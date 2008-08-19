@@ -169,7 +169,7 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.6/@ownedChild/@compartments.0">
+          compartment="//@nodes.6/@ownedChild/@compartments.1">
         <containmentFeature
             href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
         <childrenFeature
@@ -200,10 +200,51 @@
               href="tmcledit.gmfgraph#NameConstraints"/>
         </ownedChild>
       </children>
+      <children>
+        <ownedChild>
+          <domainMetaElement
+              href="tmceledit.ecore#//subjectIdentifierConstraint"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="tmcledit.gmfgraph#NameConstraints"/>
+            <features
+                href="tmceledit.ecore#//AbstractContraint/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="tmcledit.gmftool#//@palette/@tools.4/@tools.3"/>
+          <diagramNode
+              href="tmcledit.gmfgraph#NameConstraints"/>
+        </ownedChild>
+      </children>
+      <children>
+        <ownedChild>
+          <domainMetaElement
+              href="tmceledit.ecore#//subjectLocatorConstraint"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="tmcledit.gmfgraph#NameConstraints"/>
+            <features
+                href="tmceledit.ecore#//AbstractContraint/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="tmcledit.gmftool#//@palette/@tools.4/@tools.2"/>
+          <diagramNode
+              href="tmcledit.gmfgraph#NameConstraints"/>
+        </ownedChild>
+      </children>
       <compartments
-          children="//@nodes.6/@ownedChild/@children.0 //@nodes.6/@ownedChild/@children.1">
+          children="//@nodes.6/@ownedChild/@children.0">
         <compartment
             href="tmcledit.gmfgraph#TopicTypeNameCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.6/@ownedChild/@children.1">
+        <compartment
+            href="tmcledit.gmfgraph#TopicTypOccurenceCompartment"/>
       </compartments>
     </ownedChild>
   </nodes>
