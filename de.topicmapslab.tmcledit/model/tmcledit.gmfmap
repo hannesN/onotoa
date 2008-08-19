@@ -151,7 +151,7 @@
               viewPattern="{0} : {1}..{2} ({3})"
               editPattern="">
             <diagramLabel
-                href="tmcledit.gmfgraph#NameConstraints"/>
+                href="tmcledit.gmfgraph#CompartmentText"/>
             <features
                 href="tmceledit.ecore#//AbstractContraint/name"/>
             <features
@@ -165,7 +165,7 @@
               xsi:type="gmftool:CreationTool"
               href="tmcledit.gmftool#//@palette/@tools.4/@tools.1"/>
           <diagramNode
-              href="tmcledit.gmfgraph#NameConstraints"/>
+              href="tmcledit.gmfgraph#CompartmentText"/>
         </ownedChild>
       </children>
       <children
@@ -183,7 +183,7 @@
               viewPattern="{0} : {1} \t {2}..{3}"
               editPattern="">
             <diagramLabel
-                href="tmcledit.gmfgraph#NameConstraints"/>
+                href="tmcledit.gmfgraph#CompartmentText"/>
             <features
                 href="tmceledit.ecore#//AbstractContraint/name"/>
             <features
@@ -197,7 +197,7 @@
               xsi:type="gmftool:CreationTool"
               href="tmcledit.gmftool#//@palette/@tools.4/@tools.0"/>
           <diagramNode
-              href="tmcledit.gmfgraph#NameConstraints"/>
+              href="tmcledit.gmfgraph#CompartmentText"/>
         </ownedChild>
       </children>
       <children>
@@ -207,7 +207,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="tmcledit.gmfgraph#NameConstraints"/>
+                href="tmcledit.gmfgraph#CompartmentText"/>
             <features
                 href="tmceledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
@@ -215,7 +215,7 @@
               xsi:type="gmftool:CreationTool"
               href="tmcledit.gmftool#//@palette/@tools.4/@tools.3"/>
           <diagramNode
-              href="tmcledit.gmfgraph#NameConstraints"/>
+              href="tmcledit.gmfgraph#CompartmentText"/>
         </ownedChild>
       </children>
       <children>
@@ -225,7 +225,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="tmcledit.gmfgraph#NameConstraints"/>
+                href="tmcledit.gmfgraph#CompartmentText"/>
             <features
                 href="tmceledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
@@ -233,7 +233,7 @@
               xsi:type="gmftool:CreationTool"
               href="tmcledit.gmftool#//@palette/@tools.4/@tools.2"/>
           <diagramNode
-              href="tmcledit.gmfgraph#NameConstraints"/>
+              href="tmcledit.gmfgraph#CompartmentText"/>
         </ownedChild>
       </children>
       <compartments

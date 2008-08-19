@@ -24,6 +24,7 @@
     <eLiterals name="SUBJECT_IDENTIFIER" value="1"/>
     <eLiterals name="ITEM_IDENTIFIER" value="2"/>
     <eLiterals name="IDENTIFIER" value="3"/>
+    <eLiterals name="EEnumLiteral4" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OccurenceType" eSuperTypes="#//TopicType"/>
   <eClassifiers xsi:type="ecore:EClass" name="NameType" eSuperTypes="#//TopicType"/>
@@ -65,11 +66,17 @@
         eType="#//RoleTypeConstraints" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationTypeConstraints"
         eType="#//AssociationTypeConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
+        eType="#//MappingElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="subjectLocatorConstraint" eSuperTypes="#//AbstractContraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="subjectIdentifierConstraint" eSuperTypes="#//AbstractContraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationTypeConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//ScopeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationType" eType="#//AssociationsType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

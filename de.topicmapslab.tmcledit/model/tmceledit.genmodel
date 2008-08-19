@@ -12,6 +12,7 @@
       <genEnumLiterals ecoreEnumLiteral="tmceledit.ecore#//TopicId/SUBJECT_IDENTIFIER"/>
       <genEnumLiterals ecoreEnumLiteral="tmceledit.ecore#//TopicId/ITEM_IDENTIFIER"/>
       <genEnumLiterals ecoreEnumLiteral="tmceledit.ecore#//TopicId/IDENTIFIER"/>
+      <genEnumLiterals ecoreEnumLiteral="tmceledit.ecore#//TopicId/EEnumLiteral4"/>
     </genEnums>
     <genClasses ecoreClass="tmceledit.ecore#//TopicType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmceledit.ecore#//TopicType/id"/>
@@ -55,12 +56,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmceledit.ecore#//TopicMapSchema/topicTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmceledit.ecore#//TopicMapSchema/roleTypeConstraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmceledit.ecore#//TopicMapSchema/associationTypeConstraints"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmceledit.ecore#//TopicMapSchema/mappings"/>
     </genClasses>
     <genClasses ecoreClass="tmceledit.ecore#//subjectLocatorConstraint"/>
     <genClasses ecoreClass="tmceledit.ecore#//subjectIdentifierConstraint"/>
     <genClasses ecoreClass="tmceledit.ecore#//AssociationTypeConstraint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmceledit.ecore#//AssociationTypeConstraint/scope"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmceledit.ecore#//AssociationTypeConstraint/associationType"/>
+    </genClasses>
+    <genClasses ecoreClass="tmceledit.ecore#//MappingElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmceledit.ecore#//MappingElement/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmceledit.ecore#//MappingElement/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

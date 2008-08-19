@@ -90,10 +90,10 @@
       </actualFigure>
     </descriptors>
     <descriptors
-        name="NameConstraintTextFigure">
+        name="CompartmentTextFigure">
       <actualFigure
           xsi:type="gmfgraph:Label"
-          name="NameConstraintTextFigure"
+          name="CompartmentTextFigure"
           text="&lt;..>"/>
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure"/>
@@ -126,9 +126,10 @@
       figure="TopicTypeFigure"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
-      name="NameConstraints"
-      figure="NameConstraintTextFigure"
-      resizeConstraint="EAST_WEST"/>
+      name="CompartmentText"
+      figure="CompartmentTextFigure"
+      resizeConstraint="EAST_WEST"
+      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
   <labels
       name="AssocitationsTypeConstraintCardinalityLabel"
       figure="AssociationTypeConstraintCardinalityLabelFigure"/>
