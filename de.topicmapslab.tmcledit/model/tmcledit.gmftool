@@ -15,9 +15,13 @@
           title="TopicType"
           description="Create new TopicType">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/topictype_sm.gif"
+            bundle="de.topicmapslab.tmcledit"/>
         <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/topictype.gif"
+            bundle="de.topicmapslab.tmcledit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"

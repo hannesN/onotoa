@@ -98,6 +98,20 @@
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure"/>
     </descriptors>
+    <descriptors
+        name="MappingBoxFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="MappingBoxFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"
+            matchMinorSize="true"
+            forceSingleLine="true"
+            minorAlignment="CENTER"
+            minorSpacing="0"/>
+      </actualFigure>
+    </descriptors>
   </figures>
   <nodes
       name="TopicType"
@@ -121,6 +135,9 @@
   <compartments
       name="TopicTypOccurenceCompartment"
       figure="TopicTypeFigure"/>
+  <compartments
+      name="MappingBoxCompartment"
+      figure="MappingBoxFigure"/>
   <labels
       name="TopicTypeId"
       figure="TopicTypeFigure"
