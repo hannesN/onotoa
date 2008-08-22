@@ -147,7 +147,6 @@
               href="tmceledit.ecore#//NameTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
-              readOnly="true"
               viewPattern="{0} : {1}..{2} ({3})"
               editPattern="">
             <diagramLabel
@@ -200,7 +199,12 @@
               href="tmcledit.gmfgraph#CompartmentText"/>
         </ownedChild>
       </children>
-      <children>
+      <children
+          compartment="//@nodes.6/@ownedChild/@compartments.2">
+        <containmentFeature
+            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+        <childrenFeature
+            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <ownedChild>
           <domainMetaElement
               href="tmceledit.ecore#//subjectIdentifierConstraint"/>
@@ -218,7 +222,12 @@
               href="tmcledit.gmfgraph#CompartmentText"/>
         </ownedChild>
       </children>
-      <children>
+      <children
+          compartment="//@nodes.6/@ownedChild/@compartments.2">
+        <containmentFeature
+            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+        <childrenFeature
+            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <ownedChild>
           <domainMetaElement
               href="tmceledit.ecore#//subjectLocatorConstraint"/>
@@ -245,6 +254,11 @@
           children="//@nodes.6/@ownedChild/@children.1">
         <compartment
             href="tmcledit.gmfgraph#TopicTypOccurenceCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.6/@ownedChild/@children.3 //@nodes.6/@ownedChild/@children.2">
+        <compartment
+            href="tmcledit.gmfgraph#IdentifierCompartment"/>
       </compartments>
     </ownedChild>
   </nodes>

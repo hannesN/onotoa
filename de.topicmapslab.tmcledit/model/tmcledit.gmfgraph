@@ -9,7 +9,8 @@
         name="TopicTypeFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="TopicTypeFigure">
+          name="TopicTypeFigure"
+          xorFill="true">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"
@@ -17,6 +18,9 @@
             forceSingleLine="true"
             minorAlignment="CENTER"
             minorSpacing="0"/>
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="lightGray"/>
         <children
             xsi:type="gmfgraph:Label"
             name="TopicTypeIdFigure"
@@ -79,7 +83,7 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="TopicTypeIsaFigure"
-          sourceDecoration="//@figures.0/@descriptors.6/@actualFigure/@children.0">
+          targetDecoration="//@figures.0/@descriptors.6/@actualFigure/@children.0">
         <children
             xsi:type="gmfgraph:PolylineDecoration"
             name="TopicTypeIsaDecoration"
@@ -97,20 +101,6 @@
           text="&lt;..>"/>
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure"/>
-    </descriptors>
-    <descriptors
-        name="MappingBoxFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="MappingBoxFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"
-            matchMinorSize="true"
-            forceSingleLine="true"
-            minorAlignment="CENTER"
-            minorSpacing="0"/>
-      </actualFigure>
     </descriptors>
   </figures>
   <nodes
@@ -136,8 +126,9 @@
       name="TopicTypOccurenceCompartment"
       figure="TopicTypeFigure"/>
   <compartments
-      name="MappingBoxCompartment"
-      figure="MappingBoxFigure"/>
+      name="IdentifierCompartment"
+      figure="TopicTypeFigure"
+      collapsible="true"/>
   <labels
       name="TopicTypeId"
       figure="TopicTypeFigure"
@@ -145,8 +136,7 @@
   <labels
       name="CompartmentText"
       figure="CompartmentTextFigure"
-      resizeConstraint="EAST_WEST"
-      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+      resizeConstraint="EAST_WEST"/>
   <labels
       name="AssocitationsTypeConstraintCardinalityLabel"
       figure="AssociationTypeConstraintCardinalityLabelFigure"/>

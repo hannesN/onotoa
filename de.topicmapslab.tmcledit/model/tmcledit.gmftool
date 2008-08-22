@@ -71,21 +71,11 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Kind Of ..."
-          description="Create new Kind-Of-Relationship">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
+          description="Create new Kind-Of-Relationship"/>
       <tools
           xsi:type="gmftool:CreationTool"
           title="Is A ..."
-          description="Create new Is-A-Relationship">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
+          description="Create new Is-A-Relationship"/>
     </tools>
     <tools
         xsi:type="gmftool:PaletteSeparator"/>
