@@ -136,11 +136,14 @@
   <labels
       name="CompartmentText"
       figure="CompartmentTextFigure"
-      resizeConstraint="EAST_WEST"/>
+      resizeConstraint="EAST_WEST"
+      elementIcon="false"/>
   <labels
       name="AssocitationsTypeConstraintCardinalityLabel"
-      figure="AssociationTypeConstraintCardinalityLabelFigure"/>
+      figure="AssociationTypeConstraintCardinalityLabelFigure"
+      elementIcon="false"/>
   <labels
       name="AssocitationsTypeConstraintRoleLabel"
-      figure="AssociationTypeConstraintRoleLabelFigure"/>
+      figure="AssociationTypeConstraintRoleLabelFigure"
+      elementIcon="false"/>
 </gmfgraph:Canvas>
