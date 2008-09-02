@@ -1336,7 +1336,7 @@
           editPartClassName="RoleTypeConstraintsCardMinCardMaxEditPart"
           itemSemanticEditPolicyClassName="RoleTypeConstraintsCardMinCardMaxItemSemanticEditPolicy"
           notationViewFactoryClassName="RoleTypeConstraintsCardMinCardMaxViewFactory"
-          elementIcon="true">
+          alignment="SOURCE">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -1362,7 +1362,7 @@
           itemSemanticEditPolicyClassName="RoleTypeConstraintsRoleItemSemanticEditPolicy"
           notationViewFactoryClassName="RoleTypeConstraintsRoleViewFactory"
           readOnly="true"
-          elementIcon="true">
+          alignment="SOURCE">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -1872,11 +1872,15 @@
             xsi:type="gmfgen:ToolEntry"
             title="Kind Of ..."
             description="Create new Kind-Of-Relationship"
+            largeIconPath="/de.topicmapslab.tmcledit/icons/kindof.gif"
+            smallIconPath="/de.topicmapslab.tmcledit/icons/kindof_sm.gif"
             genLinks="//@diagram/@links.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Is A ..."
             description="Create new Is-A-Relationship"
+            largeIconPath="/de.topicmapslab.tmcledit/icons/isa.gif"
+            smallIconPath="/de.topicmapslab.tmcledit/icons/isa_sm.gif"
             genLinks="//@diagram/@links.2"/>
       </groups>
       <groups
@@ -1886,11 +1890,15 @@
             xsi:type="gmfgen:ToolEntry"
             title="AssociationsTypeConstraint"
             description="Create new AssociationsTypeConstraint"
+            largeIconPath="/de.topicmapslab.tmcledit/icons/associationconstraint.gif"
+            smallIconPath="/de.topicmapslab.tmcledit/icons/associationconstraint_sm.gif"
             genNodes="//@diagram/@topLevelNodes.5"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="RoleTypeConstraint"
             description="Create a RoleTypeConstraint"
+            largeIconPath="/de.topicmapslab.tmcledit/icons/associationroleconstraint.gif"
+            smallIconPath="/de.topicmapslab.tmcledit/icons/associationroleconstraint_sm.gif"
             genLinks="//@diagram/@links.0"/>
       </groups>
       <groups
@@ -2012,9 +2020,6 @@
         name="SELECT_ALL"/>
     <sharedContributionItems
         xsi:type="gmfgen:GenActionFactoryContributionItem"
-        name="OPEN_NEW_WINDOW"/>
-    <sharedContributionItems
-        xsi:type="gmfgen:GenActionFactoryContributionItem"
         name="PRINT"/>
     <mainMenu>
       <items
@@ -2123,9 +2128,6 @@
           iD="org.eclipse.ui.IWorkbenchActionConstants.M_WINDOW"
           name="&amp;Window">
         <items
-            xsi:type="gmfgen:GenSharedContributionItem"
-            actualItem="//@application/@sharedContributionItems.13"/>
-        <items
             xsi:type="gmfgen:GenGroupMarker"
             groupName="org.eclipse.ui.IWorkbenchActionConstants.MB_ADDITIONS"/>
       </items>
@@ -2168,7 +2170,7 @@
             groupName="org.eclipse.ui.IWorkbenchActionConstants.SAVE_EXT"/>
         <items
             xsi:type="gmfgen:GenSharedContributionItem"
-            actualItem="//@application/@sharedContributionItems.14"/>
+            actualItem="//@application/@sharedContributionItems.13"/>
         <items
             xsi:type="gmfgen:GenGroupMarker"
             groupName="org.eclipse.ui.IWorkbenchActionConstants.PRINT_EXT"/>

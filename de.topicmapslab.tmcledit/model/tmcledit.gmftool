@@ -71,11 +71,29 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Kind Of ..."
-          description="Create new Kind-Of-Relationship"/>
+          description="Create new Kind-Of-Relationship">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/kindof_sm.gif"
+            bundle="de.topicmapslab.tmcledit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/kindof.gif"
+            bundle="de.topicmapslab.tmcledit"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
           title="Is A ..."
-          description="Create new Is-A-Relationship"/>
+          description="Create new Is-A-Relationship">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/isa_sm.gif"
+            bundle="de.topicmapslab.tmcledit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/isa.gif"
+            bundle="de.topicmapslab.tmcledit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:PaletteSeparator"/>
@@ -88,14 +106,27 @@
           title="AssociationsTypeConstraint"
           description="Create new AssociationsTypeConstraint">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/associationconstraint_sm.gif"
+            bundle="de.topicmapslab.tmcledit"/>
         <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/associationconstraint.gif"
+            bundle="de.topicmapslab.tmcledit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
           title="RoleTypeConstraint"
-          description="Create a RoleTypeConstraint"/>
+          description="Create a RoleTypeConstraint">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/associationroleconstraint_sm.gif"
+            bundle="de.topicmapslab.tmcledit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/associationroleconstraint.gif"
+            bundle="de.topicmapslab.tmcledit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:PaletteSeparator"/>
