@@ -45,11 +45,12 @@
    <extension point="org.eclipse.ui.newWizards">
       <?gmfgen generated="true"?>
   	  <wizard
-  	     name="%newWizardName"
-  	     icon="icons/obj16/ModelDiagramFile.gif"
-  	     category="org.eclipse.ui.Examples"
-  	     class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizard"
-  	     id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizardID">
+           category="org.eclipse.ui.Examples"
+           class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizard"
+           icon="icons/obj16/ModelDiagramFile.gif"
+           id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizardID"
+           name="%newWizardName"
+           project="false">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
    </extension>
@@ -641,14 +642,6 @@
    </extension>
 
 
-   <extension point="org.eclipse.ui.perspectives">
-      <?gmfgen generated="true"?>
-      <perspective
-            id="de.topicmapslab.tmcledit.model.diagram.TmcleditPerspective"
-            name="%perspectiveName"
-            class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorPerspective">
-      </perspective>
-   </extension>
 
    <extension point="org.eclipse.ui.commands">
       <?gmfgen generated="true"?>
@@ -684,27 +677,27 @@
             id="de.topicmapslab.tmcledit.diagram.ActionSet">
          <action
                label="%newDiagramActionLabel"
-               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$NewDiagramAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.NewDiagramAction"
                menubarPath="file/new/additions"
                id="de.topicmapslab.tmcledit.diagram.NewDiagramAction">
          </action>
          <action
                label="%aboutActionLabel"
-               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$AboutAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.AboutAction"
                menubarPath="help/additions"
                id="de.topicmapslab.tmcledit.diagram.AboutAction">
          </action>
          <action
                label="%openURIActionLabel"
                definitionId="de.topicmapslab.tmcledit.diagram.OpenURICommand"
-               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$OpenURIAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.OpenURIAction"
                menubarPath="file/additions"
                id="de.topicmapslab.tmcledit.diagram.OpenURIAction">
          </action>
          <action
                label="%openActionLabel"
                definitionId="de.topicmapslab.tmcledit.diagram.OpenCommand"
-               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$OpenAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.OpenAction"
                menubarPath="file/additions"
                id="de.topicmapslab.tmcledit.diagram.OpenAction">
          </action>

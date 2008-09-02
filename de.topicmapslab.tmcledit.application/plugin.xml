@@ -16,7 +16,7 @@
       <perspective
             name="TMCLEdit Perspective"
             class="de.topicmapslab.tmcledit.application.DiagramEditorPerspective"
-            id="de.topicmapslab.tmcledit.application.perspective">
+            id="de.topicmapslab.tmcledit.application.TmcleditPerspective">
       </perspective>
    </extension>
 

@@ -1,15 +1,10 @@
 package de.topicmapslab.tmcledit.application;
 
-import java.io.File;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.ICoolBarManager;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -17,13 +12,8 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarContributionItem;
 import org.eclipse.jface.action.ToolBarManager;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.osgi.util.NLS;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
@@ -35,40 +25,18 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
 import de.topicmapslab.tmcledit.model.diagram.part.Messages;
-import de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizard;
 
-/**
- * @generated
- */
 public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
-	/**
-	 * @generated
-	 */
 	private ActionFactory.IWorkbenchAction lockToolBarAction;
 
-	/**
-	 * @generated
-	 */
 	private ActionFactory.IWorkbenchAction toggleCoolbarAction;
 
-	/**
-	 * @generated
-	 */
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
 
-	/**
-	 * @generated
-	 */
-	private IWorkbenchWindow getWindow() {
-		return getActionBarConfigurer().getWindowConfigurer().getWindow();
-	}
 
-	/**
-	 * @generated
-	 */
 	protected void makeActions(IWorkbenchWindow window) {
 		toggleCoolbarAction = ActionFactory.TOGGLE_COOLBAR.create(window);
 		register(toggleCoolbarAction);
@@ -106,9 +74,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		register(ActionFactory.RESET_PERSPECTIVE.create(window));
 	}
 
-	/**
-	 * @generated
-	 */
 	protected void fillMenuBar(IMenuManager menu) {
 
 		{
@@ -219,9 +184,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		}
 	}
 
-	/**
-	 * @generated
-	 */
 	protected void fillCoolBar(ICoolBarManager toolBar) {
 		IMenuManager popUpMenu = new MenuManager();
 		popUpMenu.add(new ActionContributionItem(lockToolBarAction));
@@ -271,10 +233,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		}
 	}
 
-	/**
-	 * @generated
-	 */
-	private static boolean openEditor(IWorkbench workbench, URI fileURI) {
+	public static boolean openEditor(IWorkbench workbench, URI fileURI) {
 		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
 		IWorkbenchPage page = workbenchWindow.getActivePage();
 		IEditorDescriptor editorDescriptor = workbench.getEditorRegistry()
@@ -303,79 +262,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * @generated
-	 */
-	public static class NewDiagramAction extends WorkbenchWindowActionDelegate {
-
-		/**
-		 * @generated
-		 */
-		public void run(IAction action) {
-			TmcleditCreationWizard wizard = new TmcleditCreationWizard();
-			wizard.init(getWindow().getWorkbench(), StructuredSelection.EMPTY);
-			WizardDialog wizardDialog = new WizardDialog(
-					getWindow().getShell(), wizard);
-			wizardDialog.open();
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	public static class OpenURIAction extends WorkbenchWindowActionDelegate {
-
-		/**
-		 * @generated
-		 */
-		public void run(IAction action) {
-			LoadResourceAction.LoadResourceDialog loadResourceDialog = new LoadResourceAction.LoadResourceDialog(
-					getWindow().getShell());
-			if (Dialog.OK == loadResourceDialog.open()) {
-				for (Iterator i = loadResourceDialog.getURIs().iterator(); i
-						.hasNext();) {
-					openEditor(getWindow().getWorkbench(), (URI) i.next());
-				}
-			}
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	public static class OpenAction extends WorkbenchWindowActionDelegate {
-
-		/**
-		 * @generated
-		 */
-		public void run(IAction action) {
-			FileDialog fileDialog = new FileDialog(getWindow().getShell(),
-					SWT.OPEN);
-			fileDialog.open();
-			if (fileDialog.getFileName() != null
-					&& fileDialog.getFileName().length() > 0) {
-				openEditor(getWindow().getWorkbench(), URI
-						.createFileURI(fileDialog.getFilterPath()
-								+ File.separator + fileDialog.getFileName()));
-			}
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	public static class AboutAction extends WorkbenchWindowActionDelegate {
-
-		/**
-		 * @generated
-		 */
-		public void run(IAction action) {
-			MessageDialog.openInformation(getWindow().getShell(),
-					Messages.DiagramEditorActionBarAdvisor_AboutDialogTitle,
-					Messages.DiagramEditorActionBarAdvisor_AboutDialogMessage);
-		}
 	}
 
 }
