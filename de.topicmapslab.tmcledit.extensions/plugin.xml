@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="de.topicmapslab.tmcledit.extensions"
+            name="TMCLEdit">
+      </category>
+      <view
+            category="de.topicmapslab.tmcledit.extensions"
+            class="de.topicmapslab.tmcledit.extensions.views.ModelView"
+            icon="icons/sample.gif"
+            id="de.topicmapslab.tmcledit.extensions.views.ModelView"
+            name="Model View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="de.topicmapslab.tmcledit.model.diagram.TmcleditPerspective">
+         <view
+               closeable="false"
+               id="de.topicmapslab.tmcledit.extensions.views.ModelView"
+               moveable="true"
+               ratio="0.3"
+               relationship="left"
+               showTitle="true"
+               standalone="true"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+
+</plugin>
