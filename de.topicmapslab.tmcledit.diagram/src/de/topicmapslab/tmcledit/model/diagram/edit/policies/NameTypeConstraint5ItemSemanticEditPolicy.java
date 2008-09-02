@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
  * @generated
  */
 public class NameTypeConstraint5ItemSemanticEditPolicy extends
-		TmceleditBaseItemSemanticEditPolicy {
+		TmcleditBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated

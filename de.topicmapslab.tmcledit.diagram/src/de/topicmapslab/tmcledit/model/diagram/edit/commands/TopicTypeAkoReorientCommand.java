@@ -10,7 +10,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientReferenceRelations
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipRequest;
 
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditBaseItemSemanticEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditBaseItemSemanticEditPolicy;
 
 /**
  * @generated
@@ -72,7 +72,7 @@ public class TopicTypeAkoReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof TopicType && newEnd instanceof TopicType)) {
 			return false;
 		}
-		return TmceleditBaseItemSemanticEditPolicy.LinkConstraints
+		return TmcleditBaseItemSemanticEditPolicy.LinkConstraints
 				.canExistTopicTypeAko_3002(getNewSource(), getOldTarget());
 	}
 
@@ -83,7 +83,7 @@ public class TopicTypeAkoReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof TopicType && newEnd instanceof TopicType)) {
 			return false;
 		}
-		return TmceleditBaseItemSemanticEditPolicy.LinkConstraints
+		return TmcleditBaseItemSemanticEditPolicy.LinkConstraints
 				.canExistTopicTypeAko_3002(getOldSource(), getNewTarget());
 	}
 

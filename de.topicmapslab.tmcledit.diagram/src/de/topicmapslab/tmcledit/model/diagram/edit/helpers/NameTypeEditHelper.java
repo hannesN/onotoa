@@ -3,5 +3,5 @@ package de.topicmapslab.tmcledit.model.diagram.edit.helpers;
 /**
  * @generated
  */
-public class NameTypeEditHelper extends TmceleditBaseEditHelper {
+public class NameTypeEditHelper extends TmcleditBaseEditHelper {
 }

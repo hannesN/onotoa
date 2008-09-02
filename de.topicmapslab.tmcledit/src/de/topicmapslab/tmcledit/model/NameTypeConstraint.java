@@ -19,7 +19,7 @@ package de.topicmapslab.tmcledit.model;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getNameTypeConstraint()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getNameTypeConstraint()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface NameTypeConstraint extends AbstractContraint {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(NameType)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getNameTypeConstraint_Type()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getNameTypeConstraint_Type()
 	 * @model
 	 * @generated
 	 */

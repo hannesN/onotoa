@@ -19,7 +19,7 @@ import de.topicmapslab.tmcledit.model.diagram.edit.parts.OccurenceTypeIdentifier
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.OccurenceTypeTopicTypOccurenceCompartmentEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.OccurenceTypeTopicTypeNameCompartmentEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicMapSchemaEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -42,13 +42,13 @@ public class OccurenceTypeViewFactory extends AbstractShapeViewFactory {
 			IAdaptable semanticAdapter, String semanticHint, int index,
 			boolean persisted) {
 		if (semanticHint == null) {
-			semanticHint = TmceleditVisualIDRegistry
+			semanticHint = TmcleditVisualIDRegistry
 					.getType(OccurenceTypeEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
-		if (!TopicMapSchemaEditPart.MODEL_ID.equals(TmceleditVisualIDRegistry
+		if (!TopicMapSchemaEditPart.MODEL_ID.equals(TmcleditVisualIDRegistry
 				.getModelID(containerView))) {
 			EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
 					.createEAnnotation();
@@ -65,28 +65,28 @@ public class OccurenceTypeViewFactory extends AbstractShapeViewFactory {
 		getViewService().createNode(
 				eObjectAdapter,
 				view,
-				TmceleditVisualIDRegistry
+				TmcleditVisualIDRegistry
 						.getType(OccurenceTypeIdEditPart.VISUAL_ID),
 				ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService()
 				.createNode(
 						eObjectAdapter,
 						view,
-						TmceleditVisualIDRegistry
+						TmcleditVisualIDRegistry
 								.getType(OccurenceTypeTopicTypeNameCompartmentEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService()
 				.createNode(
 						eObjectAdapter,
 						view,
-						TmceleditVisualIDRegistry
+						TmcleditVisualIDRegistry
 								.getType(OccurenceTypeTopicTypOccurenceCompartmentEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService()
 				.createNode(
 						eObjectAdapter,
 						view,
-						TmceleditVisualIDRegistry
+						TmcleditVisualIDRegistry
 								.getType(OccurenceTypeIdentifierCompartmentEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 	}

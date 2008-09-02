@@ -7,7 +7,7 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AssociationsType;
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -37,7 +37,7 @@ public class AssociationsTypeImpl extends TopicTypeImpl implements AssociationsT
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.ASSOCIATIONS_TYPE;
+		return ModelPackage.Literals.ASSOCIATIONS_TYPE;
 	}
 
 } //AssociationsTypeImpl

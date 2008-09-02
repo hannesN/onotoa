@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -81,7 +81,7 @@ public class OccurenceTypeConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_OccurenceTypeConstraint_unique_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_OccurenceTypeConstraint_unique_feature", "_UI_OccurenceTypeConstraint_type"),
-				 TMPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__UNIQUE,
+				 ModelPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__UNIQUE,
 				 true,
 				 false,
 				 false,
@@ -103,7 +103,7 @@ public class OccurenceTypeConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_OccurenceTypeConstraint_dataType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_OccurenceTypeConstraint_dataType_feature", "_UI_OccurenceTypeConstraint_type"),
-				 TMPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE,
+				 ModelPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE,
 				 true,
 				 false,
 				 false,
@@ -125,7 +125,7 @@ public class OccurenceTypeConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_OccurenceTypeConstraint_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_OccurenceTypeConstraint_type_feature", "_UI_OccurenceTypeConstraint_type"),
-				 TMPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__TYPE,
+				 ModelPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__TYPE,
 				 true,
 				 false,
 				 true,
@@ -171,8 +171,8 @@ public class OccurenceTypeConstraintItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OccurenceTypeConstraint.class)) {
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

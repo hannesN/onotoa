@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
  * @generated
  */
 public class SubjectLocatorConstraint3ItemSemanticEditPolicy extends
-		TmceleditBaseItemSemanticEditPolicy {
+		TmcleditBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated

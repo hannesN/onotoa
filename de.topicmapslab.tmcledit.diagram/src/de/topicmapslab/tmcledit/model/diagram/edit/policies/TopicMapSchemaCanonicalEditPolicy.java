@@ -25,7 +25,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.AssociationTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.AssociationsTypeEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.NameTypeEditPart;
@@ -35,10 +35,10 @@ import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.ScopeTypeEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicMapSchemaEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramUpdater;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditLinkDescriptor;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditNodeDescriptor;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramUpdater;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditLinkDescriptor;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditNodeDescriptor;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -57,10 +57,10 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
-		for (Iterator it = TmceleditDiagramUpdater
+		for (Iterator it = TmcleditDiagramUpdater
 				.getTopicMapSchema_79SemanticChildren(viewObject).iterator(); it
 				.hasNext();) {
-			result.add(((TmceleditNodeDescriptor) it.next()).getModelElement());
+			result.add(((TmcleditNodeDescriptor) it.next()).getModelElement());
 		}
 		return result;
 	}
@@ -76,7 +76,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 	 * @generated
 	 */
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
-		int visualID = TmceleditVisualIDRegistry.getVisualID(view);
+		int visualID = TmcleditVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
 		case NameTypeEditPart.VISUAL_ID:
 		case ScopeTypeEditPart.VISUAL_ID:
@@ -105,9 +105,9 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(TMPackage.eINSTANCE
+			myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
 					.getTopicMapSchema_TopicTypes());
-			myFeaturesToSynchronize.add(TMPackage.eINSTANCE
+			myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
 					.getTopicMapSchema_AssociationTypeConstraints());
 		}
 		return myFeaturesToSynchronize;
@@ -181,7 +181,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		for (Iterator linksIterator = existingLinks.iterator(); linksIterator
 				.hasNext();) {
 			Edge nextDiagramLink = (Edge) linksIterator.next();
-			int diagramLinkVisualID = TmceleditVisualIDRegistry
+			int diagramLinkVisualID = TmcleditVisualIDRegistry
 					.getVisualID(nextDiagramLink);
 			if (diagramLinkVisualID == -1) {
 				if (nextDiagramLink.getSource() != null
@@ -195,7 +195,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 			EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
 			for (Iterator LinkDescriptorsIterator = linkDescriptors.iterator(); LinkDescriptorsIterator
 					.hasNext();) {
-				TmceleditLinkDescriptor nextLinkDescriptor = (TmceleditLinkDescriptor) LinkDescriptorsIterator
+				TmcleditLinkDescriptor nextLinkDescriptor = (TmcleditLinkDescriptor) LinkDescriptorsIterator
 						.next();
 				if (diagramLinkObject == nextLinkDescriptor.getModelElement()
 						&& diagramLinkSrc == nextLinkDescriptor.getSource()
@@ -216,15 +216,15 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 	 * @generated
 	 */
 	private Collection collectAllLinks(View view, Map domain2NotationMap) {
-		if (!TopicMapSchemaEditPart.MODEL_ID.equals(TmceleditVisualIDRegistry
+		if (!TopicMapSchemaEditPart.MODEL_ID.equals(TmcleditVisualIDRegistry
 				.getModelID(view))) {
 			return Collections.EMPTY_LIST;
 		}
 		Collection result = new LinkedList();
-		switch (TmceleditVisualIDRegistry.getVisualID(view)) {
+		switch (TmcleditVisualIDRegistry.getVisualID(view)) {
 		case TopicMapSchemaEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getTopicMapSchema_79ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -235,7 +235,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case NameTypeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getNameType_1001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -246,7 +246,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case ScopeTypeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getScopeType_1002ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -257,7 +257,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case RoleTypeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getRoleType_1003ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -268,7 +268,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case AssociationsTypeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getAssociationsType_1004ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -279,7 +279,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case OccurenceTypeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getOccurenceType_1005ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -290,7 +290,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case AssociationTypeConstraintEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getAssociationTypeConstraint_1006ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -301,7 +301,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case TopicTypeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getTopicType_1007ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -312,7 +312,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		}
 		case RoleTypeConstraintsEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(TmceleditDiagramUpdater
+				result.addAll(TmcleditDiagramUpdater
 						.getRoleTypeConstraints_3001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
@@ -342,7 +342,7 @@ public class TopicMapSchemaCanonicalEditPolicy extends
 		List adapters = new LinkedList();
 		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator
 				.hasNext();) {
-			final TmceleditLinkDescriptor nextLinkDescriptor = (TmceleditLinkDescriptor) linkDescriptorsIterator
+			final TmcleditLinkDescriptor nextLinkDescriptor = (TmcleditLinkDescriptor) linkDescriptorsIterator
 					.next();
 			EditPart sourceEditPart = getEditPart(nextLinkDescriptor
 					.getSource(), domain2NotationMap);

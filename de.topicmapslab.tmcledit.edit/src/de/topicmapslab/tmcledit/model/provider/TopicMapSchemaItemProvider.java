@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.TMFactory;
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
 import java.util.Collection;
@@ -84,7 +84,7 @@ public class TopicMapSchemaItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TopicMapSchema_mappings_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_mappings_feature", "_UI_TopicMapSchema_type"),
-				 TMPackage.Literals.TOPIC_MAP_SCHEMA__MAPPINGS,
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__MAPPINGS,
 				 true,
 				 false,
 				 true,
@@ -105,9 +105,9 @@ public class TopicMapSchemaItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TMPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES);
-			childrenFeatures.add(TMPackage.Literals.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS);
-			childrenFeatures.add(TMPackage.Literals.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS);
+			childrenFeatures.add(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES);
+			childrenFeatures.add(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS);
+			childrenFeatures.add(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS);
 		}
 		return childrenFeatures;
 	}
@@ -159,9 +159,9 @@ public class TopicMapSchemaItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TopicMapSchema.class)) {
-			case TMPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
-			case TMPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
-			case TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -181,43 +181,43 @@ public class TopicMapSchemaItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 TMFactory.eINSTANCE.createTopicType()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
+				 ModelFactory.eINSTANCE.createTopicType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 TMFactory.eINSTANCE.createOccurenceType()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
+				 ModelFactory.eINSTANCE.createOccurenceType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 TMFactory.eINSTANCE.createNameType()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
+				 ModelFactory.eINSTANCE.createNameType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 TMFactory.eINSTANCE.createScopeType()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
+				 ModelFactory.eINSTANCE.createScopeType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 TMFactory.eINSTANCE.createAssociationsType()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
+				 ModelFactory.eINSTANCE.createAssociationsType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 TMFactory.eINSTANCE.createRoleType()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
+				 ModelFactory.eINSTANCE.createRoleType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS,
-				 TMFactory.eINSTANCE.createRoleTypeConstraints()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS,
+				 ModelFactory.eINSTANCE.createRoleTypeConstraints()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS,
-				 TMFactory.eINSTANCE.createAssociationTypeConstraint()));
+				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS,
+				 ModelFactory.eINSTANCE.createAssociationTypeConstraint()));
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class TopicMapSchemaItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return TmceleditEditPlugin.INSTANCE;
+		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

@@ -7,16 +7,16 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/topicTypes"/>
+        href="tmcledit.ecore#//TopicMapSchema/topicTypes"/>
     <ownedChild>
       <domainMetaElement
-          href="tmceledit.ecore#//NameType"/>
+          href="tmcledit.ecore#//NameType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="tmcledit.gmfgraph#TopicTypeId"/>
         <features
-            href="tmceledit.ecore#//TopicType/id"/>
+            href="tmcledit.ecore#//TopicType/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -26,12 +26,12 @@
       <children
           compartment="//@nodes.0/@ownedChild/@compartments.0">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//NameTypeConstraint"/>
+              href="tmcledit.ecore#//NameTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0} : {1}..{2} ({3})"
@@ -39,13 +39,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/regexp"/>
+                href="tmcledit.ecore#//AbstractContraint/regexp"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -56,12 +56,12 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//OccurenceTypeConstraint"/>
+              href="tmcledit.ecore#//OccurenceTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               readOnly="true"
@@ -70,13 +70,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//OccurenceTypeConstraint/dataType"/>
+                href="tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -87,18 +87,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectIdentifierConstraint"/>
+              href="tmcledit.ecore#//subjectIdentifierConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -109,18 +109,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectLocatorConstraint"/>
+              href="tmcledit.ecore#//subjectLocatorConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -146,16 +146,16 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/topicTypes"/>
+        href="tmcledit.ecore#//TopicMapSchema/topicTypes"/>
     <ownedChild>
       <domainMetaElement
-          href="tmceledit.ecore#//ScopeType"/>
+          href="tmcledit.ecore#//ScopeType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="tmcledit.gmfgraph#TopicTypeId"/>
         <features
-            href="tmceledit.ecore#//TopicType/id"/>
+            href="tmcledit.ecore#//TopicType/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -165,12 +165,12 @@
       <children
           compartment="//@nodes.1/@ownedChild/@compartments.0">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//NameTypeConstraint"/>
+              href="tmcledit.ecore#//NameTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0} : {1}..{2} ({3})"
@@ -178,13 +178,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/regexp"/>
+                href="tmcledit.ecore#//AbstractContraint/regexp"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -195,12 +195,12 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//OccurenceTypeConstraint"/>
+              href="tmcledit.ecore#//OccurenceTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               readOnly="true"
@@ -209,13 +209,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//OccurenceTypeConstraint/dataType"/>
+                href="tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -226,18 +226,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectIdentifierConstraint"/>
+              href="tmcledit.ecore#//subjectIdentifierConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -248,18 +248,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectLocatorConstraint"/>
+              href="tmcledit.ecore#//subjectLocatorConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -285,16 +285,16 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/topicTypes"/>
+        href="tmcledit.ecore#//TopicMapSchema/topicTypes"/>
     <ownedChild>
       <domainMetaElement
-          href="tmceledit.ecore#//RoleType"/>
+          href="tmcledit.ecore#//RoleType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="tmcledit.gmfgraph#TopicTypeId"/>
         <features
-            href="tmceledit.ecore#//TopicType/id"/>
+            href="tmcledit.ecore#//TopicType/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -304,12 +304,12 @@
       <children
           compartment="//@nodes.2/@ownedChild/@compartments.0">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//NameTypeConstraint"/>
+              href="tmcledit.ecore#//NameTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0} : {1}..{2} ({3})"
@@ -317,13 +317,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/regexp"/>
+                href="tmcledit.ecore#//AbstractContraint/regexp"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -334,12 +334,12 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//OccurenceTypeConstraint"/>
+              href="tmcledit.ecore#//OccurenceTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               readOnly="true"
@@ -348,13 +348,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//OccurenceTypeConstraint/dataType"/>
+                href="tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -365,18 +365,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectIdentifierConstraint"/>
+              href="tmcledit.ecore#//subjectIdentifierConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -387,18 +387,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectLocatorConstraint"/>
+              href="tmcledit.ecore#//subjectLocatorConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -424,16 +424,16 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/topicTypes"/>
+        href="tmcledit.ecore#//TopicMapSchema/topicTypes"/>
     <ownedChild>
       <domainMetaElement
-          href="tmceledit.ecore#//AssociationsType"/>
+          href="tmcledit.ecore#//AssociationsType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="tmcledit.gmfgraph#TopicTypeId"/>
         <features
-            href="tmceledit.ecore#//TopicType/id"/>
+            href="tmcledit.ecore#//TopicType/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -443,12 +443,12 @@
       <children
           compartment="//@nodes.3/@ownedChild/@compartments.0">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//NameTypeConstraint"/>
+              href="tmcledit.ecore#//NameTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0} : {1}..{2} ({3})"
@@ -456,13 +456,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/regexp"/>
+                href="tmcledit.ecore#//AbstractContraint/regexp"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -473,12 +473,12 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//OccurenceTypeConstraint"/>
+              href="tmcledit.ecore#//OccurenceTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               readOnly="true"
@@ -487,13 +487,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//OccurenceTypeConstraint/dataType"/>
+                href="tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -504,18 +504,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectIdentifierConstraint"/>
+              href="tmcledit.ecore#//subjectIdentifierConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -526,18 +526,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectLocatorConstraint"/>
+              href="tmcledit.ecore#//subjectLocatorConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -563,16 +563,16 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/topicTypes"/>
+        href="tmcledit.ecore#//TopicMapSchema/topicTypes"/>
     <ownedChild>
       <domainMetaElement
-          href="tmceledit.ecore#//OccurenceType"/>
+          href="tmcledit.ecore#//OccurenceType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="tmcledit.gmfgraph#TopicTypeId"/>
         <features
-            href="tmceledit.ecore#//TopicType/id"/>
+            href="tmcledit.ecore#//TopicType/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -582,12 +582,12 @@
       <children
           compartment="//@nodes.4/@ownedChild/@compartments.0">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//NameTypeConstraint"/>
+              href="tmcledit.ecore#//NameTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0} : {1}..{2} ({3})"
@@ -595,13 +595,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/regexp"/>
+                href="tmcledit.ecore#//AbstractContraint/regexp"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -612,12 +612,12 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//OccurenceTypeConstraint"/>
+              href="tmcledit.ecore#//OccurenceTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               readOnly="true"
@@ -626,13 +626,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//OccurenceTypeConstraint/dataType"/>
+                href="tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -643,18 +643,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectIdentifierConstraint"/>
+              href="tmcledit.ecore#//subjectIdentifierConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -665,18 +665,18 @@
       </children>
       <children>
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectLocatorConstraint"/>
+              href="tmcledit.ecore#//subjectLocatorConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -702,10 +702,10 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/associationTypeConstraints"/>
+        href="tmcledit.ecore#//TopicMapSchema/associationTypeConstraints"/>
     <ownedChild>
       <domainMetaElement
-          href="tmceledit.ecore#//AssociationTypeConstraint"/>
+          href="tmcledit.ecore#//AssociationTypeConstraint"/>
       <tool
           xsi:type="gmftool:CreationTool"
           href="tmcledit.gmftool#//@palette/@tools.2/@tools.0"/>
@@ -715,16 +715,16 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/topicTypes"/>
+        href="tmcledit.ecore#//TopicMapSchema/topicTypes"/>
     <ownedChild>
       <domainMetaElement
-          href="tmceledit.ecore#//TopicType"/>
+          href="tmcledit.ecore#//TopicType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="tmcledit.gmfgraph#TopicTypeId"/>
         <features
-            href="tmceledit.ecore#//TopicType/id"/>
+            href="tmcledit.ecore#//TopicType/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -734,12 +734,12 @@
       <children
           compartment="//@nodes.6/@ownedChild/@compartments.0">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/nameContraints"/>
+            href="tmcledit.ecore#//TopicType/nameContraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//NameTypeConstraint"/>
+              href="tmcledit.ecore#//NameTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0} : {1}..{2} ({3})"
@@ -747,13 +747,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/regexp"/>
+                href="tmcledit.ecore#//AbstractContraint/regexp"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -765,12 +765,12 @@
       <children
           compartment="//@nodes.6/@ownedChild/@compartments.1">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/occurenceConstraints"/>
+            href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//OccurenceTypeConstraint"/>
+              href="tmcledit.ecore#//OccurenceTypeConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               readOnly="true"
@@ -779,13 +779,13 @@
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
             <features
-                href="tmceledit.ecore#//OccurenceTypeConstraint/dataType"/>
+                href="tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMin"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMin"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/cardMax"/>
+                href="tmcledit.ecore#//AbstractContraint/cardMax"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -797,18 +797,18 @@
       <children
           compartment="//@nodes.6/@ownedChild/@compartments.2">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectIdentifierConstraint"/>
+              href="tmcledit.ecore#//subjectIdentifierConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -820,18 +820,18 @@
       <children
           compartment="//@nodes.6/@ownedChild/@compartments.2">
         <containmentFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <childrenFeature
-            href="tmceledit.ecore#//TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
         <ownedChild>
           <domainMetaElement
-              href="tmceledit.ecore#//subjectLocatorConstraint"/>
+              href="tmcledit.ecore#//subjectLocatorConstraint"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="tmcledit.gmfgraph#CompartmentText"/>
             <features
-                href="tmceledit.ecore#//AbstractContraint/name"/>
+                href="tmcledit.ecore#//AbstractContraint/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -859,16 +859,16 @@
   </nodes>
   <links>
     <domainMetaElement
-        href="tmceledit.ecore#//RoleTypeConstraints"/>
+        href="tmcledit.ecore#//RoleTypeConstraints"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
         viewPattern="{0}..{1}">
       <diagramLabel
           href="tmcledit.gmfgraph#AssocitationsTypeConstraintCardinalityLabel"/>
       <features
-          href="tmceledit.ecore#//RoleTypeConstraints/cardMin"/>
+          href="tmcledit.ecore#//RoleTypeConstraints/cardMin"/>
       <features
-          href="tmceledit.ecore#//RoleTypeConstraints/cardMax"/>
+          href="tmcledit.ecore#//RoleTypeConstraints/cardMax"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
@@ -876,10 +876,10 @@
       <diagramLabel
           href="tmcledit.gmfgraph#AssocitationsTypeConstraintRoleLabel"/>
       <features
-          href="tmceledit.ecore#//RoleTypeConstraints/cardMin"/>
+          href="tmcledit.ecore#//RoleTypeConstraints/cardMin"/>
     </labelMappings>
     <containmentFeature
-        href="tmceledit.ecore#//TopicMapSchema/roleTypeConstraints"/>
+        href="tmcledit.ecore#//TopicMapSchema/roleTypeConstraints"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="tmcledit.gmftool#//@palette/@tools.2/@tools.1"/>
@@ -887,10 +887,10 @@
         href="tmcledit.gmfgraph#RoleTypeConstraints"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="tmceledit.ecore#//RoleTypeConstraints/associationTypeConstraint"/>
+        href="tmcledit.ecore#//RoleTypeConstraints/associationTypeConstraint"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="tmceledit.ecore#//RoleTypeConstraints/topicType"/>
+        href="tmcledit.ecore#//RoleTypeConstraints/topicType"/>
   </links>
   <links>
     <tool
@@ -900,7 +900,7 @@
         href="tmcledit.gmfgraph#TopicTypeAko"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="tmceledit.ecore#//TopicType/ako"/>
+        href="tmcledit.ecore#//TopicType/ako"/>
     <creationConstraints>
       <targetEnd
           body="self &lt;> oppositeEnd"/>
@@ -914,7 +914,7 @@
         href="tmcledit.gmfgraph#TopicTypeIsa"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="tmceledit.ecore#//TopicType/isa"/>
+        href="tmcledit.ecore#//TopicType/isa"/>
     <creationConstraints>
       <targetEnd
           body="self &lt;> oppositeEnd"/>
@@ -924,9 +924,9 @@
     <diagramCanvas
         href="tmcledit.gmfgraph#model"/>
     <domainModel
-        href="tmceledit.ecore#/"/>
+        href="tmcledit.ecore#/"/>
     <domainMetaElement
-        href="tmceledit.ecore#//TopicMapSchema"/>
+        href="tmcledit.ecore#//TopicMapSchema"/>
     <palette
         href="tmcledit.gmftool#//@palette"/>
   </diagram>

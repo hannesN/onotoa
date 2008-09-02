@@ -6,14 +6,14 @@
       <?gmfgen generated="true"?>
       <fileTypes
          type="text"
-         extension="tm_diagram">
+         extension="model_diagram">
       </fileTypes>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <?gmfgen generated="true"?>
       <parser
-         type="tm_diagram"
+         type="model_diagram"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -21,14 +21,14 @@
    <extension point="org.eclipse.ui.editors">
       <?gmfgen generated="true"?>
       <editor
-         id="de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramEditorID"
+         id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorID"
          name="%editorName"
-         icon="icons/obj16/TMDiagramFile.gif"
-         extensions="tm_diagram"
+         icon="icons/obj16/ModelDiagramFile.gif"
+         extensions="model_diagram"
          default="true"
-         class="de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramEditor"
-         matchingStrategy="de.topicmapslab.tmcledit.model.diagram.part.TmceleditMatchingStrategy"
-         contributorClass="de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramActionBarContributor">
+         class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditor"
+         matchingStrategy="de.topicmapslab.tmcledit.model.diagram.part.TmcleditMatchingStrategy"
+         contributorClass="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramActionBarContributor">
       </editor>
    </extension>
    
@@ -46,10 +46,10 @@
       <?gmfgen generated="true"?>
   	  <wizard
   	     name="%newWizardName"
-  	     icon="icons/obj16/TMDiagramFile.gif"
+  	     icon="icons/obj16/ModelDiagramFile.gif"
   	     category="org.eclipse.ui.Examples"
-  	     class="de.topicmapslab.tmcledit.model.diagram.part.TmceleditCreationWizard"
-  	     id="de.topicmapslab.tmcledit.model.diagram.part.TmceleditCreationWizardID">
+  	     class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizard"
+  	     id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
    </extension>
@@ -61,7 +61,7 @@
             id="de.topicmapslab.tmcledit.diagram.LoadResource"
             objectClass="de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicMapSchemaEditPart">
          <action
-               class="de.topicmapslab.tmcledit.model.diagram.part.TmceleditLoadResourceAction"
+               class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditLoadResourceAction"
                enablesFor="1"
                id="de.topicmapslab.tmcledit.diagram.LoadResourceAction"
                label="%loadResourceActionLabel"
@@ -78,7 +78,7 @@
             id="de.topicmapslab.tmcledit.diagram.InitDiagram">
          <action
                label="%initDiagramActionLabel"
-               class="de.topicmapslab.tmcledit.model.diagram.part.TmceleditInitDiagramFileAction"
+               class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditInitDiagramFileAction"
                menubarPath="file/additions"
                id="de.topicmapslab.tmcledit.diagram.InitDiagramAction">
          </action>
@@ -89,9 +89,9 @@
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
-         id="TmceleditPresentation">
+         id="TmcleditPresentation">
          <Priority name="Lowest"/>
-         <ViewId id="de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramEditorID">
+         <ViewId id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="delete"/>
             </ElementType>
@@ -102,9 +102,9 @@
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
             class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
-            id="TmceleditRender">
+            id="TmcleditRender">
          <Priority name="Lowest"/>
-         <ViewId id="de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramEditorID">
+         <ViewId id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="cut"/>
                <GlobalActionId actionId="copy"/>
@@ -163,7 +163,7 @@
       <?gmfgen generated="true"?>
       <propertyContributor
             contributorId="de.topicmapslab.tmcledit.diagram"
-            labelProvider="de.topicmapslab.tmcledit.model.diagram.sheet.TmceleditSheetLabelProvider">
+            labelProvider="de.topicmapslab.tmcledit.model.diagram.sheet.TmcleditSheetLabelProvider">
          <propertyCategory category="domain"/>
          <propertyCategory category="visual"/>
          <propertyCategory category="extra"/>
@@ -214,7 +214,7 @@
          <propertySection
             id="property.section.domain" 
             tab="property.tab.domain"
-            class="de.topicmapslab.tmcledit.model.diagram.sheet.TmceleditPropertySection">
+            class="de.topicmapslab.tmcledit.model.diagram.sheet.TmcleditPropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
          </propertySection>
@@ -223,9 +223,9 @@
 
    <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
       <?gmfgen generated="true"?>
-      <viewProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmceleditViewProvider">
+      <viewProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmcleditViewProvider">
          <Priority name="Lowest"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Tmceledit"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Tmcledit"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
       </viewProvider>
@@ -233,28 +233,28 @@
 
    <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
       <?gmfgen generated="true"?>
-      <editpartProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmceleditEditPartProvider">
+      <editpartProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmcleditEditPartProvider">
          <Priority name="Lowest"/>
       </editpartProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
       <?gmfgen generated="true"?>
-      <modelingAssistantProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmceleditModelingAssistantProvider">
+      <modelingAssistantProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmcleditModelingAssistantProvider">
          <Priority name="Lowest"/>
       </modelingAssistantProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
       <?gmfgen generated="true"?>
-      <IconProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmceleditIconProvider">
+      <IconProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmcleditIconProvider">
          <Priority name="Low"/>
       </IconProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
       <?gmfgen generated="true"?>
-      <ParserProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmceleditParserProvider">
+      <ParserProvider class="de.topicmapslab.tmcledit.model.diagram.providers.TmcleditParserProvider">
          <Priority name="Lowest"/>
       </ParserProvider>
    </extension>
@@ -593,14 +593,14 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
       <?gmfgen generated="true"?>
-      <clientContext id="TmceleditClientContext">
+      <clientContext id="TmcleditClientContext">
          <enablement>
             <test
                property="org.eclipse.gmf.runtime.emf.core.editingDomain"
                value="de.topicmapslab.tmcledit.diagram.EditingDomain"/>
          </enablement>
       </clientContext> 
-      <binding context="TmceleditClientContext">
+      <binding context="TmcleditClientContext">
          <elementType ref="de.topicmapslab.tmcledit.diagram.TopicMapSchema_79"/>
          <elementType ref="de.topicmapslab.tmcledit.diagram.NameType_1001"/>
          <elementType ref="de.topicmapslab.tmcledit.diagram.ScopeType_1002"/>
@@ -640,17 +640,17 @@
       </binding>
    </extension>
 
-   <extension id="TmceleditApplication" point="org.eclipse.core.runtime.applications">
+   <extension id="TmcleditApplication" point="org.eclipse.core.runtime.applications">
       <?gmfgen generated="true"?>
       <application>
-         <run class="de.topicmapslab.tmcledit.model.diagram.application.TmceleditApplication"/>
+         <run class="de.topicmapslab.tmcledit.model.diagram.application.TmcleditApplication"/>
       </application>
    </extension>
 
    <extension point="org.eclipse.ui.perspectives">
       <?gmfgen generated="true"?>
       <perspective
-            id="de.topicmapslab.tmcledit.model.diagram.TmceleditPerspective"
+            id="de.topicmapslab.tmcledit.model.diagram.TmcleditPerspective"
             name="%perspectiveName"
             class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorPerspective">
       </perspective>
@@ -720,7 +720,7 @@
       <?gmfgen generated="true"?>
       <command
          categoryId="org.eclipse.ui.category.edit"
-         defaultHandler="de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramUpdateCommand"
+         defaultHandler="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramUpdateCommand"
          description="%update.diagram.description"
          id="de.topicmapslab.tmcledit.model.diagram.updateDiagram"
          name="%update.diagram.name"/>

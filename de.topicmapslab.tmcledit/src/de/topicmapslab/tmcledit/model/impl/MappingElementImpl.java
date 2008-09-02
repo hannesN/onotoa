@@ -7,7 +7,7 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.MappingElement;
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -87,7 +87,7 @@ public class MappingElementImpl extends EObjectImpl implements MappingElement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.MAPPING_ELEMENT;
+		return ModelPackage.Literals.MAPPING_ELEMENT;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class MappingElementImpl extends EObjectImpl implements MappingElement {
 		String oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.MAPPING_ELEMENT__KEY, oldKey, key));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAPPING_ELEMENT__KEY, oldKey, key));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class MappingElementImpl extends EObjectImpl implements MappingElement {
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.MAPPING_ELEMENT__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAPPING_ELEMENT__VALUE, oldValue, value));
 	}
 
 	/**
@@ -140,9 +140,9 @@ public class MappingElementImpl extends EObjectImpl implements MappingElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.MAPPING_ELEMENT__KEY:
+			case ModelPackage.MAPPING_ELEMENT__KEY:
 				return getKey();
-			case TMPackage.MAPPING_ELEMENT__VALUE:
+			case ModelPackage.MAPPING_ELEMENT__VALUE:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -156,10 +156,10 @@ public class MappingElementImpl extends EObjectImpl implements MappingElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.MAPPING_ELEMENT__KEY:
+			case ModelPackage.MAPPING_ELEMENT__KEY:
 				setKey((String)newValue);
 				return;
-			case TMPackage.MAPPING_ELEMENT__VALUE:
+			case ModelPackage.MAPPING_ELEMENT__VALUE:
 				setValue((String)newValue);
 				return;
 		}
@@ -174,10 +174,10 @@ public class MappingElementImpl extends EObjectImpl implements MappingElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.MAPPING_ELEMENT__KEY:
+			case ModelPackage.MAPPING_ELEMENT__KEY:
 				setKey(KEY_EDEFAULT);
 				return;
-			case TMPackage.MAPPING_ELEMENT__VALUE:
+			case ModelPackage.MAPPING_ELEMENT__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -192,9 +192,9 @@ public class MappingElementImpl extends EObjectImpl implements MappingElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.MAPPING_ELEMENT__KEY:
+			case ModelPackage.MAPPING_ELEMENT__KEY:
 				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
-			case TMPackage.MAPPING_ELEMENT__VALUE:
+			case ModelPackage.MAPPING_ELEMENT__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);

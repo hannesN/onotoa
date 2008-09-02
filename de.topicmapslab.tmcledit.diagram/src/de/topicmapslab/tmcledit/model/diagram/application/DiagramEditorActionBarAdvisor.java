@@ -35,7 +35,7 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
 import de.topicmapslab.tmcledit.model.diagram.part.Messages;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditCreationWizard;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizard;
 
 /**
  * @generated
@@ -310,7 +310,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		 * @generated
 		 */
 		public void run(IAction action) {
-			TmceleditCreationWizard wizard = new TmceleditCreationWizard();
+			TmcleditCreationWizard wizard = new TmcleditCreationWizard();
 			wizard.init(getWindow().getWorkbench(), StructuredSelection.EMPTY);
 			WizardDialog wizardDialog = new WizardDialog(
 					getWindow().getShell(), wizard);

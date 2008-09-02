@@ -6,8 +6,8 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -37,7 +37,7 @@ public class NameTypeImpl extends TopicTypeImpl implements NameType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.NAME_TYPE;
+		return ModelPackage.Literals.NAME_TYPE;
 	}
 
 } //NameTypeImpl

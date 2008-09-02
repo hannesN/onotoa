@@ -7,7 +7,7 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -80,7 +80,7 @@ public class AssociationTypeConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_AssociationTypeConstraint_scope_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AssociationTypeConstraint_scope_feature", "_UI_AssociationTypeConstraint_type"),
-				 TMPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT__SCOPE,
+				 ModelPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT__SCOPE,
 				 true,
 				 false,
 				 true,
@@ -102,7 +102,7 @@ public class AssociationTypeConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_AssociationTypeConstraint_associationType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AssociationTypeConstraint_associationType_feature", "_UI_AssociationTypeConstraint_type"),
-				 TMPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE,
+				 ModelPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE,
 				 true,
 				 false,
 				 true,
@@ -166,7 +166,7 @@ public class AssociationTypeConstraintItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return TmceleditEditPlugin.INSTANCE;
+		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

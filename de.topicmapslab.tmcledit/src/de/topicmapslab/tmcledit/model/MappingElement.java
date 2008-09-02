@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getMappingElement()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getMappingElement()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface MappingElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Key</em>' attribute.
 	 * @see #setKey(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getMappingElement_Key()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getMappingElement_Key()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -62,7 +62,7 @@ public interface MappingElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getMappingElement_Value()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getMappingElement_Value()
 	 * @model required="true"
 	 * @generated
 	 */

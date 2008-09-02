@@ -7,9 +7,9 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
-import de.topicmapslab.tmcledit.model.TMPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -124,7 +124,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.ROLE_TYPE_CONSTRAINTS;
+		return ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS;
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 		String oldCardMin = cardMin;
 		cardMin = newCardMin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN, oldCardMin, cardMin));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN, oldCardMin, cardMin));
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 		String oldCardMax = cardMax;
 		cardMax = newCardMax;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX, oldCardMax, cardMax));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX, oldCardMax, cardMax));
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 			type = (RoleType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.ROLE_TYPE_CONSTRAINTS__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE, oldType, type));
 			}
 		}
 		return type;
@@ -204,7 +204,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 		RoleType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ROLE_TYPE_CONSTRAINTS__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE, oldType, type));
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 			topicType = (TopicType)eResolveProxy(oldTopicType);
 			if (topicType != oldTopicType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE, oldTopicType, topicType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE, oldTopicType, topicType));
 			}
 		}
 		return topicType;
@@ -242,7 +242,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 		TopicType oldTopicType = topicType;
 		topicType = newTopicType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE, oldTopicType, topicType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE, oldTopicType, topicType));
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 			associationTypeConstraint = (AssociationTypeConstraint)eResolveProxy(oldAssociationTypeConstraint);
 			if (associationTypeConstraint != oldAssociationTypeConstraint) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT, oldAssociationTypeConstraint, associationTypeConstraint));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT, oldAssociationTypeConstraint, associationTypeConstraint));
 			}
 		}
 		return associationTypeConstraint;
@@ -280,7 +280,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 		AssociationTypeConstraint oldAssociationTypeConstraint = associationTypeConstraint;
 		associationTypeConstraint = newAssociationTypeConstraint;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT, oldAssociationTypeConstraint, associationTypeConstraint));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT, oldAssociationTypeConstraint, associationTypeConstraint));
 	}
 
 	/**
@@ -291,17 +291,17 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
 				return getCardMin();
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
 				return getCardMax();
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				if (resolve) return getTopicType();
 				return basicGetTopicType();
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
 				if (resolve) return getAssociationTypeConstraint();
 				return basicGetAssociationTypeConstraint();
 		}
@@ -316,19 +316,19 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
 				setCardMin((String)newValue);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
 				setCardMax((String)newValue);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
 				setType((RoleType)newValue);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				setTopicType((TopicType)newValue);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
 				setAssociationTypeConstraint((AssociationTypeConstraint)newValue);
 				return;
 		}
@@ -343,19 +343,19 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
 				setCardMin(CARD_MIN_EDEFAULT);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
 				setCardMax(CARD_MAX_EDEFAULT);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
 				setType((RoleType)null);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				setTopicType((TopicType)null);
 				return;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
 				setAssociationTypeConstraint((AssociationTypeConstraint)null);
 				return;
 		}
@@ -370,15 +370,15 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
 				return CARD_MIN_EDEFAULT == null ? cardMin != null : !CARD_MIN_EDEFAULT.equals(cardMin);
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
 				return CARD_MAX_EDEFAULT == null ? cardMax != null : !CARD_MAX_EDEFAULT.equals(cardMax);
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
 				return type != null;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				return topicType != null;
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
 				return associationTypeConstraint != null;
 		}
 		return super.eIsSet(featureID);

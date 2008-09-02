@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -77,7 +77,7 @@ public class NameTypeConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_NameTypeConstraint_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_NameTypeConstraint_type_feature", "_UI_NameTypeConstraint_type"),
-				 TMPackage.Literals.NAME_TYPE_CONSTRAINT__TYPE,
+				 ModelPackage.Literals.NAME_TYPE_CONSTRAINT__TYPE,
 				 true,
 				 false,
 				 true,

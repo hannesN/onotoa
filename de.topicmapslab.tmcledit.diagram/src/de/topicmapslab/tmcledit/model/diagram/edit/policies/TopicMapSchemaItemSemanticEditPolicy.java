@@ -7,7 +7,7 @@ import org.eclipse.gmf.runtime.emf.commands.core.commands.DuplicateEObjectsComma
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DuplicateElementsRequest;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.AssociationTypeConstraintCreateCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.AssociationsTypeCreateCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.NameTypeCreateCommand;
@@ -15,64 +15,64 @@ import de.topicmapslab.tmcledit.model.diagram.edit.commands.OccurenceTypeCreateC
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.RoleTypeCreateCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.ScopeTypeCreateCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.TopicTypeCreateCommand;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
 
 /**
  * @generated
  */
 public class TopicMapSchemaItemSemanticEditPolicy extends
-		TmceleditBaseItemSemanticEditPolicy {
+		TmcleditBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (TmceleditElementTypes.NameType_1001 == req.getElementType()) {
+		if (TmcleditElementTypes.NameType_1001 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicMapSchema_TopicTypes());
 			}
 			return getGEFWrapper(new NameTypeCreateCommand(req));
 		}
-		if (TmceleditElementTypes.ScopeType_1002 == req.getElementType()) {
+		if (TmcleditElementTypes.ScopeType_1002 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicMapSchema_TopicTypes());
 			}
 			return getGEFWrapper(new ScopeTypeCreateCommand(req));
 		}
-		if (TmceleditElementTypes.RoleType_1003 == req.getElementType()) {
+		if (TmcleditElementTypes.RoleType_1003 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicMapSchema_TopicTypes());
 			}
 			return getGEFWrapper(new RoleTypeCreateCommand(req));
 		}
-		if (TmceleditElementTypes.AssociationsType_1004 == req.getElementType()) {
+		if (TmcleditElementTypes.AssociationsType_1004 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicMapSchema_TopicTypes());
 			}
 			return getGEFWrapper(new AssociationsTypeCreateCommand(req));
 		}
-		if (TmceleditElementTypes.OccurenceType_1005 == req.getElementType()) {
+		if (TmcleditElementTypes.OccurenceType_1005 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicMapSchema_TopicTypes());
 			}
 			return getGEFWrapper(new OccurenceTypeCreateCommand(req));
 		}
-		if (TmceleditElementTypes.AssociationTypeConstraint_1006 == req
+		if (TmcleditElementTypes.AssociationTypeConstraint_1006 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicMapSchema_AssociationTypeConstraints());
 			}
 			return getGEFWrapper(new AssociationTypeConstraintCreateCommand(req));
 		}
-		if (TmceleditElementTypes.TopicType_1007 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicType_1007 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicMapSchema_TopicTypes());
 			}
 			return getGEFWrapper(new TopicTypeCreateCommand(req));

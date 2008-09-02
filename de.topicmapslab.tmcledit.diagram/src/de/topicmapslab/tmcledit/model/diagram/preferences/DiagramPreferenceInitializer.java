@@ -3,7 +3,7 @@ package de.topicmapslab.tmcledit.model.diagram.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramEditorPlugin;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorPlugin;
 
 /**
  * @generated
@@ -26,6 +26,6 @@ public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer 
 	 * @generated
 	 */
 	protected IPreferenceStore getPreferenceStore() {
-		return TmceleditDiagramEditorPlugin.getInstance().getPreferenceStore();
+		return TmcleditDiagramEditorPlugin.getInstance().getPreferenceStore();
 	}
 }

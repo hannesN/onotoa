@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getRoleTypeConstraints()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Card Min</em>' attribute.
 	 * @see #setCardMin(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getRoleTypeConstraints_CardMin()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_CardMin()
 	 * @model default="0"
 	 * @generated
 	 */
@@ -67,7 +67,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Card Max</em>' attribute.
 	 * @see #setCardMax(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getRoleTypeConstraints_CardMax()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_CardMax()
 	 * @model default="1"
 	 * @generated
 	 */
@@ -93,7 +93,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(RoleType)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getRoleTypeConstraints_Type()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_Type()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -119,7 +119,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Topic Type</em>' reference.
 	 * @see #setTopicType(TopicType)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getRoleTypeConstraints_TopicType()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_TopicType()
 	 * @model
 	 * @generated
 	 */
@@ -145,7 +145,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Association Type Constraint</em>' reference.
 	 * @see #setAssociationTypeConstraint(AssociationTypeConstraint)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getRoleTypeConstraints_AssociationTypeConstraint()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_AssociationTypeConstraint()
 	 * @model required="true"
 	 * @generated
 	 */

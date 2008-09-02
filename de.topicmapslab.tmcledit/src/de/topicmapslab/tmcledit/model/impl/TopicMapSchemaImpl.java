@@ -8,8 +8,8 @@ package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
-import de.topicmapslab.tmcledit.model.TMPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -103,7 +103,7 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.TOPIC_MAP_SCHEMA;
+		return ModelPackage.Literals.TOPIC_MAP_SCHEMA;
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 */
 	public EList<TopicType> getTopicTypes() {
 		if (topicTypes == null) {
-			topicTypes = new EObjectContainmentEList<TopicType>(TopicType.class, this, TMPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES);
+			topicTypes = new EObjectContainmentEList<TopicType>(TopicType.class, this, ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES);
 		}
 		return topicTypes;
 	}
@@ -125,7 +125,7 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 */
 	public EList<RoleTypeConstraints> getRoleTypeConstraints() {
 		if (roleTypeConstraints == null) {
-			roleTypeConstraints = new EObjectContainmentEList<RoleTypeConstraints>(RoleTypeConstraints.class, this, TMPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS);
+			roleTypeConstraints = new EObjectContainmentEList<RoleTypeConstraints>(RoleTypeConstraints.class, this, ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS);
 		}
 		return roleTypeConstraints;
 	}
@@ -148,7 +148,7 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 		AssociationTypeConstraint oldAssociationTypeConstraints = associationTypeConstraints;
 		associationTypeConstraints = newAssociationTypeConstraints;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, oldAssociationTypeConstraints, newAssociationTypeConstraints);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, oldAssociationTypeConstraints, newAssociationTypeConstraints);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -163,14 +163,14 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 		if (newAssociationTypeConstraints != associationTypeConstraints) {
 			NotificationChain msgs = null;
 			if (associationTypeConstraints != null)
-				msgs = ((InternalEObject)associationTypeConstraints).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, null, msgs);
+				msgs = ((InternalEObject)associationTypeConstraints).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, null, msgs);
 			if (newAssociationTypeConstraints != null)
-				msgs = ((InternalEObject)newAssociationTypeConstraints).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, null, msgs);
+				msgs = ((InternalEObject)newAssociationTypeConstraints).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, null, msgs);
 			msgs = basicSetAssociationTypeConstraints(newAssociationTypeConstraints, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, newAssociationTypeConstraints, newAssociationTypeConstraints));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS, newAssociationTypeConstraints, newAssociationTypeConstraints));
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 */
 	public EList<MappingElement> getMappings() {
 		if (mappings == null) {
-			mappings = new EObjectResolvingEList<MappingElement>(MappingElement.class, this, TMPackage.TOPIC_MAP_SCHEMA__MAPPINGS);
+			mappings = new EObjectResolvingEList<MappingElement>(MappingElement.class, this, ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS);
 		}
 		return mappings;
 	}
@@ -193,11 +193,11 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TMPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
+			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
 				return ((InternalEList<?>)getTopicTypes()).basicRemove(otherEnd, msgs);
-			case TMPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
 				return ((InternalEList<?>)getRoleTypeConstraints()).basicRemove(otherEnd, msgs);
-			case TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				return basicSetAssociationTypeConstraints(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -211,13 +211,13 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
+			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
 				return getTopicTypes();
-			case TMPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
 				return getRoleTypeConstraints();
-			case TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				return getAssociationTypeConstraints();
-			case TMPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
 				return getMappings();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -232,18 +232,18 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
+			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
 				getTopicTypes().clear();
 				getTopicTypes().addAll((Collection<? extends TopicType>)newValue);
 				return;
-			case TMPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
 				getRoleTypeConstraints().clear();
 				getRoleTypeConstraints().addAll((Collection<? extends RoleTypeConstraints>)newValue);
 				return;
-			case TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				setAssociationTypeConstraints((AssociationTypeConstraint)newValue);
 				return;
-			case TMPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
 				getMappings().clear();
 				getMappings().addAll((Collection<? extends MappingElement>)newValue);
 				return;
@@ -259,16 +259,16 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
+			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
 				getTopicTypes().clear();
 				return;
-			case TMPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
 				getRoleTypeConstraints().clear();
 				return;
-			case TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				setAssociationTypeConstraints((AssociationTypeConstraint)null);
 				return;
-			case TMPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
 				getMappings().clear();
 				return;
 		}
@@ -283,13 +283,13 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
+			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
 				return topicTypes != null && !topicTypes.isEmpty();
-			case TMPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
 				return roleTypeConstraints != null && !roleTypeConstraints.isEmpty();
-			case TMPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				return associationTypeConstraints != null;
-			case TMPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
+			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
 				return mappings != null && !mappings.isEmpty();
 		}
 		return super.eIsSet(featureID);

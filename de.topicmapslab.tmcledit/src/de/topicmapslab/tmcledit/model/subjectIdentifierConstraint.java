@@ -13,7 +13,7 @@ package de.topicmapslab.tmcledit.model;
  * <!-- end-user-doc -->
  *
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getsubjectIdentifierConstraint()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getsubjectIdentifierConstraint()
  * @model
  * @generated
  */

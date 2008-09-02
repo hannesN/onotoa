@@ -6,8 +6,8 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurenceType;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -37,7 +37,7 @@ public class OccurenceTypeImpl extends TopicTypeImpl implements OccurenceType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.OCCURENCE_TYPE;
+		return ModelPackage.Literals.OCCURENCE_TYPE;
 	}
 
 } //OccurenceTypeImpl

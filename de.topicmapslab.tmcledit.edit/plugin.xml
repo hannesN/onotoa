@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
             uri="http://topicmapslab.de/tmceledit/1.0"
-            class="de.topicmapslab.tmcledit.model.provider.TMItemProviderAdapterFactory"
+            class="de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider

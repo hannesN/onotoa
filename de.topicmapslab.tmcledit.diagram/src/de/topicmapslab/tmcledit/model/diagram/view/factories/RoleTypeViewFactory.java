@@ -19,7 +19,7 @@ import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeIdentifierCompa
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeTopicTypOccurenceCompartmentEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeTopicTypeNameCompartmentEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicMapSchemaEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -42,13 +42,13 @@ public class RoleTypeViewFactory extends AbstractShapeViewFactory {
 			IAdaptable semanticAdapter, String semanticHint, int index,
 			boolean persisted) {
 		if (semanticHint == null) {
-			semanticHint = TmceleditVisualIDRegistry
+			semanticHint = TmcleditVisualIDRegistry
 					.getType(RoleTypeEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
-		if (!TopicMapSchemaEditPart.MODEL_ID.equals(TmceleditVisualIDRegistry
+		if (!TopicMapSchemaEditPart.MODEL_ID.equals(TmcleditVisualIDRegistry
 				.getModelID(containerView))) {
 			EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
 					.createEAnnotation();
@@ -62,32 +62,28 @@ public class RoleTypeViewFactory extends AbstractShapeViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
+		getViewService().createNode(eObjectAdapter, view,
+				TmcleditVisualIDRegistry.getType(RoleTypeIdEditPart.VISUAL_ID),
+				ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService()
 				.createNode(
 						eObjectAdapter,
 						view,
-						TmceleditVisualIDRegistry
-								.getType(RoleTypeIdEditPart.VISUAL_ID),
-						ViewUtil.APPEND, true, getPreferencesHint());
-		getViewService()
-				.createNode(
-						eObjectAdapter,
-						view,
-						TmceleditVisualIDRegistry
+						TmcleditVisualIDRegistry
 								.getType(RoleTypeTopicTypeNameCompartmentEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService()
 				.createNode(
 						eObjectAdapter,
 						view,
-						TmceleditVisualIDRegistry
+						TmcleditVisualIDRegistry
 								.getType(RoleTypeTopicTypOccurenceCompartmentEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService()
 				.createNode(
 						eObjectAdapter,
 						view,
-						TmceleditVisualIDRegistry
+						TmcleditVisualIDRegistry
 								.getType(RoleTypeIdentifierCompartmentEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 	}

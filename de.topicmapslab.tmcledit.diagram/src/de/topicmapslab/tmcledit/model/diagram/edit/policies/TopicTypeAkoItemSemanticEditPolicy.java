@@ -8,7 +8,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyReferenceRequest;
  * @generated
  */
 public class TopicTypeAkoItemSemanticEditPolicy extends
-		TmceleditBaseItemSemanticEditPolicy {
+		TmcleditBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated

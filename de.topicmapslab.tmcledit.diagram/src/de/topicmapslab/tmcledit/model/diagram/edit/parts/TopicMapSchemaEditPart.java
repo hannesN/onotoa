@@ -15,7 +15,7 @@ public class TopicMapSchemaEditPart extends DiagramEditPart {
 	/**
 	 * @generated
 	 */
-	public final static String MODEL_ID = "Tmceledit"; //$NON-NLS-1$
+	public final static String MODEL_ID = "Tmcledit"; //$NON-NLS-1$
 
 	/**
 	 * @generated

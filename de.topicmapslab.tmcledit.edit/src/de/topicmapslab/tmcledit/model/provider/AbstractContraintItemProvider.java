@@ -8,7 +8,7 @@ package de.topicmapslab.tmcledit.model.provider;
 
 
 import de.topicmapslab.tmcledit.model.AbstractContraint;
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -86,7 +86,7 @@ public class AbstractContraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_AbstractContraint_cardMin_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractContraint_cardMin_feature", "_UI_AbstractContraint_type"),
-				 TMPackage.Literals.ABSTRACT_CONTRAINT__CARD_MIN,
+				 ModelPackage.Literals.ABSTRACT_CONTRAINT__CARD_MIN,
 				 true,
 				 false,
 				 false,
@@ -108,7 +108,7 @@ public class AbstractContraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_AbstractContraint_cardMax_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractContraint_cardMax_feature", "_UI_AbstractContraint_type"),
-				 TMPackage.Literals.ABSTRACT_CONTRAINT__CARD_MAX,
+				 ModelPackage.Literals.ABSTRACT_CONTRAINT__CARD_MAX,
 				 true,
 				 false,
 				 false,
@@ -130,7 +130,7 @@ public class AbstractContraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_AbstractContraint_regexp_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractContraint_regexp_feature", "_UI_AbstractContraint_type"),
-				 TMPackage.Literals.ABSTRACT_CONTRAINT__REGEXP,
+				 ModelPackage.Literals.ABSTRACT_CONTRAINT__REGEXP,
 				 true,
 				 false,
 				 false,
@@ -152,7 +152,7 @@ public class AbstractContraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_AbstractContraint_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractContraint_name_feature", "_UI_AbstractContraint_type"),
-				 TMPackage.Literals.ABSTRACT_CONTRAINT__NAME,
+				 ModelPackage.Literals.ABSTRACT_CONTRAINT__NAME,
 				 true,
 				 false,
 				 false,
@@ -174,7 +174,7 @@ public class AbstractContraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_AbstractContraint_scope_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractContraint_scope_feature", "_UI_AbstractContraint_type"),
-				 TMPackage.Literals.ABSTRACT_CONTRAINT__SCOPE,
+				 ModelPackage.Literals.ABSTRACT_CONTRAINT__SCOPE,
 				 true,
 				 false,
 				 true,
@@ -209,10 +209,10 @@ public class AbstractContraintItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AbstractContraint.class)) {
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MIN:
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MAX:
-			case TMPackage.ABSTRACT_CONTRAINT__REGEXP:
-			case TMPackage.ABSTRACT_CONTRAINT__NAME:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CONTRAINT__REGEXP:
+			case ModelPackage.ABSTRACT_CONTRAINT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -239,7 +239,7 @@ public class AbstractContraintItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return TmceleditEditPlugin.INSTANCE;
+		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

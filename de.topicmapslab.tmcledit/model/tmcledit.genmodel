@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.topicmapslab.tmcledit/src"
+    modelPluginID="de.topicmapslab.tmcledit" modelName="Tmcledit" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>tmcledit.ecore</foreignModel>
+  <genPackages prefix="Model" basePackage="de.topicmapslab.tmcledit" disposableProviderFactory="true"
+      ecorePackage="tmcledit.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tmcledit.ecore#//TopicId">
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//TopicId/SUBJECT_LOCATOR"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//TopicId/SUBJECT_IDENTIFIER"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//TopicId/ITEM_IDENTIFIER"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//TopicId/IDENTIFIER"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//TopicId/EEnumLiteral4"/>
+    </genEnums>
+    <genClasses ecoreClass="tmcledit.ecore#//TopicType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/idType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/isAbstract"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/isa"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/ako"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/occurenceConstraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/nameContraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//OccurenceType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//NameType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//ScopeType"/>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractContraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractContraint/cardMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractContraint/cardMax"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractContraint/regexp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractContraint/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AbstractContraint/scope"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//OccurenceTypeConstraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceTypeConstraint/unique"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OccurenceTypeConstraint/type"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//NameTypeConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//NameTypeConstraint/type"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//AssociationsType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//RoleType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//RoleTypeConstraints">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//RoleTypeConstraints/cardMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//RoleTypeConstraints/cardMax"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/topicType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/associationTypeConstraint"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//TopicMapSchema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/topicTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/roleTypeConstraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/associationTypeConstraints"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/mappings"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//subjectLocatorConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//subjectIdentifierConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//AssociationTypeConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/scope"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/associationType"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//MappingElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//MappingElement/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//MappingElement/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

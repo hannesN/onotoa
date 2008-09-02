@@ -13,7 +13,7 @@ import org.eclipse.gmf.runtime.common.ui.services.parser.ParserEditStatus;
 import org.eclipse.osgi.util.NLS;
 
 import de.topicmapslab.tmcledit.model.diagram.part.Messages;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramEditorPlugin;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorPlugin;
 
 /**
  * @generated
@@ -191,7 +191,7 @@ public class MessageFormatParser extends AbstractParser {
 		ParsePosition pos = new ParsePosition(0);
 		Object[] values = getEditProcessor().parse(editString, pos);
 		if (values == null) {
-			return new ParserEditStatus(TmceleditDiagramEditorPlugin.ID,
+			return new ParserEditStatus(TmcleditDiagramEditorPlugin.ID,
 					IParserEditStatus.UNEDITABLE, NLS.bind(
 							Messages.MessageFormatParser_InvalidInputError,
 							new Integer(pos.getErrorIndex())));

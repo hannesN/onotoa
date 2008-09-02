@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType()
  * @model
  * @generated
  */
@@ -45,7 +45,7 @@ public interface TopicType extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_Id()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Id()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -74,7 +74,7 @@ public interface TopicType extends EObject {
 	 * @return the value of the '<em>Id Type</em>' attribute.
 	 * @see de.topicmapslab.tmcledit.model.TopicId
 	 * @see #setIdType(TopicId)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_IdType()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_IdType()
 	 * @model default="IDENTIFIER" required="true"
 	 * @generated
 	 */
@@ -101,7 +101,7 @@ public interface TopicType extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(boolean)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_IsAbstract()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_IsAbstract()
 	 * @model
 	 * @generated
 	 */
@@ -127,7 +127,7 @@ public interface TopicType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Isa</em>' reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_Isa()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Isa()
 	 * @model
 	 * @generated
 	 */
@@ -143,7 +143,7 @@ public interface TopicType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ako</em>' reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_Ako()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Ako()
 	 * @model
 	 * @generated
 	 */
@@ -159,7 +159,7 @@ public interface TopicType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Occurence Constraints</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_OccurenceConstraints()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_OccurenceConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -175,7 +175,7 @@ public interface TopicType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name Contraints</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_NameContraints()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_NameContraints()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -191,7 +191,7 @@ public interface TopicType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Subject Identifier Constraints</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_SubjectIdentifierConstraints()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_SubjectIdentifierConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -207,7 +207,7 @@ public interface TopicType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Subject Locator Constraint</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicType_SubjectLocatorConstraint()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_SubjectLocatorConstraint()
 	 * @model containment="true"
 	 * @generated
 	 */

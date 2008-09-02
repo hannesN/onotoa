@@ -42,10 +42,10 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditTextSelectionEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditParserProvider;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditTextSelectionEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditParserProvider;
 
 /**
  * @generated
@@ -83,7 +83,7 @@ public class RoleTypeConstraintsCardMinCardMaxEditPart extends LabelEditPart
 	 */
 	static {
 		registerSnapBackPosition(
-				TmceleditVisualIDRegistry
+				TmcleditVisualIDRegistry
 						.getType(de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeConstraintsCardMinCardMaxEditPart.VISUAL_ID),
 				new Point(0, 40));
 	}
@@ -217,8 +217,8 @@ public class RoleTypeConstraintsCardMinCardMaxEditPart extends LabelEditPart
 	public void setLabelText(String text) {
 		setLabelTextHelper(getFigure(), text);
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof TmceleditTextSelectionEditPolicy) {
-			((TmceleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		if (pdEditPolicy instanceof TmcleditTextSelectionEditPolicy) {
+			((TmcleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -298,8 +298,8 @@ public class RoleTypeConstraintsCardMinCardMaxEditPart extends LabelEditPart
 	public IParser getParser() {
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
-			IAdaptable hintAdapter = new TmceleditParserProvider.HintAdapter(
-					TmceleditElementTypes.RoleTypeConstraints_3001,
+			IAdaptable hintAdapter = new TmcleditParserProvider.HintAdapter(
+					TmcleditElementTypes.RoleTypeConstraints_3001,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}
@@ -312,7 +312,7 @@ public class RoleTypeConstraintsCardMinCardMaxEditPart extends LabelEditPart
 	protected DirectEditManager getManager() {
 		if (manager == null) {
 			setManager(new TextDirectEditManager(this, TextDirectEditManager
-					.getTextCellEditorClass(this), TmceleditEditPartFactory
+					.getTextCellEditorClass(this), TmcleditEditPartFactory
 					.getTextCellEditorLocator(this)));
 		}
 		return manager;
@@ -406,8 +406,8 @@ public class RoleTypeConstraintsCardMinCardMaxEditPart extends LabelEditPart
 		setLabelTextHelper(getFigure(), getLabelText());
 		setLabelIconHelper(getFigure(), getLabelIcon());
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof TmceleditTextSelectionEditPolicy) {
-			((TmceleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		if (pdEditPolicy instanceof TmcleditTextSelectionEditPolicy) {
+			((TmcleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
 		}
 	}
 

@@ -8,7 +8,7 @@ package de.topicmapslab.tmcledit.model.provider;
 
 
 import de.topicmapslab.tmcledit.model.MappingElement;
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -83,7 +83,7 @@ public class MappingElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_MappingElement_key_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_MappingElement_key_feature", "_UI_MappingElement_type"),
-				 TMPackage.Literals.MAPPING_ELEMENT__KEY,
+				 ModelPackage.Literals.MAPPING_ELEMENT__KEY,
 				 true,
 				 false,
 				 false,
@@ -105,7 +105,7 @@ public class MappingElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_MappingElement_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_MappingElement_value_feature", "_UI_MappingElement_type"),
-				 TMPackage.Literals.MAPPING_ELEMENT__VALUE,
+				 ModelPackage.Literals.MAPPING_ELEMENT__VALUE,
 				 true,
 				 false,
 				 false,
@@ -151,8 +151,8 @@ public class MappingElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(MappingElement.class)) {
-			case TMPackage.MAPPING_ELEMENT__KEY:
-			case TMPackage.MAPPING_ELEMENT__VALUE:
+			case ModelPackage.MAPPING_ELEMENT__KEY:
+			case ModelPackage.MAPPING_ELEMENT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -179,7 +179,7 @@ public class MappingElementItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return TmceleditEditPlugin.INSTANCE;
+		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

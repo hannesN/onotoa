@@ -46,9 +46,9 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditTextSelectionEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditParserProvider;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditTextSelectionEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditParserProvider;
 
 /**
  * @generated
@@ -199,7 +199,7 @@ public class AssociationsTypeIdEditPart extends CompartmentEditPart implements
 		if (parserElement == null) {
 			return null;
 		}
-		return TmceleditElementTypes.getImage(parserElement.eClass());
+		return TmcleditElementTypes.getImage(parserElement.eClass());
 	}
 
 	/**
@@ -225,8 +225,8 @@ public class AssociationsTypeIdEditPart extends CompartmentEditPart implements
 	public void setLabelText(String text) {
 		setLabelTextHelper(getFigure(), text);
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof TmceleditTextSelectionEditPolicy) {
-			((TmceleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		if (pdEditPolicy instanceof TmcleditTextSelectionEditPolicy) {
+			((TmcleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -306,8 +306,8 @@ public class AssociationsTypeIdEditPart extends CompartmentEditPart implements
 	public IParser getParser() {
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
-			IAdaptable hintAdapter = new TmceleditParserProvider.HintAdapter(
-					TmceleditElementTypes.AssociationsType_1004,
+			IAdaptable hintAdapter = new TmcleditParserProvider.HintAdapter(
+					TmcleditElementTypes.AssociationsType_1004,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}
@@ -320,7 +320,7 @@ public class AssociationsTypeIdEditPart extends CompartmentEditPart implements
 	protected DirectEditManager getManager() {
 		if (manager == null) {
 			setManager(new TextDirectEditManager(this, TextDirectEditManager
-					.getTextCellEditorClass(this), TmceleditEditPartFactory
+					.getTextCellEditorClass(this), TmcleditEditPartFactory
 					.getTextCellEditorLocator(this)));
 		}
 		return manager;
@@ -414,8 +414,8 @@ public class AssociationsTypeIdEditPart extends CompartmentEditPart implements
 		setLabelTextHelper(getFigure(), getLabelText());
 		setLabelIconHelper(getFigure(), getLabelIcon());
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof TmceleditTextSelectionEditPolicy) {
-			((TmceleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		if (pdEditPolicy instanceof TmcleditTextSelectionEditPolicy) {
+			((TmcleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
 		}
 	}
 

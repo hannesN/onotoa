@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getAbstractContraint()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractContraint()
  * @model abstract="true"
  * @generated
  */
@@ -40,7 +40,7 @@ public interface AbstractContraint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Card Min</em>' attribute.
 	 * @see #setCardMin(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getAbstractContraint_CardMin()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractContraint_CardMin()
 	 * @model default="0"
 	 * @generated
 	 */
@@ -67,7 +67,7 @@ public interface AbstractContraint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Card Max</em>' attribute.
 	 * @see #setCardMax(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getAbstractContraint_CardMax()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractContraint_CardMax()
 	 * @model default="1"
 	 * @generated
 	 */
@@ -94,7 +94,7 @@ public interface AbstractContraint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Regexp</em>' attribute.
 	 * @see #setRegexp(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getAbstractContraint_Regexp()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractContraint_Regexp()
 	 * @model default="*" required="true"
 	 * @generated
 	 */
@@ -120,7 +120,7 @@ public interface AbstractContraint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getAbstractContraint_Name()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractContraint_Name()
 	 * @model
 	 * @generated
 	 */
@@ -146,7 +146,7 @@ public interface AbstractContraint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Scope</em>' reference.
 	 * @see #setScope(ScopeType)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getAbstractContraint_Scope()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractContraint_Scope()
 	 * @model
 	 * @generated
 	 */

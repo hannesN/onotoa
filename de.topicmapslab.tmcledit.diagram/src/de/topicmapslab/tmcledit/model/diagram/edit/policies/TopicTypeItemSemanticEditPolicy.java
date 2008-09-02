@@ -29,14 +29,14 @@ import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeIdentifierComp
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeIsaEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeTopicTypOccurenceCompartment3EditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeTopicTypeNameCompartment2EditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
 
 /**
  * @generated
  */
 public class TopicTypeItemSemanticEditPolicy extends
-		TmceleditBaseItemSemanticEditPolicy {
+		TmcleditBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
@@ -64,12 +64,12 @@ public class TopicTypeItemSemanticEditPolicy extends
 		}
 		for (Iterator it = view.getChildren().iterator(); it.hasNext();) {
 			Node node = (Node) it.next();
-			switch (TmceleditVisualIDRegistry.getVisualID(node)) {
+			switch (TmcleditVisualIDRegistry.getVisualID(node)) {
 			case TopicTypeTopicTypeNameCompartment2EditPart.VISUAL_ID:
 				for (Iterator cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
-					switch (TmceleditVisualIDRegistry.getVisualID(cnode)) {
+					switch (TmcleditVisualIDRegistry.getVisualID(cnode)) {
 					case NameTypeConstraint5EditPart.VISUAL_ID:
 						cmd.add(getDestroyElementCommand(cnode));
 						break;
@@ -80,7 +80,7 @@ public class TopicTypeItemSemanticEditPolicy extends
 				for (Iterator cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
-					switch (TmceleditVisualIDRegistry.getVisualID(cnode)) {
+					switch (TmcleditVisualIDRegistry.getVisualID(cnode)) {
 					case OccurenceTypeConstraint6EditPart.VISUAL_ID:
 						cmd.add(getDestroyElementCommand(cnode));
 						break;
@@ -91,7 +91,7 @@ public class TopicTypeItemSemanticEditPolicy extends
 				for (Iterator cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
-					switch (TmceleditVisualIDRegistry.getVisualID(cnode)) {
+					switch (TmcleditVisualIDRegistry.getVisualID(cnode)) {
 					case SubjectIdentifierConstraint6EditPart.VISUAL_ID:
 						cmd.add(getDestroyElementCommand(cnode));
 						break;
@@ -120,15 +120,15 @@ public class TopicTypeItemSemanticEditPolicy extends
 	 */
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (TmceleditElementTypes.RoleTypeConstraints_3001 == req
+		if (TmcleditElementTypes.RoleTypeConstraints_3001 == req
 				.getElementType()) {
 			return null;
 		}
-		if (TmceleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeAkoCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
-		if (TmceleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeIsaCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
@@ -140,16 +140,16 @@ public class TopicTypeItemSemanticEditPolicy extends
 	 */
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (TmceleditElementTypes.RoleTypeConstraints_3001 == req
+		if (TmcleditElementTypes.RoleTypeConstraints_3001 == req
 				.getElementType()) {
 			return getGEFWrapper(new RoleTypeConstraintsCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
-		if (TmceleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeAkoCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
-		if (TmceleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeIsaCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}

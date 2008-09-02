@@ -6,7 +6,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.subjectIdentifierConstraint;
 
 import org.eclipse.emf.ecore.EClass;
@@ -37,7 +37,7 @@ public class subjectIdentifierConstraintImpl extends AbstractContraintImpl imple
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.SUBJECT_IDENTIFIER_CONSTRAINT;
+		return ModelPackage.Literals.SUBJECT_IDENTIFIER_CONSTRAINT;
 	}
 
 } //subjectIdentifierConstraintImpl

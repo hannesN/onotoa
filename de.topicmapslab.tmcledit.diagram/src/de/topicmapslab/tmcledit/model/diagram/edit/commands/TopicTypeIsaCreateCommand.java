@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditBaseItemSemanticEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditBaseItemSemanticEditPolicy;
 
 /**
  * @generated
@@ -53,7 +53,7 @@ public class TopicTypeIsaCreateCommand extends EditElementCommand {
 			return true; // link creation is in progress; source is not defined yet
 		}
 		// target may be null here but it's possible to check constraint
-		return TmceleditBaseItemSemanticEditPolicy.LinkConstraints
+		return TmcleditBaseItemSemanticEditPolicy.LinkConstraints
 				.canCreateTopicTypeIsa_3003(getSource(), getTarget());
 	}
 

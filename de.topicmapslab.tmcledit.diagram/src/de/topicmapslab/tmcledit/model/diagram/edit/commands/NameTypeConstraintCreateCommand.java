@@ -6,7 +6,7 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 /**
  * @generated
@@ -36,7 +36,7 @@ public class NameTypeConstraintCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EClass getEClassToEdit() {
-		return TMPackage.eINSTANCE.getTopicType();
+		return ModelPackage.eINSTANCE.getTopicType();
 	}
 
 }

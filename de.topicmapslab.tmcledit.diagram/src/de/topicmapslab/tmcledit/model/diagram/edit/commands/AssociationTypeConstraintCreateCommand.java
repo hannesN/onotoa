@@ -6,7 +6,7 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
 /**
@@ -49,7 +49,7 @@ public class AssociationTypeConstraintCreateCommand extends
 	 * @generated
 	 */
 	protected EClass getEClassToEdit() {
-		return TMPackage.eINSTANCE.getTopicMapSchema();
+		return ModelPackage.eINSTANCE.getTopicMapSchema();
 	}
 
 }

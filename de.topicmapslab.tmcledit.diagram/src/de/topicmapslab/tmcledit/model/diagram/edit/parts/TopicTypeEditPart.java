@@ -25,10 +25,10 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditTextSelectionEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditTextSelectionEditPolicy;
 import de.topicmapslab.tmcledit.model.diagram.edit.policies.TopicTypeItemSemanticEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
 
 /**
  * @generated
@@ -71,29 +71,29 @@ public class TopicTypeEditPart extends ShapeNodeEditPart {
 										.getCreateElementRequestAdapter();
 								IElementType type = (IElementType) adapter
 										.getAdapter(IElementType.class);
-								if (type == TmceleditElementTypes.NameTypeConstraint_2021) {
-									EditPart compartmentEditPart = getChildBySemanticHint(TmceleditVisualIDRegistry
+								if (type == TmcleditElementTypes.NameTypeConstraint_2021) {
+									EditPart compartmentEditPart = getChildBySemanticHint(TmcleditVisualIDRegistry
 											.getType(TopicTypeTopicTypeNameCompartment2EditPart.VISUAL_ID));
 									return compartmentEditPart == null ? null
 											: compartmentEditPart
 													.getCommand(request);
 								}
-								if (type == TmceleditElementTypes.OccurenceTypeConstraint_2022) {
-									EditPart compartmentEditPart = getChildBySemanticHint(TmceleditVisualIDRegistry
+								if (type == TmcleditElementTypes.OccurenceTypeConstraint_2022) {
+									EditPart compartmentEditPart = getChildBySemanticHint(TmcleditVisualIDRegistry
 											.getType(TopicTypeTopicTypOccurenceCompartment3EditPart.VISUAL_ID));
 									return compartmentEditPart == null ? null
 											: compartmentEditPart
 													.getCommand(request);
 								}
-								if (type == TmceleditElementTypes.SubjectIdentifierConstraint_2023) {
-									EditPart compartmentEditPart = getChildBySemanticHint(TmceleditVisualIDRegistry
+								if (type == TmcleditElementTypes.SubjectIdentifierConstraint_2023) {
+									EditPart compartmentEditPart = getChildBySemanticHint(TmcleditVisualIDRegistry
 											.getType(TopicTypeIdentifierCompartment4EditPart.VISUAL_ID));
 									return compartmentEditPart == null ? null
 											: compartmentEditPart
 													.getCommand(request);
 								}
-								if (type == TmceleditElementTypes.SubjectLocatorConstraint_2024) {
-									EditPart compartmentEditPart = getChildBySemanticHint(TmceleditVisualIDRegistry
+								if (type == TmcleditElementTypes.SubjectLocatorConstraint_2024) {
+									EditPart compartmentEditPart = getChildBySemanticHint(TmcleditVisualIDRegistry
 											.getType(TopicTypeIdentifierCompartment4EditPart.VISUAL_ID));
 									return compartmentEditPart == null ? null
 											: compartmentEditPart
@@ -123,7 +123,7 @@ public class TopicTypeEditPart extends ShapeNodeEditPart {
 			protected EditPolicy createChildEditPolicy(EditPart child) {
 				if (child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE) == null) {
 					if (child instanceof ITextAwareEditPart) {
-						return new TmceleditTextSelectionEditPolicy();
+						return new TmcleditTextSelectionEditPolicy();
 					}
 				}
 				return super.createChildEditPolicy(child);
@@ -250,7 +250,7 @@ public class TopicTypeEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(TmceleditVisualIDRegistry
+		return getChildBySemanticHint(TmcleditVisualIDRegistry
 				.getType(TopicTypeIdEditPart.VISUAL_ID));
 	}
 

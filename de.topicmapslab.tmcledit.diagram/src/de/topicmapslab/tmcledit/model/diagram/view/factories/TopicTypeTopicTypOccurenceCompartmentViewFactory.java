@@ -12,7 +12,7 @@ import org.eclipse.gmf.runtime.notation.TitleStyle;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeTopicTypOccurenceCompartmentEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -37,7 +37,7 @@ public class TopicTypeTopicTypOccurenceCompartmentViewFactory extends
 			IAdaptable semanticAdapter, String semanticHint, int index,
 			boolean persisted) {
 		if (semanticHint == null) {
-			semanticHint = TmceleditVisualIDRegistry
+			semanticHint = TmcleditVisualIDRegistry
 					.getType(TopicTypeTopicTypOccurenceCompartmentEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}

@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -86,7 +86,7 @@ public class RoleTypeConstraintsItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RoleTypeConstraints_cardMin_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_cardMin_feature", "_UI_RoleTypeConstraints_type"),
-				 TMPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MIN,
+				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MIN,
 				 true,
 				 false,
 				 false,
@@ -108,7 +108,7 @@ public class RoleTypeConstraintsItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RoleTypeConstraints_cardMax_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_cardMax_feature", "_UI_RoleTypeConstraints_type"),
-				 TMPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MAX,
+				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MAX,
 				 true,
 				 false,
 				 false,
@@ -130,7 +130,7 @@ public class RoleTypeConstraintsItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RoleTypeConstraints_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_type_feature", "_UI_RoleTypeConstraints_type"),
-				 TMPackage.Literals.ROLE_TYPE_CONSTRAINTS__TYPE,
+				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__TYPE,
 				 true,
 				 false,
 				 true,
@@ -152,7 +152,7 @@ public class RoleTypeConstraintsItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RoleTypeConstraints_topicType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_topicType_feature", "_UI_RoleTypeConstraints_type"),
-				 TMPackage.Literals.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE,
+				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE,
 				 true,
 				 false,
 				 true,
@@ -174,7 +174,7 @@ public class RoleTypeConstraintsItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RoleTypeConstraints_associationTypeConstraint_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_associationTypeConstraint_feature", "_UI_RoleTypeConstraints_type"),
-				 TMPackage.Literals.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT,
+				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT,
 				 true,
 				 false,
 				 true,
@@ -220,8 +220,8 @@ public class RoleTypeConstraintsItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RoleTypeConstraints.class)) {
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
-			case TMPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
+			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -248,7 +248,7 @@ public class RoleTypeConstraintsItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return TmceleditEditPlugin.INSTANCE;
+		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

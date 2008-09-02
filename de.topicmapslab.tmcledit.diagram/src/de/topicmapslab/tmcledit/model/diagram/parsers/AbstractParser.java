@@ -24,7 +24,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.osgi.util.NLS;
 
 import de.topicmapslab.tmcledit.model.diagram.part.Messages;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramEditorPlugin;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorPlugin;
 
 /**
  * @generated
@@ -204,7 +204,7 @@ public abstract class AbstractParser implements IParser {
 		for (int i = 0; i < values.length; i++) {
 			Object value = getValidNewValue(features[i], values[i]);
 			if (value instanceof InvalidValue) {
-				return new ParserEditStatus(TmceleditDiagramEditorPlugin.ID,
+				return new ParserEditStatus(TmcleditDiagramEditorPlugin.ID,
 						IParserEditStatus.UNEDITABLE, value.toString());
 			}
 		}

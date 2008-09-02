@@ -8,8 +8,8 @@ package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.AssociationsType;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ScopeType;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -70,7 +70,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT;
+		return ModelPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 			scope = (ScopeType)eResolveProxy(oldScope);
 			if (scope != oldScope) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
 			}
 		}
 		return scope;
@@ -108,7 +108,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 		ScopeType oldScope = scope;
 		scope = newScope;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 			associationType = (AssociationsType)eResolveProxy(oldAssociationType);
 			if (associationType != oldAssociationType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
 			}
 		}
 		return associationType;
@@ -146,7 +146,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 		AssociationsType oldAssociationType = associationType;
 		associationType = newAssociationType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
 	}
 
 	/**
@@ -157,10 +157,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
 				if (resolve) return getScope();
 				return basicGetScope();
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				if (resolve) return getAssociationType();
 				return basicGetAssociationType();
 		}
@@ -175,10 +175,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
 				setScope((ScopeType)newValue);
 				return;
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				setAssociationType((AssociationsType)newValue);
 				return;
 		}
@@ -193,10 +193,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
 				setScope((ScopeType)null);
 				return;
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				setAssociationType((AssociationsType)null);
 				return;
 		}
@@ -211,9 +211,9 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
 				return scope != null;
-			case TMPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				return associationType != null;
 		}
 		return super.eIsSet(featureID);

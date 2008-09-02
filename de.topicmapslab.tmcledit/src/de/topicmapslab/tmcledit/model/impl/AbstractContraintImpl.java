@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AbstractContraint;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ScopeType;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -142,7 +142,7 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.ABSTRACT_CONTRAINT;
+		return ModelPackage.Literals.ABSTRACT_CONTRAINT;
 	}
 
 	/**
@@ -163,7 +163,7 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 		String oldCardMin = cardMin;
 		cardMin = newCardMin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ABSTRACT_CONTRAINT__CARD_MIN, oldCardMin, cardMin));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONTRAINT__CARD_MIN, oldCardMin, cardMin));
 	}
 
 	/**
@@ -184,7 +184,7 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 		String oldCardMax = cardMax;
 		cardMax = newCardMax;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ABSTRACT_CONTRAINT__CARD_MAX, oldCardMax, cardMax));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONTRAINT__CARD_MAX, oldCardMax, cardMax));
 	}
 
 	/**
@@ -205,7 +205,7 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 		String oldRegexp = regexp;
 		regexp = newRegexp;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ABSTRACT_CONTRAINT__REGEXP, oldRegexp, regexp));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONTRAINT__REGEXP, oldRegexp, regexp));
 	}
 
 	/**
@@ -226,7 +226,7 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ABSTRACT_CONTRAINT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONTRAINT__NAME, oldName, name));
 	}
 
 	/**
@@ -240,7 +240,7 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 			scope = (ScopeType)eResolveProxy(oldScope);
 			if (scope != oldScope) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.ABSTRACT_CONTRAINT__SCOPE, oldScope, scope));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ABSTRACT_CONTRAINT__SCOPE, oldScope, scope));
 			}
 		}
 		return scope;
@@ -264,7 +264,7 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 		ScopeType oldScope = scope;
 		scope = newScope;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.ABSTRACT_CONTRAINT__SCOPE, oldScope, scope));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONTRAINT__SCOPE, oldScope, scope));
 	}
 
 	/**
@@ -275,15 +275,15 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MIN:
 				return getCardMin();
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MAX:
 				return getCardMax();
-			case TMPackage.ABSTRACT_CONTRAINT__REGEXP:
+			case ModelPackage.ABSTRACT_CONTRAINT__REGEXP:
 				return getRegexp();
-			case TMPackage.ABSTRACT_CONTRAINT__NAME:
+			case ModelPackage.ABSTRACT_CONTRAINT__NAME:
 				return getName();
-			case TMPackage.ABSTRACT_CONTRAINT__SCOPE:
+			case ModelPackage.ABSTRACT_CONTRAINT__SCOPE:
 				if (resolve) return getScope();
 				return basicGetScope();
 		}
@@ -298,19 +298,19 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MIN:
 				setCardMin((String)newValue);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MAX:
 				setCardMax((String)newValue);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__REGEXP:
+			case ModelPackage.ABSTRACT_CONTRAINT__REGEXP:
 				setRegexp((String)newValue);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__NAME:
+			case ModelPackage.ABSTRACT_CONTRAINT__NAME:
 				setName((String)newValue);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__SCOPE:
+			case ModelPackage.ABSTRACT_CONTRAINT__SCOPE:
 				setScope((ScopeType)newValue);
 				return;
 		}
@@ -325,19 +325,19 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MIN:
 				setCardMin(CARD_MIN_EDEFAULT);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MAX:
 				setCardMax(CARD_MAX_EDEFAULT);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__REGEXP:
+			case ModelPackage.ABSTRACT_CONTRAINT__REGEXP:
 				setRegexp(REGEXP_EDEFAULT);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__NAME:
+			case ModelPackage.ABSTRACT_CONTRAINT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case TMPackage.ABSTRACT_CONTRAINT__SCOPE:
+			case ModelPackage.ABSTRACT_CONTRAINT__SCOPE:
 				setScope((ScopeType)null);
 				return;
 		}
@@ -352,15 +352,15 @@ public abstract class AbstractContraintImpl extends EObjectImpl implements Abstr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MIN:
 				return CARD_MIN_EDEFAULT == null ? cardMin != null : !CARD_MIN_EDEFAULT.equals(cardMin);
-			case TMPackage.ABSTRACT_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CONTRAINT__CARD_MAX:
 				return CARD_MAX_EDEFAULT == null ? cardMax != null : !CARD_MAX_EDEFAULT.equals(cardMax);
-			case TMPackage.ABSTRACT_CONTRAINT__REGEXP:
+			case ModelPackage.ABSTRACT_CONTRAINT__REGEXP:
 				return REGEXP_EDEFAULT == null ? regexp != null : !REGEXP_EDEFAULT.equals(regexp);
-			case TMPackage.ABSTRACT_CONTRAINT__NAME:
+			case ModelPackage.ABSTRACT_CONTRAINT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TMPackage.ABSTRACT_CONTRAINT__SCOPE:
+			case ModelPackage.ABSTRACT_CONTRAINT__SCOPE:
 				return scope != null;
 		}
 		return super.eIsSet(featureID);

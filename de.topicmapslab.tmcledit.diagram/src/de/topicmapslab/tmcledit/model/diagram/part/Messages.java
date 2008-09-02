@@ -23,222 +23,222 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreateShortcutAction_OpenModelTitle;
+	public static String TmcleditCreateShortcutAction_OpenModelTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreateShortcutAction_CreateShortcutTitle;
+	public static String TmcleditCreateShortcutAction_CreateShortcutTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizardTitle;
+	public static String TmcleditCreationWizardTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizard_DiagramModelFilePageTitle;
+	public static String TmcleditCreationWizard_DiagramModelFilePageTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizard_DiagramModelFilePageDescription;
+	public static String TmcleditCreationWizard_DiagramModelFilePageDescription;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizard_DomainModelFilePageTitle;
+	public static String TmcleditCreationWizard_DomainModelFilePageTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizard_DomainModelFilePageDescription;
+	public static String TmcleditCreationWizard_DomainModelFilePageDescription;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizardOpenEditorError;
+	public static String TmcleditCreationWizardOpenEditorError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizardCreationError;
+	public static String TmcleditCreationWizardCreationError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditCreationWizardPageExtensionError;
+	public static String TmcleditCreationWizardPageExtensionError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditorUtil_OpenModelResourceErrorDialogTitle;
+	public static String TmcleditDiagramEditorUtil_OpenModelResourceErrorDialogTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditorUtil_OpenModelResourceErrorDialogMessage;
+	public static String TmcleditDiagramEditorUtil_OpenModelResourceErrorDialogMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditorUtil_CreateDiagramProgressTask;
+	public static String TmcleditDiagramEditorUtil_CreateDiagramProgressTask;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditorUtil_CreateDiagramCommandLabel;
+	public static String TmcleditDiagramEditorUtil_CreateDiagramCommandLabel;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_isModifiable;
+	public static String TmcleditDocumentProvider_isModifiable;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_handleElementContentChanged;
+	public static String TmcleditDocumentProvider_handleElementContentChanged;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_IncorrectInputError;
+	public static String TmcleditDocumentProvider_IncorrectInputError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_NoDiagramInResourceError;
+	public static String TmcleditDocumentProvider_NoDiagramInResourceError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_DiagramLoadingError;
+	public static String TmcleditDocumentProvider_DiagramLoadingError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_UnsynchronizedFileSaveError;
+	public static String TmcleditDocumentProvider_UnsynchronizedFileSaveError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_SaveDiagramTask;
+	public static String TmcleditDocumentProvider_SaveDiagramTask;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_SaveNextResourceTask;
+	public static String TmcleditDocumentProvider_SaveNextResourceTask;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDocumentProvider_SaveAsOperation;
+	public static String TmcleditDocumentProvider_SaveAsOperation;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditInitDiagramFileAction_InitDiagramFileResourceErrorDialogTitle;
+	public static String TmcleditInitDiagramFileAction_InitDiagramFileResourceErrorDialogTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditInitDiagramFileAction_InitDiagramFileResourceErrorDialogMessage;
+	public static String TmcleditInitDiagramFileAction_InitDiagramFileResourceErrorDialogMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditInitDiagramFileAction_InitDiagramFileWizardTitle;
+	public static String TmcleditInitDiagramFileAction_InitDiagramFileWizardTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditInitDiagramFileAction_OpenModelFileDialogTitle;
+	public static String TmcleditInitDiagramFileAction_OpenModelFileDialogTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_CreationPageName;
+	public static String TmcleditNewDiagramFileWizard_CreationPageName;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_CreationPageTitle;
+	public static String TmcleditNewDiagramFileWizard_CreationPageTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_CreationPageDescription;
+	public static String TmcleditNewDiagramFileWizard_CreationPageDescription;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_RootSelectionPageName;
+	public static String TmcleditNewDiagramFileWizard_RootSelectionPageName;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_RootSelectionPageTitle;
+	public static String TmcleditNewDiagramFileWizard_RootSelectionPageTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_RootSelectionPageDescription;
+	public static String TmcleditNewDiagramFileWizard_RootSelectionPageDescription;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_RootSelectionPageSelectionTitle;
+	public static String TmcleditNewDiagramFileWizard_RootSelectionPageSelectionTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_RootSelectionPageNoSelectionMessage;
+	public static String TmcleditNewDiagramFileWizard_RootSelectionPageNoSelectionMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_RootSelectionPageInvalidSelectionMessage;
+	public static String TmcleditNewDiagramFileWizard_RootSelectionPageInvalidSelectionMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_InitDiagramCommand;
+	public static String TmcleditNewDiagramFileWizard_InitDiagramCommand;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditNewDiagramFileWizard_IncorrectRootError;
+	public static String TmcleditNewDiagramFileWizard_IncorrectRootError;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditor_SavingDeletedFile;
+	public static String TmcleditDiagramEditor_SavingDeletedFile;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditor_SaveAsErrorTitle;
+	public static String TmcleditDiagramEditor_SaveAsErrorTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditor_SaveAsErrorMessage;
+	public static String TmcleditDiagramEditor_SaveAsErrorMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditor_SaveErrorTitle;
+	public static String TmcleditDiagramEditor_SaveErrorTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditDiagramEditor_SaveErrorMessage;
+	public static String TmcleditDiagramEditor_SaveErrorMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditElementChooserDialog_SelectModelElementTitle;
+	public static String TmcleditElementChooserDialog_SelectModelElementTitle;
 
 	/**
 	 * @generated
@@ -648,12 +648,12 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String TmceleditModelingAssistantProviderTitle;
+	public static String TmcleditModelingAssistantProviderTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String TmceleditModelingAssistantProviderMessage;
+	public static String TmcleditModelingAssistantProviderMessage;
 
 	//TODO: put accessor fields manually	
 }

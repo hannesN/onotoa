@@ -21,7 +21,7 @@ package de.topicmapslab.tmcledit.model;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getOccurenceTypeConstraint()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface OccurenceTypeConstraint extends AbstractContraint {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Unique</em>' attribute.
 	 * @see #setUnique(boolean)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getOccurenceTypeConstraint_Unique()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint_Unique()
 	 * @model
 	 * @generated
 	 */
@@ -62,7 +62,7 @@ public interface OccurenceTypeConstraint extends AbstractContraint {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Type</em>' attribute.
 	 * @see #setDataType(String)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getOccurenceTypeConstraint_DataType()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint_DataType()
 	 * @model
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface OccurenceTypeConstraint extends AbstractContraint {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(OccurenceType)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getOccurenceTypeConstraint_Type()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint_Type()
 	 * @model
 	 * @generated
 	 */

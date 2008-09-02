@@ -11,13 +11,13 @@ import org.eclipse.gmf.runtime.notation.View;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.RoleTypeConstraintsCreateCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.RoleTypeConstraintsReorientCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeConstraintsEditPart;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
 
 /**
  * @generated
  */
 public class AssociationTypeConstraintItemSemanticEditPolicy extends
-		TmceleditBaseItemSemanticEditPolicy {
+		TmcleditBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
@@ -48,7 +48,7 @@ public class AssociationTypeConstraintItemSemanticEditPolicy extends
 	 */
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (TmceleditElementTypes.RoleTypeConstraints_3001 == req
+		if (TmcleditElementTypes.RoleTypeConstraints_3001 == req
 				.getElementType()) {
 			return getGEFWrapper(new RoleTypeConstraintsCreateCommand(req, req
 					.getSource(), req.getTarget()));
@@ -61,7 +61,7 @@ public class AssociationTypeConstraintItemSemanticEditPolicy extends
 	 */
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (TmceleditElementTypes.RoleTypeConstraints_3001 == req
+		if (TmcleditElementTypes.RoleTypeConstraints_3001 == req
 				.getElementType()) {
 			return null;
 		}

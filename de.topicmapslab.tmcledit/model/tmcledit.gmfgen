@@ -20,7 +20,7 @@
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <domainDiagramElement
-        href="tmceledit.genmodel#//model/TopicMapSchema"/>
+        href="tmcledit.genmodel#//model/TopicMapSchema"/>
     <childNodes
         xsi:type="gmfgen:GenChildLabelNode"
         visualID="2001"
@@ -44,24 +44,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/NameTypeConstraint"/>
+            href="tmcledit.genmodel#//model/NameTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1}..{2} ({3})"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/regexp"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/regexp"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -88,24 +88,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1} \t {2}..{3}"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -131,16 +131,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectIdentifierConstraint"/>
+            href="tmcledit.genmodel#//model/subjectIdentifierConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -166,16 +166,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/subjectLocatorConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -201,24 +201,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/NameTypeConstraint"/>
+            href="tmcledit.genmodel#//model/NameTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1}..{2} ({3})"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/regexp"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/regexp"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -245,24 +245,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1} \t {2}..{3}"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -288,16 +288,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectIdentifierConstraint"/>
+            href="tmcledit.genmodel#//model/subjectIdentifierConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -323,16 +323,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/subjectLocatorConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -358,24 +358,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/NameTypeConstraint"/>
+            href="tmcledit.genmodel#//model/NameTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1}..{2} ({3})"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/regexp"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/regexp"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -402,24 +402,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1} \t {2}..{3}"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -445,16 +445,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectIdentifierConstraint"/>
+            href="tmcledit.genmodel#//model/subjectIdentifierConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -480,16 +480,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/subjectLocatorConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -515,24 +515,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/NameTypeConstraint"/>
+            href="tmcledit.genmodel#//model/NameTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1}..{2} ({3})"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/regexp"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/regexp"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -559,24 +559,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1} \t {2}..{3}"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -602,16 +602,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectIdentifierConstraint"/>
+            href="tmcledit.genmodel#//model/subjectIdentifierConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -637,16 +637,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/subjectLocatorConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -672,24 +672,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/NameTypeConstraint"/>
+            href="tmcledit.genmodel#//model/NameTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1}..{2} ({3})"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/regexp"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/regexp"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -716,24 +716,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1} \t {2}..{3}"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -759,16 +759,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectIdentifierConstraint"/>
+            href="tmcledit.genmodel#//model/subjectIdentifierConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -794,16 +794,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/subjectLocatorConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -829,24 +829,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/NameTypeConstraint"/>
+            href="tmcledit.genmodel#//model/NameTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/nameContraints"/>
+            href="tmcledit.genmodel#//model/TopicType/nameContraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1}..{2} ({3})"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/regexp"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/regexp"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -873,24 +873,24 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/occurenceConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/occurenceConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           viewPattern="{0} : {1} \t {2}..{3}"
           editPattern="">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
+            href="tmcledit.genmodel#//model/OccurenceTypeConstraint/dataType"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMin"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMin"/>
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/cardMax"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/cardMax"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -916,16 +916,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectIdentifierConstraint"/>
+            href="tmcledit.genmodel#//model/subjectIdentifierConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectIdentifierConstraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
@@ -951,16 +951,16 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/subjectLocatorConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
+            href="tmcledit.genmodel#//model/TopicType/subjectLocatorConstraint"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
-            href="tmceledit.genmodel#//model/AbstractContraint/name"/>
+            href="tmcledit.genmodel#//model/AbstractContraint/name"/>
       </labelModelFacet>
     </childNodes>
     <topLevelNodes
@@ -990,11 +990,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/NameType"/>
+            href="tmcledit.genmodel#//model/NameType"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
       </modelFacet>
       <labels
           visualID="4001"
@@ -1011,7 +1011,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="tmceledit.genmodel#//model/TopicType/id"/>
+              href="tmcledit.genmodel#//model/TopicType/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -1042,11 +1042,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/ScopeType"/>
+            href="tmcledit.genmodel#//model/ScopeType"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
       </modelFacet>
       <labels
           visualID="4002"
@@ -1063,7 +1063,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="tmceledit.genmodel#//model/TopicType/id"/>
+              href="tmcledit.genmodel#//model/TopicType/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -1094,11 +1094,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/RoleType"/>
+            href="tmcledit.genmodel#//model/RoleType"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
       </modelFacet>
       <labels
           visualID="4003"
@@ -1115,7 +1115,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="tmceledit.genmodel#//model/TopicType/id"/>
+              href="tmcledit.genmodel#//model/TopicType/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -1146,11 +1146,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/AssociationsType"/>
+            href="tmcledit.genmodel#//model/AssociationsType"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
       </modelFacet>
       <labels
           visualID="4004"
@@ -1167,7 +1167,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="tmceledit.genmodel#//model/TopicType/id"/>
+              href="tmcledit.genmodel#//model/TopicType/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -1198,11 +1198,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/OccurenceType"/>
+            href="tmcledit.genmodel#//model/OccurenceType"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
       </modelFacet>
       <labels
           visualID="4005"
@@ -1219,7 +1219,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="tmceledit.genmodel#//model/TopicType/id"/>
+              href="tmcledit.genmodel#//model/TopicType/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -1243,11 +1243,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/AssociationTypeConstraint"/>
+            href="tmcledit.genmodel#//model/AssociationTypeConstraint"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/associationTypeConstraints"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/associationTypeConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/associationTypeConstraints"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/associationTypeConstraints"/>
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
@@ -1276,11 +1276,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="tmceledit.genmodel#//model/TopicType"/>
+            href="tmcledit.genmodel#//model/TopicType"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/topicTypes"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/topicTypes"/>
       </modelFacet>
       <labels
           visualID="4006"
@@ -1297,7 +1297,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="tmceledit.genmodel#//model/TopicType/id"/>
+              href="tmcledit.genmodel#//model/TopicType/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -1321,15 +1321,15 @@
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
-            href="tmceledit.genmodel#//model/RoleTypeConstraints"/>
+            href="tmcledit.genmodel#//model/RoleTypeConstraints"/>
         <containmentMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/roleTypeConstraints"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/roleTypeConstraints"/>
         <childMetaFeature
-            href="tmceledit.genmodel#//model/TopicMapSchema/roleTypeConstraints"/>
+            href="tmcledit.genmodel#//model/TopicMapSchema/roleTypeConstraints"/>
         <sourceMetaFeature
-            href="tmceledit.genmodel#//model/RoleTypeConstraints/associationTypeConstraint"/>
+            href="tmcledit.genmodel#//model/RoleTypeConstraints/associationTypeConstraint"/>
         <targetMetaFeature
-            href="tmceledit.genmodel#//model/RoleTypeConstraints/topicType"/>
+            href="tmcledit.genmodel#//model/RoleTypeConstraints/topicType"/>
       </modelFacet>
       <labels
           visualID="4007"
@@ -1351,9 +1351,9 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             viewPattern="{0}..{1}">
           <metaFeatures
-              href="tmceledit.genmodel#//model/RoleTypeConstraints/cardMin"/>
+              href="tmcledit.genmodel#//model/RoleTypeConstraints/cardMin"/>
           <metaFeatures
-              href="tmceledit.genmodel#//model/RoleTypeConstraints/cardMax"/>
+              href="tmcledit.genmodel#//model/RoleTypeConstraints/cardMax"/>
         </modelFacet>
       </labels>
       <labels
@@ -1376,7 +1376,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="tmceledit.genmodel#//model/RoleTypeConstraints/cardMin"/>
+              href="tmcledit.genmodel#//model/RoleTypeConstraints/cardMin"/>
         </modelFacet>
       </labels>
     </links>
@@ -1400,7 +1400,7 @@
       <modelFacet
           xsi:type="gmfgen:FeatureLinkModelFacet">
         <metaFeature
-            href="tmceledit.genmodel#//model/TopicType/ako"/>
+            href="tmcledit.genmodel#//model/TopicType/ako"/>
       </modelFacet>
       <creationConstraints
           targetEnd="//@expressionProviders/@providers.0/@expressions.0"/>
@@ -1425,7 +1425,7 @@
       <modelFacet
           xsi:type="gmfgen:FeatureLinkModelFacet">
         <metaFeature
-            href="tmceledit.genmodel#//model/TopicType/isa"/>
+            href="tmcledit.genmodel#//model/TopicType/isa"/>
       </modelFacet>
       <creationConstraints
           targetEnd="//@expressionProviders/@providers.0/@expressions.1"/>
@@ -1929,7 +1929,7 @@
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
         iD="de.topicmapslab.tmcledit.diagram.general"
-        name="Tmceledit Diagram">
+        name="tmcledit Diagram">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
           iD="de.topicmapslab.tmcledit.diagram.appearance"
@@ -1957,8 +1957,10 @@
           kind="Pathmaps"/>
     </preferencePages>
   </diagram>
-  <plugin/>
-  <editor/>
+  <plugin
+      name="Tmcledit Plugin"/>
+  <editor
+      className="TmcleditDiagramEditor"/>
   <diagramUpdater/>
   <propertySheet>
     <tabs
@@ -2203,7 +2205,7 @@
     </mainToolBar>
   </application>
   <domainGenModel
-      href="tmceledit.genmodel#/"/>
+      href="tmcledit.genmodel#/"/>
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter">

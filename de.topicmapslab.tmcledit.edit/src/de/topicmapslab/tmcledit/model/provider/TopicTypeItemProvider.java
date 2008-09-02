@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.TMFactory;
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 import java.util.Collection;
@@ -89,7 +89,7 @@ public class TopicTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TopicType_id_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_id_feature", "_UI_TopicType_type"),
-				 TMPackage.Literals.TOPIC_TYPE__ID,
+				 ModelPackage.Literals.TOPIC_TYPE__ID,
 				 true,
 				 false,
 				 false,
@@ -111,7 +111,7 @@ public class TopicTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TopicType_idType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_idType_feature", "_UI_TopicType_type"),
-				 TMPackage.Literals.TOPIC_TYPE__ID_TYPE,
+				 ModelPackage.Literals.TOPIC_TYPE__ID_TYPE,
 				 true,
 				 false,
 				 false,
@@ -133,7 +133,7 @@ public class TopicTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TopicType_isAbstract_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_isAbstract_feature", "_UI_TopicType_type"),
-				 TMPackage.Literals.TOPIC_TYPE__IS_ABSTRACT,
+				 ModelPackage.Literals.TOPIC_TYPE__IS_ABSTRACT,
 				 true,
 				 false,
 				 false,
@@ -155,7 +155,7 @@ public class TopicTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TopicType_isa_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_isa_feature", "_UI_TopicType_type"),
-				 TMPackage.Literals.TOPIC_TYPE__ISA,
+				 ModelPackage.Literals.TOPIC_TYPE__ISA,
 				 true,
 				 false,
 				 true,
@@ -177,7 +177,7 @@ public class TopicTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TopicType_ako_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_ako_feature", "_UI_TopicType_type"),
-				 TMPackage.Literals.TOPIC_TYPE__AKO,
+				 ModelPackage.Literals.TOPIC_TYPE__AKO,
 				 true,
 				 false,
 				 true,
@@ -198,10 +198,10 @@ public class TopicTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TMPackage.Literals.TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
-			childrenFeatures.add(TMPackage.Literals.TOPIC_TYPE__NAME_CONTRAINTS);
-			childrenFeatures.add(TMPackage.Literals.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
-			childrenFeatures.add(TMPackage.Literals.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
+			childrenFeatures.add(ModelPackage.Literals.TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
+			childrenFeatures.add(ModelPackage.Literals.TOPIC_TYPE__NAME_CONTRAINTS);
+			childrenFeatures.add(ModelPackage.Literals.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
+			childrenFeatures.add(ModelPackage.Literals.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
 		}
 		return childrenFeatures;
 	}
@@ -256,15 +256,15 @@ public class TopicTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TopicType.class)) {
-			case TMPackage.TOPIC_TYPE__ID:
-			case TMPackage.TOPIC_TYPE__ID_TYPE:
-			case TMPackage.TOPIC_TYPE__IS_ABSTRACT:
+			case ModelPackage.TOPIC_TYPE__ID:
+			case ModelPackage.TOPIC_TYPE__ID_TYPE:
+			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TMPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
-			case TMPackage.TOPIC_TYPE__NAME_CONTRAINTS:
-			case TMPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
-			case TMPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
+			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -284,23 +284,23 @@ public class TopicTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_TYPE__OCCURENCE_CONSTRAINTS,
-				 TMFactory.eINSTANCE.createOccurenceTypeConstraint()));
+				(ModelPackage.Literals.TOPIC_TYPE__OCCURENCE_CONSTRAINTS,
+				 ModelFactory.eINSTANCE.createOccurenceTypeConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_TYPE__NAME_CONTRAINTS,
-				 TMFactory.eINSTANCE.createNameTypeConstraint()));
+				(ModelPackage.Literals.TOPIC_TYPE__NAME_CONTRAINTS,
+				 ModelFactory.eINSTANCE.createNameTypeConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS,
-				 TMFactory.eINSTANCE.createsubjectIdentifierConstraint()));
+				(ModelPackage.Literals.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS,
+				 ModelFactory.eINSTANCE.createsubjectIdentifierConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TMPackage.Literals.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT,
-				 TMFactory.eINSTANCE.createsubjectLocatorConstraint()));
+				(ModelPackage.Literals.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT,
+				 ModelFactory.eINSTANCE.createsubjectLocatorConstraint()));
 	}
 
 	/**
@@ -311,7 +311,7 @@ public class TopicTypeItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return TmceleditEditPlugin.INSTANCE;
+		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

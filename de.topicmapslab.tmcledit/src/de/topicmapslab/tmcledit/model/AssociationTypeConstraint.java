@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getAssociationTypeConstraint()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationTypeConstraint()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface AssociationTypeConstraint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Scope</em>' reference.
 	 * @see #setScope(ScopeType)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getAssociationTypeConstraint_Scope()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationTypeConstraint_Scope()
 	 * @model
 	 * @generated
 	 */
@@ -62,7 +62,7 @@ public interface AssociationTypeConstraint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Association Type</em>' reference.
 	 * @see #setAssociationType(AssociationsType)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getAssociationTypeConstraint_AssociationType()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationTypeConstraint_AssociationType()
 	 * @model
 	 * @generated
 	 */

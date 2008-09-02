@@ -12,7 +12,7 @@ import org.eclipse.gmf.runtime.notation.TitleStyle;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.AssociationsTypeIdentifierCompartmentEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -38,7 +38,7 @@ public class AssociationsTypeIdentifierCompartmentViewFactory extends
 			IAdaptable semanticAdapter, String semanticHint, int index,
 			boolean persisted) {
 		if (semanticHint == null) {
-			semanticHint = TmceleditVisualIDRegistry
+			semanticHint = TmcleditVisualIDRegistry
 					.getType(AssociationsTypeIdentifierCompartmentEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}

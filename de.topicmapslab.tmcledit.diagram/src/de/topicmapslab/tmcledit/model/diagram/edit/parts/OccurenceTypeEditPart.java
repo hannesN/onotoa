@@ -28,9 +28,9 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import de.topicmapslab.tmcledit.model.diagram.edit.policies.OccurenceTypeCanonicalEditPolicy;
 import de.topicmapslab.tmcledit.model.diagram.edit.policies.OccurenceTypeItemSemanticEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditTextSelectionEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditTextSelectionEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
 
 /**
  * @generated
@@ -73,8 +73,8 @@ public class OccurenceTypeEditPart extends ShapeNodeEditPart {
 										.getCreateElementRequestAdapter();
 								IElementType type = (IElementType) adapter
 										.getAdapter(IElementType.class);
-								if (type == TmceleditElementTypes.NameTypeConstraint_2017) {
-									EditPart compartmentEditPart = getChildBySemanticHint(TmceleditVisualIDRegistry
+								if (type == TmcleditElementTypes.NameTypeConstraint_2017) {
+									EditPart compartmentEditPart = getChildBySemanticHint(TmcleditVisualIDRegistry
 											.getType(OccurenceTypeTopicTypeNameCompartmentEditPart.VISUAL_ID));
 									return compartmentEditPart == null ? null
 											: compartmentEditPart
@@ -108,7 +108,7 @@ public class OccurenceTypeEditPart extends ShapeNodeEditPart {
 			protected EditPolicy createChildEditPolicy(EditPart child) {
 				if (child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE) == null) {
 					if (child instanceof ITextAwareEditPart) {
-						return new TmceleditTextSelectionEditPolicy();
+						return new TmcleditTextSelectionEditPolicy();
 					}
 				}
 				return super.createChildEditPolicy(child);
@@ -235,7 +235,7 @@ public class OccurenceTypeEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(TmceleditVisualIDRegistry
+		return getChildBySemanticHint(TmcleditVisualIDRegistry
 				.getType(OccurenceTypeIdEditPart.VISUAL_ID));
 	}
 

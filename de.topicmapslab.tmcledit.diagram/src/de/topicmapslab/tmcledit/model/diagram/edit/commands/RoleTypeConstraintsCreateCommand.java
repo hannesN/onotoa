@@ -11,12 +11,12 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
-import de.topicmapslab.tmcledit.model.TMFactory;
-import de.topicmapslab.tmcledit.model.TMPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditBaseItemSemanticEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditBaseItemSemanticEditPolicy;
 
 /**
  * @generated
@@ -47,7 +47,7 @@ public class RoleTypeConstraintsCreateCommand extends CreateElementCommand {
 		this.source = source;
 		this.target = target;
 		if (request.getContainmentFeature() == null) {
-			setContainmentFeature(TMPackage.eINSTANCE
+			setContainmentFeature(ModelPackage.eINSTANCE
 					.getTopicMapSchema_RoleTypeConstraints());
 		}
 
@@ -85,7 +85,7 @@ public class RoleTypeConstraintsCreateCommand extends CreateElementCommand {
 		if (getContainer() == null) {
 			return false;
 		}
-		return TmceleditBaseItemSemanticEditPolicy.LinkConstraints
+		return TmcleditBaseItemSemanticEditPolicy.LinkConstraints
 				.canCreateRoleTypeConstraints_3001(getContainer(), getSource(),
 						getTarget());
 	}
@@ -94,7 +94,7 @@ public class RoleTypeConstraintsCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EObject doDefaultElementCreation() {
-		RoleTypeConstraints newElement = TMFactory.eINSTANCE
+		RoleTypeConstraints newElement = ModelFactory.eINSTANCE
 				.createRoleTypeConstraints();
 		getContainer().getRoleTypeConstraints().add(newElement);
 		newElement.setAssociationTypeConstraint(getSource());
@@ -106,7 +106,7 @@ public class RoleTypeConstraintsCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EClass getEClassToEdit() {
-		return TMPackage.eINSTANCE.getTopicMapSchema();
+		return ModelPackage.eINSTANCE.getTopicMapSchema();
 	}
 
 	/**

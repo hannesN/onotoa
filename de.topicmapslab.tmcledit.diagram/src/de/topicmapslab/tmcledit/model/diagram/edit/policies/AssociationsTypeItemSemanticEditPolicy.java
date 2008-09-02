@@ -14,7 +14,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipReques
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.OccurenceTypeConstraint4CreateCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.RoleTypeConstraintsCreateCommand;
 import de.topicmapslab.tmcledit.model.diagram.edit.commands.RoleTypeConstraintsReorientCommand;
@@ -34,40 +34,40 @@ import de.topicmapslab.tmcledit.model.diagram.edit.parts.SubjectIdentifierConstr
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.SubjectLocatorConstraint5EditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeAkoEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.TopicTypeIsaEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
 
 /**
  * @generated
  */
 public class AssociationsTypeItemSemanticEditPolicy extends
-		TmceleditBaseItemSemanticEditPolicy {
+		TmcleditBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (TmceleditElementTypes.OccurenceTypeConstraint_2014 == req
+		if (TmcleditElementTypes.OccurenceTypeConstraint_2014 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicType_OccurenceConstraints());
 			}
 			return getGEFWrapper(new OccurenceTypeConstraint4CreateCommand(req));
 		}
-		if (TmceleditElementTypes.SubjectIdentifierConstraint_2015 == req
+		if (TmcleditElementTypes.SubjectIdentifierConstraint_2015 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicType_SubjectIdentifierConstraints());
 			}
 			return getGEFWrapper(new SubjectIdentifierConstraint4CreateCommand(
 					req));
 		}
-		if (TmceleditElementTypes.SubjectLocatorConstraint_2016 == req
+		if (TmcleditElementTypes.SubjectLocatorConstraint_2016 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(TMPackage.eINSTANCE
+				req.setContainmentFeature(ModelPackage.eINSTANCE
 						.getTopicType_SubjectLocatorConstraint());
 			}
 			return getGEFWrapper(new SubjectLocatorConstraint5CreateCommand(req));
@@ -101,7 +101,7 @@ public class AssociationsTypeItemSemanticEditPolicy extends
 		}
 		for (Iterator it = view.getChildren().iterator(); it.hasNext();) {
 			Node node = (Node) it.next();
-			switch (TmceleditVisualIDRegistry.getVisualID(node)) {
+			switch (TmcleditVisualIDRegistry.getVisualID(node)) {
 			case OccurenceTypeConstraint4EditPart.VISUAL_ID:
 				cmd.add(getDestroyElementCommand(node));
 				break;
@@ -115,7 +115,7 @@ public class AssociationsTypeItemSemanticEditPolicy extends
 				for (Iterator cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
-					switch (TmceleditVisualIDRegistry.getVisualID(cnode)) {
+					switch (TmcleditVisualIDRegistry.getVisualID(cnode)) {
 					case NameTypeConstraint3EditPart.VISUAL_ID:
 						cmd.add(getDestroyElementCommand(cnode));
 						break;
@@ -126,7 +126,7 @@ public class AssociationsTypeItemSemanticEditPolicy extends
 				for (Iterator cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
-					switch (TmceleditVisualIDRegistry.getVisualID(cnode)) {
+					switch (TmcleditVisualIDRegistry.getVisualID(cnode)) {
 					}
 				}
 				break;
@@ -134,7 +134,7 @@ public class AssociationsTypeItemSemanticEditPolicy extends
 				for (Iterator cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
-					switch (TmceleditVisualIDRegistry.getVisualID(cnode)) {
+					switch (TmcleditVisualIDRegistry.getVisualID(cnode)) {
 					}
 				}
 				break;
@@ -157,15 +157,15 @@ public class AssociationsTypeItemSemanticEditPolicy extends
 	 */
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (TmceleditElementTypes.RoleTypeConstraints_3001 == req
+		if (TmcleditElementTypes.RoleTypeConstraints_3001 == req
 				.getElementType()) {
 			return null;
 		}
-		if (TmceleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeAkoCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
-		if (TmceleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeIsaCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
@@ -177,16 +177,16 @@ public class AssociationsTypeItemSemanticEditPolicy extends
 	 */
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (TmceleditElementTypes.RoleTypeConstraints_3001 == req
+		if (TmcleditElementTypes.RoleTypeConstraints_3001 == req
 				.getElementType()) {
 			return getGEFWrapper(new RoleTypeConstraintsCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
-		if (TmceleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeAko_3002 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeAkoCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}
-		if (TmceleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
+		if (TmcleditElementTypes.TopicTypeIsa_3003 == req.getElementType()) {
 			return getGEFWrapper(new TopicTypeIsaCreateCommand(req, req
 					.getSource(), req.getTarget()));
 		}

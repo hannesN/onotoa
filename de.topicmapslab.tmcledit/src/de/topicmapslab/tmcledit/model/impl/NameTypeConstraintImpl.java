@@ -6,9 +6,9 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -57,7 +57,7 @@ public class NameTypeConstraintImpl extends AbstractContraintImpl implements Nam
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.NAME_TYPE_CONSTRAINT;
+		return ModelPackage.Literals.NAME_TYPE_CONSTRAINT;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class NameTypeConstraintImpl extends AbstractContraintImpl implements Nam
 			type = (NameType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.NAME_TYPE_CONSTRAINT__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.NAME_TYPE_CONSTRAINT__TYPE, oldType, type));
 			}
 		}
 		return type;
@@ -95,7 +95,7 @@ public class NameTypeConstraintImpl extends AbstractContraintImpl implements Nam
 		NameType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.NAME_TYPE_CONSTRAINT__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.NAME_TYPE_CONSTRAINT__TYPE, oldType, type));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class NameTypeConstraintImpl extends AbstractContraintImpl implements Nam
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.NAME_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.NAME_TYPE_CONSTRAINT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -121,7 +121,7 @@ public class NameTypeConstraintImpl extends AbstractContraintImpl implements Nam
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.NAME_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.NAME_TYPE_CONSTRAINT__TYPE:
 				setType((NameType)newValue);
 				return;
 		}
@@ -136,7 +136,7 @@ public class NameTypeConstraintImpl extends AbstractContraintImpl implements Nam
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.NAME_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.NAME_TYPE_CONSTRAINT__TYPE:
 				setType((NameType)null);
 				return;
 		}
@@ -151,7 +151,7 @@ public class NameTypeConstraintImpl extends AbstractContraintImpl implements Nam
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.NAME_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.NAME_TYPE_CONSTRAINT__TYPE:
 				return type != null;
 		}
 		return super.eIsSet(featureID);

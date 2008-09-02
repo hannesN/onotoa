@@ -8,7 +8,7 @@ import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractLabelViewFactor
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.NameTypeConstraint2EditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -30,7 +30,7 @@ public class NameTypeConstraint2ViewFactory extends AbstractLabelViewFactory {
 			IAdaptable semanticAdapter, String semanticHint, int index,
 			boolean persisted) {
 		if (semanticHint == null) {
-			semanticHint = TmceleditVisualIDRegistry
+			semanticHint = TmcleditVisualIDRegistry
 					.getType(NameTypeConstraint2EditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}

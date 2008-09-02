@@ -6,7 +6,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.subjectLocatorConstraint;
 
 import org.eclipse.emf.ecore.EClass;
@@ -37,7 +37,7 @@ public class subjectLocatorConstraintImpl extends AbstractContraintImpl implemen
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.SUBJECT_LOCATOR_CONSTRAINT;
+		return ModelPackage.Literals.SUBJECT_LOCATOR_CONSTRAINT;
 	}
 
 } //subjectLocatorConstraintImpl

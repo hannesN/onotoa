@@ -10,13 +10,13 @@ import java.util.Set;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.OccurenceTypeConstraint3EditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.SubjectIdentifierConstraint3EditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.SubjectLocatorConstraint4EditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramUpdater;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditNodeDescriptor;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramUpdater;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditNodeDescriptor;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -34,10 +34,10 @@ public class RoleTypeCanonicalEditPolicy extends CanonicalEditPolicy {
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
-		for (Iterator it = TmceleditDiagramUpdater
+		for (Iterator it = TmcleditDiagramUpdater
 				.getRoleType_1003SemanticChildren(viewObject).iterator(); it
 				.hasNext();) {
-			result.add(((TmceleditNodeDescriptor) it.next()).getModelElement());
+			result.add(((TmcleditNodeDescriptor) it.next()).getModelElement());
 		}
 		return result;
 	}
@@ -46,7 +46,7 @@ public class RoleTypeCanonicalEditPolicy extends CanonicalEditPolicy {
 	 * @generated
 	 */
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
-		int visualID = TmceleditVisualIDRegistry.getVisualID(view);
+		int visualID = TmcleditVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
 		case OccurenceTypeConstraint3EditPart.VISUAL_ID:
 		case SubjectIdentifierConstraint3EditPart.VISUAL_ID:
@@ -71,11 +71,11 @@ public class RoleTypeCanonicalEditPolicy extends CanonicalEditPolicy {
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(TMPackage.eINSTANCE
+			myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
 					.getTopicType_OccurenceConstraints());
-			myFeaturesToSynchronize.add(TMPackage.eINSTANCE
+			myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
 					.getTopicType_SubjectIdentifierConstraints());
-			myFeaturesToSynchronize.add(TMPackage.eINSTANCE
+			myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
 					.getTopicType_SubjectLocatorConstraint());
 		}
 		return myFeaturesToSynchronize;

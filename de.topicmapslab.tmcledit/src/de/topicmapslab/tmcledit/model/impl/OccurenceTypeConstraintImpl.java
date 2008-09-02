@@ -6,9 +6,9 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -99,7 +99,7 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.OCCURENCE_TYPE_CONSTRAINT;
+		return ModelPackage.Literals.OCCURENCE_TYPE_CONSTRAINT;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 		boolean oldUnique = unique;
 		unique = newUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE, oldUnique, unique));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE, oldUnique, unique));
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 		String oldDataType = dataType;
 		dataType = newDataType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE, oldDataType, dataType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE, oldDataType, dataType));
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 			type = (OccurenceType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TMPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
 			}
 		}
 		return type;
@@ -179,7 +179,7 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 		OccurenceType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
 	}
 
 	/**
@@ -190,11 +190,11 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
 				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				return getDataType();
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -209,13 +209,13 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
 				setUnique(((Boolean)newValue).booleanValue());
 				return;
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				setDataType((String)newValue);
 				return;
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
 				setType((OccurenceType)newValue);
 				return;
 		}
@@ -230,13 +230,13 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
 				setUnique(UNIQUE_EDEFAULT);
 				return;
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				setDataType(DATA_TYPE_EDEFAULT);
 				return;
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
 				setType((OccurenceType)null);
 				return;
 		}
@@ -251,11 +251,11 @@ public class OccurenceTypeConstraintImpl extends AbstractContraintImpl implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
 				return unique != UNIQUE_EDEFAULT;
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
-			case TMPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
+			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
 				return type != null;
 		}
 		return super.eIsSet(featureID);

@@ -12,7 +12,7 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	/**
 	 * @generated
 	 */
-	public static final String PERSPECTIVE_ID = "de.topicmapslab.tmcledit.model.diagram.TmceleditPerspective"; //$NON-NLS-1$
+	public static final String PERSPECTIVE_ID = "de.topicmapslab.tmcledit.model.diagram.TmcleditPerspective"; //$NON-NLS-1$
 
 	/**
 	 * @generated

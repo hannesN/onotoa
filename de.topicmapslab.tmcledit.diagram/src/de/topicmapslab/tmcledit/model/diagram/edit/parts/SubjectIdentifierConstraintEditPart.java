@@ -47,10 +47,10 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.model.diagram.edit.policies.SubjectIdentifierConstraintItemSemanticEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditTextNonResizableEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditTextSelectionEditPolicy;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditElementTypes;
-import de.topicmapslab.tmcledit.model.diagram.providers.TmceleditParserProvider;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditTextNonResizableEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditTextSelectionEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditElementTypes;
+import de.topicmapslab.tmcledit.model.diagram.providers.TmcleditParserProvider;
 
 /**
  * @generated
@@ -109,7 +109,7 @@ public class SubjectIdentifierConstraintEditPart extends CompartmentEditPart
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
 				new SubjectIdentifierConstraintItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new TmceleditTextNonResizableEditPolicy());
+				new TmcleditTextNonResizableEditPolicy());
 		installEditPolicy(EditPolicy.COMPONENT_ROLE,
 				new ListItemComponentEditPolicy());
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
@@ -222,8 +222,8 @@ public class SubjectIdentifierConstraintEditPart extends CompartmentEditPart
 	public void setLabelText(String text) {
 		setLabelTextHelper(getFigure(), text);
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof TmceleditTextSelectionEditPolicy) {
-			((TmceleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		if (pdEditPolicy instanceof TmcleditTextSelectionEditPolicy) {
+			((TmcleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -303,8 +303,8 @@ public class SubjectIdentifierConstraintEditPart extends CompartmentEditPart
 	public IParser getParser() {
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
-			IAdaptable hintAdapter = new TmceleditParserProvider.HintAdapter(
-					TmceleditElementTypes.SubjectIdentifierConstraint_2003,
+			IAdaptable hintAdapter = new TmcleditParserProvider.HintAdapter(
+					TmcleditElementTypes.SubjectIdentifierConstraint_2003,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}
@@ -317,7 +317,7 @@ public class SubjectIdentifierConstraintEditPart extends CompartmentEditPart
 	protected DirectEditManager getManager() {
 		if (manager == null) {
 			setManager(new TextDirectEditManager(this, TextDirectEditManager
-					.getTextCellEditorClass(this), TmceleditEditPartFactory
+					.getTextCellEditorClass(this), TmcleditEditPartFactory
 					.getTextCellEditorLocator(this)));
 		}
 		return manager;
@@ -411,8 +411,8 @@ public class SubjectIdentifierConstraintEditPart extends CompartmentEditPart
 		setLabelTextHelper(getFigure(), getLabelText());
 		setLabelIconHelper(getFigure(), getLabelIcon());
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof TmceleditTextSelectionEditPolicy) {
-			((TmceleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		if (pdEditPolicy instanceof TmcleditTextSelectionEditPolicy) {
+			((TmcleditTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
 		}
 	}
 

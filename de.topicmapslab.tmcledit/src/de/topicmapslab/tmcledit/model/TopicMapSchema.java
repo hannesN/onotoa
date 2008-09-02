@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicMapSchema()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface TopicMapSchema extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Topic Types</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicMapSchema_TopicTypes()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_TopicTypes()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -56,7 +56,7 @@ public interface TopicMapSchema extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Role Type Constraints</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicMapSchema_RoleTypeConstraints()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_RoleTypeConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public interface TopicMapSchema extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Association Type Constraints</em>' containment reference.
 	 * @see #setAssociationTypeConstraints(AssociationTypeConstraint)
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicMapSchema_AssociationTypeConstraints()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_AssociationTypeConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -98,7 +98,7 @@ public interface TopicMapSchema extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Mappings</em>' reference list.
-	 * @see de.topicmapslab.tmcledit.model.TMPackage#getTopicMapSchema_Mappings()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_Mappings()
 	 * @model
 	 * @generated
 	 */

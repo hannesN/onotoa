@@ -6,8 +6,8 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleType;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -37,7 +37,7 @@ public class RoleTypeImpl extends TopicTypeImpl implements RoleType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.ROLE_TYPE;
+		return ModelPackage.Literals.ROLE_TYPE;
 	}
 
 } //RoleTypeImpl

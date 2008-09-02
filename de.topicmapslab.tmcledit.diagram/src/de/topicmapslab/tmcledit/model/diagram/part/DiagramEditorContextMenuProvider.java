@@ -68,7 +68,7 @@ public class DiagramEditorContextMenuProvider extends
 						}
 					});
 		} catch (Exception e) {
-			TmceleditDiagramEditorPlugin.getInstance().logError(
+			TmcleditDiagramEditorPlugin.getInstance().logError(
 					"Error building context menu", e);
 		}
 	}

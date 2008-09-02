@@ -13,7 +13,7 @@ package de.topicmapslab.tmcledit.model;
  * <!-- end-user-doc -->
  *
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getAssociationsType()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationsType()
  * @model
  * @generated
  */

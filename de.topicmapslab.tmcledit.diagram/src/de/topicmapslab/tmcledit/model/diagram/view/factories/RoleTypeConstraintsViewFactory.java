@@ -14,7 +14,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeConstraintsCardMinCardMaxEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeConstraintsEditPart;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.RoleTypeConstraintsRoleEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -38,7 +38,7 @@ public class RoleTypeConstraintsViewFactory extends ConnectionViewFactory {
 			IAdaptable semanticAdapter, String semanticHint, int index,
 			boolean persisted) {
 		if (semanticHint == null) {
-			semanticHint = TmceleditVisualIDRegistry
+			semanticHint = TmcleditVisualIDRegistry
 					.getType(RoleTypeConstraintsEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}
@@ -53,13 +53,13 @@ public class RoleTypeConstraintsViewFactory extends ConnectionViewFactory {
 				.createNode(
 						eObjectAdapter,
 						view,
-						TmceleditVisualIDRegistry
+						TmcleditVisualIDRegistry
 								.getType(RoleTypeConstraintsCardMinCardMaxEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService().createNode(
 				eObjectAdapter,
 				view,
-				TmceleditVisualIDRegistry
+				TmcleditVisualIDRegistry
 						.getType(RoleTypeConstraintsRoleEditPart.VISUAL_ID),
 				ViewUtil.APPEND, true, getPreferencesHint());
 	}

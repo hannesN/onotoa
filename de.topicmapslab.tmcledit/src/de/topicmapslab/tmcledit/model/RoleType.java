@@ -13,7 +13,7 @@ package de.topicmapslab.tmcledit.model;
  * <!-- end-user-doc -->
  *
  *
- * @see de.topicmapslab.tmcledit.model.TMPackage#getRoleType()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleType()
  * @model
  * @generated
  */

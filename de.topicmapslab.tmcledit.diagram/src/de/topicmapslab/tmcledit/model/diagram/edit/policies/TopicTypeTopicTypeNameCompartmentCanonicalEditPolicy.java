@@ -10,11 +10,11 @@ import java.util.Set;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.topicmapslab.tmcledit.model.TMPackage;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.diagram.edit.parts.NameTypeConstraintEditPart;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditDiagramUpdater;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditNodeDescriptor;
-import de.topicmapslab.tmcledit.model.diagram.part.TmceleditVisualIDRegistry;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramUpdater;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditNodeDescriptor;
+import de.topicmapslab.tmcledit.model.diagram.part.TmcleditVisualIDRegistry;
 
 /**
  * @generated
@@ -33,10 +33,10 @@ public class TopicTypeTopicTypeNameCompartmentCanonicalEditPolicy extends
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
-		for (Iterator it = TmceleditDiagramUpdater
+		for (Iterator it = TmcleditDiagramUpdater
 				.getNameTypeTopicTypeNameCompartment_5001SemanticChildren(
 						viewObject).iterator(); it.hasNext();) {
-			result.add(((TmceleditNodeDescriptor) it.next()).getModelElement());
+			result.add(((TmcleditNodeDescriptor) it.next()).getModelElement());
 		}
 		return result;
 	}
@@ -45,7 +45,7 @@ public class TopicTypeTopicTypeNameCompartmentCanonicalEditPolicy extends
 	 * @generated
 	 */
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
-		int visualID = TmceleditVisualIDRegistry.getVisualID(view);
+		int visualID = TmcleditVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
 		case NameTypeConstraintEditPart.VISUAL_ID:
 			if (!semanticChildren.contains(view.getElement())) {
@@ -68,7 +68,7 @@ public class TopicTypeTopicTypeNameCompartmentCanonicalEditPolicy extends
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(TMPackage.eINSTANCE
+			myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
 					.getTopicType_NameContraints());
 		}
 		return myFeaturesToSynchronize;

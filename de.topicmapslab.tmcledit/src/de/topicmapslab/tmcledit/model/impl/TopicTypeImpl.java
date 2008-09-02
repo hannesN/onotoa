@@ -6,9 +6,9 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.TMPackage;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.subjectIdentifierConstraint;
@@ -189,7 +189,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.TOPIC_TYPE;
+		return ModelPackage.Literals.TOPIC_TYPE;
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.TOPIC_TYPE__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__ID, oldId, id));
 	}
 
 	/**
@@ -231,7 +231,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 		TopicId oldIdType = idType;
 		idType = newIdType == null ? ID_TYPE_EDEFAULT : newIdType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.TOPIC_TYPE__ID_TYPE, oldIdType, idType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__ID_TYPE, oldIdType, idType));
 	}
 
 	/**
@@ -252,7 +252,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 		boolean oldIsAbstract = isAbstract;
 		isAbstract = newIsAbstract;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TMPackage.TOPIC_TYPE__IS_ABSTRACT, oldIsAbstract, isAbstract));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__IS_ABSTRACT, oldIsAbstract, isAbstract));
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 */
 	public EList<TopicType> getIsa() {
 		if (isa == null) {
-			isa = new EObjectResolvingEList<TopicType>(TopicType.class, this, TMPackage.TOPIC_TYPE__ISA);
+			isa = new EObjectResolvingEList<TopicType>(TopicType.class, this, ModelPackage.TOPIC_TYPE__ISA);
 		}
 		return isa;
 	}
@@ -274,7 +274,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 */
 	public EList<TopicType> getAko() {
 		if (ako == null) {
-			ako = new EObjectResolvingEList<TopicType>(TopicType.class, this, TMPackage.TOPIC_TYPE__AKO);
+			ako = new EObjectResolvingEList<TopicType>(TopicType.class, this, ModelPackage.TOPIC_TYPE__AKO);
 		}
 		return ako;
 	}
@@ -286,7 +286,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 */
 	public EList<OccurenceTypeConstraint> getOccurenceConstraints() {
 		if (occurenceConstraints == null) {
-			occurenceConstraints = new EObjectContainmentEList<OccurenceTypeConstraint>(OccurenceTypeConstraint.class, this, TMPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
+			occurenceConstraints = new EObjectContainmentEList<OccurenceTypeConstraint>(OccurenceTypeConstraint.class, this, ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
 		}
 		return occurenceConstraints;
 	}
@@ -298,7 +298,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 */
 	public EList<NameTypeConstraint> getNameContraints() {
 		if (nameContraints == null) {
-			nameContraints = new EObjectContainmentEList<NameTypeConstraint>(NameTypeConstraint.class, this, TMPackage.TOPIC_TYPE__NAME_CONTRAINTS);
+			nameContraints = new EObjectContainmentEList<NameTypeConstraint>(NameTypeConstraint.class, this, ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS);
 		}
 		return nameContraints;
 	}
@@ -310,7 +310,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 */
 	public EList<subjectIdentifierConstraint> getSubjectIdentifierConstraints() {
 		if (subjectIdentifierConstraints == null) {
-			subjectIdentifierConstraints = new EObjectContainmentEList<subjectIdentifierConstraint>(subjectIdentifierConstraint.class, this, TMPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
+			subjectIdentifierConstraints = new EObjectContainmentEList<subjectIdentifierConstraint>(subjectIdentifierConstraint.class, this, ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
 		}
 		return subjectIdentifierConstraints;
 	}
@@ -322,7 +322,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 */
 	public EList<subjectLocatorConstraint> getSubjectLocatorConstraint() {
 		if (subjectLocatorConstraint == null) {
-			subjectLocatorConstraint = new EObjectContainmentEList<subjectLocatorConstraint>(subjectLocatorConstraint.class, this, TMPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
+			subjectLocatorConstraint = new EObjectContainmentEList<subjectLocatorConstraint>(subjectLocatorConstraint.class, this, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
 		}
 		return subjectLocatorConstraint;
 	}
@@ -335,13 +335,13 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TMPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
 				return ((InternalEList<?>)getOccurenceConstraints()).basicRemove(otherEnd, msgs);
-			case TMPackage.TOPIC_TYPE__NAME_CONTRAINTS:
+			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				return ((InternalEList<?>)getNameContraints()).basicRemove(otherEnd, msgs);
-			case TMPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				return ((InternalEList<?>)getSubjectIdentifierConstraints()).basicRemove(otherEnd, msgs);
-			case TMPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				return ((InternalEList<?>)getSubjectLocatorConstraint()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -355,23 +355,23 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TMPackage.TOPIC_TYPE__ID:
+			case ModelPackage.TOPIC_TYPE__ID:
 				return getId();
-			case TMPackage.TOPIC_TYPE__ID_TYPE:
+			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return getIdType();
-			case TMPackage.TOPIC_TYPE__IS_ABSTRACT:
+			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
 				return isIsAbstract() ? Boolean.TRUE : Boolean.FALSE;
-			case TMPackage.TOPIC_TYPE__ISA:
+			case ModelPackage.TOPIC_TYPE__ISA:
 				return getIsa();
-			case TMPackage.TOPIC_TYPE__AKO:
+			case ModelPackage.TOPIC_TYPE__AKO:
 				return getAko();
-			case TMPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
 				return getOccurenceConstraints();
-			case TMPackage.TOPIC_TYPE__NAME_CONTRAINTS:
+			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				return getNameContraints();
-			case TMPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				return getSubjectIdentifierConstraints();
-			case TMPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				return getSubjectLocatorConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -386,36 +386,36 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TMPackage.TOPIC_TYPE__ID:
+			case ModelPackage.TOPIC_TYPE__ID:
 				setId((String)newValue);
 				return;
-			case TMPackage.TOPIC_TYPE__ID_TYPE:
+			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				setIdType((TopicId)newValue);
 				return;
-			case TMPackage.TOPIC_TYPE__IS_ABSTRACT:
+			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
 				setIsAbstract(((Boolean)newValue).booleanValue());
 				return;
-			case TMPackage.TOPIC_TYPE__ISA:
+			case ModelPackage.TOPIC_TYPE__ISA:
 				getIsa().clear();
 				getIsa().addAll((Collection<? extends TopicType>)newValue);
 				return;
-			case TMPackage.TOPIC_TYPE__AKO:
+			case ModelPackage.TOPIC_TYPE__AKO:
 				getAko().clear();
 				getAko().addAll((Collection<? extends TopicType>)newValue);
 				return;
-			case TMPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
 				getOccurenceConstraints().clear();
 				getOccurenceConstraints().addAll((Collection<? extends OccurenceTypeConstraint>)newValue);
 				return;
-			case TMPackage.TOPIC_TYPE__NAME_CONTRAINTS:
+			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				getNameContraints().clear();
 				getNameContraints().addAll((Collection<? extends NameTypeConstraint>)newValue);
 				return;
-			case TMPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				getSubjectIdentifierConstraints().clear();
 				getSubjectIdentifierConstraints().addAll((Collection<? extends subjectIdentifierConstraint>)newValue);
 				return;
-			case TMPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				getSubjectLocatorConstraint().clear();
 				getSubjectLocatorConstraint().addAll((Collection<? extends subjectLocatorConstraint>)newValue);
 				return;
@@ -431,31 +431,31 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TMPackage.TOPIC_TYPE__ID:
+			case ModelPackage.TOPIC_TYPE__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case TMPackage.TOPIC_TYPE__ID_TYPE:
+			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				setIdType(ID_TYPE_EDEFAULT);
 				return;
-			case TMPackage.TOPIC_TYPE__IS_ABSTRACT:
+			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
-			case TMPackage.TOPIC_TYPE__ISA:
+			case ModelPackage.TOPIC_TYPE__ISA:
 				getIsa().clear();
 				return;
-			case TMPackage.TOPIC_TYPE__AKO:
+			case ModelPackage.TOPIC_TYPE__AKO:
 				getAko().clear();
 				return;
-			case TMPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
 				getOccurenceConstraints().clear();
 				return;
-			case TMPackage.TOPIC_TYPE__NAME_CONTRAINTS:
+			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				getNameContraints().clear();
 				return;
-			case TMPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				getSubjectIdentifierConstraints().clear();
 				return;
-			case TMPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				getSubjectLocatorConstraint().clear();
 				return;
 		}
@@ -470,23 +470,23 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TMPackage.TOPIC_TYPE__ID:
+			case ModelPackage.TOPIC_TYPE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case TMPackage.TOPIC_TYPE__ID_TYPE:
+			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return idType != ID_TYPE_EDEFAULT;
-			case TMPackage.TOPIC_TYPE__IS_ABSTRACT:
+			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
-			case TMPackage.TOPIC_TYPE__ISA:
+			case ModelPackage.TOPIC_TYPE__ISA:
 				return isa != null && !isa.isEmpty();
-			case TMPackage.TOPIC_TYPE__AKO:
+			case ModelPackage.TOPIC_TYPE__AKO:
 				return ako != null && !ako.isEmpty();
-			case TMPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
 				return occurenceConstraints != null && !occurenceConstraints.isEmpty();
-			case TMPackage.TOPIC_TYPE__NAME_CONTRAINTS:
+			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				return nameContraints != null && !nameContraints.isEmpty();
-			case TMPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				return subjectIdentifierConstraints != null && !subjectIdentifierConstraints.isEmpty();
-			case TMPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
+			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				return subjectLocatorConstraint != null && !subjectLocatorConstraint.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -12,7 +12,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmceleditBaseItemSemanticEditPolicy;
+import de.topicmapslab.tmcledit.model.diagram.edit.policies.TmcleditBaseItemSemanticEditPolicy;
 
 /**
  * @generated
@@ -73,7 +73,7 @@ public class RoleTypeConstraintsReorientCommand extends EditElementCommand {
 			return false;
 		}
 		TopicMapSchema container = (TopicMapSchema) getLink().eContainer();
-		return TmceleditBaseItemSemanticEditPolicy.LinkConstraints
+		return TmcleditBaseItemSemanticEditPolicy.LinkConstraints
 				.canExistRoleTypeConstraints_3001(container, getNewSource(),
 						target);
 	}
@@ -91,7 +91,7 @@ public class RoleTypeConstraintsReorientCommand extends EditElementCommand {
 			return false;
 		}
 		TopicMapSchema container = (TopicMapSchema) getLink().eContainer();
-		return TmceleditBaseItemSemanticEditPolicy.LinkConstraints
+		return TmcleditBaseItemSemanticEditPolicy.LinkConstraints
 				.canExistRoleTypeConstraints_3001(container, source,
 						getNewTarget());
 	}

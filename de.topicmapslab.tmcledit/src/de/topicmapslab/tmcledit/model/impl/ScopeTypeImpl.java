@@ -6,8 +6,8 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ScopeType;
-import de.topicmapslab.tmcledit.model.TMPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -37,7 +37,7 @@ public class ScopeTypeImpl extends TopicTypeImpl implements ScopeType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TMPackage.Literals.SCOPE_TYPE;
+		return ModelPackage.Literals.SCOPE_TYPE;
 	}
 
 } //ScopeTypeImpl
