@@ -640,12 +640,6 @@
       </binding>
    </extension>
 
-   <extension id="TmcleditApplication" point="org.eclipse.core.runtime.applications">
-      <?gmfgen generated="true"?>
-      <application>
-         <run class="de.topicmapslab.tmcledit.model.diagram.application.TmcleditApplication"/>
-      </application>
-   </extension>
 
    <extension point="org.eclipse.ui.perspectives">
       <?gmfgen generated="true"?>

@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: de.topicmapslab.tmcledit.model.diagram.edit.parts, 
+Export-Package: de.topicmapslab.tmcledit.model.diagram.edit.parts,
  de.topicmapslab.tmcledit.model.diagram.part,
  de.topicmapslab.tmcledit.model.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,
@@ -29,4 +29,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
