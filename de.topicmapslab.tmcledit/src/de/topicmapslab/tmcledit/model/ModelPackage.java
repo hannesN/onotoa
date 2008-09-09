@@ -999,13 +999,22 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA__MAPPINGS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Includes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__INCLUDES = 4;
+
+	/**
 	 * The number of structural features of the '<em>Topic Map Schema</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = 4;
+	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl <em>subject Locator Constraint</em>}' class.
@@ -1628,6 +1637,17 @@ public interface ModelPackage extends EPackage {
 	EReference getTopicMapSchema_Mappings();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getIncludes <em>Includes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Includes</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#getIncludes()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_Includes();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint <em>subject Locator Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2068,6 +2088,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TOPIC_MAP_SCHEMA__MAPPINGS = eINSTANCE.getTopicMapSchema_Mappings();
+
+		/**
+		 * The meta object literal for the '<em><b>Includes</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__INCLUDES = eINSTANCE.getTopicMapSchema_Includes();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl <em>subject Locator Constraint</em>}' class.

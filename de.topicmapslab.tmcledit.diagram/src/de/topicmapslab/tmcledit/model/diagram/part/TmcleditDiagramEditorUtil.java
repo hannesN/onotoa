@@ -172,7 +172,7 @@ public class TmcleditDiagramEditorUtil {
 	/**
 	 * @generated
 	 */
-	public static Resource createDiagram(URI diagramURI, URI modelURI,
+	public static Resource createDiagram(URI diagramURI,
 			IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
 				.createEditingDomain();
@@ -182,8 +182,6 @@ public class TmcleditDiagramEditorUtil {
 						3);
 		final Resource diagramResource = editingDomain.getResourceSet()
 				.createResource(diagramURI);
-		final Resource modelResource = editingDomain.getResourceSet()
-				.createResource(modelURI);
 		final String diagramName = diagramURI.lastSegment();
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
 				editingDomain,
@@ -193,7 +191,7 @@ public class TmcleditDiagramEditorUtil {
 					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				TopicMapSchema model = createInitialModel();
-				attachModelToResource(model, modelResource);
+				attachModelToResource(model, diagramResource);
 
 				Diagram diagram = ViewService.createDiagram(model,
 						TopicMapSchemaEditPart.MODEL_ID,
@@ -205,9 +203,7 @@ public class TmcleditDiagramEditorUtil {
 				}
 
 				try {
-					modelResource
-							.save(de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorUtil
-									.getSaveOptions());
+
 					diagramResource
 							.save(de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorUtil
 									.getSaveOptions());

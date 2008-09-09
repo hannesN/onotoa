@@ -567,6 +567,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTopicMapSchema_Includes() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getsubjectLocatorConstraint() {
 		return subjectLocatorConstraintEClass;
 	}
@@ -719,6 +728,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS);
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS);
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__MAPPINGS);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__INCLUDES);
 
 		subjectLocatorConstraintEClass = createEClass(SUBJECT_LOCATOR_CONSTRAINT);
 
@@ -823,6 +833,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getTopicMapSchema_RoleTypeConstraints(), this.getRoleTypeConstraints(), null, "roleTypeConstraints", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicMapSchema_AssociationTypeConstraints(), this.getAssociationTypeConstraint(), null, "associationTypeConstraints", null, 0, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicMapSchema_Mappings(), this.getMappingElement(), null, "mappings", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_Includes(), ecorePackage.getEString(), "includes", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectLocatorConstraintEClass, subjectLocatorConstraint.class, "subjectLocatorConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -842,7 +853,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		addEEnumLiteral(topicIdEEnum, TopicId.SUBJECT_IDENTIFIER);
 		addEEnumLiteral(topicIdEEnum, TopicId.ITEM_IDENTIFIER);
 		addEEnumLiteral(topicIdEEnum, TopicId.IDENTIFIER);
-		addEEnumLiteral(topicIdEEnum, TopicId.EENUM_LITERAL4);
 
 		// Create resource
 		createResource(eNS_URI);

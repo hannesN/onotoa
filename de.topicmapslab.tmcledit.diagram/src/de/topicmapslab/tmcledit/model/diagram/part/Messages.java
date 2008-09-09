@@ -48,16 +48,6 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String TmcleditCreationWizard_DomainModelFilePageTitle;
-
-	/**
-	 * @generated
-	 */
-	public static String TmcleditCreationWizard_DomainModelFilePageDescription;
-
-	/**
-	 * @generated
-	 */
 	public static String TmcleditCreationWizardOpenEditorError;
 
 	/**

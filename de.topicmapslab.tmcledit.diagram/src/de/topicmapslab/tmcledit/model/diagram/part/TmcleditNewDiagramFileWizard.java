@@ -81,7 +81,7 @@ public class TmcleditNewDiagramFileWizard extends Wizard {
 		}
 		myFileCreationPage.setContainerFullPath(filePath);
 		myFileCreationPage.setFileName(TmcleditDiagramEditorUtil
-				.getUniqueFileName(filePath, fileName, "model_diagram")); //$NON-NLS-1$
+				.getUniqueFileName(filePath, fileName, "tmcl")); //$NON-NLS-1$
 
 		diagramRootElementSelectionPage = new DiagramRootElementSelectionPage(
 				Messages.TmcleditNewDiagramFileWizard_RootSelectionPageName);
@@ -133,6 +133,7 @@ public class TmcleditNewDiagramFileWizard extends Wizard {
 						TopicMapSchemaEditPart.MODEL_ID,
 						TmcleditDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				diagramResource.getContents().add(diagram);
+				diagramResource.getContents().add(diagram.getElement());
 				return CommandResult.newOKCommandResult();
 			}
 		};

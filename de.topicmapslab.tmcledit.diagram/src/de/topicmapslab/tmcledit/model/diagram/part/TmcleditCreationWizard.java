@@ -36,11 +36,6 @@ public class TmcleditCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @generated
 	 */
-	protected TmcleditCreationWizardPage domainModelFilePage;
-
-	/**
-	 * @generated
-	 */
 	protected Resource diagram;
 
 	/**
@@ -101,32 +96,12 @@ public class TmcleditCreationWizard extends Wizard implements INewWizard {
 	 */
 	public void addPages() {
 		diagramModelFilePage = new TmcleditCreationWizardPage(
-				"DiagramModelFile", getSelection(), "model_diagram"); //$NON-NLS-1$ //$NON-NLS-2$
+				"DiagramModelFile", getSelection(), "tmcl"); //$NON-NLS-1$ //$NON-NLS-2$
 		diagramModelFilePage
 				.setTitle(Messages.TmcleditCreationWizard_DiagramModelFilePageTitle);
 		diagramModelFilePage
 				.setDescription(Messages.TmcleditCreationWizard_DiagramModelFilePageDescription);
 		addPage(diagramModelFilePage);
-
-		domainModelFilePage = new TmcleditCreationWizardPage(
-				"DomainModelFile", getSelection(), "model") { //$NON-NLS-1$ //$NON-NLS-2$
-
-			public void setVisible(boolean visible) {
-				if (visible) {
-					String fileName = diagramModelFilePage.getFileName();
-					fileName = fileName.substring(0, fileName.length()
-							- ".model_diagram".length()); //$NON-NLS-1$
-					setFileName(TmcleditDiagramEditorUtil.getUniqueFileName(
-							getContainerFullPath(), fileName, "model")); //$NON-NLS-1$
-				}
-				super.setVisible(visible);
-			}
-		};
-		domainModelFilePage
-				.setTitle(Messages.TmcleditCreationWizard_DomainModelFilePageTitle);
-		domainModelFilePage
-				.setDescription(Messages.TmcleditCreationWizard_DomainModelFilePageDescription);
-		addPage(domainModelFilePage);
 	}
 
 	/**
@@ -138,8 +113,7 @@ public class TmcleditCreationWizard extends Wizard implements INewWizard {
 			public void run(IProgressMonitor monitor)
 					throws InvocationTargetException, InterruptedException {
 				diagram = TmcleditDiagramEditorUtil.createDiagram(
-						diagramModelFilePage.getURI(), domainModelFilePage
-								.getURI(), monitor);
+						diagramModelFilePage.getURI(), monitor);
 				if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
 					try {
 						TmcleditDiagramEditorUtil.openDiagram(diagram);

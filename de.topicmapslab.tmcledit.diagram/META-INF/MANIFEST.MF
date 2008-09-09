@@ -9,7 +9,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: de.topicmapslab.tmcledit.model.diagram.edit.parts,
  de.topicmapslab.tmcledit.model.diagram.part,
- de.topicmapslab.tmcledit.model.diagram.providers
+ de.topicmapslab.tmcledit.model.diagram.providers,
+ de.topicmapslab.tmcledit.model.diagram.sheet
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jface,
  org.eclipse.ui.views,
@@ -31,3 +32,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gef;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-LazyStart: true

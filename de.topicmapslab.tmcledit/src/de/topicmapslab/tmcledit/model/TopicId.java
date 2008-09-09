@@ -60,17 +60,7 @@ public enum TopicId implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	IDENTIFIER(3, "IDENTIFIER", "IDENTIFIER"),
-
-	/**
-	 * The '<em><b>EEnum Literal4</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #EENUM_LITERAL4_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	EENUM_LITERAL4(4, "EEnumLiteral4", "EEnumLiteral4");
+	IDENTIFIER(3, "IDENTIFIER", "IDENTIFIER");
 
 	/**
 	 * The '<em><b>SUBJECT LOCATOR</b></em>' literal value.
@@ -133,21 +123,6 @@ public enum TopicId implements Enumerator {
 	public static final int IDENTIFIER_VALUE = 3;
 
 	/**
-	 * The '<em><b>EEnum Literal4</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>EEnum Literal4</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #EENUM_LITERAL4
-	 * @model name="EEnumLiteral4"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int EENUM_LITERAL4_VALUE = 4;
-
-	/**
 	 * An array of all the '<em><b>Topic Id</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,7 +134,6 @@ public enum TopicId implements Enumerator {
 			SUBJECT_IDENTIFIER,
 			ITEM_IDENTIFIER,
 			IDENTIFIER,
-			EENUM_LITERAL4,
 		};
 
 	/**
@@ -214,7 +188,6 @@ public enum TopicId implements Enumerator {
 			case SUBJECT_IDENTIFIER_VALUE: return SUBJECT_IDENTIFIER;
 			case ITEM_IDENTIFIER_VALUE: return ITEM_IDENTIFIER;
 			case IDENTIFIER_VALUE: return IDENTIFIER;
-			case EENUM_LITERAL4_VALUE: return EENUM_LITERAL4;
 		}
 		return null;
 	}

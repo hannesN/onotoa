@@ -6,14 +6,14 @@
       <?gmfgen generated="true"?>
       <fileTypes
          type="text"
-         extension="model_diagram">
+         extension="tmcl">
       </fileTypes>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <?gmfgen generated="true"?>
       <parser
-         type="model_diagram"
+         type="tmcl"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -24,7 +24,7 @@
          id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ModelDiagramFile.gif"
-         extensions="model_diagram"
+         extensions="tmcl"
          default="true"
          class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditor"
          matchingStrategy="de.topicmapslab.tmcledit.model.diagram.part.TmcleditMatchingStrategy"
@@ -45,12 +45,11 @@
    <extension point="org.eclipse.ui.newWizards">
       <?gmfgen generated="true"?>
   	  <wizard
-           category="org.eclipse.ui.Examples"
-           class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizard"
-           icon="icons/obj16/ModelDiagramFile.gif"
-           id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizardID"
-           name="%newWizardName"
-           project="false">
+  	     name="%newWizardName"
+  	     icon="icons/obj16/ModelDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizard"
+  	     id="de.topicmapslab.tmcledit.model.diagram.part.TmcleditCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
    </extension>
@@ -677,27 +676,27 @@
             id="de.topicmapslab.tmcledit.diagram.ActionSet">
          <action
                label="%newDiagramActionLabel"
-               class="de.topicmapslab.tmcledit.model.diagram.application.NewDiagramAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$NewDiagramAction"
                menubarPath="file/new/additions"
                id="de.topicmapslab.tmcledit.diagram.NewDiagramAction">
          </action>
          <action
                label="%aboutActionLabel"
-               class="de.topicmapslab.tmcledit.model.diagram.application.AboutAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$AboutAction"
                menubarPath="help/additions"
                id="de.topicmapslab.tmcledit.diagram.AboutAction">
          </action>
          <action
                label="%openURIActionLabel"
                definitionId="de.topicmapslab.tmcledit.diagram.OpenURICommand"
-               class="de.topicmapslab.tmcledit.model.diagram.application.OpenURIAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$OpenURIAction"
                menubarPath="file/additions"
                id="de.topicmapslab.tmcledit.diagram.OpenURIAction">
          </action>
          <action
                label="%openActionLabel"
                definitionId="de.topicmapslab.tmcledit.diagram.OpenCommand"
-               class="de.topicmapslab.tmcledit.model.diagram.application.OpenAction"
+               class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorActionBarAdvisor$OpenAction"
                menubarPath="file/additions"
                id="de.topicmapslab.tmcledit.diagram.OpenAction">
          </action>
@@ -720,5 +719,19 @@
          contextId="de.topicmapslab.tmcledit.model.diagram.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
+   </extension><extension id="TmcleditApplication" point="org.eclipse.core.runtime.applications">
+      <?gmfgen generated="true"?>
+      <application>
+         <run class="de.topicmapslab.tmcledit.model.diagram.application.TmcleditApplication"/>
+      </application>
    </extension>
+<extension point="org.eclipse.ui.perspectives">
+      <?gmfgen generated="true"?>
+      <perspective
+            id="de.topicmapslab.tmcledit.model.diagram.TmcleditPerspective"
+            name="%perspectiveName"
+            class="de.topicmapslab.tmcledit.model.diagram.application.DiagramEditorPerspective">
+      </perspective>
+   </extension>
+
 </plugin>

@@ -1,24 +1,51 @@
 package de.topicmapslab.tmcledit.extensions.views;
 
-import java.util.ArrayList;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.part.*;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.jface.viewers.*;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.jface.action.*;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.IInputValidator;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.*;
-import org.eclipse.swt.widgets.Menu;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.DrillDownAdapter;
+import org.eclipse.ui.part.ViewPart;
 
+import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
 import de.topicmapslab.tmcledit.model.AssociationsType;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.OccurenceType;
@@ -35,90 +62,14 @@ import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditor;
  * view makes it possible to see the domain model.
  */
 
-public class ModelView extends ViewPart implements IPartListener {
+public class ModelView extends ViewPart implements IPartListener, IEditingDomainProvider {
 	private TreeViewer viewer;
 	private ViewContentProvider contentProvider;
 	private DrillDownAdapter drillDownAdapter;
 	private Action action1;
 	private Action action2;
 	private Action doubleClickAction;
-
-	/*
-	 * The content provider class is responsible for providing objects to the
-	 * view. It can wrap existing objects in adapters or simply return objects
-	 * as-is. These objects may be sensitive to the current input of the view,
-	 * or ignore it and always show the same content (like Task List, for
-	 * example).
-	 */
-
-	class TreeObject implements IAdaptable {
-		private String name;
-		private TreeParent parent;
-		final private EObject model;
-
-		public TreeObject(String name, EObject model) {
-			this.model = model;
-			this.name = name;
-		}
-
-		public TreeObject(String name) {
-			this.name = name;
-			this.model = null;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setParent(TreeParent parent) {
-			this.parent = parent;
-		}
-
-		public TreeParent getParent() {
-			return parent;
-		}
-
-		public String toString() {
-			return getName();
-		}
-
-		public EObject getModel() {
-			return model;
-		}
-
-		@SuppressWarnings("unchecked")
-		public Object getAdapter(Class key) {
-			return null;
-		}
-	}
-
-	class TreeParent extends TreeObject {
-		private ArrayList<TreeObject> children;
-
-		public TreeParent(String name) {
-			super(name);
-			children = new ArrayList<TreeObject>();
-		}
-
-		public void addChild(TreeObject child) {
-			children.add(child);
-			child.setParent(this);
-		}
-
-		public void removeChild(TreeObject child) {
-			children.remove(child);
-			child.setParent(null);
-		}
-
-		public TreeObject[] getChildren() {
-			return (TreeObject[]) children.toArray(new TreeObject[children
-					.size()]);
-		}
-
-		public boolean hasChildren() {
-			return children.size() > 0;
-		}
-	}
+	private TmcleditDiagramEditor currentEditor;
 
 	class ViewContentProvider implements IStructuredContentProvider,
 			ITreeContentProvider {
@@ -186,7 +137,7 @@ public class ModelView extends ViewPart implements IPartListener {
 
 		public void initialize() {
 
-			invisibleRoot = new TreeParent("");
+			invisibleRoot = new TreeParent(viewer, "");
 
 			if (currTms != null)
 				currTms.eAdapters().remove(tmsListener);
@@ -199,18 +150,18 @@ public class ModelView extends ViewPart implements IPartListener {
 						.getActiveEditor();
 				if ((ep != null) && (ep instanceof TmcleditDiagramEditor)) {
 
-					TmcleditDiagramEditor te = (TmcleditDiagramEditor) ep;
-					IDocumentProvider dp = te.getDocumentProvider();
+					currentEditor = (TmcleditDiagramEditor) ep;
+					IDocumentProvider dp = currentEditor.getDocumentProvider();
 					currTms = (TopicMapSchema) ((Diagram) dp.getDocument(
-							te.getEditorInput()).getContent()).getElement();
+							currentEditor.getEditorInput()).getContent()).getElement();
 
 					currTms.eAdapters().add(tmsListener);
 
-					ttNode = new TreeParent("TopicTypes");
-					rtNode = new TreeParent("RoleTypes");
-					ntNode = new TreeParent("NameTypes");
-					otNode = new TreeParent("OccurenceTypes");
-					atNode = new TreeParent("AssociationTypes");
+					ttNode = new TreeParent(viewer, "TopicTypes");
+					rtNode = new TreeParent(viewer, "RoleTypes");
+					ntNode = new TreeParent(viewer, "NameTypes");
+					otNode = new TreeParent(viewer, "OccurenceTypes");
+					atNode = new TreeParent(viewer, "AssociationTypes");
 
 					invisibleRoot.addChild(ttNode);
 					invisibleRoot.addChild(rtNode);
@@ -226,13 +177,13 @@ public class ModelView extends ViewPart implements IPartListener {
 				}
 			}
 
-			TreeParent root = new TreeParent("No Diagramm Editor Open");
+			TreeParent root = new TreeParent(viewer, "No Diagramm Editor Open");
 
 			invisibleRoot.addChild(root);
 		}
 
 		private void addType(TopicType tt) {
-			TreeObject to = new TreeObject(tt.getId(), tt);
+			TreeTopic to = new TreeTopic(viewer, tt, ModelView.this);
 
 			if (tt instanceof RoleType)
 				rtNode.addChild(to);
@@ -259,7 +210,7 @@ public class ModelView extends ViewPart implements IPartListener {
 				parent = atNode;
 
 			for (TreeObject to : parent.getChildren()) {
-				if (to.getModel().equals(tt))
+				if (((TreeTopic)to).getTopic().equals(tt))
 					parent.removeChild(to);
 			}
 		}
@@ -272,16 +223,15 @@ public class ModelView extends ViewPart implements IPartListener {
 		}
 
 		public Image getImage(Object obj) {
-			String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
-			if (obj instanceof TreeParent)
-				imageKey = ISharedImages.IMG_OBJ_FOLDER;
-			return PlatformUI.getWorkbench().getSharedImages().getImage(
-					imageKey);
+			return ((TreeObject) obj).getImage();
 		}
 	}
 
 	class NameSorter extends ViewerSorter {
+		
 	}
+	
+	
 
 	/**
 	 * The constructor.
@@ -301,6 +251,48 @@ public class ModelView extends ViewPart implements IPartListener {
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setSorter(new NameSorter());
+		viewer.getTree().addKeyListener(new org.eclipse.swt.events.KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+				if (sel.isEmpty())
+					return;
+				
+				TreeObject obj = (TreeObject) sel.getFirstElement();
+				if (obj instanceof TreeTopic) {
+					TopicType tt = ((TreeTopic)obj).getTopic();
+					
+					String oldName = tt.getId();
+					InputDialog dlg = new InputDialog(viewer.getTree().getShell(), "New Topic Id..",
+							"Please enter the new Topic ID", oldName,
+							new IInputValidator() {
+
+								@Override
+								public String isValid(String newText) {
+									if (newText.length()==0)
+										return "no name given";
+									
+									// TODO check if there's a topic with the same name
+									
+									return null;
+								}
+					});
+					if (InputDialog.OK==dlg.open()) {
+						if (currentEditor!=null) {
+							currentEditor.getEditingDomain().getCommandStack().
+									execute(new RenameCommand(tt, dlg.getValue()));
+						
+						}
+						else 
+							return;
+					}
+					viewer.refresh(obj);
+					
+				}
+				
+				
+			}
+		});
 		viewer.setInput(getViewSite());
 
 		// Create the help context id for the viewer's control
@@ -313,6 +305,9 @@ public class ModelView extends ViewPart implements IPartListener {
 
 		for (IWorkbenchPage page : getSite().getWorkbenchWindow().getPages())
 			page.addPartListener(this);
+		
+		getSite().setSelectionProvider(viewer);
+		
 	}
 
 	private void hookContextMenu() {
@@ -366,13 +361,14 @@ public class ModelView extends ViewPart implements IPartListener {
 	private void makeActions() {
 		action1 = new Action() {
 			public void run() {
-				showMessage("Action 1 executed");
+				contentProvider.initialize();
+				viewer.setInput(getViewSite());
 			}
 		};
-		action1.setText("Action 1");
-		action1.setToolTipText("Action 1 tooltip");
+		action1.setText("Refresh");
+		action1.setToolTipText("Refreshs the Model View");
 		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
-				.getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+				.getImageDescriptor(ISharedImages.IMG_ELCL_SYNCED));
 
 		action2 = new Action() {
 			public void run() {
@@ -415,8 +411,15 @@ public class ModelView extends ViewPart implements IPartListener {
 
 	@Override
 	public void partActivated(IWorkbenchPart part) {
-		contentProvider.initialize();
-		viewer.setInput(getViewSite());
+		if (part instanceof TmcleditDiagramEditor) {
+			if (currentEditor==part)
+				return;
+			
+			contentProvider.initialize();
+			viewer.setInput(getViewSite());
+			currentEditor = (TmcleditDiagramEditor) part;
+			
+		}
 	}
 
 	@Override
@@ -433,5 +436,12 @@ public class ModelView extends ViewPart implements IPartListener {
 
 	@Override
 	public void partOpened(IWorkbenchPart part) {
+	}
+
+	@Override
+	public EditingDomain getEditingDomain() {
+		if (currentEditor!=null)
+			return currentEditor.getEditingDomain();
+		return null;
 	}
 }

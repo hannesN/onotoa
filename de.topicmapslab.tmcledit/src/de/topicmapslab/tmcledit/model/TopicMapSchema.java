@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getRoleTypeConstraints <em>Role Type Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getAssociationTypeConstraints <em>Association Type Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getMappings <em>Mappings</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getIncludes <em>Includes</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,5 +104,21 @@ public interface TopicMapSchema extends EObject {
 	 * @generated
 	 */
 	EList<MappingElement> getMappings();
+
+	/**
+	 * Returns the value of the '<em><b>Includes</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Includes</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Includes</em>' attribute list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_Includes()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getIncludes();
 
 } // TopicMapSchema

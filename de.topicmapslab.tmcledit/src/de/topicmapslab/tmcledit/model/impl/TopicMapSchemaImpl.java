@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getRoleTypeConstraints <em>Role Type Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getAssociationTypeConstraints <em>Association Type Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getMappings <em>Mappings</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getIncludes <em>Includes</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,6 +88,16 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * @ordered
 	 */
 	protected EList<MappingElement> mappings;
+
+	/**
+	 * The cached value of the '{@link #getIncludes() <em>Includes</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncludes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> includes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +202,18 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getIncludes() {
+		if (includes == null) {
+			includes = new EDataTypeUniqueEList<String>(String.class, this, ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES);
+		}
+		return includes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -219,6 +243,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				return getAssociationTypeConstraints();
 			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
 				return getMappings();
+			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
+				return getIncludes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -247,6 +273,10 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				getMappings().clear();
 				getMappings().addAll((Collection<? extends MappingElement>)newValue);
 				return;
+			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
+				getIncludes().clear();
+				getIncludes().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -271,6 +301,9 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
 				getMappings().clear();
 				return;
+			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
+				getIncludes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -291,8 +324,26 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				return associationTypeConstraints != null;
 			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
 				return mappings != null && !mappings.isEmpty();
+			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
+				return includes != null && !includes.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (includes: ");
+		result.append(includes);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TopicMapSchemaImpl

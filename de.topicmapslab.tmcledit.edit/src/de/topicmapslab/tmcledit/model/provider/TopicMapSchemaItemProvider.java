@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -67,6 +68,7 @@ public class TopicMapSchemaItemProvider
 			super.getPropertyDescriptors(object);
 
 			addMappingsPropertyDescriptor(object);
+			addIncludesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,6 +91,28 @@ public class TopicMapSchemaItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Includes feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIncludesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_includes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_includes_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__INCLUDES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -159,6 +183,9 @@ public class TopicMapSchemaItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TopicMapSchema.class)) {
+			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
 			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
 			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
