@@ -1,7 +1,0 @@
-# Tracing options for the de.topicmapslab.tmcledit.diagram plug-in
-
-# Common issues
-de.topicmapslab.tmcledit.diagram/debug=false
-
-# Visual IDs
-de.topicmapslab.tmcledit.diagram/debug/visualID=false
