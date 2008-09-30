@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import de.topicmapslab.tmcledit.model.diagram.part.Messages;
 
 /**
  * @generated

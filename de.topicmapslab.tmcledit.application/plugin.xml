@@ -19,5 +19,20 @@
             id="de.topicmapslab.tmcledit.application.TmcleditPerspective">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="de.topicmapslab.tmcledit.application.actionSet1"
+            label="FileActionSet"
+            visible="true">
+         <action
+               class="de.topicmapslab.tmcledit.application.NewDiagramAction"
+               id="de.topicmapslab.tmcledit.application.newaction"
+               label="New.."
+               menubarPath="file/fileStart"
+               style="push">
+         </action>
+      </actionSet>
+   </extension>
 
 </plugin>

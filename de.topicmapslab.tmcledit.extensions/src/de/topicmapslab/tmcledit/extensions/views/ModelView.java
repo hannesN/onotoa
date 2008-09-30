@@ -1,11 +1,20 @@
 package de.topicmapslab.tmcledit.extensions.views;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
+import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.Action;
@@ -21,11 +30,12 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -44,15 +54,19 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipse.ui.views.properties.PropertySheetPage;
 
+import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
 import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
 import de.topicmapslab.tmcledit.model.AssociationsType;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.ScopeType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditor;
+import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 
 /**
  * This view renders the model behind a diagram. It is used to add model
@@ -62,21 +76,27 @@ import de.topicmapslab.tmcledit.model.diagram.part.TmcleditDiagramEditor;
  * view makes it possible to see the domain model.
  */
 
-public class ModelView extends ViewPart implements IPartListener, IEditingDomainProvider {
+public class ModelView extends ViewPart implements IPartListener, IEditingDomainProvider, ISelectionProvider {
+	
+	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView"; 
+	
 	private TreeViewer viewer;
 	private ViewContentProvider contentProvider;
 	private DrillDownAdapter drillDownAdapter;
 	private Action action1;
 	private Action action2;
 	private Action doubleClickAction;
-	private TmcleditDiagramEditor currentEditor;
-
+	private TMCLDiagramEditor currentEditor;
+	private TopicMapSchema currentTopicMapSchema;
+	private ComposedAdapterFactory adapterFactory;
+	
+	private List<ISelectionChangedListener> listeners;
+	
 	class ViewContentProvider implements IStructuredContentProvider,
 			ITreeContentProvider {
 		private TreeParent invisibleRoot;
 
-		private TopicMapSchema currTms;
-
+		
 		private AdapterImpl tmsListener = new AdapterImpl() {
 			@Override
 			public void notifyChanged(Notification msg) {
@@ -99,6 +119,7 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 		private TreeParent ntNode;
 		private TreeParent otNode;
 		private TreeParent atNode;
+		private TreeParent stNode;
 
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
 		}
@@ -139,8 +160,8 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 
 			invisibleRoot = new TreeParent(viewer, "");
 
-			if (currTms != null)
-				currTms.eAdapters().remove(tmsListener);
+			if (currentTopicMapSchema != null)
+				currentTopicMapSchema.eAdapters().remove(tmsListener);
 
 			// getting the model of the current editor
 			IWorkbenchPage page = getSite().getWorkbenchWindow()
@@ -148,28 +169,28 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 			if (page != null) {
 				IEditorPart ep = getSite().getWorkbenchWindow().getActivePage()
 						.getActiveEditor();
-				if ((ep != null) && (ep instanceof TmcleditDiagramEditor)) {
+				if ((ep != null) && (ep instanceof TMCLDiagramEditor)) {
 
-					currentEditor = (TmcleditDiagramEditor) ep;
-					IDocumentProvider dp = currentEditor.getDocumentProvider();
-					currTms = (TopicMapSchema) ((Diagram) dp.getDocument(
-							currentEditor.getEditorInput()).getContent()).getElement();
+					currentEditor = (TMCLDiagramEditor) ep;
+					currentTopicMapSchema = currentEditor.getTopicMapSchema(); 
 
-					currTms.eAdapters().add(tmsListener);
+					currentTopicMapSchema.eAdapters().add(tmsListener);
 
 					ttNode = new TreeParent(viewer, "TopicTypes");
 					rtNode = new TreeParent(viewer, "RoleTypes");
 					ntNode = new TreeParent(viewer, "NameTypes");
 					otNode = new TreeParent(viewer, "OccurenceTypes");
 					atNode = new TreeParent(viewer, "AssociationTypes");
+					stNode = new TreeParent(viewer, "ScopeTypes");
 
 					invisibleRoot.addChild(ttNode);
 					invisibleRoot.addChild(rtNode);
 					invisibleRoot.addChild(ntNode);
 					invisibleRoot.addChild(otNode);
 					invisibleRoot.addChild(atNode);
+					invisibleRoot.addChild(stNode);
 
-					for (TopicType tt : currTms.getTopicTypes()) {
+					for (TopicType tt : currentTopicMapSchema.getTopicTypes()) {
 						addType(tt);
 					}
 
@@ -193,6 +214,8 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 				otNode.addChild(to);
 			else if (tt instanceof AssociationsType)
 				atNode.addChild(to);
+			else if (tt instanceof ScopeType)
+				stNode.addChild(to);
 			else if (tt instanceof TopicType)
 				ttNode.addChild(to);
 		}
@@ -308,6 +331,13 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 		
 		getSite().setSelectionProvider(viewer);
 		
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+
+		
 	}
 
 	private void hookContextMenu() {
@@ -411,17 +441,42 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 
 	@Override
 	public void partActivated(IWorkbenchPart part) {
-		if (part instanceof TmcleditDiagramEditor) {
+		if (part instanceof TMCLDiagramEditor) {
 			if (currentEditor==part)
 				return;
 			
 			contentProvider.initialize();
 			viewer.setInput(getViewSite());
-			currentEditor = (TmcleditDiagramEditor) part;
+			currentEditor = (TMCLDiagramEditor) part;
 			
 		}
 	}
+	
+	public IPropertySheetPage getPropertySheetPage() {
+		if (currentEditor == null)
+			return null;
+		PropertySheetPage propertySheetPage = new ExtendedPropertySheetPage(
+				(AdapterFactoryEditingDomain) currentEditor.getEditingDomain()) {
+			@Override
+			public void setSelectionToViewer(List<?> selection) {
+				/*
+				 * ModelEditor.this.setSelectionToViewer(selection);
+				 * ModelEditor.this.setFocus();
+				 */
+			}
 
+			@Override
+			public void setActionBars(IActionBars actionBars) {
+				super.setActionBars(actionBars);
+			}
+		};
+		propertySheetPage
+				.setPropertySourceProvider(new AdapterFactoryContentProvider(
+						adapterFactory));
+		return propertySheetPage;
+
+	}
+		
 	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
 	}
@@ -443,5 +498,41 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 		if (currentEditor!=null)
 			return currentEditor.getEditingDomain();
 		return null;
+	}
+
+	@Override
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		if (listeners==Collections.EMPTY_LIST)
+			listeners = new ArrayList<ISelectionChangedListener>();
+		listeners.add(listener);
+	}
+
+	@Override
+	public ISelection getSelection() {
+		if (viewer!=null)
+			return viewer.getSelection();
+		else
+			return new StructuredSelection();
+	}
+
+		
+	public TopicMapSchema getCurrentTopicMapSchema() {
+		return currentTopicMapSchema;
+	}
+	
+	
+
+	@Override
+	public void removeSelectionChangedListener(
+			ISelectionChangedListener listener) {
+		if (listeners==Collections.EMPTY_LIST)
+			listeners = new ArrayList<ISelectionChangedListener>();
+		listeners.remove(listener);	
+	}
+
+	@Override
+	public void setSelection(ISelection selection) {
+		if (viewer!=null)
+			viewer.setSelection(selection);
 	}
 }

@@ -398,6 +398,144 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.BendPoint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BendPointItemProvider bendPointItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.BendPoint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBendPointAdapter() {
+		if (bendPointItemProvider == null) {
+			bendPointItemProvider = new BendPointItemProvider(this);
+		}
+
+		return bendPointItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.Diagram} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DiagramItemProvider diagramItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.Diagram}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDiagramAdapter() {
+		if (diagramItemProvider == null) {
+			diagramItemProvider = new DiagramItemProvider(this);
+		}
+
+		return diagramItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.Node} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NodeItemProvider nodeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.Node}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNodeAdapter() {
+		if (nodeItemProvider == null) {
+			nodeItemProvider = new NodeItemProvider(this);
+		}
+
+		return nodeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.Edges} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EdgesItemProvider edgesItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.Edges}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEdgesAdapter() {
+		if (edgesItemProvider == null) {
+			edgesItemProvider = new EdgesItemProvider(this);
+		}
+
+		return edgesItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.TypeNode} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeNodeItemProvider typeNodeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.TypeNode}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeNodeAdapter() {
+		if (typeNodeItemProvider == null) {
+			typeNodeItemProvider = new TypeNodeItemProvider(this);
+		}
+
+		return typeNodeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.AssociationNode} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AssociationNodeItemProvider associationNodeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.AssociationNode}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAssociationNodeAdapter() {
+		if (associationNodeItemProvider == null) {
+			associationNodeItemProvider = new AssociationNodeItemProvider(this);
+		}
+
+		return associationNodeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -510,6 +648,12 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (subjectIdentifierConstraintItemProvider != null) subjectIdentifierConstraintItemProvider.dispose();
 		if (associationTypeConstraintItemProvider != null) associationTypeConstraintItemProvider.dispose();
 		if (mappingElementItemProvider != null) mappingElementItemProvider.dispose();
+		if (bendPointItemProvider != null) bendPointItemProvider.dispose();
+		if (diagramItemProvider != null) diagramItemProvider.dispose();
+		if (nodeItemProvider != null) nodeItemProvider.dispose();
+		if (edgesItemProvider != null) edgesItemProvider.dispose();
+		if (typeNodeItemProvider != null) typeNodeItemProvider.dispose();
+		if (associationNodeItemProvider != null) associationNodeItemProvider.dispose();
 	}
 
 }

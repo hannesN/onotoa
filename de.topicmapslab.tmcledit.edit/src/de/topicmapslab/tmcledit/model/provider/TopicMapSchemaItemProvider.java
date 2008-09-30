@@ -69,6 +69,7 @@ public class TopicMapSchemaItemProvider
 
 			addMappingsPropertyDescriptor(object);
 			addIncludesPropertyDescriptor(object);
+			addDiagramPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,6 +114,28 @@ public class TopicMapSchemaItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Diagram feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDiagramPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_diagram_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_diagram_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__DIAGRAM,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

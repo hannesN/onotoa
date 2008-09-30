@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getAssociationTypeConstraints <em>Association Type Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getMappings <em>Mappings</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getIncludes <em>Includes</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getDiagram <em>Diagram</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,30 +65,20 @@ public interface TopicMapSchema extends EObject {
 	EList<RoleTypeConstraints> getRoleTypeConstraints();
 
 	/**
-	 * Returns the value of the '<em><b>Association Type Constraints</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Association Type Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Association Type Constraints</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Association Type Constraints</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Association Type Constraints</em>' containment reference.
-	 * @see #setAssociationTypeConstraints(AssociationTypeConstraint)
+	 * @return the value of the '<em>Association Type Constraints</em>' containment reference list.
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_AssociationTypeConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	AssociationTypeConstraint getAssociationTypeConstraints();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getAssociationTypeConstraints <em>Association Type Constraints</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Association Type Constraints</em>' containment reference.
-	 * @see #getAssociationTypeConstraints()
-	 * @generated
-	 */
-	void setAssociationTypeConstraints(AssociationTypeConstraint value);
+	EList<AssociationTypeConstraint> getAssociationTypeConstraints();
 
 	/**
 	 * Returns the value of the '<em><b>Mappings</b></em>' reference list.
@@ -120,5 +111,31 @@ public interface TopicMapSchema extends EObject {
 	 * @generated
 	 */
 	EList<String> getIncludes();
+
+	/**
+	 * Returns the value of the '<em><b>Diagram</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Diagram</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Diagram</em>' containment reference.
+	 * @see #setDiagram(Diagram)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_Diagram()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	Diagram getDiagram();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getDiagram <em>Diagram</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Diagram</em>' containment reference.
+	 * @see #getDiagram()
+	 * @generated
+	 */
+	void setDiagram(Diagram value);
 
 } // TopicMapSchema

@@ -152,6 +152,60 @@ public interface ModelFactory extends EFactory {
 	MappingElement createMappingElement();
 
 	/**
+	 * Returns a new object of class '<em>Bend Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bend Point</em>'.
+	 * @generated
+	 */
+	BendPoint createBendPoint();
+
+	/**
+	 * Returns a new object of class '<em>Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram</em>'.
+	 * @generated
+	 */
+	Diagram createDiagram();
+
+	/**
+	 * Returns a new object of class '<em>Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Node</em>'.
+	 * @generated
+	 */
+	Node createNode();
+
+	/**
+	 * Returns a new object of class '<em>Edges</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Edges</em>'.
+	 * @generated
+	 */
+	Edges createEdges();
+
+	/**
+	 * Returns a new object of class '<em>Type Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Node</em>'.
+	 * @generated
+	 */
+	TypeNode createTypeNode();
+
+	/**
+	 * Returns a new object of class '<em>Association Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Association Node</em>'.
+	 * @generated
+	 */
+	AssociationNode createAssociationNode();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

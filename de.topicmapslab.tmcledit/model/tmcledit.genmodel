@@ -57,6 +57,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/associationTypeConstraints"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/mappings"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/includes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/diagram"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//subjectLocatorConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//subjectIdentifierConstraint"/>
@@ -67,6 +68,28 @@
     <genClasses ecoreClass="tmcledit.ecore#//MappingElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//MappingElement/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//MappingElement/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//BendPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//BendPoint/posX"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//BendPoint/posY"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//Diagram">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Diagram/nodes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Diagram/edges"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Node/posX"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Node/posY"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//Edges">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edges/bendPoints"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edges/roleTypeConstraint"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//TypeNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TypeNode/type"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//AssociationNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationNode/associationConstraint"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -4,8 +4,6 @@ import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 
-import de.topicmapslab.tmcledit.model.diagram.part.Messages;
-
 /**
  * @generated
  */

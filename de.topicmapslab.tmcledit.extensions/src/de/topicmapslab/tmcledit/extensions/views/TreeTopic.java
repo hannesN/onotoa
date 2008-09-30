@@ -11,7 +11,6 @@ import org.eclipse.ui.views.properties.IPropertySourceProvider;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.diagram.sheet.TmcleditPropertySection;
 
 /**
  * @author Hannes Niederhausen
@@ -58,11 +57,7 @@ public class TreeTopic extends TreeParent {
 		if (topic==null)
 			return null;
 		
-		if (key == IPropertySourceProvider.class) {
-			TmcleditPropertySection section = new TmcleditPropertySection();
-			section.setInput(part, new StructuredSelection(topic));
-			return section;
-		}			
+				
 		
 		return null;
 	}

@@ -6,7 +6,6 @@ import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
-import de.topicmapslab.tmcledit.model.diagram.part.Messages;
 
 /**
  * @generated

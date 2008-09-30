@@ -64,11 +64,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleTypeConstraints" upperBound="-1"
         eType="#//RoleTypeConstraints" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationTypeConstraints"
-        eType="#//AssociationTypeConstraint" containment="true"/>
+        upperBound="-1" eType="#//AssociationTypeConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
         eType="#//MappingElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="includes" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" lowerBound="1"
+        eType="#//Diagram" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="subjectLocatorConstraint" eSuperTypes="#//AbstractContraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="subjectIdentifierConstraint" eSuperTypes="#//AbstractContraint"/>
@@ -79,5 +81,31 @@
   <eClassifiers xsi:type="ecore:EClass" name="MappingElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BendPoint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//Node" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//Edges" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edges">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bendPoints" eType="#//BendPoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleTypeConstraint" lowerBound="1"
+        eType="#//RoleTypeConstraints"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeNode" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TopicType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationNode" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associationConstraint"
+        eType="#//AssociationTypeConstraint"/>
   </eClassifiers>
 </ecore:EPackage>

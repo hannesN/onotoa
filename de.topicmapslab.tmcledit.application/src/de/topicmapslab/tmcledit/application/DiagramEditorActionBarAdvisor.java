@@ -24,7 +24,6 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
-import de.topicmapslab.tmcledit.model.diagram.part.Messages;
 
 public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
@@ -43,6 +42,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		lockToolBarAction = ActionFactory.LOCK_TOOL_BAR.create(window);
 		register(lockToolBarAction);
 
+		
 		register(ActionFactory.CLOSE.create(window));
 
 		register(ActionFactory.CLOSE_ALL.create(window));
@@ -82,7 +82,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 					IWorkbenchActionConstants.M_FILE);
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
-
 			{
 				IMenuManager menuXX = new MenuManager(
 						Messages.ApplicationMenuName_New, "new");
@@ -239,22 +238,17 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		IEditorDescriptor editorDescriptor = workbench.getEditorRegistry()
 				.getDefaultEditor(fileURI.toFileString());
 		if (editorDescriptor == null) {
-			MessageDialog
-					.openError(
+			MessageDialog.openError(
 							workbenchWindow.getShell(),
 							Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorTitle,
-							NLS
-									.bind(
-											Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorMessage,
+							NLS.bind(Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorMessage,
 											fileURI.toFileString()));
 			return false;
 		} else {
 			try {
-				page.openEditor(new URIEditorInput(fileURI), editorDescriptor
-						.getId());
+				page.openEditor(new URIEditorInput(fileURI), editorDescriptor.getId());
 			} catch (PartInitException exception) {
-				MessageDialog
-						.openError(
+				MessageDialog.openError(
 								workbenchWindow.getShell(),
 								Messages.DiagramEditorActionBarAdvisor_DefaultEditorOpenErrorTitle,
 								exception.getMessage());

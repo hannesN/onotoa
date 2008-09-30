@@ -4,6 +4,9 @@ import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
+import de.topicmapslab.tmcledit.extensions.views.ModelView;
+import de.topicmapslab.tmcledit.extensions.views.PropertyDetailView;
+
 /**
  * @generated
  */
@@ -22,10 +25,9 @@ public class DiagramEditorPerspective implements IPerspectiveFactory {
 		bottom.addView(IPageLayout.ID_OUTLINE);
 		IFolderLayout bottomRight = layout.createFolder(
 				"bottomRight", IPageLayout.RIGHT, 0.5f, "bottom"); //$NON-NLS-1$	//$NON-NLS-2$
-		bottomRight.addView(IPageLayout.ID_PROP_SHEET);
+		bottomRight.addView(PropertyDetailView.ID);
 		
-		layout.addView("de.topicmapslab.tmcledit.extensions.views.ModelView",
-				   IPageLayout.LEFT, 0.3f, layout.getEditorArea());
+		layout.addView(ModelView.ID, IPageLayout.LEFT, 0.3f, layout.getEditorArea());
 				   
 	}
 }
