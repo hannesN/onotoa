@@ -6,9 +6,6 @@ package de.topicmapslab.tmcledit.extensions.views;
 import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.NodeEditPart;
-import org.eclipse.gmf.runtime.notation.impl.NodeImpl;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -92,7 +89,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 						page.setEditingDomain(modelView.getEditingDomain());
 					} else {
 						TMCLDiagramEditor currentEditor = (TMCLDiagramEditor) part;
-						page.setTopicMapSchema(currentEditor.getTopicMapSchema());
+						page.setTopicMapSchema(currentEditor.getDiagram().getTopicMapSchema());
 						page.setEditingDomain(currentEditor.getEditingDomain());
 						
 					}

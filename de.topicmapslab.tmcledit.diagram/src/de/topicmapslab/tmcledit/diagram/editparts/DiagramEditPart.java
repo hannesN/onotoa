@@ -14,8 +14,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 
+import de.topicmapslab.tmcledit.diagram.model.Diagram;
 import de.topicmapslab.tmcledit.diagram.policies.DiagramLayoutEditPolicy;
-import de.topicmapslab.tmcledit.model.Diagram;
 
 /**
  * @author Hannes Niederhausen

@@ -10,7 +10,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 /**
- * @author mai00ckx
+ * @author Hannes Niederhausen
  *
  */
 public class AssociationNodeEditPart extends AbstractGraphicalEditPart {
@@ -34,6 +34,7 @@ public class AssociationNodeEditPart extends AbstractGraphicalEditPart {
 	protected void createEditPolicies() {
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected List getModelSourceConnections() {
 		// TODO Auto-generated method stub

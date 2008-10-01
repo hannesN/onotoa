@@ -6,13 +6,11 @@ package de.topicmapslab.tmcledit.diagram.command;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.commands.Command;
 
-import de.topicmapslab.tmcledit.model.AssociationNode;
-import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.diagram.model.Diagram;
+import de.topicmapslab.tmcledit.diagram.model.ModelFactory;
+import de.topicmapslab.tmcledit.diagram.model.Node;
+import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.TypeNode;
-import de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl;
 
 /**
  * @author Hannes Niederhausen
@@ -29,11 +27,11 @@ public class NewNodeCommand extends Command {
 	
 	private final Node node;
 	
-	private final TopicMapSchema schema;
+	private final Diagram diagram;
 	
-	public NewNodeCommand(TopicMapSchema schema, Point location, Type type) {
+	public NewNodeCommand(Diagram diagram, Point location, Type type) {
 		this.type = type;
-		this.schema = schema;
+		this.diagram = diagram;
 		
 		if (type==Type.ASSOCIATION) {
 			node = ModelFactory.eINSTANCE.createAssociationNode();		
@@ -47,9 +45,9 @@ public class NewNodeCommand extends Command {
 	@Override
 	public void execute() {
 		if (type==Type.TYPE) {
-			TopicType tt = ModelFactory.eINSTANCE.createTopicType();
+			TopicType tt = de.topicmapslab.tmcledit.model.ModelFactory.eINSTANCE.createTopicType();
 			tt.setId("default type");
-			((TypeNode)node).setType(tt);
+			((TypeNode)node).setTopicType(tt);
 		}
 		
 		redo();
@@ -58,18 +56,18 @@ public class NewNodeCommand extends Command {
 	@Override
 	public void redo() {
 		if (type==Type.TYPE) {
-			TopicType tt = ((TypeNode)node).getType(); 
-			schema.getTopicTypes().add(tt);
-			schema.getDiagram().getNodes().add(node);
+			TopicType tt = ((TypeNode)node).getTopicType(); 
+			diagram.getTopicMapSchema().getTopicTypes().add(tt);
+			diagram.getNodes().add(node);
 		}
 	}
 	
 	@Override
 	public void undo() {
 		if (type==Type.TYPE) {
-			TopicType tt = ((TypeNode)node).getType(); 
-			schema.getDiagram().getNodes().remove(node);
-			schema.getTopicTypes().remove(tt);
+			TopicType tt = ((TypeNode)node).getTopicType(); 
+			diagram.getNodes().remove(node);
+			diagram.getTopicMapSchema().getTopicTypes().remove(tt);
 		}
 	}
 	

@@ -49,7 +49,6 @@ public class NameTypeConstraintEditPart extends AdapterGraphicalEditPart {
 		nameLabel.setText(ntc.getName());
 		typeLabel.setText(":"+ntc.getType().getId());
 		cardLabel.setText("  "+ntc.getCardMin()+".."+ntc.getCardMax());	
-		
 	}
 
 	@Override

@@ -31,7 +31,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class NameTypeConstraintItemProvider
-	extends AbstractContraintItemProvider
+	extends AbstractConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

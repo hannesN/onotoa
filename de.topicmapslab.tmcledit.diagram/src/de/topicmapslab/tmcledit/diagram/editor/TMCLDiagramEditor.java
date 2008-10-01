@@ -34,18 +34,18 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.part.EditorPart;
 
-import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.diagram.model.AssociationNode;
+import de.topicmapslab.tmcledit.diagram.model.Diagram;
+import de.topicmapslab.tmcledit.diagram.model.Node;
+import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * @author Hannes Niederhausen
@@ -54,7 +54,7 @@ import de.topicmapslab.tmcledit.model.TypeNode;
 public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implements ISelectionChangedListener, ISelectionProvider {
 	//extends EditorPart {
 
-	private TopicMapSchema topicMapSchema;
+	private Diagram diagram;
 	
 //	private EditDomain editDomain;
 	
@@ -72,7 +72,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		GraphicalViewer viewer = getGraphicalViewer();
-		viewer.setContents(topicMapSchema.getDiagram()); // set the contents of this editor
+		viewer.setContents(diagram); // set the contents of this editor
 		viewer.addSelectionChangedListener(this);
 		
 		getSite().setSelectionProvider(this);
@@ -109,15 +109,15 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 		return null;
 	}
 	
-	public TopicMapSchema getTopicMapSchema() {
-		return topicMapSchema;
+	public Diagram getDiagram() {
+		return diagram;
 	}
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		URIEditorInput ei = (URIEditorInput) getEditorInput();
 		Resource resource = new XMIResourceFactoryImpl().createResource(ei.getURI());
-		resource.getContents().add(topicMapSchema);
+		resource.getContents().add(diagram);
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
@@ -143,25 +143,30 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 		URIEditorInput ei = (URIEditorInput) input;
 		File file = new File(ei.getURI().toFileString());
 		if (file.exists()) {
-			topicMapSchema = (TopicMapSchema) resSet.getResource(ei.getURI(), true).getContents().get(0);
+			diagram = (Diagram) resSet.getResource(ei.getURI(), true).getContents().get(0);
 			
 		} else {
 			ModelFactory modelInstance = ModelFactory.eINSTANCE;
-			topicMapSchema = modelInstance.createTopicMapSchema();
-			topicMapSchema.setDiagram(modelInstance.createDiagram());
+			de.topicmapslab.tmcledit.diagram.model.ModelFactory diagramModel = de.topicmapslab.tmcledit.diagram.model.ModelFactory.eINSTANCE;
+			
+			TopicMapSchema schema = modelInstance.createTopicMapSchema(); 
+			
+			diagram = diagramModel.createDiagram(); 
+			diagram.setTopicMapSchema(schema);
 			
 			TopicType tt = modelInstance.createTopicType();
 			tt.setId("wwid:Person");
-			TypeNode tn = modelInstance.createTypeNode();
+			schema.getTopicTypes().add(tt);
+			
+			TypeNode tn = diagramModel.createTypeNode();
 			tn.setPosX(50);
 			tn.setPosY(50);
-			tn.setType(tt);
-			topicMapSchema.getTopicTypes().add(tt);
-			topicMapSchema.getDiagram().getNodes().add((Node) tn);
+			tn.setTopicType(tt);
+			diagram.getNodes().add((Node) tn);
 			
 			OccurenceType ot = modelInstance.createOccurenceType();
 			ot.setId("wwid:Adresse");
-			topicMapSchema.getTopicTypes().add(ot);
+			schema.getTopicTypes().add(ot);
 			
 			OccurenceTypeConstraint otc = modelInstance.createOccurenceTypeConstraint();
 			otc.setCardMax("*");
@@ -226,10 +231,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 				Object model = part.getModel();
 				if (model instanceof TypeNode) {
 					TypeNode node = (TypeNode) model;
-					currentSelection = new StructuredSelection(node.getType());
+					currentSelection = new StructuredSelection(node.getTopicType());
 				} else if (model instanceof AssociationNode) {
 					AssociationNode node = (AssociationNode) model;
-					currentSelection = new StructuredSelection(node.getAssociationConstraint());
+					currentSelection = new StructuredSelection(node.getAssociationTypeConstraint());
 				}
 					// TODO Connections
 				

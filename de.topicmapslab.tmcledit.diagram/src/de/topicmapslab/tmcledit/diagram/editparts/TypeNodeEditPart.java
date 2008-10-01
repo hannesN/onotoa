@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.MarginBorder;
-import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -21,32 +21,27 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
-import org.eclipse.gef.editpolicies.ContainerEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
-import org.eclipse.gef.tools.CellEditorLocator;
 import org.eclipse.gef.tools.DirectEditManager;
-import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.TextCellEditor;
 
-import de.topicmapslab.tmcledit.diagram.directedit.LabelCellEditorLocator;
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
-import de.topicmapslab.tmcledit.diagram.figures.CompartmentFigureBorder;
 import de.topicmapslab.tmcledit.diagram.figures.CompartmentFigure;
+import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * @author Hannes Niederhausen
  * 
  */
 public class TypeNodeEditPart extends AdapterGraphicalEditPart {
-
-	private Label titleLabel;
 	protected DirectEditManager manager;
 	
+	private Label titleLabel;
+
 	protected CompartmentFigure occurencesFigure; 
 	protected CompartmentFigure basenameFigure;
 	protected CompartmentFigure identifierFigure;
@@ -54,14 +49,18 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart {
 	@Override
 	protected IFigure createFigure() {
 		if (figure == null) {
-			figure = new RectangleFigure();
-
-			figure.setLayoutManager(new ToolbarLayout(false));
+			figure = new Figure();
+			
+			ToolbarLayout layout = new ToolbarLayout(false);
+			layout.setStretchMinorAxis(true);
+			layout.setSpacing(3);
+			figure.setLayoutManager(layout);
+			figure.setBorder(new LineBorder(ColorConstants.black, 1));
+			
 			titleLabel = new Label();
 			figure.add(titleLabel);
 
 			figure.setOpaque(true);
-			figure.setBorder(new MarginBorder(10));
 			figure.setBackgroundColor(ColorConstants.yellow);
 			
 			basenameFigure = new CompartmentFigure();
@@ -89,7 +88,7 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart {
 		
 		TypeNode tn = (TypeNode) getModel();
 		if (titleLabel.isVisible()) {
-			TopicType tt = (TopicType) tn.getType();
+			TopicType tt = (TopicType) tn.getTopicType();
 			titleLabel.setText(tt.getId());
 		}
 		Rectangle r = new Rectangle(tn.getPosX(), tn.getPosY(), -1, -1);
@@ -130,10 +129,11 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart {
 	@Override
 	protected List getModelChildren() {
 		List<EObject> list = new ArrayList<EObject>();
-		list.addAll(getCastedModel().getType().getOccurenceConstraints());
-		list.addAll(getCastedModel().getType().getNameContraints());
-		list.addAll(getCastedModel().getType().getSubjectIdentifierConstraints());
-		list.addAll(getCastedModel().getType().getSubjectLocatorConstraint());
+		TopicType topicType = getCastedModel().getTopicType();
+		list.addAll(topicType.getOccurenceConstraints());
+		list.addAll(topicType.getNameContraints());
+		list.addAll(topicType.getSubjectIdentifierConstraints());
+		list.addAll(topicType.getSubjectLocatorConstraint());
 		
 		return list;
 	}
@@ -153,13 +153,13 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart {
 	public void activate() {
 		super.activate();
 		TypeNode tn = (TypeNode) getModel();
-		tn.getType().eAdapters().add(this);
+		tn.getTopicType().eAdapters().add(this);
 	}
 	
 	@Override
 	public void deactivate() {
 		TypeNode tn = (TypeNode) getModel();
-		tn.getType().eAdapters().remove(this);
+		tn.getTopicType().eAdapters().remove(this);
 		super.deactivate();
 	}
 	
@@ -184,7 +184,7 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart {
 			basenameFigure.add(child);
 		
 	}
-	
+		
 	@Override
 	public IFigure getContentPane() {
 		return occurencesFigure;

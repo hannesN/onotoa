@@ -6,7 +6,6 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
@@ -31,7 +30,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.RoleTypeConstraintsImpl#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.RoleTypeConstraintsImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.RoleTypeConstraintsImpl#getTopicType <em>Topic Type</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.RoleTypeConstraintsImpl#getAssociationTypeConstraint <em>Association Type Constraint</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,16 +95,6 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	 * @ordered
 	 */
 	protected TopicType topicType;
-
-	/**
-	 * The cached value of the '{@link #getAssociationTypeConstraint() <em>Association Type Constraint</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociationTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected AssociationTypeConstraint associationTypeConstraint;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -250,44 +238,6 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssociationTypeConstraint getAssociationTypeConstraint() {
-		if (associationTypeConstraint != null && associationTypeConstraint.eIsProxy()) {
-			InternalEObject oldAssociationTypeConstraint = (InternalEObject)associationTypeConstraint;
-			associationTypeConstraint = (AssociationTypeConstraint)eResolveProxy(oldAssociationTypeConstraint);
-			if (associationTypeConstraint != oldAssociationTypeConstraint) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT, oldAssociationTypeConstraint, associationTypeConstraint));
-			}
-		}
-		return associationTypeConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AssociationTypeConstraint basicGetAssociationTypeConstraint() {
-		return associationTypeConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAssociationTypeConstraint(AssociationTypeConstraint newAssociationTypeConstraint) {
-		AssociationTypeConstraint oldAssociationTypeConstraint = associationTypeConstraint;
-		associationTypeConstraint = newAssociationTypeConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT, oldAssociationTypeConstraint, associationTypeConstraint));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -301,9 +251,6 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				if (resolve) return getTopicType();
 				return basicGetTopicType();
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
-				if (resolve) return getAssociationTypeConstraint();
-				return basicGetAssociationTypeConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,9 +274,6 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 				return;
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				setTopicType((TopicType)newValue);
-				return;
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
-				setAssociationTypeConstraint((AssociationTypeConstraint)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -355,9 +299,6 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				setTopicType((TopicType)null);
 				return;
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
-				setAssociationTypeConstraint((AssociationTypeConstraint)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -378,8 +319,6 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 				return type != null;
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				return topicType != null;
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT:
-				return associationTypeConstraint != null;
 		}
 		return super.eIsSet(featureID);
 	}

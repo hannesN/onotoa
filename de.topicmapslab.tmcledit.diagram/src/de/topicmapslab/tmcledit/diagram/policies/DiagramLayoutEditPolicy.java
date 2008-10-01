@@ -9,10 +9,9 @@ import org.eclipse.gef.requests.CreateRequest;
 import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.command.MoveNodeCommand;
 import de.topicmapslab.tmcledit.diagram.command.NewNodeCommand;
-import de.topicmapslab.tmcledit.diagram.command.NewNodeCommand.Type;
-import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
-import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.diagram.model.Diagram;
+import de.topicmapslab.tmcledit.diagram.model.Node;
+import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 
 public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 
@@ -31,11 +30,11 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
 		if (request.getNewObjectType()==TypeNode.class) {
-			TopicMapSchema schema = DiagramActivator.getCurrentSchema();
-			if (schema==null)
+			Diagram diagram = DiagramActivator.getCurrentDiagram();
+			if (diagram==null)
 				return null;
 			
-			NewNodeCommand cmd = new NewNodeCommand(schema, request.getLocation(), NewNodeCommand.Type.TYPE);
+			NewNodeCommand cmd = new NewNodeCommand(diagram, request.getLocation(), NewNodeCommand.Type.TYPE);
 			return cmd;
 			
 		}

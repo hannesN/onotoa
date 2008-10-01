@@ -88,8 +88,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createScopeTypeAdapter();
 			}
 			@Override
-			public Adapter caseAbstractContraint(AbstractContraint object) {
-				return createAbstractContraintAdapter();
+			public Adapter caseAbstractConstraint(AbstractConstraint object) {
+				return createAbstractConstraintAdapter();
 			}
 			@Override
 			public Adapter caseOccurenceTypeConstraint(OccurenceTypeConstraint object) {
@@ -130,30 +130,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMappingElement(MappingElement object) {
 				return createMappingElementAdapter();
-			}
-			@Override
-			public Adapter caseBendPoint(BendPoint object) {
-				return createBendPointAdapter();
-			}
-			@Override
-			public Adapter caseDiagram(Diagram object) {
-				return createDiagramAdapter();
-			}
-			@Override
-			public Adapter caseNode(Node object) {
-				return createNodeAdapter();
-			}
-			@Override
-			public Adapter caseEdges(Edges object) {
-				return createEdgesAdapter();
-			}
-			@Override
-			public Adapter caseTypeNode(TypeNode object) {
-				return createTypeNodeAdapter();
-			}
-			@Override
-			public Adapter caseAssociationNode(AssociationNode object) {
-				return createAssociationNodeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -232,16 +208,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractContraint <em>Abstract Contraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractConstraint <em>Abstract Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.AbstractContraint
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint
 	 * @generated
 	 */
-	public Adapter createAbstractContraintAdapter() {
+	public Adapter createAbstractConstraintAdapter() {
 		return null;
 	}
 
@@ -382,90 +358,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.BendPoint <em>Bend Point</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.BendPoint
-	 * @generated
-	 */
-	public Adapter createBendPointAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Diagram <em>Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.Diagram
-	 * @generated
-	 */
-	public Adapter createDiagramAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Node <em>Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.Node
-	 * @generated
-	 */
-	public Adapter createNodeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Edges <em>Edges</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.Edges
-	 * @generated
-	 */
-	public Adapter createEdgesAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.TypeNode <em>Type Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.TypeNode
-	 * @generated
-	 */
-	public Adapter createTypeNodeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AssociationNode <em>Association Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.AssociationNode
-	 * @generated
-	 */
-	public Adapter createAssociationNodeAdapter() {
 		return null;
 	}
 

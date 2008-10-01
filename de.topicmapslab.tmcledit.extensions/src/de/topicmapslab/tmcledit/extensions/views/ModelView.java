@@ -15,8 +15,6 @@ import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -172,7 +170,7 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 				if ((ep != null) && (ep instanceof TMCLDiagramEditor)) {
 
 					currentEditor = (TMCLDiagramEditor) ep;
-					currentTopicMapSchema = currentEditor.getTopicMapSchema(); 
+					currentTopicMapSchema = currentEditor.getDiagram().getTopicMapSchema(); 
 
 					currentTopicMapSchema.eAdapters().add(tmsListener);
 

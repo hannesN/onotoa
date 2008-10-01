@@ -1,13 +1,12 @@
 package de.topicmapslab.tmcledit.diagram;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.diagram.model.Diagram;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -53,7 +52,7 @@ public class DiagramActivator extends AbstractUIPlugin {
 		return plugin;
 	}
 	
-	public static final TopicMapSchema getCurrentSchema() {
+	public static final Diagram getCurrentDiagram() {
 		// getting the model of the current editor
 		
 		IWorkbenchPage page = getDefault().getWorkbench().getActiveWorkbenchWindow()
@@ -62,7 +61,7 @@ public class DiagramActivator extends AbstractUIPlugin {
 			IEditorPart ep = page.getActiveEditor();
 			if ((ep != null) && (ep instanceof TMCLDiagramEditor)) {
 
-				return ((TMCLDiagramEditor) ep).getTopicMapSchema();
+				return ((TMCLDiagramEditor) ep).getDiagram();
 			}
 		}
 			return null;

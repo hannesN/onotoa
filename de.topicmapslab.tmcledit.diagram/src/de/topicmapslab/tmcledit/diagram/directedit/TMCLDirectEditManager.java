@@ -7,7 +7,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.tools.CellEditorLocator;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -23,6 +22,7 @@ public class TMCLDirectEditManager extends DirectEditManager {
 	private Label label;
 	private Font figureFont;
 
+	@SuppressWarnings("unchecked")
 	public TMCLDirectEditManager(GraphicalEditPart source, Class editorType,
 			Label label) {
 		super(source, editorType, new LabelCellEditorLocator(label));

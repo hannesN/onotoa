@@ -17,5 +17,5 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface subjectIdentifierConstraint extends AbstractContraint {
+public interface subjectIdentifierConstraint extends AbstractConstraint {
 } // subjectIdentifierConstraint

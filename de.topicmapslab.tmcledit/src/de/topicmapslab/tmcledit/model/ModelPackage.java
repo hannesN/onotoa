@@ -461,14 +461,14 @@ public interface ModelPackage extends EPackage {
 	int SCOPE_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractContraintImpl <em>Abstract Contraint</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.AbstractContraintImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractContraint()
+	 * @see de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractConstraint()
 	 * @generated
 	 */
-	int ABSTRACT_CONTRAINT = 4;
+	int ABSTRACT_CONSTRAINT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -477,7 +477,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTRAINT__CARD_MIN = 0;
+	int ABSTRACT_CONSTRAINT__CARD_MIN = 0;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -486,7 +486,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTRAINT__CARD_MAX = 1;
+	int ABSTRACT_CONSTRAINT__CARD_MAX = 1;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -495,7 +495,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTRAINT__REGEXP = 2;
+	int ABSTRACT_CONSTRAINT__REGEXP = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -504,7 +504,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTRAINT__NAME = 3;
+	int ABSTRACT_CONSTRAINT__NAME = 3;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -513,16 +513,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTRAINT__SCOPE = 4;
+	int ABSTRACT_CONSTRAINT__SCOPE = 4;
 
 	/**
-	 * The number of structural features of the '<em>Abstract Contraint</em>' class.
+	 * The number of structural features of the '<em>Abstract Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTRAINT_FEATURE_COUNT = 5;
+	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.
@@ -541,7 +541,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONTRAINT__CARD_MIN;
+	int OCCURENCE_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -550,7 +550,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONTRAINT__CARD_MAX;
+	int OCCURENCE_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -559,7 +559,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONTRAINT__REGEXP;
+	int OCCURENCE_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -568,7 +568,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__NAME = ABSTRACT_CONTRAINT__NAME;
+	int OCCURENCE_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -577,7 +577,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONTRAINT__SCOPE;
+	int OCCURENCE_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
 	 * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -586,7 +586,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__UNIQUE = ABSTRACT_CONTRAINT_FEATURE_COUNT + 0;
+	int OCCURENCE_TYPE_CONSTRAINT__UNIQUE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
@@ -595,7 +595,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE = ABSTRACT_CONTRAINT_FEATURE_COUNT + 1;
+	int OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -604,7 +604,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONTRAINT_FEATURE_COUNT + 2;
+	int OCCURENCE_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Occurence Type Constraint</em>' class.
@@ -613,7 +613,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONTRAINT_FEATURE_COUNT + 3;
+	int OCCURENCE_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeConstraintImpl <em>Name Type Constraint</em>}' class.
@@ -632,7 +632,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONTRAINT__CARD_MIN;
+	int NAME_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -641,7 +641,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONTRAINT__CARD_MAX;
+	int NAME_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -650,7 +650,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONTRAINT__REGEXP;
+	int NAME_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -659,7 +659,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__NAME = ABSTRACT_CONTRAINT__NAME;
+	int NAME_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -668,7 +668,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONTRAINT__SCOPE;
+	int NAME_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -677,7 +677,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONTRAINT_FEATURE_COUNT + 0;
+	int NAME_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Name Type Constraint</em>' class.
@@ -686,7 +686,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONTRAINT_FEATURE_COUNT + 1;
+	int NAME_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationsTypeImpl <em>Associations Type</em>}' class.
@@ -935,22 +935,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Association Type Constraint</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT = 4;
-
-	/**
 	 * The number of structural features of the '<em>Role Type Constraints</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE_CONSTRAINTS_FEATURE_COUNT = 5;
+	int ROLE_TYPE_CONSTRAINTS_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl <em>Topic Map Schema</em>}' class.
@@ -972,22 +963,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA__TOPIC_TYPES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Role Type Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS = 1;
-
-	/**
 	 * The feature id for the '<em><b>Association Type Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS = 2;
+	int TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Mappings</b></em>' reference list.
@@ -996,7 +978,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA__MAPPINGS = 3;
+	int TOPIC_MAP_SCHEMA__MAPPINGS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Includes</b></em>' attribute list.
@@ -1005,16 +987,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA__INCLUDES = 4;
-
-	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOPIC_MAP_SCHEMA__DIAGRAM = 5;
+	int TOPIC_MAP_SCHEMA__INCLUDES = 3;
 
 	/**
 	 * The number of structural features of the '<em>Topic Map Schema</em>' class.
@@ -1023,7 +996,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = 6;
+	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl <em>subject Locator Constraint</em>}' class.
@@ -1042,7 +1015,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__CARD_MIN = ABSTRACT_CONTRAINT__CARD_MIN;
+	int SUBJECT_LOCATOR_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -1051,7 +1024,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__CARD_MAX = ABSTRACT_CONTRAINT__CARD_MAX;
+	int SUBJECT_LOCATOR_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -1060,7 +1033,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__REGEXP = ABSTRACT_CONTRAINT__REGEXP;
+	int SUBJECT_LOCATOR_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1069,7 +1042,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__NAME = ABSTRACT_CONTRAINT__NAME;
+	int SUBJECT_LOCATOR_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -1078,7 +1051,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__SCOPE = ABSTRACT_CONTRAINT__SCOPE;
+	int SUBJECT_LOCATOR_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
 	 * The number of structural features of the '<em>subject Locator Constraint</em>' class.
@@ -1087,7 +1060,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONTRAINT_FEATURE_COUNT + 0;
+	int SUBJECT_LOCATOR_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.subjectIdentifierConstraintImpl <em>subject Identifier Constraint</em>}' class.
@@ -1106,7 +1079,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MIN = ABSTRACT_CONTRAINT__CARD_MIN;
+	int SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -1115,7 +1088,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MAX = ABSTRACT_CONTRAINT__CARD_MAX;
+	int SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -1124,7 +1097,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__REGEXP = ABSTRACT_CONTRAINT__REGEXP;
+	int SUBJECT_IDENTIFIER_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1133,7 +1106,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__NAME = ABSTRACT_CONTRAINT__NAME;
+	int SUBJECT_IDENTIFIER_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -1142,7 +1115,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__SCOPE = ABSTRACT_CONTRAINT__SCOPE;
+	int SUBJECT_IDENTIFIER_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
 	 * The number of structural features of the '<em>subject Identifier Constraint</em>' class.
@@ -1151,7 +1124,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONTRAINT_FEATURE_COUNT + 0;
+	int SUBJECT_IDENTIFIER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl <em>Association Type Constraint</em>}' class.
@@ -1182,13 +1155,22 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Role Type Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Association Type Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE_CONSTRAINT_FEATURE_COUNT = 2;
+	int ASSOCIATION_TYPE_CONSTRAINT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.MappingElementImpl <em>Mapping Element</em>}' class.
@@ -1228,246 +1210,6 @@ public interface ModelPackage extends EPackage {
 	int MAPPING_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.BendPointImpl <em>Bend Point</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.BendPointImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendPoint()
-	 * @generated
-	 */
-	int BEND_POINT = 15;
-
-	/**
-	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BEND_POINT__POS_X = 0;
-
-	/**
-	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BEND_POINT__POS_Y = 1;
-
-	/**
-	 * The number of structural features of the '<em>Bend Point</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BEND_POINT_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl <em>Diagram</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.DiagramImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDiagram()
-	 * @generated
-	 */
-	int DIAGRAM = 16;
-
-	/**
-	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIAGRAM__NODES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIAGRAM__EDGES = 1;
-
-	/**
-	 * The number of structural features of the '<em>Diagram</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIAGRAM_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NodeImpl <em>Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.NodeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNode()
-	 * @generated
-	 */
-	int NODE = 17;
-
-	/**
-	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__POS_X = 0;
-
-	/**
-	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__POS_Y = 1;
-
-	/**
-	 * The number of structural features of the '<em>Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.EdgesImpl <em>Edges</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.EdgesImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdges()
-	 * @generated
-	 */
-	int EDGES = 18;
-
-	/**
-	 * The feature id for the '<em><b>Bend Points</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGES__BEND_POINTS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Role Type Constraint</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGES__ROLE_TYPE_CONSTRAINT = 1;
-
-	/**
-	 * The number of structural features of the '<em>Edges</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGES_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TypeNodeImpl <em>Type Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.TypeNodeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTypeNode()
-	 * @generated
-	 */
-	int TYPE_NODE = 19;
-
-	/**
-	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_NODE__POS_X = NODE__POS_X;
-
-	/**
-	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_NODE__POS_Y = NODE__POS_Y;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_NODE__TYPE = NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Type Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationNode()
-	 * @generated
-	 */
-	int ASSOCIATION_NODE = 20;
-
-	/**
-	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION_NODE__POS_X = NODE__POS_X;
-
-	/**
-	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION_NODE__POS_Y = NODE__POS_Y;
-
-	/**
-	 * The feature id for the '<em><b>Association Constraint</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION_NODE__ASSOCIATION_CONSTRAINT = NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Association Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1475,7 +1217,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 21;
+	int TOPIC_ID = 15;
 
 
 	/**
@@ -1618,69 +1360,69 @@ public interface ModelPackage extends EPackage {
 	EClass getScopeType();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractContraint <em>Abstract Contraint</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractConstraint <em>Abstract Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Contraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractContraint
+	 * @return the meta object for class '<em>Abstract Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint
 	 * @generated
 	 */
-	EClass getAbstractContraint();
+	EClass getAbstractConstraint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractContraint#getCardMin <em>Card Min</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMin <em>Card Min</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Card Min</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractContraint#getCardMin()
-	 * @see #getAbstractContraint()
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMin()
+	 * @see #getAbstractConstraint()
 	 * @generated
 	 */
-	EAttribute getAbstractContraint_CardMin();
+	EAttribute getAbstractConstraint_CardMin();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractContraint#getCardMax <em>Card Max</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMax <em>Card Max</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Card Max</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractContraint#getCardMax()
-	 * @see #getAbstractContraint()
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMax()
+	 * @see #getAbstractConstraint()
 	 * @generated
 	 */
-	EAttribute getAbstractContraint_CardMax();
+	EAttribute getAbstractConstraint_CardMax();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractContraint#getRegexp <em>Regexp</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getRegexp <em>Regexp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Regexp</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractContraint#getRegexp()
-	 * @see #getAbstractContraint()
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getRegexp()
+	 * @see #getAbstractConstraint()
 	 * @generated
 	 */
-	EAttribute getAbstractContraint_Regexp();
+	EAttribute getAbstractConstraint_Regexp();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractContraint#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractContraint#getName()
-	 * @see #getAbstractContraint()
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getName()
+	 * @see #getAbstractConstraint()
 	 * @generated
 	 */
-	EAttribute getAbstractContraint_Name();
+	EAttribute getAbstractConstraint_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AbstractContraint#getScope <em>Scope</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Scope</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractContraint#getScope()
-	 * @see #getAbstractContraint()
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getScope()
+	 * @see #getAbstractConstraint()
 	 * @generated
 	 */
-	EReference getAbstractContraint_Scope();
+	EReference getAbstractConstraint_Scope();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint <em>Occurence Type Constraint</em>}'.
@@ -1821,17 +1563,6 @@ public interface ModelPackage extends EPackage {
 	EReference getRoleTypeConstraints_TopicType();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getAssociationTypeConstraint <em>Association Type Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Association Type Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RoleTypeConstraints#getAssociationTypeConstraint()
-	 * @see #getRoleTypeConstraints()
-	 * @generated
-	 */
-	EReference getRoleTypeConstraints_AssociationTypeConstraint();
-
-	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.TopicMapSchema <em>Topic Map Schema</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1851,17 +1582,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTopicMapSchema_TopicTypes();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getRoleTypeConstraints <em>Role Type Constraints</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Role Type Constraints</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#getRoleTypeConstraints()
-	 * @see #getTopicMapSchema()
-	 * @generated
-	 */
-	EReference getTopicMapSchema_RoleTypeConstraints();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getAssociationTypeConstraints <em>Association Type Constraints</em>}'.
@@ -1895,17 +1615,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTopicMapSchema_Includes();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getDiagram <em>Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Diagram</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#getDiagram()
-	 * @see #getTopicMapSchema()
-	 * @generated
-	 */
-	EReference getTopicMapSchema_Diagram();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint <em>subject Locator Constraint</em>}'.
@@ -1960,6 +1669,17 @@ public interface ModelPackage extends EPackage {
 	EReference getAssociationTypeConstraint_AssociationType();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getRoleTypeConstraints <em>Role Type Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Role Type Constraints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getRoleTypeConstraints()
+	 * @see #getAssociationTypeConstraint()
+	 * @generated
+	 */
+	EReference getAssociationTypeConstraint_RoleTypeConstraints();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.MappingElement <em>Mapping Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1990,176 +1710,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMappingElement_Value();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.BendPoint <em>Bend Point</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Bend Point</em>'.
-	 * @see de.topicmapslab.tmcledit.model.BendPoint
-	 * @generated
-	 */
-	EClass getBendPoint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.BendPoint#getPosX <em>Pos X</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pos X</em>'.
-	 * @see de.topicmapslab.tmcledit.model.BendPoint#getPosX()
-	 * @see #getBendPoint()
-	 * @generated
-	 */
-	EAttribute getBendPoint_PosX();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.BendPoint#getPosY <em>Pos Y</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pos Y</em>'.
-	 * @see de.topicmapslab.tmcledit.model.BendPoint#getPosY()
-	 * @see #getBendPoint()
-	 * @generated
-	 */
-	EAttribute getBendPoint_PosY();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Diagram <em>Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Diagram</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Diagram
-	 * @generated
-	 */
-	EClass getDiagram();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.Diagram#getNodes <em>Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Diagram#getNodes()
-	 * @see #getDiagram()
-	 * @generated
-	 */
-	EReference getDiagram_Nodes();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.Diagram#getEdges <em>Edges</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Edges</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Diagram#getEdges()
-	 * @see #getDiagram()
-	 * @generated
-	 */
-	EReference getDiagram_Edges();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Node <em>Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Node</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Node
-	 * @generated
-	 */
-	EClass getNode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Node#getPosX <em>Pos X</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pos X</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Node#getPosX()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_PosX();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Node#getPosY <em>Pos Y</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pos Y</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Node#getPosY()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_PosY();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Edges <em>Edges</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Edges</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Edges
-	 * @generated
-	 */
-	EClass getEdges();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.Edges#getBendPoints <em>Bend Points</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Bend Points</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Edges#getBendPoints()
-	 * @see #getEdges()
-	 * @generated
-	 */
-	EReference getEdges_BendPoints();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.Edges#getRoleTypeConstraint <em>Role Type Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Role Type Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Edges#getRoleTypeConstraint()
-	 * @see #getEdges()
-	 * @generated
-	 */
-	EReference getEdges_RoleTypeConstraint();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.TypeNode <em>Type Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Node</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TypeNode
-	 * @generated
-	 */
-	EClass getTypeNode();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.TypeNode#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TypeNode#getType()
-	 * @see #getTypeNode()
-	 * @generated
-	 */
-	EReference getTypeNode_Type();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AssociationNode <em>Association Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Association Node</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AssociationNode
-	 * @generated
-	 */
-	EClass getAssociationNode();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AssociationNode#getAssociationConstraint <em>Association Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Association Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AssociationNode#getAssociationConstraint()
-	 * @see #getAssociationNode()
-	 * @generated
-	 */
-	EReference getAssociationNode_AssociationConstraint();
 
 	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
@@ -2306,14 +1856,14 @@ public interface ModelPackage extends EPackage {
 		EClass SCOPE_TYPE = eINSTANCE.getScopeType();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractContraintImpl <em>Abstract Contraint</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.AbstractContraintImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractContraint()
+		 * @see de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractConstraint()
 		 * @generated
 		 */
-		EClass ABSTRACT_CONTRAINT = eINSTANCE.getAbstractContraint();
+		EClass ABSTRACT_CONSTRAINT = eINSTANCE.getAbstractConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Card Min</b></em>' attribute feature.
@@ -2321,7 +1871,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_CONTRAINT__CARD_MIN = eINSTANCE.getAbstractContraint_CardMin();
+		EAttribute ABSTRACT_CONSTRAINT__CARD_MIN = eINSTANCE.getAbstractConstraint_CardMin();
 
 		/**
 		 * The meta object literal for the '<em><b>Card Max</b></em>' attribute feature.
@@ -2329,7 +1879,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_CONTRAINT__CARD_MAX = eINSTANCE.getAbstractContraint_CardMax();
+		EAttribute ABSTRACT_CONSTRAINT__CARD_MAX = eINSTANCE.getAbstractConstraint_CardMax();
 
 		/**
 		 * The meta object literal for the '<em><b>Regexp</b></em>' attribute feature.
@@ -2337,7 +1887,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_CONTRAINT__REGEXP = eINSTANCE.getAbstractContraint_Regexp();
+		EAttribute ABSTRACT_CONSTRAINT__REGEXP = eINSTANCE.getAbstractConstraint_Regexp();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2345,7 +1895,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_CONTRAINT__NAME = eINSTANCE.getAbstractContraint_Name();
+		EAttribute ABSTRACT_CONSTRAINT__NAME = eINSTANCE.getAbstractConstraint_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Scope</b></em>' reference feature.
@@ -2353,7 +1903,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_CONTRAINT__SCOPE = eINSTANCE.getAbstractContraint_Scope();
+		EReference ABSTRACT_CONSTRAINT__SCOPE = eINSTANCE.getAbstractConstraint_Scope();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.
@@ -2470,14 +2020,6 @@ public interface ModelPackage extends EPackage {
 		EReference ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE = eINSTANCE.getRoleTypeConstraints_TopicType();
 
 		/**
-		 * The meta object literal for the '<em><b>Association Type Constraint</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT = eINSTANCE.getRoleTypeConstraints_AssociationTypeConstraint();
-
-		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl <em>Topic Map Schema</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2494,14 +2036,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TOPIC_MAP_SCHEMA__TOPIC_TYPES = eINSTANCE.getTopicMapSchema_TopicTypes();
-
-		/**
-		 * The meta object literal for the '<em><b>Role Type Constraints</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS = eINSTANCE.getTopicMapSchema_RoleTypeConstraints();
 
 		/**
 		 * The meta object literal for the '<em><b>Association Type Constraints</b></em>' containment reference list feature.
@@ -2526,14 +2060,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TOPIC_MAP_SCHEMA__INCLUDES = eINSTANCE.getTopicMapSchema_Includes();
-
-		/**
-		 * The meta object literal for the '<em><b>Diagram</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOPIC_MAP_SCHEMA__DIAGRAM = eINSTANCE.getTopicMapSchema_Diagram();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl <em>subject Locator Constraint</em>}' class.
@@ -2582,6 +2108,14 @@ public interface ModelPackage extends EPackage {
 		EReference ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE = eINSTANCE.getAssociationTypeConstraint_AssociationType();
 
 		/**
+		 * The meta object literal for the '<em><b>Role Type Constraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS = eINSTANCE.getAssociationTypeConstraint_RoleTypeConstraints();
+
+		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.MappingElementImpl <em>Mapping Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2606,146 +2140,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MAPPING_ELEMENT__VALUE = eINSTANCE.getMappingElement_Value();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.BendPointImpl <em>Bend Point</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.BendPointImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendPoint()
-		 * @generated
-		 */
-		EClass BEND_POINT = eINSTANCE.getBendPoint();
-
-		/**
-		 * The meta object literal for the '<em><b>Pos X</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BEND_POINT__POS_X = eINSTANCE.getBendPoint_PosX();
-
-		/**
-		 * The meta object literal for the '<em><b>Pos Y</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BEND_POINT__POS_Y = eINSTANCE.getBendPoint_PosY();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl <em>Diagram</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.DiagramImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDiagram()
-		 * @generated
-		 */
-		EClass DIAGRAM = eINSTANCE.getDiagram();
-
-		/**
-		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DIAGRAM__NODES = eINSTANCE.getDiagram_Nodes();
-
-		/**
-		 * The meta object literal for the '<em><b>Edges</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DIAGRAM__EDGES = eINSTANCE.getDiagram_Edges();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.NodeImpl <em>Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.NodeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNode()
-		 * @generated
-		 */
-		EClass NODE = eINSTANCE.getNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Pos X</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__POS_X = eINSTANCE.getNode_PosX();
-
-		/**
-		 * The meta object literal for the '<em><b>Pos Y</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__POS_Y = eINSTANCE.getNode_PosY();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.EdgesImpl <em>Edges</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.EdgesImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdges()
-		 * @generated
-		 */
-		EClass EDGES = eINSTANCE.getEdges();
-
-		/**
-		 * The meta object literal for the '<em><b>Bend Points</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EDGES__BEND_POINTS = eINSTANCE.getEdges_BendPoints();
-
-		/**
-		 * The meta object literal for the '<em><b>Role Type Constraint</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EDGES__ROLE_TYPE_CONSTRAINT = eINSTANCE.getEdges_RoleTypeConstraint();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.TypeNodeImpl <em>Type Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.TypeNodeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTypeNode()
-		 * @generated
-		 */
-		EClass TYPE_NODE = eINSTANCE.getTypeNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_NODE__TYPE = eINSTANCE.getTypeNode_Type();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationNode()
-		 * @generated
-		 */
-		EClass ASSOCIATION_NODE = eINSTANCE.getAssociationNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Association Constraint</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSOCIATION_NODE__ASSOCIATION_CONSTRAINT = eINSTANCE.getAssociationNode_AssociationConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

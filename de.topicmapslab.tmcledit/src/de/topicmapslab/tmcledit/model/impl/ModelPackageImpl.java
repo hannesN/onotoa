@@ -6,19 +6,14 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.AbstractContraint;
-import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.AssociationsType;
-import de.topicmapslab.tmcledit.model.BendPoint;
-import de.topicmapslab.tmcledit.model.Diagram;
-import de.topicmapslab.tmcledit.model.Edges;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
@@ -27,7 +22,6 @@ import de.topicmapslab.tmcledit.model.ScopeType;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.subjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.subjectLocatorConstraint;
 
@@ -79,7 +73,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractContraintEClass = null;
+	private EClass abstractConstraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,48 +144,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass mappingElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass bendPointEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass diagramEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass edgesEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass associationNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -390,8 +342,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbstractContraint() {
-		return abstractContraintEClass;
+	public EClass getAbstractConstraint() {
+		return abstractConstraintEClass;
 	}
 
 	/**
@@ -399,8 +351,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractContraint_CardMin() {
-		return (EAttribute)abstractContraintEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAbstractConstraint_CardMin() {
+		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -408,8 +360,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractContraint_CardMax() {
-		return (EAttribute)abstractContraintEClass.getEStructuralFeatures().get(1);
+	public EAttribute getAbstractConstraint_CardMax() {
+		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -417,8 +369,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractContraint_Regexp() {
-		return (EAttribute)abstractContraintEClass.getEStructuralFeatures().get(2);
+	public EAttribute getAbstractConstraint_Regexp() {
+		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -426,8 +378,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractContraint_Name() {
-		return (EAttribute)abstractContraintEClass.getEStructuralFeatures().get(3);
+	public EAttribute getAbstractConstraint_Name() {
+		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -435,8 +387,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractContraint_Scope() {
-		return (EReference)abstractContraintEClass.getEStructuralFeatures().get(4);
+	public EReference getAbstractConstraint_Scope() {
+		return (EReference)abstractConstraintEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -561,15 +513,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoleTypeConstraints_AssociationTypeConstraint() {
-		return (EReference)roleTypeConstraintsEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTopicMapSchema() {
 		return topicMapSchemaEClass;
 	}
@@ -588,7 +531,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTopicMapSchema_RoleTypeConstraints() {
+	public EReference getTopicMapSchema_AssociationTypeConstraints() {
 		return (EReference)topicMapSchemaEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -597,7 +540,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTopicMapSchema_AssociationTypeConstraints() {
+	public EReference getTopicMapSchema_Mappings() {
 		return (EReference)topicMapSchemaEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -606,26 +549,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTopicMapSchema_Mappings() {
-		return (EReference)topicMapSchemaEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getTopicMapSchema_Includes() {
-		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTopicMapSchema_Diagram() {
-		return (EReference)topicMapSchemaEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -678,6 +603,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAssociationTypeConstraint_RoleTypeConstraints() {
+		return (EReference)associationTypeConstraintEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMappingElement() {
 		return mappingElementEClass;
 	}
@@ -698,150 +632,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EAttribute getMappingElement_Value() {
 		return (EAttribute)mappingElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBendPoint() {
-		return bendPointEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBendPoint_PosX() {
-		return (EAttribute)bendPointEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBendPoint_PosY() {
-		return (EAttribute)bendPointEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDiagram() {
-		return diagramEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDiagram_Nodes() {
-		return (EReference)diagramEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDiagram_Edges() {
-		return (EReference)diagramEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNode() {
-		return nodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNode_PosX() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNode_PosY() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEdges() {
-		return edgesEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEdges_BendPoints() {
-		return (EReference)edgesEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEdges_RoleTypeConstraint() {
-		return (EReference)edgesEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeNode() {
-		return typeNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTypeNode_Type() {
-		return (EReference)typeNodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAssociationNode() {
-		return associationNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAssociationNode_AssociationConstraint() {
-		return (EReference)associationNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -898,12 +688,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		scopeTypeEClass = createEClass(SCOPE_TYPE);
 
-		abstractContraintEClass = createEClass(ABSTRACT_CONTRAINT);
-		createEAttribute(abstractContraintEClass, ABSTRACT_CONTRAINT__CARD_MIN);
-		createEAttribute(abstractContraintEClass, ABSTRACT_CONTRAINT__CARD_MAX);
-		createEAttribute(abstractContraintEClass, ABSTRACT_CONTRAINT__REGEXP);
-		createEAttribute(abstractContraintEClass, ABSTRACT_CONTRAINT__NAME);
-		createEReference(abstractContraintEClass, ABSTRACT_CONTRAINT__SCOPE);
+		abstractConstraintEClass = createEClass(ABSTRACT_CONSTRAINT);
+		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__CARD_MIN);
+		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__CARD_MAX);
+		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__REGEXP);
+		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__NAME);
+		createEReference(abstractConstraintEClass, ABSTRACT_CONSTRAINT__SCOPE);
 
 		occurenceTypeConstraintEClass = createEClass(OCCURENCE_TYPE_CONSTRAINT);
 		createEAttribute(occurenceTypeConstraintEClass, OCCURENCE_TYPE_CONSTRAINT__UNIQUE);
@@ -922,15 +712,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__CARD_MAX);
 		createEReference(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__TYPE);
 		createEReference(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE);
-		createEReference(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT);
 
 		topicMapSchemaEClass = createEClass(TOPIC_MAP_SCHEMA);
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__TOPIC_TYPES);
-		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS);
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS);
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__MAPPINGS);
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__INCLUDES);
-		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__DIAGRAM);
 
 		subjectLocatorConstraintEClass = createEClass(SUBJECT_LOCATOR_CONSTRAINT);
 
@@ -939,32 +726,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		associationTypeConstraintEClass = createEClass(ASSOCIATION_TYPE_CONSTRAINT);
 		createEReference(associationTypeConstraintEClass, ASSOCIATION_TYPE_CONSTRAINT__SCOPE);
 		createEReference(associationTypeConstraintEClass, ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE);
+		createEReference(associationTypeConstraintEClass, ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS);
 
 		mappingElementEClass = createEClass(MAPPING_ELEMENT);
 		createEAttribute(mappingElementEClass, MAPPING_ELEMENT__KEY);
 		createEAttribute(mappingElementEClass, MAPPING_ELEMENT__VALUE);
-
-		bendPointEClass = createEClass(BEND_POINT);
-		createEAttribute(bendPointEClass, BEND_POINT__POS_X);
-		createEAttribute(bendPointEClass, BEND_POINT__POS_Y);
-
-		diagramEClass = createEClass(DIAGRAM);
-		createEReference(diagramEClass, DIAGRAM__NODES);
-		createEReference(diagramEClass, DIAGRAM__EDGES);
-
-		nodeEClass = createEClass(NODE);
-		createEAttribute(nodeEClass, NODE__POS_X);
-		createEAttribute(nodeEClass, NODE__POS_Y);
-
-		edgesEClass = createEClass(EDGES);
-		createEReference(edgesEClass, EDGES__BEND_POINTS);
-		createEReference(edgesEClass, EDGES__ROLE_TYPE_CONSTRAINT);
-
-		typeNodeEClass = createEClass(TYPE_NODE);
-		createEReference(typeNodeEClass, TYPE_NODE__TYPE);
-
-		associationNodeEClass = createEClass(ASSOCIATION_NODE);
-		createEReference(associationNodeEClass, ASSOCIATION_NODE__ASSOCIATION_CONSTRAINT);
 
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
@@ -1001,14 +767,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		occurenceTypeEClass.getESuperTypes().add(this.getTopicType());
 		nameTypeEClass.getESuperTypes().add(this.getTopicType());
 		scopeTypeEClass.getESuperTypes().add(this.getTopicType());
-		occurenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractContraint());
-		nameTypeConstraintEClass.getESuperTypes().add(this.getAbstractContraint());
+		occurenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
+		nameTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		associationsTypeEClass.getESuperTypes().add(this.getTopicType());
 		roleTypeEClass.getESuperTypes().add(this.getTopicType());
-		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractContraint());
-		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractContraint());
-		typeNodeEClass.getESuperTypes().add(this.getNode());
-		associationNodeEClass.getESuperTypes().add(this.getNode());
+		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
+		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1028,12 +792,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(scopeTypeEClass, ScopeType.class, "ScopeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(abstractContraintEClass, AbstractContraint.class, "AbstractContraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractContraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, AbstractContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractContraint_CardMax(), ecorePackage.getEString(), "cardMax", "1", 0, 1, AbstractContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractContraint_Regexp(), ecorePackage.getEString(), "regexp", "*", 1, 1, AbstractContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractContraint_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractContraint_Scope(), this.getScopeType(), null, "scope", null, 0, 1, AbstractContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractConstraintEClass, AbstractConstraint.class, "AbstractConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractConstraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractConstraint_CardMax(), ecorePackage.getEString(), "cardMax", "1", 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractConstraint_Regexp(), ecorePackage.getEString(), "regexp", "*", 1, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractConstraint_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractConstraint_Scope(), this.getScopeType(), null, "scope", null, 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(occurenceTypeConstraintEClass, OccurenceTypeConstraint.class, "OccurenceTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOccurenceTypeConstraint_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, OccurenceTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1052,15 +816,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getRoleTypeConstraints_CardMax(), ecorePackage.getEString(), "cardMax", "1", 0, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoleTypeConstraints_Type(), this.getRoleType(), null, "type", null, 1, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoleTypeConstraints_TopicType(), this.getTopicType(), null, "topicType", null, 0, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoleTypeConstraints_AssociationTypeConstraint(), this.getAssociationTypeConstraint(), null, "associationTypeConstraint", null, 1, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(topicMapSchemaEClass, TopicMapSchema.class, "TopicMapSchema", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTopicMapSchema_TopicTypes(), this.getTopicType(), null, "topicTypes", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopicMapSchema_RoleTypeConstraints(), this.getRoleTypeConstraints(), null, "roleTypeConstraints", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicMapSchema_AssociationTypeConstraints(), this.getAssociationTypeConstraint(), null, "associationTypeConstraints", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicMapSchema_Mappings(), this.getMappingElement(), null, "mappings", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicMapSchema_Includes(), ecorePackage.getEString(), "includes", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopicMapSchema_Diagram(), this.getDiagram(), null, "diagram", null, 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectLocatorConstraintEClass, subjectLocatorConstraint.class, "subjectLocatorConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1069,32 +830,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(associationTypeConstraintEClass, AssociationTypeConstraint.class, "AssociationTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssociationTypeConstraint_Scope(), this.getScopeType(), null, "scope", null, 0, 1, AssociationTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociationTypeConstraint_AssociationType(), this.getAssociationsType(), null, "associationType", null, 0, 1, AssociationTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssociationTypeConstraint_RoleTypeConstraints(), this.getRoleTypeConstraints(), null, "roleTypeConstraints", null, 1, -1, AssociationTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingElementEClass, MappingElement.class, "MappingElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingElement_Key(), ecorePackage.getEString(), "key", null, 1, 1, MappingElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingElement_Value(), ecorePackage.getEString(), "value", null, 1, 1, MappingElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(bendPointEClass, BendPoint.class, "BendPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBendPoint_PosX(), ecorePackage.getEInt(), "posX", null, 1, 1, BendPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBendPoint_PosY(), ecorePackage.getEInt(), "posY", null, 1, 1, BendPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(diagramEClass, Diagram.class, "Diagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDiagram_Nodes(), this.getNode(), null, "nodes", null, 0, -1, Diagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDiagram_Edges(), this.getEdges(), null, "edges", null, 0, -1, Diagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNode_PosX(), ecorePackage.getEInt(), "posX", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_PosY(), ecorePackage.getEInt(), "posY", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(edgesEClass, Edges.class, "Edges", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEdges_BendPoints(), this.getBendPoint(), null, "bendPoints", null, 0, 1, Edges.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEdges_RoleTypeConstraint(), this.getRoleTypeConstraints(), null, "roleTypeConstraint", null, 1, 1, Edges.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeNodeEClass, TypeNode.class, "TypeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeNode_Type(), this.getTopicType(), null, "type", null, 1, 1, TypeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(associationNodeEClass, AssociationNode.class, "AssociationNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssociationNode_AssociationConstraint(), this.getAssociationTypeConstraint(), null, "associationConstraint", null, 0, 1, AssociationNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

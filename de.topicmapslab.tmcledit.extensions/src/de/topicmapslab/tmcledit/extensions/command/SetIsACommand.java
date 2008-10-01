@@ -3,13 +3,10 @@
  */
 package de.topicmapslab.tmcledit.extensions.command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-
-import de.topicmapslab.tmcledit.extensions.Activator;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**

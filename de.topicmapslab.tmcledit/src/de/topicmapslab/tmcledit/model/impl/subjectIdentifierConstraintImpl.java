@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class subjectIdentifierConstraintImpl extends AbstractContraintImpl implements subjectIdentifierConstraint {
+public class subjectIdentifierConstraintImpl extends AbstractConstraintImpl implements subjectIdentifierConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

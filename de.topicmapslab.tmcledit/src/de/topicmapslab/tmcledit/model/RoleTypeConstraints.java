@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getType <em>Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getTopicType <em>Topic Type</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getAssociationTypeConstraint <em>Association Type Constraint</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,31 +133,5 @@ public interface RoleTypeConstraints extends EObject {
 	 * @generated
 	 */
 	void setTopicType(TopicType value);
-
-	/**
-	 * Returns the value of the '<em><b>Association Type Constraint</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Association Type Constraint</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Association Type Constraint</em>' reference.
-	 * @see #setAssociationTypeConstraint(AssociationTypeConstraint)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_AssociationTypeConstraint()
-	 * @model required="true"
-	 * @generated
-	 */
-	AssociationTypeConstraint getAssociationTypeConstraint();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getAssociationTypeConstraint <em>Association Type Constraint</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Association Type Constraint</em>' reference.
-	 * @see #getAssociationTypeConstraint()
-	 * @generated
-	 */
-	void setAssociationTypeConstraint(AssociationTypeConstraint value);
 
 } // RoleTypeConstraints

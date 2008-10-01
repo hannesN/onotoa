@@ -114,23 +114,23 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ABSTRACT_CONTRAINT: {
-				AbstractContraint abstractContraint = (AbstractContraint)theEObject;
-				T result = caseAbstractContraint(abstractContraint);
+			case ModelPackage.ABSTRACT_CONSTRAINT: {
+				AbstractConstraint abstractConstraint = (AbstractConstraint)theEObject;
+				T result = caseAbstractConstraint(abstractConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: {
 				OccurenceTypeConstraint occurenceTypeConstraint = (OccurenceTypeConstraint)theEObject;
 				T result = caseOccurenceTypeConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseAbstractContraint(occurenceTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(occurenceTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.NAME_TYPE_CONSTRAINT: {
 				NameTypeConstraint nameTypeConstraint = (NameTypeConstraint)theEObject;
 				T result = caseNameTypeConstraint(nameTypeConstraint);
-				if (result == null) result = caseAbstractContraint(nameTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -163,14 +163,14 @@ public class ModelSwitch<T> {
 			case ModelPackage.SUBJECT_LOCATOR_CONSTRAINT: {
 				subjectLocatorConstraint subjectLocatorConstraint = (subjectLocatorConstraint)theEObject;
 				T result = casesubjectLocatorConstraint(subjectLocatorConstraint);
-				if (result == null) result = caseAbstractContraint(subjectLocatorConstraint);
+				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: {
 				subjectIdentifierConstraint subjectIdentifierConstraint = (subjectIdentifierConstraint)theEObject;
 				T result = casesubjectIdentifierConstraint(subjectIdentifierConstraint);
-				if (result == null) result = caseAbstractContraint(subjectIdentifierConstraint);
+				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -183,44 +183,6 @@ public class ModelSwitch<T> {
 			case ModelPackage.MAPPING_ELEMENT: {
 				MappingElement mappingElement = (MappingElement)theEObject;
 				T result = caseMappingElement(mappingElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.BEND_POINT: {
-				BendPoint bendPoint = (BendPoint)theEObject;
-				T result = caseBendPoint(bendPoint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.DIAGRAM: {
-				Diagram diagram = (Diagram)theEObject;
-				T result = caseDiagram(diagram);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.NODE: {
-				Node node = (Node)theEObject;
-				T result = caseNode(node);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.EDGES: {
-				Edges edges = (Edges)theEObject;
-				T result = caseEdges(edges);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.TYPE_NODE: {
-				TypeNode typeNode = (TypeNode)theEObject;
-				T result = caseTypeNode(typeNode);
-				if (result == null) result = caseNode(typeNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.ASSOCIATION_NODE: {
-				AssociationNode associationNode = (AssociationNode)theEObject;
-				T result = caseAssociationNode(associationNode);
-				if (result == null) result = caseNode(associationNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -289,17 +251,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Contraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Contraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractContraint(AbstractContraint object) {
+	public T caseAbstractConstraint(AbstractConstraint object) {
 		return null;
 	}
 
@@ -450,96 +412,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseMappingElement(MappingElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bend Point</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bend Point</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBendPoint(BendPoint object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Diagram</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Diagram</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDiagram(Diagram object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNode(Node object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Edges</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Edges</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEdges(Edges object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeNode(TypeNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssociationNode(AssociationNode object) {
 		return null;
 	}
 

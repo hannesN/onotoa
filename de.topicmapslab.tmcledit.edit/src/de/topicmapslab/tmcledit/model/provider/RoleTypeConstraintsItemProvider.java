@@ -68,7 +68,6 @@ public class RoleTypeConstraintsItemProvider
 			addCardMaxPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addTopicTypePropertyDescriptor(object);
-			addAssociationTypeConstraintPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -153,28 +152,6 @@ public class RoleTypeConstraintsItemProvider
 				 getString("_UI_RoleTypeConstraints_topicType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_topicType_feature", "_UI_RoleTypeConstraints_type"),
 				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Association Type Constraint feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAssociationTypeConstraintPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RoleTypeConstraints_associationTypeConstraint_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_associationTypeConstraint_feature", "_UI_RoleTypeConstraints_type"),
-				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__ASSOCIATION_TYPE_CONSTRAINT,
 				 true,
 				 false,
 				 true,

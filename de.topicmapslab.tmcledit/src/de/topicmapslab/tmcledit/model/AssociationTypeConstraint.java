@@ -6,6 +6,8 @@
  */
 package de.topicmapslab.tmcledit.model;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getScope <em>Scope</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getAssociationType <em>Association Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getRoleTypeConstraints <em>Role Type Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +80,21 @@ public interface AssociationTypeConstraint extends EObject {
 	 * @generated
 	 */
 	void setAssociationType(AssociationsType value);
+
+	/**
+	 * Returns the value of the '<em><b>Role Type Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RoleTypeConstraints}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Role Type Constraints</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Role Type Constraints</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationTypeConstraint_RoleTypeConstraints()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	EList<RoleTypeConstraints> getRoleTypeConstraints();
 
 } // AssociationTypeConstraint

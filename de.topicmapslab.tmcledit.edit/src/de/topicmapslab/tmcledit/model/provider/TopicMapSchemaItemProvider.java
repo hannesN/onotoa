@@ -69,7 +69,6 @@ public class TopicMapSchemaItemProvider
 
 			addMappingsPropertyDescriptor(object);
 			addIncludesPropertyDescriptor(object);
-			addDiagramPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -119,28 +118,6 @@ public class TopicMapSchemaItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Diagram feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDiagramPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TopicMapSchema_diagram_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_diagram_feature", "_UI_TopicMapSchema_type"),
-				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__DIAGRAM,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -153,7 +130,6 @@ public class TopicMapSchemaItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES);
-			childrenFeatures.add(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS);
 			childrenFeatures.add(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS);
 		}
 		return childrenFeatures;
@@ -210,7 +186,6 @@ public class TopicMapSchemaItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:
-			case ModelPackage.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS:
 			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -258,11 +233,6 @@ public class TopicMapSchemaItemProvider
 			(createChildParameter
 				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
 				 ModelFactory.eINSTANCE.createRoleType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ROLE_TYPE_CONSTRAINTS,
-				 ModelFactory.eINSTANCE.createRoleTypeConstraints()));
 
 		newChildDescriptors.add
 			(createChildParameter

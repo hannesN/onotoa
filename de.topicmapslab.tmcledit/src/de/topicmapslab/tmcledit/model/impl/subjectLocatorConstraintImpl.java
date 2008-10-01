@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class subjectLocatorConstraintImpl extends AbstractContraintImpl implements subjectLocatorConstraint {
+public class subjectLocatorConstraintImpl extends AbstractConstraintImpl implements subjectLocatorConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

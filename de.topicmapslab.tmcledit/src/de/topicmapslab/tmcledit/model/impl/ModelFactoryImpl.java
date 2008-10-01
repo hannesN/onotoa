@@ -75,12 +75,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: return createsubjectIdentifierConstraint();
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT: return createAssociationTypeConstraint();
 			case ModelPackage.MAPPING_ELEMENT: return createMappingElement();
-			case ModelPackage.BEND_POINT: return createBendPoint();
-			case ModelPackage.DIAGRAM: return createDiagram();
-			case ModelPackage.NODE: return createNode();
-			case ModelPackage.EDGES: return createEdges();
-			case ModelPackage.TYPE_NODE: return createTypeNode();
-			case ModelPackage.ASSOCIATION_NODE: return createAssociationNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -254,66 +248,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public MappingElement createMappingElement() {
 		MappingElementImpl mappingElement = new MappingElementImpl();
 		return mappingElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BendPoint createBendPoint() {
-		BendPointImpl bendPoint = new BendPointImpl();
-		return bendPoint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Diagram createDiagram() {
-		DiagramImpl diagram = new DiagramImpl();
-		return diagram;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Node createNode() {
-		NodeImpl node = new NodeImpl();
-		return node;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Edges createEdges() {
-		EdgesImpl edges = new EdgesImpl();
-		return edges;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeNode createTypeNode() {
-		TypeNodeImpl typeNode = new TypeNodeImpl();
-		return typeNode;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AssociationNode createAssociationNode() {
-		AssociationNodeImpl associationNode = new AssociationNodeImpl();
-		return associationNode;
 	}
 
 	/**

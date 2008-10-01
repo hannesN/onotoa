@@ -23,7 +23,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface NameTypeConstraint extends AbstractContraint {
+public interface NameTypeConstraint extends AbstractConstraint {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

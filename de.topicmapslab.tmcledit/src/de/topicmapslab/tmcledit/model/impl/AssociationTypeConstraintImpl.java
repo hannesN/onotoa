@@ -9,15 +9,24 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.AssociationsType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.ScopeType;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +37,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl#getScope <em>Scope</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl#getAssociationType <em>Association Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl#getRoleTypeConstraints <em>Role Type Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +63,16 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * @ordered
 	 */
 	protected AssociationsType associationType;
+
+	/**
+	 * The cached value of the '{@link #getRoleTypeConstraints() <em>Role Type Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRoleTypeConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RoleTypeConstraints> roleTypeConstraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,6 +174,32 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RoleTypeConstraints> getRoleTypeConstraints() {
+		if (roleTypeConstraints == null) {
+			roleTypeConstraints = new EObjectContainmentEList<RoleTypeConstraints>(RoleTypeConstraints.class, this, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS);
+		}
+		return roleTypeConstraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
+				return ((InternalEList<?>)getRoleTypeConstraints()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -163,6 +209,8 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				if (resolve) return getAssociationType();
 				return basicGetAssociationType();
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
+				return getRoleTypeConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -172,6 +220,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -180,6 +229,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				setAssociationType((AssociationsType)newValue);
+				return;
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
+				getRoleTypeConstraints().clear();
+				getRoleTypeConstraints().addAll((Collection<? extends RoleTypeConstraints>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -199,6 +252,9 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				setAssociationType((AssociationsType)null);
 				return;
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
+				getRoleTypeConstraints().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -215,6 +271,8 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 				return scope != null;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				return associationType != null;
+			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
+				return roleTypeConstraints != null && !roleTypeConstraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
