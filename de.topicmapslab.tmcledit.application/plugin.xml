@@ -34,5 +34,17 @@
          </action>
       </actionSet>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="de.topicmapslab.tmcledit.application.application"
+            name="TMCL Edit">
+         <property
+               name="appName"
+               value="TMCL Edit">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

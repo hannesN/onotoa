@@ -260,5 +260,5 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 		result.append(')');
 		return result.toString();
 	}
-
+	
 } //DiagramImpl

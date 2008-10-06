@@ -8,7 +8,7 @@ import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.jface.viewers.CellEditor;
 
-import de.topicmapslab.tmcledit.diagram.command.RenameCommand;
+import de.topicmapslab.tmcledit.diagram.command.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 
@@ -26,7 +26,7 @@ public class TopicTypeDirectEditPolicy extends DirectEditPolicy {
 			
 			CellEditor cellEditor = request.getCellEditor();
 			String newName = (String) cellEditor.getValue();
-			RenameCommand cmd = new RenameCommand(tn.getTopicType(), newName);
+			RenameTopicTypeCommand cmd = new RenameTopicTypeCommand(tn.getTopicType(), newName);
 		
 			return cmd;
 		

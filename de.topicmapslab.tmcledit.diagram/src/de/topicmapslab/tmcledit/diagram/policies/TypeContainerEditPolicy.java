@@ -3,7 +3,10 @@ package de.topicmapslab.tmcledit.diagram.policies;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ContainerEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
-import org.eclipse.gef.requests.GroupRequest;
+
+import de.topicmapslab.tmcledit.diagram.command.CreateOccurenceConstraintCommand;
+import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
+import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 
 /**
  * 
@@ -14,16 +17,9 @@ public class TypeContainerEditPolicy extends ContainerEditPolicy {
 
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
-		// TODO Auto-generated method stub
+		if (request.getNewObjectType()==OccurenceTypeConstraint.class) {
+			return new CreateOccurenceConstraintCommand(((TypeNodeEditPart)getHost()).getCastedModel().getTopicType());
+		}
 		return null;
 	}
-	
-	@Override
-	protected Command getAddCommand(GroupRequest request) {
-		// TODO Auto-generated method stub
-		return super.getAddCommand(request);
-	}
-	
-	
-
 }

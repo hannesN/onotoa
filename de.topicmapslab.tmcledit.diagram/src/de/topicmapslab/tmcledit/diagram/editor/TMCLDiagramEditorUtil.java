@@ -5,6 +5,7 @@ package de.topicmapslab.tmcledit.diagram.editor;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
+import org.eclipse.gef.palette.ConnectionCreationToolEntry;
 import org.eclipse.gef.palette.CreationToolEntry;
 import org.eclipse.gef.palette.MarqueeToolEntry;
 import org.eclipse.gef.palette.PaletteGroup;
@@ -13,10 +14,13 @@ import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
 
 import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.IsAEdgeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.diagram.model.Diagram;
+import de.topicmapslab.tmcledit.diagram.model.Edge;
+import de.topicmapslab.tmcledit.diagram.model.EdgeType;
 import de.topicmapslab.tmcledit.diagram.model.ModelFactory;
 import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -39,7 +43,8 @@ public class TMCLDiagramEditorUtil  {
 		pr.setDefaultEntry(selEntry);
 		
 		pr.add(getTypePaletteGroup());
-		
+		pr.add(getTypeItemsPaletteGroup());
+		pr.add(getConnectionsPaletteGroup());
 		
 		return pr;
 	}
@@ -58,10 +63,14 @@ public class TMCLDiagramEditorUtil  {
 					part = new OccurenceTypeConstraintEditPart();
 				} if (model instanceof NameTypeConstraint) {
 					part = new NameTypeConstraintEditPart();
+				} if (model instanceof Edge) {
+					Edge e = (Edge) model;
+					if (e.getType()==EdgeType.IS_ATYPE)
+						part = new IsAEdgeEditPart();					
 				}
 				
-					
-				part.setModel(model);
+				if (part!=null)
+					part.setModel(model);
 				return part;
 			}
 			
@@ -90,4 +99,44 @@ public class TMCLDiagramEditorUtil  {
 		return group;
 	}
 
+	private static PaletteGroup getTypeItemsPaletteGroup() {
+		PaletteGroup group = new PaletteGroup("Topic Types Items");
+		group.add(new CreationToolEntry("Occurence Constraints", "Occurence Constraints", new CreationFactory() {
+
+			@Override
+			public Object getNewObject() {
+				return de.topicmapslab.tmcledit.model.ModelFactory.eINSTANCE.createOccurenceTypeConstraint();
+			}
+
+			@Override
+			public Object getObjectType() {
+				return OccurenceTypeConstraint.class;
+			}
+			
+		}, null, null));
+		
+		return group;
+	}
+
+	private static PaletteGroup getConnectionsPaletteGroup() {
+		PaletteGroup group = new PaletteGroup("Connection Items");
+		group.add(new ConnectionCreationToolEntry("Is A ...", "Create Is A connection", new CreationFactory() {
+
+			@Override
+			public Object getNewObject() {
+				Edge e = ModelFactory.eINSTANCE.createEdge();
+				e.setType(EdgeType.IS_ATYPE);
+				return e;
+			}
+
+			@Override
+			public Object getObjectType() {
+				return Edge.class;
+			}
+			
+		}, null, null));
+		
+		return group;
+	}
+	
 }

@@ -35,8 +35,11 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 
+import de.topicmapslab.tmcledit.diagram.DiagramController;
 import de.topicmapslab.tmcledit.diagram.model.AssociationNode;
 import de.topicmapslab.tmcledit.diagram.model.Diagram;
+import de.topicmapslab.tmcledit.diagram.model.Edge;
+import de.topicmapslab.tmcledit.diagram.model.EdgeType;
 import de.topicmapslab.tmcledit.diagram.model.Node;
 import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -63,6 +66,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 
 	private ISelection currentSelection;
 	private List<ISelectionChangedListener> selectionChangedListeners = Collections.emptyList();
+
+	private DiagramAdapter diagramAdapter;
 
 	public TMCLDiagramEditor() {
 		setEditDomain(new DefaultEditDomain(this));
@@ -158,11 +163,29 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 			tt.setId("wwid:Person");
 			schema.getTopicTypes().add(tt);
 			
+			TopicType tt2 = modelInstance.createTopicType();
+			tt2.setId("wwid:Chef");
+			tt2.getIsa().add(tt);
+			schema.getTopicTypes().add(tt2);
+			
+			
 			TypeNode tn = diagramModel.createTypeNode();
 			tn.setPosX(50);
 			tn.setPosY(50);
 			tn.setTopicType(tt);
 			diagram.getNodes().add((Node) tn);
+			
+			TypeNode tn2 = diagramModel.createTypeNode();
+			tn2.setPosX(450);
+			tn2.setPosY(50);
+			tn2.setTopicType(tt2);
+			diagram.getNodes().add((Node) tn2);
+			
+			Edge e = diagramModel.createEdge();
+			e.setSource(tn2);
+			e.setTarget(tn);
+			e.setType(EdgeType.IS_ATYPE);
+			diagram.getEdges().add(e);
 			
 			OccurenceType ot = modelInstance.createOccurenceType();
 			ot.setId("wwid:Adresse");
@@ -183,8 +206,12 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 			ntc.setType(nt);
 			tt.getNameContraints().add(ntc);
 			
+			
+			
 		}
+		new DiagramController(diagram);
 	}
+	
 
 	@Override
 	public boolean isDirty() {
@@ -273,6 +300,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 	}
 	
 	private void fireSelectionChanged() {
+		if (currentSelection==null)
+			currentSelection = new StructuredSelection();
+		
 		SelectionChangedEvent event = new SelectionChangedEvent(this, currentSelection);
 		
 		for (ISelectionChangedListener l : selectionChangedListeners) {

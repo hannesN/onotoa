@@ -10,7 +10,7 @@ import org.eclipse.emf.common.command.AbstractCommand;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
- * @author mai00ckx
+ * @author Hannes Niederhausen
  * 
  */
 public class SetIsACommand extends AbstractCommand {
@@ -26,11 +26,10 @@ public class SetIsACommand extends AbstractCommand {
 		this.topic = topic;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void execute() {
 		topic.getIsa().clear();
-
+		topic.getIsa().addAll(newList);
 
 	}
 
@@ -39,7 +38,6 @@ public class SetIsACommand extends AbstractCommand {
 		execute();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void undo() {
 		topic.getIsa().clear();

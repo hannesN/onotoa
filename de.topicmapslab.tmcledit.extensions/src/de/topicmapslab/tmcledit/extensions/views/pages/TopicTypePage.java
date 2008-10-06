@@ -3,17 +3,9 @@
  */
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.Document;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EContentsEList;
-import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.impl.NodeImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
@@ -95,11 +87,13 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
 				if (dlg.open() == Dialog.OK) {
-					/* TODO  is setting command 
+						/* TODO  is setting command 
 					getEditingDomain().getCommandStack().execute(
 							new SetIsACommand(dlg.getSelectedTopics(),
 									(TopicType) getModel())));
 								*/
+					new SetIsACommand(dlg.getSelectedTopics(),
+							(TopicType) getModel()).execute();
 				}
 			}
 		});
