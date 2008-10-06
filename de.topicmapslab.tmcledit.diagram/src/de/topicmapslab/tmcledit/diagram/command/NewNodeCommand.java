@@ -14,61 +14,87 @@ import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class NewNodeCommand extends Command {
 
 	public enum Type {
-		ASSOCIATION,
-		TYPE
+		ASSOCIATION, TYPE
 	}
-	
+
 	private final Type type;
-	
+
 	private final Node node;
-	
+
 	private final Diagram diagram;
-	
-	public NewNodeCommand(Diagram diagram, Point location, Type type) {
-		this.type = type;
-		this.diagram = diagram;
-		
-		if (type==Type.ASSOCIATION) {
-			node = ModelFactory.eINSTANCE.createAssociationNode();		
+
+	private final boolean createNewType;
+
+	public NewNodeCommand(Diagram diagram, Point location, Node node) {
+		if (node instanceof TypeNode) {
+			createNewType = (((TypeNode) node).getTopicType() == null);
+			this.type = Type.TYPE;
 		} else {
-			node = ModelFactory.eINSTANCE.createTypeNode();
+			this.type = Type.ASSOCIATION;
+			createNewType = false;
 		}
+
+		this.diagram = diagram;
+
+		this.node = node;
+
 		node.setPosX(location.x);
 		node.setPosY(location.y);
 	}
-	
+
+	@Override
+	public boolean canExecute() {
+		if ((node instanceof TypeNode)
+				&& (((TypeNode) node).getTopicType() != null)) {
+			TopicType tt = ((TypeNode) node).getTopicType();
+			for (Node n : diagram.getNodes()) {
+				if (n instanceof TypeNode) {
+					if ( ((TypeNode)n).getTopicType().equals(tt) )
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public void execute() {
-		if (type==Type.TYPE) {
-			TopicType tt = de.topicmapslab.tmcledit.model.ModelFactory.eINSTANCE.createTopicType();
+		if ((type == Type.TYPE) && (createNewType)) {
+			TopicType tt = de.topicmapslab.tmcledit.model.ModelFactory.eINSTANCE
+					.createTopicType();
 			tt.setId("default type");
-			((TypeNode)node).setTopicType(tt);
+			((TypeNode) node).setTopicType(tt);
 		}
-		
+
 		redo();
 	}
-	
+
 	@Override
 	public void redo() {
-		if (type==Type.TYPE) {
-			TopicType tt = ((TypeNode)node).getTopicType(); 
-			diagram.getTopicMapSchema().getTopicTypes().add(tt);
+		if (type == Type.TYPE) {
+
+			TopicType tt = ((TypeNode) node).getTopicType();
+			if (createNewType)
+				diagram.getTopicMapSchema().getTopicTypes().add(tt);
 			diagram.getNodes().add(node);
 		}
 	}
-	
+
 	@Override
 	public void undo() {
-		if (type==Type.TYPE) {
-			TopicType tt = ((TypeNode)node).getTopicType(); 
+		if (type == Type.TYPE) {
+			TopicType tt = ((TypeNode) node).getTopicType();
 			diagram.getNodes().remove(node);
-			diagram.getTopicMapSchema().getTopicTypes().remove(tt);
+			if (createNewType) {
+				diagram.getTopicMapSchema().getTopicTypes().remove(tt);
+			}
+
 		}
 	}
-	
+
 }

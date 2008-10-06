@@ -36,7 +36,7 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 			if (diagram==null)
 				return null;
 			
-			NewNodeCommand cmd = new NewNodeCommand(diagram, request.getLocation(), NewNodeCommand.Type.TYPE);
+			NewNodeCommand cmd = new NewNodeCommand(diagram, request.getLocation(), (Node) request.getNewObject());
 			return cmd;
 			
 		}

@@ -88,9 +88,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setEditDomain(getEditDomain());
 		
 //		getEditDomain().getCommandStack().addCommandStackListener(this);
-//		getSite().setSelectionProvider(this);
+		getSite().setSelectionProvider(this);
 		// listen for dropped parts
-		//viewer.addDropTargetListener(createTransferDropTargetListener());
+		viewer.addDropTargetListener(new TypeDropTransferListener(viewer));
 	}
 	
 	protected void configureGraphicalViewer() {
@@ -234,9 +234,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			return getGraphicalViewer();
 		if (adapter == IWorkbenchPage.class)
 			return getSite().getPage();
-		if (adapter == ISelectionProvider.class)
-			return getSite().getSelectionProvider();
 		if (adapter == TMCLDiagramEditor.class)
+			return this;
+		if (adapter == ISelectionProvider.class)
 			return this;
 		if (adapter == EditingDomain.class)
 			return getEditingDomain();
@@ -279,7 +279,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 
 	private void updateSelectionDependentActions(EditPart selection) {
-		removeFromDiagramAction.setSelectedEditPart(selection);		
+		removeFromDiagramAction.setSelectedEditPart(selection);
 		
 		
 	}
@@ -310,7 +310,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	public void setSelection(ISelection selection) {
-		currentSelection = selection;
+	//	currentSelection = selection;
 	}
 	
 	private void fireSelectionChanged() {

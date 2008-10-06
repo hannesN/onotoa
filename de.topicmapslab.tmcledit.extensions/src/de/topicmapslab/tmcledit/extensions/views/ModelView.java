@@ -15,6 +15,7 @@ import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
+import org.eclipse.gef.dnd.SimpleObjectTransfer;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -38,6 +39,13 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.DragSource;
+import org.eclipse.swt.dnd.DragSourceAdapter;
+import org.eclipse.swt.dnd.DragSourceEvent;
+import org.eclipse.swt.dnd.DragSourceListener;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -335,9 +343,40 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 		adapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
-		
+		initDragAndDrop();
 	}
 
+	private void initDragAndDrop() {
+		DragSource dragSource = new DragSource(viewer.getTree(), DND.DROP_COPY);
+		dragSource.setTransfer(new Transfer[] {TextTransfer.getInstance()});
+		dragSource.addDragListener(new DragSourceAdapter() {
+			
+			@Override
+			public void dragStart(DragSourceEvent event) {
+				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+				Object obj = sel.getFirstElement();
+				if (obj instanceof TreeTopic) {
+					event.data = ((TreeTopic)obj).getTopic().toString();
+					event.doit = true;
+				} else {
+					event.doit = false;
+				}
+				
+			}
+			
+			@Override
+			public void dragSetData(DragSourceEvent event) {
+				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+				Object obj = sel.getFirstElement();
+				if (obj instanceof TreeTopic) {
+					event.data = ((TreeTopic)obj).getTopic().toString();
+				} else {
+					event.data = null;
+				}
+			}
+		});
+	}
+	
 	private void hookContextMenu() {
 		MenuManager menuMgr = new MenuManager("#PopupMenu");
 		menuMgr.setRemoveAllWhenShown(true);

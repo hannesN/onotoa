@@ -49,6 +49,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		super.init(site);
 	}
 	
+	
 	@Override
 	public void dispose() {
 		getSite().getPage().removeSelectionListener(this);
@@ -112,5 +113,6 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		pageBook.showPage(emptyPage.getControl());
 		
 	}
+
 
 }
