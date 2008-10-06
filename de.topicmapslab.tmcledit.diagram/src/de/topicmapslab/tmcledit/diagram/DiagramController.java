@@ -20,22 +20,22 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
- * This controller listens to model changes and creates or removes
- * edges if necessary
+ * This controller listens to model changes and creates or removes edges if
+ * necessary
  * 
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class DiagramController implements Adapter {
 
 	private Notifier target;
 	private final Diagram diagram;
-	
+
 	public DiagramController(Diagram diagram) {
 		this.diagram = diagram;
-		init();		
+		init();
 	}
-	
+
 	private void init() {
 		TopicMapSchema schema = diagram.getTopicMapSchema();
 		schema.eAdapters().add(this);
@@ -76,7 +76,7 @@ public class DiagramController implements Adapter {
 							(TopicType) notification.getOldValue());
 				}
 			}
-				
+
 		}
 
 	}
@@ -84,7 +84,7 @@ public class DiagramController implements Adapter {
 	private void removeIsAEdge(TopicType source, TopicType target) {
 		List<Edge> removableEdges = new ArrayList<Edge>();
 		for (Edge e : diagram.getEdges()) {
-			if (e.getType()==EdgeType.IS_ATYPE) {
+			if (e.getType() == EdgeType.IS_ATYPE) {
 				TypeNode s = (TypeNode) e.getSource();
 				if (s.getTopicType().equals(source)) {
 					TypeNode t = (TypeNode) e.getTarget();
@@ -95,15 +95,15 @@ public class DiagramController implements Adapter {
 			}
 		}
 		diagram.getEdges().removeAll(removableEdges);
-		
+
 	}
 
 	private void addNewIsAEdge(TopicType source, TopicType target) {
 		TypeNode s = null;
 		TypeNode t = null;
 		Iterator<Node> it = diagram.getNodes().iterator();
-		
-		while ( (it.hasNext()) && ( (s==null) || (t==null) ) ) {
+
+		while ((it.hasNext()) && ((s == null) || (t == null))) {
 			Node n = it.next();
 			if (n instanceof TypeNode) {
 				TypeNode tn = (TypeNode) n;
@@ -113,13 +113,21 @@ public class DiagramController implements Adapter {
 					t = tn;
 			}
 		}
-		
-		if ( (s!=null) && (t!=null) ) {
-			Edge e = ModelFactory.eINSTANCE.createEdge();
-			e.setType(EdgeType.IS_ATYPE);
-			e.setSource(s);
-			e.setTarget(t);
-			diagram.getEdges().add(e);			
+
+		if ((s != null) && (t != null)) {
+			// check if an edge exists
+			boolean found = false;
+			for (Edge e : diagram.getEdges()) {
+				if ((e.getSource().equals(s) && (e.getTarget().equals(t))))
+					found = true;
+			}
+			if (!found) {
+				Edge e = ModelFactory.eINSTANCE.createEdge();
+				e.setType(EdgeType.IS_ATYPE);
+				e.setSource(s);
+				e.setTarget(t);
+				diagram.getEdges().add(e);
+			}
 		}
 	}
 

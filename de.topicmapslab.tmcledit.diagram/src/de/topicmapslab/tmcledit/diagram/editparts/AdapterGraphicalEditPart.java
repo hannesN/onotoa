@@ -50,4 +50,5 @@ public abstract class AdapterGraphicalEditPart extends AbstractGraphicalEditPart
 		}
 		super.deactivate();
 	}
+	
 }

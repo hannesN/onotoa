@@ -66,17 +66,6 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 		return (List) d.getNodes();
 	}
 
-	@Override
-	public void notifyChanged(Notification notification) {
-		if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__EDGES) {
-			if (notification.getEventType()==Notification.ADD) {
-				updateEdges((Edge) notification.getNewValue());
-			}
-		}
-		refreshChildren();	
-		
-	}
-
 	@SuppressWarnings("unchecked")
 	private void updateEdges(Edge edge) {
 		// find editparts for edges nodes
@@ -99,6 +88,17 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 			tep.refresh();
 		}
 		
+	}
+
+	@Override
+	public void notifyChanged(Notification notification) {
+		if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__EDGES) {
+			if (notification.getEventType()==Notification.ADD) {
+				updateEdges((Edge) notification.getNewValue());
+			}
+		} else if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__NODES) {
+			refreshChildren();	
+		}
 	}
 
 }

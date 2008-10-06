@@ -179,9 +179,10 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEd
 	
 	@Override
 	public void notifyChanged(Notification notification) {
-		if (notification.getFeatureID(EList.class)==ModelPackage.TOPIC_TYPE__ISA) {
-				//refreshSourceConnections();
-		} else {
+		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
+			return;
+		
+		if (notification.getNotifier().equals(getModel())) {
 			refreshChildren();
 			refreshVisuals();
 		}

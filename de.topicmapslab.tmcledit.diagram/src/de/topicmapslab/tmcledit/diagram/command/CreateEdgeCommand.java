@@ -53,7 +53,7 @@ public class CreateEdgeCommand extends Command {
 		
 		}
 		
-		diagram.getEdges().add(edge);
+		//diagram.getEdges().add(edge);
 	}
 	
 	@Override
@@ -73,7 +73,7 @@ public class CreateEdgeCommand extends Command {
 			break;
 	
 	}
-		diagram.getEdges().remove(edge);
+		//diagram.getEdges().remove(edge);
 	}
 	
 	

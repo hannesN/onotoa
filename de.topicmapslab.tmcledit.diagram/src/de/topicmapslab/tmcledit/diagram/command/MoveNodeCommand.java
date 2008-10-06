@@ -39,9 +39,9 @@ public class MoveNodeCommand extends Command {
 	
 	private void setLocation(Point location) {
 		((EObjectImpl) node).eSetDeliver(false);
-		node.setPosX(newLocation.x);
+		node.setPosX(location.x);
 		((EObjectImpl) node).eSetDeliver(true);
-		node.setPosY(newLocation.y);
+		node.setPosY(location.y);
 	}
 	
 	@Override

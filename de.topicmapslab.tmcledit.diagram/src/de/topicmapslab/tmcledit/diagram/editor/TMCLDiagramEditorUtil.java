@@ -14,7 +14,7 @@ import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
 
 import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
-import de.topicmapslab.tmcledit.diagram.editparts.IsAEdgeEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
@@ -64,9 +64,7 @@ public class TMCLDiagramEditorUtil  {
 				} if (model instanceof NameTypeConstraint) {
 					part = new NameTypeConstraintEditPart();
 				} if (model instanceof Edge) {
-					Edge e = (Edge) model;
-					if (e.getType()==EdgeType.IS_ATYPE)
-						part = new IsAEdgeEditPart();					
+					part = new EdgeEditPart();					
 				}
 				
 				if (part!=null)
@@ -126,6 +124,21 @@ public class TMCLDiagramEditorUtil  {
 			public Object getNewObject() {
 				Edge e = ModelFactory.eINSTANCE.createEdge();
 				e.setType(EdgeType.IS_ATYPE);
+				return e;
+			}
+
+			@Override
+			public Object getObjectType() {
+				return Edge.class;
+			}
+			
+		}, null, null));
+		group.add(new ConnectionCreationToolEntry("Kind Of ...", "Create kind of connection", new CreationFactory() {
+
+			@Override
+			public Object getNewObject() {
+				Edge e = ModelFactory.eINSTANCE.createEdge();
+				e.setType(EdgeType.AKO_TYPE);
 				return e;
 			}
 

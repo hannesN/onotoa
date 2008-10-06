@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EventObject;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +18,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.RootEditPart;
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
@@ -32,9 +36,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
 
+import de.topicmapslab.tmcledit.diagram.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.diagram.DiagramController;
 import de.topicmapslab.tmcledit.diagram.model.AssociationNode;
 import de.topicmapslab.tmcledit.diagram.model.Diagram;
@@ -54,7 +59,8 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author Hannes Niederhausen
  *
  */
-public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implements ISelectionChangedListener, ISelectionProvider {
+public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
+		implements ISelectionChangedListener, ISelectionProvider {
 	//extends EditorPart {
 
 	private Diagram diagram;
@@ -67,7 +73,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 	private ISelection currentSelection;
 	private List<ISelectionChangedListener> selectionChangedListeners = Collections.emptyList();
 
-	private DiagramAdapter diagramAdapter;
+	private RemoveFromDiagramAction removeFromDiagramAction;
 
 	public TMCLDiagramEditor() {
 		setEditDomain(new DefaultEditDomain(this));
@@ -79,8 +85,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 		GraphicalViewer viewer = getGraphicalViewer();
 		viewer.setContents(diagram); // set the contents of this editor
 		viewer.addSelectionChangedListener(this);
+		viewer.setEditDomain(getEditDomain());
 		
-		getSite().setSelectionProvider(this);
+//		getEditDomain().getCommandStack().addCommandStackListener(this);
+//		getSite().setSelectionProvider(this);
 		// listen for dropped parts
 		//viewer.addDropTargetListener(createTransferDropTargetListener());
 	}
@@ -92,14 +100,14 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 		viewer.setEditPartFactory(TMCLDiagramEditorUtil.getEditPartFactory());
 		viewer.setRootEditPart(new ScalableFreeformRootEditPart());
 		viewer.setKeyHandler(new GraphicalViewerKeyHandler(viewer));
-
-		/*
+		
+		
 		// configure the context menu provider
 		ContextMenuProvider cmProvider =
-				new ShapesEditorContextMenuProvider(viewer, getActionRegistry());
+				new TMCLEditorContextMenuProvider(viewer, getActionRegistry());
 		viewer.setContextMenu(cmProvider);
 		getSite().registerContextMenu(cmProvider, viewer);
-		*/
+		
 	}
 	
 	
@@ -128,7 +136,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		getCommandStack().markSaveLocation();
+		
 	}
 
 	@Override
@@ -136,11 +145,15 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 	}
 
 	@Override
-	public void init(IEditorSite site, IEditorInput input)
-			throws PartInitException {
-		setSite(site);
-		setInput(input);
-		
+	protected void createActions() {
+		removeFromDiagramAction = new RemoveFromDiagramAction(getEditDomain().getCommandStack());
+		getActionRegistry().registerAction(removeFromDiagramAction);
+		super.createActions();
+	}
+	
+	@Override
+	protected void setInput(IEditorInput input) {
+		super.setInput(input);
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> map = reg.getExtensionToFactoryMap();
 		map.put("tmcl", new XMIResourceFactoryImpl());
@@ -205,25 +218,16 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 			ntc.setName("vorname");
 			ntc.setType(nt);
 			tt.getNameContraints().add(ntc);
-			
-			
-			
 		}
 		new DiagramController(diagram);
-	}
-	
-
-	@Override
-	public boolean isDirty() {
-		
-		return false;
 	}
 
 	@Override
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
-/*
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (adapter == EditPartViewer.class)
@@ -234,12 +238,14 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 			return getSite().getSelectionProvider();
 		if (adapter == TMCLDiagramEditor.class)
 			return this;
-		if (adapter == EditDomain.class)
+		if (adapter == EditingDomain.class)
 			return getEditingDomain();
+		if (adapter == CommandStack.class)
+			return getEditDomain().getCommandStack();
 		return super.getAdapter(adapter);
 	}
 
-*/
+
 	@Override
 	protected PaletteRoot getPaletteRoot() {
 		return TMCLDiagramEditorUtil.getPaletteRoot();
@@ -255,6 +261,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 		else {
 			if (sel.getFirstElement() instanceof EditPart) {
 				EditPart part = (EditPart) sel.getFirstElement();
+				updateSelectionDependentActions(part);
 				Object model = part.getModel();
 				if (model instanceof TypeNode) {
 					TypeNode node = (TypeNode) model;
@@ -268,6 +275,13 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 				fireSelectionChanged();
 			}
 		}
+	}
+
+
+	private void updateSelectionDependentActions(EditPart selection) {
+		removeFromDiagramAction.setSelectedEditPart(selection);		
+		
+		
 	}
 
 
@@ -309,5 +323,17 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette implemen
 			l.selectionChanged(event);
 		}
 	}
-
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void updateActions(List actionIds) {
+		super.updateActions(actionIds);
+	}
+	
+	@Override
+	public void commandStackChanged(EventObject event) {
+		super.commandStackChanged(event);
+		firePropertyChange(IEditorPart.PROP_DIRTY);
+	}
 }
