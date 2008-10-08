@@ -7,7 +7,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.commands.Command;
 
 import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.ModelFactory;
 import de.topicmapslab.tmcledit.diagram.model.Node;
 import de.topicmapslab.tmcledit.diagram.model.TypeNode;
 import de.topicmapslab.tmcledit.model.TopicType;

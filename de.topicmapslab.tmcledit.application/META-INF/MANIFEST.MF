@@ -4,8 +4,8 @@ Bundle-Name: Application Plug-in
 Bundle-SymbolicName: de.topicmapslab.tmcledit.application; singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: de.topicmapslab.tmcledit.application.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
+ org.eclipse.core.runtime;bundle-version="3.4.0",
  de.topicmapslab.tmcledit;bundle-version="1.0.0",
  de.topicmapslab.tmcledit.diagram;bundle-version="1.0.0",
  de.topicmapslab.tmcledit.edit;bundle-version="1.0.0",
