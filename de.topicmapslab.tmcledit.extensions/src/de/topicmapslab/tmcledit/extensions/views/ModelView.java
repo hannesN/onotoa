@@ -1,6 +1,7 @@
 package de.topicmapslab.tmcledit.extensions.views;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,6 @@ import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
-import org.eclipse.gef.dnd.SimpleObjectTransfer;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -43,7 +43,6 @@ import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
 import org.eclipse.swt.dnd.DragSourceAdapter;
 import org.eclipse.swt.dnd.DragSourceEvent;
-import org.eclipse.swt.dnd.DragSourceListener;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.KeyEvent;
@@ -51,12 +50,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
@@ -65,7 +60,14 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
 import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
+import de.topicmapslab.tmcledit.extensions.util.FileUtil;
+import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeDiagram;
+import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeObject;
+import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
+import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 import de.topicmapslab.tmcledit.model.AssociationsType;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.RoleType;
@@ -75,14 +77,10 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 
 /**
- * This view renders the model behind a diagram. It is used to add model
- * elements to the diagram or get an overview of the model.
- * 
- * Elements which are removed from a diagram may still be in the model and this
- * view makes it possible to see the domain model.
+ * @author Hannes Niederhausen
  */
 
-public class ModelView extends ViewPart implements IPartListener, IEditingDomainProvider, ISelectionProvider {
+public class ModelView extends ViewPart implements IEditingDomainProvider, ISelectionProvider {
 	
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView"; 
 	
@@ -93,14 +91,18 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 	private Action action2;
 	private Action doubleClickAction;
 	private TMCLDiagramEditor currentEditor;
-	private TopicMapSchema currentTopicMapSchema;
 	private ComposedAdapterFactory adapterFactory;
+	
+	private File currFile;
+	private boolean dirty;
 	
 	private List<ISelectionChangedListener> listeners;
 	
 	class ViewContentProvider implements IStructuredContentProvider,
 			ITreeContentProvider {
 		private TreeParent invisibleRoot;
+		private TreeParent diagramNode;
+		private TreeParent schemaNode;
 
 		
 		private AdapterImpl tmsListener = new AdapterImpl() {
@@ -161,56 +163,53 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 				return ((TreeParent) parent).hasChildren();
 			return false;
 		}
+		
+		public void uninitialize() {
+			if (getCurrentTopicMapSchema() != null)
+				getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
+		}
 
 		public void initialize() {
-
 			invisibleRoot = new TreeParent(viewer, "");
-
-			if (currentTopicMapSchema != null)
-				currentTopicMapSchema.eAdapters().remove(tmsListener);
-
-			// getting the model of the current editor
-			IWorkbenchPage page = getSite().getWorkbenchWindow()
-					.getActivePage();
-			if (page != null) {
-				IEditorPart ep = getSite().getWorkbenchWindow().getActivePage()
-						.getActiveEditor();
-				if ((ep != null) && (ep instanceof TMCLDiagramEditor)) {
-
-					currentEditor = (TMCLDiagramEditor) ep;
-					currentTopicMapSchema = currentEditor.getDiagram().getTopicMapSchema(); 
-
-					currentTopicMapSchema.eAdapters().add(tmsListener);
-
-					ttNode = new TreeParent(viewer, "TopicTypes");
-					rtNode = new TreeParent(viewer, "RoleTypes");
-					ntNode = new TreeParent(viewer, "NameTypes");
-					otNode = new TreeParent(viewer, "OccurenceTypes");
-					atNode = new TreeParent(viewer, "AssociationTypes");
-					stNode = new TreeParent(viewer, "ScopeTypes");
-
-					invisibleRoot.addChild(ttNode);
-					invisibleRoot.addChild(rtNode);
-					invisibleRoot.addChild(ntNode);
-					invisibleRoot.addChild(otNode);
-					invisibleRoot.addChild(atNode);
-					invisibleRoot.addChild(stNode);
-
-					for (TopicType tt : currentTopicMapSchema.getTopicTypes()) {
-						addType(tt);
-					}
-
-					return;
+						
+			if (currFile!=null) {
+				schemaNode = new TreeParent(viewer, "Topic Map Schema");
+				diagramNode = new TreeParent(viewer, "Diagrams");
+				
+				invisibleRoot.addChild(diagramNode);
+				invisibleRoot.addChild(schemaNode);
+				
+				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
+	
+				ttNode = new TreeParent(viewer, "TopicTypes");
+				rtNode = new TreeParent(viewer, "RoleTypes");
+				ntNode = new TreeParent(viewer, "NameTypes");
+				otNode = new TreeParent(viewer, "OccurenceTypes");
+				atNode = new TreeParent(viewer, "AssociationTypes");
+				stNode = new TreeParent(viewer, "ScopeTypes");
+	
+				schemaNode.addChild(ttNode);
+				schemaNode.addChild(rtNode);
+				schemaNode.addChild(ntNode);
+				schemaNode.addChild(otNode);
+				schemaNode.addChild(atNode);
+				schemaNode.addChild(stNode);
+	
+				for (TopicType tt : getCurrentTopicMapSchema().getTopicTypes()) {
+					addType(tt);
 				}
+				
+				for (Diagram d : currFile.getDiagrams()) {
+					diagramNode.addChild(new TreeDiagram(viewer, d));
+				}
+			} else {
+				TreeParent root = new TreeParent(viewer, "No Diagramm Editor Open");
+				invisibleRoot.addChild(root);
 			}
-
-			TreeParent root = new TreeParent(viewer, "No Diagramm Editor Open");
-
-			invisibleRoot.addChild(root);
 		}
 
 		private void addType(TopicType tt) {
-			TreeTopic to = new TreeTopic(viewer, tt, ModelView.this);
+			TreeTopic to = new TreeTopic(viewer, tt);
 
 			if (tt instanceof RoleType)
 				rtNode.addChild(to);
@@ -259,8 +258,6 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 	class NameSorter extends ViewerSorter {
 		
 	}
-	
-	
 
 	/**
 	 * The constructor.
@@ -332,9 +329,6 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 		hookDoubleClickAction();
 		contributeToActionBars();
 
-		for (IWorkbenchPage page : getSite().getWorkbenchWindow().getPages())
-			page.addPartListener(this);
-		
 		getSite().setSelectionProvider(viewer);
 		
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -392,8 +386,6 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 
 	@Override
 	public void dispose() {
-		for (IWorkbenchPage page : getSite().getWorkbenchWindow().getPages())
-			page.removePartListener(this);
 		super.dispose();
 	}
 
@@ -451,7 +443,7 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 				ISelection selection = viewer.getSelection();
 				Object obj = ((IStructuredSelection) selection)
 						.getFirstElement();
-				showMessage("Double-click detected on " + obj.toString());
+				((TreeObject)obj).handleDoubleClick();
 			}
 		};
 	}
@@ -476,19 +468,6 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 		viewer.getControl().setFocus();
 	}
 
-	@Override
-	public void partActivated(IWorkbenchPart part) {
-		if (part instanceof TMCLDiagramEditor) {
-			if (currentEditor==part)
-				return;
-			
-			contentProvider.initialize();
-			viewer.setInput(getViewSite());
-			currentEditor = (TMCLDiagramEditor) part;
-			
-		}
-	}
-	
 	public IPropertySheetPage getPropertySheetPage() {
 		if (currentEditor == null)
 			return null;
@@ -515,22 +494,6 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 	}
 		
 	@Override
-	public void partBroughtToTop(IWorkbenchPart part) {
-	}
-
-	@Override
-	public void partClosed(IWorkbenchPart part) {
-	}
-
-	@Override
-	public void partDeactivated(IWorkbenchPart part) {
-	}
-
-	@Override
-	public void partOpened(IWorkbenchPart part) {
-	}
-
-	@Override
 	public EditingDomain getEditingDomain() {
 		if (currentEditor!=null)
 			return currentEditor.getEditingDomain();
@@ -554,11 +517,11 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 
 		
 	public TopicMapSchema getCurrentTopicMapSchema() {
-		return currentTopicMapSchema;
+		if (currFile!=null)
+			return currFile.getTopicMapSchema();
+		return null;
 	}
 	
-	
-
 	@Override
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
@@ -572,4 +535,30 @@ public class ModelView extends ViewPart implements IPartListener, IEditingDomain
 		if (viewer!=null)
 			viewer.setSelection(selection);
 	}
+	
+	public void setFilename(String filename) {
+		// TODO check dirty state and ask for saving
+		contentProvider.uninitialize();
+		currFile = FileUtil.loadFile(filename);
+		contentProvider.initialize();
+		viewer.refresh();
+	}
+	
+	public void doSave() {
+		try {
+			FileUtil.saveFile(currFile);
+			// TODO set dirty state
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setDirty(boolean dirty) {
+		this.dirty = dirty;
+	}
+	
+	public boolean isDirty() {
+		return dirty;
+	}
+	
 }

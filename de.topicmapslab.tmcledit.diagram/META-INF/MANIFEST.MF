@@ -14,5 +14,4 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
  org.eclipse.emf.common.ui;bundle-version="2.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.topicmapslab.tmcledit.diagram.editor,
- de.topicmapslab.tmcledit.diagram.model
+Export-Package: de.topicmapslab.tmcledit.diagram.editor

@@ -7,25 +7,26 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
+import de.topicmapslab.tmcledit.model.Diagram;
+
 /**
  * @author Hannes Niederhausen
  *
  */
 public class TMCLEditorInput implements IEditorInput {
 
-	private String path;
-	private String name;
-	private boolean doesExists;
+	private final Diagram diagram;
+	private final boolean exists;
 	
-	public TMCLEditorInput(String path, String name, boolean doesExists) {
-		this.path = path;
-		this.name = name;
-		this.doesExists = doesExists;
+	
+	public TMCLEditorInput(Diagram diagram, boolean doesExists) {
+		this.diagram = diagram;
+		this.exists = doesExists;
 	}
 	
 	@Override
 	public boolean exists() {
-		return doesExists;
+		return exists;
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class TMCLEditorInput implements IEditorInput {
 
 	@Override
 	public String getName() {
-		return name;
+		return diagram.getName();
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class TMCLEditorInput implements IEditorInput {
 
 	@Override
 	public String getToolTipText() {
-		return path;
+		return diagram.getName();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -54,4 +55,7 @@ public class TMCLEditorInput implements IEditorInput {
 		return null;
 	}
 
+	public Diagram getDiagram() {
+		return diagram;
+	}
 }

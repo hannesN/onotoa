@@ -5,7 +5,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 
-import de.topicmapslab.tmcledit.diagram.model.Edge;
+import de.topicmapslab.tmcledit.model.Edge;
 
 public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPart {
 

@@ -16,10 +16,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Edge;
-import de.topicmapslab.tmcledit.diagram.model.ModelPackage;
 import de.topicmapslab.tmcledit.diagram.policies.DiagramLayoutEditPolicy;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 /**
  * @author Hannes Niederhausen

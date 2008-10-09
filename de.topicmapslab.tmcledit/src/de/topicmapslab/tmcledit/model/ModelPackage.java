@@ -1210,6 +1210,319 @@ public interface ModelPackage extends EPackage {
 	int MAPPING_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NodeImpl <em>Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.NodeImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNode()
+	 * @generated
+	 */
+	int NODE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__POS_X = 0;
+
+	/**
+	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__POS_Y = 1;
+
+	/**
+	 * The number of structural features of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TypeNodeImpl <em>Type Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.TypeNodeImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTypeNode()
+	 * @generated
+	 */
+	int TYPE_NODE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_NODE__POS_X = NODE__POS_X;
+
+	/**
+	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_NODE__POS_Y = NODE__POS_Y;
+
+	/**
+	 * The feature id for the '<em><b>Topic Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_NODE__TOPIC_TYPE = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointsImpl <em>Bendpoints</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.BendpointsImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendpoints()
+	 * @generated
+	 */
+	int BENDPOINTS = 17;
+
+	/**
+	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BENDPOINTS__POS_X = 0;
+
+	/**
+	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BENDPOINTS__POS_Y = 1;
+
+	/**
+	 * The number of structural features of the '<em>Bendpoints</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BENDPOINTS_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl <em>Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.EdgeImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdge()
+	 * @generated
+	 */
+	int EDGE = 18;
+
+	/**
+	 * The feature id for the '<em><b>Bendpoints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__BENDPOINTS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__SOURCE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__TARGET = 2;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__TYPE = 3;
+
+	/**
+	 * The number of structural features of the '<em>Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationNode()
+	 * @generated
+	 */
+	int ASSOCIATION_NODE = 19;
+
+	/**
+	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_NODE__POS_X = NODE__POS_X;
+
+	/**
+	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_NODE__POS_Y = NODE__POS_Y;
+
+	/**
+	 * The feature id for the '<em><b>Association Constraint</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_NODE__ASSOCIATION_CONSTRAINT = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Association Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl <em>Diagram</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.DiagramImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDiagram()
+	 * @generated
+	 */
+	int DIAGRAM = 20;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM__EDGES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM__NODES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM__NAME = 2;
+
+	/**
+	 * The number of structural features of the '<em>Diagram</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.FileImpl <em>File</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.FileImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getFile()
+	 * @generated
+	 */
+	int FILE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Diagrams</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__DIAGRAMS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Topic Map Schema</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__TOPIC_MAP_SCHEMA = 1;
+
+	/**
+	 * The feature id for the '<em><b>Filename</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__FILENAME = 2;
+
+	/**
+	 * The number of structural features of the '<em>File</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1217,7 +1530,18 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 15;
+	int TOPIC_ID = 22;
+
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.EdgeType
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
+	 * @generated
+	 */
+	int EDGE_TYPE = 23;
 
 
 	/**
@@ -1712,6 +2036,252 @@ public interface ModelPackage extends EPackage {
 	EAttribute getMappingElement_Value();
 
 	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Node <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Node</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Node
+	 * @generated
+	 */
+	EClass getNode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Node#getPosX <em>Pos X</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pos X</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Node#getPosX()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EAttribute getNode_PosX();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Node#getPosY <em>Pos Y</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pos Y</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Node#getPosY()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EAttribute getNode_PosY();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.TypeNode <em>Type Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Node</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TypeNode
+	 * @generated
+	 */
+	EClass getTypeNode();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.TypeNode#getTopicType <em>Topic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Topic Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TypeNode#getTopicType()
+	 * @see #getTypeNode()
+	 * @generated
+	 */
+	EReference getTypeNode_TopicType();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Bendpoints <em>Bendpoints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Bendpoints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Bendpoints
+	 * @generated
+	 */
+	EClass getBendpoints();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Bendpoints#getPosX <em>Pos X</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pos X</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Bendpoints#getPosX()
+	 * @see #getBendpoints()
+	 * @generated
+	 */
+	EAttribute getBendpoints_PosX();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Bendpoints#getPosY <em>Pos Y</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pos Y</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Bendpoints#getPosY()
+	 * @see #getBendpoints()
+	 * @generated
+	 */
+	EAttribute getBendpoints_PosY();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Edge <em>Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Edge</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Edge
+	 * @generated
+	 */
+	EClass getEdge();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.Edge#getBendpoints <em>Bendpoints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Bendpoints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Edge#getBendpoints()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_Bendpoints();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.Edge#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Edge#getSource()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_Source();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.Edge#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Edge#getTarget()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Edge#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Edge#getType()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EAttribute getEdge_Type();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AssociationNode <em>Association Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Association Node</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AssociationNode
+	 * @generated
+	 */
+	EClass getAssociationNode();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AssociationNode#getAssociationConstraint <em>Association Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Association Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AssociationNode#getAssociationConstraint()
+	 * @see #getAssociationNode()
+	 * @generated
+	 */
+	EReference getAssociationNode_AssociationConstraint();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Diagram <em>Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Diagram</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Diagram
+	 * @generated
+	 */
+	EClass getDiagram();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.Diagram#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Edges</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Diagram#getEdges()
+	 * @see #getDiagram()
+	 * @generated
+	 */
+	EReference getDiagram_Edges();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.Diagram#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Diagram#getNodes()
+	 * @see #getDiagram()
+	 * @generated
+	 */
+	EReference getDiagram_Nodes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Diagram#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Diagram#getName()
+	 * @see #getDiagram()
+	 * @generated
+	 */
+	EAttribute getDiagram_Name();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.File <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>File</em>'.
+	 * @see de.topicmapslab.tmcledit.model.File
+	 * @generated
+	 */
+	EClass getFile();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.File#getDiagrams <em>Diagrams</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Diagrams</em>'.
+	 * @see de.topicmapslab.tmcledit.model.File#getDiagrams()
+	 * @see #getFile()
+	 * @generated
+	 */
+	EReference getFile_Diagrams();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.topicmapslab.tmcledit.model.File#getTopicMapSchema <em>Topic Map Schema</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Topic Map Schema</em>'.
+	 * @see de.topicmapslab.tmcledit.model.File#getTopicMapSchema()
+	 * @see #getFile()
+	 * @generated
+	 */
+	EReference getFile_TopicMapSchema();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.File#getFilename <em>Filename</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Filename</em>'.
+	 * @see de.topicmapslab.tmcledit.model.File#getFilename()
+	 * @see #getFile()
+	 * @generated
+	 */
+	EAttribute getFile_Filename();
+
+	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1720,6 +2290,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getTopicId();
+
+	/**
+	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Edge Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.EdgeType
+	 * @generated
+	 */
+	EEnum getEdgeType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2142,6 +2722,204 @@ public interface ModelPackage extends EPackage {
 		EAttribute MAPPING_ELEMENT__VALUE = eINSTANCE.getMappingElement_Value();
 
 		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.NodeImpl <em>Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.NodeImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNode()
+		 * @generated
+		 */
+		EClass NODE = eINSTANCE.getNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Pos X</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE__POS_X = eINSTANCE.getNode_PosX();
+
+		/**
+		 * The meta object literal for the '<em><b>Pos Y</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE__POS_Y = eINSTANCE.getNode_PosY();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.TypeNodeImpl <em>Type Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.TypeNodeImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTypeNode()
+		 * @generated
+		 */
+		EClass TYPE_NODE = eINSTANCE.getTypeNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Topic Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_NODE__TOPIC_TYPE = eINSTANCE.getTypeNode_TopicType();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointsImpl <em>Bendpoints</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.BendpointsImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendpoints()
+		 * @generated
+		 */
+		EClass BENDPOINTS = eINSTANCE.getBendpoints();
+
+		/**
+		 * The meta object literal for the '<em><b>Pos X</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BENDPOINTS__POS_X = eINSTANCE.getBendpoints_PosX();
+
+		/**
+		 * The meta object literal for the '<em><b>Pos Y</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BENDPOINTS__POS_Y = eINSTANCE.getBendpoints_PosY();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl <em>Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.EdgeImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdge()
+		 * @generated
+		 */
+		EClass EDGE = eINSTANCE.getEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Bendpoints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__BENDPOINTS = eINSTANCE.getEdge_Bendpoints();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__SOURCE = eINSTANCE.getEdge_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__TARGET = eINSTANCE.getEdge_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EDGE__TYPE = eINSTANCE.getEdge_Type();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationNode()
+		 * @generated
+		 */
+		EClass ASSOCIATION_NODE = eINSTANCE.getAssociationNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Association Constraint</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSOCIATION_NODE__ASSOCIATION_CONSTRAINT = eINSTANCE.getAssociationNode_AssociationConstraint();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl <em>Diagram</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.DiagramImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDiagram()
+		 * @generated
+		 */
+		EClass DIAGRAM = eINSTANCE.getDiagram();
+
+		/**
+		 * The meta object literal for the '<em><b>Edges</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIAGRAM__EDGES = eINSTANCE.getDiagram_Edges();
+
+		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIAGRAM__NODES = eINSTANCE.getDiagram_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DIAGRAM__NAME = eINSTANCE.getDiagram_Name();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.FileImpl <em>File</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.FileImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getFile()
+		 * @generated
+		 */
+		EClass FILE = eINSTANCE.getFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Diagrams</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FILE__DIAGRAMS = eINSTANCE.getFile_Diagrams();
+
+		/**
+		 * The meta object literal for the '<em><b>Topic Map Schema</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FILE__TOPIC_MAP_SCHEMA = eINSTANCE.getFile_TopicMapSchema();
+
+		/**
+		 * The meta object literal for the '<em><b>Filename</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE__FILENAME = eINSTANCE.getFile_Filename();
+
+		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2150,6 +2928,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TOPIC_ID = eINSTANCE.getTopicId();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.EdgeType
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
+		 * @generated
+		 */
+		EEnum EDGE_TYPE = eINSTANCE.getEdgeType();
 
 	}
 

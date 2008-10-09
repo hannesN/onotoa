@@ -6,9 +6,9 @@ import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gef.requests.ReconnectRequest;
 
 import de.topicmapslab.tmcledit.diagram.command.CreateEdgeCommand;
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Edge;
-import de.topicmapslab.tmcledit.diagram.model.Node;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.Node;
 
 public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 

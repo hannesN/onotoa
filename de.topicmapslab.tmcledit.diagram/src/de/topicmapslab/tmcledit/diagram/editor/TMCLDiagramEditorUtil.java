@@ -18,13 +18,13 @@ import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Edge;
-import de.topicmapslab.tmcledit.diagram.model.EdgeType;
-import de.topicmapslab.tmcledit.diagram.model.ModelFactory;
-import de.topicmapslab.tmcledit.diagram.model.TypeNode;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * @author Hannes Niederhausen

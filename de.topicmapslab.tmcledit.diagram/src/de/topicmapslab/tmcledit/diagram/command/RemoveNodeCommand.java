@@ -6,9 +6,10 @@ import java.util.List;
 
 import org.eclipse.gef.commands.Command;
 
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Edge;
-import de.topicmapslab.tmcledit.diagram.model.Node;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.Node;
+
 
 
 public class RemoveNodeCommand extends Command {

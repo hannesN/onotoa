@@ -10,7 +10,7 @@ import org.eclipse.jface.viewers.CellEditor;
 
 import de.topicmapslab.tmcledit.diagram.command.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
-import de.topicmapslab.tmcledit.diagram.model.TypeNode;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * @author Hannes Niederhausen

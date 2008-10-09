@@ -6,11 +6,9 @@ import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
 
-import de.topicmapslab.tmcledit.diagram.RemoveFromDiagramAction;
-import de.topicmapslab.tmcledit.diagram.command.RemoveNodeCommand;
+import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 
 public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 

@@ -75,6 +75,13 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: return createsubjectIdentifierConstraint();
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT: return createAssociationTypeConstraint();
 			case ModelPackage.MAPPING_ELEMENT: return createMappingElement();
+			case ModelPackage.NODE: return createNode();
+			case ModelPackage.TYPE_NODE: return createTypeNode();
+			case ModelPackage.BENDPOINTS: return createBendpoints();
+			case ModelPackage.EDGE: return createEdge();
+			case ModelPackage.ASSOCIATION_NODE: return createAssociationNode();
+			case ModelPackage.DIAGRAM: return createDiagram();
+			case ModelPackage.FILE: return createFile();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -90,6 +97,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.TOPIC_ID:
 				return createTopicIdFromString(eDataType, initialValue);
+			case ModelPackage.EDGE_TYPE:
+				return createEdgeTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -105,6 +114,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.TOPIC_ID:
 				return convertTopicIdToString(eDataType, instanceValue);
+			case ModelPackage.EDGE_TYPE:
+				return convertEdgeTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -255,6 +266,76 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Node createNode() {
+		NodeImpl node = new NodeImpl();
+		return node;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeNode createTypeNode() {
+		TypeNodeImpl typeNode = new TypeNodeImpl();
+		return typeNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Bendpoints createBendpoints() {
+		BendpointsImpl bendpoints = new BendpointsImpl();
+		return bendpoints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Edge createEdge() {
+		EdgeImpl edge = new EdgeImpl();
+		return edge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssociationNode createAssociationNode() {
+		AssociationNodeImpl associationNode = new AssociationNodeImpl();
+		return associationNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Diagram createDiagram() {
+		DiagramImpl diagram = new DiagramImpl();
+		return diagram;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public File createFile() {
+		FileImpl file = new FileImpl();
+		return file;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TopicId createTopicIdFromString(EDataType eDataType, String initialValue) {
 		TopicId result = TopicId.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -267,6 +348,26 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public String convertTopicIdToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EdgeType createEdgeTypeFromString(EDataType eDataType, String initialValue) {
+		EdgeType result = EdgeType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEdgeTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

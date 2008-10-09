@@ -21,6 +21,8 @@ import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
 import de.topicmapslab.tmcledit.extensions.views.pages.AbstractModelPage;
 import de.topicmapslab.tmcledit.extensions.views.pages.EmptyPage;
 import de.topicmapslab.tmcledit.extensions.views.pages.TopicTypePage;
+import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -73,9 +75,6 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				if (obj instanceof TreeTopic) {
 					obj = ((TreeTopic)obj).getTopic();
 				}
-				
-				
-				
 				if (obj instanceof TopicType) {
 					AbstractModelPage page = pageMap.get(TOPIC_TYPE);
 					if (page == null) {
@@ -90,7 +89,8 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 						page.setEditingDomain(modelView.getEditingDomain());
 					} else {
 						TMCLDiagramEditor currentEditor = (TMCLDiagramEditor) part;
-						page.setTopicMapSchema(currentEditor.getDiagram().getTopicMapSchema());
+						File file = (File) currentEditor.getDiagram().eContainer();
+						page.setTopicMapSchema(file.getTopicMapSchema());
 						page.setEditingDomain(currentEditor.getEditingDomain());
 						
 					}

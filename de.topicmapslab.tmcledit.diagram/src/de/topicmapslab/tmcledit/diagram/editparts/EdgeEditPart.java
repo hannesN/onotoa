@@ -17,10 +17,10 @@ import org.eclipse.gef.editpolicies.ConnectionEditPolicy;
 import org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy;
 import org.eclipse.gef.requests.GroupRequest;
 
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Edge;
-import de.topicmapslab.tmcledit.diagram.model.EdgeType;
-import de.topicmapslab.tmcledit.diagram.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
 	

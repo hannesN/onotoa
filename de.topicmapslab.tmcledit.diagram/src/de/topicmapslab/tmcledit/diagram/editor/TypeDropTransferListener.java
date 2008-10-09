@@ -6,56 +6,35 @@ import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.swt.dnd.DND;
-import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 
-import de.topicmapslab.tmcledit.diagram.DiagramActivator;
-import de.topicmapslab.tmcledit.diagram.model.ModelFactory;
-import de.topicmapslab.tmcledit.diagram.model.TypeNode;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 public class TypeDropTransferListener extends AbstractTransferDropTargetListener {
 
 	private TypeNodeCreationFactory fac = new TypeNodeCreationFactory();
 
-	public TypeDropTransferListener(EditPartViewer viewer) {
+	private final TopicMapSchema schema;
+	
+	public TypeDropTransferListener(EditPartViewer viewer, Diagram diagram) {
 		super(viewer);
+		this.schema = ((File)diagram.eContainer()).getTopicMapSchema();
 	}
-	
-	@Override
-	public void dragEnter(DropTargetEvent event) {
-		// TODO Auto-generated method stub
-		super.dragEnter(event);
-	}
-	
-	@Override
-	public void dragOver(DropTargetEvent event) {
-		// TODO Auto-generated method stub
-		super.dragOver(event);
-	}
-	
+		
 	@Override
 	public Transfer getTransfer() {
 		return TextTransfer.getInstance();
 	}
-	
-	@Override
-	public void drop(DropTargetEvent event) {
-		// TODO Auto-generated method stub
-		super.drop(event);
-	}
-
-	@Override
-	public void dropAccept(DropTargetEvent event) {
-		// TODO Auto-generated method stub
-		super.dropAccept(event);
-	}
-	
+		
 	@Override
 	protected void updateTargetRequest() {
 		((CreateRequest)getTargetRequest()).setLocation(getDropLocation());
-
 	}
 
 	@Override
@@ -76,7 +55,8 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 	protected void handleDrop() {
 		String objId = (String) getCurrentEvent().data;
 		fac.setTopicType(null);
-		for (TopicType tt : DiagramActivator.getCurrentDiagram().getTopicMapSchema().getTopicTypes()) {
+		
+		for (TopicType tt : schema.getTopicTypes()) {
 			if (tt.toString().equals(objId))
 				fac.setTopicType(tt);
 		}

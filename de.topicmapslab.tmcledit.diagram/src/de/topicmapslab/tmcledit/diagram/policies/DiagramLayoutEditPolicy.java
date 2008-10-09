@@ -8,12 +8,11 @@ import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 
-import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.command.MoveNodeCommand;
 import de.topicmapslab.tmcledit.diagram.command.NewNodeCommand;
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Node;
-import de.topicmapslab.tmcledit.diagram.model.TypeNode;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 
@@ -32,10 +31,7 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
 		if (request.getNewObjectType()==TypeNode.class) {
-			Diagram diagram = DiagramActivator.getCurrentDiagram();
-			if (diagram==null)
-				return null;
-			
+			Diagram diagram = (Diagram) getHost().getModel();
 			NewNodeCommand cmd = new NewNodeCommand(diagram, request.getLocation(), (Node) request.getNewObject());
 			return cmd;
 			

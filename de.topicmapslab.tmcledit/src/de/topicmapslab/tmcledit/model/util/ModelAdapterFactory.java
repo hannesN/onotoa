@@ -132,6 +132,34 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createMappingElementAdapter();
 			}
 			@Override
+			public Adapter caseNode(Node object) {
+				return createNodeAdapter();
+			}
+			@Override
+			public Adapter caseTypeNode(TypeNode object) {
+				return createTypeNodeAdapter();
+			}
+			@Override
+			public Adapter caseBendpoints(Bendpoints object) {
+				return createBendpointsAdapter();
+			}
+			@Override
+			public Adapter caseEdge(Edge object) {
+				return createEdgeAdapter();
+			}
+			@Override
+			public Adapter caseAssociationNode(AssociationNode object) {
+				return createAssociationNodeAdapter();
+			}
+			@Override
+			public Adapter caseDiagram(Diagram object) {
+				return createDiagramAdapter();
+			}
+			@Override
+			public Adapter caseFile(File object) {
+				return createFileAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -358,6 +386,104 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Node <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.Node
+	 * @generated
+	 */
+	public Adapter createNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.TypeNode <em>Type Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.TypeNode
+	 * @generated
+	 */
+	public Adapter createTypeNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Bendpoints <em>Bendpoints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.Bendpoints
+	 * @generated
+	 */
+	public Adapter createBendpointsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Edge <em>Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.Edge
+	 * @generated
+	 */
+	public Adapter createEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AssociationNode <em>Association Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.AssociationNode
+	 * @generated
+	 */
+	public Adapter createAssociationNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Diagram <em>Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.Diagram
+	 * @generated
+	 */
+	public Adapter createDiagramAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.File <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.File
+	 * @generated
+	 */
+	public Adapter createFileAdapter() {
 		return null;
 	}
 

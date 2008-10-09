@@ -1,7 +1,6 @@
 package de.topicmapslab.tmcledit.application;
 
 import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -21,8 +20,7 @@ public class NewDiagramAction extends WorkbenchWindowActionDelegate {
 		WizardDialog dlg = new WizardDialog(getWindow().getShell(), wizard);
 		if (dlg.open()==Dialog.OK) {
 			
-			DiagramEditorActionBarAdvisor.openEditor(getWindow().getWorkbench(), URI
-					.createFileURI(wizard.getPath()));
+			DiagramEditorActionBarAdvisor.openModelView(getWindow().getWorkbench(), wizard.getPath());
 		}
 		
 	}

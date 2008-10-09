@@ -8,12 +8,12 @@ import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 
-import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.command.CreateOccurenceConstraintCommand;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.TypeNode;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 public class TypeNodeLayoutEditPolicy extends LayoutEditPolicy {
 
@@ -21,10 +21,13 @@ public class TypeNodeLayoutEditPolicy extends LayoutEditPolicy {
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
 		if (request.getNewObjectType()==TypeNode.class) {
-			Diagram diagram = DiagramActivator.getCurrentDiagram();
+			Node node = (Node) getHost().getModel();
+			// getting container which is a diagram
+			Diagram diagram = (Diagram) node.eContainer();
 			if (diagram==null)
 				return null;
 			TopicType tt = ((TypeNodeEditPart)getHost()).getCastedModel().getTopicType();
+			
 			CreateOccurenceConstraintCommand cmd = new CreateOccurenceConstraintCommand(tt);
 			return cmd;
 			

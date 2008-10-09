@@ -152,6 +152,69 @@ public interface ModelFactory extends EFactory {
 	MappingElement createMappingElement();
 
 	/**
+	 * Returns a new object of class '<em>Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Node</em>'.
+	 * @generated
+	 */
+	Node createNode();
+
+	/**
+	 * Returns a new object of class '<em>Type Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Node</em>'.
+	 * @generated
+	 */
+	TypeNode createTypeNode();
+
+	/**
+	 * Returns a new object of class '<em>Bendpoints</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bendpoints</em>'.
+	 * @generated
+	 */
+	Bendpoints createBendpoints();
+
+	/**
+	 * Returns a new object of class '<em>Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Edge</em>'.
+	 * @generated
+	 */
+	Edge createEdge();
+
+	/**
+	 * Returns a new object of class '<em>Association Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Association Node</em>'.
+	 * @generated
+	 */
+	AssociationNode createAssociationNode();
+
+	/**
+	 * Returns a new object of class '<em>Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram</em>'.
+	 * @generated
+	 */
+	Diagram createDiagram();
+
+	/**
+	 * Returns a new object of class '<em>File</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File</em>'.
+	 * @generated
+	 */
+	File createFile();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

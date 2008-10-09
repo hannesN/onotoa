@@ -7,7 +7,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.gef.commands.Command;
 
-import de.topicmapslab.tmcledit.diagram.model.Node;
+import de.topicmapslab.tmcledit.model.Node;
 
 
 /**

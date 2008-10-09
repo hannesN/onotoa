@@ -3,19 +3,15 @@
  */
 package de.topicmapslab.tmcledit.diagram.editor;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EventObject;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
@@ -39,21 +35,11 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 
-import de.topicmapslab.tmcledit.diagram.RemoveFromDiagramAction;
-import de.topicmapslab.tmcledit.diagram.DiagramController;
-import de.topicmapslab.tmcledit.diagram.model.AssociationNode;
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Edge;
-import de.topicmapslab.tmcledit.diagram.model.EdgeType;
-import de.topicmapslab.tmcledit.diagram.model.Node;
-import de.topicmapslab.tmcledit.diagram.model.TypeNode;
-import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.NameType;
-import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceType;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
-import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.diagram.action.DiagramController;
+import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
+import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * @author Hannes Niederhausen
@@ -63,12 +49,11 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		implements ISelectionChangedListener, ISelectionProvider {
 	//extends EditorPart {
 
+	public static final String ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
+	
 	private Diagram diagram;
 	
-//	private EditDomain editDomain;
-	
 	private RootEditPart rootEditPart;
-//	private GraphicalViewer graphicalViewer;
 
 	private ISelection currentSelection;
 	private List<ISelectionChangedListener> selectionChangedListeners = Collections.emptyList();
@@ -90,7 +75,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 //		getEditDomain().getCommandStack().addCommandStackListener(this);
 		getSite().setSelectionProvider(this);
 		// listen for dropped parts
-		viewer.addDropTargetListener(new TypeDropTransferListener(viewer));
+		viewer.addDropTargetListener(new TypeDropTransferListener(viewer, diagram));
 	}
 	
 	protected void configureGraphicalViewer() {
@@ -154,72 +139,13 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	@Override
 	protected void setInput(IEditorInput input) {
 		super.setInput(input);
-		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-		Map<String, Object> map = reg.getExtensionToFactoryMap();
-		map.put("tmcl", new XMIResourceFactoryImpl());
-		ResourceSet resSet = new ResourceSetImpl();
-		URIEditorInput ei = (URIEditorInput) input;
-		File file = new File(ei.getURI().toFileString());
-		if (file.exists()) {
-			diagram = (Diagram) resSet.getResource(ei.getURI(), true).getContents().get(0);
-			
-		} else {
-			ModelFactory modelInstance = ModelFactory.eINSTANCE;
-			de.topicmapslab.tmcledit.diagram.model.ModelFactory diagramModel = de.topicmapslab.tmcledit.diagram.model.ModelFactory.eINSTANCE;
-			
-			TopicMapSchema schema = modelInstance.createTopicMapSchema(); 
-			
-			diagram = diagramModel.createDiagram(); 
-			diagram.setTopicMapSchema(schema);
-			
-			TopicType tt = modelInstance.createTopicType();
-			tt.setId("wwid:Person");
-			schema.getTopicTypes().add(tt);
-			
-			TopicType tt2 = modelInstance.createTopicType();
-			tt2.setId("wwid:Chef");
-			tt2.getIsa().add(tt);
-			schema.getTopicTypes().add(tt2);
-			
-			
-			TypeNode tn = diagramModel.createTypeNode();
-			tn.setPosX(50);
-			tn.setPosY(50);
-			tn.setTopicType(tt);
-			diagram.getNodes().add((Node) tn);
-			
-			TypeNode tn2 = diagramModel.createTypeNode();
-			tn2.setPosX(450);
-			tn2.setPosY(50);
-			tn2.setTopicType(tt2);
-			diagram.getNodes().add((Node) tn2);
-			
-			Edge e = diagramModel.createEdge();
-			e.setSource(tn2);
-			e.setTarget(tn);
-			e.setType(EdgeType.IS_ATYPE);
-			diagram.getEdges().add(e);
-			
-			OccurenceType ot = modelInstance.createOccurenceType();
-			ot.setId("wwid:Adresse");
-			schema.getTopicTypes().add(ot);
-			
-			OccurenceTypeConstraint otc = modelInstance.createOccurenceTypeConstraint();
-			otc.setCardMax("*");
-			otc.setCardMin("0");
-			otc.setType(ot);
-			otc.setName("Heimadresse");
-			tt.getOccurenceConstraints().add(otc);
-			
-			NameType nt = modelInstance.createNameType();
-			nt.setId("wwid:Vorname");
-			
-			NameTypeConstraint ntc = modelInstance.createNameTypeConstraint();
-			ntc.setName("vorname");
-			ntc.setType(nt);
-			tt.getNameContraints().add(ntc);
-		}
+		
+		TMCLEditorInput ei = (TMCLEditorInput) input;
+		this.diagram = ei.getDiagram();
+		
+		
 		new DiagramController(diagram);
+		
 	}
 
 	@Override
@@ -268,7 +194,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					currentSelection = new StructuredSelection(node.getTopicType());
 				} else if (model instanceof AssociationNode) {
 					AssociationNode node = (AssociationNode) model;
-					currentSelection = new StructuredSelection(node.getAssociationTypeConstraint());
+					currentSelection = new StructuredSelection(node.getAssociationConstraint());
 				}
 					// TODO Connections
 				

@@ -24,6 +24,8 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
+import de.topicmapslab.tmcledit.extensions.views.ModelView;
+
 
 public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
@@ -255,6 +257,44 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 				return false;
 			}
 		}
+		return true;
+	}
+	
+	public static boolean openModelView(IWorkbench workbench, String filename) {
+		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
+		IWorkbenchPage page = workbenchWindow.getActivePage();
+		
+		try {
+			page.showView(ModelView.ID);
+			ModelView modelView = (ModelView) page.findView(ModelView.ID);
+			if (modelView!=null)
+				modelView.setFilename(filename);
+			
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+		/*
+		IEditorDescriptor editorDescriptor = workbench.getEditorRegistry()
+				.getDefaultEditor(fileURI.toFileString());
+		if (editorDescriptor == null) {
+			MessageDialog.openError(
+							workbenchWindow.getShell(),
+							Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorTitle,
+							NLS.bind(Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorMessage,
+											fileURI.toFileString()));
+			return false;
+		} else {
+			try {
+				page.openEditor(new URIEditorInput(fileURI), editorDescriptor.getId());
+			} catch (PartInitException exception) {
+				MessageDialog.openError(
+								workbenchWindow.getShell(),
+								Messages.DiagramEditorActionBarAdvisor_DefaultEditorOpenErrorTitle,
+								exception.getMessage());
+				return false;
+			}
+		}
+		*/
 		return true;
 	}
 

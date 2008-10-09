@@ -6,10 +6,11 @@ package de.topicmapslab.tmcledit.diagram.command;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.commands.Command;
 
-import de.topicmapslab.tmcledit.diagram.model.Diagram;
-import de.topicmapslab.tmcledit.diagram.model.Node;
-import de.topicmapslab.tmcledit.diagram.model.TypeNode;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * @author Hannes Niederhausen
@@ -78,8 +79,10 @@ public class NewNodeCommand extends Command {
 		if (type == Type.TYPE) {
 
 			TopicType tt = ((TypeNode) node).getTopicType();
-			if (createNewType)
-				diagram.getTopicMapSchema().getTopicTypes().add(tt);
+			if (createNewType) {
+				File file = (File) diagram.eContainer();
+				file.getTopicMapSchema().getTopicTypes().add(tt);
+			}
 			diagram.getNodes().add(node);
 		}
 	}
@@ -90,7 +93,8 @@ public class NewNodeCommand extends Command {
 			TopicType tt = ((TypeNode) node).getTopicType();
 			diagram.getNodes().remove(node);
 			if (createNewType) {
-				diagram.getTopicMapSchema().getTopicTypes().remove(tt);
+				File file = (File) diagram.eContainer();
+				file.getTopicMapSchema().getTopicTypes().remove(tt);
 			}
 
 		}
