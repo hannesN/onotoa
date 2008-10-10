@@ -1,5 +1,6 @@
 package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.ui.PartInitException;
 
@@ -12,8 +13,8 @@ public class TreeDiagram extends TreeObject {
 
 	private final Diagram diagram;
 	
-	public TreeDiagram(TreeViewer viewer, Diagram diagram) {
-		super(viewer);
+	public TreeDiagram(TreeViewer viewer, Diagram diagram, EditingDomain editingDomain) {
+		super(viewer, editingDomain);
 		this.diagram = diagram;
 	}
 	
@@ -26,7 +27,7 @@ public class TreeDiagram extends TreeObject {
 	public void handleDoubleClick() {
 		try {
 			Activator.getDefault().getWorkbench().getActiveWorkbenchWindow()
-					.getActivePage().openEditor(new TMCLEditorInput(diagram, true), TMCLDiagramEditor.ID);
+					.getActivePage().openEditor(new TMCLEditorInput(diagram, true, editingDomain), TMCLDiagramEditor.ID);
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}

@@ -4,10 +4,13 @@ package de.topicmapslab.tmcledit.extensions.views;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -92,6 +95,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private Action doubleClickAction;
 	private TMCLDiagramEditor currentEditor;
 	private ComposedAdapterFactory adapterFactory;
+	
+	private EditingDomain editingDomain;
 	
 	private File currFile;
 	private boolean dirty;
@@ -200,7 +205,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				}
 				
 				for (Diagram d : currFile.getDiagrams()) {
-					diagramNode.addChild(new TreeDiagram(viewer, d));
+					diagramNode.addChild(new TreeDiagram(viewer, d, editingDomain));
 				}
 			} else {
 				TreeParent root = new TreeParent(viewer, "No Diagramm Editor Open");
@@ -540,6 +545,17 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		// TODO check dirty state and ask for saving
 		contentProvider.uninitialize();
 		currFile = FileUtil.loadFile(filename);
+		
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+
+		BasicCommandStack commandStack = new BasicCommandStack();
+
+		editingDomain = new AdapterFactoryEditingDomain(adapterFactory, commandStack, new HashMap<Resource, Boolean>());
+		
 		contentProvider.initialize();
 		viewer.refresh();
 	}

@@ -3,6 +3,7 @@
  */
 package de.topicmapslab.tmcledit.diagram.editor;
 
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
@@ -17,11 +18,12 @@ public class TMCLEditorInput implements IEditorInput {
 
 	private final Diagram diagram;
 	private final boolean exists;
+	private final EditingDomain editingDomain;
 	
-	
-	public TMCLEditorInput(Diagram diagram, boolean doesExists) {
+	public TMCLEditorInput(Diagram diagram, boolean doesExists, EditingDomain editingDomain) {
 		this.diagram = diagram;
 		this.exists = doesExists;
+		this.editingDomain = editingDomain;
 	}
 	
 	@Override
@@ -53,6 +55,10 @@ public class TMCLEditorInput implements IEditorInput {
 	@Override
 	public Object getAdapter(Class adapter) {
 		return null;
+	}
+	
+	public EditingDomain getEditingDomain() {
+		return editingDomain;
 	}
 
 	public Diagram getDiagram() {
