@@ -101,6 +101,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//File/diagrams"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//File/topicMapSchema"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//File/filename"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//File/dirty"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -117,6 +117,8 @@
         eType="#//TopicMapSchema" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dirty" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        transient="true" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EdgeType">
     <eLiterals name="IS_ATYPE"/>

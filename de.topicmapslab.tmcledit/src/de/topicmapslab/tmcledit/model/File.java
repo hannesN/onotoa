@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.File#getDiagrams <em>Diagrams</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.File#getTopicMapSchema <em>Topic Map Schema</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.File#getFilename <em>Filename</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.File#isDirty <em>Dirty</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,5 +97,32 @@ public interface File extends EObject {
 	 * @generated
 	 */
 	void setFilename(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Dirty</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dirty</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dirty</em>' attribute.
+	 * @see #setDirty(boolean)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getFile_Dirty()
+	 * @model default="false" required="true" transient="true"
+	 * @generated
+	 */
+	boolean isDirty();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.File#isDirty <em>Dirty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dirty</em>' attribute.
+	 * @see #isDirty()
+	 * @generated
+	 */
+	void setDirty(boolean value);
 
 } // File

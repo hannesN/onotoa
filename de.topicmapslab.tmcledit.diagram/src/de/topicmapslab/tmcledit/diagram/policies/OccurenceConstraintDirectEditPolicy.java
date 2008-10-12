@@ -8,9 +8,11 @@ import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.jface.viewers.CellEditor;
 
-import de.topicmapslab.tmcledit.diagram.command.RenameOccurenceConstraintCommand;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.commands.RenameOccurenceConstraintCommand;
 
 /**
  * @author Hannes Niederhausen
@@ -24,12 +26,12 @@ public class OccurenceConstraintDirectEditPolicy extends DirectEditPolicy {
 		if (getHost() instanceof OccurenceTypeConstraintEditPart) {
 			OccurenceTypeConstraint otc = (OccurenceTypeConstraint) ((OccurenceTypeConstraintEditPart) getHost())
 					.getModel();
-			
+			TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
 			CellEditor cellEditor = request.getCellEditor();
 			String newName = (String) cellEditor.getValue();
 			RenameOccurenceConstraintCommand cmd = new RenameOccurenceConstraintCommand(otc, newName);
 		
-			return cmd;
+			return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		
 		}
 		return null;

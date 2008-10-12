@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#getDiagrams <em>Diagrams</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#getTopicMapSchema <em>Topic Map Schema</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#getFilename <em>Filename</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#isDirty <em>Dirty</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,6 +83,26 @@ public class FileImpl extends EObjectImpl implements File {
 	 * @ordered
 	 */
 	protected String filename = FILENAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDirty()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DIRTY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDirty()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean dirty = DIRTY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -183,6 +204,27 @@ public class FileImpl extends EObjectImpl implements File {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isDirty() {
+		return dirty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDirty(boolean newDirty) {
+		boolean oldDirty = dirty;
+		dirty = newDirty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.FILE__DIRTY, oldDirty, dirty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -208,6 +250,8 @@ public class FileImpl extends EObjectImpl implements File {
 				return getTopicMapSchema();
 			case ModelPackage.FILE__FILENAME:
 				return getFilename();
+			case ModelPackage.FILE__DIRTY:
+				return isDirty() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -231,6 +275,9 @@ public class FileImpl extends EObjectImpl implements File {
 			case ModelPackage.FILE__FILENAME:
 				setFilename((String)newValue);
 				return;
+			case ModelPackage.FILE__DIRTY:
+				setDirty(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -252,6 +299,9 @@ public class FileImpl extends EObjectImpl implements File {
 			case ModelPackage.FILE__FILENAME:
 				setFilename(FILENAME_EDEFAULT);
 				return;
+			case ModelPackage.FILE__DIRTY:
+				setDirty(DIRTY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -270,6 +320,8 @@ public class FileImpl extends EObjectImpl implements File {
 				return topicMapSchema != null;
 			case ModelPackage.FILE__FILENAME:
 				return FILENAME_EDEFAULT == null ? filename != null : !FILENAME_EDEFAULT.equals(filename);
+			case ModelPackage.FILE__DIRTY:
+				return dirty != DIRTY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -286,6 +338,8 @@ public class FileImpl extends EObjectImpl implements File {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (filename: ");
 		result.append(filename);
+		result.append(", dirty: ");
+		result.append(dirty);
 		result.append(')');
 		return result.toString();
 	}

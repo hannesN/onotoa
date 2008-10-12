@@ -44,5 +44,8 @@ public class CommandAdapter extends org.eclipse.gef.commands.Command {
 		cmdStack.undo();
 	}
 	
+	public Command getEmfCommand() {
+		return emfCommand;
+	}
 	
 }

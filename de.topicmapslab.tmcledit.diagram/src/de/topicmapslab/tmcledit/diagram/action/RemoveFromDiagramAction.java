@@ -9,11 +9,13 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import de.topicmapslab.tmcledit.diagram.command.RemoveNodeCommand;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.commands.RemoveNodeCommand;
 
 public class RemoveFromDiagramAction extends Action implements UpdateAction {
 
@@ -41,7 +43,10 @@ public class RemoveFromDiagramAction extends Action implements UpdateAction {
 	public void run() {
 		if (selectedEditPart instanceof NodeEditPart) {
 			Node node = (Node) selectedEditPart.getModel();
-			commandStack.execute(new RemoveNodeCommand((Diagram) node.eContainer(), node));
+			TMCLEditDomain ed = (TMCLEditDomain) selectedEditPart.getViewer().getEditDomain();
+			commandStack.execute(
+					new CommandAdapter (ed.getEditingDomain().getCommandStack(),
+						new RemoveNodeCommand((Diagram) node.eContainer(), node)));
 		}
 		// TODO Remove of node sub elements
 	}

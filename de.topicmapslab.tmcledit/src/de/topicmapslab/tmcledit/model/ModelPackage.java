@@ -1514,13 +1514,22 @@ public interface ModelPackage extends EPackage {
 	int FILE__FILENAME = 2;
 
 	/**
+	 * The feature id for the '<em><b>Dirty</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__DIRTY = 3;
+
+	/**
 	 * The number of structural features of the '<em>File</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_FEATURE_COUNT = 3;
+	int FILE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
@@ -2282,6 +2291,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getFile_Filename();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.File#isDirty <em>Dirty</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Dirty</em>'.
+	 * @see de.topicmapslab.tmcledit.model.File#isDirty()
+	 * @see #getFile()
+	 * @generated
+	 */
+	EAttribute getFile_Dirty();
+
+	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2918,6 +2938,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FILE__FILENAME = eINSTANCE.getFile_Filename();
+
+		/**
+		 * The meta object literal for the '<em><b>Dirty</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE__DIRTY = eINSTANCE.getFile_Dirty();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

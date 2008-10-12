@@ -1,4 +1,4 @@
-package de.topicmapslab.tmcledit.extensions.util;
+package de.topicmapslab.tmcledit.model.util;
 
 import java.io.IOException;
 import java.util.Collections;

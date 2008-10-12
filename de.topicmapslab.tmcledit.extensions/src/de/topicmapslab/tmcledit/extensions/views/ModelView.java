@@ -65,7 +65,6 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
@@ -75,7 +74,6 @@ import de.topicmapslab.tmcledit.extensions.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UndoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
 import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
-import de.topicmapslab.tmcledit.extensions.util.FileUtil;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeDiagram;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
@@ -92,6 +90,8 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
+import de.topicmapslab.tmcledit.model.util.DirtyStateObserver;
+import de.topicmapslab.tmcledit.model.util.FileUtil;
 
 /**
  * @author Hannes Niederhausen
@@ -103,7 +103,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	
 	private TreeViewer viewer;
 	private ViewContentProvider contentProvider;
-	private DrillDownAdapter drillDownAdapter;
 	private Action action1;
 	private Action action2;
 	private Action doubleClickAction;
@@ -113,11 +112,24 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private EditingDomain editingDomain;
 	
 	private File currFile;
-	private boolean dirty;
-	
 	private List<ISelectionChangedListener> listeners;
 
 	private Map<String, UpdateAction> actionRegistry;
+
+	private DirtyStateObserver dirtyStateObserver;
+	
+	private AdapterImpl dirtyListener = new AdapterImpl() {
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (msg.getFeatureID(Boolean.class)==ModelPackage.FILE__DIRTY) {
+				if ( (currFile!=null) && (currFile.isDirty()) )
+					setPartName("*ModelView");
+				else
+					setPartName("ModelView");
+			}
+				
+		}
+	};
 	
 	
 	class ViewContentProvider implements IStructuredContentProvider,
@@ -296,8 +308,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	 */
 	public void createPartControl(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-		drillDownAdapter = new DrillDownAdapter(viewer);
-
+		
 		contentProvider = new ViewContentProvider();
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(new ViewLabelProvider());
@@ -484,7 +495,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		manager.add(action1);
 		manager.add(action2);
 		manager.add(new Separator());
-		drillDownAdapter.addNavigationActions(manager);
+
 	}
 
 	private void makeActions() {
@@ -616,33 +627,35 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 	
 	public void setFilename(String filename) {
+		
+		if (dirtyStateObserver!=null)
+			dirtyStateObserver.dispose();
+		if (currFile!=null)
+			currFile.eAdapters().remove(dirtyListener);
 		// TODO check dirty state and ask for saving
 		contentProvider.uninitialize();
+		
+		if (filename!=null) {
 		currFile = FileUtil.loadFile(filename);
-
+		currFile.eAdapters().add(dirtyListener);
 		if (editingDomain!=null)
 			editingDomain.getCommandStack().removeCommandStackListener(this);
 		
-		editingDomain = null; // clear it for new creaion in getter
+		editingDomain = null; // clear it for new creation in getter
+		dirtyStateObserver = new DirtyStateObserver(currFile, getEditingDomain().getCommandStack());
+		}
 		contentProvider.initialize();
+		
 		viewer.refresh();
 	}
 	
 	public void doSave() {
 		try {
 			FileUtil.saveFile(currFile);
-			// TODO set dirty state
+			currFile.setDirty(false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void setDirty(boolean dirty) {
-		this.dirty = dirty;
-	}
-	
-	public boolean isDirty() {
-		return dirty;
 	}
 	
 	public void updateActions() {
@@ -662,7 +675,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	@Override
 	public void commandStackChanged(EventObject event) {
 		updateActions();
-		
 	}
 	
 }

@@ -910,6 +910,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFile_Dirty() {
+		return (EAttribute)fileEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1041,6 +1050,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(fileEClass, FILE__DIAGRAMS);
 		createEReference(fileEClass, FILE__TOPIC_MAP_SCHEMA);
 		createEAttribute(fileEClass, FILE__FILENAME);
+		createEAttribute(fileEClass, FILE__DIRTY);
 
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
@@ -1178,6 +1188,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getFile_Diagrams(), this.getDiagram(), null, "diagrams", null, 0, -1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFile_TopicMapSchema(), this.getTopicMapSchema(), null, "topicMapSchema", null, 1, 1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFile_Filename(), ecorePackage.getEString(), "filename", null, 0, 1, File.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFile_Dirty(), ecorePackage.getEBoolean(), "dirty", "false", 1, 1, File.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");
