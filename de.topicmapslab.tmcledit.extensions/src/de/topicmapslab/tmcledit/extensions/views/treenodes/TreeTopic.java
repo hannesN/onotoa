@@ -4,8 +4,8 @@
 package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.jface.viewers.TreeViewer;
 
+import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -17,7 +17,7 @@ public class TreeTopic extends TreeParent {
 
 	private final TopicType topic;
 	
-	public TreeTopic(TreeViewer viewer, TopicType topic) {
+	public TreeTopic(ModelView viewer, TopicType topic) {
 		super(viewer, null);
 		this.topic = topic;
 		topic.eAdapters().add(this);
@@ -30,7 +30,7 @@ public class TreeTopic extends TreeParent {
 	@Override
 	public void notifyChanged(Notification notification) {
 		if ( (notification.getEventType()==Notification.SET) && (notification.getFeatureID(String.class)==ModelPackage.TOPIC_TYPE__ID)){
-			viewer.refresh(this);
+			getModelView().getViewer().refresh(this);
 		}
 	}
 	

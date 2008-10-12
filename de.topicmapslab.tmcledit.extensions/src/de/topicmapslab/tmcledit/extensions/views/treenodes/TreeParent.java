@@ -5,13 +5,13 @@ package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
 import java.util.ArrayList;
 
-import org.eclipse.jface.viewers.TreeViewer;
+import de.topicmapslab.tmcledit.extensions.views.ModelView;
 
 
 public class TreeParent extends TreeObject {
 	private ArrayList<TreeObject> children;
 
-	public TreeParent(TreeViewer viewer, String name) {
+	public TreeParent(ModelView viewer, String name) {
 		super(viewer, name);
 		children = new ArrayList<TreeObject>();
 	}

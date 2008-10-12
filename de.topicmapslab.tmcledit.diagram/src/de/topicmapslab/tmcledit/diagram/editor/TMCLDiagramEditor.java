@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
-import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
@@ -31,9 +30,11 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.actions.ActionFactory;
 
 import de.topicmapslab.tmcledit.diagram.action.DiagramController;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
@@ -61,7 +62,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private RemoveFromDiagramAction removeFromDiagramAction;
 
 	public TMCLDiagramEditor() {
-		setEditDomain(new DefaultEditDomain(this));
+		setEditDomain(new TMCLEditDomain(this));
 	}
 
 		
@@ -143,9 +144,15 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		TMCLEditorInput ei = (TMCLEditorInput) input;
 		this.diagram = ei.getDiagram();
 		
+		((TMCLEditDomain) getEditDomain()).setEditingDomain(ei.getEditingDomain());
 		
 		new DiagramController(diagram);
+		IActionBars actionBars = getEditorSite().getActionBars();
+		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), ei.getUndoAction());
+		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(), ei.getRedoAction());
 		
+		getActionRegistry().registerAction(ei.getUndoAction());
+		getActionRegistry().registerAction(ei.getRedoAction());
 	}
 
 	@Override

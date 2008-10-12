@@ -4,6 +4,8 @@
 package de.topicmapslab.tmcledit.diagram.editor;
 
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.ui.action.RedoAction;
+import org.eclipse.emf.edit.ui.action.UndoAction;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
@@ -20,12 +22,22 @@ public class TMCLEditorInput implements IEditorInput {
 	private final boolean exists;
 	private final EditingDomain editingDomain;
 	
-	public TMCLEditorInput(Diagram diagram, boolean doesExists, EditingDomain editingDomain) {
-		this.diagram = diagram;
-		this.exists = doesExists;
-		this.editingDomain = editingDomain;
-	}
+	private final UndoAction undoAction;
+	private final RedoAction redoAction;
 	
+	
+	
+	public TMCLEditorInput(Diagram diagram, EditingDomain editingDomain,
+			UndoAction undoAction, RedoAction redoAction, 
+			boolean exists) {
+		super();
+		this.diagram = diagram;
+		this.editingDomain = editingDomain;
+		this.redoAction = redoAction;
+		this.undoAction = undoAction;
+		this.exists = exists;
+	}
+
 	@Override
 	public boolean exists() {
 		return exists;
@@ -63,5 +75,13 @@ public class TMCLEditorInput implements IEditorInput {
 
 	public Diagram getDiagram() {
 		return diagram;
+	}
+	
+	public RedoAction getRedoAction() {
+		return redoAction;
+	}
+	
+	public UndoAction getUndoAction() {
+		return undoAction;
 	}
 }

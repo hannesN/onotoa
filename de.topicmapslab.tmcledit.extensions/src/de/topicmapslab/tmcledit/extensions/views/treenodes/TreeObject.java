@@ -8,9 +8,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.graphics.Image;
 
+import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 
 
@@ -20,15 +20,15 @@ public class TreeObject implements IAdaptable, Adapter {
 	private TreeParent parent;
 	private Notifier target;
 	protected static ModelItemProviderAdapterFactory factory = new ModelItemProviderAdapterFactory();
-	protected final TreeViewer viewer;
+	
+	private final ModelView modelView;
 
-	public TreeObject(TreeViewer viewer, EditingDomain editingDomain) {
-		this.viewer = viewer;
-		this.editingDomain = editingDomain;
+	public TreeObject(ModelView modelView) {
+		this.modelView = modelView;
 	}
 
-	public TreeObject(TreeViewer viewer, String name) {
-		this.viewer = viewer;
+	public TreeObject(ModelView modelView, String name) {
+		this(modelView);
 		this.name = name;
 	}
 
@@ -36,6 +36,10 @@ public class TreeObject implements IAdaptable, Adapter {
 		return name;
 	}
 
+	protected ModelView getModelView() {
+		return modelView;
+	}
+	
 	public void setParent(TreeParent parent) {
 		this.parent = parent;
 	}

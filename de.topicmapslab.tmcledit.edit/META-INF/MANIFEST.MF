@@ -8,8 +8,11 @@ Bundle-Activator: de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin$Imp
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.topicmapslab.tmcledit.model.provider
+Export-Package: de.topicmapslab.tmcledit.model.commands,
+ de.topicmapslab.tmcledit.model.provider
 Require-Bundle: org.eclipse.core.runtime,
  de.topicmapslab.tmcledit;visibility:=reexport,
- org.eclipse.emf.edit;bundle-version="2.4.0";visibility:=reexport
+ org.eclipse.emf.edit;bundle-version="2.4.0";visibility:=reexport,
+ org.eclipse.emf.transaction;bundle-version="1.2.0",
+ org.eclipse.emf.workspace;bundle-version="1.2.0"
 Bundle-ActivationPolicy: lazy

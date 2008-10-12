@@ -4,27 +4,33 @@ package de.topicmapslab.tmcledit.extensions.views;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.eclipse.emf.common.command.BasicCommandStack;
+import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.action.RedoAction;
+import org.eclipse.emf.edit.ui.action.UndoAction;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
+import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -54,14 +60,20 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
+import de.topicmapslab.tmcledit.extensions.actions.RedoActionWrapper;
+import de.topicmapslab.tmcledit.extensions.actions.UndoActionWrapper;
+import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
 import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
 import de.topicmapslab.tmcledit.extensions.util.FileUtil;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeDiagram;
@@ -71,19 +83,21 @@ import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 import de.topicmapslab.tmcledit.model.AssociationsType;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 
 /**
  * @author Hannes Niederhausen
  */
 
-public class ModelView extends ViewPart implements IEditingDomainProvider, ISelectionProvider {
+public class ModelView extends ViewPart implements IEditingDomainProvider, ISelectionProvider, CommandStackListener {
 	
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView"; 
 	
@@ -102,6 +116,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private boolean dirty;
 	
 	private List<ISelectionChangedListener> listeners;
+
+	private Map<String, UpdateAction> actionRegistry;
+	
 	
 	class ViewContentProvider implements IStructuredContentProvider,
 			ITreeContentProvider {
@@ -113,17 +130,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		private AdapterImpl tmsListener = new AdapterImpl() {
 			@Override
 			public void notifyChanged(Notification msg) {
-				if ((msg.getEventType() == Notification.ADD)
-						&& (msg.getNewValue() instanceof TopicType)) {
-					addType((TopicType) msg.getNewValue());
+				if (msg.getFeatureID(EList.class)==ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES) {
+					switch (msg.getEventType()) {
+					case Notification.ADD: addType((TopicType) msg.getNewValue()); break;
+					case Notification.REMOVE: removeType((TopicType) msg.getOldValue()); break;
+					}
 				}
-
-				if ((msg.getEventType() == Notification.REMOVE)
-						&& (msg.getNewValue() instanceof TopicType)) {
-					removeType((TopicType) msg.getNewValue());
-				}
-
-				viewer.setInput(getViewSite());
+				
 			}
 		};
 
@@ -175,23 +188,23 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 
 		public void initialize() {
-			invisibleRoot = new TreeParent(viewer, "");
+			invisibleRoot = new TreeParent(ModelView.this, "");
 						
 			if (currFile!=null) {
-				schemaNode = new TreeParent(viewer, "Topic Map Schema");
-				diagramNode = new TreeParent(viewer, "Diagrams");
+				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
+				diagramNode = new TreeParent(ModelView.this, "Diagrams");
 				
 				invisibleRoot.addChild(diagramNode);
 				invisibleRoot.addChild(schemaNode);
 				
 				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
 	
-				ttNode = new TreeParent(viewer, "TopicTypes");
-				rtNode = new TreeParent(viewer, "RoleTypes");
-				ntNode = new TreeParent(viewer, "NameTypes");
-				otNode = new TreeParent(viewer, "OccurenceTypes");
-				atNode = new TreeParent(viewer, "AssociationTypes");
-				stNode = new TreeParent(viewer, "ScopeTypes");
+				ttNode = new TreeParent(ModelView.this, "TopicTypes");
+				rtNode = new TreeParent(ModelView.this, "RoleTypes");
+				ntNode = new TreeParent(ModelView.this, "NameTypes");
+				otNode = new TreeParent(ModelView.this, "OccurenceTypes");
+				atNode = new TreeParent(ModelView.this, "AssociationTypes");
+				stNode = new TreeParent(ModelView.this, "ScopeTypes");
 	
 				schemaNode.addChild(ttNode);
 				schemaNode.addChild(rtNode);
@@ -205,29 +218,35 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				}
 				
 				for (Diagram d : currFile.getDiagrams()) {
-					diagramNode.addChild(new TreeDiagram(viewer, d, editingDomain));
+					diagramNode.addChild(new TreeDiagram(ModelView.this, d));
 				}
 			} else {
-				TreeParent root = new TreeParent(viewer, "No Diagramm Editor Open");
+				TreeParent root = new TreeParent(ModelView.this, "No Diagramm Editor Open");
 				invisibleRoot.addChild(root);
 			}
 		}
 
 		private void addType(TopicType tt) {
-			TreeTopic to = new TreeTopic(viewer, tt);
-
+			TreeTopic to = new TreeTopic(ModelView.this, tt);
+			TreeParent parent = null;
+			
 			if (tt instanceof RoleType)
-				rtNode.addChild(to);
+				parent = rtNode;
 			else if (tt instanceof NameType)
-				ntNode.addChild(to);
+				parent = ntNode;
 			else if (tt instanceof OccurenceType)
-				otNode.addChild(to);
+				parent = otNode;
 			else if (tt instanceof AssociationsType)
-				atNode.addChild(to);
+				parent = atNode;
 			else if (tt instanceof ScopeType)
-				stNode.addChild(to);
+				parent = stNode;
 			else if (tt instanceof TopicType)
-				ttNode.addChild(to);
+				parent = ttNode;
+			
+			if (parent != null) {
+				parent.addChild(to);
+				viewer.refresh(parent);
+			}
 		}
 
 		private void removeType(TopicType tt) {
@@ -246,6 +265,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				if (((TreeTopic)to).getTopic().equals(tt))
 					parent.removeChild(to);
 			}
+			viewer.refresh(parent);
 		}
 	}
 
@@ -323,6 +343,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				
 				
 			}
+			
 		});
 		viewer.setInput(getViewSite());
 
@@ -376,6 +397,30 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		});
 	}
 	
+	@Override
+	public void init(IViewSite site) throws PartInitException {
+		super.init(site);
+		
+		actionRegistry = new HashMap<String, UpdateAction>();
+		createActions();
+	}
+	
+	public void createActions() {
+		IActionBars actionBars = getViewSite().getActionBars();
+		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
+		
+		UndoActionWrapper undoAction = new UndoActionWrapper();
+		undoAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_UNDO));
+		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), undoAction);
+		
+		RedoActionWrapper redoAction = new RedoActionWrapper();
+		redoAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_REDO));
+		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(), redoAction);
+		
+		actionRegistry.put(ActionFactory.UNDO.getId(), undoAction);
+		actionRegistry.put(ActionFactory.REDO.getId(), redoAction);
+	}
+	
 	private void hookContextMenu() {
 		MenuManager menuMgr = new MenuManager("#PopupMenu");
 		menuMgr.setRemoveAllWhenShown(true);
@@ -409,8 +454,28 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(action1);
 		manager.add(action2);
-		manager.add(new Separator());
-		drillDownAdapter.addNavigationActions(manager);
+		
+		manager.add(new Action() {
+			@Override
+			public String getText() {
+				return "Create Topic Type";
+			}
+			
+			@Override
+			public void run() {
+				InputDialog dlg = new InputDialog(getSite().getShell(),
+						"New Topic Type..",
+						"Please Enter the name of the new type", "", null);
+				
+				if (dlg.open()==Dialog.OK) {
+					String name = dlg.getValue();
+					getEditingDomain().getCommandStack().execute(
+							new CreateTopicTypeCommand(currFile.getTopicMapSchema(), name));
+				}
+					
+				
+			}
+		});
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -500,9 +565,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		
 	@Override
 	public EditingDomain getEditingDomain() {
-		if (currentEditor!=null)
-			return currentEditor.getEditingDomain();
-		return null;
+		if (editingDomain==null) {
+			editingDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
+			UpdateAction action = actionRegistry.get(ActionFactory.UNDO.getId());
+			((UndoAction)action).setEditingDomain(editingDomain);
+						
+			action = actionRegistry.get(ActionFactory.REDO.getId());
+			((RedoAction)action).setEditingDomain(editingDomain);
+			editingDomain.getCommandStack().addCommandStackListener(this);
+			updateActions();
+		}
+			
+		return editingDomain;
 	}
 
 	@Override
@@ -545,17 +619,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		// TODO check dirty state and ask for saving
 		contentProvider.uninitialize();
 		currFile = FileUtil.loadFile(filename);
+
+		if (editingDomain!=null)
+			editingDomain.getCommandStack().removeCommandStackListener(this);
 		
-		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-
-		BasicCommandStack commandStack = new BasicCommandStack();
-
-		editingDomain = new AdapterFactoryEditingDomain(adapterFactory, commandStack, new HashMap<Resource, Boolean>());
-		
+		editingDomain = null; // clear it for new creaion in getter
 		contentProvider.initialize();
 		viewer.refresh();
 	}
@@ -575,6 +643,26 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	
 	public boolean isDirty() {
 		return dirty;
+	}
+	
+	public void updateActions() {
+		for (UpdateAction a : actionRegistry.values()) {
+			a.update();
+		}
+	}
+	
+	public Map<String, UpdateAction> getActionRegistry() {
+		return actionRegistry;
+	}
+	
+	public TreeViewer getViewer() {
+		return viewer;
+	}
+
+	@Override
+	public void commandStackChanged(EventObject event) {
+		updateActions();
+		
 	}
 	
 }
