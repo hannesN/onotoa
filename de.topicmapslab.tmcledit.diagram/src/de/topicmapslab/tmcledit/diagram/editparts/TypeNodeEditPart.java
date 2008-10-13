@@ -39,6 +39,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 /**
  * @author Hannes Niederhausen
@@ -65,6 +66,7 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEd
 			figure.setBorder(new LineBorder(ColorConstants.black, 1));
 			
 			titleLabel = new Label();
+			titleLabel.setIcon(ImageProvider.getTopicTypeImage(getCastedModel().getTopicType()));
 			figure.add(titleLabel);
 
 			figure.setOpaque(true);

@@ -11,8 +11,6 @@ import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorInput;
 import de.topicmapslab.tmcledit.extensions.Activator;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.Diagram;
-import de.topicmapslab.tmcledit.model.util.ImageConstants;
-import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class TreeDiagram extends TreeObject {
 
@@ -45,7 +43,7 @@ public class TreeDiagram extends TreeObject {
 	
 	@Override
 	public Image getImage() {
-		return ImageProvider.getImage(ImageConstants.DIAGRAM);
+		return null;// ImageProvider.getImage(ImageConstants.DIAGRAM);
 	}
 
 }

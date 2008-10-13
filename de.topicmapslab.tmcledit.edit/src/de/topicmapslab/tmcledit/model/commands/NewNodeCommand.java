@@ -29,15 +29,13 @@ public class NewNodeCommand extends AbstractCommand {
 
 	private final Diagram diagram;
 
-	private final boolean createNewType;
+	private boolean createdNewType = false;
 
 	public NewNodeCommand(Diagram diagram, Point location, Node node) {
 		if (node instanceof TypeNode) {
-			createNewType = (((TypeNode) node).getTopicType() == null);
 			this.type = Type.TYPE;
 		} else {
 			this.type = Type.ASSOCIATION;
-			createNewType = false;
 		}
 
 		this.diagram = diagram;
@@ -50,12 +48,12 @@ public class NewNodeCommand extends AbstractCommand {
 
 	@Override
 	public boolean canExecute() {
-		if ((node instanceof TypeNode)
-				&& (((TypeNode) node).getTopicType() != null)) {
+		prepare();
+		if ((node instanceof TypeNode) && (!createdNewType)) {
 			TopicType tt = ((TypeNode) node).getTopicType();
 			for (Node n : diagram.getNodes()) {
 				if (n instanceof TypeNode) {
-					if ( ((TypeNode)n).getTopicType().equals(tt) )
+					if (((TypeNode) n).getTopicType().equals(tt))
 						return false;
 				}
 			}
@@ -67,14 +65,13 @@ public class NewNodeCommand extends AbstractCommand {
 	public void execute() {
 		redo();
 	}
-	
+
 	@Override
 	protected boolean prepare() {
-		if ((type == Type.TYPE) && (createNewType)) {
-			TopicType tt = de.topicmapslab.tmcledit.model.ModelFactory.eINSTANCE
-					.createTopicType();
-			tt.setId("default type");
-			((TypeNode) node).setTopicType(tt);
+		if (node instanceof TypeNode) {
+			if (((TypeNode) node).getTopicType().eContainer() == null) {
+				createdNewType = true;
+			}
 		}
 		return true;
 	}
@@ -82,9 +79,8 @@ public class NewNodeCommand extends AbstractCommand {
 	@Override
 	public void redo() {
 		if (type == Type.TYPE) {
-
-			TopicType tt = ((TypeNode) node).getTopicType();
-			if (createNewType) {
+			if (createdNewType) {
+				TopicType tt = ((TypeNode) node).getTopicType();
 				File file = (File) diagram.eContainer();
 				file.getTopicMapSchema().getTopicTypes().add(tt);
 			}
@@ -97,7 +93,7 @@ public class NewNodeCommand extends AbstractCommand {
 		if (type == Type.TYPE) {
 			TopicType tt = ((TypeNode) node).getTopicType();
 			diagram.getNodes().remove(node);
-			if (createNewType) {
+			if (createdNewType) {
 				File file = (File) diagram.eContainer();
 				file.getTopicMapSchema().getTopicTypes().remove(tt);
 			}
@@ -105,4 +101,8 @@ public class NewNodeCommand extends AbstractCommand {
 		}
 	}
 
+	@Override
+	public String getLabel() {
+		return "Create Node";
+	}
 }

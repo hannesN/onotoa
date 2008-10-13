@@ -38,7 +38,7 @@ public class TreeOccurence extends TreeObject{
 	
 	@Override
 	public Image getImage() {
-		return ImageProvider.getImage(ImageConstants.OCCURENCETYPECONSTRAINT);
+		return ImageProvider.getImage(ImageConstants.OCCURENCECONSTRAINT);
 		
 	}
 	

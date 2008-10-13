@@ -20,7 +20,7 @@ public class ImageProvider {
 		switch(topicType.getKind())
 		{
 			case ASSOCIATION_TYPE:
-				return ImageProvider.getImage(ImageConstants.ASSOCIATIONSTYPE);
+				return ImageProvider.getImage(ImageConstants.ASSOCIATIONTYPE);
 			case NAME_TYPE:
 				return ImageProvider.getImage(ImageConstants.NAMETYPE);
 			case OCCURENCE_TYPE:

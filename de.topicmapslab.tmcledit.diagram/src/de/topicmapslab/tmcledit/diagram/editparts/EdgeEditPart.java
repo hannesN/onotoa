@@ -30,7 +30,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		conn.setConnectionRouter(new BendpointConnectionRouter());
 		
 		
-		if (getCastedModel().getType() == EdgeType.IS_ATYPE) {
+		if (getCastedModel().getType() == EdgeType.AKO_TYPE) {
 			PolygonDecoration deco = new PolygonDecoration();
 			PointList points = new PointList();
 			points.addPoint(new Point(-2, -2));
@@ -41,7 +41,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			deco.setFill(true);
 			deco.setBackgroundColor(ColorConstants.white);
 			conn.setTargetDecoration(deco);
-		} else if (getCastedModel().getType() == EdgeType.AKO_TYPE) {
+		} else if (getCastedModel().getType() == EdgeType.IS_ATYPE) {
 			PolylineDecoration deco = new PolylineDecoration();
 			PointList points = new PointList();
 			points.addPoint(new Point(-2, -2));

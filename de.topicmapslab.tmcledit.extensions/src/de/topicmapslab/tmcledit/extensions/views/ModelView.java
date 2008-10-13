@@ -328,7 +328,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		viewer.setSorter(new NameSorter());
 
 		viewer.setInput(getViewSite());
-
+		viewer.expandToLevel(2);
 		// Create the help context id for the viewer's control
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(),
 				"de.topicmapslab.tmcledit.extensions.viewer");
@@ -485,6 +485,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			public void run() {
 				contentProvider.initialize();
 				viewer.setInput(getViewSite());
+				viewer.expandToLevel(2);
 			}
 		};
 		action1.setText("Refresh");
