@@ -2,6 +2,7 @@ package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
 import org.eclipse.emf.edit.ui.action.RedoAction;
 import org.eclipse.emf.edit.ui.action.UndoAction;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 
@@ -10,6 +11,8 @@ import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorInput;
 import de.topicmapslab.tmcledit.extensions.Activator;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class TreeDiagram extends TreeObject {
 
@@ -38,6 +41,11 @@ public class TreeDiagram extends TreeObject {
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public Image getImage() {
+		return ImageProvider.getImage(ImageConstants.DIAGRAM);
 	}
 
 }

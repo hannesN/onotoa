@@ -8,10 +8,10 @@ import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.graphics.Image;
 
-import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 /**
@@ -80,7 +80,7 @@ public class TreeTopic extends TreeParent {
 		if (InputDialog.OK == dlg.open()) {
 
 			getModelView().getEditingDomain().getCommandStack().execute(
-					new RenameCommand(topic, dlg.getValue()));
+					new RenameTopicTypeCommand(topic, dlg.getValue()));
 		}
 	}
 	

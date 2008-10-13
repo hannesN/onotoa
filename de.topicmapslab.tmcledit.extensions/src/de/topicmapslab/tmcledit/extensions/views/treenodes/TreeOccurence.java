@@ -1,10 +1,13 @@
 package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class TreeOccurence extends TreeObject{
 
@@ -31,6 +34,12 @@ public class TreeOccurence extends TreeObject{
 	@Override
 	public String getName() {
 		return otc.getName();
+	}
+	
+	@Override
+	public Image getImage() {
+		return ImageProvider.getImage(ImageConstants.OCCURENCETYPECONSTRAINT);
+		
 	}
 	
 	@Override

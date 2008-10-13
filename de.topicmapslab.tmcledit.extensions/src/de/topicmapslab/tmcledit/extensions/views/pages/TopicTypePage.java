@@ -22,9 +22,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.extensions.TopicSelectionDialog;
-import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
-import de.topicmapslab.tmcledit.extensions.command.SetIsACommand;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
 /**
  * Property detail page for topic types.
@@ -61,7 +61,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			public void focusLost(FocusEvent e) {
 				if (nameText.getText().length() > 0) {
 					getEditingDomain().getCommandStack().execute(
-							new RenameCommand((TopicType) getModel(), nameText
+							new RenameTopicTypeCommand((TopicType) getModel(), nameText
 									.getText()));
 				}
 			}

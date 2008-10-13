@@ -1,10 +1,13 @@
 package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class TreeName extends TreeObject{
 
@@ -38,5 +41,10 @@ public class TreeName extends TreeObject{
 		if ( (notification.getEventType()==Notification.SET) && (notification.getFeatureID(String.class)==ModelPackage.NAME_TYPE_CONSTRAINT__NAME)){
 			getModelView().getViewer().refresh(this);
 		}
+	}
+	
+	@Override
+	public Image getImage() {
+		return ImageProvider.getImage(ImageConstants.NAMETYPE);
 	}
 }
