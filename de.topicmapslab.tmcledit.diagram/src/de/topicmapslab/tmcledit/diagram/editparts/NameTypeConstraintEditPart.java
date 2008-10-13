@@ -1,54 +1,36 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
-import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.gef.EditPolicy;
 
+import de.topicmapslab.tmcledit.diagram.policies.NameConstraintDirectEditPolicy;
+import de.topicmapslab.tmcledit.diagram.policies.OccurenceConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 
-public class NameTypeConstraintEditPart extends AdapterGraphicalEditPart {
-
-	Label nameLabel;
-	Label cardLabel;
-	Label typeLabel;
+public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	
-	@Override
-	protected IFigure createFigure() {
-
-		figure = new Figure();
-		
-		figure.setLayoutManager(new ToolbarLayout(true));
-
-		nameLabel = new Label();
-		figure.add(nameLabel);
-		
-		typeLabel = new Label();
-		figure.add(typeLabel);
-		
-		cardLabel = new Label();
-		figure.add(cardLabel);
-		
-		return figure;
-	}
-
 	private NameTypeConstraint getCastedModel() {
 		return (NameTypeConstraint) getModel();
 	}
 	
 	@Override
 	protected void createEditPolicies() {
-		// TODO Auto-generated method stub
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new NameConstraintDirectEditPolicy());
 
 	}
 	
 	@Override
 	protected void refreshVisuals() {
 		NameTypeConstraint ntc = getCastedModel();
-		nameLabel.setText(ntc.getName());
-		typeLabel.setText(":"+ntc.getType().getId());
-		cardLabel.setText("  "+ntc.getCardMin()+".."+ntc.getCardMax());	
+		getNameLabel().setText(ntc.getName());
+		StringBuffer buffer = new StringBuffer(50);
+		buffer.append(":");
+		buffer.append(ntc.getType().getId());
+		buffer.append("  ");
+		buffer.append(ntc.getCardMin());
+		buffer.append("..");
+		buffer.append(ntc.getCardMax());
+		getTypeLabel().setText(buffer.toString());
 	}
 
 	@Override
@@ -58,4 +40,5 @@ public class NameTypeConstraintEditPart extends AdapterGraphicalEditPart {
 		
 	}
 
+	
 }

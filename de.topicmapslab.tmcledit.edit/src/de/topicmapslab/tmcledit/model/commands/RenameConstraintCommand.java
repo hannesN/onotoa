@@ -6,35 +6,35 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.AbstractConstraint;
 
 /**
  * @author Hannes Niederhausen
  *
  */
-public class RenameOccurenceConstraintCommand extends AbstractCommand{
+public class RenameConstraintCommand extends AbstractCommand{
 
-	private final OccurenceTypeConstraint otc;
+	private final AbstractConstraint constraint;
 	private final String oldName;
 	private final String newName;
 
 	
 	
-	public RenameOccurenceConstraintCommand(OccurenceTypeConstraint otc, String newName) {
+	public RenameConstraintCommand(AbstractConstraint constraint, String newName) {
 		super();
-		this.otc = otc;
-		this.oldName = otc.getName();
+		this.constraint = constraint;
+		this.oldName = constraint.getName();
 		this.newName = newName;
 	}
 
 	@Override
 	public void execute() {
-		otc.setName(newName);
+		constraint.setName(newName);
 	}
 	
 	@Override
 	public void undo() {
-		otc.setName(oldName);
+		constraint.setName(oldName);
 	}
 	
 	@Override

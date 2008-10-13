@@ -11,15 +11,11 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
-import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
@@ -35,6 +31,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.topicmapslab.tmcledit.diagram.action.DiagramController;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
@@ -57,7 +54,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	private Diagram diagram;
 
-	private RootEditPart rootEditPart;
+	private ScalableFreeformRootEditPart rootEditPart;
 
 	private ISelection currentSelection;
 	private List<ISelectionChangedListener> selectionChangedListeners = Collections
@@ -66,6 +63,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private RemoveFromDiagramAction removeFromDiagramAction;
 
 	private DirtyAdapter dirtyAdapter;
+
+	private OverviewOutlinePage outlinePage;
 
 	public TMCLDiagramEditor() {
 		setEditDomain(new TMCLEditDomain(this));
@@ -101,7 +100,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	}
 
-	public RootEditPart getRootEditPart() {
+	public ScalableFreeformRootEditPart getRootEditPart() {
 		if (rootEditPart == null) {
 			rootEditPart = new ScalableFreeformRootEditPart();
 		}
@@ -194,9 +193,20 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			return getEditingDomain();
 		if (adapter == CommandStack.class)
 			return getEditDomain().getCommandStack();
+		if (adapter == IContentOutlinePage.class)
+			return getContentOutlinePage();
 		return super.getAdapter(adapter);
 	}
 
+	public IContentOutlinePage getContentOutlinePage() {
+		if ( (outlinePage == null) && (null!=getGraphicalViewer()) ) {
+			
+			outlinePage = new OverviewOutlinePage((ScalableFreeformRootEditPart) getGraphicalViewer().getRootEditPart());
+		}
+
+		return outlinePage;
+	}
+	
 	@Override
 	protected PaletteRoot getPaletteRoot() {
 		return TMCLDiagramEditorUtil.getPaletteRoot();
@@ -291,4 +301,5 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			}
 		}
 	}
+	
 }
