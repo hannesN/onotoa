@@ -14,6 +14,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -65,6 +66,16 @@ public class FileUtil {
 		Diagram diagram = modelInstance.createDiagram();
 		diagram.setName("Lalala");
 		file.getDiagrams().add(diagram);
+		
+		MappingElement me = ModelFactory.eINSTANCE.createMappingElement();
+		me.setKey("wwid");
+		me.setValue("http://psi.wasweissich.de");
+		schema.getMappings().add(me);
+		
+		me = ModelFactory.eINSTANCE.createMappingElement();
+		me.setKey("tmcl");
+		me.setValue("http://psi.topicmaps.org/tmcl/");
+		schema.getMappings().add(me);
 		
 		TopicType tt = modelInstance.createTopicType();
 		tt.setId("wwid:Person");

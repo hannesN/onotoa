@@ -4,7 +4,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 
 import de.topicmapslab.tmcledit.diagram.policies.NameConstraintDirectEditPolicy;
-import de.topicmapslab.tmcledit.diagram.policies.OccurenceConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 
 public class NameTypeConstraintEditPart extends AbstractLabelEditPart {

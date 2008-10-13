@@ -19,17 +19,20 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 	protected Command getDirectEditCommand(DirectEditRequest request) {
 		if (getHost() instanceof AbstractLabelEditPart) {
 			TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
-			CellEditor cellEditor = request.getCellEditor();
-			String newName = (String) cellEditor.getValue();
-			org.eclipse.emf.common.command.Command cmd = getRenameCommand(getHost().getModel(), newName);
+			org.eclipse.emf.common.command.Command cmd = getRenameCommand(getHost().getModel(), request);
 			if (cmd!=null)
 				return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		
 		}
 		return null;
 	}
-
-	public abstract org.eclipse.emf.common.command.Command getRenameCommand(Object model, String name);
+	
+	protected String getNewString(DirectEditRequest request) {
+		CellEditor cellEditor = request.getCellEditor();
+		return (String) cellEditor.getValue();
+	}
+	
+	public abstract org.eclipse.emf.common.command.Command getRenameCommand(Object model, DirectEditRequest request);
 		
 	@Override
 	protected void revertOldEditValue(DirectEditRequest request) {

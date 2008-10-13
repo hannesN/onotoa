@@ -3,6 +3,7 @@
  */
 package de.topicmapslab.tmcledit.diagram.editor;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.eclipse.gef.palette.ConnectionCreationToolEntry;
@@ -17,10 +18,13 @@ import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingElementEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
@@ -57,14 +61,18 @@ public class TMCLDiagramEditorUtil  {
 				EditPart part = null;
 				if (model instanceof Diagram) {
 					part = new DiagramEditPart();
-				} if (model instanceof TypeNode) {
+				} else if (model instanceof TypeNode) {
 					part = new TypeNodeEditPart();
-				} if (model instanceof OccurenceTypeConstraint) {
+				} else if (model instanceof OccurenceTypeConstraint) {
 					part = new OccurenceTypeConstraintEditPart();
-				} if (model instanceof NameTypeConstraint) {
+				} else if (model instanceof NameTypeConstraint) {
 					part = new NameTypeConstraintEditPart();
-				} if (model instanceof Edge) {
+				} else if (model instanceof Edge) {
 					part = new EdgeEditPart();					
+				} else if (model instanceof EList) {
+					part = new PrefixMappingEditPart();
+				} else if (model instanceof MappingElement) {
+					part = new PrefixMappingElementEditPart();
 				}
 				
 				if (part!=null)

@@ -1,5 +1,7 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.Map;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.ToolbarLayout;
@@ -20,6 +22,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;
 	private Label typeLabel;
+	
 
 	public AbstractLabelEditPart() {
 		super();
@@ -30,7 +33,9 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	
 		figure = new SelectionFigure();
 		
-		figure.setLayoutManager(new ToolbarLayout(true));
+		ToolbarLayout layout = new ToolbarLayout(true);
+		layout.setSpacing(5);
+		figure.setLayoutManager(layout);
 		
 		nameLabel = new EditableLabel("");
 		figure.add(nameLabel);
@@ -57,25 +62,36 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 
 	public void performRequest(Request req) {
 		if (req.getType() == RequestConstants.REQ_DIRECT_EDIT) {
-			if (req instanceof DirectEditRequest && !directEditHitTest(((DirectEditRequest) req).getLocation().getCopy()))
-				return;
-			performDirectEdit();
+			if (req instanceof DirectEditRequest) {
+				Label label = directEditHitTest(((DirectEditRequest) req).getLocation().getCopy());
+				if (label!=null) {
+					fillExtendedData(req.getExtendedData());
+					performDirectEdit(label);
+					
+				}
+			}
 		}
 		super.performRequest(req);
 	}
 
-	private void performDirectEdit() {
+	@SuppressWarnings("unchecked")
+	protected void fillExtendedData(Map extendedData) {		
+	}
+
+	private void performDirectEdit(Label label) {
 		if (manager == null) {
-			manager = new TMCLDirectEditManager(this, TextCellEditor.class, nameLabel);					
+			manager = new TMCLDirectEditManager(this, TextCellEditor.class, label);					
 		}
 		manager.show();
 	}
 
-	private boolean directEditHitTest(Point requestLoc) {
-		getFigure().translateToRelative(requestLoc);
-		if (getFigure().containsPoint(requestLoc))
-			return true;
-		return false;
+	protected Label directEditHitTest(Point requestLoc) {
+		
+		getNameLabel().translateToRelative(requestLoc);
+		if (getNameLabel().containsPoint(requestLoc))
+			return getNameLabel();
+		
+		return null;
 	}
 
 	public DirectEditManager getManager() {

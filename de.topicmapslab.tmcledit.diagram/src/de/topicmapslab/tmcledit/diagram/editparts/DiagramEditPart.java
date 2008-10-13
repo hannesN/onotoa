@@ -3,6 +3,7 @@
  */
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,12 +14,14 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 
 import de.topicmapslab.tmcledit.diagram.policies.DiagramLayoutEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 
 /**
@@ -29,6 +32,8 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 
 	private XYLayout layout;
 
+	private PrefixMappingEditPart prefixMappingEditPart;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -57,13 +62,31 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 		installEditPolicy(EditPolicy.COMPONENT_ROLE, new RootComponentEditPolicy());
 		
 	}
+	
+	// tiny hack to omit a mess of listeners/adapters
+	
+	@Override
+	protected void addChild(EditPart child, int index) {
+		super.addChild(child, index);
+		if (child instanceof PrefixMappingEditPart) {
+			this.prefixMappingEditPart = (PrefixMappingEditPart) child;
+		}
+	}
 
+	public PrefixMappingEditPart getPrefixMappingEditPart() {
+		return prefixMappingEditPart;
+	}
+	// hack end
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List getModelChildren() {
 		Diagram d = (Diagram) getModel();
-
-		return (List) d.getNodes();
+		List result = new ArrayList();
+		result.addAll(d.getNodes());
+		result.add(((File)d.eContainer()).getTopicMapSchema().getMappings());
+		
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

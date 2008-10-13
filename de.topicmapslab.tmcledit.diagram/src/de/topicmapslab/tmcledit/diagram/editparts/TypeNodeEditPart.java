@@ -102,6 +102,10 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEd
 		Rectangle r = new Rectangle(tn.getPosX(), tn.getPosY(), -1, -1);
         ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
 
+        // refreshing mapping element, because it should always be in the upper corner
+        PrefixMappingEditPart pmep = ((DiagramEditPart)getParent()).getPrefixMappingEditPart();
+        if (pmep!=null)
+        	pmep.refreshVisuals();
 	}
 	
 	@Override
