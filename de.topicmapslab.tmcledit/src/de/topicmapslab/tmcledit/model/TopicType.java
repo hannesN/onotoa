@@ -184,7 +184,7 @@ public interface TopicType extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.subjectIdentifierConstraint}.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Subject Identifier Constraints</em>' containment reference list isn't clear,
@@ -196,11 +196,11 @@ public interface TopicType extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<subjectIdentifierConstraint> getSubjectIdentifierConstraints();
+	EList<SubjectIdentifierConstraint> getSubjectIdentifierConstraints();
 
 	/**
 	 * Returns the value of the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint}.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Subject Locator Constraint</em>' containment reference list isn't clear,
@@ -212,7 +212,7 @@ public interface TopicType extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<subjectLocatorConstraint> getSubjectLocatorConstraint();
+	EList<SubjectLocatorConstraint> getSubjectLocatorConstraint();
 
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute.

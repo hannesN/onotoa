@@ -188,7 +188,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_8QRiUWbQEd2l1f56ebDpfA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_8QNQ4WbQEd2l1f56ebDpfA" fontName="Sans Serif" fontHeight="10" fillColor="13761016" lineColor="0"/>
-    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//subjectLocatorConstraint"/>
+    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//SubjectLocatorConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8QN38GbQEd2l1f56ebDpfA" x="238" y="-163"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_VWD7AGbREd2l1f56ebDpfA" type="1001">
@@ -204,7 +204,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_VWEiGGbREd2l1f56ebDpfA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_VWD7AWbREd2l1f56ebDpfA" fontName="Sans Serif" fontHeight="10" fillColor="13761016" lineColor="0"/>
-    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//subjectIdentifierConstraint"/>
+    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//SubjectIdentifierConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VWD7AmbREd2l1f56ebDpfA" x="237" y="-109"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_RRDIAGeCEd23RNXf6aIi2g" type="1001">

@@ -7,7 +7,7 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.subjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,12 +23,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.subjectIdentifierConstraint} object.
+ * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class subjectIdentifierConstraintItemProvider
+public class SubjectLocatorConstraintItemProvider
 	extends AbstractConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -42,7 +42,7 @@ public class subjectIdentifierConstraintItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public subjectIdentifierConstraintItemProvider(AdapterFactory adapterFactory) {
+	public SubjectLocatorConstraintItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,14 +62,14 @@ public class subjectIdentifierConstraintItemProvider
 	}
 
 	/**
-	 * This returns subjectIdentifierConstraint.gif.
+	 * This returns SubjectLocatorConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/subjectIdentifierConstraint"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SubjectLocatorConstraint"));
 	}
 
 	/**
@@ -80,10 +80,10 @@ public class subjectIdentifierConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((subjectIdentifierConstraint)object).getName();
+		String label = ((SubjectLocatorConstraint)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_subjectIdentifierConstraint_type") :
-			getString("_UI_subjectIdentifierConstraint_type") + " " + label;
+			getString("_UI_SubjectLocatorConstraint_type") :
+			getString("_UI_SubjectLocatorConstraint_type") + " " + label;
 	}
 
 	/**

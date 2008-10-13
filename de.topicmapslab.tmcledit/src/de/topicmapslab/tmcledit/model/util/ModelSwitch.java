@@ -126,15 +126,15 @@ public class ModelSwitch<T> {
 				return result;
 			}
 			case ModelPackage.SUBJECT_LOCATOR_CONSTRAINT: {
-				subjectLocatorConstraint subjectLocatorConstraint = (subjectLocatorConstraint)theEObject;
-				T result = casesubjectLocatorConstraint(subjectLocatorConstraint);
+				SubjectLocatorConstraint subjectLocatorConstraint = (SubjectLocatorConstraint)theEObject;
+				T result = caseSubjectLocatorConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: {
-				subjectIdentifierConstraint subjectIdentifierConstraint = (subjectIdentifierConstraint)theEObject;
-				T result = casesubjectIdentifierConstraint(subjectIdentifierConstraint);
+				SubjectIdentifierConstraint subjectIdentifierConstraint = (SubjectIdentifierConstraint)theEObject;
+				T result = caseSubjectIdentifierConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -290,32 +290,32 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>subject Locator Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Subject Locator Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>subject Locator Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Subject Locator Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casesubjectLocatorConstraint(subjectLocatorConstraint object) {
+	public T caseSubjectLocatorConstraint(SubjectLocatorConstraint object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>subject Identifier Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Subject Identifier Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>subject Identifier Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Subject Identifier Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casesubjectIdentifierConstraint(subjectIdentifierConstraint object) {
+	public T caseSubjectIdentifierConstraint(SubjectIdentifierConstraint object) {
 		return null;
 	}
 

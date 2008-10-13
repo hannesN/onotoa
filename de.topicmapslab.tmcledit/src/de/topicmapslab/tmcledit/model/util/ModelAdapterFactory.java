@@ -96,12 +96,12 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createTopicMapSchemaAdapter();
 			}
 			@Override
-			public Adapter casesubjectLocatorConstraint(subjectLocatorConstraint object) {
-				return createsubjectLocatorConstraintAdapter();
+			public Adapter caseSubjectLocatorConstraint(SubjectLocatorConstraint object) {
+				return createSubjectLocatorConstraintAdapter();
 			}
 			@Override
-			public Adapter casesubjectIdentifierConstraint(subjectIdentifierConstraint object) {
-				return createsubjectIdentifierConstraintAdapter();
+			public Adapter caseSubjectIdentifierConstraint(SubjectIdentifierConstraint object) {
+				return createSubjectIdentifierConstraintAdapter();
 			}
 			@Override
 			public Adapter caseAssociationTypeConstraint(AssociationTypeConstraint object) {
@@ -244,30 +244,30 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint <em>subject Locator Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint <em>Subject Locator Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.subjectLocatorConstraint
+	 * @see de.topicmapslab.tmcledit.model.SubjectLocatorConstraint
 	 * @generated
 	 */
-	public Adapter createsubjectLocatorConstraintAdapter() {
+	public Adapter createSubjectLocatorConstraintAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.subjectIdentifierConstraint <em>subject Identifier Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint <em>Subject Identifier Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.subjectIdentifierConstraint
+	 * @see de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint
 	 * @generated
 	 */
-	public Adapter createsubjectIdentifierConstraintAdapter() {
+	public Adapter createSubjectIdentifierConstraintAdapter() {
 		return null;
 	}
 

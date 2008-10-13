@@ -15,9 +15,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="nameContraints" upperBound="-1"
         eType="#//NameTypeConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subjectIdentifierConstraints"
-        upperBound="-1" eType="#//subjectIdentifierConstraint" containment="true"/>
+        upperBound="-1" eType="#//SubjectIdentifierConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subjectLocatorConstraint"
-        upperBound="-1" eType="#//subjectLocatorConstraint" containment="true"/>
+        upperBound="-1" eType="#//SubjectLocatorConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//KindOfTopicType"
         defaultValueLiteral="TopicType"/>
   </eClassifiers>
@@ -63,8 +63,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="includes" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="subjectLocatorConstraint" eSuperTypes="#//AbstractConstraint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="subjectIdentifierConstraint" eSuperTypes="#//AbstractConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubjectLocatorConstraint" eSuperTypes="#//AbstractConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubjectIdentifierConstraint" eSuperTypes="#//AbstractConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationTypeConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationType" eType="#//TopicType"/>

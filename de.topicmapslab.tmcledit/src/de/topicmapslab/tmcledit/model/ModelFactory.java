@@ -71,22 +71,22 @@ public interface ModelFactory extends EFactory {
 	TopicMapSchema createTopicMapSchema();
 
 	/**
-	 * Returns a new object of class '<em>subject Locator Constraint</em>'.
+	 * Returns a new object of class '<em>Subject Locator Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>subject Locator Constraint</em>'.
+	 * @return a new object of class '<em>Subject Locator Constraint</em>'.
 	 * @generated
 	 */
-	subjectLocatorConstraint createsubjectLocatorConstraint();
+	SubjectLocatorConstraint createSubjectLocatorConstraint();
 
 	/**
-	 * Returns a new object of class '<em>subject Identifier Constraint</em>'.
+	 * Returns a new object of class '<em>Subject Identifier Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>subject Identifier Constraint</em>'.
+	 * @return a new object of class '<em>Subject Identifier Constraint</em>'.
 	 * @generated
 	 */
-	subjectIdentifierConstraint createsubjectIdentifierConstraint();
+	SubjectIdentifierConstraint createSubjectIdentifierConstraint();
 
 	/**
 	 * Returns a new object of class '<em>Association Type Constraint</em>'.

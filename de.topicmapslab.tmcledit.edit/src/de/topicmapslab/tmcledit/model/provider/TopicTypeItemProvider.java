@@ -319,12 +319,12 @@ public class TopicTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ModelPackage.Literals.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS,
-				 ModelFactory.eINSTANCE.createsubjectIdentifierConstraint()));
+				 ModelFactory.eINSTANCE.createSubjectIdentifierConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ModelPackage.Literals.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT,
-				 ModelFactory.eINSTANCE.createsubjectLocatorConstraint()));
+				 ModelFactory.eINSTANCE.createSubjectLocatorConstraint()));
 	}
 
 	/**

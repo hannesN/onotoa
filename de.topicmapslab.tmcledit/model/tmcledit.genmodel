@@ -65,8 +65,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/mappings"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/includes"/>
     </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//subjectLocatorConstraint"/>
-    <genClasses ecoreClass="tmcledit.ecore#//subjectIdentifierConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//SubjectLocatorConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//SubjectIdentifierConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//AssociationTypeConstraint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/scope"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/associationType"/>

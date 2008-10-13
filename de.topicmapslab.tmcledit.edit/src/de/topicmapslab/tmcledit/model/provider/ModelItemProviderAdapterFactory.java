@@ -191,46 +191,46 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint} instances.
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected subjectLocatorConstraintItemProvider subjectLocatorConstraintItemProvider;
+	protected SubjectLocatorConstraintItemProvider subjectLocatorConstraintItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint}.
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createsubjectLocatorConstraintAdapter() {
+	public Adapter createSubjectLocatorConstraintAdapter() {
 		if (subjectLocatorConstraintItemProvider == null) {
-			subjectLocatorConstraintItemProvider = new subjectLocatorConstraintItemProvider(this);
+			subjectLocatorConstraintItemProvider = new SubjectLocatorConstraintItemProvider(this);
 		}
 
 		return subjectLocatorConstraintItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.subjectIdentifierConstraint} instances.
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected subjectIdentifierConstraintItemProvider subjectIdentifierConstraintItemProvider;
+	protected SubjectIdentifierConstraintItemProvider subjectIdentifierConstraintItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.subjectIdentifierConstraint}.
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createsubjectIdentifierConstraintAdapter() {
+	public Adapter createSubjectIdentifierConstraintAdapter() {
 		if (subjectIdentifierConstraintItemProvider == null) {
-			subjectIdentifierConstraintItemProvider = new subjectIdentifierConstraintItemProvider(this);
+			subjectIdentifierConstraintItemProvider = new SubjectIdentifierConstraintItemProvider(this);
 		}
 
 		return subjectIdentifierConstraintItemProvider;

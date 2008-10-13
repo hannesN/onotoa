@@ -508,11 +508,11 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl <em>subject Locator Constraint</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl <em>Subject Locator Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getsubjectLocatorConstraint()
+	 * @see de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getSubjectLocatorConstraint()
 	 * @generated
 	 */
 	int SUBJECT_LOCATOR_CONSTRAINT = 6;
@@ -563,7 +563,7 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
-	 * The number of structural features of the '<em>subject Locator Constraint</em>' class.
+	 * The number of structural features of the '<em>Subject Locator Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -572,11 +572,11 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.subjectIdentifierConstraintImpl <em>subject Identifier Constraint</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectIdentifierConstraintImpl <em>Subject Identifier Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.subjectIdentifierConstraintImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getsubjectIdentifierConstraint()
+	 * @see de.topicmapslab.tmcledit.model.impl.SubjectIdentifierConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getSubjectIdentifierConstraint()
 	 * @generated
 	 */
 	int SUBJECT_IDENTIFIER_CONSTRAINT = 7;
@@ -627,7 +627,7 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_IDENTIFIER_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
-	 * The number of structural features of the '<em>subject Identifier Constraint</em>' class.
+	 * The number of structural features of the '<em>Subject Identifier Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1429,24 +1429,24 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTopicMapSchema_Includes();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint <em>subject Locator Constraint</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint <em>Subject Locator Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>subject Locator Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.subjectLocatorConstraint
+	 * @return the meta object for class '<em>Subject Locator Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.SubjectLocatorConstraint
 	 * @generated
 	 */
-	EClass getsubjectLocatorConstraint();
+	EClass getSubjectLocatorConstraint();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.subjectIdentifierConstraint <em>subject Identifier Constraint</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint <em>Subject Identifier Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>subject Identifier Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.subjectIdentifierConstraint
+	 * @return the meta object for class '<em>Subject Identifier Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint
 	 * @generated
 	 */
-	EClass getsubjectIdentifierConstraint();
+	EClass getSubjectIdentifierConstraint();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint <em>Association Type Constraint</em>}'.
@@ -2109,24 +2109,24 @@ public interface ModelPackage extends EPackage {
 		EAttribute TOPIC_MAP_SCHEMA__INCLUDES = eINSTANCE.getTopicMapSchema_Includes();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl <em>subject Locator Constraint</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl <em>Subject Locator Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.subjectLocatorConstraintImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getsubjectLocatorConstraint()
+		 * @see de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getSubjectLocatorConstraint()
 		 * @generated
 		 */
-		EClass SUBJECT_LOCATOR_CONSTRAINT = eINSTANCE.getsubjectLocatorConstraint();
+		EClass SUBJECT_LOCATOR_CONSTRAINT = eINSTANCE.getSubjectLocatorConstraint();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.subjectIdentifierConstraintImpl <em>subject Identifier Constraint</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectIdentifierConstraintImpl <em>Subject Identifier Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.subjectIdentifierConstraintImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getsubjectIdentifierConstraint()
+		 * @see de.topicmapslab.tmcledit.model.impl.SubjectIdentifierConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getSubjectIdentifierConstraint()
 		 * @generated
 		 */
-		EClass SUBJECT_IDENTIFIER_CONSTRAINT = eINSTANCE.getsubjectIdentifierConstraint();
+		EClass SUBJECT_IDENTIFIER_CONSTRAINT = eINSTANCE.getSubjectIdentifierConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl <em>Association Type Constraint</em>}' class.

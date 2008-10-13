@@ -7,26 +7,26 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.subjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>subject Identifier Constraint</b></em>'.
+ * An implementation of the model object '<em><b>Subject Locator Constraint</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class subjectIdentifierConstraintImpl extends AbstractConstraintImpl implements subjectIdentifierConstraint {
+public class SubjectLocatorConstraintImpl extends AbstractConstraintImpl implements SubjectLocatorConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected subjectIdentifierConstraintImpl() {
+	protected SubjectLocatorConstraintImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class subjectIdentifierConstraintImpl extends AbstractConstraintImpl impl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.SUBJECT_IDENTIFIER_CONSTRAINT;
+		return ModelPackage.Literals.SUBJECT_LOCATOR_CONSTRAINT;
 	}
 
-} //subjectIdentifierConstraintImpl
+} //SubjectLocatorConstraintImpl

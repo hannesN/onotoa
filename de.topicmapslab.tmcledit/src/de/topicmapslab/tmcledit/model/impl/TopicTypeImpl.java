@@ -10,10 +10,10 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.subjectIdentifierConstraint;
-import de.topicmapslab.tmcledit.model.subjectLocatorConstraint;
 
 import java.util.Collection;
 
@@ -163,7 +163,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<subjectIdentifierConstraint> subjectIdentifierConstraints;
+	protected EList<SubjectIdentifierConstraint> subjectIdentifierConstraints;
 
 	/**
 	 * The cached value of the '{@link #getSubjectLocatorConstraint() <em>Subject Locator Constraint</em>}' containment reference list.
@@ -173,7 +173,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<subjectLocatorConstraint> subjectLocatorConstraint;
+	protected EList<SubjectLocatorConstraint> subjectLocatorConstraint;
 
 	/**
 	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -330,9 +330,9 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<subjectIdentifierConstraint> getSubjectIdentifierConstraints() {
+	public EList<SubjectIdentifierConstraint> getSubjectIdentifierConstraints() {
 		if (subjectIdentifierConstraints == null) {
-			subjectIdentifierConstraints = new EObjectContainmentEList<subjectIdentifierConstraint>(subjectIdentifierConstraint.class, this, ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
+			subjectIdentifierConstraints = new EObjectContainmentEList<SubjectIdentifierConstraint>(SubjectIdentifierConstraint.class, this, ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
 		}
 		return subjectIdentifierConstraints;
 	}
@@ -342,9 +342,9 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<subjectLocatorConstraint> getSubjectLocatorConstraint() {
+	public EList<SubjectLocatorConstraint> getSubjectLocatorConstraint() {
 		if (subjectLocatorConstraint == null) {
-			subjectLocatorConstraint = new EObjectContainmentEList<subjectLocatorConstraint>(subjectLocatorConstraint.class, this, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
+			subjectLocatorConstraint = new EObjectContainmentEList<SubjectLocatorConstraint>(SubjectLocatorConstraint.class, this, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
 		}
 		return subjectLocatorConstraint;
 	}
@@ -458,11 +458,11 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return;
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				getSubjectIdentifierConstraints().clear();
-				getSubjectIdentifierConstraints().addAll((Collection<? extends subjectIdentifierConstraint>)newValue);
+				getSubjectIdentifierConstraints().addAll((Collection<? extends SubjectIdentifierConstraint>)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				getSubjectLocatorConstraint().clear();
-				getSubjectLocatorConstraint().addAll((Collection<? extends subjectLocatorConstraint>)newValue);
+				getSubjectLocatorConstraint().addAll((Collection<? extends SubjectLocatorConstraint>)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__KIND:
 				setKind((KindOfTopicType)newValue);

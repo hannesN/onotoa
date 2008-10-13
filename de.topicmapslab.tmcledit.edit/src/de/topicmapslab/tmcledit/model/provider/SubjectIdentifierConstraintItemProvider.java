@@ -7,7 +7,7 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.subjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,12 +23,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.subjectLocatorConstraint} object.
+ * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class subjectLocatorConstraintItemProvider
+public class SubjectIdentifierConstraintItemProvider
 	extends AbstractConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -42,7 +42,7 @@ public class subjectLocatorConstraintItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public subjectLocatorConstraintItemProvider(AdapterFactory adapterFactory) {
+	public SubjectIdentifierConstraintItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,14 +62,14 @@ public class subjectLocatorConstraintItemProvider
 	}
 
 	/**
-	 * This returns subjectLocatorConstraint.gif.
+	 * This returns SubjectIdentifierConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/subjectLocatorConstraint"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SubjectIdentifierConstraint"));
 	}
 
 	/**
@@ -80,10 +80,10 @@ public class subjectLocatorConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((subjectLocatorConstraint)object).getName();
+		String label = ((SubjectIdentifierConstraint)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_subjectLocatorConstraint_type") :
-			getString("_UI_subjectLocatorConstraint_type") + " " + label;
+			getString("_UI_SubjectIdentifierConstraint_type") :
+			getString("_UI_SubjectIdentifierConstraint_type") + " " + label;
 	}
 
 	/**

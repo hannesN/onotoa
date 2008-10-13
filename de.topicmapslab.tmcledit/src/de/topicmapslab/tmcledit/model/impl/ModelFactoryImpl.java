@@ -66,8 +66,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.NAME_TYPE_CONSTRAINT: return createNameTypeConstraint();
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS: return createRoleTypeConstraints();
 			case ModelPackage.TOPIC_MAP_SCHEMA: return createTopicMapSchema();
-			case ModelPackage.SUBJECT_LOCATOR_CONSTRAINT: return createsubjectLocatorConstraint();
-			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: return createsubjectIdentifierConstraint();
+			case ModelPackage.SUBJECT_LOCATOR_CONSTRAINT: return createSubjectLocatorConstraint();
+			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: return createSubjectIdentifierConstraint();
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT: return createAssociationTypeConstraint();
 			case ModelPackage.MAPPING_ELEMENT: return createMappingElement();
 			case ModelPackage.NODE: return createNode();
@@ -175,8 +175,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public subjectLocatorConstraint createsubjectLocatorConstraint() {
-		subjectLocatorConstraintImpl subjectLocatorConstraint = new subjectLocatorConstraintImpl();
+	public SubjectLocatorConstraint createSubjectLocatorConstraint() {
+		SubjectLocatorConstraintImpl subjectLocatorConstraint = new SubjectLocatorConstraintImpl();
 		return subjectLocatorConstraint;
 	}
 
@@ -185,8 +185,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public subjectIdentifierConstraint createsubjectIdentifierConstraint() {
-		subjectIdentifierConstraintImpl subjectIdentifierConstraint = new subjectIdentifierConstraintImpl();
+	public SubjectIdentifierConstraint createSubjectIdentifierConstraint() {
+		SubjectIdentifierConstraintImpl subjectIdentifierConstraint = new SubjectIdentifierConstraintImpl();
 		return subjectIdentifierConstraint;
 	}
 
