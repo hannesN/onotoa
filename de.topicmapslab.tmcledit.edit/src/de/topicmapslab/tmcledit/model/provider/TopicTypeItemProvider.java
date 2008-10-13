@@ -72,6 +72,7 @@ public class TopicTypeItemProvider
 			addIsAbstractPropertyDescriptor(object);
 			addIsaPropertyDescriptor(object);
 			addAkoPropertyDescriptor(object);
+			addKindPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -187,6 +188,28 @@ public class TopicTypeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Kind feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addKindPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicType_kind_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_kind_feature", "_UI_TopicType_type"),
+				 ModelPackage.Literals.TOPIC_TYPE__KIND,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -259,6 +282,7 @@ public class TopicTypeItemProvider
 			case ModelPackage.TOPIC_TYPE__ID:
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
+			case ModelPackage.TOPIC_TYPE__KIND:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:

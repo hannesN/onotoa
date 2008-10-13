@@ -76,18 +76,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createTopicTypeAdapter();
 			}
 			@Override
-			public Adapter caseOccurenceType(OccurenceType object) {
-				return createOccurenceTypeAdapter();
-			}
-			@Override
-			public Adapter caseNameType(NameType object) {
-				return createNameTypeAdapter();
-			}
-			@Override
-			public Adapter caseScopeType(ScopeType object) {
-				return createScopeTypeAdapter();
-			}
-			@Override
 			public Adapter caseAbstractConstraint(AbstractConstraint object) {
 				return createAbstractConstraintAdapter();
 			}
@@ -98,14 +86,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNameTypeConstraint(NameTypeConstraint object) {
 				return createNameTypeConstraintAdapter();
-			}
-			@Override
-			public Adapter caseAssociationsType(AssociationsType object) {
-				return createAssociationsTypeAdapter();
-			}
-			@Override
-			public Adapter caseRoleType(RoleType object) {
-				return createRoleTypeAdapter();
 			}
 			@Override
 			public Adapter caseRoleTypeConstraints(RoleTypeConstraints object) {
@@ -194,48 +174,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OccurenceType <em>Occurence Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceType
-	 * @generated
-	 */
-	public Adapter createOccurenceTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.NameType <em>Name Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.NameType
-	 * @generated
-	 */
-	public Adapter createNameTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ScopeType <em>Scope Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.ScopeType
-	 * @generated
-	 */
-	public Adapter createScopeTypeAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractConstraint <em>Abstract Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -274,34 +212,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNameTypeConstraintAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AssociationsType <em>Associations Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.AssociationsType
-	 * @generated
-	 */
-	public Adapter createAssociationsTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RoleType <em>Role Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.RoleType
-	 * @generated
-	 */
-	public Adapter createRoleTypeAdapter() {
 		return null;
 	}
 

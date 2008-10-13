@@ -18,6 +18,8 @@
         upperBound="-1" eType="#//subjectIdentifierConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subjectLocatorConstraint"
         upperBound="-1" eType="#//subjectLocatorConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//KindOfTopicType"
+        defaultValueLiteral="TopicType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TopicId">
     <eLiterals name="SUBJECT_LOCATOR"/>
@@ -25,9 +27,6 @@
     <eLiterals name="ITEM_IDENTIFIER" value="2"/>
     <eLiterals name="IDENTIFIER" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OccurenceType" eSuperTypes="#//TopicType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NameType" eSuperTypes="#//TopicType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ScopeType" eSuperTypes="#//TopicType"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractConstraint" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="0"/>
@@ -36,24 +35,22 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexp" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="*"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//ScopeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//TopicType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OccurenceTypeConstraint" eSuperTypes="#//AbstractConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//OccurenceType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TopicType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NameTypeConstraint" eSuperTypes="#//AbstractConstraint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//NameType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TopicType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationsType" eSuperTypes="#//TopicType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleType" eSuperTypes="#//TopicType"/>
   <eClassifiers xsi:type="ecore:EClass" name="RoleTypeConstraints">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//RoleType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="topicType" eType="#//TopicType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TopicMapSchema">
@@ -69,8 +66,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="subjectLocatorConstraint" eSuperTypes="#//AbstractConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="subjectIdentifierConstraint" eSuperTypes="#//AbstractConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationTypeConstraint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//ScopeType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="associationType" eType="#//AssociationsType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//TopicType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associationType" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleTypeConstraints" lowerBound="1"
         upperBound="-1" eType="#//RoleTypeConstraints" containment="true"/>
   </eClassifiers>
@@ -124,5 +121,13 @@
     <eLiterals name="IS_ATYPE"/>
     <eLiterals name="AKO_TYPE" value="1"/>
     <eLiterals name="ROLE_CONSTRAINT_TYPE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="KindOfTopicType">
+    <eLiterals name="TopicType"/>
+    <eLiterals name="OccurenceType" value="1"/>
+    <eLiterals name="NameType" value="2"/>
+    <eLiterals name="RoleType" value="3"/>
+    <eLiterals name="AssociationType" value="4"/>
+    <eLiterals name="ScopeType" value="5"/>
   </eClassifiers>
 </ecore:EPackage>

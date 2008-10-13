@@ -8,7 +8,7 @@ package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.ScopeType;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -124,7 +124,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * @generated
 	 * @ordered
 	 */
-	protected ScopeType scope;
+	protected TopicType scope;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -234,10 +234,10 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ScopeType getScope() {
+	public TopicType getScope() {
 		if (scope != null && scope.eIsProxy()) {
 			InternalEObject oldScope = (InternalEObject)scope;
-			scope = (ScopeType)eResolveProxy(oldScope);
+			scope = (TopicType)eResolveProxy(oldScope);
 			if (scope != oldScope) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ABSTRACT_CONSTRAINT__SCOPE, oldScope, scope));
@@ -251,7 +251,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ScopeType basicGetScope() {
+	public TopicType basicGetScope() {
 		return scope;
 	}
 
@@ -260,8 +260,8 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setScope(ScopeType newScope) {
-		ScopeType oldScope = scope;
+	public void setScope(TopicType newScope) {
+		TopicType oldScope = scope;
 		scope = newScope;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONSTRAINT__SCOPE, oldScope, scope));
@@ -311,7 +311,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				setName((String)newValue);
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				setScope((ScopeType)newValue);
+				setScope((TopicType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -338,7 +338,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				setName(NAME_EDEFAULT);
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				setScope((ScopeType)null);
+				setScope((TopicType)null);
 				return;
 		}
 		super.eUnset(featureID);

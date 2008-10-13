@@ -87,12 +87,12 @@ public interface OccurenceTypeConstraint extends AbstractConstraint {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(OccurenceType)
+	 * @see #setType(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint_Type()
 	 * @model
 	 * @generated
 	 */
-	OccurenceType getType();
+	TopicType getType();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#getType <em>Type</em>}' reference.
@@ -102,6 +102,6 @@ public interface OccurenceTypeConstraint extends AbstractConstraint {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(OccurenceType value);
+	void setType(TopicType value);
 
 } // OccurenceTypeConstraint

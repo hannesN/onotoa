@@ -91,12 +91,12 @@ public interface RoleTypeConstraints extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(RoleType)
+	 * @see #setType(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	RoleType getType();
+	TopicType getType();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getType <em>Type</em>}' reference.
@@ -106,7 +106,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(RoleType value);
+	void setType(TopicType value);
 
 	/**
 	 * Returns the value of the '<em><b>Topic Type</b></em>' reference.

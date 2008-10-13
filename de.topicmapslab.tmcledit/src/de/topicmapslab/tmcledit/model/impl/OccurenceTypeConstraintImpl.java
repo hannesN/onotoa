@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -81,7 +81,7 @@ public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected OccurenceType type;
+	protected TopicType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,10 +149,10 @@ public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OccurenceType getType() {
+	public TopicType getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (OccurenceType)eResolveProxy(oldType);
+			type = (TopicType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
@@ -166,7 +166,7 @@ public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OccurenceType basicGetType() {
+	public TopicType basicGetType() {
 		return type;
 	}
 
@@ -175,8 +175,8 @@ public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(OccurenceType newType) {
-		OccurenceType oldType = type;
+	public void setType(TopicType newType) {
+		TopicType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
@@ -216,7 +216,7 @@ public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implemen
 				setDataType((String)newValue);
 				return;
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
-				setType((OccurenceType)newValue);
+				setType((TopicType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -237,7 +237,7 @@ public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implemen
 				setDataType(DATA_TYPE_EDEFAULT);
 				return;
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
-				setType((OccurenceType)null);
+				setType((TopicType)null);
 				return;
 		}
 		super.eUnset(featureID);

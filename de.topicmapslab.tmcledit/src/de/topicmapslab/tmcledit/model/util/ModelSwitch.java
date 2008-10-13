@@ -93,27 +93,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.OCCURENCE_TYPE: {
-				OccurenceType occurenceType = (OccurenceType)theEObject;
-				T result = caseOccurenceType(occurenceType);
-				if (result == null) result = caseTopicType(occurenceType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.NAME_TYPE: {
-				NameType nameType = (NameType)theEObject;
-				T result = caseNameType(nameType);
-				if (result == null) result = caseTopicType(nameType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.SCOPE_TYPE: {
-				ScopeType scopeType = (ScopeType)theEObject;
-				T result = caseScopeType(scopeType);
-				if (result == null) result = caseTopicType(scopeType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ModelPackage.ABSTRACT_CONSTRAINT: {
 				AbstractConstraint abstractConstraint = (AbstractConstraint)theEObject;
 				T result = caseAbstractConstraint(abstractConstraint);
@@ -131,20 +110,6 @@ public class ModelSwitch<T> {
 				NameTypeConstraint nameTypeConstraint = (NameTypeConstraint)theEObject;
 				T result = caseNameTypeConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.ASSOCIATIONS_TYPE: {
-				AssociationsType associationsType = (AssociationsType)theEObject;
-				T result = caseAssociationsType(associationsType);
-				if (result == null) result = caseTopicType(associationsType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.ROLE_TYPE: {
-				RoleType roleType = (RoleType)theEObject;
-				T result = caseRoleType(roleType);
-				if (result == null) result = caseTopicType(roleType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -250,51 +215,6 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Occurence Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Occurence Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOccurenceType(OccurenceType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Name Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Name Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNameType(NameType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scope Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scope Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScopeType(ScopeType object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Abstract Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -336,36 +256,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseNameTypeConstraint(NameTypeConstraint object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Associations Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Associations Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssociationsType(AssociationsType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Role Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Role Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRoleType(RoleType object) {
 		return null;
 	}
 

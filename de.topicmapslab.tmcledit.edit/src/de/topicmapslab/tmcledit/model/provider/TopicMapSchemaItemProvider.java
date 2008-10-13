@@ -211,31 +211,6 @@ public class TopicMapSchemaItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 ModelFactory.eINSTANCE.createOccurenceType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 ModelFactory.eINSTANCE.createNameType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 ModelFactory.eINSTANCE.createScopeType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 ModelFactory.eINSTANCE.createAssociationsType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 ModelFactory.eINSTANCE.createRoleType()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS,
 				 ModelFactory.eINSTANCE.createAssociationTypeConstraint()));
 	}

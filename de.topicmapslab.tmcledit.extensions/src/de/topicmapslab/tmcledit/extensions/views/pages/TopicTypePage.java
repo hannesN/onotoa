@@ -24,11 +24,6 @@ import org.eclipse.ui.forms.widgets.Section;
 import de.topicmapslab.tmcledit.extensions.TopicSelectionDialog;
 import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
 import de.topicmapslab.tmcledit.extensions.command.SetIsACommand;
-import de.topicmapslab.tmcledit.model.AssociationsType;
-import de.topicmapslab.tmcledit.model.NameType;
-import de.topicmapslab.tmcledit.model.OccurenceType;
-import de.topicmapslab.tmcledit.model.RoleType;
-import de.topicmapslab.tmcledit.model.ScopeType;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -155,17 +150,19 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	}
 
 	private String getTopicType(TopicType t) {
-		if (t instanceof RoleType)
+		switch (t.getKind()) {
+		case ROLE_TYPE:
 			return "Role Type";
-		if (t instanceof NameType)
+		case NAME_TYPE:
 			return "Name Type";
-		if (t instanceof AssociationsType)
+		case ASSOCIATION_TYPE:
 			return "Association Type";
-		if (t instanceof OccurenceType)
+		case OCCURENCE_TYPE:
 			return "OccurenceType";
-		if (t instanceof ScopeType)
+		case SCOPE_TYPE:
 			return "Scope Type";
-
-		return "Topic Type";
+		default:
+			return "Topic Type";
+		}
 	}
 }

@@ -145,12 +145,12 @@ public interface AbstractConstraint extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Scope</em>' reference.
-	 * @see #setScope(ScopeType)
+	 * @see #setScope(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractConstraint_Scope()
 	 * @model
 	 * @generated
 	 */
-	ScopeType getScope();
+	TopicType getScope();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}' reference.
@@ -160,6 +160,6 @@ public interface AbstractConstraint extends EObject {
 	 * @see #getScope()
 	 * @generated
 	 */
-	void setScope(ScopeType value);
+	void setScope(TopicType value);
 
 } // AbstractConstraint

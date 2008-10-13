@@ -10,8 +10,8 @@ import de.topicmapslab.tmcledit.model.Bendpoints;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-
 import de.topicmapslab.tmcledit.model.Node;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -64,6 +64,7 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * @ordered
 	 */
 	protected Node source;
+
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->

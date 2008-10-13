@@ -3,7 +3,6 @@ package de.topicmapslab.tmcledit.model.commands;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -17,10 +16,11 @@ public class CreateOccurenceConstraintCommand extends AbstractCommand {
 	private final TopicType topicType;
 	
 	private OccurenceTypeConstraint otc;
-	private OccurenceType ot;
+	private TopicType ot;
 	
 	public CreateOccurenceConstraintCommand(TopicType topicType) {
 		this.topicType = topicType;
+		// TODO Occurence type festlegen
 	}
 	
 	@Override

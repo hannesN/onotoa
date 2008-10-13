@@ -6,11 +6,13 @@ package de.topicmapslab.tmcledit.extensions.views.treenodes;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 /**
  * @author Hannes Niederhausen
@@ -79,7 +81,11 @@ public class TreeTopic extends TreeParent {
 
 			getModelView().getEditingDomain().getCommandStack().execute(
 					new RenameCommand(topic, dlg.getValue()));
-
 		}
+	}
+	
+	@Override
+	public Image getImage() {
+		return ImageProvider.getTopicTypeImage(topic);
 	}
 }

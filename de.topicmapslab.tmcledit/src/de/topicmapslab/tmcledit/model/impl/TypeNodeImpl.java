@@ -40,6 +40,7 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 	 * @ordered
 	 */
 	protected TopicType topicType;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

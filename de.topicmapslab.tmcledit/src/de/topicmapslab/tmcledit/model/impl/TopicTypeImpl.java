@@ -6,6 +6,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
@@ -47,6 +48,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getNameContraints <em>Name Contraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
  *
@@ -172,6 +174,26 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * @ordered
 	 */
 	protected EList<subjectLocatorConstraint> subjectLocatorConstraint;
+
+	/**
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final KindOfTopicType KIND_EDEFAULT = KindOfTopicType.TOPIC_TYPE;
+
+	/**
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected KindOfTopicType kind = KIND_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -332,6 +354,27 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public KindOfTopicType getKind() {
+		return kind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKind(KindOfTopicType newKind) {
+		KindOfTopicType oldKind = kind;
+		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__KIND, oldKind, kind));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -373,6 +416,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return getSubjectIdentifierConstraints();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				return getSubjectLocatorConstraint();
+			case ModelPackage.TOPIC_TYPE__KIND:
+				return getKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -419,6 +464,9 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				getSubjectLocatorConstraint().clear();
 				getSubjectLocatorConstraint().addAll((Collection<? extends subjectLocatorConstraint>)newValue);
 				return;
+			case ModelPackage.TOPIC_TYPE__KIND:
+				setKind((KindOfTopicType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -458,6 +506,9 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				getSubjectLocatorConstraint().clear();
 				return;
+			case ModelPackage.TOPIC_TYPE__KIND:
+				setKind(KIND_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -488,6 +539,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return subjectIdentifierConstraints != null && !subjectIdentifierConstraints.isEmpty();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT:
 				return subjectLocatorConstraint != null && !subjectLocatorConstraint.isEmpty();
+			case ModelPackage.TOPIC_TYPE__KIND:
+				return kind != KIND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -508,6 +561,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 		result.append(idType);
 		result.append(", isAbstract: ");
 		result.append(isAbstract);
+		result.append(", kind: ");
+		result.append(kind);
 		result.append(')');
 		return result.toString();
 	}

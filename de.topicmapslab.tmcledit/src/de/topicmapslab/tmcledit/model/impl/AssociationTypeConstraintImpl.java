@@ -7,10 +7,9 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.AssociationsType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
-import de.topicmapslab.tmcledit.model.ScopeType;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 import java.util.Collection;
 
@@ -52,7 +51,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * @generated
 	 * @ordered
 	 */
-	protected ScopeType scope;
+	protected TopicType scope;
 
 	/**
 	 * The cached value of the '{@link #getAssociationType() <em>Association Type</em>}' reference.
@@ -62,7 +61,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * @generated
 	 * @ordered
 	 */
-	protected AssociationsType associationType;
+	protected TopicType associationType;
 
 	/**
 	 * The cached value of the '{@link #getRoleTypeConstraints() <em>Role Type Constraints</em>}' containment reference list.
@@ -98,10 +97,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ScopeType getScope() {
+	public TopicType getScope() {
 		if (scope != null && scope.eIsProxy()) {
 			InternalEObject oldScope = (InternalEObject)scope;
-			scope = (ScopeType)eResolveProxy(oldScope);
+			scope = (TopicType)eResolveProxy(oldScope);
 			if (scope != oldScope) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
@@ -115,7 +114,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ScopeType basicGetScope() {
+	public TopicType basicGetScope() {
 		return scope;
 	}
 
@@ -124,8 +123,8 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setScope(ScopeType newScope) {
-		ScopeType oldScope = scope;
+	public void setScope(TopicType newScope) {
+		TopicType oldScope = scope;
 		scope = newScope;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
@@ -136,10 +135,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssociationsType getAssociationType() {
+	public TopicType getAssociationType() {
 		if (associationType != null && associationType.eIsProxy()) {
 			InternalEObject oldAssociationType = (InternalEObject)associationType;
-			associationType = (AssociationsType)eResolveProxy(oldAssociationType);
+			associationType = (TopicType)eResolveProxy(oldAssociationType);
 			if (associationType != oldAssociationType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
@@ -153,7 +152,7 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssociationsType basicGetAssociationType() {
+	public TopicType basicGetAssociationType() {
 		return associationType;
 	}
 
@@ -162,8 +161,8 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAssociationType(AssociationsType newAssociationType) {
-		AssociationsType oldAssociationType = associationType;
+	public void setAssociationType(TopicType newAssociationType) {
+		TopicType oldAssociationType = associationType;
 		associationType = newAssociationType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
@@ -225,10 +224,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
-				setScope((ScopeType)newValue);
+				setScope((TopicType)newValue);
 				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
-				setAssociationType((AssociationsType)newValue);
+				setAssociationType((TopicType)newValue);
 				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
 				getRoleTypeConstraints().clear();
@@ -247,10 +246,10 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
-				setScope((ScopeType)null);
+				setScope((TopicType)null);
 				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
-				setAssociationType((AssociationsType)null);
+				setAssociationType((TopicType)null);
 				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
 				getRoleTypeConstraints().clear();

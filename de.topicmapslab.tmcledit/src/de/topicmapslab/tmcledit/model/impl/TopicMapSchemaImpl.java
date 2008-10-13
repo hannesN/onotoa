@@ -45,7 +45,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
-	
 	/**
 	 * The cached value of the '{@link #getTopicTypes() <em>Topic Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -277,5 +276,5 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 		result.append(')');
 		return result.toString();
 	}
-	
+
 } //TopicMapSchemaImpl

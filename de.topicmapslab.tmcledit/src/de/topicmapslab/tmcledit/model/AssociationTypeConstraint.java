@@ -38,12 +38,12 @@ public interface AssociationTypeConstraint extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Scope</em>' reference.
-	 * @see #setScope(ScopeType)
+	 * @see #setScope(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationTypeConstraint_Scope()
 	 * @model
 	 * @generated
 	 */
-	ScopeType getScope();
+	TopicType getScope();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getScope <em>Scope</em>}' reference.
@@ -53,7 +53,7 @@ public interface AssociationTypeConstraint extends EObject {
 	 * @see #getScope()
 	 * @generated
 	 */
-	void setScope(ScopeType value);
+	void setScope(TopicType value);
 
 	/**
 	 * Returns the value of the '<em><b>Association Type</b></em>' reference.
@@ -64,12 +64,12 @@ public interface AssociationTypeConstraint extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Association Type</em>' reference.
-	 * @see #setAssociationType(AssociationsType)
+	 * @see #setAssociationType(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationTypeConstraint_AssociationType()
 	 * @model
 	 * @generated
 	 */
-	AssociationsType getAssociationType();
+	TopicType getAssociationType();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getAssociationType <em>Association Type</em>}' reference.
@@ -79,7 +79,7 @@ public interface AssociationTypeConstraint extends EObject {
 	 * @see #getAssociationType()
 	 * @generated
 	 */
-	void setAssociationType(AssociationsType value);
+	void setAssociationType(TopicType value);
 
 	/**
 	 * Returns the value of the '<em><b>Role Type Constraints</b></em>' containment reference list.

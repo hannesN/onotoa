@@ -152,313 +152,22 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = 8;
 
 	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_TYPE__KIND = 9;
+
+	/**
 	 * The number of structural features of the '<em>Topic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE_FEATURE_COUNT = 9;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl <em>Occurence Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurenceType()
-	 * @generated
-	 */
-	int OCCURENCE_TYPE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__ID = TOPIC_TYPE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__IS_ABSTRACT = TOPIC_TYPE__IS_ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Isa</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__ISA = TOPIC_TYPE__ISA;
-
-	/**
-	 * The feature id for the '<em><b>Ako</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__AKO = TOPIC_TYPE__AKO;
-
-	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__OCCURENCE_CONSTRAINTS = TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
-
-	/**
-	 * The number of structural features of the '<em>Occurence Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl <em>Name Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.NameTypeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNameType()
-	 * @generated
-	 */
-	int NAME_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__ID = TOPIC_TYPE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__IS_ABSTRACT = TOPIC_TYPE__IS_ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Isa</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__ISA = TOPIC_TYPE__ISA;
-
-	/**
-	 * The feature id for the '<em><b>Ako</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__AKO = TOPIC_TYPE__AKO;
-
-	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__OCCURENCE_CONSTRAINTS = TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
-
-	/**
-	 * The number of structural features of the '<em>Name Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeTypeImpl <em>Scope Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.ScopeTypeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getScopeType()
-	 * @generated
-	 */
-	int SCOPE_TYPE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__ID = TOPIC_TYPE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__IS_ABSTRACT = TOPIC_TYPE__IS_ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Isa</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__ISA = TOPIC_TYPE__ISA;
-
-	/**
-	 * The feature id for the '<em><b>Ako</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__AKO = TOPIC_TYPE__AKO;
-
-	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__OCCURENCE_CONSTRAINTS = TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
-
-	/**
-	 * The number of structural features of the '<em>Scope Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 0;
+	int TOPIC_TYPE_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.
@@ -468,7 +177,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractConstraint()
 	 * @generated
 	 */
-	int ABSTRACT_CONSTRAINT = 4;
+	int ABSTRACT_CONSTRAINT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -532,7 +241,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurenceTypeConstraint()
 	 * @generated
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT = 5;
+	int OCCURENCE_TYPE_CONSTRAINT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -623,7 +332,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNameTypeConstraint()
 	 * @generated
 	 */
-	int NAME_TYPE_CONSTRAINT = 6;
+	int NAME_TYPE_CONSTRAINT = 3;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -689,206 +398,6 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationsTypeImpl <em>Associations Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.AssociationsTypeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationsType()
-	 * @generated
-	 */
-	int ASSOCIATIONS_TYPE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__ID = TOPIC_TYPE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__IS_ABSTRACT = TOPIC_TYPE__IS_ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Isa</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__ISA = TOPIC_TYPE__ISA;
-
-	/**
-	 * The feature id for the '<em><b>Ako</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__AKO = TOPIC_TYPE__AKO;
-
-	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__OCCURENCE_CONSTRAINTS = TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
-
-	/**
-	 * The number of structural features of the '<em>Associations Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIONS_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleTypeImpl <em>Role Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.RoleTypeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleType()
-	 * @generated
-	 */
-	int ROLE_TYPE = 8;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__ID = TOPIC_TYPE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__IS_ABSTRACT = TOPIC_TYPE__IS_ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Isa</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__ISA = TOPIC_TYPE__ISA;
-
-	/**
-	 * The feature id for the '<em><b>Ako</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__AKO = TOPIC_TYPE__AKO;
-
-	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__OCCURENCE_CONSTRAINTS = TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
-
-	/**
-	 * The number of structural features of the '<em>Role Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleTypeConstraintsImpl <em>Role Type Constraints</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -896,7 +405,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleTypeConstraints()
 	 * @generated
 	 */
-	int ROLE_TYPE_CONSTRAINTS = 9;
+	int ROLE_TYPE_CONSTRAINTS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -951,7 +460,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicMapSchema()
 	 * @generated
 	 */
-	int TOPIC_MAP_SCHEMA = 10;
+	int TOPIC_MAP_SCHEMA = 5;
 
 	/**
 	 * The feature id for the '<em><b>Topic Types</b></em>' containment reference list.
@@ -1006,7 +515,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getsubjectLocatorConstraint()
 	 * @generated
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT = 11;
+	int SUBJECT_LOCATOR_CONSTRAINT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -1070,7 +579,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getsubjectIdentifierConstraint()
 	 * @generated
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT = 12;
+	int SUBJECT_IDENTIFIER_CONSTRAINT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -1134,7 +643,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationTypeConstraint()
 	 * @generated
 	 */
-	int ASSOCIATION_TYPE_CONSTRAINT = 13;
+	int ASSOCIATION_TYPE_CONSTRAINT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -1180,7 +689,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getMappingElement()
 	 * @generated
 	 */
-	int MAPPING_ELEMENT = 14;
+	int MAPPING_ELEMENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1217,7 +726,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 15;
+	int NODE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1254,7 +763,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTypeNode()
 	 * @generated
 	 */
-	int TYPE_NODE = 16;
+	int TYPE_NODE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1300,7 +809,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendpoints()
 	 * @generated
 	 */
-	int BENDPOINTS = 17;
+	int BENDPOINTS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1337,7 +846,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdge()
 	 * @generated
 	 */
-	int EDGE = 18;
+	int EDGE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Bendpoints</b></em>' containment reference list.
@@ -1392,7 +901,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationNode()
 	 * @generated
 	 */
-	int ASSOCIATION_NODE = 19;
+	int ASSOCIATION_NODE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1438,7 +947,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDiagram()
 	 * @generated
 	 */
-	int DIAGRAM = 20;
+	int DIAGRAM = 15;
 
 	/**
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
@@ -1484,7 +993,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 21;
+	int FILE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Diagrams</b></em>' containment reference list.
@@ -1539,8 +1048,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 22;
-
+	int TOPIC_ID = 17;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -1550,7 +1058,17 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 23;
+	int EDGE_TYPE = 18;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.KindOfTopicType
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
+	 * @generated
+	 */
+	int KIND_OF_TOPIC_TYPE = 19;
 
 
 	/**
@@ -1663,34 +1181,15 @@ public interface ModelPackage extends EPackage {
 	EReference getTopicType_SubjectLocatorConstraint();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurenceType <em>Occurence Type</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Occurence Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceType
+	 * @return the meta object for the attribute '<em>Kind</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getKind()
+	 * @see #getTopicType()
 	 * @generated
 	 */
-	EClass getOccurenceType();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.NameType <em>Name Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Name Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.NameType
-	 * @generated
-	 */
-	EClass getNameType();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ScopeType <em>Scope Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Scope Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.ScopeType
-	 * @generated
-	 */
-	EClass getScopeType();
+	EAttribute getTopicType_Kind();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractConstraint <em>Abstract Constraint</em>}'.
@@ -1820,26 +1319,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNameTypeConstraint_Type();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AssociationsType <em>Associations Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Associations Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AssociationsType
-	 * @generated
-	 */
-	EClass getAssociationsType();
-
-	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleType <em>Role Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Role Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RoleType
-	 * @generated
-	 */
-	EClass getRoleType();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints <em>Role Type Constraints</em>}'.
@@ -2322,6 +1801,16 @@ public interface ModelPackage extends EPackage {
 	EEnum getEdgeType();
 
 	/**
+	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Kind Of Topic Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.KindOfTopicType
+	 * @generated
+	 */
+	EEnum getKindOfTopicType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2426,34 +1915,12 @@ public interface ModelPackage extends EPackage {
 		EReference TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = eINSTANCE.getTopicType_SubjectLocatorConstraint();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl <em>Occurence Type</em>}' class.
+		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurenceType()
 		 * @generated
 		 */
-		EClass OCCURENCE_TYPE = eINSTANCE.getOccurenceType();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl <em>Name Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.NameTypeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getNameType()
-		 * @generated
-		 */
-		EClass NAME_TYPE = eINSTANCE.getNameType();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeTypeImpl <em>Scope Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.ScopeTypeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getScopeType()
-		 * @generated
-		 */
-		EClass SCOPE_TYPE = eINSTANCE.getScopeType();
+		EAttribute TOPIC_TYPE__KIND = eINSTANCE.getTopicType_Kind();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.
@@ -2556,26 +2023,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference NAME_TYPE_CONSTRAINT__TYPE = eINSTANCE.getNameTypeConstraint_Type();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationsTypeImpl <em>Associations Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.AssociationsTypeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAssociationsType()
-		 * @generated
-		 */
-		EClass ASSOCIATIONS_TYPE = eINSTANCE.getAssociationsType();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleTypeImpl <em>Role Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.RoleTypeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleType()
-		 * @generated
-		 */
-		EClass ROLE_TYPE = eINSTANCE.getRoleType();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleTypeConstraintsImpl <em>Role Type Constraints</em>}' class.
@@ -2966,6 +2413,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum EDGE_TYPE = eINSTANCE.getEdgeType();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.KindOfTopicType
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
+		 * @generated
+		 */
+		EEnum KIND_OF_TOPIC_TYPE = eINSTANCE.getKindOfTopicType();
 
 	}
 

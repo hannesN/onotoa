@@ -33,12 +33,12 @@ public interface NameTypeConstraint extends AbstractConstraint {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(NameType)
+	 * @see #setType(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getNameTypeConstraint_Type()
 	 * @model
 	 * @generated
 	 */
-	NameType getType();
+	TopicType getType();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.NameTypeConstraint#getType <em>Type</em>}' reference.
@@ -48,6 +48,6 @@ public interface NameTypeConstraint extends AbstractConstraint {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(NameType value);
+	void setType(TopicType value);
 
 } // NameTypeConstraint

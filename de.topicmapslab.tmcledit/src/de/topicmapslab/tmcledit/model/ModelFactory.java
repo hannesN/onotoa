@@ -35,33 +35,6 @@ public interface ModelFactory extends EFactory {
 	TopicType createTopicType();
 
 	/**
-	 * Returns a new object of class '<em>Occurence Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Occurence Type</em>'.
-	 * @generated
-	 */
-	OccurenceType createOccurenceType();
-
-	/**
-	 * Returns a new object of class '<em>Name Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Name Type</em>'.
-	 * @generated
-	 */
-	NameType createNameType();
-
-	/**
-	 * Returns a new object of class '<em>Scope Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scope Type</em>'.
-	 * @generated
-	 */
-	ScopeType createScopeType();
-
-	/**
 	 * Returns a new object of class '<em>Occurence Type Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,24 +51,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	NameTypeConstraint createNameTypeConstraint();
-
-	/**
-	 * Returns a new object of class '<em>Associations Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Associations Type</em>'.
-	 * @generated
-	 */
-	AssociationsType createAssociationsType();
-
-	/**
-	 * Returns a new object of class '<em>Role Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role Type</em>'.
-	 * @generated
-	 */
-	RoleType createRoleType();
 
 	/**
 	 * Returns a new object of class '<em>Role Type Constraints</em>'.

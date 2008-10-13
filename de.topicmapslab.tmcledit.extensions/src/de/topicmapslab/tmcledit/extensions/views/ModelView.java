@@ -30,7 +30,6 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -72,23 +71,17 @@ import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
 import de.topicmapslab.tmcledit.extensions.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UndoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
-import de.topicmapslab.tmcledit.extensions.command.RenameCommand;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeDiagram;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeName;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeOccurence;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
-import de.topicmapslab.tmcledit.model.AssociationsType;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
-import de.topicmapslab.tmcledit.model.ScopeType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
@@ -249,18 +242,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			TreeTopic to = new TreeTopic(ModelView.this, tt);
 			TreeParent parent = null;
 
-			if (tt instanceof RoleType)
-				parent = rtNode;
-			else if (tt instanceof NameType)
-				parent = ntNode;
-			else if (tt instanceof OccurenceType)
-				parent = otNode;
-			else if (tt instanceof AssociationsType)
-				parent = atNode;
-			else if (tt instanceof ScopeType)
-				parent = stNode;
-			else if (tt instanceof TopicType)
-				parent = ttNode;
+			parent = getParentNode(tt);
 
 			if (parent != null) {
 				parent.addChild(to);
@@ -277,20 +259,38 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		private void removeType(TopicType tt) {
 			TreeParent parent = ttNode;
 
-			if (tt instanceof RoleType)
-				parent = rtNode;
-			else if (tt instanceof NameType)
-				parent = ntNode;
-			else if (tt instanceof OccurenceType)
-				parent = otNode;
-			else if (tt instanceof AssociationsType)
-				parent = atNode;
+			parent = getParentNode(tt);
 
 			for (TreeObject to : parent.getChildren()) {
 				if (((TreeTopic) to).getTopic().equals(tt))
 					parent.removeChild(to);
 			}
 			viewer.refresh(parent);
+		}
+
+		private TreeParent getParentNode(TopicType topicType) {
+			TreeParent parent;
+			switch (topicType.getKind()) {
+			case ROLE_TYPE:
+				parent = rtNode;
+				break;
+			case NAME_TYPE:
+				parent = ntNode;
+				break;
+			case OCCURENCE_TYPE:
+				parent = otNode;
+				break;
+			case ASSOCIATION_TYPE:
+				parent = atNode;
+				break;
+			case SCOPE_TYPE:
+				parent = stNode;
+				break;
+			default:
+				parent = ttNode;
+				break;
+			}
+			return parent;
 		}
 	}
 

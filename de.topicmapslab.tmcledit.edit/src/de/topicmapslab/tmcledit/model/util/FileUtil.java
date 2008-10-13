@@ -14,12 +14,11 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -105,7 +104,8 @@ public class FileUtil {
 		e.setType(EdgeType.IS_ATYPE);
 		diagram.getEdges().add(e);
 		
-		OccurenceType ot = modelInstance.createOccurenceType();
+		TopicType ot = modelInstance.createTopicType();
+		ot.setKind(KindOfTopicType.OCCURENCE_TYPE);
 		ot.setId("wwid:Adresse");
 		schema.getTopicTypes().add(ot);
 		
@@ -116,7 +116,8 @@ public class FileUtil {
 		otc.setName("Heimadresse");
 		tt.getOccurenceConstraints().add(otc);
 		
-		NameType nt = modelInstance.createNameType();
+		TopicType nt = modelInstance.createTopicType();
+		nt.setKind(KindOfTopicType.NAME_TYPE);
 		nt.setId("wwid:Vorname");
 		
 		NameTypeConstraint ntc = modelInstance.createNameTypeConstraint();

@@ -99,75 +99,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.OccurenceType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected OccurenceTypeItemProvider occurenceTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.OccurenceType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createOccurenceTypeAdapter() {
-		if (occurenceTypeItemProvider == null) {
-			occurenceTypeItemProvider = new OccurenceTypeItemProvider(this);
-		}
-
-		return occurenceTypeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.NameType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NameTypeItemProvider nameTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.NameType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createNameTypeAdapter() {
-		if (nameTypeItemProvider == null) {
-			nameTypeItemProvider = new NameTypeItemProvider(this);
-		}
-
-		return nameTypeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.ScopeType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ScopeTypeItemProvider scopeTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.ScopeType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createScopeTypeAdapter() {
-		if (scopeTypeItemProvider == null) {
-			scopeTypeItemProvider = new ScopeTypeItemProvider(this);
-		}
-
-		return scopeTypeItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -211,52 +142,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		}
 
 		return nameTypeConstraintItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.AssociationsType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AssociationsTypeItemProvider associationsTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.AssociationsType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAssociationsTypeAdapter() {
-		if (associationsTypeItemProvider == null) {
-			associationsTypeItemProvider = new AssociationsTypeItemProvider(this);
-		}
-
-		return associationsTypeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RoleType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RoleTypeItemProvider roleTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RoleType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRoleTypeAdapter() {
-		if (roleTypeItemProvider == null) {
-			roleTypeItemProvider = new RoleTypeItemProvider(this);
-		}
-
-		return roleTypeItemProvider;
 	}
 
 	/**
@@ -658,13 +543,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	public void dispose() {
 		if (topicTypeItemProvider != null) topicTypeItemProvider.dispose();
-		if (occurenceTypeItemProvider != null) occurenceTypeItemProvider.dispose();
-		if (nameTypeItemProvider != null) nameTypeItemProvider.dispose();
-		if (scopeTypeItemProvider != null) scopeTypeItemProvider.dispose();
 		if (occurenceTypeConstraintItemProvider != null) occurenceTypeConstraintItemProvider.dispose();
 		if (nameTypeConstraintItemProvider != null) nameTypeConstraintItemProvider.dispose();
-		if (associationsTypeItemProvider != null) associationsTypeItemProvider.dispose();
-		if (roleTypeItemProvider != null) roleTypeItemProvider.dispose();
 		if (roleTypeConstraintsItemProvider != null) roleTypeConstraintsItemProvider.dispose();
 		if (topicMapSchemaItemProvider != null) topicMapSchemaItemProvider.dispose();
 		if (subjectLocatorConstraintItemProvider != null) subjectLocatorConstraintItemProvider.dispose();

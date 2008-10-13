@@ -7,7 +7,6 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -84,7 +83,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	 * @generated
 	 * @ordered
 	 */
-	protected RoleType type;
+	protected TopicType type;
 
 	/**
 	 * The cached value of the '{@link #getTopicType() <em>Topic Type</em>}' reference.
@@ -162,10 +161,10 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleType getType() {
+	public TopicType getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (RoleType)eResolveProxy(oldType);
+			type = (TopicType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE, oldType, type));
@@ -179,7 +178,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleType basicGetType() {
+	public TopicType basicGetType() {
 		return type;
 	}
 
@@ -188,8 +187,8 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(RoleType newType) {
-		RoleType oldType = type;
+	public void setType(TopicType newType) {
+		TopicType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE, oldType, type));
@@ -270,7 +269,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 				setCardMax((String)newValue);
 				return;
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
-				setType((RoleType)newValue);
+				setType((TopicType)newValue);
 				return;
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				setTopicType((TopicType)newValue);
@@ -294,7 +293,7 @@ public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeCons
 				setCardMax(CARD_MAX_EDEFAULT);
 				return;
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE:
-				setType((RoleType)null);
+				setType((TopicType)null);
 				return;
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE:
 				setTopicType((TopicType)null);

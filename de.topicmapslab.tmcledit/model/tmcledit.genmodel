@@ -18,6 +18,14 @@
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//EdgeType/AKO_TYPE"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//EdgeType/ROLE_CONSTRAINT_TYPE"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tmcledit.ecore#//KindOfTopicType">
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/TopicType"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/OccurenceType"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NameType"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/RoleType"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/AssociationType"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/ScopeType"/>
+    </genEnums>
     <genClasses ecoreClass="tmcledit.ecore#//TopicType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/idType"/>
@@ -28,10 +36,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/nameContraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/kind"/>
     </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//OccurenceType"/>
-    <genClasses ecoreClass="tmcledit.ecore#//NameType"/>
-    <genClasses ecoreClass="tmcledit.ecore#//ScopeType"/>
     <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/cardMin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/cardMax"/>
@@ -47,8 +53,6 @@
     <genClasses ecoreClass="tmcledit.ecore#//NameTypeConstraint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//NameTypeConstraint/type"/>
     </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//AssociationsType"/>
-    <genClasses ecoreClass="tmcledit.ecore#//RoleType"/>
     <genClasses ecoreClass="tmcledit.ecore#//RoleTypeConstraints">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//RoleTypeConstraints/cardMin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//RoleTypeConstraints/cardMax"/>

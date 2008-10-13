@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getNameContraints <em>Name Contraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
  *
@@ -212,5 +213,35 @@ public interface TopicType extends EObject {
 	 * @generated
 	 */
 	EList<subjectLocatorConstraint> getSubjectLocatorConstraint();
+
+	/**
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The default value is <code>"TopicType"</code>.
+	 * The literals are from the enumeration {@link de.topicmapslab.tmcledit.model.KindOfTopicType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see de.topicmapslab.tmcledit.model.KindOfTopicType
+	 * @see #setKind(KindOfTopicType)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Kind()
+	 * @model default="TopicType" required="true"
+	 * @generated
+	 */
+	KindOfTopicType getKind();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see de.topicmapslab.tmcledit.model.KindOfTopicType
+	 * @see #getKind()
+	 * @generated
+	 */
+	void setKind(KindOfTopicType value);
 
 } // TopicType

@@ -7,8 +7,8 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -39,7 +39,7 @@ public class NameTypeConstraintImpl extends AbstractConstraintImpl implements Na
 	 * @generated
 	 * @ordered
 	 */
-	protected NameType type;
+	protected TopicType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,10 +65,10 @@ public class NameTypeConstraintImpl extends AbstractConstraintImpl implements Na
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NameType getType() {
+	public TopicType getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (NameType)eResolveProxy(oldType);
+			type = (TopicType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.NAME_TYPE_CONSTRAINT__TYPE, oldType, type));
@@ -82,7 +82,7 @@ public class NameTypeConstraintImpl extends AbstractConstraintImpl implements Na
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NameType basicGetType() {
+	public TopicType basicGetType() {
 		return type;
 	}
 
@@ -91,8 +91,8 @@ public class NameTypeConstraintImpl extends AbstractConstraintImpl implements Na
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(NameType newType) {
-		NameType oldType = type;
+	public void setType(TopicType newType) {
+		TopicType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.NAME_TYPE_CONSTRAINT__TYPE, oldType, type));
@@ -122,7 +122,7 @@ public class NameTypeConstraintImpl extends AbstractConstraintImpl implements Na
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.NAME_TYPE_CONSTRAINT__TYPE:
-				setType((NameType)newValue);
+				setType((TopicType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,7 +137,7 @@ public class NameTypeConstraintImpl extends AbstractConstraintImpl implements Na
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.NAME_TYPE_CONSTRAINT__TYPE:
-				setType((NameType)null);
+				setType((TopicType)null);
 				return;
 		}
 		super.eUnset(featureID);
