@@ -87,4 +87,8 @@ public class TreeObject implements IAdaptable, Adapter {
 	public void handleDoubleClick() {
 		
 	}
+	
+	public void handleRename() {
+		
+	}
 }
