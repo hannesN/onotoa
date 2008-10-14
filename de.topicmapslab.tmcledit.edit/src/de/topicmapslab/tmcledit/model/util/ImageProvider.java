@@ -1,6 +1,7 @@
 package de.topicmapslab.tmcledit.model.util;
 
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -14,6 +15,10 @@ public class ImageProvider {
 	
 	public static Image getImage(String key) {
 		return getExtendedImageRegistry().getImage(TmcleditEditPlugin.INSTANCE.getImage(key));
+	}
+	
+	public static ImageDescriptor getImageDescriptor(String key) {
+		return getExtendedImageRegistry().getImageDescriptor(TmcleditEditPlugin.INSTANCE.getImage(key));
 	}
 	
 	public static Image getTopicTypeImage(TopicType topicType) {

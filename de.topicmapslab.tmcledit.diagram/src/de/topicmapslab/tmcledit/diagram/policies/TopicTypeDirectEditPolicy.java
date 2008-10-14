@@ -10,6 +10,7 @@ import org.eclipse.jface.viewers.CellEditor;
 
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
+import de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
@@ -24,7 +25,7 @@ public class TopicTypeDirectEditPolicy extends DirectEditPolicy {
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
 		if (getHost() instanceof TypeNodeEditPart) {
-			TypeNode tn = (TypeNode) ((TypeNodeEditPart)getHost()).getModel();
+			TypeNode tn = (TypeNode) ((NodeEditPart)getHost()).getModel();
 			
 			CellEditor cellEditor = request.getCellEditor();
 			String newName = (String) cellEditor.getValue();

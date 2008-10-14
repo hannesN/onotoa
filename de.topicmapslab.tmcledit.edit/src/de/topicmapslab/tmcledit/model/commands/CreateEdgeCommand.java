@@ -49,6 +49,8 @@ public class CreateEdgeCommand extends AbstractCommand {
 				source.getIsa().add(target);
 				break;
 			case ROLE_CONSTRAINT_TYPE:
+				
+				diagram.getEdges().add(edge);
 				break;
 		
 		}
@@ -70,6 +72,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 			source.getIsa().remove(target);
 			break;
 		case ROLE_CONSTRAINT_TYPE:
+			diagram.getEdges().remove(edge);
 			break;
 	
 	}

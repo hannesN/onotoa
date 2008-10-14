@@ -12,6 +12,7 @@ import org.eclipse.gef.requests.CreateRequest;
 
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
+import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TypeNode;
@@ -35,7 +36,8 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
-		if (request.getNewObjectType()==TypeNode.class) {
+		if ( (request.getNewObjectType()==TypeNode.class) ||
+			 (request.getNewObjectType()==AssociationNode.class) ){
 			Diagram diagram = (Diagram) getHost().getModel();
 			TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
 			Point p = new Point();

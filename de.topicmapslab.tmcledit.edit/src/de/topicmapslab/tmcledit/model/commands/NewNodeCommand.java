@@ -84,20 +84,19 @@ public class NewNodeCommand extends AbstractCommand {
 				File file = (File) diagram.eContainer();
 				file.getTopicMapSchema().getTopicTypes().add(tt);
 			}
-			diagram.getNodes().add(node);
 		}
+		diagram.getNodes().add(node);
 	}
 
 	@Override
 	public void undo() {
+		diagram.getNodes().remove(node);
 		if (type == Type.TYPE) {
 			TopicType tt = ((TypeNode) node).getTopicType();
-			diagram.getNodes().remove(node);
 			if (createdNewType) {
 				File file = (File) diagram.eContainer();
 				file.getTopicMapSchema().getTopicTypes().remove(tt);
 			}
-
 		}
 	}
 

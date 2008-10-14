@@ -92,13 +92,13 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 	@SuppressWarnings("unchecked")
 	private void updateEdges(Edge edge) {
 		// find editparts for edges nodes
-		TypeNodeEditPart sep = null;
-		TypeNodeEditPart tep = null;
+		NodeEditPart sep = null;
+		NodeEditPart tep = null;
 		Iterator it = getChildren().iterator();
 		while ((it.hasNext()) && ((sep == null) || (tep == null))) {
 			Object nextObj = it.next();
 			if (nextObj instanceof TypeNodeEditPart) {
-				TypeNodeEditPart tmpEp = (TypeNodeEditPart) nextObj;
+				NodeEditPart tmpEp = (NodeEditPart) nextObj;
 				if (tmpEp.getModel().equals(edge.getSource()))
 					sep = tmpEp;
 				if (tmpEp.getModel().equals(edge.getTarget()))

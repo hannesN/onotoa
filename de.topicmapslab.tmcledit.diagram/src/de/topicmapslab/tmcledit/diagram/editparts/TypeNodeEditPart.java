@@ -6,9 +6,7 @@ package de.topicmapslab.tmcledit.diagram.editparts;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
@@ -18,7 +16,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
@@ -31,12 +28,10 @@ import org.eclipse.jface.viewers.TextCellEditor;
 
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.CompartmentFigure;
-import de.topicmapslab.tmcledit.diagram.policies.NodeGraphicalNodeEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
-import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -45,7 +40,7 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
  * @author Hannes Niederhausen
  * 
  */
-public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEditPart {
+public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart implements NodeEditPart {
 	protected DirectEditManager manager;
 	
 	private Label titleLabel;
@@ -87,10 +82,10 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEd
 
 	@Override
 	protected void createEditPolicies() {
+		super.createEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new TopicTypeDirectEditPolicy());
 		installEditPolicy(EditPolicy.CONTAINER_ROLE, new TypeContainerEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new TypeNodeLayoutEditPolicy());
-		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new NodeGraphicalNodeEditPolicy());
 	}
 	
 	@Override
@@ -104,10 +99,7 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEd
 		Rectangle r = new Rectangle(tn.getPosX(), tn.getPosY(), -1, -1);
         ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
 
-        // refreshing mapping element, because it should always be in the upper corner
-        PrefixMappingEditPart pmep = ((DiagramEditPart)getParent()).getPrefixMappingEditPart();
-        if (pmep!=null)
-        	pmep.refreshVisuals();
+        super.refreshVisuals();
 	}
 	
 	@Override
@@ -166,16 +158,12 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEd
 	@Override
 	public void activate() {
 		super.activate();
-		Diagram d = (Diagram) getParent().getModel();
-		d.eAdapters().add(this);
 		TypeNode tn = (TypeNode) getModel();
 		tn.getTopicType().eAdapters().add(this);
 	}
 	
 	@Override
 	public void deactivate() {
-		Diagram d = (Diagram) getParent().getModel();
-		d.eAdapters().remove(this);
 		TypeNode tn = (TypeNode) getModel();
 		tn.getTopicType().eAdapters().remove(this);
 		super.deactivate();
@@ -206,58 +194,9 @@ public class TypeNodeEditPart extends AdapterGraphicalEditPart implements NodeEd
 		
 	}
 		
-	@SuppressWarnings("unchecked")
-	@Override
-	protected List getModelSourceConnections() {
-		
-		List<Edge> resultList = new ArrayList<Edge>();
-		Diagram diagram = (Diagram) getParent().getModel();
-		for (Edge e : diagram.getEdges()) {
-			if (e.getSource().equals(getModel())) {
-				resultList.add(e);
-			}
-		}
-		return resultList;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected List getModelTargetConnections() {
-		List<Edge> resultList = new ArrayList<Edge>();
-		Diagram diagram = (Diagram) getParent().getModel();
-		for (Edge e : diagram.getEdges()) {
-			if (e.getTarget().equals(getModel())) {
-				resultList.add(e);
-			}
-		}
-		return resultList;
-	}
-	
 	@Override
 	public IFigure getContentPane() {
 		return occurencesFigure;
-	}
-
-	@Override
-	public ConnectionAnchor getSourceConnectionAnchor(
-			ConnectionEditPart connection) {
-		return new ChopboxAnchor(getFigure());
-	}
-
-	@Override
-	public ConnectionAnchor getSourceConnectionAnchor(Request request) {
-		return new ChopboxAnchor(getFigure());
-	}
-
-	@Override
-	public ConnectionAnchor getTargetConnectionAnchor(
-			ConnectionEditPart connection) {
-		return new ChopboxAnchor(getFigure());
-	}
-
-	@Override
-	public ConnectionAnchor getTargetConnectionAnchor(Request request) {
-		return new ChopboxAnchor(getFigure());
 	}
 	
 }

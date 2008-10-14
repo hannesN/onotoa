@@ -7,6 +7,7 @@ import org.eclipse.gef.requests.ReconnectRequest;
 
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
+import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.Node;
@@ -22,6 +23,11 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 				.getStartCommand()).getEmfCommand();
 		if (request.getTargetEditPart()==request.getSourceEditPart())
 			return null;
+		
+		if ( (request.getSourceEditPart() instanceof AssociationNodeEditPart) &&
+			 (request.getTargetEditPart() instanceof AssociationNodeEditPart) )
+			return null;
+		
 		cmd.setTarget((Node) request.getTargetEditPart().getModel());
 		return request.getStartCommand();
 	}
