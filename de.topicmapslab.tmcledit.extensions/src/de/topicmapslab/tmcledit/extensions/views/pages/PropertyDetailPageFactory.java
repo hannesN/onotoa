@@ -5,11 +5,13 @@ import java.util.HashMap;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.ui.part.PageBook;
 
+import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class PropertyDetailPageFactory {
 	private static final String TOPIC_TYPE = "TopicType";
+	private static final String DIAGRAM = "Diagram";
 	private static final String PREFIX_MAPPING = "PrefixMapping";
 	
 	private EmptyPage emptyPage;
@@ -45,6 +47,13 @@ public class PropertyDetailPageFactory {
 				page = new PrefixMappingPage();
 				page.createControl(pageBook);
 				pageMap.put(PREFIX_MAPPING, page);
+			}
+		} else if (model instanceof Diagram) {
+			page = pageMap.get(DIAGRAM);
+			if (page==null) {
+				page = new DiagramPage();
+				page.createControl(pageBook);
+				pageMap.put(DIAGRAM, page);
 			}
 		}
 		return page;

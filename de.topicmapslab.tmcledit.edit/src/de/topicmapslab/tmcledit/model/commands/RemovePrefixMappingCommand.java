@@ -3,7 +3,6 @@ package de.topicmapslab.tmcledit.model.commands;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.MappingElement;
-import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
 public class RemovePrefixMappingCommand extends AbstractCommand{
