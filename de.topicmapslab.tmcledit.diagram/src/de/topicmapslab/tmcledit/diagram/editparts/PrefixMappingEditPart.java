@@ -12,17 +12,19 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.MappingElement;
 
 public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 
 	private final Adapter adapter = new AdapterImpl() {
 		@Override
 		public void notifyChanged(Notification msg) {
-		
+			refreshChildren();
 		}
 	};
 	
@@ -45,19 +47,21 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 	}
 	
 	@SuppressWarnings("unchecked")
-	EList getCastedModel() {
-		return (EList) getModel();
+	EObjectContainmentEList<MappingElement> getCastedModel() {
+		return (EObjectContainmentEList<MappingElement>) getModel();
 	}
 	
 	@Override
 	public void activate() {
 		super.activate();
+		getCastedModel().getEObject().eAdapters().add(adapter);
 		((Diagram)getParent().getModel()).eAdapters().add(adapter);
 	}
 	
 	@Override
 	public void deactivate() {
-		((Diagram)getParent().getModel()).eAdapters().add(adapter);
+		((Diagram)getParent().getModel()).eAdapters().remove(adapter);
+		getCastedModel().getEObject().eAdapters().remove(adapter);
 		super.deactivate();
 	}
 	

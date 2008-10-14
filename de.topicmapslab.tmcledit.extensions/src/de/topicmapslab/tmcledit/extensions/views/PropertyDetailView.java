@@ -32,7 +32,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.PropertyDetailView";
 
 	private PageBook pageBook;
-
+	private AbstractModelPage currentPage;
 	private PropertyDetailPageFactory pageFactory;
 
 	@Override
@@ -51,6 +51,14 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	public void setFocus() {
 	}
 
+	private void setCurrentPage(AbstractModelPage currentPage) {
+		if (this.currentPage!=null)
+			this.currentPage.aboutToHide();
+		
+		this.currentPage = currentPage;
+		pageBook.showPage(currentPage.getControl());
+	}
+	
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		
@@ -67,7 +75,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				
 
 				AbstractModelPage page = pageFactory.getPageFor(obj);
-				pageBook.showPage(page.getControl());
+				setCurrentPage(page);
 				page.setModel(obj);
 				
 				
@@ -91,7 +99,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		pageBook = new PageBook(parent, SWT.NONE);
 		pageFactory = new PropertyDetailPageFactory(pageBook);
 
-		pageBook.showPage(pageFactory.getEmptyPage().getControl());
+		setCurrentPage(pageFactory.getEmptyPage());
 
 	}
 

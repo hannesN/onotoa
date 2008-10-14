@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.topicmapslab.tmcledit.extensions;
+package de.topicmapslab.tmcledit.extensions.dialogs;
 
 import java.util.ArrayList;
 import java.util.Collections;

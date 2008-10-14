@@ -5,27 +5,36 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.extensions.dialogs.NewPrefixMappingDialog;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.commands.CreatePrefixMappingCommand;
+import de.topicmapslab.tmcledit.model.commands.RemovePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
 
 /**
@@ -37,6 +46,10 @@ public class PrefixMappingPage extends AbstractModelPage {
 	private final String[] columnNames = {"key", "value"};
 
 	private TableViewer tableViewer;
+
+	private Button addButton;
+
+	private Button removeButton;
 	
 	
 	@SuppressWarnings("unchecked")
@@ -48,11 +61,23 @@ public class PrefixMappingPage extends AbstractModelPage {
 			schema = (TopicMapSchema) me.eContainer(); 
 		} else if (model instanceof EObjectContainmentEList) {
 			// this must be the list of mapping elements
-			model = ((EObjectContainmentEList)model).getEObject();
+			schema = (TopicMapSchema) ((EObjectContainmentEList)model).getEObject();
 		}
 		super.setModel(schema);
+		
+		for (MappingElement me : schema.getMappings()) {
+			me.eAdapters().add(this);
+		}
 	}
 	
+	@Override
+	public void aboutToHide() {
+		TopicMapSchema schema = (TopicMapSchema) getModel();
+		for (MappingElement me : schema.getMappings()) {
+			me.eAdapters().remove(this);
+		}
+		super.aboutToHide();
+	}
 	
 	@Override
 	public void updateUI() {
@@ -74,9 +99,65 @@ public class PrefixMappingPage extends AbstractModelPage {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout());
 		
+		createButtonComposite(toolkit, comp);
 		createTableViewer(toolkit, comp);
 		
 		setControl(comp);
+	}
+
+	private void createButtonComposite(FormToolkit toolkit, Composite parent) {
+		Composite comp = toolkit.createComposite(parent);
+		comp.setLayout(new GridLayout(2, false));
+		GridData gd = new GridData(GridData.END);
+		comp.setLayoutData(gd);
+		
+		gd=new GridData();
+		gd.widthHint = 120;
+		GridDataFactory fac = GridDataFactory.createFrom(gd);
+		
+		addButton = toolkit.createButton(comp, "Add...", SWT.PUSH);
+		fac.applyTo(addButton);
+		removeButton = toolkit.createButton(comp, "Remove...", SWT.PUSH);
+		fac.applyTo(removeButton);
+		
+		hookAddButtonListener();
+		hookRemoveButtonListener();
+		
+	}
+
+	private void hookRemoveButtonListener() {
+		removeButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				IStructuredSelection sel = (IStructuredSelection) tableViewer
+						.getSelection();
+				if (sel.isEmpty())
+					return;
+				MappingElement me = (MappingElement) sel.getFirstElement();
+				getCommandStack().execute(
+						new RemovePrefixMappingCommand(
+								(TopicMapSchema) getModel(), me));
+
+			}
+		});
+		
+	}
+
+	private void hookAddButtonListener() {
+		addButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(
+						addButton.getShell());
+				if (dlg.open() == Dialog.OK) {
+					getCommandStack().execute(
+							new CreatePrefixMappingCommand(
+									(TopicMapSchema) getModel(), dlg.getKey(),
+									dlg.getUri()));
+				}
+			}
+		});
+		
 	}
 
 	private void createTableViewer(FormToolkit toolkit, Composite parent) {
@@ -108,9 +189,11 @@ public class PrefixMappingPage extends AbstractModelPage {
 
 	@Override
 	public void notifyChanged(Notification notification) {
-		if (notification.getNotifier().equals(getModel()) ) {
+		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
+			return;
+		//if (notification.getNotifier() instanceof  ) {
 			updateUI();
-		}
+		
 
 	}
 

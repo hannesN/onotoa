@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
-import de.topicmapslab.tmcledit.extensions.TopicSelectionDialog;
+import de.topicmapslab.tmcledit.extensions.dialogs.TopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;

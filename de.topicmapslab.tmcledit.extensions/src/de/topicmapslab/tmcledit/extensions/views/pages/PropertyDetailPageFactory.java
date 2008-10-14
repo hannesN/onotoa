@@ -47,8 +47,6 @@ public class PropertyDetailPageFactory {
 				pageMap.put(PREFIX_MAPPING, page);
 			}
 		}
-		System.out.println(model);
-		
 		return page;
 	}
 

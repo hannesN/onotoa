@@ -161,6 +161,11 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		getActionRegistry().registerAction(ei.getUndoAction());
 		getActionRegistry().registerAction(ei.getRedoAction());
 	}
+	
+	@Override
+	public boolean isSaveOnCloseNeeded() {
+		return false;
+	}
 
 	@Override
 	public boolean isSaveAsAllowed() {

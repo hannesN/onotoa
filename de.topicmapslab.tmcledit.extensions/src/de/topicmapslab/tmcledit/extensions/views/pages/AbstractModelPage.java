@@ -25,7 +25,11 @@ public abstract class AbstractModelPage extends Page implements Adapter {
 	public void setModel(Object model) {
 		if (this.model != null)
 			this.model.eAdapters().remove(this);
-			
+		
+		// TODO Remove me when sure all works fine
+		if (model==null)
+			System.out.println("model null");
+		
 		this.model = (EObject) model;
 		this.model.eAdapters().add(this);
 		updateUI();
@@ -65,6 +69,11 @@ public abstract class AbstractModelPage extends Page implements Adapter {
 	
 	public void setCommandStack(CommandStack commandStack) {
 		this.commandStack = commandStack;
+	}
+	
+	public void aboutToHide() {
+		if (this.getModel()!=null)
+			this.getModel().eAdapters().remove(this);
 	}
 	
 	public abstract void updateUI();
