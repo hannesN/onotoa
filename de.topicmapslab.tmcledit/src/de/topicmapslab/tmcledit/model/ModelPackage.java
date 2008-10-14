@@ -481,7 +481,7 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Mappings</b></em>' reference list.
+	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1407,10 +1407,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTopicMapSchema_AssociationTypeConstraints();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getMappings <em>Mappings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getMappings <em>Mappings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Mappings</em>'.
+	 * @return the meta object for the containment reference list '<em>Mappings</em>'.
 	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#getMappings()
 	 * @see #getTopicMapSchema()
 	 * @generated
@@ -2093,7 +2093,7 @@ public interface ModelPackage extends EPackage {
 		EReference TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS = eINSTANCE.getTopicMapSchema_AssociationTypeConstraints();
 
 		/**
-		 * The meta object literal for the '<em><b>Mappings</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Mappings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

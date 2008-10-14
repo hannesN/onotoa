@@ -119,6 +119,7 @@ public class FileUtil {
 		TopicType nt = modelInstance.createTopicType();
 		nt.setKind(KindOfTopicType.NAME_TYPE);
 		nt.setId("wwid:Vorname");
+		schema.getTopicTypes().add(nt);
 		
 		NameTypeConstraint ntc = modelInstance.createNameTypeConstraint();
 		ntc.setName("vorname");

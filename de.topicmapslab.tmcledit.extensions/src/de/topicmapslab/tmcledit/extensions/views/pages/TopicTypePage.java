@@ -5,7 +5,6 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
@@ -16,14 +15,16 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.extensions.TopicSelectionDialog;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
 /**
@@ -60,7 +61,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (nameText.getText().length() > 0) {
-					getEditingDomain().getCommandStack().execute(
+					getCommandStack().execute(
 							new RenameTopicTypeCommand((TopicType) getModel(), nameText
 									.getText()));
 				}
@@ -82,13 +83,8 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
 				if (dlg.open() == Dialog.OK) {
-						/* TODO  is setting command 
-					getEditingDomain().getCommandStack().execute(
-							new SetIsACommand(dlg.getSelectedTopics(),
-									(TopicType) getModel())));
-								*/
-					new SetIsACommand(dlg.getSelectedTopics(),
-							(TopicType) getModel()).execute();
+					getCommandStack().execute(new SetIsACommand(dlg.getSelectedTopics(),
+							(TopicType) getModel()));
 				}
 			}
 		});
@@ -96,17 +92,42 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		toolkit.createLabel(comp, "kind of:");
 		akoText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = 2;
+		gd.horizontalSpan = 1;
 		akoText.setLayoutData(gd);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText
+						.getShell());
+				dlg.setAvailableTopics(getTopicMapSchema().getTopicTypes());
+				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
+				if (dlg.open() == Dialog.OK) {
+					getCommandStack().execute(new SetAkoCommand(dlg.getSelectedTopics(),
+							(TopicType) getModel()));
+				}
+			}
+
+			
+		});
+
+		toolkit.createLabel(comp, "isAbstract");
+		abstractButton = toolkit.createButton(comp, "", SWT.CHECK);
+		abstractButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				getCommandStack().execute(new SetAbstractTopicTypeCommand((TopicType) getModel(), abstractButton.getSelection()));
+			}
+		});
+		
 		section.setClient(comp);
+		setControl(section);
 	}
 
-	@Override
-	public Control getControl() {
-		return section;
+	private TopicMapSchema getTopicMapSchema() {
+		return (TopicMapSchema) getModel().eContainer();		
 	}
-
+	
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();
@@ -141,12 +162,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				akoText.setText(b.substring(0, b.length() - 2));
 			else
 				akoText.setText("");
+			
+			abstractButton.setSelection(t.isIsAbstract());
 		}
-	}
-
-	@Override
-	public void setModel(EObject model) {
-		super.setModel(model);
 	}
 
 	private String getTopicType(TopicType t) {

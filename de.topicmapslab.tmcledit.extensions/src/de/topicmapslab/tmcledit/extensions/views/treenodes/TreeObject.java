@@ -58,6 +58,10 @@ public class TreeObject implements IAdaptable, Adapter {
 		return null;
 	}
 	
+	public Object getModel() {
+		return null;
+	}
+	
 	public void dispose() {
 	}
 

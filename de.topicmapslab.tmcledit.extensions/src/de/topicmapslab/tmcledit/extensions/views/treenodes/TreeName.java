@@ -47,4 +47,9 @@ public class TreeName extends TreeObject{
 	public Image getImage() {
 		return ImageProvider.getImage(ImageConstants.NAMECONSTRAINT);
 	}
+	
+	@Override
+	public Object getModel() {
+		return ntc; 
+	}
 }

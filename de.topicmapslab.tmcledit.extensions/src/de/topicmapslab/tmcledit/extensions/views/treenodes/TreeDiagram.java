@@ -46,4 +46,8 @@ public class TreeDiagram extends TreeObject {
 		return null;// ImageProvider.getImage(ImageConstants.DIAGRAM);
 	}
 
+	@Override
+	public Object getModel() {
+		return diagram;
+	}
 }

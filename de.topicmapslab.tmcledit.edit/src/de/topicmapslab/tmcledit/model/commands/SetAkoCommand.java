@@ -13,23 +13,23 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author Hannes Niederhausen
  * 
  */
-public class SetIsACommand extends AbstractCommand {
+public class SetAkoCommand extends AbstractCommand {
 
 	private final List<TopicType> oldList;
 	private final List<TopicType> newList;
 	private final TopicType topic;
 
-	public SetIsACommand(List<TopicType> newList, TopicType topic) {
+	public SetAkoCommand(List<TopicType> newList, TopicType topic) {
 		super();
 		this.newList = newList;
-		this.oldList = topic.getIsa();
+		this.oldList = topic.getAko();
 		this.topic = topic;
 	}
 
 	@Override
 	public void execute() {
-		topic.getIsa().clear();
-		topic.getIsa().addAll(newList);
+		topic.getAko().clear();
+		topic.getAko().addAll(newList);
 
 	}
 
@@ -40,8 +40,8 @@ public class SetIsACommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		topic.getIsa().clear();
-		topic.getIsa().addAll(oldList);
+		topic.getAko().clear();
+		topic.getAko().addAll(oldList);
 
 	}
 
@@ -52,6 +52,6 @@ public class SetIsACommand extends AbstractCommand {
 
 	@Override
 	public String getLabel() {
-		return "Set is a relationship";
+		return "Set a kind of relationship";
 	}
 }

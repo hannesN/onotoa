@@ -43,6 +43,11 @@ public class TreeOccurence extends TreeObject{
 	}
 	
 	@Override
+	public Object getModel() {
+		return otc;
+	}
+	
+	@Override
 	public void notifyChanged(Notification notification) {
 		if ( (notification.getEventType()==Notification.SET) && (notification.getFeatureID(String.class)==ModelPackage.OCCURENCE_TYPE_CONSTRAINT__NAME)){
 			getModelView().getViewer().refresh(this);

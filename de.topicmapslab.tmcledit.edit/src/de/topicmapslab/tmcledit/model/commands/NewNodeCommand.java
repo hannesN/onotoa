@@ -7,6 +7,8 @@ import java.awt.Point;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
@@ -68,21 +70,37 @@ public class NewNodeCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
-		if (node instanceof TypeNode) {
+		switch (type) {
+		case TYPE:
 			if (((TypeNode) node).getTopicType().eContainer() == null) {
 				createdNewType = true;
 			}
+			break;
+		case ASSOCIATION:
+			if (((AssociationNode) node).getAssociationConstraint()
+					.eContainer() == null) {
+				createdNewType = true;
+			}
 		}
+
 		return true;
 	}
 
 	@Override
 	public void redo() {
-		if (type == Type.TYPE) {
+		switch (type) {
+		case TYPE:
 			if (createdNewType) {
 				TopicType tt = ((TypeNode) node).getTopicType();
 				File file = (File) diagram.eContainer();
 				file.getTopicMapSchema().getTopicTypes().add(tt);
+			}
+			break;
+		case ASSOCIATION:
+			if (createdNewType) {
+				AssociationTypeConstraint atc = ((AssociationNode)node).getAssociationConstraint();
+				File file = (File) diagram.eContainer();
+				file.getTopicMapSchema().getAssociationTypeConstraints().add(atc);
 			}
 		}
 		diagram.getNodes().add(node);
@@ -91,17 +109,26 @@ public class NewNodeCommand extends AbstractCommand {
 	@Override
 	public void undo() {
 		diagram.getNodes().remove(node);
-		if (type == Type.TYPE) {
-			TopicType tt = ((TypeNode) node).getTopicType();
+		switch (type) {
+		case TYPE:
 			if (createdNewType) {
+				TopicType tt = ((TypeNode) node).getTopicType();
 				File file = (File) diagram.eContainer();
 				file.getTopicMapSchema().getTopicTypes().remove(tt);
 			}
+			break;
+		case ASSOCIATION:
+			if (createdNewType) {
+				AssociationTypeConstraint atc = ((AssociationNode)node).getAssociationConstraint();
+				File file = (File) diagram.eContainer();
+				file.getTopicMapSchema().getAssociationTypeConstraints().remove(atc);
+			}
 		}
+		
 	}
 
 	@Override
 	public String getLabel() {
-		return "Create Node";
+		return (type==Type.TYPE) ? "Create Type Node" : "Create Association Node";
 	}
 }

@@ -63,7 +63,7 @@ public interface TopicMapSchema extends EObject {
 	EList<AssociationTypeConstraint> getAssociationTypeConstraints();
 
 	/**
-	 * Returns the value of the '<em><b>Mappings</b></em>' reference list.
+	 * Returns the value of the '<em><b>Mappings</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.MappingElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -71,9 +71,9 @@ public interface TopicMapSchema extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mappings</em>' reference list.
+	 * @return the value of the '<em>Mappings</em>' containment reference list.
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_Mappings()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<MappingElement> getMappings();

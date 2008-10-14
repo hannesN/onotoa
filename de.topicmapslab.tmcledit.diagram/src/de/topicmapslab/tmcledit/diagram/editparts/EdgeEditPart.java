@@ -2,6 +2,7 @@ package de.topicmapslab.tmcledit.diagram.editparts;
 
 import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.DelegatingLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
@@ -10,7 +11,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ConnectionEditPolicy;
@@ -50,6 +50,8 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			deco.setTemplate(points);
 			deco.setFill(false);
 			conn.setTargetDecoration(deco);
+		} else if (getCastedModel().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {
+			conn.setLayoutManager(new DelegatingLayout());			
 		}
 		
 		
@@ -99,13 +101,5 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		
 	}
 	
-	@Override
-	public void setTarget(EditPart editPart) {
-		super.setTarget(editPart);
-	}
-
-	@Override
-	public void setSource(EditPart editPart) {
-		super.setSource(editPart);
-	}
+	
 }

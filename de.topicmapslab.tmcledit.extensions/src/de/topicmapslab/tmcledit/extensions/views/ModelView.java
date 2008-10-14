@@ -41,6 +41,7 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -109,7 +110,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private EditingDomain editingDomain;
 
 	private File currFile;
-	private List<ISelectionChangedListener> listeners;
+	
+	private List<ISelectionChangedListener> listeners = Collections.emptyList();
+	private ISelection currentSelection;
 
 	private Map<String, UpdateAction> actionRegistry;
 
@@ -338,8 +341,28 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		hookKeyListener();
 		contributeToActionBars();
 
-		getSite().setSelectionProvider(viewer);
+		getSite().setSelectionProvider(this);
 
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+				if (sel.isEmpty())
+					currentSelection = new StructuredSelection();
+				else {
+					TreeObject to = (TreeObject) sel.getFirstElement();
+					if (to.getModel()==null)
+						currentSelection = new StructuredSelection();
+					else
+						currentSelection = new StructuredSelection(to.getModel());
+				}
+				fireSelectionChanged();
+				
+			}
+			
+		});
+		
 		adapterFactory = new ComposedAdapterFactory(
 				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
@@ -605,10 +628,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	@Override
 	public ISelection getSelection() {
-		if (viewer != null)
-			return viewer.getSelection();
-		else
-			return new StructuredSelection();
+		if (currentSelection==null)
+			currentSelection = new StructuredSelection();
+		return currentSelection;
 	}
 
 	public TopicMapSchema getCurrentTopicMapSchema() {
@@ -631,6 +653,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			viewer.setSelection(selection);
 	}
 
+	private void fireSelectionChanged() {
+		SelectionChangedEvent e = new SelectionChangedEvent(this, currentSelection);
+		for (ISelectionChangedListener l : listeners) {
+			l.selectionChanged(e);
+		}
+	}
+	
 	public void setFilename(String filename) {
 
 		if (dirtyStateObserver != null)

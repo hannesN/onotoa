@@ -1,35 +1,32 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
 
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
 public abstract class AbstractModelPage extends Page implements Adapter {
 
 	private EObject model;
 
-	private TopicMapSchema topicMapSchema;
-
-	private EditingDomain editingDomain;
-
-	private Diagram diagram;
-
 	private Notifier target;
+	
+	private Control control;
+	
+	private CommandStack commandStack;
 
 	public AbstractModelPage() {
 		super();
 	}
 
-	public void setModel(EObject model) {
-
+	public void setModel(Object model) {
 		if (this.model != null)
 			this.model.eAdapters().remove(this);
-		this.model = model;
+			
+		this.model = (EObject) model;
 		this.model.eAdapters().add(this);
 		updateUI();
 	}
@@ -44,6 +41,15 @@ public abstract class AbstractModelPage extends Page implements Adapter {
 	}
 
 	@Override
+	public Control getControl() {
+		return control;
+	}
+	
+	public void setControl(Control control) {
+		this.control = control;
+	}
+	
+	@Override
 	public boolean isAdapterForType(Object type) {
 		return true;
 	}
@@ -53,34 +59,17 @@ public abstract class AbstractModelPage extends Page implements Adapter {
 		this.target = newTarget;
 	}
 
+	protected CommandStack getCommandStack() {
+		return commandStack;
+	}
+	
+	public void setCommandStack(CommandStack commandStack) {
+		this.commandStack = commandStack;
+	}
+	
 	public abstract void updateUI();
 
 	public EObject getModel() {
 		return model;
 	}
-
-	protected TopicMapSchema getTopicMapSchema() {
-		return topicMapSchema;
-	}
-
-	public void setTopicMapSchema(TopicMapSchema topicMapSchema) {
-		this.topicMapSchema = topicMapSchema;
-	}
-
-	public void setEditingDomain(EditingDomain editingDomain) {
-		this.editingDomain = editingDomain;
-	}
-
-	protected EditingDomain getEditingDomain() {
-		return editingDomain;
-	}
-
-	public Diagram getDiagram() {
-		return diagram;
-	}
-
-	public void setDiagram(Diagram diagram) {
-		this.diagram = diagram;
-	}
-
 }

@@ -108,7 +108,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	}
 
 	public EditingDomain getEditingDomain() {
-		return null;
+		return ((TMCLEditorInput)getEditorInput()).getEditingDomain();
 	}
 
 	public Diagram getDiagram() {
@@ -231,6 +231,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					AssociationNode node = (AssociationNode) model;
 					currentSelection = new StructuredSelection(node
 							.getAssociationConstraint());
+				} else {
+					currentSelection = new StructuredSelection(model);
 				}
 				// TODO Connections
 

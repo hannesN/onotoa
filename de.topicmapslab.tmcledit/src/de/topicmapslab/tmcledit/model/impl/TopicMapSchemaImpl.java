@@ -6,27 +6,22 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,7 +61,7 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	protected EList<AssociationTypeConstraint> associationTypeConstraints;
 
 	/**
-	 * The cached value of the '{@link #getMappings() <em>Mappings</em>}' reference list.
+	 * The cached value of the '{@link #getMappings() <em>Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getMappings()
@@ -135,7 +130,7 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 */
 	public EList<MappingElement> getMappings() {
 		if (mappings == null) {
-			mappings = new EObjectResolvingEList<MappingElement>(MappingElement.class, this, ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS);
+			mappings = new EObjectContainmentEList<MappingElement>(MappingElement.class, this, ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS);
 		}
 		return mappings;
 	}
@@ -164,6 +159,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				return ((InternalEList<?>)getTopicTypes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS:
 				return ((InternalEList<?>)getAssociationTypeConstraints()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TOPIC_MAP_SCHEMA__MAPPINGS:
+				return ((InternalEList<?>)getMappings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

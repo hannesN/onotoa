@@ -31,6 +31,11 @@ public class TreeTopic extends TreeParent {
 	public TopicType getTopic() {
 		return topic;
 	}
+	
+	@Override
+	public Object getModel() {
+		return getTopic();
+	}
 
 	@Override
 	public void notifyChanged(Notification notification) {

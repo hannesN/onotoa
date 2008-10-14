@@ -31,7 +31,6 @@ import de.topicmapslab.tmcledit.diagram.figures.CompartmentFigure;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
-import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
