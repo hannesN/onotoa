@@ -175,8 +175,9 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		
 		if (notification.getNotifier().equals(((TypeNode)getModel()).getTopicType())) {
 			refreshChildren();
-			refreshVisuals();
 		}
+		refreshVisuals();
+		
 	}
 
 	/**
