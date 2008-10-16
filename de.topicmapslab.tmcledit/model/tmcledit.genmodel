@@ -42,7 +42,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/cardMin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/cardMax"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/regexp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AbstractConstraint/scope"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//OccurenceTypeConstraint">
@@ -92,6 +91,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edge/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edge/target"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Edge/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edge/roleConstraint"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//AssociationNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationNode/associationConstraint"/>

@@ -207,22 +207,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CONSTRAINT__REGEXP = 2;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_CONSTRAINT__NAME = 3;
-
-	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONSTRAINT__SCOPE = 4;
+	int ABSTRACT_CONSTRAINT__SCOPE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Constraint</em>' class.
@@ -231,7 +222,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = 5;
+	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.
@@ -269,15 +260,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int OCCURENCE_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -360,15 +342,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAME_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -545,15 +518,6 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -607,15 +571,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUBJECT_IDENTIFIER_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' reference.
@@ -885,13 +840,22 @@ public interface ModelPackage extends EPackage {
 	int EDGE__TYPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Role Constraint</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__ROLE_CONSTRAINT = 4;
+
+	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = 4;
+	int EDGE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.
@@ -1233,17 +1197,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAbstractConstraint_Regexp();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getName()
-	 * @see #getAbstractConstraint()
-	 * @generated
-	 */
-	EAttribute getAbstractConstraint_Name();
 
 	/**
 	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}'.
@@ -1663,6 +1616,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getEdge_Type();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.Edge#getRoleConstraint <em>Role Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Role Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Edge#getRoleConstraint()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_RoleConstraint();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AssociationNode <em>Association Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1955,14 +1919,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_CONSTRAINT__REGEXP = eINSTANCE.getAbstractConstraint_Regexp();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ABSTRACT_CONSTRAINT__NAME = eINSTANCE.getAbstractConstraint_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Scope</b></em>' reference feature.
@@ -2299,6 +2255,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EDGE__TYPE = eINSTANCE.getEdge_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Role Constraint</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__ROLE_CONSTRAINT = eINSTANCE.getEdge_RoleConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.

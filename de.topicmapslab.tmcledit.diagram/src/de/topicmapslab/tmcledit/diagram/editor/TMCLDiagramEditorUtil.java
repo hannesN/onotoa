@@ -142,7 +142,14 @@ public class TMCLDiagramEditorUtil {
 
 					@Override
 					public Object getNewObject() {
-						return ModelFactory.eINSTANCE.createOccurenceTypeConstraint();
+						OccurenceTypeConstraint otc =  ModelFactory.eINSTANCE.createOccurenceTypeConstraint();
+						
+						TopicType type = ModelFactory.eINSTANCE.createTopicType();
+						type.setKind(KindOfTopicType.OCCURENCE_TYPE);
+						type.setId("foo:occurence");
+						otc.setType(type);
+						
+						return otc;
 					}
 
 					@Override
@@ -254,6 +261,7 @@ public class TMCLDiagramEditorUtil {
 					@Override
 					public Object getNewObject() {
 						Edge e = ModelFactory.eINSTANCE.createEdge();
+						e.setRoleConstraint(ModelFactory.eINSTANCE.createRoleTypeConstraints());
 						e.setType(EdgeType.ROLE_CONSTRAINT_TYPE);
 						return e;
 					}

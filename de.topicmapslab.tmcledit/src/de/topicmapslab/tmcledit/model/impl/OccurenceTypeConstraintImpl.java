@@ -61,7 +61,7 @@ public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DATA_TYPE_EDEFAULT = null;
+	protected static final String DATA_TYPE_EDEFAULT = "xsd:string";
 
 	/**
 	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' attribute.

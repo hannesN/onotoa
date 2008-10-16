@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getSource <em>Source</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getTarget <em>Target</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getType <em>Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getRoleConstraint <em>Role Constraint</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,5 +127,31 @@ public interface Edge extends EObject {
 	 * @generated
 	 */
 	void setType(EdgeType value);
+
+	/**
+	 * Returns the value of the '<em><b>Role Constraint</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Role Constraint</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Role Constraint</em>' reference.
+	 * @see #setRoleConstraint(RoleTypeConstraints)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getEdge_RoleConstraint()
+	 * @model
+	 * @generated
+	 */
+	RoleTypeConstraints getRoleConstraint();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.Edge#getRoleConstraint <em>Role Constraint</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Role Constraint</em>' reference.
+	 * @see #getRoleConstraint()
+	 * @generated
+	 */
+	void setRoleConstraint(RoleTypeConstraints value);
 
 } // Edge

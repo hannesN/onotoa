@@ -12,6 +12,7 @@ import de.topicmapslab.tmcledit.model.AbstractConstraint;
  * @author Hannes Niederhausen
  *
  */
+//TODO reimplement it
 public class RenameConstraintCommand extends AbstractCommand{
 
 	private final AbstractConstraint constraint;
@@ -23,18 +24,18 @@ public class RenameConstraintCommand extends AbstractCommand{
 	public RenameConstraintCommand(AbstractConstraint constraint, String newName) {
 		super();
 		this.constraint = constraint;
-		this.oldName = constraint.getName();
+		this.oldName = "";//constraint.get();
 		this.newName = newName;
 	}
 
 	@Override
 	public void execute() {
-		constraint.setName(newName);
+		//constraint.setName(newName);
 	}
 	
 	@Override
 	public void undo() {
-		constraint.setName(oldName);
+		//constraint.setName(oldName);
 	}
 	
 	@Override
@@ -44,6 +45,6 @@ public class RenameConstraintCommand extends AbstractCommand{
 	
 	@Override
 	protected boolean prepare() {
-		return true;
+		return false;
 	}
 }

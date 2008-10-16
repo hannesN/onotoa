@@ -7,7 +7,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.gef.requests.DirectEditRequest;
 
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.commands.RenameConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 
 
 
@@ -20,7 +20,7 @@ public class OccurenceConstraintDirectEditPolicy extends AbstractDirectEditPolic
 	@Override
 	public Command getRenameCommand(Object model, DirectEditRequest request) {
 		if (model instanceof OccurenceTypeConstraint)
-			return new RenameConstraintCommand((OccurenceTypeConstraint) model, getNewString(request));
+			return new RenameTopicTypeCommand(((OccurenceTypeConstraint) model).getType(), getNewString(request));
 		return null;
 	}
 

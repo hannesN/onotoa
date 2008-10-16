@@ -21,7 +21,7 @@ public class TypeContainerEditPolicy extends ContainerEditPolicy {
 	protected Command getCreateCommand(CreateRequest request) {
 		if (request.getNewObjectType()==OccurenceTypeConstraint.class) {
 			TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
-			CreateOccurenceConstraintCommand cmd = new CreateOccurenceConstraintCommand(((TypeNodeEditPart)getHost()).getCastedModel().getTopicType());
+			CreateOccurenceConstraintCommand cmd = new CreateOccurenceConstraintCommand(((TypeNodeEditPart)getHost()).getCastedModel().getTopicType(), (OccurenceTypeConstraint) request.getNewObject());
 			return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		}
 		return null;

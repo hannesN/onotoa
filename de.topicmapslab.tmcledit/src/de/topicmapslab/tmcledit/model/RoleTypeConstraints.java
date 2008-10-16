@@ -40,7 +40,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * @return the value of the '<em>Card Min</em>' attribute.
 	 * @see #setCardMin(String)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_CardMin()
-	 * @model default="0"
+	 * @model default="0" required="true"
 	 * @generated
 	 */
 	String getCardMin();
@@ -67,7 +67,7 @@ public interface RoleTypeConstraints extends EObject {
 	 * @return the value of the '<em>Card Max</em>' attribute.
 	 * @see #setCardMax(String)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleTypeConstraints_CardMax()
-	 * @model default="1"
+	 * @model default="1" required="true"
 	 * @generated
 	 */
 	String getCardMax();

@@ -12,6 +12,7 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.Node;
 
+import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getRoleConstraint <em>Role Constraint</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,6 +96,16 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * @ordered
 	 */
 	protected EdgeType type = TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRoleConstraint() <em>Role Constraint</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRoleConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected RoleTypeConstraints roleConstraint;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -228,6 +240,44 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public RoleTypeConstraints getRoleConstraint() {
+		if (roleConstraint != null && roleConstraint.eIsProxy()) {
+			InternalEObject oldRoleConstraint = (InternalEObject)roleConstraint;
+			roleConstraint = (RoleTypeConstraints)eResolveProxy(oldRoleConstraint);
+			if (roleConstraint != oldRoleConstraint) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.EDGE__ROLE_CONSTRAINT, oldRoleConstraint, roleConstraint));
+			}
+		}
+		return roleConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RoleTypeConstraints basicGetRoleConstraint() {
+		return roleConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRoleConstraint(RoleTypeConstraints newRoleConstraint) {
+		RoleTypeConstraints oldRoleConstraint = roleConstraint;
+		roleConstraint = newRoleConstraint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EDGE__ROLE_CONSTRAINT, oldRoleConstraint, roleConstraint));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -255,6 +305,9 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 				return basicGetTarget();
 			case ModelPackage.EDGE__TYPE:
 				return getType();
+			case ModelPackage.EDGE__ROLE_CONSTRAINT:
+				if (resolve) return getRoleConstraint();
+				return basicGetRoleConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,6 +334,9 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 			case ModelPackage.EDGE__TYPE:
 				setType((EdgeType)newValue);
 				return;
+			case ModelPackage.EDGE__ROLE_CONSTRAINT:
+				setRoleConstraint((RoleTypeConstraints)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -305,6 +361,9 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 			case ModelPackage.EDGE__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
+			case ModelPackage.EDGE__ROLE_CONSTRAINT:
+				setRoleConstraint((RoleTypeConstraints)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -325,6 +384,8 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 				return target != null;
 			case ModelPackage.EDGE__TYPE:
 				return type != TYPE_EDEFAULT;
+			case ModelPackage.EDGE__ROLE_CONSTRAINT:
+				return roleConstraint != null;
 		}
 		return super.eIsSet(featureID);
 	}

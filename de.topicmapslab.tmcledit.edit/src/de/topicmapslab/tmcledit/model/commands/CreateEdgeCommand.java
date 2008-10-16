@@ -32,7 +32,19 @@ public class CreateEdgeCommand extends AbstractCommand {
 	
 	@Override
 	public boolean canExecute() {
+		prepare();
 		return (edge.getTarget()!=null) && (edge.getSource()!=null) && (diagram!=null);
+	}
+	
+	@Override
+	protected boolean prepare() {
+		if ((edge.getTarget()!=null) && (edge.getSource()!=null) && (diagram!=null)) {
+			if (edge.getRoleConstraint()!=null) {
+				edge.getRoleConstraint().setTopicType(((TypeNode)edge.getTarget()).getTopicType());
+			}
+				
+		}
+		return true;
 	}
 	
 	@Override

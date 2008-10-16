@@ -113,7 +113,6 @@ public class FileUtil {
 		otc.setCardMax("*");
 		otc.setCardMin("0");
 		otc.setType(ot);
-		otc.setName("Heimadresse");
 		tt.getOccurenceConstraints().add(otc);
 		
 		TopicType nt = modelInstance.createTopicType();
@@ -122,7 +121,6 @@ public class FileUtil {
 		schema.getTopicTypes().add(nt);
 		
 		NameTypeConstraint ntc = modelInstance.createNameTypeConstraint();
-		ntc.setName("vorname");
 		ntc.setType(nt);
 		tt.getNameContraints().add(ntc);
 	}

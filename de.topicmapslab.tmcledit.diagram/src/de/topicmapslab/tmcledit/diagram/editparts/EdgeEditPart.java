@@ -2,8 +2,9 @@ package de.topicmapslab.tmcledit.diagram.editparts;
 
 import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.DelegatingLayout;
+import org.eclipse.draw2d.ConnectionEndpointLocator;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
@@ -21,8 +22,12 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
+	
+	private Label cardLabel;
+	private Label typeLabel;
 	
 	protected IFigure createFigure()
 	{
@@ -51,13 +56,26 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			deco.setFill(false);
 			conn.setTargetDecoration(deco);
 		} else if (getCastedModel().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {
-			conn.setLayoutManager(new DelegatingLayout());			
+			addConnectionLabels(conn);			
 		}
-		
-		
 		return conn;
 	}
 	
+	private void addConnectionLabels(PolylineConnection connection) {
+		ConnectionEndpointLocator locator = new ConnectionEndpointLocator(connection, true);
+		locator.setUDistance(15);
+		locator.setVDistance(15);
+		cardLabel = new Label();
+		connection.add(cardLabel, locator);
+		
+		locator = new ConnectionEndpointLocator(connection, true);
+		locator.setUDistance(35);
+		locator.setVDistance(15);
+		typeLabel = new Label();
+		connection.add(typeLabel, locator);
+
+	}
+
 	public Edge getCastedModel() {
 		return (Edge) getModel();
 	}
@@ -75,7 +93,6 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 
 	@Override
 	public void activate() {
-		
 		((Diagram)getRoot().getContents().getModel()).eAdapters().add(adapter);
 		super.activate();
 	}
@@ -100,6 +117,16 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			refreshVisuals();
 		
 	}
-	
-	
+
+	@Override
+	protected void refreshVisuals() {
+		if (getCastedModel().getRoleConstraint()!=null) {
+			RoleTypeConstraints rtc = getCastedModel().getRoleConstraint();
+			cardLabel.setText(rtc.getCardMin()+".."+rtc.getCardMax());
+			if (rtc.getType()!=null)
+				typeLabel.setText(rtc.getType().getId());
+			else
+				typeLabel.setText("no role type set");
+		}
+	}
 }

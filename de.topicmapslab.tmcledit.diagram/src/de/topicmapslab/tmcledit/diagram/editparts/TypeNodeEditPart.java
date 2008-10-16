@@ -173,7 +173,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
 			return;
 		
-		if (notification.getNotifier().equals(getModel())) {
+		if (notification.getNotifier().equals(((TypeNode)getModel()).getTopicType())) {
 			refreshChildren();
 			refreshVisuals();
 		}

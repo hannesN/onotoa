@@ -80,7 +80,7 @@ public class SubjectIdentifierConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SubjectIdentifierConstraint)object).getName();
+		String label = ((SubjectIdentifierConstraint)object).getCardMin();
 		return label == null || label.length() == 0 ?
 			getString("_UI_SubjectIdentifierConstraint_type") :
 			getString("_UI_SubjectIdentifierConstraint_type") + " " + label;

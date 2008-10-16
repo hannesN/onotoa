@@ -71,6 +71,7 @@ public class EdgeItemProvider
 			addSourcePropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
+			addRoleConstraintPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -137,6 +138,28 @@ public class EdgeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Role Constraint feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRoleConstraintPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Edge_roleConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Edge_roleConstraint_feature", "_UI_Edge_type"),
+				 ModelPackage.Literals.EDGE__ROLE_CONSTRAINT,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

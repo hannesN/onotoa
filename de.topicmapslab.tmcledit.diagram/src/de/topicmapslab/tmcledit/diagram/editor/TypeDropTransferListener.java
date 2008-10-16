@@ -1,5 +1,6 @@
 package de.topicmapslab.tmcledit.diagram.editor;
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
@@ -9,16 +10,20 @@ import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 
+import de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
 public class TypeDropTransferListener extends AbstractTransferDropTargetListener {
 
-	private TypeNodeCreationFactory fac = new TypeNodeCreationFactory();
+	private TypeNodeCreationFactory nodeFac = new TypeNodeCreationFactory();
+	private OccurenceConstraintCreationFactory occFac = new OccurenceConstraintCreationFactory();
 
 	private final TopicMapSchema schema;
 	
@@ -34,13 +39,18 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 		
 	@Override
 	protected void updateTargetRequest() {
-		((CreateRequest)getTargetRequest()).setLocation(getDropLocation());
+		CreateRequest req = ((CreateRequest)getTargetRequest());
+		req.setLocation(getDropLocation());
+		EditPart part = getViewer().findObjectAt(getDropLocation());
+		if (part instanceof NodeEditPart) {
+			req.setFactory(occFac);
+		}
 	}
 
 	@Override
 	protected Request createTargetRequest() {
 		CreateRequest req = new CreateRequest();
-		req.setFactory(fac);
+		req.setFactory(nodeFac);
 
 		return req;
 	}
@@ -53,13 +63,25 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 
 	@Override
 	protected void handleDrop() {
-		String objId = (String) getCurrentEvent().data;
-		fac.setTopicType(null);
+		CreateRequest req = ((CreateRequest)getTargetRequest());
 		
+		String objId = (String) getCurrentEvent().data;
+		nodeFac.setTopicType(null);
+		
+		TopicType dropedType = null;
 		for (TopicType tt : schema.getTopicTypes()) {
 			if (tt.toString().equals(objId))
-				fac.setTopicType(tt);
+				dropedType = tt;
 		}
+		
+		if (dropedType.getKind()==KindOfTopicType.TOPIC_TYPE) {
+			nodeFac.setTopicType(dropedType);
+			req.setFactory(nodeFac);
+		} else if (dropedType.getKind()==KindOfTopicType.OCCURENCE_TYPE) {
+			occFac.setTopicType(dropedType);
+			req.setFactory(occFac);
+		}
+		
 		
 		super.handleDrop();
 	}
@@ -85,6 +107,34 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 		@Override
 		public Object getObjectType() {
 			return TypeNode.class;
+		}
+	};
+	
+	private class OccurenceConstraintCreationFactory implements CreationFactory {
+
+		private TopicType occurenceType;
+		
+		@Override
+		public Object getNewObject() {
+			OccurenceTypeConstraint otc = ModelFactory.eINSTANCE.createOccurenceTypeConstraint();
+			if (occurenceType==null) {
+				occurenceType = de.topicmapslab.tmcledit.model.ModelFactory.eINSTANCE.createTopicType();
+				occurenceType.setId("foo:bar");
+				occurenceType.setKind(KindOfTopicType.OCCURENCE_TYPE);
+			}
+			otc.setType(occurenceType);
+			
+			
+			return otc;
+		}
+
+		public void setTopicType(TopicType topicType) {
+			this.occurenceType = topicType;
+		}
+		
+		@Override
+		public Object getObjectType() {
+			return OccurenceTypeConstraint.class;
 		}
 	};
 }

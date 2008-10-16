@@ -4,8 +4,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
-import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
@@ -33,7 +33,7 @@ public class TreeOccurence extends TreeObject{
 	
 	@Override
 	public String getName() {
-		return otc.getName();
+		return otc.getType().getId();
 	}
 	
 	@Override
@@ -49,7 +49,16 @@ public class TreeOccurence extends TreeObject{
 	
 	@Override
 	public void notifyChanged(Notification notification) {
-		if ( (notification.getEventType()==Notification.SET) && (notification.getFeatureID(String.class)==ModelPackage.OCCURENCE_TYPE_CONSTRAINT__NAME)){
+		if (notification.getNotifier().equals(this.otc)) {
+			if (notification.getNewValue() instanceof TopicType) {
+				if (notification.getOldValue()!=null)
+					((TopicType)notification.getOldValue()).eAdapters().remove(this);
+				((TopicType)notification.getNewValue()).eAdapters().add(this);
+			}
+			return;
+		}
+		
+		if (notification.getNotifier().equals(otc.getType())) {
 			getModelView().getViewer().refresh(this);
 		}
 	}

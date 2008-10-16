@@ -6,6 +6,7 @@ import org.eclipse.gef.EditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.OccurenceConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
 	private OccurenceTypeConstraint getCastedModel() {
@@ -22,23 +23,42 @@ public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
 		OccurenceTypeConstraint otc = getCastedModel();
 		StringBuffer text = new StringBuffer();
 		
-		getNameLabel().setText(otc.getName());
+		getNameLabel().setText(otc.getType().getId());
 		
-		TopicType type = otc.getType();
-		if (type!=null)
-			text.append(":"+otc.getType().getId());
-		
-		text.append("\t"+otc.getCardMin()+".."+otc.getCardMax());	
+		text.append(" : ");
+		text.append(otc.getDataType());
+		text.append(" ");
+		text.append(otc.getCardMin());
+		text.append("..");
+		text.append(otc.getCardMax());	
 		
 		getTypeLabel().setText(text.toString());
 	}
 
+	@Override
+	public void activate() {
+		getCastedModel().getType().eAdapters().add(this);
+		super.activate();
+	}
 	
+	@Override
+	public void deactivate() {
+		getCastedModel().getType().eAdapters().remove(this);
+		super.deactivate();
+	}
 	
 	@Override
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType()==Notification.SET)
+		if (notification.getEventType()==Notification.SET) {
+			if (notification.getNewValue() instanceof TopicType) {
+				TypeNode old = (TypeNode) notification.getOldValue();
+				if (old!=null)
+					old.eAdapters().remove(this);
+				((TypeNode) notification.getNewValue()).eAdapters().add(this);
+			
+			}
 			refreshVisuals();
+		}
 		
 	}
 

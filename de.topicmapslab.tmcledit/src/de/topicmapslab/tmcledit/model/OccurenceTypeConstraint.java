@@ -54,6 +54,7 @@ public interface OccurenceTypeConstraint extends AbstractConstraint {
 
 	/**
 	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
+	 * The default value is <code>"xsd:string"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Data Type</em>' attribute isn't clear,
@@ -63,7 +64,7 @@ public interface OccurenceTypeConstraint extends AbstractConstraint {
 	 * @return the value of the '<em>Data Type</em>' attribute.
 	 * @see #setDataType(String)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint_DataType()
-	 * @model
+	 * @model default="xsd:string" required="true"
 	 * @generated
 	 */
 	String getDataType();

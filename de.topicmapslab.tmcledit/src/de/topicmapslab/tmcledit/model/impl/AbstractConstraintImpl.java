@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getCardMin <em>Card Min</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getRegexp <em>Regexp</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getScope <em>Scope</em>}</li>
  * </ul>
  * </p>
@@ -84,7 +83,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REGEXP_EDEFAULT = "*";
+	protected static final String REGEXP_EDEFAULT = ".*";
 
 	/**
 	 * The cached value of the '{@link #getRegexp() <em>Regexp</em>}' attribute.
@@ -95,26 +94,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * @ordered
 	 */
 	protected String regexp = REGEXP_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getScope() <em>Scope</em>}' reference.
@@ -213,27 +192,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONSTRAINT__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TopicType getScope() {
 		if (scope != null && scope.eIsProxy()) {
 			InternalEObject oldScope = (InternalEObject)scope;
@@ -281,8 +239,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				return getCardMax();
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				return getRegexp();
-			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
-				return getName();
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
 				if (resolve) return getScope();
 				return basicGetScope();
@@ -306,9 +262,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				setRegexp((String)newValue);
-				return;
-			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
-				setName((String)newValue);
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
 				setScope((TopicType)newValue);
@@ -334,9 +287,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				setRegexp(REGEXP_EDEFAULT);
 				return;
-			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
 				setScope((TopicType)null);
 				return;
@@ -358,8 +308,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				return CARD_MAX_EDEFAULT == null ? cardMax != null : !CARD_MAX_EDEFAULT.equals(cardMax);
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				return REGEXP_EDEFAULT == null ? regexp != null : !REGEXP_EDEFAULT.equals(regexp);
-			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
 				return scope != null;
 		}
@@ -382,8 +330,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 		result.append(cardMax);
 		result.append(", regexp: ");
 		result.append(regexp);
-		result.append(", name: ");
-		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

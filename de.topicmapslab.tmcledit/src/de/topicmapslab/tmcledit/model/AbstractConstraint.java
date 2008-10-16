@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMin <em>Card Min</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getRegexp <em>Regexp</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}</li>
  * </ul>
  * </p>
@@ -85,7 +84,7 @@ public interface AbstractConstraint extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Regexp</b></em>' attribute.
-	 * The default value is <code>"*"</code>.
+	 * The default value is <code>".*"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Regexp</em>' attribute isn't clear,
@@ -95,7 +94,7 @@ public interface AbstractConstraint extends EObject {
 	 * @return the value of the '<em>Regexp</em>' attribute.
 	 * @see #setRegexp(String)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractConstraint_Regexp()
-	 * @model default="*" required="true"
+	 * @model default=".*" required="true"
 	 * @generated
 	 */
 	String getRegexp();
@@ -109,32 +108,6 @@ public interface AbstractConstraint extends EObject {
 	 * @generated
 	 */
 	void setRegexp(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractConstraint_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Scope</b></em>' reference.

@@ -21,11 +21,12 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	@Override
 	protected void refreshVisuals() {
 		NameTypeConstraint ntc = getCastedModel();
-		getNameLabel().setText(ntc.getName());
+		getNameLabel().setText(ntc.getType().getId());
 		StringBuffer buffer = new StringBuffer(50);
-		buffer.append(":");
-		buffer.append(ntc.getType().getId());
-		buffer.append("  ");
+		buffer.append(" [");
+		buffer.append(ntc.getRegexp());
+		buffer.append("] ");
+		buffer.append(" ");
 		buffer.append(ntc.getCardMin());
 		buffer.append("..");
 		buffer.append(ntc.getCardMax());
