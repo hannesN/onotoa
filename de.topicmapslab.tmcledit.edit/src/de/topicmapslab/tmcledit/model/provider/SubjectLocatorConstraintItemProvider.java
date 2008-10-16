@@ -80,7 +80,7 @@ public class SubjectLocatorConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SubjectLocatorConstraint)object).getCardMin();
+		String label = ((SubjectLocatorConstraint)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_SubjectLocatorConstraint_type") :
 			getString("_UI_SubjectLocatorConstraint_type") + " " + label;

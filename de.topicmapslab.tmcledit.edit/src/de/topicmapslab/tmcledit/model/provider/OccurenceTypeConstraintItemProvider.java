@@ -153,7 +153,7 @@ public class OccurenceTypeConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((OccurenceTypeConstraint)object).getCardMin();
+		String label = ((OccurenceTypeConstraint)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_OccurenceTypeConstraint_type") :
 			getString("_UI_OccurenceTypeConstraint_type") + " " + label;

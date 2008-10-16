@@ -7,11 +7,13 @@ import org.eclipse.ui.part.PageBook;
 
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.MappingElement;
+import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class PropertyDetailPageFactory {
 	private static final String TOPIC_TYPE = "TopicType";
 	private static final String DIAGRAM = "Diagram";
+	private static final String ROLE = "role";
 	private static final String PREFIX_MAPPING = "PrefixMapping";
 	
 	private EmptyPage emptyPage;
@@ -54,6 +56,13 @@ public class PropertyDetailPageFactory {
 				page = new DiagramPage();
 				page.createControl(pageBook);
 				pageMap.put(DIAGRAM, page);
+			}
+		} else if (model instanceof RoleTypeConstraints) {
+			page = pageMap.get(ROLE);
+			if (page==null) {
+				page = new RoleModelPage();
+				page.createControl(pageBook);
+				pageMap.put(ROLE, page);
 			}
 		}
 		return page;

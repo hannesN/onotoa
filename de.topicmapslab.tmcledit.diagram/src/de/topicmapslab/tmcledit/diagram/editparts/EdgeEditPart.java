@@ -23,6 +23,7 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
 	
@@ -94,12 +95,25 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	public void activate() {
 		((Diagram)getRoot().getContents().getModel()).eAdapters().add(adapter);
+		RoleTypeConstraints roleConstraint = getCastedModel().getRoleConstraint();
+		if (roleConstraint!=null) {
+			roleConstraint.eAdapters().add(adapter);
+			if (roleConstraint.getType()!=null)
+				roleConstraint.getType().eAdapters().add(adapter);
+		}
 		super.activate();
 	}
 	
 	@Override
 	public void deactivate() {
 		((Diagram)getRoot().getContents().getModel()).eAdapters().remove(adapter);
+		RoleTypeConstraints roleConstraint = getCastedModel().getRoleConstraint();
+		if (roleConstraint!=null) {
+			roleConstraint.eAdapters().remove(adapter);
+			if (roleConstraint.getType()!=null)
+				roleConstraint.getType().eAdapters().remove(adapter);
+			
+		}
 		super.deactivate();
 	}
 	
@@ -116,6 +130,16 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		} else
 			refreshVisuals();
 		
+		if (notification.getNotifier().equals(getCastedModel().getRoleConstraint())) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE) {
+				TopicType tmp = (TopicType) notification.getOldValue();
+				if (tmp!=null)
+					tmp.eAdapters().remove(adapter);
+				tmp = (TopicType) notification.getNewValue();
+				if (tmp!=null)
+					tmp.eAdapters().add(adapter);
+			}
+		}
 	}
 
 	@Override
@@ -128,5 +152,6 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			else
 				typeLabel.setText("no role type set");
 		}
+		
 	}
 }

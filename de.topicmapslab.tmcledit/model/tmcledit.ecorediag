@@ -74,6 +74,10 @@
         <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//AbstractConstraint/regexp"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_JO_aoWVUEd2WgM1R5UUCVQ"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_0rGQoZuJEd2vk7_57_maVg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//AbstractConstraint/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0rGQopuJEd2vk7_57_maVg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_B-HOAmVUEd2WgM1R5UUCVQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_B-HOA2VUEd2WgM1R5UUCVQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_B-HOBGVUEd2WgM1R5UUCVQ"/>

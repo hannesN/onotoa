@@ -43,6 +43,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/cardMax"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/regexp"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AbstractConstraint/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/name"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//OccurenceTypeConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceTypeConstraint/unique"/>

@@ -15,6 +15,8 @@ import org.eclipse.gef.palette.PaletteSeparator;
 import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
 
+import de.topicmapslab.tmcledit.diagram.creationfactories.OccurenceConstraintCreationFactory;
+import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
@@ -34,7 +36,6 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
-import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -99,36 +100,36 @@ public class TMCLDiagramEditorUtil {
 		PaletteGroup group = new PaletteGroup("Topic Types");
 
 		group.add(new CreationToolEntry("Topic Type", "Topic Type",
-				new TopicTypeCreationFactory(KindOfTopicType.TOPIC_TYPE),
+				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
 
 		group.add(new CreationToolEntry(
 						"Occurence Type",
 						"Occurence Type",
-						new TopicTypeCreationFactory(KindOfTopicType.OCCURENCE_TYPE),
+						new TypeNodeCreationFactory(KindOfTopicType.OCCURENCE_TYPE),
 						ImageProvider.getImageDescriptor(ImageConstants.OCCURENCETYPE_SM),
 						ImageProvider.getImageDescriptor(ImageConstants.OCCURENCETYPE)));
 
 		group.add(new CreationToolEntry("Role Type", "Role Type",
-				new TopicTypeCreationFactory(KindOfTopicType.ROLE_TYPE),
+				new TypeNodeCreationFactory(KindOfTopicType.ROLE_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.ROLETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.ROLETYPE)));
 
 		group.add(new CreationToolEntry("Association Type", "Association Type",
-				new TopicTypeCreationFactory(KindOfTopicType.ASSOCIATION_TYPE),
+				new TypeNodeCreationFactory(KindOfTopicType.ASSOCIATION_TYPE),
 				ImageProvider
 						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE_SM),
 				ImageProvider
 						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE)));
 
 		group.add(new CreationToolEntry("Name Type", "Name Type",
-				new TopicTypeCreationFactory(KindOfTopicType.NAME_TYPE),
+				new TypeNodeCreationFactory(KindOfTopicType.NAME_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE)));
 
 		group.add(new CreationToolEntry("Scope Type", "Scope Type",
-				new TopicTypeCreationFactory(KindOfTopicType.SCOPE_TYPE),
+				new TypeNodeCreationFactory(KindOfTopicType.SCOPE_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.SCOPETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.SCOPETYPE)));
 
@@ -138,26 +139,7 @@ public class TMCLDiagramEditorUtil {
 	private static PaletteGroup getTypeItemsPaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types Items");
 		group.add(new CreationToolEntry("Occurence Constraints",
-				"Occurence Constraints", new CreationFactory() {
-
-					@Override
-					public Object getNewObject() {
-						OccurenceTypeConstraint otc =  ModelFactory.eINSTANCE.createOccurenceTypeConstraint();
-						
-						TopicType type = ModelFactory.eINSTANCE.createTopicType();
-						type.setKind(KindOfTopicType.OCCURENCE_TYPE);
-						type.setId("foo:occurence");
-						otc.setType(type);
-						
-						return otc;
-					}
-
-					@Override
-					public Object getObjectType() {
-						return OccurenceTypeConstraint.class;
-					}
-
-				}, 
+				"Occurence Constraints", new OccurenceConstraintCreationFactory(), 
 				ImageProvider.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT_SM), 
 				ImageProvider.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT)));
 		
@@ -274,30 +256,6 @@ public class TMCLDiagramEditorUtil {
 				}, null, null));
 		
 		return group;
-	}
-
-	private static final class TopicTypeCreationFactory implements
-			CreationFactory {
-		private final KindOfTopicType kind;
-
-		public TopicTypeCreationFactory(KindOfTopicType kind) {
-			this.kind = kind;
-		}
-
-		@Override
-		public Object getNewObject() {
-			TypeNode node = ModelFactory.eINSTANCE.createTypeNode();
-			TopicType tt = ModelFactory.eINSTANCE.createTopicType();
-			tt.setId("foo:default");
-			tt.setKind(kind);
-			node.setTopicType(tt);
-			return node;
-		}
-
-		@Override
-		public Object getObjectType() {
-			return TypeNode.class;
-		}
 	}
 
 }

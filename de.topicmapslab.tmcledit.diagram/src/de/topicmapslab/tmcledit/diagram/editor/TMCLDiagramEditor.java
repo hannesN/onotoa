@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditPart;
@@ -37,6 +38,7 @@ import de.topicmapslab.tmcledit.diagram.action.DiagramController;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TypeNode;
@@ -236,6 +238,12 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					AssociationNode node = (AssociationNode) model;
 					currentSelection = new StructuredSelection(node
 							.getAssociationConstraint());
+				} else if (model instanceof Edge) {
+					EObject tmp = ((Edge)model).getRoleConstraint();
+					if (tmp!=null)
+						currentSelection = new StructuredSelection(tmp);
+					else
+						currentSelection = new StructuredSelection();
 				} else {
 					currentSelection = new StructuredSelection(model);
 				}

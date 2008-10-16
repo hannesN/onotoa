@@ -37,7 +37,7 @@ public abstract class NodeEditPart extends AdapterGraphicalEditPart implements o
 	protected void createEditPolicies() {
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new NodeGraphicalNodeEditPolicy());	
 	}
-	
+		
 	@Override
 	protected void refreshVisuals() {
 		// refreshing mapping element, because it should always be in the upper corner

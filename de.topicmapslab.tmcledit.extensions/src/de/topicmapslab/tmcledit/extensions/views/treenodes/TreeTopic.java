@@ -3,13 +3,18 @@
  */
 package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -42,7 +47,46 @@ public class TreeTopic extends TreeParent {
 		if ((notification.getEventType() == Notification.SET)
 				&& (notification.getFeatureID(String.class) == ModelPackage.TOPIC_TYPE__ID)) {
 			getModelView().getViewer().refresh(this);
+		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS) {
+			if (notification.getEventType() == Notification.ADD) {
+				addChild(new TreeOccurence(getModelView(),
+						(OccurenceTypeConstraint) notification.getNewValue()));
+				refresh();
+			} else if (notification.getEventType() == Notification.REMOVE) {
+				for (Iterator<TreeObject> it = getChildrenList().iterator(); it
+						.hasNext();) {
+					TreeObject obj = it.next();
+					if (obj instanceof TreeOccurence) {
+						if (((TreeOccurence) obj).getModel().equals(
+								notification.getOldValue())) {
+							it.remove();
+							break;
+						}
+					}
+				}
+				refresh();
+			}
+		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS) {
+			if (notification.getEventType() == Notification.ADD) {
+				addChild(new TreeName(getModelView(),
+						(NameTypeConstraint) notification.getNewValue()));
+				refresh();
+			} else if (notification.getEventType() == Notification.REMOVE) {
+				for (Iterator<TreeObject> it = getChildrenList().iterator(); it
+						.hasNext();) {
+					TreeObject obj = it.next();
+					if (obj instanceof TreeOccurence) {
+						if (((TreeName) obj).getModel().equals(
+								notification.getOldValue())) {
+							it.remove();
+							break;
+						}
+					}
+				}
+				refresh();
+			}
 		}
+		
 	}
 
 	@Override

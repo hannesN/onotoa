@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getRegexp <em>Regexp</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,5 +135,31 @@ public interface AbstractConstraint extends EObject {
 	 * @generated
 	 */
 	void setScope(TopicType value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractConstraint_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // AbstractConstraint

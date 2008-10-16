@@ -15,7 +15,6 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.CreateOccurenceConstraintCommand;
 
 public class TypeNodeLayoutEditPolicy extends LayoutEditPolicy {
@@ -24,7 +23,7 @@ public class TypeNodeLayoutEditPolicy extends LayoutEditPolicy {
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
 	
-		if (request.getNewObjectType()==TypeNode.class) {
+		if (request.getNewObjectType()==OccurenceTypeConstraint.class) {
 			Node node = (Node) getHost().getModel();
 			// getting container which is a diagram
 			Diagram diagram = (Diagram) node.eContainer();

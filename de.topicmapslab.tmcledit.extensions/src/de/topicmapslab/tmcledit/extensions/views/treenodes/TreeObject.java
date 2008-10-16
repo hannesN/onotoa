@@ -88,6 +88,10 @@ public class TreeObject implements IAdaptable, Adapter {
 		return null;
 	}
 	
+	public void refresh() {
+		getModelView().getViewer().refresh(this);
+	}
+	
 	public void handleDoubleClick() {
 		
 	}

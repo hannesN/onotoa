@@ -30,6 +30,10 @@ public class TreeParent extends TreeObject {
 		return (TreeObject[]) children.toArray(new TreeObject[children
 				.size()]);
 	}
+	
+	public ArrayList<TreeObject> getChildrenList() {
+		return children;
+	}
 
 	public boolean hasChildren() {
 		return children.size() > 0;

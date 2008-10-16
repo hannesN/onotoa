@@ -96,8 +96,11 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			titleLabel.setText(tt.getId());
 		}
 		Rectangle r = new Rectangle(tn.getPosX(), tn.getPosY(), -1, -1);
+		try {
         ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
-
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
         super.refreshVisuals();
 	}
 	
@@ -177,7 +180,6 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			refreshChildren();
 		}
 		refreshVisuals();
-		
 	}
 
 	/**
@@ -192,6 +194,15 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		else if (childEditPart instanceof NameTypeConstraintEditPart)
 			basenameFigure.add(child);
 		
+	}
+	
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
+		if (childEditPart instanceof OccurenceTypeConstraintEditPart)
+			occurencesFigure.remove(child);
+		else if (childEditPart instanceof NameTypeConstraintEditPart)
+			basenameFigure.remove(child);
 	}
 		
 	@Override

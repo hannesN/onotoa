@@ -216,13 +216,22 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CONSTRAINT__SCOPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CONSTRAINT__NAME = 4;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = 4;
+	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.
@@ -269,6 +278,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int OCCURENCE_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCCURENCE_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -351,6 +369,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAME_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -527,6 +554,15 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBJECT_LOCATOR_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
+
+	/**
 	 * The number of structural features of the '<em>Subject Locator Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -580,6 +616,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUBJECT_IDENTIFIER_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBJECT_IDENTIFIER_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Subject Identifier Constraint</em>' class.
@@ -1208,6 +1253,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractConstraint_Scope();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getName()
+	 * @see #getAbstractConstraint()
+	 * @generated
+	 */
+	EAttribute getAbstractConstraint_Name();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint <em>Occurence Type Constraint</em>}'.
@@ -1927,6 +1983,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_CONSTRAINT__SCOPE = eINSTANCE.getAbstractConstraint_Scope();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_CONSTRAINT__NAME = eINSTANCE.getAbstractConstraint_Name();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.

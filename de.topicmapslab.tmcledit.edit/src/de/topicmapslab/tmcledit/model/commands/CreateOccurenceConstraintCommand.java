@@ -45,7 +45,7 @@ public class CreateOccurenceConstraintCommand extends AbstractCommand {
 		topicType.getOccurenceConstraints().remove(otc);
 		if (isNew) {
 			TopicMapSchema schema = (TopicMapSchema) topicType.eContainer();
-			schema.getTopicTypes().add(otc.getType());
+			schema.getTopicTypes().remove(otc.getType());
 		}
 		
 	}

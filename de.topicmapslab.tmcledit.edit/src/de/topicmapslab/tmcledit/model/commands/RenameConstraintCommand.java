@@ -24,18 +24,18 @@ public class RenameConstraintCommand extends AbstractCommand{
 	public RenameConstraintCommand(AbstractConstraint constraint, String newName) {
 		super();
 		this.constraint = constraint;
-		this.oldName = "";//constraint.get();
+		this.oldName = constraint.getName();
 		this.newName = newName;
 	}
 
 	@Override
 	public void execute() {
-		//constraint.setName(newName);
+		constraint.setName(newName);
 	}
 	
 	@Override
 	public void undo() {
-		//constraint.setName(oldName);
+		constraint.setName(oldName);
 	}
 	
 	@Override
@@ -45,6 +45,6 @@ public class RenameConstraintCommand extends AbstractCommand{
 	
 	@Override
 	protected boolean prepare() {
-		return false;
+		return true;
 	}
 }

@@ -89,6 +89,7 @@ import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 import de.topicmapslab.tmcledit.model.util.DirtyStateObserver;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
+import de.topicmapslab.tmcledit.model.util.TopicIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -202,6 +203,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		}
 
 		public void initialize() {
+			if (currFile!=null)
+				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
+			update();
+		}
+		
+		public void update() {
+			
 			invisibleRoot = new TreeParent(ModelView.this, "");
 
 			if (currFile != null) {
@@ -210,8 +218,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 				invisibleRoot.addChild(diagramNode);
 				invisibleRoot.addChild(schemaNode);
-
-				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
 
 				ttNode = new TreeParent(ModelView.this, "TopicTypes");
 				rtNode = new TreeParent(ModelView.this, "RoleTypes");
@@ -238,7 +244,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				TreeParent root = new TreeParent(ModelView.this,
 						"No Diagramm Editor Open");
 				invisibleRoot.addChild(root);
-			}
+			}			
 		}
 
 		private void addType(TopicType tt) {
@@ -506,7 +512,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private void makeActions() {
 		action1 = new Action() {
 			public void run() {
-				contentProvider.initialize();
+				contentProvider.update();
 				viewer.setInput(getViewSite());
 				viewer.expandToLevel(2);
 			}
@@ -682,6 +688,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		}
 		contentProvider.initialize();
 
+		// initialize indexer 
+		TopicIndexer.getInstance(currFile.getTopicMapSchema());
+		
 		viewer.refresh();
 	}
 

@@ -123,5 +123,20 @@ public class FileUtil {
 		NameTypeConstraint ntc = modelInstance.createNameTypeConstraint();
 		ntc.setType(nt);
 		tt.getNameContraints().add(ntc);
+		
+		TopicType rt = ModelFactory.eINSTANCE.createTopicType();
+		rt.setId("foo:Employee");
+		rt.setKind(KindOfTopicType.ROLE_TYPE);
+		schema.getTopicTypes().add(rt);
+		
+		rt = ModelFactory.eINSTANCE.createTopicType();
+		rt.setId("foo:Employer");
+		rt.setKind(KindOfTopicType.ROLE_TYPE);
+		schema.getTopicTypes().add(rt);
+		
+		
+		
+		
+		
 	}
 }
