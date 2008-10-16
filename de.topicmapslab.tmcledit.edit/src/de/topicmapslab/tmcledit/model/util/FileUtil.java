@@ -63,12 +63,12 @@ public class FileUtil {
 		TopicMapSchema schema = file.getTopicMapSchema(); 
 		
 		Diagram diagram = modelInstance.createDiagram();
-		diagram.setName("Lalala");
+		diagram.setName("diagram 1");
 		file.getDiagrams().add(diagram);
 		
 		MappingElement me = ModelFactory.eINSTANCE.createMappingElement();
-		me.setKey("wwid");
-		me.setValue("http://psi.wasweissich.de");
+		me.setKey("foo");
+		me.setValue("http://psi.foo.com");
 		schema.getMappings().add(me);
 		
 		me = ModelFactory.eINSTANCE.createMappingElement();
@@ -77,11 +77,11 @@ public class FileUtil {
 		schema.getMappings().add(me);
 		
 		TopicType tt = modelInstance.createTopicType();
-		tt.setId("wwid:Person");
+		tt.setId("foo:Person");
 		schema.getTopicTypes().add(tt);
 		
 		TopicType tt2 = modelInstance.createTopicType();
-		tt2.setId("wwid:Chef");
+		tt2.setId("foo:Boss");
 		tt2.getIsa().add(tt);
 		schema.getTopicTypes().add(tt2);
 		
@@ -106,7 +106,7 @@ public class FileUtil {
 		
 		TopicType ot = modelInstance.createTopicType();
 		ot.setKind(KindOfTopicType.OCCURENCE_TYPE);
-		ot.setId("wwid:Adresse");
+		ot.setId("foo:Addresse");
 		schema.getTopicTypes().add(ot);
 		
 		OccurenceTypeConstraint otc = modelInstance.createOccurenceTypeConstraint();
@@ -117,7 +117,7 @@ public class FileUtil {
 		
 		TopicType nt = modelInstance.createTopicType();
 		nt.setKind(KindOfTopicType.NAME_TYPE);
-		nt.setId("wwid:Vorname");
+		nt.setId("foo:Firstname");
 		schema.getTopicTypes().add(nt);
 		
 		NameTypeConstraint ntc = modelInstance.createNameTypeConstraint();
