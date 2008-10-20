@@ -38,6 +38,10 @@ public class TopicIndexer implements Adapter{
 		return null;
 	}
 	
+	public List<TopicType> getTopicTypes() {
+		return topicMapSchema.getTopicTypes();
+	}
+	
 	public List<TopicType> getRoleTypes() {
 		List<TopicType> result = new ArrayList<TopicType>();
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {

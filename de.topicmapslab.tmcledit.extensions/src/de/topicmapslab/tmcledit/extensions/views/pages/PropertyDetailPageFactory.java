@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.ui.part.PageBook;
 
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
@@ -15,6 +16,7 @@ public class PropertyDetailPageFactory {
 	private static final String DIAGRAM = "Diagram";
 	private static final String ROLE = "role";
 	private static final String PREFIX_MAPPING = "PrefixMapping";
+	private static final String ASSOCIATION = "association";
 	
 	private EmptyPage emptyPage;
 	
@@ -63,6 +65,13 @@ public class PropertyDetailPageFactory {
 				page = new RoleModelPage();
 				page.createControl(pageBook);
 				pageMap.put(ROLE, page);
+			}
+		} else if (model instanceof AssociationTypeConstraint) {
+			page = pageMap.get(ASSOCIATION);
+			if (page==null) {
+				page = new AssociationConstraintModelPage();
+				page.createControl(pageBook);
+				pageMap.put(ASSOCIATION, page);
 			}
 		}
 		return page;

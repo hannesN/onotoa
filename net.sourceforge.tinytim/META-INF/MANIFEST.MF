@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tinytim Plug-in
+Bundle-SymbolicName: net.sourceforge.tinytim
+Bundle-Version: 1.5.0
+Bundle-ClassPath: tinytim-mio-1.5.0beta.jar,
+ tinytim-1.5.0beta.jar,
+ tmapi-1_0SP1.jar
+Export-Package: org.tinytim,
+ org.tinytim.index,
+ org.tinytim.index.tmapi,
+ org.tinytim.mio,
+ org.tinytim.voc,
+ org.tmapi.core,
+ org.tmapi.index,
+ org.tmapi.index.core
+Require-Bundle: javax.xml
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

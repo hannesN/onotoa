@@ -9,18 +9,19 @@ import java.util.List;
 
 import org.eclipse.draw2d.AbstractConnectionAnchor;
 import org.eclipse.draw2d.ConnectionAnchor;
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 
 import de.topicmapslab.tmcledit.diagram.figures.CircleFigure;
 import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -57,7 +58,7 @@ public class AssociationNodeEditPart extends NodeEditPart{
         
         TopicType associationType = node.getAssociationConstraint().getAssociationType();
 		if (associationType!=null)
-        	typeLabel.setText(associationType.getId());
+        	((CircleFigure)getFigure()).setText(associationType.getId());
         
 		super.refreshVisuals();
 	}
@@ -80,6 +81,25 @@ public class AssociationNodeEditPart extends NodeEditPart{
 			return result;
 		}
 	}
+
+	@Override
+	public void activate() {
+		super.activate();
+		AssociationTypeConstraint associationConstraint = getCastedModel().getAssociationConstraint();
+		associationConstraint.eAdapters().add(this);
+		if (associationConstraint.getAssociationType()!=null)
+			associationConstraint.getAssociationType().eAdapters().add(this);
+		
+	}
+	
+	@Override
+	public void deactivate() {
+		AssociationTypeConstraint associationConstraint = getCastedModel().getAssociationConstraint();
+		associationConstraint.eAdapters().remove(this);
+		if (associationConstraint.getAssociationType()!=null)
+			associationConstraint.getAssociationType().eAdapters().remove(this);
+		super.deactivate();
+	}
 	
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(
@@ -89,10 +109,23 @@ public class AssociationNodeEditPart extends NodeEditPart{
 
 	@Override
 	public void notifyChanged(Notification notification) {
+		if (notification.getEventType()==Notification.REMOVING_ADAPTER) {
+			return;
+		}
 		if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__EDGES)
 			refreshSourceConnections();
 		if (notification.getNotifier()==getModel())
 			refreshVisuals();
+		if (notification.getEventType()==Notification.SET) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE) {
+				if (notification.getOldValue()!=null)
+					((EObject)notification.getOldValue()).eAdapters().remove(this);
+				
+				if (notification.getNewValue()!=null)
+					((EObject)notification.getNewValue()).eAdapters().add(this);
+			}
+			refreshVisuals();
+		}
 	}	
 
 	/**
