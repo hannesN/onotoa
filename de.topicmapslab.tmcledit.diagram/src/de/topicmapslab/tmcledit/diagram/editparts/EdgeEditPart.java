@@ -130,6 +130,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		} else
 			refreshVisuals();
 		
+		
 		if (notification.getNotifier().equals(getCastedModel().getRoleConstraint())) {
 			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE) {
 				TopicType tmp = (TopicType) notification.getOldValue();
@@ -139,6 +140,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				if (tmp!=null)
 					tmp.eAdapters().add(adapter);
 			}
+			refreshVisuals();
 		}
 	}
 

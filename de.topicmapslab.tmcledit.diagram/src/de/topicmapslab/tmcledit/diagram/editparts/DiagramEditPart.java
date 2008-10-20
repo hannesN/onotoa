@@ -10,6 +10,7 @@ import java.util.List;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.FreeformLayout;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.emf.common.notify.Notification;
@@ -17,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
+import org.eclipse.swt.SWT;
 
 import de.topicmapslab.tmcledit.diagram.policies.DiagramLayoutEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -42,7 +44,14 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 	@Override
 	protected IFigure createFigure() {
 		if (figure == null) {
-			figure = new FreeformLayer();
+			// override to activate antialiasing
+			figure = new FreeformLayer() {
+				@Override
+				public void paint(Graphics graphics) {
+					graphics.setAntialias(SWT.ON);
+					super.paint(graphics);
+				}
+			};
 			figure.setOpaque(true);
 			figure.setBackgroundColor(ColorConstants.white);
 			layout = new FreeformLayout();

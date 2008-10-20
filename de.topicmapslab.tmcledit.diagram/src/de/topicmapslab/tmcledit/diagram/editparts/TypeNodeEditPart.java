@@ -15,6 +15,7 @@ import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
@@ -31,6 +32,8 @@ import de.topicmapslab.tmcledit.diagram.figures.CompartmentFigure;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -176,6 +179,15 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
 			return;
 		
+		if (notification.getNotifier() instanceof Diagram) {
+			if (notification.getEventType()==Notification.REMOVE)
+				return;
+			if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__EDGES) {
+				refreshSourceConnections();
+				refreshTargetConnections();
+			}
+		}
+				
 		if (notification.getNotifier().equals(((TypeNode)getModel()).getTopicType())) {
 			refreshChildren();
 		}
