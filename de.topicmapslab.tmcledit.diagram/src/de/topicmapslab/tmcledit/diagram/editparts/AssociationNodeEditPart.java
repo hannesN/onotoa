@@ -3,18 +3,26 @@
  */
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.draw2d.Ellipse;
+import org.eclipse.draw2d.AbstractConnectionAnchor;
+import org.eclipse.draw2d.ConnectionAnchor;
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 
+import de.topicmapslab.tmcledit.diagram.figures.CircleFigure;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
  * @author Hannes Niederhausen
@@ -22,12 +30,13 @@ import de.topicmapslab.tmcledit.model.Node;
  */
 public class AssociationNodeEditPart extends NodeEditPart{
 
+	Label typeLabel;
+	
 	@Override
 	protected IFigure createFigure() {
-		Ellipse figure = new Ellipse();
+		Label figure = new CircleFigure();
 		
-		figure.setSize(40, 40);
-		
+		figure.setText("foo:association");		
 		return figure;
 	}
 
@@ -42,17 +51,40 @@ public class AssociationNodeEditPart extends NodeEditPart{
 	
 	@Override
 	protected void refreshVisuals() {
-		Node node = getCastedModel();
+		AssociationNode node = getCastedModel();
 		Rectangle r = new Rectangle(node.getPosX(), node.getPosY(), -1, -1);
         ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
+        
+        TopicType associationType = node.getAssociationConstraint().getAssociationType();
+		if (associationType!=null)
+        	typeLabel.setText(associationType.getId());
+        
 		super.refreshVisuals();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List getModelSourceConnections() {
-		// TODO Auto-generated method stub
 		return super.getModelSourceConnections();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected List getModelChildren() {
+		TopicType type = getCastedModel().getAssociationConstraint().getAssociationType();
+		if (type==null)
+			return Collections.EMPTY_LIST;
+		else {
+			List result = new ArrayList();
+			result.add(type);
+			return result;
+		}
+	}
+	
+	@Override
+	public ConnectionAnchor getSourceConnectionAnchor(
+			ConnectionEditPart connection) {
+		return new ChopCircleAngle(getFigure());
 	}
 
 	@Override
@@ -62,6 +94,43 @@ public class AssociationNodeEditPart extends NodeEditPart{
 		if (notification.getNotifier()==getModel())
 			refreshVisuals();
 	}	
-	
+
+	/**
+	 * This anchor works like the ChobBoxAnchor, but instead of
+	 * using a box it uses a circle
+	 * @author Hannes Niederhausen
+	 *
+	 */
+	private class ChopCircleAngle extends AbstractConnectionAnchor {
+
+		public ChopCircleAngle(IFigure owner) {
+			setOwner(owner);
+		}
+		
+		@Override
+		public Point getLocation(Point reference) {
+			Rectangle bounds = getOwner().getBounds();
+			int radius = bounds.width/2;
+			Point middlePoint = new Point(bounds.x+radius, bounds.y+radius);
+			
+			
+			
+			double dx = reference.x-middlePoint.x;
+			double dy = reference.y-middlePoint.y;
+			
+			double length = Math.sqrt((dx*dx+dy*dy));
+			dx /= length;
+			dy /= length;
+			
+			
+			Point result = new Point();
+			
+			result.x = (int) (middlePoint.x+radius*dx);
+			result.y = (int) (middlePoint.y+radius*dy);
+			
+			return result;
+		}
+		
+	}
 
 }
