@@ -19,7 +19,7 @@ public class DiagramPage extends AbstractModelPage {
 
 	@Override
 	public void updateUI() {
-		nameText.setText(((Diagram)getModel()).getName());
+		nameText.setText(((Diagram) getModel()).getName());
 	}
 
 	@Override
@@ -27,12 +27,12 @@ public class DiagramPage extends AbstractModelPage {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(2, false));
-		
+
 		toolkit.createLabel(comp, "Name:");
-		
+
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
 		nameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		setControl(comp);
 		hookNameTextListeners();
 	}
@@ -42,14 +42,19 @@ public class DiagramPage extends AbstractModelPage {
 			@Override
 			public void focusLost(FocusEvent e) {
 				String newName = nameText.getText();
-				if (newName.length()==0)
+				
+				if (newName.length() == 0)
 					return;
 				
-				getCommandStack().execute(new RenameDiagramCommand(newName, (Diagram) getModel()));
-				
+				if (newName.equals(((Diagram) getModel()).getName()))
+					return;
+
+				getCommandStack().execute(new RenameDiagramCommand(newName,
+										(Diagram) getModel()));
+
 			}
 		});
-		
+
 	}
 
 	@Override

@@ -40,8 +40,11 @@ public class TopicSelectionDialog extends Dialog {
 	private ListViewer availableTopicList;
 	private ListViewer selectedTopicList;
 	
-	public TopicSelectionDialog(Shell parentShell) {
+	private TopicType workingTopicType;
+	
+	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType) {
 		super(parentShell);
+		this.workingTopicType = workingTopicType;
 	}
 
 	@Override
@@ -63,6 +66,8 @@ public class TopicSelectionDialog extends Dialog {
 			public boolean select(Viewer viewer, Object parentElement,
 					Object element) {
 				if (selectedTopics.contains(element))
+					return false;
+				if (workingTopicType.equals(element))
 					return false;
 				return true;
 			}

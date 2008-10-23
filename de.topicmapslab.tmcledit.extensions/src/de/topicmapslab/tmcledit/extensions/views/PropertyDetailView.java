@@ -3,18 +3,24 @@
  */
 package de.topicmapslab.tmcledit.extensions.views;
 
+import java.util.Map;
+
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
+import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
 import de.topicmapslab.tmcledit.extensions.views.pages.AbstractModelPage;
 import de.topicmapslab.tmcledit.extensions.views.pages.PropertyDetailPageFactory;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
@@ -64,6 +70,19 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		
 		if ( ( (part instanceof ModelView) || (part instanceof TMCLDiagramEditor) ) 
 				&& (selection instanceof IStructuredSelection) ){
+			
+			// register actions
+			if (part instanceof ModelView) {
+				Map<String, UpdateAction> ar = ((ModelView)part).getActionRegistry();
+				IActionBars actionBars = getViewSite().getActionBars();
+				
+				String tmp = ActionFactory.UNDO.getId();
+				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
+				
+				tmp = ActionFactory.REDO.getId();
+				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
+			}
+			
 			
 			IStructuredSelection sel = (IStructuredSelection) selection;
 			if (!sel.isEmpty()) {

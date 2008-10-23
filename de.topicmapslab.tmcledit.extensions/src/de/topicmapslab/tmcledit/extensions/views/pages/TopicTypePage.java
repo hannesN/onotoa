@@ -78,7 +78,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(isAText
-						.getShell());
+						.getShell(), (TopicType) getModel());
 				dlg.setAvailableTopics(getTopicMapSchema().getTopicTypes());
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
@@ -94,13 +94,14 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 1;
 		akoText.setLayoutData(gd);
+		button = toolkit.createButton(comp, "...", SWT.PUSH);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText
-						.getShell());
+						.getShell(), (TopicType) getModel());
 				dlg.setAvailableTopics(getTopicMapSchema().getTopicTypes());
-				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
+				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
 
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(new SetAkoCommand(dlg.getSelectedTopics(),
