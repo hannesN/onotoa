@@ -1,6 +1,7 @@
 package de.topicmapslab.tmcledit.extensions.views.treenodes;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
@@ -11,36 +12,40 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class TreeName extends TreeObject{
 
-	private final NameTypeConstraint ntc;
 	
 	public TreeName(ModelView modelView, NameTypeConstraint ntc) {
-		super(modelView);
-		this.ntc = ntc;
-		ntc.eAdapters().add(this);
+		this(modelView, ntc, null);
 	}
 
 	public TreeName(ModelView modelView, NameTypeConstraint ntc, String name) {
 		super(modelView, name);
-		this.ntc = ntc;
-		ntc.eAdapters().add(this);
-		ntc.getType().eAdapters().add(this);
+		setModel(ntc);
 	}
 
+	public NameTypeConstraint getNameTypeConstraint() {
+		return (NameTypeConstraint) getModel();
+	}
+	
 	@Override
+	public void setModel(EObject model) {
+		super.setModel(model);
+		getNameTypeConstraint().getType().eAdapters().add(this);
+	}
+	
 	public void dispose() {
-		ntc.eAdapters().remove(this);
-		ntc.getType().eAdapters().remove(this);
+		if (getModel()!=null)
+			getNameTypeConstraint().getType().eAdapters().remove(this);
 		super.dispose();
 	}
 	
 	@Override
 	public String getName() {
-		return ntc.getType().getId();
+		return getNameTypeConstraint().getType().getId();
 	}
 	
 	@Override
 	public void notifyChanged(Notification notification) {
-		if (notification.getNotifier().equals(this.ntc)) {
+		if (notification.getNotifier().equals(getNameTypeConstraint())) {
 			if (notification.getNewValue() instanceof TopicType) {
 				if (notification.getOldValue()!=null)
 					((TopicType)notification.getOldValue()).eAdapters().remove(this);
@@ -49,7 +54,7 @@ public class TreeName extends TreeObject{
 			return;
 		}
 		
-		if (notification.getNotifier().equals(ntc.getType())) {
+		if (notification.getNotifier().equals(getNameTypeConstraint().getType())) {
 			getModelView().getViewer().refresh(this);
 		}
 	}
@@ -59,8 +64,4 @@ public class TreeName extends TreeObject{
 		return ImageProvider.getImage(ImageConstants.NAMECONSTRAINT);
 	}
 	
-	@Override
-	public Object getModel() {
-		return ntc; 
-	}
 }

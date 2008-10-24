@@ -2,6 +2,7 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.Node;
@@ -61,7 +62,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 				source.getIsa().add(target);
 				break;
 			case ROLE_CONSTRAINT_TYPE:
-				
+				((AssociationNode) edge.getSource()).getAssociationConstraint().getRoleTypeConstraints().add(edge.getRoleConstraint());
 				diagram.getEdges().add(edge);
 				break;
 		
@@ -84,6 +85,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 			source.getIsa().remove(target);
 			break;
 		case ROLE_CONSTRAINT_TYPE:
+			((AssociationNode) edge.getSource()).getAssociationConstraint().getRoleTypeConstraints().remove(edge.getRoleConstraint());
 			diagram.getEdges().remove(edge);
 			break;
 	

@@ -23,6 +23,7 @@ import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
 import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
 import de.topicmapslab.tmcledit.extensions.views.pages.AbstractModelPage;
 import de.topicmapslab.tmcledit.extensions.views.pages.PropertyDetailPageFactory;
+import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 
 /**
@@ -88,8 +89,8 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 			if (!sel.isEmpty()) {
 				Object obj = sel.getFirstElement();
 				
-				if (obj instanceof TreeTopic) {
-					obj = ((TreeTopic)obj).getTopic();
+				if (obj instanceof TreeObject) {
+					obj = ((TreeTopic)obj).getModel();
 				}
 				
 

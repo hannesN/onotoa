@@ -38,4 +38,12 @@ public class TreeParent extends TreeObject {
 	public boolean hasChildren() {
 		return children.size() > 0;
 	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		for (TreeObject to : children) {
+			to.dispose();
+		}
+	}
 }

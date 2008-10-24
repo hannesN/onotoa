@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.graphics.Image;
 
@@ -22,6 +23,7 @@ public class TreeObject implements IAdaptable, Adapter {
 	protected static ModelItemProviderAdapterFactory factory = new ModelItemProviderAdapterFactory();
 	
 	private final ModelView modelView;
+	private EObject model;
 
 	public TreeObject(ModelView modelView) {
 		this.modelView = modelView;
@@ -58,11 +60,20 @@ public class TreeObject implements IAdaptable, Adapter {
 		return null;
 	}
 	
-	public Object getModel() {
-		return null;
+	public EObject getModel() {
+		return model;
+	}
+	
+	public void setModel(EObject model) {
+		dispose();
+		this.model = model;
+		model.eAdapters().add(this);
 	}
 	
 	public void dispose() {
+		if (getModel()!=null) {
+			getModel().eAdapters().remove(this);
+		}
 	}
 
 	@Override

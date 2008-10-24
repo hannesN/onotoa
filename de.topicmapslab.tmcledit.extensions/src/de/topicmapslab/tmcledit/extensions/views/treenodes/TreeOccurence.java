@@ -11,29 +11,22 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class TreeOccurence extends TreeObject{
 
-	private final OccurenceTypeConstraint otc;
-	
 	public TreeOccurence(ModelView modelView, OccurenceTypeConstraint otc) {
-		super(modelView);
-		this.otc = otc;
-		otc.eAdapters().add(this);
+		this(modelView, otc, null);
 	}
 
 	public TreeOccurence(ModelView modelView, OccurenceTypeConstraint otc, String name) {
 		super(modelView, name);
-		this.otc = otc;
-		otc.eAdapters().add(this);
+		setModel(otc);
 	}
 
-	@Override
-	public void dispose() {
-		otc.eAdapters().remove(this);
-		super.dispose();
+	private OccurenceTypeConstraint getOccurenceTypeConstraint() {
+		return (OccurenceTypeConstraint) getModel();
 	}
 	
 	@Override
 	public String getName() {
-		return otc.getType().getId();
+		return getOccurenceTypeConstraint().getType().getId();
 	}
 	
 	@Override
@@ -43,13 +36,8 @@ public class TreeOccurence extends TreeObject{
 	}
 	
 	@Override
-	public Object getModel() {
-		return otc;
-	}
-	
-	@Override
 	public void notifyChanged(Notification notification) {
-		if (notification.getNotifier().equals(this.otc)) {
+		if (notification.getNotifier().equals(getOccurenceTypeConstraint())) {
 			if (notification.getNewValue() instanceof TopicType) {
 				if (notification.getOldValue()!=null)
 					((TopicType)notification.getOldValue()).eAdapters().remove(this);
@@ -58,7 +46,7 @@ public class TreeOccurence extends TreeObject{
 			return;
 		}
 		
-		if (notification.getNotifier().equals(otc.getType())) {
+		if (notification.getNotifier().equals(getOccurenceTypeConstraint().getType())) {
 			getModelView().getViewer().refresh(this);
 		}
 	}

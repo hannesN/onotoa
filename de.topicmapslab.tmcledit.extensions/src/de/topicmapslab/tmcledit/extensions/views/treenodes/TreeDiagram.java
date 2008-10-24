@@ -19,25 +19,26 @@ import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
 
 public class TreeDiagram extends TreeObject {
 
-	private final Diagram diagram;
-	
-	
 	public TreeDiagram(ModelView modelView, Diagram diagram) {
 		super(modelView);
-		this.diagram = diagram;
-		diagram.eAdapters().add(this);
+		setModel(diagram);
 	}
 	
 	@Override
 	public String getName() {
-		return diagram.getName();
+		return getDiagram().getName();
 	}
+	
+	public Diagram getDiagram() {
+		return (Diagram) getModel();
+	}
+	
 	
 	@Override
 	public void handleDoubleClick() {
 		try {
 			Activator.getDefault().getWorkbench().getActiveWorkbenchWindow()
-					.getActivePage().openEditor(new TMCLEditorInput(diagram, 
+					.getActivePage().openEditor(new TMCLEditorInput(getDiagram(), 
 							getModelView().getEditingDomain(),
 							(UndoAction) getModelView().getActionRegistry().get(ActionFactory.UNDO.getId()),
 							(RedoAction) getModelView().getActionRegistry().get(ActionFactory.REDO.getId()),
@@ -54,7 +55,7 @@ public class TreeDiagram extends TreeObject {
 	
 	@Override
 	public void handleRename() {
-		String oldName = diagram.getName();
+		String oldName = getDiagram().getName();
 		InputDialog dlg = new InputDialog(getModelView().getViewer().getTree()
 				.getShell(), "New Diagram Name..", "Please enter the new diagram name",
 				oldName, new IInputValidator() {
@@ -69,21 +70,10 @@ public class TreeDiagram extends TreeObject {
 				});
 		if (InputDialog.OK == dlg.open()) {
 			getModelView().getEditingDomain().getCommandStack().execute(
-					new RenameDiagramCommand(dlg.getValue(), diagram));
+					new RenameDiagramCommand(dlg.getValue(), getDiagram()));
 		}
 	}
 
-	@Override
-	public void dispose() {
-		diagram.eAdapters().remove(this);
-		super.dispose();
-	}
-	
-	@Override
-	public Object getModel() {
-		return diagram;
-	}
-	
 	@Override
 	public void notifyChanged(Notification notification) {
 		if ( (notification.getEventType()==Notification.SET) && (notification.getFeatureID(String.class)==ModelPackage.DIAGRAM__NAME)){

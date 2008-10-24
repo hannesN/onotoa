@@ -200,6 +200,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		public void uninitialize() {
 			if (getCurrentTopicMapSchema() != null)
 				getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
+			invisibleRoot.dispose();
 		}
 
 		public void initialize() {
@@ -271,8 +272,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			parent = getParentNode(tt);
 
 			for (TreeObject to : parent.getChildren()) {
-				if (((TreeTopic) to).getTopic().equals(tt))
+				if (((TreeTopic) to).getModel().equals(tt)) {
 					parent.removeChild(to);
+					to.dispose();
+				}
 			}
 			viewer.refresh(parent);
 		}
@@ -392,7 +395,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 						.getSelection();
 				Object obj = sel.getFirstElement();
 				if (obj instanceof TreeTopic) {
-					event.data = ((TreeTopic) obj).getTopic().toString();
+					event.data = ((TreeTopic) obj).getModel().toString();
 					event.doit = true;
 				} else {
 					event.doit = false;
@@ -406,7 +409,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 						.getSelection();
 				Object obj = sel.getFirstElement();
 				if (obj instanceof TreeTopic) {
-					event.data = ((TreeTopic) obj).getTopic().toString();
+					event.data = ((TreeTopic) obj).getModel().toString();
 				} else {
 					event.data = null;
 				}

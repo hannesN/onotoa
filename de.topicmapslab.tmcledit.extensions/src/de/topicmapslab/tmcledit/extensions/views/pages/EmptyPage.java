@@ -15,7 +15,7 @@ public class EmptyPage extends AbstractModelPage {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout());
-		toolkit.createLabel(comp, "Dumm di dumm, das is die Default seite");
+		toolkit.createLabel(comp, "No Item Selected");
 		
 		setControl(comp);
 	}

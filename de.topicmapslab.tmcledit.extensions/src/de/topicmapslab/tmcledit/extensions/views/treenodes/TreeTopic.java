@@ -25,21 +25,9 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
  */
 public class TreeTopic extends TreeParent {
 
-	private final TopicType topic;
-
 	public TreeTopic(ModelView viewer, TopicType topic) {
 		super(viewer, null);
-		this.topic = topic;
-		topic.eAdapters().add(this);
-	}
-
-	public TopicType getTopic() {
-		return topic;
-	}
-	
-	@Override
-	public Object getModel() {
-		return getTopic();
+		setModel(topic);
 	}
 
 	@Override
@@ -88,22 +76,20 @@ public class TreeTopic extends TreeParent {
 		}
 		
 	}
-
-	@Override
-	public String getName() {
-		return topic.getId();
+	
+	private TopicType getTopicType() {
+		return (TopicType) getModel();
 	}
 
 	@Override
-	public void dispose() {
-		topic.eAdapters().remove(this);
-		super.dispose();
+	public String getName() {
+		return getTopicType().getId();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class key) {
-		if (topic == null)
+		if (getTopicType() == null)
 			return null;
 
 		return null;
@@ -111,7 +97,7 @@ public class TreeTopic extends TreeParent {
 
 	@Override
 	public void handleRename() {
-		String oldName = topic.getId();
+		String oldName = getTopicType().getId();
 		InputDialog dlg = new InputDialog(getModelView().getViewer().getTree()
 				.getShell(), "New Topic Id..", "Please enter the new Topic ID",
 				oldName, new IInputValidator() {
@@ -129,12 +115,12 @@ public class TreeTopic extends TreeParent {
 		if (InputDialog.OK == dlg.open()) {
 
 			getModelView().getEditingDomain().getCommandStack().execute(
-					new RenameTopicTypeCommand(topic, dlg.getValue()));
+					new RenameTopicTypeCommand(getTopicType(), dlg.getValue()));
 		}
 	}
 	
 	@Override
 	public Image getImage() {
-		return ImageProvider.getTopicTypeImage(topic);
+		return ImageProvider.getTopicTypeImage(getTopicType());
 	}
 }
