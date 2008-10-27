@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -58,9 +59,11 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
@@ -69,6 +72,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
+import de.topicmapslab.tmcledit.extensions.actions.CloseAction;
 import de.topicmapslab.tmcledit.extensions.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UndoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
@@ -115,7 +119,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
 
-	private Map<String, UpdateAction> actionRegistry;
+	private Map<String, IAction> actionRegistry;
 
 	private DirtyStateObserver dirtyStateObserver;
 
@@ -421,7 +425,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 
-		actionRegistry = new HashMap<String, UpdateAction>();
+		actionRegistry = new HashMap<String, IAction>();
 		createActions();
 	}
 
@@ -444,6 +448,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		actionRegistry.put(ActionFactory.UNDO.getId(), undoAction);
 		actionRegistry.put(ActionFactory.REDO.getId(), redoAction);
+		
+		CloseAction action = new CloseAction(this);
+		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), action);
+		
+		actionBars.updateActionBars();
 	}
 
 	private void hookContextMenu() {
@@ -615,7 +624,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		if (editingDomain == null) {
 			editingDomain = WorkspaceEditingDomainFactory.INSTANCE
 					.createEditingDomain();
-			UpdateAction action = actionRegistry
+			IAction action = actionRegistry
 					.get(ActionFactory.UNDO.getId());
 			((UndoAction) action).setEditingDomain(editingDomain);
 
@@ -678,21 +687,28 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		// TODO check dirty state and ask for saving
 		contentProvider.uninitialize();
 
+		if (editingDomain != null)
+			editingDomain.getCommandStack()
+					.removeCommandStackListener(this);
+		
+		editingDomain = null; // clear it for new creation in getter
+		
 		if (filename != null) {
 			currFile = FileUtil.loadFile(filename);
 			currFile.eAdapters().add(dirtyListener);
-			if (editingDomain != null)
-				editingDomain.getCommandStack()
-						.removeCommandStackListener(this);
+			
 
-			editingDomain = null; // clear it for new creation in getter
+		
 			dirtyStateObserver = new DirtyStateObserver(currFile,
 					getEditingDomain().getCommandStack());
+			// initialize indexer 
+			TopicIndexer.getInstance(currFile.getTopicMapSchema());
+		} else {
+			currFile = null;
 		}
 		contentProvider.initialize();
 
-		// initialize indexer 
-		TopicIndexer.getInstance(currFile.getTopicMapSchema());
+		
 		
 		viewer.refresh();
 	}
@@ -707,12 +723,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public void updateActions() {
-		for (UpdateAction a : actionRegistry.values()) {
-			a.update();
+		for (IAction a : actionRegistry.values()) {
+			if (a instanceof UpdateAction)
+				((UpdateAction)a).update();
 		}
 	}
 
-	public Map<String, UpdateAction> getActionRegistry() {
+	public Map<String, IAction> getActionRegistry() {
 		return actionRegistry;
 	}
 
@@ -723,6 +740,19 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	@Override
 	public void commandStackChanged(EventObject event) {
 		updateActions();
+	}
+
+	public void close() {
+		setFilename(null);
+		IWorkbenchPage activePage = getViewSite().getWorkbenchWindow().getActivePage();
+		for (IEditorReference ref : activePage.getEditorReferences()) {
+			if (ref.getId().equals(TMCLDiagramEditor.ID)) {
+				activePage.closeEditor(ref.getEditor(false), false);
+			}
+		}
+		
+		updateActions();
+		viewer.refresh();
 	}
 
 }

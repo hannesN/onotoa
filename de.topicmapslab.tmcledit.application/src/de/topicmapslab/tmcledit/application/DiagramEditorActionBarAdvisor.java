@@ -47,8 +47,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		
 		register(ActionFactory.CLOSE.create(window));
 
-		register(ActionFactory.CLOSE_ALL.create(window));
-
 		register(ActionFactory.SAVE.create(window));
 
 		register(ActionFactory.SAVE_AS.create(window));
@@ -100,8 +98,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			menuX.add(new Separator());
 
 			menuX.add(getAction(ActionFactory.CLOSE.getId()));
-
-			menuX.add(getAction(ActionFactory.CLOSE_ALL.getId()));
 
 			menuX.add(new Separator());
 

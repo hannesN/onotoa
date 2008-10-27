@@ -20,7 +20,6 @@ import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
-import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
 import de.topicmapslab.tmcledit.extensions.views.pages.AbstractModelPage;
 import de.topicmapslab.tmcledit.extensions.views.pages.PropertyDetailPageFactory;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeObject;
@@ -74,7 +73,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 			
 			// register actions
 			if (part instanceof ModelView) {
-				Map<String, UpdateAction> ar = ((ModelView)part).getActionRegistry();
+				Map<String, IAction> ar = ((ModelView)part).getActionRegistry();
 				IActionBars actionBars = getViewSite().getActionBars();
 				
 				String tmp = ActionFactory.UNDO.getId();
