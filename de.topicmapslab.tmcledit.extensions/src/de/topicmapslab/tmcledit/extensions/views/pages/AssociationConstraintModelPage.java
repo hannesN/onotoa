@@ -26,8 +26,6 @@ import de.topicmapslab.tmcledit.model.TopicType;
  */
 public class AssociationConstraintModelPage extends AbstractModelPage {
 
-	
-	
 	private Text typeText;
 
 	@Override

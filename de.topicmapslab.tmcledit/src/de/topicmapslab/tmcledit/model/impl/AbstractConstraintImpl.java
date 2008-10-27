@@ -6,17 +6,18 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,14 +98,14 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	protected String regexp = REGEXP_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getScope() <em>Scope</em>}' reference.
+	 * The cached value of the '{@link #getScope() <em>Scope</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getScope()
 	 * @generated
 	 * @ordered
 	 */
-	protected TopicType scope;
+	protected EList<TopicType> scope;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -213,37 +214,11 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TopicType getScope() {
-		if (scope != null && scope.eIsProxy()) {
-			InternalEObject oldScope = (InternalEObject)scope;
-			scope = (TopicType)eResolveProxy(oldScope);
-			if (scope != oldScope) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ABSTRACT_CONSTRAINT__SCOPE, oldScope, scope));
-			}
+	public EList<TopicType> getScope() {
+		if (scope == null) {
+			scope = new EObjectResolvingEList<TopicType>(TopicType.class, this, ModelPackage.ABSTRACT_CONSTRAINT__SCOPE);
 		}
 		return scope;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TopicType basicGetScope() {
-		return scope;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setScope(TopicType newScope) {
-		TopicType oldScope = scope;
-		scope = newScope;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONSTRAINT__SCOPE, oldScope, scope));
 	}
 
 	/**
@@ -282,8 +257,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				return getRegexp();
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				if (resolve) return getScope();
-				return basicGetScope();
+				return getScope();
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				return getName();
 		}
@@ -295,6 +269,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -308,7 +283,8 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				setRegexp((String)newValue);
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				setScope((TopicType)newValue);
+				getScope().clear();
+				getScope().addAll((Collection<? extends TopicType>)newValue);
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				setName((String)newValue);
@@ -335,7 +311,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				setRegexp(REGEXP_EDEFAULT);
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				setScope((TopicType)null);
+				getScope().clear();
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				setName(NAME_EDEFAULT);
@@ -359,7 +335,7 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				return REGEXP_EDEFAULT == null ? regexp != null : !REGEXP_EDEFAULT.equals(regexp);
 			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				return scope != null;
+				return scope != null && !scope.isEmpty();
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}

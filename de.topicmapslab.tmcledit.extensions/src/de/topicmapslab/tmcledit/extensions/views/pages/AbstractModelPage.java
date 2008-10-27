@@ -7,8 +7,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
 
+import de.topicmapslab.tmcledit.extensions.util.IModelProvider;
 
-public abstract class AbstractModelPage extends Page implements Adapter {
+
+public abstract class AbstractModelPage extends Page implements Adapter, IModelProvider {
 
 	private EObject model;
 
@@ -17,10 +19,6 @@ public abstract class AbstractModelPage extends Page implements Adapter {
 	private Control control;
 	
 	private CommandStack commandStack;
-
-	public AbstractModelPage() {
-		super();
-	}
 
 	public void setModel(Object model) {
 		if (this.model != null)
@@ -63,7 +61,7 @@ public abstract class AbstractModelPage extends Page implements Adapter {
 		this.target = newTarget;
 	}
 
-	protected CommandStack getCommandStack() {
+	public CommandStack getCommandStack() {
 		return commandStack;
 	}
 	

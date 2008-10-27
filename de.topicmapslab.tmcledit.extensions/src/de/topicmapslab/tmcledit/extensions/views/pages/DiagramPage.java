@@ -61,5 +61,4 @@ public class DiagramPage extends AbstractModelPage {
 	public void notifyChanged(Notification notification) {
 		updateUI();
 	}
-
 }

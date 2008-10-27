@@ -19,7 +19,6 @@ public class PropertyDetailPageFactory {
 	private static final String ASSOCIATION = "association";
 	
 	private EmptyPage emptyPage;
-	
 	private HashMap<String, AbstractModelPage> pageMap = new HashMap<String, AbstractModelPage>();
 	
 	private final PageBook pageBook;
@@ -27,7 +26,6 @@ public class PropertyDetailPageFactory {
 	public PropertyDetailPageFactory(PageBook pageBook) {
 		super();
 		this.pageBook = pageBook;
-		
 		emptyPage = new EmptyPage();
 		emptyPage.createControl(pageBook);
 	}

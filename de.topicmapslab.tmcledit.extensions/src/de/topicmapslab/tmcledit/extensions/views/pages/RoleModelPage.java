@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.extensions.util.TextObserver;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
@@ -30,8 +32,7 @@ public class RoleModelPage extends AbstractModelPage{
 	private Text cardMinText;
 	private Text cardMaxText;
 	private Text roleText;
-	
-	
+
 	@Override
 	public void updateUI() {
 		RoleTypeConstraints rtc = (RoleTypeConstraints) getModel();
@@ -68,12 +69,16 @@ public class RoleModelPage extends AbstractModelPage{
 		gd.horizontalSpan = 2;
 		cardMinText = toolkit.createText(comp, "", SWT.BORDER);
 		cardMinText.setLayoutData(gd);
+		TextObserver.observe(cardMinText, this, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN);
+		
+		/*
 		cardMinText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
 			getCastedModel().setCardMin(cardMinText.getText());	
 			}
 		});
+		*/
 		
 		toolkit.createLabel(comp, "cardMax:");
 		cardMaxText = toolkit.createText(comp, "", SWT.BORDER);

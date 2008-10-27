@@ -207,7 +207,7 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CONSTRAINT__REGEXP = 2;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference.
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -271,7 +271,7 @@ public interface ModelPackage extends EPackage {
 	int OCCURENCE_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference.
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -362,7 +362,7 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference.
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -545,7 +545,7 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference.
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -609,7 +609,7 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_IDENTIFIER_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference.
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1244,10 +1244,10 @@ public interface ModelPackage extends EPackage {
 	EAttribute getAbstractConstraint_Regexp();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}'.
+	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Scope</em>'.
+	 * @return the meta object for the reference list '<em>Scope</em>'.
 	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getScope()
 	 * @see #getAbstractConstraint()
 	 * @generated
@@ -1977,7 +1977,7 @@ public interface ModelPackage extends EPackage {
 		EAttribute ABSTRACT_CONSTRAINT__REGEXP = eINSTANCE.getAbstractConstraint_Regexp();
 
 		/**
-		 * The meta object literal for the '<em><b>Scope</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Scope</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

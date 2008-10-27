@@ -31,6 +31,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	public FilterTopicSelectionDialog(Shell shell, KindOfTopicType kindOfTopicType) {
 		this(shell, false);
 		this.kindOfTopicType = kindOfTopicType;
+		setInitialPattern("?");
 	}
 	
 	public FilterTopicSelectionDialog(Shell shell, boolean multi) {
@@ -50,7 +51,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	protected ItemsFilter createFilter() {
 		return new TopicFilter();
 	}
-
+	
 	@Override
 	protected void fillContentProvider(AbstractContentProvider contentProvider,
 			ItemsFilter itemsFilter, IProgressMonitor progressMonitor)
@@ -123,6 +124,9 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 		@Override
 		public String getText(Object element) {
+			if (element==null)
+				return "";
+				
 			TopicType tt = (TopicType) element;
 			return tt.getId();
 		}
@@ -155,6 +159,8 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 		@Override
 		public String getText(Object element) {
+			if (element==null)
+				return "";
 			TopicType tt = (TopicType) element;
 			return tt.getId();
 		}
