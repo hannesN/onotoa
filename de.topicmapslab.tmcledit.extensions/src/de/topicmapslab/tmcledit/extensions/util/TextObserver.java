@@ -1,7 +1,5 @@
 package de.topicmapslab.tmcledit.extensions.util;
 
-import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.FocusEvent;

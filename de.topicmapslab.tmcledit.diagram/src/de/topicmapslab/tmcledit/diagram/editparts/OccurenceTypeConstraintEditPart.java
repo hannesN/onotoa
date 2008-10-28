@@ -51,10 +51,10 @@ public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.SET) {
 			if (notification.getNewValue() instanceof TopicType) {
-				TypeNode old = (TypeNode) notification.getOldValue();
+				TopicType old = (TopicType) notification.getOldValue();
 				if (old!=null)
 					old.eAdapters().remove(this);
-				((TypeNode) notification.getNewValue()).eAdapters().add(this);
+				((TopicType) notification.getNewValue()).eAdapters().add(this);
 			
 			}
 			refreshVisuals();

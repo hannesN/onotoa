@@ -27,6 +27,8 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	private static final String SETTINGS = FilterTopicSelectionDialog.class.getCanonicalName();
 	
 	private KindOfTopicType kindOfTopicType = null;
+
+	private TopicTypeComparator topicTypeComparator;
 	
 	public FilterTopicSelectionDialog(Shell shell, KindOfTopicType kindOfTopicType) {
 		this(shell, false);
@@ -90,12 +92,28 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Comparator getItemsComparator() {
-		return null;
+		if (topicTypeComparator==null)
+			topicTypeComparator = new TopicTypeComparator();
+		
+		return topicTypeComparator;
 	}
 
 	@Override
 	protected IStatus validateItem(Object item) {
 		return Status.OK_STATUS;
+	}
+
+	private final class TopicTypeComparator implements Comparator<TopicType> {
+		@Override
+		public int compare(TopicType o1, TopicType o2) {
+			if (o1.equals(o2))
+				return 0;
+			
+			TopicType tt1 = (TopicType) o1;
+			TopicType tt2 = (TopicType) o2;
+			
+			return tt1.getId().compareTo(tt2.getId());
+		}
 	}
 
 	private class TopicFilter extends ItemsFilter {

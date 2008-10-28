@@ -20,7 +20,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.extensions.dialogs.TopicSelectionDialog;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
@@ -79,7 +78,6 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			public void widgetSelected(SelectionEvent e) {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(isAText
 						.getShell(), (TopicType) getModel());
-				dlg.setAvailableTopics(getTopicMapSchema().getTopicTypes());
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
 				if (dlg.open() == Dialog.OK) {
@@ -100,7 +98,6 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			public void widgetSelected(SelectionEvent e) {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText
 						.getShell(), (TopicType) getModel());
-				dlg.setAvailableTopics(getTopicMapSchema().getTopicTypes());
 				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
 
 				if (dlg.open() == Dialog.OK) {
@@ -125,10 +122,6 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		setControl(section);
 	}
 
-	private TopicMapSchema getTopicMapSchema() {
-		return (TopicMapSchema) getModel().eContainer();		
-	}
-	
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();

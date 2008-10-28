@@ -6,8 +6,6 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.FocusAdapter;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -70,28 +68,14 @@ public class RoleModelPage extends AbstractModelPage{
 		cardMinText = toolkit.createText(comp, "", SWT.BORDER);
 		cardMinText.setLayoutData(gd);
 		TextObserver.observe(cardMinText, this, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN);
-		
-		/*
-		cardMinText.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-			getCastedModel().setCardMin(cardMinText.getText());	
-			}
-		});
-		*/
-		
+				
 		toolkit.createLabel(comp, "cardMax:");
 		cardMaxText = toolkit.createText(comp, "", SWT.BORDER);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		cardMaxText.setLayoutData(gd);
+		TextObserver.observe(cardMinText, this, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX);
 		
-		cardMaxText.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-			getCastedModel().setCardMax(cardMaxText.getText());	
-			}
-		});
 		setControl(comp);
 	}
 	

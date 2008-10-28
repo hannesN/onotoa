@@ -26,7 +26,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.TopicIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -35,16 +37,22 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class TopicSelectionDialog extends Dialog {
 
 	private List<TopicType> selectedTopics = Collections.emptyList();
-	private List<TopicType> availableTopics = Collections.emptyList();
-	
+		
 	private ListViewer availableTopicList;
 	private ListViewer selectedTopicList;
 	
 	private TopicType workingTopicType;
 	
+	private KindOfTopicType kind;
+	
 	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType) {
+		this(parentShell, workingTopicType, KindOfTopicType.TOPIC_TYPE);
+	}
+	
+	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType, KindOfTopicType kind) {
 		super(parentShell);
 		this.workingTopicType = workingTopicType;
+		this.kind = kind;
 	}
 
 	@Override
@@ -59,15 +67,20 @@ public class TopicSelectionDialog extends Dialog {
 		availableTopicList.getList().setLayoutData(gd);
 		availableTopicList.setContentProvider(new ArrayContentProvider());
 		availableTopicList.setLabelProvider(new TopicLableProvider());
-		availableTopicList.setInput(availableTopics);
+		availableTopicList.setInput(TopicIndexer.getInstance().getTopicTypes());
 		availableTopicList.addFilter(new ViewerFilter() {
 
 			@Override
 			public boolean select(Viewer viewer, Object parentElement,
 					Object element) {
+				if (kind!=KindOfTopicType.TOPIC_TYPE) {
+					if (((TopicType)element).getKind()!=kind)
+						return false;
+				}
+				
 				if (selectedTopics.contains(element))
 					return false;
-				if (workingTopicType.equals(element))
+				if (element.equals(workingTopicType))
 					return false;
 				return true;
 			}
@@ -157,11 +170,6 @@ public class TopicSelectionDialog extends Dialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setSize(500, 400);
-	}
-	
-	public void setAvailableTopics(List<TopicType> availableTopics) {
-		this.availableTopics=new ArrayList<TopicType>();
-		this.availableTopics.addAll(availableTopics);
 	}
 	
 	public List<TopicType> getSelectedTopics() {

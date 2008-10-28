@@ -1,17 +1,28 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.extensions.dialogs.TopicSelectionDialog;
 import de.topicmapslab.tmcledit.extensions.util.TextObserver;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.SetConstraintScopeCommand;
 
 /**
  * 
@@ -24,6 +35,7 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 	protected Text cardMaxText;
 	protected Text regExpText;
 	protected Text scopeText;
+	private Button scopeButton;
 	
 	@Override
 	public void updateUI() {
@@ -54,20 +66,53 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 	 * @param parent the parent control
 	 */
 	protected void createCommonConstraintControls(Composite parent, FormToolkit toolkit) {
+		GridDataFactory fac = GridDataFactory.createFrom(new GridData(GridData.FILL_HORIZONTAL));
+		
 		toolkit.createLabel(parent, "cardMin");
 		cardMinText = toolkit.createText(parent, "", SWT.BORDER);
+		fac.applyTo(cardMinText);
 		TextObserver.observe(cardMinText, this, ModelPackage.ABSTRACT_CONSTRAINT__CARD_MIN);
 		
 		toolkit.createLabel(parent, "cardMax");
 		cardMaxText = toolkit.createText(parent, "", SWT.BORDER);
-		TextObserver.observe(cardMinText, this, ModelPackage.ABSTRACT_CONSTRAINT__CARD_MAX);
+		fac.applyTo(cardMaxText);
+		TextObserver.observe(cardMaxText, this, ModelPackage.ABSTRACT_CONSTRAINT__CARD_MAX);
 		
-		toolkit.createLabel(parent, "regExp");
+		toolkit.createLabel(parent, "reg. exp");
 		regExpText = toolkit.createText(parent, "", SWT.BORDER);
+		fac.applyTo(regExpText);
 		TextObserver.observe(regExpText, this, ModelPackage.ABSTRACT_CONSTRAINT__REGEXP);
 		
-		// TODO Scope stuff
+		toolkit.createLabel(parent, "scope:");
+		Composite comp = toolkit.createComposite(parent);
+		GridLayout layout = new GridLayout(2, false);
+		layout.marginWidth = 0;
+		comp.setLayout(layout);
+		fac.applyTo(comp);
 		
+		
+		scopeText = toolkit.createText(comp, "", SWT.BORDER);
+		scopeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		fac.applyTo(scopeText);
+		scopeButton = toolkit.createButton(comp, "...", SWT.PUSH);
+		
+		hookButtonListeners();
+		
+		
+	}
+
+	private void hookButtonListeners() {
+		scopeButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TopicSelectionDialog dlg = new TopicSelectionDialog(scopeButton.getShell(), null, KindOfTopicType.SCOPE_TYPE);
+				dlg.setSelectedTopics(getCastedModel().getScope());
+				if (Dialog.OK==dlg.open()) {
+					List<TopicType> newScope = dlg.getSelectedTopics();
+					getCommandStack().execute(new SetConstraintScopeCommand(getCastedModel(), newScope));
+				}
+			}
+		});
 	}
 
 	@Override
