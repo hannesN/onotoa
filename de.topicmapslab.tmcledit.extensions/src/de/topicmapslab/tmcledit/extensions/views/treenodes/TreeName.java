@@ -29,17 +29,21 @@ public class TreeName extends TreeObject{
 	@Override
 	public void setModel(EObject model) {
 		super.setModel(model);
-		getNameTypeConstraint().getType().eAdapters().add(this);
+		if (getNameTypeConstraint().getType()!=null)
+			getNameTypeConstraint().getType().eAdapters().add(this);
+		
 	}
 	
 	public void dispose() {
-		if (getModel()!=null)
+		if ( (getModel()!=null) && (getNameTypeConstraint().getType()!=null) )
 			getNameTypeConstraint().getType().eAdapters().remove(this);
 		super.dispose();
 	}
 	
 	@Override
 	public String getName() {
+		if (getNameTypeConstraint().getType()==null)
+			return "No name type set";
 		return getNameTypeConstraint().getType().getId();
 	}
 	

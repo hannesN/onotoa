@@ -31,6 +31,10 @@ public class RoleModelPage extends AbstractModelPage{
 	private Text cardMaxText;
 	private Text roleText;
 
+	public RoleModelPage() {
+		super("role");
+	}
+	
 	@Override
 	public void updateUI() {
 		RoleTypeConstraints rtc = (RoleTypeConstraints) getModel();

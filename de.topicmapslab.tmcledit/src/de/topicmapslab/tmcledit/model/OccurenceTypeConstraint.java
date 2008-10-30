@@ -25,7 +25,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface OccurenceTypeConstraint extends AbstractConstraint {
+public interface OccurenceTypeConstraint extends ScopedConstraint {
 	/**
 	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
 	 * <!-- begin-user-doc -->

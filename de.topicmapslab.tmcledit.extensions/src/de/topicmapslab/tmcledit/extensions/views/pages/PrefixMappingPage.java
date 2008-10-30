@@ -51,6 +51,10 @@ public class PrefixMappingPage extends AbstractModelPage {
 
 	private Button removeButton;
 
+	public PrefixMappingPage() {
+		super("prefix mapping");
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setModel(Object model) {

@@ -19,6 +19,15 @@ public abstract class AbstractModelPage extends Page implements Adapter, IModelP
 	private Control control;
 	
 	private CommandStack commandStack;
+	
+	private String ID;
+
+	
+	
+	public AbstractModelPage(String id) {
+		super();
+		ID = id;
+	}
 
 	public void setModel(Object model) {
 		if (this.model != null)
@@ -78,5 +87,9 @@ public abstract class AbstractModelPage extends Page implements Adapter, IModelP
 
 	public EObject getModel() {
 		return model;
+	}
+	
+	public String getID() {
+		return ID;
 	}
 }

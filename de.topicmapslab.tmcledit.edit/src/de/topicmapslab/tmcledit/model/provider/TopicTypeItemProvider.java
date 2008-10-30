@@ -73,6 +73,7 @@ public class TopicTypeItemProvider
 			addIsaPropertyDescriptor(object);
 			addAkoPropertyDescriptor(object);
 			addKindPropertyDescriptor(object);
+			addExclusivePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -205,6 +206,28 @@ public class TopicTypeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exclusive feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExclusivePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicType_exclusive_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_exclusive_feature", "_UI_TopicType_type"),
+				 ModelPackage.Literals.TOPIC_TYPE__EXCLUSIVE,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

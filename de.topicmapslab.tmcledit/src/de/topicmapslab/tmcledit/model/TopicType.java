@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getExclusive <em>Exclusive</em>}</li>
  * </ul>
  * </p>
  *
@@ -243,5 +244,21 @@ public interface TopicType extends EObject {
 	 * @generated
 	 */
 	void setKind(KindOfTopicType value);
+
+	/**
+	 * Returns the value of the '<em><b>Exclusive</b></em>' reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.TopicType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exclusive</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exclusive</em>' reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Exclusive()
+	 * @model
+	 * @generated
+	 */
+	EList<TopicType> getExclusive();
 
 } // TopicType

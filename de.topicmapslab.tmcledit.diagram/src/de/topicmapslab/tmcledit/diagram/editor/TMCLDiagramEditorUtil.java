@@ -24,6 +24,8 @@ import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingElementEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.SubjectIdentifierConstraintEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.SubjectLocatorConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -36,6 +38,7 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -86,7 +89,12 @@ public class TMCLDiagramEditorUtil {
 					part = new PrefixMappingEditPart();
 				} else if (model instanceof MappingElement) {
 					part = new PrefixMappingElementEditPart();
+				}else if (model instanceof SubjectIdentifierConstraint) {
+					part = new SubjectIdentifierConstraintEditPart();
+				}else if (model instanceof SubjectLocatorConstraint) {
+					part = new SubjectLocatorConstraintEditPart();
 				}
+				
 
 				if (part != null)
 					part.setModel(model);
@@ -175,6 +183,23 @@ public class TMCLDiagramEditorUtil {
 
 				}, 
 				null, null));
+		
+		group.add(new CreationToolEntry("Subject Locator Constraints",
+				"Subject Locator Constraints", new CreationFactory() {
+
+					@Override
+					public Object getNewObject() {
+						return ModelFactory.eINSTANCE.createSubjectLocatorConstraint();
+					}
+
+					@Override
+					public Object getObjectType() {
+						return SubjectLocatorConstraint.class;
+					}
+
+				}, 
+				null, null));
+		
 		return group;
 	}
 

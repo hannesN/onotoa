@@ -17,6 +17,10 @@ public class DiagramPage extends AbstractModelPage {
 
 	private Text nameText;
 
+	public DiagramPage() {
+		super("diagram");
+	}
+	
 	@Override
 	public void updateUI() {
 		nameText.setText(((Diagram) getModel()).getName());

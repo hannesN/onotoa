@@ -49,6 +49,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getExclusive <em>Exclusive</em>}</li>
  * </ul>
  * </p>
  *
@@ -194,6 +195,16 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * @ordered
 	 */
 	protected KindOfTopicType kind = KIND_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExclusive() <em>Exclusive</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExclusive()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TopicType> exclusive;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -375,6 +386,18 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TopicType> getExclusive() {
+		if (exclusive == null) {
+			exclusive = new EObjectResolvingEList<TopicType>(TopicType.class, this, ModelPackage.TOPIC_TYPE__EXCLUSIVE);
+		}
+		return exclusive;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -418,6 +441,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return getSubjectLocatorConstraint();
 			case ModelPackage.TOPIC_TYPE__KIND:
 				return getKind();
+			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
+				return getExclusive();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -467,6 +492,10 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__KIND:
 				setKind((KindOfTopicType)newValue);
 				return;
+			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
+				getExclusive().clear();
+				getExclusive().addAll((Collection<? extends TopicType>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -509,6 +538,9 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__KIND:
 				setKind(KIND_EDEFAULT);
 				return;
+			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
+				getExclusive().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -541,6 +573,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return subjectLocatorConstraint != null && !subjectLocatorConstraint.isEmpty();
 			case ModelPackage.TOPIC_TYPE__KIND:
 				return kind != KIND_EDEFAULT;
+			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
+				return exclusive != null && !exclusive.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

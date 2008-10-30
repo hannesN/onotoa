@@ -10,6 +10,10 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class EmptyPage extends AbstractModelPage {
 
+	public EmptyPage() {
+		super("empty");
+	}
+	
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());

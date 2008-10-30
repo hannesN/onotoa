@@ -4,7 +4,9 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 
 import de.topicmapslab.tmcledit.diagram.policies.NameConstraintDirectEditPolicy;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	
@@ -21,7 +23,10 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	@Override
 	protected void refreshVisuals() {
 		NameTypeConstraint ntc = getCastedModel();
-		getNameLabel().setText(ntc.getType().getId());
+		if (ntc.getType()==null)
+			getNameLabel().setText("No Type");
+		else
+			getNameLabel().setText(ntc.getType().getId());
 		StringBuffer buffer = new StringBuffer(50);
 		buffer.append(" [");
 		buffer.append(ntc.getRegexp());
@@ -34,7 +39,31 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	}
 
 	@Override
+	public void activate() {
+		super.activate();
+		if (getCastedModel().getType()!=null)
+			getCastedModel().getType().eAdapters().add(this);
+	}
+	
+	@Override
+	public void deactivate() {
+		if (getCastedModel().getType()!=null)
+			getCastedModel().getType().eAdapters().remove(this);
+		super.deactivate();
+	}
+	
+	@Override
 	public void notifyChanged(Notification notification) {
+		if (notification.getNotifier()==getModel()) { 
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.NAME_TYPE_CONSTRAINT__TYPE) {
+				TopicType tmp = (TopicType) notification.getOldValue();
+				if (tmp!=null)
+					tmp.eAdapters().remove(this);
+				tmp = (TopicType) notification.getNewValue();
+				if (tmp!=null)
+					tmp.eAdapters().add(this);
+			}
+		}
 		if (notification.getEventType()==Notification.SET)
 			refreshVisuals();
 		

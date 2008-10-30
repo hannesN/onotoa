@@ -8,7 +8,7 @@ package de.topicmapslab.tmcledit.model.provider;
 
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedConstraint;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,13 +25,13 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.NameTypeConstraint} object.
+ * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.ScopedConstraint} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NameTypeConstraintItemProvider
-	extends ScopedConstraintItemProvider
+public class ScopedConstraintItemProvider
+	extends AbstractConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -44,7 +44,7 @@ public class NameTypeConstraintItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NameTypeConstraintItemProvider(AdapterFactory adapterFactory) {
+	public ScopedConstraintItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,25 +59,25 @@ public class NameTypeConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
+			addScopePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Scope feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addScopePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_NameTypeConstraint_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NameTypeConstraint_type_feature", "_UI_NameTypeConstraint_type"),
-				 ModelPackage.Literals.NAME_TYPE_CONSTRAINT__TYPE,
+				 getString("_UI_ScopedConstraint_scope_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ScopedConstraint_scope_feature", "_UI_ScopedConstraint_type"),
+				 ModelPackage.Literals.SCOPED_CONSTRAINT__SCOPE,
 				 true,
 				 false,
 				 true,
@@ -87,14 +87,14 @@ public class NameTypeConstraintItemProvider
 	}
 
 	/**
-	 * This returns NameTypeConstraint.gif.
+	 * This returns ScopedConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/NameTypeConstraint"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ScopedConstraint"));
 	}
 
 	/**
@@ -105,10 +105,10 @@ public class NameTypeConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((NameTypeConstraint)object).getName();
+		String label = ((ScopedConstraint)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_NameTypeConstraint_type") :
-			getString("_UI_NameTypeConstraint_type") + " " + label;
+			getString("_UI_ScopedConstraint_type") :
+			getString("_UI_ScopedConstraint_type") + " " + label;
 	}
 
 	/**

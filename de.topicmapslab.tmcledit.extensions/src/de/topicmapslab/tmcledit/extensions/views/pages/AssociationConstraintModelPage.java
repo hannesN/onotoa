@@ -28,6 +28,10 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 
 	private Text typeText;
 
+	public AssociationConstraintModelPage() {
+		super("association_constraint");
+	}
+	
 	@Override
 	public void updateUI() {
 		AssociationTypeConstraint asc = getCastedModel();

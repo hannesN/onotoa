@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class NameTypeConstraintImpl extends AbstractConstraintImpl implements NameTypeConstraint {
+public class NameTypeConstraintImpl extends ScopedConstraintImpl implements NameTypeConstraint {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->

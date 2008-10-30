@@ -6,7 +6,6 @@
  */
 package de.topicmapslab.tmcledit.model;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -20,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMin <em>Card Min</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getRegexp <em>Regexp</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -110,22 +108,6 @@ public interface AbstractConstraint extends EObject {
 	 * @generated
 	 */
 	void setRegexp(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Scope</b></em>' reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.TopicType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Scope</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Scope</em>' reference list.
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractConstraint_Scope()
-	 * @model
-	 * @generated
-	 */
-	EList<TopicType> getScope();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

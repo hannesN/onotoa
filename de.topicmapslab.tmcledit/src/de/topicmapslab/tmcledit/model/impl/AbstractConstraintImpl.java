@@ -6,18 +6,13 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +24,6 @@ import de.topicmapslab.tmcledit.model.TopicType;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getCardMin <em>Card Min</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getRegexp <em>Regexp</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getScope <em>Scope</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -96,16 +90,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * @ordered
 	 */
 	protected String regexp = REGEXP_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getScope() <em>Scope</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getScope()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TopicType> scope;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -214,18 +198,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TopicType> getScope() {
-		if (scope == null) {
-			scope = new EObjectResolvingEList<TopicType>(TopicType.class, this, ModelPackage.ABSTRACT_CONSTRAINT__SCOPE);
-		}
-		return scope;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getName() {
 		return name;
 	}
@@ -256,8 +228,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				return getCardMax();
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				return getRegexp();
-			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				return getScope();
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				return getName();
 		}
@@ -269,7 +239,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -281,10 +250,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				setRegexp((String)newValue);
-				return;
-			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				getScope().clear();
-				getScope().addAll((Collection<? extends TopicType>)newValue);
 				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				setName((String)newValue);
@@ -310,9 +275,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				setRegexp(REGEXP_EDEFAULT);
 				return;
-			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				getScope().clear();
-				return;
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -334,8 +296,6 @@ public abstract class AbstractConstraintImpl extends EObjectImpl implements Abst
 				return CARD_MAX_EDEFAULT == null ? cardMax != null : !CARD_MAX_EDEFAULT.equals(cardMax);
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				return REGEXP_EDEFAULT == null ? regexp != null : !REGEXP_EDEFAULT.equals(regexp);
-			case ModelPackage.ABSTRACT_CONSTRAINT__SCOPE:
-				return scope != null && !scope.isEmpty();
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}

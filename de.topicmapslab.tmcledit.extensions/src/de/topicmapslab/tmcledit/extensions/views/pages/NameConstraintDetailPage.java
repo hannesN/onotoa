@@ -15,20 +15,17 @@ import org.eclipse.ui.forms.widgets.Section;
 import de.topicmapslab.tmcledit.extensions.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
-public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelPage {
-	
+public class NameConstraintDetailPage extends AbstractScopedContraintModelPage {
+
 	private Text typeText;
 	private Button typeButton;
-	private Text datatypeText;
-	private Button datatypeButton;
-	private Button uniqueButton;
 	private Section section;
 	
-	public OccurenceConstraintDetailPage() {
-		super("occurence constraint");
+	public NameConstraintDetailPage() {
+		super("name constraint");
 	}
 	
 	@Override
@@ -37,24 +34,19 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 		
 		section = toolkit.createSection(parent, Section.EXPANDED
 				| Section.TITLE_BAR);
-		section.setText("Occurence Constraint");
+		section.setText("Name Constraint");
 		Composite comp = toolkit.createComposite(section);
 		comp.setLayout(new GridLayout(2, false));
-		toolkit.createLabel(comp, "Type:");
 
+		toolkit.createLabel(comp, "Type:");
 		createTypeComposite(toolkit, comp);
 		
-		toolkit.createLabel(comp, "Datatype:");
-		createDatatypeComposite(toolkit, comp);
+		hookButtonListener();
 		
 		createCommonConstraintControls(comp, toolkit);
 		
-		toolkit.createLabel(comp, "Unique:");
-		uniqueButton = toolkit.createButton(comp, "", SWT.CHECK);
 		section.setClient(comp);
 		setControl(section);
-		
-		hookButtonListener();
 	}
 
 	private void createTypeComposite(FormToolkit toolkit, Composite parent) {
@@ -68,69 +60,34 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 		
 		typeButton = toolkit.createButton(typeComp, "...", SWT.PUSH);
 	}
-
-	private void createDatatypeComposite(FormToolkit toolkit, Composite parent) {
-		Composite typeComp = toolkit.createComposite(parent);
-		typeComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		GridLayout layout = new GridLayout(2, false);
-		layout.marginWidth = 0;
-		typeComp.setLayout(layout);
-		datatypeText = toolkit.createText(typeComp, "", SWT.BORDER);
-		datatypeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		datatypeButton = toolkit.createButton(typeComp, "...", SWT.PUSH);
-	}
 	
 	private void hookButtonListener() {
 		typeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeButton.getShell(), KindOfTopicType.OCCURENCE_TYPE);
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeButton.getShell(), KindOfTopicType.NAME_TYPE);
 				if (Dialog.OK==dlg.open()) {
 					getCommandStack().execute(
 									new GenericSetCommand(
 											getModel(),
-											ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE,
+											ModelPackage.NAME_TYPE_CONSTRAINT__TYPE,
 											dlg.getFirstResult()));
 				}
 			}
 		});
 		
-		datatypeButton.addSelectionListener(new SelectionAdapter(){
-			
-		});
-		
-		uniqueButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				getCommandStack().execute(
-						new GenericSetCommand(
-								getModel(),
-								ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE,
-								new Boolean(uniqueButton.getSelection())));
-			}
-		});
 	}
 
 	@Override
 	public void updateUI() {
-		OccurenceTypeConstraint castedModel = getCastedModel();
-		if (castedModel.getType().getId()!=null) 
-			typeText.setText(castedModel.getType().getId());
+		if ( (getCastedModel().getType()!=null) && (getCastedModel().getType().getId()!=null) )
+			typeText.setText(getCastedModel().getType().getId());
 		else
 			typeText.setText("");
-		
-		if (castedModel.getDataType()!=null)
-			datatypeText.setText(castedModel.getDataType());
-		else
-			datatypeText.setText("");
-		
-		uniqueButton.setSelection(castedModel.isUnique());
-		
 		super.updateUI();
 	}
 	
-	protected OccurenceTypeConstraint getCastedModel() {
-		return (OccurenceTypeConstraint) getModel();
+	protected NameTypeConstraint getCastedModel() {
+		return (NameTypeConstraint) getModel();
 	}
 }

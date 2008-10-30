@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implements OccurenceTypeConstraint {
+public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements OccurenceTypeConstraint {
 	/**
 	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
 	 * <!-- begin-user-doc -->

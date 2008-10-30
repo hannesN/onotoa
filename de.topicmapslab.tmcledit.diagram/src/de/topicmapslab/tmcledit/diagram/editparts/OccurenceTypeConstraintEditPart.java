@@ -6,7 +6,6 @@ import org.eclipse.gef.EditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.OccurenceConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.TypeNode;
 
 public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
 	private OccurenceTypeConstraint getCastedModel() {

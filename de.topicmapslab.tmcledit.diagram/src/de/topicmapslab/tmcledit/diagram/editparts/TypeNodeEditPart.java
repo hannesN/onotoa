@@ -205,6 +205,9 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			occurencesFigure.add(child);
 		else if (childEditPart instanceof NameTypeConstraintEditPart)
 			basenameFigure.add(child);
+		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
+				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) )
+			identifierFigure.add(child);
 		
 	}
 	
@@ -215,6 +218,9 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			occurencesFigure.remove(child);
 		else if (childEditPart instanceof NameTypeConstraintEditPart)
 			basenameFigure.remove(child);
+		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
+				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) )
+			identifierFigure.remove(child);
 	}
 		
 	@Override

@@ -34,7 +34,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-import de.topicmapslab.tmcledit.diagram.action.DiagramController;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -153,7 +152,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		dirtyAdapter = new DirtyAdapter();
 		((File)diagram.eContainer()).eAdapters().add(dirtyAdapter);
 		
-		new DiagramController(diagram);
 		IActionBars actionBars = getEditorSite().getActionBars();
 		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), ei
 				.getUndoAction());
@@ -247,8 +245,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				} else {
 					currentSelection = new StructuredSelection(model);
 				}
-				// TODO Connections
-
 				fireSelectionChanged();
 			}
 		}

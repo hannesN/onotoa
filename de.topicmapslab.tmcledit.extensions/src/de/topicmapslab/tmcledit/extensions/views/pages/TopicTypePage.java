@@ -41,6 +41,10 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 	private Section section;
 
+	public TopicTypePage() {
+		super("topic type");
+	}
+	
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());

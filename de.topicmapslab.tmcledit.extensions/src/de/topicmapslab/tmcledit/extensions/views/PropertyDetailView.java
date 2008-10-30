@@ -16,7 +16,8 @@ import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.part.PageBook;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledPageBook;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
@@ -37,7 +38,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.PropertyDetailView";
 
-	private PageBook pageBook;
+	private ScrolledPageBook pageBook;
 	private AbstractModelPage currentPage;
 	private PropertyDetailPageFactory pageFactory;
 
@@ -62,7 +63,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 			this.currentPage.aboutToHide();
 		
 		this.currentPage = currentPage;
-		pageBook.showPage(currentPage.getControl());
+		pageBook.showPage(currentPage.getID());
 	}
 	
 	@Override
@@ -70,7 +71,6 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		
 		if ( ( (part instanceof ModelView) || (part instanceof TMCLDiagramEditor) ) 
 				&& (selection instanceof IStructuredSelection) ){
-			
 			// register actions
 			if (part instanceof ModelView) {
 				Map<String, IAction> ar = ((ModelView)part).getActionRegistry();
@@ -82,8 +82,6 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				tmp = ActionFactory.REDO.getId();
 				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
 			}
-			
-			
 			IStructuredSelection sel = (IStructuredSelection) selection;
 			if (!sel.isEmpty()) {
 				Object obj = sel.getFirstElement();
@@ -91,12 +89,9 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				if (obj instanceof TreeObject) {
 					obj = ((TreeTopic)obj).getModel();
 				}
-				
-
 				AbstractModelPage page = pageFactory.getPageFor(obj);
 				setCurrentPage(page);
 				page.setModel(obj);
-				
 				
 				if (part instanceof ModelView) {
 					ModelView modelView = (ModelView) part;
@@ -105,17 +100,15 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 					TMCLDiagramEditor currentEditor = (TMCLDiagramEditor) part;
 					page.setCommandStack(currentEditor.getEditingDomain().getCommandStack());
 				}
-				
-					
-
 			}
 		}
-		
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
-		pageBook = new PageBook(parent, SWT.NONE);
+		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+		pageBook = toolkit.createPageBook(parent, SWT.V_SCROLL);
+		pageBook.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		pageFactory = new PropertyDetailPageFactory(pageBook);
 
 		setCurrentPage(pageFactory.getEmptyPage());

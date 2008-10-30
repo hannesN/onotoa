@@ -161,13 +161,22 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__KIND = 9;
 
 	/**
+	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_TYPE__EXCLUSIVE = 10;
+
+	/**
 	 * The number of structural features of the '<em>Topic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE_FEATURE_COUNT = 10;
+	int TOPIC_TYPE_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.
@@ -207,22 +216,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CONSTRAINT__REGEXP = 2;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_CONSTRAINT__SCOPE = 3;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONSTRAINT__NAME = 4;
+	int ABSTRACT_CONSTRAINT__NAME = 3;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Constraint</em>' class.
@@ -231,7 +231,71 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = 5;
+	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopedConstraintImpl <em>Scoped Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.ScopedConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getScopedConstraint()
+	 * @generated
+	 */
+	int SCOPED_CONSTRAINT = 17;
+
+	/**
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
+
+	/**
+	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Scoped Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.
@@ -250,7 +314,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
+	int OCCURENCE_TYPE_CONSTRAINT__CARD_MIN = SCOPED_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -259,7 +323,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
+	int OCCURENCE_TYPE_CONSTRAINT__CARD_MAX = SCOPED_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -268,16 +332,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
-
-	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURENCE_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
+	int OCCURENCE_TYPE_CONSTRAINT__REGEXP = SCOPED_CONSTRAINT__REGEXP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -286,7 +341,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
+	int OCCURENCE_TYPE_CONSTRAINT__NAME = SCOPED_CONSTRAINT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCCURENCE_TYPE_CONSTRAINT__SCOPE = SCOPED_CONSTRAINT__SCOPE;
 
 	/**
 	 * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -295,7 +359,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__UNIQUE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
+	int OCCURENCE_TYPE_CONSTRAINT__UNIQUE = SCOPED_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
@@ -304,7 +368,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
+	int OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE = SCOPED_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -313,7 +377,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 2;
+	int OCCURENCE_TYPE_CONSTRAINT__TYPE = SCOPED_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Occurence Type Constraint</em>' class.
@@ -322,7 +386,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 3;
+	int OCCURENCE_TYPE_CONSTRAINT_FEATURE_COUNT = SCOPED_CONSTRAINT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeConstraintImpl <em>Name Type Constraint</em>}' class.
@@ -341,7 +405,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
+	int NAME_TYPE_CONSTRAINT__CARD_MIN = SCOPED_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -350,7 +414,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
+	int NAME_TYPE_CONSTRAINT__CARD_MAX = SCOPED_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -359,16 +423,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
-
-	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_TYPE_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
+	int NAME_TYPE_CONSTRAINT__REGEXP = SCOPED_CONSTRAINT__REGEXP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -377,7 +432,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
+	int NAME_TYPE_CONSTRAINT__NAME = SCOPED_CONSTRAINT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Scope</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_TYPE_CONSTRAINT__SCOPE = SCOPED_CONSTRAINT__SCOPE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -386,7 +450,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
+	int NAME_TYPE_CONSTRAINT__TYPE = SCOPED_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Name Type Constraint</em>' class.
@@ -395,7 +459,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
+	int NAME_TYPE_CONSTRAINT_FEATURE_COUNT = SCOPED_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleTypeConstraintsImpl <em>Role Type Constraints</em>}' class.
@@ -545,15 +609,6 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -607,15 +662,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUBJECT_IDENTIFIER_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
-
-	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__SCOPE = ABSTRACT_CONSTRAINT__SCOPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1057,7 +1103,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 17;
+	int TOPIC_ID = 18;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -1067,7 +1113,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 18;
+	int EDGE_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -1077,7 +1123,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 19;
+	int KIND_OF_TOPIC_TYPE = 20;
 
 
 	/**
@@ -1201,6 +1247,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTopicType_Kind();
 
 	/**
+	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getExclusive <em>Exclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Exclusive</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getExclusive()
+	 * @see #getTopicType()
+	 * @generated
+	 */
+	EReference getTopicType_Exclusive();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractConstraint <em>Abstract Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1242,17 +1299,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAbstractConstraint_Regexp();
-
-	/**
-	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getScope <em>Scope</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Scope</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractConstraint#getScope()
-	 * @see #getAbstractConstraint()
-	 * @generated
-	 */
-	EReference getAbstractConstraint_Scope();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}'.
@@ -1801,6 +1847,27 @@ public interface ModelPackage extends EPackage {
 	EAttribute getFile_Dirty();
 
 	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ScopedConstraint <em>Scoped Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scoped Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ScopedConstraint
+	 * @generated
+	 */
+	EClass getScopedConstraint();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.ScopedConstraint#getScope <em>Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Scope</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ScopedConstraint#getScope()
+	 * @see #getScopedConstraint()
+	 * @generated
+	 */
+	EReference getScopedConstraint_Scope();
+
+	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1943,6 +2010,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute TOPIC_TYPE__KIND = eINSTANCE.getTopicType_Kind();
 
 		/**
+		 * The meta object literal for the '<em><b>Exclusive</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOPIC_TYPE__EXCLUSIVE = eINSTANCE.getTopicType_Exclusive();
+
+		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1975,14 +2050,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_CONSTRAINT__REGEXP = eINSTANCE.getAbstractConstraint_Regexp();
-
-		/**
-		 * The meta object literal for the '<em><b>Scope</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_CONSTRAINT__SCOPE = eINSTANCE.getAbstractConstraint_Scope();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2421,6 +2488,24 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FILE__DIRTY = eINSTANCE.getFile_Dirty();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ScopedConstraintImpl <em>Scoped Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.ScopedConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getScopedConstraint()
+		 * @generated
+		 */
+		EClass SCOPED_CONSTRAINT = eINSTANCE.getScopedConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Scope</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPED_CONSTRAINT__SCOPE = eINSTANCE.getScopedConstraint_Scope();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

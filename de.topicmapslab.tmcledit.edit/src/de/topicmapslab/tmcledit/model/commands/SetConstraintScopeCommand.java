@@ -5,19 +5,19 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.ScopedConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class SetConstraintScopeCommand extends AbstractCommand {
 
-	private final AbstractConstraint constraint;
+	private final ScopedConstraint constraint;
 	private final List<TopicType> newScope;
 
 	private List<TopicType> oldScope;
 	
 	
 	
-	public SetConstraintScopeCommand(AbstractConstraint constraint,
+	public SetConstraintScopeCommand(ScopedConstraint constraint,
 			List<TopicType> newScope) {
 		super("Set Scope");
 		this.constraint = constraint;

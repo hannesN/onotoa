@@ -68,7 +68,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 		
 		}
 		
-		//diagram.getEdges().add(edge);
+		diagram.getEdges().add(edge);
 	}
 	
 	@Override
@@ -90,7 +90,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 			break;
 	
 	}
-		//diagram.getEdges().remove(edge);
+		diagram.getEdges().remove(edge);
 	}
 
 	@Override

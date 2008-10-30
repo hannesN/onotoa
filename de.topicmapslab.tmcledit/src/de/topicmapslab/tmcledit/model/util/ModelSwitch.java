@@ -102,6 +102,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: {
 				OccurenceTypeConstraint occurenceTypeConstraint = (OccurenceTypeConstraint)theEObject;
 				T result = caseOccurenceTypeConstraint(occurenceTypeConstraint);
+				if (result == null) result = caseScopedConstraint(occurenceTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(occurenceTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -109,6 +110,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.NAME_TYPE_CONSTRAINT: {
 				NameTypeConstraint nameTypeConstraint = (NameTypeConstraint)theEObject;
 				T result = caseNameTypeConstraint(nameTypeConstraint);
+				if (result == null) result = caseScopedConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -192,6 +194,13 @@ public class ModelSwitch<T> {
 			case ModelPackage.FILE: {
 				File file = (File)theEObject;
 				T result = caseFile(file);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.SCOPED_CONSTRAINT: {
+				ScopedConstraint scopedConstraint = (ScopedConstraint)theEObject;
+				T result = caseScopedConstraint(scopedConstraint);
+				if (result == null) result = caseAbstractConstraint(scopedConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -451,6 +460,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseFile(File object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scoped Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scoped Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScopedConstraint(ScopedConstraint object) {
 		return null;
 	}
 
