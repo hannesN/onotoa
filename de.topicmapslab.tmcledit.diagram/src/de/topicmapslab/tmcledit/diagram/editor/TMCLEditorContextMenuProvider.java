@@ -8,6 +8,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.ui.actions.ActionFactory;
 
+import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 
 public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
@@ -33,6 +34,11 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 		action = getActionRegistry().getAction(RemoveFromDiagramAction.ID);
 		if (action.isEnabled())
 			menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+		
+		action = getActionRegistry().getAction(DeleteFromModelAction.ID);
+		if (action.isEnabled())
+			menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+		
 
 	}
 	

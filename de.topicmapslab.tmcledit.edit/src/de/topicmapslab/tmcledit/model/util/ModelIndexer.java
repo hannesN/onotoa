@@ -5,6 +5,8 @@ package de.topicmapslab.tmcledit.model.util;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
+
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -26,8 +28,10 @@ public class ModelIndexer {
 	private TopicIndexer topicIndexer;
 	private TopicTypeNodeIndexer nodeIndexer;
 	
+	private final File file;
+	
 	private ModelIndexer(File file) {
-		
+		this.file = file;
 	}
 	
 	
@@ -53,12 +57,15 @@ public class ModelIndexer {
 			nodeIndexer.dispose();
 	}
 
-	
-
 	public static ModelIndexer getInstance() {
 		return instance;
 	}
 
+	public TopicMapSchema getTopicMapSchema() {
+		return file.getTopicMapSchema();
+	}
+	
+	
 
 	public TopicType createTopicType() {
 		return topicIndexer.createTopicType();
@@ -91,5 +98,25 @@ public class ModelIndexer {
 
 	public List<Edge> getEdges(Diagram d, EdgeType type) {
 		return nodeIndexer.getEdges(d, type);
+	}
+
+
+	public EList<Diagram> getDiagrams() {
+		return file.getDiagrams();
+	}
+
+
+	public List<Edge> getEdgesUsingTopicType(TopicType type) {
+		return nodeIndexer.getEdgesUsingTopicType(type);
+	}
+
+
+	public List<TopicType> getInstanceTypes(TopicType topicType) {
+		return topicIndexer.getInstanceTypes(topicType);
+	}
+
+
+	public List<TopicType> getSubTypes(TopicType topicType) {
+		return topicIndexer.getSubTypes(topicType);
 	}
 }

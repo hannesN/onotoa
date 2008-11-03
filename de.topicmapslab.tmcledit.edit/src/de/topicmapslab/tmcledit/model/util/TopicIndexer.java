@@ -101,4 +101,41 @@ public class TopicIndexer implements Adapter{
 		lastDefaultNumber = 0;
 	}
 
+	/**
+	 * Returns a list of topic types, which has the given type in
+	 * there ako-list
+	 * 
+	 * @param topicType 
+	 * @return
+	 */
+	public List<TopicType> getSubTypes(TopicType topicType) {
+		List<TopicType> result = new ArrayList<TopicType>();
+		
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			if(tt.getAko().contains(topicType)) {
+				result.add(tt);
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of topic types, which has the given type in
+	 * there isa-list
+	 * 
+	 * @param topicType 
+	 * @return
+	 */
+	public List<TopicType> getInstanceTypes(TopicType topicType) {
+		List<TopicType> result = new ArrayList<TopicType>();
+		
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			if(tt.getIsa().contains(topicType)) {
+				result.add(tt);
+			}
+		}
+		
+		return result;
+	}
 }

@@ -39,6 +39,7 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 	}
 	
 	public void init(File file) {
+		this.file = file;
 		nodeMap = new HashMap<TopicType, List<TypeNode>>();
 		file.eAdapters().add(this);
 		for (Diagram d : file.getDiagrams()) {
@@ -112,7 +113,7 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 			}
 			if (msg.getEventType()==Notification.REMOVE) {
 				if (msg.getOldValue() instanceof TypeNode) {
-					TypeNode tmp = (TypeNode) msg.getNewValue();
+					TypeNode tmp = (TypeNode) msg.getOldValue();
 					List<TypeNode> list = nodeMap.get(tmp.getTopicType());
 					if (list==null) {
 						return; // shouldn't happen
@@ -190,6 +191,22 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 			}
 		}
 		
+		return result;
+	}
+	
+	public List<Edge> getEdgesUsingTopicType(TopicType type) {
+		List<Edge> result = new ArrayList<Edge>();
+		
+		for (Diagram d : file.getDiagrams()) {
+			TypeNode node = getNodeFor(type, d);
+			if (node==null)
+				continue;
+			
+			for (Edge e : d.getEdges()) {
+				if ((e.getSource().equals(node)) || (e.getTarget().equals(node)))
+					result.add(e);
+			}
+		}
 		return result;
 	}
 }

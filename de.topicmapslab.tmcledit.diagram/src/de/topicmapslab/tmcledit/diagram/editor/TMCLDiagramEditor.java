@@ -34,6 +34,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -62,6 +63,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			.emptyList();
 
 	private RemoveFromDiagramAction removeFromDiagramAction;
+	private DeleteFromModelAction deleteFromModelAction;
 
 	private DirtyAdapter dirtyAdapter;
 
@@ -135,6 +137,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	protected void createActions() {
 		removeFromDiagramAction = new RemoveFromDiagramAction(getEditDomain()
 				.getCommandStack());
+		deleteFromModelAction = new DeleteFromModelAction(getEditDomain().getCommandStack());
+		getActionRegistry().registerAction(deleteFromModelAction);
 		getActionRegistry().registerAction(removeFromDiagramAction);
 		super.createActions();
 	}
@@ -252,6 +256,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	private void updateSelectionDependentActions(EditPart selection) {
 		removeFromDiagramAction.setSelectedEditPart(selection);
+		deleteFromModelAction.setSelectedEditPart(selection);
 
 	}
 
