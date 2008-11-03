@@ -20,7 +20,7 @@ import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
 import de.topicmapslab.tmcledit.extensions.Activator;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.util.TopicIndexer;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
@@ -58,7 +58,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	protected void fillContentProvider(AbstractContentProvider contentProvider,
 			ItemsFilter itemsFilter, IProgressMonitor progressMonitor)
 			throws CoreException {
-		List<TopicType> types = TopicIndexer.getInstance().getTopicTypes();
+		List<TopicType> types = ModelIndexer.getInstance().getTopicTypes();
 		progressMonitor.beginTask("Filling Topic List", types.size());
 
 		for (TopicType type : types) {

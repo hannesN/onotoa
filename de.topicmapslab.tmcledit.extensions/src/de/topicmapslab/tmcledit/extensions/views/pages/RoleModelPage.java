@@ -23,7 +23,7 @@ import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
-import de.topicmapslab.tmcledit.model.util.TopicIndexer;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class RoleModelPage extends AbstractModelPage{
 
@@ -98,7 +98,7 @@ public class RoleModelPage extends AbstractModelPage{
 		public void widgetSelected(SelectionEvent e) {
 			ListSelectionDialog dlg = new ListSelectionDialog(
 					roleText.getShell(),
-					TopicIndexer.getInstance().getRoleTypes(),
+					ModelIndexer.getInstance().getRoleTypes(),
 					new ArrayContentProvider(),
 					new TopicLabelProvider(),
 					"Choose the tole type");

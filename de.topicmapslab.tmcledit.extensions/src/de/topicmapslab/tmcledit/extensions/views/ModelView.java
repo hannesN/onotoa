@@ -93,7 +93,7 @@ import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 import de.topicmapslab.tmcledit.model.util.DirtyStateObserver;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
-import de.topicmapslab.tmcledit.model.util.TopicIndexer;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -702,7 +702,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			dirtyStateObserver = new DirtyStateObserver(currFile,
 					getEditingDomain().getCommandStack());
 			// initialize indexer 
-			TopicIndexer.getInstance(currFile.getTopicMapSchema());
+			ModelIndexer.createInstance(currFile);
 		} else {
 			currFile = null;
 		}

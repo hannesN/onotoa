@@ -9,7 +9,7 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.util.TopicIndexer;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class OccurenceConstraintCreationFactory implements CreationFactory {
 
@@ -19,7 +19,7 @@ public class OccurenceConstraintCreationFactory implements CreationFactory {
 	public Object getNewObject() {
 		OccurenceTypeConstraint otc = ModelFactory.eINSTANCE.createOccurenceTypeConstraint();
 		if (occurenceType==null) {
-			occurenceType = TopicIndexer.getInstance().createTopicType();
+			occurenceType = ModelIndexer.getInstance().createTopicType();
 			occurenceType.setKind(KindOfTopicType.OCCURENCE_TYPE);
 		}
 		otc.setType(occurenceType);

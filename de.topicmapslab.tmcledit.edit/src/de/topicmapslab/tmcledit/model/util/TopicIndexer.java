@@ -14,24 +14,12 @@ import de.topicmapslab.tmcledit.model.TopicType;
 
 public class TopicIndexer implements Adapter{
 
-	private static TopicIndexer INSTANCE;
+	private int lastDefaultNumber;
 	
-	private static int lastDefaultNumber;
-	
-	private final TopicMapSchema topicMapSchema;
+	private TopicMapSchema topicMapSchema;
 	
 	private Notifier target;
 	
-	public TopicIndexer(TopicMapSchema topicMapSchema) {
-		super();
-		this.topicMapSchema = topicMapSchema;
-		topicMapSchema.eAdapters().add(this);
-	}
-	
-	protected void init() {
-		// start indexing, hashtable any one?
-		lastDefaultNumber=0;
-	}
 	
 	public TopicType getTopicType(String id) {
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
@@ -92,7 +80,10 @@ public class TopicIndexer implements Adapter{
 	}
 
 	public void dispose() {
+		if (topicMapSchema==null)
+			return;
 		topicMapSchema.eAdapters().remove(this);
+		topicMapSchema = null;
 	}
 	
 	@Override
@@ -100,19 +91,14 @@ public class TopicIndexer implements Adapter{
 		this.target = newTarget;
 	}
 	
-	public static TopicIndexer getInstance(TopicMapSchema schema) {
-		if (INSTANCE==null) {
-			INSTANCE = new TopicIndexer(schema);
-		} else {
-			if (!INSTANCE.topicMapSchema.equals(schema))
-				INSTANCE.dispose();
-				INSTANCE = new TopicIndexer(schema);
-		}
+	public void init(TopicMapSchema schema) {
+		assert(schema!=null);
+		if (!schema.equals(topicMapSchema))
+			dispose();
 		
-		return INSTANCE;
+		this.topicMapSchema = schema;
+		topicMapSchema.eAdapters().add(this);
+		lastDefaultNumber = 0;
 	}
-	
-	public static TopicIndexer getInstance() {
-		return INSTANCE;
-	}
+
 }

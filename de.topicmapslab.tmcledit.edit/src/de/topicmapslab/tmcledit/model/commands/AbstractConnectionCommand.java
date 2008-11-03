@@ -14,6 +14,7 @@ import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public abstract class AbstractConnectionCommand extends AbstractCommand {
 
@@ -89,16 +90,11 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		
 		for (Diagram d : file.getDiagrams()) {
 			// check if we have a topicnode containing representing the topic
-			TypeNode currentNode = null;
-			for (Node node : d.getNodes()) {
-				if (node instanceof TypeNode) {
-					if (((TypeNode) node).getTopicType().equals(topic)) {
-						findRemoveEdges(d);
-						currentNode = (TypeNode) node;
-						break; 
-					}
-				}
+			TypeNode currentNode = ModelIndexer.getInstance().getNodeFor(topic, d);
+			if (currentNode!=null) {
+				findRemoveEdges(d);
 			}
+			
 			// now we have the type node and all edges we will remove
 			// its time to create the new edges for the new types
 			for (Node node : d.getNodes()) {
@@ -118,8 +114,8 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 	}
 
 	private void findRemoveEdges(Diagram d) {
-		for (Edge edge : d.getEdges()) {
-			if (edge.getType()==getEdgeType()) {
+		for (Edge edge : ModelIndexer.getInstance().getEdges(d, getEdgeType())) {
+			if (((TypeNode)edge.getSource()).getTopicType().equals(topic)) {
 				TypeNode target = (TypeNode) edge.getTarget();
 				if (removeList.contains(target.getTopicType()) )
 					removeEdgeList.add(new EdgeWrapper(d, edge));

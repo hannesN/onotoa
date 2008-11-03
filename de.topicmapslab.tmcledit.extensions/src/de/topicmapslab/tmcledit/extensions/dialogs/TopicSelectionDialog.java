@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.util.TopicIndexer;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -67,7 +67,7 @@ public class TopicSelectionDialog extends Dialog {
 		availableTopicList.getList().setLayoutData(gd);
 		availableTopicList.setContentProvider(new ArrayContentProvider());
 		availableTopicList.setLabelProvider(new TopicLableProvider());
-		availableTopicList.setInput(TopicIndexer.getInstance().getTopicTypes());
+		availableTopicList.setInput(ModelIndexer.getInstance().getTopicTypes());
 		availableTopicList.addFilter(new ViewerFilter() {
 
 			@Override
