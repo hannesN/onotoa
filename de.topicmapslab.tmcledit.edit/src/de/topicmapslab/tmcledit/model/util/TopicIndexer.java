@@ -14,7 +14,9 @@ import de.topicmapslab.tmcledit.model.TopicType;
 
 public class TopicIndexer implements Adapter{
 
-	private static  TopicIndexer INSTANCE;
+	private static TopicIndexer INSTANCE;
+	
+	private static int lastDefaultNumber;
 	
 	private final TopicMapSchema topicMapSchema;
 	
@@ -28,6 +30,7 @@ public class TopicIndexer implements Adapter{
 	
 	protected void init() {
 		// start indexing, hashtable any one?
+		lastDefaultNumber=0;
 	}
 	
 	public TopicType getTopicType(String id) {
@@ -58,6 +61,18 @@ public class TopicIndexer implements Adapter{
 			tt = ModelFactory.eINSTANCE.createTopicType();
 			tt.setId(id);
 		}
+		return tt;
+	}
+	
+	public TopicType createTopicType() {
+		TopicType tt = ModelFactory.eINSTANCE.createTopicType();
+		String tmp = "foo:default";
+		
+		while (getTopicType(tmp+lastDefaultNumber)!=null) {
+			lastDefaultNumber++;
+		}
+		tt.setId(tmp+lastDefaultNumber);
+		
 		return tt;
 	}
 		

@@ -19,7 +19,7 @@ public class OccurenceConstraintCreationFactory implements CreationFactory {
 	public Object getNewObject() {
 		OccurenceTypeConstraint otc = ModelFactory.eINSTANCE.createOccurenceTypeConstraint();
 		if (occurenceType==null) {
-			occurenceType = TopicIndexer.getInstance().createTopicType("foo:occType");
+			occurenceType = TopicIndexer.getInstance().createTopicType();
 			occurenceType.setKind(KindOfTopicType.OCCURENCE_TYPE);
 		}
 		otc.setType(occurenceType);
