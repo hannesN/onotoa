@@ -13,6 +13,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 
+import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -30,7 +32,8 @@ import de.topicmapslab.tmcledit.model.TypeNode;
  */
 public class TopicTypeNodeIndexer extends AdapterImpl{
 
-	private Map<TopicType, List<TypeNode>> nodeMap;
+	private Map<TopicType, List<TypeNode>> typeNodeMap;
+	private Map<AssociationTypeConstraint, List<AssociationNode>> assNodeMap;
 	private File file;
 	
 	
@@ -40,46 +43,60 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 	
 	public void init(File file) {
 		this.file = file;
-		nodeMap = new HashMap<TopicType, List<TypeNode>>();
+		typeNodeMap = new HashMap<TopicType, List<TypeNode>>();
+		assNodeMap = new HashMap<AssociationTypeConstraint, List<AssociationNode>>();
 		file.eAdapters().add(this);
+		
 		for (Diagram d : file.getDiagrams()) {
 			d.eAdapters().add(this);
 			for (Node node : d.getNodes()) {
 				if (node instanceof TypeNode) {
-					TypeNode tmp = (TypeNode) node;
-					List<TypeNode> list = nodeMap.get(tmp.getTopicType());
-					if (list == null) {
-						list = new ArrayList<TypeNode>(2);
-						nodeMap.put(tmp.getTopicType(), list);
-					}
-					list.add(tmp);
+					addTypeNode((TypeNode) node);
+				} else {
+					addAssociationNode((AssociationNode) node);
 				}
 			}
 		}
 	}
-	
-	public void dispose() {
-		if (file!=null) {
-			file.eAdapters().remove(this);
-			for (Diagram d : file.getDiagrams()) {
-				d.eAdapters().remove(this);
-			}
-				
+
+	private void addAssociationNode(AssociationNode node) {
+		List<AssociationNode> list = assNodeMap.get(node.getAssociationConstraint());
+		if (list == null) {
+			list = new ArrayList<AssociationNode>(2);
+			assNodeMap.put(node.getAssociationConstraint(), list);
 		}
+		list.add(node);
+	}
+
+	private void addTypeNode(TypeNode node) {
+		List<TypeNode> list = typeNodeMap.get(node.getTopicType());
+		if (list == null) {
+			list = new ArrayList<TypeNode>(2);
+			typeNodeMap.put(node.getTopicType(), list);
+		}
+		list.add(node);
 	}
 	
-	@Override
-	public void notifyChanged(Notification msg) {
-		if (msg.getEventType()==Notification.REMOVING_ADAPTER) {
-			return;
+	private void removeTypeNode(TypeNode node) {
+		List<TypeNode> list = typeNodeMap.get(node.getTopicType());
+		if (list==null) {
+			return; // shouldn't happen
 		}
-		
-		if (msg.getNotifier().equals(file)) {
-			handleFileNotification(msg);
-		} else if (msg.getNotifier() instanceof Diagram) {
-			handleDiagramNotification(msg);
+		list.remove(node);
+		// now some clean up so we don't have entries with an empty list
+		if (list.isEmpty())
+			typeNodeMap.remove(node.getTopicType());
+	}
+
+	private void removeAssociationNode(AssociationNode node) {
+		List<AssociationNode> list = assNodeMap.get(node.getAssociationConstraint());
+		if (list==null) {
+			return; // shouldn't happen
 		}
-		
+		list.remove(node);
+		// now some clean up so we don't have entries with an empty list
+		if (list.isEmpty())
+			assNodeMap.remove(node.getAssociationConstraint());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -88,12 +105,9 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 			if (msg.getEventType()==Notification.ADD) {
 				if (msg.getNewValue() instanceof TypeNode) {
 					TypeNode tmp = (TypeNode) msg.getNewValue();
-					List<TypeNode> list = nodeMap.get(tmp.getTopicType());
-					if (list==null) {
-						list=new ArrayList<TypeNode>(2);
-						nodeMap.put(tmp.getTopicType(), list);
-					}
-					list.add(tmp);
+					addTypeNode(tmp);
+				}  else {
+					addAssociationNode((AssociationNode) msg.getNewValue());
 				}
 				return;
 			}
@@ -101,44 +115,27 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 				for (Object tmpObj : (Collection) msg.getNewValue()) {
 					if (tmpObj instanceof TypeNode) {
 						TypeNode tmp = (TypeNode) tmpObj;
-						List<TypeNode> list = nodeMap.get(tmp.getTopicType());
-						if (list==null) {
-							list=new ArrayList<TypeNode>(2);
-							nodeMap.put(tmp.getTopicType(), list);
-						}
-						list.add(tmp);
+						addTypeNode(tmp);
+					} else {
+						addAssociationNode((AssociationNode) tmpObj);
 					}
 				}
 				return;
 			}
 			if (msg.getEventType()==Notification.REMOVE) {
 				if (msg.getOldValue() instanceof TypeNode) {
-					TypeNode tmp = (TypeNode) msg.getOldValue();
-					List<TypeNode> list = nodeMap.get(tmp.getTopicType());
-					if (list==null) {
-						return; // shouldn't happen
-					}
-					list.remove(tmp);
-					// now some clean up so we don't have entries with an empty list
-					if (list.isEmpty())
-						nodeMap.remove(tmp.getTopicType());
-					
+					removeTypeNode((TypeNode) msg.getOldValue());
+				} else {
+					removeAssociationNode((AssociationNode) msg.getOldValue());
 				}
 				return;
 			}
 			if (msg.getEventType()==Notification.REMOVE_MANY) {
 				for (Object tmpObj : (Collection) msg.getOldValue()) {
 					if (tmpObj instanceof TypeNode) {
-						TypeNode tmp = (TypeNode) tmpObj;
-						List<TypeNode> list = nodeMap.get(tmp.getTopicType());
-						if (list==null) {
-							return; // shouldn't happen
-						}
-						list.remove(tmp);
-						// now some clean up so we don't have entries with an empty list
-						if (list.isEmpty())
-							nodeMap.remove(tmp.getTopicType());
-						
+						removeTypeNode((TypeNode) tmpObj);
+					} else {
+						removeAssociationNode((AssociationNode) tmpObj);
 					}
 				}
 				return;
@@ -166,17 +163,57 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 		}
 	}
 
+	@Override
+	public void notifyChanged(Notification msg) {
+		if (msg.getEventType()==Notification.REMOVING_ADAPTER) {
+			return;
+		}
+		
+		if (msg.getNotifier().equals(file)) {
+			handleFileNotification(msg);
+		} else if (msg.getNotifier() instanceof Diagram) {
+			handleDiagramNotification(msg);
+		}
+		
+	}
+
+	public void dispose() {
+		if (file!=null) {
+			file.eAdapters().remove(this);
+			for (Diagram d : file.getDiagrams()) {
+				d.eAdapters().remove(this);
+			}
+				
+		}
+	}
+
 	/**
 	 * 
 	 * @param topicType the topic type which is represented by the searched node
 	 * @param diagram the diagram, containg the node
 	 * @return <code>null</code> if non found, else the instance of the node
 	 */
-	public TypeNode getNodeFor(TopicType topicType, Diagram diagram) {
-		List<TypeNode> list = nodeMap.get(topicType);
+	public Node getNodeFor(TopicType topicType, Diagram diagram) {
+		List<TypeNode> list = typeNodeMap.get(topicType);
 		for (TypeNode tn : list) {
 			if (tn.eContainer().equals(diagram))
 				return tn;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param topicType the topic type which is represented by the searched node
+	 * @param diagram the diagram, containg the node
+	 * @return <code>null</code> if non found, else the instance of the node
+	 */
+	public Node getNodeFor(AssociationTypeConstraint assConstraint, Diagram diagram) {
+		List<AssociationNode> list = assNodeMap.get(assConstraint);
+		for (AssociationNode an : list) {
+			if (an.eContainer().equals(diagram))
+				return an;
 		}
 		
 		return null;
@@ -198,7 +235,7 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 		List<Edge> result = new ArrayList<Edge>();
 		
 		for (Diagram d : file.getDiagrams()) {
-			TypeNode node = getNodeFor(type, d);
+			TypeNode node = (TypeNode) getNodeFor(type, d);
 			if (node==null)
 				continue;
 			

@@ -63,7 +63,7 @@ public class TreeTopic extends TreeParent {
 				for (Iterator<TreeObject> it = getChildrenList().iterator(); it
 						.hasNext();) {
 					TreeObject obj = it.next();
-					if (obj instanceof TreeOccurence) {
+					if (obj instanceof TreeName) {
 						if (((TreeName) obj).getModel().equals(
 								notification.getOldValue())) {
 							it.remove();

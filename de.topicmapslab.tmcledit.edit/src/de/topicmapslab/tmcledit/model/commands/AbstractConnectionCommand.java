@@ -90,7 +90,7 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		
 		for (Diagram d : file.getDiagrams()) {
 			// check if we have a topicnode containing representing the topic
-			TypeNode currentNode = ModelIndexer.getInstance().getNodeFor(topic, d);
+			TypeNode currentNode = (TypeNode) ModelIndexer.getInstance().getNodeFor(topic, d);
 			if (currentNode!=null) {
 				findRemoveEdges(d);
 			}

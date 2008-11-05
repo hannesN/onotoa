@@ -8,8 +8,15 @@ import java.util.Map;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -19,11 +26,16 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	private final TopicType topicType;
 
 	private List<TopicType> isAList = Collections.emptyList();
-	private List<TopicType> akoList = Collections.emptyList();
+	private List<TopicType> akoList = Collections.emptyList();;
 	private List<ContainmentPair<Diagram, TypeNode>> typeNodeList = Collections.emptyList();
 	
+	private List<DeleteTopicTypeConstraintItemCommand> constraintCommands = Collections.emptyList();
+	
 	private Map<Diagram, List<Edge>> edgeMap = Collections.emptyMap();
+
+	private List<DeleteAssociationConstraintCommand> associationCommands = Collections.emptyList();
 		
+	
 	
 	public DeleteTopicTypeCommand(TopicType topicType) {
 		this.topicType = topicType;
@@ -43,6 +55,15 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		for (TopicType tt : akoList) {
 			tt.getAko().remove(topicType);
 		}
+		
+		for (DeleteTopicTypeConstraintItemCommand cmd : constraintCommands) {
+			cmd.execute();
+		}
+		
+		for (DeleteAssociationConstraintCommand cmd : associationCommands) {
+			cmd.execute();
+		}
+		
 		ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().remove(topicType);
 
 	}
@@ -50,6 +71,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	@Override
 	public void undo() {
 		ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(topicType);
+		
 		for (TopicType tt : isAList) {
 			tt.getIsa().add(topicType);
 		}
@@ -61,7 +83,14 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			if (edgeMap.get(cp.getContainer())!=null) {
 				cp.container.getEdges().addAll(edgeMap.get(cp.getContainer()));
 			}
+		}
 		
+		for (DeleteTopicTypeConstraintItemCommand cmd : constraintCommands) {
+			cmd.undo();
+		}
+		
+		for (DeleteAssociationConstraintCommand cmd : associationCommands) {
+			cmd.undo();
 		}
 		
 	}
@@ -79,6 +108,10 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			isAList = ModelIndexer.getInstance().getInstanceTypes(topicType);
 			akoList = ModelIndexer.getInstance().getSubTypes(topicType);
 			
+			prepareConstraintCommandList();
+			
+			prepareAssociationCommands();
+			
 			isPrepared = true;
 		}
 		
@@ -86,6 +119,75 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	}
 
 
+	private void prepareAssociationCommands() {
+		if (topicType.getKind()!=KindOfTopicType.ASSOCIATION_TYPE)
+			return;
+		TopicMapSchema topicMapSchema = ModelIndexer.getInstance().getTopicMapSchema();
+		for (AssociationTypeConstraint asc : topicMapSchema.getAssociationTypeConstraints()) {
+			if (asc.getAssociationType().equals(topicType)) {
+				DeleteAssociationConstraintCommand cmd = new DeleteAssociationConstraintCommand(asc);
+				if (cmd.canExecute()) {
+					addAssociationConstraintCommand(cmd);
+				}
+			}
+		}
+		
+	}
+
+	/**
+	 * Searches usage of the topic type in constraints of other topics
+	 */
+	private void prepareConstraintCommandList() {
+		if ((topicType.getKind() == KindOfTopicType.NAME_TYPE)
+				|| (topicType.getKind() == KindOfTopicType.OCCURENCE_TYPE)) {
+			for (TopicType tt : ModelIndexer.getInstance().getTopicMapSchema()
+					.getTopicTypes()) {
+				if (tt.equals(topicType))
+					continue;
+				if (topicType.getKind() == KindOfTopicType.NAME_TYPE) {
+					for (NameTypeConstraint ntc : tt.getNameContraints()) {
+						if (ntc.getType().equals(topicType)) {
+							addConstraintCommand(tt, ntc,
+									ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS);
+						}
+					}
+				} else if (topicType.getKind() == KindOfTopicType.OCCURENCE_TYPE) {
+					for (OccurenceTypeConstraint otc : tt
+							.getOccurenceConstraints()) {
+						if (otc.getType().equals(topicType)) {
+							addConstraintCommand(
+									tt,
+									otc,
+									ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	private void addConstraintCommand(TopicType tt, AbstractConstraint constraint, int featureID) {
+		if (constraintCommands==Collections.EMPTY_LIST) {
+			constraintCommands = new ArrayList<DeleteTopicTypeConstraintItemCommand>();
+		}
+		DeleteTopicTypeConstraintItemCommand cmd = new DeleteTopicTypeConstraintItemCommand(
+				tt, constraint, featureID);
+		if (cmd.canExecute()) {
+			constraintCommands.add(cmd);
+		}
+	}
+	
+	
+	private void addAssociationConstraintCommand(
+			DeleteAssociationConstraintCommand cmd) {
+		if (associationCommands==Collections.EMPTY_LIST) {
+			associationCommands = new ArrayList<DeleteAssociationConstraintCommand>();
+		}
+		
+		associationCommands.add(cmd);
+		
+	}
 
 	private void addToEdgeList(Diagram d, Edge e) {
 		if (edgeMap==Collections.EMPTY_MAP) {
@@ -106,7 +208,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	 */
 	private void extractTopicNodes() {
 		for(Diagram d : ModelIndexer.getInstance().getDiagrams()) {
-			TypeNode node = ModelIndexer.getInstance().getNodeFor(topicType, d);
+			TypeNode node = (TypeNode) ModelIndexer.getInstance().getNodeFor(topicType, d);
 			if (node!=null) {
 				
 				if (typeNodeList==Collections.EMPTY_LIST)

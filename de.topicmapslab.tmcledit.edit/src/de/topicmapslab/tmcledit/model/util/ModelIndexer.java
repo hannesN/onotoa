@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * The Indexer is a singleton created for one {@link File} which contains different Indexer for
@@ -91,8 +92,16 @@ public class ModelIndexer {
 		return topicIndexer.getTopicTypes();
 	}
 
-	public TypeNode getNodeFor(TopicType topicType, Diagram diagram) {
+	public Node getNodeFor(TopicType topicType, Diagram diagram) {
 		return nodeIndexer.getNodeFor(topicType, diagram);
+	}
+	
+	
+
+
+	public Node getNodeFor(AssociationTypeConstraint assConstraint,
+			Diagram diagram) {
+		return nodeIndexer.getNodeFor(assConstraint, diagram);
 	}
 
 

@@ -3,8 +3,6 @@
  */
 package de.topicmapslab.tmcledit.diagram.editparts;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.AbstractConnectionAnchor;
@@ -68,10 +66,11 @@ public class AssociationNodeEditPart extends NodeEditPart{
 	protected List getModelSourceConnections() {
 		return super.getModelSourceConnections();
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List getModelChildren() {
+		
 		TopicType type = getCastedModel().getAssociationConstraint().getAssociationType();
 		if (type==null)
 			return Collections.EMPTY_LIST;
@@ -81,7 +80,7 @@ public class AssociationNodeEditPart extends NodeEditPart{
 			return result;
 		}
 	}
-
+*/
 	@Override
 	public void activate() {
 		super.activate();
@@ -116,7 +115,7 @@ public class AssociationNodeEditPart extends NodeEditPart{
 			refreshSourceConnections();
 		if (notification.getNotifier()==getModel())
 			refreshVisuals();
-		if (notification.getEventType()==Notification.SET) {
+		if ( (notification.getEventType()==Notification.SET) && (notification.getNotifier().equals(getCastedModel().getAssociationConstraint())) ) {
 			if (notification.getFeatureID(TopicType.class)==ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE) {
 				if (notification.getOldValue()!=null)
 					((EObject)notification.getOldValue()).eAdapters().remove(this);
