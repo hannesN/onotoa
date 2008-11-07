@@ -141,7 +141,11 @@ public class AssociationNodeEditPart extends NodeEditPart{
 		
 		@Override
 		public Point getLocation(Point reference) {
-			Rectangle bounds = getOwner().getBounds();
+			Rectangle bounds = Rectangle.SINGLETON; 
+			bounds.setBounds(getOwner().getBounds());
+
+			getOwner().translateToAbsolute(bounds);
+			
 			int radius = bounds.width/2;
 			Point middlePoint = new Point(bounds.x+radius, bounds.y+radius);
 			

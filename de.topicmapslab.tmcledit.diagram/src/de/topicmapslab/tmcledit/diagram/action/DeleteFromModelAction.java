@@ -1,5 +1,6 @@
 package de.topicmapslab.tmcledit.diagram.action;
 
+import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.commands.CommandStack;
@@ -11,11 +12,23 @@ import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
-import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
-import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
-import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.model.commands.DeleteAssociationConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.DeleteRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
 
 public class DeleteFromModelAction extends Action implements UpdateAction{
 public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
@@ -41,14 +54,42 @@ public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 	@Override
 	public void run() {
 		TMCLEditDomain ed = (TMCLEditDomain) selectedEditPart.getViewer().getEditDomain();
-		if (selectedEditPart instanceof NodeEditPart) {
-			Node node = (Node) selectedEditPart.getModel();
-			if (node instanceof TypeNode) {
-				commandStack.execute(new CommandAdapter(ed.getEditingDomain()
-						.getCommandStack(), new DeleteTopicTypeCommand(((TypeNode)node).getTopicType())));
+		AbstractCommand cmd = null;
+		Object model = selectedEditPart.getModel();
+		
+		if (model instanceof TypeNode) {
+			cmd = new DeleteTopicTypeCommand(((TypeNode) model).getTopicType());
+		} else if (model instanceof AbstractConstraint) {
+			int type = -1;
+			if (model instanceof NameTypeConstraint) {
+				type = ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS;
+			} else if (model instanceof OccurenceTypeConstraint) {
+				type = ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
+			} else if (model instanceof SubjectIdentifierConstraint) {
+				type = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
+			} else if (model instanceof SubjectIdentifierConstraint) {
+				type = ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
 			}
+			AbstractConstraint ac = (AbstractConstraint) model;
+			cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) ac
+					.eContainer(), ac, type);
+		} else if (model instanceof Edge) {
+			Edge edge = (Edge) model;
+			RoleTypeConstraints roleConstraint = edge.getRoleConstraint();
+			if (roleConstraint != null)
+				cmd = new DeleteRoleConstraintCommand(
+						(AssociationTypeConstraint) roleConstraint.eContainer(),
+						roleConstraint);
+		} else if (model instanceof AssociationNode) {
+			cmd = new DeleteAssociationConstraintCommand(
+					((AssociationNode) model).getAssociationConstraint());
 		}
-		// TODO Remove of node sub elements
+
+		
+		if (cmd!=null) {
+			commandStack.execute(new CommandAdapter(ed.getEditingDomain()
+					.getCommandStack(), cmd));
+		}
 	}
 	
 	@Override
@@ -68,9 +109,15 @@ public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 	
 	@Override
 	public void update() {
+		Object model = null;
+		if (selectedEditPart != null)
+			model = selectedEditPart.getModel();
 		if ( (selectedEditPart instanceof NodeEditPart)
-			|| (selectedEditPart instanceof OccurenceTypeConstraintEditPart)
-			|| (selectedEditPart instanceof NameTypeConstraintEditPart)
+			|| (model instanceof OccurenceTypeConstraint)
+			|| (model instanceof NameTypeConstraint)
+			|| (model instanceof SubjectIdentifierConstraint)
+			|| (model instanceof SubjectLocatorConstraint)
+			|| ( (model instanceof Edge) && ((Edge)model).getType()==EdgeType.ROLE_CONSTRAINT_TYPE)
 		 ) {
 			setEnabled(true);
 		} else {
