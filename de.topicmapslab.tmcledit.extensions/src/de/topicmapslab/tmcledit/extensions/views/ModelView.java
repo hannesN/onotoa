@@ -219,6 +219,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 			if (currFile != null) {
 				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
+				schemaNode.setModel(getCurrentTopicMapSchema());
 				diagramNode = new TreeParent(ModelView.this, "Diagrams");
 
 				invisibleRoot.addChild(diagramNode);
@@ -669,6 +670,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	public void setSelection(ISelection selection) {
 		if (viewer != null)
 			viewer.setSelection(selection);
+		fireSelectionChanged();
 	}
 
 	private void fireSelectionChanged() {

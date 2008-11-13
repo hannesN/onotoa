@@ -69,6 +69,12 @@ public class TopicMapSchemaItemProvider
 
 			addMappingsPropertyDescriptor(object);
 			addIncludesPropertyDescriptor(object);
+			addActiveTopicTypeConstraintPropertyDescriptor(object);
+			addActiveScopeTypeConstraintPropertyDescriptor(object);
+			addActiveRoleTypeConstraintPropertyDescriptor(object);
+			addActiveNameTypeConstraintPropertyDescriptor(object);
+			addActiveAssociationTypeConstraintPropertyDescriptor(object);
+			addActiveOccurenceTypeConstraintPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,6 +119,138 @@ public class TopicMapSchemaItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Active Topic Type Constraint feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveTopicTypeConstraintPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_activeTopicTypeConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_activeTopicTypeConstraint_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Active Scope Type Constraint feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveScopeTypeConstraintPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_activeScopeTypeConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_activeScopeTypeConstraint_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Active Role Type Constraint feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveRoleTypeConstraintPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_activeRoleTypeConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_activeRoleTypeConstraint_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Active Name Type Constraint feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveNameTypeConstraintPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_activeNameTypeConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_activeNameTypeConstraint_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Active Association Type Constraint feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveAssociationTypeConstraintPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_activeAssociationTypeConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_activeAssociationTypeConstraint_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Active Occurence Type Constraint feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveOccurenceTypeConstraintPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicMapSchema_activeOccurenceTypeConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicMapSchema_activeOccurenceTypeConstraint_feature", "_UI_TopicMapSchema_type"),
+				 ModelPackage.Literals.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -167,7 +305,8 @@ public class TopicMapSchemaItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_TopicMapSchema_type");
+		TopicMapSchema topicMapSchema = (TopicMapSchema)object;
+		return getString("_UI_TopicMapSchema_type") + " " + topicMapSchema.isActiveNameTypeConstraint();
 	}
 
 	/**
@@ -183,6 +322,12 @@ public class TopicMapSchemaItemProvider
 
 		switch (notification.getFeatureID(TopicMapSchema.class)) {
 			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES:

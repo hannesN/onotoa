@@ -562,6 +562,60 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTopicMapSchema_ActiveTopicTypeConstraint() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicMapSchema_ActiveScopeTypeConstraint() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicMapSchema_ActiveRoleTypeConstraint() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicMapSchema_ActiveNameTypeConstraint() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicMapSchema_ActiveAssociationTypeConstraint() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicMapSchema_ActiveOccurenceTypeConstraint() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSubjectLocatorConstraint() {
 		return subjectLocatorConstraintEClass;
 	}
@@ -974,6 +1028,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS);
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__MAPPINGS);
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__INCLUDES);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT);
 
 		subjectLocatorConstraintEClass = createEClass(SUBJECT_LOCATOR_CONSTRAINT);
 
@@ -1104,6 +1164,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getTopicMapSchema_AssociationTypeConstraints(), this.getAssociationTypeConstraint(), null, "associationTypeConstraints", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicMapSchema_Mappings(), this.getMappingElement(), null, "mappings", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicMapSchema_Includes(), ecorePackage.getEString(), "includes", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_ActiveTopicTypeConstraint(), ecorePackage.getEBoolean(), "activeTopicTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_ActiveScopeTypeConstraint(), ecorePackage.getEBoolean(), "activeScopeTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_ActiveRoleTypeConstraint(), ecorePackage.getEBoolean(), "activeRoleTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_ActiveNameTypeConstraint(), ecorePackage.getEBoolean(), "activeNameTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_ActiveAssociationTypeConstraint(), ecorePackage.getEBoolean(), "activeAssociationTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_ActiveOccurenceTypeConstraint(), ecorePackage.getEBoolean(), "activeOccurenceTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectLocatorConstraintEClass, SubjectLocatorConstraint.class, "SubjectLocatorConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

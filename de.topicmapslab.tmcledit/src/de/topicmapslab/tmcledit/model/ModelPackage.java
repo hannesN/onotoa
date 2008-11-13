@@ -563,13 +563,67 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA__INCLUDES = 3;
 
 	/**
+	 * The feature id for the '<em><b>Active Topic Type Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Active Scope Type Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Active Role Type Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT = 6;
+
+	/**
+	 * The feature id for the '<em><b>Active Name Type Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT = 7;
+
+	/**
+	 * The feature id for the '<em><b>Active Association Type Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Active Occurence Type Constraint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT = 9;
+
+	/**
 	 * The number of structural features of the '<em>Topic Map Schema</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = 4;
+	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl <em>Subject Locator Constraint</em>}' class.
@@ -1484,6 +1538,72 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTopicMapSchema_Includes();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveTopicTypeConstraint <em>Active Topic Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active Topic Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveTopicTypeConstraint()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_ActiveTopicTypeConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveScopeTypeConstraint <em>Active Scope Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active Scope Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveScopeTypeConstraint()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_ActiveScopeTypeConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveRoleTypeConstraint <em>Active Role Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active Role Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveRoleTypeConstraint()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_ActiveRoleTypeConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveNameTypeConstraint <em>Active Name Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active Name Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveNameTypeConstraint()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_ActiveNameTypeConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveAssociationTypeConstraint <em>Active Association Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active Association Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveAssociationTypeConstraint()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_ActiveAssociationTypeConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurenceTypeConstraint <em>Active Occurence Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active Occurence Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurenceTypeConstraint()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_ActiveOccurenceTypeConstraint();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint <em>Subject Locator Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2194,6 +2314,54 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TOPIC_MAP_SCHEMA__INCLUDES = eINSTANCE.getTopicMapSchema_Includes();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Topic Type Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveTopicTypeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Scope Type Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveScopeTypeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Role Type Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveRoleTypeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Name Type Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveNameTypeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Association Type Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveAssociationTypeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Occurence Type Constraint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveOccurenceTypeConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl <em>Subject Locator Constraint</em>}' class.

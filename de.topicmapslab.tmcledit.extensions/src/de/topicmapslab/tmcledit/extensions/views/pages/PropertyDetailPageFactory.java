@@ -13,9 +13,11 @@ import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class PropertyDetailPageFactory {
+	private static final String TOPIC_MAP_SCHEMA = "TopicMapSchema";
 	private static final String TOPIC_TYPE = "TopicType";
 	private static final String DIAGRAM = "Diagram";
 	private static final String ROLE = "role";
@@ -106,6 +108,14 @@ public class PropertyDetailPageFactory {
 				page = new IdentifierConstraintModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(IDENTIFIER_CONSTRAINT, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+		} else if (model instanceof TopicMapSchema) {
+			page = pageMap.get(TOPIC_MAP_SCHEMA);
+			if (page==null) {
+				page = new TopicMapSchemaPropertyPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(TOPIC_MAP_SCHEMA, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		}

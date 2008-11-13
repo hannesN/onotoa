@@ -59,8 +59,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private ScalableFreeformRootEditPart rootEditPart;
 
 	private ISelection currentSelection;
-	private List<ISelectionChangedListener> selectionChangedListeners = Collections
-			.emptyList();
+	private List<ISelectionChangedListener> selectionChangedListeners = Collections.emptyList();
 
 	private RemoveFromDiagramAction removeFromDiagramAction;
 	private DeleteFromModelAction deleteFromModelAction;

@@ -18,6 +18,7 @@ import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -107,8 +108,9 @@ public class TreeTopic extends TreeParent {
 						if (newText.length() == 0)
 							return "no name given";
 
-						// TODO check if there's a topic with the same name
-
+						if (ModelIndexer.getInstance().getTopicType(newText)!=null) {
+							return "name already used";
+						}
 						return null;
 					}
 				});
