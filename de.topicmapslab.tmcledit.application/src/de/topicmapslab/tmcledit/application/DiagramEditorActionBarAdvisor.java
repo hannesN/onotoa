@@ -72,6 +72,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		register(ActionFactory.PRINT.create(window));
 		
 		register(ActionFactory.RESET_PERSPECTIVE.create(window));
+		
+		register(ActionFactory.EXPORT.create(window));
 	}
 
 	protected void fillMenuBar(IMenuManager menu) {
@@ -108,7 +110,10 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			menuX.add(getAction(ActionFactory.SAVE_ALL.getId()));
 
 			menuX.add(new Separator());
+			
+			menuX.add(getAction(ActionFactory.EXPORT.getId()));
 
+			menuX.add(new Separator());
 			menuX.add(getAction(ActionFactory.QUIT.getId()));
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_END));

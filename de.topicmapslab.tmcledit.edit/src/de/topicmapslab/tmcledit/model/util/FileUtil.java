@@ -35,7 +35,7 @@ public class FileUtil {
 			ModelFactory einstance = ModelFactory.eINSTANCE;
 			result = einstance.createFile();
 			result.setTopicMapSchema(einstance.createTopicMapSchema());
-			createTestData(result);
+			//createTestData(result);
 		} else {
 			Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map<String, Object> map = reg.getExtensionToFactoryMap();

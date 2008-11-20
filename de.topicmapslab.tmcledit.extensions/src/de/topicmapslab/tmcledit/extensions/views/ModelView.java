@@ -89,6 +89,7 @@ import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.CreateDiagramCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 import de.topicmapslab.tmcledit.model.util.DirtyStateObserver;
@@ -145,7 +146,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		private AdapterImpl tmsListener = new AdapterImpl() {
 			@Override
 			public void notifyChanged(Notification msg) {
-				if (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES) {
+				if ((msg.getNotifier() instanceof TopicMapSchema)
+					&& (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES)) {
 					switch (msg.getEventType()) {
 					case Notification.ADD:
 						addType((TopicType) msg.getNewValue());
@@ -154,8 +156,17 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 						removeType((TopicType) msg.getOldValue());
 						break;
 					}
+				} else if ((msg.getNotifier() instanceof File) 
+					&& (msg.getFeatureID(EList.class) == ModelPackage.FILE__DIAGRAMS)) {
+					switch (msg.getEventType()) {
+					case Notification.ADD:
+						addDiagram((Diagram) msg.getNewValue());
+						break;
+					case Notification.REMOVE:
+						removeDiagram((Diagram) msg.getOldValue());
+						break;
+					}
 				}
-
 			}
 		};
 
@@ -202,14 +213,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		}
 
 		public void uninitialize() {
-			if (getCurrentTopicMapSchema() != null)
+			if (currFile != null) {
 				getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
+				currFile.eAdapters().remove(tmsListener);
+			}
 			invisibleRoot.dispose();
 		}
 
 		public void initialize() {
-			if (currFile!=null)
+			if (currFile!=null) {
 				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
+				currFile.eAdapters().add(tmsListener);
+			}
 			update();
 		}
 		
@@ -253,6 +268,24 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}			
 		}
 
+		private void addDiagram(Diagram diagram) {
+			diagramNode.addChild(new TreeDiagram(ModelView.this, diagram));
+			getViewer().refresh(diagramNode);
+		}
+		
+		private void removeDiagram(Diagram diagram) {
+			TreeObject removableNode = null;
+			for (TreeObject to : diagramNode.getChildren()) {
+				if (diagram.equals(to.getModel())) {
+					removableNode = to;
+				}
+			}
+			if (removableNode !=null) {
+				diagramNode.removeChild(removableNode);
+				getViewer().refresh(diagramNode);
+			}
+		}
+		
 		private void addType(TopicType tt) {
 			TreeTopic to = new TreeTopic(ModelView.this, tt);
 			TreeParent parent = null;
@@ -362,12 +395,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-				if (sel.isEmpty())
-					currentSelection = new StructuredSelection();
-				else {
+				if (sel.isEmpty()) {
+					if (currFile!=null)
+						currentSelection = new StructuredSelection(currFile);
+					else
+						currentSelection = new StructuredSelection();
+				} else {
 					TreeObject to = (TreeObject) sel.getFirstElement();
 					if (to.getModel()==null)
-						currentSelection = new StructuredSelection();
+						currentSelection = new StructuredSelection(currFile);
 					else
 						currentSelection = new StructuredSelection(to.getModel());
 				}
@@ -490,6 +526,27 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		manager.add(action1);
 		manager.add(action2);
 
+		manager.add(new Action() {
+			@Override
+			public String getText() {
+				return "Create Diagram";
+			}
+
+			@Override
+			public void run() {
+				InputDialog dlg = new InputDialog(getSite().getShell(),
+						"New Diagram..",
+						"Please Enter the name of the new diagram", "", null);
+
+				if (dlg.open() == Dialog.OK) {
+					String name = dlg.getValue();
+					getEditingDomain().getCommandStack().execute(
+							new CreateDiagramCommand(name, currFile));
+				}
+
+			}
+		});
+		
 		manager.add(new Action() {
 			@Override
 			public String getText() {
@@ -648,7 +705,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	@Override
 	public ISelection getSelection() {
 		if (currentSelection==null)
-			currentSelection = new StructuredSelection();
+			if (currFile!=null)
+				currentSelection = new StructuredSelection(currFile);
+			else
+				currentSelection = new StructuredSelection();
 		return currentSelection;
 	}
 
@@ -710,7 +770,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		}
 		contentProvider.initialize();
 
-		
+		setSelection(new StructuredSelection(currFile));
 		
 		viewer.refresh();
 	}
@@ -729,6 +789,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			if (a instanceof UpdateAction)
 				((UpdateAction)a).update();
 		}
+		// updating export selection
+		getViewSite().getActionBars().getGlobalActionHandler(ActionFactory.EXPORT.getId());
 	}
 
 	public Map<String, IAction> getActionRegistry() {

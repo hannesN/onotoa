@@ -286,9 +286,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	}
 
 	private void fireSelectionChanged() {
-		if (currentSelection == null)
-			currentSelection = new StructuredSelection();
-
+		if (currentSelection == null) {
+			TMCLEditorInput ei = (TMCLEditorInput) getEditorInput();
+			currentSelection = new StructuredSelection(ei.getDiagram());
+		}
 		SelectionChangedEvent event = new SelectionChangedEvent(this,
 				currentSelection);
 

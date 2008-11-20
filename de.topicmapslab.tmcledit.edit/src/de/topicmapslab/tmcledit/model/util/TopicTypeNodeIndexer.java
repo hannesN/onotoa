@@ -154,10 +154,10 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 					d.eAdapters().add(this);
 			}
 			if (msg.getEventType()==Notification.REMOVE) {
-				((Diagram)msg.getNewValue()).eAdapters().remove(this);
+				((Diagram)msg.getOldValue()).eAdapters().remove(this);
 			}
 			if (msg.getEventType()==Notification.REMOVE_MANY) {
-				for (Diagram d : (Collection<Diagram>) msg.getNewValue())
+				for (Diagram d : (Collection<Diagram>) msg.getOldValue())
 					d.eAdapters().remove(this);
 			}
 		}
