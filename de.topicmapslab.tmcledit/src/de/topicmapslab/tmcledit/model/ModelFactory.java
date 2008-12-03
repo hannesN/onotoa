@@ -18,6 +18,12 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface ModelFactory extends EFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

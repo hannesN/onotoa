@@ -33,6 +33,12 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public abstract class ScopedConstraintImpl extends AbstractConstraintImpl implements ScopedConstraint {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+	/**
 	 * The cached value of the '{@link #getScope() <em>Scope</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

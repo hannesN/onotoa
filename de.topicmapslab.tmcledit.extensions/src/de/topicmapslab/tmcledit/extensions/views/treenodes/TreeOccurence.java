@@ -26,7 +26,7 @@ public class TreeOccurence extends TreeObject{
 	
 	@Override
 	public String getName() {
-		return getOccurenceTypeConstraint().getType().getId();
+		return getOccurenceTypeConstraint().getType().getName();
 	}
 	
 	@Override

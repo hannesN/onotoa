@@ -44,6 +44,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class AssociationTypeConstraintImpl extends EObjectImpl implements AssociationTypeConstraint {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The cached value of the '{@link #getScope() <em>Scope</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

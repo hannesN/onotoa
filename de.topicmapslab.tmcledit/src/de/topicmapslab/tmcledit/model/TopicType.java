@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getId <em>Id</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIdentifiers <em>Identifiers</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIdType <em>Id Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIsa <em>Isa</em>}</li>
@@ -29,6 +29,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getExclusive <em>Exclusive</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getLocators <em>Locators</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,30 +40,27 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TopicType extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
+	 * Returns the value of the '<em><b>Identifiers</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Identifiers</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Id()
-	 * @model required="true"
+	 * @return the value of the '<em>Identifiers</em>' attribute list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Identifiers()
+	 * @model
 	 * @generated
 	 */
-	String getId();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicType#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
-	void setId(String value);
+	EList<String> getIdentifiers();
 
 	/**
 	 * Returns the value of the '<em><b>Id Type</b></em>' attribute.
@@ -260,5 +259,47 @@ public interface TopicType extends EObject {
 	 * @generated
 	 */
 	EList<TopicType> getExclusive();
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Name()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Locators</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Locators</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Locators</em>' attribute list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Locators()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getLocators();
 
 } // TopicType

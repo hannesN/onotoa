@@ -44,6 +44,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class DiagramImpl extends EObjectImpl implements Diagram {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

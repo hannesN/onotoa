@@ -75,7 +75,7 @@ public class TinyTiMTopicMapBuilder {
 	}
 
 	private Topic getTopic(TopicType topicType, TopicMap tm) throws Exception {
-		Locator l = parseId(topicType.getId(), tm);
+		Locator l = null; //parseId(topicType.getId(), tm);
 		Topic r = null;
 		if (l !=null)
 			r = topicsIndex.getTopicBySubjectIdentifier(l);
@@ -87,7 +87,8 @@ public class TinyTiMTopicMapBuilder {
 
 	private Topic createTopic(TopicType topicType, TopicMap tm)
 			throws Exception {
-		Locator l = parseId(topicType.getId(), tm);
+		
+		Locator l = null;//parseId(topicType.getId(), tm);
 		Topic t = null;
 		if (l!=null) {
 			t = tm.createTopic();
@@ -95,13 +96,12 @@ public class TinyTiMTopicMapBuilder {
 		} else {
 			throw new RuntimeException("No subject IDentifier given.");
 		}
-
 		for (TopicType tt : topicType.getIsa()) {
 			Topic topic = getTopic(tt, tm);
 			t.addType(topic);
 		}
-		TopicName name = t.createTopicName(topicType.getId(), null);
-		name.setValue(topicType.getId());
+		TopicName name = t.createTopicName(topicType.getName(), null);
+		name.setValue(topicType.getName());
 		
 		for (NameTypeConstraint ntc : topicType.getNameContraints()) {
 			createBaseName(ntc, t);
@@ -116,8 +116,8 @@ public class TinyTiMTopicMapBuilder {
 
 	private TopicName createBaseName(NameTypeConstraint ntc, Topic topic)
 			throws Exception {
-		String id = ntc.getType().getId();
-		TopicName name = topic.createTopicName(id.substring(id.indexOf(':')+1), null);
+		String id = ntc.getType().getName();
+		TopicName name = topic.createTopicName(id, null);
 		Topic type = getTopic(ntc.getType(), topic.getTopicMap());
 		name.setValue("");
 		name.setType(type);

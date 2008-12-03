@@ -32,6 +32,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class TypeNodeImpl extends NodeImpl implements TypeNode {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+	/**
 	 * The cached value of the '{@link #getTopicType() <em>Topic Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

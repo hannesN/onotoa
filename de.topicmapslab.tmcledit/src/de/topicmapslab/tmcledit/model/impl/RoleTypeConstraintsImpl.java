@@ -36,6 +36,13 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class RoleTypeConstraintsImpl extends EObjectImpl implements RoleTypeConstraints {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The default value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -56,7 +56,7 @@ public class AssociationNodeEditPart extends NodeEditPart{
         
         TopicType associationType = node.getAssociationConstraint().getAssociationType();
 		if (associationType!=null)
-        	((CircleFigure)getFigure()).setText(associationType.getId());
+        	((CircleFigure)getFigure()).setText(associationType.getName());
         
 		super.refreshVisuals();
 	}

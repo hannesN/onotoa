@@ -86,7 +86,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 	@Override
 	public String getElementName(Object item) {
-		return ((TopicType)item).getId();
+		return ((TopicType)item).getName();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -112,7 +112,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 			TopicType tt1 = (TopicType) o1;
 			TopicType tt2 = (TopicType) o2;
 			
-			return tt1.getId().compareTo(tt2.getId());
+			return tt1.getName().compareTo(tt2.getName());
 		}
 	}
 
@@ -128,7 +128,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 			TopicType tt = (TopicType) item;
 			
-			return matches(tt.getId());
+			return matches(tt.getName());
 		}
 		
 	}
@@ -146,7 +146,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 				return "";
 				
 			TopicType tt = (TopicType) element;
-			return tt.getId();
+			return tt.getName();
 		}
 
 		@Override
@@ -180,7 +180,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 			if (element==null)
 				return "";
 			TopicType tt = (TopicType) element;
-			return tt.getId();
+			return tt.getName();
 		}
 
 		@Override

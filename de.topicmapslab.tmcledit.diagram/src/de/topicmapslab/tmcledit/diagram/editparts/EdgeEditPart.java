@@ -150,7 +150,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			RoleTypeConstraints rtc = getCastedModel().getRoleConstraint();
 			cardLabel.setText(rtc.getCardMin()+".."+rtc.getCardMax());
 			if (rtc.getType()!=null)
-				typeLabel.setText(rtc.getType().getId());
+				typeLabel.setText(rtc.getType().getName());
 			else
 				typeLabel.setText("no role type set");
 		}

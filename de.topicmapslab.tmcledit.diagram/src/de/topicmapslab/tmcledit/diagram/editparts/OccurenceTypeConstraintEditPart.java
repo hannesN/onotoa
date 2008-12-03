@@ -22,7 +22,7 @@ public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
 		OccurenceTypeConstraint otc = getCastedModel();
 		StringBuffer text = new StringBuffer();
 		
-		getNameLabel().setText(otc.getType().getId());
+		getNameLabel().setText(otc.getType().getName());
 		
 		text.append(" : ");
 		text.append(otc.getDataType());

@@ -26,6 +26,9 @@ import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.widgets.Display;
 
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.CompartmentFigure;
@@ -46,15 +49,22 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	protected DirectEditManager manager;
 	
 	private Label titleLabel;
+	
+	protected Figure identifierFigure;
 
 	protected CompartmentFigure occurencesFigure; 
 	protected CompartmentFigure basenameFigure;
-	protected CompartmentFigure identifierFigure;
+	protected CompartmentFigure identifierCompartmentFigure;
+	
+	private static Font identifierFont;
+	private static int refCounter=0;
 	
 	@Override
 	protected IFigure createFigure() {
 		if (figure == null) {
 			figure = new Figure();
+			
+			
 			
 			ToolbarLayout layout = new ToolbarLayout(false);
 			layout.setStretchMinorAxis(true);
@@ -66,6 +76,17 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			titleLabel.setIcon(ImageProvider.getTopicTypeImage(getCastedModel().getTopicType()));
 			figure.add(titleLabel);
 
+			if (identifierFont==null) {
+				Font tmp = Display.getCurrent().getSystemFont();
+				FontData fd = tmp.getFontData()[0];
+				fd.setHeight(7);
+				identifierFont = new Font(Display.getCurrent(), fd);
+			}
+			
+			identifierFigure = new Figure();
+			identifierFigure.setLayoutManager(new ToolbarLayout(false));
+			figure.add(identifierFigure);
+			
 			figure.setOpaque(true);
 			figure.setBackgroundColor(ColorConstants.yellow);
 			
@@ -75,11 +96,28 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			occurencesFigure = new CompartmentFigure();
 			figure.add(occurencesFigure);
 			
-			identifierFigure = new CompartmentFigure();
-			figure.add(identifierFigure);
+			identifierCompartmentFigure = new CompartmentFigure();
+			figure.add(identifierCompartmentFigure);
 			
 		}
 		return figure;
+	}
+	
+	protected void fillIdentifierFigure() {
+		identifierFigure.removeAll();
+		
+		for (String s : getCastedModel().getTopicType().getIdentifiers()) {
+			Label l = new Label();
+			l.setText(s);
+			l.setFont(identifierFont);
+			identifierFigure.add(l);
+		}
+		for (String s : getCastedModel().getTopicType().getLocators()) {
+			Label l = new Label();
+			l.setText("="+s);
+			l.setFont(identifierFont);
+			identifierFigure.add(l);
+		}
 	}
 
 	@Override
@@ -96,7 +134,8 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		TypeNode tn = (TypeNode) getModel();
 		if (titleLabel.isVisible()) {
 			TopicType tt = (TopicType) tn.getTopicType();
-			titleLabel.setText(tt.getId());
+			titleLabel.setText(tt.getName());
+			fillIdentifierFigure();
 		}
 		Rectangle r = new Rectangle(tn.getPosX(), tn.getPosY(), -1, -1);
 		try {
@@ -165,12 +204,19 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		super.activate();
 		TypeNode tn = (TypeNode) getModel();
 		tn.getTopicType().eAdapters().add(this);
+		refCounter++;
 	}
 	
 	@Override
 	public void deactivate() {
 		TypeNode tn = (TypeNode) getModel();
 		tn.getTopicType().eAdapters().remove(this);
+		refCounter--;
+		if (refCounter==0) {
+			identifierFont.dispose();
+			identifierFont = null;
+		}
+		
 		super.deactivate();
 	}
 	
@@ -207,7 +253,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			basenameFigure.add(child);
 		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
 				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) )
-			identifierFigure.add(child);
+			identifierCompartmentFigure.add(child);
 		
 	}
 	
@@ -220,7 +266,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			basenameFigure.remove(child);
 		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
 				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) )
-			identifierFigure.remove(child);
+			identifierCompartmentFigure.remove(child);
 	}
 		
 	@Override

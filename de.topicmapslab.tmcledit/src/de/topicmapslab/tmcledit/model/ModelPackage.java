@@ -29,6 +29,13 @@ import org.eclipse.emf.ecore.EReference;
  */
 public interface ModelPackage extends EPackage {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,13 +78,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE__ID = 0;
+	int TOPIC_TYPE__IDENTIFIERS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
@@ -170,13 +177,31 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__EXCLUSIVE = 10;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_TYPE__NAME = 11;
+
+	/**
+	 * The feature id for the '<em><b>Locators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_TYPE__LOCATORS = 12;
+
+	/**
 	 * The number of structural features of the '<em>Topic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE_FEATURE_COUNT = 11;
+	int TOPIC_TYPE_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.
@@ -1191,15 +1216,15 @@ public interface ModelPackage extends EPackage {
 	EClass getTopicType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicType#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute list '{@link de.topicmapslab.tmcledit.model.TopicType#getIdentifiers <em>Identifiers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicType#getId()
+	 * @return the meta object for the attribute list '<em>Identifiers</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getIdentifiers()
 	 * @see #getTopicType()
 	 * @generated
 	 */
-	EAttribute getTopicType_Id();
+	EAttribute getTopicType_Identifiers();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicType#getIdType <em>Id Type</em>}'.
@@ -1310,6 +1335,28 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTopicType_Exclusive();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getName()
+	 * @see #getTopicType()
+	 * @generated
+	 */
+	EAttribute getTopicType_Name();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link de.topicmapslab.tmcledit.model.TopicType#getLocators <em>Locators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Locators</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getLocators()
+	 * @see #getTopicType()
+	 * @generated
+	 */
+	EAttribute getTopicType_Locators();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractConstraint <em>Abstract Constraint</em>}'.
@@ -2050,12 +2097,12 @@ public interface ModelPackage extends EPackage {
 		EClass TOPIC_TYPE = eINSTANCE.getTopicType();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Identifiers</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TOPIC_TYPE__ID = eINSTANCE.getTopicType_Id();
+		EAttribute TOPIC_TYPE__IDENTIFIERS = eINSTANCE.getTopicType_Identifiers();
 
 		/**
 		 * The meta object literal for the '<em><b>Id Type</b></em>' attribute feature.
@@ -2136,6 +2183,22 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TOPIC_TYPE__EXCLUSIVE = eINSTANCE.getTopicType_Exclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_TYPE__NAME = eINSTANCE.getTopicType_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Locators</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_TYPE__LOCATORS = eINSTANCE.getTopicType_Locators();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl <em>Abstract Constraint</em>}' class.

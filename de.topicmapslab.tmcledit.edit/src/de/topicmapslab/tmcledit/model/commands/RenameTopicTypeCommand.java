@@ -23,18 +23,18 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 	public RenameTopicTypeCommand(TopicType tt, String newName) {
 		super();
 		this.tt = tt;
-		this.oldName = tt.getId();
+		this.oldName = tt.getName();
 		this.newName = newName;
 	}
 
 	@Override
 	public void execute() {
-		tt.setId(newName);
+		tt.setName(newName);
 	}
 	
 	@Override
 	public void undo() {
-		tt.setId(oldName);
+		tt.setName(oldName);
 	}
 
 	@Override

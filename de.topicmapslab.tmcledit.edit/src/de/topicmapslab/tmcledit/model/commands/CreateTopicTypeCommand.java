@@ -20,7 +20,7 @@ public class CreateTopicTypeCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		topicType = ModelFactory.eINSTANCE.createTopicType();
-		topicType.setId(name);
+		topicType.setName(name);
 		return true;
 	}
 	

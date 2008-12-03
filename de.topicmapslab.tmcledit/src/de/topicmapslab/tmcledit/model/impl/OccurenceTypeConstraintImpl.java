@@ -34,6 +34,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements OccurenceTypeConstraint {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

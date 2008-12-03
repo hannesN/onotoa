@@ -4,7 +4,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
     nsURI="http://topicmapslab.de/tmceledit/1.0" nsPrefix="tmceledit">
   <eClassifiers xsi:type="ecore:EClass" name="TopicType">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifiers" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="idType" lowerBound="1"
         eType="#//TopicId" defaultValueLiteral="IDENTIFIER"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -22,6 +23,9 @@
         defaultValueLiteral="TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exclusive" upperBound="-1"
         eType="#//TopicType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locators" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TopicId">
     <eLiterals name="SUBJECT_LOCATOR"/>

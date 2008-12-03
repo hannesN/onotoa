@@ -32,6 +32,13 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
  */
 public abstract class AbstractConstraintImpl extends EObjectImpl implements AbstractConstraint {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The default value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

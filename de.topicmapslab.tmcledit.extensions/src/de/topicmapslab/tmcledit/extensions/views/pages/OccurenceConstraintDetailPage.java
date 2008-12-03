@@ -115,8 +115,8 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 	@Override
 	public void updateUI() {
 		OccurenceTypeConstraint castedModel = getCastedModel();
-		if (castedModel.getType().getId()!=null) 
-			typeText.setText(castedModel.getType().getId());
+		if (castedModel.getType().getName()!=null) 
+			typeText.setText(castedModel.getType().getName());
 		else
 			typeText.setText("");
 		

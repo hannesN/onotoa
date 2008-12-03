@@ -50,6 +50,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass topicTypeEClass = null;
 
 	/**
@@ -274,7 +281,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTopicType_Id() {
+	public EAttribute getTopicType_Identifiers() {
 		return (EAttribute)topicTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -366,6 +373,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getTopicType_Exclusive() {
 		return (EReference)topicTypeEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicType_Name() {
+		return (EAttribute)topicTypeEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicType_Locators() {
+		return (EAttribute)topicTypeEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -991,7 +1016,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Create classes and their features
 		topicTypeEClass = createEClass(TOPIC_TYPE);
-		createEAttribute(topicTypeEClass, TOPIC_TYPE__ID);
+		createEAttribute(topicTypeEClass, TOPIC_TYPE__IDENTIFIERS);
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__ID_TYPE);
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__IS_ABSTRACT);
 		createEReference(topicTypeEClass, TOPIC_TYPE__ISA);
@@ -1002,6 +1027,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(topicTypeEClass, TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__KIND);
 		createEReference(topicTypeEClass, TOPIC_TYPE__EXCLUSIVE);
+		createEAttribute(topicTypeEClass, TOPIC_TYPE__NAME);
+		createEAttribute(topicTypeEClass, TOPIC_TYPE__LOCATORS);
 
 		abstractConstraintEClass = createEClass(ABSTRACT_CONSTRAINT);
 		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__CARD_MIN);
@@ -1127,7 +1154,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTopicType_Id(), ecorePackage.getEString(), "id", null, 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicType_Identifiers(), ecorePackage.getEString(), "identifiers", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicType_IdType(), this.getTopicId(), "idType", "IDENTIFIER", 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicType_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", null, 0, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_Isa(), this.getTopicType(), null, "isa", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1138,6 +1165,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getTopicType_SubjectLocatorConstraint(), this.getSubjectLocatorConstraint(), null, "subjectLocatorConstraint", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicType_Kind(), this.getKindOfTopicType(), "kind", "TopicType", 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_Exclusive(), this.getTopicType(), null, "exclusive", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicType_Name(), ecorePackage.getEString(), "name", null, 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicType_Locators(), ecorePackage.getEString(), "locators", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractConstraintEClass, AbstractConstraint.class, "AbstractConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractConstraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

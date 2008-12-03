@@ -18,6 +18,13 @@ import org.eclipse.emf.common.util.ResourceLocator;
  */
 public final class TmcleditEditPlugin extends EMFPlugin {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

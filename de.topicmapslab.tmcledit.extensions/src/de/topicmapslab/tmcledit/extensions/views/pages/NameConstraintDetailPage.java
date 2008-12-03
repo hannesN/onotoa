@@ -80,8 +80,8 @@ public class NameConstraintDetailPage extends AbstractScopedContraintModelPage {
 
 	@Override
 	public void updateUI() {
-		if ( (getCastedModel().getType()!=null) && (getCastedModel().getType().getId()!=null) )
-			typeText.setText(getCastedModel().getType().getId());
+		if ( (getCastedModel().getType()!=null) && (getCastedModel().getType().getName()!=null) )
+			typeText.setText(getCastedModel().getType().getName());
 		else
 			typeText.setText("");
 		super.updateUI();

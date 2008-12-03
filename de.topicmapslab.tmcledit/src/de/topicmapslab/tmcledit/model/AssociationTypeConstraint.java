@@ -30,6 +30,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AssociationTypeConstraint extends EObject {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * Returns the value of the '<em><b>Scope</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>

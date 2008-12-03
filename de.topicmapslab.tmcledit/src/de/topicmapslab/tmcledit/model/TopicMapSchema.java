@@ -37,6 +37,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TopicMapSchema extends EObject {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * Returns the value of the '<em><b>Topic Types</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.TopicType}.
 	 * <!-- begin-user-doc -->

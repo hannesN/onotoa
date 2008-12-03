@@ -77,11 +77,13 @@ public class FileUtil {
 		schema.getMappings().add(me);
 		
 		TopicType tt = modelInstance.createTopicType();
-		tt.setId("foo:Person");
+		tt.setName("Person");
+		tt.getIdentifiers().add("foo:Person");
 		schema.getTopicTypes().add(tt);
 		
 		TopicType tt2 = modelInstance.createTopicType();
-		tt2.setId("foo:Boss");
+		tt2.setName("Boss");
+		tt2.getIdentifiers().add("foo:Boss");
 		tt2.getIsa().add(tt);
 		schema.getTopicTypes().add(tt2);
 		
@@ -106,7 +108,8 @@ public class FileUtil {
 		
 		TopicType ot = modelInstance.createTopicType();
 		ot.setKind(KindOfTopicType.OCCURENCE_TYPE);
-		ot.setId("foo:Addresse");
+		ot.setName("Addresse");
+		ot.getIdentifiers().add("foo:Address");
 		schema.getTopicTypes().add(ot);
 		
 		OccurenceTypeConstraint otc = modelInstance.createOccurenceTypeConstraint();
@@ -117,7 +120,8 @@ public class FileUtil {
 		
 		TopicType nt = modelInstance.createTopicType();
 		nt.setKind(KindOfTopicType.NAME_TYPE);
-		nt.setId("foo:Firstname");
+		nt.setName("Firstname");
+		nt.getIdentifiers().add("foo:Firstname");
 		schema.getTopicTypes().add(nt);
 		
 		NameTypeConstraint ntc = modelInstance.createNameTypeConstraint();
@@ -125,12 +129,14 @@ public class FileUtil {
 		tt.getNameContraints().add(ntc);
 		
 		TopicType rt = ModelFactory.eINSTANCE.createTopicType();
-		rt.setId("foo:Employee");
+		rt.setName("Employee");
+		rt.getIdentifiers().add("foo:Employee");
 		rt.setKind(KindOfTopicType.ROLE_TYPE);
 		schema.getTopicTypes().add(rt);
 		
 		rt = ModelFactory.eINSTANCE.createTopicType();
-		rt.setId("foo:Employer");
+		rt.setName("Employer");
+		rt.getIdentifiers().add("foo:Employer");
 		rt.setKind(KindOfTopicType.ROLE_TYPE);
 		schema.getTopicTypes().add(rt);
 		

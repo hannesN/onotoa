@@ -31,6 +31,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface File extends EObject {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * Returns the value of the '<em><b>Diagrams</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.Diagram}.
 	 * <!-- begin-user-doc -->

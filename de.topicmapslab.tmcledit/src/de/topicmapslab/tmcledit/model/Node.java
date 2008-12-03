@@ -27,6 +27,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Node extends EObject {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * Returns the value of the '<em><b>Pos X</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>

@@ -34,7 +34,7 @@ public class TreeTopic extends TreeParent {
 	@Override
 	public void notifyChanged(Notification notification) {
 		if ((notification.getEventType() == Notification.SET)
-				&& (notification.getFeatureID(String.class) == ModelPackage.TOPIC_TYPE__ID)) {
+				&& (notification.getFeatureID(String.class) == ModelPackage.TOPIC_TYPE__NAME)) {
 			getModelView().getViewer().refresh(this);
 		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS) {
 			if (notification.getEventType() == Notification.ADD) {
@@ -84,7 +84,7 @@ public class TreeTopic extends TreeParent {
 
 	@Override
 	public String getName() {
-		return getTopicType().getId();
+		return getTopicType().getName();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -98,7 +98,7 @@ public class TreeTopic extends TreeParent {
 
 	@Override
 	public void handleRename() {
-		String oldName = getTopicType().getId();
+		String oldName = getTopicType().getName();
 		InputDialog dlg = new InputDialog(getModelView().getViewer().getTree()
 				.getShell(), "New Topic Id..", "Please enter the new Topic ID",
 				oldName, new IInputValidator() {

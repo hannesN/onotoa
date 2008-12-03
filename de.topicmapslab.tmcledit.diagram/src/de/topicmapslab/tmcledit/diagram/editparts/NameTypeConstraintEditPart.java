@@ -26,7 +26,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		if (ntc.getType()==null)
 			getNameLabel().setText("No Type");
 		else
-			getNameLabel().setText(ntc.getType().getId());
+			getNameLabel().setText(ntc.getType().getName());
 		StringBuffer buffer = new StringBuffer(50);
 		buffer.append(" [");
 		buffer.append(ntc.getRegexp());

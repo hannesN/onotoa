@@ -80,7 +80,7 @@ public abstract class AbstractScopedContraintModelPage extends
 		
 		for (Iterator<TopicType> it = getCastedModel().getScope().iterator(); it.hasNext();) {
 			TopicType tt = it.next();
-			buffer.append(tt.getId());
+			buffer.append(tt.getName());
 			if (it.hasNext())
 				buffer.append(", ");
 		}

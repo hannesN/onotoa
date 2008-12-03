@@ -49,6 +49,13 @@ import de.topicmapslab.tmcledit.model.TopicType;
  */
 public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The cached value of the '{@link #getTopicTypes() <em>Topic Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

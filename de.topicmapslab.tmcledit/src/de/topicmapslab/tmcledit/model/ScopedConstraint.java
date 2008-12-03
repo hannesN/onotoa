@@ -26,6 +26,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ScopedConstraint extends AbstractConstraint {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * Returns the value of the '<em><b>Scope</b></em>' reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.TopicType}.
 	 * <!-- begin-user-doc -->

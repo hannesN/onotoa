@@ -47,6 +47,13 @@ public class TopicTypeItemProvider
 		IItemLabelProvider,
 		IItemPropertySource {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,31 +74,33 @@ public class TopicTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIdPropertyDescriptor(object);
+			addIdentifiersPropertyDescriptor(object);
 			addIdTypePropertyDescriptor(object);
 			addIsAbstractPropertyDescriptor(object);
 			addIsaPropertyDescriptor(object);
 			addAkoPropertyDescriptor(object);
 			addKindPropertyDescriptor(object);
 			addExclusivePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addLocatorsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
+	 * This adds a property descriptor for the Identifiers feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIdPropertyDescriptor(Object object) {
+	protected void addIdentifiersPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TopicType_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_id_feature", "_UI_TopicType_type"),
-				 ModelPackage.Literals.TOPIC_TYPE__ID,
+				 getString("_UI_TopicType_identifiers_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_identifiers_feature", "_UI_TopicType_type"),
+				 ModelPackage.Literals.TOPIC_TYPE__IDENTIFIERS,
 				 true,
 				 false,
 				 false,
@@ -233,6 +242,50 @@ public class TopicTypeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicType_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_name_feature", "_UI_TopicType_type"),
+				 ModelPackage.Literals.TOPIC_TYPE__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Locators feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLocatorsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TopicType_locators_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_locators_feature", "_UI_TopicType_type"),
+				 ModelPackage.Literals.TOPIC_TYPE__LOCATORS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -284,7 +337,7 @@ public class TopicTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TopicType)object).getId();
+		String label = ((TopicType)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_TopicType_type") :
 			getString("_UI_TopicType_type") + " " + label;
@@ -302,10 +355,12 @@ public class TopicTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TopicType.class)) {
-			case ModelPackage.TOPIC_TYPE__ID:
+			case ModelPackage.TOPIC_TYPE__IDENTIFIERS:
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
 			case ModelPackage.TOPIC_TYPE__KIND:
+			case ModelPackage.TOPIC_TYPE__NAME:
+			case ModelPackage.TOPIC_TYPE__LOCATORS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:

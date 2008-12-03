@@ -42,7 +42,7 @@ public class RoleModelPage extends AbstractModelPage{
 		cardMaxText.setText(rtc.getCardMax());
 		
 		if (rtc.getType()!=null)
-			roleText.setText(rtc.getType().getId());
+			roleText.setText(rtc.getType().getName());
 		else
 			roleText.setText("no type");
 		
@@ -123,7 +123,7 @@ public class RoleModelPage extends AbstractModelPage{
 
 		@Override
 		public String getText(Object element) {
-			return ((TopicType)element).getId();
+			return ((TopicType)element).getName();
 		}
 
 		@Override

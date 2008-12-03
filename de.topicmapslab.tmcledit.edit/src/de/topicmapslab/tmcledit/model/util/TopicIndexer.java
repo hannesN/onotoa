@@ -21,9 +21,9 @@ public class TopicIndexer implements Adapter{
 	private Notifier target;
 	
 	
-	public TopicType getTopicType(String id) {
+	public TopicType getTopicType(String name) {
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if (tt.getId().equals(id))
+			if (tt.getName().equals(name))
 				return tt;
 		}
 		return null;
@@ -47,19 +47,19 @@ public class TopicIndexer implements Adapter{
 		TopicType tt = getTopicType(id);
 		if (tt==null) {
 			tt = ModelFactory.eINSTANCE.createTopicType();
-			tt.setId(id);
+			tt.setName(id);
 		}
 		return tt;
 	}
 	
 	public TopicType createTopicType() {
 		TopicType tt = ModelFactory.eINSTANCE.createTopicType();
-		String tmp = "foo:default";
+		String tmp = "default";
 		
 		while (getTopicType(tmp+lastDefaultNumber)!=null) {
 			lastDefaultNumber++;
 		}
-		tt.setId(tmp+lastDefaultNumber);
+		tt.setName(tmp+lastDefaultNumber);
 		
 		return tt;
 	}

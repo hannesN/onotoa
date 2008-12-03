@@ -38,7 +38,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		if (asc.getAssociationType()==null)
 			typeText.setText("");
 		else
-			typeText.setText(asc.getAssociationType().getId());
+			typeText.setText(asc.getAssociationType().getName());
 	}
 
 	private AssociationTypeConstraint getCastedModel() {

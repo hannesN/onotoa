@@ -53,6 +53,13 @@ public enum EdgeType implements Enumerator {
 	ROLE_CONSTRAINT_TYPE(2, "ROLE_CONSTRAINT_TYPE", "ROLE_CONSTRAINT_TYPE");
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The '<em><b>IS ATYPE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>

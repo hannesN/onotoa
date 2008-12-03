@@ -25,6 +25,13 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

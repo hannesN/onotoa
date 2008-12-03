@@ -83,6 +83,13 @@ public enum KindOfTopicType implements Enumerator {
 	SCOPE_TYPE(5, "ScopeType", "ScopeType");
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The '<em><b>Topic Type</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>

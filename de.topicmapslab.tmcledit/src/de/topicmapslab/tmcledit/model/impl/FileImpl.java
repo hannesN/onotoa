@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class FileImpl extends EObjectImpl implements File {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
+	/**
 	 * The cached value of the '{@link #getDiagrams() <em>Diagrams</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

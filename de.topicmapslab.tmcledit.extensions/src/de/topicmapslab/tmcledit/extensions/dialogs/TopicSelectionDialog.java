@@ -185,7 +185,7 @@ public class TopicSelectionDialog extends Dialog {
 		@Override
 		public String getText(Object element) {
 			if (element instanceof TopicType)
-				return ((TopicType)element).getId();
+				return ((TopicType)element).getName();
 			
 			return super.getText(element);
 		}

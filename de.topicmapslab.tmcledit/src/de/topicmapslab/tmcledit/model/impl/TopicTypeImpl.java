@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -39,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIdentifiers <em>Identifiers</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIdType <em>Id Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIsa <em>Isa</em>}</li>
@@ -50,6 +51,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getExclusive <em>Exclusive</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getLocators <em>Locators</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,24 +60,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
 	 * @generated
-	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getIdentifiers()
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	protected EList<String> identifiers;
 
 	/**
 	 * The default value of the '{@link #getIdType() <em>Id Type</em>}' attribute.
@@ -207,6 +207,36 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	protected EList<TopicType> exclusive;
 
 	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getLocators() <em>Locators</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocators()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> locators;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -230,20 +260,11 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__ID, oldId, id));
+	public EList<String> getIdentifiers() {
+		if (identifiers == null) {
+			identifiers = new EDataTypeUniqueEList<String>(String.class, this, ModelPackage.TOPIC_TYPE__IDENTIFIERS);
+		}
+		return identifiers;
 	}
 
 	/**
@@ -398,6 +419,39 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getLocators() {
+		if (locators == null) {
+			locators = new EDataTypeUniqueEList<String>(String.class, this, ModelPackage.TOPIC_TYPE__LOCATORS);
+		}
+		return locators;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -421,8 +475,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.TOPIC_TYPE__ID:
-				return getId();
+			case ModelPackage.TOPIC_TYPE__IDENTIFIERS:
+				return getIdentifiers();
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return getIdType();
 			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
@@ -443,6 +497,10 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return getKind();
 			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
 				return getExclusive();
+			case ModelPackage.TOPIC_TYPE__NAME:
+				return getName();
+			case ModelPackage.TOPIC_TYPE__LOCATORS:
+				return getLocators();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -456,8 +514,9 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.TOPIC_TYPE__ID:
-				setId((String)newValue);
+			case ModelPackage.TOPIC_TYPE__IDENTIFIERS:
+				getIdentifiers().clear();
+				getIdentifiers().addAll((Collection<? extends String>)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				setIdType((TopicId)newValue);
@@ -496,6 +555,13 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				getExclusive().clear();
 				getExclusive().addAll((Collection<? extends TopicType>)newValue);
 				return;
+			case ModelPackage.TOPIC_TYPE__NAME:
+				setName((String)newValue);
+				return;
+			case ModelPackage.TOPIC_TYPE__LOCATORS:
+				getLocators().clear();
+				getLocators().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -508,8 +574,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.TOPIC_TYPE__ID:
-				setId(ID_EDEFAULT);
+			case ModelPackage.TOPIC_TYPE__IDENTIFIERS:
+				getIdentifiers().clear();
 				return;
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				setIdType(ID_TYPE_EDEFAULT);
@@ -541,6 +607,12 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
 				getExclusive().clear();
 				return;
+			case ModelPackage.TOPIC_TYPE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case ModelPackage.TOPIC_TYPE__LOCATORS:
+				getLocators().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -553,8 +625,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.TOPIC_TYPE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case ModelPackage.TOPIC_TYPE__IDENTIFIERS:
+				return identifiers != null && !identifiers.isEmpty();
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return idType != ID_TYPE_EDEFAULT;
 			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
@@ -575,6 +647,10 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return kind != KIND_EDEFAULT;
 			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
 				return exclusive != null && !exclusive.isEmpty();
+			case ModelPackage.TOPIC_TYPE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.TOPIC_TYPE__LOCATORS:
+				return locators != null && !locators.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -589,14 +665,18 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
+		result.append(" (identifiers: ");
+		result.append(identifiers);
 		result.append(", idType: ");
 		result.append(idType);
 		result.append(", isAbstract: ");
 		result.append(isAbstract);
 		result.append(", kind: ");
 		result.append(kind);
+		result.append(", name: ");
+		result.append(name);
+		result.append(", locators: ");
+		result.append(locators);
 		result.append(')');
 		return result.toString();
 	}

@@ -44,7 +44,7 @@ public class TreeName extends TreeObject{
 	public String getName() {
 		if (getNameTypeConstraint().getType()==null)
 			return "No name type set";
-		return getNameTypeConstraint().getType().getId();
+		return getNameTypeConstraint().getType().getName();
 	}
 	
 	@Override

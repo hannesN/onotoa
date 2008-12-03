@@ -24,7 +24,7 @@ public class TM4JTopicMapBuilder {
 	public TM4JTopicMapBuilder(TopicMapSchema topicMapSchema) {
 		this.topicMapSchema = topicMapSchema;
 	}
-
+/*
 	public TopicMap getTopicMap() throws Exception{
 		TopicMap tm = null;
 
@@ -152,4 +152,5 @@ public class TM4JTopicMapBuilder {
 		
 		return null;
 	}
+	*/
 }

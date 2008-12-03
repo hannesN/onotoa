@@ -19,12 +19,15 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
+import de.topicmapslab.tmcledit.extensions.dialogs.StringListSelectionDialog;
 import de.topicmapslab.tmcledit.extensions.dialogs.TopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
+import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
+import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
 
 /**
  * Property detail page for topic types.
@@ -35,6 +38,8 @@ import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 	private Text nameText;
+	private Text identifierText;
+	private Text locatorText;
 	private Text isAText;
 	private Text akoText;
 	private Button abstractButton;
@@ -71,12 +76,55 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			}
 		});
 
+		toolkit.createLabel(comp, "Subject Identifiers:");
+		identifierText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		identifierText.setLayoutData(gd);
+
+		Button button = toolkit.createButton(comp, "...", SWT.PUSH);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TopicType type = (TopicType) getModel();
+				StringListSelectionDialog dlg = new StringListSelectionDialog(identifierText.getShell());
+				dlg.setSelectedTopics(type.getIdentifiers());
+				dlg.setInputDescription("Please enter the new subject identifier.");
+
+				if (dlg.open() == Dialog.OK) {
+					getCommandStack().execute(new SetTopicTypeIdentifiersCommand(dlg.getStringList(),
+							(TopicType) getModel()));
+				}
+			}
+		});
+		
+
+		toolkit.createLabel(comp, "Subject Locators:");
+		locatorText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		locatorText.setLayoutData(gd);
+
+		button = toolkit.createButton(comp, "...", SWT.PUSH);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TopicType type = (TopicType) getModel();
+				StringListSelectionDialog dlg = new StringListSelectionDialog(identifierText.getShell());
+				dlg.setSelectedTopics(type.getLocators());
+				dlg.setInputDescription("Please enter the new subject locator.");
+
+				if (dlg.open() == Dialog.OK) {
+					getCommandStack().execute(new SetTopicTypeLocatorsCommand(dlg.getStringList(),
+							(TopicType) getModel()));
+				}
+			}
+		});
+		
 		toolkit.createLabel(comp, "is a:");
 		isAText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		isAText.setLayoutData(gd);
 
-		Button button = toolkit.createButton(comp, "...", SWT.PUSH);
+		button = toolkit.createButton(comp, "...", SWT.PUSH);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -139,11 +187,33 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				section.setText("<...>");
 			else
 				section.setText(getTopicType(t));
-			nameText.setText(t.getId());
+			nameText.setText(t.getName());
 
 			StringBuffer b = new StringBuffer();
+			for (String s : t.getIdentifiers()) {
+				b.append(s);
+				b.append(", ");
+			}
+			if (b.length() > 0)
+				identifierText.setText(b.substring(0, b.length() - 2));
+			else
+				identifierText.setText("");
+			
+			b.setLength(0);
+			
+			for (String s : t.getLocators()) {
+				b.append(s);
+				b.append(", ");
+			}
+			if (b.length() > 0)
+				locatorText.setText(b.substring(0, b.length() - 2));
+			else
+				locatorText.setText("");
+			
+			b.setLength(0);
+			
 			for (TopicType tt : t.getIsa()) {
-				b.append(tt.getId());
+				b.append(tt.getName());
 				b.append(", ");
 			}
 			if (b.length() > 0)
@@ -153,7 +223,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 			b.setLength(0);
 			for (TopicType tt : t.getAko()) {
-				b.append(tt.getId());
+				b.append(tt.getName());
 				b.append(", ");
 			}
 			if (b.length() > 0)
