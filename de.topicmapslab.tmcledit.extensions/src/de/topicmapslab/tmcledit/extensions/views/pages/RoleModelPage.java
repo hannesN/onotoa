@@ -78,7 +78,7 @@ public class RoleModelPage extends AbstractModelPage{
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		cardMaxText.setLayoutData(gd);
-		TextObserver.observe(cardMinText, this, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX);
+		TextObserver.observe(cardMaxText, this, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX);
 		
 		setControl(comp);
 	}
