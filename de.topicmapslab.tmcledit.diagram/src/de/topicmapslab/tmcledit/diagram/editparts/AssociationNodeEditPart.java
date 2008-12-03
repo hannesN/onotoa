@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.AbstractConnectionAnchor;
 import org.eclipse.draw2d.ConnectionAnchor;
+import org.eclipse.draw2d.EllipseAnchor;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
@@ -103,7 +104,7 @@ public class AssociationNodeEditPart extends NodeEditPart{
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(
 			ConnectionEditPart connection) {
-		return new ChopCircleAngle(getFigure());
+		return new EllipseAnchor(getFigure());
 	}
 
 	@Override
