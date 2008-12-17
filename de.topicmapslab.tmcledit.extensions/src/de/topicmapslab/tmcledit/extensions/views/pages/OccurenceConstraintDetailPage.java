@@ -2,6 +2,8 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -77,6 +79,12 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 		typeComp.setLayout(layout);
 		datatypeText = toolkit.createText(typeComp, "", SWT.BORDER);
 		datatypeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		datatypeText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				getCastedModel().setDataType(datatypeText.getText());
+			}
+		});
 		
 		datatypeButton = toolkit.createButton(typeComp, "...", SWT.PUSH);
 	}

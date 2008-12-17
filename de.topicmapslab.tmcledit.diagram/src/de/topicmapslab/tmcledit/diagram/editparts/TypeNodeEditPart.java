@@ -26,6 +26,7 @@ import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
@@ -57,14 +58,13 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	protected CompartmentFigure identifierCompartmentFigure;
 	
 	private static Font identifierFont;
+	private Font nameFont;
 	private static int refCounter=0;
 	
 	@Override
 	protected IFigure createFigure() {
 		if (figure == null) {
 			figure = new Figure();
-			
-			
 			
 			ToolbarLayout layout = new ToolbarLayout(false);
 			layout.setStretchMinorAxis(true);
@@ -75,6 +75,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			titleLabel = new Label();
 			titleLabel.setIcon(ImageProvider.getTopicTypeImage(getCastedModel().getTopicType()));
 			figure.add(titleLabel);
+			
 
 			if (identifierFont==null) {
 				Font tmp = Display.getCurrent().getSystemFont();
@@ -84,7 +85,10 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			}
 			
 			identifierFigure = new Figure();
-			identifierFigure.setLayoutManager(new ToolbarLayout(false));
+			layout = new ToolbarLayout(false);
+			layout.setStretchMinorAxis(false);
+			layout.setSpacing(3);
+			identifierFigure.setLayoutManager(layout);
 			figure.add(identifierFigure);
 			
 			figure.setOpaque(true);
@@ -101,6 +105,19 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			
 		}
 		return figure;
+	}
+	
+	private void createNameFont() {
+		if (nameFont!=null) {
+			nameFont.dispose();
+		}
+		Font tmp = Display.getCurrent().getSystemFont();
+		FontData fd = tmp.getFontData()[0];
+		if (getCastedModel().getTopicType().isIsAbstract())
+			fd.setStyle(SWT.ITALIC);
+		
+		nameFont = new Font(Display.getCurrent(), fd);
+		titleLabel.setFont(nameFont);
 	}
 	
 	protected void fillIdentifierFigure() {
@@ -135,7 +152,10 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		if (titleLabel.isVisible()) {
 			TopicType tt = (TopicType) tn.getTopicType();
 			titleLabel.setText(tt.getName());
+			
+			createNameFont();
 			fillIdentifierFigure();
+			
 		}
 		Rectangle r = new Rectangle(tn.getPosX(), tn.getPosY(), -1, -1);
 		try {
