@@ -25,6 +25,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
+import de.topicmapslab.tmcledit.model.commands.SetExclusiveCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
@@ -45,6 +46,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	private Button abstractButton;
 
 	private Section section;
+	private Text exclusiveText;
 
 	public TopicTypePage() {
 		super("topic type");
@@ -160,6 +162,28 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 			
 		});
+		
+		toolkit.createLabel(comp, "exclusive:");
+		exclusiveText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalSpan = 1;
+		exclusiveText.setLayoutData(gd);
+		button = toolkit.createButton(comp, "...", SWT.PUSH);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TopicSelectionDialog dlg = new TopicSelectionDialog(exclusiveText
+						.getShell(), (TopicType) getModel());
+				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
+
+				if (dlg.open() == Dialog.OK) {
+					getCommandStack().execute(new SetExclusiveCommand(dlg.getSelectedTopics(),
+							(TopicType) getModel()));
+				}
+			}
+
+			
+		});
 
 		toolkit.createLabel(comp, "isAbstract");
 		abstractButton = toolkit.createButton(comp, "", SWT.CHECK);
@@ -230,6 +254,18 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				akoText.setText(b.substring(0, b.length() - 2));
 			else
 				akoText.setText("");
+			
+			b.setLength(0);
+			
+			for (TopicType tt : t.getExclusive()) {
+				b.append(tt.getName());
+				b.append(", ");
+			}
+			if (b.length() > 0)
+				exclusiveText.setText(b.substring(0, b.length() - 2));
+			else
+				exclusiveText.setText("");
+
 			
 			abstractButton.setSelection(t.isIsAbstract());
 		}
