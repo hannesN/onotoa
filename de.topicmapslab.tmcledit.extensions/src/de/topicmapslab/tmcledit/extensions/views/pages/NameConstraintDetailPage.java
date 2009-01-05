@@ -1,6 +1,7 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -9,14 +10,20 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.forms.events.HyperlinkAdapter;
+import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.extensions.dialogs.FilterTopicSelectionDialog;
+import de.topicmapslab.tmcledit.extensions.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class NameConstraintDetailPage extends AbstractScopedContraintModelPage {
 
@@ -38,7 +45,22 @@ public class NameConstraintDetailPage extends AbstractScopedContraintModelPage {
 		Composite comp = toolkit.createComposite(section);
 		comp.setLayout(new GridLayout(2, false));
 
-		toolkit.createLabel(comp, "Type:");
+		Hyperlink link = toolkit.createHyperlink(comp, "Type:", SWT.NONE);
+		link.addHyperlinkListener(new HyperlinkAdapter() {
+			@Override
+			public void linkActivated(HyperlinkEvent e) {
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
+				wizard.setDefaultType(KindOfTopicType.NAME_TYPE);
+				WizardDialog dlg = new WizardDialog(section.getShell(), wizard);
+				
+				if (dlg.open()==Dialog.OK) {
+					TopicType tt = wizard.getNewTopicType();
+					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
+					getCastedModel().setType(tt);
+				}
+				
+			}
+		});
 		createTypeComposite(toolkit, comp);
 		
 		hookButtonListener();

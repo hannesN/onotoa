@@ -5,6 +5,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -15,9 +16,14 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
+import org.eclipse.ui.forms.events.HyperlinkAdapter;
+import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.Hyperlink;
 
+import de.topicmapslab.tmcledit.extensions.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.extensions.util.TextObserver;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -57,7 +63,22 @@ public class RoleModelPage extends AbstractModelPage{
 		
 	
 		
-		toolkit.createLabel(comp, "Role:");
+		Hyperlink link = toolkit.createHyperlink(comp, "Role:", SWT.NONE);
+		link.addHyperlinkListener(new HyperlinkAdapter() {
+			@Override
+			public void linkActivated(HyperlinkEvent e) {
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
+				wizard.setDefaultType(KindOfTopicType.ROLE_TYPE);
+				WizardDialog dlg = new WizardDialog(cardMinText.getShell(), wizard);
+				
+				if (dlg.open()==Dialog.OK) {
+					TopicType tt = wizard.getNewTopicType();
+					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
+					getCastedModel().setType(tt);
+				}
+				
+			}
+		});
 		
 		roleText = toolkit.createText(comp, "", SWT.BORDER);
 		roleText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

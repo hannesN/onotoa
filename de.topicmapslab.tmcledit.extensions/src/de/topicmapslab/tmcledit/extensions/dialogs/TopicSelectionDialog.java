@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -143,6 +144,23 @@ public class TopicSelectionDialog extends Dialog {
 		Button createButton = new Button(comp, SWT.PUSH);
 		createButton.setToolTipText("Create new Topic");
 		createButton.setText("New..");
+		createButton.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
+				wizard.setDefaultType(KindOfTopicType.OCCURENCE_TYPE);
+				WizardDialog dlg = new WizardDialog(availableTopicList.getList().getShell(), wizard);
+				
+				if (dlg.open()==Dialog.OK) {
+					TopicType tt = wizard.getNewTopicType();
+					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
+					selectedTopics.add(tt);
+					selectedTopicList.refresh();
+				}
+				
+			}
+		});
 		fac.applyTo(createButton);
 	}
 
