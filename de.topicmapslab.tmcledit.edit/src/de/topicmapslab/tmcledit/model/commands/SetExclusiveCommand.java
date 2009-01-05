@@ -17,7 +17,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class SetExclusiveCommand extends AbstractCommand {
 
 	private TopicType topicType;
-	
+
 	private List<TopicType> removeList;
 	private List<TopicType> addList;
 
@@ -30,37 +30,34 @@ public class SetExclusiveCommand extends AbstractCommand {
 
 	@Override
 	public void execute() {
-		
+
 		for (TopicType tt : removeList) {
 			tt.getExclusive().remove(topicType);
 		}
 		for (TopicType tt : addList) {
 			tt.getExclusive().add(topicType);
 		}
-		
-		
+
 		topicType.eSetDeliver(false);
 		topicType.getExclusive().removeAll(removeList);
 		topicType.eSetDeliver(true);
 		topicType.getExclusive().addAll(addList);
 	}
-	
+
 	@Override
 	protected boolean prepare() {
 		removeList = new ArrayList<TopicType>();
-		if (topicType.getExclusive()!=null) {
-			for (TopicType tt : topicType.getExclusive()) {
-				if (addList.contains(tt)) {
-					addList.remove(tt);
-				} else {
-					removeList.add(tt);
-				}
+		for (TopicType tt : topicType.getExclusive()) {
+			if (addList.contains(tt)) {
+				addList.remove(tt);
+			} else {
+				removeList.add(tt);
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public void undo() {
 		for (TopicType tt : removeList) {
@@ -69,13 +66,13 @@ public class SetExclusiveCommand extends AbstractCommand {
 		for (TopicType tt : addList) {
 			tt.getExclusive().remove(topicType);
 		}
-		
+
 		topicType.eSetDeliver(false);
 		topicType.getExclusive().addAll(removeList);
 		topicType.eSetDeliver(true);
 		topicType.getExclusive().removeAll(addList);
 	}
-	
+
 	@Override
 	public void redo() {
 		execute();
