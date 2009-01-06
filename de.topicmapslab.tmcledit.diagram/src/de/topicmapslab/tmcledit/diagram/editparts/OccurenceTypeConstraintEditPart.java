@@ -20,18 +20,23 @@ public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
 	@Override
 	protected void refreshVisuals() {
 		OccurenceTypeConstraint otc = getCastedModel();
-		StringBuffer text = new StringBuffer();
+		StringBuffer buffer = new StringBuffer();
 		
 		getNameLabel().setText(otc.getType().getName());
 		
-		text.append(" : ");
-		text.append(otc.getDataType());
-		text.append(" ");
-		text.append(otc.getCardMin());
-		text.append("..");
-		text.append(otc.getCardMax());	
+		buffer.append(" : ");
+		buffer.append(otc.getDataType());
+		buffer.append(" ");
+		buffer.append(otc.getCardMin());
+		buffer.append("..");
+		buffer.append(otc.getCardMax());	
 		
-		getTypeLabel().setText(text.toString());
+		for (TopicType tt : getCastedModel().getScope()) {
+			buffer.append("\n@");
+			buffer.append(tt.getName());
+		}
+		
+		getTypeLabel().setText(buffer.toString());
 	}
 
 	@Override

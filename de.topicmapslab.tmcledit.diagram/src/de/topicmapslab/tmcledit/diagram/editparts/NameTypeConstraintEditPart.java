@@ -1,5 +1,7 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 
@@ -35,6 +37,10 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		buffer.append(ntc.getCardMin());
 		buffer.append("..");
 		buffer.append(ntc.getCardMax());
+		for (TopicType tt : getCastedModel().getScope()) {
+			buffer.append("\n@");
+			buffer.append(tt.getName());
+		}
 		getTypeLabel().setText(buffer.toString());
 	}
 
@@ -64,7 +70,9 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 					tmp.eAdapters().add(this);
 			}
 		}
-		if (notification.getEventType()==Notification.SET)
+		
+		if ( (notification.getFeatureID(List.class)==ModelPackage.NAME_TYPE_CONSTRAINT__SCOPE) ||
+		 (notification.getEventType()==Notification.SET) )
 			refreshVisuals();
 		
 	}
