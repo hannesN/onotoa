@@ -126,48 +126,6 @@ public class AssociationNodeEditPart extends NodeEditPart{
 			}
 			refreshVisuals();
 		}
-	}	
-
-	/**
-	 * This anchor works like the ChobBoxAnchor, but instead of
-	 * using a box it uses a circle
-	 * @author Hannes Niederhausen
-	 *
-	 */
-	private class ChopCircleAngle extends AbstractConnectionAnchor {
-
-		public ChopCircleAngle(IFigure owner) {
-			setOwner(owner);
-		}
-		
-		@Override
-		public Point getLocation(Point reference) {
-			Rectangle bounds = Rectangle.SINGLETON; 
-			bounds.setBounds(getOwner().getBounds());
-
-			getOwner().translateToAbsolute(bounds);
-			
-			int radius = bounds.width/2;
-			Point middlePoint = new Point(bounds.x+radius, bounds.y+radius);
-			
-			
-			
-			double dx = reference.x-middlePoint.x;
-			double dy = reference.y-middlePoint.y;
-			
-			double length = Math.sqrt((dx*dx+dy*dy));
-			dx /= length;
-			dy /= length;
-			
-			
-			Point result = new Point();
-			
-			result.x = (int) (middlePoint.x+radius*dx);
-			result.y = (int) (middlePoint.y+radius*dy);
-			
-			return result;
-		}
-		
 	}
 
 }
