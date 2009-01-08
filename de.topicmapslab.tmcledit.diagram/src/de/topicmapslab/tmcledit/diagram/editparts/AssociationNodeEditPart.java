@@ -5,12 +5,10 @@ package de.topicmapslab.tmcledit.diagram.editparts;
 
 import java.util.List;
 
-import org.eclipse.draw2d.AbstractConnectionAnchor;
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.EllipseAnchor;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;

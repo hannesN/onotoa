@@ -10,7 +10,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
+public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 	
 	private NameTypeConstraint getCastedModel() {
 		return (NameTypeConstraint) getModel();
@@ -37,10 +37,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		buffer.append(ntc.getCardMin());
 		buffer.append("..");
 		buffer.append(ntc.getCardMax());
-		for (TopicType tt : getCastedModel().getScope()) {
-			buffer.append("\n@");
-			buffer.append(tt.getName());
-		}
+		addScopeText(buffer);
 		getTypeLabel().setText(buffer.toString());
 	}
 

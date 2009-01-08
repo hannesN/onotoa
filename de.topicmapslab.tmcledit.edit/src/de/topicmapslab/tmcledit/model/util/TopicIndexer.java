@@ -43,6 +43,16 @@ public class TopicIndexer implements Adapter{
 		return result;
 	}
 	
+	public List<TopicType> getScopeTypes() {
+		List<TopicType> result = new ArrayList<TopicType>();
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			if (tt.getKind()==KindOfTopicType.SCOPE_TYPE)
+				result.add(tt);
+		}
+		
+		return result;
+	}
+	
 	public TopicType createTopicType(String id) {
 		TopicType tt = getTopicType(id);
 		if (tt==null) {

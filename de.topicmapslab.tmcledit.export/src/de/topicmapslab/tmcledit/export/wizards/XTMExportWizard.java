@@ -2,8 +2,6 @@ package de.topicmapslab.tmcledit.export.wizards;
 
 import java.io.FileOutputStream;
 
-import org.apache.xml.serialize.OutputFormat;
-import org.apache.xml.serialize.XMLSerializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -19,15 +17,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
-import org.tm4j.topicmap.TopicMap;
-import org.tm4j.topicmap.TopicMapProcessingException;
-import org.tm4j.topicmap.utils.TopicMapWalker;
-import org.tm4j.topicmap.utils.XTMWriter;
-
 import org.tmapiutils.impexp.xtm.XTMSerializer;
 
-
-import de.topicmapslab.tmcledit.export.builder.TM4JTopicMapBuilder;
 import de.topicmapslab.tmcledit.export.builder.TinyTiMTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -49,7 +40,6 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		if (schema==null)
 			throw new RuntimeException("No topic map schema selected.");
 		
-		TM4JTopicMapBuilder tm4jbuilder = new TM4JTopicMapBuilder(schema);
 		TinyTiMTopicMapBuilder ttbuilder = new TinyTiMTopicMapBuilder(schema);
 		
 		

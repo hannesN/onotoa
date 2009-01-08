@@ -27,33 +27,43 @@ import de.topicmapslab.tmcledit.model.TypeNode;
 public class FileUtil {
 	
 	public static final File loadFile(String path) {
-		java.io.File file = new java.io.File(path);
-		File result = null;
-		if (file.isDirectory())
-			return null; //TODO Exception
-		if (!file.exists()) {
-			ModelFactory einstance = ModelFactory.eINSTANCE;
-			result = einstance.createFile();
-			result.setTopicMapSchema(einstance.createTopicMapSchema());
-			//createTestData(result);
-		} else {
-			Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-			Map<String, Object> map = reg.getExtensionToFactoryMap();
-			map.put("tmcl", new XMIResourceFactoryImpl());
-			ResourceSet resSet = new ResourceSetImpl();
-			URI uri = URI.createFileURI(path);
-			result = (File) resSet.getResource(uri, true).getContents().get(0);
+		try {
+			java.io.File file = new java.io.File(path);
+			File result = null;
+			if (file.isDirectory())
+				return null; //TODO Exception
+			if (!file.exists()) {
+				ModelFactory einstance = ModelFactory.eINSTANCE;
+				result = einstance.createFile();
+				result.setTopicMapSchema(einstance.createTopicMapSchema());
+				//createTestData(result);
+			} else {
+				Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+				Map<String, Object> map = reg.getExtensionToFactoryMap();
+				map.put("tmcl", new XMIResourceFactoryImpl());
+				ResourceSet resSet = new ResourceSetImpl();
+				URI uri = URI.createFileURI(path);
+				result = (File) resSet.getResource(uri, true).getContents()
+						.get(0);
+			}
+			result.setFilename(path);
+			return result;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		result.setFilename(path);
-		return result;
+		
 	}
 	
 	public static final void saveFile(File file) throws IOException {
-		URI uri = URI.createFileURI(file.getFilename());
-		Resource resource = new XMIResourceFactoryImpl().createResource(uri);
-		resource.getContents().add(file);
-		
-		resource.save(Collections.EMPTY_MAP);
+		try {
+			URI uri = URI.createFileURI(file.getFilename());
+			Resource resource = new XMIResourceFactoryImpl().createResource(uri);
+			resource.getContents().add(file);
+			
+			resource.save(Collections.EMPTY_MAP);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		
 	}
 	

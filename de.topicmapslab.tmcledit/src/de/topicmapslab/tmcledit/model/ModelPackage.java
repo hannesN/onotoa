@@ -305,7 +305,7 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_CONSTRAINT__NAME = ABSTRACT_CONSTRAINT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
+	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -369,7 +369,7 @@ public interface ModelPackage extends EPackage {
 	int OCCURENCE_TYPE_CONSTRAINT__NAME = SCOPED_CONSTRAINT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
+	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -460,7 +460,7 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE_CONSTRAINT__NAME = SCOPED_CONSTRAINT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference list.
+	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1175,6 +1175,52 @@ public interface ModelPackage extends EPackage {
 	int FILE_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl <em>Scope Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getScopeConstraint()
+	 * @generated
+	 */
+	int SCOPE_CONSTRAINT = 18;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE_CONSTRAINT__TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE_CONSTRAINT__CARD_MIN = 1;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE_CONSTRAINT__CARD_MAX = 2;
+
+	/**
+	 * The number of structural features of the '<em>Scope Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE_CONSTRAINT_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1182,7 +1228,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 18;
+	int TOPIC_ID = 19;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -1192,7 +1238,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 19;
+	int EDGE_TYPE = 20;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -1202,7 +1248,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 20;
+	int KIND_OF_TOPIC_TYPE = 21;
 
 
 	/**
@@ -2024,15 +2070,58 @@ public interface ModelPackage extends EPackage {
 	EClass getScopedConstraint();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.ScopedConstraint#getScope <em>Scope</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.ScopedConstraint#getScope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Scope</em>'.
+	 * @return the meta object for the containment reference list '<em>Scope</em>'.
 	 * @see de.topicmapslab.tmcledit.model.ScopedConstraint#getScope()
 	 * @see #getScopedConstraint()
 	 * @generated
 	 */
 	EReference getScopedConstraint_Scope();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ScopeConstraint <em>Scope Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scope Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ScopeConstraint
+	 * @generated
+	 */
+	EClass getScopeConstraint();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.ScopeConstraint#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ScopeConstraint#getType()
+	 * @see #getScopeConstraint()
+	 * @generated
+	 */
+	EReference getScopeConstraint_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.ScopeConstraint#getCardMin <em>Card Min</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Card Min</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ScopeConstraint#getCardMin()
+	 * @see #getScopeConstraint()
+	 * @generated
+	 */
+	EAttribute getScopeConstraint_CardMin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.ScopeConstraint#getCardMax <em>Card Max</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Card Max</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ScopeConstraint#getCardMax()
+	 * @see #getScopeConstraint()
+	 * @generated
+	 */
+	EAttribute getScopeConstraint_CardMax();
 
 	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
@@ -2731,12 +2820,46 @@ public interface ModelPackage extends EPackage {
 		EClass SCOPED_CONSTRAINT = eINSTANCE.getScopedConstraint();
 
 		/**
-		 * The meta object literal for the '<em><b>Scope</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Scope</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference SCOPED_CONSTRAINT__SCOPE = eINSTANCE.getScopedConstraint_Scope();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl <em>Scope Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getScopeConstraint()
+		 * @generated
+		 */
+		EClass SCOPE_CONSTRAINT = eINSTANCE.getScopeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPE_CONSTRAINT__TYPE = eINSTANCE.getScopeConstraint_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Card Min</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCOPE_CONSTRAINT__CARD_MIN = eINSTANCE.getScopeConstraint_CardMin();
+
+		/**
+		 * The meta object literal for the '<em><b>Card Max</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCOPE_CONSTRAINT__CARD_MAX = eINSTANCE.getScopeConstraint_CardMax();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

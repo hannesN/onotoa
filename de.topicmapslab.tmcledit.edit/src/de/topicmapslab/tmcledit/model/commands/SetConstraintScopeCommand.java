@@ -5,20 +5,20 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedConstraint;
-import de.topicmapslab.tmcledit.model.TopicType;
 
 public class SetConstraintScopeCommand extends AbstractCommand {
 
 	private final ScopedConstraint constraint;
-	private final List<TopicType> newScope;
+	private final List<ScopeConstraint> newScope;
 
-	private List<TopicType> oldScope;
+	private List<ScopeConstraint> oldScope;
 	
 	
 	
 	public SetConstraintScopeCommand(ScopedConstraint constraint,
-			List<TopicType> newScope) {
+			List<ScopeConstraint> newScope) {
 		super("Set Scope");
 		this.constraint = constraint;
 		this.newScope = newScope;
@@ -26,7 +26,7 @@ public class SetConstraintScopeCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
-		oldScope = new ArrayList<TopicType>();
+		oldScope = new ArrayList<ScopeConstraint>();
 		oldScope.addAll(constraint.getScope());
 		return true;
 	}
@@ -36,7 +36,7 @@ public class SetConstraintScopeCommand extends AbstractCommand {
 		setScopeList(newScope);
 	}
 
-	private void setScopeList(List<TopicType> scopeList) {
+	private void setScopeList(List<ScopeConstraint> scopeList) {
 		constraint.eSetDeliver(false);
 		constraint.getScope().clear();
 		constraint.eSetDeliver(true);

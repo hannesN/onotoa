@@ -1,28 +1,12 @@
 package de.topicmapslab.tmcledit.export.builder;
 
-import org.tm4j.net.Locator;
-import org.tm4j.topicmap.Association;
-import org.tm4j.topicmap.BaseName;
-import org.tm4j.topicmap.Member;
-import org.tm4j.topicmap.Occurrence;
-import org.tm4j.topicmap.Topic;
-import org.tm4j.topicmap.TopicMap;
-import org.tm4j.topicmap.TopicMapProvider;
-import org.tm4j.topicmap.TopicMapProviderFactory;
-
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.MappingElement;
-import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
-import de.topicmapslab.tmcledit.model.TopicType;
 
 public class TM4JTopicMapBuilder {
-	private final TopicMapSchema topicMapSchema;
+//	private final TopicMapSchema topicMapSchema;
 
 	public TM4JTopicMapBuilder(TopicMapSchema topicMapSchema) {
-		this.topicMapSchema = topicMapSchema;
+	//	this.topicMapSchema = topicMapSchema;
 	}
 /*
 	public TopicMap getTopicMap() throws Exception{

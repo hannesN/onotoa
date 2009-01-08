@@ -33,19 +33,19 @@ public interface ScopedConstraint extends AbstractConstraint {
 	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
 
 	/**
-	 * Returns the value of the '<em><b>Scope</b></em>' reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.TopicType}.
+	 * Returns the value of the '<em><b>Scope</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.ScopeConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Scope</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Scope</em>' reference list.
+	 * @return the value of the '<em>Scope</em>' containment reference list.
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getScopedConstraint_Scope()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TopicType> getScope();
+	EList<ScopeConstraint> getScope();
 
 } // ScopedConstraint

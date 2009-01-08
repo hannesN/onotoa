@@ -120,5 +120,10 @@
     <genClasses ecoreClass="tmcledit.ecore#//ScopedConstraint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ScopedConstraint/scope"/>
     </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//ScopeConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ScopeConstraint/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//ScopeConstraint/cardMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//ScopeConstraint/cardMax"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

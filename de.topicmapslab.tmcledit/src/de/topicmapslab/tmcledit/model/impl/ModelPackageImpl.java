@@ -22,6 +22,7 @@ import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
@@ -177,6 +178,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass scopedConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scopeConstraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -965,6 +973,42 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getScopeConstraint() {
+		return scopeConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScopeConstraint_Type() {
+		return (EReference)scopeConstraintEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getScopeConstraint_CardMin() {
+		return (EAttribute)scopeConstraintEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getScopeConstraint_CardMax() {
+		return (EAttribute)scopeConstraintEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1110,6 +1154,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		scopedConstraintEClass = createEClass(SCOPED_CONSTRAINT);
 		createEReference(scopedConstraintEClass, SCOPED_CONSTRAINT__SCOPE);
 
+		scopeConstraintEClass = createEClass(SCOPE_CONSTRAINT);
+		createEReference(scopeConstraintEClass, SCOPE_CONSTRAINT__TYPE);
+		createEAttribute(scopeConstraintEClass, SCOPE_CONSTRAINT__CARD_MIN);
+		createEAttribute(scopeConstraintEClass, SCOPE_CONSTRAINT__CARD_MAX);
+
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
 		edgeTypeEEnum = createEEnum(EDGE_TYPE);
@@ -1246,7 +1295,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getFile_Dirty(), ecorePackage.getEBoolean(), "dirty", "false", 1, 1, File.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopedConstraintEClass, ScopedConstraint.class, "ScopedConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScopedConstraint_Scope(), this.getTopicType(), null, "scope", null, 0, -1, ScopedConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScopedConstraint_Scope(), this.getScopeConstraint(), null, "scope", null, 0, -1, ScopedConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scopeConstraintEClass, ScopeConstraint.class, "ScopeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScopeConstraint_Type(), this.getTopicType(), null, "type", null, 1, 1, ScopeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScopeConstraint_CardMin(), ecorePackage.getEInt(), "cardMin", null, 0, 1, ScopeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScopeConstraint_CardMax(), ecorePackage.getEInt(), "cardMax", null, 0, 1, ScopeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

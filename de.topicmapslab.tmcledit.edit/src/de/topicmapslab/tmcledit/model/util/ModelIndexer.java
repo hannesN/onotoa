@@ -83,6 +83,11 @@ public class ModelIndexer {
 	}
 
 
+	public List<TopicType> getScopeTypes() {
+		return topicIndexer.getScopeTypes();
+	}
+
+
 	public TopicType getTopicType(String id) {
 		return topicIndexer.getTopicType(id);
 	}

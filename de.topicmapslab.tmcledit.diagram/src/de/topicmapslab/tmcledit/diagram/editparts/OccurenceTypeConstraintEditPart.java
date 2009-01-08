@@ -7,8 +7,8 @@ import de.topicmapslab.tmcledit.diagram.policies.OccurenceConstraintDirectEditPo
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
-	private OccurenceTypeConstraint getCastedModel() {
+public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
+	OccurenceTypeConstraint getCastedModel() {
 		return (OccurenceTypeConstraint) getModel();
 	}
 	
@@ -31,10 +31,7 @@ public class OccurenceTypeConstraintEditPart extends AbstractLabelEditPart {
 		buffer.append("..");
 		buffer.append(otc.getCardMax());	
 		
-		for (TopicType tt : getCastedModel().getScope()) {
-			buffer.append("\n@");
-			buffer.append(tt.getName());
-		}
+		addScopeText(buffer);
 		
 		getTypeLabel().setText(buffer.toString());
 	}

@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -451,6 +450,29 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.ScopeConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScopeConstraintItemProvider scopeConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.ScopeConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScopeConstraintAdapter() {
+		if (scopeConstraintItemProvider == null) {
+			scopeConstraintItemProvider = new ScopeConstraintItemProvider(this);
+		}
+
+		return scopeConstraintItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -565,6 +587,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (associationNodeItemProvider != null) associationNodeItemProvider.dispose();
 		if (diagramItemProvider != null) diagramItemProvider.dispose();
 		if (fileItemProvider != null) fileItemProvider.dispose();
+		if (scopeConstraintItemProvider != null) scopeConstraintItemProvider.dispose();
 	}
 
 }

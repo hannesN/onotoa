@@ -84,6 +84,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.ASSOCIATION_NODE: return createAssociationNode();
 			case ModelPackage.DIAGRAM: return createDiagram();
 			case ModelPackage.FILE: return createFile();
+			case ModelPackage.SCOPE_CONSTRAINT: return createScopeConstraint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -285,6 +286,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public File createFile() {
 		FileImpl file = new FileImpl();
 		return file;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScopeConstraint createScopeConstraint() {
+		ScopeConstraintImpl scopeConstraint = new ScopeConstraintImpl();
+		return scopeConstraint;
 	}
 
 	/**

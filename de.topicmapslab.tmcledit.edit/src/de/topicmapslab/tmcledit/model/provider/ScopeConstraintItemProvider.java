@@ -7,7 +7,7 @@ package de.topicmapslab.tmcledit.model.provider;
 
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,12 +29,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.RoleTypeConstraints} object.
+ * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.ScopeConstraint} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RoleTypeConstraintsItemProvider
+public class ScopeConstraintItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -55,7 +55,7 @@ public class RoleTypeConstraintsItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleTypeConstraintsItemProvider(AdapterFactory adapterFactory) {
+	public ScopeConstraintItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -70,12 +70,33 @@ public class RoleTypeConstraintsItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTypePropertyDescriptor(object);
 			addCardMinPropertyDescriptor(object);
 			addCardMaxPropertyDescriptor(object);
-			addTypePropertyDescriptor(object);
-			addTopicTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ScopeConstraint_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ScopeConstraint_type_feature", "_UI_ScopeConstraint_type"),
+				 ModelPackage.Literals.SCOPE_CONSTRAINT__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -89,13 +110,13 @@ public class RoleTypeConstraintsItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RoleTypeConstraints_cardMin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_cardMin_feature", "_UI_RoleTypeConstraints_type"),
-				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MIN,
+				 getString("_UI_ScopeConstraint_cardMin_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ScopeConstraint_cardMin_feature", "_UI_ScopeConstraint_type"),
+				 ModelPackage.Literals.SCOPE_CONSTRAINT__CARD_MIN,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -111,70 +132,26 @@ public class RoleTypeConstraintsItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RoleTypeConstraints_cardMax_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_cardMax_feature", "_UI_RoleTypeConstraints_type"),
-				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MAX,
+				 getString("_UI_ScopeConstraint_cardMax_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ScopeConstraint_cardMax_feature", "_UI_ScopeConstraint_type"),
+				 ModelPackage.Literals.SCOPE_CONSTRAINT__CARD_MAX,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RoleTypeConstraints_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_type_feature", "_UI_RoleTypeConstraints_type"),
-				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Topic Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTopicTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RoleTypeConstraints_topicType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_topicType_feature", "_UI_RoleTypeConstraints_type"),
-				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns RoleTypeConstraints.gif.
+	 * This returns ScopeConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleTypeConstraints"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ScopeConstraint"));
 	}
 
 	/**
@@ -185,10 +162,8 @@ public class RoleTypeConstraintsItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RoleTypeConstraints)object).getCardMin();
-		return label == null || label.length() == 0 ?
-			getString("_UI_RoleTypeConstraints_type") :
-			getString("_UI_RoleTypeConstraints_type") + " " + label;
+		ScopeConstraint scopeConstraint = (ScopeConstraint)object;
+		return getString("_UI_ScopeConstraint_type") + " " + scopeConstraint.getCardMin();
 	}
 
 	/**
@@ -202,9 +177,9 @@ public class RoleTypeConstraintsItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(RoleTypeConstraints.class)) {
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
+		switch (notification.getFeatureID(ScopeConstraint.class)) {
+			case ModelPackage.SCOPE_CONSTRAINT__CARD_MIN:
+			case ModelPackage.SCOPE_CONSTRAINT__CARD_MAX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

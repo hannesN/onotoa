@@ -150,6 +150,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createScopedConstraintAdapter();
 			}
 			@Override
+			public Adapter caseScopeConstraint(ScopeConstraint object) {
+				return createScopeConstraintAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -418,6 +422,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScopedConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ScopeConstraint <em>Scope Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.ScopeConstraint
+	 * @generated
+	 */
+	public Adapter createScopeConstraintAdapter() {
 		return null;
 	}
 
