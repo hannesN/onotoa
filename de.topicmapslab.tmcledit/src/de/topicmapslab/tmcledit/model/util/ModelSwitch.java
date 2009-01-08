@@ -102,6 +102,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.ABSTRACT_CONSTRAINT: {
 				AbstractConstraint abstractConstraint = (AbstractConstraint)theEObject;
 				T result = caseAbstractConstraint(abstractConstraint);
+				if (result == null) result = caseCardinalityContraint(abstractConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,6 +111,7 @@ public class ModelSwitch<T> {
 				T result = caseOccurenceTypeConstraint(occurenceTypeConstraint);
 				if (result == null) result = caseScopedConstraint(occurenceTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(occurenceTypeConstraint);
+				if (result == null) result = caseCardinalityContraint(occurenceTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -118,6 +120,7 @@ public class ModelSwitch<T> {
 				T result = caseNameTypeConstraint(nameTypeConstraint);
 				if (result == null) result = caseScopedConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
+				if (result == null) result = caseCardinalityContraint(nameTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -137,6 +140,7 @@ public class ModelSwitch<T> {
 				SubjectLocatorConstraint subjectLocatorConstraint = (SubjectLocatorConstraint)theEObject;
 				T result = caseSubjectLocatorConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
+				if (result == null) result = caseCardinalityContraint(subjectLocatorConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -144,6 +148,7 @@ public class ModelSwitch<T> {
 				SubjectIdentifierConstraint subjectIdentifierConstraint = (SubjectIdentifierConstraint)theEObject;
 				T result = caseSubjectIdentifierConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
+				if (result == null) result = caseCardinalityContraint(subjectIdentifierConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -207,12 +212,20 @@ public class ModelSwitch<T> {
 				ScopedConstraint scopedConstraint = (ScopedConstraint)theEObject;
 				T result = caseScopedConstraint(scopedConstraint);
 				if (result == null) result = caseAbstractConstraint(scopedConstraint);
+				if (result == null) result = caseCardinalityContraint(scopedConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.SCOPE_CONSTRAINT: {
 				ScopeConstraint scopeConstraint = (ScopeConstraint)theEObject;
 				T result = caseScopeConstraint(scopeConstraint);
+				if (result == null) result = caseCardinalityContraint(scopeConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.CARDINALITY_CONTRAINT: {
+				CardinalityContraint cardinalityContraint = (CardinalityContraint)theEObject;
+				T result = caseCardinalityContraint(cardinalityContraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -502,6 +515,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseScopeConstraint(ScopeConstraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cardinality Contraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cardinality Contraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCardinalityContraint(CardinalityContraint object) {
 		return null;
 	}
 

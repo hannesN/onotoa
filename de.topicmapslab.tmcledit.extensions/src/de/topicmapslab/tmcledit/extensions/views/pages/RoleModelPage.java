@@ -75,6 +75,7 @@ public class RoleModelPage extends AbstractModelPage{
 					TopicType tt = wizard.getNewTopicType();
 					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
 					getCastedModel().setType(tt);
+					// TODO Command
 				}
 				
 			}

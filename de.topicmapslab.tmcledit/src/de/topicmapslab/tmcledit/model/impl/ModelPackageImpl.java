@@ -10,6 +10,7 @@ import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Bendpoints;
+import de.topicmapslab.tmcledit.model.CardinalityContraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -185,6 +186,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass scopeConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cardinalityContraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -415,7 +423,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractConstraint_CardMin() {
+	public EAttribute getAbstractConstraint_Regexp() {
 		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -424,26 +432,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractConstraint_CardMax() {
-		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAbstractConstraint_Regexp() {
-		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getAbstractConstraint_Name() {
-		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)abstractConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -991,8 +981,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getScopeConstraint_CardMin() {
-		return (EAttribute)scopeConstraintEClass.getEStructuralFeatures().get(1);
+	public EClass getCardinalityContraint() {
+		return cardinalityContraintEClass;
 	}
 
 	/**
@@ -1000,8 +990,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getScopeConstraint_CardMax() {
-		return (EAttribute)scopeConstraintEClass.getEStructuralFeatures().get(2);
+	public EAttribute getCardinalityContraint_CardMin() {
+		return (EAttribute)cardinalityContraintEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCardinalityContraint_CardMax() {
+		return (EAttribute)cardinalityContraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1075,8 +1074,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__LOCATORS);
 
 		abstractConstraintEClass = createEClass(ABSTRACT_CONSTRAINT);
-		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__CARD_MIN);
-		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__CARD_MAX);
 		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__REGEXP);
 		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__NAME);
 
@@ -1156,8 +1153,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		scopeConstraintEClass = createEClass(SCOPE_CONSTRAINT);
 		createEReference(scopeConstraintEClass, SCOPE_CONSTRAINT__TYPE);
-		createEAttribute(scopeConstraintEClass, SCOPE_CONSTRAINT__CARD_MIN);
-		createEAttribute(scopeConstraintEClass, SCOPE_CONSTRAINT__CARD_MAX);
+
+		cardinalityContraintEClass = createEClass(CARDINALITY_CONTRAINT);
+		createEAttribute(cardinalityContraintEClass, CARDINALITY_CONTRAINT__CARD_MIN);
+		createEAttribute(cardinalityContraintEClass, CARDINALITY_CONTRAINT__CARD_MAX);
 
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
@@ -1193,6 +1192,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		abstractConstraintEClass.getESuperTypes().add(this.getCardinalityContraint());
 		occurenceTypeConstraintEClass.getESuperTypes().add(this.getScopedConstraint());
 		nameTypeConstraintEClass.getESuperTypes().add(this.getScopedConstraint());
 		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
@@ -1200,6 +1200,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		typeNodeEClass.getESuperTypes().add(this.getNode());
 		associationNodeEClass.getESuperTypes().add(this.getNode());
 		scopedConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
+		scopeConstraintEClass.getESuperTypes().add(this.getCardinalityContraint());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1218,8 +1219,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTopicType_Locators(), ecorePackage.getEString(), "locators", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractConstraintEClass, AbstractConstraint.class, "AbstractConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractConstraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractConstraint_CardMax(), ecorePackage.getEString(), "cardMax", "1", 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractConstraint_Regexp(), ecorePackage.getEString(), "regexp", ".*", 1, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractConstraint_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1299,8 +1298,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(scopeConstraintEClass, ScopeConstraint.class, "ScopeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScopeConstraint_Type(), this.getTopicType(), null, "type", null, 1, 1, ScopeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getScopeConstraint_CardMin(), ecorePackage.getEInt(), "cardMin", null, 0, 1, ScopeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getScopeConstraint_CardMax(), ecorePackage.getEInt(), "cardMax", null, 0, 1, ScopeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cardinalityContraintEClass, CardinalityContraint.class, "CardinalityContraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCardinalityContraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, CardinalityContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCardinalityContraint_CardMax(), ecorePackage.getEString(), "cardMax", "1", 0, 1, CardinalityContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

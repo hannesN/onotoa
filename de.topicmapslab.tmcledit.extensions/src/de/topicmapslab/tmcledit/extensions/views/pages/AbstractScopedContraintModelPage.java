@@ -7,13 +7,13 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -43,8 +44,8 @@ import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddScopeConstraintsCommand;
-import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveScopeConstraintsCommand;
+import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -132,12 +133,35 @@ public abstract class AbstractScopedContraintModelPage extends
 		}
 		
 		scopeTable = new TableViewer(table);
-		scopeTable.setCellEditors(new CellEditor[]{null, new TextCellEditor(), new TextCellEditor()});
+		scopeTable.setCellEditors(new CellEditor[]{null, getTextCellEditor(), getTextCellEditor()});
 		scopeTable.setColumnProperties(TABLE_PROPS);
 		scopeTable.setContentProvider(new ArrayContentProvider());
 		scopeTable.setLabelProvider(new ScopeTableLabelProvider());
 		scopeTable.setCellModifier(new ScopeCellModifier());
 		return comp;
+	}
+	
+	private CellEditor getTextCellEditor() {
+		TextCellEditor editor = new TextCellEditor(scopeTable.getTable());
+		editor.setValidator(new ICellEditorValidator() {
+
+			@Override
+			public String isValid(Object value) {
+				String val = (String) value;
+				if (val.length()==0)
+					return "No text given";
+				if (val.equals("*"))
+					return null;
+				try {
+					Integer.parseInt(val);
+				} catch (NumberFormatException e) {
+					return "Please enter a number or *";
+				}
+				
+				return null;
+			}
+		});
+		return editor;
 	}
 
 	protected void hookButtonListeners() {
@@ -159,8 +183,8 @@ public abstract class AbstractScopedContraintModelPage extends
 					for (Object tt : dlg.getResult()) {
 						ScopeConstraint sc = ModelFactory.eINSTANCE.createScopeConstraint();
 						sc.setType((TopicType) tt);
-						sc.setCardMin(0);
-						sc.setCardMax(1);
+						sc.setCardMin("0");
+						sc.setCardMax("1");
 						scl.add(sc);
 					}
 					AddScopeConstraintsCommand cmd = new AddScopeConstraintsCommand(getCastedModel(), scl);
@@ -184,8 +208,8 @@ public abstract class AbstractScopedContraintModelPage extends
 					List<ScopeConstraint> scl = new ArrayList<ScopeConstraint>();
 					ScopeConstraint sc = ModelFactory.eINSTANCE.createScopeConstraint();
 					sc.setType(tt);
-					sc.setCardMin(0);
-					sc.setCardMax(1);
+					sc.setCardMin("0");
+					sc.setCardMax("1");
 					scl.add(sc);
 					AddScopeConstraintsCommand cmd = new AddScopeConstraintsCommand(getCastedModel(), scl);
 					getCommandStack().execute(cmd);
@@ -217,11 +241,41 @@ public abstract class AbstractScopedContraintModelPage extends
 	}
 	
 	@Override
+	public void notifyChanged(Notification notification) {
+		if (notification.getNotifier() instanceof ScopeConstraint) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.SCOPE_CONSTRAINT__TYPE) {
+				if (notification.getOldValue()!=null) {
+					((TopicType)notification.getOldValue()).eAdapters().remove(this);
+				}
+				if (notification.getNewValue()!=null) {
+					((TopicType)notification.getNewValue()).eAdapters().add(this);
+				}
+			} 
+			scopeTable.refresh(notification.getNotifier());
+			return;
+			
+		}
+		
+		
+		super.notifyChanged(notification);
+	}
+	
+	@Override
 	public void setModel(Object model) {
-		if (getModel()!=null)
-			((EObject)getModel()).eAdapters().remove(adapter);
+		if (getCastedModel()!=null) {
+			for (ScopeConstraint sc : getCastedModel().getScope()) {
+				if (sc.getType()!=null)
+					sc.getType().eAdapters().remove(this);
+				sc.eAdapters().remove(this);
+			}
+		}
+		
 		super.setModel(model);
-		((EObject)getModel()).eAdapters().add(adapter);
+		for (ScopeConstraint sc : getCastedModel().getScope()) {
+			if (sc.getType()!=null)
+				sc.getType().eAdapters().add(this);
+			sc.eAdapters().add(this);
+		}
 	}
 	
 	private ScopedConstraint getCastedModel() {
@@ -233,6 +287,7 @@ public abstract class AbstractScopedContraintModelPage extends
 	public void updateUI() {
 		super.updateUI();
 		scopeTable.setInput(getCastedModel().getScope());
+		scopeTable.refresh();
 	}
 	
 	private class ScopeCellModifier implements ICellModifier {
@@ -248,27 +303,27 @@ public abstract class AbstractScopedContraintModelPage extends
 		public Object getValue(Object element, String property) {
 			ScopeConstraint scopeConstraint = (ScopeConstraint) element;
 			if (property.equals(TABLE_PROPS[1]))
-				return Integer.toString(scopeConstraint.getCardMin());
+				return scopeConstraint.getCardMin();
 			if (property.equals(TABLE_PROPS[2]))
-				return Integer.toString(scopeConstraint.getCardMax());
+				return scopeConstraint.getCardMax();
 			
 			return null;
 		}
 
 		@Override
 		public void modify(Object element, String property, Object value) {
-			ScopeConstraint scopeConstraint = (ScopeConstraint) element;
-			int featureID = 0;
+			TableItem item = (TableItem) element;
+			ScopeConstraint scopeConstraint = (ScopeConstraint) item.getData();
+			boolean isMin = true;
 			if (property.equals(TABLE_PROPS[1])) {
-				featureID = ModelPackage.SCOPE_CONSTRAINT__CARD_MIN;
+				isMin = true;
 			} else if (property.equals(TABLE_PROPS[2])) {
-				featureID = ModelPackage.SCOPE_CONSTRAINT__CARD_MAX;
+				isMin = false;
 			}
 			if (value instanceof String) {
 				try {
-					GenericSetCommand cmd = new GenericSetCommand(
-							scopeConstraint, featureID, Integer
-									.parseInt((String) value));
+					SetCardinalityCommand cmd = new SetCardinalityCommand(
+							scopeConstraint, isMin, (String) value);
 					getCommandStack().execute(cmd);
 				} catch (Exception e) {
 					new RuntimeException(e);
@@ -291,8 +346,8 @@ public abstract class AbstractScopedContraintModelPage extends
 			ScopeConstraint sc = (ScopeConstraint) element;
 			switch(columnIndex) {
 			case 0: return sc.getType().getName();
-			case 1: return Integer.toString(sc.getCardMin());
-			case 2: return Integer.toString(sc.getCardMax());
+			case 1: return sc.getCardMin();
+			case 2: return sc.getCardMax();
 			}
 			return null;
 		}

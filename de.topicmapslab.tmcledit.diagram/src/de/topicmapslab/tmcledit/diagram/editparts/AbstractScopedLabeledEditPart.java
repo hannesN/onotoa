@@ -22,6 +22,30 @@ public abstract class AbstractScopedLabeledEditPart extends
 		}
 	}
 	
+	@Override
+	public void setModel(Object model) {
+		if (getModel()!=null)
+			removeScopeAdapters();
+		super.setModel(model);
+		updateScopeAdapters();
+	}
+	
+	private void updateScopeAdapters() {
+		for (ScopeConstraint sc : getCastedModel().getScope()) {
+			if (sc.getType()!=null)
+				sc.getType().eAdapters();
+			sc.eAdapters().add(this);
+		}
+	}
+	
+	private void removeScopeAdapters() {
+		for (ScopeConstraint sc : getCastedModel().getScope()) {
+			if (sc.getType()!=null)
+				sc.getType().eAdapters();
+			sc.eAdapters().add(this);
+		}
+	}
+
 	private ScopedConstraint getCastedModel() {
 		return (ScopedConstraint) getModel();
 	}

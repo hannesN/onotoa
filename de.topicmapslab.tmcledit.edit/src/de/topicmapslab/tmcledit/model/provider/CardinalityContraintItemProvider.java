@@ -6,11 +6,16 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
+import de.topicmapslab.tmcledit.model.CardinalityContraint;
+import de.topicmapslab.tmcledit.model.ModelPackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,19 +24,17 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
-import de.topicmapslab.tmcledit.model.ModelPackage;
-
 /**
- * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.AbstractConstraint} object.
+ * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.CardinalityContraint} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AbstractConstraintItemProvider
-	extends CardinalityContraintItemProvider
+public class CardinalityContraintItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -51,7 +54,7 @@ public class AbstractConstraintItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractConstraintItemProvider(AdapterFactory adapterFactory) {
+	public CardinalityContraintItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -66,26 +69,26 @@ public class AbstractConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRegexpPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
+			addCardMinPropertyDescriptor(object);
+			addCardMaxPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Regexp feature.
+	 * This adds a property descriptor for the Card Min feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRegexpPropertyDescriptor(Object object) {
+	protected void addCardMinPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AbstractConstraint_regexp_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractConstraint_regexp_feature", "_UI_AbstractConstraint_type"),
-				 ModelPackage.Literals.ABSTRACT_CONSTRAINT__REGEXP,
+				 getString("_UI_CardinalityContraint_cardMin_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CardinalityContraint_cardMin_feature", "_UI_CardinalityContraint_type"),
+				 ModelPackage.Literals.CARDINALITY_CONTRAINT__CARD_MIN,
 				 true,
 				 false,
 				 false,
@@ -95,19 +98,19 @@ public class AbstractConstraintItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Card Max feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addCardMaxPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AbstractConstraint_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractConstraint_name_feature", "_UI_AbstractConstraint_type"),
-				 ModelPackage.Literals.ABSTRACT_CONSTRAINT__NAME,
+				 getString("_UI_CardinalityContraint_cardMax_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CardinalityContraint_cardMax_feature", "_UI_CardinalityContraint_type"),
+				 ModelPackage.Literals.CARDINALITY_CONTRAINT__CARD_MAX,
 				 true,
 				 false,
 				 false,
@@ -124,10 +127,10 @@ public class AbstractConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AbstractConstraint)object).getName();
+		String label = ((CardinalityContraint)object).getCardMin();
 		return label == null || label.length() == 0 ?
-			getString("_UI_AbstractConstraint_type") :
-			getString("_UI_AbstractConstraint_type") + " " + label;
+			getString("_UI_CardinalityContraint_type") :
+			getString("_UI_CardinalityContraint_type") + " " + label;
 	}
 
 	/**
@@ -141,9 +144,9 @@ public class AbstractConstraintItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AbstractConstraint.class)) {
-			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
-			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
+		switch (notification.getFeatureID(CardinalityContraint.class)) {
+			case ModelPackage.CARDINALITY_CONTRAINT__CARD_MIN:
+			case ModelPackage.CARDINALITY_CONTRAINT__CARD_MAX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -160,6 +163,17 @@ public class AbstractConstraintItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }
