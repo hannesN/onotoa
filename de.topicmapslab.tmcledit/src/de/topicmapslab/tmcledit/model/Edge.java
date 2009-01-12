@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getTarget <em>Target</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getType <em>Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getRoleConstraint <em>Role Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.Edge#getLabelPositions <em>Label Positions</em>}</li>
  * </ul>
  * </p>
  *
@@ -160,5 +161,21 @@ public interface Edge extends EObject {
 	 * @generated
 	 */
 	void setRoleConstraint(RoleTypeConstraints value);
+
+	/**
+	 * Returns the value of the '<em><b>Label Positions</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.LabelPos}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Label Positions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Label Positions</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getEdge_LabelPositions()
+	 * @model containment="true" upper="2"
+	 * @generated
+	 */
+	EList<LabelPos> getLabelPositions();
 
 } // Edge

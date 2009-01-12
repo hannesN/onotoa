@@ -55,8 +55,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//NameTypeConstraint/type"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//RoleTypeConstraints">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//RoleTypeConstraints/cardMin"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//RoleTypeConstraints/cardMax"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/topicType"/>
     </genClasses>
@@ -100,6 +98,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edge/target"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Edge/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edge/roleConstraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edge/labelPositions"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//AssociationNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationNode/associationConstraint"/>
@@ -124,6 +123,10 @@
     <genClasses image="false" ecoreClass="tmcledit.ecore#//CardinalityContraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//CardinalityContraint/cardMin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//CardinalityContraint/cardMax"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//LabelPos">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//LabelPos/posX"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//LabelPos/posY"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

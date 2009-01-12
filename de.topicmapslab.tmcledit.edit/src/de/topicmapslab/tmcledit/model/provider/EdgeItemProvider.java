@@ -183,6 +183,7 @@ public class EdgeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ModelPackage.Literals.EDGE__BENDPOINTS);
+			childrenFeatures.add(ModelPackage.Literals.EDGE__LABEL_POSITIONS);
 		}
 		return childrenFeatures;
 	}
@@ -242,6 +243,7 @@ public class EdgeItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ModelPackage.EDGE__BENDPOINTS:
+			case ModelPackage.EDGE__LABEL_POSITIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -263,6 +265,11 @@ public class EdgeItemProvider
 			(createChildParameter
 				(ModelPackage.Literals.EDGE__BENDPOINTS,
 				 ModelFactory.eINSTANCE.createBendpoints()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ModelPackage.Literals.EDGE__LABEL_POSITIONS,
+				 ModelFactory.eINSTANCE.createLabelPos()));
 	}
 
 	/**

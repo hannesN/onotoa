@@ -35,7 +35,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class RoleTypeConstraintsItemProvider
-	extends ItemProviderAdapter
+	extends CardinalityContraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -70,56 +70,10 @@ public class RoleTypeConstraintsItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addCardMinPropertyDescriptor(object);
-			addCardMaxPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addTopicTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Card Min feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCardMinPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RoleTypeConstraints_cardMin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_cardMin_feature", "_UI_RoleTypeConstraints_type"),
-				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MIN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Card Max feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCardMaxPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RoleTypeConstraints_cardMax_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RoleTypeConstraints_cardMax_feature", "_UI_RoleTypeConstraints_type"),
-				 ModelPackage.Literals.ROLE_TYPE_CONSTRAINTS__CARD_MAX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -201,13 +155,6 @@ public class RoleTypeConstraintsItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(RoleTypeConstraints.class)) {
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN:
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -221,17 +168,6 @@ public class RoleTypeConstraintsItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

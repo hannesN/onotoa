@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -50,6 +51,7 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
+@SuppressWarnings("unused")
 public abstract class AbstractScopedContraintModelPage extends
 		AbstractConstraintModelPage {
 
@@ -59,13 +61,6 @@ public abstract class AbstractScopedContraintModelPage extends
 	private Button addButton;
 	private Button newButton;
 	private Button removeButton;
-	
-	private Adapter adapter = new AdapterImpl() {
-		@Override
-		public void notifyChanged(Notification msg) {
-			updateUI();
-		}
-	};
 	
 	public AbstractScopedContraintModelPage(String id) {
 		super(id);
@@ -152,12 +147,12 @@ public abstract class AbstractScopedContraintModelPage extends
 					return "No text given";
 				if (val.equals("*"))
 					return null;
-				try {
-					Integer.parseInt(val);
-				} catch (NumberFormatException e) {
-					return "Please enter a number or *";
-				}
-				
+				char[] chars = ((String)value).toCharArray();
+				for (int i = 0; i < chars.length; i++) {
+					if (!Character.isDigit(chars[i])) {
+						return "use only digits or *";
+					}
+				}				
 				return null;
 			}
 		});

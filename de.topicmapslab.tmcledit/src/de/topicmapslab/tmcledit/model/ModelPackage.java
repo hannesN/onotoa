@@ -660,7 +660,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE_CONSTRAINTS__CARD_MIN = 0;
+	int ROLE_TYPE_CONSTRAINTS__CARD_MIN = CARDINALITY_CONTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -669,7 +669,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE_CONSTRAINTS__CARD_MAX = 1;
+	int ROLE_TYPE_CONSTRAINTS__CARD_MAX = CARDINALITY_CONTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -678,7 +678,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE_CONSTRAINTS__TYPE = 2;
+	int ROLE_TYPE_CONSTRAINTS__TYPE = CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Topic Type</b></em>' reference.
@@ -687,7 +687,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE = 3;
+	int ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE = CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Role Type Constraints</em>' class.
@@ -696,7 +696,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE_CONSTRAINTS_FEATURE_COUNT = 4;
+	int ROLE_TYPE_CONSTRAINTS_FEATURE_COUNT = CARDINALITY_CONTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Topic Types</b></em>' containment reference list.
@@ -1086,13 +1086,22 @@ public interface ModelPackage extends EPackage {
 	int EDGE__ROLE_CONSTRAINT = 4;
 
 	/**
+	 * The feature id for the '<em><b>Label Positions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__LABEL_POSITIONS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = 5;
+	int EDGE_FEATURE_COUNT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1258,6 +1267,43 @@ public interface ModelPackage extends EPackage {
 	int SCOPE_CONSTRAINT_FEATURE_COUNT = CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.LabelPosImpl <em>Label Pos</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.LabelPosImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getLabelPos()
+	 * @generated
+	 */
+	int LABEL_POS = 20;
+
+	/**
+	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL_POS__POS_X = 0;
+
+	/**
+	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL_POS__POS_Y = 1;
+
+	/**
+	 * The number of structural features of the '<em>Label Pos</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL_POS_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1265,7 +1311,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 20;
+	int TOPIC_ID = 21;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -1275,7 +1321,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 21;
+	int EDGE_TYPE = 22;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -1285,7 +1331,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 22;
+	int KIND_OF_TOPIC_TYPE = 23;
 
 
 	/**
@@ -1546,28 +1592,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRoleTypeConstraints();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getCardMin <em>Card Min</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Card Min</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RoleTypeConstraints#getCardMin()
-	 * @see #getRoleTypeConstraints()
-	 * @generated
-	 */
-	EAttribute getRoleTypeConstraints_CardMin();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getCardMax <em>Card Max</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Card Max</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RoleTypeConstraints#getCardMax()
-	 * @see #getRoleTypeConstraints()
-	 * @generated
-	 */
-	EAttribute getRoleTypeConstraints_CardMax();
 
 	/**
 	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints#getType <em>Type</em>}'.
@@ -1957,6 +1981,17 @@ public interface ModelPackage extends EPackage {
 	EReference getEdge_RoleConstraint();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.Edge#getLabelPositions <em>Label Positions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Label Positions</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Edge#getLabelPositions()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_LabelPositions();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AssociationNode <em>Association Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2147,6 +2182,38 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCardinalityContraint_CardMax();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.LabelPos <em>Label Pos</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Label Pos</em>'.
+	 * @see de.topicmapslab.tmcledit.model.LabelPos
+	 * @generated
+	 */
+	EClass getLabelPos();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.LabelPos#getPosX <em>Pos X</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pos X</em>'.
+	 * @see de.topicmapslab.tmcledit.model.LabelPos#getPosX()
+	 * @see #getLabelPos()
+	 * @generated
+	 */
+	EAttribute getLabelPos_PosX();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.LabelPos#getPosY <em>Pos Y</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pos Y</em>'.
+	 * @see de.topicmapslab.tmcledit.model.LabelPos#getPosY()
+	 * @see #getLabelPos()
+	 * @generated
+	 */
+	EAttribute getLabelPos_PosY();
 
 	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
@@ -2401,22 +2468,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ROLE_TYPE_CONSTRAINTS = eINSTANCE.getRoleTypeConstraints();
-
-		/**
-		 * The meta object literal for the '<em><b>Card Min</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE_TYPE_CONSTRAINTS__CARD_MIN = eINSTANCE.getRoleTypeConstraints_CardMin();
-
-		/**
-		 * The meta object literal for the '<em><b>Card Max</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE_TYPE_CONSTRAINTS__CARD_MAX = eINSTANCE.getRoleTypeConstraints_CardMax();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -2725,6 +2776,14 @@ public interface ModelPackage extends EPackage {
 		EReference EDGE__ROLE_CONSTRAINT = eINSTANCE.getEdge_RoleConstraint();
 
 		/**
+		 * The meta object literal for the '<em><b>Label Positions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__LABEL_POSITIONS = eINSTANCE.getEdge_LabelPositions();
+
+		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2879,6 +2938,32 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CARDINALITY_CONTRAINT__CARD_MAX = eINSTANCE.getCardinalityContraint_CardMax();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.LabelPosImpl <em>Label Pos</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.LabelPosImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getLabelPos()
+		 * @generated
+		 */
+		EClass LABEL_POS = eINSTANCE.getLabelPos();
+
+		/**
+		 * The meta object literal for the '<em><b>Pos X</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LABEL_POS__POS_X = eINSTANCE.getLabelPos_PosX();
+
+		/**
+		 * The meta object literal for the '<em><b>Pos Y</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LABEL_POS__POS_Y = eINSTANCE.getLabelPos_PosY();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

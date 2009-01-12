@@ -9,6 +9,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.Bendpoints;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.Node;
 
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getRoleConstraint <em>Role Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl#getLabelPositions <em>Label Positions</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,6 +115,16 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * @ordered
 	 */
 	protected RoleTypeConstraints roleConstraint;
+
+	/**
+	 * The cached value of the '{@link #getLabelPositions() <em>Label Positions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabelPositions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<LabelPos> labelPositions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -285,11 +297,25 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<LabelPos> getLabelPositions() {
+		if (labelPositions == null) {
+			labelPositions = new EObjectContainmentEList<LabelPos>(LabelPos.class, this, ModelPackage.EDGE__LABEL_POSITIONS);
+		}
+		return labelPositions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.EDGE__BENDPOINTS:
 				return ((InternalEList<?>)getBendpoints()).basicRemove(otherEnd, msgs);
+			case ModelPackage.EDGE__LABEL_POSITIONS:
+				return ((InternalEList<?>)getLabelPositions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -315,6 +341,8 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 			case ModelPackage.EDGE__ROLE_CONSTRAINT:
 				if (resolve) return getRoleConstraint();
 				return basicGetRoleConstraint();
+			case ModelPackage.EDGE__LABEL_POSITIONS:
+				return getLabelPositions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,6 +372,10 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 			case ModelPackage.EDGE__ROLE_CONSTRAINT:
 				setRoleConstraint((RoleTypeConstraints)newValue);
 				return;
+			case ModelPackage.EDGE__LABEL_POSITIONS:
+				getLabelPositions().clear();
+				getLabelPositions().addAll((Collection<? extends LabelPos>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -371,6 +403,9 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 			case ModelPackage.EDGE__ROLE_CONSTRAINT:
 				setRoleConstraint((RoleTypeConstraints)null);
 				return;
+			case ModelPackage.EDGE__LABEL_POSITIONS:
+				getLabelPositions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -393,6 +428,8 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 				return type != TYPE_EDEFAULT;
 			case ModelPackage.EDGE__ROLE_CONSTRAINT:
 				return roleConstraint != null;
+			case ModelPackage.EDGE__LABEL_POSITIONS:
+				return labelPositions != null && !labelPositions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

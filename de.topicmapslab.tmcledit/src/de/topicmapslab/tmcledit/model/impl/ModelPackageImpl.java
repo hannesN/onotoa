@@ -16,6 +16,7 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -193,6 +194,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass cardinalityContraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass labelPosEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -504,26 +512,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRoleTypeConstraints_CardMin() {
-		return (EAttribute)roleTypeConstraintsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRoleTypeConstraints_CardMax() {
-		return (EAttribute)roleTypeConstraintsEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getRoleTypeConstraints_Type() {
-		return (EReference)roleTypeConstraintsEClass.getEStructuralFeatures().get(2);
+		return (EReference)roleTypeConstraintsEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -532,7 +522,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getRoleTypeConstraints_TopicType() {
-		return (EReference)roleTypeConstraintsEClass.getEStructuralFeatures().get(3);
+		return (EReference)roleTypeConstraintsEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -846,6 +836,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getEdge_LabelPositions() {
+		return (EReference)edgeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAssociationNode() {
 		return associationNodeEClass;
 	}
@@ -1008,6 +1007,33 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLabelPos() {
+		return labelPosEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLabelPos_PosX() {
+		return (EAttribute)labelPosEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLabelPos_PosY() {
+		return (EAttribute)labelPosEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1086,8 +1112,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(nameTypeConstraintEClass, NAME_TYPE_CONSTRAINT__TYPE);
 
 		roleTypeConstraintsEClass = createEClass(ROLE_TYPE_CONSTRAINTS);
-		createEAttribute(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__CARD_MIN);
-		createEAttribute(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__CARD_MAX);
 		createEReference(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__TYPE);
 		createEReference(roleTypeConstraintsEClass, ROLE_TYPE_CONSTRAINTS__TOPIC_TYPE);
 
@@ -1133,6 +1157,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(edgeEClass, EDGE__TARGET);
 		createEAttribute(edgeEClass, EDGE__TYPE);
 		createEReference(edgeEClass, EDGE__ROLE_CONSTRAINT);
+		createEReference(edgeEClass, EDGE__LABEL_POSITIONS);
 
 		associationNodeEClass = createEClass(ASSOCIATION_NODE);
 		createEReference(associationNodeEClass, ASSOCIATION_NODE__ASSOCIATION_CONSTRAINT);
@@ -1157,6 +1182,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		cardinalityContraintEClass = createEClass(CARDINALITY_CONTRAINT);
 		createEAttribute(cardinalityContraintEClass, CARDINALITY_CONTRAINT__CARD_MIN);
 		createEAttribute(cardinalityContraintEClass, CARDINALITY_CONTRAINT__CARD_MAX);
+
+		labelPosEClass = createEClass(LABEL_POS);
+		createEAttribute(labelPosEClass, LABEL_POS__POS_X);
+		createEAttribute(labelPosEClass, LABEL_POS__POS_Y);
 
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
@@ -1195,6 +1224,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractConstraintEClass.getESuperTypes().add(this.getCardinalityContraint());
 		occurenceTypeConstraintEClass.getESuperTypes().add(this.getScopedConstraint());
 		nameTypeConstraintEClass.getESuperTypes().add(this.getScopedConstraint());
+		roleTypeConstraintsEClass.getESuperTypes().add(this.getCardinalityContraint());
 		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		typeNodeEClass.getESuperTypes().add(this.getNode());
@@ -1231,8 +1261,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getNameTypeConstraint_Type(), this.getTopicType(), null, "type", null, 0, 1, NameTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleTypeConstraintsEClass, RoleTypeConstraints.class, "RoleTypeConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRoleTypeConstraints_CardMin(), ecorePackage.getEString(), "cardMin", "0", 1, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRoleTypeConstraints_CardMax(), ecorePackage.getEString(), "cardMax", "1", 1, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoleTypeConstraints_Type(), this.getTopicType(), null, "type", null, 1, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoleTypeConstraints_TopicType(), this.getTopicType(), null, "topicType", null, 0, 1, RoleTypeConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1278,6 +1306,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getEdge_Target(), this.getNode(), null, "target", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEdge_Type(), this.getEdgeType(), "type", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_RoleConstraint(), this.getRoleTypeConstraints(), null, "roleConstraint", null, 0, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEdge_LabelPositions(), this.getLabelPos(), null, "labelPositions", null, 0, 2, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(associationNodeEClass, AssociationNode.class, "AssociationNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssociationNode_AssociationConstraint(), this.getAssociationTypeConstraint(), null, "associationConstraint", null, 1, 1, AssociationNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1302,6 +1331,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(cardinalityContraintEClass, CardinalityContraint.class, "CardinalityContraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCardinalityContraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, CardinalityContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCardinalityContraint_CardMax(), ecorePackage.getEString(), "cardMax", "1", 0, 1, CardinalityContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(labelPosEClass, LabelPos.class, "LabelPos", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLabelPos_PosX(), ecorePackage.getEInt(), "posX", "0", 1, 1, LabelPos.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabelPos_PosY(), ecorePackage.getEInt(), "posY", "0", 1, 1, LabelPos.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

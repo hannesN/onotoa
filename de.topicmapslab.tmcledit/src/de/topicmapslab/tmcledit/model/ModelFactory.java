@@ -185,6 +185,15 @@ public interface ModelFactory extends EFactory {
 	ScopeConstraint createScopeConstraint();
 
 	/**
+	 * Returns a new object of class '<em>Label Pos</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Label Pos</em>'.
+	 * @generated
+	 */
+	LabelPos createLabelPos();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

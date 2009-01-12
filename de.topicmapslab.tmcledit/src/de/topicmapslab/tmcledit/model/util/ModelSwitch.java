@@ -127,6 +127,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.ROLE_TYPE_CONSTRAINTS: {
 				RoleTypeConstraints roleTypeConstraints = (RoleTypeConstraints)theEObject;
 				T result = caseRoleTypeConstraints(roleTypeConstraints);
+				if (result == null) result = caseCardinalityContraint(roleTypeConstraints);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -226,6 +227,12 @@ public class ModelSwitch<T> {
 			case ModelPackage.CARDINALITY_CONTRAINT: {
 				CardinalityContraint cardinalityContraint = (CardinalityContraint)theEObject;
 				T result = caseCardinalityContraint(cardinalityContraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.LABEL_POS: {
+				LabelPos labelPos = (LabelPos)theEObject;
+				T result = caseLabelPos(labelPos);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -530,6 +537,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseCardinalityContraint(CardinalityContraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Label Pos</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Label Pos</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLabelPos(LabelPos object) {
 		return null;
 	}
 

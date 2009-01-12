@@ -11,6 +11,7 @@ import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
+import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -85,6 +86,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			}
 			
 			identifierFigure = new Figure();
+			identifierFigure.setBorder(new MarginBorder(2, 5, 2, 5));
 			layout = new ToolbarLayout(false);
 			layout.setStretchMinorAxis(false);
 			layout.setSpacing(3);
@@ -147,7 +149,6 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	
 	@Override
 	protected void refreshVisuals() {
-		
 		TypeNode tn = (TypeNode) getModel();
 		if (titleLabel.isVisible()) {
 			TopicType tt = (TopicType) tn.getTopicType();

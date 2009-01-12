@@ -85,6 +85,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.DIAGRAM: return createDiagram();
 			case ModelPackage.FILE: return createFile();
 			case ModelPackage.SCOPE_CONSTRAINT: return createScopeConstraint();
+			case ModelPackage.LABEL_POS: return createLabelPos();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -296,6 +297,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ScopeConstraint createScopeConstraint() {
 		ScopeConstraintImpl scopeConstraint = new ScopeConstraintImpl();
 		return scopeConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LabelPos createLabelPos() {
+		LabelPosImpl labelPos = new LabelPosImpl();
+		return labelPos;
 	}
 
 	/**

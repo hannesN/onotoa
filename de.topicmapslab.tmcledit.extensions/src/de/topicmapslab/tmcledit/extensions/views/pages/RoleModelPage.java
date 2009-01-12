@@ -22,9 +22,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 
 import de.topicmapslab.tmcledit.extensions.dialogs.NewTopicTypeWizard;
-import de.topicmapslab.tmcledit.extensions.util.TextObserver;
+import de.topicmapslab.tmcledit.extensions.util.CardTextObserver;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
-import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
@@ -93,14 +92,14 @@ public class RoleModelPage extends AbstractModelPage{
 		gd.horizontalSpan = 2;
 		cardMinText = toolkit.createText(comp, "", SWT.BORDER);
 		cardMinText.setLayoutData(gd);
-		TextObserver.observe(cardMinText, this, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MIN);
+		CardTextObserver.observe(cardMinText, this, true);
 				
 		toolkit.createLabel(comp, "cardMax:");
 		cardMaxText = toolkit.createText(comp, "", SWT.BORDER);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		cardMaxText.setLayoutData(gd);
-		TextObserver.observe(cardMaxText, this, ModelPackage.ROLE_TYPE_CONSTRAINTS__CARD_MAX);
+		CardTextObserver.observe(cardMaxText, this, false);
 		
 		setControl(comp);
 	}

@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.extensions.util.CardTextObserver;
 import de.topicmapslab.tmcledit.extensions.util.TextObserver;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -49,12 +50,12 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 		toolkit.createLabel(parent, "cardMin");
 		cardMinText = toolkit.createText(parent, "", SWT.BORDER);
 		fac.applyTo(cardMinText);
-		TextObserver.observe(cardMinText, this, ModelPackage.ABSTRACT_CONSTRAINT__CARD_MIN);
+		CardTextObserver.observe(cardMinText, this, true);
 		
 		toolkit.createLabel(parent, "cardMax");
 		cardMaxText = toolkit.createText(parent, "", SWT.BORDER);
 		fac.applyTo(cardMaxText);
-		TextObserver.observe(cardMaxText, this, ModelPackage.ABSTRACT_CONSTRAINT__CARD_MAX);
+		CardTextObserver.observe(cardMaxText, this, false);
 		
 		toolkit.createLabel(parent, "reg. exp");
 		regExpText = toolkit.createText(parent, "", SWT.BORDER);

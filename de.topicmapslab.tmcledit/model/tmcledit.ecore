@@ -48,11 +48,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="NameTypeConstraint" eSuperTypes="#//ScopedConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TopicType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleTypeConstraints">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMin" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="0"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleTypeConstraints" eSuperTypes="#//CardinalityContraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="topicType" eType="#//TopicType"/>
   </eClassifiers>
@@ -117,6 +113,8 @@
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//EdgeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleConstraint" eType="#//RoleTypeConstraints"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelPositions" upperBound="2"
+        eType="#//LabelPos" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationNode" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationConstraint"
@@ -164,5 +162,11 @@
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LabelPos">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
   </eClassifiers>
 </ecore:EPackage>

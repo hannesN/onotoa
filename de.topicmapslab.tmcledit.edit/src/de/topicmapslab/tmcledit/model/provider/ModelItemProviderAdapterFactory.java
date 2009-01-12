@@ -473,6 +473,29 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.LabelPos} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LabelPosItemProvider labelPosItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.LabelPos}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLabelPosAdapter() {
+		if (labelPosItemProvider == null) {
+			labelPosItemProvider = new LabelPosItemProvider(this);
+		}
+
+		return labelPosItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -588,6 +611,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (diagramItemProvider != null) diagramItemProvider.dispose();
 		if (fileItemProvider != null) fileItemProvider.dispose();
 		if (scopeConstraintItemProvider != null) scopeConstraintItemProvider.dispose();
+		if (labelPosItemProvider != null) labelPosItemProvider.dispose();
 	}
 
 }

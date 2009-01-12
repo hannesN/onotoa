@@ -5,13 +5,16 @@ import java.util.List;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
@@ -26,17 +29,21 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 			refreshChildren();
 		}
 	};
-	
+
 	@Override
 	protected IFigure createFigure() {
 		if (figure == null) {
 			figure = new Figure();
-			
+
 			ToolbarLayout layout = new ToolbarLayout(false);
-			layout.setStretchMinorAxis(true);
+			layout.setStretchMinorAxis(false);
 			layout.setSpacing(5);
 			figure.setLayoutManager(layout);
 			figure.setBorder(new LineBorder(ColorConstants.black, 1));
+			figure.setMinimumSize(new Dimension(50, 20));
+			Label l = new Label();
+			l.setText("Prefixes:");
+			figure.add(l);
 		}
 		return figure;
 	}
@@ -44,34 +51,42 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected void createEditPolicies() {
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	EObjectContainmentEList<MappingElement> getCastedModel() {
 		return (EObjectContainmentEList<MappingElement>) getModel();
+	}
+
+	@Override
+	protected void addChildVisual(EditPart childEditPart, int index) {
+		// increase index beacuse headline-label is index
+		super.addChildVisual(childEditPart, index+1);
 	}
 	
 	@Override
 	public void activate() {
 		super.activate();
 		getCastedModel().getEObject().eAdapters().add(adapter);
-		((Diagram)getParent().getModel()).eAdapters().add(adapter);
+		((Diagram) getParent().getModel()).eAdapters().add(adapter);
 	}
-	
+
 	@Override
 	public void deactivate() {
-		((Diagram)getParent().getModel()).eAdapters().remove(adapter);
+		((Diagram) getParent().getModel()).eAdapters().remove(adapter);
 		getCastedModel().getEObject().eAdapters().remove(adapter);
 		super.deactivate();
 	}
-	
+
 	@Override
 	protected void refreshVisuals() {
-		Rectangle r = ((GraphicalEditPart)getParent()).getFigure().getBounds().getCopy();
+		Rectangle r = ((GraphicalEditPart) getParent()).getFigure().getBounds()
+				.getCopy();
 		r.setSize(-1, -1);
-        ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
-		
+		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
+				getFigure(), r);
+
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List getModelChildren() {
