@@ -4,7 +4,6 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
 import org.eclipse.draw2d.Connection;
-import org.eclipse.draw2d.ConnectionEndpointLocator;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.emf.common.notify.Notification;

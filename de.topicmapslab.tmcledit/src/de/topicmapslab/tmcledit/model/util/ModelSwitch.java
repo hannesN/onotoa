@@ -156,6 +156,9 @@ public class ModelSwitch<T> {
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT: {
 				AssociationTypeConstraint associationTypeConstraint = (AssociationTypeConstraint)theEObject;
 				T result = caseAssociationTypeConstraint(associationTypeConstraint);
+				if (result == null) result = caseScopedConstraint(associationTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(associationTypeConstraint);
+				if (result == null) result = caseCardinalityContraint(associationTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

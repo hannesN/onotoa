@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getScope <em>Scope</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getAssociationType <em>Association Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getRoleTypeConstraints <em>Role Type Constraints</em>}</li>
  * </ul>
@@ -28,39 +27,13 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface AssociationTypeConstraint extends EObject {
+public interface AssociationTypeConstraint extends ScopedConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
-	 * Returns the value of the '<em><b>Scope</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Scope</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Scope</em>' reference.
-	 * @see #setScope(TopicType)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationTypeConstraint_Scope()
-	 * @model
-	 * @generated
-	 */
-	TopicType getScope();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getScope <em>Scope</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Scope</em>' reference.
-	 * @see #getScope()
-	 * @generated
-	 */
-	void setScope(TopicType value);
 
 	/**
 	 * Returns the value of the '<em><b>Association Type</b></em>' reference.

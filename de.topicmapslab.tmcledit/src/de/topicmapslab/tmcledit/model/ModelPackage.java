@@ -888,13 +888,49 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_IDENTIFIER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Scope</b></em>' reference.
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE_CONSTRAINT__SCOPE = 0;
+	int ASSOCIATION_TYPE_CONSTRAINT__CARD_MIN = SCOPED_CONSTRAINT__CARD_MIN;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE_CONSTRAINT__CARD_MAX = SCOPED_CONSTRAINT__CARD_MAX;
+
+	/**
+	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE_CONSTRAINT__REGEXP = SCOPED_CONSTRAINT__REGEXP;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE_CONSTRAINT__NAME = SCOPED_CONSTRAINT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE_CONSTRAINT__SCOPE = SCOPED_CONSTRAINT__SCOPE;
 
 	/**
 	 * The feature id for the '<em><b>Association Type</b></em>' reference.
@@ -903,7 +939,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE = 1;
+	int ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE = SCOPED_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Role Type Constraints</b></em>' containment reference list.
@@ -912,7 +948,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS = 2;
+	int ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS = SCOPED_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Association Type Constraint</em>' class.
@@ -921,7 +957,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE_CONSTRAINT_FEATURE_COUNT = 3;
+	int ASSOCIATION_TYPE_CONSTRAINT_FEATURE_COUNT = SCOPED_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1766,17 +1802,6 @@ public interface ModelPackage extends EPackage {
 	EClass getAssociationTypeConstraint();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getScope <em>Scope</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Scope</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getScope()
-	 * @see #getAssociationTypeConstraint()
-	 * @generated
-	 */
-	EReference getAssociationTypeConstraint_Scope();
-
-	/**
 	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.AssociationTypeConstraint#getAssociationType <em>Association Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2604,14 +2629,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ASSOCIATION_TYPE_CONSTRAINT = eINSTANCE.getAssociationTypeConstraint();
-
-		/**
-		 * The meta object literal for the '<em><b>Scope</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSOCIATION_TYPE_CONSTRAINT__SCOPE = eINSTANCE.getAssociationTypeConstraint_Scope();
 
 		/**
 		 * The meta object literal for the '<em><b>Association Type</b></em>' reference feature.

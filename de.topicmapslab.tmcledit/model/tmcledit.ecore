@@ -82,8 +82,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SubjectLocatorConstraint" eSuperTypes="#//AbstractConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="SubjectIdentifierConstraint" eSuperTypes="#//AbstractConstraint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationTypeConstraint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//TopicType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationTypeConstraint" eSuperTypes="#//ScopedConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationType" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleTypeConstraints" lowerBound="1"
         upperBound="-1" eType="#//RoleTypeConstraints" containment="true"/>

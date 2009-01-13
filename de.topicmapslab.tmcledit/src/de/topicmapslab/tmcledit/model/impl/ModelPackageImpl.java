@@ -656,7 +656,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssociationTypeConstraint_Scope() {
+	public EReference getAssociationTypeConstraint_AssociationType() {
 		return (EReference)associationTypeConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -665,17 +665,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssociationTypeConstraint_AssociationType() {
-		return (EReference)associationTypeConstraintEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAssociationTypeConstraint_RoleTypeConstraints() {
-		return (EReference)associationTypeConstraintEClass.getEStructuralFeatures().get(2);
+		return (EReference)associationTypeConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1132,7 +1123,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		subjectIdentifierConstraintEClass = createEClass(SUBJECT_IDENTIFIER_CONSTRAINT);
 
 		associationTypeConstraintEClass = createEClass(ASSOCIATION_TYPE_CONSTRAINT);
-		createEReference(associationTypeConstraintEClass, ASSOCIATION_TYPE_CONSTRAINT__SCOPE);
 		createEReference(associationTypeConstraintEClass, ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE);
 		createEReference(associationTypeConstraintEClass, ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS);
 
@@ -1227,6 +1217,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		roleTypeConstraintsEClass.getESuperTypes().add(this.getCardinalityContraint());
 		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
+		associationTypeConstraintEClass.getESuperTypes().add(this.getScopedConstraint());
 		typeNodeEClass.getESuperTypes().add(this.getNode());
 		associationNodeEClass.getESuperTypes().add(this.getNode());
 		scopedConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
@@ -1281,7 +1272,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(subjectIdentifierConstraintEClass, SubjectIdentifierConstraint.class, "SubjectIdentifierConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(associationTypeConstraintEClass, AssociationTypeConstraint.class, "AssociationTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssociationTypeConstraint_Scope(), this.getTopicType(), null, "scope", null, 0, 1, AssociationTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociationTypeConstraint_AssociationType(), this.getTopicType(), null, "associationType", null, 0, 1, AssociationTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociationTypeConstraint_RoleTypeConstraints(), this.getRoleTypeConstraints(), null, "roleTypeConstraints", null, 1, -1, AssociationTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

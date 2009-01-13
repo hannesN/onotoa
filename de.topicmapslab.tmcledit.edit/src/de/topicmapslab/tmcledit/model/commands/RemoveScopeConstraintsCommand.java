@@ -27,17 +27,11 @@ public class RemoveScopeConstraintsCommand extends AbstractCommand {
 		this.scope = scope;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.emf.common.command.Command#execute()
-	 */
 	@Override
 	public void execute() {
 		constraint.getScope().removeAll(scope);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.emf.common.command.Command#redo()
-	 */
 	@Override
 	public void redo() {
 		execute();

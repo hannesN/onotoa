@@ -73,7 +73,6 @@
     <genClasses ecoreClass="tmcledit.ecore#//SubjectLocatorConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//SubjectIdentifierConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//AssociationTypeConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/scope"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/associationType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/roleTypeConstraints"/>
     </genClasses>

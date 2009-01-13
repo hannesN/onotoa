@@ -37,7 +37,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class AssociationTypeConstraintItemProvider
-	extends ItemProviderAdapter
+	extends ScopedConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -72,32 +72,9 @@ public class AssociationTypeConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addScopePropertyDescriptor(object);
 			addAssociationTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Scope feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addScopePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AssociationTypeConstraint_scope_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociationTypeConstraint_scope_feature", "_UI_AssociationTypeConstraint_type"),
-				 ModelPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT__SCOPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -171,7 +148,10 @@ public class AssociationTypeConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_AssociationTypeConstraint_type");
+		String label = ((AssociationTypeConstraint)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_AssociationTypeConstraint_type") :
+			getString("_UI_AssociationTypeConstraint_type") + " " + label;
 	}
 
 	/**
@@ -208,17 +188,6 @@ public class AssociationTypeConstraintItemProvider
 			(createChildParameter
 				(ModelPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS,
 				 ModelFactory.eINSTANCE.createRoleTypeConstraints()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return TmcleditEditPlugin.INSTANCE;
 	}
 
 }

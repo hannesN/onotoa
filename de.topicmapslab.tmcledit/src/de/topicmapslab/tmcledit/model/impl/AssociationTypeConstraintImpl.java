@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl#getScope <em>Scope</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl#getAssociationType <em>Association Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeConstraintImpl#getRoleTypeConstraints <em>Role Type Constraints</em>}</li>
  * </ul>
@@ -42,23 +41,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class AssociationTypeConstraintImpl extends EObjectImpl implements AssociationTypeConstraint {
+public class AssociationTypeConstraintImpl extends ScopedConstraintImpl implements AssociationTypeConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
-	 * The cached value of the '{@link #getScope() <em>Scope</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getScope()
-	 * @generated
-	 * @ordered
-	 */
-	protected TopicType scope;
 
 	/**
 	 * The cached value of the '{@link #getAssociationType() <em>Association Type</em>}' reference.
@@ -97,44 +86,6 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	protected EClass eStaticClass() {
 		return ModelPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TopicType getScope() {
-		if (scope != null && scope.eIsProxy()) {
-			InternalEObject oldScope = (InternalEObject)scope;
-			scope = (TopicType)eResolveProxy(oldScope);
-			if (scope != oldScope) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
-			}
-		}
-		return scope;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TopicType basicGetScope() {
-		return scope;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setScope(TopicType newScope) {
-		TopicType oldScope = scope;
-		scope = newScope;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE, oldScope, scope));
 	}
 
 	/**
@@ -209,9 +160,6 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
-				if (resolve) return getScope();
-				return basicGetScope();
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				if (resolve) return getAssociationType();
 				return basicGetAssociationType();
@@ -230,9 +178,6 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
-				setScope((TopicType)newValue);
-				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				setAssociationType((TopicType)newValue);
 				return;
@@ -252,9 +197,6 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
-				setScope((TopicType)null);
-				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				setAssociationType((TopicType)null);
 				return;
@@ -273,8 +215,6 @@ public class AssociationTypeConstraintImpl extends EObjectImpl implements Associ
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__SCOPE:
-				return scope != null;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE:
 				return associationType != null;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ROLE_TYPE_CONSTRAINTS:
