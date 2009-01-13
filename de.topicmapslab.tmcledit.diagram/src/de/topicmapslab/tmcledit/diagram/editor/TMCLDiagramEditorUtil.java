@@ -20,6 +20,7 @@ import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactor
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingEditPart;
@@ -33,6 +34,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -78,7 +80,7 @@ public class TMCLDiagramEditorUtil {
 				} else if (model instanceof TypeNode) {
 					part = new TypeNodeEditPart();
 				} else if (model instanceof AssociationNode) {
-						part = new AssociationNodeEditPart();
+					part = new AssociationNodeEditPart();
 				} else if (model instanceof OccurenceTypeConstraint) {
 					part = new OccurenceTypeConstraintEditPart();
 				} else if (model instanceof NameTypeConstraint) {
@@ -89,12 +91,13 @@ public class TMCLDiagramEditorUtil {
 					part = new PrefixMappingEditPart();
 				} else if (model instanceof MappingElement) {
 					part = new PrefixMappingElementEditPart();
-				}else if (model instanceof SubjectIdentifierConstraint) {
+				} else if (model instanceof SubjectIdentifierConstraint) {
 					part = new SubjectIdentifierConstraintEditPart();
-				}else if (model instanceof SubjectLocatorConstraint) {
+				} else if (model instanceof SubjectLocatorConstraint) {
 					part = new SubjectLocatorConstraintEditPart();
+				} else if (model instanceof LabelPos) {
+					part = new MoveableLabelEditPart();
 				}
-				
 
 				if (part != null)
 					part.setModel(model);
@@ -112,12 +115,16 @@ public class TMCLDiagramEditorUtil {
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
 
-		group.add(new CreationToolEntry(
+		group
+				.add(new CreationToolEntry(
 						"Occurence Type",
 						"Occurence Type",
-						new TypeNodeCreationFactory(KindOfTopicType.OCCURENCE_TYPE),
-						ImageProvider.getImageDescriptor(ImageConstants.OCCURENCETYPE_SM),
-						ImageProvider.getImageDescriptor(ImageConstants.OCCURENCETYPE)));
+						new TypeNodeCreationFactory(
+								KindOfTopicType.OCCURENCE_TYPE),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.OCCURENCETYPE_SM),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.OCCURENCETYPE)));
 
 		group.add(new CreationToolEntry("Role Type", "Role Type",
 				new TypeNodeCreationFactory(KindOfTopicType.ROLE_TYPE),
@@ -146,34 +153,46 @@ public class TMCLDiagramEditorUtil {
 
 	private static PaletteGroup getTypeItemsPaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types Items");
-		group.add(new CreationToolEntry("Occurence Constraints",
-				"Occurence Constraints", new OccurenceConstraintCreationFactory(), 
-				ImageProvider.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT_SM), 
-				ImageProvider.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT)));
-		
-		group.add(new CreationToolEntry("Name Constraints",
-				"Name Constraints", new CreationFactory() {
+		group
+				.add(new CreationToolEntry(
+						"Occurence Constraints",
+						"Occurence Constraints",
+						new OccurenceConstraintCreationFactory(),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT_SM),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT)));
 
-					@Override
-					public Object getNewObject() {
-						return ModelFactory.eINSTANCE.createNameTypeConstraint();
-					}
+		group
+				.add(new CreationToolEntry(
+						"Name Constraints",
+						"Name Constraints",
+						new CreationFactory() {
 
-					@Override
-					public Object getObjectType() {
-						return NameTypeConstraint.class;
-					}
+							@Override
+							public Object getNewObject() {
+								return ModelFactory.eINSTANCE
+										.createNameTypeConstraint();
+							}
 
-				}, 
-				ImageProvider.getImageDescriptor(ImageConstants.NAMECONSTRAINT_SM), 
-				ImageProvider.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
-		
+							@Override
+							public Object getObjectType() {
+								return NameTypeConstraint.class;
+							}
+
+						},
+						ImageProvider
+								.getImageDescriptor(ImageConstants.NAMECONSTRAINT_SM),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
+
 		group.add(new CreationToolEntry("Subject Identifier Constraints",
 				"Subject Identifier Constraints", new CreationFactory() {
 
 					@Override
 					public Object getNewObject() {
-						return ModelFactory.eINSTANCE.createSubjectIdentifierConstraint();
+						return ModelFactory.eINSTANCE
+								.createSubjectIdentifierConstraint();
 					}
 
 					@Override
@@ -181,15 +200,15 @@ public class TMCLDiagramEditorUtil {
 						return SubjectIdentifierConstraint.class;
 					}
 
-				}, 
-				null, null));
-		
+				}, null, null));
+
 		group.add(new CreationToolEntry("Subject Locator Constraints",
 				"Subject Locator Constraints", new CreationFactory() {
 
 					@Override
 					public Object getNewObject() {
-						return ModelFactory.eINSTANCE.createSubjectLocatorConstraint();
+						return ModelFactory.eINSTANCE
+								.createSubjectLocatorConstraint();
 					}
 
 					@Override
@@ -197,9 +216,8 @@ public class TMCLDiagramEditorUtil {
 						return SubjectLocatorConstraint.class;
 					}
 
-				}, 
-				null, null));
-		
+				}, null, null));
+
 		return group;
 	}
 
@@ -241,34 +259,41 @@ public class TMCLDiagramEditorUtil {
 				}, ImageProvider.getImageDescriptor(ImageConstants.KINDOF_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.KINDOF)));
 
-		group.add(new CreationToolEntry("Association Constraint",
-				"Association Constraint",
-				new CreationFactory() {
+		group
+				.add(new CreationToolEntry(
+						"Association Constraint",
+						"Association Constraint",
+						new CreationFactory() {
 
-					@Override
-					public Object getNewObject() {
-						AssociationNode node = ModelFactory.eINSTANCE.createAssociationNode();
-						AssociationTypeConstraint ac = ModelFactory.eINSTANCE.createAssociationTypeConstraint();
-						node.setAssociationConstraint(ac);
-						return node;
-					}
+							@Override
+							public Object getNewObject() {
+								AssociationNode node = ModelFactory.eINSTANCE
+										.createAssociationNode();
+								AssociationTypeConstraint ac = ModelFactory.eINSTANCE
+										.createAssociationTypeConstraint();
+								node.setAssociationConstraint(ac);
+								return node;
+							}
 
-					@Override
-					public Object getObjectType() {
-						return AssociationNode.class;
-					}
-			
-		}, 
-		ImageProvider.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM),
-		ImageProvider.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)) );
-		
+							@Override
+							public Object getObjectType() {
+								return AssociationNode.class;
+							}
+
+						},
+						ImageProvider
+								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)));
+
 		group.add(new ConnectionCreationToolEntry("Role Constraint ...",
 				"Create Role Constraint connection", new CreationFactory() {
 
 					@Override
 					public Object getNewObject() {
 						Edge e = ModelFactory.eINSTANCE.createEdge();
-						e.setRoleConstraint(ModelFactory.eINSTANCE.createRoleTypeConstraints());
+						e.setRoleConstraint(ModelFactory.eINSTANCE
+								.createRoleTypeConstraints());
 						e.setType(EdgeType.ROLE_CONSTRAINT_TYPE);
 						return e;
 					}
@@ -279,7 +304,7 @@ public class TMCLDiagramEditorUtil {
 					}
 
 				}, null, null));
-		
+
 		return group;
 	}
 
