@@ -1345,6 +1345,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.ROLE_TYPE);
 		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.ASSOCIATION_TYPE);
 		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.SCOPE_TYPE);
+		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.NO_TYPE);
 
 		// Create resource
 		createResource(eNS_URI);

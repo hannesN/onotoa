@@ -26,6 +26,7 @@
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/RoleType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/AssociationType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/ScopeType"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NO_TYPE"/>
     </genEnums>
     <genClasses ecoreClass="tmcledit.ecore#//TopicType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/identifiers"/>

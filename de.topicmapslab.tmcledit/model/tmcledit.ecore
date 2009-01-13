@@ -148,6 +148,7 @@
     <eLiterals name="RoleType" value="3"/>
     <eLiterals name="AssociationType" value="4"/>
     <eLiterals name="ScopeType" value="5"/>
+    <eLiterals name="NO_TYPE" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedConstraint" abstract="true" eSuperTypes="#//AbstractConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" upperBound="-1"

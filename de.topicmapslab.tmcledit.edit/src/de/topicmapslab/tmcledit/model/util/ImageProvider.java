@@ -24,6 +24,8 @@ public class ImageProvider {
 	public static Image getTopicTypeImage(TopicType topicType) {
 		switch(topicType.getKind())
 		{
+			case NO_TYPE:
+				return ImageProvider.getImage(ImageConstants.TOPIC);
 			case ASSOCIATION_TYPE:
 				return ImageProvider.getImage(ImageConstants.ASSOCIATIONTYPE);
 			case NAME_TYPE:

@@ -80,7 +80,15 @@ public enum KindOfTopicType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SCOPE_TYPE(5, "ScopeType", "ScopeType");
+	SCOPE_TYPE(5, "ScopeType", "ScopeType"), /**
+	 * The '<em><b>NO TYPE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NO_TYPE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	NO_TYPE(6, "NO_TYPE", "NO_TYPE");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +188,21 @@ public enum KindOfTopicType implements Enumerator {
 	public static final int SCOPE_TYPE_VALUE = 5;
 
 	/**
+	 * The '<em><b>NO TYPE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>NO TYPE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #NO_TYPE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NO_TYPE_VALUE = 6;
+
+	/**
 	 * An array of all the '<em><b>Kind Of Topic Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -193,6 +216,7 @@ public enum KindOfTopicType implements Enumerator {
 			ROLE_TYPE,
 			ASSOCIATION_TYPE,
 			SCOPE_TYPE,
+			NO_TYPE,
 		};
 
 	/**
@@ -249,6 +273,7 @@ public enum KindOfTopicType implements Enumerator {
 			case ROLE_TYPE_VALUE: return ROLE_TYPE;
 			case ASSOCIATION_TYPE_VALUE: return ASSOCIATION_TYPE;
 			case SCOPE_TYPE_VALUE: return SCOPE_TYPE;
+			case NO_TYPE_VALUE: return NO_TYPE;
 		}
 		return null;
 	}

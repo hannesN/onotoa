@@ -25,6 +25,8 @@ public interface ImageConstants {
 	public static String ASSOCIATIONTYPE_SM = "./associationtype_sm.gif";
 	public static String OCCURENCETYPE_SM = "./occurencetype_sm.gif";
 	public static String TOPICTYPE = "./topictype.gif";
+	public static String TOPIC = "./topic.gif";
+	public static String TOPIC_SM = "./topic.gif";
 	public static String ASSOCIATIONTYPE = "./associationtype.gif";
 	public static String ROLETYPE = "./roletype.gif";
 	public static String KINDOF = "./kindof.gif";

@@ -110,6 +110,11 @@ public class TMCLDiagramEditorUtil {
 	private static PaletteGroup getTypePaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types");
 
+		group.add(new CreationToolEntry("Topic", "Topic",
+				new TypeNodeCreationFactory(KindOfTopicType.NO_TYPE),
+				ImageProvider.getImageDescriptor(ImageConstants.TOPIC_SM),
+				ImageProvider.getImageDescriptor(ImageConstants.TOPIC)));
+		
 		group.add(new CreationToolEntry("Topic Type", "Topic Type",
 				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
