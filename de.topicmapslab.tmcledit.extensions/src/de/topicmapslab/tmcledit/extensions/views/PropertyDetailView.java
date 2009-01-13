@@ -107,7 +107,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	@Override
 	public void createPartControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		pageBook = toolkit.createPageBook(parent, SWT.V_SCROLL);
+		pageBook = toolkit.createPageBook(parent, SWT.V_SCROLL|SWT.H_SCROLL);
 		pageBook.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		pageFactory = new PropertyDetailPageFactory(pageBook);
 

@@ -1,5 +1,8 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -25,6 +28,7 @@ import de.topicmapslab.tmcledit.extensions.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.extensions.util.CardTextObserver;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -117,9 +121,19 @@ public class RoleModelPage extends AbstractModelPage{
 	private class SelectionListener extends SelectionAdapter {
 		@Override
 		public void widgetSelected(SelectionEvent e) {
+			List<TopicType> list;
+			ModelIndexer instance = ModelIndexer.getInstance();
+			TopicMapSchema topicMapSchema = instance.getTopicMapSchema();
+			if (topicMapSchema.isActiveRoleTypeConstraint()) {
+				list = instance.getRoleTypes();
+			} else {
+				list = new ArrayList<TopicType>(topicMapSchema.getTopicTypes());
+				list.remove(getCastedModel().eContainer());
+			}
+			
 			ListSelectionDialog dlg = new ListSelectionDialog(
 					roleText.getShell(),
-					ModelIndexer.getInstance().getRoleTypes(),
+					list,
 					new ArrayContentProvider(),
 					new TopicLabelProvider(),
 					"Choose the tole type");

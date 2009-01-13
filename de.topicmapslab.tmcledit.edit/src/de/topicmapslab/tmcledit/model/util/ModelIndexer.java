@@ -34,8 +34,7 @@ public class ModelIndexer {
 	private ModelIndexer(File file) {
 		this.file = file;
 	}
-	
-	
+
 	public static void createInstance(File file) {
 		if (instance!=null)
 			instance.dispose();
@@ -65,33 +64,26 @@ public class ModelIndexer {
 	public TopicMapSchema getTopicMapSchema() {
 		return file.getTopicMapSchema();
 	}
-	
-	
 
 	public TopicType createTopicType() {
 		return topicIndexer.createTopicType();
 	}
 
-
 	public TopicType createTopicType(String id) {
 		return topicIndexer.createTopicType(id);
 	}
-
 
 	public List<TopicType> getRoleTypes() {
 		return topicIndexer.getRoleTypes();
 	}
 
-
 	public List<TopicType> getScopeTypes() {
 		return topicIndexer.getScopeTypes();
 	}
 
-
 	public TopicType getTopicType(String id) {
 		return topicIndexer.getTopicType(id);
 	}
-
 
 	public List<TopicType> getTopicTypes() {
 		return topicIndexer.getTopicTypes();
@@ -100,35 +92,27 @@ public class ModelIndexer {
 	public Node getNodeFor(TopicType topicType, Diagram diagram) {
 		return nodeIndexer.getNodeFor(topicType, diagram);
 	}
-	
-	
-
 
 	public Node getNodeFor(AssociationTypeConstraint assConstraint,
 			Diagram diagram) {
 		return nodeIndexer.getNodeFor(assConstraint, diagram);
 	}
 
-
 	public List<Edge> getEdges(Diagram d, EdgeType type) {
 		return nodeIndexer.getEdges(d, type);
 	}
-
-
+	
 	public EList<Diagram> getDiagrams() {
 		return file.getDiagrams();
 	}
-
 
 	public List<Edge> getEdgesUsingTopicType(TopicType type) {
 		return nodeIndexer.getEdgesUsingTopicType(type);
 	}
 
-
 	public List<TopicType> getInstanceTypes(TopicType topicType) {
 		return topicIndexer.getInstanceTypes(topicType);
 	}
-
 
 	public List<TopicType> getSubTypes(TopicType topicType) {
 		return topicIndexer.getSubTypes(topicType);

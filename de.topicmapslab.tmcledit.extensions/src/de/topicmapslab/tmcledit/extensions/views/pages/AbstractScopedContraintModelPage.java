@@ -30,6 +30,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -43,6 +44,7 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveScopeConstraintsCommand;
@@ -70,9 +72,12 @@ public abstract class AbstractScopedContraintModelPage extends
 	protected void createCommonConstraintControls(Composite parent,
 			FormToolkit toolkit) {
 		super.createCommonConstraintControls(parent, toolkit);
+		
 		GridDataFactory fac = GridDataFactory.createFrom(new GridData(GridData.FILL_HORIZONTAL));
 		
-		toolkit.createLabel(parent, "scope:");
+		Label l = toolkit.createLabel(parent, "scope:");
+		GridData gd = new GridData();
+		gd.verticalAlignment = SWT.TOP;
 		Composite comp = toolkit.createComposite(parent);
 		GridLayout layout = new GridLayout(2, false);
 		layout.marginWidth = 0;
@@ -82,12 +87,16 @@ public abstract class AbstractScopedContraintModelPage extends
 		
 		
 		Composite scopeComp = toolkit.createComposite(comp);
-		scopeComp.setLayout(new GridLayout(2, false));
+		layout = new GridLayout(2, false);
+		layout.marginWidth = 0;
+		scopeComp.setLayout(layout);
 		fac.applyTo(scopeComp);
 		createScopeTable(scopeComp, toolkit);
+		
 		createScopeButtons(scopeComp, toolkit);
 		
 		hookButtonListeners();
+		
 	}
 	
 	private void createScopeButtons(Composite parent, FormToolkit toolkit) {
@@ -96,7 +105,7 @@ public abstract class AbstractScopedContraintModelPage extends
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 		
 		GridData bgd = new GridData();
-		bgd.minimumWidth = 120;
+		bgd.widthHint = 100;
 		bgd.verticalAlignment = SWT.CENTER;
 		GridDataFactory fac = GridDataFactory.createFrom(bgd);
 		
@@ -114,17 +123,24 @@ public abstract class AbstractScopedContraintModelPage extends
 	private Composite createScopeTable(Composite parent, FormToolkit toolkit) {
 		Composite comp = toolkit.createComposite(parent);
 		GridData gd = new GridData(GridData.FILL_BOTH);
-		gd.minimumHeight=150;
+		gd.heightHint=100;
 		comp.setLayoutData(gd);
-		TableColumnLayout layout = new TableColumnLayout();
+		
+		//TableColumnLayout layout = new TableColumnLayout();
+		GridLayout layout = new GridLayout();
 		comp.setLayout(layout);
 		Table table = toolkit.createTable(comp, SWT.BORDER);
 		table.setHeaderVisible(true);
+		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
 		for (int i=0; i<TABLE_PROPS.length; i++) {
 			TableColumn tc = new TableColumn(table, i);
 			tc.setText(TABLE_PROPS[i]);
-			layout.setColumnData(tc, new ColumnWeightData(1));
+			if (i==0)
+				tc.setWidth(150);
+			else
+				tc.setWidth(80);
+		//	layout.setColumnData(tc, new ColumnWeightData(1, 50));
 		}
 		
 		scopeTable = new TableViewer(table);
@@ -163,9 +179,20 @@ public abstract class AbstractScopedContraintModelPage extends
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				
+				ModelIndexer instance = ModelIndexer.getInstance();
+				TopicMapSchema topicMapSchema = instance.getTopicMapSchema();
+				List<TopicType> list = new ArrayList<TopicType>();
+				if (topicMapSchema.isActiveScopeTypeConstraint()) {
+					list.addAll(instance.getScopeTypes());
+				} else {
+					list.addAll(topicMapSchema.getTopicTypes());
+					list.remove(getCastedModel().eContainer());
+				}
+										
 				ListSelectionDialog dlg = new ListSelectionDialog(
 						scopeTable.getTable().getShell(),
-						ModelIndexer.getInstance().getScopeTypes(),
+						list,
 						new ArrayContentProvider(),
 						new TopicLabelProvider(),
 						"Choose the Scope type");

@@ -76,6 +76,7 @@ public class NameConstraintDetailPage extends AbstractScopedContraintModelPage {
 		typeComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		GridLayout layout = new GridLayout(2, false);
 		layout.marginWidth = 0;
+		
 		typeComp.setLayout(layout);
 		typeText = toolkit.createText(typeComp, "", SWT.BORDER);
 		typeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -87,7 +88,12 @@ public class NameConstraintDetailPage extends AbstractScopedContraintModelPage {
 		typeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeButton.getShell(), KindOfTopicType.NAME_TYPE);
+				KindOfTopicType type = null;
+				if (ModelIndexer.getInstance().getTopicMapSchema()
+						.isActiveNameTypeConstraint()) {
+					type = KindOfTopicType.NAME_TYPE;
+				}
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeButton.getShell(), type);
 				if (Dialog.OK==dlg.open()) {
 					getCommandStack().execute(
 									new GenericSetCommand(

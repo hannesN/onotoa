@@ -43,7 +43,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		setDetailsLabelProvider(new DetailLabelProvider());
 		
 	}
-
+	
 	@Override
 	protected Control createExtendedContentArea(Composite parent) {
 		return new Composite(parent, SWT.NONE);

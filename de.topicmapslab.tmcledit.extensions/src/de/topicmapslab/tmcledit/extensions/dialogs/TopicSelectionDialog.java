@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
@@ -74,7 +75,8 @@ public class TopicSelectionDialog extends Dialog {
 			@Override
 			public boolean select(Viewer viewer, Object parentElement,
 					Object element) {
-				if (kind!=KindOfTopicType.TOPIC_TYPE) {
+				
+				if ( (filterTopicType(kind)) && (kind!=KindOfTopicType.TOPIC_TYPE) ){
 					if (((TopicType)element).getKind()!=kind)
 						return false;
 				}
@@ -182,6 +184,23 @@ public class TopicSelectionDialog extends Dialog {
 		}
 		availableTopicList.refresh();
 		selectedTopicList.refresh();
+	}
+	
+	private boolean filterTopicType(KindOfTopicType type) {
+		TopicMapSchema schema = ModelIndexer.getInstance().getTopicMapSchema();
+		switch (type) {
+		case ASSOCIATION_TYPE:
+			return schema.isActiveAssociationTypeConstraint();
+		case SCOPE_TYPE:
+			return schema.isActiveScopeTypeConstraint();
+		case OCCURENCE_TYPE:
+			return schema.isActiveOccurenceTypeConstraint();
+		case ROLE_TYPE:
+			return schema.isActiveRoleTypeConstraint();
+		case NAME_TYPE:
+			return schema.isActiveNameTypeConstraint();
+		}
+		return true;
 	}
 	
 	@Override
