@@ -84,6 +84,7 @@ import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
@@ -740,7 +741,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		}
 	}
 	
-	public void setFilename(String filename) {
+	public void setFilename(String filename, boolean newFile) {
 
 		if (dirtyStateObserver != null)
 			dirtyStateObserver.dispose();
@@ -756,7 +757,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		editingDomain = null; // clear it for new creation in getter
 		
 		if (filename != null) {
-			currFile = FileUtil.loadFile(filename);
+			if (!newFile)
+				currFile = FileUtil.loadFile(filename);
+			else {
+				currFile = ModelFactory.eINSTANCE.createFile();
+				currFile.setTopicMapSchema(ModelFactory.eINSTANCE.createTopicMapSchema());
+			}
 			currFile.eAdapters().add(dirtyListener);
 			
 
@@ -770,7 +776,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		}
 		contentProvider.initialize();
 
-		setSelection(new StructuredSelection(currFile));
+		if (currFile!=null)
+			setSelection(new StructuredSelection(currFile));
+		
+		setSelection(new StructuredSelection());
 		
 		viewer.refresh();
 	}
@@ -807,7 +816,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public void close() {
-		setFilename(null);
+		setFilename(null, false);
 		IWorkbenchPage activePage = getViewSite().getWorkbenchWindow().getActivePage();
 		for (IEditorReference ref : activePage.getEditorReferences()) {
 			if (ref.getId().equals(TMCLDiagramEditor.ID)) {

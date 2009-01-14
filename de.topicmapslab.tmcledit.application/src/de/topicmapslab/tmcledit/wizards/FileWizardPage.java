@@ -23,13 +23,13 @@ import org.eclipse.swt.widgets.Text;
  * @author Hannes Niederhausen
  *
  */
-public class NewFileWizardPage extends WizardPage {
+public class FileWizardPage extends WizardPage {
 
 	
 	private Text pathText;
 	private String path;
 
-	protected NewFileWizardPage(String pageName) {
+	protected FileWizardPage(String pageName) {
 		super(pageName);
 	}
 
@@ -57,7 +57,7 @@ public class NewFileWizardPage extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog dlg = new FileDialog(pathText.getShell());
-				dlg.setFilterExtensions(new String[]{"tmcl"});
+				dlg.setFilterExtensions(new String[]{"*.tmcl"});
 				dlg.setFilterPath(System.getProperty("user.home"));
 				
 				String path = dlg.open();
@@ -65,7 +65,7 @@ public class NewFileWizardPage extends WizardPage {
 					if (!path.endsWith(".tmcl"))
 						path += ".tmcl";
 					pathText.setText(path);
-					NewFileWizardPage.this.path = path;
+					FileWizardPage.this.path = path;
 				}
 				
 			}

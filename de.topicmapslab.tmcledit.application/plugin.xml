@@ -32,6 +32,13 @@
                menubarPath="file/fileStart"
                style="push">
          </action>
+         <action
+               class="de.topicmapslab.tmcledit.application.OpenDiagramAction"
+               id="de.topicmapslab.tmcledit.application.openaction"
+               label="Open.."
+               menubarPath="file/de.topicmapslab.tmcledit.application.newaction"
+               style="push">
+         </action>
       </actionSet>
    </extension>
    <extension

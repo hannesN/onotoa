@@ -9,14 +9,23 @@ import org.eclipse.jface.wizard.Wizard;
  * @author Hannes Niederhausen
  *
  */
-public class NewFileWizard extends Wizard {
+public class FileWizard extends Wizard {
 
-	private NewFileWizardPage page1;
+	private FileWizardPage page1;
+
+	private final boolean newFile;
 	
+	
+
+	public FileWizard(boolean newFile) {
+		super();
+		this.newFile = newFile;
+	}
 
 	@Override
 	public void addPages() {
-		page1 = new NewFileWizardPage("New File..");
+		String title = (newFile) ? "New File.." : "OpenFile";
+		page1 = new FileWizardPage(title);
 		addPage(page1);
 		
 	}

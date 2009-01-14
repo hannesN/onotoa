@@ -261,41 +261,21 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		return true;
 	}
 	
-	public static boolean openModelView(IWorkbench workbench, String filename) {
+	public static boolean openModelView(IWorkbench workbench, String filename, boolean newFile) {
 		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
 		IWorkbenchPage page = workbenchWindow.getActivePage();
 		
 		try {
 			page.showView(ModelView.ID);
 			ModelView modelView = (ModelView) page.findView(ModelView.ID);
-			if (modelView!=null)
-				modelView.setFilename(filename);
+			if (modelView!=null) {
+				modelView.setFilename(filename, newFile);
+			}
 			
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
-		/*
-		IEditorDescriptor editorDescriptor = workbench.getEditorRegistry()
-				.getDefaultEditor(fileURI.toFileString());
-		if (editorDescriptor == null) {
-			MessageDialog.openError(
-							workbenchWindow.getShell(),
-							Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorTitle,
-							NLS.bind(Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorMessage,
-											fileURI.toFileString()));
-			return false;
-		} else {
-			try {
-				page.openEditor(new URIEditorInput(fileURI), editorDescriptor.getId());
-			} catch (PartInitException exception) {
-				MessageDialog.openError(
-								workbenchWindow.getShell(),
-								Messages.DiagramEditorActionBarAdvisor_DefaultEditorOpenErrorTitle,
-								exception.getMessage());
-				return false;
-			}
-		}
-		*/
+		
 		return true;
 	}
 
