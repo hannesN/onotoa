@@ -33,8 +33,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 	
 	@Override
 	public boolean canExecute() {
-		prepare();
-		return (edge.getTarget()!=null) && (edge.getSource()!=null) && (diagram!=null);
+		return prepare();
 	}
 	
 	@Override
@@ -43,32 +42,19 @@ public class CreateEdgeCommand extends AbstractCommand {
 			if (edge.getRoleConstraint()!=null) {
 				edge.getRoleConstraint().setTopicType(((TypeNode)edge.getTarget()).getTopicType());
 			}
-				
+		} else {
+			return false;
 		}
 		return true;
 	}
 	
 	@Override
 	public void execute() {
-		switch (edge.getType()) {
-			case AKO_TYPE:
-				TopicType source = ((TypeNode)edge.getSource()).getTopicType();
-				TopicType target = ((TypeNode)edge.getTarget()).getTopicType();
-				source.getAko().add(target);
-				break;
-			case IS_ATYPE:
-				source = ((TypeNode)edge.getSource()).getTopicType();
-				target = ((TypeNode)edge.getTarget()).getTopicType();
-				source.getIsa().add(target);
-				break;
-			case ROLE_CONSTRAINT_TYPE:
-				((AssociationNode) edge.getSource()).getAssociationConstraint().getRoleTypeConstraints().add(edge.getRoleConstraint());
-				diagram.getEdges().add(edge);
-				break;
-		
-		}
-		
-		diagram.getEdges().add(edge);
+		 redo();
+	}
+	
+	public Edge getEdge() {
+		return edge;
 	}
 	
 	@Override
@@ -95,7 +81,25 @@ public class CreateEdgeCommand extends AbstractCommand {
 
 	@Override
 	public void redo() {
-		execute();
+		switch (edge.getType()) {
+		case AKO_TYPE:
+			TopicType source = ((TypeNode)edge.getSource()).getTopicType();
+			TopicType target = ((TypeNode)edge.getTarget()).getTopicType();
+			source.getAko().add(target);
+			break;
+		case IS_ATYPE:
+			source = ((TypeNode)edge.getSource()).getTopicType();
+			target = ((TypeNode)edge.getTarget()).getTopicType();
+			source.getIsa().add(target);
+			break;
+		case ROLE_CONSTRAINT_TYPE:
+			((AssociationNode) edge.getSource()).getAssociationConstraint().getRoleTypeConstraints().add(edge.getRoleConstraint());
+			diagram.getEdges().add(edge);
+			break;
+	
+	}
+	
+	diagram.getEdges().add(edge);
 		
 	}
 	

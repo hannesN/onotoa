@@ -10,8 +10,13 @@ import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
@@ -29,6 +34,18 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			return null;
 		
 		cmd.setTarget((Node) request.getTargetEditPart().getModel());
+
+		
+		if (cmd.getEdge().getType()==EdgeType.IS_ATYPE) {
+			TopicType target = ((TypeNode)cmd.getEdge().getTarget()).getTopicType();
+		
+			if ( (target.getKind()==KindOfTopicType.NO_TYPE) && 
+				 (ModelIndexer.getInstance().getTopicMapSchema().isActiveTopicTypeConstraint()) ) {
+				
+				return null;
+			}
+			
+		}
 		return request.getStartCommand();
 	}
 
