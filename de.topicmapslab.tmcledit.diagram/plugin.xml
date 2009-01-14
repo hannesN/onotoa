@@ -5,6 +5,7 @@
          point="org.eclipse.ui.editors">
       <editor
             class="de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor"
+            contributorClass="de.topicmapslab.tmcledit.diagram.editor.TMCLEditorActionBarContributor"
             default="false"
             extensions="tmcl"
             id="de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor"

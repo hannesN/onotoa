@@ -6,7 +6,9 @@ package de.topicmapslab.tmcledit.diagram.editor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
@@ -17,17 +19,26 @@ import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gef.MouseWheelHandler;
+import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
+import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.gef.ui.actions.ActionRegistry;
+import org.eclipse.gef.ui.actions.GEFActionConstants;
+import org.eclipse.gef.ui.actions.ZoomInAction;
+import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.SWT;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
@@ -67,7 +78,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private DirtyAdapter dirtyAdapter;
 
 	private OverviewOutlinePage outlinePage;
-
+	
 	public TMCLDiagramEditor() {
 		setEditDomain(new TMCLEditDomain(this));
 	}
@@ -99,9 +110,32 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				viewer, getActionRegistry());
 		viewer.setContextMenu(cmProvider);
 		getSite().registerContextMenu(cmProvider, viewer);
+		
+		List<String> zoomContributions = new ArrayList<String>(5);
+		zoomContributions.add(ZoomManager.FIT_ALL);
+		zoomContributions.add(ZoomManager.FIT_HEIGHT);
+		zoomContributions.add(ZoomManager.FIT_WIDTH);
+
+		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(ZoomManager.class.toString());
+		
+		manager.setZoomLevelContributions(zoomContributions);
+
+		IAction zoomIn = new ZoomInAction(manager);
+		zoomIn.setAccelerator(0);
+		IAction zoomOut = new ZoomOutAction(manager);
+		
+		getActionRegistry().registerAction(zoomIn);
+		getActionRegistry().registerAction(zoomOut);
+		
+		viewer.setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.MOD2),
+				MouseWheelZoomHandler.SINGLETON);
 
 	}
 
+	public ZoomManager getZoomManager() {
+		return getRootEditPart().getZoomManager();
+	}
+	
 	public ScalableFreeformRootEditPart getRootEditPart() {
 		if (rootEditPart == null) {
 			rootEditPart = new ScalableFreeformRootEditPart();
@@ -117,6 +151,11 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return diagram;
 	}
 
+	@Override
+	public ActionRegistry getActionRegistry() {
+		return super.getActionRegistry();
+	}
+	
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		try {
@@ -139,6 +178,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		deleteFromModelAction = new DeleteFromModelAction(getEditDomain().getCommandStack());
 		getActionRegistry().registerAction(deleteFromModelAction);
 		getActionRegistry().registerAction(removeFromDiagramAction);
+		
+		
 		super.createActions();
 	}
 
@@ -203,6 +244,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			return getEditDomain().getCommandStack();
 		if (adapter == IContentOutlinePage.class)
 			return getContentOutlinePage();
+		if (adapter == ZoomManager.class)
+			return getGraphicalViewer().getProperty(ZoomManager.class.toString());
 		return super.getAdapter(adapter);
 	}
 
