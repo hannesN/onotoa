@@ -44,6 +44,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
+import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
@@ -269,6 +270,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		else {
 			if (sel.getFirstElement() instanceof EditPart) {
 				EditPart part = (EditPart) sel.getFirstElement();
+				if (part instanceof MoveableLabelEditPart) {
+					part = part.getParent();
+				}
 				updateSelectionDependentActions(part);
 				Object model = part.getModel();
 				if (model instanceof TypeNode) {

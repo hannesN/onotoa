@@ -22,7 +22,10 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 		OccurenceTypeConstraint otc = getCastedModel();
 		StringBuffer buffer = new StringBuffer();
 		
-		getNameLabel().setText(otc.getType().getName());
+		if (otc.getType()!=null)
+			getNameLabel().setText(otc.getType().getName());
+		else
+			getNameLabel().setText("No Type Set");
 		
 		buffer.append(" : ");
 		buffer.append(otc.getDataType());
@@ -38,14 +41,17 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 
 	@Override
 	public void activate() {
-		getCastedModel().getType().eAdapters().add(this);
+		if (getCastedModel().getType()!=null)
+			getCastedModel().getType().eAdapters().add(this);
 		super.activate();
 	}
 	
 	@Override
 	public void deactivate() {
-		getCastedModel().getType().eAdapters().remove(this);
+		if (getCastedModel().getType()!=null)
+			getCastedModel().getType().eAdapters().remove(this);
 		super.deactivate();
+
 	}
 	
 	@Override
@@ -55,7 +61,8 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 				TopicType old = (TopicType) notification.getOldValue();
 				if (old!=null)
 					old.eAdapters().remove(this);
-				((TopicType) notification.getNewValue()).eAdapters().add(this);
+				if (notification.getNewValue()!=null)
+					((TopicType) notification.getNewValue()).eAdapters().add(this);
 			
 			}
 			refreshVisuals();

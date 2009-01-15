@@ -10,7 +10,8 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.topicmapslab.tmcledit.model.commands,
  de.topicmapslab.tmcledit.model.provider,
- de.topicmapslab.tmcledit.model.util
+ de.topicmapslab.tmcledit.model.util,
+ de.topicmapslab.tmcledit.model.validation
 Require-Bundle: org.eclipse.core.runtime,
  de.topicmapslab.tmcledit;visibility:=reexport,
  org.eclipse.emf.edit;bundle-version="2.4.0";visibility:=reexport,
