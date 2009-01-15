@@ -185,7 +185,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			menu.add(menuX);
 		}
 	}
-
+	
 	protected void fillCoolBar(ICoolBarManager toolBar) {
 		IMenuManager popUpMenu = new MenuManager();
 		popUpMenu.add(new ActionContributionItem(lockToolBarAction));
@@ -222,6 +222,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 		toolBar.add(new GroupMarker(IWorkbenchActionConstants.GROUP_EDITOR));
 
+		
+		
 		toolBar.add(new GroupMarker(IWorkbenchActionConstants.GROUP_HELP));
 
 		{

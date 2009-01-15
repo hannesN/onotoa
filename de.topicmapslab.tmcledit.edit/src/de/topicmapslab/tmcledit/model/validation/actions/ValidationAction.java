@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.topicmapslab.tmcledit.model.validation;
+package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;

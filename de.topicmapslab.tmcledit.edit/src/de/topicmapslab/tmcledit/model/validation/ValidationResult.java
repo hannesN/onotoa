@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
+import de.topicmapslab.tmcledit.model.validation.actions.ValidationAction;
+
 /**
  * @author Hannes Niederhausen
  *
