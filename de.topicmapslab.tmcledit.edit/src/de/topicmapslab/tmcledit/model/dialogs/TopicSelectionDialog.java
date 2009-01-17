@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.topicmapslab.tmcledit.extensions.dialogs;
+package de.topicmapslab.tmcledit.model.dialogs;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Shell;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 /**

@@ -38,7 +38,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import de.topicmapslab.tmcledit.extensions.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -49,6 +48,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
+import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;

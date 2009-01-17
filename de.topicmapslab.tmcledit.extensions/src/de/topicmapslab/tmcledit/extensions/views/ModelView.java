@@ -395,13 +395,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
+				if (currFile==null) {
+					currentSelection = new StructuredSelection();
+					return;
+				}
+				
 				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
 				if (sel.isEmpty()) {
-					if (currFile!=null)
-						currentSelection = new StructuredSelection(currFile);
-					else
-						currentSelection = new StructuredSelection();
+					currentSelection = new StructuredSelection(currFile);
 				} else {
+					
 					TreeObject to = (TreeObject) sel.getFirstElement();
 					if (to.getModel()==null)
 						currentSelection = new StructuredSelection(currFile);

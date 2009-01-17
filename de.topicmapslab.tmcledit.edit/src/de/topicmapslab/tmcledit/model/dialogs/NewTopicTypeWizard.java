@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.topicmapslab.tmcledit.extensions.dialogs;
+package de.topicmapslab.tmcledit.model.dialogs;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.wizard.Wizard;

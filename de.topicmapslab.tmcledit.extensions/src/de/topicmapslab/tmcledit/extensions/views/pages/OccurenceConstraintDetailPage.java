@@ -18,13 +18,13 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.Section;
 
-import de.topicmapslab.tmcledit.extensions.dialogs.FilterTopicSelectionDialog;
-import de.topicmapslab.tmcledit.extensions.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
+import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelPage {

@@ -1,4 +1,4 @@
-package de.topicmapslab.tmcledit.extensions.dialogs;
+package de.topicmapslab.tmcledit.model.dialogs;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;

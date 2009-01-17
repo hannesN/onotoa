@@ -21,6 +21,13 @@
             id="de.topicmapslab.tmcledit.extensions.views.PropertyDetailView"
             name="Property Details View">
       </view>
+      <view
+            class="de.topicmapslab.tmcledit.extensions.views.ValidationErrorView"
+            icon="icons/sample.gif"
+            id="de.topicmapslab.tmcledit.extensions.views.ValidationErrorView"
+            name="Error View"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">

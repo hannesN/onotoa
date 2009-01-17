@@ -1,6 +1,7 @@
 package de.topicmapslab.tmcledit.model.commands;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
@@ -18,9 +19,9 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public abstract class AbstractConnectionCommand extends AbstractCommand {
 
-	private List<TopicType> removeList;
-	private List<TopicType> addList;
-	private List<EdgeWrapper> removeEdgeList;
+	private List<TopicType> removeList = Collections.emptyList();
+	private List<TopicType> addList = Collections.emptyList();
+	private List<EdgeWrapper> removeEdgeList = Collections.emptyList();
 
 
 

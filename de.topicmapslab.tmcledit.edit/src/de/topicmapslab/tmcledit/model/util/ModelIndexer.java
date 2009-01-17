@@ -12,6 +12,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -116,5 +117,25 @@ public class ModelIndexer {
 
 	public List<TopicType> getSubTypes(TopicType topicType) {
 		return topicIndexer.getSubTypes(topicType);
+	}
+	
+	public boolean isFilterActivated(KindOfTopicType kindOfType) {
+		TopicMapSchema topicMapSchema = getInstance().getTopicMapSchema();
+		switch (kindOfType) {
+		case ASSOCIATION_TYPE: 
+				return topicMapSchema.isActiveAssociationTypeConstraint(); 
+		case NAME_TYPE:
+				return topicMapSchema.isActiveNameTypeConstraint();
+		case OCCURENCE_TYPE:
+				return topicMapSchema.isActiveOccurenceTypeConstraint();
+		case ROLE_TYPE:
+				return topicMapSchema.isActiveRoleTypeConstraint();
+		case SCOPE_TYPE:
+				return topicMapSchema.isActiveScopeTypeConstraint();
+		case TOPIC_TYPE:
+				return topicMapSchema.isActiveTopicTypeConstraint();
+		}
+		
+		return false;
 	}
 }

@@ -30,12 +30,12 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import de.topicmapslab.tmcledit.extensions.dialogs.NewPrefixMappingDialog;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.commands.CreatePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.RemovePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
+import de.topicmapslab.tmcledit.model.dialogs.NewPrefixMappingDialog;
 
 /**
  * @author Hannes Niederhausen

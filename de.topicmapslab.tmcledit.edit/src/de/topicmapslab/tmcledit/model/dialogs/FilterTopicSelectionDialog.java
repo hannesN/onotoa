@@ -1,4 +1,4 @@
-package de.topicmapslab.tmcledit.extensions.dialogs;
+package de.topicmapslab.tmcledit.model.dialogs;
 
 import java.util.Comparator;
 import java.util.List;
@@ -17,9 +17,10 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
 
-import de.topicmapslab.tmcledit.extensions.Activator;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
+import de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
@@ -77,9 +78,9 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 	@Override
 	protected IDialogSettings getDialogSettings() {
-		IDialogSettings settings = Activator.getDefault().getDialogSettings().getSection(SETTINGS);
+		IDialogSettings settings = TmcleditEditPlugin.getPlugin().getDialogSettings().getSection(SETTINGS);
 		if (settings==null)
-			settings = Activator.getDefault().getDialogSettings().addNewSection(SETTINGS);
+			settings = TmcleditEditPlugin.getPlugin().getDialogSettings().addNewSection(SETTINGS);
 		
 		return settings;
 	}

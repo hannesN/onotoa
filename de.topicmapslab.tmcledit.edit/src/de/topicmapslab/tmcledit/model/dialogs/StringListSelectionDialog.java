@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.topicmapslab.tmcledit.extensions.dialogs;
+package de.topicmapslab.tmcledit.model.dialogs;
 
 import java.util.ArrayList;
 import java.util.Iterator;

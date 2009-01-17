@@ -19,8 +19,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
-import de.topicmapslab.tmcledit.extensions.dialogs.StringListSelectionDialog;
-import de.topicmapslab.tmcledit.extensions.dialogs.TopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
@@ -29,6 +27,8 @@ import de.topicmapslab.tmcledit.model.commands.SetExclusiveCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
+import de.topicmapslab.tmcledit.model.dialogs.StringListSelectionDialog;
+import de.topicmapslab.tmcledit.model.dialogs.TopicSelectionDialog;
 
 /**
  * Property detail page for topic types.

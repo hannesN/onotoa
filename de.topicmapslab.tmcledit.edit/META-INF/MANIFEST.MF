@@ -9,6 +9,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.topicmapslab.tmcledit.model.commands,
+ de.topicmapslab.tmcledit.model.dialogs,
  de.topicmapslab.tmcledit.model.provider,
  de.topicmapslab.tmcledit.model.util,
  de.topicmapslab.tmcledit.model.validation
