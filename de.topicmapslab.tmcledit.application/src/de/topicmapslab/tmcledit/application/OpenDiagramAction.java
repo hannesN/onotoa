@@ -5,10 +5,7 @@ package de.topicmapslab.tmcledit.application;
 
 import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.wizard.WizardDialog;
-
-import de.topicmapslab.tmcledit.wizards.FileWizard;
+import org.eclipse.swt.widgets.FileDialog;
 
 /**
  * @author Hannes Niederhausen
@@ -17,11 +14,16 @@ import de.topicmapslab.tmcledit.wizards.FileWizard;
 public class OpenDiagramAction extends WorkbenchWindowActionDelegate {
 	@Override
 	public void run(IAction action) {
-		FileWizard wizard = new FileWizard(true);
-		WizardDialog dlg = new WizardDialog(getWindow().getShell(), wizard);
-		if (dlg.open()==Dialog.OK) {
-			
-			DiagramEditorActionBarAdvisor.openModelView(getWindow().getWorkbench(), wizard.getPath(), false);
+		FileDialog dlg = new FileDialog(getWindow().getShell());
+		dlg.setFilterExtensions(new String[]{"*.tmcl"});
+		dlg.setFilterPath(System.getProperty("user.home"));
+		
+		String path = dlg.open();
+		if (path!=null) {
+			if (!path.endsWith(".tmcl"))
+				path += ".tmcl";
+						
+			DiagramEditorActionBarAdvisor.openModelView(getWindow().getWorkbench(), path, false);
 		}
 		
 	}
