@@ -36,9 +36,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
@@ -87,6 +90,20 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setContents(diagram); // set the contents of this editor
 		viewer.addSelectionChangedListener(this);
 		viewer.setEditDomain(getEditDomain());
+		viewer.getControl().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				try {
+					getEditorSite().getPage()
+							.showView(
+									"de.topicmapslab.tmcledit.extensions.views.PropertyDetailView",
+									null, IWorkbenchPage.VIEW_VISIBLE);
+				} catch (PartInitException e1) {
+					
+				}
+			}
+			
+		});
 
 		// getEditDomain().getCommandStack().addCommandStackListener(this);
 		getSite().setSelectionProvider(this);

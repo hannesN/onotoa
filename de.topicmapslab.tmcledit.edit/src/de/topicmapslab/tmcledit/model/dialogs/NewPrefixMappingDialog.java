@@ -37,8 +37,15 @@ public class NewPrefixMappingDialog extends Dialog {
 		label.setText("URI:");
 		uriText = new Text(comp, SWT.BORDER);
 		uriText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	
+		if (key!=null)
+			keyText.setText(key);
 		
 		return comp;
+	}
+	
+	public void setKey(String key) {
+		this.key = key;
 	}
 	
 	@Override
