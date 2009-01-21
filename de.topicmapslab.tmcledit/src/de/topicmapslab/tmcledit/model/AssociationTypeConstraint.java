@@ -8,8 +8,6 @@ package de.topicmapslab.tmcledit.model;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Association Type Constraint</b></em>'.

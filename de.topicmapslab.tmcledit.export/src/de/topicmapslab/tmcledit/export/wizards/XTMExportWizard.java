@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
-import org.tmapiutils.impexp.xtm.XTMSerializer;
+import org.tinytim.mio.XTM20TopicMapWriter;
 
 import de.topicmapslab.tmcledit.export.builder.TinyTiMTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -50,26 +50,8 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		try
 		{
 			FileOutputStream os = new FileOutputStream(file);
-			XTMSerializer xtmS = new XTMSerializer();
-			xtmS.serialize(os, ttbuilder.getTopicMap());
-			/*
-			TopicMap map = builder.getTopicMap();
-			file.createNewFile();
-			
-			
-			
-			TopicMapWalker walker = new TopicMapWalker();
-			XTMWriter writer = new XTMWriter();
-			OutputFormat of = new OutputFormat();
-			of.setEncoding("UTF-8");
-			of.setIndenting(true);
-			of.setIndent(4);
-			XMLSerializer serializer = new XMLSerializer(os, of);
-			walker.setHandler(writer);
-			writer.setContentHandler(serializer);
-			
-		    walker.walk(map);
-		    */
+			XTM20TopicMapWriter writer = new XTM20TopicMapWriter(os, "http://wasauchimmer.de/");
+			writer.write(ttbuilder.getTopicMap(false));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
