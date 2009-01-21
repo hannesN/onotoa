@@ -41,8 +41,13 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 	
 	@Override
 	public void execute() {
-		topic.getIsa().removeAll(removeList);
-		topic.getIsa().addAll(addList);
+		if (getEdgeType()==EdgeType.AKO_TYPE) {
+			topic.getAko().removeAll(removeList);
+			topic.getAko().addAll(addList);
+		} else if (getEdgeType()==EdgeType.IS_ATYPE) {
+			topic.getIsa().removeAll(removeList);
+			topic.getIsa().addAll(addList);
+		}
 		for (EdgeWrapper ew : addEdgeList) {
 			ew.diagram.getEdges().add(ew.edge);
 		}
@@ -59,8 +64,13 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		topic.getIsa().addAll(removeList);
-		topic.getIsa().removeAll(addList);
+		if (getEdgeType()==EdgeType.AKO_TYPE) {
+			topic.getAko().addAll(removeList);
+			topic.getAko().removeAll(addList);
+		} else if (getEdgeType()==EdgeType.IS_ATYPE) {
+			topic.getIsa().addAll(removeList);
+			topic.getIsa().removeAll(addList);
+		}
 		for (EdgeWrapper ew : addEdgeList) {
 			ew.diagram.getEdges().remove(ew.edge);
 		}
