@@ -32,7 +32,6 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 	private TopicMapSchema schema;
 	
 	public XTMExportWizard() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
