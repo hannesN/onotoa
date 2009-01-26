@@ -496,6 +496,29 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AbstractTypeConstraintItemProvider abstractTypeConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAbstractTypeConstraintAdapter() {
+		if (abstractTypeConstraintItemProvider == null) {
+			abstractTypeConstraintItemProvider = new AbstractTypeConstraintItemProvider(this);
+		}
+
+		return abstractTypeConstraintItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -612,6 +635,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (fileItemProvider != null) fileItemProvider.dispose();
 		if (scopeConstraintItemProvider != null) scopeConstraintItemProvider.dispose();
 		if (labelPosItemProvider != null) labelPosItemProvider.dispose();
+		if (abstractTypeConstraintItemProvider != null) abstractTypeConstraintItemProvider.dispose();
 	}
 
 }

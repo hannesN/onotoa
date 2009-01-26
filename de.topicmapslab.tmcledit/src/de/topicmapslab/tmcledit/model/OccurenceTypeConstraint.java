@@ -17,7 +17,6 @@ package de.topicmapslab.tmcledit.model;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#isUnique <em>Unique</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#getDataType <em>Data Type</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,7 +24,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface OccurenceTypeConstraint extends ScopedConstraint {
+public interface OccurenceTypeConstraint extends AbstractTypeConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,31 +84,5 @@ public interface OccurenceTypeConstraint extends ScopedConstraint {
 	 * @generated
 	 */
 	void setDataType(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(TopicType)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint_Type()
-	 * @model
-	 * @generated
-	 */
-	TopicType getType();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#getType <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(TopicType value);
 
 } // OccurenceTypeConstraint

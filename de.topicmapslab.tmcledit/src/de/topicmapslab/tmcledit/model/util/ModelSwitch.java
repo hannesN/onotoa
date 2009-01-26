@@ -103,14 +103,17 @@ public class ModelSwitch<T> {
 				AbstractConstraint abstractConstraint = (AbstractConstraint)theEObject;
 				T result = caseAbstractConstraint(abstractConstraint);
 				if (result == null) result = caseCardinalityContraint(abstractConstraint);
+				if (result == null) result = caseNamedConstraint(abstractConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: {
 				OccurenceTypeConstraint occurenceTypeConstraint = (OccurenceTypeConstraint)theEObject;
 				T result = caseOccurenceTypeConstraint(occurenceTypeConstraint);
+				if (result == null) result = caseAbstractTypeConstraint(occurenceTypeConstraint);
 				if (result == null) result = caseScopedConstraint(occurenceTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(occurenceTypeConstraint);
+				if (result == null) result = caseNamedConstraint(occurenceTypeConstraint);
 				if (result == null) result = caseCardinalityContraint(occurenceTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -118,8 +121,10 @@ public class ModelSwitch<T> {
 			case ModelPackage.NAME_TYPE_CONSTRAINT: {
 				NameTypeConstraint nameTypeConstraint = (NameTypeConstraint)theEObject;
 				T result = caseNameTypeConstraint(nameTypeConstraint);
+				if (result == null) result = caseAbstractTypeConstraint(nameTypeConstraint);
 				if (result == null) result = caseScopedConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
+				if (result == null) result = caseNamedConstraint(nameTypeConstraint);
 				if (result == null) result = caseCardinalityContraint(nameTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -142,6 +147,7 @@ public class ModelSwitch<T> {
 				T result = caseSubjectLocatorConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseCardinalityContraint(subjectLocatorConstraint);
+				if (result == null) result = caseNamedConstraint(subjectLocatorConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -150,6 +156,7 @@ public class ModelSwitch<T> {
 				T result = caseSubjectIdentifierConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseCardinalityContraint(subjectIdentifierConstraint);
+				if (result == null) result = caseNamedConstraint(subjectIdentifierConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -158,6 +165,7 @@ public class ModelSwitch<T> {
 				T result = caseAssociationTypeConstraint(associationTypeConstraint);
 				if (result == null) result = caseScopedConstraint(associationTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(associationTypeConstraint);
+				if (result == null) result = caseNamedConstraint(associationTypeConstraint);
 				if (result == null) result = caseCardinalityContraint(associationTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -215,8 +223,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.SCOPED_CONSTRAINT: {
 				ScopedConstraint scopedConstraint = (ScopedConstraint)theEObject;
 				T result = caseScopedConstraint(scopedConstraint);
-				if (result == null) result = caseAbstractConstraint(scopedConstraint);
-				if (result == null) result = caseCardinalityContraint(scopedConstraint);
+				if (result == null) result = caseNamedConstraint(scopedConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -236,6 +243,22 @@ public class ModelSwitch<T> {
 			case ModelPackage.LABEL_POS: {
 				LabelPos labelPos = (LabelPos)theEObject;
 				T result = caseLabelPos(labelPos);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ABSTRACT_TYPE_CONSTRAINT: {
+				AbstractTypeConstraint abstractTypeConstraint = (AbstractTypeConstraint)theEObject;
+				T result = caseAbstractTypeConstraint(abstractTypeConstraint);
+				if (result == null) result = caseScopedConstraint(abstractTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(abstractTypeConstraint);
+				if (result == null) result = caseNamedConstraint(abstractTypeConstraint);
+				if (result == null) result = caseCardinalityContraint(abstractTypeConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.NAMED_CONSTRAINT: {
+				NamedConstraint namedConstraint = (NamedConstraint)theEObject;
+				T result = caseNamedConstraint(namedConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -555,6 +578,36 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseLabelPos(LabelPos object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Type Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Type Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractTypeConstraint(AbstractTypeConstraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedConstraint(NamedConstraint object) {
 		return null;
 	}
 

@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class OccurenceTypeConstraintItemProvider
-	extends ScopedConstraintItemProvider
+	extends AbstractTypeConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -69,7 +69,6 @@ public class OccurenceTypeConstraintItemProvider
 
 			addUniquePropertyDescriptor(object);
 			addDataTypePropertyDescriptor(object);
-			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -114,28 +113,6 @@ public class OccurenceTypeConstraintItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OccurenceTypeConstraint_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OccurenceTypeConstraint_type_feature", "_UI_OccurenceTypeConstraint_type"),
-				 ModelPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}

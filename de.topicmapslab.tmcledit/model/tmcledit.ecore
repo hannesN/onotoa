@@ -34,20 +34,16 @@
     <eLiterals name="IDENTIFIER" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractConstraint" abstract="true"
-      eSuperTypes="#//CardinalityContraint">
+      eSuperTypes="#//CardinalityContraint #//NamedConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexp" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=".*"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OccurenceTypeConstraint" eSuperTypes="#//ScopedConstraint">
+  <eClassifiers xsi:type="ecore:EClass" name="OccurenceTypeConstraint" eSuperTypes="#//AbstractTypeConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="xsd:string"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TopicType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NameTypeConstraint" eSuperTypes="#//ScopedConstraint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TopicType"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameTypeConstraint" eSuperTypes="#//AbstractTypeConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="RoleTypeConstraints" eSuperTypes="#//CardinalityContraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="topicType" eType="#//TopicType"/>
@@ -82,7 +78,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SubjectLocatorConstraint" eSuperTypes="#//AbstractConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="SubjectIdentifierConstraint" eSuperTypes="#//AbstractConstraint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationTypeConstraint" eSuperTypes="#//ScopedConstraint">
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationTypeConstraint" eSuperTypes="#//ScopedConstraint #//AbstractConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationType" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleTypeConstraints" lowerBound="1"
         upperBound="-1" eType="#//RoleTypeConstraints" containment="true"/>
@@ -150,7 +146,8 @@
     <eLiterals name="ScopeType" value="5"/>
     <eLiterals name="NO_TYPE" value="6"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ScopedConstraint" abstract="true" eSuperTypes="#//AbstractConstraint">
+  <eClassifiers xsi:type="ecore:EClass" name="ScopedConstraint" abstract="true" interface="true"
+      eSuperTypes="#//NamedConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" upperBound="-1"
         eType="#//ScopeConstraint" containment="true"/>
   </eClassifiers>
@@ -168,5 +165,11 @@
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractTypeConstraint" eSuperTypes="#//ScopedConstraint #//AbstractConstraint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TopicType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedConstraint" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

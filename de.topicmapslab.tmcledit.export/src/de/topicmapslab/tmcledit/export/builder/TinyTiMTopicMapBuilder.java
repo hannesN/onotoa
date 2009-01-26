@@ -1,11 +1,6 @@
 package de.topicmapslab.tmcledit.export.builder;
 
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.tinytim.core.Scope;
 import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
 import org.tmapi.core.Topic;
@@ -14,6 +9,7 @@ import org.tmapi.core.TopicMapSystem;
 import org.tmapi.core.TopicMapSystemFactory;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AbstractTypeConstraint;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -121,7 +117,11 @@ public class TinyTiMTopicMapBuilder {
 				buffer.append("Associations of this type should have the following role types: ");
 				for (RoleTypeConstraints rtc : asc.getRoleTypeConstraints()) {
 					buffer.append(rtc.getTopicType().getName());
-					buffer.append(", ");
+					buffer.append("[");
+					buffer.append(rtc.getCardMin());
+					buffer.append("..");
+					buffer.append(rtc.getCardMax());
+					buffer.append("], ");
 				}
 				buffer.setLength(buffer.length()-2);
 				if (asc.getScope().size()>0)
@@ -234,18 +234,46 @@ public class TinyTiMTopicMapBuilder {
 			t.addType(this.topicType);
 			break;
 		}
-		/*
-		for (NameTypeConstraint ntc : topicType.getNameContraints()) {
-			createBaseName(ntc, t);
-		}
 		
-		for (OccurenceTypeConstraint otc : topicType.getOccurenceConstraints()) {
-			createOccurence(otc, t);
+		if (createConstraintInfos) {
+			for (NameTypeConstraint ntc : topicType.getNameContraints()) {
+				createConstraints(ntc, t);
+			}
+			
+			for (OccurenceTypeConstraint otc : topicType.getOccurenceConstraints()) {
+				createConstraints(otc, t);
+			}
 		}
-		*/
 
 		return t;
 	}
+
+	private void createConstraints(AbstractTypeConstraint otc, Topic t) {
+		Topic cit = getConstraintInfoTopic(otc, t.getTopicMap());
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("type: ");
+		buffer.append(otc.getType().getName());
+		buffer.append(" [");
+		buffer.append(otc.getCardMin());
+		buffer.append("..");
+		buffer.append("] ");
+		if (otc.getScope().size()>0) {
+			buffer.append("@scope: ");
+			for (ScopeConstraint sc : otc.getScope()) {
+				buffer.append(sc.getType().getName());
+				buffer.append("[");
+				buffer.append(sc.getCardMin());
+				buffer.append("..");
+				buffer.append(sc.getCardMax());
+				buffer.append("], ");
+			}
+			buffer.setLength(buffer.length()-2);
+		}
+		
+		t.createOccurrence(cit, buffer.toString(), infoScope);
+	}
+
 
 	/*
 	private TopicName createBaseName(NameTypeConstraint ntc, Topic topic)

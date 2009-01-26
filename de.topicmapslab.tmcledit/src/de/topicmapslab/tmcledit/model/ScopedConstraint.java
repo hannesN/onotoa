@@ -21,10 +21,10 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see de.topicmapslab.tmcledit.model.ModelPackage#getScopedConstraint()
- * @model abstract="true"
+ * @model interface="true" abstract="true"
  * @generated
  */
-public interface ScopedConstraint extends AbstractConstraint {
+public interface ScopedConstraint extends NamedConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

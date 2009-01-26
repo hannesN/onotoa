@@ -86,6 +86,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.FILE: return createFile();
 			case ModelPackage.SCOPE_CONSTRAINT: return createScopeConstraint();
 			case ModelPackage.LABEL_POS: return createLabelPos();
+			case ModelPackage.ABSTRACT_TYPE_CONSTRAINT: return createAbstractTypeConstraint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -307,6 +308,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public LabelPos createLabelPos() {
 		LabelPosImpl labelPos = new LabelPosImpl();
 		return labelPos;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractTypeConstraint createAbstractTypeConstraint() {
+		AbstractTypeConstraintImpl abstractTypeConstraint = new AbstractTypeConstraintImpl();
+		return abstractTypeConstraint;
 	}
 
 	/**

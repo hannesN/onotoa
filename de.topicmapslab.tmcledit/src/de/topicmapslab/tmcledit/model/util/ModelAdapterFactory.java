@@ -162,6 +162,14 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createLabelPosAdapter();
 			}
 			@Override
+			public Adapter caseAbstractTypeConstraint(AbstractTypeConstraint object) {
+				return createAbstractTypeConstraintAdapter();
+			}
+			@Override
+			public Adapter caseNamedConstraint(NamedConstraint object) {
+				return createNamedConstraintAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -472,6 +480,34 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLabelPosAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint <em>Abstract Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.AbstractTypeConstraint
+	 * @generated
+	 */
+	public Adapter createAbstractTypeConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.NamedConstraint <em>Named Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.NamedConstraint
+	 * @generated
+	 */
+	public Adapter createNamedConstraintAdapter() {
 		return null;
 	}
 

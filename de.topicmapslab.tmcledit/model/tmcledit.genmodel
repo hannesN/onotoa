@@ -45,16 +45,12 @@
     </genClasses>
     <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/regexp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/name"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//OccurenceTypeConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceTypeConstraint/unique"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OccurenceTypeConstraint/type"/>
     </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//NameTypeConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//NameTypeConstraint/type"/>
-    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//NameTypeConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//RoleTypeConstraints">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/topicType"/>
@@ -127,6 +123,12 @@
     <genClasses ecoreClass="tmcledit.ecore#//LabelPos">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//LabelPos/posX"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//LabelPos/posY"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//AbstractTypeConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AbstractTypeConstraint/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//NamedConstraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//NamedConstraint/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -66,8 +66,8 @@ public class AbstractConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRegexpPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addRegexpPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -105,9 +105,9 @@ public class AbstractConstraintItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AbstractConstraint_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractConstraint_name_feature", "_UI_AbstractConstraint_type"),
-				 ModelPackage.Literals.ABSTRACT_CONSTRAINT__NAME,
+				 getString("_UI_NamedConstraint_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedConstraint_name_feature", "_UI_NamedConstraint_type"),
+				 ModelPackage.Literals.NAMED_CONSTRAINT__NAME,
 				 true,
 				 false,
 				 false,
@@ -142,8 +142,8 @@ public class AbstractConstraintItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AbstractConstraint.class)) {
-			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
+			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

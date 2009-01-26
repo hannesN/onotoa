@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AssociationTypeConstraint extends ScopedConstraint {
+public interface AssociationTypeConstraint extends ScopedConstraint, AbstractConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

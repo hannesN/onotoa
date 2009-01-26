@@ -16,7 +16,6 @@ package de.topicmapslab.tmcledit.model;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getRegexp <em>Regexp</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,7 +23,7 @@ package de.topicmapslab.tmcledit.model;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractConstraint extends CardinalityContraint {
+public interface AbstractConstraint extends CardinalityContraint, NamedConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,31 +57,5 @@ public interface AbstractConstraint extends CardinalityContraint {
 	 * @generated
 	 */
 	void setRegexp(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractConstraint_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractConstraint#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 } // AbstractConstraint

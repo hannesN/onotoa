@@ -194,6 +194,15 @@ public interface ModelFactory extends EFactory {
 	LabelPos createLabelPos();
 
 	/**
+	 * Returns a new object of class '<em>Abstract Type Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Type Constraint</em>'.
+	 * @generated
+	 */
+	AbstractTypeConstraint createAbstractTypeConstraint();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

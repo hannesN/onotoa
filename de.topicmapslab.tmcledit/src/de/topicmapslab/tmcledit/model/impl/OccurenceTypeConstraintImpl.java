@@ -6,16 +6,12 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.TopicType;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,13 +22,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl#isUnique <em>Unique</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl#getDataType <em>Data Type</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements OccurenceTypeConstraint {
+public class OccurenceTypeConstraintImpl extends AbstractTypeConstraintImpl implements OccurenceTypeConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,16 +74,6 @@ public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements
 	 * @ordered
 	 */
 	protected String dataType = DATA_TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected TopicType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,44 +141,6 @@ public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TopicType getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (TopicType)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
-			}
-		}
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TopicType basicGetType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(TopicType newType) {
-		TopicType oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -201,9 +148,6 @@ public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements
 				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				return getDataType();
-			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -221,9 +165,6 @@ public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements
 				return;
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				setDataType((String)newValue);
-				return;
-			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
-				setType((TopicType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -243,9 +184,6 @@ public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				setDataType(DATA_TYPE_EDEFAULT);
 				return;
-			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
-				setType((TopicType)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -262,8 +200,6 @@ public class OccurenceTypeConstraintImpl extends ScopedConstraintImpl implements
 				return unique != UNIQUE_EDEFAULT;
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
-			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE:
-				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}
