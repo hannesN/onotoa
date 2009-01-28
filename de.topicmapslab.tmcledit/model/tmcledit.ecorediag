@@ -720,7 +720,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_vh_cYWbREd2l1f56ebDpfA" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_vh_cYmbREd2l1f56ebDpfA" fontName="Sans Serif" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vh_cY2bREd2l1f56ebDpfA" points="[0, -1, 96, 135]$[0, -136, 96, 0]$[-85, -136, 11, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vh_cY2bREd2l1f56ebDpfA" points="[0, -1, 82, 134]$[0, -135, 82, 0]$[-70, -135, 12, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_viGKEGbREd2l1f56ebDpfA" id="(0.23636363,0.012048192)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_viGKEWbREd2l1f56ebDpfA" id="(0.9408602,0.2682927)"/>
   </edges>
@@ -734,7 +734,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_3sTLYWbREd2l1f56ebDpfA" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_3sTLYmbREd2l1f56ebDpfA" fontName="Sans Serif" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3sTLY2bREd2l1f56ebDpfA" points="[0, -4, 164, 182]$[0, -186, 164, 0]$[-122, -186, 42, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3sTLY2bREd2l1f56ebDpfA" points="[0, -5, 154, 182]$[0, -187, 154, 0]$[-109, -187, 45, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3sWOsGbREd2l1f56ebDpfA" id="(0.43195266,0.03937008)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3sWOsWbREd2l1f56ebDpfA" id="(0.75418997,0.4390244)"/>
   </edges>
@@ -956,7 +956,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_N8RvUprtEd2wVP58cG6tug" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_N8RvU5rtEd2wVP58cG6tug" fontName="Sans Serif" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="tmcledit.ecore#//Edge/roleConstraint"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_N8RvVJrtEd2wVP58cG6tug" points="[0, 4, 226, -479]$[0, 76, 226, -407]$[20, 76, 246, -407]$[27, 487, 253, 4]$[-196, 487, 30, 4]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_N8RvVJrtEd2wVP58cG6tug" points="[1, 5, 225, -478]$[1, 76, 225, -407]$[29, 76, 253, -407]$[29, 487, 253, 4]$[-194, 487, 30, 4]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_N8ZrIJrtEd2wVP58cG6tug" id="(0.9461538,0.9183673)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_N8ZrIZrtEd2wVP58cG6tug" id="(0.80136985,0.27272728)"/>
   </edges>
