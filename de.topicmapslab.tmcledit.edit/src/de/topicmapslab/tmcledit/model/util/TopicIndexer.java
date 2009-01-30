@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
@@ -175,6 +176,16 @@ public class TopicIndexer implements Adapter{
 		for (TopicType tt : topicMapSchema.getTopicTypes())
 			if (tt instanceof ScopedTopicType)
 				result.add((ScopedTopicType) tt);
+		
+		return result;
+	}
+
+	public List<AssociationType> getAssociationTypes() {
+		List<AssociationType> result = new ArrayList<AssociationType>();
+		
+		for (TopicType tt : topicMapSchema.getTopicTypes())
+			if (tt instanceof AssociationType)
+				result.add( (AssociationType) tt);
 		
 		return result;
 	}

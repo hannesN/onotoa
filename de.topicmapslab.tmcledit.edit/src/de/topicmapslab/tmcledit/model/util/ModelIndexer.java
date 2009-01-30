@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
@@ -138,6 +139,10 @@ public class ModelIndexer {
 		}
 		
 		return false;
+	}
+	
+	public List<AssociationType> getAssociationTypes() {
+		return topicIndexer.getAssociationTypes();
 	}
 	
 	public List<ScopedTopicType> getScopedTopicTypes() {

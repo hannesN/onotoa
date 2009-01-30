@@ -3,6 +3,7 @@
  */
 package de.topicmapslab.tmcledit.model.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
@@ -19,6 +20,11 @@ public class RemoveScopeConstraintsCommand extends AbstractCommand {
 	private final ScopedTopicType scopedTopicType;
 	private final List<ScopeConstraint> scope;
 	
+	public RemoveScopeConstraintsCommand(ScopedTopicType scopedTopicType,
+			 ScopeConstraint scope) {
+		this(scopedTopicType, new ArrayList<ScopeConstraint>());
+		this.scope.add(scope);
+	}
 	
 	public RemoveScopeConstraintsCommand(ScopedTopicType scopedTopicType,
 			List<ScopeConstraint> scope) {

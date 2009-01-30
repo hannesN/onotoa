@@ -23,6 +23,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -45,7 +46,7 @@ public class TypedCardinalityConstraintWidget {
 	private Button addButton;
 	private Button newButton;
 	private Button removeButton;
-	
+
 	private CommandStack commandStack;
 
 	private Label label;
@@ -54,11 +55,11 @@ public class TypedCardinalityConstraintWidget {
 		this.commandStack = commandStack;
 		createControls(parent, toolkit);
 	}
-	
+
 	private CommandStack getCommandStack() {
 		return commandStack;
 	}
-	
+
 	public void setText(String text) {
 		label.setText(text);
 	}
@@ -69,10 +70,7 @@ public class TypedCardinalityConstraintWidget {
 	
 	protected void createControls(Composite parent,
 			FormToolkit toolkit) {
-	
 
-		GridDataFactory fac = GridDataFactory.createFrom(new GridData(GridData.FILL_HORIZONTAL));
-		
 		label = toolkit.createLabel(parent, "label:");
 		GridData gd = new GridData();
 		gd.verticalAlignment = SWT.TOP;
@@ -85,18 +83,10 @@ public class TypedCardinalityConstraintWidget {
 		layout.marginWidth = 0;
 		layout.marginHeight = 0;
 		comp.setLayout(layout);
-		fac.applyTo(comp);
+
+		createScopeTable(comp, toolkit);
 		
-		
-		
-		Composite scopeComp = toolkit.createComposite(comp);
-		layout = new GridLayout(2, false);
-		layout.marginWidth = 0;
-		scopeComp.setLayout(layout);
-		fac.applyTo(scopeComp);
-		createScopeTable(scopeComp, toolkit);
-		
-		createScopeButtons(scopeComp, toolkit);
+		createScopeButtons(comp, toolkit);
 	}
 	
 	private void createScopeButtons(Composite parent, FormToolkit toolkit) {
@@ -267,11 +257,28 @@ public class TypedCardinalityConstraintWidget {
 		
 	}
 	
-	protected class TopicLabelProvider implements ILabelProvider {
+	public class TopicLabelProvider implements ILabelProvider {
 
 		@Override
 		public Image getImage(Object element) {
-			return ImageProvider.getImage(ImageConstants.ROLETYPE);
+			String img = ImageConstants.TOPICTYPE;
+			
+			switch ( ((TopicType)element).getKind() ) {
+			case ROLE_TYPE:
+				img = ImageConstants.ROLETYPE;
+				break;
+			case SCOPE_TYPE:
+				img = ImageConstants.SCOPETYPE;
+				break;
+			case ASSOCIATION_TYPE:
+				img = ImageConstants.ASSOCIATIONTYPE;
+				break;
+			case OCCURENCE_TYPE:
+				img = ImageConstants.OCCURENCECONSTRAINT;
+				break;
+			}
+			
+			return ImageProvider.getImage(img);
 		}
 
 		@Override
@@ -296,6 +303,14 @@ public class TypedCardinalityConstraintWidget {
 		public void removeListener(ILabelProviderListener listener) {
 		}
 		
+	}
+	
+	public TableViewer getTableViewer() {
+		return tableViewer;
+	}
+
+	public Shell getShell() {
+		return tableViewer.getTable().getShell();
 	}
 	
 }

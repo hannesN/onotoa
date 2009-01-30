@@ -39,7 +39,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	private List<DeleteAssociationConstraintCommand> associationCommands = Collections
 			.emptyList();
 
-	private List<RemoveScopeConstraintCommand> scopeCommands = Collections
+	private List<RemoveScopeConstraintsCommand> scopeCommands = Collections
 			.emptyList();
 
 	public DeleteTopicTypeCommand(TopicType topicType) {
@@ -70,7 +70,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			cmd.execute();
 		}
 		
-		for (RemoveScopeConstraintCommand cmd : scopeCommands) {
+		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
 			cmd.execute();
 		}
 
@@ -105,7 +105,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			cmd.undo();
 		}
 		
-		for (RemoveScopeConstraintCommand cmd : scopeCommands) {
+		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
 			cmd.undo();
 		}
 
@@ -185,7 +185,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			
 			for (ScopeConstraint sc : stt.getScope()) {
 				if (topicType.equals(sc.getType()))
-					addScopeContraintCommand(new RemoveScopeConstraintCommand(stt, sc));
+					addScopeContraintCommand(new RemoveScopeConstraintsCommand(stt, sc));
 			}
 		}
 	}
@@ -211,9 +211,9 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		associationCommands.add(cmd);
 	}
 
-	private void addScopeContraintCommand(RemoveScopeConstraintCommand cmd) {
+	private void addScopeContraintCommand(RemoveScopeConstraintsCommand cmd) {
 		if (scopeCommands == Collections.EMPTY_LIST) {
-			scopeCommands = new ArrayList<RemoveScopeConstraintCommand>();
+			scopeCommands = new ArrayList<RemoveScopeConstraintsCommand>();
 		}
 		scopeCommands.add(cmd);
 	}
