@@ -11,22 +11,22 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
-public class DeleteRoleConstraintCommand extends AbstractCommand {
+public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 
 	private final AssociationTypeConstraint associationTypeConstraint;
-	private final RoleTypeConstraints roleTypeConstraints;
+	private final RolePlayerConstraints rolePlayerConstraints;
 	
 	private Map<Diagram, Edge>  edgeMap = Collections.emptyMap();
 	
-	public DeleteRoleConstraintCommand(
+	public DeleteRolePlayerConstraintCommand(
 			AssociationTypeConstraint associationTypeConstraint,
-			RoleTypeConstraints roleTypeConstraints) {
+			RolePlayerConstraints rolePlayerConstraints) {
 		super();
 		this.associationTypeConstraint = associationTypeConstraint;
-		this.roleTypeConstraints = roleTypeConstraints;
+		this.rolePlayerConstraints = rolePlayerConstraints;
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class DeleteRoleConstraintCommand extends AbstractCommand {
 		for (Diagram d : edgeMap.keySet()) {
 			d.getEdges().remove(edgeMap.get(d));
 		}
-		associationTypeConstraint.getRoleTypeConstraints().remove(roleTypeConstraints);
+		associationTypeConstraint.getPlayerConstraints().remove(rolePlayerConstraints);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class DeleteRoleConstraintCommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		associationTypeConstraint.getRoleTypeConstraints().add(roleTypeConstraints);
+		associationTypeConstraint.getPlayerConstraints().add(rolePlayerConstraints);
 		for (Diagram d : edgeMap.keySet()) {
 			d.getEdges().add(edgeMap.get(d));
 		}
@@ -58,7 +58,7 @@ public class DeleteRoleConstraintCommand extends AbstractCommand {
 			
 			if (node!=null) {
 				for (Edge e : ModelIndexer.getInstance().getEdges(d, EdgeType.ROLE_CONSTRAINT_TYPE)) {
-					if (e.getRoleConstraint().equals(roleTypeConstraints))
+					if (e.getRoleConstraint().equals(rolePlayerConstraints))
 						addEdge(d, e);
 				}
 			}

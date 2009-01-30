@@ -5,24 +5,25 @@
  */
 package de.topicmapslab.tmcledit.model;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Abstract Type Constraint</b></em>'.
+ * A representation of the model object '<em><b>Abstract Typed Constraint</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint#getType <em>Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.AbstractTypedConstraint#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractTypeConstraint()
- * @model
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractTypedConstraint()
+ * @model abstract="true"
  * @generated
  */
-public interface AbstractTypeConstraint extends ScopedConstraint, AbstractConstraint {
+public interface AbstractTypedConstraint extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,14 +41,14 @@ public interface AbstractTypeConstraint extends ScopedConstraint, AbstractConstr
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(TopicType)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractTypeConstraint_Type()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractTypedConstraint_Type()
 	 * @model required="true"
 	 * @generated
 	 */
 	TopicType getType();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractTypedConstraint#getType <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' reference.
@@ -56,4 +57,4 @@ public interface AbstractTypeConstraint extends ScopedConstraint, AbstractConstr
 	 */
 	void setType(TopicType value);
 
-} // AbstractTypeConstraint
+} // AbstractTypedConstraint
