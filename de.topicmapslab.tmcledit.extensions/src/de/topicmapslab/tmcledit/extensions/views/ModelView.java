@@ -765,6 +765,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			else {
 				currFile = ModelFactory.eINSTANCE.createFile();
 				currFile.setTopicMapSchema(ModelFactory.eINSTANCE.createTopicMapSchema());
+				currFile.setFilename(filename);
 			}
 			currFile.eAdapters().add(dirtyListener);
 			

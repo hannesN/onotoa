@@ -8,7 +8,7 @@ import java.util.List;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
-import de.topicmapslab.tmcledit.model.ScopedConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 
 /**
  * @author Hannes Niederhausen
@@ -16,15 +16,15 @@ import de.topicmapslab.tmcledit.model.ScopedConstraint;
  */
 public class AddScopeConstraintsCommand extends AbstractCommand {
 
-	private final ScopedConstraint constraint;
+	private final ScopedTopicType scopedTopicType;
 	private final List<ScopeConstraint> scopes;
 	
 	
 	
-	public AddScopeConstraintsCommand(ScopedConstraint constraint,
+	public AddScopeConstraintsCommand(ScopedTopicType scopedTopicType,
 			List<ScopeConstraint> scopes) {
 		super("Add Scope Constraints");
-		this.constraint = constraint;
+		this.scopedTopicType = scopedTopicType;
 		this.scopes = scopes;
 	}
 
@@ -33,7 +33,7 @@ public class AddScopeConstraintsCommand extends AbstractCommand {
 	 */
 	@Override
 	public void execute() {
-		constraint.getScope().addAll(scopes);
+		scopedTopicType.getScope().addAll(scopes);
 	}
 
 	/* (non-Javadoc)
@@ -46,7 +46,7 @@ public class AddScopeConstraintsCommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		constraint.getScope().removeAll(scopes);
+		scopedTopicType.getScope().removeAll(scopes);
 	}
 	
 	@Override

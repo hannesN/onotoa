@@ -29,7 +29,7 @@ public class AssociationCreateTypeAction extends CreateTypeAction {
 		cmd.append(new CreateTopicTypeCommand(ModelIndexer.getInstance()
 				.getTopicMapSchema(), topicType));
 		cmd.append(new GenericSetCommand(getModelObject(),
-				ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE,
+				ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE,
 				topicType));
 		return cmd;
 			

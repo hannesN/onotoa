@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -80,7 +79,7 @@ public interface TopicMapSchema extends EObject {
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.MappingElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mappings</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Mappings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

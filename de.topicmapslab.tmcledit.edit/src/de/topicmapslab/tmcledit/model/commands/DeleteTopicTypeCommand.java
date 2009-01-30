@@ -16,6 +16,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
@@ -140,7 +141,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 				.getTopicMapSchema();
 		for (AssociationTypeConstraint asc : topicMapSchema
 				.getAssociationTypeConstraints()) {
-			if (asc.getAssociationType().equals(topicType)) {
+			if (asc.getType().equals(topicType)) {
 				DeleteAssociationConstraintCommand cmd = new DeleteAssociationConstraintCommand(
 						asc);
 				if (cmd.canExecute()) {
@@ -178,30 +179,13 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	}
 
 	private void prepareScopeConstraintCommandList() {
-		TopicMapSchema topicMapSchema = ModelIndexer.getInstance().getTopicMapSchema();
-		for (TopicType tt : topicMapSchema
-				.getTopicTypes()) {
-			if (tt.equals(topicType))
+		for (ScopedTopicType stt : ModelIndexer.getInstance().getScopedTopicTypes()) {
+			if (stt.equals(topicType))
 				continue;
 			
-			for (NameTypeConstraint ntc : tt.getNameContraints()) {
-				for (ScopeConstraint sc : ntc.getScope()) {
-					if (topicType.equals(sc.getType()))
-						addScopeContraintCommand(new RemoveScopeConstraintCommand(ntc, sc));
-				}
-			}
-
-			for (OccurenceTypeConstraint otc : tt.getOccurenceConstraints()) {
-				for (ScopeConstraint sc : otc.getScope()) {
-					if (topicType.equals(sc.getType()))
-						addScopeContraintCommand(new RemoveScopeConstraintCommand(otc, sc));
-				}
-			}
-		}
-		for (AssociationTypeConstraint atc : topicMapSchema.getAssociationTypeConstraints()) {
-			for (ScopeConstraint sc : atc.getScope()) {
+			for (ScopeConstraint sc : stt.getScope()) {
 				if (topicType.equals(sc.getType()))
-					addScopeContraintCommand(new RemoveScopeConstraintCommand(atc, sc));
+					addScopeContraintCommand(new RemoveScopeConstraintCommand(stt, sc));
 			}
 		}
 	}

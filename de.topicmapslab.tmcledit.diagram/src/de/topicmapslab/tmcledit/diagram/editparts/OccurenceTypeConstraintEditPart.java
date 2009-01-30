@@ -4,6 +4,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 
 import de.topicmapslab.tmcledit.diagram.policies.OccurenceConstraintDirectEditPolicy;
+import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -28,7 +29,10 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 			getNameLabel().setText("No Type Set");
 		
 		buffer.append(" : ");
-		buffer.append(otc.getDataType());
+		if (otc.getType() instanceof OccurenceType)
+			buffer.append(((OccurenceType) otc.getType()).getDataType());
+		else
+			buffer.append("xsd:anyType");
 		buffer.append(" ");
 		buffer.append(otc.getCardMin());
 		buffer.append("..");

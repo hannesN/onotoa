@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -23,6 +22,7 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
@@ -59,13 +59,13 @@ public interface ModelFactory extends EFactory {
 	NameTypeConstraint createNameTypeConstraint();
 
 	/**
-	 * Returns a new object of class '<em>Role Type Constraints</em>'.
+	 * Returns a new object of class '<em>Role Player Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role Type Constraints</em>'.
+	 * @return a new object of class '<em>Role Player Constraints</em>'.
 	 * @generated
 	 */
-	RoleTypeConstraints createRoleTypeConstraints();
+	RolePlayerConstraints createRolePlayerConstraints();
 
 	/**
 	 * Returns a new object of class '<em>Topic Map Schema</em>'.
@@ -194,13 +194,67 @@ public interface ModelFactory extends EFactory {
 	LabelPos createLabelPos();
 
 	/**
-	 * Returns a new object of class '<em>Abstract Type Constraint</em>'.
+	 * Returns a new object of class '<em>Association Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract Type Constraint</em>'.
+	 * @return a new object of class '<em>Association Type</em>'.
 	 * @generated
 	 */
-	AbstractTypeConstraint createAbstractTypeConstraint();
+	AssociationType createAssociationType();
+
+	/**
+	 * Returns a new object of class '<em>Occurence Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Occurence Type</em>'.
+	 * @generated
+	 */
+	OccurenceType createOccurenceType();
+
+	/**
+	 * Returns a new object of class '<em>Role Constraints</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Role Constraints</em>'.
+	 * @generated
+	 */
+	RoleConstraints createRoleConstraints();
+
+	/**
+	 * Returns a new object of class '<em>Role Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Role Type</em>'.
+	 * @generated
+	 */
+	RoleType createRoleType();
+
+	/**
+	 * Returns a new object of class '<em>Other Role Player Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Other Role Player Constraint</em>'.
+	 * @generated
+	 */
+	OtherRolePlayerConstraint createOtherRolePlayerConstraint();
+
+	/**
+	 * Returns a new object of class '<em>Name Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Name Type</em>'.
+	 * @generated
+	 */
+	NameType createNameType();
+
+	/**
+	 * Returns a new object of class '<em>Abstract Typed Cardinality Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Typed Cardinality Constraint</em>'.
+	 * @generated
+	 */
+	AbstractTypedCardinalityConstraint createAbstractTypedCardinalityConstraint();
 
 	/**
 	 * Returns the package supported by this factory.

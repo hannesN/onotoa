@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -42,7 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIdentifiers <em>Identifiers</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIdType <em>Id Type</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#isIsAbstract <em>Is Abstract</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIsa <em>Isa</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getAko <em>Ako</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getOccurenceConstraints <em>Occurence Constraints</em>}</li>
@@ -97,24 +96,24 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	protected TopicId idType = ID_TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsAbstract()
+	 * @see #isAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_ABSTRACT_EDEFAULT = false;
+	protected static final boolean ABSTRACT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsAbstract()
+	 * @see #isAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isAbstract = IS_ABSTRACT_EDEFAULT;
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getIsa() <em>Isa</em>}' reference list.
@@ -293,8 +292,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsAbstract() {
-		return isAbstract;
+	public boolean isAbstract() {
+		return abstract_;
 	}
 
 	/**
@@ -302,11 +301,11 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsAbstract(boolean newIsAbstract) {
-		boolean oldIsAbstract = isAbstract;
-		isAbstract = newIsAbstract;
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__IS_ABSTRACT, oldIsAbstract, isAbstract));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__ABSTRACT, oldAbstract, abstract_));
 	}
 
 	/**
@@ -479,8 +478,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return getIdentifiers();
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return getIdType();
-			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
-				return isIsAbstract() ? Boolean.TRUE : Boolean.FALSE;
+			case ModelPackage.TOPIC_TYPE__ABSTRACT:
+				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.TOPIC_TYPE__ISA:
 				return getIsa();
 			case ModelPackage.TOPIC_TYPE__AKO:
@@ -521,8 +520,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				setIdType((TopicId)newValue);
 				return;
-			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
-				setIsAbstract(((Boolean)newValue).booleanValue());
+			case ModelPackage.TOPIC_TYPE__ABSTRACT:
+				setAbstract(((Boolean)newValue).booleanValue());
 				return;
 			case ModelPackage.TOPIC_TYPE__ISA:
 				getIsa().clear();
@@ -580,8 +579,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				setIdType(ID_TYPE_EDEFAULT);
 				return;
-			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
-				setIsAbstract(IS_ABSTRACT_EDEFAULT);
+			case ModelPackage.TOPIC_TYPE__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
 				return;
 			case ModelPackage.TOPIC_TYPE__ISA:
 				getIsa().clear();
@@ -629,8 +628,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return identifiers != null && !identifiers.isEmpty();
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return idType != ID_TYPE_EDEFAULT;
-			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
-				return isAbstract != IS_ABSTRACT_EDEFAULT;
+			case ModelPackage.TOPIC_TYPE__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
 			case ModelPackage.TOPIC_TYPE__ISA:
 				return isa != null && !isa.isEmpty();
 			case ModelPackage.TOPIC_TYPE__AKO:
@@ -669,8 +668,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 		result.append(identifiers);
 		result.append(", idType: ");
 		result.append(idType);
-		result.append(", isAbstract: ");
-		result.append(isAbstract);
+		result.append(", abstract: ");
+		result.append(abstract_);
 		result.append(", kind: ");
 		result.append(kind);
 		result.append(", name: ");

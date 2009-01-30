@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -20,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIdentifiers <em>Identifiers</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIdType <em>Id Type</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#isIsAbstract <em>Is Abstract</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIsa <em>Isa</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getAko <em>Ako</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOccurenceConstraints <em>Occurence Constraints</em>}</li>
@@ -93,30 +92,31 @@ public interface TopicType extends EObject {
 	void setIdType(TopicId value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
+	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Abstract</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Abstract</em>' attribute.
-	 * @see #setIsAbstract(boolean)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_IsAbstract()
-	 * @model
+	 * @return the value of the '<em>Abstract</em>' attribute.
+	 * @see #setAbstract(boolean)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Abstract()
+	 * @model default="false" required="true"
 	 * @generated
 	 */
-	boolean isIsAbstract();
+	boolean isAbstract();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicType#isIsAbstract <em>Is Abstract</em>}' attribute.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicType#isAbstract <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Abstract</em>' attribute.
-	 * @see #isIsAbstract()
+	 * @param value the new value of the '<em>Abstract</em>' attribute.
+	 * @see #isAbstract()
 	 * @generated
 	 */
-	void setIsAbstract(boolean value);
+	void setAbstract(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Isa</b></em>' reference list.

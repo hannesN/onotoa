@@ -26,7 +26,7 @@ import org.eclipse.ui.forms.widgets.Hyperlink;
 
 import de.topicmapslab.tmcledit.extensions.util.CardTextObserver;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
@@ -46,12 +46,13 @@ public class RoleModelPage extends AbstractModelPage{
 	
 	@Override
 	public void updateUI() {
-		RoleTypeConstraints rtc = (RoleTypeConstraints) getModel();
-		cardMinText.setText(rtc.getCardMin());
-		cardMaxText.setText(rtc.getCardMax());
+		RolePlayerConstraints rpc = getCastedModel();
 		
-		if (rtc.getType()!=null)
-			roleText.setText(rtc.getType().getName());
+		cardMinText.setText(rpc.getRole().getCardMin());
+		cardMaxText.setText(rpc.getRole().getCardMax());
+		
+		if (rpc.getType()!=null)
+			roleText.setText(rpc.getType().getName());
 		else
 			roleText.setText("no type");
 		
@@ -108,8 +109,8 @@ public class RoleModelPage extends AbstractModelPage{
 		setControl(comp);
 	}
 	
-	protected RoleTypeConstraints getCastedModel() {
-		return (RoleTypeConstraints) getModel();
+	protected RolePlayerConstraints getCastedModel() {
+		return (RolePlayerConstraints) getModel();
 	}
 
 	@Override

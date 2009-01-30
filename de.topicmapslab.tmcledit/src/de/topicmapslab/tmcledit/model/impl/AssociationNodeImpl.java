@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -37,6 +36,7 @@ public class AssociationNodeImpl extends NodeImpl implements AssociationNode {
 	 * @generated
 	 */
 	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
 	/**
 	 * The cached value of the '{@link #getAssociationConstraint() <em>Association Constraint</em>}' reference.
 	 * <!-- begin-user-doc -->

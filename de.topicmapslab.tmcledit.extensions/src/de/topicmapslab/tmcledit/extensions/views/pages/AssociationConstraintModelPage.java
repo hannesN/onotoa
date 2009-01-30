@@ -41,10 +41,10 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 	@Override
 	public void updateUI() {
 		AssociationTypeConstraint asc = getCastedModel();
-		if (asc.getAssociationType()==null)
+		if (asc.getType()==null)
 			typeText.setText("");
 		else
-			typeText.setText(asc.getAssociationType().getName());
+			typeText.setText(asc.getType().getName());
 	}
 
 	private AssociationTypeConstraint getCastedModel() {
@@ -69,7 +69,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = wizard.getNewTopicType();
 					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
-					getCastedModel().setAssociationType(tt);
+					getCastedModel().setType(tt);
 				}
 				
 			}
@@ -96,7 +96,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeText.getShell(), type);
 				
 				if (dlg.open()==Dialog.OK) {
-					getCastedModel().setAssociationType((TopicType) dlg.getFirstResult());
+					getCastedModel().setType((TopicType) dlg.getFirstResult());
 				}
 				
 			}
@@ -110,7 +110,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		}
 		
 		if (notification.getEventType()==Notification.SET) {
-			if (notification.getFeatureID(TopicType.class)==ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
 				if (notification.getOldValue()!=null)
 					((EObject)notification.getOldValue()).eAdapters().remove(this);
 				

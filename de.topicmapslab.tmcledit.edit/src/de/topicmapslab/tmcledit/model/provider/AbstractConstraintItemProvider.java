@@ -6,11 +6,15 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
+import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.ModelPackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -21,9 +25,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
-import de.topicmapslab.tmcledit.model.ModelPackage;
-
 /**
  * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.AbstractConstraint} object.
  * <!-- begin-user-doc -->
@@ -31,7 +32,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
  * @generated
  */
 public class AbstractConstraintItemProvider
-	extends CardinalityContraintItemProvider
+	extends AbstractCardinalityContraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -66,7 +67,6 @@ public class AbstractConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addRegexpPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -95,28 +95,6 @@ public class AbstractConstraintItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_NamedConstraint_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NamedConstraint_name_feature", "_UI_NamedConstraint_type"),
-				 ModelPackage.Literals.NAMED_CONSTRAINT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -124,7 +102,7 @@ public class AbstractConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AbstractConstraint)object).getName();
+		String label = ((AbstractConstraint)object).getCardMin();
 		return label == null || label.length() == 0 ?
 			getString("_UI_AbstractConstraint_type") :
 			getString("_UI_AbstractConstraint_type") + " " + label;
@@ -142,7 +120,6 @@ public class AbstractConstraintItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AbstractConstraint.class)) {
-			case ModelPackage.ABSTRACT_CONSTRAINT__NAME:
 			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

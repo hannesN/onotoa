@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -33,6 +32,7 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -102,37 +102,36 @@ public class ModelSwitch<T> {
 			case ModelPackage.ABSTRACT_CONSTRAINT: {
 				AbstractConstraint abstractConstraint = (AbstractConstraint)theEObject;
 				T result = caseAbstractConstraint(abstractConstraint);
-				if (result == null) result = caseCardinalityContraint(abstractConstraint);
-				if (result == null) result = caseNamedConstraint(abstractConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(abstractConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: {
 				OccurenceTypeConstraint occurenceTypeConstraint = (OccurenceTypeConstraint)theEObject;
 				T result = caseOccurenceTypeConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseAbstractTypeConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseScopedConstraint(occurenceTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseNamedConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseCardinalityContraint(occurenceTypeConstraint);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(occurenceTypeConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(occurenceTypeConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(occurenceTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.NAME_TYPE_CONSTRAINT: {
 				NameTypeConstraint nameTypeConstraint = (NameTypeConstraint)theEObject;
 				T result = caseNameTypeConstraint(nameTypeConstraint);
-				if (result == null) result = caseAbstractTypeConstraint(nameTypeConstraint);
-				if (result == null) result = caseScopedConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
-				if (result == null) result = caseNamedConstraint(nameTypeConstraint);
-				if (result == null) result = caseCardinalityContraint(nameTypeConstraint);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(nameTypeConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(nameTypeConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(nameTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS: {
-				RoleTypeConstraints roleTypeConstraints = (RoleTypeConstraints)theEObject;
-				T result = caseRoleTypeConstraints(roleTypeConstraints);
-				if (result == null) result = caseCardinalityContraint(roleTypeConstraints);
+			case ModelPackage.ROLE_PLAYER_CONSTRAINTS: {
+				RolePlayerConstraints rolePlayerConstraints = (RolePlayerConstraints)theEObject;
+				T result = caseRolePlayerConstraints(rolePlayerConstraints);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(rolePlayerConstraints);
+				if (result == null) result = caseAbstractCardinalityContraint(rolePlayerConstraints);
+				if (result == null) result = caseAbstractTypedConstraint(rolePlayerConstraints);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -146,8 +145,7 @@ public class ModelSwitch<T> {
 				SubjectLocatorConstraint subjectLocatorConstraint = (SubjectLocatorConstraint)theEObject;
 				T result = caseSubjectLocatorConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
-				if (result == null) result = caseCardinalityContraint(subjectLocatorConstraint);
-				if (result == null) result = caseNamedConstraint(subjectLocatorConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(subjectLocatorConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -155,18 +153,16 @@ public class ModelSwitch<T> {
 				SubjectIdentifierConstraint subjectIdentifierConstraint = (SubjectIdentifierConstraint)theEObject;
 				T result = caseSubjectIdentifierConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
-				if (result == null) result = caseCardinalityContraint(subjectIdentifierConstraint);
-				if (result == null) result = caseNamedConstraint(subjectIdentifierConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(subjectIdentifierConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT: {
 				AssociationTypeConstraint associationTypeConstraint = (AssociationTypeConstraint)theEObject;
 				T result = caseAssociationTypeConstraint(associationTypeConstraint);
-				if (result == null) result = caseScopedConstraint(associationTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(associationTypeConstraint);
-				if (result == null) result = caseNamedConstraint(associationTypeConstraint);
-				if (result == null) result = caseCardinalityContraint(associationTypeConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(associationTypeConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(associationTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -220,23 +216,18 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.SCOPED_CONSTRAINT: {
-				ScopedConstraint scopedConstraint = (ScopedConstraint)theEObject;
-				T result = caseScopedConstraint(scopedConstraint);
-				if (result == null) result = caseNamedConstraint(scopedConstraint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ModelPackage.SCOPE_CONSTRAINT: {
 				ScopeConstraint scopeConstraint = (ScopeConstraint)theEObject;
 				T result = caseScopeConstraint(scopeConstraint);
-				if (result == null) result = caseCardinalityContraint(scopeConstraint);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(scopeConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(scopeConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(scopeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.CARDINALITY_CONTRAINT: {
-				CardinalityContraint cardinalityContraint = (CardinalityContraint)theEObject;
-				T result = caseCardinalityContraint(cardinalityContraint);
+			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT: {
+				AbstractCardinalityContraint abstractCardinalityContraint = (AbstractCardinalityContraint)theEObject;
+				T result = caseAbstractCardinalityContraint(abstractCardinalityContraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -246,19 +237,73 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ABSTRACT_TYPE_CONSTRAINT: {
-				AbstractTypeConstraint abstractTypeConstraint = (AbstractTypeConstraint)theEObject;
-				T result = caseAbstractTypeConstraint(abstractTypeConstraint);
-				if (result == null) result = caseScopedConstraint(abstractTypeConstraint);
-				if (result == null) result = caseAbstractConstraint(abstractTypeConstraint);
-				if (result == null) result = caseNamedConstraint(abstractTypeConstraint);
-				if (result == null) result = caseCardinalityContraint(abstractTypeConstraint);
+			case ModelPackage.ABSTRACT_TYPED_CONSTRAINT: {
+				AbstractTypedConstraint abstractTypedConstraint = (AbstractTypedConstraint)theEObject;
+				T result = caseAbstractTypedConstraint(abstractTypedConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.NAMED_CONSTRAINT: {
-				NamedConstraint namedConstraint = (NamedConstraint)theEObject;
-				T result = caseNamedConstraint(namedConstraint);
+			case ModelPackage.SCOPED_TOPIC_TYPE: {
+				ScopedTopicType scopedTopicType = (ScopedTopicType)theEObject;
+				T result = caseScopedTopicType(scopedTopicType);
+				if (result == null) result = caseTopicType(scopedTopicType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ASSOCIATION_TYPE: {
+				AssociationType associationType = (AssociationType)theEObject;
+				T result = caseAssociationType(associationType);
+				if (result == null) result = caseScopedTopicType(associationType);
+				if (result == null) result = caseTopicType(associationType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.OCCURENCE_TYPE: {
+				OccurenceType occurenceType = (OccurenceType)theEObject;
+				T result = caseOccurenceType(occurenceType);
+				if (result == null) result = caseScopedTopicType(occurenceType);
+				if (result == null) result = caseTopicType(occurenceType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ROLE_CONSTRAINTS: {
+				RoleConstraints roleConstraints = (RoleConstraints)theEObject;
+				T result = caseRoleConstraints(roleConstraints);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(roleConstraints);
+				if (result == null) result = caseAbstractCardinalityContraint(roleConstraints);
+				if (result == null) result = caseAbstractTypedConstraint(roleConstraints);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ROLE_TYPE: {
+				RoleType roleType = (RoleType)theEObject;
+				T result = caseRoleType(roleType);
+				if (result == null) result = caseTopicType(roleType);
+				if (result == null) result = caseOtherRolePlayerConstraint(roleType);
+				if (result == null) result = caseAbstractCardinalityContraint(roleType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT: {
+				OtherRolePlayerConstraint otherRolePlayerConstraint = (OtherRolePlayerConstraint)theEObject;
+				T result = caseOtherRolePlayerConstraint(otherRolePlayerConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(otherRolePlayerConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.NAME_TYPE: {
+				NameType nameType = (NameType)theEObject;
+				T result = caseNameType(nameType);
+				if (result == null) result = caseScopedTopicType(nameType);
+				if (result == null) result = caseTopicType(nameType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ABSTRACT_TYPED_CARDINALITY_CONSTRAINT: {
+				AbstractTypedCardinalityConstraint abstractTypedCardinalityConstraint = (AbstractTypedCardinalityConstraint)theEObject;
+				T result = caseAbstractTypedCardinalityConstraint(abstractTypedCardinalityConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(abstractTypedCardinalityConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(abstractTypedCardinalityConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -327,17 +372,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Role Type Constraints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Role Player Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Role Type Constraints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Role Player Constraints</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoleTypeConstraints(RoleTypeConstraints object) {
+	public T caseRolePlayerConstraints(RolePlayerConstraints object) {
 		return null;
 	}
 
@@ -522,21 +567,6 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scoped Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scoped Constraint</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScopedConstraint(ScopedConstraint object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Scope Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -552,17 +582,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Cardinality Contraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Cardinality Contraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Cardinality Contraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Cardinality Contraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCardinalityContraint(CardinalityContraint object) {
+	public T caseAbstractCardinalityContraint(AbstractCardinalityContraint object) {
 		return null;
 	}
 
@@ -582,32 +612,137 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Type Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Typed Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Type Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Typed Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractTypeConstraint(AbstractTypeConstraint object) {
+	public T caseAbstractTypedConstraint(AbstractTypedConstraint object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Scoped Topic Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Scoped Topic Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNamedConstraint(NamedConstraint object) {
+	public T caseScopedTopicType(ScopedTopicType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Association Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Association Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssociationType(AssociationType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Occurence Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Occurence Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOccurenceType(OccurenceType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Role Constraints</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Role Constraints</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRoleConstraints(RoleConstraints object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Role Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Role Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRoleType(RoleType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Other Role Player Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Other Role Player Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOtherRolePlayerConstraint(OtherRolePlayerConstraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Name Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Name Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNameType(NameType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Typed Cardinality Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Typed Cardinality Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractTypedCardinalityConstraint(AbstractTypedCardinalityConstraint object) {
 		return null;
 	}
 

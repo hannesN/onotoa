@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -17,7 +16,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface NameTypeConstraint extends AbstractTypeConstraint {
+public interface NameTypeConstraint extends AbstractConstraint, AbstractTypedCardinalityConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

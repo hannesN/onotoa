@@ -10,10 +10,12 @@ import org.tmapi.core.TopicMapSystemFactory;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AbstractTypeConstraint;
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraints;
 import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
@@ -117,24 +119,25 @@ public class TinyTiMTopicMapBuilder {
 	private void createAssociationConstraintInfos(TopicMap tm) {
 		Locator l;
 		for (AssociationTypeConstraint asc : topicMapSchema.getAssociationTypeConstraints()) {
-			l = tm.createLocator("#topic"+asc.getAssociationType().hashCode());
+			AssociationType type = (AssociationType) asc.getType();
+			l = tm.createLocator("#topic"+type.hashCode());
 			Topic topic = tm.createTopicByItemIdentifier(l); // topic should already exists therefor no new creation
 			
 			StringBuffer buffer = new StringBuffer();
 			
 			buffer.append("Associations of this type should have the following role types: ");
-			for (RoleTypeConstraints rtc : asc.getRoleTypeConstraints()) {
-				buffer.append(rtc.getTopicType().getName());
+			for (RoleConstraints rc : ((AssociationType)type).getRoles()) {
+				buffer.append(rc.getType().getName());
 				buffer.append("[");
-				buffer.append(rtc.getCardMin());
+				buffer.append(rc.getCardMin());
 				buffer.append("..");
-				buffer.append(rtc.getCardMax());
+				buffer.append(rc.getCardMax());
 				buffer.append("], ");
 			}
 			buffer.setLength(buffer.length()-2);
-			if (asc.getScope().size()>0)
+			if (type.getScope().size()>0)
 				buffer.append(" @ scope: ");
-			for (ScopeConstraint sc : asc.getScope()) {
+			for (ScopeConstraint sc : type.getScope()) {
 				buffer.append(sc.getType().getName());
 				buffer.append("[");
 				buffer.append(sc.getCardMin());
@@ -159,7 +162,7 @@ public class TinyTiMTopicMapBuilder {
 			l = tm.createLocator("#subject_identifier_constraint_info");
 		} else if (constraint instanceof SubjectLocatorConstraint) {
 			l = tm.createLocator("#subject_identifier_constraint_info");
-		} else if (constraint instanceof RoleTypeConstraints) {
+		} else if (constraint instanceof RoleConstraints) {
 			l = tm.createLocator("#role_constraint_info");
 		}
 		

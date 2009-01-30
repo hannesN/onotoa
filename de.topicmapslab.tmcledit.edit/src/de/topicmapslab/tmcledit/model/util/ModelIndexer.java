@@ -14,6 +14,7 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -66,8 +67,8 @@ public class ModelIndexer {
 		return file.getTopicMapSchema();
 	}
 
-	public TopicType createTopicType() {
-		return topicIndexer.createTopicType();
+	public TopicType createTopicType(KindOfTopicType kind) {
+		return topicIndexer.createTopicType(kind);
 	}
 
 	public TopicType createTopicType(String id) {
@@ -137,5 +138,9 @@ public class ModelIndexer {
 		}
 		
 		return false;
+	}
+	
+	public List<ScopedTopicType> getScopedTopicTypes() {
+		return topicIndexer.getScopedTopicTypes();
 	}
 }

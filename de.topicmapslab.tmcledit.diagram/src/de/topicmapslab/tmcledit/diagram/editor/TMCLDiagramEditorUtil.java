@@ -298,7 +298,7 @@ public class TMCLDiagramEditorUtil {
 					public Object getNewObject() {
 						Edge e = ModelFactory.eINSTANCE.createEdge();
 						e.setRoleConstraint(ModelFactory.eINSTANCE
-								.createRoleTypeConstraints());
+								.createRolePlayerConstraints());
 						e.setType(EdgeType.ROLE_CONSTRAINT_TYPE);
 						return e;
 					}

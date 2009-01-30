@@ -16,7 +16,6 @@ public class CreateEdgeCommand extends AbstractCommand {
 	
 	public CreateEdgeCommand(Edge newEdge) {
 		edge = newEdge;
-		
 	}
 	
 	public void setSource(Node source) {
@@ -40,7 +39,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 	protected boolean prepare() {
 		if ((edge.getTarget()!=null) && (edge.getSource()!=null) && (diagram!=null)) {
 			if (edge.getRoleConstraint()!=null) {
-				edge.getRoleConstraint().setTopicType(((TypeNode)edge.getTarget()).getTopicType());
+				edge.getRoleConstraint().setPlayer(((TypeNode)edge.getTarget()).getTopicType());
 			}
 		} else {
 			return false;
@@ -71,7 +70,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 			source.getIsa().remove(target);
 			break;
 		case ROLE_CONSTRAINT_TYPE:
-			((AssociationNode) edge.getSource()).getAssociationConstraint().getRoleTypeConstraints().remove(edge.getRoleConstraint());
+			((AssociationNode) edge.getSource()).getAssociationConstraint().getPlayerConstraints().remove(edge.getRoleConstraint());
 			diagram.getEdges().remove(edge);
 			break;
 	
@@ -93,7 +92,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 			source.getIsa().add(target);
 			break;
 		case ROLE_CONSTRAINT_TYPE:
-			((AssociationNode) edge.getSource()).getAssociationConstraint().getRoleTypeConstraints().add(edge.getRoleConstraint());
+			((AssociationNode) edge.getSource()).getAssociationConstraint().getPlayerConstraints().add(edge.getRoleConstraint());
 			diagram.getEdges().add(edge);
 			break;
 	

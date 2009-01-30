@@ -6,20 +6,29 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
-
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
-//TODO reimplement it
+//TODO reimplement it or delete it
 public class RenameConstraintCommand extends AbstractCommand{
 
-	private final AbstractConstraint constraint;
-	private final String oldName;
-	private final String newName;
+//	private final AbstractConstraint constraint;
+//	private final String oldName;
+//	private final String newName;
 
-	
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void redo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/*
 	
 	public RenameConstraintCommand(AbstractConstraint constraint, String newName) {
 		super();
@@ -47,4 +56,5 @@ public class RenameConstraintCommand extends AbstractCommand{
 	protected boolean prepare() {
 		return true;
 	}
+	*/
 }

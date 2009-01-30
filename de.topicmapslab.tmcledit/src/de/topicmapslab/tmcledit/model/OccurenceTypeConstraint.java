@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -16,7 +15,6 @@ package de.topicmapslab.tmcledit.model;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#isUnique <em>Unique</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,7 +22,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface OccurenceTypeConstraint extends AbstractTypeConstraint {
+public interface OccurenceTypeConstraint extends AbstractConstraint, AbstractTypedCardinalityConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -57,32 +55,5 @@ public interface OccurenceTypeConstraint extends AbstractTypeConstraint {
 	 * @generated
 	 */
 	void setUnique(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
-	 * The default value is <code>"xsd:string"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Data Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Type</em>' attribute.
-	 * @see #setDataType(String)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurenceTypeConstraint_DataType()
-	 * @model default="xsd:string" required="true"
-	 * @generated
-	 */
-	String getDataType();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#getDataType <em>Data Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data Type</em>' attribute.
-	 * @see #getDataType()
-	 * @generated
-	 */
-	void setDataType(String value);
 
 } // OccurenceTypeConstraint

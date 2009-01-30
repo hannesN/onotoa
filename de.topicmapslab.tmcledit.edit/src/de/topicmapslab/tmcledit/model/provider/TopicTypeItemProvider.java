@@ -75,7 +75,7 @@ public class TopicTypeItemProvider
 
 			addIdentifiersPropertyDescriptor(object);
 			addIdTypePropertyDescriptor(object);
-			addIsAbstractPropertyDescriptor(object);
+			addAbstractPropertyDescriptor(object);
 			addIsaPropertyDescriptor(object);
 			addAkoPropertyDescriptor(object);
 			addKindPropertyDescriptor(object);
@@ -131,19 +131,19 @@ public class TopicTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Is Abstract feature.
+	 * This adds a property descriptor for the Abstract feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsAbstractPropertyDescriptor(Object object) {
+	protected void addAbstractPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TopicType_isAbstract_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_isAbstract_feature", "_UI_TopicType_type"),
-				 ModelPackage.Literals.TOPIC_TYPE__IS_ABSTRACT,
+				 getString("_UI_TopicType_abstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_abstract_feature", "_UI_TopicType_type"),
+				 ModelPackage.Literals.TOPIC_TYPE__ABSTRACT,
 				 true,
 				 false,
 				 false,
@@ -356,7 +356,7 @@ public class TopicTypeItemProvider
 		switch (notification.getFeatureID(TopicType.class)) {
 			case ModelPackage.TOPIC_TYPE__IDENTIFIERS:
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
-			case ModelPackage.TOPIC_TYPE__IS_ABSTRACT:
+			case ModelPackage.TOPIC_TYPE__ABSTRACT:
 			case ModelPackage.TOPIC_TYPE__KIND:
 			case ModelPackage.TOPIC_TYPE__NAME:
 			case ModelPackage.TOPIC_TYPE__LOCATORS:

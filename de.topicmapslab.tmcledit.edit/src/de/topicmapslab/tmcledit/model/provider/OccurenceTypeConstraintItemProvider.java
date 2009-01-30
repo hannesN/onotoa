@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class OccurenceTypeConstraintItemProvider
-	extends AbstractTypeConstraintItemProvider
+	extends AbstractConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -67,10 +67,32 @@ public class OccurenceTypeConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTypePropertyDescriptor(object);
 			addUniquePropertyDescriptor(object);
-			addDataTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractTypedConstraint_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractTypedConstraint_type_feature", "_UI_AbstractTypedConstraint_type"),
+				 ModelPackage.Literals.ABSTRACT_TYPED_CONSTRAINT__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -96,28 +118,6 @@ public class OccurenceTypeConstraintItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Data Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDataTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OccurenceTypeConstraint_dataType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OccurenceTypeConstraint_dataType_feature", "_UI_OccurenceTypeConstraint_type"),
-				 ModelPackage.Literals.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns OccurenceTypeConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -136,7 +136,7 @@ public class OccurenceTypeConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((OccurenceTypeConstraint)object).getName();
+		String label = ((OccurenceTypeConstraint)object).getCardMin();
 		return label == null || label.length() == 0 ?
 			getString("_UI_OccurenceTypeConstraint_type") :
 			getString("_UI_OccurenceTypeConstraint_type") + " " + label;
@@ -155,7 +155,6 @@ public class OccurenceTypeConstraintItemProvider
 
 		switch (notification.getFeatureID(OccurenceTypeConstraint.class)) {
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__UNIQUE:
-			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT__DATA_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

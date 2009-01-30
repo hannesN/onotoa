@@ -25,7 +25,7 @@ import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
-public class NameConstraintDetailPage extends AbstractScopedContraintModelPage {
+public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 
 	private Text typeText;
 	private Button typeButton;

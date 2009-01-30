@@ -12,14 +12,14 @@ import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class DeleteAssociationConstraintCommand extends AbstractCommand {
 	
 	private final AssociationTypeConstraint constraint;
 	
-	private List<DeleteRoleConstraintCommand> cmds = Collections.emptyList();
+	private List<DeleteRolePlayerConstraintCommand> cmds = Collections.emptyList();
 	
 	private Map<Diagram, Node> nodeMap = Collections.emptyMap();
 	
@@ -35,7 +35,7 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 		ModelIndexer indexer = ModelIndexer.getInstance();
 		
 		
-		for (DeleteRoleConstraintCommand cmd : cmds) {
+		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
 			cmd.execute();
 		}
 		
@@ -51,7 +51,7 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 	@Override
 	public void redo() {
 		ModelIndexer indexer = ModelIndexer.getInstance();
-		for (DeleteRoleConstraintCommand cmd : cmds) {
+		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
 			cmd.redo();
 		}
 		
@@ -73,19 +73,19 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 			d.getNodes().add(nodeMap.get(d));
 		}
 		
-		for (DeleteRoleConstraintCommand cmd : cmds) {
+		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
 			cmd.undo();
 		}
 	}
 	
 	@Override
 	protected boolean prepare() {
-		if (constraint.getRoleTypeConstraints().size()>0) {
-			cmds = new ArrayList<DeleteRoleConstraintCommand>(constraint.getRoleTypeConstraints().size());
+		if (constraint.getPlayerConstraints().size()>0) {
+			cmds = new ArrayList<DeleteRolePlayerConstraintCommand>(constraint.getPlayerConstraints().size());
 		}
 		
-		for (RoleTypeConstraints rtc : constraint.getRoleTypeConstraints()) {
-			DeleteRoleConstraintCommand cmd = new DeleteRoleConstraintCommand(constraint, rtc);
+		for (RolePlayerConstraints rpc : constraint.getPlayerConstraints()) {
+			DeleteRolePlayerConstraintCommand cmd = new DeleteRolePlayerConstraintCommand(constraint, rpc);
 			if (cmd.canExecute())
 				cmds.add(cmd);
 		}

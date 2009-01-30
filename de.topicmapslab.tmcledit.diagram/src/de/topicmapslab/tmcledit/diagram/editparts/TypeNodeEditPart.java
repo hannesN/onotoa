@@ -115,7 +115,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		}
 		Font tmp = Display.getCurrent().getSystemFont();
 		FontData fd = tmp.getFontData()[0];
-		if (getCastedModel().getTopicType().isIsAbstract())
+		if (getCastedModel().getTopicType().isAbstract())
 			fd.setStyle(SWT.ITALIC);
 		
 		nameFont = new Font(Display.getCurrent(), fd);

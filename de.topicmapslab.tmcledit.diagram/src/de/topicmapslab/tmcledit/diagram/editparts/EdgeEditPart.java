@@ -34,7 +34,7 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetLabelPosCommand;
 
@@ -165,7 +165,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	public void activate() {
 		((Diagram)getRoot().getContents().getModel()).eAdapters().add(adapter);
-		RoleTypeConstraints roleConstraint = getCastedModel().getRoleConstraint();
+		RolePlayerConstraints roleConstraint = getCastedModel().getRoleConstraint();
 		if (roleConstraint!=null) {
 			roleConstraint.eAdapters().add(adapter);
 			if (roleConstraint.getType()!=null)
@@ -177,7 +177,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	public void deactivate() {
 		((Diagram)getRoot().getContents().getModel()).eAdapters().remove(adapter);
-		RoleTypeConstraints roleConstraint = getCastedModel().getRoleConstraint();
+		RolePlayerConstraints roleConstraint = getCastedModel().getRoleConstraint();
 		if (roleConstraint!=null) {
 			roleConstraint.eAdapters().remove(adapter);
 			if (roleConstraint.getType()!=null)
@@ -202,7 +202,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		
 		
 		if (notification.getNotifier().equals(getCastedModel().getRoleConstraint())) {
-			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_TYPE_CONSTRAINTS__TYPE) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_PLAYER_CONSTRAINTS__TYPE) {
 				TopicType tmp = (TopicType) notification.getOldValue();
 				if (tmp!=null)
 					tmp.eAdapters().remove(adapter);
@@ -217,11 +217,11 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	protected void refreshVisuals() {
 		if (getCastedModel().getRoleConstraint()!=null) {
-			RoleTypeConstraints rtc = getCastedModel().getRoleConstraint();
+			RolePlayerConstraints rtc = getCastedModel().getRoleConstraint();
 			
 			String typeText = "no role type set";
-			if (rtc.getType()!=null)
-				typeText = rtc.getType().getName();
+			if (rtc.getRole()!=null)
+				typeText = rtc.getRole().getType().getName();
 			
 			if (getChildren().size()>0) {
 				MoveableLabelEditPart cardEditPart = (MoveableLabelEditPart) getChildren().get(0);

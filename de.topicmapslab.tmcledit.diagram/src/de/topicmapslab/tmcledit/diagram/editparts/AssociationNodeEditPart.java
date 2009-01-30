@@ -3,8 +3,6 @@
  */
 package de.topicmapslab.tmcledit.diagram.editparts;
 
-import java.util.List;
-
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.EllipseAnchor;
 import org.eclipse.draw2d.IFigure;
@@ -53,40 +51,20 @@ public class AssociationNodeEditPart extends NodeEditPart{
 		Rectangle r = new Rectangle(node.getPosX(), node.getPosY(), -1, -1);
         ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
         
-        TopicType associationType = node.getAssociationConstraint().getAssociationType();
+        TopicType associationType = node.getAssociationConstraint().getType();
 		if (associationType!=null)
         	((CircleFigure)getFigure()).setText(associationType.getName());
         
 		super.refreshVisuals();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	protected List getModelSourceConnections() {
-		return super.getModelSourceConnections();
-	}
-	/*
-	@SuppressWarnings("unchecked")
-	@Override
-	protected List getModelChildren() {
-		
-		TopicType type = getCastedModel().getAssociationConstraint().getAssociationType();
-		if (type==null)
-			return Collections.EMPTY_LIST;
-		else {
-			List result = new ArrayList();
-			result.add(type);
-			return result;
-		}
-	}
-*/
 	@Override
 	public void activate() {
 		super.activate();
 		AssociationTypeConstraint associationConstraint = getCastedModel().getAssociationConstraint();
 		associationConstraint.eAdapters().add(this);
-		if (associationConstraint.getAssociationType()!=null)
-			associationConstraint.getAssociationType().eAdapters().add(this);
+		if (associationConstraint.getType()!=null)
+			associationConstraint.getType().eAdapters().add(this);
 		
 	}
 	
@@ -94,8 +72,8 @@ public class AssociationNodeEditPart extends NodeEditPart{
 	public void deactivate() {
 		AssociationTypeConstraint associationConstraint = getCastedModel().getAssociationConstraint();
 		associationConstraint.eAdapters().remove(this);
-		if (associationConstraint.getAssociationType()!=null)
-			associationConstraint.getAssociationType().eAdapters().remove(this);
+		if (associationConstraint.getType()!=null)
+			associationConstraint.getType().eAdapters().remove(this);
 		super.deactivate();
 	}
 	
@@ -115,7 +93,7 @@ public class AssociationNodeEditPart extends NodeEditPart{
 		if (notification.getNotifier()==getModel())
 			refreshVisuals();
 		if ( (notification.getEventType()==Notification.SET) && (notification.getNotifier().equals(getCastedModel().getAssociationConstraint())) ) {
-			if (notification.getFeatureID(TopicType.class)==ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
 				if (notification.getOldValue()!=null)
 					((EObject)notification.getOldValue()).eAdapters().remove(this);
 				

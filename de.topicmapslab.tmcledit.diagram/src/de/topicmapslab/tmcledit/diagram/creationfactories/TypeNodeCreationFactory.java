@@ -40,8 +40,7 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 		TypeNode tn = ModelFactory.eINSTANCE.createTypeNode();
 
 		if (topicType == null) {
-			topicType = ModelIndexer.getInstance().createTopicType();
-			topicType.setKind(kind);
+			topicType = ModelIndexer.getInstance().createTopicType(kind);
 		}
 		tn.setTopicType(topicType);
 

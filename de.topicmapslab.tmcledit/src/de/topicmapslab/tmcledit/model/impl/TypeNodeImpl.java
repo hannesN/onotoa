@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -37,6 +36,7 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 	 * @generated
 	 */
 	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
 	/**
 	 * The cached value of the '{@link #getTopicType() <em>Topic Type</em>}' reference.
 	 * <!-- begin-user-doc -->

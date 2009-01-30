@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -30,6 +29,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
@@ -94,8 +94,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createNameTypeConstraintAdapter();
 			}
 			@Override
-			public Adapter caseRoleTypeConstraints(RoleTypeConstraints object) {
-				return createRoleTypeConstraintsAdapter();
+			public Adapter caseRolePlayerConstraints(RolePlayerConstraints object) {
+				return createRolePlayerConstraintsAdapter();
 			}
 			@Override
 			public Adapter caseTopicMapSchema(TopicMapSchema object) {
@@ -146,28 +146,52 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createFileAdapter();
 			}
 			@Override
-			public Adapter caseScopedConstraint(ScopedConstraint object) {
-				return createScopedConstraintAdapter();
-			}
-			@Override
 			public Adapter caseScopeConstraint(ScopeConstraint object) {
 				return createScopeConstraintAdapter();
 			}
 			@Override
-			public Adapter caseCardinalityContraint(CardinalityContraint object) {
-				return createCardinalityContraintAdapter();
+			public Adapter caseAbstractCardinalityContraint(AbstractCardinalityContraint object) {
+				return createAbstractCardinalityContraintAdapter();
 			}
 			@Override
 			public Adapter caseLabelPos(LabelPos object) {
 				return createLabelPosAdapter();
 			}
 			@Override
-			public Adapter caseAbstractTypeConstraint(AbstractTypeConstraint object) {
-				return createAbstractTypeConstraintAdapter();
+			public Adapter caseAbstractTypedConstraint(AbstractTypedConstraint object) {
+				return createAbstractTypedConstraintAdapter();
 			}
 			@Override
-			public Adapter caseNamedConstraint(NamedConstraint object) {
-				return createNamedConstraintAdapter();
+			public Adapter caseScopedTopicType(ScopedTopicType object) {
+				return createScopedTopicTypeAdapter();
+			}
+			@Override
+			public Adapter caseAssociationType(AssociationType object) {
+				return createAssociationTypeAdapter();
+			}
+			@Override
+			public Adapter caseOccurenceType(OccurenceType object) {
+				return createOccurenceTypeAdapter();
+			}
+			@Override
+			public Adapter caseRoleConstraints(RoleConstraints object) {
+				return createRoleConstraintsAdapter();
+			}
+			@Override
+			public Adapter caseRoleType(RoleType object) {
+				return createRoleTypeAdapter();
+			}
+			@Override
+			public Adapter caseOtherRolePlayerConstraint(OtherRolePlayerConstraint object) {
+				return createOtherRolePlayerConstraintAdapter();
+			}
+			@Override
+			public Adapter caseNameType(NameType object) {
+				return createNameTypeAdapter();
+			}
+			@Override
+			public Adapter caseAbstractTypedCardinalityConstraint(AbstractTypedCardinalityConstraint object) {
+				return createAbstractTypedCardinalityConstraintAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -246,16 +270,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RoleTypeConstraints <em>Role Type Constraints</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraints <em>Role Player Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.RoleTypeConstraints
+	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraints
 	 * @generated
 	 */
-	public Adapter createRoleTypeConstraintsAdapter() {
+	public Adapter createRolePlayerConstraintsAdapter() {
 		return null;
 	}
 
@@ -428,20 +452,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ScopedConstraint <em>Scoped Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.ScopedConstraint
-	 * @generated
-	 */
-	public Adapter createScopedConstraintAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ScopeConstraint <em>Scope Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -456,16 +466,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.CardinalityContraint <em>Cardinality Contraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint <em>Abstract Cardinality Contraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.CardinalityContraint
+	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityContraint
 	 * @generated
 	 */
-	public Adapter createCardinalityContraintAdapter() {
+	public Adapter createAbstractCardinalityContraintAdapter() {
 		return null;
 	}
 
@@ -484,30 +494,128 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint <em>Abstract Type Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractTypedConstraint <em>Abstract Typed Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.AbstractTypeConstraint
+	 * @see de.topicmapslab.tmcledit.model.AbstractTypedConstraint
 	 * @generated
 	 */
-	public Adapter createAbstractTypeConstraintAdapter() {
+	public Adapter createAbstractTypedConstraintAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.NamedConstraint <em>Named Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ScopedTopicType <em>Scoped Topic Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.NamedConstraint
+	 * @see de.topicmapslab.tmcledit.model.ScopedTopicType
 	 * @generated
 	 */
-	public Adapter createNamedConstraintAdapter() {
+	public Adapter createScopedTopicTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AssociationType <em>Association Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.AssociationType
+	 * @generated
+	 */
+	public Adapter createAssociationTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OccurenceType <em>Occurence Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.OccurenceType
+	 * @generated
+	 */
+	public Adapter createOccurenceTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RoleConstraints <em>Role Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.RoleConstraints
+	 * @generated
+	 */
+	public Adapter createRoleConstraintsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RoleType <em>Role Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.RoleType
+	 * @generated
+	 */
+	public Adapter createRoleTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint <em>Other Role Player Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint
+	 * @generated
+	 */
+	public Adapter createOtherRolePlayerConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.NameType <em>Name Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.NameType
+	 * @generated
+	 */
+	public Adapter createNameTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint <em>Abstract Typed Cardinality Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint
+	 * @generated
+	 */
+	public Adapter createAbstractTypedCardinalityConstraintAdapter() {
 		return null;
 	}
 

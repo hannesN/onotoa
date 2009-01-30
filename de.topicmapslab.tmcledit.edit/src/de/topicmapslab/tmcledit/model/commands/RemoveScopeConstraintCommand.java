@@ -6,7 +6,7 @@ package de.topicmapslab.tmcledit.model.commands;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
-import de.topicmapslab.tmcledit.model.ScopedConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 
 /**
  * @author Hannes Niederhausen
@@ -14,20 +14,20 @@ import de.topicmapslab.tmcledit.model.ScopedConstraint;
  */
 public class RemoveScopeConstraintCommand extends AbstractCommand {
 
-	private final ScopedConstraint constraint;
+	private final ScopedTopicType scopedTopicType;
 	private final ScopeConstraint scope;
 	
 	
-	public RemoveScopeConstraintCommand(ScopedConstraint constraint,
+	public RemoveScopeConstraintCommand(ScopedTopicType scopedTopicType,
 			ScopeConstraint scope) {
 		super("Remove Scope");
-		this.constraint = constraint;
+		this.scopedTopicType = scopedTopicType;
 		this.scope = scope;
 	}
 
 	@Override
 	public void execute() {
-		constraint.getScope().remove(scope);
+		scopedTopicType.getScope().remove(scope);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class RemoveScopeConstraintCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		constraint.getScope().add(scope);
+		scopedTopicType.getScope().add(scope);
 	}
 
 	@Override

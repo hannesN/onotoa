@@ -5,7 +5,7 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.CardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 
 /**
  * @author Hannes Niederhausen
@@ -13,13 +13,13 @@ import de.topicmapslab.tmcledit.model.CardinalityContraint;
  */
 public class SetCardinalityCommand extends AbstractCommand {
 
-	private CardinalityContraint cardinalityContraint;
+	private AbstractCardinalityContraint cardinalityContraint;
 	private boolean isMin;
 	private String newValue;
 	private String oldValue;
 	private String oldMax;
 	
-	public SetCardinalityCommand(CardinalityContraint cardinalityContraint,
+	public SetCardinalityCommand(AbstractCardinalityContraint cardinalityContraint,
 			boolean isMin, String newValue) {
 		super();
 		this.cardinalityContraint = cardinalityContraint;

@@ -68,7 +68,7 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 			}
 		}
 		
-		if ( (notification.getFeatureID(List.class)==ModelPackage.NAME_TYPE_CONSTRAINT__SCOPE) ||
+		if ( (notification.getFeatureID(List.class)==ModelPackage.SCOPED_TOPIC_TYPE__SCOPE) ||
 		 (notification.getEventType()==Notification.SET) )
 			refreshVisuals();
 		

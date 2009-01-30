@@ -26,12 +26,12 @@
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/RoleType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/AssociationType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/ScopeType"/>
-      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NO_TYPE"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NoType"/>
     </genEnums>
     <genClasses ecoreClass="tmcledit.ecore#//TopicType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/identifiers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/idType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/isAbstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/abstract"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/isa"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/ako"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/occurenceConstraints"/>
@@ -48,12 +48,11 @@
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//OccurenceTypeConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceTypeConstraint/unique"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceTypeConstraint/dataType"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//NameTypeConstraint"/>
-    <genClasses ecoreClass="tmcledit.ecore#//RoleTypeConstraints">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleTypeConstraints/topicType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//RolePlayerConstraints">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RolePlayerConstraints/player"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RolePlayerConstraints/role"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//TopicMapSchema">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/topicTypes"/>
@@ -70,8 +69,7 @@
     <genClasses ecoreClass="tmcledit.ecore#//SubjectLocatorConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//SubjectIdentifierConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//AssociationTypeConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/associationType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/roleTypeConstraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationTypeConstraint/playerConstraints"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//MappingElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//MappingElement/key"/>
@@ -110,25 +108,37 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//File/filename"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//File/dirty"/>
     </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//ScopedConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ScopedConstraint/scope"/>
-    </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//ScopeConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ScopeConstraint/type"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="tmcledit.ecore#//CardinalityContraint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//CardinalityContraint/cardMin"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//CardinalityContraint/cardMax"/>
+    <genClasses ecoreClass="tmcledit.ecore#//ScopeConstraint"/>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractCardinalityContraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractCardinalityContraint/cardMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractCardinalityContraint/cardMax"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//LabelPos">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//LabelPos/posX"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//LabelPos/posY"/>
     </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//AbstractTypeConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AbstractTypeConstraint/type"/>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractTypedConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AbstractTypedConstraint/type"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="tmcledit.ecore#//NamedConstraint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//NamedConstraint/name"/>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//ScopedTopicType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ScopedTopicType/scope"/>
     </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//AssociationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationType/roles"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//OccurenceType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurenceType/dataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//RoleConstraints"/>
+    <genClasses ecoreClass="tmcledit.ecore#//RoleType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleType/otherRoles"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//OtherRolePlayerConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/player"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/otherPlayer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/otherRole"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//NameType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//AbstractTypedCardinalityConstraint"/>
   </genPackages>
 </genmodel:GenModel>

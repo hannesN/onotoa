@@ -71,25 +71,20 @@ public class ModelValidator {
 	
 	private void validateAssociationConstraints() {
 		for (AssociationTypeConstraint atc : schema.getAssociationTypeConstraints()) {
-			if (atc.getAssociationType()==null) {
+			if (atc.getType()==null) {
 				ValidationResult vr = new ValidationResult("No type set for association constraint", atc);
 				vr.addValidationAction(new AssociationCreateTypeAction());
 				vr.addValidationAction(new AssociationSelectTypeAction());
 				addValidationResult(vr);
 			} else if ((schema.isActiveAssociationTypeConstraint())
-					&& (atc.getAssociationType().getKind() == KindOfTopicType.NO_TYPE)) {
+					&& (atc.getType().getKind() != KindOfTopicType.ASSOCIATION_TYPE)) {
 				ValidationResult vr = new ValidationResult("The topic "
-						+ atc.getAssociationType().getName() + " may not be type for an association constraint", atc.getAssociationType());
+						+ atc.getType().getName() + " may not be type for an association constraint", atc.getType());
 				vr.addValidationAction(new DeactivateFlagAction(schema, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT, false));
 				vr.addValidationAction(new AssociationCreateTypeAction());
 				vr.addValidationAction(new AssociationSelectTypeAction());
 				addValidationResult(vr);
-			}
-			if (atc.getRoleTypeConstraints().size()==0) {
-				ValidationResult vr = new ValidationResult("No roles set for association constraint", atc);
-				addValidationResult(vr);
-				
-			}
+			} 
 		}
 	}
 	

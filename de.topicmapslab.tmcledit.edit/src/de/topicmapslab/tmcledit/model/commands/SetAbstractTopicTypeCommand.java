@@ -26,12 +26,12 @@ public class SetAbstractTopicTypeCommand extends AbstractCommand {
 
 	@Override
 	public void execute() {
-		tt.setIsAbstract(isAbstract);
+		tt.setAbstract(isAbstract);
 	}
 	
 	@Override
 	public void undo() {
-		tt.setIsAbstract(!isAbstract);
+		tt.setAbstract(!isAbstract);
 	}
 
 	@Override

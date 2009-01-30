@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -18,11 +17,11 @@ package de.topicmapslab.tmcledit.model;
  * @generated
  */
 public interface SubjectIdentifierConstraint extends AbstractConstraint {
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
+
 } // SubjectIdentifierConstraint

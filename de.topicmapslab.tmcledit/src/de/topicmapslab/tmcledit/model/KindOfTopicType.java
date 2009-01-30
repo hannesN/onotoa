@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -80,15 +79,17 @@ public enum KindOfTopicType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SCOPE_TYPE(5, "ScopeType", "ScopeType"), /**
-	 * The '<em><b>NO TYPE</b></em>' literal object.
+	SCOPE_TYPE(5, "ScopeType", "ScopeType"),
+
+	/**
+	 * The '<em><b>No Type</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #NO_TYPE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NO_TYPE(6, "NO_TYPE", "NO_TYPE");
+	NO_TYPE(6, "NoType", "NoType");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -188,15 +189,15 @@ public enum KindOfTopicType implements Enumerator {
 	public static final int SCOPE_TYPE_VALUE = 5;
 
 	/**
-	 * The '<em><b>NO TYPE</b></em>' literal value.
+	 * The '<em><b>No Type</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>NO TYPE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>No Type</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #NO_TYPE
-	 * @model
+	 * @model name="NoType"
 	 * @generated
 	 * @ordered
 	 */

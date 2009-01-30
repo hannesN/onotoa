@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -145,12 +144,12 @@ public interface Edge extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Role Constraint</em>' reference.
-	 * @see #setRoleConstraint(RoleTypeConstraints)
+	 * @see #setRoleConstraint(RolePlayerConstraints)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getEdge_RoleConstraint()
 	 * @model
 	 * @generated
 	 */
-	RoleTypeConstraints getRoleConstraint();
+	RolePlayerConstraints getRoleConstraint();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.Edge#getRoleConstraint <em>Role Constraint</em>}' reference.
@@ -160,7 +159,7 @@ public interface Edge extends EObject {
 	 * @see #getRoleConstraint()
 	 * @generated
 	 */
-	void setRoleConstraint(RoleTypeConstraints value);
+	void setRoleConstraint(RolePlayerConstraints value);
 
 	/**
 	 * Returns the value of the '<em><b>Label Positions</b></em>' containment reference list.

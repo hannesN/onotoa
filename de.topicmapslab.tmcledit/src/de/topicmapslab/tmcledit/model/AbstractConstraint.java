@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -23,7 +22,7 @@ package de.topicmapslab.tmcledit.model;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractConstraint extends CardinalityContraint, NamedConstraint {
+public interface AbstractConstraint extends AbstractCardinalityContraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

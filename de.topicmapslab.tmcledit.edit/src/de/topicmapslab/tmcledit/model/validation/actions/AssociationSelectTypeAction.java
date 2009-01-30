@@ -27,7 +27,7 @@ public class AssociationSelectTypeAction extends SelectTypeAction {
 	@Override
 	protected AbstractCommand getCommand(TopicType topicType) {
 		return new GenericSetCommand(getModelObject(),
-				ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__ASSOCIATION_TYPE,
+				ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE,
 				topicType);
 	}
 }

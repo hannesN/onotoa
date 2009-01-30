@@ -3,8 +3,6 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.FocusAdapter;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -27,12 +25,10 @@ import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
-public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelPage {
+public class OccurenceConstraintDetailPage extends AbstractConstraintModelPage {
 	
 	private Text typeText;
 	private Button typeButton;
-	private Text datatypeText;
-	private Button datatypeButton;
 	private Button uniqueButton;
 	private Section section;
 	
@@ -69,9 +65,6 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 
 		createTypeComposite(toolkit, comp);
 		
-		toolkit.createLabel(comp, "Datatype:");
-		createDatatypeComposite(toolkit, comp);
-		
 		createCommonConstraintControls(comp, toolkit);
 		
 		toolkit.createLabel(comp, "Unique:");
@@ -94,24 +87,6 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 		typeButton = toolkit.createButton(typeComp, "...", SWT.PUSH);
 	}
 
-	private void createDatatypeComposite(FormToolkit toolkit, Composite parent) {
-		Composite typeComp = toolkit.createComposite(parent);
-		typeComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		GridLayout layout = new GridLayout(2, false);
-		layout.marginWidth = 0;
-		typeComp.setLayout(layout);
-		datatypeText = toolkit.createText(typeComp, "", SWT.BORDER);
-		datatypeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		datatypeText.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				getCastedModel().setDataType(datatypeText.getText());
-			}
-		});
-		
-		datatypeButton = toolkit.createButton(typeComp, "...", SWT.PUSH);
-	}
-	
 	private void hookButtonListener() {
 		typeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -130,10 +105,6 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 											dlg.getFirstResult()));
 				}
 			}
-		});
-		
-		datatypeButton.addSelectionListener(new SelectionAdapter(){
-			
 		});
 		
 		uniqueButton.addSelectionListener(new SelectionAdapter() {
@@ -155,12 +126,6 @@ public class OccurenceConstraintDetailPage extends AbstractScopedContraintModelP
 			typeText.setText(castedModel.getType().getName());
 		else
 			typeText.setText("");
-		
-		if (castedModel.getDataType()!=null)
-			datatypeText.setText(castedModel.getDataType());
-		else
-			datatypeText.setText("");
-		
 		uniqueButton.setSelection(castedModel.isUnique());
 		
 		super.updateUI();

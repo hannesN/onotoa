@@ -5,12 +5,16 @@ import java.util.HashMap;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.ui.forms.widgets.ScrolledPageBook;
 
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.MappingElement;
+import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -19,6 +23,10 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class PropertyDetailPageFactory {
 	private static final String TOPIC_MAP_SCHEMA = "TopicMapSchema";
 	private static final String TOPIC_TYPE = "TopicType";
+	private static final String NAME_TYPE = "NameType";
+	private static final String ROLE_TYPE = "RoleType";
+	private static final String OCCURENCE_TYPE = "OccurenceType";
+	private static final String ASSOCIATION_TYPE = "AssociationType";
 	private static final String DIAGRAM = "Diagram";
 	private static final String ROLE = "role";
 	private static final String PREFIX_MAPPING = "PrefixMapping";
@@ -45,7 +53,43 @@ public class PropertyDetailPageFactory {
 	public AbstractModelPage getPageFor(Object model) {
 		AbstractModelPage page = emptyPage;
 		
-		if (model instanceof TopicType) {
+		if (model instanceof OccurenceType) {
+			page = pageMap.get(OCCURENCE_TYPE);
+			if (page==null) {
+				page = new OccurenceTypeModelPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(OCCURENCE_TYPE, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+			return page;
+		} else if (model instanceof NameType) {
+			page = pageMap.get(NAME_TYPE);
+			if (page==null) {
+				page = new NameTypeModelPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(NAME_TYPE, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+			return page;
+		} else if (model instanceof AssociationType) {
+			page = pageMap.get(ASSOCIATION_TYPE);
+			if (page==null) {
+				page = new AssociationTypeModelPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(ASSOCIATION_TYPE, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+			return page;
+		} else if (model instanceof RoleType) {
+			page = pageMap.get(ROLE_TYPE);
+			if (page==null) {
+				page = new RoleTypeModelPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(ROLE_TYPE, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+			return page;
+		} if (model instanceof TopicType) {
 			page = pageMap.get(TOPIC_TYPE);
 			if (page==null) {
 				page = new TopicTypePage();
@@ -70,7 +114,7 @@ public class PropertyDetailPageFactory {
 				pageMap.put(DIAGRAM, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-		} else if (model instanceof RoleTypeConstraints) {
+		} else if (model instanceof RolePlayerConstraints) {
 			page = pageMap.get(ROLE);
 			if (page==null) {
 				page = new RoleModelPage();

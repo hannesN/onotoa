@@ -1,6 +1,5 @@
 /**
- * <copyright>
- * </copyright>
+ * (C) 2008 Hannes Niederhause, Topic Maps Lab
  *
  * $Id$
  */
@@ -71,7 +70,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.TOPIC_TYPE: return createTopicType();
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: return createOccurenceTypeConstraint();
 			case ModelPackage.NAME_TYPE_CONSTRAINT: return createNameTypeConstraint();
-			case ModelPackage.ROLE_TYPE_CONSTRAINTS: return createRoleTypeConstraints();
+			case ModelPackage.ROLE_PLAYER_CONSTRAINTS: return createRolePlayerConstraints();
 			case ModelPackage.TOPIC_MAP_SCHEMA: return createTopicMapSchema();
 			case ModelPackage.SUBJECT_LOCATOR_CONSTRAINT: return createSubjectLocatorConstraint();
 			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: return createSubjectIdentifierConstraint();
@@ -86,7 +85,13 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.FILE: return createFile();
 			case ModelPackage.SCOPE_CONSTRAINT: return createScopeConstraint();
 			case ModelPackage.LABEL_POS: return createLabelPos();
-			case ModelPackage.ABSTRACT_TYPE_CONSTRAINT: return createAbstractTypeConstraint();
+			case ModelPackage.ASSOCIATION_TYPE: return createAssociationType();
+			case ModelPackage.OCCURENCE_TYPE: return createOccurenceType();
+			case ModelPackage.ROLE_CONSTRAINTS: return createRoleConstraints();
+			case ModelPackage.ROLE_TYPE: return createRoleType();
+			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT: return createOtherRolePlayerConstraint();
+			case ModelPackage.NAME_TYPE: return createNameType();
+			case ModelPackage.ABSTRACT_TYPED_CARDINALITY_CONSTRAINT: return createAbstractTypedCardinalityConstraint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -165,9 +170,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleTypeConstraints createRoleTypeConstraints() {
-		RoleTypeConstraintsImpl roleTypeConstraints = new RoleTypeConstraintsImpl();
-		return roleTypeConstraints;
+	public RolePlayerConstraints createRolePlayerConstraints() {
+		RolePlayerConstraintsImpl rolePlayerConstraints = new RolePlayerConstraintsImpl();
+		return rolePlayerConstraints;
 	}
 
 	/**
@@ -315,9 +320,69 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractTypeConstraint createAbstractTypeConstraint() {
-		AbstractTypeConstraintImpl abstractTypeConstraint = new AbstractTypeConstraintImpl();
-		return abstractTypeConstraint;
+	public AssociationType createAssociationType() {
+		AssociationTypeImpl associationType = new AssociationTypeImpl();
+		return associationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OccurenceType createOccurenceType() {
+		OccurenceTypeImpl occurenceType = new OccurenceTypeImpl();
+		return occurenceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RoleConstraints createRoleConstraints() {
+		RoleConstraintsImpl roleConstraints = new RoleConstraintsImpl();
+		return roleConstraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RoleType createRoleType() {
+		RoleTypeImpl roleType = new RoleTypeImpl();
+		return roleType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OtherRolePlayerConstraint createOtherRolePlayerConstraint() {
+		OtherRolePlayerConstraintImpl otherRolePlayerConstraint = new OtherRolePlayerConstraintImpl();
+		return otherRolePlayerConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameType createNameType() {
+		NameTypeImpl nameType = new NameTypeImpl();
+		return nameType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractTypedCardinalityConstraint createAbstractTypedCardinalityConstraint() {
+		AbstractTypedCardinalityConstraintImpl abstractTypedCardinalityConstraint = new AbstractTypedCardinalityConstraintImpl();
+		return abstractTypedCardinalityConstraint;
 	}
 
 	/**

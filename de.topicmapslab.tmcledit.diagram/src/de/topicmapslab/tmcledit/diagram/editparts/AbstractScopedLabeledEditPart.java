@@ -1,7 +1,12 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.Collections;
+import java.util.List;
+
+import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
-import de.topicmapslab.tmcledit.model.ScopedConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 public abstract class AbstractScopedLabeledEditPart extends
 		AbstractLabelEditPart {
@@ -11,7 +16,7 @@ public abstract class AbstractScopedLabeledEditPart extends
 	}
 
 	protected void addScopeText(StringBuffer buffer) {
-		for (ScopeConstraint sc : getCastedModel().getScope()) {
+		for (ScopeConstraint sc : getScope()) {
 			buffer.append("\n@");
 			buffer.append(sc.getType().getName());
 			buffer.append("  [");
@@ -31,7 +36,7 @@ public abstract class AbstractScopedLabeledEditPart extends
 	}
 	
 	private void updateScopeAdapters() {
-		for (ScopeConstraint sc : getCastedModel().getScope()) {
+		for (ScopeConstraint sc : getScope()) {
 			if (sc.getType()!=null)
 				sc.getType().eAdapters();
 			sc.eAdapters().add(this);
@@ -39,15 +44,19 @@ public abstract class AbstractScopedLabeledEditPart extends
 	}
 	
 	private void removeScopeAdapters() {
-		for (ScopeConstraint sc : getCastedModel().getScope()) {
+		for (ScopeConstraint sc : getScope()) {
 			if (sc.getType()!=null)
 				sc.getType().eAdapters();
 			sc.eAdapters().add(this);
 		}
 	}
 
-	private ScopedConstraint getCastedModel() {
-		return (ScopedConstraint) getModel();
+	private List<ScopeConstraint> getScope() {
+		if (getModel() instanceof AbstractTypedConstraint) {
+			TopicType type = ((AbstractTypedConstraint)getModel()).getType();
+			if (type instanceof ScopedTopicType)
+				return ((ScopedTopicType)type).getScope();
+		}
+		return Collections.emptyList();
 	}
-
 }

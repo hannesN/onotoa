@@ -52,6 +52,10 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		super("topic type");
 	}
 	
+	public TopicTypePage(String id) {
+		super(id);
+	}
+	
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
@@ -187,6 +191,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 		toolkit.createLabel(comp, "isAbstract");
 		abstractButton = toolkit.createButton(comp, "", SWT.CHECK);
+		gd = new GridData();
+		gd.horizontalSpan = 2;
+		abstractButton.setLayoutData(gd);
 		abstractButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -195,6 +202,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		});
 		
 		section.setClient(comp);
+		
+		createAdditionalControls(comp, toolkit);
+		
 		setControl(section);
 	}
 
@@ -267,10 +277,13 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				exclusiveText.setText("");
 
 			
-			abstractButton.setSelection(t.isIsAbstract());
+			abstractButton.setSelection(t.isAbstract());
 		}
 	}
 
+	protected void createAdditionalControls(Composite parent, FormToolkit toolkit) {
+	}
+	
 	private String getTopicType(TopicType t) {
 		switch (t.getKind()) {
 		case ROLE_TYPE:

@@ -9,6 +9,7 @@ import org.eclipse.emf.common.notify.Notifier;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -62,8 +63,27 @@ public class TopicIndexer implements Adapter{
 		return tt;
 	}
 	
-	public TopicType createTopicType() {
-		TopicType tt = ModelFactory.eINSTANCE.createTopicType();
+	public TopicType createTopicType(KindOfTopicType kind) {
+		TopicType tt;
+		
+		switch (kind) {
+		case OCCURENCE_TYPE:
+			tt = ModelFactory.eINSTANCE.createOccurenceType();
+			break;
+		case NAME_TYPE:
+			tt = ModelFactory.eINSTANCE.createNameType();
+			break;
+		case ROLE_TYPE:
+			tt = ModelFactory.eINSTANCE.createRoleType();
+			break;
+		case ASSOCIATION_TYPE:
+			tt = ModelFactory.eINSTANCE.createAssociationType();
+			break;
+		default:
+			tt = ModelFactory.eINSTANCE.createTopicType();
+			break;
+		}
+		
 		String tmp = "default";
 		
 		while (getTopicType(tmp+lastDefaultNumber)!=null) {
@@ -145,6 +165,16 @@ public class TopicIndexer implements Adapter{
 				result.add(tt);
 			}
 		}
+		
+		return result;
+	}
+	
+	public List<ScopedTopicType> getScopedTopicTypes() {
+		List<ScopedTopicType> result = new ArrayList<ScopedTopicType>();
+		
+		for (TopicType tt : topicMapSchema.getTopicTypes())
+			if (tt instanceof ScopedTopicType)
+				result.add((ScopedTopicType) tt);
 		
 		return result;
 	}

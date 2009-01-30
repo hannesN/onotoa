@@ -151,26 +151,26 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RoleTypeConstraints} instances.
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RolePlayerConstraints} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RoleTypeConstraintsItemProvider roleTypeConstraintsItemProvider;
+	protected RolePlayerConstraintsItemProvider rolePlayerConstraintsItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RoleTypeConstraints}.
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RolePlayerConstraints}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRoleTypeConstraintsAdapter() {
-		if (roleTypeConstraintsItemProvider == null) {
-			roleTypeConstraintsItemProvider = new RoleTypeConstraintsItemProvider(this);
+	public Adapter createRolePlayerConstraintsAdapter() {
+		if (rolePlayerConstraintsItemProvider == null) {
+			rolePlayerConstraintsItemProvider = new RolePlayerConstraintsItemProvider(this);
 		}
 
-		return roleTypeConstraintsItemProvider;
+		return rolePlayerConstraintsItemProvider;
 	}
 
 	/**
@@ -496,26 +496,164 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint} instances.
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.AssociationType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AbstractTypeConstraintItemProvider abstractTypeConstraintItemProvider;
+	protected AssociationTypeItemProvider associationTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.AbstractTypeConstraint}.
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.AssociationType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAbstractTypeConstraintAdapter() {
-		if (abstractTypeConstraintItemProvider == null) {
-			abstractTypeConstraintItemProvider = new AbstractTypeConstraintItemProvider(this);
+	public Adapter createAssociationTypeAdapter() {
+		if (associationTypeItemProvider == null) {
+			associationTypeItemProvider = new AssociationTypeItemProvider(this);
 		}
 
-		return abstractTypeConstraintItemProvider;
+		return associationTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.OccurenceType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OccurenceTypeItemProvider occurenceTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.OccurenceType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOccurenceTypeAdapter() {
+		if (occurenceTypeItemProvider == null) {
+			occurenceTypeItemProvider = new OccurenceTypeItemProvider(this);
+		}
+
+		return occurenceTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RoleConstraints} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RoleConstraintsItemProvider roleConstraintsItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RoleConstraints}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRoleConstraintsAdapter() {
+		if (roleConstraintsItemProvider == null) {
+			roleConstraintsItemProvider = new RoleConstraintsItemProvider(this);
+		}
+
+		return roleConstraintsItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RoleType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RoleTypeItemProvider roleTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RoleType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRoleTypeAdapter() {
+		if (roleTypeItemProvider == null) {
+			roleTypeItemProvider = new RoleTypeItemProvider(this);
+		}
+
+		return roleTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OtherRolePlayerConstraintItemProvider otherRolePlayerConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOtherRolePlayerConstraintAdapter() {
+		if (otherRolePlayerConstraintItemProvider == null) {
+			otherRolePlayerConstraintItemProvider = new OtherRolePlayerConstraintItemProvider(this);
+		}
+
+		return otherRolePlayerConstraintItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.NameType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NameTypeItemProvider nameTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.NameType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNameTypeAdapter() {
+		if (nameTypeItemProvider == null) {
+			nameTypeItemProvider = new NameTypeItemProvider(this);
+		}
+
+		return nameTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AbstractTypedCardinalityConstraintItemProvider abstractTypedCardinalityConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAbstractTypedCardinalityConstraintAdapter() {
+		if (abstractTypedCardinalityConstraintItemProvider == null) {
+			abstractTypedCardinalityConstraintItemProvider = new AbstractTypedCardinalityConstraintItemProvider(this);
+		}
+
+		return abstractTypedCardinalityConstraintItemProvider;
 	}
 
 	/**
@@ -620,7 +758,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (topicTypeItemProvider != null) topicTypeItemProvider.dispose();
 		if (occurenceTypeConstraintItemProvider != null) occurenceTypeConstraintItemProvider.dispose();
 		if (nameTypeConstraintItemProvider != null) nameTypeConstraintItemProvider.dispose();
-		if (roleTypeConstraintsItemProvider != null) roleTypeConstraintsItemProvider.dispose();
+		if (rolePlayerConstraintsItemProvider != null) rolePlayerConstraintsItemProvider.dispose();
 		if (topicMapSchemaItemProvider != null) topicMapSchemaItemProvider.dispose();
 		if (subjectLocatorConstraintItemProvider != null) subjectLocatorConstraintItemProvider.dispose();
 		if (subjectIdentifierConstraintItemProvider != null) subjectIdentifierConstraintItemProvider.dispose();
@@ -635,7 +773,13 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (fileItemProvider != null) fileItemProvider.dispose();
 		if (scopeConstraintItemProvider != null) scopeConstraintItemProvider.dispose();
 		if (labelPosItemProvider != null) labelPosItemProvider.dispose();
-		if (abstractTypeConstraintItemProvider != null) abstractTypeConstraintItemProvider.dispose();
+		if (associationTypeItemProvider != null) associationTypeItemProvider.dispose();
+		if (occurenceTypeItemProvider != null) occurenceTypeItemProvider.dispose();
+		if (roleConstraintsItemProvider != null) roleConstraintsItemProvider.dispose();
+		if (roleTypeItemProvider != null) roleTypeItemProvider.dispose();
+		if (otherRolePlayerConstraintItemProvider != null) otherRolePlayerConstraintItemProvider.dispose();
+		if (nameTypeItemProvider != null) nameTypeItemProvider.dispose();
+		if (abstractTypedCardinalityConstraintItemProvider != null) abstractTypedCardinalityConstraintItemProvider.dispose();
 	}
 
 }
