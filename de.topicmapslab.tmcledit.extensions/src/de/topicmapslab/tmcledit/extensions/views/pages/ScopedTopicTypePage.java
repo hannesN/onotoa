@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -53,6 +54,13 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		
 		
 		hookButtonListeners();
+	}
+	
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+		super.setCommandStack(commandStack);
+		if (control != null)
+			control.setCommandStack(commandStack);
 	}
 	
 	private void hookButtonListeners() {

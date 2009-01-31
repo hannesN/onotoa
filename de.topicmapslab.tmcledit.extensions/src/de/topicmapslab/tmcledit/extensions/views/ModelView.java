@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -23,6 +24,7 @@ import org.eclipse.emf.edit.ui.action.UndoAction;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
+import org.eclipse.emf.workspace.impl.WorkspaceCommandStackImpl;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -59,7 +61,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IMemento;
+import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchActionConstants;
@@ -72,6 +77,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
+import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorInput;
 import de.topicmapslab.tmcledit.extensions.actions.CloseAction;
 import de.topicmapslab.tmcledit.extensions.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UndoActionWrapper;
@@ -102,7 +108,7 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
  */
 
 public class ModelView extends ViewPart implements IEditingDomainProvider,
-		ISelectionProvider, CommandStackListener {
+		ISelectionProvider, CommandStackListener, ISaveablePart {
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 
@@ -129,10 +135,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(Boolean.class) == ModelPackage.FILE__DIRTY) {
-				if ((currFile != null) && (currFile.isDirty()))
-					setPartName("*ModelView");
-				else
-					setPartName("ModelView");
+				firePropertyChange(PROP_DIRTY);
 			}
 
 		}
@@ -463,6 +466,37 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	@Override
+	public void init(IViewSite site, IMemento memento) throws PartInitException {
+		init(site);
+		if (memento==null)
+			return;
+		
+		String text = memento.getTextData();
+		if ( (text==null) || ("null".equals(text)) )
+			return;
+		
+		setFilename(text, false);
+		
+		for (IMemento children : memento.getChildren("editor")) {
+			text = children.getTextData();
+	
+			Diagram currDiagram = null;
+			for (Diagram d : currFile.getDiagrams()) {
+				if (d.getName().equals(text))
+					currDiagram = d;
+			}
+			if (currDiagram!=null) {
+				getViewSite().getPage().openEditor(new TMCLEditorInput(currDiagram, 
+						getEditingDomain(),
+						(UndoAction) getActionRegistry().get(ActionFactory.UNDO.getId()),
+						(RedoAction) getActionRegistry().get(ActionFactory.REDO.getId()),
+						true), TMCLDiagramEditor.ID);
+			}
+		}
+		
+	}
+	
+	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 
@@ -487,11 +521,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(),
 				redoAction);
 
+
+		CloseAction closeAction = new CloseAction(this);
+		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), closeAction);
+		
 		actionRegistry.put(ActionFactory.UNDO.getId(), undoAction);
 		actionRegistry.put(ActionFactory.REDO.getId(), redoAction);
-		
-		CloseAction action = new CloseAction(this);
-		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), action);
 		
 		actionBars.updateActionBars();
 	}
@@ -507,11 +542,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		Menu menu = menuMgr.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(menuMgr, viewer);
-	}
-
-	@Override
-	public void dispose() {
-		super.dispose();
 	}
 
 	private void contributeToActionBars() {
@@ -734,6 +764,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	public void setSelection(ISelection selection) {
 		if (viewer != null)
 			viewer.setSelection(selection);
+		currentSelection = selection;
 		fireSelectionChanged();
 	}
 
@@ -750,15 +781,17 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			dirtyStateObserver.dispose();
 		if (currFile != null)
 			currFile.eAdapters().remove(dirtyListener);
-		// TODO check dirty state and ask for saving
-		contentProvider.uninitialize();
+		
+		checkSavedState();
+		
+		if (contentProvider!=null)
+			contentProvider.uninitialize();
 
 		if (editingDomain != null)
 			editingDomain.getCommandStack()
 					.removeCommandStackListener(this);
 		
 		editingDomain = null; // clear it for new creation in getter
-		
 		if (filename != null) {
 			if (!newFile)
 				currFile = FileUtil.loadFile(filename);
@@ -768,9 +801,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				currFile.setFilename(filename);
 			}
 			currFile.eAdapters().add(dirtyListener);
-			
-
-		
 			dirtyStateObserver = new DirtyStateObserver(currFile,
 					getEditingDomain().getCommandStack());
 			// initialize indexer 
@@ -778,22 +808,28 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		} else {
 			currFile = null;
 		}
-		contentProvider.initialize();
+		if (contentProvider!=null)
+			contentProvider.initialize();
 
 		if (currFile!=null)
 			setSelection(new StructuredSelection(currFile));
 		
 		setSelection(new StructuredSelection());
-		
-		viewer.refresh();
+		firePropertyChange(PROP_DIRTY);
+		if (viewer!=null)
+			viewer.refresh();
 	}
 
-	public void doSave() {
-		try {
-			FileUtil.saveFile(currFile);
-			currFile.setDirty(false);
-		} catch (IOException e) {
-			e.printStackTrace();
+	private void checkSavedState() {
+		if (currFile != null) {
+			currFile.eAdapters().remove(dirtyListener);
+			WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+			if (cmdStack.isSaveNeeded()) {
+				if (MessageDialog.openQuestion(getViewSite().getShell(), "Unsaved model", 
+						"Youre model is not saved. Do you want to save now?")) {
+					doSave(null);
+				}
+			}
 		}
 	}
 
@@ -827,9 +863,65 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				activePage.closeEditor(ref.getEditor(false), false);
 			}
 		}
-		
+		firePropertyChange(PROP_DIRTY);
 		updateActions();
 		viewer.refresh();
+	}
+	
+	@Override
+	public void saveState(IMemento memento) {
+		String text = "null";
+
+		if (currFile!=null) {
+			java.io.File file = new java.io.File(currFile.getFilename());
+			if (file.exists())
+				text = currFile.getFilename();
+			file = null;
+		}
+		
+		memento.putTextData(text);
+		int i = 0;
+		for (IEditorReference ref : getViewSite().getPage().getEditorReferences()) {
+			IEditorPart part = ref.getEditor(false);
+			if ( (part!=null) && (part instanceof TMCLDiagramEditor) ) {
+				i++;
+				TMCLEditorInput ei = (TMCLEditorInput) part.getEditorInput();
+				IMemento partChild = memento.createChild("editor");
+				partChild.putTextData(ei.getDiagram().getName());
+			}
+		}
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor monitor) {
+		try {
+			FileUtil.saveFile((File) currFile);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+		cmdStack.saveIsDone();
+		currFile.setDirty(false);
+	}
+
+	@Override
+	public void doSaveAs() {
+	}
+
+	@Override
+	public boolean isDirty() {
+		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+		return cmdStack.isSaveNeeded();
+	}
+
+	@Override
+	public boolean isSaveAsAllowed() {
+		return false;
+	}
+
+	@Override
+	public boolean isSaveOnCloseNeeded() {
+		return isDirty();
 	}
 
 }

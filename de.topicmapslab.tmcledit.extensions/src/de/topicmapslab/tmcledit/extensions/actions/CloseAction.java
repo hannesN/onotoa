@@ -23,7 +23,7 @@ public class CloseAction extends Action {
 	
 	@Override
 	public String getText() {
-		return "Close fsd";
+		return "Close fsdhjfsdkhfjs";
 	}
 	
 	@Override

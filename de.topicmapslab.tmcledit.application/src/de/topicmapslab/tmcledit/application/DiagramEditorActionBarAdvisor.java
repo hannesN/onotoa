@@ -5,6 +5,7 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.GroupMarker;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.ICoolBarManager;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -47,7 +48,9 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		
 		register(ActionFactory.CLOSE.create(window));
 
-		register(ActionFactory.SAVE.create(window));
+		IAction a = ActionFactory.SAVE.create(window);
+		a.run();
+		register(a);
 
 		register(ActionFactory.SAVE_AS.create(window));
 

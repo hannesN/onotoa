@@ -176,8 +176,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		try {
 			FileUtil.saveFile((File)diagram.eContainer());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		((File)diagram.eContainer()).setDirty(false);
 	}

@@ -56,6 +56,10 @@ public class TypedCardinalityConstraintWidget {
 		createControls(parent, toolkit);
 	}
 
+	public void setCommandStack(CommandStack commandStack) {
+		this.commandStack = commandStack;
+	}
+	
 	private CommandStack getCommandStack() {
 		return commandStack;
 	}
@@ -119,7 +123,7 @@ public class TypedCardinalityConstraintWidget {
 		//TableColumnLayout layout = new TableColumnLayout();
 		GridLayout layout = new GridLayout();
 		comp.setLayout(layout);
-		Table table = toolkit.createTable(comp, SWT.BORDER);
+		Table table = toolkit.createTable(comp, SWT.BORDER|SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
@@ -212,7 +216,7 @@ public class TypedCardinalityConstraintWidget {
 							constraint, isMin, (String) value);
 					getCommandStack().execute(cmd);
 				} catch (Exception e) {
-					new RuntimeException(e);
+					throw new RuntimeException(e);
 				}
 			}
 			

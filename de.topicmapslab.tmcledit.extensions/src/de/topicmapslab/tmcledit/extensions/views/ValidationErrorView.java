@@ -45,7 +45,7 @@ public class ValidationErrorView extends ViewPart {
 		TableColumnLayout layout = new TableColumnLayout();
 		comp.setLayout(layout);
 		
-		Table table = toolkit.createTable(comp, SWT.BORDER);
+		Table table = toolkit.createTable(comp, SWT.BORDER|SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);
 		
 		TableColumn tc = new TableColumn(table, SWT.None);

@@ -169,7 +169,7 @@ public class PrefixMappingPage extends AbstractModelPage {
 		TableColumnLayout layout = new TableColumnLayout();
 		tableComp.setLayout(layout);
 		
-		Table table = toolkit.createTable(tableComp, SWT.BORDER);
+		Table table = toolkit.createTable(tableComp, SWT.BORDER|SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);
 		
 		

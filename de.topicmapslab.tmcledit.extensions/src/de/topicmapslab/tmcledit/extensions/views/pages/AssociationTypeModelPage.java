@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -21,7 +23,9 @@ import de.topicmapslab.tmcledit.extensions.TypedCardinalityConstraintWidget;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleConstraints;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintsCommand;
@@ -53,6 +57,13 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		super.createAdditionalControls(parent, toolkit);
 	}
 
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+		super.setCommandStack(commandStack);
+		if (control != null)
+			control.setCommandStack(commandStack);
+	}
+	
 	private AssociationType getCastedModel() {
 		return (AssociationType) getModel();
 	}
@@ -138,6 +149,43 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				getCommandStack().execute(cmd);
 			}
 		});
+	}
+	
+	@Override
+	public void notifyChanged(Notification notification) {
+		if (notification.getNotifier() instanceof ScopeConstraint) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_CONSTRAINTS__TYPE) {
+				if (notification.getOldValue()!=null) {
+					((TopicType)notification.getOldValue()).eAdapters().remove(this);
+				}
+				if (notification.getNewValue()!=null) {
+					((TopicType)notification.getNewValue()).eAdapters().add(this);
+				}
+			} 
+			control.getTableViewer().refresh(notification.getNotifier());
+			return;
+			
+		}
+		
+		super.notifyChanged(notification);
+	}
+	
+	@Override
+	public void setModel(Object model) {
+		if (getCastedModel()!=null) {
+			for (RoleConstraints rc : getCastedModel().getRoles()) {
+				if (rc.getType()!=null)
+					rc.getType().eAdapters().remove(this);
+				rc.eAdapters().remove(this);
+			}
+		}
+		
+		super.setModel(model);
+		for (RoleConstraints rc : getCastedModel().getRoles()) {
+			if (rc.getType()!=null)
+				rc.getType().eAdapters().add(this);
+			rc.eAdapters().add(this);
+		}
 	}
 	
 	@Override
