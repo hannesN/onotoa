@@ -3,9 +3,11 @@
  */
 package de.topicmapslab.tmcledit.extensions;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -69,8 +71,17 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		label.setText(text);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setInput(List<? extends AbstractTypedCardinalityConstraint> input) {
+		for (AbstractTypedCardinalityConstraint tcc : (List<? extends AbstractTypedCardinalityConstraint>) tableViewer.getInput()) {
+			tcc.eAdapters().remove(this);
+		}
+		
 		tableViewer.setInput(input);
+		
+		for (AbstractTypedCardinalityConstraint tcc : input) {
+			tcc.eAdapters().add(this);
+		}
 	}
 	
 	protected void createControls(Composite parent,
@@ -90,9 +101,11 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		comp.setLayout(layout);
 
 		createTable(comp, toolkit);
-		
+		tableViewer.setInput(Collections.emptyList());
 		createButtons(comp, toolkit);
 	}
+	
+	
 	
 	private void createButtons(Composite parent, FormToolkit toolkit) {
 		Composite comp = toolkit.createComposite(parent);
@@ -145,6 +158,12 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		tableViewer.setLabelProvider(new ScopeTableLabelProvider());
 		tableViewer.setCellModifier(new ConstraintCellModifier());
 		return comp;
+	}
+	
+	@Override
+	public void notifyChanged(Notification msg) {
+		if (msg.getEventType()==Notification.SET)
+			tableViewer.refresh(msg.getNotifier());
 	}
 	
 	private CellEditor getTextCellEditor() {
