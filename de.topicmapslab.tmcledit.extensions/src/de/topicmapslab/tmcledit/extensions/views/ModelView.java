@@ -99,7 +99,6 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateDiagramCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
-import de.topicmapslab.tmcledit.model.util.DirtyStateObserver;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
@@ -128,8 +127,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private ISelection currentSelection;
 
 	private Map<String, IAction> actionRegistry;
-
-	private DirtyStateObserver dirtyStateObserver;
 
 	private AdapterImpl dirtyListener = new AdapterImpl() {
 		@Override
@@ -777,8 +774,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	
 	public void setFilename(String filename, boolean newFile) {
 
-		if (dirtyStateObserver != null)
-			dirtyStateObserver.dispose();
 		if (currFile != null)
 			currFile.eAdapters().remove(dirtyListener);
 		
@@ -801,8 +796,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				currFile.setFilename(filename);
 			}
 			currFile.eAdapters().add(dirtyListener);
-			dirtyStateObserver = new DirtyStateObserver(currFile,
-					getEditingDomain().getCommandStack());
+
 			// initialize indexer 
 			ModelIndexer.createInstance(currFile);
 		} else {
@@ -853,6 +847,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	@Override
 	public void commandStackChanged(EventObject event) {
 		updateActions();
+		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+		currFile.setDirty(cmdStack.isSaveNeeded());
 	}
 
 	public void close() {
@@ -910,10 +906,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	@Override
 	public boolean isDirty() {
-		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
-		return cmdStack.isSaveNeeded();
+		if (currFile==null)
+			return false;
+		return currFile.isDirty();
 	}
-
+	
 	@Override
 	public boolean isSaveAsAllowed() {
 		return false;

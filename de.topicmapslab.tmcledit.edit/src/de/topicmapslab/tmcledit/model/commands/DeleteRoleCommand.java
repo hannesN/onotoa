@@ -8,24 +8,24 @@ import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.RoleConstraints;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class DeleteRoleCommand extends AbstractCommand {
 
 	private final AssociationType associationType;
-	private final RoleConstraints roleConstraints;
+	private final RoleConstraint RoleConstraint;
 	
 	private List<DeleteRolePlayerConstraintCommand> deletePlayerCmds = Collections.emptyList();
 	
 	public DeleteRoleCommand(
 			AssociationType associationType,
-			RoleConstraints roleConstraints) {
+			RoleConstraint RoleConstraint) {
 		super();
 		this.associationType = associationType;
-		this.roleConstraints = roleConstraints;
+		this.RoleConstraint = RoleConstraint;
 	}
 
 	@Override
@@ -33,14 +33,14 @@ public class DeleteRoleCommand extends AbstractCommand {
 		for (DeleteRolePlayerConstraintCommand cmd : deletePlayerCmds)
 			if (cmd.canExecute())
 				cmd.execute();
-		associationType.getRoles().remove(roleConstraints);
+		associationType.getRoles().remove(RoleConstraint);
 	}
 
 	@Override
 	public void redo() {
 		for (DeleteRolePlayerConstraintCommand cmd : deletePlayerCmds)
 			cmd.redo();
-		associationType.getRoles().remove(roleConstraints);
+		associationType.getRoles().remove(RoleConstraint);
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class DeleteRoleCommand extends AbstractCommand {
 		
 		for (AssociationTypeConstraint atc : schema.getAssociationTypeConstraints()) {
 			if (atc.getType().equals(associationType)) {
-				for (RolePlayerConstraints rpc : atc.getPlayerConstraints()) {
-					if (rpc.getRole().equals(roleConstraints)) {
+				for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+					if (rpc.getRole().equals(RoleConstraint)) {
 						addCommand(atc, rpc);
 					}
 				}
@@ -67,7 +67,7 @@ public class DeleteRoleCommand extends AbstractCommand {
 		return true;
 	}
 
-	private void addCommand(AssociationTypeConstraint atc, RolePlayerConstraints rpc) {
+	private void addCommand(AssociationTypeConstraint atc, RolePlayerConstraint rpc) {
 		if (deletePlayerCmds==Collections.EMPTY_LIST)
 			deletePlayerCmds = new ArrayList<DeleteRolePlayerConstraintCommand>();
 		

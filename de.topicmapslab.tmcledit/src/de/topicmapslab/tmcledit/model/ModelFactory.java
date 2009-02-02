@@ -17,13 +17,6 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface ModelFactory extends EFactory {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -59,13 +52,13 @@ public interface ModelFactory extends EFactory {
 	NameTypeConstraint createNameTypeConstraint();
 
 	/**
-	 * Returns a new object of class '<em>Role Player Constraints</em>'.
+	 * Returns a new object of class '<em>Role Player Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role Player Constraints</em>'.
+	 * @return a new object of class '<em>Role Player Constraint</em>'.
 	 * @generated
 	 */
-	RolePlayerConstraints createRolePlayerConstraints();
+	RolePlayerConstraint createRolePlayerConstraint();
 
 	/**
 	 * Returns a new object of class '<em>Topic Map Schema</em>'.
@@ -212,13 +205,13 @@ public interface ModelFactory extends EFactory {
 	OccurenceType createOccurenceType();
 
 	/**
-	 * Returns a new object of class '<em>Role Constraints</em>'.
+	 * Returns a new object of class '<em>Role Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role Constraints</em>'.
+	 * @return a new object of class '<em>Role Constraint</em>'.
 	 * @generated
 	 */
-	RoleConstraints createRoleConstraints();
+	RoleConstraint createRoleConstraint();
 
 	/**
 	 * Returns a new object of class '<em>Role Type</em>'.

@@ -32,13 +32,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Edge extends EObject {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Bendpoints</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.Bendpoints}.
 	 * <!-- begin-user-doc -->
@@ -144,12 +137,12 @@ public interface Edge extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Role Constraint</em>' reference.
-	 * @see #setRoleConstraint(RolePlayerConstraints)
+	 * @see #setRoleConstraint(RolePlayerConstraint)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getEdge_RoleConstraint()
 	 * @model
 	 * @generated
 	 */
-	RolePlayerConstraints getRoleConstraint();
+	RolePlayerConstraint getRoleConstraint();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.Edge#getRoleConstraint <em>Role Constraint</em>}' reference.
@@ -159,7 +152,7 @@ public interface Edge extends EObject {
 	 * @see #getRoleConstraint()
 	 * @generated
 	 */
-	void setRoleConstraint(RolePlayerConstraints value);
+	void setRoleConstraint(RolePlayerConstraint value);
 
 	/**
 	 * Returns the value of the '<em><b>Label Positions</b></em>' containment reference list.

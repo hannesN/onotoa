@@ -24,13 +24,6 @@ package de.topicmapslab.tmcledit.model;
  */
 public interface TypeNode extends Node {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Topic Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>

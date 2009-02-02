@@ -47,13 +47,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class RoleTypeImpl extends TopicTypeImpl implements RoleType {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The default value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

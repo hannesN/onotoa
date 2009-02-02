@@ -8,7 +8,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleConstraints;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 
 import java.util.Collection;
 
@@ -37,13 +37,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class AssociationTypeImpl extends ScopedTopicTypeImpl implements AssociationType {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,7 +44,7 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RoleConstraints> roles;
+	protected EList<RoleConstraint> roles;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,9 +71,9 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<RoleConstraints> getRoles() {
+	public EList<RoleConstraint> getRoles() {
 		if (roles == null) {
-			roles = new EObjectContainmentEList<RoleConstraints>(RoleConstraints.class, this, ModelPackage.ASSOCIATION_TYPE__ROLES);
+			roles = new EObjectContainmentEList<RoleConstraint>(RoleConstraint.class, this, ModelPackage.ASSOCIATION_TYPE__ROLES);
 		}
 		return roles;
 	}
@@ -124,7 +117,7 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 		switch (featureID) {
 			case ModelPackage.ASSOCIATION_TYPE__ROLES:
 				getRoles().clear();
-				getRoles().addAll((Collection<? extends RoleConstraints>)newValue);
+				getRoles().addAll((Collection<? extends RoleConstraint>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

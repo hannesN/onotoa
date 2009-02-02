@@ -1,6 +1,6 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,6 +16,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
@@ -25,12 +26,13 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 
 import de.topicmapslab.tmcledit.extensions.util.CardTextObserver;
+import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
-import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
@@ -39,6 +41,10 @@ public class RoleModelPage extends AbstractModelPage{
 	private Text cardMinText;
 	private Text cardMaxText;
 	private Text roleText;
+	
+	private Combo roleCombo;
+	private Text roleCardMinText;
+	private Text roleCardMaxText;
 
 	public RoleModelPage() {
 		super("role");
@@ -46,13 +52,13 @@ public class RoleModelPage extends AbstractModelPage{
 	
 	@Override
 	public void updateUI() {
-		RolePlayerConstraints rpc = getCastedModel();
+		RolePlayerConstraint rpc = getCastedModel();
 		
-		cardMinText.setText(rpc.getRole().getCardMin());
-		cardMaxText.setText(rpc.getRole().getCardMax());
+		cardMinText.setText(rpc.getCardMin());
+		cardMaxText.setText(rpc.getCardMax());
 		
-		if (rpc.getType()!=null)
-			roleText.setText(rpc.getType().getName());
+		if (rpc.getRole()!=null)
+			roleText.setText(rpc.getRole().getType().getName());
 		else
 			roleText.setText("no type");
 		
@@ -78,7 +84,6 @@ public class RoleModelPage extends AbstractModelPage{
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = wizard.getNewTopicType();
 					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
-					getCastedModel().setType(tt);
 					// TODO Command
 				}
 				
@@ -109,8 +114,8 @@ public class RoleModelPage extends AbstractModelPage{
 		setControl(comp);
 	}
 	
-	protected RolePlayerConstraints getCastedModel() {
-		return (RolePlayerConstraints) getModel();
+	protected RolePlayerConstraint getCastedModel() {
+		return (RolePlayerConstraint) getModel();
 	}
 
 	@Override
@@ -122,44 +127,39 @@ public class RoleModelPage extends AbstractModelPage{
 	private class SelectionListener extends SelectionAdapter {
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			List<TopicType> list;
-			ModelIndexer instance = ModelIndexer.getInstance();
-			TopicMapSchema topicMapSchema = instance.getTopicMapSchema();
-			if (topicMapSchema.isActiveRoleTypeConstraint()) {
-				list = instance.getRoleTypes();
-			} else {
-				list = new ArrayList<TopicType>(topicMapSchema.getTopicTypes());
-				list.remove(getCastedModel().eContainer());
-			}
+			List<RoleConstraint> list = Collections.emptyList();
+			AssociationType type = (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
+			
+			list = type.getRoles();
 			
 			ListSelectionDialog dlg = new ListSelectionDialog(
 					roleText.getShell(),
 					list,
 					new ArrayContentProvider(),
-					new TopicLabelProvider(),
-					"Choose the tole type");
+					new RoleConstraintLabelProvider(),
+					"Choose the role");
 			
 			if (dlg.open()==Dialog.OK) {
 				if (dlg.getResult().length>0)
-					getCastedModel().setType((TopicType) dlg.getResult()[0]);
+					getCastedModel().setRole((RoleConstraint) dlg.getResult()[0]);
 				else
-					getCastedModel().setType(null);
+					getCastedModel().setRole(null);
 			}
 			
 			
 		}
 	}
 	
-	private class TopicLabelProvider implements ILabelProvider {
+	private class RoleConstraintLabelProvider implements ILabelProvider {
 
 		@Override
 		public Image getImage(Object element) {
-			return ImageProvider.getImage(ImageConstants.ROLETYPE);
+			return ImageProvider.getTopicTypeImage(((RoleConstraint)element).getType());
 		}
 
 		@Override
 		public String getText(Object element) {
-			return ((TopicType)element).getName();
+			return ((RoleConstraint)element).getType().getName();
 		}
 
 		@Override

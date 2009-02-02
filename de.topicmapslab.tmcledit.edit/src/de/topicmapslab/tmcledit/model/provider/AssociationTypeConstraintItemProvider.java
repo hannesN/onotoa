@@ -42,13 +42,6 @@ public class AssociationTypeConstraintItemProvider
 		IItemLabelProvider,
 		IItemPropertySource {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -184,7 +177,7 @@ public class AssociationTypeConstraintItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ModelPackage.Literals.ASSOCIATION_TYPE_CONSTRAINT__PLAYER_CONSTRAINTS,
-				 ModelFactory.eINSTANCE.createRolePlayerConstraints()));
+				 ModelFactory.eINSTANCE.createRolePlayerConstraint()));
 	}
 
 }

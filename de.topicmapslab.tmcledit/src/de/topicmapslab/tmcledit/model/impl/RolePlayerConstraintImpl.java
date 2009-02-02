@@ -1,13 +1,13 @@
 /**
- * (C) 2008 Hannes Niederhause, Topic Maps Lab
+ * (C) 2008 Hannes Niederhausen, Topic Maps Lab
  *
  * $Id$
  */
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleConstraints;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -19,26 +19,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Role Player Constraints</b></em>'.
+ * An implementation of the model object '<em><b>Role Player Constraint</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintsImpl#getPlayer <em>Player</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintsImpl#getRole <em>Role</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintImpl#getPlayer <em>Player</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintImpl#getRole <em>Role</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstraintImpl implements RolePlayerConstraints {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
+public class RolePlayerConstraintImpl extends AbstractCardinalityContraintImpl implements RolePlayerConstraint {
 	/**
 	 * The cached value of the '{@link #getPlayer() <em>Player</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -57,14 +50,14 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	 * @generated
 	 * @ordered
 	 */
-	protected RoleConstraints role;
+	protected RoleConstraint role;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RolePlayerConstraintsImpl() {
+	protected RolePlayerConstraintImpl() {
 		super();
 	}
 
@@ -75,7 +68,7 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.ROLE_PLAYER_CONSTRAINTS;
+		return ModelPackage.Literals.ROLE_PLAYER_CONSTRAINT;
 	}
 
 	/**
@@ -89,7 +82,7 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 			player = (TopicType)eResolveProxy(oldPlayer);
 			if (player != oldPlayer) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_PLAYER_CONSTRAINTS__PLAYER, oldPlayer, player));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_PLAYER_CONSTRAINT__PLAYER, oldPlayer, player));
 			}
 		}
 		return player;
@@ -113,7 +106,7 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 		TopicType oldPlayer = player;
 		player = newPlayer;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_PLAYER_CONSTRAINTS__PLAYER, oldPlayer, player));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_PLAYER_CONSTRAINT__PLAYER, oldPlayer, player));
 	}
 
 	/**
@@ -121,13 +114,13 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleConstraints getRole() {
+	public RoleConstraint getRole() {
 		if (role != null && role.eIsProxy()) {
 			InternalEObject oldRole = (InternalEObject)role;
-			role = (RoleConstraints)eResolveProxy(oldRole);
+			role = (RoleConstraint)eResolveProxy(oldRole);
 			if (role != oldRole) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_PLAYER_CONSTRAINTS__ROLE, oldRole, role));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE, oldRole, role));
 			}
 		}
 		return role;
@@ -138,7 +131,7 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleConstraints basicGetRole() {
+	public RoleConstraint basicGetRole() {
 		return role;
 	}
 
@@ -147,11 +140,11 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRole(RoleConstraints newRole) {
-		RoleConstraints oldRole = role;
+	public void setRole(RoleConstraint newRole) {
+		RoleConstraint oldRole = role;
 		role = newRole;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_PLAYER_CONSTRAINTS__ROLE, oldRole, role));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE, oldRole, role));
 	}
 
 	/**
@@ -162,10 +155,10 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__PLAYER:
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__PLAYER:
 				if (resolve) return getPlayer();
 				return basicGetPlayer();
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__ROLE:
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE:
 				if (resolve) return getRole();
 				return basicGetRole();
 		}
@@ -180,11 +173,11 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__PLAYER:
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__PLAYER:
 				setPlayer((TopicType)newValue);
 				return;
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__ROLE:
-				setRole((RoleConstraints)newValue);
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE:
+				setRole((RoleConstraint)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -198,11 +191,11 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__PLAYER:
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__PLAYER:
 				setPlayer((TopicType)null);
 				return;
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__ROLE:
-				setRole((RoleConstraints)null);
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE:
+				setRole((RoleConstraint)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -216,12 +209,12 @@ public class RolePlayerConstraintsImpl extends AbstractTypedCardinalityConstrain
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__PLAYER:
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__PLAYER:
 				return player != null;
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS__ROLE:
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE:
 				return role != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //RolePlayerConstraintsImpl
+} //RolePlayerConstraintImpl

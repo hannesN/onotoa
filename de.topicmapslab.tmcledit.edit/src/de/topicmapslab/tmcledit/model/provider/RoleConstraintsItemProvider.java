@@ -6,7 +6,7 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.RoleConstraints;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 
 import java.util.Collection;
 import java.util.List;
@@ -86,7 +86,7 @@ public class RoleConstraintsItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RoleConstraints)object).getCardMin();
+		String label = ((RoleConstraint)object).getCardMin();
 		return label == null || label.length() == 0 ?
 			getString("_UI_RoleConstraints_type") :
 			getString("_UI_RoleConstraints_type") + " " + label;

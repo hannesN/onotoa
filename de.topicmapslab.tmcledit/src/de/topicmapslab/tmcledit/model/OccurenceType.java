@@ -24,13 +24,6 @@ package de.topicmapslab.tmcledit.model;
  */
 public interface OccurenceType extends ScopedTopicType {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
 	 * The default value is <code>"xsd:anyType"</code>.
 	 * <!-- begin-user-doc -->

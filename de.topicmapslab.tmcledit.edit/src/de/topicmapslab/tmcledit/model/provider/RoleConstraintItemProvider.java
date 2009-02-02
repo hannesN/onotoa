@@ -1,12 +1,12 @@
 /**
- * (C) 2008 Hannes Niederhause, Topic Maps Lab
+ * (C) 2008 Hannes Niederhausen, Topic Maps Lab
  *
  * $Id$
  */
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,13 +22,13 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint} object.
+ * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.RoleConstraint} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SubjectLocatorConstraintItemProvider
-	extends AbstractConstraintItemProvider
+public class RoleConstraintItemProvider
+	extends AbstractTypedCardinalityConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -41,7 +41,7 @@ public class SubjectLocatorConstraintItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SubjectLocatorConstraintItemProvider(AdapterFactory adapterFactory) {
+	public RoleConstraintItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,14 +61,14 @@ public class SubjectLocatorConstraintItemProvider
 	}
 
 	/**
-	 * This returns SubjectLocatorConstraint.gif.
+	 * This returns RoleConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SubjectLocatorConstraint"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleConstraint"));
 	}
 
 	/**
@@ -79,10 +79,10 @@ public class SubjectLocatorConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SubjectLocatorConstraint)object).getCardMin();
+		String label = ((RoleConstraint)object).getCardMin();
 		return label == null || label.length() == 0 ?
-			getString("_UI_SubjectLocatorConstraint_type") :
-			getString("_UI_SubjectLocatorConstraint_type") + " " + label;
+			getString("_UI_RoleConstraint_type") :
+			getString("_UI_RoleConstraint_type") + " " + label;
 	}
 
 	/**

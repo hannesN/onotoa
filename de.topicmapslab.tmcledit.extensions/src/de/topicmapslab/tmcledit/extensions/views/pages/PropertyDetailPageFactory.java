@@ -13,7 +13,7 @@ import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
@@ -114,7 +114,7 @@ public class PropertyDetailPageFactory {
 				pageMap.put(DIAGRAM, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-		} else if (model instanceof RolePlayerConstraints) {
+		} else if (model instanceof RolePlayerConstraint) {
 			page = pageMap.get(ROLE);
 			if (page==null) {
 				page = new RoleModelPage();

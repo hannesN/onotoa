@@ -17,11 +17,5 @@ package de.topicmapslab.tmcledit.model;
  * @generated
  */
 public interface NameTypeConstraint extends AbstractConstraint, AbstractTypedCardinalityConstraint {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
 
 } // NameTypeConstraint

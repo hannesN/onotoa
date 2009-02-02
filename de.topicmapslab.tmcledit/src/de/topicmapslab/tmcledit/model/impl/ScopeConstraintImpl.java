@@ -25,13 +25,6 @@ public class ScopeConstraintImpl extends AbstractTypedCardinalityConstraintImpl 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	protected ScopeConstraintImpl() {
 		super();
 	}

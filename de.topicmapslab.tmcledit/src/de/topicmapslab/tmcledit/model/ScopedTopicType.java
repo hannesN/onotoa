@@ -25,13 +25,6 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ScopedTopicType extends TopicType {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Scope</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.ScopeConstraint}.
 	 * <!-- begin-user-doc -->

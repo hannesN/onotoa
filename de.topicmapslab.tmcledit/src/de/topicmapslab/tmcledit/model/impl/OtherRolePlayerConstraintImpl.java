@@ -32,13 +32,6 @@ import de.topicmapslab.tmcledit.model.TopicType;
  */
 public class OtherRolePlayerConstraintImpl extends AbstractCardinalityContraintImpl implements OtherRolePlayerConstraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The cached value of the '{@link #getPlayer() <em>Player</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

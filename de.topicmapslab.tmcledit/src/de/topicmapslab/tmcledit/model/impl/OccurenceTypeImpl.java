@@ -30,13 +30,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class OccurenceTypeImpl extends ScopedTopicTypeImpl implements OccurenceType {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The default value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

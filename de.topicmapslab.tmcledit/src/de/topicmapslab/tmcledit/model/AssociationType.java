@@ -25,15 +25,8 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface AssociationType extends ScopedTopicType {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Roles</b></em>' containment reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RoleConstraints}.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RoleConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Roles</em>' containment reference list isn't clear,
@@ -45,6 +38,6 @@ public interface AssociationType extends ScopedTopicType {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<RoleConstraints> getRoles();
+	EList<RoleConstraint> getRoles();
 
 } // AssociationType

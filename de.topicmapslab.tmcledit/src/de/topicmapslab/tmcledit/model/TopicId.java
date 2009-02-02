@@ -62,13 +62,6 @@ public enum TopicId implements Enumerator {
 	IDENTIFIER(3, "IDENTIFIER", "IDENTIFIER");
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The '<em><b>SUBJECT LOCATOR</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>

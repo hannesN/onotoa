@@ -15,28 +15,20 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
-import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ConnectionEditPolicy;
 import org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy;
-import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
-import org.eclipse.gef.editpolicies.XYLayoutEditPolicy;
-import org.eclipse.gef.requests.ChangeBoundsRequest;
-import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.requests.GroupRequest;
 
-import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
-import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
+import de.topicmapslab.tmcledit.diagram.policies.LabelXYLayoutEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.SetLabelPosCommand;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
 	protected IFigure createFigure()
@@ -82,7 +74,12 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				pos = ModelFactory.eINSTANCE.createLabelPos();
 				pos.setPosX(0);
 				pos.setPosY(0);
-				labelPositions.add(pos);				
+				labelPositions.add(pos);
+				
+				pos = ModelFactory.eINSTANCE.createLabelPos();
+				pos.setPosX(0);
+				pos.setPosY(0);
+				labelPositions.add(pos);
 			}
 			return labelPositions;
 		}
@@ -108,50 +105,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	protected void createEditPolicies() {
 		
-		installEditPolicy(EditPolicy.LAYOUT_ROLE, new XYLayoutEditPolicy() {
-			
-			@Override
-			protected EditPolicy createChildEditPolicy(EditPart child) {
-				return new NonResizableEditPolicy();
-			}
-
-			@Override
-			protected Command getCreateCommand(CreateRequest request) {
-				return null;
-			}
-
-			@SuppressWarnings("unchecked")
-			@Override
-			protected Command getMoveChildrenCommand(Request request) {
-				if (request.getType()==RequestConstants.REQ_MOVE_CHILDREN) {
-					TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
-					ChangeBoundsRequest req = (ChangeBoundsRequest) request;
-					List<EditPart> epList = req.getEditParts();
-					
-					MoveableLabelEditPart ep = (MoveableLabelEditPart) epList.get(0); 
-					
-					LabelPos pos = (LabelPos) ep.getModel();
-					
-					int x = pos.getPosX()+req.getMoveDelta().x;
-					int y = pos.getPosY()+req.getMoveDelta().y;
-					
-										
-					return new CommandAdapter(ed.getEditingDomain()
-							.getCommandStack(), 
-							new SetLabelPosCommand((LabelPos) ep.getModel(), x, y));
-					
-				}
-				
-				return null;
-			}
-
-			@Override
-			protected Command createChangeConstraintCommand(EditPart child,
-					Object constraint) {
-				return null;
-			}
-			
-		});
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new LabelXYLayoutEditPolicy());
 		
 		installEditPolicy(EditPolicy.CONNECTION_ENDPOINTS_ROLE, new ConnectionEndpointEditPolicy());
 		installEditPolicy(EditPolicy.CONNECTION_ROLE, new ConnectionEditPolicy() {
@@ -165,11 +119,11 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	public void activate() {
 		((Diagram)getRoot().getContents().getModel()).eAdapters().add(adapter);
-		RolePlayerConstraints roleConstraint = getCastedModel().getRoleConstraint();
+		RolePlayerConstraint roleConstraint = getCastedModel().getRoleConstraint();
 		if (roleConstraint!=null) {
 			roleConstraint.eAdapters().add(adapter);
-			if (roleConstraint.getType()!=null)
-				roleConstraint.getType().eAdapters().add(adapter);
+			if (roleConstraint.getRole()!=null)
+				roleConstraint.getRole().getType().eAdapters().add(adapter);
 		}
 		super.activate();
 	}
@@ -177,11 +131,11 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	public void deactivate() {
 		((Diagram)getRoot().getContents().getModel()).eAdapters().remove(adapter);
-		RolePlayerConstraints roleConstraint = getCastedModel().getRoleConstraint();
+		RolePlayerConstraint roleConstraint = getCastedModel().getRoleConstraint();
 		if (roleConstraint!=null) {
 			roleConstraint.eAdapters().remove(adapter);
-			if (roleConstraint.getType()!=null)
-				roleConstraint.getType().eAdapters().remove(adapter);
+			if (roleConstraint.getRole()!=null)
+				roleConstraint.getRole().getType().eAdapters().remove(adapter);
 			
 		}
 		super.deactivate();
@@ -202,7 +156,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		
 		
 		if (notification.getNotifier().equals(getCastedModel().getRoleConstraint())) {
-			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_PLAYER_CONSTRAINTS__TYPE) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE) {
 				TopicType tmp = (TopicType) notification.getOldValue();
 				if (tmp!=null)
 					tmp.eAdapters().remove(adapter);
@@ -217,7 +171,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	protected void refreshVisuals() {
 		if (getCastedModel().getRoleConstraint()!=null) {
-			RolePlayerConstraints rtc = getCastedModel().getRoleConstraint();
+			RolePlayerConstraint rtc = getCastedModel().getRoleConstraint();
 			
 			String typeText = "no role type set";
 			if (rtc.getRole()!=null)
@@ -226,10 +180,16 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			if (getChildren().size()>0) {
 				MoveableLabelEditPart cardEditPart = (MoveableLabelEditPart) getChildren().get(0);
 				MoveableLabelEditPart typeEditPart = (MoveableLabelEditPart) getChildren().get(1);
+				MoveableLabelEditPart roleCardEditPart = (MoveableLabelEditPart) getChildren().get(2);
+				
 				cardEditPart.setText(rtc.getCardMin()+".."+rtc.getCardMax());
+				
+				if (rtc.getRole()!=null)
+					roleCardEditPart.setText(rtc.getRole().getCardMin()+".."+rtc.getRole().getCardMax());
 				
 				typeEditPart.setText(typeText);
 				
+				roleCardEditPart.refreshVisuals();
 				cardEditPart.refreshVisuals();
 				typeEditPart.refreshVisuals();	
 			}

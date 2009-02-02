@@ -24,13 +24,6 @@ package de.topicmapslab.tmcledit.model;
  */
 public interface OccurenceTypeConstraint extends AbstractConstraint, AbstractTypedCardinalityConstraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>

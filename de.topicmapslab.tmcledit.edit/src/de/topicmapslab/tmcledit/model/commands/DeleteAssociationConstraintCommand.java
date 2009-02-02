@@ -12,7 +12,7 @@ import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class DeleteAssociationConstraintCommand extends AbstractCommand {
@@ -84,7 +84,7 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 			cmds = new ArrayList<DeleteRolePlayerConstraintCommand>(constraint.getPlayerConstraints().size());
 		}
 		
-		for (RolePlayerConstraints rpc : constraint.getPlayerConstraints()) {
+		for (RolePlayerConstraint rpc : constraint.getPlayerConstraints()) {
 			DeleteRolePlayerConstraintCommand cmd = new DeleteRolePlayerConstraintCommand(constraint, rpc);
 			if (cmd.canExecute())
 				cmds.add(cmd);

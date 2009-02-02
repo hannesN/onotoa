@@ -31,13 +31,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The default value of the '{@link #getPosX() <em>Pos X</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

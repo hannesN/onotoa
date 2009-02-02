@@ -8,7 +8,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 import java.util.Collection;
@@ -42,13 +42,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class AssociationTypeConstraintImpl extends AbstractConstraintImpl implements AssociationTypeConstraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,7 +59,7 @@ public class AssociationTypeConstraintImpl extends AbstractConstraintImpl implem
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RolePlayerConstraints> playerConstraints;
+	protected EList<RolePlayerConstraint> playerConstraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,9 +123,9 @@ public class AssociationTypeConstraintImpl extends AbstractConstraintImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<RolePlayerConstraints> getPlayerConstraints() {
+	public EList<RolePlayerConstraint> getPlayerConstraints() {
 		if (playerConstraints == null) {
-			playerConstraints = new EObjectContainmentEList<RolePlayerConstraints>(RolePlayerConstraints.class, this, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__PLAYER_CONSTRAINTS);
+			playerConstraints = new EObjectContainmentEList<RolePlayerConstraint>(RolePlayerConstraint.class, this, ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__PLAYER_CONSTRAINTS);
 		}
 		return playerConstraints;
 	}
@@ -182,7 +175,7 @@ public class AssociationTypeConstraintImpl extends AbstractConstraintImpl implem
 				return;
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__PLAYER_CONSTRAINTS:
 				getPlayerConstraints().clear();
-				getPlayerConstraints().addAll((Collection<? extends RolePlayerConstraints>)newValue);
+				getPlayerConstraints().addAll((Collection<? extends RolePlayerConstraint>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

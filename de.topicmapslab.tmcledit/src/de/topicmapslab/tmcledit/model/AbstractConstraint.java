@@ -24,13 +24,6 @@ package de.topicmapslab.tmcledit.model;
  */
 public interface AbstractConstraint extends AbstractCardinalityContraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Regexp</b></em>' attribute.
 	 * The default value is <code>".*"</code>.
 	 * <!-- begin-user-doc -->

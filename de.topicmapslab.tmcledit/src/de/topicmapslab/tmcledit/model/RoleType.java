@@ -25,13 +25,6 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface RoleType extends TopicType, OtherRolePlayerConstraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Other Roles</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint}.
 	 * <!-- begin-user-doc -->

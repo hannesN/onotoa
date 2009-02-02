@@ -24,12 +24,12 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleConstraints;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintsCommand;
-import de.topicmapslab.tmcledit.model.commands.RemoveRoleConstraintsCommand;
+import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.RemoveRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
@@ -94,15 +94,15 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 					if (dlg.getResult().length==0)
 						return;
 					
-					List<RoleConstraints> rcl = new ArrayList<RoleConstraints>();
+					List<RoleConstraint> rcl = new ArrayList<RoleConstraint>();
 					for (Object tt : dlg.getResult()) {
-						RoleConstraints rc = ModelFactory.eINSTANCE.createRoleConstraints();
+						RoleConstraint rc = ModelFactory.eINSTANCE.createRoleConstraint();
 						rc.setType((TopicType) tt);
 						rc.setCardMin("1");
 						rc.setCardMax("1");
 						rcl.add(rc);
 					}
-					AddRoleConstraintsCommand cmd = new AddRoleConstraintsCommand(getCastedModel(), rcl);
+					AddRoleConstraintCommand cmd = new AddRoleConstraintCommand(getCastedModel(), rcl);
 					getCommandStack().execute(cmd);
 				}
 			}
@@ -118,11 +118,11 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = wizard.getNewTopicType();
 					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
-					RoleConstraints rc = ModelFactory.eINSTANCE.createRoleConstraints();
+					RoleConstraint rc = ModelFactory.eINSTANCE.createRoleConstraint();
 					rc.setType(tt);
 					rc.setCardMin("1");
 					rc.setCardMax("1");
-					AddRoleConstraintsCommand cmd = new AddRoleConstraintsCommand(getCastedModel(), rc);
+					AddRoleConstraintCommand cmd = new AddRoleConstraintCommand(getCastedModel(), rc);
 					getCommandStack().execute(cmd);	
 				}
 			}
@@ -138,13 +138,13 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				if (sel.isEmpty())
 					return;
 				
-				List<RoleConstraints> removeList = new ArrayList<RoleConstraints>();
-				Iterator<RoleConstraints> it = sel.iterator();
+				List<RoleConstraint> removeList = new ArrayList<RoleConstraint>();
+				Iterator<RoleConstraint> it = sel.iterator();
 				while (it.hasNext()) {
 					removeList.add(it.next());
 				}
 				
-				RemoveRoleConstraintsCommand cmd = new RemoveRoleConstraintsCommand(
+				RemoveRoleConstraintCommand cmd = new RemoveRoleConstraintCommand(
 						getCastedModel(), removeList);
 				getCommandStack().execute(cmd);
 			}
@@ -154,7 +154,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getNotifier() instanceof ScopeConstraint) {
-			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_CONSTRAINTS__TYPE) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_CONSTRAINT__TYPE) {
 				if (notification.getOldValue()!=null) {
 					((TopicType)notification.getOldValue()).eAdapters().remove(this);
 				}
@@ -173,7 +173,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	@Override
 	public void setModel(Object model) {
 		if (getCastedModel()!=null) {
-			for (RoleConstraints rc : getCastedModel().getRoles()) {
+			for (RoleConstraint rc : getCastedModel().getRoles()) {
 				if (rc.getType()!=null)
 					rc.getType().eAdapters().remove(this);
 				rc.eAdapters().remove(this);
@@ -181,7 +181,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		}
 		
 		super.setModel(model);
-		for (RoleConstraints rc : getCastedModel().getRoles()) {
+		for (RoleConstraint rc : getCastedModel().getRoles()) {
 			if (rc.getType()!=null)
 				rc.getType().eAdapters().add(this);
 			rc.eAdapters().add(this);

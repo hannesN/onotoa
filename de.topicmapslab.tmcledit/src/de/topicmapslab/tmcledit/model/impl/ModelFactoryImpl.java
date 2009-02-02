@@ -24,13 +24,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,7 +63,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.TOPIC_TYPE: return createTopicType();
 			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: return createOccurenceTypeConstraint();
 			case ModelPackage.NAME_TYPE_CONSTRAINT: return createNameTypeConstraint();
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS: return createRolePlayerConstraints();
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT: return createRolePlayerConstraint();
 			case ModelPackage.TOPIC_MAP_SCHEMA: return createTopicMapSchema();
 			case ModelPackage.SUBJECT_LOCATOR_CONSTRAINT: return createSubjectLocatorConstraint();
 			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: return createSubjectIdentifierConstraint();
@@ -87,7 +80,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.LABEL_POS: return createLabelPos();
 			case ModelPackage.ASSOCIATION_TYPE: return createAssociationType();
 			case ModelPackage.OCCURENCE_TYPE: return createOccurenceType();
-			case ModelPackage.ROLE_CONSTRAINTS: return createRoleConstraints();
+			case ModelPackage.ROLE_CONSTRAINT: return createRoleConstraint();
 			case ModelPackage.ROLE_TYPE: return createRoleType();
 			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT: return createOtherRolePlayerConstraint();
 			case ModelPackage.NAME_TYPE: return createNameType();
@@ -170,9 +163,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RolePlayerConstraints createRolePlayerConstraints() {
-		RolePlayerConstraintsImpl rolePlayerConstraints = new RolePlayerConstraintsImpl();
-		return rolePlayerConstraints;
+	public RolePlayerConstraint createRolePlayerConstraint() {
+		RolePlayerConstraintImpl rolePlayerConstraint = new RolePlayerConstraintImpl();
+		return rolePlayerConstraint;
 	}
 
 	/**
@@ -340,9 +333,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleConstraints createRoleConstraints() {
-		RoleConstraintsImpl roleConstraints = new RoleConstraintsImpl();
-		return roleConstraints;
+	public RoleConstraint createRoleConstraint() {
+		RoleConstraintImpl roleConstraint = new RoleConstraintImpl();
+		return roleConstraint;
 	}
 
 	/**

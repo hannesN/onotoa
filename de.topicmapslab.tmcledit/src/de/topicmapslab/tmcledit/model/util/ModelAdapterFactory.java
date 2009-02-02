@@ -24,13 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class ModelAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,8 +87,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createNameTypeConstraintAdapter();
 			}
 			@Override
-			public Adapter caseRolePlayerConstraints(RolePlayerConstraints object) {
-				return createRolePlayerConstraintsAdapter();
+			public Adapter caseRolePlayerConstraint(RolePlayerConstraint object) {
+				return createRolePlayerConstraintAdapter();
 			}
 			@Override
 			public Adapter caseTopicMapSchema(TopicMapSchema object) {
@@ -174,8 +167,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createOccurenceTypeAdapter();
 			}
 			@Override
-			public Adapter caseRoleConstraints(RoleConstraints object) {
-				return createRoleConstraintsAdapter();
+			public Adapter caseRoleConstraint(RoleConstraint object) {
+				return createRoleConstraintAdapter();
 			}
 			@Override
 			public Adapter caseRoleType(RoleType object) {
@@ -270,16 +263,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraints <em>Role Player Constraints</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraint <em>Role Player Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraints
+	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraint
 	 * @generated
 	 */
-	public Adapter createRolePlayerConstraintsAdapter() {
+	public Adapter createRolePlayerConstraintAdapter() {
 		return null;
 	}
 
@@ -550,16 +543,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RoleConstraints <em>Role Constraints</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RoleConstraint <em>Role Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.RoleConstraints
+	 * @see de.topicmapslab.tmcledit.model.RoleConstraint
 	 * @generated
 	 */
-	public Adapter createRoleConstraintsAdapter() {
+	public Adapter createRoleConstraintAdapter() {
 		return null;
 	}
 

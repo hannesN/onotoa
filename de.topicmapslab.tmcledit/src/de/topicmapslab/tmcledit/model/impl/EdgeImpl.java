@@ -11,7 +11,7 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 
 import java.util.Collection;
 
@@ -48,13 +48,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class EdgeImpl extends EObjectImpl implements Edge {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
 	/**
 	 * The cached value of the '{@link #getBendpoints() <em>Bendpoints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -113,7 +106,7 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * @generated
 	 * @ordered
 	 */
-	protected RolePlayerConstraints roleConstraint;
+	protected RolePlayerConstraint roleConstraint;
 
 	/**
 	 * The cached value of the '{@link #getLabelPositions() <em>Label Positions</em>}' containment reference list.
@@ -258,10 +251,10 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RolePlayerConstraints getRoleConstraint() {
+	public RolePlayerConstraint getRoleConstraint() {
 		if (roleConstraint != null && roleConstraint.eIsProxy()) {
 			InternalEObject oldRoleConstraint = (InternalEObject)roleConstraint;
-			roleConstraint = (RolePlayerConstraints)eResolveProxy(oldRoleConstraint);
+			roleConstraint = (RolePlayerConstraint)eResolveProxy(oldRoleConstraint);
 			if (roleConstraint != oldRoleConstraint) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.EDGE__ROLE_CONSTRAINT, oldRoleConstraint, roleConstraint));
@@ -275,7 +268,7 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RolePlayerConstraints basicGetRoleConstraint() {
+	public RolePlayerConstraint basicGetRoleConstraint() {
 		return roleConstraint;
 	}
 
@@ -284,8 +277,8 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoleConstraint(RolePlayerConstraints newRoleConstraint) {
-		RolePlayerConstraints oldRoleConstraint = roleConstraint;
+	public void setRoleConstraint(RolePlayerConstraint newRoleConstraint) {
+		RolePlayerConstraint oldRoleConstraint = roleConstraint;
 		roleConstraint = newRoleConstraint;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EDGE__ROLE_CONSTRAINT, oldRoleConstraint, roleConstraint));
@@ -369,7 +362,7 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 				setType((EdgeType)newValue);
 				return;
 			case ModelPackage.EDGE__ROLE_CONSTRAINT:
-				setRoleConstraint((RolePlayerConstraints)newValue);
+				setRoleConstraint((RolePlayerConstraint)newValue);
 				return;
 			case ModelPackage.EDGE__LABEL_POSITIONS:
 				getLabelPositions().clear();
@@ -400,7 +393,7 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 				setType(TYPE_EDEFAULT);
 				return;
 			case ModelPackage.EDGE__ROLE_CONSTRAINT:
-				setRoleConstraint((RolePlayerConstraints)null);
+				setRoleConstraint((RolePlayerConstraint)null);
 				return;
 			case ModelPackage.EDGE__LABEL_POSITIONS:
 				getLabelPositions().clear();

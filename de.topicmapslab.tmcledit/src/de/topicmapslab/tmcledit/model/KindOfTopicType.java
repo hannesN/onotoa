@@ -92,13 +92,6 @@ public enum KindOfTopicType implements Enumerator {
 	NO_TYPE(6, "NoType", "NoType");
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The '<em><b>Topic Type</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>

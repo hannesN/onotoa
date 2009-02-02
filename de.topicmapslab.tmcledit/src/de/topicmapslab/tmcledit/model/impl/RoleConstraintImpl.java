@@ -1,34 +1,32 @@
 /**
- * (C) 2008 Hannes Niederhause, Topic Maps Lab
+ * (C) 2008 Hannes Niederhausen, Topic Maps Lab
  *
  * $Id$
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.NameType;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Name Type</b></em>'.
+ * An implementation of the model object '<em><b>Role Constraint</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
+public class RoleConstraintImpl extends AbstractTypedCardinalityConstraintImpl implements RoleConstraint {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	protected NameTypeImpl() {
+	protected RoleConstraintImpl() {
 		super();
-		setKind(KindOfTopicType.NAME_TYPE);
 	}
 
 	/**
@@ -38,7 +36,7 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.NAME_TYPE;
+		return ModelPackage.Literals.ROLE_CONSTRAINT;
 	}
 
-} //NameTypeImpl
+} //RoleConstraintImpl

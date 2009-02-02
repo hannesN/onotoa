@@ -37,13 +37,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  */
 public class ModelItemProviderAdapterFactory extends ModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,7 +158,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 * @generated
 	 */
 	@Override
-	public Adapter createRolePlayerConstraintsAdapter() {
+	public Adapter createRolePlayerConstraintAdapter() {
 		if (rolePlayerConstraintsItemProvider == null) {
 			rolePlayerConstraintsItemProvider = new RolePlayerConstraintsItemProvider(this);
 		}
@@ -542,26 +535,26 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RoleConstraints} instances.
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RoleConstraint} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RoleConstraintsItemProvider roleConstraintsItemProvider;
+	protected RoleConstraintItemProvider roleConstraintItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RoleConstraints}.
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RoleConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRoleConstraintsAdapter() {
-		if (roleConstraintsItemProvider == null) {
-			roleConstraintsItemProvider = new RoleConstraintsItemProvider(this);
+	public Adapter createRoleConstraintAdapter() {
+		if (roleConstraintItemProvider == null) {
+			roleConstraintItemProvider = new RoleConstraintItemProvider(this);
 		}
 
-		return roleConstraintsItemProvider;
+		return roleConstraintItemProvider;
 	}
 
 	/**
@@ -775,7 +768,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (labelPosItemProvider != null) labelPosItemProvider.dispose();
 		if (associationTypeItemProvider != null) associationTypeItemProvider.dispose();
 		if (occurenceTypeItemProvider != null) occurenceTypeItemProvider.dispose();
-		if (roleConstraintsItemProvider != null) roleConstraintsItemProvider.dispose();
+		if (roleConstraintItemProvider != null) roleConstraintItemProvider.dispose();
 		if (roleTypeItemProvider != null) roleTypeItemProvider.dispose();
 		if (otherRolePlayerConstraintItemProvider != null) otherRolePlayerConstraintItemProvider.dispose();
 		if (nameTypeItemProvider != null) nameTypeItemProvider.dispose();

@@ -34,13 +34,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class OccurenceTypeConstraintImpl extends AbstractConstraintImpl implements OccurenceTypeConstraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

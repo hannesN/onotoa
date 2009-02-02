@@ -27,13 +27,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class ModelSwitch<T> {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,12 +119,10 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ROLE_PLAYER_CONSTRAINTS: {
-				RolePlayerConstraints rolePlayerConstraints = (RolePlayerConstraints)theEObject;
-				T result = caseRolePlayerConstraints(rolePlayerConstraints);
-				if (result == null) result = caseAbstractTypedCardinalityConstraint(rolePlayerConstraints);
-				if (result == null) result = caseAbstractCardinalityContraint(rolePlayerConstraints);
-				if (result == null) result = caseAbstractTypedConstraint(rolePlayerConstraints);
+			case ModelPackage.ROLE_PLAYER_CONSTRAINT: {
+				RolePlayerConstraint rolePlayerConstraint = (RolePlayerConstraint)theEObject;
+				T result = caseRolePlayerConstraint(rolePlayerConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(rolePlayerConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -266,12 +257,12 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ROLE_CONSTRAINTS: {
-				RoleConstraints roleConstraints = (RoleConstraints)theEObject;
-				T result = caseRoleConstraints(roleConstraints);
-				if (result == null) result = caseAbstractTypedCardinalityConstraint(roleConstraints);
-				if (result == null) result = caseAbstractCardinalityContraint(roleConstraints);
-				if (result == null) result = caseAbstractTypedConstraint(roleConstraints);
+			case ModelPackage.ROLE_CONSTRAINT: {
+				RoleConstraint roleConstraint = (RoleConstraint)theEObject;
+				T result = caseRoleConstraint(roleConstraint);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(roleConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(roleConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(roleConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -372,17 +363,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Role Player Constraints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Role Player Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Role Player Constraints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Role Player Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRolePlayerConstraints(RolePlayerConstraints object) {
+	public T caseRolePlayerConstraint(RolePlayerConstraint object) {
 		return null;
 	}
 
@@ -672,17 +663,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Role Constraints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Role Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Role Constraints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Role Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoleConstraints(RoleConstraints object) {
+	public T caseRoleConstraint(RoleConstraint object) {
 		return null;
 	}
 

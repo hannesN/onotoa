@@ -25,15 +25,8 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface AssociationTypeConstraint extends AbstractConstraint, AbstractTypedConstraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * Returns the value of the '<em><b>Player Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RolePlayerConstraints}.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RolePlayerConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Player Constraints</em>' containment reference list isn't clear,
@@ -45,6 +38,6 @@ public interface AssociationTypeConstraint extends AbstractConstraint, AbstractT
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<RolePlayerConstraints> getPlayerConstraints();
+	EList<RolePlayerConstraint> getPlayerConstraints();
 
 } // AssociationTypeConstraint

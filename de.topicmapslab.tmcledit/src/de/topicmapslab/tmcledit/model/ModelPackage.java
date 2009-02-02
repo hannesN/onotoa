@@ -28,13 +28,6 @@ import org.eclipse.emf.ecore.EReference;
  */
 public interface ModelPackage extends EPackage {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -405,14 +398,14 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractTypedCardinalityConstraintImpl <em>Abstract Typed Cardinality Constraint</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintImpl <em>Role Player Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.AbstractTypedCardinalityConstraintImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractTypedCardinalityConstraint()
+	 * @see de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRolePlayerConstraint()
 	 * @generated
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT = 28;
+	int ROLE_PLAYER_CONSTRAINT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -421,7 +414,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
+	int ROLE_PLAYER_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -430,62 +423,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Abstract Typed Cardinality Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintsImpl <em>Role Player Constraints</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintsImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRolePlayerConstraints()
-	 * @generated
-	 */
-	int ROLE_PLAYER_CONSTRAINTS = 4;
-
-	/**
-	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_PLAYER_CONSTRAINTS__CARD_MIN = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MIN;
-
-	/**
-	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_PLAYER_CONSTRAINTS__CARD_MAX = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MAX;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_PLAYER_CONSTRAINTS__TYPE = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE;
+	int ROLE_PLAYER_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Player</b></em>' reference.
@@ -494,7 +432,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINTS__PLAYER = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
+	int ROLE_PLAYER_CONSTRAINT__PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' reference.
@@ -503,16 +441,26 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINTS__ROLE = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 1;
+	int ROLE_PLAYER_CONSTRAINT__ROLE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Role Player Constraints</em>' class.
+	 * The number of structural features of the '<em>Role Player Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINTS_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 2;
+	int ROLE_PLAYER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractTypedCardinalityConstraintImpl <em>Abstract Typed Cardinality Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.AbstractTypedCardinalityConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractTypedCardinalityConstraint()
+	 * @generated
+	 */
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT = 28;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl <em>Topic Map Schema</em>}' class.
@@ -1157,6 +1105,42 @@ public interface ModelPackage extends EPackage {
 	int FILE_FEATURE_COUNT = 4;
 
 	/**
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Typed Cardinality Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl <em>Scope Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1721,14 +1705,14 @@ public interface ModelPackage extends EPackage {
 	int OCCURENCE_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintsImpl <em>Role Constraints</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl <em>Role Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.RoleConstraintsImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleConstraints()
+	 * @see de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleConstraint()
 	 * @generated
 	 */
-	int ROLE_CONSTRAINTS = 24;
+	int ROLE_CONSTRAINT = 24;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -1737,7 +1721,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_CONSTRAINTS__CARD_MIN = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MIN;
+	int ROLE_CONSTRAINT__CARD_MIN = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -1746,7 +1730,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_CONSTRAINTS__CARD_MAX = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MAX;
+	int ROLE_CONSTRAINT__CARD_MAX = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1755,16 +1739,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_CONSTRAINTS__TYPE = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE;
+	int ROLE_CONSTRAINT__TYPE = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE;
 
 	/**
-	 * The number of structural features of the '<em>Role Constraints</em>' class.
+	 * The number of structural features of the '<em>Role Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_CONSTRAINTS_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
+	int ROLE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleTypeImpl <em>Role Type</em>}' class.
@@ -2402,36 +2386,36 @@ public interface ModelPackage extends EPackage {
 	EClass getNameTypeConstraint();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraints <em>Role Player Constraints</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraint <em>Role Player Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Role Player Constraints</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraints
+	 * @return the meta object for class '<em>Role Player Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraint
 	 * @generated
 	 */
-	EClass getRolePlayerConstraints();
+	EClass getRolePlayerConstraint();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraints#getPlayer <em>Player</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraint#getPlayer <em>Player</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Player</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraints#getPlayer()
-	 * @see #getRolePlayerConstraints()
+	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraint#getPlayer()
+	 * @see #getRolePlayerConstraint()
 	 * @generated
 	 */
-	EReference getRolePlayerConstraints_Player();
+	EReference getRolePlayerConstraint_Player();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraints#getRole <em>Role</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RolePlayerConstraint#getRole <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Role</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraints#getRole()
-	 * @see #getRolePlayerConstraints()
+	 * @see de.topicmapslab.tmcledit.model.RolePlayerConstraint#getRole()
+	 * @see #getRolePlayerConstraint()
 	 * @generated
 	 */
-	EReference getRolePlayerConstraints_Role();
+	EReference getRolePlayerConstraint_Role();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.TopicMapSchema <em>Topic Map Schema</em>}'.
@@ -3064,14 +3048,14 @@ public interface ModelPackage extends EPackage {
 	EAttribute getOccurenceType_DataType();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleConstraints <em>Role Constraints</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleConstraint <em>Role Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Role Constraints</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RoleConstraints
+	 * @return the meta object for class '<em>Role Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.RoleConstraint
 	 * @generated
 	 */
-	EClass getRoleConstraints();
+	EClass getRoleConstraint();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleType <em>Role Type</em>}'.
@@ -3370,14 +3354,14 @@ public interface ModelPackage extends EPackage {
 		EClass NAME_TYPE_CONSTRAINT = eINSTANCE.getNameTypeConstraint();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintsImpl <em>Role Player Constraints</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintImpl <em>Role Player Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintsImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRolePlayerConstraints()
+		 * @see de.topicmapslab.tmcledit.model.impl.RolePlayerConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRolePlayerConstraint()
 		 * @generated
 		 */
-		EClass ROLE_PLAYER_CONSTRAINTS = eINSTANCE.getRolePlayerConstraints();
+		EClass ROLE_PLAYER_CONSTRAINT = eINSTANCE.getRolePlayerConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Player</b></em>' reference feature.
@@ -3385,7 +3369,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROLE_PLAYER_CONSTRAINTS__PLAYER = eINSTANCE.getRolePlayerConstraints_Player();
+		EReference ROLE_PLAYER_CONSTRAINT__PLAYER = eINSTANCE.getRolePlayerConstraint_Player();
 
 		/**
 		 * The meta object literal for the '<em><b>Role</b></em>' reference feature.
@@ -3393,7 +3377,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROLE_PLAYER_CONSTRAINTS__ROLE = eINSTANCE.getRolePlayerConstraints_Role();
+		EReference ROLE_PLAYER_CONSTRAINT__ROLE = eINSTANCE.getRolePlayerConstraint_Role();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl <em>Topic Map Schema</em>}' class.
@@ -3906,14 +3890,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute OCCURENCE_TYPE__DATA_TYPE = eINSTANCE.getOccurenceType_DataType();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintsImpl <em>Role Constraints</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl <em>Role Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.RoleConstraintsImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleConstraints()
+		 * @see de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleConstraint()
 		 * @generated
 		 */
-		EClass ROLE_CONSTRAINTS = eINSTANCE.getRoleConstraints();
+		EClass ROLE_CONSTRAINT = eINSTANCE.getRoleConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleTypeImpl <em>Role Type</em>}' class.

@@ -59,13 +59,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

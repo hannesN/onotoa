@@ -29,13 +29,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class AbstractConstraintImpl extends AbstractCardinalityContraintImpl implements AbstractConstraint {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
 	 * The default value of the '{@link #getRegexp() <em>Regexp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -7,7 +7,7 @@ package de.topicmapslab.tmcledit.model.provider;
 
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraints;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 
 import java.util.Collection;
 import java.util.List;
@@ -30,20 +30,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class RolePlayerConstraintsItemProvider
-	extends AbstractTypedCardinalityConstraintItemProvider
+	extends AbstractCardinalityContraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
 		ITreeItemContentProvider,
 		IItemLabelProvider,
 		IItemPropertySource {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -84,7 +77,7 @@ public class RolePlayerConstraintsItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RolePlayerConstraints_player_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RolePlayerConstraints_player_feature", "_UI_RolePlayerConstraints_type"),
-				 ModelPackage.Literals.ROLE_PLAYER_CONSTRAINTS__PLAYER,
+				 ModelPackage.Literals.ROLE_PLAYER_CONSTRAINT__PLAYER,
 				 true,
 				 false,
 				 true,
@@ -106,7 +99,7 @@ public class RolePlayerConstraintsItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RolePlayerConstraints_role_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RolePlayerConstraints_role_feature", "_UI_RolePlayerConstraints_type"),
-				 ModelPackage.Literals.ROLE_PLAYER_CONSTRAINTS__ROLE,
+				 ModelPackage.Literals.ROLE_PLAYER_CONSTRAINT__ROLE,
 				 true,
 				 false,
 				 true,
@@ -134,7 +127,7 @@ public class RolePlayerConstraintsItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RolePlayerConstraints)object).getCardMin();
+		String label = ((RolePlayerConstraint)object).getCardMin();
 		return label == null || label.length() == 0 ?
 			getString("_UI_RolePlayerConstraints_type") :
 			getString("_UI_RolePlayerConstraints_type") + " " + label;

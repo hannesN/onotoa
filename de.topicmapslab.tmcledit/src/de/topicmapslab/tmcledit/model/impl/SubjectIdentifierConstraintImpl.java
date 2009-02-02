@@ -25,13 +25,6 @@ public class SubjectIdentifierConstraintImpl extends AbstractConstraintImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "(C) 2008 Hannes Niederhause, Topic Maps Lab";
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	protected SubjectIdentifierConstraintImpl() {
 		super();
 	}
