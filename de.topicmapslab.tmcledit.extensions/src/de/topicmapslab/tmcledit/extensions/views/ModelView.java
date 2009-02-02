@@ -151,10 +151,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 					&& (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES)) {
 					switch (msg.getEventType()) {
 					case Notification.ADD:
-						addType((TopicType) msg.getNewValue());
+						addType((TopicType) msg.getNewValue(), true);
 						break;
 					case Notification.REMOVE:
-						removeType((TopicType) msg.getOldValue());
+						removeType((TopicType) msg.getOldValue(), true);
 						break;
 					}
 				} else if ((msg.getNotifier() instanceof File) 
@@ -232,7 +232,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		public void update() {
 			
 			invisibleRoot = new TreeParent(ModelView.this, "");
-
 			if (currFile != null) {
 				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
 				schemaNode.setModel(getCurrentTopicMapSchema());
@@ -256,12 +255,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				schemaNode.addChild(stNode);
 
 				for (TopicType tt : getCurrentTopicMapSchema().getTopicTypes()) {
-					addType(tt);
+					addType(tt, false);
 				}
 
 				for (Diagram d : currFile.getDiagrams()) {
 					diagramNode.addChild(new TreeDiagram(ModelView.this, d));
 				}
+				if (!viewer.isBusy())
+					viewer.refresh();
 			} else {
 				TreeParent root = new TreeParent(ModelView.this,
 						"No Diagramm Editor Open");
@@ -287,7 +288,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 		}
 		
-		private void addType(TopicType tt) {
+		private void addType(TopicType tt, boolean refresh) {
 			TreeTopic to = new TreeTopic(ModelView.this, tt);
 			TreeParent parent = null;
 
@@ -301,11 +302,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				for (OccurenceTypeConstraint otc : tt.getOccurenceConstraints()) {
 					to.addChild(new TreeOccurence(ModelView.this, otc));
 				}
-				viewer.refresh(parent);
+				if (refresh)
+					viewer.refresh(parent);
 			}
 		}
 
-		private void removeType(TopicType tt) {
+		private void removeType(TopicType tt, boolean refresh) {
 			TreeParent parent = ttNode;
 
 			parent = getParentNode(tt);
@@ -316,7 +318,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 					to.dispose();
 				}
 			}
-			viewer.refresh(parent);
+			if (refresh)
+				viewer.refresh(parent);
 		}
 
 		private TreeParent getParentNode(TopicType topicType) {

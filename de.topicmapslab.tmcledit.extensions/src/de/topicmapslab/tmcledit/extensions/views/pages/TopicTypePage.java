@@ -63,12 +63,16 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		section = toolkit.createSection(parent, Section.EXPANDED
 				| Section.TITLE_BAR);
 		section.setText("Dies st ein n test");
+		GridData gd = new GridData(GridData.FILL_BOTH);
+		gd.minimumHeight=20;
+		gd.minimumWidth=20;
+		section.setLayoutData(gd);
 		Composite comp = toolkit.createComposite(section);
 		comp.setLayout(new GridLayout(3, false));
 
 		toolkit.createLabel(comp, "Name:");
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		nameText.setLayoutData(gd);
 		nameText.addFocusListener(new FocusAdapter() {

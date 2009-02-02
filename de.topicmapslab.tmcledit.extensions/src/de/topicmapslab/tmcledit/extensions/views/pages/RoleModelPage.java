@@ -1,51 +1,35 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
-import java.util.Collections;
-import java.util.List;
-
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ListSelectionDialog;
-import org.eclipse.ui.forms.events.HyperlinkAdapter;
-import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Hyperlink;
+import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.extensions.util.CardTextObserver;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
-import de.topicmapslab.tmcledit.model.util.ImageProvider;
-import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class RoleModelPage extends AbstractModelPage{
 
 	private Text cardMinText;
 	private Text cardMaxText;
-	private Text roleText;
-	
 	private Combo roleCombo;
-	private Text roleCardMinText;
-	private Text roleCardMaxText;
 
+	
+	private AssociationTypeModelPage assPage;
+	
 	public RoleModelPage() {
 		super("role");
 	}
@@ -54,52 +38,76 @@ public class RoleModelPage extends AbstractModelPage{
 	public void updateUI() {
 		RolePlayerConstraint rpc = getCastedModel();
 		
+		updateCombo();
+		
 		cardMinText.setText(rpc.getCardMin());
 		cardMaxText.setText(rpc.getCardMax());
-		
-		if (rpc.getRole()!=null)
-			roleText.setText(rpc.getRole().getType().getName());
-		else
-			roleText.setText("no type");
 		
 	}
 
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+
+		CTabItem item1 = new CTabItem(folder, SWT.NONE);
+		item1.setText("Role Player Properties");
+		Composite comp = createRoleConstraintProps(folder, toolkit);
 		
-		Composite comp = toolkit.createComposite(parent);
-		comp.setLayout(new GridLayout(3, false));
+		item1.setControl(comp);
 		
+		assPage = new AssociationTypeModelPage();
+		assPage.createControl(folder);
+		
+		CTabItem item2 = new CTabItem(folder, SWT.NONE);
+		item2.setText("Association Type Properties");
+		item2.setControl(assPage.getControl());
+		
+		folder.setSelection(item1);
+		setControl(folder);
+	}
+
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+		super.setCommandStack(commandStack);
+		assPage.setCommandStack(commandStack);
+	}
 	
+	private Composite createRoleConstraintProps(Composite parent,
+			FormToolkit toolkit) {
 		
-		Hyperlink link = toolkit.createHyperlink(comp, "Role:", SWT.NONE);
-		link.addHyperlinkListener(new HyperlinkAdapter() {
+		Section section = toolkit.createSection(parent, Section.EXPANDED
+				| Section.TITLE_BAR);
+		section.setText("Role Player Constraint");
+		Composite comp = toolkit.createComposite(section);
+		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.marginWidth = 5;
+		gridLayout.marginHeight = 5;
+		gridLayout.verticalSpacing = 0;
+		gridLayout.horizontalSpacing = 0;
+		comp.setLayout(gridLayout);
+		
+		
+		toolkit.createLabel(comp, "Role:");
+		roleCombo = new Combo(comp, SWT.BORDER);
+		roleCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		toolkit.adapt(roleCombo);
+		
+		roleCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void linkActivated(HyperlinkEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.ROLE_TYPE);
-				WizardDialog dlg = new WizardDialog(cardMinText.getShell(), wizard);
-				
-				if (dlg.open()==Dialog.OK) {
-					TopicType tt = wizard.getNewTopicType();
-					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
-					// TODO Command
+			public void widgetSelected(SelectionEvent e) {
+				int index = roleCombo.getSelectionIndex();
+				if (index>-1) {
+					RoleConstraint rc = getAssociationType().getRoles().get(index);
+					
+					getCastedModel().setRole(rc);
 				}
-				
 			}
 		});
-		
-		roleText = toolkit.createText(comp, "", SWT.BORDER);
-		roleText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		Button selectButton = toolkit.createButton(comp, "...", SWT.PUSH);
-		selectButton.addSelectionListener(new SelectionListener());
 		
 				
 		toolkit.createLabel(comp, "cardMin:");
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = 2;
 		cardMinText = toolkit.createText(comp, "", SWT.BORDER);
 		cardMinText.setLayoutData(gd);
 		CardTextObserver.observe(cardMinText, this, true);
@@ -107,77 +115,56 @@ public class RoleModelPage extends AbstractModelPage{
 		toolkit.createLabel(comp, "cardMax:");
 		cardMaxText = toolkit.createText(comp, "", SWT.BORDER);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = 2;
 		cardMaxText.setLayoutData(gd);
 		CardTextObserver.observe(cardMaxText, this, false);
 		
-		setControl(comp);
+		section.setClient(comp);
+		return section;
+	}
+	
+	private void updateCombo() {
+		int index = -1;
+		int i=0;
+		roleCombo.removeAll();
+		for (RoleConstraint rc : getAssociationType().getRoles()) {
+			roleCombo.add(rc.getType().getName());
+			if (rc.equals(getCastedModel().getRole()))
+				index = i;
+			i++;
+		}
+		if (index>-1)
+			roleCombo.select(index);
 	}
 	
 	protected RolePlayerConstraint getCastedModel() {
 		return (RolePlayerConstraint) getModel();
 	}
 
+	protected AssociationType getAssociationType() {
+		return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
+	}
+	
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();
+	}
+
+	@Override
+	public void setModel(Object model) {
+		RolePlayerConstraint rpc = (RolePlayerConstraint) getCastedModel();
 		
-	}
-
-	private class SelectionListener extends SelectionAdapter {
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-			List<RoleConstraint> list = Collections.emptyList();
-			AssociationType type = (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
-			
-			list = type.getRoles();
-			
-			ListSelectionDialog dlg = new ListSelectionDialog(
-					roleText.getShell(),
-					list,
-					new ArrayContentProvider(),
-					new RoleConstraintLabelProvider(),
-					"Choose the role");
-			
-			if (dlg.open()==Dialog.OK) {
-				if (dlg.getResult().length>0)
-					getCastedModel().setRole((RoleConstraint) dlg.getResult()[0]);
-				else
-					getCastedModel().setRole(null);
-			}
-			
-			
-		}
-	}
-	
-	private class RoleConstraintLabelProvider implements ILabelProvider {
-
-		@Override
-		public Image getImage(Object element) {
-			return ImageProvider.getTopicTypeImage(((RoleConstraint)element).getType());
-		}
-
-		@Override
-		public String getText(Object element) {
-			return ((RoleConstraint)element).getType().getName();
-		}
-
-		@Override
-		public void addListener(ILabelProviderListener listener) {
-		}
-
-		@Override
-		public void dispose() {
-		}
-
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			return false;
-		}
-
-		@Override
-		public void removeListener(ILabelProviderListener listener) {
-		}
+		if ( (rpc!=null) && (rpc.getRole()!=null) )
+			rpc.getRole().eAdapters().remove(this);
 		
+		super.setModel(model);
+		
+		rpc = (RolePlayerConstraint) model;
+		
+		if (rpc.getRole()!=null)
+			rpc.getRole().eAdapters().add(this);
+		
+		if (assPage != null)
+			assPage.setModel(getAssociationType());
 	}
+
 }

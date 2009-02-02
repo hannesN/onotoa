@@ -1,10 +1,13 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -16,6 +19,7 @@ import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
+import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -33,6 +37,9 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 public class AssociationConstraintModelPage extends AbstractModelPage {
 
 	private Text typeText;
+	private Section section;
+	
+	private AssociationTypeModelPage typeModelPage;
 
 	public AssociationConstraintModelPage() {
 		super("association_constraint");
@@ -41,10 +48,12 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 	@Override
 	public void updateUI() {
 		AssociationTypeConstraint asc = getCastedModel();
-		if (asc.getType()==null)
+		section.setText("Association Constraint:");
+		if (asc.getType()==null) {
 			typeText.setText("");
-		else
+		} else {
 			typeText.setText(asc.getType().getName());
+		}
 	}
 
 	private AssociationTypeConstraint getCastedModel() {
@@ -55,8 +64,33 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		
-		Composite comp = toolkit.createComposite(parent);
+		typeModelPage = new AssociationTypeModelPage();
+		
+		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+		typeModelPage.createControl(folder);
+		
+		CTabItem item1 = new CTabItem(folder, SWT.NONE);
+		item1.setText("Association Constraint Properties");
+		item1.setControl(createConstraintSection(folder, toolkit));
+		
+		
+		CTabItem item2 = new CTabItem(folder, SWT.NONE);
+		item2.setText("Association Type Properties");
+		item2.setControl(typeModelPage.getControl());
+		
+		
+		folder.setSelection(item1);
+		setControl(folder);
+	}
+
+	private Composite createConstraintSection(Composite parent, FormToolkit toolkit) {
+		section = toolkit.createSection(parent, Section.EXPANDED
+				| Section.TITLE_BAR);
+		section.setText("Dies st ein n test");
+		Composite comp = toolkit.createComposite(section);
 		comp.setLayout(new GridLayout(3, false));
+		
+		section.setClient(comp);
 		
 		Hyperlink link = toolkit.createHyperlink(comp, "Assoc. Type:", SWT.NONE);
 		link.addHyperlinkListener(new HyperlinkAdapter() {
@@ -82,7 +116,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		Button button = toolkit.createButton(comp, "...", SWT.PUSH);
 		hookAddTypeButtonListeners(button);
 		
-		setControl(comp);
+		return section;
 	}
 
 	private void hookAddTypeButtonListeners(Button button) {
@@ -103,6 +137,18 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		});
 	}
 
+	@Override
+	public void setModel(Object model) {
+		super.setModel(model);
+		typeModelPage.setModel(getCastedModel().getType());
+	}
+	
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+		super.setCommandStack(commandStack);
+		typeModelPage.setCommandStack(commandStack);
+	}
+	
 	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.REMOVING_ADAPTER) {
