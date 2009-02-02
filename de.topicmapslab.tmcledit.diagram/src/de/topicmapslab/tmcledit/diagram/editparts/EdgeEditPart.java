@@ -151,11 +151,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				getTarget().refresh();
 			if (getSource()!=null)
 				getSource().refresh();			
-		} else
-			refreshVisuals();
-		
-		
-		if (notification.getNotifier().equals(getCastedModel().getRoleConstraint())) {
+		} else if (notification.getNotifier().equals(getCastedModel().getRoleConstraint())) {
 			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE) {
 				TopicType tmp = (TopicType) notification.getOldValue();
 				if (tmp!=null)
@@ -164,8 +160,8 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				if (tmp!=null)
 					tmp.eAdapters().add(adapter);
 			}
-			refreshVisuals();
 		}
+		refreshVisuals();
 	}
 	
 	@Override
