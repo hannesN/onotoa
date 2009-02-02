@@ -60,6 +60,7 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 	
 	@Override
 	public void notifyChanged(Notification notification) {
+		super.notifyChanged(notification);
 		if (notification.getEventType()==Notification.SET) {
 			if (notification.getNewValue() instanceof TopicType) {
 				TopicType old = (TopicType) notification.getOldValue();

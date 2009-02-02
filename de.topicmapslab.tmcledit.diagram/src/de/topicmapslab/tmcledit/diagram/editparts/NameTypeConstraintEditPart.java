@@ -1,7 +1,5 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
-import java.util.List;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 
@@ -57,6 +55,8 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 	
 	@Override
 	public void notifyChanged(Notification notification) {
+		super.notifyChanged(notification);
+		
 		if (notification.getNotifier()==getModel()) { 
 			if (notification.getFeatureID(TopicType.class)==ModelPackage.NAME_TYPE_CONSTRAINT__TYPE) {
 				TopicType tmp = (TopicType) notification.getOldValue();
@@ -68,9 +68,7 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 			}
 		}
 		
-		if ( (notification.getFeatureID(List.class)==ModelPackage.SCOPED_TOPIC_TYPE__SCOPE) ||
-		 (notification.getEventType()==Notification.SET) )
-			refreshVisuals();
+		refreshVisuals();
 		
 	}
 

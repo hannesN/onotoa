@@ -82,6 +82,7 @@ public class TopicIndexer implements Adapter{
 			break;
 		default:
 			tt = ModelFactory.eINSTANCE.createTopicType();
+			tt.setKind(kind);
 			break;
 		}
 		

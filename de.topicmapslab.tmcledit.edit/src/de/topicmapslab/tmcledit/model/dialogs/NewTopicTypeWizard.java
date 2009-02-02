@@ -153,13 +153,32 @@ public class NewTopicTypeWizard extends Wizard {
 		}
 		
 		private TopicType createNewType() {
-			TopicType type = ModelFactory.eINSTANCE.createTopicType();
-			
+			ModelFactory factory = ModelFactory.eINSTANCE;
+			TopicType type = factory.createTopicType();
+			int selection = -1;
 			for (int i=0; i<buttons.length; i++) {
 				if (buttons[i].getSelection())
-					type.setKind(KindOfTopicType.get(i));
+					selection = i;
 			}
-						
+			
+			switch(selection) {
+			case KindOfTopicType.ASSOCIATION_TYPE_VALUE:
+				type = factory.createAssociationType();
+				break;
+			case KindOfTopicType.ROLE_TYPE_VALUE:
+				type = factory.createRoleType();
+				break;
+			case KindOfTopicType.NAME_TYPE_VALUE:
+				type = factory.createNameType();
+				break;
+			case KindOfTopicType.OCCURENCE_TYPE_VALUE:
+				type = factory.createOccurenceType();
+				break;
+			default:
+				type = factory.createTopicType();
+				type.setKind(KindOfTopicType.get(selection));
+				break;
+			}
 			type.setName(nameText.getText());
 			
 			if (identifierText.getText().length()>0)

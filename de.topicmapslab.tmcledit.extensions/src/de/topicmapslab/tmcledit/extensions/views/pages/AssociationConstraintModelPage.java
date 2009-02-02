@@ -1,6 +1,7 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
@@ -25,6 +26,8 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.commands.SetAssociationTypeCommand;
 import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -102,8 +105,12 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 				
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = wizard.getNewTopicType();
-					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
-					getCastedModel().setType(tt);
+					CompoundCommand cmd = new CompoundCommand();
+					CreateTopicTypeCommand c1 = new CreateTopicTypeCommand(ModelIndexer.getInstance().getTopicMapSchema(), tt);
+					cmd.append(c1);
+					SetAssociationTypeCommand c2 = new SetAssociationTypeCommand(getCastedModel(), tt);
+					cmd.append(c2);
+					getCommandStack().execute(cmd);
 				}
 				
 			}
@@ -130,7 +137,9 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeText.getShell(), type);
 				
 				if (dlg.open()==Dialog.OK) {
-					getCastedModel().setType((TopicType) dlg.getFirstResult());
+					TopicType tt = ((TopicType) dlg.getFirstResult());
+					SetAssociationTypeCommand cmd = new SetAssociationTypeCommand(getCastedModel(), tt);
+					getCommandStack().execute(cmd);
 				}
 				
 			}
@@ -162,6 +171,8 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 				
 				if (notification.getNewValue()!=null)
 					((EObject)notification.getNewValue()).eAdapters().add(this);
+				
+				typeModelPage.setModel(getCastedModel().getType());
 			}
 				
 			

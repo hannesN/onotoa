@@ -6,6 +6,7 @@ package de.topicmapslab.tmcledit.extensions;
 import java.util.List;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
@@ -39,7 +40,7 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
  * @author Hannes Niederhausen
  *
  */
-public class TypedCardinalityConstraintWidget {
+public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	protected final static String[] TABLE_PROPS = {"Type", "cardMin", "cardMax"};
 	
 	protected TableViewer tableViewer;
@@ -88,12 +89,12 @@ public class TypedCardinalityConstraintWidget {
 		layout.marginHeight = 0;
 		comp.setLayout(layout);
 
-		createScopeTable(comp, toolkit);
+		createTable(comp, toolkit);
 		
-		createScopeButtons(comp, toolkit);
+		createButtons(comp, toolkit);
 	}
 	
-	private void createScopeButtons(Composite parent, FormToolkit toolkit) {
+	private void createButtons(Composite parent, FormToolkit toolkit) {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout());
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
@@ -114,7 +115,7 @@ public class TypedCardinalityConstraintWidget {
 		
 	}
 
-	private Composite createScopeTable(Composite parent, FormToolkit toolkit) {
+	private Composite createTable(Composite parent, FormToolkit toolkit) {
 		Composite comp = toolkit.createComposite(parent);
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.heightHint=100;
