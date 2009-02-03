@@ -30,7 +30,7 @@ import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.addRoleConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -104,7 +104,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 						rc.setCardMax("1");
 						rcl.add(rc);
 					}
-					addRoleConstraintCommand cmd = new addRoleConstraintCommand(getCastedModel(), rcl);
+					AddRoleConstraintCommand cmd = new AddRoleConstraintCommand(getCastedModel(), rcl);
 					getCommandStack().execute(cmd);
 				}
 			}
@@ -124,7 +124,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 					rc.setType(tt);
 					rc.setCardMin("1");
 					rc.setCardMax("1");
-					addRoleConstraintCommand cmd = new addRoleConstraintCommand(getCastedModel(), rc);
+					AddRoleConstraintCommand cmd = new AddRoleConstraintCommand(getCastedModel(), rc);
 					getCommandStack().execute(cmd);	
 				}
 			}

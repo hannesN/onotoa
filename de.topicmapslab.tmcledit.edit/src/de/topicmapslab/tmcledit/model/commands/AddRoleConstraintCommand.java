@@ -15,18 +15,18 @@ import de.topicmapslab.tmcledit.model.RoleConstraint;
  * @author Hannes Niederhausen
  *
  */
-public class addRoleConstraintCommand extends AbstractCommand {
+public class AddRoleConstraintCommand extends AbstractCommand {
 
 	private final AssociationType associationType;
 	private final List<RoleConstraint> roles;
 	
-	public addRoleConstraintCommand(AssociationType associationType,
+	public AddRoleConstraintCommand(AssociationType associationType,
 			RoleConstraint role) {
 		this(associationType, new ArrayList<RoleConstraint>());
 		this.roles.add(role);
 	}
 	
-	public addRoleConstraintCommand(AssociationType associationType,
+	public AddRoleConstraintCommand(AssociationType associationType,
 			List<RoleConstraint> roles) {
 		super("Add Scope Constraints");
 		this.associationType = associationType;
