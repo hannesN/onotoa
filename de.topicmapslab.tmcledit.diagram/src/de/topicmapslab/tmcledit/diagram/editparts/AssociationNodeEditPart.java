@@ -73,10 +73,12 @@ public class AssociationNodeEditPart extends NodeEditPart {
 
 		TopicType associationType = node.getAssociationConstraint().getType();
 		StringBuffer buffer = new StringBuffer();
-		if (associationType != null)
+		if (associationType != null) {
 			buffer.append(associationType.getName());
-
-		addScope(buffer);
+			addScope(buffer);
+		} else {
+			buffer.append("No type set");
+		}
 
 		((CircleFigure) getFigure()).setText(buffer.toString());
 
@@ -128,6 +130,8 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		if (getCastedModel() != null) {
 			TopicType tt = getCastedModel().getAssociationConstraint()
 					.getType();
+			if (tt==null)
+				return;
 			tt.eAdapters().add(this);
 			if ((tt instanceof AssociationType)) {
 				for (ScopeConstraint sc : ((AssociationType) tt).getScope()) {

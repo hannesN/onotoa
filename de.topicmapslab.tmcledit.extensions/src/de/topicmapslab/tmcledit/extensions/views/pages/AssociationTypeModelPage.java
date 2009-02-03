@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.extensions.TypedCardinalityConstraintWidget;
+import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -28,7 +30,7 @@ import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.addRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -102,7 +104,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 						rc.setCardMax("1");
 						rcl.add(rc);
 					}
-					AddRoleConstraintCommand cmd = new AddRoleConstraintCommand(getCastedModel(), rcl);
+					addRoleConstraintCommand cmd = new addRoleConstraintCommand(getCastedModel(), rcl);
 					getCommandStack().execute(cmd);
 				}
 			}
@@ -122,7 +124,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 					rc.setType(tt);
 					rc.setCardMin("1");
 					rc.setCardMax("1");
-					AddRoleConstraintCommand cmd = new AddRoleConstraintCommand(getCastedModel(), rc);
+					addRoleConstraintCommand cmd = new addRoleConstraintCommand(getCastedModel(), rc);
 					getCommandStack().execute(cmd);	
 				}
 			}
@@ -181,6 +183,9 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		}
 		
 		super.setModel(model);
+		if (model==null)
+			return;
+		
 		for (RoleConstraint rc : getCastedModel().getRoles()) {
 			if (rc.getType()!=null)
 				rc.getType().eAdapters().add(this);
@@ -188,9 +193,13 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updateUI() {
-		control.setInput(getCastedModel().getRoles());
+		if (getCastedModel()==null)
+			control.setInput((List<? extends AbstractTypedCardinalityConstraint>) Collections.emptyList());
+		else
+			control.setInput(getCastedModel().getRoles());
 		super.updateUI();
 	}
 }

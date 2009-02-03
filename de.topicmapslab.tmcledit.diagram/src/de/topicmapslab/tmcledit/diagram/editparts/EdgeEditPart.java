@@ -27,6 +27,7 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -153,10 +154,10 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				getSource().refresh();			
 		} else if (notification.getNotifier().equals(getCastedModel().getRoleConstraint())) {
 			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE) {
-				TopicType tmp = (TopicType) notification.getOldValue();
+				RoleConstraint tmp = (RoleConstraint) notification.getOldValue();
 				if (tmp!=null)
 					tmp.eAdapters().remove(adapter);
-				tmp = (TopicType) notification.getNewValue();
+				tmp = (RoleConstraint) notification.getNewValue();
 				if (tmp!=null)
 					tmp.eAdapters().add(adapter);
 			}

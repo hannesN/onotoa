@@ -14,16 +14,19 @@ import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.DeleteAssociationConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.DeleteRolePlayerConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
 
@@ -72,12 +75,11 @@ public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 					.eContainer(), ac, type);
 		} else if (model instanceof Edge) {
 			Edge edge = (Edge) model;
-//			RolePlayerConstraints roleConstraint = edge.getRoleConstraint();
-//			if (roleConstraint != null)
-//				cmd = new DeleteRoleConstraintCommand(
-//						(AssociationTypeConstraint) roleConstraint.eContainer(),
-//						roleConstraint);
-				// TODO CREATE NEW COMMAND
+			RolePlayerConstraint roleConstraint = edge.getRoleConstraint();
+			if (roleConstraint != null)
+				cmd = new DeleteRolePlayerConstraintCommand(
+						(AssociationTypeConstraint) roleConstraint.eContainer(),
+						roleConstraint);
 		} else if (model instanceof AssociationNode) {
 			cmd = new DeleteAssociationConstraintCommand(
 					((AssociationNode) model).getAssociationConstraint());

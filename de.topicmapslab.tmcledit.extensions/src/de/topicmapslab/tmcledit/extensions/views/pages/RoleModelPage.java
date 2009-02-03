@@ -20,6 +20,7 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 
 public class RoleModelPage extends AbstractModelPage{
 
@@ -99,8 +100,8 @@ public class RoleModelPage extends AbstractModelPage{
 				int index = roleCombo.getSelectionIndex();
 				if (index>-1) {
 					RoleConstraint rc = getAssociationType().getRoles().get(index);
-					
-					getCastedModel().setRole(rc);
+					SetRoleConstraintCommand cmd = new SetRoleConstraintCommand(getCastedModel(), rc);
+					getCommandStack().execute(cmd);
 				}
 			}
 		});

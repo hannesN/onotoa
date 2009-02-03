@@ -9,12 +9,15 @@ import java.util.Map;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -41,7 +44,11 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 	private List<RemoveScopeConstraintsCommand> scopeCommands = Collections
 			.emptyList();
+	
+	private List<RemoveRoleConstraintCommand> roleCommands = Collections.emptyList();
 
+	private List<SetRoleConstraintCommand> roleconstCommands = Collections.emptyList();
+	
 	public DeleteTopicTypeCommand(TopicType topicType) {
 		this.topicType = topicType;
 	}
@@ -71,6 +78,14 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		}
 		
 		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
+			cmd.execute();
+		}
+		
+		for (RemoveRoleConstraintCommand cmd : roleCommands) {
+			cmd.execute();
+		}
+		
+		for (SetRoleConstraintCommand cmd : roleconstCommands) {
 			cmd.execute();
 		}
 
@@ -108,7 +123,12 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
 			cmd.undo();
 		}
-
+		for (RemoveRoleConstraintCommand cmd : roleCommands) {
+			cmd.undo();
+		}
+		for (SetRoleConstraintCommand cmd : roleconstCommands) {
+			cmd.undo();
+		}
 	}
 
 	@Override
@@ -141,11 +161,32 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 				.getTopicMapSchema();
 		for (AssociationTypeConstraint asc : topicMapSchema
 				.getAssociationTypeConstraints()) {
-			if (asc.getType().equals(topicType)) {
+			if (topicType.equals(asc.getType())) {
 				DeleteAssociationConstraintCommand cmd = new DeleteAssociationConstraintCommand(
 						asc);
 				if (cmd.canExecute()) {
 					addAssociationConstraintCommand(cmd);
+				}
+			} else {
+				if ( (asc.getType()!=null) && (asc.getType() instanceof AssociationType) ) {
+					AssociationType at = (AssociationType) asc.getType();
+				
+					for (RoleConstraint rc : at.getRoles()) {
+						if (topicType.equals(rc.getType())) {
+							RemoveRoleConstraintCommand cmd = new RemoveRoleConstraintCommand
+							(at, rc);
+							if (cmd.canExecute())
+								addRoleConstraintCommand(cmd);
+							// check if theres a roleplayconstraint using this role
+							for (RolePlayerConstraint rpc : asc.getPlayerConstraints()) {
+								if ( rc.equals(rpc.getRole()) ) {
+									SetRoleConstraintCommand cmd2 = new SetRoleConstraintCommand(rpc, null);
+									if (cmd2.canExecute())
+										addRoleConstraintCommand(cmd2);
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -185,7 +226,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			
 			for (ScopeConstraint sc : stt.getScope()) {
 				if (topicType.equals(sc.getType()))
-					addScopeContraintCommand(new RemoveScopeConstraintsCommand(stt, sc));
+					addScopeConstraintCommand(new RemoveScopeConstraintsCommand(stt, sc));
 			}
 		}
 	}
@@ -211,11 +252,25 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		associationCommands.add(cmd);
 	}
 
-	private void addScopeContraintCommand(RemoveScopeConstraintsCommand cmd) {
+	private void addScopeConstraintCommand(RemoveScopeConstraintsCommand cmd) {
 		if (scopeCommands == Collections.EMPTY_LIST) {
 			scopeCommands = new ArrayList<RemoveScopeConstraintsCommand>();
 		}
 		scopeCommands.add(cmd);
+	}
+	
+	private void addRoleConstraintCommand(RemoveRoleConstraintCommand cmd) {
+		if (roleCommands == Collections.EMPTY_LIST) {
+			roleCommands = new ArrayList<RemoveRoleConstraintCommand>();
+		}
+		roleCommands.add(cmd);
+	}
+	
+	private void addRoleConstraintCommand(SetRoleConstraintCommand cmd) {
+		if (roleconstCommands== Collections.EMPTY_LIST) {
+			roleconstCommands = new ArrayList<SetRoleConstraintCommand>();
+		}
+		roleconstCommands.add(cmd);
 	}
 
 	private void addToEdgeList(Diagram d, Edge e) {
