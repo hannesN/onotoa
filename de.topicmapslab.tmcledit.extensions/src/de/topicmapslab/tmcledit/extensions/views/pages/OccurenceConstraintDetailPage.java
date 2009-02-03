@@ -1,8 +1,12 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
+import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -32,6 +36,8 @@ public class OccurenceConstraintDetailPage extends AbstractConstraintModelPage {
 	private Button uniqueButton;
 	private Section section;
 	
+	private OccurenceTypeModelPage typeModelPage;
+	
 	public OccurenceConstraintDetailPage() {
 		super("occurence constraint");
 	}
@@ -39,7 +45,28 @@ public class OccurenceConstraintDetailPage extends AbstractConstraintModelPage {
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+		typeModelPage = new OccurenceTypeModelPage();
 		
+		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+		typeModelPage.createControl(folder);
+		
+		CTabItem item1 = new CTabItem(folder, SWT.NONE);
+		item1.setText("Occurence Constraint Properties");
+		item1.setControl(createConstraintComposite(folder, toolkit));
+		
+		
+		CTabItem item2 = new CTabItem(folder, SWT.NONE);
+		item2.setText("Occurence Type Properties");
+		item2.setControl(typeModelPage.getControl());
+		
+		
+		folder.setSelection(item1);
+		setControl(folder);
+		
+		hookButtonListener();
+	}
+
+	private Composite createConstraintComposite(Composite parent, FormToolkit toolkit) {
 		section = toolkit.createSection(parent, Section.EXPANDED
 				| Section.TITLE_BAR);
 		section.setText("Occurence Constraint");
@@ -70,9 +97,8 @@ public class OccurenceConstraintDetailPage extends AbstractConstraintModelPage {
 		toolkit.createLabel(comp, "Unique:");
 		uniqueButton = toolkit.createButton(comp, "", SWT.CHECK);
 		section.setClient(comp);
-		setControl(section);
 		
-		hookButtonListener();
+		return section;
 	}
 
 	private void createTypeComposite(FormToolkit toolkit, Composite parent) {
@@ -131,7 +157,29 @@ public class OccurenceConstraintDetailPage extends AbstractConstraintModelPage {
 		super.updateUI();
 	}
 	
+	@Override
+	public void setModel(Object model) {
+		super.setModel(model);
+		if (typeModelPage!=null)
+			typeModelPage.setModel(getCastedModel().getType());
+	}
+	
 	protected OccurenceTypeConstraint getCastedModel() {
 		return (OccurenceTypeConstraint) getModel();
+	}
+	
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+		super.setCommandStack(commandStack);
+		if (typeModelPage!=null)
+			typeModelPage.setCommandStack(commandStack);
+	}
+	
+	@Override
+	public void notifyChanged(Notification notification) {
+		if (notification.getFeatureID(TopicType.class)==ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE)
+			typeModelPage.setModel(notification.getNewValue());
+		super.notifyChanged(notification);
+		
 	}
 }

@@ -221,6 +221,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	public void updateUI() {
 		if (nameText != null) {
 			TopicType t = (TopicType) getModel();
+			if (t!=null) {
 			if (getTopicType(t) == null)
 				section.setText("<...>");
 			else
@@ -279,9 +280,19 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				exclusiveText.setText(b.substring(0, b.length() - 2));
 			else
 				exclusiveText.setText("");
-
 			
 			abstractButton.setSelection(t.isAbstract());
+			} else {
+				nameText.setText("");
+				identifierText.setText("");
+				locatorText.setText("");
+				isAText.setText("");
+				akoText.setText("");
+				abstractButton.setSelection(false);
+				exclusiveText.setText("");
+			}
+			
+			
 		}
 	}
 
@@ -289,6 +300,8 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	}
 	
 	private String getTopicType(TopicType t) {
+		if (t==null)
+			return "Topic Type";
 		switch (t.getKind()) {
 		case ROLE_TYPE:
 			return "Role Type";

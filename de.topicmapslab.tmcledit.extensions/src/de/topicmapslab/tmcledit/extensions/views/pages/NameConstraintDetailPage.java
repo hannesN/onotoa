@@ -1,8 +1,11 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -31,6 +34,8 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 	private Button typeButton;
 	private Section section;
 	
+	private NameTypeModelPage typeModelPage;
+	
 	public NameConstraintDetailPage() {
 		super("name constraint");
 	}
@@ -38,7 +43,33 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+		typeModelPage = new NameTypeModelPage();
+		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+		typeModelPage.createControl(folder);
 		
+		CTabItem item1 = new CTabItem(folder, SWT.NONE);
+		item1.setText("Name Constraint Properties");
+		item1.setControl(createConstraintComposite(folder, toolkit));
+		
+		
+		CTabItem item2 = new CTabItem(folder, SWT.NONE);
+		item2.setText("Name Type Properties");
+		item2.setControl(typeModelPage.getControl());
+		
+		
+		folder.setSelection(item1);
+		setControl(folder);
+		
+	}
+
+	@Override
+	public void setModel(Object model) {
+		super.setModel(model);
+		if (typeModelPage!=null)
+			typeModelPage.setModel(getCastedModel().getType());
+	}
+	
+	private Composite createConstraintComposite(Composite parent, FormToolkit toolkit) {
 		section = toolkit.createSection(parent, Section.EXPANDED
 				| Section.TITLE_BAR);
 		section.setText("Name Constraint");
@@ -68,7 +99,7 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 		createCommonConstraintControls(comp, toolkit);
 		
 		section.setClient(comp);
-		setControl(section);
+		return section;
 	}
 
 	private void createTypeComposite(FormToolkit toolkit, Composite parent) {
@@ -117,5 +148,12 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 	
 	protected NameTypeConstraint getCastedModel() {
 		return (NameTypeConstraint) getModel();
+	}
+	
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+		super.setCommandStack(commandStack);
+		if (typeModelPage!=null)
+			typeModelPage.setCommandStack(commandStack);
 	}
 }

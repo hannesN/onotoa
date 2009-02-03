@@ -33,12 +33,15 @@ public abstract class AbstractModelPage extends Page implements Adapter, IModelP
 		if (this.model != null)
 			this.model.eAdapters().remove(this);
 		
-		// TODO Remove me when sure all works fine
-		if (model==null)
-			System.out.println("model null");
-		
+		if (model==null) {
+			getControl().setEnabled(false);
+		} else {
+			getControl().setEnabled(true);
+		}
+			
 		this.model = (EObject) model;
-		this.model.eAdapters().add(this);
+		if (model!=null)
+			this.model.eAdapters().add(this);
 		updateUI();
 	}
 

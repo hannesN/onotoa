@@ -70,8 +70,8 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 					((TopicType) notification.getNewValue()).eAdapters().add(this);
 			
 			}
-			refreshVisuals();
 		}
+		refreshVisuals();
 		
 	}
 

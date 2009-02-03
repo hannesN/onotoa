@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.extensions.TypedCardinalityConstraintWidget;
+import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -180,6 +182,8 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		}
 		
 		super.setModel(model);
+		if (model==null)
+			return;
 		for (ScopeConstraint sc : getCastedModel().getScope()) {
 			if (sc.getType()!=null)
 				sc.getType().eAdapters().add(this);
@@ -191,10 +195,15 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		return (ScopedTopicType) getModel();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updateUI() {
 		super.updateUI();
-		control.setInput(getCastedModel().getScope());
+		if (getCastedModel()!=null)
+			control.setInput(getCastedModel().getScope());
+		else
+			control.setInput((List<? extends AbstractTypedCardinalityConstraint>) Collections.emptyList());
+		
 		control.getTableViewer().refresh();
 	}
 

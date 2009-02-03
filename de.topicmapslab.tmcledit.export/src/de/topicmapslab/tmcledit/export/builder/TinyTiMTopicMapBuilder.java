@@ -9,14 +9,12 @@ import org.tmapi.core.TopicMapSystem;
 import org.tmapi.core.TopicMapSystemFactory;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
-import de.topicmapslab.tmcledit.model.AbstractTypeConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.RoleConstraints;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
@@ -126,7 +124,7 @@ public class TinyTiMTopicMapBuilder {
 			StringBuffer buffer = new StringBuffer();
 			
 			buffer.append("Associations of this type should have the following role types: ");
-			for (RoleConstraints rc : ((AssociationType)type).getRoles()) {
+			for (RoleConstraint rc : ((AssociationType)type).getRoles()) {
 				buffer.append(rc.getType().getName());
 				buffer.append("[");
 				buffer.append(rc.getCardMin());
@@ -162,7 +160,7 @@ public class TinyTiMTopicMapBuilder {
 			l = tm.createLocator("#subject_identifier_constraint_info");
 		} else if (constraint instanceof SubjectLocatorConstraint) {
 			l = tm.createLocator("#subject_identifier_constraint_info");
-		} else if (constraint instanceof RoleConstraints) {
+		} else if (constraint instanceof RoleConstraint) {
 			l = tm.createLocator("#role_constraint_info");
 		}
 		
@@ -218,7 +216,7 @@ public class TinyTiMTopicMapBuilder {
 			t.addType(this.topicType);
 			break;
 		}
-		
+		/*
 		if (createConstraintInfos) {
 			for (NameTypeConstraint ntc : topicType.getNameContraints()) {
 				createConstraints(ntc, t);
@@ -228,11 +226,12 @@ public class TinyTiMTopicMapBuilder {
 				createConstraints(otc, t);
 			}
 		}
-
+*/
 		return t;
 	}
 
-	private void createConstraints(AbstractTypeConstraint tc, Topic t) {
+	private void createConstraints(AbstractConstraint tc, Topic t) {
+		/*
 		Topic cit = getConstraintInfoTopic(tc, t.getTopicMap());
 		
 		StringBuffer buffer = new StringBuffer();
@@ -265,6 +264,7 @@ public class TinyTiMTopicMapBuilder {
 		}
 		
 		t.createOccurrence(cit, buffer.toString(), infoScope);
+		*/
 	}
 
 

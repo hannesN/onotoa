@@ -11,7 +11,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.RoleTypeConstraints;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -129,7 +129,7 @@ public class CTMBuilder {
 		
 		addLine("- "+topicType.getName());
 		
-		if (topicType.isIsAbstract()) {
+		if (topicType.isAbstract()) {
 			addLine("isAbstract();");
 		}
 		
@@ -201,7 +201,7 @@ public class CTMBuilder {
 		
 	}
 	
-	private void processRoleContraint(RoleTypeConstraints rtc) {
+	private void processRoleContraint(RoleConstraint rtc) {
 		
 	}
 	
