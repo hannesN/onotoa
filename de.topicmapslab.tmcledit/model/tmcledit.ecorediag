@@ -856,7 +856,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_9CjEUY_DEd2b8YHEZQS5cA" routing="Rectilinear" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_9CjEUo_DEd2b8YHEZQS5cA" fontName="Sans Serif" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="tmcledit.ecore#//AssociationType/roles"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9CjEU4_DEd2b8YHEZQS5cA" points="[-1, 0, 132, 169]$[-1, -184, 132, -15]$[-126, -184, 7, -15]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9CjEU4_DEd2b8YHEZQS5cA" points="[5, 0, 153, 322]$[5, -263, 153, 59]$[-141, -263, 7, 59]$[-141, -319, 7, 3]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9Coj4I_DEd2b8YHEZQS5cA" id="(0.72727275,0.024390243)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9Coj4Y_DEd2b8YHEZQS5cA" id="(0.9411765,0.9512195)"/>
   </edges>

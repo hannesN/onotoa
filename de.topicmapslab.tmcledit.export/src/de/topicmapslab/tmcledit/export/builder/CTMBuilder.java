@@ -3,15 +3,23 @@
  */
 package de.topicmapslab.tmcledit.export.builder;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -27,6 +35,7 @@ public class CTMBuilder {
 	String LINE_SEP = System.getProperty("line.separator");
 	
 	private Map<TopicType, String> typeIdMap = Collections.emptyMap();
+	private Map<TopicType, List<PlayerConstraintInfo>> playerInfoMap = Collections.emptyMap();
 	
 	private String indentString;
 	private int indention = 0;
@@ -50,6 +59,9 @@ public class CTMBuilder {
 		indention = 0;
 		buffer = new StringBuffer();
 		typeIdMap = new HashMap<TopicType, String>();
+		playerInfoMap = new HashMap<TopicType, List<PlayerConstraintInfo>>();
+		
+		indexRolePlayerConstraints();
 		
 		addLine("%prefix tmcl http://psi.topicmaps.org/tmcl");
 		addLineSeparator();
@@ -59,6 +71,22 @@ public class CTMBuilder {
 		
 	}
 	
+	private void indexRolePlayerConstraints() {
+		for (AssociationTypeConstraint atc : schema.getAssociationTypeConstraints()) {
+			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+				TopicType player = rpc.getPlayer();
+				List<PlayerConstraintInfo> infoList = playerInfoMap.get(player);
+				if (infoList==null) {
+					infoList = new ArrayList<PlayerConstraintInfo>();
+					playerInfoMap.put(player, infoList);
+				}
+				PlayerConstraintInfo info = new PlayerConstraintInfo(
+						(AssociationType) atc.getType(), rpc);
+				infoList.add(info);
+			}
+		}
+	}
+
 	private void addLineSeparator() {
 		buffer.append(LINE_SEP);
 	}
@@ -151,13 +179,87 @@ public class CTMBuilder {
 			processNameTypeConstraint(ntc);
 		}
 		
+		for (OccurenceTypeConstraint otc : topicType.getOccurenceConstraints()) {
+			processOccurenceTypeConstraint(otc);
+		}
 		
+		if (topicType instanceof ScopedTopicType) {
+			ScopedTopicType stt = (ScopedTopicType) topicType;
+			
+			for (ScopeConstraint sc : stt.getScope()) {
+				processScopedTopicTypes(stt, sc);
+			}
+		}
+		
+		if (topicType instanceof AssociationType) {
+			AssociationType at = (AssociationType) topicType;
+			
+			for (RoleConstraint rc : at.getRoles())
+				processRoleContraint(rc);
+		}
+		
+		if (topicType instanceof OccurenceType) {
+			processOccurenceDatatype(topicType);
+		}
+		
+		List<PlayerConstraintInfo> infos = playerInfoMap.get(topicType);
+		if (infos!=null)
+			for(PlayerConstraintInfo info : infos) {
+				processPlayerConstraintInfo(info);
+			}
 		
 		
 		indention = 0;
 		buffer.append(" .");
 		addLineSeparator();
 		
+	}
+
+	private void processPlayerConstraintInfo(PlayerConstraintInfo info) {
+		RolePlayerConstraint rolePlayerConstraint = info.rolePlayerConstraint;
+		
+		addIndention();
+		buffer.append("plays-role(");
+		buffer.append(getIdString(rolePlayerConstraint.getRole().getType()));
+		buffer.append(", ");
+		buffer.append(getIdString(info.associationType));
+		buffer.append(", ");
+		buffer.append(rolePlayerConstraint.getCardMin());
+		buffer.append(", ");
+		buffer.append(rolePlayerConstraint.getCardMax());
+		buffer.append(");");
+		addLineSeparator();
+	}
+
+	private void processOccurenceDatatype(TopicType topicType) {
+		OccurenceType ot = (OccurenceType) topicType;
+		addIndention();
+		buffer.append("has-datatype(");
+		buffer.append(ot.getDataType());
+		buffer.append(");");
+		addLineSeparator();
+	}
+
+	private void processScopedTopicTypes(ScopedTopicType stt, ScopeConstraint sc) {
+		addIndention();
+		switch(stt.getKind()) {
+		case NAME_TYPE:
+				buffer.append("has-scope(");
+				break;
+			case OCCURENCE_TYPE:
+				buffer.append("has-occurence-scope(");
+				break;
+			case ASSOCIATION_TYPE:
+				buffer.append("has-association-scope(");
+				break;
+		}
+
+		buffer.append(getIdString(sc.getType()));
+		buffer.append(", ");
+		buffer.append(sc.getCardMin());
+		buffer.append(", ");
+		buffer.append(sc.getCardMax());
+		buffer.append(");");
 	}
 
 	private String getIdString(TopicType topicType) {
@@ -194,7 +296,24 @@ public class CTMBuilder {
 	}
 	
 	private void processOccurenceTypeConstraint(OccurenceTypeConstraint otc) {
-		
+		String idString = getIdString(otc.getType());
+		addIndention();
+		buffer.append("has-occurence(");
+		buffer.append(idString);
+		buffer.append(otc.getCardMin());
+		buffer.append(",");
+		buffer.append(otc.getCardMax());
+		buffer.append(",\"");
+		buffer.append(otc.getRegexp());
+		buffer.append("\");");
+		addLineSeparator();
+
+		if (otc.isUnique()) {
+			addIndention();
+			buffer.append("unqie-occurence(");
+			buffer.append(idString);
+			buffer.append(");");
+		}
 	}
 	
 	private void processAssociationConstraint(AssociationTypeConstraint atc) {
@@ -202,7 +321,14 @@ public class CTMBuilder {
 	}
 	
 	private void processRoleContraint(RoleConstraint rtc) {
-		
+		addIndention();
+		buffer.append("has-role(");
+		buffer.append(getIdString(rtc.getType()));
+		buffer.append(rtc.getCardMin());
+		buffer.append(",");
+		buffer.append(rtc.getCardMax());
+		buffer.append(");");
+		addLineSeparator();
 	}
 	
 	private void processSubjectIdentifierConstraint(SubjectIdentifierConstraint sic) {
@@ -229,5 +355,18 @@ public class CTMBuilder {
 		addLineSeparator();
 	}
 	
+	private class PlayerConstraintInfo {
+		final AssociationType associationType;
+		final RolePlayerConstraint rolePlayerConstraint;
+		
+		public PlayerConstraintInfo(AssociationType associationType,
+				RolePlayerConstraint rolePlayerConstraint) {
+			super();
+			this.associationType = associationType;
+			this.rolePlayerConstraint = rolePlayerConstraint;
+		}
+		
+		
+	}
 	
 }
