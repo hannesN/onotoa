@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -76,7 +77,9 @@ public class ModelValidator {
 				vr.addValidationAction(new AssociationCreateTypeAction());
 				vr.addValidationAction(new AssociationSelectTypeAction());
 				addValidationResult(vr);
-			} else if ((schema.isActiveAssociationTypeConstraint())
+				return;
+			} 
+			if ((schema.isActiveAssociationTypeConstraint())
 					&& (atc.getType().getKind() != KindOfTopicType.ASSOCIATION_TYPE)) {
 				ValidationResult vr = new ValidationResult("The topic "
 						+ atc.getType().getName() + " may not be type for an association constraint", atc.getType());
@@ -85,6 +88,12 @@ public class ModelValidator {
 				vr.addValidationAction(new AssociationSelectTypeAction());
 				addValidationResult(vr);
 			} 
+			
+			if ( ((AssociationType)atc.getType()).getRoles().size()==0) {
+				ValidationResult vr = new ValidationResult("The topic "
+						+ atc.getType().getName() + " has no roles set", atc.getType());
+				addValidationResult(vr);
+			}
 		}
 	}
 	

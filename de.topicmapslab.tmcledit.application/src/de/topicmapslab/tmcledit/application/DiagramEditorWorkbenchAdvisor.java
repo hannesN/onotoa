@@ -22,7 +22,7 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public void initialize(IWorkbenchConfigurer configurer) {
 		super.initialize(configurer);

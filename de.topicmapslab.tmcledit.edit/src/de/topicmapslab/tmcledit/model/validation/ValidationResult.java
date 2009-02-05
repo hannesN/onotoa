@@ -34,6 +34,10 @@ public class ValidationResult {
 		return message;
 	}
 	
+	public EObject getObject() {
+		return object;
+	}
+	
 	public List<IValidationAction> getActions() {
 		return actions;
 	}

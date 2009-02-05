@@ -67,6 +67,8 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@Override
 	protected void refreshVisuals() {
 		AssociationNode node = getCastedModel();
+		if (getParent()==null)
+			return;
 		Rectangle r = new Rectangle(node.getPosX(), node.getPosY(), -1, -1);
 		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
 				getFigure(), r);

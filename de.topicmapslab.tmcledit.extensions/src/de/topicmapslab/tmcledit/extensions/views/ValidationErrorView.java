@@ -3,6 +3,8 @@
  */
 package de.topicmapslab.tmcledit.extensions.views;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.action.IAction;
@@ -12,9 +14,16 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -31,11 +40,14 @@ import de.topicmapslab.tmcledit.model.validation.ValidationResult;
  * @author Hannes Niederhausen
  *
  */
-public class ValidationErrorView extends ViewPart {
+public class ValidationErrorView extends ViewPart implements ISelectionProvider {
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ValidationErrorView";
 	
 	private TableViewer viewer;
+	
+	private List<ISelectionChangedListener> listeners = Collections.emptyList();
+	private ISelection currentSelection;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -55,9 +67,24 @@ public class ValidationErrorView extends ViewPart {
 		viewer = new TableViewer(table);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setLabelProvider(new ValidationLabelProvider());
-		
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
+				if (sel.isEmpty())
+					setSelection(sel);
+				else {
+					ValidationResult r = (ValidationResult) sel.getFirstElement();
+					setSelection(new StructuredSelection(r.getObject()));
+				}				
+			}
+			
+		});
+				
 		hookContextMenu();
-		
+		setSelection(new StructuredSelection());
+		getSite().setSelectionProvider(this);
 	}
 	private void hookContextMenu() {
 		MenuManager menuMgr = new MenuManager("#PopupMenu");
@@ -93,31 +120,57 @@ public class ValidationErrorView extends ViewPart {
 		viewer.setInput(results);
 	}
 	
-	private class ValidationLabelProvider implements ITableLabelProvider {
+	@Override
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		if (listeners==Collections.EMPTY_LIST)
+			listeners = new ArrayList<ISelectionChangedListener>();
+		listeners.add(listener);
+	}
+	@Override
+	public ISelection getSelection() {
+		return currentSelection;
+	}
+	@Override
+	public void removeSelectionChangedListener(
+			ISelectionChangedListener listener) {
+		if (listeners==Collections.EMPTY_LIST)
+			return;
+		listeners.remove(listener);
+	}
+	@Override
+	public void setSelection(ISelection selection) {
+		currentSelection = selection;
+		SelectionChangedEvent e = new SelectionChangedEvent(this, selection);
+		for (ISelectionChangedListener l : listeners) {
+			l.selectionChanged(e);
+		}
+	}
 
+	private class ValidationLabelProvider implements ITableLabelProvider {
+	
 		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
-
+	
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			return ((ValidationResult)element).getMessage();
 		}
-
+	
 		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
-
+	
 		@Override
 		public void dispose() {
 		}
-
+	
 		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
-
+	
 		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}

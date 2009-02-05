@@ -70,7 +70,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		
-		if ( ( (part instanceof ModelView) || (part instanceof TMCLDiagramEditor) ) 
+		if ( ( (part instanceof ModelView) || (part instanceof TMCLDiagramEditor) || (part instanceof ValidationErrorView)) 
 				&& (selection instanceof IStructuredSelection) ){
 			// register actions
 			if (part instanceof ModelView) {
@@ -97,10 +97,13 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				setCurrentPage(page);
 				page.setModel(obj);
 				
+				if (part instanceof ValidationErrorView)
+					part = part.getSite().getWorkbenchWindow().getActivePage().findView(ModelView.ID);
+				
 				if (part instanceof ModelView) {
 					ModelView modelView = (ModelView) part;
 					page.setCommandStack(modelView.getEditingDomain().getCommandStack());
-				} else {
+				} else if (part instanceof TMCLDiagramEditor) {
 					TMCLDiagramEditor currentEditor = (TMCLDiagramEditor) part;
 					page.setCommandStack(currentEditor.getEditingDomain().getCommandStack());
 				}

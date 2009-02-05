@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -69,6 +72,7 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
@@ -101,6 +105,8 @@ import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
+import de.topicmapslab.tmcledit.model.validation.ModelValidator;
+import de.topicmapslab.tmcledit.model.validation.ValidationResult;
 
 /**
  * @author Hannes Niederhausen
@@ -120,7 +126,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private ComposedAdapterFactory adapterFactory;
 
 	private EditingDomain editingDomain;
-
+	private ValidateJob validateJob = new ValidateJob();
 	private File currFile;
 	
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
@@ -137,231 +143,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		}
 	};
-
-	class ViewContentProvider implements IStructuredContentProvider,
-			ITreeContentProvider {
-		private TreeParent invisibleRoot;
-		private TreeParent diagramNode;
-		private TreeParent schemaNode;
-
-		private AdapterImpl tmsListener = new AdapterImpl() {
-			@Override
-			public void notifyChanged(Notification msg) {
-				if ((msg.getNotifier() instanceof TopicMapSchema)
-					&& (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES)) {
-					switch (msg.getEventType()) {
-					case Notification.ADD:
-						addType((TopicType) msg.getNewValue(), true);
-						break;
-					case Notification.REMOVE:
-						removeType((TopicType) msg.getOldValue(), true);
-						break;
-					}
-				} else if ((msg.getNotifier() instanceof File) 
-					&& (msg.getFeatureID(EList.class) == ModelPackage.FILE__DIAGRAMS)) {
-					switch (msg.getEventType()) {
-					case Notification.ADD:
-						addDiagram((Diagram) msg.getNewValue());
-						break;
-					case Notification.REMOVE:
-						removeDiagram((Diagram) msg.getOldValue());
-						break;
-					}
-				}
-			}
-		};
-
-		private TreeParent ttNode;
-		private TreeParent rtNode;
-		private TreeParent ntNode;
-		private TreeParent otNode;
-		private TreeParent atNode;
-		private TreeParent stNode;
-
-		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-		}
-
-		public void dispose() {
-		}
-
-		public Object[] getElements(Object parent) {
-			if (parent.equals(getViewSite())) {
-				if (invisibleRoot == null)
-					initialize();
-				return getChildren(invisibleRoot);
-			}
-			return getChildren(parent);
-		}
-
-		public Object getParent(Object child) {
-			if (child instanceof TreeObject) {
-				return ((TreeObject) child).getParent();
-			}
-			return null;
-		}
-
-		public Object[] getChildren(Object parent) {
-			if (parent instanceof TreeParent) {
-				return ((TreeParent) parent).getChildren();
-			}
-			return new Object[0];
-		}
-
-		public boolean hasChildren(Object parent) {
-			if (parent instanceof TreeParent)
-				return ((TreeParent) parent).hasChildren();
-			return false;
-		}
-
-		public void uninitialize() {
-			if (currFile != null) {
-				getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
-				currFile.eAdapters().remove(tmsListener);
-			}
-			invisibleRoot.dispose();
-		}
-
-		public void initialize() {
-			if (currFile!=null) {
-				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
-				currFile.eAdapters().add(tmsListener);
-			}
-			update();
-		}
-		
-		public void update() {
-			
-			invisibleRoot = new TreeParent(ModelView.this, "");
-			if (currFile != null) {
-				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
-				schemaNode.setModel(getCurrentTopicMapSchema());
-				diagramNode = new TreeParent(ModelView.this, "Diagrams");
-
-				invisibleRoot.addChild(diagramNode);
-				invisibleRoot.addChild(schemaNode);
-
-				ttNode = new TreeParent(ModelView.this, "TopicTypes");
-				rtNode = new TreeParent(ModelView.this, "RoleTypes");
-				ntNode = new TreeParent(ModelView.this, "NameTypes");
-				otNode = new TreeParent(ModelView.this, "OccurenceTypes");
-				atNode = new TreeParent(ModelView.this, "AssociationTypes");
-				stNode = new TreeParent(ModelView.this, "ScopeTypes");
-
-				schemaNode.addChild(ttNode);
-				schemaNode.addChild(rtNode);
-				schemaNode.addChild(ntNode);
-				schemaNode.addChild(otNode);
-				schemaNode.addChild(atNode);
-				schemaNode.addChild(stNode);
-
-				for (TopicType tt : getCurrentTopicMapSchema().getTopicTypes()) {
-					addType(tt, false);
-				}
-
-				for (Diagram d : currFile.getDiagrams()) {
-					diagramNode.addChild(new TreeDiagram(ModelView.this, d));
-				}
-				if (!viewer.isBusy())
-					viewer.refresh();
-			} else {
-				TreeParent root = new TreeParent(ModelView.this,
-						"No Diagramm Editor Open");
-				invisibleRoot.addChild(root);
-			}			
-		}
-
-		private void addDiagram(Diagram diagram) {
-			diagramNode.addChild(new TreeDiagram(ModelView.this, diagram));
-			getViewer().refresh(diagramNode);
-		}
-		
-		private void removeDiagram(Diagram diagram) {
-			TreeObject removableNode = null;
-			for (TreeObject to : diagramNode.getChildren()) {
-				if (diagram.equals(to.getModel())) {
-					removableNode = to;
-				}
-			}
-			if (removableNode !=null) {
-				diagramNode.removeChild(removableNode);
-				getViewer().refresh(diagramNode);
-			}
-		}
-		
-		private void addType(TopicType tt, boolean refresh) {
-			TreeTopic to = new TreeTopic(ModelView.this, tt);
-			TreeParent parent = null;
-
-			parent = getParentNode(tt);
-
-			if (parent != null) {
-				parent.addChild(to);
-				for (NameTypeConstraint ntc : tt.getNameContraints()) {
-					to.addChild(new TreeName(ModelView.this, ntc));
-				}
-				for (OccurenceTypeConstraint otc : tt.getOccurenceConstraints()) {
-					to.addChild(new TreeOccurence(ModelView.this, otc));
-				}
-				if (refresh)
-					viewer.refresh(parent);
-			}
-		}
-
-		private void removeType(TopicType tt, boolean refresh) {
-			TreeParent parent = ttNode;
-
-			parent = getParentNode(tt);
-
-			for (TreeObject to : parent.getChildren()) {
-				if (((TreeTopic) to).getModel().equals(tt)) {
-					parent.removeChild(to);
-					to.dispose();
-				}
-			}
-			if (refresh)
-				viewer.refresh(parent);
-		}
-
-		private TreeParent getParentNode(TopicType topicType) {
-			TreeParent parent;
-			switch (topicType.getKind()) {
-			case ROLE_TYPE:
-				parent = rtNode;
-				break;
-			case NAME_TYPE:
-				parent = ntNode;
-				break;
-			case OCCURENCE_TYPE:
-				parent = otNode;
-				break;
-			case ASSOCIATION_TYPE:
-				parent = atNode;
-				break;
-			case SCOPE_TYPE:
-				parent = stNode;
-				break;
-			default:
-				parent = ttNode;
-				break;
-			}
-			return parent;
-		}
-	}
-
-	class ViewLabelProvider extends LabelProvider {
-
-		public String getText(Object obj) {
-			return obj.toString();
-		}
-
-		public Image getImage(Object obj) {
-			return ((TreeObject) obj).getImage();
-		}
-	}
-
-	class NameSorter extends ViewerSorter {
-
-	}
 
 	/**
 	 * The constructor.
@@ -852,6 +633,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		updateActions();
 		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
 		currFile.setDirty(cmdStack.isSaveNeeded());
+		
+		if (!validateJob.isRunning())
+			validateJob.schedule();
 	}
 
 	public void close() {
@@ -922,6 +706,306 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	@Override
 	public boolean isSaveOnCloseNeeded() {
 		return isDirty();
+	}
+
+	class ViewContentProvider implements IStructuredContentProvider,
+			ITreeContentProvider {
+		private TreeParent invisibleRoot;
+		private TreeParent diagramNode;
+		private TreeParent schemaNode;
+	
+		private AdapterImpl tmsListener = new AdapterImpl() {
+			@Override
+			public void notifyChanged(Notification msg) {
+				if ((msg.getNotifier() instanceof TopicMapSchema)
+					&& (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES)) {
+					switch (msg.getEventType()) {
+					case Notification.ADD:
+						addType((TopicType) msg.getNewValue(), true);
+						break;
+					case Notification.REMOVE:
+						removeType((TopicType) msg.getOldValue(), true);
+						break;
+					}
+				} else if ((msg.getNotifier() instanceof File) 
+					&& (msg.getFeatureID(EList.class) == ModelPackage.FILE__DIAGRAMS)) {
+					switch (msg.getEventType()) {
+					case Notification.ADD:
+						addDiagram((Diagram) msg.getNewValue());
+						break;
+					case Notification.REMOVE:
+						removeDiagram((Diagram) msg.getOldValue());
+						break;
+					}
+				}
+			}
+		};
+	
+		private TreeParent ttNode;
+		private TreeParent rtNode;
+		private TreeParent ntNode;
+		private TreeParent otNode;
+		private TreeParent atNode;
+		private TreeParent stNode;
+	
+		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
+		}
+	
+		public void dispose() {
+		}
+	
+		public Object[] getElements(Object parent) {
+			if (parent.equals(getViewSite())) {
+				if (invisibleRoot == null)
+					initialize();
+				return getChildren(invisibleRoot);
+			}
+			return getChildren(parent);
+		}
+	
+		public Object getParent(Object child) {
+			if (child instanceof TreeObject) {
+				return ((TreeObject) child).getParent();
+			}
+			return null;
+		}
+	
+		public Object[] getChildren(Object parent) {
+			if (parent instanceof TreeParent) {
+				return ((TreeParent) parent).getChildren();
+			}
+			return new Object[0];
+		}
+	
+		public boolean hasChildren(Object parent) {
+			if (parent instanceof TreeParent)
+				return ((TreeParent) parent).hasChildren();
+			return false;
+		}
+	
+		public void uninitialize() {
+			if (currFile != null) {
+				getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
+				currFile.eAdapters().remove(tmsListener);
+			}
+			invisibleRoot.dispose();
+		}
+	
+		public void initialize() {
+			if (currFile!=null) {
+				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
+				currFile.eAdapters().add(tmsListener);
+			}
+			update();
+		}
+		
+		public void update() {
+			
+			invisibleRoot = new TreeParent(ModelView.this, "");
+			if (currFile != null) {
+				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
+				schemaNode.setModel(getCurrentTopicMapSchema());
+				diagramNode = new TreeParent(ModelView.this, "Diagrams");
+	
+				invisibleRoot.addChild(diagramNode);
+				invisibleRoot.addChild(schemaNode);
+	
+				ttNode = new TreeParent(ModelView.this, "TopicTypes");
+				rtNode = new TreeParent(ModelView.this, "RoleTypes");
+				ntNode = new TreeParent(ModelView.this, "NameTypes");
+				otNode = new TreeParent(ModelView.this, "OccurenceTypes");
+				atNode = new TreeParent(ModelView.this, "AssociationTypes");
+				stNode = new TreeParent(ModelView.this, "ScopeTypes");
+	
+				schemaNode.addChild(ttNode);
+				schemaNode.addChild(rtNode);
+				schemaNode.addChild(ntNode);
+				schemaNode.addChild(otNode);
+				schemaNode.addChild(atNode);
+				schemaNode.addChild(stNode);
+	
+				for (TopicType tt : getCurrentTopicMapSchema().getTopicTypes()) {
+					addType(tt, false);
+				}
+	
+				for (Diagram d : currFile.getDiagrams()) {
+					diagramNode.addChild(new TreeDiagram(ModelView.this, d));
+				}
+				if (!viewer.isBusy())
+					viewer.refresh();
+			} else {
+				TreeParent root = new TreeParent(ModelView.this,
+						"No Diagramm Editor Open");
+				invisibleRoot.addChild(root);
+			}			
+		}
+	
+		private void addDiagram(Diagram diagram) {
+			diagramNode.addChild(new TreeDiagram(ModelView.this, diagram));
+			getViewer().refresh(diagramNode);
+		}
+		
+		private void removeDiagram(Diagram diagram) {
+			TreeObject removableNode = null;
+			for (TreeObject to : diagramNode.getChildren()) {
+				if (diagram.equals(to.getModel())) {
+					removableNode = to;
+				}
+			}
+			if (removableNode !=null) {
+				diagramNode.removeChild(removableNode);
+				getViewer().refresh(diagramNode);
+			}
+		}
+		
+		private void addType(TopicType tt, boolean refresh) {
+			TreeTopic to = new TreeTopic(ModelView.this, tt);
+			TreeParent parent = null;
+	
+			parent = getParentNode(tt);
+	
+			if (parent != null) {
+				parent.addChild(to);
+				for (NameTypeConstraint ntc : tt.getNameContraints()) {
+					to.addChild(new TreeName(ModelView.this, ntc));
+				}
+				for (OccurenceTypeConstraint otc : tt.getOccurenceConstraints()) {
+					to.addChild(new TreeOccurence(ModelView.this, otc));
+				}
+				if (refresh)
+					viewer.refresh(parent);
+			}
+		}
+	
+		private void removeType(TopicType tt, boolean refresh) {
+			TreeParent parent = ttNode;
+	
+			parent = getParentNode(tt);
+	
+			for (TreeObject to : parent.getChildren()) {
+				if (((TreeTopic) to).getModel().equals(tt)) {
+					parent.removeChild(to);
+					to.dispose();
+				}
+			}
+			if (refresh)
+				viewer.refresh(parent);
+		}
+	
+		private TreeParent getParentNode(TopicType topicType) {
+			TreeParent parent;
+			switch (topicType.getKind()) {
+			case ROLE_TYPE:
+				parent = rtNode;
+				break;
+			case NAME_TYPE:
+				parent = ntNode;
+				break;
+			case OCCURENCE_TYPE:
+				parent = otNode;
+				break;
+			case ASSOCIATION_TYPE:
+				parent = atNode;
+				break;
+			case SCOPE_TYPE:
+				parent = stNode;
+				break;
+			default:
+				parent = ttNode;
+				break;
+			}
+			return parent;
+		}
+	}
+
+	class ViewLabelProvider extends LabelProvider {
+	
+		public String getText(Object obj) {
+			return obj.toString();
+		}
+	
+		public Image getImage(Object obj) {
+			return ((TreeObject) obj).getImage();
+		}
+	}
+
+	class NameSorter extends ViewerSorter {
+	
+	}
+	
+	class ValidateJob extends Job {
+		private boolean running = false;
+		
+		private FeedbackRunnable feedBackRunnable = new FeedbackRunnable(); 
+		
+		public ValidateJob() {
+			super("Validate...");
+		}
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			if (currFile == null)
+				return Status.OK_STATUS;
+			
+			running = true;
+
+			IWorkbenchWindow activeWorkbenchWindow = getViewSite().getWorkbenchWindow(); 
+			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+			
+			File file = currFile;
+
+			ModelValidator validator = new ModelValidator(file);
+
+			List<ValidationResult> list = validator.validate();
+			
+			try {
+				ValidationErrorView vew = (ValidationErrorView) activePage
+						.findView(ValidationErrorView.ID);
+
+				if (list.size() > 0) {
+					if (vew == null)
+						vew = (ValidationErrorView) activePage
+								.showView(ValidationErrorView.ID);
+				}
+				if (vew != null) {
+					feedBackRunnable.setList(list);
+					feedBackRunnable.setView(vew);
+					getViewSite().getWorkbenchWindow().getShell().getDisplay()
+							.syncExec(feedBackRunnable);
+				}
+
+			} catch (PartInitException e) {
+				running = false;
+				throw new RuntimeException(e);
+			} finally {
+				running = false;
+			}
+
+			return Status.OK_STATUS;
+		}
+		
+		public boolean isRunning() {
+			return running;
+		}
+
+		private class FeedbackRunnable implements Runnable {
+			private List<ValidationResult> list;
+			private ValidationErrorView vew;
+			
+			@Override
+			public void run() {
+				vew.setValidationResults(list);
+			}
+			
+			public void setList(List<ValidationResult> list) {
+				this.list = list;
+			}
+			
+			public void setView(ValidationErrorView vew) {
+				this.vew = vew;
+			}
+			
+		};
 	}
 
 }

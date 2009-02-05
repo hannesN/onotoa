@@ -35,6 +35,8 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
 		configurer.setInitialSize(new Point(1000, 700));
 		configurer.setTitle(Messages.DiagramEditorWorkbenchWindowAdvisor_Title);
+		configurer.setShowCoolBar(true);
+		configurer.setShowStatusLine(true);
 	}
 
 }
