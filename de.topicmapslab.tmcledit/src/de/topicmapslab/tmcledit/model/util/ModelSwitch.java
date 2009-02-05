@@ -270,8 +270,6 @@ public class ModelSwitch<T> {
 				RoleType roleType = (RoleType)theEObject;
 				T result = caseRoleType(roleType);
 				if (result == null) result = caseTopicType(roleType);
-				if (result == null) result = caseOtherRolePlayerConstraint(roleType);
-				if (result == null) result = caseAbstractCardinalityContraint(roleType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

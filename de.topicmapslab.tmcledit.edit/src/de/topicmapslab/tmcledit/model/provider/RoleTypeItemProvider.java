@@ -6,27 +6,23 @@
 package de.topicmapslab.tmcledit.model.provider;
 
 
-import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleType;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.RoleType;
 
 /**
  * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.RoleType} object.
@@ -63,123 +59,8 @@ public class RoleTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addCardMinPropertyDescriptor(object);
-			addCardMaxPropertyDescriptor(object);
-			addPlayerPropertyDescriptor(object);
-			addOtherPlayerPropertyDescriptor(object);
-			addOtherRolePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Card Min feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCardMinPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AbstractCardinalityContraint_cardMin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractCardinalityContraint_cardMin_feature", "_UI_AbstractCardinalityContraint_type"),
-				 ModelPackage.Literals.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Card Max feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCardMaxPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AbstractCardinalityContraint_cardMax_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractCardinalityContraint_cardMax_feature", "_UI_AbstractCardinalityContraint_type"),
-				 ModelPackage.Literals.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Player feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addPlayerPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OtherRolePlayerConstraint_player_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OtherRolePlayerConstraint_player_feature", "_UI_OtherRolePlayerConstraint_type"),
-				 ModelPackage.Literals.OTHER_ROLE_PLAYER_CONSTRAINT__PLAYER,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Other Player feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOtherPlayerPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OtherRolePlayerConstraint_otherPlayer_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OtherRolePlayerConstraint_otherPlayer_feature", "_UI_OtherRolePlayerConstraint_type"),
-				 ModelPackage.Literals.OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_PLAYER,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Other Role feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOtherRolePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OtherRolePlayerConstraint_otherRole_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OtherRolePlayerConstraint_otherRole_feature", "_UI_OtherRolePlayerConstraint_type"),
-				 ModelPackage.Literals.OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -249,10 +130,6 @@ public class RoleTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RoleType.class)) {
-			case ModelPackage.ROLE_TYPE__CARD_MIN:
-			case ModelPackage.ROLE_TYPE__CARD_MAX:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case ModelPackage.ROLE_TYPE__OTHER_ROLES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -270,11 +147,6 @@ public class RoleTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ModelPackage.Literals.ROLE_TYPE__OTHER_ROLES,
-				 ModelFactory.eINSTANCE.createRoleType()));
 
 		newChildDescriptors.add
 			(createChildParameter

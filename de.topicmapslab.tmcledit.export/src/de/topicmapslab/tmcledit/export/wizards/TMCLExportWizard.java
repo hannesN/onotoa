@@ -1,8 +1,5 @@
 package de.topicmapslab.tmcledit.export.wizards;
 
-import java.net.URI;
-import java.net.URL;
-
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.jet.JETEmitter;
@@ -21,7 +18,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
-import org.osgi.framework.Bundle;
 
 import de.topicmapslab.tmcledit.export.Activator;
 import de.topicmapslab.tmcledit.model.Diagram;

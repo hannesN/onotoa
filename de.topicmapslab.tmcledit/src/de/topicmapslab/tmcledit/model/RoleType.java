@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface RoleType extends TopicType, OtherRolePlayerConstraint {
+public interface RoleType extends TopicType {
 	/**
 	 * Returns the value of the '<em><b>Other Roles</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint}.

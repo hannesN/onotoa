@@ -174,7 +174,7 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="xsd:anyType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleType" eSuperTypes="#//TopicType #//OtherRolePlayerConstraint">
+  <eClassifiers xsi:type="ecore:EClass" name="RoleType" eSuperTypes="#//TopicType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherRoles" upperBound="-1"
         eType="#//OtherRolePlayerConstraint" containment="true"/>
   </eClassifiers>
@@ -185,6 +185,8 @@
         eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherRole" lowerBound="1"
         eType="#//RoleType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associationType" lowerBound="1"
+        eType="#//AssociationType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NameType" eSuperTypes="#//ScopedTopicType"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractTypedCardinalityConstraint"

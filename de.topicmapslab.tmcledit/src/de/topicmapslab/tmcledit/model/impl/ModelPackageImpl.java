@@ -1143,6 +1143,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getOtherRolePlayerConstraint_AssociationType() {
+		return (EReference)otherRolePlayerConstraintEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getNameType() {
 		return nameTypeEClass;
 	}
@@ -1325,6 +1334,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(otherRolePlayerConstraintEClass, OTHER_ROLE_PLAYER_CONSTRAINT__PLAYER);
 		createEReference(otherRolePlayerConstraintEClass, OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_PLAYER);
 		createEReference(otherRolePlayerConstraintEClass, OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE);
+		createEReference(otherRolePlayerConstraintEClass, OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE);
 
 		nameTypeEClass = createEClass(NAME_TYPE);
 
@@ -1382,7 +1392,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		occurenceTypeEClass.getESuperTypes().add(this.getScopedTopicType());
 		roleConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		roleTypeEClass.getESuperTypes().add(this.getTopicType());
-		roleTypeEClass.getESuperTypes().add(this.getOtherRolePlayerConstraint());
 		otherRolePlayerConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		nameTypeEClass.getESuperTypes().add(this.getScopedTopicType());
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
@@ -1503,6 +1512,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getOtherRolePlayerConstraint_Player(), this.getTopicType(), null, "player", null, 1, 1, OtherRolePlayerConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOtherRolePlayerConstraint_OtherPlayer(), this.getTopicType(), null, "otherPlayer", null, 1, 1, OtherRolePlayerConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOtherRolePlayerConstraint_OtherRole(), this.getRoleType(), null, "otherRole", null, 1, 1, OtherRolePlayerConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOtherRolePlayerConstraint_AssociationType(), this.getAssociationType(), null, "associationType", null, 1, 1, OtherRolePlayerConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nameTypeEClass, NameType.class, "NameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

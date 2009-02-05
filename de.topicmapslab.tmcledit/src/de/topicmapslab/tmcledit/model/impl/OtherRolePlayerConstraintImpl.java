@@ -5,6 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.AssociationType;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -25,6 +26,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl#getPlayer <em>Player</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl#getOtherPlayer <em>Other Player</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl#getOtherRole <em>Other Role</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl#getAssociationType <em>Association Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,6 +62,16 @@ public class OtherRolePlayerConstraintImpl extends AbstractCardinalityContraintI
 	 * @ordered
 	 */
 	protected RoleType otherRole;
+
+	/**
+	 * The cached value of the '{@link #getAssociationType() <em>Association Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAssociationType()
+	 * @generated
+	 * @ordered
+	 */
+	protected AssociationType associationType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -199,6 +211,44 @@ public class OtherRolePlayerConstraintImpl extends AbstractCardinalityContraintI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public AssociationType getAssociationType() {
+		if (associationType != null && associationType.eIsProxy()) {
+			InternalEObject oldAssociationType = (InternalEObject)associationType;
+			associationType = (AssociationType)eResolveProxy(oldAssociationType);
+			if (associationType != oldAssociationType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
+			}
+		}
+		return associationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssociationType basicGetAssociationType() {
+		return associationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAssociationType(AssociationType newAssociationType) {
+		AssociationType oldAssociationType = associationType;
+		associationType = newAssociationType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE, oldAssociationType, associationType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -211,6 +261,9 @@ public class OtherRolePlayerConstraintImpl extends AbstractCardinalityContraintI
 			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE:
 				if (resolve) return getOtherRole();
 				return basicGetOtherRole();
+			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE:
+				if (resolve) return getAssociationType();
+				return basicGetAssociationType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -231,6 +284,9 @@ public class OtherRolePlayerConstraintImpl extends AbstractCardinalityContraintI
 				return;
 			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE:
 				setOtherRole((RoleType)newValue);
+				return;
+			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE:
+				setAssociationType((AssociationType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -253,6 +309,9 @@ public class OtherRolePlayerConstraintImpl extends AbstractCardinalityContraintI
 			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE:
 				setOtherRole((RoleType)null);
 				return;
+			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE:
+				setAssociationType((AssociationType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -271,6 +330,8 @@ public class OtherRolePlayerConstraintImpl extends AbstractCardinalityContraintI
 				return otherPlayer != null;
 			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE:
 				return otherRole != null;
+			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE:
+				return associationType != null;
 		}
 		return super.eIsSet(featureID);
 	}

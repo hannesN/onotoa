@@ -137,6 +137,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/player"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/otherPlayer"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/otherRole"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/associationType"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//NameType"/>
     <genClasses ecoreClass="tmcledit.ecore#//AbstractTypedCardinalityConstraint"/>

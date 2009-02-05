@@ -67,7 +67,7 @@ public class FileUtil {
 		
 	}
 	
-	private static final void createTestData(File file) {
+	protected static final void createTestData(File file) {
 		ModelFactory modelInstance = ModelFactory.eINSTANCE;
 		
 		TopicMapSchema schema = file.getTopicMapSchema(); 

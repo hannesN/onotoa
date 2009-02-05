@@ -15,6 +15,7 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
@@ -202,6 +203,11 @@ public class CTMBuilder {
 			processOccurenceDatatype(topicType);
 		}
 		
+		if (topicType instanceof RoleType) {
+			for (OtherRolePlayerConstraint orpc : ((RoleType)topicType).getOtherRoles())
+				processOtherRolePlayerConstraint(orpc);
+		}
+		
 		List<PlayerConstraintInfo> infos = playerInfoMap.get(topicType);
 		if (infos!=null)
 			for(PlayerConstraintInfo info : infos) {
@@ -260,28 +266,9 @@ public class CTMBuilder {
 		buffer.append(", ");
 		buffer.append(sc.getCardMax());
 		buffer.append(");");
+		addLineSeparator();
 	}
 
-	private String getIdString(TopicType topicType) {
-		String id = typeIdMap.get(topicType);
-		if (id == null) {
-
-			if (topicType.getIdentifiers().size() > 0) {
-				id = topicType.getIdentifiers().get(0);
-			}
-
-			if (topicType.getLocators().size() > 0) {
-				id = "= " + topicType.getLocators().get(0);
-			}
-
-			if (id == null)
-				id = topicType.getName().toLowerCase();
-
-			typeIdMap.put(topicType, id);
-		}
-		return id;
-	}
-	
 	private void processNameTypeConstraint(NameTypeConstraint ntc) {
 		buffer.append("has-name(");
 		buffer.append(ntc.getType().getName());
@@ -313,11 +300,26 @@ public class CTMBuilder {
 			buffer.append("unqie-occurence(");
 			buffer.append(idString);
 			buffer.append(");");
+			addLineSeparator();
 		}
 	}
-	
-	private void processAssociationConstraint(AssociationTypeConstraint atc) {
-		
+
+	private void processOtherRolePlayerConstraint(OtherRolePlayerConstraint orpc) {
+		addIndention();
+		buffer.append("other-role(");
+		buffer.append(getIdString(orpc.getAssociationType()));
+		buffer.append(", ");
+		buffer.append(getIdString(orpc.getPlayer()));
+		buffer.append(", ");
+		buffer.append(getIdString(orpc.getOtherRole()));
+		buffer.append(", ");
+		buffer.append(getIdString(orpc.getOtherPlayer()));
+		buffer.append(", ");
+		buffer.append(orpc.getCardMin());
+		buffer.append(", ");
+		buffer.append(orpc.getCardMax());
+		buffer.append(");");
+		addLineSeparator();
 	}
 	
 	private void processRoleContraint(RoleConstraint rtc) {
@@ -355,6 +357,26 @@ public class CTMBuilder {
 		addLineSeparator();
 	}
 	
+	private String getIdString(TopicType topicType) {
+		String id = typeIdMap.get(topicType);
+		if (id == null) {
+	
+			if (topicType.getIdentifiers().size() > 0) {
+				id = topicType.getIdentifiers().get(0);
+			}
+	
+			if (topicType.getLocators().size() > 0) {
+				id = "= " + topicType.getLocators().get(0);
+			}
+	
+			if (id == null)
+				id = topicType.getName().toLowerCase();
+	
+			typeIdMap.put(topicType, id);
+		}
+		return id;
+	}
+
 	private class PlayerConstraintInfo {
 		final AssociationType associationType;
 		final RolePlayerConstraint rolePlayerConstraint;

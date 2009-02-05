@@ -22,6 +22,9 @@ public class ImageProvider {
 	}
 	
 	public static Image getTopicTypeImage(TopicType topicType) {
+		if (topicType==null)
+			return null;
+		
 		switch(topicType.getKind())
 		{
 			case NO_TYPE:

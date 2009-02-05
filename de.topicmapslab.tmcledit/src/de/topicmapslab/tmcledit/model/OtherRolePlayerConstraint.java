@@ -17,6 +17,7 @@ package de.topicmapslab.tmcledit.model;
  *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getPlayer <em>Player</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherPlayer <em>Other Player</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherRole <em>Other Role</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getAssociationType <em>Association Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,5 +103,31 @@ public interface OtherRolePlayerConstraint extends AbstractCardinalityContraint 
 	 * @generated
 	 */
 	void setOtherRole(RoleType value);
+
+	/**
+	 * Returns the value of the '<em><b>Association Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Association Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Association Type</em>' reference.
+	 * @see #setAssociationType(AssociationType)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOtherRolePlayerConstraint_AssociationType()
+	 * @model required="true"
+	 * @generated
+	 */
+	AssociationType getAssociationType();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getAssociationType <em>Association Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Association Type</em>' reference.
+	 * @see #getAssociationType()
+	 * @generated
+	 */
+	void setAssociationType(AssociationType value);
 
 } // OtherRolePlayerConstraint

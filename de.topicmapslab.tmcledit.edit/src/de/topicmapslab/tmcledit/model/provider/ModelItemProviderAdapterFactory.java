@@ -144,26 +144,26 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RolePlayerConstraints} instances.
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.RolePlayerConstraint} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RolePlayerConstraintsItemProvider rolePlayerConstraintsItemProvider;
+	protected RolePlayerConstraintItemProvider rolePlayerConstraintItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RolePlayerConstraints}.
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.RolePlayerConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Adapter createRolePlayerConstraintAdapter() {
-		if (rolePlayerConstraintsItemProvider == null) {
-			rolePlayerConstraintsItemProvider = new RolePlayerConstraintsItemProvider(this);
+		if (rolePlayerConstraintItemProvider == null) {
+			rolePlayerConstraintItemProvider = new RolePlayerConstraintItemProvider(this);
 		}
 
-		return rolePlayerConstraintsItemProvider;
+		return rolePlayerConstraintItemProvider;
 	}
 
 	/**
@@ -751,7 +751,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (topicTypeItemProvider != null) topicTypeItemProvider.dispose();
 		if (occurenceTypeConstraintItemProvider != null) occurenceTypeConstraintItemProvider.dispose();
 		if (nameTypeConstraintItemProvider != null) nameTypeConstraintItemProvider.dispose();
-		if (rolePlayerConstraintsItemProvider != null) rolePlayerConstraintsItemProvider.dispose();
+		if (rolePlayerConstraintItemProvider != null) rolePlayerConstraintItemProvider.dispose();
 		if (topicMapSchemaItemProvider != null) topicMapSchemaItemProvider.dispose();
 		if (subjectLocatorConstraintItemProvider != null) subjectLocatorConstraintItemProvider.dispose();
 		if (subjectIdentifierConstraintItemProvider != null) subjectIdentifierConstraintItemProvider.dispose();

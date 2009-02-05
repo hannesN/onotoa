@@ -61,6 +61,7 @@ public class OtherRolePlayerConstraintItemProvider
 			addPlayerPropertyDescriptor(object);
 			addOtherPlayerPropertyDescriptor(object);
 			addOtherRolePropertyDescriptor(object);
+			addAssociationTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -123,6 +124,28 @@ public class OtherRolePlayerConstraintItemProvider
 				 getString("_UI_OtherRolePlayerConstraint_otherRole_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_OtherRolePlayerConstraint_otherRole_feature", "_UI_OtherRolePlayerConstraint_type"),
 				 ModelPackage.Literals.OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Association Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAssociationTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_OtherRolePlayerConstraint_associationType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_OtherRolePlayerConstraint_associationType_feature", "_UI_OtherRolePlayerConstraint_type"),
+				 ModelPackage.Literals.OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE,
 				 true,
 				 false,
 				 true,
