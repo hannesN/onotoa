@@ -1,6 +1,7 @@
 package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.EObject;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -10,8 +11,8 @@ public abstract class TopicTypeAction extends ValidationAction {
 
 	protected KindOfTopicType kindOfType;
 
-	public TopicTypeAction(KindOfTopicType type) {
-		super();
+	public TopicTypeAction(CommandStack cmdStack, KindOfTopicType type) {
+		super(cmdStack);
 		this.kindOfType = type;
 	}
 

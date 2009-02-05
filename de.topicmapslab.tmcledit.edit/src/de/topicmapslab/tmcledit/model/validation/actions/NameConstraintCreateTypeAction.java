@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -19,8 +20,8 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
  */
 public class NameConstraintCreateTypeAction extends CreateTypeAction {
 
-	public NameConstraintCreateTypeAction() {
-		super(KindOfTopicType.NAME_TYPE);
+	public NameConstraintCreateTypeAction(CommandStack cmdStack) {
+		super(cmdStack, KindOfTopicType.NAME_TYPE);
 	}
 	
 	@Override

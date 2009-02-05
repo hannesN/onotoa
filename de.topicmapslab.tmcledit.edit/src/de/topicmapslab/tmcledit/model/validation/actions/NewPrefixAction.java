@@ -3,6 +3,7 @@
  */
 package de.topicmapslab.tmcledit.model.validation.actions;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.ui.PlatformUI;
 
@@ -19,7 +20,8 @@ public class NewPrefixAction extends ValidationAction {
 	private TopicMapSchema schema;
 	private String key;
 	
-	public NewPrefixAction(TopicMapSchema schema, String prefix) {
+	public NewPrefixAction(CommandStack cmdStack, TopicMapSchema schema, String prefix) {
+		super(cmdStack);
 		this.schema = schema;
 		this.key = prefix;
 		setText("Create new prefix entry");
@@ -33,8 +35,7 @@ public class NewPrefixAction extends ValidationAction {
 		if (Dialog.OK==dlg.open()) {
 			CreatePrefixMappingCommand cmd = new CreatePrefixMappingCommand(schema, 
 					dlg.getKey(), dlg.getUri());
-			if (cmd.canExecute())
-				cmd.execute();
+			getCommandStack().execute(cmd);
 		}	
 
 	}

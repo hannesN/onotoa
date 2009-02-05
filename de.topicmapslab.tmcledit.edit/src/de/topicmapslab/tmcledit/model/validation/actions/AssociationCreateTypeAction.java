@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -19,8 +20,8 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
  */
 public class AssociationCreateTypeAction extends CreateTypeAction {
 
-	public AssociationCreateTypeAction() {
-		super(KindOfTopicType.ASSOCIATION_TYPE);
+	public AssociationCreateTypeAction(CommandStack cmdStack) {
+		super(cmdStack, KindOfTopicType.ASSOCIATION_TYPE);
 	}
 	
 	@Override

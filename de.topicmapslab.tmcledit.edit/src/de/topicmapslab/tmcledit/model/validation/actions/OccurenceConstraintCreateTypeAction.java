@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -19,8 +20,8 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
  */
 public class OccurenceConstraintCreateTypeAction extends CreateTypeAction {
 
-	public OccurenceConstraintCreateTypeAction() {
-		super(KindOfTopicType.OCCURENCE_TYPE);
+	public OccurenceConstraintCreateTypeAction(CommandStack cmdStack) {
+		super(cmdStack, KindOfTopicType.OCCURENCE_TYPE);
 	}
 	
 	@Override
@@ -32,6 +33,5 @@ public class OccurenceConstraintCreateTypeAction extends CreateTypeAction {
 				ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE,
 				topicType));
 		return cmd;
-			
 	}
 }

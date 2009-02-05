@@ -41,8 +41,8 @@ public class ValidateHandler extends AbstractHandler {
 			File file = (File) view.getCurrentTopicMapSchema().eContainer();
 
 			ModelValidator validator = new ModelValidator(file);
-
-			List<ValidationResult> list = validator.validate();
+			
+			List<ValidationResult> list = validator.validate(view.getEditingDomain().getCommandStack());
 			
 			try {
 				ValidationErrorView vew = (ValidationErrorView) activePage.findView(ValidationErrorView.ID);

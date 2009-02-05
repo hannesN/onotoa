@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -20,8 +21,8 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
  */
 public abstract class SelectTypeAction extends TopicTypeAction {
 	
-	public SelectTypeAction(KindOfTopicType type) {
-		super(type);
+	public SelectTypeAction(CommandStack cmdStack, KindOfTopicType type) {
+		super(cmdStack, type);
 		
 	}
 	
@@ -42,8 +43,7 @@ public abstract class SelectTypeAction extends TopicTypeAction {
 				TopicType type = (TopicType) dialog.getFirstResult();
 		
 				AbstractCommand cmd = getCommand(type);
-				if (cmd.canExecute())
-					cmd.execute();
+				getCommandStack().execute(cmd);
 				
 			}
 		}

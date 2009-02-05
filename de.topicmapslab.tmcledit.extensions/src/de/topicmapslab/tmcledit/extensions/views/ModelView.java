@@ -119,8 +119,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	private TreeViewer viewer;
 	private ViewContentProvider contentProvider;
-	private Action action1;
-	private Action action2;
+	private Action refreshAction;
 	private Action doubleClickAction;
 	private TMCLDiagramEditor currentEditor;
 	private ComposedAdapterFactory adapterFactory;
@@ -332,14 +331,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
-		manager.add(action1);
+		manager.add(refreshAction);
 		manager.add(new Separator());
-		manager.add(action2);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		manager.add(action1);
-		manager.add(action2);
+		manager.add(refreshAction);
 
 		manager.add(new Action() {
 			@Override
@@ -388,34 +385,24 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
-		manager.add(action1);
-		manager.add(action2);
+		manager.add(refreshAction);
 		manager.add(new Separator());
 
 	}
 
 	private void makeActions() {
-		action1 = new Action() {
+		refreshAction = new Action() {
 			public void run() {
 				contentProvider.update();
 				viewer.setInput(getViewSite());
 				viewer.expandToLevel(2);
 			}
 		};
-		action1.setText("Refresh");
-		action1.setToolTipText("Refreshs the Model View");
-		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
+		refreshAction.setText("Refresh");
+		refreshAction.setToolTipText("Refreshs the Model View");
+		refreshAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
 				.getImageDescriptor(ISharedImages.IMG_ELCL_SYNCED));
 
-		action2 = new Action() {
-			public void run() {
-				showMessage("Action 2 executed");
-			}
-		};
-		action2.setText("Action 2");
-		action2.setToolTipText("Action 2 tooltip");
-		action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
-				.getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		doubleClickAction = new Action() {
 			public void run() {
 				ISelection selection = viewer.getSelection();
@@ -455,10 +442,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				});
 	}
 
-	private void showMessage(String message) {
-		MessageDialog.openInformation(viewer.getControl().getShell(),
-				"Model View", message);
-	}
 
 	/**
 	 * Passing the focus request to the viewer's control.
@@ -956,7 +939,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 			ModelValidator validator = new ModelValidator(file);
 
-			List<ValidationResult> list = validator.validate();
+			List<ValidationResult> list = validator.validate(getEditingDomain().getCommandStack());
 			
 			try {
 				ValidationErrorView vew = (ValidationErrorView) activePage

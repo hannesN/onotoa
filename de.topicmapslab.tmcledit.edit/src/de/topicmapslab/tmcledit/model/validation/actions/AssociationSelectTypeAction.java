@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -19,8 +20,8 @@ public class AssociationSelectTypeAction extends SelectTypeAction {
 
 	
 	
-	public AssociationSelectTypeAction() {
-		super(KindOfTopicType.ASSOCIATION_TYPE);
+	public AssociationSelectTypeAction(CommandStack cmdStack) {
+		super(cmdStack, KindOfTopicType.ASSOCIATION_TYPE);
 		setText("Select Type");
 	}
 		

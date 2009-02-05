@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.PlatformUI;
@@ -17,8 +18,9 @@ import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
  *
  */
 public abstract class CreateTypeAction extends TopicTypeAction {
-	public CreateTypeAction(KindOfTopicType type) {
-		super(type);
+	public CreateTypeAction(CommandStack cmdStack, KindOfTopicType type) {
+		super(cmdStack, type);
+		setText("Create New Type..");
 	}
 	
 	@Override
@@ -32,8 +34,7 @@ public abstract class CreateTypeAction extends TopicTypeAction {
 		if (dlg.open()==Dialog.OK) {
 			TopicType tt = wizard.getNewTopicType();
 			AbstractCommand cmd = getCommand(tt);
-			if (cmd.canExecute())
-				cmd.execute();
+			getCommandStack().execute(cmd);
 		}
 	}
 
