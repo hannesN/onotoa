@@ -32,6 +32,10 @@ public class NewTopicTypeWizard extends Wizard {
 	private TopicType newTopicType;
 	private KindOfTopicType defaultType = KindOfTopicType.TOPIC_TYPE;
 	
+	public NewTopicTypeWizard() {
+		setWindowTitle("New Topic Type..");
+	}
+	
 	@Override
 	public void addPages() {
 		page1 = new NewTypeWizardPage();
@@ -70,6 +74,7 @@ public class NewTopicTypeWizard extends Wizard {
 		
 		protected NewTypeWizardPage() {
 			super("new type");
+			setTitle("Topic Type");
 		}
 
 		@Override

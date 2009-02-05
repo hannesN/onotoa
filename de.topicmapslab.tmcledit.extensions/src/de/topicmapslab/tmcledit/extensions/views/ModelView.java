@@ -52,6 +52,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -94,6 +95,7 @@ import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -102,6 +104,7 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateDiagramCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -367,15 +370,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 			@Override
 			public void run() {
-				InputDialog dlg = new InputDialog(getSite().getShell(),
-						"New Topic Type..",
-						"Please Enter the name of the new type", "", null);
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
+				wizard.setDefaultType(KindOfTopicType.TOPIC_TYPE);
 
-				if (dlg.open() == Dialog.OK) {
-					String name = dlg.getValue();
+				WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell(), wizard);
+				
+				if (dlg.open()==Dialog.OK) {
 					getEditingDomain().getCommandStack().execute(
 							new CreateTopicTypeCommand(currFile
-									.getTopicMapSchema(), name));
+									.getTopicMapSchema(), wizard.getNewTopicType()));
 				}
 
 			}
