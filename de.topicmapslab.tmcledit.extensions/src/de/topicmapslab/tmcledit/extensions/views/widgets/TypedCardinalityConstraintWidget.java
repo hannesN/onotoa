@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.topicmapslab.tmcledit.extensions;
+package de.topicmapslab.tmcledit.extensions.views.widgets;
 
 import java.util.Collections;
 import java.util.List;

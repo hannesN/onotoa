@@ -40,6 +40,7 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
@@ -82,6 +83,13 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	
 	public TMCLDiagramEditor() {
 		setEditDomain(new TMCLEditDomain(this));
+	}
+	
+	@Override
+	public void init(IEditorSite site, IEditorInput input)
+			throws PartInitException {
+		super.init(site, input);
+		setPartName(input.getName());
 	}
 
 	protected void initializeGraphicalViewer() {
@@ -232,6 +240,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	
 	@Override
 	public boolean isDirty() {
+		if (diagram.eContainer()==null)
+			return false;
 		return ((File)diagram.eContainer()).isDirty();
 	}
 
@@ -374,7 +384,16 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			if (msg.getFeatureID(Boolean.class)==ModelPackage.FILE__DIRTY) {
 				firePropertyChange(TMCLDiagramEditor.PROP_DIRTY);
 				getCommandStack().markSaveLocation();
+			} else if (msg.getFeatureID(List.class)==ModelPackage.FILE__DIAGRAMS) {
+				if (msg.getEventType()==Notification.REMOVE) {
+					
+					if (msg.getOldValue().equals(getDiagram())) {
+						getEditorSite().getPage().closeEditor(TMCLDiagramEditor.this, false);
+					}
+						
+				}
 			}
+			
 		}
 	}
 	

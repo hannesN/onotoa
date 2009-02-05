@@ -195,11 +195,12 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 	 */
 	public Node getNodeFor(TopicType topicType, Diagram diagram) {
 		List<TypeNode> list = typeNodeMap.get(topicType);
-		for (TypeNode tn : list) {
-			if (tn.eContainer().equals(diagram))
-				return tn;
+		if (list!=null) {
+			for (TypeNode tn : list) {
+				if (tn.eContainer().equals(diagram))
+					return tn;
+			}
 		}
-		
 		return null;
 	}
 	

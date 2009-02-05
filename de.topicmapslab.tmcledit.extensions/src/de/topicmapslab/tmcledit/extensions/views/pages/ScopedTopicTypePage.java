@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import de.topicmapslab.tmcledit.extensions.TypedCardinalityConstraintWidget;
+import de.topicmapslab.tmcledit.extensions.views.widgets.TypedCardinalityConstraintWidget;
 import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;

@@ -35,9 +35,6 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.IInputValidator;
-import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -53,7 +50,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -85,6 +81,10 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorInput;
 import de.topicmapslab.tmcledit.extensions.actions.CloseAction;
+import de.topicmapslab.tmcledit.extensions.actions.CreateDiagramAction;
+import de.topicmapslab.tmcledit.extensions.actions.CreateTopicAction;
+import de.topicmapslab.tmcledit.extensions.actions.DeleteDiagramAction;
+import de.topicmapslab.tmcledit.extensions.actions.DeleteTopicTypeAction;
 import de.topicmapslab.tmcledit.extensions.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UndoActionWrapper;
 import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
@@ -96,16 +96,12 @@ import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.CreateDiagramCommand;
-import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
-import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -130,7 +126,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	private EditingDomain editingDomain;
 	private ValidateJob validateJob = new ValidateJob();
-	private File currFile;
+	File currFile;
 	
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
@@ -146,6 +142,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		}
 	};
+
+	private CreateDiagramAction createDiagramAction;
+
+	private CreateTopicAction createTopicAction;
+
+	private DeleteTopicTypeAction deleteTopicTypeAction;
+
+	private DeleteDiagramAction deleteDiagramAction;
 
 	/**
 	 * The constructor.
@@ -341,65 +345,21 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(refreshAction);
-
-		manager.add(new Action() {
-			@Override
-			public String getText() {
-				return "Create Diagram";
-			}
-
-			@Override
-			public void run() {
-				InputDialog dlg = new InputDialog(getSite().getShell(),
-						"New Diagram..",
-						"Please Enter the name of the new diagram", "", 
-						new IInputValidator() {
-
-							@Override
-							public String isValid(String newText) {
-								if (newText.length()==0)
-									return "Please enter a name.";
-								for (Diagram d : currFile.getDiagrams()) {
-									if (d.getName().equals(newText)) {
-										return "A diagram with that name already exists!";
-									}
-								}
-								return null;										
-							}
-					
-				});
-
-				if (dlg.open() == Dialog.OK) {
-					String name = dlg.getValue();
-					getEditingDomain().getCommandStack().execute(
-							new CreateDiagramCommand(name, currFile));
-				}
-
-			}
-		});
+		manager.add(new Separator());
 		
-		manager.add(new Action() {
-			@Override
-			public String getText() {
-				return "Create Topic Type";
+		manager.add(createDiagramAction);
+		manager.add(createTopicAction);
+		manager.add(new Separator());
+		if (!currentSelection.isEmpty()) {
+			Object selection = ((IStructuredSelection)currentSelection).getFirstElement();
+			if (selection instanceof TopicType) {
+				deleteTopicTypeAction.setType((TopicType) selection);
+				manager.add(deleteTopicTypeAction);
+			} else if (selection instanceof Diagram) {
+				deleteDiagramAction.setDiagram((Diagram) selection);
+				manager.add(deleteDiagramAction);
 			}
-
-			@Override
-			public void run() {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.TOPIC_TYPE);
-
-				WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getShell(), wizard);
-				
-				if (dlg.open()==Dialog.OK) {
-					getEditingDomain().getCommandStack().execute(
-							new CreateTopicTypeCommand(currFile
-									.getTopicMapSchema(), wizard.getNewTopicType()));
-				}
-
-			}
-		});
+		}
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -431,6 +391,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				((TreeObject) obj).handleDoubleClick();
 			}
 		};
+		deleteDiagramAction = new DeleteDiagramAction(this);
+		deleteTopicTypeAction = new DeleteTopicTypeAction(this);
+		createDiagramAction = new CreateDiagramAction(this);
+		createTopicAction = new CreateTopicAction(this);
 	}
 
 	private void hookDoubleClickAction() {
