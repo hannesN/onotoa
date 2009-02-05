@@ -36,6 +36,7 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -351,7 +352,22 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			public void run() {
 				InputDialog dlg = new InputDialog(getSite().getShell(),
 						"New Diagram..",
-						"Please Enter the name of the new diagram", "", null);
+						"Please Enter the name of the new diagram", "", 
+						new IInputValidator() {
+
+							@Override
+							public String isValid(String newText) {
+								if (newText.length()==0)
+									return "Please enter a name.";
+								for (Diagram d : currFile.getDiagrams()) {
+									if (d.getName().equals(newText)) {
+										return "A diagram with that name already exists!";
+									}
+								}
+								return null;										
+							}
+					
+				});
 
 				if (dlg.open() == Dialog.OK) {
 					String name = dlg.getValue();
