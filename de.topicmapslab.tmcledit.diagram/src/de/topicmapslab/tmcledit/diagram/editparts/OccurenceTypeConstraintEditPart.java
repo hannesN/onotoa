@@ -106,7 +106,6 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 		@Override
 		public void paint(IFigure figure, Graphics graphics, Insets insets) {
 			Rectangle rec = figure.getBounds();
-			System.out.println(rec);
 			int y = rec.y+rec.height-1;
 			graphics.pushState();
 			graphics.setForegroundColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));

@@ -1,9 +1,9 @@
 package de.topicmapslab.tmcledit.export.wizards;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.codegen.jet.JETEmitter;
+import java.io.FileWriter;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.SWT;
@@ -19,7 +19,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
 
-import de.topicmapslab.tmcledit.export.Activator;
+import de.topicmapslab.tmcledit.export.builder.CTMBuilder;
+import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
@@ -42,17 +43,20 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		
 		java.io.File file = new java.io.File(text.getText());
 		
-		if (file.exists())
+		if (file.exists()) {
+			if (!MessageDialog.openQuestion(getShell(), "File already exists",  
+					"File already exists. Do you want to overwrite it?"))
+				return false;
+			
 			file.delete();
+			
+		}
 		try
 		{ 
-			String pluginId = Activator.PLUGIN_ID;
-			String base = Platform.getBundle(pluginId).getEntry("/").toString();
-			String uri = base + "templates/tmcl.jetctm";
-
-			JETEmitter e = new JETEmitter(uri, getClass().getClassLoader());
-			String t = e.generate(new NullProgressMonitor(), new Object[] {schema});
-			System.out.println(t);
+			CTMBuilder builder = new CTMBuilder();
+			FileWriter writer = new FileWriter(file);
+			writer.append(builder.getCTMText(schema));
+			writer.close();
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -70,8 +74,17 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 	
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		if (selection.isEmpty())
+		if (selection.isEmpty()) {
+			try {
+			ModelView view = (ModelView) workbench.getActiveWorkbenchWindow()
+					.getActivePage().findView(ModelView.ID);
+			if (view!=null)
+				schema = view.getCurrentTopicMapSchema();
 			return;
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
 		
 		if (!(selection.getFirstElement() instanceof EObject))
 			return;

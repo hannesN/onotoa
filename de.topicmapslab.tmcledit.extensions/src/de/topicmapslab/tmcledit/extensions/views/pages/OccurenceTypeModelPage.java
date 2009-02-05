@@ -140,7 +140,8 @@ public class OccurenceTypeModelPage extends ScopedTopicTypePage {
 	
 	@Override
 	public void updateUI() {
-		if (getCastedModel().getDataType()!=null)
+		
+		if ( (getModel()!=null) && (getCastedModel().getDataType()!=null) )
 			datatypeText.setText(getCastedModel().getDataType());
 		else
 			datatypeText.setText("");

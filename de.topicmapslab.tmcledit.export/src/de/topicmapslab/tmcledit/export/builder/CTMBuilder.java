@@ -11,6 +11,7 @@ import java.util.Map;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceType;
@@ -65,10 +66,9 @@ public class CTMBuilder {
 		indexRolePlayerConstraints();
 		
 		addLine("%prefix tmcl http://psi.topicmaps.org/tmcl");
-		addLineSeparator();
 		addLine("%prefix tm http://psi.topicmaps.org/tmdm/model");
 		addLineSeparator();
-		addLine("%inlcude http://www.topicmaps.org.tmcl/templates.ctm");
+		addLine("%include http://www.topicmaps.org.tmcl/templates.ctm");
 		
 	}
 	
@@ -94,7 +94,7 @@ public class CTMBuilder {
 	
 	private void processMapping() {
 		for (MappingElement me : schema.getMappings()) {
-			buffer.append("% prefix ");
+			buffer.append("%prefix ");
 			buffer.append(me.getKey());
 			buffer.append(" ");
 			buffer.append(me.getValue());
@@ -117,7 +117,7 @@ public class CTMBuilder {
 	
 	private void processTopicMapSchema() {
 		if (schema.isActiveTopicTypeConstraint())
-			addLine("ttc isa topictypeconstraint .");
+			addLine("ttc isa topictype-constraint .");
 		
 		if (schema.isActiveAssociationTypeConstraint())
 			addLine("atc isa associationtype-constraint .");
@@ -156,7 +156,16 @@ public class CTMBuilder {
 			addLine(tmp);
 		}
 		
-		addLine("- "+topicType.getName());
+		
+		if (topicType.getKind()!=KindOfTopicType.NO_TYPE) {
+			addIndention();
+			buffer.append("ako ");
+			buffer.append(topicType.getKind().getName().toLowerCase());
+			buffer.append(";");
+			addLineSeparator();
+		}
+		
+		addLine("- \""+topicType.getName()+"\";");
 		
 		if (topicType.isAbstract()) {
 			addLine("isAbstract();");
@@ -216,9 +225,12 @@ public class CTMBuilder {
 		
 		
 		indention = 0;
+		int i = buffer.lastIndexOf(";", buffer.length());
+		if (i>=0)			
+			buffer.setLength(i);
 		buffer.append(" .");
 		addLineSeparator();
-		
+		addLineSeparator();
 	}
 
 	private void processPlayerConstraintInfo(PlayerConstraintInfo info) {
@@ -270,13 +282,14 @@ public class CTMBuilder {
 	}
 
 	private void processNameTypeConstraint(NameTypeConstraint ntc) {
+		addIndention();
 		buffer.append("has-name(");
 		buffer.append(ntc.getType().getName());
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append(ntc.getCardMin());
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append(ntc.getCardMax());
-		buffer.append(",\"");
+		buffer.append(", \"");
 		buffer.append(ntc.getRegexp());
 		buffer.append("\");");
 		addLineSeparator();
@@ -287,10 +300,11 @@ public class CTMBuilder {
 		addIndention();
 		buffer.append("has-occurence(");
 		buffer.append(idString);
+		buffer.append(", ");
 		buffer.append(otc.getCardMin());
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append(otc.getCardMax());
-		buffer.append(",\"");
+		buffer.append(", \"");
 		buffer.append(otc.getRegexp());
 		buffer.append("\");");
 		addLineSeparator();
@@ -327,7 +341,7 @@ public class CTMBuilder {
 		buffer.append("has-role(");
 		buffer.append(getIdString(rtc.getType()));
 		buffer.append(rtc.getCardMin());
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append(rtc.getCardMax());
 		buffer.append(");");
 		addLineSeparator();
@@ -337,9 +351,9 @@ public class CTMBuilder {
 		addIndention();
 		buffer.append("has-subjectidentifier(");
 		buffer.append(sic.getCardMin());
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append(sic.getCardMax());
-		buffer.append(",\"");
+		buffer.append(", \"");
 		buffer.append(sic.getRegexp());
 		buffer.append("\");");
 		addLineSeparator();
@@ -349,9 +363,9 @@ public class CTMBuilder {
 		addIndention();
 		buffer.append("has-subjectlocator(");
 		buffer.append(slc.getCardMin());
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append(slc.getCardMax());
-		buffer.append(",\"");
+		buffer.append(", \"");
 		buffer.append(slc.getRegexp());
 		buffer.append("\");");
 		addLineSeparator();
