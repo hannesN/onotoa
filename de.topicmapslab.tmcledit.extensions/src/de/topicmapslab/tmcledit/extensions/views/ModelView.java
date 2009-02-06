@@ -3,13 +3,10 @@ package de.topicmapslab.tmcledit.extensions.views;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.tree.TreeModel;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -53,7 +50,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -901,13 +897,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	class NameSorter extends TreePathViewerSorter {
-		@SuppressWarnings("unchecked")
-		@Override
-		protected Comparator getComparator() {
-			// TODO Auto-generated method stub
-			return super.getComparator();
-		}
-		
 		@Override
 		public int category(Object element) {
 			if (element instanceof TreeOccurence) {
@@ -918,13 +907,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 			
 			return super.category(element);
-		}
-		
-		@Override
-		public boolean isSorterProperty(Object element, String property) {
-			System.out.println("element:"+element);
-			System.out.println("property:"+property);
-			return super.isSorterProperty(element, property);
 		}
 	}
 	
