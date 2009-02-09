@@ -3,6 +3,7 @@ package de.topicmapslab.tmcledit.export.wizards;
 import java.io.FileOutputStream;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.SWT;
@@ -28,7 +29,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 
 public class XTMExportWizard extends Wizard implements IExportWizard {
 	private Text text;
-	
+	private boolean exportConstraintInfos = true;
 	private TopicMapSchema schema;
 	
 	public XTMExportWizard() {
@@ -44,13 +45,19 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		
 		java.io.File file = new java.io.File(text.getText());
 		
-		if (file.exists())
+		if (file.exists()) {
+			if (!MessageDialog.openQuestion(getShell(), "File already exists",  
+					"File already exists. Do you want to overwrite it?"))
+				return false;
+			
 			file.delete();
+			
+		}
 		try
 		{
 			FileOutputStream os = new FileOutputStream(file);
 			XTM20TopicMapWriter writer = new XTM20TopicMapWriter(os, "http://wasauchimmer.de/");
-			writer.write(ttbuilder.getTopicMap(false));
+			writer.write(ttbuilder.getTopicMap(exportConstraintInfos));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -121,6 +128,18 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 				}
 			}
 		});
+		
+		Button exportButton = new Button(comp, SWT.CHECK);
+		exportButton.setSelection(exportConstraintInfos);
+		GridData gd = new GridData();
+		gd.horizontalSpan = 3;
+		exportButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				exportConstraintInfos = ((Button)e.widget).getSelection();
+			}
+		});
+		
 	}
 
 	

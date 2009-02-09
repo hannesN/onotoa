@@ -92,18 +92,6 @@ public class CTMBuilder {
 		buffer.append(LINE_SEP);
 	}
 	
-	private void processMapping() {
-		for (MappingElement me : schema.getMappings()) {
-			buffer.append("%prefix ");
-			buffer.append(me.getKey());
-			buffer.append(" ");
-			buffer.append(me.getValue());
-			addLineSeparator();
-		}
-		addLineSeparator();
-		addLineSeparator();
-	}
-	
 	private void addLine(String text) {
 		addIndention();
 		buffer.append(text);
@@ -115,6 +103,18 @@ public class CTMBuilder {
 			buffer.append(indentString);
 	}
 	
+	private void processMapping() {
+		for (MappingElement me : schema.getMappings()) {
+			buffer.append("%prefix ");
+			buffer.append(me.getKey());
+			buffer.append(" ");
+			buffer.append(me.getValue());
+			addLineSeparator();
+		}
+		addLineSeparator();
+		addLineSeparator();
+	}
+
 	private void processTopicMapSchema() {
 		if (schema.isActiveTopicTypeConstraint())
 			addLine("ttc isa topictype-constraint .");

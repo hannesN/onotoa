@@ -8,14 +8,18 @@ import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystem;
 import org.tmapi.core.TopicMapSystemFactory;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
+import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurenceType;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -37,6 +41,14 @@ public class TinyTiMTopicMapBuilder {
 	private Topic supertype_subType_assTopic;
 	
 	private Topic infoScope;
+	private Topic occurenceDatatype;
+	private Topic scopeConstraintType;
+	private Topic roleConstraintType;
+	private Topic rolePlayerConstraintType;
+	private Topic nameConstraintType;
+	private Topic occurenceConstraintType;
+	private Topic locatorConstraintType;
+	private Topic identifierConstraintType;
 	
 	public TinyTiMTopicMapBuilder(TopicMapSchema topicMapSchema) {
 		this.topicMapSchema = topicMapSchema;
@@ -57,12 +69,35 @@ public class TinyTiMTopicMapBuilder {
 		tm = system.createTopicMap("http://psi.topicmapslab.de/tmclschema");
 		
 		if (createConstraintInfos) {
-			Locator l = tm.createLocator("#constraint_info_scope");
-			scopeType = tm.createTopicByItemIdentifier(l);
+			Locator l = tm.createLocator("#info_scope");
+			infoScope = tm.createTopicByItemIdentifier(l);
+			
+			l = tm.createLocator("#constraint_occurence_datatype_info");
+			occurenceDatatype = tm.createTopicByItemIdentifier(l);
+		
+			l = tm.createLocator("#constraint_scope_info");
+			scopeConstraintType = tm.createTopicByItemIdentifier(l);
+			
+			l = tm.createLocator("#constraint_role_info");
+			roleConstraintType = tm.createTopicByItemIdentifier(l);
+			
+			l = tm.createLocator("#constraint_role_player_info");
+			roleConstraintType = tm.createTopicByItemIdentifier(l);
+			
+			l = tm.createLocator("#constraint_name_info");
+			nameConstraintType = tm.createTopicByItemIdentifier(l);
+			
+			l = tm.createLocator("#constraint_occurence_info");
+			occurenceConstraintType = tm.createTopicByItemIdentifier(l);
+			
+			l = tm.createLocator("#constraint_subject_locator_info");
+			locatorConstraintType = tm.createTopicByItemIdentifier(l);
+			
+			l = tm.createLocator("#constraint_subject_identifier_info");
+			identifierConstraintType = tm.createTopicByItemIdentifier(l);
+			
 		}
 		
-		//topicsIndex = (TopicsIndex) tm.getHelperObject(org.tmapi.index.core.TopicsIndex.class);
-
 		// creating type topics
 		Locator l = tm.createLocator("http://psi.topicmaps.org/tmcl/topictype");
 		topicType = tm.createTopicBySubjectIdentifier(l);
@@ -123,32 +158,29 @@ public class TinyTiMTopicMapBuilder {
 			
 			StringBuffer buffer = new StringBuffer();
 			
-			buffer.append("Associations of this type should have the following role types: ");
-			for (RoleConstraint rc : ((AssociationType)type).getRoles()) {
+			buffer.append("Associations of this type have the following players: ");
+			
+			for (RolePlayerConstraint rpc : asc.getPlayerConstraints()) {
+				RoleConstraint rc = rpc.getRole();
+				buffer.setLength(0);
+				buffer.append("Player: ");
+				buffer.append(rpc.getPlayer().getName());
+				buffer.append(" Role:");
 				buffer.append(rc.getType().getName());
-				buffer.append("[");
+				buffer.append(" [");
 				buffer.append(rc.getCardMin());
 				buffer.append("..");
 				buffer.append(rc.getCardMax());
-				buffer.append("], ");
-			}
-			buffer.setLength(buffer.length()-2);
-			if (type.getScope().size()>0)
-				buffer.append(" @ scope: ");
-			for (ScopeConstraint sc : type.getScope()) {
-				buffer.append(sc.getType().getName());
-				buffer.append("[");
-				buffer.append(sc.getCardMin());
-				buffer.append("..");
-				buffer.append(sc.getCardMax());
 				buffer.append("]");
+				
+				topic.createOccurrence(rolePlayerConstraintType, buffer.toString(), infoScope);
 			}
+						
 			
-			topic.createOccurrence(getConstraintInfoTopic(asc, tm), buffer.toString(), scopeType);
 		}
 	}
-	
-	private Topic getConstraintInfoTopic(AbstractConstraint constraint, TopicMap tm) {
+	/*
+	private Topic getConstraintInfoTopic(Object constraint, TopicMap tm) {
 		Locator l = null;
 		if (constraint instanceof AssociationTypeConstraint) {
 			l = tm.createLocator("#association_constraint_info");
@@ -166,7 +198,7 @@ public class TinyTiMTopicMapBuilder {
 		
 		return tm.createTopicByItemIdentifier(l);
 	}
-	
+	*/
 	private Topic createTopic(TopicType topicType, TopicMap tm)
 			throws Exception {
 		
@@ -199,12 +231,16 @@ public class TinyTiMTopicMapBuilder {
 		switch (topicType.getKind()) {
 		case ASSOCIATION_TYPE:
 			t.addType(associationType);
+			createScopeInfo(t, (AssociationType) topicType);
+			addAssociationInfos(t, (AssociationType) topicType);
 			break;
 		case OCCURENCE_TYPE:
 			t.addType(occurenceType);
+			addOccurenceInfos(t, topicType);
 			break;
 		case NAME_TYPE:
 			t.addType(nameType);
+			createScopeInfo(t, (NameType) topicType);
 			break;
 		case ROLE_TYPE:
 			t.addType(roleType);
@@ -216,7 +252,7 @@ public class TinyTiMTopicMapBuilder {
 			t.addType(this.topicType);
 			break;
 		}
-		/*
+		
 		if (createConstraintInfos) {
 			for (NameTypeConstraint ntc : topicType.getNameContraints()) {
 				createConstraints(ntc, t);
@@ -225,15 +261,90 @@ public class TinyTiMTopicMapBuilder {
 			for (OccurenceTypeConstraint otc : topicType.getOccurenceConstraints()) {
 				createConstraints(otc, t);
 			}
+			
+			for (SubjectLocatorConstraint slc : topicType.getSubjectLocatorConstraint()) {
+				createLocatorConstraint(slc, t);
+			}
+			
+			for (SubjectIdentifierConstraint sic : topicType.getSubjectIdentifierConstraints()) {
+				createIdentifierConstraint(sic, t);
+			}
 		}
-*/
+
 		return t;
 	}
 
-	private void createConstraints(AbstractConstraint tc, Topic t) {
-		/*
-		Topic cit = getConstraintInfoTopic(tc, t.getTopicMap());
+	private void createLocatorConstraint(SubjectLocatorConstraint slc,
+			Topic t) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("\"");
+		buffer.append(slc.getRegexp());
+		buffer.append("\" [");
+		buffer.append(slc.getCardMin());
+		buffer.append("..");
+		buffer.append(slc.getCardMax());
+		buffer.append("]");
+		 
+		t.createOccurrence(locatorConstraintType, buffer.toString(), infoScope);
+	}
+	
+	private void createIdentifierConstraint(SubjectIdentifierConstraint sic,
+			Topic t) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("\"");
+		buffer.append(sic.getRegexp());
+		buffer.append("\" [");
+		buffer.append(sic.getCardMin());
+		buffer.append("..");
+		buffer.append(sic.getCardMax());
+		buffer.append("]");
+		 
+		t.createOccurrence(identifierConstraintType, buffer.toString(), infoScope);
+	}
+
+	private void addAssociationInfos(Topic t, AssociationType topicType) {
+		StringBuffer buffer = new StringBuffer();
+		for (RoleConstraint rc : topicType.getRoles()) {
+			buffer.setLength(0);
+			buffer.append(rc.getType().getName());
+			buffer.append(" [");
+			buffer.append(rc.getCardMin());
+			buffer.append("..");
+			buffer.append(rc.getCardMax());
+			buffer.append("]");
+			t.createOccurrence(roleConstraintType, buffer.toString(), infoScope);
+		}
+	}
+
+	private void addOccurenceInfos(Topic t, TopicType topicType) {
+		if (!createConstraintInfos)
+			return;
 		
+		OccurenceType ot = (OccurenceType) topicType;
+		
+		t.createOccurrence(occurenceDatatype, ot.getDataType(), infoScope);
+		createScopeInfo(t, ot);
+	}
+
+	private void createScopeInfo(Topic t, ScopedTopicType st) {
+		for (ScopeConstraint sc : st.getScope()) {
+			addScopeInfo(t, sc);
+		}
+	}
+
+	private void addScopeInfo(Topic t, ScopeConstraint sc) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(sc.getType().getName());
+		buffer.append(" [");
+		buffer.append(sc.getCardMin());
+		buffer.append("..");
+		buffer.append(sc.getCardMax());
+		buffer.append("]");
+		
+		t.createOccurrence(scopeConstraintType, buffer.toString(), infoScope);
+	}
+
+	private void createConstraints(AbstractTypedCardinalityConstraint tc, Topic t) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("type: ");
 		buffer.append(tc.getType().getName());
@@ -241,30 +352,12 @@ public class TinyTiMTopicMapBuilder {
 		buffer.append(tc.getCardMin());
 		buffer.append("..");
 		buffer.append("] ");
+
+		if (tc instanceof NameTypeConstraint)
+			t.createOccurrence(nameConstraintType, buffer.toString(), infoScope);
+		else if (tc instanceof OccurenceTypeConstraint)
+			t.createOccurrence(occurenceConstraintType, buffer.toString(), infoScope);
 		
-		if (tc instanceof OccurenceTypeConstraint) {
-			OccurenceTypeConstraint otc = (OccurenceTypeConstraint) tc;
-			buffer.append(" datatype: ");
-			buffer.append(otc.getDataType());
-			if (otc.isUnique())
-				buffer.append(" is unique ");
-		}
-		
-		if (tc.getScope().size()>0) {
-			buffer.append("@scope: ");
-			for (ScopeConstraint sc : tc.getScope()) {
-				buffer.append(sc.getType().getName());
-				buffer.append("[");
-				buffer.append(sc.getCardMin());
-				buffer.append("..");
-				buffer.append(sc.getCardMax());
-				buffer.append("], ");
-			}
-			buffer.setLength(buffer.length()-2);
-		}
-		
-		t.createOccurrence(cit, buffer.toString(), infoScope);
-		*/
 	}
 
 
