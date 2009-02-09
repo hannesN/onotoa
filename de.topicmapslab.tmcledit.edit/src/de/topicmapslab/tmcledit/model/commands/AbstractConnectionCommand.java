@@ -135,14 +135,16 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 	}
 
 	private void createTypeLists() {
+		List<TopicType> tmpList = (getEdgeType()==EdgeType.AKO_TYPE) ? topic.getAko() : topic.getIsa();
 		addList = new ArrayList<TopicType>();
 		for (TopicType tt : newList) {
-			if (!topic.getIsa().contains(tt)) {
+			if (!tmpList.contains(tt)) {
 				addList.add(tt);
 			}
 		}
 		removeList = new ArrayList<TopicType>();
-		for (TopicType tt : topic.getIsa()) {
+		
+		for (TopicType tt : tmpList) {
 			if (!newList.contains(tt)) {
 				removeList.add(tt);
 			}

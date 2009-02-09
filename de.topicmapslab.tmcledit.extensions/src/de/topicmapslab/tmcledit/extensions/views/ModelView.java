@@ -525,8 +525,21 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	
 	public void setFilename(String filename, boolean newFile) {
 
-		if (currFile != null)
+		if (currFile != null) {
 			currFile.eAdapters().remove(dirtyListener);
+		
+			IWorkbenchPage page = getViewSite().getPage();
+			for (IEditorReference ref : page.getEditorReferences()) {
+				try {
+					if (ref.getEditorInput() instanceof TMCLEditorInput) {
+						IEditorPart part = ref.getEditor(false);
+						page.closeEditor(part, false);
+					}
+				} catch (PartInitException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
 		
 		checkSavedState();
 		
