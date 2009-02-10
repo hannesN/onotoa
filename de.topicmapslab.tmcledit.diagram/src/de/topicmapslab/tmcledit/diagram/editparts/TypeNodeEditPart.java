@@ -8,8 +8,11 @@ import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.FlowLayout;
+import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.LayoutManager;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ToolbarLayout;
@@ -100,6 +103,11 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			figure.add(basenameFigure);			
 			
 			occurencesFigure = new CompartmentFigure();
+			
+//			GridLayout manager = new GridLayout(1, false);
+//			manager.marginWidth = 10;
+//			manager.marginHeight = 10;
+			occurencesFigure.setLayoutManager(new ToolbarLayout());
 			figure.add(occurencesFigure);
 			
 			identifierCompartmentFigure = new CompartmentFigure();
@@ -162,7 +170,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		try {
         ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
 		} catch (NullPointerException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
         super.refreshVisuals();
 	}
@@ -268,8 +276,10 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
-		if (childEditPart instanceof OccurenceTypeConstraintEditPart)
+		if (childEditPart instanceof OccurenceTypeConstraintEditPart) {
 			occurencesFigure.add(child);
+			occurencesFigure.revalidate();
+		}
 		else if (childEditPart instanceof NameTypeConstraintEditPart)
 			basenameFigure.add(child);
 		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
@@ -281,8 +291,9 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
-		if (childEditPart instanceof OccurenceTypeConstraintEditPart)
-			occurencesFigure.remove(child);
+		if (childEditPart instanceof OccurenceTypeConstraintEditPart) {
+			occurencesFigure.remove(child);			
+		}
 		else if (childEditPart instanceof NameTypeConstraintEditPart)
 			basenameFigure.remove(child);
 		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||

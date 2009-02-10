@@ -17,7 +17,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.MoveNodeCommand;
-import de.topicmapslab.tmcledit.model.commands.NewNodeCommand;
+import de.topicmapslab.tmcledit.model.commands.CreateNodeCommand;
 
 public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 
@@ -43,7 +43,7 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 			Point p = new Point();
 			p.x = request.getLocation().x;
 			p.y = request.getLocation().y;
-			NewNodeCommand cmd = new NewNodeCommand(diagram, p, (Node) request.getNewObject());
+			CreateNodeCommand cmd = new CreateNodeCommand(diagram, p, (Node) request.getNewObject());
 			
 			return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 			

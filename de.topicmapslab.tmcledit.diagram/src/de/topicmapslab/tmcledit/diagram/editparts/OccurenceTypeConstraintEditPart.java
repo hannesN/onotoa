@@ -28,7 +28,13 @@ public class OccurenceTypeConstraintEditPart extends AbstractScopedLabeledEditPa
 	protected void createEditPolicies() {
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new OccurenceConstraintDirectEditPolicy());
 	}
-			
+		
+	@Override
+	public IFigure getFigure() {
+		// TODO Auto-generated method stub
+		return super.getFigure();
+	}
+	
 	@Override
 	protected void refreshVisuals() {
 		OccurenceTypeConstraint otc = getCastedModel();

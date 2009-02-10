@@ -18,6 +18,11 @@ public class CreateEdgeCommand extends AbstractCommand {
 		edge = newEdge;
 	}
 	
+	public CreateEdgeCommand(Edge newEdge, Diagram diagram) {
+		edge = newEdge;
+		this.diagram = diagram;
+	}
+	
 	public void setSource(Node source) {
 		edge.setSource(source);
 	}

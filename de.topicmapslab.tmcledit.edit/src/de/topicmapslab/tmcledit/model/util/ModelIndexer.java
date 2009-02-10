@@ -15,6 +15,7 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -29,6 +30,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class ModelIndexer {
 	private static ModelIndexer instance;
 	
+	private AssociationIndexer associationIndexer;
 	private TopicIndexer topicIndexer;
 	private TopicTypeNodeIndexer nodeIndexer;
 	
@@ -49,6 +51,9 @@ public class ModelIndexer {
 		
 		getInstance().nodeIndexer = new TopicTypeNodeIndexer();
 		getInstance().nodeIndexer.init(file);
+		
+		getInstance().associationIndexer = new AssociationIndexer();
+		getInstance().associationIndexer.init(file.getTopicMapSchema());
 		
 	}
 	
@@ -148,4 +153,11 @@ public class ModelIndexer {
 	public List<ScopedTopicType> getScopedTopicTypes() {
 		return topicIndexer.getScopedTopicTypes();
 	}
+
+	public List<RolePlayerConstraint> getRolePlayerConstraintsFor(
+			TopicType topicType) {
+		return associationIndexer.getRolePlayerConstraintsFor(topicType);
+	}
+	
+	
 }
