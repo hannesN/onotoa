@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
@@ -22,7 +22,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;
 	private Label typeLabel;
-	
+	private boolean editable = true;
 
 	public AbstractLabelEditPart() {
 		super();
@@ -32,15 +32,13 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	protected IFigure createFigure() {
 	
 		figure = new SelectionFigure();
-		
-		ToolbarLayout layout = new ToolbarLayout(true);
-		layout.setSpacing(5);
-		figure.setLayoutManager(layout);
-		
+
 		nameLabel = new EditableLabel("");
+		nameLabel.setLabelAlignment(PositionConstants.LEFT);
 		figure.add(nameLabel);
 		
 		typeLabel = new Label();
+		typeLabel.setLabelAlignment(PositionConstants.LEFT);
 		figure.add(typeLabel);
 		
 		return figure;
@@ -62,7 +60,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 
 	public void performRequest(Request req) {
 		if (req.getType() == RequestConstants.REQ_DIRECT_EDIT) {
-			if (req instanceof DirectEditRequest) {
+			if ( (req instanceof DirectEditRequest) && (isEditable()) ){
 				Label label = directEditHitTest(((DirectEditRequest) req).getLocation().getCopy());
 				if (label!=null) {
 					fillExtendedData(req.getExtendedData());
@@ -74,6 +72,14 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		super.performRequest(req);
 	}
 
+	protected boolean isEditable() {
+		return editable;
+	}
+	
+	protected void setEditable(boolean editable) {
+		this.editable = editable;
+	}
+	
 	@SuppressWarnings("unchecked")
 	protected void fillExtendedData(Map extendedData) {		
 	}

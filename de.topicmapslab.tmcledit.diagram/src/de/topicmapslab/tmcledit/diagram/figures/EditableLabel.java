@@ -24,7 +24,6 @@ public class EditableLabel extends Label
 		bounds.intersect(getBounds());
 		return bounds;
 	}
-
 	
 	/**
 	 * sets the text of the label

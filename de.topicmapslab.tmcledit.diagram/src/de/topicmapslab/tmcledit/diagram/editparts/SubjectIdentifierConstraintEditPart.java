@@ -7,6 +7,10 @@ import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 
 public class SubjectIdentifierConstraintEditPart extends AbstractLabelEditPart {
 	
+	public SubjectIdentifierConstraintEditPart() {
+		setEditable(false);
+	}
+	
 	private SubjectIdentifierConstraint getCastedModel() {
 		return (SubjectIdentifierConstraint) getModel();
 	}

@@ -33,7 +33,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
-import de.topicmapslab.tmcledit.diagram.figures.CompartmentFigure;
+import de.topicmapslab.tmcledit.diagram.figures.LineFigure;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
@@ -48,19 +48,20 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
  * 
  */
 public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart implements NodeEditPart {
-	protected DirectEditManager manager;
+	protected DirectEditManager editManager;
 	
 	private Label titleLabel;
 	
 	protected Figure identifierFigure;
 
-	protected CompartmentFigure occurencesFigure; 
-	protected CompartmentFigure basenameFigure;
-	protected CompartmentFigure identifierCompartmentFigure;
+	protected Figure compartmentFigure;
 	
 	private static Font identifierFont;
 	private Font nameFont;
 	private static int refCounter=0;
+	
+	private LineFigure firstLine;
+	private LineFigure secondLine;
 	
 	@Override
 	protected IFigure createFigure() {
@@ -96,19 +97,16 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			figure.setOpaque(true);
 			figure.setBackgroundColor(ColorConstants.yellow);
 			
-			basenameFigure = new CompartmentFigure();
-			figure.add(basenameFigure);			
+			ScopedFigureLayoutManager manager = new ScopedFigureLayoutManager();
+			compartmentFigure = new Figure();
+			compartmentFigure.setLayoutManager(manager);
+			figure.add(compartmentFigure);
 			
-			occurencesFigure = new CompartmentFigure();
-			
-//			GridLayout manager = new GridLayout(1, false);
-//			manager.marginWidth = 10;
-//			manager.marginHeight = 10;
-			occurencesFigure.setLayoutManager(new ToolbarLayout());
-			figure.add(occurencesFigure);
-			
-			identifierCompartmentFigure = new CompartmentFigure();
-			figure.add(identifierCompartmentFigure);
+			firstLine = new LineFigure();
+			secondLine = new LineFigure();
+			compartmentFigure.add(new LineFigure());
+			compartmentFigure.add(firstLine);
+			compartmentFigure.add(secondLine);
 			
 		}
 		return figure;
@@ -183,10 +181,10 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	}
 	
 	private void performDirectEdit() {
-		if (manager == null) {
-			manager = new TMCLDirectEditManager(this, TextCellEditor.class, titleLabel);					
+		if (editManager == null) {
+			editManager = new TMCLDirectEditManager(this, TextCellEditor.class, titleLabel);					
 		}
-		manager.show();
+		editManager.show();
 	}
 
 	private boolean directEditHitTest(Point requestLoc)
@@ -274,33 +272,21 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
 		if (childEditPart instanceof OccurenceTypeConstraintEditPart) {
-			occurencesFigure.add(child);
-			occurencesFigure.revalidate();
+			int i = compartmentFigure.getChildren().indexOf(secondLine);
+			compartmentFigure.add(child, i);
 		}
-		else if (childEditPart instanceof NameTypeConstraintEditPart)
-			basenameFigure.add(child);
-		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
+		else if (childEditPart instanceof NameTypeConstraintEditPart) {
+			int i = compartmentFigure.getChildren().indexOf(firstLine);
+			compartmentFigure.add(child, i);
+		} else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
 				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) )
-			identifierCompartmentFigure.add(child);
+			compartmentFigure.add(child);
 		
 	}
-	
-	@Override
-	protected void removeChildVisual(EditPart childEditPart) {
-		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
-		if (childEditPart instanceof OccurenceTypeConstraintEditPart) {
-			occurencesFigure.remove(child);			
-		}
-		else if (childEditPart instanceof NameTypeConstraintEditPart)
-			basenameFigure.remove(child);
-		else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
-				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) )
-			identifierCompartmentFigure.remove(child);
-	}
-		
+			
 	@Override
 	public IFigure getContentPane() {
-		return occurencesFigure;
+		return compartmentFigure;
 	}
 	
 }
