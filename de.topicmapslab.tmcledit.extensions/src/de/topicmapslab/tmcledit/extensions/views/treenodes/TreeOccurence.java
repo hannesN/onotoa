@@ -26,7 +26,10 @@ public class TreeOccurence extends TreeObject{
 	
 	@Override
 	public String getName() {
-		return getOccurenceTypeConstraint().getType().getName();
+		
+		TopicType type = getOccurenceTypeConstraint().getType();
+		
+		return (type==null) ? "no type set" : type.getName();
 	}
 	
 	@Override
@@ -43,11 +46,7 @@ public class TreeOccurence extends TreeObject{
 					((TopicType)notification.getOldValue()).eAdapters().remove(this);
 				((TopicType)notification.getNewValue()).eAdapters().add(this);
 			}
-			return;
 		}
-		
-		if (notification.getNotifier().equals(getOccurenceTypeConstraint().getType())) {
-			getModelView().getViewer().refresh(this);
-		}
+		getModelView().getViewer().refresh(this);
 	}
 }

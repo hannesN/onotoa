@@ -55,12 +55,9 @@ public class TreeName extends TreeObject{
 					((TopicType)notification.getOldValue()).eAdapters().remove(this);
 				((TopicType)notification.getNewValue()).eAdapters().add(this);
 			}
-			return;
 		}
 		
-		if (notification.getNotifier().equals(getNameTypeConstraint().getType())) {
-			getModelView().getViewer().refresh(this);
-		}
+		getModelView().getViewer().refresh(this);
 	}
 	
 	@Override
