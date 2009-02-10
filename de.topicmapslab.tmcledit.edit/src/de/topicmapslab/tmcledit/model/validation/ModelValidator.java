@@ -14,6 +14,7 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
@@ -117,6 +118,15 @@ public class ModelValidator {
 						+ atc.getType().getName() + " has no roles set", atc
 						.getType());
 				addValidationResult(vr);
+			}
+			
+			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+				if (rpc.getRole()==null) {
+					ValidationResult vr = new ValidationResult(
+							"No role set for role player constraint", rpc);
+					addValidationResult(vr);
+				}
+					
 			}
 		}
 	}
