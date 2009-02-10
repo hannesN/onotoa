@@ -76,11 +76,6 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				pos.setPosX(0);
 				pos.setPosY(0);
 				labelPositions.add(pos);
-				
-				pos = ModelFactory.eINSTANCE.createLabelPos();
-				pos.setPosX(0);
-				pos.setPosY(0);
-				labelPositions.add(pos);
 			}
 			return labelPositions;
 		}
@@ -176,19 +171,16 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			
 			if (getChildren().size()>0) {
 				MoveableLabelEditPart cardEditPart = (MoveableLabelEditPart) getChildren().get(0);
-				MoveableLabelEditPart typeEditPart = (MoveableLabelEditPart) getChildren().get(1);
-				MoveableLabelEditPart roleCardEditPart = (MoveableLabelEditPart) getChildren().get(2);
+				MoveableLabelEditPart roleCardEditPart = (MoveableLabelEditPart) getChildren().get(1);
 				
-				cardEditPart.setText(rtc.getCardMin()+".."+rtc.getCardMax());
+				cardEditPart.setText(rtc.getCardMin()+".."+rtc.getCardMax()+"\n"+typeText);
 				
 				if (rtc.getRole()!=null)
 					roleCardEditPart.setText(rtc.getRole().getCardMin()+".."+rtc.getRole().getCardMax());
 				
-				typeEditPart.setText(typeText);
 				
 				roleCardEditPart.refreshVisuals();
 				cardEditPart.refreshVisuals();
-				typeEditPart.refreshVisuals();	
 			}
 		}
 		

@@ -82,7 +82,7 @@ public class MoveableLabelEditPart extends AdapterGraphicalEditPart {
 	
 	public MovableConnectionLocator getLocator() {
 		if (locator == null) {
-			boolean isEnd = (getParent().getChildren().indexOf(this)!=2);
+			boolean isEnd = (getParent().getChildren().indexOf(this)!=1);
 				
 			locator = new MovableConnectionLocator(
 					(Connection) ((GraphicalEditPart) getParent()).getFigure(),
