@@ -7,6 +7,7 @@ import org.eclipse.ui.forms.widgets.ScrolledPageBook;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameType;
@@ -34,6 +35,7 @@ public class PropertyDetailPageFactory {
 	private static final String OCCURENCE_CONSTRAINT = "occurence_constraint";
 	private static final String NAME_CONSTRAINT = "name_constraint";
 	private static final String IDENTIFIER_CONSTRAINT = "idenntifier_constraint";
+	private static final String COMMENT = "comment";
 	
 	private EmptyPage emptyPage;
 	private HashMap<String, AbstractModelPage> pageMap = new HashMap<String, AbstractModelPage>();
@@ -160,6 +162,14 @@ public class PropertyDetailPageFactory {
 				page = new TopicMapSchemaPropertyPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(TOPIC_MAP_SCHEMA, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+		} else if (model instanceof Comment) {
+			page = pageMap.get(COMMENT);
+			if (page==null) {
+				page = new CommentPropertyModelPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(COMMENT, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		}

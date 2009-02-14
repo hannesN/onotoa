@@ -1041,13 +1041,22 @@ public interface ModelPackage extends EPackage {
 	int DIAGRAM__NAME = 2;
 
 	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM__COMMENTS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_FEATURE_COUNT = 3;
+	int DIAGRAM_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.FileImpl <em>File</em>}' class.
@@ -2114,6 +2123,70 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.CommentImpl <em>Comment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.CommentImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getComment()
+	 * @generated
+	 */
+	int COMMENT = 29;
+
+	/**
+	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__POS_X = NODE__POS_X;
+
+	/**
+	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__POS_Y = NODE__POS_Y;
+
+	/**
+	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__CONTENT = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__WIDTH = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__HEIGHT = NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Comment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT_FEATURE_COUNT = NODE_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2121,7 +2194,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 29;
+	int TOPIC_ID = 30;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -2131,7 +2204,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 30;
+	int EDGE_TYPE = 31;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -2141,7 +2214,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 31;
+	int KIND_OF_TOPIC_TYPE = 32;
 
 
 	/**
@@ -2800,6 +2873,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getDiagram_Name();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.Diagram#getComments <em>Comments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Comments</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Diagram#getComments()
+	 * @see #getDiagram()
+	 * @generated
+	 */
+	EReference getDiagram_Comments();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.File <em>File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3115,6 +3199,49 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAbstractTypedCardinalityConstraint();
+
+	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Comment <em>Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Comment</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Comment
+	 * @generated
+	 */
+	EClass getComment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Comment#getContent <em>Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Comment#getContent()
+	 * @see #getComment()
+	 * @generated
+	 */
+	EAttribute getComment_Content();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Comment#getWidth <em>Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Width</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Comment#getWidth()
+	 * @see #getComment()
+	 * @generated
+	 */
+	EAttribute getComment_Width();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Comment#getHeight <em>Height</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Height</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Comment#getHeight()
+	 * @see #getComment()
+	 * @generated
+	 */
+	EAttribute getComment_Height();
 
 	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
@@ -3689,6 +3816,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute DIAGRAM__NAME = eINSTANCE.getDiagram_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Comments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIAGRAM__COMMENTS = eINSTANCE.getDiagram_Comments();
+
+		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.FileImpl <em>File</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3953,6 +4088,40 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ABSTRACT_TYPED_CARDINALITY_CONSTRAINT = eINSTANCE.getAbstractTypedCardinalityConstraint();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.CommentImpl <em>Comment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.CommentImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getComment()
+		 * @generated
+		 */
+		EClass COMMENT = eINSTANCE.getComment();
+
+		/**
+		 * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMMENT__CONTENT = eINSTANCE.getComment_Content();
+
+		/**
+		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMMENT__WIDTH = eINSTANCE.getComment_Width();
+
+		/**
+		 * The meta object literal for the '<em><b>Height</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMMENT__HEIGHT = eINSTANCE.getComment_Height();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

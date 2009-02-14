@@ -101,6 +101,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Diagram/edges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Diagram/nodes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Diagram/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Diagram/comments"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//File">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//File/diagrams"/>
@@ -141,5 +142,10 @@
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//NameType"/>
     <genClasses ecoreClass="tmcledit.ecore#//AbstractTypedCardinalityConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//Comment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Comment/content"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Comment/width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Comment/height"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
