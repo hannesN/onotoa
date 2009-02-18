@@ -35,6 +35,7 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
+import de.topicmapslab.tmcledit.extensions.actions.ShowErrorViewAction;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 
 
@@ -182,7 +183,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			IMenuManager menuX = new MenuManager(
 					Messages.ApplicationMenuName_Window,
 					IWorkbenchActionConstants.M_WINDOW);
-
+			
+			menuX.add(new ShowErrorViewAction());
 			menuX.add(getAction(ActionFactory.RESET_PERSPECTIVE.getId()));
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 			menu.add(menuX);
