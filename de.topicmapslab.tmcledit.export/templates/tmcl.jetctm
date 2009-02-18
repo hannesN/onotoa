@@ -1,0 +1,14 @@
+<%@ jet package="de.topicmapslab.tmcledit.export.compiler" 
+imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* de.topicmapslab.tmcledit.model.*" 
+class="Class" version="$Id$" %>
+<% TopicMapSchema schema = (TopicMapSchema) argument %>
+%prefix tmcl http://psi.topicmaps.org/tmcl
+%prefix tm http://psi.topicmaps.org/tmdm/model
+
+<% for (MappingElement me : schema.getgetMappings() { %>
+%prefix <%= me.getKey()+" "+me.getgetValue() %>
+<%} 
+ for (TopicType tt : schema.getTopicTypes()) { %>
+	
+	
+<% }%>

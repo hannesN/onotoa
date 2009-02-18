@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="de.topicmapslab.tmcledit.application.TmcleditApplication">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="TMCLEdit Perspective"
+            class="de.topicmapslab.tmcledit.application.DiagramEditorPerspective"
+            id="de.topicmapslab.tmcledit.application.TmcleditPerspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="de.topicmapslab.tmcledit.application.actionSet1"
+            label="FileActionSet"
+            visible="true">
+         <action
+               class="de.topicmapslab.tmcledit.application.NewDiagramAction"
+               id="de.topicmapslab.tmcledit.application.newaction"
+               label="New.."
+               menubarPath="file/fileStart"
+               style="push">
+         </action>
+         <action
+               class="de.topicmapslab.tmcledit.application.OpenDiagramAction"
+               id="de.topicmapslab.tmcledit.application.openaction"
+               label="Open.."
+               menubarPath="file/de.topicmapslab.tmcledit.application.newaction"
+               style="push">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="de.topicmapslab.tmcledit.application.application"
+            name="Onotoa">
+         <property
+               name="appName"
+               value="Onotoa">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
