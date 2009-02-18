@@ -650,6 +650,29 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.Comment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CommentItemProvider commentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.Comment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCommentAdapter() {
+		if (commentItemProvider == null) {
+			commentItemProvider = new CommentItemProvider(this);
+		}
+
+		return commentItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -773,6 +796,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (otherRolePlayerConstraintItemProvider != null) otherRolePlayerConstraintItemProvider.dispose();
 		if (nameTypeItemProvider != null) nameTypeItemProvider.dispose();
 		if (abstractTypedCardinalityConstraintItemProvider != null) abstractTypedCardinalityConstraintItemProvider.dispose();
+		if (commentItemProvider != null) commentItemProvider.dispose();
 	}
 
 }

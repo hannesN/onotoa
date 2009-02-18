@@ -18,6 +18,7 @@ import org.eclipse.gef.requests.CreationFactory;
 import de.topicmapslab.tmcledit.diagram.creationfactories.OccurenceConstraintCreationFactory;
 import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.CommentEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
@@ -30,6 +31,7 @@ import de.topicmapslab.tmcledit.diagram.editparts.SubjectLocatorConstraintEditPa
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -60,6 +62,24 @@ public class TMCLDiagramEditorUtil {
 		pr.add(group);
 		pr.setDefaultEntry(selEntry);
 
+		group.add(new CreationToolEntry("Comment", "Comment",
+				new CreationFactory() {
+
+					@Override
+					public Object getNewObject() {
+						Comment c = ModelFactory.eINSTANCE.createComment();
+						c.setWidth(50);
+						c.setHeight(40);
+						return c;
+					}
+
+					@Override
+					public Object getObjectType() {
+						return Comment.class;
+					}
+
+				}, null, null));
+		
 		pr.add(new PaletteSeparator("selection.seperator"));
 		pr.add(getTypePaletteGroup());
 		pr.add(new PaletteSeparator("type.seperator"));
@@ -97,6 +117,8 @@ public class TMCLDiagramEditorUtil {
 					part = new SubjectLocatorConstraintEditPart();
 				} else if (model instanceof LabelPos) {
 					part = new MoveableLabelEditPart();
+				} else if (model instanceof Comment) {
+					part = new CommentEditPart();
 				}
 
 				if (part != null)
@@ -120,8 +142,7 @@ public class TMCLDiagramEditorUtil {
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
 
-		group
-				.add(new CreationToolEntry(
+		group.add(new CreationToolEntry(
 						"Occurence Type",
 						"Occurence Type",
 						new TypeNodeCreationFactory(

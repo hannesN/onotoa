@@ -85,6 +85,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT: return createOtherRolePlayerConstraint();
 			case ModelPackage.NAME_TYPE: return createNameType();
 			case ModelPackage.ABSTRACT_TYPED_CARDINALITY_CONSTRAINT: return createAbstractTypedCardinalityConstraint();
+			case ModelPackage.COMMENT: return createComment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -376,6 +377,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public AbstractTypedCardinalityConstraint createAbstractTypedCardinalityConstraint() {
 		AbstractTypedCardinalityConstraintImpl abstractTypedCardinalityConstraint = new AbstractTypedCardinalityConstraintImpl();
 		return abstractTypedCardinalityConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Comment createComment() {
+		CommentImpl comment = new CommentImpl();
+		return comment;
 	}
 
 	/**
