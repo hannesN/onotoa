@@ -93,6 +93,7 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 		Diagram d = (Diagram) getModel();
 		List result = new ArrayList();
 		result.addAll(d.getNodes());
+		result.addAll(d.getComments());
 		result.add(((File)d.eContainer()).getTopicMapSchema().getMappings());
 		
 		return result;
@@ -129,6 +130,8 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 				updateEdges((Edge) notification.getNewValue());
 			}
 		} else if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__NODES) {
+			refreshChildren();	
+		} else if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__COMMENTS) {
 			refreshChildren();	
 		}
 	}

@@ -34,6 +34,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 	private ActionFactory.IWorkbenchAction toggleCoolbarAction;
 
+	private AboutAction aboutAction;
+	
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -45,6 +47,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		lockToolBarAction = ActionFactory.LOCK_TOOL_BAR.create(window);
 		register(lockToolBarAction);
 
+		aboutAction = new AboutAction();
 		
 		register(ActionFactory.CLOSE.create(window));
 
@@ -183,7 +186,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_START));
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_END));
-
+			menuX.add(aboutAction);
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 			menu.add(menuX);
 		}

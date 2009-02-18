@@ -75,6 +75,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			figure.setBorder(new LineBorder(ColorConstants.black, 1));
 			
 			titleLabel = new Label();
+			titleLabel.setBorder(new MarginBorder(2, 5, 2, 5));
 			titleLabel.setIcon(ImageProvider.getTopicTypeImage(getCastedModel().getTopicType()));
 			figure.add(titleLabel);
 			

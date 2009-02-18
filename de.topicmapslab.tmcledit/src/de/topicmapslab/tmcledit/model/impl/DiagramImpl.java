@@ -5,6 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl#getEdges <em>Edges</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.DiagramImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +83,16 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Comment> comments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,6 +163,18 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Comment> getComments() {
+		if (comments == null) {
+			comments = new EObjectContainmentEList<Comment>(Comment.class, this, ModelPackage.DIAGRAM__COMMENTS);
+		}
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -158,6 +182,8 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DIAGRAM__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DIAGRAM__COMMENTS:
+				return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -176,6 +202,8 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 				return getNodes();
 			case ModelPackage.DIAGRAM__NAME:
 				return getName();
+			case ModelPackage.DIAGRAM__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,6 +228,10 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 			case ModelPackage.DIAGRAM__NAME:
 				setName((String)newValue);
 				return;
+			case ModelPackage.DIAGRAM__COMMENTS:
+				getComments().clear();
+				getComments().addAll((Collection<? extends Comment>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -221,6 +253,9 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 			case ModelPackage.DIAGRAM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.DIAGRAM__COMMENTS:
+				getComments().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -239,6 +274,8 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 				return nodes != null && !nodes.isEmpty();
 			case ModelPackage.DIAGRAM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.DIAGRAM__COMMENTS:
+				return comments != null && !comments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

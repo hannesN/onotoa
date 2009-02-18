@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.Diagram#getEdges <em>Edges</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.Diagram#getNodes <em>Nodes</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.Diagram#getName <em>Name</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.Diagram#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,5 +86,21 @@ public interface Diagram extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Comments</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.Comment}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Comments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Comments</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getDiagram_Comments()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Comment> getComments();
 
 } // Diagram
