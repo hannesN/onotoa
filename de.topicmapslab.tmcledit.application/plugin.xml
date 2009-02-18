@@ -46,10 +46,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="de.topicmapslab.tmcledit.application.application"
-            name="TMCL Edit">
+            name="Onotoa">
          <property
                name="appName"
-               value="TMCL Edit">
+               value="Onotoa">
          </property>
       </product>
    </extension>

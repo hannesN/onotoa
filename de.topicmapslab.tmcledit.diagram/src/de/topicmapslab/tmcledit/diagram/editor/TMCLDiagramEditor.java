@@ -26,6 +26,7 @@ import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
+import org.eclipse.gef.ui.palette.FlyoutPaletteComposite;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.jface.action.IAction;
@@ -90,6 +91,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			throws PartInitException {
 		super.init(site, input);
 		setPartName(input.getName());
+		getPalettePreferences().setPaletteState(FlyoutPaletteComposite.STATE_PINNED_OPEN);
+		getPalettePreferences().setPaletteWidth(200);
 	}
 
 	protected void initializeGraphicalViewer() {
@@ -112,12 +115,13 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			}
 			
 		});
-
 		// getEditDomain().getCommandStack().addCommandStackListener(this);
 		getSite().setSelectionProvider(this);
 		// listen for dropped parts
 		viewer.addDropTargetListener(new TypeDropTransferListener(viewer,
 				diagram));
+		
+		
 	}
 
 	protected void configureGraphicalViewer() {
@@ -152,7 +156,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		
 		viewer.setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.MOD2),
 				MouseWheelZoomHandler.SINGLETON);
-
+		getPalettePreferences().setPaletteState(FlyoutPaletteComposite.STATE_PINNED_OPEN);
 	}
 
 	public ZoomManager getZoomManager() {
