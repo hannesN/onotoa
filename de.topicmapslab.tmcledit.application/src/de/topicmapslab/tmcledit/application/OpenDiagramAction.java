@@ -13,18 +13,27 @@
  */
 package de.topicmapslab.tmcledit.application;
 
-import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
-import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.Action;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * @author Hannes Niederhausen
  *
  */
-public class OpenDiagramAction extends WorkbenchWindowActionDelegate {
+public class OpenDiagramAction extends Action {
+	
+	public OpenDiagramAction() {
+		setText("Open..");
+	}
+	
 	@Override
-	public void run(IAction action) {
-		FileDialog dlg = new FileDialog(getWindow().getShell());
+	public void run() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		Shell shell = workbench.getActiveWorkbenchWindow().getShell();
+		FileDialog dlg = new FileDialog(shell);
 		dlg.setFilterExtensions(new String[]{"*.tmcl"});
 		dlg.setFilterPath(System.getProperty("user.home"));
 		
@@ -33,7 +42,7 @@ public class OpenDiagramAction extends WorkbenchWindowActionDelegate {
 			if (!path.endsWith(".tmcl"))
 				path += ".tmcl";
 						
-			DiagramEditorActionBarAdvisor.openModelView(getWindow().getWorkbench(), path, false);
+			DiagramEditorActionBarAdvisor.openModelView(workbench, path, false);
 		}
 		
 	}

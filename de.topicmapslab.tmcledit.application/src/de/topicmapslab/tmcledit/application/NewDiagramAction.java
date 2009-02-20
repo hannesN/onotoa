@@ -10,27 +10,32 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
-import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
-import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.wizards.FileWizard;
 
 /**
  */
-public class NewDiagramAction extends WorkbenchWindowActionDelegate {
+public class NewDiagramAction extends Action {
 
-	/**
-	 * @generated NOT
-	 */
-	public void run(IAction action) {
+	public NewDiagramAction() {
+		setText("New..");
+	}
+	
+	public void run() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		Shell shell = workbench.getActiveWorkbenchWindow().getShell();
 		
 		FileWizard wizard = new FileWizard(true);
-		WizardDialog dlg = new WizardDialog(getWindow().getShell(), wizard);
+		WizardDialog dlg = new WizardDialog(shell, wizard);
 		if (dlg.open()==Dialog.OK) {
 			
-			DiagramEditorActionBarAdvisor.openModelView(getWindow().getWorkbench(), wizard.getPath(), true);
+			DiagramEditorActionBarAdvisor.openModelView(workbench, wizard.getPath(), true);
 		}
 		
 	}

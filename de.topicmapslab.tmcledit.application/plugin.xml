@@ -1,61 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.2"?><!--
-    Copyright (c) 2008, 2009 Topic Maps Lab and others.
-    All rights reserved. This program and the accompanying materials
-    are made available under the terms of the Eclipse Public License v1.0
-    which accompanies this distribution, and is available at
-    http://www.eclipse.org/legal/epl-v10.html
-    
-    Contributors:
-        Hannes Niederhausen - initial API and implementation
- -->
-
-<plugin>
-
-   <extension
-         id="application"
-         point="org.eclipse.core.runtime.applications">
-      <application>
-         <run
-               class="de.topicmapslab.tmcledit.application.TmcleditApplication">
-         </run>
-      </application>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            name="TMCLEdit Perspective"
-            class="de.topicmapslab.tmcledit.application.DiagramEditorPerspective"
-            id="de.topicmapslab.tmcledit.application.TmcleditPerspective">
-      </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            id="de.topicmapslab.tmcledit.application.actionSet1"
-            label="FileActionSet"
-            visible="true">
-         <action
-               class="de.topicmapslab.tmcledit.application.NewDiagramAction"
-               id="de.topicmapslab.tmcledit.application.newaction"
-               label="New.."
-               menubarPath="file/fileStart"
-               style="push">
-         </action>
-         <action
-               class="de.topicmapslab.tmcledit.application.OpenDiagramAction"
-               id="de.topicmapslab.tmcledit.application.openaction"
-               label="Open.."
-               menubarPath="file/de.topicmapslab.tmcledit.application.newaction"
-               style="push">
-         </action>
-      </actionSet>
-   </extension>
+<?eclipse version="3.0"?>
+<plugin
+>
    <extension
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="de.topicmapslab.tmcledit.application.application"
+            application="de.topicmapslab.tmcledit.application.onotoa"
             name="Onotoa">
          <property
                name="appName"
@@ -63,5 +14,25 @@
          </property>
       </product>
    </extension>
-
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="de.topicmapslab.tmcledit.application.DiagramEditorPerspective"
+            id="de.topicmapslab.tmcledit.application.TmcleditPerspective"
+            name="Onotota Perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="onotoa"
+         name="Onotoa"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="de.topicmapslab.tmcledit.application.TmcleditApplication">
+         </run>
+      </application>
+   </extension>
 </plugin>

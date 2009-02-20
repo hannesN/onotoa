@@ -26,8 +26,7 @@ public class DiagramEditorPerspective implements IPerspectiveFactory {
 	 */
 	public void createInitialLayout(IPageLayout layout) {
 		layout.setEditorAreaVisible(true);
-		
-		
+				
 		
 		layout.addPerspectiveShortcut(DiagramEditorWorkbenchAdvisor.PERSPECTIVE_ID);
 		IFolderLayout bottom = layout.createFolder(

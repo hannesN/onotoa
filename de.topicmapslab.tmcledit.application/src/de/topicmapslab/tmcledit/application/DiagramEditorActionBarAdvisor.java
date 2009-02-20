@@ -15,7 +15,6 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.ICoolBarManager;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -46,6 +45,10 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 	private AboutAction aboutAction;
 	
+	private NewDiagramAction newDiagramAction;
+	
+	private OpenDiagramAction openDiagramAction;
+	
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -57,13 +60,12 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		lockToolBarAction = ActionFactory.LOCK_TOOL_BAR.create(window);
 		register(lockToolBarAction);
 
+		newDiagramAction = new NewDiagramAction();
+		openDiagramAction = new OpenDiagramAction();
 		aboutAction = new AboutAction();
-		
 		register(ActionFactory.CLOSE.create(window));
 
-		IAction a = ActionFactory.SAVE.create(window);
-		a.run();
-		register(a);
+		register(ActionFactory.SAVE.create(window));
 
 		register(ActionFactory.SAVE_AS.create(window));
 
@@ -100,14 +102,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 					IWorkbenchActionConstants.M_FILE);
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
-			{
-				IMenuManager menuXX = new MenuManager(
-						Messages.ApplicationMenuName_New, "new");
-
-				menuXX.add(new GroupMarker(
-						IWorkbenchActionConstants.MB_ADDITIONS));
-				menuX.add(menuXX);
-			}
+			menuX.add(newDiagramAction);
+			menuX.add(openDiagramAction);
 
 			menuX.add(new Separator());
 
