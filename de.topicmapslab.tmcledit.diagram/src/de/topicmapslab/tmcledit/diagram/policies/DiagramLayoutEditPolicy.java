@@ -51,13 +51,10 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 			
 			// check if resize command
 			if (node instanceof Comment) {
-				if ((node.getPosX()==rec.x) && (node.getPosY()==rec.y)) {
-					cmd = new ResizeCommentCommand((Comment) node, rec.width, rec.height);
-					return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
-				}
+				cmd = new ResizeCommentCommand((Comment) node, rec.x, rec.y, rec.width, rec.height);
+			} else {
+				cmd = new MoveNodeCommand((Node) child.getModel(), rec.x, rec.y);
 			}
-			cmd = new MoveNodeCommand((Node) child.getModel(), rec.x, rec.y);
-		
 			if (cmd!=null)
 				return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		}
