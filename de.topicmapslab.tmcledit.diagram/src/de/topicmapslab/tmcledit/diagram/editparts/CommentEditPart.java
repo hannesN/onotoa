@@ -44,13 +44,10 @@ public class CommentEditPart extends AdapterGraphicalEditPart {
 	@Override
 	public void notifyChanged(Notification notification) {
 		if ( (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__HEIGHT) ||
-			 (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__WIDTH) ) {
-			updateSize();
-			return;
-		}
-		if ( (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__POS_X) ||
+			 (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__WIDTH)  ||
+			 (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__POS_X)  ||
 			 (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__POS_Y) ) {
-			updatePosition();
+			updateBounds();
 			return;
 		}
 		if ( (notification.getFeatureID(String.class)==ModelPackage.COMMENT__CONTENT)) {
@@ -59,12 +56,6 @@ public class CommentEditPart extends AdapterGraphicalEditPart {
 		}
 	}
 
-	private void updateSize() {
-		Comment comment = getCastedModel();
-		((CommentFigure)figure).setSize(comment.getWidth(), comment.getHeight());
-		
-	}
-	
 	private Comment getCastedModel() {
 		return (Comment) getModel();
 	}
@@ -72,8 +63,7 @@ public class CommentEditPart extends AdapterGraphicalEditPart {
 	@Override
 	protected void refreshVisuals() {
 		updateContent();
-		updatePosition();
-		updateSize();
+		updateBounds();
 	}
 
 	private void updateContent() {
@@ -87,7 +77,7 @@ public class CommentEditPart extends AdapterGraphicalEditPart {
 		}
 	}
 
-	private void updatePosition() {
+	private void updateBounds() {
 		if (getParent()==null)
 			return;
 		Comment comment = getCastedModel();
@@ -96,6 +86,6 @@ public class CommentEditPart extends AdapterGraphicalEditPart {
 		
 		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
 				getFigure(), r);
-		
+		((CommentFigure)figure).setSize(comment.getWidth(), comment.getHeight());
 	}
 }

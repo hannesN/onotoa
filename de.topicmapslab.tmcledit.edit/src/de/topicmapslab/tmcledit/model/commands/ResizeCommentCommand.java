@@ -13,7 +13,7 @@
  */
 package de.topicmapslab.tmcledit.model.commands;
 
-import java.awt.Dimension;
+import java.awt.Rectangle;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -29,12 +29,12 @@ public class ResizeCommentCommand extends AbstractCommand {
 
 	private final Comment commentNode;
 	
-	private Dimension newSize;
-	private Dimension oldSize;
+	private Rectangle newBounds;
+	private Rectangle oldBounds;
 	
-	public ResizeCommentCommand(Comment node, int newW, int newH) {
+	public ResizeCommentCommand(Comment node, int newX, int newY, int newW, int newH) {
 		this.commentNode = node;
-		newSize = new Dimension(newW, newH);
+		newBounds = new Rectangle(newX, newY, newW, newH);
 	}
 
 	@Override
@@ -44,25 +44,30 @@ public class ResizeCommentCommand extends AbstractCommand {
 	
 	@Override
 	protected boolean prepare() {
-		oldSize = new Dimension(commentNode.getWidth(), commentNode.getHeight());
+		oldBounds = new Rectangle(commentNode.getPosX(),
+								commentNode.getPosY(),
+								commentNode.getWidth(), 
+								commentNode.getHeight());
 		return true;
 	}
 	
 	@Override
 	public void redo() {
-		setSize(newSize);
+		setBounds(newBounds);
 	}
 	
-	private void setSize(Dimension size) {
+	private void setBounds(Rectangle bounds) {
 		((EObjectImpl) commentNode).eSetDeliver(false);
-		commentNode.setWidth(size.width);
+		commentNode.setPosX(bounds.x);
+		commentNode.setPosY(bounds.y);
+		commentNode.setWidth(bounds.width);
 		((EObjectImpl) commentNode).eSetDeliver(true);
-		commentNode.setHeight(size.height);
+		commentNode.setHeight(bounds.height);
 	}
 	
 	@Override
 	public void undo() {
-		setSize(oldSize);
+		setBounds(oldBounds);
 	}
 	
 }
