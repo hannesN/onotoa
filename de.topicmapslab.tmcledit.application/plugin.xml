@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="de.topicmapslab.tmcledit.application.onotoa"
+            name="Onotoa">
+         <property
+               name="appName"
+               value="Onotoa">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="de.topicmapslab.tmcledit.application.DiagramEditorPerspective"
+            id="de.topicmapslab.tmcledit.application.TmcleditPerspective"
+            name="Onotota Perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="onotoa"
+         name="Onotoa"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="de.topicmapslab.tmcledit.application.TmcleditApplication">
+         </run>
+      </application>
+   </extension>
+</plugin>
