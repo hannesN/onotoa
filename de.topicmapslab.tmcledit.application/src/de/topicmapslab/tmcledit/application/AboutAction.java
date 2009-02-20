@@ -33,9 +33,9 @@ public class AboutAction extends Action {
 	public void run() {
 		Bundle bundle = TmcleditEditPlugin.getPlugin().getBundle();
 		String version = (String) bundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
-		int i = version.lastIndexOf(".0.0");
-		if (i > -1)
-			version = version.substring(0, i);
+//		int i = version.lastIndexOf(".0.0");
+//		if (i > -1)
+//			version = version.substring(0, i);
 		
 		version = "\nVersion: " + version;
 		String copyright = "\n(C) 2009, Hannes Niederhausen, Topic Maps Lab";
