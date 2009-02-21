@@ -99,7 +99,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		{
 			IMenuManager menuX = new MenuManager(
 					Messages.ApplicationMenuName_File,
-					IWorkbenchActionConstants.M_FILE);
+					"org.eclipse.ui.main.menu."+IWorkbenchActionConstants.M_FILE);
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
 			menuX.add(newDiagramAction);
@@ -135,7 +135,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		{
 			IMenuManager menuX = new MenuManager(
 					Messages.ApplicationMenuName_Edit,
-					IWorkbenchActionConstants.M_EDIT);
+					"org.eclipse.ui.main.menu."+IWorkbenchActionConstants.M_EDIT);
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.EDIT_START));
 
@@ -177,10 +177,11 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		{
 			IMenuManager menuX = new MenuManager(
 					Messages.ApplicationMenuName_Window,
-					IWorkbenchActionConstants.M_WINDOW);
+					"org.eclipse.ui.main.menu.window");
 
-			menuX.add(getAction(ActionFactory.RESET_PERSPECTIVE.getId()));
+			
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+			menuX.add(getAction(ActionFactory.RESET_PERSPECTIVE.getId()));
 			menu.add(menuX);
 		}
 
