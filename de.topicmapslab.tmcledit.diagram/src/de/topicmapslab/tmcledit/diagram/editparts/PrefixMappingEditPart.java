@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
@@ -33,6 +34,8 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 
 public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 
+	private Figure compartment;
+	
 	private final Adapter adapter = new AdapterImpl() {
 		@Override
 		public void notifyChanged(Notification msg) {
@@ -53,11 +56,46 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 			figure.setMinimumSize(new Dimension(50, 20));
 			Label l = new Label();
 			l.setText("Prefixes:");
+			
+			compartment = new Figure();
+			GridLayout gridLayout = new GridLayout(2, false);
+			gridLayout.verticalSpacing = 1;
+			compartment.setLayoutManager(gridLayout);
+			
 			figure.add(l);
+			figure.add(compartment);
+			
 		}
 		return figure;
 	}
 
+	@Override
+	public IFigure getContentPane() {
+		if (compartment==null)
+			createFigure();
+		return compartment;
+	}
+	
+	@Override
+	protected void addChildVisual(EditPart childEditPart, int index) {
+		if (childEditPart instanceof PrefixMappingElementEditPart) {
+			PrefixMappingElementEditPart ep = (PrefixMappingElementEditPart) childEditPart;
+			getContentPane().add(ep.getKeyLabel());
+			getContentPane().add(ep.getUriLabel());
+		} else 
+			super.addChildVisual(childEditPart, index);
+	}
+	
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		if (childEditPart instanceof PrefixMappingElementEditPart) {
+			PrefixMappingElementEditPart ep = (PrefixMappingElementEditPart) childEditPart;
+			getContentPane().remove(ep.getKeyLabel());
+			getContentPane().remove(ep.getUriLabel());
+		} else 
+			super.removeChildVisual(childEditPart);
+	}
+	
 	@Override
 	protected void createEditPolicies() {
 	}
@@ -67,12 +105,6 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 		return (EObjectContainmentEList<MappingElement>) getModel();
 	}
 
-	@Override
-	protected void addChildVisual(EditPart childEditPart, int index) {
-		// increase index beacuse headline-label is index
-		super.addChildVisual(childEditPart, index+1);
-	}
-	
 	@Override
 	public void activate() {
 		super.activate();

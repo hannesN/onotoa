@@ -88,16 +88,13 @@
          </toolbar>
       </menuContribution>
       <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu.window">
+            locationURI="menu:window">
          <command
                commandId="de.topicmapslab.tmcledit.extensions.showerrorviewcommand"
                mode="FORCE_TEXT"
                style="push"
                tooltip="Opens the validation error view">
          </command>
-         <menu
-               label="Huhu">
-         </menu>
       </menuContribution>
    </extension>
    <extension
