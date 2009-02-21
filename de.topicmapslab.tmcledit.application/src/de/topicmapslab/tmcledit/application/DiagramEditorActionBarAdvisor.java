@@ -193,8 +193,9 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_START));
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_END));
-			menuX.add(aboutAction);
+			
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+			menuX.add(aboutAction);
 			menu.add(menuX);
 		}
 	}
