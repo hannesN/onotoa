@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.topicmapslab.tmcledit.doc.actions.ShowHelpHandler"
+            id="de.topicmapslab.tmcledit.doc.openhelpcommand"
+            name="Help">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.tmcledit.doc.actions.ShowLicenseHandler"
+            id="de.topicmapslab.tmcledit.doc.showlicensecommand"
+            name="Show License">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:help">
+         <command
+               commandId="de.topicmapslab.tmcledit.doc.openhelpcommand"
+               label="&amp;Help"
+               style="push">
+         </command>
+         <command
+               commandId="de.topicmapslab.tmcledit.doc.showlicensecommand"
+               label="Show License"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="de.topicmapslab.tmcledit.doc.openhelpcommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="F1">
+      </key>
+   </extension>
+
+</plugin>
