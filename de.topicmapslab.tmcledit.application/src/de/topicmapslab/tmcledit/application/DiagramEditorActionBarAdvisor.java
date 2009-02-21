@@ -178,6 +178,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			IMenuManager menuX = new MenuManager(
 					Messages.ApplicationMenuName_Window,
 					IWorkbenchActionConstants.M_WINDOW);
+			
 
 			
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
