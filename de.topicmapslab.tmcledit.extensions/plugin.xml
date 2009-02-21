@@ -67,6 +67,10 @@
             id="de.topicmapslab.tmcledit.model.validatecommand"
             name="Validate">
       </command>
+      <command
+            id="de.topicmapslab.tmcledit.extensions.showerrorviewcommand"
+            name="Show Arror View">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -83,12 +87,28 @@
             </command>
          </toolbar>
       </menuContribution>
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu.window">
+         <command
+               commandId="de.topicmapslab.tmcledit.extensions.showerrorviewcommand"
+               mode="FORCE_TEXT"
+               style="push"
+               tooltip="Opens the validation error view">
+         </command>
+         <menu
+               label="Huhu">
+         </menu>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
             class="de.topicmapslab.tmcledit.extensions.actions.ValidateHandler"
             commandId="de.topicmapslab.tmcledit.model.validatecommand">
+      </handler>
+      <handler
+            class="de.topicmapslab.tmcledit.extensions.actions.ShowValidationErrorViewHandler"
+            commandId="de.topicmapslab.tmcledit.extensions.showerrorviewcommand">
       </handler>
    </extension>
    <extension
