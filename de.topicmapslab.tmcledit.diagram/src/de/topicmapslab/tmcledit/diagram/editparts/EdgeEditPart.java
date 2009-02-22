@@ -175,22 +175,23 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		if (getCastedModel().getRoleConstraint()!=null) {
 			RolePlayerConstraint rtc = getCastedModel().getRoleConstraint();
 			
-			String typeText = "no role type set";
+			String roleText = "no role type set";
 			if (rtc.getRole()!=null)
-				typeText = rtc.getRole().getType().getName();
+				roleText = rtc.getRole().getCardMin() + ".."
+						+ rtc.getRole().getCardMax() + "\n"
+						+ rtc.getRole().getType().getName();
 			
 			if (getChildren().size()>0) {
-				MoveableLabelEditPart cardEditPart = (MoveableLabelEditPart) getChildren().get(0);
-				MoveableLabelEditPart roleCardEditPart = (MoveableLabelEditPart) getChildren().get(1);
+				MoveableLabelEditPart roleEditPart = (MoveableLabelEditPart) getChildren().get(0);
+				MoveableLabelEditPart rolePlayerCardEditPart = (MoveableLabelEditPart) getChildren().get(1);
 				
-				cardEditPart.setText(rtc.getCardMin()+".."+rtc.getCardMax()+"\n"+typeText);
+				roleEditPart.setText(roleText);
 				
-				if (rtc.getRole()!=null)
-					roleCardEditPart.setText(rtc.getRole().getCardMin()+".."+rtc.getRole().getCardMax());
+				rolePlayerCardEditPart.setText(rtc.getCardMin()+".."+rtc.getCardMax());
 				
 				
-				roleCardEditPart.refreshVisuals();
-				cardEditPart.refreshVisuals();
+				rolePlayerCardEditPart.refreshVisuals();
+				roleEditPart.refreshVisuals();
 			}
 		}
 		
