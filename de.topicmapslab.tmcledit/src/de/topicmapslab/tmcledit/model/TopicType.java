@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIsa <em>Isa</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getAko <em>Ako</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOccurenceConstraints <em>Occurence Constraints</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOccurrenceConstraints <em>Occurrence Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getNameContraints <em>Name Contraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
@@ -154,20 +154,20 @@ public interface TopicType extends EObject {
 	EList<TopicType> getAko();
 
 	/**
-	 * Returns the value of the '<em><b>Occurence Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint}.
+	 * Returns the value of the '<em><b>Occurrence Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Occurence Constraints</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Occurrence Constraints</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Occurence Constraints</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_OccurenceConstraints()
+	 * @return the value of the '<em>Occurrence Constraints</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_OccurrenceConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<OccurenceTypeConstraint> getOccurenceConstraints();
+	EList<OccurrenceTypeConstraint> getOccurrenceConstraints();
 
 	/**
 	 * Returns the value of the '<em><b>Name Contraints</b></em>' containment reference list.

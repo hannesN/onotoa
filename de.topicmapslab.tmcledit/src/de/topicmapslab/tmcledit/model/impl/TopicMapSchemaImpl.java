@@ -54,7 +54,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveRoleTypeConstraint <em>Active Role Type Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveNameTypeConstraint <em>Active Name Type Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveAssociationTypeConstraint <em>Active Association Type Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveOccurenceTypeConstraint <em>Active Occurence Type Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveOccurrenceTypeConstraint <em>Active Occurrence Type Constraint</em>}</li>
  * </ul>
  * </p>
  *
@@ -202,24 +202,24 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	protected boolean activeAssociationTypeConstraint = ACTIVE_ASSOCIATION_TYPE_CONSTRAINT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isActiveOccurenceTypeConstraint() <em>Active Occurence Type Constraint</em>}' attribute.
+	 * The default value of the '{@link #isActiveOccurrenceTypeConstraint() <em>Active Occurrence Type Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isActiveOccurenceTypeConstraint()
+	 * @see #isActiveOccurrenceTypeConstraint()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ACTIVE_OCCURENCE_TYPE_CONSTRAINT_EDEFAULT = true;
+	protected static final boolean ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT = true;
 
 	/**
-	 * The cached value of the '{@link #isActiveOccurenceTypeConstraint() <em>Active Occurence Type Constraint</em>}' attribute.
+	 * The cached value of the '{@link #isActiveOccurrenceTypeConstraint() <em>Active Occurrence Type Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isActiveOccurenceTypeConstraint()
+	 * @see #isActiveOccurrenceTypeConstraint()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean activeOccurenceTypeConstraint = ACTIVE_OCCURENCE_TYPE_CONSTRAINT_EDEFAULT;
+	protected boolean activeOccurrenceTypeConstraint = ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -398,8 +398,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isActiveOccurenceTypeConstraint() {
-		return activeOccurenceTypeConstraint;
+	public boolean isActiveOccurrenceTypeConstraint() {
+		return activeOccurrenceTypeConstraint;
 	}
 
 	/**
@@ -407,11 +407,11 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActiveOccurenceTypeConstraint(boolean newActiveOccurenceTypeConstraint) {
-		boolean oldActiveOccurenceTypeConstraint = activeOccurenceTypeConstraint;
-		activeOccurenceTypeConstraint = newActiveOccurenceTypeConstraint;
+	public void setActiveOccurrenceTypeConstraint(boolean newActiveOccurrenceTypeConstraint) {
+		boolean oldActiveOccurrenceTypeConstraint = activeOccurrenceTypeConstraint;
+		activeOccurrenceTypeConstraint = newActiveOccurrenceTypeConstraint;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT, oldActiveOccurenceTypeConstraint, activeOccurenceTypeConstraint));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT, oldActiveOccurrenceTypeConstraint, activeOccurrenceTypeConstraint));
 	}
 
 	/**
@@ -458,8 +458,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				return isActiveNameTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
 				return isActiveAssociationTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT:
-				return isActiveOccurenceTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
+				return isActiveOccurrenceTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -504,8 +504,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
 				setActiveAssociationTypeConstraint(((Boolean)newValue).booleanValue());
 				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT:
-				setActiveOccurenceTypeConstraint(((Boolean)newValue).booleanValue());
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
+				setActiveOccurrenceTypeConstraint(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -546,8 +546,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
 				setActiveAssociationTypeConstraint(ACTIVE_ASSOCIATION_TYPE_CONSTRAINT_EDEFAULT);
 				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT:
-				setActiveOccurenceTypeConstraint(ACTIVE_OCCURENCE_TYPE_CONSTRAINT_EDEFAULT);
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
+				setActiveOccurrenceTypeConstraint(ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -579,8 +579,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				return activeNameTypeConstraint != ACTIVE_NAME_TYPE_CONSTRAINT_EDEFAULT;
 			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
 				return activeAssociationTypeConstraint != ACTIVE_ASSOCIATION_TYPE_CONSTRAINT_EDEFAULT;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT:
-				return activeOccurenceTypeConstraint != ACTIVE_OCCURENCE_TYPE_CONSTRAINT_EDEFAULT;
+			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
+				return activeOccurrenceTypeConstraint != ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -607,8 +607,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 		result.append(activeNameTypeConstraint);
 		result.append(", activeAssociationTypeConstraint: ");
 		result.append(activeAssociationTypeConstraint);
-		result.append(", activeOccurenceTypeConstraint: ");
-		result.append(activeOccurenceTypeConstraint);
+		result.append(", activeOccurrenceTypeConstraint: ");
+		result.append(activeOccurrenceTypeConstraint);
 		result.append(')');
 		return result.toString();
 	}

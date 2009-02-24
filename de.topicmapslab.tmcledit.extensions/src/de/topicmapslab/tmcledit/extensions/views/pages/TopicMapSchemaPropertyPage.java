@@ -46,7 +46,7 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 			atButton.setSelection(getCastedModel().isActiveAssociationTypeConstraint());
 			stButton.setSelection(getCastedModel().isActiveScopeTypeConstraint());
 			ntButton.setSelection(getCastedModel().isActiveNameTypeConstraint());
-			otButton.setSelection(getCastedModel().isActiveOccurenceTypeConstraint());
+			otButton.setSelection(getCastedModel().isActiveOccurrenceTypeConstraint());
 		}
 	}
 
@@ -91,8 +91,8 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT);
 		
 		otButton = createCheckButton(toolkit, comp,
-				"Occurence Type Constraint",
-				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT);
+				"Occurrence Type Constraint",
+				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT);
 		
 		setControl(section);
 	}

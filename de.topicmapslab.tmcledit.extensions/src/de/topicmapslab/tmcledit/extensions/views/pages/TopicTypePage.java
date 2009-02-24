@@ -319,8 +319,8 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			return "Name Type";
 		case ASSOCIATION_TYPE:
 			return "Association Type";
-		case OCCURENCE_TYPE:
-			return "OccurenceType";
+		case OCCURRENCE_TYPE:
+			return "Occurrence Type";
 		case SCOPE_TYPE:
 			return "Scope Type";
 		default:

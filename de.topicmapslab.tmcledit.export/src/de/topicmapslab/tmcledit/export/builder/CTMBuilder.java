@@ -24,8 +24,8 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceType;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
@@ -138,8 +138,8 @@ public class CTMBuilder {
 		if (schema.isActiveRoleTypeConstraint())
 			addLine("rtc isa roletype-constraint .");
 		
-		if (schema.isActiveOccurenceTypeConstraint())
-			addLine("otc isa occurencetype-constraint .");
+		if (schema.isActiveOccurrenceTypeConstraint())
+			addLine("otc isa occurrencetype-constraint .");
 		
 		addLineSeparator();
 		
@@ -199,8 +199,8 @@ public class CTMBuilder {
 			processNameTypeConstraint(ntc);
 		}
 		
-		for (OccurenceTypeConstraint otc : topicType.getOccurenceConstraints()) {
-			processOccurenceTypeConstraint(otc);
+		for (OccurrenceTypeConstraint otc : topicType.getOccurrenceConstraints()) {
+			processOccurrenceTypeConstraint(otc);
 		}
 		
 		if (topicType instanceof ScopedTopicType) {
@@ -218,8 +218,8 @@ public class CTMBuilder {
 				processRoleContraint(rc);
 		}
 		
-		if (topicType instanceof OccurenceType) {
-			processOccurenceDatatype(topicType);
+		if (topicType instanceof OccurrenceType) {
+			processOccurrenceDatatype(topicType);
 		}
 		
 		if (topicType instanceof RoleType) {
@@ -259,8 +259,8 @@ public class CTMBuilder {
 		addLineSeparator();
 	}
 
-	private void processOccurenceDatatype(TopicType topicType) {
-		OccurenceType ot = (OccurenceType) topicType;
+	private void processOccurrenceDatatype(TopicType topicType) {
+		OccurrenceType ot = (OccurrenceType) topicType;
 		addIndention();
 		buffer.append("has-datatype(");
 		buffer.append(ot.getDataType());
@@ -274,8 +274,8 @@ public class CTMBuilder {
 		case NAME_TYPE:
 				buffer.append("has-scope(");
 				break;
-			case OCCURENCE_TYPE:
-				buffer.append("has-occurence-scope(");
+			case OCCURRENCE_TYPE:
+				buffer.append("has-occurrence-scope(");
 				break;
 			case ASSOCIATION_TYPE:
 				buffer.append("has-association-scope(");
@@ -305,10 +305,10 @@ public class CTMBuilder {
 		addLineSeparator();
 	}
 	
-	private void processOccurenceTypeConstraint(OccurenceTypeConstraint otc) {
+	private void processOccurrenceTypeConstraint(OccurrenceTypeConstraint otc) {
 		String idString = getIdString(otc.getType());
 		addIndention();
-		buffer.append("has-occurence(");
+		buffer.append("has-occurrence(");
 		buffer.append(idString);
 		buffer.append(", ");
 		buffer.append(otc.getCardMin());
@@ -321,7 +321,7 @@ public class CTMBuilder {
 
 		if (otc.isUnique()) {
 			addIndention();
-			buffer.append("unqie-occurence(");
+			buffer.append("unqie-occurrence(");
 			buffer.append(idString);
 			buffer.append(");");
 			addLineSeparator();

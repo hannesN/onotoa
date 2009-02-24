@@ -29,7 +29,7 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
@@ -127,16 +127,16 @@ public class FileUtil {
 		diagram.getEdges().add(e);
 		
 		TopicType ot = modelInstance.createTopicType();
-		ot.setKind(KindOfTopicType.OCCURENCE_TYPE);
+		ot.setKind(KindOfTopicType.OCCURRENCE_TYPE);
 		ot.setName("Addresse");
 		ot.getIdentifiers().add("foo:Address");
 		schema.getTopicTypes().add(ot);
 		
-		OccurenceTypeConstraint otc = modelInstance.createOccurenceTypeConstraint();
+		OccurrenceTypeConstraint otc = modelInstance.createOccurrenceTypeConstraint();
 		otc.setCardMax("*");
 		otc.setCardMin("0");
 		otc.setType(ot);
-		tt.getOccurenceConstraints().add(otc);
+		tt.getOccurrenceConstraints().add(otc);
 		
 		TopicType nt = modelInstance.createTopicType();
 		nt.setKind(KindOfTopicType.NAME_TYPE);

@@ -333,12 +333,12 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String OccurenceType2CreationTool_title;
+	public static String OccurrenceType2CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String OccurenceType2CreationTool_desc;
+	public static String OccurrenceType2CreationTool_desc;
 
 	/**
 	 * @generated
@@ -423,12 +423,12 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String OccurenceTypeConstraint1CreationTool_title;
+	public static String OccurrenceTypeConstraint1CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String OccurenceTypeConstraint1CreationTool_desc;
+	public static String OccurrenceTypeConstraint1CreationTool_desc;
 
 	/**
 	 * @generated
@@ -548,7 +548,7 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String TopicTypeTopicTypOccurenceCompartmentEditPart_title;
+	public static String TopicTypeTopicTypOccurrenceCompartmentEditPart_title;
 
 	/**
 	 * @generated
@@ -563,7 +563,7 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String TopicTypeTopicTypOccurenceCompartment2EditPart_title;
+	public static String TopicTypeTopicTypOccurrenceCompartment2EditPart_title;
 
 	/**
 	 * @generated
@@ -578,7 +578,7 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String RoleTypeTopicTypOccurenceCompartmentEditPart_title;
+	public static String RoleTypeTopicTypOccurrenceCompartmentEditPart_title;
 
 	/**
 	 * @generated
@@ -593,7 +593,7 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String AssociationsTypeTopicTypOccurenceCompartmentEditPart_title;
+	public static String AssociationsTypeTopicTypOccurrenceCompartmentEditPart_title;
 
 	/**
 	 * @generated
@@ -603,17 +603,17 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String OccurenceTypeTopicTypeNameCompartmentEditPart_title;
+	public static String OccurrenceTypeTopicTypeNameCompartmentEditPart_title;
 
 	/**
 	 * @generated
 	 */
-	public static String OccurenceTypeTopicTypOccurenceCompartmentEditPart_title;
+	public static String OccurrenceTypeTopicTypOccurrenceCompartmentEditPart_title;
 
 	/**
 	 * @generated
 	 */
-	public static String OccurenceTypeIdentifierCompartmentEditPart_title;
+	public static String OccurrenceTypeIdentifierCompartmentEditPart_title;
 
 	/**
 	 * @generated
@@ -623,7 +623,7 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String TopicTypeTopicTypOccurenceCompartment3EditPart_title;
+	public static String TopicTypeTopicTypOccurrenceCompartment3EditPart_title;
 
 	/**
 	 * @generated

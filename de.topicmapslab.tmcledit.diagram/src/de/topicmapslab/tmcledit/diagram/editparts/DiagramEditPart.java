@@ -103,9 +103,8 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 		Diagram d = (Diagram) getModel();
 		List result = new ArrayList();
 		result.addAll(d.getNodes());
-		result.addAll(d.getComments());
 		result.add(((File)d.eContainer()).getTopicMapSchema().getMappings());
-		
+		result.addAll(d.getComments());
 		return result;
 	}
 

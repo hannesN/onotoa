@@ -109,13 +109,13 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: {
-				OccurenceTypeConstraint occurenceTypeConstraint = (OccurenceTypeConstraint)theEObject;
-				T result = caseOccurenceTypeConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseAbstractConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseAbstractTypedCardinalityConstraint(occurenceTypeConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(occurenceTypeConstraint);
-				if (result == null) result = caseAbstractTypedConstraint(occurenceTypeConstraint);
+			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT: {
+				OccurrenceTypeConstraint occurrenceTypeConstraint = (OccurrenceTypeConstraint)theEObject;
+				T result = caseOccurrenceTypeConstraint(occurrenceTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(occurrenceTypeConstraint);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(occurrenceTypeConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(occurrenceTypeConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(occurrenceTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -259,11 +259,11 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.OCCURENCE_TYPE: {
-				OccurenceType occurenceType = (OccurenceType)theEObject;
-				T result = caseOccurenceType(occurenceType);
-				if (result == null) result = caseScopedTopicType(occurenceType);
-				if (result == null) result = caseTopicType(occurenceType);
+			case ModelPackage.OCCURRENCE_TYPE: {
+				OccurrenceType occurrenceType = (OccurrenceType)theEObject;
+				T result = caseOccurrenceType(occurrenceType);
+				if (result == null) result = caseScopedTopicType(occurrenceType);
+				if (result == null) result = caseTopicType(occurrenceType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -348,17 +348,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Occurence Type Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Occurrence Type Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Occurence Type Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Occurrence Type Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOccurenceTypeConstraint(OccurenceTypeConstraint object) {
+	public T caseOccurrenceTypeConstraint(OccurrenceTypeConstraint object) {
 		return null;
 	}
 
@@ -663,17 +663,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Occurence Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Occurrence Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Occurence Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Occurrence Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOccurenceType(OccurenceType object) {
+	public T caseOccurrenceType(OccurrenceType object) {
 		return null;
 	}
 

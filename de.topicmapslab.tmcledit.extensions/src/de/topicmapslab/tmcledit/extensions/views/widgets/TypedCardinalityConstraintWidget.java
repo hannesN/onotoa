@@ -307,8 +307,8 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			case ASSOCIATION_TYPE:
 				img = ImageConstants.ASSOCIATIONTYPE;
 				break;
-			case OCCURENCE_TYPE:
-				img = ImageConstants.OCCURENCECONSTRAINT;
+			case OCCURRENCE_TYPE:
+				img = ImageConstants.OCCURRENCECONSTRAINT;
 				break;
 			}
 			

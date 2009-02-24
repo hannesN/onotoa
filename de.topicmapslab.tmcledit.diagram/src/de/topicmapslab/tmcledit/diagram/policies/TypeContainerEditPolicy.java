@@ -17,8 +17,8 @@ import org.eclipse.gef.requests.CreateRequest;
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.commands.CreateOccurenceConstraintCommand;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand;
 
 /**
  * 
@@ -29,9 +29,9 @@ public class TypeContainerEditPolicy extends ContainerEditPolicy {
 
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
-		if (request.getNewObjectType()==OccurenceTypeConstraint.class) {
+		if (request.getNewObjectType()==OccurrenceTypeConstraint.class) {
 			TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
-			CreateOccurenceConstraintCommand cmd = new CreateOccurenceConstraintCommand(((TypeNodeEditPart)getHost()).getCastedModel().getTopicType(), (OccurenceTypeConstraint) request.getNewObject());
+			CreateOccurrenceConstraintCommand cmd = new CreateOccurrenceConstraintCommand(((TypeNodeEditPart)getHost()).getCastedModel().getTopicType(), (OccurrenceTypeConstraint) request.getNewObject());
 			return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		}
 		return null;

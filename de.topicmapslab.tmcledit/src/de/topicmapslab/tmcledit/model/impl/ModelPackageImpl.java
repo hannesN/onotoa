@@ -43,8 +43,8 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.OccurenceType;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
@@ -84,7 +84,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass occurenceTypeConstraintEClass = null;
+	private EClass occurrenceTypeConstraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -231,7 +231,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass occurenceTypeEClass = null;
+	private EClass occurrenceTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -423,7 +423,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTopicType_OccurenceConstraints() {
+	public EReference getTopicType_OccurrenceConstraints() {
 		return (EReference)topicTypeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -513,8 +513,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getOccurenceTypeConstraint() {
-		return occurenceTypeConstraintEClass;
+	public EClass getOccurrenceTypeConstraint() {
+		return occurrenceTypeConstraintEClass;
 	}
 
 	/**
@@ -522,8 +522,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOccurenceTypeConstraint_Unique() {
-		return (EAttribute)occurenceTypeConstraintEClass.getEStructuralFeatures().get(0);
+	public EAttribute getOccurrenceTypeConstraint_Unique() {
+		return (EAttribute)occurrenceTypeConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -657,7 +657,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTopicMapSchema_ActiveOccurenceTypeConstraint() {
+	public EAttribute getTopicMapSchema_ActiveOccurrenceTypeConstraint() {
 		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -1089,8 +1089,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getOccurenceType() {
-		return occurenceTypeEClass;
+	public EClass getOccurrenceType() {
+		return occurrenceTypeEClass;
 	}
 
 	/**
@@ -1098,8 +1098,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOccurenceType_DataType() {
-		return (EAttribute)occurenceTypeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getOccurrenceType_DataType() {
+		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1289,7 +1289,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__ABSTRACT);
 		createEReference(topicTypeEClass, TOPIC_TYPE__ISA);
 		createEReference(topicTypeEClass, TOPIC_TYPE__AKO);
-		createEReference(topicTypeEClass, TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
+		createEReference(topicTypeEClass, TOPIC_TYPE__OCCURRENCE_CONSTRAINTS);
 		createEReference(topicTypeEClass, TOPIC_TYPE__NAME_CONTRAINTS);
 		createEReference(topicTypeEClass, TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
 		createEReference(topicTypeEClass, TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
@@ -1301,8 +1301,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractConstraintEClass = createEClass(ABSTRACT_CONSTRAINT);
 		createEAttribute(abstractConstraintEClass, ABSTRACT_CONSTRAINT__REGEXP);
 
-		occurenceTypeConstraintEClass = createEClass(OCCURENCE_TYPE_CONSTRAINT);
-		createEAttribute(occurenceTypeConstraintEClass, OCCURENCE_TYPE_CONSTRAINT__UNIQUE);
+		occurrenceTypeConstraintEClass = createEClass(OCCURRENCE_TYPE_CONSTRAINT);
+		createEAttribute(occurrenceTypeConstraintEClass, OCCURRENCE_TYPE_CONSTRAINT__UNIQUE);
 
 		nameTypeConstraintEClass = createEClass(NAME_TYPE_CONSTRAINT);
 
@@ -1320,7 +1320,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT);
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT);
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT);
-		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT);
 
 		subjectLocatorConstraintEClass = createEClass(SUBJECT_LOCATOR_CONSTRAINT);
 
@@ -1386,8 +1386,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		associationTypeEClass = createEClass(ASSOCIATION_TYPE);
 		createEReference(associationTypeEClass, ASSOCIATION_TYPE__ROLES);
 
-		occurenceTypeEClass = createEClass(OCCURENCE_TYPE);
-		createEAttribute(occurenceTypeEClass, OCCURENCE_TYPE__DATA_TYPE);
+		occurrenceTypeEClass = createEClass(OCCURRENCE_TYPE);
+		createEAttribute(occurrenceTypeEClass, OCCURRENCE_TYPE__DATA_TYPE);
 
 		roleConstraintEClass = createEClass(ROLE_CONSTRAINT);
 
@@ -1444,8 +1444,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Add supertypes to classes
 		abstractConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
-		occurenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
-		occurenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
+		occurrenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
+		occurrenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		nameTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		nameTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		rolePlayerConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
@@ -1458,7 +1458,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		scopeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		scopedTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 		associationTypeEClass.getESuperTypes().add(this.getScopedTopicType());
-		occurenceTypeEClass.getESuperTypes().add(this.getScopedTopicType());
+		occurrenceTypeEClass.getESuperTypes().add(this.getScopedTopicType());
 		roleConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		roleTypeEClass.getESuperTypes().add(this.getTopicType());
 		otherRolePlayerConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
@@ -1474,7 +1474,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTopicType_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_Isa(), this.getTopicType(), null, "isa", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_Ako(), this.getTopicType(), null, "ako", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopicType_OccurenceConstraints(), this.getOccurenceTypeConstraint(), null, "occurenceConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopicType_OccurrenceConstraints(), this.getOccurrenceTypeConstraint(), null, "occurrenceConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_NameContraints(), this.getNameTypeConstraint(), null, "nameContraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_SubjectIdentifierConstraints(), this.getSubjectIdentifierConstraint(), null, "subjectIdentifierConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_SubjectLocatorConstraint(), this.getSubjectLocatorConstraint(), null, "subjectLocatorConstraint", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1486,8 +1486,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(abstractConstraintEClass, AbstractConstraint.class, "AbstractConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractConstraint_Regexp(), ecorePackage.getEString(), "regexp", ".*", 1, 1, AbstractConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(occurenceTypeConstraintEClass, OccurenceTypeConstraint.class, "OccurenceTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOccurenceTypeConstraint_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, OccurenceTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(occurrenceTypeConstraintEClass, OccurrenceTypeConstraint.class, "OccurrenceTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOccurrenceTypeConstraint_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, OccurrenceTypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nameTypeConstraintEClass, NameTypeConstraint.class, "NameTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1505,7 +1505,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTopicMapSchema_ActiveRoleTypeConstraint(), ecorePackage.getEBoolean(), "activeRoleTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicMapSchema_ActiveNameTypeConstraint(), ecorePackage.getEBoolean(), "activeNameTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicMapSchema_ActiveAssociationTypeConstraint(), ecorePackage.getEBoolean(), "activeAssociationTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTopicMapSchema_ActiveOccurenceTypeConstraint(), ecorePackage.getEBoolean(), "activeOccurenceTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_ActiveOccurrenceTypeConstraint(), ecorePackage.getEBoolean(), "activeOccurrenceTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectLocatorConstraintEClass, SubjectLocatorConstraint.class, "SubjectLocatorConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1571,8 +1571,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(associationTypeEClass, AssociationType.class, "AssociationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssociationType_Roles(), this.getRoleConstraint(), null, "roles", null, 1, -1, AssociationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(occurenceTypeEClass, OccurenceType.class, "OccurenceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOccurenceType_DataType(), ecorePackage.getEString(), "dataType", "xsd:anyType", 1, 1, OccurenceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(occurrenceTypeEClass, OccurrenceType.class, "OccurrenceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOccurrenceType_DataType(), ecorePackage.getEString(), "dataType", "xsd:anyType", 1, 1, OccurrenceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleConstraintEClass, RoleConstraint.class, "RoleConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1608,7 +1608,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEEnum(kindOfTopicTypeEEnum, KindOfTopicType.class, "KindOfTopicType");
 		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.TOPIC_TYPE);
-		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.OCCURENCE_TYPE);
+		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.OCCURRENCE_TYPE);
 		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.NAME_TYPE);
 		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.ROLE_TYPE);
 		addEEnumLiteral(kindOfTopicTypeEEnum, KindOfTopicType.ASSOCIATION_TYPE);

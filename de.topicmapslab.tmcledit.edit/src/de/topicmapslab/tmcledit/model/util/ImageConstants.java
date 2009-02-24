@@ -18,9 +18,9 @@ package de.topicmapslab.tmcledit.model.util;
 public interface ImageConstants {
 	public static String ISA_SM = "./isa_sm.gif";
 	public static String NAMETYPE_SM = "./nametype_sm.gif";
-	public static String OCCURENCECONSTRAINT = "./occurenceconstraint.gif";
-	public static String OCCURENCECONSTRAINT_SM = "./occurenceconstraint_sm.gif";
-	public static String OCCURENCETYPE = "./occurencetype.gif";
+	public static String OCCURRENCECONSTRAINT = "./occurrenceconstraint.gif";
+	public static String OCCURRENCECONSTRAINT_SM = "./occurrenceconstraint_sm.gif";
+	public static String OCCURRENCETYPE = "./occurrencetype.gif";
 	public static String ROLETYPE_SM = "./roletype_sm.gif";
 	public static String NAMECONSTRAINT = "./nameconstraint.gif";
 	public static String ASSOCIATIONROLECONSTRAINT_SM = "./associationroleconstraint_sm.gif";
@@ -33,7 +33,7 @@ public interface ImageConstants {
 	public static String ASSOCIATIONROLECONSTRAINT = "./associationroleconstraint.gif";
 	public static String TOPICTYPE_SM = "./topictype_sm.gif";
 	public static String ASSOCIATIONTYPE_SM = "./associationtype_sm.gif";
-	public static String OCCURENCETYPE_SM = "./occurencetype_sm.gif";
+	public static String OCCURRENCETYPE_SM = "./occurrencetype_sm.gif";
 	public static String TOPICTYPE = "./topictype.gif";
 	public static String TOPIC = "./topic.gif";
 	public static String TOPIC_SM = "./topic.gif";

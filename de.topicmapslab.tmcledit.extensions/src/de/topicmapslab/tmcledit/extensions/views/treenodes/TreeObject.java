@@ -22,7 +22,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
-import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 
 
 public class TreeObject implements IAdaptable, Adapter {
@@ -30,7 +29,6 @@ public class TreeObject implements IAdaptable, Adapter {
 	protected EditingDomain editingDomain;
 	private TreeParent parent;
 	private Notifier target;
-	protected static ModelItemProviderAdapterFactory factory = new ModelItemProviderAdapterFactory();
 	
 	private final ModelView modelView;
 	private EObject model;

@@ -125,13 +125,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__AKO = 4;
 
 	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE__OCCURENCE_CONSTRAINTS = 5;
+	int TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
@@ -289,14 +289,14 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeConstraintImpl <em>Occurrence Type Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurenceTypeConstraint()
+	 * @see de.topicmapslab.tmcledit.model.impl.OccurrenceTypeConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurrenceTypeConstraint()
 	 * @generated
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT = 2;
+	int OCCURRENCE_TYPE_CONSTRAINT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -305,7 +305,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
+	int OCCURRENCE_TYPE_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -314,7 +314,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
+	int OCCURRENCE_TYPE_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -323,7 +323,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
+	int OCCURRENCE_TYPE_CONSTRAINT__REGEXP = ABSTRACT_CONSTRAINT__REGEXP;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -332,7 +332,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
+	int OCCURRENCE_TYPE_CONSTRAINT__TYPE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -341,16 +341,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT__UNIQUE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
+	int OCCURRENCE_TYPE_CONSTRAINT__UNIQUE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Occurence Type Constraint</em>' class.
+	 * The number of structural features of the '<em>Occurrence Type Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 2;
+	int OCCURRENCE_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeConstraintImpl <em>Name Type Constraint</em>}' class.
@@ -564,13 +564,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT = 8;
 
 	/**
-	 * The feature id for the '<em><b>Active Occurence Type Constraint</b></em>' attribute.
+	 * The feature id for the '<em><b>Active Occurrence Type Constraint</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT = 9;
+	int TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT = 9;
 
 	/**
 	 * The number of structural features of the '<em>Topic Map Schema</em>' class.
@@ -1326,13 +1326,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_TOPIC_TYPE__AKO = TOPIC_TYPE__AKO;
 
 	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_TOPIC_TYPE__OCCURENCE_CONSTRAINTS = TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
+	int SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
@@ -1471,13 +1471,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__AKO = SCOPED_TOPIC_TYPE__AKO;
 
 	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE__OCCURENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
+	int ASSOCIATION_TYPE__OCCURRENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
@@ -1570,14 +1570,14 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl <em>Occurence Type</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl <em>Occurrence Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurenceType()
+	 * @see de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurrenceType()
 	 * @generated
 	 */
-	int OCCURENCE_TYPE = 23;
+	int OCCURRENCE_TYPE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -1586,7 +1586,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__IDENTIFIERS = SCOPED_TOPIC_TYPE__IDENTIFIERS;
+	int OCCURRENCE_TYPE__IDENTIFIERS = SCOPED_TOPIC_TYPE__IDENTIFIERS;
 
 	/**
 	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
@@ -1595,7 +1595,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__ID_TYPE = SCOPED_TOPIC_TYPE__ID_TYPE;
+	int OCCURRENCE_TYPE__ID_TYPE = SCOPED_TOPIC_TYPE__ID_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1604,7 +1604,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__ABSTRACT = SCOPED_TOPIC_TYPE__ABSTRACT;
+	int OCCURRENCE_TYPE__ABSTRACT = SCOPED_TOPIC_TYPE__ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Isa</b></em>' reference list.
@@ -1613,7 +1613,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__ISA = SCOPED_TOPIC_TYPE__ISA;
+	int OCCURRENCE_TYPE__ISA = SCOPED_TOPIC_TYPE__ISA;
 
 	/**
 	 * The feature id for the '<em><b>Ako</b></em>' reference list.
@@ -1622,16 +1622,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__AKO = SCOPED_TOPIC_TYPE__AKO;
+	int OCCURRENCE_TYPE__AKO = SCOPED_TOPIC_TYPE__AKO;
 
 	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__OCCURENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
+	int OCCURRENCE_TYPE__OCCURRENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
@@ -1640,7 +1640,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__NAME_CONTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONTRAINTS;
+	int OCCURRENCE_TYPE__NAME_CONTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -1649,7 +1649,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
+	int OCCURRENCE_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
@@ -1658,7 +1658,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__SUBJECT_LOCATOR_CONSTRAINT = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int OCCURRENCE_TYPE__SUBJECT_LOCATOR_CONSTRAINT = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -1667,7 +1667,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__KIND = SCOPED_TOPIC_TYPE__KIND;
+	int OCCURRENCE_TYPE__KIND = SCOPED_TOPIC_TYPE__KIND;
 
 	/**
 	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
@@ -1676,7 +1676,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__EXCLUSIVE = SCOPED_TOPIC_TYPE__EXCLUSIVE;
+	int OCCURRENCE_TYPE__EXCLUSIVE = SCOPED_TOPIC_TYPE__EXCLUSIVE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1685,7 +1685,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__NAME = SCOPED_TOPIC_TYPE__NAME;
+	int OCCURRENCE_TYPE__NAME = SCOPED_TOPIC_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Locators</b></em>' attribute list.
@@ -1694,7 +1694,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__LOCATORS = SCOPED_TOPIC_TYPE__LOCATORS;
+	int OCCURRENCE_TYPE__LOCATORS = SCOPED_TOPIC_TYPE__LOCATORS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -1703,7 +1703,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__SCOPE = SCOPED_TOPIC_TYPE__SCOPE;
+	int OCCURRENCE_TYPE__SCOPE = SCOPED_TOPIC_TYPE__SCOPE;
 
 	/**
 	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
@@ -1712,16 +1712,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE__DATA_TYPE = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 0;
+	int OCCURRENCE_TYPE__DATA_TYPE = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Occurence Type</em>' class.
+	 * The number of structural features of the '<em>Occurrence Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURENCE_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
+	int OCCURRENCE_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl <em>Role Constraint</em>}' class.
@@ -1825,13 +1825,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__AKO = TOPIC_TYPE__AKO;
 
 	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE__OCCURENCE_CONSTRAINTS = TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
+	int ROLE_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
@@ -2043,13 +2043,13 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__AKO = SCOPED_TOPIC_TYPE__AKO;
 
 	/**
-	 * The feature id for the '<em><b>Occurence Constraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE__OCCURENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
+	int NAME_TYPE__OCCURRENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
@@ -2293,15 +2293,15 @@ public interface ModelPackage extends EPackage {
 	EReference getTopicType_Ako();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getOccurenceConstraints <em>Occurence Constraints</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getOccurrenceConstraints <em>Occurrence Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Occurence Constraints</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicType#getOccurenceConstraints()
+	 * @return the meta object for the containment reference list '<em>Occurrence Constraints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getOccurrenceConstraints()
 	 * @see #getTopicType()
 	 * @generated
 	 */
-	EReference getTopicType_OccurenceConstraints();
+	EReference getTopicType_OccurrenceConstraints();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getNameContraints <em>Name Contraints</em>}'.
@@ -2402,25 +2402,25 @@ public interface ModelPackage extends EPackage {
 	EAttribute getAbstractConstraint_Regexp();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint <em>Occurence Type Constraint</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint <em>Occurrence Type Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Occurence Type Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceTypeConstraint
+	 * @return the meta object for class '<em>Occurrence Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint
 	 * @generated
 	 */
-	EClass getOccurenceTypeConstraint();
+	EClass getOccurrenceTypeConstraint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#isUnique <em>Unique</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint#isUnique <em>Unique</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Unique</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceTypeConstraint#isUnique()
-	 * @see #getOccurenceTypeConstraint()
+	 * @see de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint#isUnique()
+	 * @see #getOccurrenceTypeConstraint()
 	 * @generated
 	 */
-	EAttribute getOccurenceTypeConstraint_Unique();
+	EAttribute getOccurrenceTypeConstraint_Unique();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.NameTypeConstraint <em>Name Type Constraint</em>}'.
@@ -2574,15 +2574,15 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTopicMapSchema_ActiveAssociationTypeConstraint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurenceTypeConstraint <em>Active Occurence Type Constraint</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurrenceTypeConstraint <em>Active Occurrence Type Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Active Occurence Type Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurenceTypeConstraint()
+	 * @return the meta object for the attribute '<em>Active Occurrence Type Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurrenceTypeConstraint()
 	 * @see #getTopicMapSchema()
 	 * @generated
 	 */
-	EAttribute getTopicMapSchema_ActiveOccurenceTypeConstraint();
+	EAttribute getTopicMapSchema_ActiveOccurrenceTypeConstraint();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint <em>Subject Locator Constraint</em>}'.
@@ -3085,25 +3085,25 @@ public interface ModelPackage extends EPackage {
 	EReference getAssociationType_Roles();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurenceType <em>Occurence Type</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurrenceType <em>Occurrence Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Occurence Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceType
+	 * @return the meta object for class '<em>Occurrence Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.OccurrenceType
 	 * @generated
 	 */
-	EClass getOccurenceType();
+	EClass getOccurrenceType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurenceType#getDataType <em>Data Type</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurrenceType#getDataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Data Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceType#getDataType()
-	 * @see #getOccurenceType()
+	 * @see de.topicmapslab.tmcledit.model.OccurrenceType#getDataType()
+	 * @see #getOccurrenceType()
 	 * @generated
 	 */
-	EAttribute getOccurenceType_DataType();
+	EAttribute getOccurrenceType_DataType();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleConstraint <em>Role Constraint</em>}'.
@@ -3356,12 +3356,12 @@ public interface ModelPackage extends EPackage {
 		EReference TOPIC_TYPE__AKO = eINSTANCE.getTopicType_Ako();
 
 		/**
-		 * The meta object literal for the '<em><b>Occurence Constraints</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Occurrence Constraints</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOPIC_TYPE__OCCURENCE_CONSTRAINTS = eINSTANCE.getTopicType_OccurenceConstraints();
+		EReference TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = eINSTANCE.getTopicType_OccurrenceConstraints();
 
 		/**
 		 * The meta object literal for the '<em><b>Name Contraints</b></em>' containment reference list feature.
@@ -3438,14 +3438,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute ABSTRACT_CONSTRAINT__REGEXP = eINSTANCE.getAbstractConstraint_Regexp();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl <em>Occurence Type Constraint</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeConstraintImpl <em>Occurrence Type Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.OccurenceTypeConstraintImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurenceTypeConstraint()
+		 * @see de.topicmapslab.tmcledit.model.impl.OccurrenceTypeConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurrenceTypeConstraint()
 		 * @generated
 		 */
-		EClass OCCURENCE_TYPE_CONSTRAINT = eINSTANCE.getOccurenceTypeConstraint();
+		EClass OCCURRENCE_TYPE_CONSTRAINT = eINSTANCE.getOccurrenceTypeConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
@@ -3453,7 +3453,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OCCURENCE_TYPE_CONSTRAINT__UNIQUE = eINSTANCE.getOccurenceTypeConstraint_Unique();
+		EAttribute OCCURRENCE_TYPE_CONSTRAINT__UNIQUE = eINSTANCE.getOccurrenceTypeConstraint_Unique();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeConstraintImpl <em>Name Type Constraint</em>}' class.
@@ -3574,12 +3574,12 @@ public interface ModelPackage extends EPackage {
 		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveAssociationTypeConstraint();
 
 		/**
-		 * The meta object literal for the '<em><b>Active Occurence Type Constraint</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Active Occurrence Type Constraint</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_OCCURENCE_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveOccurenceTypeConstraint();
+		EAttribute TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT = eINSTANCE.getTopicMapSchema_ActiveOccurrenceTypeConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl <em>Subject Locator Constraint</em>}' class.
@@ -3992,14 +3992,14 @@ public interface ModelPackage extends EPackage {
 		EReference ASSOCIATION_TYPE__ROLES = eINSTANCE.getAssociationType_Roles();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl <em>Occurence Type</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl <em>Occurrence Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.OccurenceTypeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurenceType()
+		 * @see de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOccurrenceType()
 		 * @generated
 		 */
-		EClass OCCURENCE_TYPE = eINSTANCE.getOccurenceType();
+		EClass OCCURRENCE_TYPE = eINSTANCE.getOccurrenceType();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
@@ -4007,7 +4007,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OCCURENCE_TYPE__DATA_TYPE = eINSTANCE.getOccurenceType_DataType();
+		EAttribute OCCURRENCE_TYPE__DATA_TYPE = eINSTANCE.getOccurrenceType_DataType();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl <em>Role Constraint</em>}' class.

@@ -162,7 +162,7 @@ public class TopicSelectionDialog extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.OCCURENCE_TYPE);
+				wizard.setDefaultType(KindOfTopicType.OCCURRENCE_TYPE);
 				WizardDialog dlg = new WizardDialog(availableTopicList.getList().getShell(), wizard);
 				
 				if (dlg.open()==Dialog.OK) {
@@ -204,8 +204,8 @@ public class TopicSelectionDialog extends Dialog {
 			return schema.isActiveAssociationTypeConstraint();
 		case SCOPE_TYPE:
 			return schema.isActiveScopeTypeConstraint();
-		case OCCURENCE_TYPE:
-			return schema.isActiveOccurenceTypeConstraint();
+		case OCCURRENCE_TYPE:
+			return schema.isActiveOccurrenceTypeConstraint();
 		case ROLE_TYPE:
 			return schema.isActiveRoleTypeConstraint();
 		case NAME_TYPE:
