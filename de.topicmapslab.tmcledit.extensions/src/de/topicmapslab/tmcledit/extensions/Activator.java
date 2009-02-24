@@ -10,6 +10,12 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.extensions;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -37,6 +43,23 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		IPreferenceStore prefStore = getPreferenceStore();
+		if (prefStore.getBoolean("second_start")) {
+			if (!prefStore.getBoolean("survey_done")) {
+				IWorkbench workbench = PlatformUI.getWorkbench();
+				Shell shell = workbench.getActiveWorkbenchWindow().getShell();
+				if (MessageDialog.openQuestion(shell, "A tiny favor..", "Onotoa is part of my diplome thesis.\n" +
+						"Please take the time to fillout my tiny survey about Onotoa.\n" +
+						"Do you want to open the sruvey now?")) {
+					((IHandlerService) workbench
+							.getService(IHandlerService.class)).executeCommand(
+							"de.topicmapslab.tmcledit.doc.opensurveycommand",
+							null);
+				}
+			}
+		} else {
+			prefStore.setValue("second_start", true);
+		}
 	}
 
 	/*
