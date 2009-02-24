@@ -18,7 +18,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
@@ -54,7 +54,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIsa <em>Isa</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getAko <em>Ako</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getOccurenceConstraints <em>Occurence Constraints</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getOccurrenceConstraints <em>Occurrence Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getNameContraints <em>Name Contraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
@@ -139,14 +139,14 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	protected EList<TopicType> ako;
 
 	/**
-	 * The cached value of the '{@link #getOccurenceConstraints() <em>Occurence Constraints</em>}' containment reference list.
+	 * The cached value of the '{@link #getOccurrenceConstraints() <em>Occurrence Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOccurenceConstraints()
+	 * @see #getOccurrenceConstraints()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OccurenceTypeConstraint> occurenceConstraints;
+	protected EList<OccurrenceTypeConstraint> occurrenceConstraints;
 
 	/**
 	 * The cached value of the '{@link #getNameContraints() <em>Name Contraints</em>}' containment reference list.
@@ -340,11 +340,11 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OccurenceTypeConstraint> getOccurenceConstraints() {
-		if (occurenceConstraints == null) {
-			occurenceConstraints = new EObjectContainmentEList<OccurenceTypeConstraint>(OccurenceTypeConstraint.class, this, ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
+	public EList<OccurrenceTypeConstraint> getOccurrenceConstraints() {
+		if (occurrenceConstraints == null) {
+			occurrenceConstraints = new EObjectContainmentEList<OccurrenceTypeConstraint>(OccurrenceTypeConstraint.class, this, ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS);
 		}
-		return occurenceConstraints;
+		return occurrenceConstraints;
 	}
 
 	/**
@@ -457,8 +457,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
-				return ((InternalEList<?>)getOccurenceConstraints()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
+				return ((InternalEList<?>)getOccurrenceConstraints()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				return ((InternalEList<?>)getNameContraints()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
@@ -487,8 +487,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return getIsa();
 			case ModelPackage.TOPIC_TYPE__AKO:
 				return getAko();
-			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
-				return getOccurenceConstraints();
+			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
+				return getOccurrenceConstraints();
 			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				return getNameContraints();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
@@ -534,9 +534,9 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				getAko().clear();
 				getAko().addAll((Collection<? extends TopicType>)newValue);
 				return;
-			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
-				getOccurenceConstraints().clear();
-				getOccurenceConstraints().addAll((Collection<? extends OccurenceTypeConstraint>)newValue);
+			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
+				getOccurrenceConstraints().clear();
+				getOccurrenceConstraints().addAll((Collection<? extends OccurrenceTypeConstraint>)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				getNameContraints().clear();
@@ -591,8 +591,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__AKO:
 				getAko().clear();
 				return;
-			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
-				getOccurenceConstraints().clear();
+			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
+				getOccurrenceConstraints().clear();
 				return;
 			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				getNameContraints().clear();
@@ -637,8 +637,8 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				return isa != null && !isa.isEmpty();
 			case ModelPackage.TOPIC_TYPE__AKO:
 				return ako != null && !ako.isEmpty();
-			case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
-				return occurenceConstraints != null && !occurenceConstraints.isEmpty();
+			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
+				return occurrenceConstraints != null && !occurrenceConstraints.isEmpty();
 			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 				return nameContraints != null && !nameContraints.isEmpty();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:

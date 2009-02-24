@@ -24,8 +24,8 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceType;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
@@ -42,7 +42,7 @@ public class TinyTiMTopicMapBuilder {
 	
 	private Topic scopeType;
 	private Topic nameType;
-	private Topic occurenceType;
+	private Topic occurrenceType;
 	private Topic associationType;
 	private Topic roleType;
 	private Topic topicType;
@@ -51,12 +51,12 @@ public class TinyTiMTopicMapBuilder {
 	private Topic supertype_subType_assTopic;
 	
 	private Topic infoScope;
-	private Topic occurenceDatatype;
+	private Topic occurrenceDatatype;
 	private Topic scopeConstraintType;
 	private Topic roleConstraintType;
 	private Topic rolePlayerConstraintType;
 	private Topic nameConstraintType;
-	private Topic occurenceConstraintType;
+	private Topic occurrenceConstraintType;
 	private Topic locatorConstraintType;
 	private Topic identifierConstraintType;
 	
@@ -82,8 +82,8 @@ public class TinyTiMTopicMapBuilder {
 			Locator l = tm.createLocator("#info_scope");
 			infoScope = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_occurence_datatype_info");
-			occurenceDatatype = tm.createTopicByItemIdentifier(l);
+			l = tm.createLocator("#constraint_occurrence_datatype_info");
+			occurrenceDatatype = tm.createTopicByItemIdentifier(l);
 		
 			l = tm.createLocator("#constraint_scope_info");
 			scopeConstraintType = tm.createTopicByItemIdentifier(l);
@@ -97,8 +97,8 @@ public class TinyTiMTopicMapBuilder {
 			l = tm.createLocator("#constraint_name_info");
 			nameConstraintType = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_occurence_info");
-			occurenceConstraintType = tm.createTopicByItemIdentifier(l);
+			l = tm.createLocator("#constraint_occurrence_info");
+			occurrenceConstraintType = tm.createTopicByItemIdentifier(l);
 			
 			l = tm.createLocator("#constraint_subject_locator_info");
 			locatorConstraintType = tm.createTopicByItemIdentifier(l);
@@ -124,10 +124,10 @@ public class TinyTiMTopicMapBuilder {
 		associationType.addType(topicType);
 		associationType.createName("association type");
 		
-		l = tm.createLocator("http://psi.topicmaps.org/tmcl/occurencetype");
-		occurenceType = tm.createTopicBySubjectIdentifier(l);
-		occurenceType.addType(topicType);
-		occurenceType.createName("occurence type");
+		l = tm.createLocator("http://psi.topicmaps.org/tmcl/occurrencetype");
+		occurrenceType = tm.createTopicBySubjectIdentifier(l);
+		occurrenceType.addType(topicType);
+		occurrenceType.createName("occurrence type");
 		
 		l = tm.createLocator("http://psi.topicmaps.org/tmcl/nametype");
 		nameType = tm.createTopicBySubjectIdentifier(l);
@@ -194,8 +194,8 @@ public class TinyTiMTopicMapBuilder {
 		Locator l = null;
 		if (constraint instanceof AssociationTypeConstraint) {
 			l = tm.createLocator("#association_constraint_info");
-		} else if (constraint instanceof OccurenceTypeConstraint) {
-			l = tm.createLocator("#occurence_constraint_info");
+		} else if (constraint instanceof occurrenceTypeConstraint) {
+			l = tm.createLocator("#occurrence_constraint_info");
 		} else if (constraint instanceof NameTypeConstraint) {
 			l = tm.createLocator("#name_constraint_info");
 		} else if (constraint  instanceof SubjectIdentifierConstraint) {
@@ -244,9 +244,9 @@ public class TinyTiMTopicMapBuilder {
 			createScopeInfo(t, (AssociationType) topicType);
 			addAssociationInfos(t, (AssociationType) topicType);
 			break;
-		case OCCURENCE_TYPE:
-			t.addType(occurenceType);
-			addOccurenceInfos(t, topicType);
+		case OCCURRENCE_TYPE:
+			t.addType(occurrenceType);
+			addoccurrenceInfos(t, topicType);
 			break;
 		case NAME_TYPE:
 			t.addType(nameType);
@@ -268,7 +268,7 @@ public class TinyTiMTopicMapBuilder {
 				createConstraints(ntc, t);
 			}
 			
-			for (OccurenceTypeConstraint otc : topicType.getOccurenceConstraints()) {
+			for (OccurrenceTypeConstraint otc : topicType.getOccurrenceConstraints()) {
 				createConstraints(otc, t);
 			}
 			
@@ -326,13 +326,13 @@ public class TinyTiMTopicMapBuilder {
 		}
 	}
 
-	private void addOccurenceInfos(Topic t, TopicType topicType) {
+	private void addoccurrenceInfos(Topic t, TopicType topicType) {
 		if (!createConstraintInfos)
 			return;
 		
-		OccurenceType ot = (OccurenceType) topicType;
+		OccurrenceType ot = (OccurrenceType) topicType;
 		
-		t.createOccurrence(occurenceDatatype, ot.getDataType(), infoScope);
+		t.createOccurrence(occurrenceDatatype, ot.getDataType(), infoScope);
 		createScopeInfo(t, ot);
 	}
 
@@ -365,8 +365,8 @@ public class TinyTiMTopicMapBuilder {
 
 		if (tc instanceof NameTypeConstraint)
 			t.createOccurrence(nameConstraintType, buffer.toString(), infoScope);
-		else if (tc instanceof OccurenceTypeConstraint)
-			t.createOccurrence(occurenceConstraintType, buffer.toString(), infoScope);
+		else if (tc instanceof OccurrenceTypeConstraint)
+			t.createOccurrence(occurrenceConstraintType, buffer.toString(), infoScope);
 		
 	}
 

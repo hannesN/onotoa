@@ -42,16 +42,14 @@ public enum KindOfTopicType implements Enumerator {
 	TOPIC_TYPE(0, "TopicType", "TopicType"),
 
 	/**
-	 * The '<em><b>Occurence Type</b></em>' literal object.
+	 * The '<em><b>Occurrence Type</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #OCCURENCE_TYPE_VALUE
+	 * @see #OCCURRENCE_TYPE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	OCCURENCE_TYPE(1, "OccurenceType", "OccurenceType"),
-
-	/**
+	OCCURRENCE_TYPE(1, "OccurrenceType", "OccurrenceType"), /**
 	 * The '<em><b>Name Type</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,19 +115,19 @@ public enum KindOfTopicType implements Enumerator {
 	public static final int TOPIC_TYPE_VALUE = 0;
 
 	/**
-	 * The '<em><b>Occurence Type</b></em>' literal value.
+	 * The '<em><b>Occurrence Type</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Occurence Type</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Occurrence Type</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #OCCURENCE_TYPE
-	 * @model name="OccurenceType"
+	 * @see #OCCURRENCE_TYPE
+	 * @model name="OccurrenceType"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OCCURENCE_TYPE_VALUE = 1;
+	public static final int OCCURRENCE_TYPE_VALUE = 1;
 
 	/**
 	 * The '<em><b>Name Type</b></em>' literal value.
@@ -215,7 +213,7 @@ public enum KindOfTopicType implements Enumerator {
 	private static final KindOfTopicType[] VALUES_ARRAY =
 		new KindOfTopicType[] {
 			TOPIC_TYPE,
-			OCCURENCE_TYPE,
+			OCCURRENCE_TYPE,
 			NAME_TYPE,
 			ROLE_TYPE,
 			ASSOCIATION_TYPE,
@@ -272,7 +270,7 @@ public enum KindOfTopicType implements Enumerator {
 	public static KindOfTopicType get(int value) {
 		switch (value) {
 			case TOPIC_TYPE_VALUE: return TOPIC_TYPE;
-			case OCCURENCE_TYPE_VALUE: return OCCURENCE_TYPE;
+			case OCCURRENCE_TYPE_VALUE: return OCCURRENCE_TYPE;
 			case NAME_TYPE_VALUE: return NAME_TYPE;
 			case ROLE_TYPE_VALUE: return ROLE_TYPE;
 			case ASSOCIATION_TYPE_VALUE: return ASSOCIATION_TYPE;

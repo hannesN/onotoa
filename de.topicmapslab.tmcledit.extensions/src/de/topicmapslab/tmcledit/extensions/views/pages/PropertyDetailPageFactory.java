@@ -22,8 +22,8 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceType;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
@@ -36,13 +36,13 @@ public class PropertyDetailPageFactory {
 	private static final String TOPIC_TYPE = "TopicType";
 	private static final String NAME_TYPE = "NameType";
 	private static final String ROLE_TYPE = "RoleType";
-	private static final String OCCURENCE_TYPE = "OccurenceType";
+	private static final String OCCURRENCE_TYPE = "OccurrenceType";
 	private static final String ASSOCIATION_TYPE = "AssociationType";
 	private static final String DIAGRAM = "Diagram";
 	private static final String ROLE = "role";
 	private static final String PREFIX_MAPPING = "PrefixMapping";
 	private static final String ASSOCIATION = "association";
-	private static final String OCCURENCE_CONSTRAINT = "occurence_constraint";
+	private static final String OCCURRENCE_CONSTRAINT = "occurrence_constraint";
 	private static final String NAME_CONSTRAINT = "name_constraint";
 	private static final String IDENTIFIER_CONSTRAINT = "idenntifier_constraint";
 	private static final String COMMENT = "comment";
@@ -65,12 +65,12 @@ public class PropertyDetailPageFactory {
 	public AbstractModelPage getPageFor(Object model) {
 		AbstractModelPage page = emptyPage;
 		
-		if (model instanceof OccurenceType) {
-			page = pageMap.get(OCCURENCE_TYPE);
+		if (model instanceof OccurrenceType) {
+			page = pageMap.get(OCCURRENCE_TYPE);
 			if (page==null) {
-				page = new OccurenceTypeModelPage();
+				page = new OccurrenceTypeModelPage();
 				page.createControl(pageBook.getContainer());
-				pageMap.put(OCCURENCE_TYPE, page);
+				pageMap.put(OCCURRENCE_TYPE, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 			return page;
@@ -142,12 +142,12 @@ public class PropertyDetailPageFactory {
 				pageMap.put(ASSOCIATION, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-		}  else if (model instanceof OccurenceTypeConstraint) {
-			page = pageMap.get(OCCURENCE_CONSTRAINT);
+		}  else if (model instanceof OccurrenceTypeConstraint) {
+			page = pageMap.get(OCCURRENCE_CONSTRAINT);
 			if (page==null) {
-				page = new OccurenceConstraintDetailPage();
+				page = new OccurrenceConstraintDetailPage();
 				page.createControl(pageBook.getContainer());
-				pageMap.put(OCCURENCE_CONSTRAINT, page);
+				pageMap.put(OCCURRENCE_CONSTRAINT, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		}  else if (model instanceof NameTypeConstraint) {

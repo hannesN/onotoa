@@ -42,7 +42,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	protected IFigure createFigure() {
 	
 		figure = new SelectionFigure();
-
+		
 		nameLabel = new EditableLabel("");
 		nameLabel.setLabelAlignment(PositionConstants.LEFT);
 		figure.add(nameLabel);

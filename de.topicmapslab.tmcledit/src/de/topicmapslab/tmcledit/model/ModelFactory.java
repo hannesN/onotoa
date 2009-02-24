@@ -44,13 +44,13 @@ public interface ModelFactory extends EFactory {
 	TopicType createTopicType();
 
 	/**
-	 * Returns a new object of class '<em>Occurence Type Constraint</em>'.
+	 * Returns a new object of class '<em>Occurrence Type Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Occurence Type Constraint</em>'.
+	 * @return a new object of class '<em>Occurrence Type Constraint</em>'.
 	 * @generated
 	 */
-	OccurenceTypeConstraint createOccurenceTypeConstraint();
+	OccurrenceTypeConstraint createOccurrenceTypeConstraint();
 
 	/**
 	 * Returns a new object of class '<em>Name Type Constraint</em>'.
@@ -206,13 +206,13 @@ public interface ModelFactory extends EFactory {
 	AssociationType createAssociationType();
 
 	/**
-	 * Returns a new object of class '<em>Occurence Type</em>'.
+	 * Returns a new object of class '<em>Occurrence Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Occurence Type</em>'.
+	 * @return a new object of class '<em>Occurrence Type</em>'.
 	 * @generated
 	 */
-	OccurenceType createOccurenceType();
+	OccurrenceType createOccurrenceType();
 
 	/**
 	 * Returns a new object of class '<em>Role Constraint</em>'.

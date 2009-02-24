@@ -31,7 +31,7 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 public class OccurenceConstraintCreateTypeAction extends CreateTypeAction {
 
 	public OccurenceConstraintCreateTypeAction(CommandStack cmdStack) {
-		super(cmdStack, KindOfTopicType.OCCURENCE_TYPE);
+		super(cmdStack, KindOfTopicType.OCCURRENCE_TYPE);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class OccurenceConstraintCreateTypeAction extends CreateTypeAction {
 		cmd.append(new CreateTopicTypeCommand(ModelIndexer.getInstance()
 				.getTopicMapSchema(), topicType));
 		cmd.append(new GenericSetCommand(getModelObject(),
-				ModelPackage.OCCURENCE_TYPE_CONSTRAINT__TYPE,
+				ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__TYPE,
 				topicType));
 		return cmd;
 	}

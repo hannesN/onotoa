@@ -91,7 +91,7 @@
     <children xmi:type="notation:Node" xmi:id="_xEvOYGVZEd2WgM1R5UUCVQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_xEvOYWVZEd2WgM1R5UUCVQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_BnQ1AGXoEd2UlMMYUVedwQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//OccurenceTypeConstraint/unique"/>
+        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//OccurrenceTypeConstraint/unique"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_BnQ1AWXoEd2UlMMYUVedwQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_xEvOYmVZEd2WgM1R5UUCVQ"/>
@@ -104,7 +104,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_xEvOaGVZEd2WgM1R5UUCVQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_xEuAQWVZEd2WgM1R5UUCVQ" fontName="Sans Serif" fontHeight="10" fillColor="13761016" lineColor="0"/>
-    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//OccurenceTypeConstraint"/>
+    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//OccurrenceTypeConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xEuAQmVZEd2WgM1R5UUCVQ" x="55" y="478"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_YJZd0GXrEd2UlMMYUVedwQ" type="1001">
@@ -430,7 +430,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_MnVfIZlMEd2TKbZ0gzs8EQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Mpbw4JlMEd2TKbZ0gzs8EQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/OccurenceType"/>
+        <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/OccurrenceType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Mpbw4ZlMEd2TKbZ0gzs8EQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_MrWccJlMEd2TKbZ0gzs8EQ" type="2006">
@@ -577,7 +577,7 @@
     <children xmi:type="notation:Node" xmi:id="_qRIdkO1WEd2oZryb8K1DWg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_qRIdke1WEd2oZryb8K1DWg" type="5001">
       <children xmi:type="notation:Node" xmi:id="_FhyJ0GXoEd2UlMMYUVedwQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//OccurenceType/dataType"/>
+        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//OccurrenceType/dataType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_FhyJ0WXoEd2UlMMYUVedwQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_qRIdku1WEd2oZryb8K1DWg"/>
@@ -590,7 +590,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_qRJEpO1WEd2oZryb8K1DWg"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_qRH2ge1WEd2oZryb8K1DWg" fontName="Sans Serif" fontHeight="10" fillColor="13761016" lineColor="0"/>
-    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//OccurenceType"/>
+    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//OccurrenceType"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qRH2gu1WEd2oZryb8K1DWg" x="351" y="666"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_l2BHsO1XEd2oZryb8K1DWg" type="1001">
@@ -755,7 +755,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_KDI4UWXsEd2UlMMYUVedwQ" routing="Rectilinear" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_KDI4UmXsEd2UlMMYUVedwQ" fontName="Sans Serif" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="tmcledit.ecore#//TopicType/occurenceConstraints"/>
+    <element xmi:type="ecore:EReference" href="tmcledit.ecore#//TopicType/occurrenceConstraints"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_KDI4U2XsEd2UlMMYUVedwQ" points="[-28, 56, 241, -401]$[-298, 56, -29, -401]$[-298, 440, -29, -17]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KDMisGXsEd2UlMMYUVedwQ" id="(0.16766468,0.02)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KDMisWXsEd2UlMMYUVedwQ" id="(0.9171271,0.36363637)"/>

@@ -215,7 +215,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	protected List getModelChildren() {
 		List<EObject> list = new ArrayList<EObject>();
 		TopicType topicType = getCastedModel().getTopicType();
-		list.addAll(topicType.getOccurenceConstraints());
+		list.addAll(topicType.getOccurrenceConstraints());
 		list.addAll(topicType.getNameContraints());
 		list.addAll(topicType.getSubjectIdentifierConstraints());
 		list.addAll(topicType.getSubjectLocatorConstraint());
@@ -282,7 +282,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
-		if (childEditPart instanceof OccurenceTypeConstraintEditPart) {
+		if (childEditPart instanceof OccurrenceTypeConstraintEditPart) {
 			int i = compartmentFigure.getChildren().indexOf(secondLine);
 			compartmentFigure.add(child, i);
 		}

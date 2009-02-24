@@ -22,7 +22,7 @@ import org.eclipse.ui.PlatformUI;
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
-import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.OccurrenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.commands.RemoveNodeCommand;
@@ -79,7 +79,7 @@ public class RemoveFromDiagramAction extends Action implements UpdateAction {
 	@Override
 	public void update() {
 		if ( (selectedEditPart instanceof NodeEditPart)
-			|| (selectedEditPart instanceof OccurenceTypeConstraintEditPart)
+			|| (selectedEditPart instanceof OccurrenceTypeConstraintEditPart)
 			|| (selectedEditPart instanceof NameTypeConstraintEditPart)
 		 ) {
 			setEnabled(true);

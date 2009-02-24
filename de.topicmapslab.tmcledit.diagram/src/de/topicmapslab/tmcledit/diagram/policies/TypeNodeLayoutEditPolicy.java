@@ -25,12 +25,12 @@ import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateNameTypeConstraintCommand;
-import de.topicmapslab.tmcledit.model.commands.CreateOccurenceConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateSubjectIdentifierConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateSubjectLocatorConstraintCommand;
 
@@ -43,14 +43,14 @@ public class TypeNodeLayoutEditPolicy extends LayoutEditPolicy {
 		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
 		AbstractCommand cmd = null;
 		
-		if (request.getNewObjectType()==OccurenceTypeConstraint.class) {
+		if (request.getNewObjectType()==OccurrenceTypeConstraint.class) {
 			// getting container which is a diagram
 			Diagram diagram = (Diagram) node.eContainer();
 			if (diagram==null)
 				return null;
 			TopicType tt = ((TypeNodeEditPart)getHost()).getCastedModel().getTopicType();
 			
-			cmd = new CreateOccurenceConstraintCommand(tt, (OccurenceTypeConstraint) request.getNewObject());
+			cmd = new CreateOccurrenceConstraintCommand(tt, (OccurrenceTypeConstraint) request.getNewObject());
 		} else if (request.getNewObjectType()==NameTypeConstraint.class) {
 			TopicType tt = ((TypeNodeEditPart)getHost()).getCastedModel().getTopicType();
 			cmd = new CreateNameTypeConstraintCommand(tt, (NameTypeConstraint) request.getNewObject());

@@ -71,7 +71,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.TOPIC_TYPE: return createTopicType();
-			case ModelPackage.OCCURENCE_TYPE_CONSTRAINT: return createOccurenceTypeConstraint();
+			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT: return createOccurrenceTypeConstraint();
 			case ModelPackage.NAME_TYPE_CONSTRAINT: return createNameTypeConstraint();
 			case ModelPackage.ROLE_PLAYER_CONSTRAINT: return createRolePlayerConstraint();
 			case ModelPackage.TOPIC_MAP_SCHEMA: return createTopicMapSchema();
@@ -89,7 +89,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.SCOPE_CONSTRAINT: return createScopeConstraint();
 			case ModelPackage.LABEL_POS: return createLabelPos();
 			case ModelPackage.ASSOCIATION_TYPE: return createAssociationType();
-			case ModelPackage.OCCURENCE_TYPE: return createOccurenceType();
+			case ModelPackage.OCCURRENCE_TYPE: return createOccurrenceType();
 			case ModelPackage.ROLE_CONSTRAINT: return createRoleConstraint();
 			case ModelPackage.ROLE_TYPE: return createRoleType();
 			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT: return createOtherRolePlayerConstraint();
@@ -154,9 +154,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OccurenceTypeConstraint createOccurenceTypeConstraint() {
-		OccurenceTypeConstraintImpl occurenceTypeConstraint = new OccurenceTypeConstraintImpl();
-		return occurenceTypeConstraint;
+	public OccurrenceTypeConstraint createOccurrenceTypeConstraint() {
+		OccurrenceTypeConstraintImpl occurrenceTypeConstraint = new OccurrenceTypeConstraintImpl();
+		return occurrenceTypeConstraint;
 	}
 
 	/**
@@ -334,9 +334,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OccurenceType createOccurenceType() {
-		OccurenceTypeImpl occurenceType = new OccurenceTypeImpl();
-		return occurenceType;
+	public OccurrenceType createOccurrenceType() {
+		OccurrenceTypeImpl occurrenceType = new OccurrenceTypeImpl();
+		return occurrenceType;
 	}
 
 	/**

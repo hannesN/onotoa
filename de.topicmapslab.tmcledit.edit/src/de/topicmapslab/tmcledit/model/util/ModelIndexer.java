@@ -143,8 +143,8 @@ public class ModelIndexer {
 				return topicMapSchema.isActiveAssociationTypeConstraint(); 
 		case NAME_TYPE:
 				return topicMapSchema.isActiveNameTypeConstraint();
-		case OCCURENCE_TYPE:
-				return topicMapSchema.isActiveOccurenceTypeConstraint();
+		case OCCURRENCE_TYPE:
+				return topicMapSchema.isActiveOccurrenceTypeConstraint();
 		case ROLE_TYPE:
 				return topicMapSchema.isActiveRoleTypeConstraint();
 		case SCOPE_TYPE:

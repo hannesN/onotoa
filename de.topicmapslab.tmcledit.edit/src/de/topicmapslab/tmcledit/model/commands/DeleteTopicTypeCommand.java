@@ -25,7 +25,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
@@ -219,10 +219,10 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 				}
 			}
 
-			for (OccurenceTypeConstraint otc : tt.getOccurenceConstraints()) {
+			for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
 				if (otc.getType().equals(topicType)) {
 					addConstraintCommand(tt, otc,
-							ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS);
+							ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS);
 				}
 			}
 

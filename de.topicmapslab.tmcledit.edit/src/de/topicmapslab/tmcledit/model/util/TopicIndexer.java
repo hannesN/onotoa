@@ -78,8 +78,8 @@ public class TopicIndexer implements Adapter{
 		TopicType tt;
 		
 		switch (kind) {
-		case OCCURENCE_TYPE:
-			tt = ModelFactory.eINSTANCE.createOccurenceType();
+		case OCCURRENCE_TYPE:
+			tt = ModelFactory.eINSTANCE.createOccurrenceType();
 			break;
 		case NAME_TYPE:
 			tt = ModelFactory.eINSTANCE.createNameType();

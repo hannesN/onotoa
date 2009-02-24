@@ -25,7 +25,7 @@ import org.eclipse.gef.palette.PaletteSeparator;
 import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
 
-import de.topicmapslab.tmcledit.diagram.creationfactories.OccurenceConstraintCreationFactory;
+import de.topicmapslab.tmcledit.diagram.creationfactories.OccurrenceConstraintCreationFactory;
 import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.CommentEditPart;
@@ -33,7 +33,7 @@ import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
-import de.topicmapslab.tmcledit.diagram.editparts.OccurenceTypeConstraintEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.OccurrenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingElementEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.SubjectIdentifierConstraintEditPart;
@@ -50,7 +50,7 @@ import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TypeNode;
@@ -111,8 +111,8 @@ public class TMCLDiagramEditorUtil {
 					part = new TypeNodeEditPart();
 				} else if (model instanceof AssociationNode) {
 					part = new AssociationNodeEditPart();
-				} else if (model instanceof OccurenceTypeConstraint) {
-					part = new OccurenceTypeConstraintEditPart();
+				} else if (model instanceof OccurrenceTypeConstraint) {
+					part = new OccurrenceTypeConstraintEditPart();
 				} else if (model instanceof NameTypeConstraint) {
 					part = new NameTypeConstraintEditPart();
 				} else if (model instanceof Edge) {
@@ -153,14 +153,14 @@ public class TMCLDiagramEditorUtil {
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
 
 		group.add(new CreationToolEntry(
-						"Occurence Type",
-						"Occurence Type",
+						"Occurrence Type",
+						"Occurrence Type",
 						new TypeNodeCreationFactory(
-								KindOfTopicType.OCCURENCE_TYPE),
+								KindOfTopicType.OCCURRENCE_TYPE),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURENCETYPE_SM),
+								.getImageDescriptor(ImageConstants.OCCURRENCETYPE_SM),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURENCETYPE)));
+								.getImageDescriptor(ImageConstants.OCCURRENCETYPE)));
 
 		group.add(new CreationToolEntry("Role Type", "Role Type",
 				new TypeNodeCreationFactory(KindOfTopicType.ROLE_TYPE),
@@ -191,13 +191,13 @@ public class TMCLDiagramEditorUtil {
 		PaletteGroup group = new PaletteGroup("Topic Types Items");
 		group
 				.add(new CreationToolEntry(
-						"Occurence Constraints",
-						"Occurence Constraints",
-						new OccurenceConstraintCreationFactory(),
+						"Occurrence Constraints",
+						"Occurrence Constraints",
+						new OccurrenceConstraintCreationFactory(),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT_SM),
+								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT_SM),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURENCECONSTRAINT)));
+								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT)));
 
 		group
 				.add(new CreationToolEntry(

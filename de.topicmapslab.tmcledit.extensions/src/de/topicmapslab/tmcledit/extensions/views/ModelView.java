@@ -26,16 +26,10 @@ import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.RedoAction;
 import org.eclipse.emf.edit.ui.action.UndoAction;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.emf.workspace.impl.WorkspaceCommandStackImpl;
 import org.eclipse.jface.action.Action;
@@ -85,8 +79,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorInput;
@@ -101,7 +93,7 @@ import de.topicmapslab.tmcledit.extensions.actions.UpdateAction;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeDiagram;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeName;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeObject;
-import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeOccurence;
+import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeOccurrence;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -109,10 +101,9 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.provider.ModelItemProviderAdapterFactory;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 import de.topicmapslab.tmcledit.model.validation.ModelValidator;
@@ -131,8 +122,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private ViewContentProvider contentProvider;
 	private Action refreshAction;
 	private Action doubleClickAction;
-	private TMCLDiagramEditor currentEditor;
-	private ComposedAdapterFactory adapterFactory;
+	//private TMCLDiagramEditor currentEditor;
 
 	private EditingDomain editingDomain;
 	private ValidateJob validateJob = new ValidateJob();
@@ -217,7 +207,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 			
 		});
-		
+		/*
 		adapterFactory = new ComposedAdapterFactory(
 				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
@@ -226,7 +216,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		adapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
 		adapterFactory
 				.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-
+*/
 		initDragAndDrop();
 	}
 
@@ -442,31 +432,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	 */
 	public void setFocus() {
 		viewer.getControl().setFocus();
-	}
-
-	public IPropertySheetPage getPropertySheetPage() {
-		if (currentEditor == null)
-			return null;
-		PropertySheetPage propertySheetPage = new ExtendedPropertySheetPage(
-				(AdapterFactoryEditingDomain) currentEditor.getEditingDomain()) {
-			@Override
-			public void setSelectionToViewer(List<?> selection) {
-				/*
-				 * ModelEditor.this.setSelectionToViewer(selection);
-				 * ModelEditor.this.setFocus();
-				 */
-			}
-
-			@Override
-			public void setActionBars(IActionBars actionBars) {
-				super.setActionBars(actionBars);
-			}
-		};
-		propertySheetPage
-				.setPropertySourceProvider(new AdapterFactoryContentProvider(
-						adapterFactory));
-		return propertySheetPage;
-
 	}
 
 	@Override
@@ -803,7 +768,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				ttNode = new TreeParent(ModelView.this, "TopicTypes");
 				rtNode = new TreeParent(ModelView.this, "RoleTypes");
 				ntNode = new TreeParent(ModelView.this, "NameTypes");
-				otNode = new TreeParent(ModelView.this, "OccurenceTypes");
+				otNode = new TreeParent(ModelView.this, "OccurrenceTypes");
 				atNode = new TreeParent(ModelView.this, "AssociationTypes");
 				stNode = new TreeParent(ModelView.this, "ScopeTypes");
 	
@@ -859,8 +824,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				for (NameTypeConstraint ntc : tt.getNameContraints()) {
 					to.addChild(new TreeName(ModelView.this, ntc));
 				}
-				for (OccurenceTypeConstraint otc : tt.getOccurenceConstraints()) {
-					to.addChild(new TreeOccurence(ModelView.this, otc));
+				for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
+					to.addChild(new TreeOccurrence(ModelView.this, otc));
 				}
 				if (refresh)
 					viewer.refresh(parent);
@@ -891,7 +856,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			case NAME_TYPE:
 				parent = ntNode;
 				break;
-			case OCCURENCE_TYPE:
+			case OCCURRENCE_TYPE:
 				parent = otNode;
 				break;
 			case ASSOCIATION_TYPE:
@@ -922,7 +887,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	class NameSorter extends TreePathViewerSorter {
 		@Override
 		public int category(Object element) {
-			if (element instanceof TreeOccurence) {
+			if (element instanceof TreeOccurrence) {
 				return 3;
 			}
 			if (element instanceof TreeName) {

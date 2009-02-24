@@ -15,7 +15,7 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.OccurenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
 
 /**
  * @author Hannes Niederhausen
@@ -23,13 +23,13 @@ import de.topicmapslab.tmcledit.model.OccurenceType;
  */
 public class SetDatatypeCommand extends AbstractCommand {
 
-	private final OccurenceType type;
+	private final OccurrenceType type;
 	private final String newString;
 	private final String oldString;
 	
 	
 	
-	public SetDatatypeCommand(OccurenceType type, String newString) {
+	public SetDatatypeCommand(OccurrenceType type, String newString) {
 		super();
 		this.type = type;
 		this.newString = newString;

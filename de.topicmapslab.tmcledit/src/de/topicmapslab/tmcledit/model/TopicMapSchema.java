@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveRoleTypeConstraint <em>Active Role Type Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveNameTypeConstraint <em>Active Name Type Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveAssociationTypeConstraint <em>Active Association Type Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurenceTypeConstraint <em>Active Occurence Type Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurrenceTypeConstraint <em>Active Occurrence Type Constraint</em>}</li>
  * </ul>
  * </p>
  *
@@ -245,30 +245,30 @@ public interface TopicMapSchema extends EObject {
 	void setActiveAssociationTypeConstraint(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Active Occurence Type Constraint</b></em>' attribute.
+	 * Returns the value of the '<em><b>Active Occurrence Type Constraint</b></em>' attribute.
 	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Active Occurence Type Constraint</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Active Occurrence Type Constraint</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Active Occurence Type Constraint</em>' attribute.
-	 * @see #setActiveOccurenceTypeConstraint(boolean)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_ActiveOccurenceTypeConstraint()
+	 * @return the value of the '<em>Active Occurrence Type Constraint</em>' attribute.
+	 * @see #setActiveOccurrenceTypeConstraint(boolean)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_ActiveOccurrenceTypeConstraint()
 	 * @model default="true" required="true"
 	 * @generated
 	 */
-	boolean isActiveOccurenceTypeConstraint();
+	boolean isActiveOccurrenceTypeConstraint();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurenceTypeConstraint <em>Active Occurence Type Constraint</em>}' attribute.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#isActiveOccurrenceTypeConstraint <em>Active Occurrence Type Constraint</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Active Occurence Type Constraint</em>' attribute.
-	 * @see #isActiveOccurenceTypeConstraint()
+	 * @param value the new value of the '<em>Active Occurrence Type Constraint</em>' attribute.
+	 * @see #isActiveOccurrenceTypeConstraint()
 	 * @generated
 	 */
-	void setActiveOccurenceTypeConstraint(boolean value);
+	void setActiveOccurrenceTypeConstraint(boolean value);
 
 } // TopicMapSchema

@@ -43,8 +43,8 @@ public class ImageProvider {
 				return ImageProvider.getImage(ImageConstants.ASSOCIATIONTYPE);
 			case NAME_TYPE:
 				return ImageProvider.getImage(ImageConstants.NAMETYPE);
-			case OCCURENCE_TYPE:
-				return ImageProvider.getImage(ImageConstants.OCCURENCETYPE);
+			case OCCURRENCE_TYPE:
+				return ImageProvider.getImage(ImageConstants.OCCURRENCETYPE);
 			case ROLE_TYPE:
 				return ImageProvider.getImage(ImageConstants.ROLETYPE);
 			case SCOPE_TYPE:

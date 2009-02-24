@@ -19,7 +19,7 @@ import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 
-import de.topicmapslab.tmcledit.diagram.creationfactories.OccurenceConstraintCreationFactory;
+import de.topicmapslab.tmcledit.diagram.creationfactories.OccurrenceConstraintCreationFactory;
 import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -31,7 +31,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class TypeDropTransferListener extends AbstractTransferDropTargetListener {
 
 	private TypeNodeCreationFactory nodeFac = new TypeNodeCreationFactory(true);
-	private OccurenceConstraintCreationFactory occFac = new OccurenceConstraintCreationFactory();
+	private OccurrenceConstraintCreationFactory occFac = new OccurrenceConstraintCreationFactory();
 
 	private final TopicMapSchema schema;
 	
@@ -88,7 +88,7 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 			nodeFac.setTopicType(dropedType);
 			req.setFactory(nodeFac);
 		  
-		if (dropedType.getKind()==KindOfTopicType.OCCURENCE_TYPE) {
+		if (dropedType.getKind()==KindOfTopicType.OCCURRENCE_TYPE) {
 			occFac.setTopicType(dropedType);
 			req.setFactory(occFac);
 		} 

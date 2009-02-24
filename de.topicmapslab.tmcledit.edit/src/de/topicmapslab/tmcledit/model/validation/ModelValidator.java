@@ -23,7 +23,7 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -34,8 +34,8 @@ import de.topicmapslab.tmcledit.model.validation.actions.DeactivateFlagAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NameConstraintCreateTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NameConstraintSelectTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NewPrefixAction;
-import de.topicmapslab.tmcledit.model.validation.actions.OccurenceConstraintCreateTypeAction;
-import de.topicmapslab.tmcledit.model.validation.actions.OccurenceConstraintSelectTypeAction;
+import de.topicmapslab.tmcledit.model.validation.actions.OccurrenceConstraintCreateTypeAction;
+import de.topicmapslab.tmcledit.model.validation.actions.OccurrenceConstraintSelectTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.RemoveIsAAction;
 
 /**
@@ -68,7 +68,7 @@ public class ModelValidator {
 
 	private void validateTopicTypes() {
 		for (TopicType tt : schema.getTopicTypes()) {
-			validateOccurenceConstraint(tt);
+			validateOccurrenceConstraint(tt);
 			validateNameConstraint(tt);
 			checkPrefixes(tt);
 			if (ModelIndexer.getInstance().isFilterActivated(
@@ -185,30 +185,30 @@ public class ModelValidator {
 	 * if check for type is needed }
 	 */
 
-	private void validateOccurenceConstraint(TopicType topicType) {
-		for (OccurenceTypeConstraint otc : topicType.getOccurenceConstraints()) {
+	private void validateOccurrenceConstraint(TopicType topicType) {
+		for (OccurrenceTypeConstraint otc : topicType.getOccurrenceConstraints()) {
 			if (otc.getType() == null) {
 				ValidationResult vr = new ValidationResult(
-						"No type for occurence constraint set", otc);
-				vr.addValidationAction(new OccurenceConstraintSelectTypeAction(
+						"No type for occurrence constraint set", otc);
+				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(
 						commandStack));
-				vr.addValidationAction(new OccurenceConstraintCreateTypeAction(
+				vr.addValidationAction(new OccurrenceConstraintCreateTypeAction(
 						commandStack));
 				addValidationResult(vr);
-			} else if ((schema.isActiveOccurenceTypeConstraint())
+			} else if ((schema.isActiveOccurrenceTypeConstraint())
 					&& (otc.getType().getKind() == KindOfTopicType.NO_TYPE)) {
 				ValidationResult vr = new ValidationResult("The topic "
 						+ otc.getType().getName()
-						+ " may not be type for an occurence constraint", otc
+						+ " may not be type for an occurrence constraint", otc
 						.getType());
 				vr.addValidationAction(new DeactivateFlagAction(
 								commandStack,
 								schema,
 								ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT,
 								false));
-				vr.addValidationAction(new OccurenceConstraintSelectTypeAction(
+				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(
 						commandStack));
-				vr.addValidationAction(new OccurenceConstraintCreateTypeAction(
+				vr.addValidationAction(new OccurrenceConstraintCreateTypeAction(
 						commandStack));
 				addValidationResult(vr);
 			}

@@ -106,7 +106,7 @@ public class NewTopicTypeWizard extends Wizard {
 			group.setText("Type:");
 			group.setLayout(new GridLayout(3, false));
 			
-			String labels[] = {"Topic Type",  "Occurence Type", "Name Type", 
+			String labels[] = {"Topic Type",  "Occurrence Type", "Name Type", 
 					"Role Type", "Association Type", "Scope Type"};
 			
 			buttons = new Button[labels.length];
@@ -186,14 +186,15 @@ public class NewTopicTypeWizard extends Wizard {
 			case KindOfTopicType.NAME_TYPE_VALUE:
 				type = factory.createNameType();
 				break;
-			case KindOfTopicType.OCCURENCE_TYPE_VALUE:
-				type = factory.createOccurenceType();
+			case KindOfTopicType.OCCURRENCE_TYPE_VALUE:
+				type = factory.createOccurrenceType();
 				break;
 			default:
 				type = factory.createTopicType();
-				type.setKind(KindOfTopicType.get(selection));
+				
 				break;
 			}
+			type.setKind(KindOfTopicType.get(selection));
 			type.setName(nameText.getText());
 			
 			if (identifierText.getText().length()>0)

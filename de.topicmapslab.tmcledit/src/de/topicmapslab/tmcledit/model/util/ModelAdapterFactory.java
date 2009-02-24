@@ -89,8 +89,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractConstraintAdapter();
 			}
 			@Override
-			public Adapter caseOccurenceTypeConstraint(OccurenceTypeConstraint object) {
-				return createOccurenceTypeConstraintAdapter();
+			public Adapter caseOccurrenceTypeConstraint(OccurrenceTypeConstraint object) {
+				return createOccurrenceTypeConstraintAdapter();
 			}
 			@Override
 			public Adapter caseNameTypeConstraint(NameTypeConstraint object) {
@@ -173,8 +173,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createAssociationTypeAdapter();
 			}
 			@Override
-			public Adapter caseOccurenceType(OccurenceType object) {
-				return createOccurenceTypeAdapter();
+			public Adapter caseOccurrenceType(OccurrenceType object) {
+				return createOccurrenceTypeAdapter();
 			}
 			@Override
 			public Adapter caseRoleConstraint(RoleConstraint object) {
@@ -249,16 +249,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OccurenceTypeConstraint <em>Occurence Type Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint <em>Occurrence Type Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceTypeConstraint
+	 * @see de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint
 	 * @generated
 	 */
-	public Adapter createOccurenceTypeConstraintAdapter() {
+	public Adapter createOccurrenceTypeConstraintAdapter() {
 		return null;
 	}
 
@@ -543,16 +543,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OccurenceType <em>Occurence Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OccurrenceType <em>Occurrence Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.OccurenceType
+	 * @see de.topicmapslab.tmcledit.model.OccurrenceType
 	 * @generated
 	 */
-	public Adapter createOccurenceTypeAdapter() {
+	public Adapter createOccurrenceTypeAdapter() {
 		return null;
 	}
 

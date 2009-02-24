@@ -30,7 +30,7 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
@@ -75,8 +75,8 @@ public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 			int type = -1;
 			if (model instanceof NameTypeConstraint) {
 				type = ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS;
-			} else if (model instanceof OccurenceTypeConstraint) {
-				type = ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS;
+			} else if (model instanceof OccurrenceTypeConstraint) {
+				type = ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 			} else if (model instanceof SubjectIdentifierConstraint) {
 				type = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 			} else if (model instanceof SubjectIdentifierConstraint) {
@@ -127,7 +127,7 @@ public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 		if (selectedEditPart != null)
 			model = selectedEditPart.getModel();
 		if ( (selectedEditPart instanceof NodeEditPart)
-			|| (model instanceof OccurenceTypeConstraint)
+			|| (model instanceof OccurrenceTypeConstraint)
 			|| (model instanceof NameTypeConstraint)
 			|| (model instanceof SubjectIdentifierConstraint)
 			|| (model instanceof SubjectLocatorConstraint)

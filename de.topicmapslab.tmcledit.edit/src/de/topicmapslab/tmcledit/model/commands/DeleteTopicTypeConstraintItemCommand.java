@@ -64,8 +64,8 @@ public class DeleteTopicTypeConstraintItemCommand extends AbstractCommand {
 		case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
 			constraintList = topicType.getNameContraints();
 			break;
-		case ModelPackage.TOPIC_TYPE__OCCURENCE_CONSTRAINTS:
-			constraintList = topicType.getOccurenceConstraints();
+		case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
+			constraintList = topicType.getOccurrenceConstraints();
 			break;
 		case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 			constraintList = topicType.getSubjectIdentifierConstraints();
