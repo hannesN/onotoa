@@ -34,5 +34,19 @@
                class="de.topicmapslab.tmcledit.application.TmcleditApplication">
          </run>
       </application>
+      </extension>   
+      <extension
+         id="de.topicmapslab.tmcledit.splashhandler"
+         name="Onotoa Splash"
+         point="org.eclipse.ui.splashHandlers">
+      <splashHandlerProductBinding
+            productId="de.topicmapslab.tmcledit.application.product"
+            splashId="de.topicmapslab.tmcledit.application.splash.onotoa">
+      </splashHandlerProductBinding>
+      <splashHandler
+            class="de.topicmapslab.tmcledit.application.splash.OnotoaSplashHandler"
+            id="de.topicmapslab.tmcledit.application.splash.onotoa">
+      </splashHandler>
+      
    </extension>
 </plugin>
