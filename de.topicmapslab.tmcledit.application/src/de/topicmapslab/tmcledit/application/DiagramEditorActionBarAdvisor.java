@@ -48,7 +48,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 	private NewDiagramAction newDiagramAction;
 	
 	private OpenDiagramAction openDiagramAction;
-	
+
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -63,8 +63,9 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		newDiagramAction = new NewDiagramAction();
 		openDiagramAction = new OpenDiagramAction();
 		aboutAction = new AboutAction();
+		
 		register(ActionFactory.CLOSE.create(window));
-
+		
 		register(ActionFactory.SAVE.create(window));
 
 		register(ActionFactory.SAVE_AS.create(window));
@@ -124,7 +125,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			menuX.add(new Separator());
 			
 			menuX.add(getAction(ActionFactory.EXPORT.getId()));
-
 			menuX.add(new Separator());
 			menuX.add(getAction(ActionFactory.QUIT.getId()));
 
