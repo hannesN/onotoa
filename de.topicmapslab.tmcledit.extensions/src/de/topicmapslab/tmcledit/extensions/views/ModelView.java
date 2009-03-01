@@ -549,8 +549,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		
 		setSelection(new StructuredSelection());
 		firePropertyChange(PROP_DIRTY);
-		if (viewer!=null)
+		if (viewer!=null) {
 			viewer.refresh();
+			viewer.expandToLevel(2);
+		}
 	}
 
 	private void checkSavedState() {
