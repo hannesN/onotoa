@@ -31,7 +31,7 @@ public class DeleteTopicTypeAction extends Action {
 	private ModelView modelView;
 
 	public DeleteTopicTypeAction(ModelView modelView) {
-		setText("Delete Type");
+		setText("Delete");
 		this.modelView = modelView;
 	}
 
