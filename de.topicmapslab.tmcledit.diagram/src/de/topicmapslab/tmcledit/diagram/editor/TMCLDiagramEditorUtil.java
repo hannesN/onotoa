@@ -322,8 +322,8 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)));
 
-		group.add(new ConnectionCreationToolEntry("Role Constraint ...",
-				"Create Role Constraint connection", new CreationFactory() {
+		group.add(new ConnectionCreationToolEntry("Role Player Constraint ...",
+				"Create Role Player Constraint connection", new CreationFactory() {
 
 					@Override
 					public Object getNewObject() {
