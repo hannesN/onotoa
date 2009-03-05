@@ -68,6 +68,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		
 	}
 
+	@Override
 	public void performRequest(Request req) {
 		if (req.getType() == RequestConstants.REQ_DIRECT_EDIT) {
 			if ( (req instanceof DirectEditRequest) && (isEditable()) ){

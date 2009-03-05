@@ -45,6 +45,7 @@ public class SelectionFigure extends Figure
 	/**
 	 * paints figure differently depends on the whether the figure has focus or is selected 
 	 */
+	@Override
 	protected void paintFigure(Graphics graphics)
 	{
 		if (selected)

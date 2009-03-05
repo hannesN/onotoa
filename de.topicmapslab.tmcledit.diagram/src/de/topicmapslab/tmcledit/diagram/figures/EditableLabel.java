@@ -38,6 +38,7 @@ public class EditableLabel extends Label
 	/**
 	 * sets the text of the label
 	 */
+	@Override
 	public void setText(String s)
 	{
 		super.setText(s);
@@ -47,6 +48,7 @@ public class EditableLabel extends Label
 	/**
 	 * paints figure differently depends on the whether the figure has focus or is selected 
 	 */
+	@Override
 	protected void paintFigure(Graphics graphics)
 	{
 		if (selected)
