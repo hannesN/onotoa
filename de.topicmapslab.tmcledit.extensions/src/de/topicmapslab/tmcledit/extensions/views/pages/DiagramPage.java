@@ -71,7 +71,6 @@ public class DiagramPage extends AbstractModelPage {
 
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();
 	}

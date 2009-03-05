@@ -42,7 +42,6 @@ public class SetRoleConstraintCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#execute()
 	 */
-	@Override
 	public void execute() {
 		rolePlayerConstraint.setRole(newConstraint);
 	}
@@ -50,7 +49,6 @@ public class SetRoleConstraintCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#redo()
 	 */
-	@Override
 	public void redo() {
 		rolePlayerConstraint.setRole(newConstraint);
 	}

@@ -26,11 +26,10 @@ public class ShowHelpHandler extends AbstractHandler {
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		BrowserDialog dlg = new BrowserDialog((Shell) null, false);
 		dlg.setTitle("Online Help");
-		dlg.setUrl("http://onotoa.topicmapslab.de/index.php?docs");
+		dlg.setUrl("http://onotoa.topicmapslab.de/index.php?nav=docs");
 		dlg.open();
 		return null;
 	}

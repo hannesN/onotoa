@@ -36,7 +36,6 @@ import de.topicmapslab.tmcledit.model.validation.ValidationResult;
  */
 public class ValidateHandler extends AbstractHandler {
 
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench()

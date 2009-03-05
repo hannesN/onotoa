@@ -45,7 +45,6 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 		this(KindOfTopicType.TOPIC_TYPE, cache);
 	}
 
-	@Override
 	public Object getNewObject() {
 		TypeNode tn = ModelFactory.eINSTANCE.createTypeNode();
 
@@ -64,7 +63,6 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 		this.topicType = topicType;
 	}
 
-	@Override
 	public Object getObjectType() {
 		return TypeNode.class;
 	}

@@ -43,12 +43,10 @@ public class RemoveScopeConstraintsCommand extends AbstractCommand {
 		this.scope = scope;
 	}
 
-	@Override
 	public void execute() {
 		scopedTopicType.getScope().removeAll(scope);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

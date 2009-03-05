@@ -23,7 +23,6 @@ public class OccurrenceConstraintCreationFactory implements CreationFactory {
 
 	private TopicType occurrenceType;
 	
-	@Override
 	public Object getNewObject() {
 		OccurrenceTypeConstraint otc = ModelFactory.eINSTANCE.createOccurrenceTypeConstraint();
 		otc.setType(occurrenceType);
@@ -36,7 +35,6 @@ public class OccurrenceConstraintCreationFactory implements CreationFactory {
 		this.occurrenceType = topicType;
 	}
 	
-	@Override
 	public Object getObjectType() {
 		return OccurrenceTypeConstraint.class;
 	}

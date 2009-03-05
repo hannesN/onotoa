@@ -168,7 +168,6 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		typeModelPage.setCommandStack(commandStack);
 	}
 	
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.REMOVING_ADAPTER) {
 			return;

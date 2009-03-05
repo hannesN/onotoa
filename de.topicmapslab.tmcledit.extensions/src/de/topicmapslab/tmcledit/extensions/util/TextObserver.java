@@ -39,11 +39,9 @@ public class TextObserver implements FocusListener, DisposeListener {
 		
 	}
 
-	@Override
 	public void focusGained(FocusEvent e) {
 	}
 
-	@Override
 	public void focusLost(FocusEvent e) {
 		/*
 		EStructuralFeature feature = modelProvider.getModel().eClass().getEStructuralFeature(featureID);
@@ -52,7 +50,6 @@ public class TextObserver implements FocusListener, DisposeListener {
 		modelProvider.getCommandStack().execute(new GenericSetCommand(modelProvider.getModel(), featureID, text.getText()));
 	}
 
-	@Override
 	public void widgetDisposed(DisposeEvent e) {
 		text.removeFocusListener(this);
 	}

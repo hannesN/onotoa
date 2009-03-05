@@ -75,7 +75,6 @@ public class TMCLDiagramEditorUtil {
 		group.add(new CreationToolEntry("Comment", "Comment",
 				new CreationFactory() {
 
-					@Override
 					public Object getNewObject() {
 						Comment c = ModelFactory.eINSTANCE.createComment();
 						c.setWidth(50);
@@ -83,7 +82,6 @@ public class TMCLDiagramEditorUtil {
 						return c;
 					}
 
-					@Override
 					public Object getObjectType() {
 						return Comment.class;
 					}
@@ -102,7 +100,6 @@ public class TMCLDiagramEditorUtil {
 	public static EditPartFactory getEditPartFactory() {
 		return new EditPartFactory() {
 
-			@Override
 			public EditPart createEditPart(EditPart context, Object model) {
 				EditPart part = null;
 				if (model instanceof Diagram) {
@@ -205,13 +202,11 @@ public class TMCLDiagramEditorUtil {
 						"Name Constraints",
 						new CreationFactory() {
 
-							@Override
 							public Object getNewObject() {
 								return ModelFactory.eINSTANCE
 										.createNameTypeConstraint();
 							}
 
-							@Override
 							public Object getObjectType() {
 								return NameTypeConstraint.class;
 							}
@@ -225,13 +220,11 @@ public class TMCLDiagramEditorUtil {
 		group.add(new CreationToolEntry("Subject Identifier Constraints",
 				"Subject Identifier Constraints", new CreationFactory() {
 
-					@Override
 					public Object getNewObject() {
 						return ModelFactory.eINSTANCE
 								.createSubjectIdentifierConstraint();
 					}
 
-					@Override
 					public Object getObjectType() {
 						return SubjectIdentifierConstraint.class;
 					}
@@ -241,13 +234,11 @@ public class TMCLDiagramEditorUtil {
 		group.add(new CreationToolEntry("Subject Locator Constraints",
 				"Subject Locator Constraints", new CreationFactory() {
 
-					@Override
 					public Object getNewObject() {
 						return ModelFactory.eINSTANCE
 								.createSubjectLocatorConstraint();
 					}
 
-					@Override
 					public Object getObjectType() {
 						return SubjectLocatorConstraint.class;
 					}
@@ -262,14 +253,12 @@ public class TMCLDiagramEditorUtil {
 		group.add(new ConnectionCreationToolEntry("Is A ...",
 				"Create Is A connection", new CreationFactory() {
 
-					@Override
 					public Object getNewObject() {
 						Edge e = ModelFactory.eINSTANCE.createEdge();
 						e.setType(EdgeType.IS_ATYPE);
 						return e;
 					}
 
-					@Override
 					public Object getObjectType() {
 						return Edge.class;
 					}
@@ -280,14 +269,12 @@ public class TMCLDiagramEditorUtil {
 		group.add(new ConnectionCreationToolEntry("Kind Of ...",
 				"Create kind of connection", new CreationFactory() {
 
-					@Override
 					public Object getNewObject() {
 						Edge e = ModelFactory.eINSTANCE.createEdge();
 						e.setType(EdgeType.AKO_TYPE);
 						return e;
 					}
 
-					@Override
 					public Object getObjectType() {
 						return Edge.class;
 					}
@@ -301,7 +288,6 @@ public class TMCLDiagramEditorUtil {
 						"Association Constraint",
 						new CreationFactory() {
 
-							@Override
 							public Object getNewObject() {
 								AssociationNode node = ModelFactory.eINSTANCE
 										.createAssociationNode();
@@ -311,7 +297,6 @@ public class TMCLDiagramEditorUtil {
 								return node;
 							}
 
-							@Override
 							public Object getObjectType() {
 								return AssociationNode.class;
 							}
@@ -325,7 +310,6 @@ public class TMCLDiagramEditorUtil {
 		group.add(new ConnectionCreationToolEntry("Role Player Constraint ...",
 				"Create Role Player Constraint connection", new CreationFactory() {
 
-					@Override
 					public Object getNewObject() {
 						Edge e = ModelFactory.eINSTANCE.createEdge();
 						e.setRoleConstraint(ModelFactory.eINSTANCE
@@ -334,7 +318,6 @@ public class TMCLDiagramEditorUtil {
 						return e;
 					}
 
-					@Override
 					public Object getObjectType() {
 						return Edge.class;
 					}

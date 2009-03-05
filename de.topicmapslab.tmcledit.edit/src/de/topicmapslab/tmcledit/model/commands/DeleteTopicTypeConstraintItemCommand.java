@@ -47,7 +47,6 @@ public class DeleteTopicTypeConstraintItemCommand extends AbstractCommand {
 		this.featureID = featureID;
 	}
 
-	@Override
 	public void execute() {
 		constraintList.remove(constraint);
 	}
@@ -80,7 +79,6 @@ public class DeleteTopicTypeConstraintItemCommand extends AbstractCommand {
 		return true;
 	}
 	
-	@Override
 	public void redo() {
 		execute();
 	}

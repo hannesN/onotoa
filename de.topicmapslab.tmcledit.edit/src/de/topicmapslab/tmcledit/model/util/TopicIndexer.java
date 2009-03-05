@@ -106,17 +106,14 @@ public class TopicIndexer implements Adapter{
 		return tt;
 	}
 		
-	@Override
 	public Notifier getTarget() {
 		return target;
 	}
 
-	@Override
 	public boolean isAdapterForType(Object type) {
 		return true;
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		// TODO index new Topic or remove it, if indexing is really done ;)
 	}
@@ -128,7 +125,6 @@ public class TopicIndexer implements Adapter{
 		topicMapSchema = null;
 	}
 	
-	@Override
 	public void setTarget(Notifier newTarget) {
 		this.target = newTarget;
 	}

@@ -255,7 +255,6 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		super.deactivate();
 	}
 	
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
 			return;

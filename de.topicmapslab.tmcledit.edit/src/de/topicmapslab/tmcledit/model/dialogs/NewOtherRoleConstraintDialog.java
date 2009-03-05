@@ -63,6 +63,7 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 	private Button otherPlayerButton;
 	
 	private Adapter roleListener = new AdapterImpl() {
+		@Override
 		public void notifyChanged(Notification msg) 
 			{
 				validate();
@@ -173,7 +174,6 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 		return otherRole;
 	}
 	
-	@Override
 	public void widgetDisposed(DisposeEvent e) {
 		otherRole.eAdapters().remove(roleListener);
 	}
@@ -258,7 +258,6 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 			this.isMax = isMax;
 		}
 		
-		@Override
 		public void verifyText(VerifyEvent e) {
 			if (isMax) {
 				Text text = (Text) e.widget;

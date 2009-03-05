@@ -38,7 +38,6 @@ public class SetExclusiveCommand extends AbstractCommand {
 		this.addList = new ArrayList<TopicType>(newList);
 	}
 
-	@Override
 	public void execute() {
 
 		for (TopicType tt : removeList) {
@@ -83,7 +82,6 @@ public class SetExclusiveCommand extends AbstractCommand {
 		topicType.getExclusive().removeAll(addList);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

@@ -32,7 +32,6 @@ public class FileSelectionWizardPage extends WizardPage {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void createControl(Composite parent) {
 		Composite comp = new Composite(parent, SWT.None);
 		comp.setLayout(new GridLayout(3, false));

@@ -26,17 +26,14 @@ public abstract class AdapterGraphicalEditPart extends AbstractGraphicalEditPart
 
 	private Notifier target;
 	
-	@Override
 	public Notifier getTarget() {
 		return target;
 	}
 
-	@Override
 	public boolean isAdapterForType(Object type) {
 		return true;
 	}
 
-	@Override
 	public void setTarget(Notifier newTarget) {
 		this.target = newTarget;
 	}

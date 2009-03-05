@@ -200,7 +200,6 @@ public class PrefixMappingPage extends AbstractModelPage {
 		
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
 			return;
@@ -212,12 +211,10 @@ public class PrefixMappingPage extends AbstractModelPage {
 
 	private class TableLabelProvider implements ITableLabelProvider {
 
-		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
 
-		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			MappingElement me = (MappingElement) element;
 			switch(columnIndex) {
@@ -227,32 +224,26 @@ public class PrefixMappingPage extends AbstractModelPage {
 			return null;
 		}
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public void dispose() {
 		}
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}		
 	}
 	
 	private class TableCellModifier implements ICellModifier {
 
-		@Override
 		public boolean canModify(Object element, String property) {
 			return true;
 		}
 
-		@Override
 		public Object getValue(Object element, String property) {
 			MappingElement me = (MappingElement) element;
 			if (columnNames[0].equals(property)) {
@@ -262,7 +253,6 @@ public class PrefixMappingPage extends AbstractModelPage {
 			}
 		}
 
-		@Override
 		public void modify(Object element, String property, Object value) {
 			if (value==null)
 				return;

@@ -42,7 +42,6 @@ public class EmptyPage extends AbstractModelPage {
 	public void updateUI() {
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 	}
 }

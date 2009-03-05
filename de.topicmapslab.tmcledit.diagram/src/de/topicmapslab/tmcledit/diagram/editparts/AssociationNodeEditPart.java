@@ -155,7 +155,6 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER) {
 			return;

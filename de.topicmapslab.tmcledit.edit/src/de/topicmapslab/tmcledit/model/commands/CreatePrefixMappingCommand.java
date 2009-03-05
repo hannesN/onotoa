@@ -41,7 +41,6 @@ public class CreatePrefixMappingCommand extends AbstractCommand{
 		return true;
 	}
 	
-	@Override
 	public void execute() {
 		schema.getMappings().add(newElement);
 	}
@@ -51,7 +50,6 @@ public class CreatePrefixMappingCommand extends AbstractCommand{
 		schema.getMappings().remove(newElement);
 	}
 	
-	@Override
 	public void redo() {
 		execute();
 	}

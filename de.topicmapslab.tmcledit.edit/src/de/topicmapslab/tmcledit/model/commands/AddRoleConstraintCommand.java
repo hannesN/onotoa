@@ -46,7 +46,6 @@ public class AddRoleConstraintCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#execute()
 	 */
-	@Override
 	public void execute() {
 		associationType.getRoles().addAll(roles);
 	}
@@ -54,7 +53,6 @@ public class AddRoleConstraintCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#redo()
 	 */
-	@Override
 	public void redo() {
 		execute();
 	}

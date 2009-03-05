@@ -33,12 +33,10 @@ public class AddOtherRolePlayerConstraintCommand extends AbstractCommand {
 		this.orpc = orpc;
 	}
 
-	@Override
 	public void execute() {
 		roleType.getOtherRoles().add(orpc);
 	}
 
-	@Override
 	public void redo() {
 		roleType.getOtherRoles().add(orpc);
 	}

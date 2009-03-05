@@ -87,7 +87,6 @@ public class NewTopicTypeWizard extends Wizard {
 			setTitle("Topic Type");
 		}
 
-		@Override
 		public void createControl(Composite parent) {
 			Composite comp = new Composite(parent, SWT.NONE);
 			comp.setLayout(new GridLayout());
@@ -140,7 +139,6 @@ public class NewTopicTypeWizard extends Wizard {
 			fac.applyTo(nameText);
 			nameText.addModifyListener(new ModifyListener() {
 
-				@Override
 				public void modifyText(ModifyEvent e) {
 					setPageComplete(nameText.getText().length()>0);
 				}

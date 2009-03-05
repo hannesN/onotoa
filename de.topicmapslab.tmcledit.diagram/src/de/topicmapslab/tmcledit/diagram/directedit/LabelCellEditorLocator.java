@@ -35,7 +35,6 @@ public class LabelCellEditorLocator implements CellEditorLocator {
 		this.label = label;
 	}
 	
-	@Override
 	public void relocate(CellEditor celleditor) {
 		Text text = (Text) celleditor.getControl();
 

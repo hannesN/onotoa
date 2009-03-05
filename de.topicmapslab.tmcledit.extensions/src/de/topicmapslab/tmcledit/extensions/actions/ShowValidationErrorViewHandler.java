@@ -25,7 +25,6 @@ import de.topicmapslab.tmcledit.extensions.views.ValidationErrorView;
  */
 public class ShowValidationErrorViewHandler extends AbstractHandler {
 
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow workbench = HandlerUtil.getActiveWorkbenchWindow(event);
 		

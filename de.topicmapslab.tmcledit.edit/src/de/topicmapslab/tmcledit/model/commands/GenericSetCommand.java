@@ -45,12 +45,10 @@ public class GenericSetCommand extends AbstractCommand {
 		return feature;
 	}
 	
-	@Override
 	public void execute() {
 		model.eSet(getFeature(), newValue);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

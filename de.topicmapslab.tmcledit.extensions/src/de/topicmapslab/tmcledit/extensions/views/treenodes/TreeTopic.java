@@ -113,7 +113,6 @@ public class TreeTopic extends TreeParent {
 				.getShell(), "New Topic Id..", "Please enter the new Topic ID",
 				oldName, new IInputValidator() {
 
-					@Override
 					public String isValid(String newText) {
 						if (newText.length() == 0)
 							return "no name given";

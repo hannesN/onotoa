@@ -83,7 +83,6 @@ public class CreateNodeCommand extends AbstractCommand {
 		return true;
 	}
 
-	@Override
 	public void execute() {
 		switch (type) {
 		case TYPE:
@@ -164,7 +163,6 @@ public class CreateNodeCommand extends AbstractCommand {
 		return edge;
 	}
 
-	@Override
 	public void redo() {
 		switch (type) {
 		case TYPE:

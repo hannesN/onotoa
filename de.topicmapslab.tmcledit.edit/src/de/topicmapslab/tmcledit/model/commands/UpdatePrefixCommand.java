@@ -41,7 +41,6 @@ public class UpdatePrefixCommand extends AbstractCommand {
 		this.newValue = newValue;
 	}
 
-	@Override
 	public void execute() {
 		me.eSetDeliver(false);
 		me.setKey(newKey);
@@ -57,7 +56,6 @@ public class UpdatePrefixCommand extends AbstractCommand {
 		me.setValue(oldValue);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

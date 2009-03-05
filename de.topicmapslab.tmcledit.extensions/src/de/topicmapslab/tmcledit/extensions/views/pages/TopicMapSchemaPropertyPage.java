@@ -110,7 +110,6 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 		return tmp;
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();
 	}

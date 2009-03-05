@@ -30,6 +30,7 @@ public class AboutAction extends Action {
 		setId("about action");
 	}
 	
+	@Override
 	public void run() {
 		Bundle bundle = TmcleditEditPlugin.getPlugin().getBundle();
 		String version = (String) bundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);

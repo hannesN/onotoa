@@ -27,6 +27,7 @@ public class NewDiagramAction extends Action {
 		setText("New..");
 	}
 	
+	@Override
 	public void run() {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		Shell shell = workbench.getActiveWorkbenchWindow().getShell();

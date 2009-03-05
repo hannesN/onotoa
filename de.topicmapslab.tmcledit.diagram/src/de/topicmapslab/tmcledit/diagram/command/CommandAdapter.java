@@ -26,14 +26,15 @@ public class CommandAdapter extends org.eclipse.gef.commands.Command {
 		this.emfCommand = emfCommand;
 	}
 
+	@Override
 	public boolean canExecute() {
 		return emfCommand.canExecute();
 	}
-
+	@Override
 	public boolean canUndo() {
 		return emfCommand.canUndo();
 	}
-
+	@Override
 	public void execute() {
 		cmdStack.execute(emfCommand);
 	}
@@ -41,15 +42,15 @@ public class CommandAdapter extends org.eclipse.gef.commands.Command {
 	public String getDescription() {
 		return emfCommand.getDescription();
 	}
-
+	@Override
 	public String getLabel() {
 		return emfCommand.getLabel();
 	}
-
+	@Override
 	public void redo() {
 		cmdStack.redo();
 	}
-
+	@Override
 	public void undo() {
 		cmdStack.undo();
 	}

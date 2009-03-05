@@ -52,7 +52,6 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#execute()
 	 */
-	@Override
 	public void execute() {
 		for (SetRoleConstraintCommand cmd : roleConstraintList) {
 			cmd.execute();
@@ -63,7 +62,6 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#redo()
 	 */
-	@Override
 	public void redo() {
 		execute();
 	}

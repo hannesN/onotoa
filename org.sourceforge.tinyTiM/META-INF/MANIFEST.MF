@@ -236,4 +236,4 @@ Export-Package: com.semagia.mio,
  org.xmlpull.v1.util,
  org.xmlpull.v1.wrapper,
  org.xmlpull.v1.wrapper.classic
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

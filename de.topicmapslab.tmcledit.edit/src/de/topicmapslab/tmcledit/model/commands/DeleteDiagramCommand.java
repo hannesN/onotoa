@@ -36,7 +36,6 @@ public class DeleteDiagramCommand extends AbstractCommand {
 		this.index = file.getDiagrams().indexOf(diagram);
 	}
 
-	@Override
 	public void execute() {
 		file.getDiagrams().remove(diagram);
 	}
@@ -46,7 +45,6 @@ public class DeleteDiagramCommand extends AbstractCommand {
 		file.getDiagrams().add(index, diagram);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

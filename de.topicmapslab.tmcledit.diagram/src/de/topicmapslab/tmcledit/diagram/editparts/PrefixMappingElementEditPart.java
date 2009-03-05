@@ -62,7 +62,6 @@ public class PrefixMappingElementEditPart extends AdapterGraphicalEditPart {
 		return ((GraphicalEditPart)getParent()).getContentPane();
 	}
 	
-	@Override
 	public void notifyChanged(Notification notification) {
 		refreshVisuals();
 	}

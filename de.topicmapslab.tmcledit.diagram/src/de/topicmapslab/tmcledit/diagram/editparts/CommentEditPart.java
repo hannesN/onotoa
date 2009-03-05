@@ -41,7 +41,6 @@ public class CommentEditPart extends AdapterGraphicalEditPart {
 	protected void createEditPolicies() {
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		if ( (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__HEIGHT) ||
 			 (notification.getFeatureID(Integer.class)==ModelPackage.COMMENT__WIDTH)  ||

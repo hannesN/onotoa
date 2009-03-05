@@ -22,22 +22,18 @@ public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPa
 	protected Adapter adapter = new Adapter() {
 		private Notifier target;
 		
-		@Override
 		public Notifier getTarget() {
 			return target;
 		}
 
-		@Override
 		public boolean isAdapterForType(Object type) {
 			return AdapterConnectionEditPart.this.isAdapterForType(type);
 		}
 
-		@Override
 		public void notifyChanged(Notification notification) {
 			AdapterConnectionEditPart.this.notifyChanged(notification);
 		}
 
-		@Override
 		public void setTarget(Notifier newTarget) {
 			this.target = newTarget;
 		}

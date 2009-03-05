@@ -49,7 +49,6 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 
 	protected abstract EdgeType getEdgeType();
 	
-	@Override
 	public void execute() {
 		if (getEdgeType()==EdgeType.AKO_TYPE) {
 			topic.getAko().removeAll(removeList);
@@ -67,7 +66,6 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

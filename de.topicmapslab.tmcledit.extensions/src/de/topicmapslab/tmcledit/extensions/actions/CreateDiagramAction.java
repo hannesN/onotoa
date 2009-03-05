@@ -49,7 +49,6 @@ public class CreateDiagramAction extends Action {
 				"Please Enter the name of the new diagram", "", 
 				new IInputValidator() {
 
-					@Override
 					public String isValid(String newText) {
 						if (newText.length()==0)
 							return "Please enter a name.";

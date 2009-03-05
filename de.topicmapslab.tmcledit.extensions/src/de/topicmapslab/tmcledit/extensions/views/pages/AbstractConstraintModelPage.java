@@ -78,7 +78,6 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 
 	
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
 			return;

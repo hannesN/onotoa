@@ -39,7 +39,6 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 		this.RolePlayerConstraint = RolePlayerConstraint;
 	}
 
-	@Override
 	public void execute() {
 		for (Diagram d : edgeMap.keySet()) {
 			d.getEdges().remove(edgeMap.get(d));
@@ -47,7 +46,6 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 		associationTypeConstraint.getPlayerConstraints().remove(RolePlayerConstraint);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

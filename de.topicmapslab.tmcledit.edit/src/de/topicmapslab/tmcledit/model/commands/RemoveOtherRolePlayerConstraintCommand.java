@@ -35,12 +35,10 @@ public class RemoveOtherRolePlayerConstraintCommand extends AbstractCommand {
 		this.constraintList = constraintList;
 	}
 	
-	@Override
 	public void execute() {
 		roleType.getOtherRoles().removeAll(constraintList);
 	}
 	
-	@Override
 	public void redo() {
 		roleType.getOtherRoles().removeAll(constraintList);		
 	}

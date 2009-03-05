@@ -44,7 +44,6 @@ public class SubjectIdentifierConstraintEditPart extends AbstractLabelEditPart {
 		getTypeLabel().setText(buffer.toString());
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.SET)
 			refreshVisuals();

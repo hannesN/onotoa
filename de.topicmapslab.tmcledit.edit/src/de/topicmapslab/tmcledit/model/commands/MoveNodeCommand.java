@@ -37,7 +37,6 @@ public class MoveNodeCommand extends AbstractCommand {
 		newLocation = new Point(newX, newY);
 	}
 
-	@Override
 	public void execute() {
 	
 		redo();
@@ -49,7 +48,6 @@ public class MoveNodeCommand extends AbstractCommand {
 		return true;
 	}
 	
-	@Override
 	public void redo() {
 		setLocation(newLocation);
 	}

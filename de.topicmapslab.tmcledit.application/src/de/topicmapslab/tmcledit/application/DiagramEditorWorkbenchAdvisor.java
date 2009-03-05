@@ -27,6 +27,7 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	/**
 	 * @generated
 	 */
+	@Override
 	public String getInitialWindowPerspectiveId() {
 		return PERSPECTIVE_ID;
 	}
@@ -34,6 +35,7 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	public void initialize(IWorkbenchConfigurer configurer) {
 		super.initialize(configurer);
 		configurer.setSaveAndRestore(true);
@@ -42,6 +44,7 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	/**
 	 * @generated
 	 */
+	@Override
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
 		return new DiagramEditorWorkbenchWindowAdvisor(configurer);

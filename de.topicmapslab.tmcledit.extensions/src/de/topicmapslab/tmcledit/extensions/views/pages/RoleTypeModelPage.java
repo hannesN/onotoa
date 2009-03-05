@@ -197,7 +197,6 @@ public class RoleTypeModelPage extends TopicTypePage {
 	
 	private class OtherRoleLabelProvider implements ITableLabelProvider {
 
-		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			OtherRolePlayerConstraint c = (OtherRolePlayerConstraint) element;
 			TopicType type = null;
@@ -219,7 +218,6 @@ public class RoleTypeModelPage extends TopicTypePage {
 			return ImageProvider.getTopicTypeImage(type);
 		}
 
-		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			OtherRolePlayerConstraint c = (OtherRolePlayerConstraint) element;
 			switch (columnIndex) {
@@ -235,20 +233,16 @@ public class RoleTypeModelPage extends TopicTypePage {
 			return null;
 		}
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public void dispose() {
 		}
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
 		

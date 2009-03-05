@@ -102,7 +102,6 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 
 	private static class UnderlineLabelBorder extends AbstractBorder {
 
-		@Override
 		public Insets getInsets(IFigure figure) {
 			return new Insets(0, 0, 1, 0);
 		}
@@ -113,7 +112,6 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 			return new Dimension(preferredSize.width, preferredSize.height+1);
 		}
 
-		@Override
 		public void paint(IFigure figure, Graphics graphics, Insets insets) {
 			Rectangle rec = figure.getBounds();
 			int y = rec.y+rec.height-1;

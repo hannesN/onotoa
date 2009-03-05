@@ -48,12 +48,10 @@ public abstract class AbstractTopicTypeIdentificationCommand extends
 		return true;
 	}
 	
-	@Override
 	public void execute() {
 		setList(newList);
 	}
 
-	@Override
 	public void redo() {
 		setList(newList);
 	}

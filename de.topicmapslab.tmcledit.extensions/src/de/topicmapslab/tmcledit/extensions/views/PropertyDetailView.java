@@ -77,7 +77,6 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		pageBook.reflow(true);
 	}
 	
-	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		
 		if ( ( (part instanceof ModelView) || (part instanceof TMCLDiagramEditor) || (part instanceof ValidationErrorView)) 

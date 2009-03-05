@@ -34,7 +34,6 @@ public class SetAbstractTopicTypeCommand extends AbstractCommand {
 		tt = topicType;
 	}
 
-	@Override
 	public void execute() {
 		tt.setAbstract(isAbstract);
 	}
@@ -44,7 +43,6 @@ public class SetAbstractTopicTypeCommand extends AbstractCommand {
 		tt.setAbstract(!isAbstract);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

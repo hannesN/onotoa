@@ -58,6 +58,7 @@ public class TreeObject implements IAdaptable, Adapter {
 		return parent;
 	}
 
+	@Override
 	public String toString() {
 		return getName();
 	}
@@ -84,21 +85,17 @@ public class TreeObject implements IAdaptable, Adapter {
 		}
 	}
 
-	@Override
 	public Notifier getTarget() {
 		return target;
 	}
 
-	@Override
 	public boolean isAdapterForType(Object type) {
 		return false;
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 	}
 
-	@Override
 	public void setTarget(Notifier newTarget) {
 		target = newTarget;
 	}

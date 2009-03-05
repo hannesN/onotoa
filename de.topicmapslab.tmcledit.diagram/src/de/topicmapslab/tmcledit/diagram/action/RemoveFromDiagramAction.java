@@ -76,7 +76,6 @@ public class RemoveFromDiagramAction extends Action implements UpdateAction {
 		update();
 	}
 	
-	@Override
 	public void update() {
 		if ( (selectedEditPart instanceof NodeEditPart)
 			|| (selectedEditPart instanceof OccurrenceTypeConstraintEditPart)

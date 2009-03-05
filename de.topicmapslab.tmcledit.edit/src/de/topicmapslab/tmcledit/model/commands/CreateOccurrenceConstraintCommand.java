@@ -32,7 +32,6 @@ public class CreateOccurrenceConstraintCommand extends AbstractCommand {
 		this.otc = otc;
 	}
 	
-	@Override
 	public void execute() {
 		redo();
 	}
@@ -51,7 +50,6 @@ public class CreateOccurrenceConstraintCommand extends AbstractCommand {
 		topicType.getOccurrenceConstraints().remove(otc);		
 	}
 	
-	@Override
 	public void redo() {
 		topicType.getOccurrenceConstraints().add(otc);
 	}

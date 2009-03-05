@@ -222,7 +222,6 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		setControl(section);
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();
 	}
