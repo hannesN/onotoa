@@ -35,13 +35,11 @@ public class RemoveNodeCommand extends AbstractCommand {
 		this.node = node;
 	}
 	
-	@Override
 	public void execute() {
 		
 		redo();
 	}
 	
-	@Override
 	public void redo() {
 		diagram.getEdges().removeAll(edgeList);
 		diagram.getNodes().remove(node);

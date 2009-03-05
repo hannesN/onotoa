@@ -34,12 +34,10 @@ public class DeleteCommentCommand extends AbstractCommand {
 	}
 
 
-	@Override
 	public void execute() {
 		diagram.getComments().remove(comment);
 	}
 
-	@Override
 	public void redo() {
 		diagram.getComments().remove(comment);
 	}

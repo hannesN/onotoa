@@ -29,12 +29,10 @@ public class CreateNameTypeConstraintCommand extends AbstractCommand {
 		this.nameTypeConstraint = nameTypeConstraint;
 	}
 	
-	@Override
 	public void execute() {
 		topicType.getNameContraints().add(nameTypeConstraint);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

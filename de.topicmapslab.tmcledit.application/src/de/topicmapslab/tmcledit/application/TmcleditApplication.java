@@ -22,7 +22,6 @@ import org.eclipse.ui.PlatformUI;
  */
 public class TmcleditApplication implements IApplication {
 
-	@Override
 	public Object start(IApplicationContext context) throws Exception {
 		Display display = PlatformUI.createDisplay();
 		try {
@@ -37,7 +36,6 @@ public class TmcleditApplication implements IApplication {
 		}
 	}
 
-	@Override
 	public void stop() {
 	}
 }

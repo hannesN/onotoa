@@ -82,7 +82,6 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		addPage(page1);
 	}
 	
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		if (selection.isEmpty()) {
 			try {

@@ -43,7 +43,6 @@ public class CreateTopicTypeCommand extends AbstractCommand {
 		return true;
 	}
 
-	@Override
 	public void execute() {
 		schema.getTopicTypes().add(topicType);
 	}
@@ -53,7 +52,6 @@ public class CreateTopicTypeCommand extends AbstractCommand {
 		return super.canUndo();
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

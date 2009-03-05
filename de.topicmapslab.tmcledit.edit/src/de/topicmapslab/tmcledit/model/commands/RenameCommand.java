@@ -37,7 +37,6 @@ public class RenameCommand extends AbstractCommand {
 		this.newName = newName;
 	}
 
-	@Override
 	public void execute() {
 		tt.setName(newName);
 	}
@@ -47,7 +46,6 @@ public class RenameCommand extends AbstractCommand {
 		tt.setName(oldName);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

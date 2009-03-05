@@ -155,7 +155,6 @@ public class RoleModelPage extends AbstractModelPage{
 		return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
 	}
 	
-	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();
 	}

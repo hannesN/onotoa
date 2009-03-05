@@ -53,7 +53,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		super(configurer);
 	}
 
-
+	@Override
 	protected void makeActions(IWorkbenchWindow window) {
 		toggleCoolbarAction = ActionFactory.TOGGLE_COOLBAR.create(window);
 		register(toggleCoolbarAction);
@@ -95,6 +95,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		register(ActionFactory.EXPORT.create(window));
 	}
 
+	@Override
 	protected void fillMenuBar(IMenuManager menu) {
 
 		{
@@ -201,6 +202,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		}
 	}
 	
+	@Override
 	protected void fillCoolBar(ICoolBarManager toolBar) {
 		IMenuManager popUpMenu = new MenuManager();
 		popUpMenu.add(new ActionContributionItem(lockToolBarAction));

@@ -83,22 +83,18 @@ public abstract class NodeEditPart extends AdapterGraphicalEditPart implements o
 		super.deactivate();
 	}
 
-	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(ConnectionEditPart connection) {
 		return new ChopboxAnchor(getFigure());
 	}
 
-	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(Request request) {
 		return new ChopboxAnchor(getFigure());
 	}
 
-	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(ConnectionEditPart connection) {
 		return new ChopboxAnchor(getFigure());
 	}
 
-	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(Request request) {
 		return new ChopboxAnchor(getFigure());
 	}

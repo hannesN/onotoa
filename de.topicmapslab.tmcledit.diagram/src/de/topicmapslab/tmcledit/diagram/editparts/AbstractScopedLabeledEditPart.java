@@ -75,7 +75,6 @@ public abstract class AbstractScopedLabeledEditPart extends
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getFeatureID(List.class)==ModelPackage.SCOPED_TOPIC_TYPE__SCOPE) {
 			if (notification.getEventType()==Notification.ADD) {

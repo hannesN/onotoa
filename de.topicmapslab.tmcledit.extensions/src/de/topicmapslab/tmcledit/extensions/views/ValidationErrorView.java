@@ -81,7 +81,6 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 		viewer.setLabelProvider(new ValidationLabelProvider());
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 
-			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
 				if (sel.isEmpty())
@@ -132,24 +131,20 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 		viewer.setInput(results);
 	}
 	
-	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		if (listeners==Collections.EMPTY_LIST)
 			listeners = new ArrayList<ISelectionChangedListener>();
 		listeners.add(listener);
 	}
-	@Override
 	public ISelection getSelection() {
 		return currentSelection;
 	}
-	@Override
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
 		if (listeners==Collections.EMPTY_LIST)
 			return;
 		listeners.remove(listener);
 	}
-	@Override
 	public void setSelection(ISelection selection) {
 		currentSelection = selection;
 		SelectionChangedEvent e = new SelectionChangedEvent(this, selection);
@@ -160,30 +155,24 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 
 	private class ValidationLabelProvider implements ITableLabelProvider {
 	
-		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
 		}
 	
-		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			return ((ValidationResult)element).getMessage();
 		}
 	
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 	
-		@Override
 		public void dispose() {
 		}
 	
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 	
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
 		

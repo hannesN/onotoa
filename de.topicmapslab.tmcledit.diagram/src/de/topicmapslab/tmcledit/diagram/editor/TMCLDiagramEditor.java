@@ -105,6 +105,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		getPalettePreferences().setPaletteWidth(200);
 	}
 
+	@Override
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		GraphicalViewer viewer = getGraphicalViewer();
@@ -133,7 +134,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		
 		
 	}
-
+	@Override
 	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
 
@@ -301,7 +302,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return TMCLDiagramEditorUtil.getPaletteRoot();
 	}
 
-	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		IStructuredSelection sel = (IStructuredSelection) event.getSelection();
 
@@ -343,7 +343,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	}
 
-	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		if (selectionChangedListeners == Collections.EMPTY_LIST)
 			selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
@@ -351,20 +350,17 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		selectionChangedListeners.add(listener);
 	}
 
-	@Override
 	public ISelection getSelection() {
 		return (currentSelection == null) ? new StructuredSelection()
 				: currentSelection;
 	}
 
-	@Override
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
 		if (selectionChangedListeners != Collections.EMPTY_LIST)
 			selectionChangedListeners.remove(listener);
 	}
 
-	@Override
 	public void setSelection(ISelection selection) {
 		// currentSelection = selection;
 	}

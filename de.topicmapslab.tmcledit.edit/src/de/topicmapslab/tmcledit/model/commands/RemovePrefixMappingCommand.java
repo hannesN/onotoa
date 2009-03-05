@@ -34,7 +34,6 @@ public class RemovePrefixMappingCommand extends AbstractCommand{
 		return true;
 	}
 	
-	@Override
 	public void execute() {
 		schema.getMappings().remove(me);
 	}
@@ -44,7 +43,6 @@ public class RemovePrefixMappingCommand extends AbstractCommand{
 		schema.getMappings().add(me);
 	}
 	
-	@Override
 	public void redo() {
 		execute();
 	}

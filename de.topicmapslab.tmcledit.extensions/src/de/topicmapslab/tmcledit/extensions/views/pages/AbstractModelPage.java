@@ -59,7 +59,6 @@ public abstract class AbstractModelPage extends Page implements Adapter, IModelP
 	public void setFocus() {
 	}
 
-	@Override
 	public Notifier getTarget() {
 		return target;
 	}
@@ -73,12 +72,10 @@ public abstract class AbstractModelPage extends Page implements Adapter, IModelP
 		this.control = control;
 	}
 	
-	@Override
 	public boolean isAdapterForType(Object type) {
 		return true;
 	}
 
-	@Override
 	public void setTarget(Notifier newTarget) {
 		this.target = newTarget;
 	}

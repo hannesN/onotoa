@@ -28,7 +28,6 @@ public class RemoveDiagramCommand extends AbstractCommand{
 		this.file = file;
 	}
 	
-	@Override
 	public void execute() {
 		file.getDiagrams().remove(diagram);
 	}
@@ -42,7 +41,6 @@ public class RemoveDiagramCommand extends AbstractCommand{
 	protected boolean prepare() {
 		return true;
 	}
-	@Override
 	public void redo() {
 		execute();
 	}

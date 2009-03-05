@@ -45,11 +45,9 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 
 	}
 
-	@Override
 	public void focusGained(FocusEvent e) {
 	}
 
-	@Override
 	public void focusLost(FocusEvent e) {
 		/*
 		 * EStructuralFeature feature =
@@ -61,7 +59,6 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 						.getModel(), isMin, text.getText()));
 	}
 
-	@Override
 	public void widgetDisposed(DisposeEvent e) {
 		text.removeFocusListener(this);
 		text.removeVerifyListener(this);
@@ -73,7 +70,6 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		new CardTextObserver(text, modelProvider, isMin);
 	}
 
-	@Override
 	public void verifyText(VerifyEvent e) {
 		String text = e.text;
 		

@@ -117,7 +117,6 @@ public class MoveableLabelEditPart extends AdapterGraphicalEditPart {
 	protected void createEditPolicies() {
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		refreshVisuals();
 	}

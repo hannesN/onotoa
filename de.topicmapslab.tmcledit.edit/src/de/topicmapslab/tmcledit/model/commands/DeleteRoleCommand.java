@@ -38,7 +38,6 @@ public class DeleteRoleCommand extends AbstractCommand {
 		this.RoleConstraint = RoleConstraint;
 	}
 
-	@Override
 	public void execute() {
 		for (DeleteRolePlayerConstraintCommand cmd : deletePlayerCmds)
 			if (cmd.canExecute())
@@ -46,7 +45,6 @@ public class DeleteRoleCommand extends AbstractCommand {
 		associationType.getRoles().remove(RoleConstraint);
 	}
 
-	@Override
 	public void redo() {
 		for (DeleteRolePlayerConstraintCommand cmd : deletePlayerCmds)
 			cmd.redo();

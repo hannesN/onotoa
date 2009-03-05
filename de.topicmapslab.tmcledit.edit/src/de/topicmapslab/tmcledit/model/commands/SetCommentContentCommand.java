@@ -35,12 +35,10 @@ public class SetCommentContentCommand extends AbstractCommand {
 	}
 
 
-	@Override
 	public void execute() {
 		comment.setContent(newText);
 	}
 
-	@Override
 	public void redo() {
 		comment.setContent(newText);
 	}

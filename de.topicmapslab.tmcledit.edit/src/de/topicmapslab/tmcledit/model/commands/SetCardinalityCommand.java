@@ -37,7 +37,6 @@ public class SetCardinalityCommand extends AbstractCommand {
 		this.newValue = newValue;
 	}
 
-	@Override
 	public void execute() {
 		if (isMin) {
 			cardinalityContraint.setCardMin(newValue);
@@ -69,7 +68,6 @@ public class SetCardinalityCommand extends AbstractCommand {
 		}
 	}
 	
-	@Override
 	public void redo() {
 		execute();
 	}

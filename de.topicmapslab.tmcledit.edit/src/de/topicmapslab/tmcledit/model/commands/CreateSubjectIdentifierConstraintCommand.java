@@ -30,12 +30,10 @@ public class CreateSubjectIdentifierConstraintCommand extends AbstractCommand {
 		this.subjectIdentifierConstraint = subjectIdentifierConstraint;
 	}
 	
-	@Override
 	public void execute() {
 		topicType.getSubjectIdentifierConstraints().add(subjectIdentifierConstraint);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

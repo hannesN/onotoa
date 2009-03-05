@@ -41,7 +41,6 @@ public class SetConstraintScopeCommand extends AbstractCommand {
 		return true;
 	}
 	
-	@Override
 	public void execute() {
 		setScopeList(newScope);
 	}
@@ -53,7 +52,6 @@ public class SetConstraintScopeCommand extends AbstractCommand {
 		scopedTopicType.getScope().addAll(scopeList);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

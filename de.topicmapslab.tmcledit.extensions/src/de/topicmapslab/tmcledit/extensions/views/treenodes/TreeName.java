@@ -44,6 +44,7 @@ public class TreeName extends TreeObject{
 		
 	}
 	
+	@Override
 	public void dispose() {
 		if ( (getModel()!=null) && (getNameTypeConstraint().getType()!=null) )
 			getNameTypeConstraint().getType().eAdapters().remove(this);

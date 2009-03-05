@@ -115,7 +115,6 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	}
 
 	private final class TopicTypeComparator implements Comparator<TopicType> {
-		@Override
 		public int compare(TopicType o1, TopicType o2) {
 			if (o1.equals(o2))
 				return 0;
@@ -146,12 +145,10 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	
 	private class ListLabelProvider implements ILabelProvider {
 
-		@Override
 		public Image getImage(Object element) {
 			return null;
 		}
 
-		@Override
 		public String getText(Object element) {
 			if (element==null)
 				return "";
@@ -160,20 +157,16 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 			return tt.getName();
 		}
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public void dispose() {
 		}
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
 		
@@ -181,12 +174,10 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	
 	private class DetailLabelProvider implements ILabelProvider {
 
-		@Override
 		public Image getImage(Object element) {
 			return null;
 		}
 
-		@Override
 		public String getText(Object element) {
 			if (element==null)
 				return "";
@@ -194,20 +185,16 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 			return tt.getName();
 		}
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public void dispose() {
 		}
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
 		

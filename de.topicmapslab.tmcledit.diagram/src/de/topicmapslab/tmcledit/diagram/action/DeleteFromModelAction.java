@@ -121,7 +121,6 @@ public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 		update();
 	}
 	
-	@Override
 	public void update() {
 		Object model = null;
 		if (selectedEditPart != null)

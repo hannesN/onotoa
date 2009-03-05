@@ -132,7 +132,6 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 		
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getFeatureID(EList.class)==ModelPackage.DIAGRAM__EDGES) {
 			if (notification.getEventType()==Notification.ADD) {

@@ -161,6 +161,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	 * This is a callback that will allow us to create the viewer and initialize
 	 * it.
 	 */
+	@Override
 	public void createPartControl(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 
@@ -184,7 +185,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
-			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				if (currFile==null) {
 					currentSelection = new StructuredSelection();
@@ -372,6 +372,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	private void makeActions() {
 		refreshAction = new Action() {
+			@Override
 			public void run() {
 				contentProvider.update();
 				viewer.setInput(getViewSite());
@@ -384,6 +385,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				.getImageDescriptor(ISharedImages.IMG_ELCL_SYNCED));
 
 		doubleClickAction = new Action() {
+			@Override
 			public void run() {
 				ISelection selection = viewer.getSelection();
 				Object obj = ((IStructuredSelection) selection)
@@ -430,11 +432,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
+	@Override
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
 
-	@Override
 	public EditingDomain getEditingDomain() {
 		if (editingDomain == null) {
 			editingDomain = WorkspaceEditingDomainFactory.INSTANCE
@@ -452,14 +454,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		return editingDomain;
 	}
 
-	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		if (listeners == Collections.EMPTY_LIST)
 			listeners = new ArrayList<ISelectionChangedListener>();
 		listeners.add(listener);
 	}
 
-	@Override
 	public ISelection getSelection() {
 		if (currentSelection==null)
 			if (currFile!=null)
@@ -475,7 +475,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		return null;
 	}
 
-	@Override
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
 		if (listeners == Collections.EMPTY_LIST)
@@ -483,7 +482,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		listeners.remove(listener);
 	}
 
-	@Override
 	public void setSelection(ISelection selection) {
 		if (viewer != null)
 			viewer.setSelection(selection);
@@ -585,7 +583,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		return viewer;
 	}
 
-	@Override
 	public void commandStackChanged(EventObject event) {
 		updateActions();
 		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
@@ -632,7 +629,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		}
 	}
 	
-	@Override
 	public void doSave(IProgressMonitor monitor) {
 		try {
 			FileUtil.saveFile((File) currFile);
@@ -644,23 +640,19 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		currFile.setDirty(false);
 	}
 
-	@Override
 	public void doSaveAs() {
 	}
 
-	@Override
 	public boolean isDirty() {
 		if (currFile==null)
 			return false;
 		return currFile.isDirty();
 	}
 	
-	@Override
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
 
-	@Override
 	public boolean isSaveOnCloseNeeded() {
 		return isDirty();
 	}
@@ -877,10 +869,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	class ViewLabelProvider extends LabelProvider {
 	
+		@Override
 		public String getText(Object obj) {
 			return obj.toString();
 		}
 	
+		@Override
 		public Image getImage(Object obj) {
 			return ((TreeObject) obj).getImage();
 		}
@@ -959,7 +953,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			private List<ValidationResult> list;
 			private ValidationErrorView vew;
 			
-			@Override
 			public void run() {
 				vew.setValidationResults(list);
 			}

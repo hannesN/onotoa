@@ -48,33 +48,27 @@ public class TMCLEditorInput implements IEditorInput {
 		this.exists = exists;
 	}
 
-	@Override
 	public boolean exists() {
 		return exists;
 	}
 
-	@Override
 	public ImageDescriptor getImageDescriptor() {
 		return null;
 	}
 
-	@Override
 	public String getName() {
 		return diagram.getName();
 	}
 
-	@Override
 	public IPersistableElement getPersistable() {
 		return null;
 	}
 
-	@Override
 	public String getToolTipText() {
 		return diagram.getName();
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public Object getAdapter(Class adapter) {
 		return null;
 	}

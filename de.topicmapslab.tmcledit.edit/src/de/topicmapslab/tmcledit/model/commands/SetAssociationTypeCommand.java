@@ -44,7 +44,6 @@ public class SetAssociationTypeCommand extends AbstractCommand {
 		this.oldType = constraint.getType();
 	}
 
-	@Override
 	public void execute() {
 		for (AbstractCommand cmd : cmds) {
 			if (cmd.canExecute())
@@ -53,7 +52,6 @@ public class SetAssociationTypeCommand extends AbstractCommand {
 		constraint.setType(newType);
 	}
 
-	@Override
 	public void redo() {
 		for (AbstractCommand cmd : cmds) {
 			cmd.redo();

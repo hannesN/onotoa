@@ -37,12 +37,10 @@ public class CreateCommentCommand extends AbstractCommand {
 	}
 
 
-	@Override
 	public void execute() {
 		diagram.getComments().add(comment);
 	}
 
-	@Override
 	public void redo() {
 		diagram.getComments().add(comment);
 	}

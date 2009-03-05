@@ -29,12 +29,10 @@ public class CreateSubjectLocatorConstraintCommand extends AbstractCommand {
 		this.subjectLocatorConstraint = subjectLocatorConstraint;
 	}
 	
-	@Override
 	public void execute() {
 		topicType.getSubjectLocatorConstraint().add(subjectLocatorConstraint);
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

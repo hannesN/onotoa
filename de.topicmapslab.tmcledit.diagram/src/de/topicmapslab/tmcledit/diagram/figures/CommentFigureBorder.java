@@ -21,13 +21,11 @@ public class CommentFigureBorder extends AbstractBorder {
 
 	static final Insets zeroInsets = new Insets(0, 0, 0, 0); 
 	
-	@Override
 	public Insets getInsets(IFigure figure) {
 		return new Insets(5,5,5,5);
 		
 	}
 
-	@Override
 	public void paint(IFigure figure, Graphics graphics, Insets insets) {
 		Rectangle rec = getPaintRectangle(figure, getInsets(figure));
 		//rec.y -= 10;

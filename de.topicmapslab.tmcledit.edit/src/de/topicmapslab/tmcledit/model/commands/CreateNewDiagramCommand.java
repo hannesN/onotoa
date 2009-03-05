@@ -30,12 +30,10 @@ public class CreateNewDiagramCommand extends AbstractCommand {
 		this.file = file;
 	}
 
-	@Override
 	public void execute() {
 		file.getDiagrams().add(diagram);
 	}
 
-	@Override
 	public void redo() {
 		file.getDiagrams().add(diagram);
 	}

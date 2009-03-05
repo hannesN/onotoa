@@ -70,7 +70,6 @@ public class TreeDiagram extends TreeObject {
 				.getShell(), "New Diagram Name..", "Please enter the new diagram name",
 				oldName, new IInputValidator() {
 
-					@Override
 					public String isValid(String newText) {
 						if (newText.length() == 0)
 							return "no name given";

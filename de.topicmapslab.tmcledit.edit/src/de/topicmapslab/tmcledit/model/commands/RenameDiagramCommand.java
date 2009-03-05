@@ -28,7 +28,6 @@ public class RenameDiagramCommand extends AbstractCommand{
 		this.diagram = diagram;
 	}
 	
-	@Override
 	public void execute() {
 		diagram.setName(name);
 	}
@@ -43,7 +42,6 @@ public class RenameDiagramCommand extends AbstractCommand{
 		oldName = diagram.getName();
 		return true;
 	}
-	@Override
 	public void redo() {
 		execute();
 	}

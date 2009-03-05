@@ -31,7 +31,6 @@ public class CreateDiagramCommand extends AbstractCommand{
 		this.file = file;
 	}
 	
-	@Override
 	public void execute() {
 		file.getDiagrams().add(diagram);
 	}
@@ -47,7 +46,7 @@ public class CreateDiagramCommand extends AbstractCommand{
 		diagram.setName(name);
 		return true;
 	}
-	@Override
+	
 	public void redo() {
 		execute();
 	}

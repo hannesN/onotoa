@@ -63,7 +63,6 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		this.topicType = topicType;
 	}
 
-	@Override
 	public void execute() {
 		for (ContainmentPair<Diagram, TypeNode> cp : typeNodeList) {
 			if (edgeMap.get(cp.getContainer()) != null) {
@@ -141,7 +140,6 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		}
 	}
 
-	@Override
 	public void redo() {
 		execute();
 	}

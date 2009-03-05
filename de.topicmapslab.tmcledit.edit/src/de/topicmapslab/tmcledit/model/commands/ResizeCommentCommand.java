@@ -37,7 +37,6 @@ public class ResizeCommentCommand extends AbstractCommand {
 		newBounds = new Rectangle(newX, newY, newW, newH);
 	}
 
-	@Override
 	public void execute() {
 		redo();
 	}
@@ -51,7 +50,6 @@ public class ResizeCommentCommand extends AbstractCommand {
 		return true;
 	}
 	
-	@Override
 	public void redo() {
 		setBounds(newBounds);
 	}

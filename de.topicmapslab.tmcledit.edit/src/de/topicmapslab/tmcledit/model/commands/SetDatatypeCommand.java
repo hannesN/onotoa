@@ -39,7 +39,6 @@ public class SetDatatypeCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#execute()
 	 */
-	@Override
 	public void execute() {
 		type.setDataType(newString);
 	}
@@ -47,7 +46,6 @@ public class SetDatatypeCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#redo()
 	 */
-	@Override
 	public void redo() {
 		type.setDataType(newString);
 	}

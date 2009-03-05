@@ -40,7 +40,6 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 	}
 	
 	
-	@Override
 	public void execute() {
 		ModelIndexer indexer = ModelIndexer.getInstance();
 		
@@ -58,7 +57,6 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 		
 	}
 
-	@Override
 	public void redo() {
 		ModelIndexer indexer = ModelIndexer.getInstance();
 		for (DeleteRolePlayerConstraintCommand cmd : cmds) {

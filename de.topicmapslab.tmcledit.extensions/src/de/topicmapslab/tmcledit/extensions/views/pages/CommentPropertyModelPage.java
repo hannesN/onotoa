@@ -70,7 +70,6 @@ public class CommentPropertyModelPage extends AbstractModelPage {
 		setControl(section);
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		updateUI();
 	}

@@ -62,7 +62,6 @@ public class CreateEdgeCommand extends AbstractCommand {
 		return true;
 	}
 	
-	@Override
 	public void execute() {
 		 redo();
 	}
@@ -93,7 +92,6 @@ public class CreateEdgeCommand extends AbstractCommand {
 		diagram.getEdges().remove(edge);
 	}
 
-	@Override
 	public void redo() {
 		switch (edge.getType()) {
 		case AKO_TYPE:

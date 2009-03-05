@@ -43,7 +43,6 @@ public class FileWizardPage extends WizardPage {
 		super(pageName);
 	}
 
-	@Override
 	public void createControl(Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayout(new GridLayout(3, false));
@@ -54,7 +53,6 @@ public class FileWizardPage extends WizardPage {
 		pathText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		pathText.addModifyListener(new ModifyListener() {
 
-			@Override
 			public void modifyText(ModifyEvent e) {
 				path = pathText.getText();
 			}

@@ -180,7 +180,6 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		TextCellEditor editor = new TextCellEditor(tableViewer.getTable());
 		editor.setValidator(new ICellEditorValidator() {
 
-			@Override
 			public String isValid(Object value) {
 				String val = (String) value;
 				if (val.length()==0)
@@ -212,14 +211,12 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	}
 	private class ConstraintCellModifier implements ICellModifier {
 
-		@Override
 		public boolean canModify(Object element, String property) {
 			if ( (property.equals(TABLE_PROPS[1])) || property.equals(TABLE_PROPS[2]) )
 				return true;
 			return false;
 		}
 
-		@Override
 		public Object getValue(Object element, String property) {
 			AbstractTypedCardinalityConstraint constraint = (AbstractTypedCardinalityConstraint) element;
 			if (property.equals(TABLE_PROPS[1]))
@@ -230,7 +227,6 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			return null;
 		}
 
-		@Override
 		public void modify(Object element, String property, Object value) {
 			TableItem item = (TableItem) element;
 			AbstractTypedCardinalityConstraint constraint = (AbstractTypedCardinalityConstraint) item.getData();
@@ -256,12 +252,10 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	
 	private class ScopeTableLabelProvider implements ITableLabelProvider {
 
-		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
 
-		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			AbstractTypedCardinalityConstraint tc = (AbstractTypedCardinalityConstraint) element;
 			switch(columnIndex) {
@@ -272,20 +266,16 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			return null;
 		}
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public void dispose() {
 		}
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
 		
@@ -293,7 +283,6 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	
 	public class TopicLabelProvider implements ILabelProvider {
 
-		@Override
 		public Image getImage(Object element) {
 			String img = ImageConstants.TOPICTYPE;
 			
@@ -315,25 +304,20 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			return ImageProvider.getImage(img);
 		}
 
-		@Override
 		public String getText(Object element) {
 			return ((TopicType)element).getName();
 		}
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public void dispose() {
 		}
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
 		

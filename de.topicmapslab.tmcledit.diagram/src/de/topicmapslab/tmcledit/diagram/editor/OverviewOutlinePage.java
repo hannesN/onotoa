@@ -63,7 +63,8 @@ public class OverviewOutlinePage extends Page implements IContentOutlinePage
     /* (non-Javadoc)
      * @see org.eclipse.ui.part.IPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl(Composite parent)
+    @Override
+	public void createControl(Composite parent)
     {
         // create canvas and lws
         overview = new Canvas(parent, SWT.NONE);
@@ -81,7 +82,8 @@ public class OverviewOutlinePage extends Page implements IContentOutlinePage
     /* (non-Javadoc)
      * @see org.eclipse.ui.part.IPage#dispose()
      */
-    public void dispose()
+    @Override
+	public void dispose()
     {
         if (null != thumbnail)
             thumbnail.deactivate();
@@ -92,7 +94,8 @@ public class OverviewOutlinePage extends Page implements IContentOutlinePage
     /* (non-Javadoc)
      * @see org.eclipse.ui.part.IPage#getControl()
      */
-    public Control getControl()
+    @Override
+	public Control getControl()
     {
         return overview;
     }
@@ -114,7 +117,8 @@ public class OverviewOutlinePage extends Page implements IContentOutlinePage
     /* (non-Javadoc)
      * @see org.eclipse.ui.part.IPage#setFocus()
      */
-    public void setFocus()
+    @Override
+	public void setFocus()
     {
         if (getControl() != null)
             getControl().setFocus();

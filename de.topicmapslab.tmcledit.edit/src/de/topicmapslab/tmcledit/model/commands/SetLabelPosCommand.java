@@ -39,7 +39,6 @@ public class SetLabelPosCommand extends AbstractCommand {
 		this.newPosY = newPosY;
 	}
 
-	@Override
 	public void execute() {
 		position.eSetDeliver(false);
 		position.setPosX(newPosX);
@@ -50,7 +49,6 @@ public class SetLabelPosCommand extends AbstractCommand {
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.Command#redo()
 	 */
-	@Override
 	public void redo() {
 		execute();
 	}

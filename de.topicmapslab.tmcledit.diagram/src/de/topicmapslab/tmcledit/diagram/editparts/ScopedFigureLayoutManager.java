@@ -78,7 +78,6 @@ public class ScopedFigureLayoutManager extends AbstractLayout {
 	 * @see org.eclipse.draw2d.LayoutManager#layout(org.eclipse.draw2d.IFigure)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public void layout(IFigure container) {
 		Maximum max = calculateMaximums(container);
 		int height = 0;
