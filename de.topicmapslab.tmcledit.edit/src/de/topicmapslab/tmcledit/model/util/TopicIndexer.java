@@ -92,10 +92,9 @@ public class TopicIndexer implements Adapter{
 			break;
 		default:
 			tt = ModelFactory.eINSTANCE.createTopicType();
-			tt.setKind(kind);
 			break;
 		}
-		
+		tt.setKind(kind);
 		String tmp = "default";
 		
 		while (getTopicType(tmp+lastDefaultNumber)!=null) {

@@ -42,6 +42,7 @@ import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
+	@Override
 	protected IFigure createFigure()
 	{
 		figure = (PolylineConnection) super.createFigure();
@@ -115,7 +116,8 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		
 		installEditPolicy(EditPolicy.CONNECTION_ENDPOINTS_ROLE, new ConnectionEndpointEditPolicy());
 		installEditPolicy(EditPolicy.CONNECTION_ROLE, new ConnectionEditPolicy() {
-            protected Command getDeleteCommand(GroupRequest request) {
+            @Override
+			protected Command getDeleteCommand(GroupRequest request) {
                 return null;//new ConnectionDeleteCommand(getCastedModel());
             }
         });
