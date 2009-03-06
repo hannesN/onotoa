@@ -29,7 +29,7 @@ public class ShowHelpHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		BrowserDialog dlg = new BrowserDialog((Shell) null, false);
 		dlg.setTitle("Online Help");
-		dlg.setUrl("http://onotoa.topicmapslab.de/index.php?nav=docs");
+		dlg.setUrl("http://onotoa.topicmapslab.de/documentation");
 		dlg.open();
 		return null;
 	}
