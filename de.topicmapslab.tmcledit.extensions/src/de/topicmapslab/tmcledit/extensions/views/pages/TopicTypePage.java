@@ -61,21 +61,21 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	public TopicTypePage() {
 		super("topic type");
 	}
-	
+
 	public TopicTypePage(String id) {
 		super(id);
 	}
-	
+
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 
 		section = toolkit.createSection(parent, Section.EXPANDED
 				| Section.TITLE_BAR);
-		section.setText("Dies st ein n test");
+		section.setText("");
 		GridData gd = new GridData(GridData.FILL_BOTH);
-		gd.minimumHeight=20;
-		gd.minimumWidth=20;
+		gd.minimumHeight = 20;
+		gd.minimumWidth = 20;
 		section.setLayoutData(gd);
 		Composite comp = toolkit.createComposite(section);
 		comp.setLayout(new GridLayout(3, false));
@@ -90,14 +90,15 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			public void focusLost(FocusEvent e) {
 				if (nameText.getText().length() > 0) {
 					getCommandStack().execute(
-							new RenameTopicTypeCommand((TopicType) getModel(), nameText
-									.getText()));
+							new RenameTopicTypeCommand((TopicType) getModel(),
+									nameText.getText()));
 				}
 			}
 		});
 
 		toolkit.createLabel(comp, "Subject Identifiers:");
-		identifierText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
+		identifierText = toolkit.createText(comp, "", SWT.BORDER
+				| SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		identifierText.setLayoutData(gd);
 
@@ -106,17 +107,19 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicType type = (TopicType) getModel();
-				StringListSelectionDialog dlg = new StringListSelectionDialog(identifierText.getShell());
+				StringListSelectionDialog dlg = new StringListSelectionDialog(
+						identifierText.getShell());
 				dlg.setSelectedTopics(type.getIdentifiers());
-				dlg.setInputDescription("Please enter the new subject identifier.");
+				dlg
+						.setInputDescription("Please enter the new subject identifier.");
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(new SetTopicTypeIdentifiersCommand(dlg.getStringList(),
-							(TopicType) getModel()));
+					getCommandStack().execute(
+							new SetTopicTypeIdentifiersCommand(dlg
+									.getStringList(), (TopicType) getModel()));
 				}
 			}
 		});
-		
 
 		toolkit.createLabel(comp, "Subject Locators:");
 		locatorText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
@@ -128,17 +131,22 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicType type = (TopicType) getModel();
-				StringListSelectionDialog dlg = new StringListSelectionDialog(identifierText.getShell());
+				StringListSelectionDialog dlg = new StringListSelectionDialog(
+						identifierText.getShell());
 				dlg.setSelectedTopics(type.getLocators());
-				dlg.setInputDescription("Please enter the new subject locator.");
+				dlg
+						.setInputDescription("Please enter the new subject locator.");
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(new SetTopicTypeLocatorsCommand(dlg.getStringList(),
-							(TopicType) getModel()));
+					getCommandStack()
+							.execute(
+									new SetTopicTypeLocatorsCommand(dlg
+											.getStringList(),
+											(TopicType) getModel()));
 				}
 			}
 		});
-		
+
 		toolkit.createLabel(comp, "is a:");
 		isAText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -153,8 +161,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(new SetIsACommand(dlg.getSelectedTopics(),
-							(TopicType) getModel()));
+					getCommandStack().execute(
+							new SetIsACommand(dlg.getSelectedTopics(),
+									(TopicType) getModel()));
 				}
 			}
 		});
@@ -173,16 +182,17 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(new SetAkoCommand(dlg.getSelectedTopics(),
-							(TopicType) getModel()));
+					getCommandStack().execute(
+							new SetAkoCommand(dlg.getSelectedTopics(),
+									(TopicType) getModel()));
 				}
 			}
 
-			
 		});
-		
+
 		toolkit.createLabel(comp, "exclusive:");
-		exclusiveText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
+		exclusiveText = toolkit
+				.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 1;
 		exclusiveText.setLayoutData(gd);
@@ -190,17 +200,17 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TopicSelectionDialog dlg = new TopicSelectionDialog(exclusiveText
-						.getShell(), (TopicType) getModel());
+				TopicSelectionDialog dlg = new TopicSelectionDialog(
+						exclusiveText.getShell(), (TopicType) getModel());
 				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(new SetExclusiveCommand(dlg.getSelectedTopics(),
-							(TopicType) getModel()));
+					getCommandStack().execute(
+							new SetExclusiveCommand(dlg.getSelectedTopics(),
+									(TopicType) getModel()));
 				}
 			}
 
-			
 		});
 
 		toolkit.createLabel(comp, "isAbstract");
@@ -211,14 +221,16 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		abstractButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				getCommandStack().execute(new SetAbstractTopicTypeCommand((TopicType) getModel(), abstractButton.getSelection()));
+				getCommandStack().execute(
+						new SetAbstractTopicTypeCommand((TopicType) getModel(),
+								abstractButton.getSelection()));
 			}
 		});
-		
+
 		section.setClient(comp);
-		
+
 		createAdditionalControls(comp, toolkit);
-		
+
 		setControl(section);
 	}
 
@@ -230,68 +242,66 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	public void updateUI() {
 		if (nameText != null) {
 			TopicType t = (TopicType) getModel();
-			if (t!=null) {
-			if (getTopicType(t) == null)
-				section.setText("<...>");
-			else
+			if (t != null) {
+				nameText.setText(t.getName());
 				section.setText(getTopicType(t));
-			nameText.setText(t.getName());
 
-			StringBuffer b = new StringBuffer();
-			for (String s : t.getIdentifiers()) {
-				b.append(s);
-				b.append(", ");
-			}
-			if (b.length() > 0)
-				identifierText.setText(b.substring(0, b.length() - 2));
-			else
-				identifierText.setText("");
-			
-			b.setLength(0);
-			
-			for (String s : t.getLocators()) {
-				b.append(s);
-				b.append(", ");
-			}
-			if (b.length() > 0)
-				locatorText.setText(b.substring(0, b.length() - 2));
-			else
-				locatorText.setText("");
-			
-			b.setLength(0);
-			
-			for (TopicType tt : t.getIsa()) {
-				b.append(tt.getName());
-				b.append(", ");
-			}
-			if (b.length() > 0)
-				isAText.setText(b.substring(0, b.length() - 2));
-			else
-				isAText.setText("");
+				StringBuffer b = new StringBuffer();
+				for (String s : t.getIdentifiers()) {
+					b.append(s);
+					b.append(", ");
+				}
+				if (b.length() > 0)
+					identifierText.setText(b.substring(0, b.length() - 2));
+				else
+					identifierText.setText("");
 
-			b.setLength(0);
-			for (TopicType tt : t.getAko()) {
-				b.append(tt.getName());
-				b.append(", ");
-			}
-			if (b.length() > 0)
-				akoText.setText(b.substring(0, b.length() - 2));
-			else
-				akoText.setText("");
-			
-			b.setLength(0);
-			
-			for (TopicType tt : t.getExclusive()) {
-				b.append(tt.getName());
-				b.append(", ");
-			}
-			if (b.length() > 0)
-				exclusiveText.setText(b.substring(0, b.length() - 2));
-			else
-				exclusiveText.setText("");
-			
-			abstractButton.setSelection(t.isAbstract());
+				b.setLength(0);
+
+				for (String s : t.getLocators()) {
+					b.append(s);
+					b.append(", ");
+				}
+				if (b.length() > 0)
+					locatorText.setText(b.substring(0, b.length() - 2));
+				else
+					locatorText.setText("");
+
+				b.setLength(0);
+
+				for (TopicType tt : t.getIsa()) {
+					b.append(tt.getName());
+					b.append(", ");
+				}
+				if (b.length() > 0)
+					isAText.setText(b.substring(0, b.length() - 2));
+				else
+					isAText.setText("");
+
+				b.setLength(0);
+				for (TopicType tt : t.getAko()) {
+					b.append(tt.getName());
+					b.append(", ");
+				}
+				if (b.length() > 0)
+					akoText.setText(b.substring(0, b.length() - 2));
+				else
+					akoText.setText("");
+
+				b.setLength(0);
+
+				for (TopicType tt : t.getExclusive()) {
+					b.append(tt.getName());
+					b.append(", ");
+				}
+				if (b.length() > 0)
+					exclusiveText.setText(b.substring(0, b.length() - 2));
+				else
+					exclusiveText.setText("");
+
+				abstractButton.setSelection(t.isAbstract());
 			} else {
+				section.setText("");
 				nameText.setText("");
 				identifierText.setText("");
 				locatorText.setText("");
@@ -300,16 +310,17 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				abstractButton.setSelection(false);
 				exclusiveText.setText("");
 			}
-			
-			
+
 		}
+		section.layout(true);
 	}
 
-	protected void createAdditionalControls(Composite parent, FormToolkit toolkit) {
+	protected void createAdditionalControls(Composite parent,
+			FormToolkit toolkit) {
 	}
-	
+
 	private String getTopicType(TopicType t) {
-		if (t==null)
+		if (t == null)
 			return "Topic Type";
 		switch (t.getKind()) {
 		case ROLE_TYPE:
