@@ -292,9 +292,11 @@ public class CTMBuilder {
 	}
 
 	private void processNameTypeConstraint(NameTypeConstraint ntc) {
+		String nameId=(ntc.getType()==null) ? "http://psi.topicmaps.org/iso13250/model/topic-name" :
+			getIdString(ntc.getType());
 		addIndention();
 		buffer.append("has-name(");
-		buffer.append(ntc.getType().getName());
+		buffer.append(nameId);
 		buffer.append(", ");
 		buffer.append(ntc.getCardMin());
 		buffer.append(", ");
