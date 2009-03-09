@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application.splash;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
@@ -18,6 +20,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.splash.BasicSplashHandler;
 import org.osgi.framework.Bundle;
 
@@ -67,7 +70,23 @@ public class OnotoaSplashHandler extends BasicSplashHandler {
 					 "(C) 2008, 2009 Hannes Niederhauen, Topic Maps Lab";
 		label.setText(tmp);
 		
+		IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
+		if (prefStore.getBoolean("second_start")) {
+			if (!prefStore.getBoolean("survey_done")) {
+				Shell shell = parent.getShell();
+				if (MessageDialog.openQuestion(shell, "A tiny favor..", "Onotoa is part of my diplome thesis.\n" +
+						"Please take the time to fillout my tiny survey about Onotoa.\n" +
+						"Do you want to open the sruvey now?")) {
+					PlatformUI.getPreferenceStore().setValue("shownow", true);
+				}
+			}
+		} else {
+			prefStore.setValue("second_start", true);
+		}
+		
 	}
+	
+	
 	
 	@Override
 	public void dispose() {

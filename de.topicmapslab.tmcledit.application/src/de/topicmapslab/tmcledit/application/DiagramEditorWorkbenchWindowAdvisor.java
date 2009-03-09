@@ -10,11 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
+import org.eclipse.ui.handlers.IHandlerService;
 
 
 /**
@@ -51,4 +55,21 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 		configurer.setShowStatusLine(true);
 	}
 
+	@Override
+	public void postWindowOpen() {
+		super.postWindowOpen();
+		IPreferenceStore preferenceStore = PlatformUI.getPreferenceStore();
+		if (preferenceStore.getBoolean("shownow")) {
+			IWorkbench workbench = PlatformUI.getWorkbench();
+			try {
+				((IHandlerService) workbench
+						.getService(IHandlerService.class)).executeCommand(
+						"de.topicmapslab.tmcledit.doc.opensurveycommand",
+						null);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			preferenceStore.setToDefault("shownow");
+		}
+	}
 }

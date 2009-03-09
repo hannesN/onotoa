@@ -14,9 +14,9 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.doc.dialogs.BrowserDialog;
-import de.topicmapslab.tmcledit.extensions.Activator;
 
 /**
  * @author Hannes Niederhausen
@@ -32,7 +32,7 @@ public class OpenSurveyHandler extends AbstractHandler{
 		dlg.setTitle("Online Survey");
 		dlg.setUrl("http://survey.onotoa.topicmapslab.de/");
 		dlg.open();
-		Activator.getDefault().getPreferenceStore().setValue("survey_done", true);
+		PlatformUI.getPreferenceStore().setValue("survey_done", true);
 		return null;
 	}
 
