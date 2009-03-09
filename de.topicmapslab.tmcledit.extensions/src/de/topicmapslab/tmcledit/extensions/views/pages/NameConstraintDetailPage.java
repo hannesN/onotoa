@@ -152,7 +152,7 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 		if ( (getCastedModel().getType()!=null) && (getCastedModel().getType().getName()!=null) )
 			typeText.setText(getCastedModel().getType().getName());
 		else
-			typeText.setText("");
+			typeText.setText("http://psi.topicmaps.org/iso13250/model/topic-name");
 		super.updateUI();
 	}
 	
