@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
+import org.eclipse.ui.IWorkbenchPreferenceConstants;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.IWorkbenchConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
@@ -39,6 +41,7 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	public void initialize(IWorkbenchConfigurer configurer) {
 		super.initialize(configurer);
 		configurer.setSaveAndRestore(true);
+		PlatformUI.getPreferenceStore().putValue(IWorkbenchPreferenceConstants.SHOW_PROGRESS_ON_STARTUP, "true");
 	}
 
 	/**
