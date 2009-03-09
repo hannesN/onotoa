@@ -34,7 +34,7 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 	protected void refreshVisuals() {
 		NameTypeConstraint ntc = getCastedModel();
 		if (ntc.getType()==null)
-			getNameLabel().setText("No Type");
+			getNameLabel().setText("default");
 		else
 			getNameLabel().setText(ntc.getType().getName());
 		StringBuffer buffer = new StringBuffer(50);

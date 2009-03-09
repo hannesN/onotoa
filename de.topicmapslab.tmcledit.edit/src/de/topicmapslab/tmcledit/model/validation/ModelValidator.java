@@ -218,6 +218,7 @@ public class ModelValidator {
 	private void validateNameConstraint(TopicType topicType) {
 		for (NameTypeConstraint ntc : topicType.getNameContraints()) {
 			if (ntc.getType() == null) {
+				/*
 				ValidationResult vr = new ValidationResult(
 						"No type for name type constraint set", ntc);
 				vr.addValidationAction(new NameConstraintSelectTypeAction(
@@ -225,6 +226,8 @@ public class ModelValidator {
 				vr.addValidationAction(new NameConstraintCreateTypeAction(
 						commandStack));
 				addValidationResult(vr);
+				*/
+				
 			} else if ((schema.isActiveAssociationTypeConstraint())
 					&& (ntc.getType().getKind() == KindOfTopicType.NO_TYPE)) {
 				ValidationResult vr = new ValidationResult("The topic "
