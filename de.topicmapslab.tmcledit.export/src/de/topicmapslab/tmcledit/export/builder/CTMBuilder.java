@@ -396,7 +396,7 @@ public class CTMBuilder {
 			}
 	
 			if (id == null)
-				id = topicType.getName().toLowerCase();
+				id = topicType.getName().toLowerCase().replaceAll(" ", "-");
 	
 			typeIdMap.put(topicType, id);
 		}
