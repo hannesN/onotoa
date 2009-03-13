@@ -19,7 +19,6 @@ import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -47,10 +46,16 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			return null;
 		
 		Node node = (Node) request.getTargetEditPart().getModel();
-		if (node instanceof AssociationNode)
-			cmd.setSource(node);
-		else
+		
+		if (cmd.getEdge().getType()==EdgeType.ROLE_CONSTRAINT_TYPE) {
+			if (node instanceof AssociationNode)
+				cmd.setSource(node);
+			else
+				cmd.setTarget(node);
+		} else {
 			cmd.setTarget(node);
+		}
+
 
 		
 		
@@ -75,10 +80,14 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 		cmd.setDiagram(d);
 		
 		Node node = (Node) getHost().getModel();
-		if (node instanceof AssociationNode)
+		if (cmd.getEdge().getType()==EdgeType.ROLE_CONSTRAINT_TYPE) {
+			if (node instanceof AssociationNode)
+				cmd.setSource(node);
+			else
+				cmd.setTarget(node);
+		} else {
 			cmd.setSource(node);
-		else
-			cmd.setTarget(node);
+		}
 
 		CommandAdapter cmdAdapter = new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		request.setStartCommand(cmdAdapter);
