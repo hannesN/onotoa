@@ -18,6 +18,8 @@ import org.eclipse.gef.requests.ReconnectRequest;
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
+import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -36,6 +38,7 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 		
 		CreateEdgeCommand cmd = (CreateEdgeCommand) ((CommandAdapter)request
 				.getStartCommand()).getEmfCommand();
+		
 		if (request.getTargetEditPart()==request.getSourceEditPart())
 			return null;
 		
@@ -43,8 +46,13 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			 (request.getTargetEditPart() instanceof AssociationNodeEditPart) )
 			return null;
 		
-		cmd.setTarget((Node) request.getTargetEditPart().getModel());
+		Node node = (Node) request.getTargetEditPart().getModel();
+		if (node instanceof AssociationNode)
+			cmd.setSource(node);
+		else
+			cmd.setTarget(node);
 
+		
 		
 		if (cmd.getEdge().getType()==EdgeType.IS_ATYPE) {
 			TopicType target = ((TypeNode)cmd.getEdge().getTarget()).getTopicType();
@@ -65,7 +73,12 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
 		Diagram d = (Diagram) getHost().getParent().getModel();
 		cmd.setDiagram(d);
-		cmd.setSource((Node) getHost().getModel());
+		
+		Node node = (Node) getHost().getModel();
+		if (node instanceof AssociationNode)
+			cmd.setSource(node);
+		else
+			cmd.setTarget(node);
 
 		CommandAdapter cmdAdapter = new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		request.setStartCommand(cmdAdapter);
