@@ -24,6 +24,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.Comment;
+import de.topicmapslab.tmcledit.model.commands.SetCommentContentCommand;
 
 /**
  * @author Hannes Niederhausen
@@ -63,7 +64,7 @@ public class CommentPropertyModelPage extends AbstractModelPage {
 		contentText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				getCastedModel().setContent(contentText.getText());				
+				getCommandStack().execute(new SetCommentContentCommand(getCastedModel(), contentText.getText()));
 			}
 		});
 		section.setClient(comp);
