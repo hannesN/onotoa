@@ -195,4 +195,22 @@ public class TopicIndexer implements Adapter{
 		
 		return result;
 	}
+	
+	public List<TopicType> getUsedAsIsa(TopicType topicType) {
+		List<TopicType> result = new ArrayList<TopicType>();
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			if (tt.getIsa().contains(topicType))
+				result.add(tt);
+		}
+		return result;
+	}
+	
+	public List<TopicType> getUsedAsAko(TopicType topicType) {
+		List<TopicType> result = new ArrayList<TopicType>();
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			if (tt.getAko().contains(topicType))
+				result.add(tt);
+		}
+		return result;
+	}
 }
