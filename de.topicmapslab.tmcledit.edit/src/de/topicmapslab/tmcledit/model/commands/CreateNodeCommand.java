@@ -121,7 +121,15 @@ public class CreateNodeCommand extends AbstractCommand {
 					Node node2 = modelIndexer.getNodeFor(tt, diagram);
 					if (node2!=null) {
 						Edge edge = createEdge(node, node2, EdgeType.IS_ATYPE);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
+						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+						addEdgeCommand(cmd);
+					}
+				}
+				for(TopicType tt : modelIndexer.getUsedAsIsa(topicType) ) {
+					Node node2 = modelIndexer.getNodeFor(tt, diagram);
+					if (node2!=null) {
+						Edge edge = createEdge(node2, node, EdgeType.IS_ATYPE);
+						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
 						addEdgeCommand(cmd);
 					}
 				}
@@ -129,7 +137,15 @@ public class CreateNodeCommand extends AbstractCommand {
 					Node node2 = modelIndexer.getNodeFor(tt, diagram);
 					if (node2!=null) {
 						Edge edge = createEdge(node, node2, EdgeType.AKO_TYPE);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
+						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+						addEdgeCommand(cmd);
+					}
+				}
+				for(TopicType tt : modelIndexer.getUsedAsAko(topicType)) {
+					Node node2 = modelIndexer.getNodeFor(tt, diagram);
+					if (node2!=null) {
+						Edge edge = createEdge(node2, node, EdgeType.AKO_TYPE);
+						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
 						addEdgeCommand(cmd);
 					}
 				}
@@ -139,7 +155,7 @@ public class CreateNodeCommand extends AbstractCommand {
 					if (node2!=null) {
 						Edge edge = createEdge(node2, node, EdgeType.ROLE_CONSTRAINT_TYPE);
 						edge.setRoleConstraint(rpc);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
+						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
 						addEdgeCommand(cmd);
 					}
 				}

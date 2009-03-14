@@ -168,6 +168,15 @@ public class ModelIndexer {
 			TopicType topicType) {
 		return associationIndexer.getRolePlayerConstraintsFor(topicType);
 	}
+
+	public List<TopicType> getUsedAsAko(TopicType topicType) {
+		return topicIndexer.getUsedAsAko(topicType);
+	}
+
+	public List<TopicType> getUsedAsIsa(TopicType topicType) {
+		return topicIndexer.getUsedAsIsa(topicType);
+	}
+	
 	
 	
 }
