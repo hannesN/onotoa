@@ -45,6 +45,7 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 	private Section section;
 	
 	private NameTypeModelPage typeModelPage;
+	private CTabFolder folder;
 	
 	public NameConstraintDetailPage() {
 		super("name constraint");
@@ -54,7 +55,7 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		typeModelPage = new NameTypeModelPage();
-		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+		folder = new CTabFolder(parent, SWT.NONE);
 		typeModelPage.createControl(folder);
 		
 		CTabItem item1 = new CTabItem(folder, SWT.NONE);
@@ -77,6 +78,12 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 		super.setModel(model);
 		if (typeModelPage!=null)
 			typeModelPage.setModel(getCastedModel().getType());
+	}
+	
+	@Override
+	public void aboutToHide() {
+		super.aboutToHide();
+		folder.setSelection(0);
 	}
 	
 	private Composite createConstraintComposite(Composite parent, FormToolkit toolkit) {

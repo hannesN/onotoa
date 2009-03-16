@@ -47,6 +47,7 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 	private Section section;
 	
 	private OccurrenceTypeModelPage typeModelPage;
+	private CTabFolder folder;
 	
 	public OccurrenceConstraintDetailPage() {
 		super("occurrence constraint");
@@ -57,7 +58,7 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		typeModelPage = new OccurrenceTypeModelPage();
 		
-		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+		folder = new CTabFolder(parent, SWT.NONE);
 		typeModelPage.createControl(folder);
 		
 		CTabItem item1 = new CTabItem(folder, SWT.NONE);
@@ -183,6 +184,13 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 		super.setCommandStack(commandStack);
 		if (typeModelPage!=null)
 			typeModelPage.setCommandStack(commandStack);
+	}
+	
+	@Override
+	public void aboutToHide() {
+		super.aboutToHide();
+		folder.setSelection(0);
+		
 	}
 	
 	@Override

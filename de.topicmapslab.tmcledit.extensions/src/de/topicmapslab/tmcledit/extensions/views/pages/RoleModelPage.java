@@ -40,6 +40,7 @@ public class RoleModelPage extends AbstractModelPage{
 
 	
 	private AssociationTypeModelPage assPage;
+	private CTabFolder folder;
 	
 	public RoleModelPage() {
 		super("role");
@@ -59,7 +60,7 @@ public class RoleModelPage extends AbstractModelPage{
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+		folder = new CTabFolder(parent, SWT.NONE);
 
 		CTabItem item1 = new CTabItem(folder, SWT.NONE);
 		item1.setText("Role Player Properties");
@@ -153,6 +154,12 @@ public class RoleModelPage extends AbstractModelPage{
 
 	protected AssociationType getAssociationType() {
 		return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
+	}
+	
+	@Override
+	public void aboutToHide() {
+		super.aboutToHide();
+		folder.setSelection(0);
 	}
 	
 	public void notifyChanged(Notification notification) {
