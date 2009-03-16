@@ -76,6 +76,7 @@ public class CTMBuilder {
 		indexRolePlayerConstraints();
 		
 		addLine("%prefix tmcl http://psi.topicmaps.org/tmcl");
+		addLine("%prefix xsd http://www.w3.org/2001/XMLSchema#");
 		addLine("%prefix tm http://psi.topicmaps.org/tmdm/model");
 		addLine("%prefix http://psi.topicmapslab.de/tmclschema");
 		addLineSeparator();
