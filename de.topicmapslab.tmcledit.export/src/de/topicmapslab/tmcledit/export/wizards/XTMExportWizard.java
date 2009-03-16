@@ -66,7 +66,7 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		try
 		{
 			FileOutputStream os = new FileOutputStream(file);
-			XTM20TopicMapWriter writer = new XTM20TopicMapWriter(os, "http://wasauchimmer.de/");
+			XTM20TopicMapWriter writer = new XTM20TopicMapWriter(os, "http://psi.topicmapslab.de/tmclschema");
 			writer.write(ttbuilder.getTopicMap(exportConstraintInfos));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
