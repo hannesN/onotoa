@@ -16,6 +16,7 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -46,6 +47,7 @@ import de.topicmapslab.tmcledit.model.commands.CreatePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.RemovePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewPrefixMappingDialog;
+import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
 /**
  * @author Hannes Niederhausen
@@ -163,10 +165,15 @@ public class PrefixMappingPage extends AbstractModelPage {
 				NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(
 						addButton.getShell());
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(
-							new CreatePrefixMappingCommand(
-									(TopicMapSchema) getModel(), dlg.getKey(),
-									dlg.getUri()));
+					if (PrefixKeyMatcher.isValidKey(dlg.getKey()))
+						getCommandStack().execute(
+								new CreatePrefixMappingCommand(
+										(TopicMapSchema) getModel(), dlg.getKey(),
+										dlg.getUri()));
+					else
+						MessageDialog
+								.openError(addButton.getShell(), "invalid key",
+										"You've entered an invalid key!");
 				}
 			}
 		});
@@ -268,7 +275,12 @@ public class PrefixMappingPage extends AbstractModelPage {
 					return;
 				val = (String) value;
 			}
-			getCommandStack().execute(new UpdatePrefixCommand(me, key, val));
+			if (PrefixKeyMatcher.isValidKey(key))
+				getCommandStack().execute(new UpdatePrefixCommand(me, key, val));
+			else
+				MessageDialog
+				.openError(addButton.getShell(), "invalid key",
+						"You've entered an invalid key!");
 			
 		}
 		

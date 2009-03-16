@@ -15,11 +15,14 @@ package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.commands.CreatePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewPrefixMappingDialog;
+import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
 /**
  * @author Hannes Niederhausen
@@ -39,13 +42,20 @@ public class NewPrefixAction extends ValidationAction {
 
 	@Override
 	public void run() {
-		NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(PlatformUI
-				.getWorkbench().getActiveWorkbenchWindow().getShell());
+		Shell shell = PlatformUI
+				.getWorkbench().getActiveWorkbenchWindow().getShell();
+		NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(shell);
 		dlg.setKey(key);
 		if (Dialog.OK==dlg.open()) {
+			if (PrefixKeyMatcher.isValidKey(dlg.getUri())) {
 			CreatePrefixMappingCommand cmd = new CreatePrefixMappingCommand(schema, 
 					dlg.getKey(), dlg.getUri());
 			getCommandStack().execute(cmd);
+			} else {
+				MessageDialog
+				.openError(shell, "invalid key",
+						"You've entered an invalid key!");
+			}
 		}	
 
 	}
