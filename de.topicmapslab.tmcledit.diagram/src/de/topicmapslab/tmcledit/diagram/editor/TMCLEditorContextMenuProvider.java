@@ -24,14 +24,22 @@ import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 
 	private final ActionRegistry actionRegistry;
+	private boolean active;
 	
 	public TMCLEditorContextMenuProvider(EditPartViewer viewer, ActionRegistry actionRegistry) {
 		super(viewer);
 		this.actionRegistry = actionRegistry;
+		active = true;
+	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	@Override
 	public void buildContextMenu(IMenuManager menu) {
+		if (!active)
+			return;
 		GEFActionConstants.addStandardActionGroups(menu);
 
 		IAction action;
