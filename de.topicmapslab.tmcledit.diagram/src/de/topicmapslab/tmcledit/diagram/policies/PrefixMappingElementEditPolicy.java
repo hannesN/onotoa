@@ -12,9 +12,11 @@ package de.topicmapslab.tmcledit.diagram.policies;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.gef.requests.DirectEditRequest;
+import org.eclipse.jface.dialogs.MessageDialog;
 
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
+import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
 public class PrefixMappingElementEditPolicy extends AbstractDirectEditPolicy {
 
@@ -36,7 +38,12 @@ public class PrefixMappingElementEditPolicy extends AbstractDirectEditPolicy {
 			else
 				newValue = getNewString(request);
 			 
-			return new UpdatePrefixCommand((MappingElement) model, newKey, newValue);
+			if (PrefixKeyMatcher.isValidKey(newValue))
+				return new UpdatePrefixCommand((MappingElement) model, newKey, newValue);
+			else
+				MessageDialog
+				.openError(request.getCellEditor().getControl().getShell(), "invalid key",
+						"You've entered an invalid key!");
 		}
 		
 		return null;
