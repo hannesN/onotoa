@@ -11,6 +11,7 @@
 package de.topicmapslab.tmcledit.export.builder;
 
 
+import org.tinytim.voc.TMDM;
 import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
 import org.tmapi.core.Topic;
@@ -39,6 +40,7 @@ public class TinyTiMTopicMapBuilder {
 	private final TopicMapSchema topicMapSchema;
 	
 	private boolean createConstraintInfos;
+	private Locator	baseLocator;
 	
 	private Topic scopeType;
 	private Topic nameType;
@@ -77,33 +79,34 @@ public class TinyTiMTopicMapBuilder {
 		TopicMapSystem system = fac.newTopicMapSystem();
 		
 		tm = system.createTopicMap("http://psi.topicmapslab.de/tmclschema");
+		baseLocator = tm.createLocator("http://psi.topicmapslab.de/tmclschema");
 		
 		if (createConstraintInfos) {
-			Locator l = tm.createLocator("#info_scope");
+			Locator l = baseLocator.resolve("#info_scope");
 			infoScope = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_occurrence_datatype_info");
+			l = baseLocator.resolve("#constraint_occurrence_datatype_info");
 			occurrenceDatatype = tm.createTopicByItemIdentifier(l);
 		
-			l = tm.createLocator("#constraint_scope_info");
+			baseLocator.resolve("#constraint_scope_info");
 			scopeConstraintType = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_role_info");
+			l = baseLocator.resolve("#constraint_role_info");
 			roleConstraintType = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_role_player_info");
-			roleConstraintType = tm.createTopicByItemIdentifier(l);
+			l = baseLocator.resolve("#constraint_role_player_info");
+			rolePlayerConstraintType = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_name_info");
+			l = baseLocator.resolve("#constraint_name_info");
 			nameConstraintType = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_occurrence_info");
+			l = baseLocator.resolve("#constraint_occurrence_info");
 			occurrenceConstraintType = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_subject_locator_info");
+			l = baseLocator.resolve("#constraint_subject_locator_info");
 			locatorConstraintType = tm.createTopicByItemIdentifier(l);
 			
-			l = tm.createLocator("#constraint_subject_identifier_info");
+			l = baseLocator.resolve("#constraint_subject_identifier_info");
 			identifierConstraintType = tm.createTopicByItemIdentifier(l);
 			
 		}
@@ -139,14 +142,9 @@ public class TinyTiMTopicMapBuilder {
 		scopeType.addType(topicType);
 		scopeType.createName("scope type");
 
-		l = tm.createLocator("http://psi.topicmaps.org/iso13250/model/supertype");
-		superTypeRole = tm.createTopicBySubjectIdentifier(l);
-		
-		l = tm.createLocator("http://psi.topicmaps.org/iso13250/model/subtype");
-		subTypeRole = tm.createTopicBySubjectIdentifier(l);
-		
-		l = tm.createLocator("http://psi.topicmaps.org/iso13250/model/supertype-subtype");
-		supertype_subType_assTopic = tm.createTopicBySubjectIdentifier(l);
+		superTypeRole = tm.createTopicBySubjectIdentifier(TMDM.SUPERTYPE);
+		subTypeRole = tm.createTopicBySubjectIdentifier(TMDM.SUBTYPE);
+		supertype_subType_assTopic = tm.createTopicBySubjectIdentifier(TMDM.SUPERTYPE_SUBTYPE);
 		
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
 			createTopic(tt, tm);
@@ -163,7 +161,7 @@ public class TinyTiMTopicMapBuilder {
 		Locator l;
 		for (AssociationTypeConstraint asc : topicMapSchema.getAssociationTypeConstraints()) {
 			AssociationType type = (AssociationType) asc.getType();
-			l = tm.createLocator("#topic"+type.hashCode());
+			l = baseLocator.resolve("#topic"+type.hashCode());
 			Topic topic = tm.createTopicByItemIdentifier(l); // topic should already exists therefor no new creation
 			
 			StringBuffer buffer = new StringBuffer();
@@ -214,7 +212,7 @@ public class TinyTiMTopicMapBuilder {
 		
 		Topic t = null;
 
-		Locator itemId = tm.createLocator("#topic" + topicType.hashCode());
+		Locator itemId = baseLocator.resolve("#topic" + topicType.hashCode());
 		t = tm.createTopicByItemIdentifier(itemId);
 		for (String s : topicType.getIdentifiers()) {
 			t.addSubjectIdentifier(parseId(s, tm));
@@ -357,7 +355,11 @@ public class TinyTiMTopicMapBuilder {
 	private void createConstraints(AbstractTypedCardinalityConstraint tc, Topic t) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("type: ");
-		buffer.append(tc.getType().getName());
+		TopicType type = tc.getType();
+		if (type==null)
+			buffer.append("default name");
+		else
+			buffer.append(type.getName());
 		buffer.append(" [");
 		buffer.append(tc.getCardMin());
 		buffer.append("..");
@@ -381,7 +383,10 @@ public class TinyTiMTopicMapBuilder {
 			String tmp = id.substring(0, index);
 			for (MappingElement me : topicMapSchema.getMappings()) {
 				if (me.getKey().equals(tmp)) {
-					tmp = me.getValue()+"/"+id.substring(index+1);
+					if (me.getValue().endsWith("/"))
+						tmp = me.getValue()+id.substring(index+1);
+					else
+						tmp = me.getValue()+"/"+id.substring(index+1);
 					return map.createLocator(tmp);
 				}
 			}
