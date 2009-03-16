@@ -29,17 +29,23 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
+import org.eclipse.gef.Tool;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
+import org.eclipse.gef.palette.PaletteListener;
 import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.gef.palette.ToolEntry;
+import org.eclipse.gef.tools.SelectionTool;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite;
+import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -91,6 +97,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private DirtyAdapter dirtyAdapter;
 
 	private OverviewOutlinePage outlinePage;
+
+	private TMCLEditorContextMenuProvider cmProvider;
 	
 	public TMCLDiagramEditor() {
 		setEditDomain(new TMCLEditDomain(this));
@@ -112,6 +120,12 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setContents(diagram); // set the contents of this editor
 		viewer.addSelectionChangedListener(this);
 		viewer.setEditDomain(getEditDomain());
+		
+		getSite().setSelectionProvider(this);
+		// listen for dropped parts
+		viewer.addDropTargetListener(new TypeDropTransferListener(viewer,
+				diagram));
+		
 		viewer.getControl().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
@@ -124,15 +138,19 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					
 				}
 			}
-			
+			@Override
+			public void mouseDown(MouseEvent e) {
+				if (e.button==3) {
+					if ((getEditDomain().getActiveTool()==null) || 
+					    (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
+						getEditDomain().getPaletteViewer().setActiveTool(null);
+						cmProvider.setActive(false);
+					} else {
+						cmProvider.setActive(true);
+					}
+				}
+			}
 		});
-		// getEditDomain().getCommandStack().addCommandStackListener(this);
-		getSite().setSelectionProvider(this);
-		// listen for dropped parts
-		viewer.addDropTargetListener(new TypeDropTransferListener(viewer,
-				diagram));
-		
-		
 	}
 	@Override
 	protected void configureGraphicalViewer() {
@@ -143,10 +161,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setRootEditPart(new ScalableFreeformRootEditPart());
 		viewer.setKeyHandler(new GraphicalViewerKeyHandler(viewer));
 
-		// configure the context menu provider
-		ContextMenuProvider cmProvider = new TMCLEditorContextMenuProvider(
+		cmProvider = new TMCLEditorContextMenuProvider(
 				viewer, getActionRegistry());
-		viewer.setContextMenu(cmProvider);
+		getGraphicalViewer().setContextMenu(cmProvider);
 		getSite().registerContextMenu(cmProvider, viewer);
 		
 		List<String> zoomContributions = new ArrayList<String>(5);
