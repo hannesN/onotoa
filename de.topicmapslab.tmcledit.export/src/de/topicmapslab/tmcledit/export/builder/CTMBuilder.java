@@ -77,6 +77,7 @@ public class CTMBuilder {
 		
 		addLine("%prefix tmcl http://psi.topicmaps.org/tmcl");
 		addLine("%prefix tm http://psi.topicmaps.org/tmdm/model");
+		addLine("%prefix http://psi.topicmapslab.de/tmclschema");
 		addLineSeparator();
 		addLine("%include http://www.topicmaps.org.tmcl/templates.ctm");
 		
@@ -395,13 +396,32 @@ public class CTMBuilder {
 				id = "= " + topicType.getLocators().get(0);
 			}
 	
-			if (id == null)
-				id = topicType.getName().toLowerCase().replaceAll(" ", "-");
+			
+			if (id == null) {
+				StringBuffer buffer = new StringBuffer();
+				char[] nameChars = topicType.getName().toLowerCase().toCharArray();
+				for (char c : nameChars) {
+					switch (c) {
+					case ' ': buffer.append("-"); break;
+					case '"': buffer.append("\\\""); break;
+					case 'ü': buffer.append("ue"); break;
+					case 'ö': buffer.append("oe"); break;
+					case 'ä': buffer.append("ae"); break;
+					case '\'': buffer.append("\'"); break;
+					// TODO find more
+					
+					default: buffer.append(c); 
+					}
+				}
+				id = buffer.toString();
+			}
 	
 			typeIdMap.put(topicType, id);
 		}
 		return id;
 	}
+	
+	
 
 	private class PlayerConstraintInfo {
 		final AssociationType associationType;
