@@ -153,6 +153,9 @@ public class ModelValidator {
 	private void checkPrefix(TopicType tt, String c) {
 		String prefix = getPrefix(c);
 		if (prefix != null) {
+			if (prefix.equals("mailto"))
+				return;
+				
 			boolean found = false;
 			for (MappingElement me : schema.getMappings()) {
 				if (me.getKey().equals(prefix)) {
