@@ -140,8 +140,10 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		
 		Button exportButton = new Button(comp, SWT.CHECK);
 		exportButton.setSelection(exportConstraintInfos);
+		exportButton.setText("export constraint infos as occurrences");
 		GridData gd = new GridData();
 		gd.horizontalSpan = 3;
+		exportButton.setLayoutData(gd);
 		exportButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
