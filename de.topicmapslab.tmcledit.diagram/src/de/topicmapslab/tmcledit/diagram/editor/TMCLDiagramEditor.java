@@ -19,33 +19,29 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
-import org.eclipse.gef.Tool;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
-import org.eclipse.gef.palette.PaletteListener;
 import org.eclipse.gef.palette.PaletteRoot;
-import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.gef.tools.SelectionTool;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite;
-import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -158,7 +154,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 		GraphicalViewer viewer = getGraphicalViewer();
 		viewer.setEditPartFactory(TMCLDiagramEditorUtil.getEditPartFactory());
-		viewer.setRootEditPart(new ScalableFreeformRootEditPart());
+		viewer.setRootEditPart(getRootEditPart());
 		viewer.setKeyHandler(new GraphicalViewerKeyHandler(viewer));
 
 		cmProvider = new TMCLEditorContextMenuProvider(
@@ -399,6 +395,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return (TMCLEditorInput) getEditorInput();
 	}
 
+	IFigure getPrintableFigure() {
+		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void updateActions(List actionIds) {
