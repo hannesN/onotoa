@@ -391,15 +391,10 @@ public class CTMBuilder {
 	
 			if (topicType.getIdentifiers().size() > 0) {
 				id = topicType.getIdentifiers().get(0);
-			}
-	
-			if (topicType.getLocators().size() > 0) {
-				id = "= " + topicType.getLocators().get(0);
-			}
-	
-			
-			if (id == null) {
-				StringBuffer buffer = new StringBuffer();
+			} else if (topicType.getLocators().size() > 0) {
+				id = "=" + topicType.getLocators().get(0);
+			} else {
+				StringBuffer buffer = new StringBuffer("^");
 				char[] nameChars = topicType.getName().toLowerCase().toCharArray();
 				for (char c : nameChars) {
 					switch (c) {
