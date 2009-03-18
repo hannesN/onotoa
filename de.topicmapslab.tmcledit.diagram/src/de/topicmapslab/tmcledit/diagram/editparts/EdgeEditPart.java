@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
@@ -29,6 +30,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ConnectionEditPolicy;
 import org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy;
 import org.eclipse.gef.requests.GroupRequest;
+import org.eclipse.swt.SWT;
 
 import de.topicmapslab.tmcledit.diagram.policies.LabelXYLayoutEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -45,7 +47,13 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	protected IFigure createFigure()
 	{
-		figure = (PolylineConnection) super.createFigure();
+		figure = new PolylineConnection() {
+			@Override
+			public void paint(Graphics graphics) {
+				graphics.setAntialias(SWT.ON);
+				super.paint(graphics);
+			}
+		};
 		((PolylineConnection)figure).setConnectionRouter(new BendpointConnectionRouter());
 		
 		
