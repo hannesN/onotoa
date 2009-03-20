@@ -33,7 +33,7 @@ public class SetAssociationTypeCommand extends AbstractCommand {
 	private final TopicType oldType;
 	
 	private final AssociationTypeConstraint constraint;
-	private List<DeleteRolePlayerConstraintCommand> cmds = Collections.emptyList();
+	private List<SetRoleConstraintCommand> cmds = Collections.emptyList();
 	
 	
 	public SetAssociationTypeCommand(AssociationTypeConstraint constraint,
@@ -70,10 +70,10 @@ public class SetAssociationTypeCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		if (constraint.getPlayerConstraints().size()>0)
-			cmds = new ArrayList<DeleteRolePlayerConstraintCommand>();
+			cmds = new ArrayList<SetRoleConstraintCommand>();
 		
 		for (RolePlayerConstraint rpc : constraint.getPlayerConstraints()) {
-			cmds.add(new DeleteRolePlayerConstraintCommand(constraint, rpc));
+			cmds.add(new SetRoleConstraintCommand(rpc, null));
 		}
 		return true;
 	}
