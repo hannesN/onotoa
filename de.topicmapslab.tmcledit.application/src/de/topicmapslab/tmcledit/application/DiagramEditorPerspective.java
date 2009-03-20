@@ -29,14 +29,18 @@ public class DiagramEditorPerspective implements IPerspectiveFactory {
 				
 		
 		layout.addPerspectiveShortcut(DiagramEditorWorkbenchAdvisor.PERSPECTIVE_ID);
-		IFolderLayout bottom = layout.createFolder(
-				"bottom", IPageLayout.BOTTOM, 0.55f, layout.getEditorArea()); //$NON-NLS-1$
-		bottom.addView(IPageLayout.ID_OUTLINE);
-		IFolderLayout bottomRight = layout.createFolder(
-				"bottomRight", IPageLayout.RIGHT, 0.5f, "bottom"); //$NON-NLS-1$	//$NON-NLS-2$
-		bottomRight.addView(PropertyDetailView.ID);
+		IFolderLayout leftSide = layout.createFolder("left", IPageLayout.LEFT, 0.2f, layout.getEditorArea());
+		leftSide.addView(ModelView.ID);
 		
-		layout.addView(ModelView.ID, IPageLayout.LEFT, 0.3f, layout.getEditorArea());
+		IFolderLayout leftBottom = layout.createFolder(
+				"leftBottom", IPageLayout.BOTTOM, 0.70f, "left"); //$NON-NLS-1$	//$NON-NLS-2$
+		leftBottom.addView(IPageLayout.ID_OUTLINE);
+		
+		IFolderLayout bottom = layout.createFolder(
+				"bottom", IPageLayout.BOTTOM, 0.75f, layout.getEditorArea()); //$NON-NLS-1$
+		bottom.addView(PropertyDetailView.ID);
+		
+		
 				   
 	}
 }
