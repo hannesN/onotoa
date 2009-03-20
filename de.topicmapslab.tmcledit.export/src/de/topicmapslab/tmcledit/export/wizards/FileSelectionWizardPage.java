@@ -29,7 +29,7 @@ public class FileSelectionWizardPage extends WizardPage {
 	
 	public FileSelectionWizardPage() {
 		super("File Selection");
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public void createControl(Composite parent) {
