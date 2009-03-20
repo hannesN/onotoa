@@ -41,6 +41,7 @@ public class FileWizardPage extends WizardPage {
 
 	protected FileWizardPage(String pageName) {
 		super(pageName);
+		setTitle(pageName);
 	}
 
 	public void createControl(Composite parent) {
