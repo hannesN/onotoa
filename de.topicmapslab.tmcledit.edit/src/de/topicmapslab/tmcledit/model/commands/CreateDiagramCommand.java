@@ -56,4 +56,7 @@ public class CreateDiagramCommand extends AbstractCommand{
 		return "Create new diagram";
 	}
 	
+	public Diagram getDiagram() {
+		return diagram;
+	}
 }

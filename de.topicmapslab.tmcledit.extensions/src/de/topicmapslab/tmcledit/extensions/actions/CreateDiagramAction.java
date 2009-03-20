@@ -13,11 +13,18 @@
  */
 package de.topicmapslab.tmcledit.extensions.actions;
 
+import org.eclipse.emf.edit.ui.action.RedoAction;
+import org.eclipse.emf.edit.ui.action.UndoAction;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.actions.ActionFactory;
 
+import de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor;
+import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorInput;
+import de.topicmapslab.tmcledit.extensions.Activator;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -67,8 +74,23 @@ public class CreateDiagramAction extends Action {
 
 		if (dlg.open() == Dialog.OK) {
 			String name = dlg.getValue();
+			CreateDiagramCommand command = new CreateDiagramCommand(name, file);
 			this.modelView.getEditingDomain().getCommandStack().execute(
-					new CreateDiagramCommand(name, file));
+					command);
+			this.modelView.getViewer().expandToLevel(2);
+			
+			if (command.getDiagram()==null)
+				return;
+			try {
+				Activator.getDefault().getWorkbench().getActiveWorkbenchWindow()
+						.getActivePage().openEditor(new TMCLEditorInput(command.getDiagram(), 
+								this.modelView.getEditingDomain(),
+								(UndoAction) this.modelView.getActionRegistry().get(ActionFactory.UNDO.getId()),
+								(RedoAction) this.modelView.getActionRegistry().get(ActionFactory.REDO.getId()),
+								true), TMCLDiagramEditor.ID);
+			} catch (PartInitException e) {
+				throw new RuntimeException(e);
+			}
 		}
 
 	}
