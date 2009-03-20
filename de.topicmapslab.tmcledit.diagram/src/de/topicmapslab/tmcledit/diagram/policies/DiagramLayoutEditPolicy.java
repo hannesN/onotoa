@@ -10,12 +10,14 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.policies;
 
+import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.gef.editpolicies.XYLayoutEditPolicy;
@@ -67,16 +69,27 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 		CommandStack commandStack = ed.getEditingDomain().getCommandStack();
 		Diagram diagram = (Diagram) getHost().getModel();
 		AbstractCommand cmd = null;
-		Point p = new Point(request.getLocation().x, request.getLocation().y);
+		org.eclipse.draw2d.geometry.Point p = request.getLocation().getCopy();
 
+		ZoomManager manager = (ZoomManager) getHost().getViewer().getProperty(ZoomManager.class.toString());
+	//	manager.getViewport().translateToAbsolute(request.getLocation().getCopy());
+		
+		Viewport viewport = manager.getViewport();
+		p.translate(viewport.getViewLocation());
+		
+		
+		
+		
+		Point p2 = new Point(p.x, p.y);
 		if ( (request.getNewObjectType()==TypeNode.class) ||
 			 (request.getNewObjectType()==AssociationNode.class) ){
 
-			cmd = new CreateNodeCommand(diagram, p, (Node) request.getNewObject());
+			
+			cmd = new CreateNodeCommand(diagram, p2, (Node) request.getNewObject());
 			
 		} else if (request.getNewObjectType() == Comment.class) {
 			cmd = new CreateCommentCommand(diagram,
-					(Comment) request.getNewObject(), p);
+					(Comment) request.getNewObject(), p2);
 		}
 		if (cmd!=null)
 			return new CommandAdapter(commandStack, cmd);
