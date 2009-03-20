@@ -56,11 +56,17 @@ public class FileSelectionWizardPage extends WizardPage {
 			}
 		});
 		
+		addAdditionalWidgets(comp);
+		
 		setControl(comp);
 	}
 
 	public void setFileExtensions(String[] fileExtensions) {
 		this.fileExtensions = fileExtensions;
+	}
+	
+	public void addAdditionalWidgets(Composite parent) {
+		
 	}
 	
 }

@@ -20,11 +20,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
@@ -77,10 +74,12 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 
 	@Override
 	public void addPages() {
-		FileSelectionWizardPage page1 = new FileSelectionWizardPage();
+		
+		WizardPage page1 = new WizardPage();
 		page1.setFileExtensions(getFilterExtensions());
 		page1.setTitle("XTM Export - File selection");
 		addPage(page1);
+		
 	}
 	
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -112,50 +111,26 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		
 	}
 
-	@Override
-	public void createPageControls(Composite pageContainer) {
-		Composite comp = new Composite(pageContainer, SWT.None);
-		comp.setLayout(new GridLayout(3, false));
-		
-		Label l = new Label(comp, SWT.NONE);
-		l.setText("&Filename");
-		
-		text = new Text(comp, SWT.BORDER);
-		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		Button browseButton = new Button(comp, SWT.PUSH);
-		browseButton.setText("...");
-		browseButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				FileDialog dlg = new FileDialog(text.getShell());
-				dlg.setFilterExtensions(getFilterExtensions());
-				String file = dlg.open();
-				if (file!=null) {
-					if (!file.endsWith(".xtm"))
-						file+=".xtm";
-					text.setText(file);
-				}
-			}
-		});
-		
-		Button exportButton = new Button(comp, SWT.CHECK);
-		exportButton.setSelection(exportConstraintInfos);
-		exportButton.setText("export constraint infos as occurrences");
-		GridData gd = new GridData();
-		gd.horizontalSpan = 3;
-		exportButton.setLayoutData(gd);
-		exportButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				exportConstraintInfos = ((Button)e.widget).getSelection();
-			}
-		});
-		
-	}
-
-	
 	public String[] getFilterExtensions() {
 		return new String[]{"*.xtm"};
+	}
+	
+	private class WizardPage extends FileSelectionWizardPage {
+		@Override
+		public void addAdditionalWidgets(Composite parent) {
+			Button exportButton = new Button(parent, SWT.CHECK);
+			exportButton.setSelection(exportConstraintInfos);
+			exportButton.setText("export constraint infos as occurrences");
+			GridData gd = new GridData();
+			gd.horizontalSpan = 3;
+			exportButton.setLayoutData(gd);
+			exportButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					exportConstraintInfos = ((Button)e.widget).getSelection();
+				}
+			});
+			
+		}
 	}
 }
