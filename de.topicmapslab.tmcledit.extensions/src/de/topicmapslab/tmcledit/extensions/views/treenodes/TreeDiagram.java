@@ -54,7 +54,7 @@ public class TreeDiagram extends TreeObject {
 							(RedoAction) getModelView().getActionRegistry().get(ActionFactory.REDO.getId()),
 							true), TMCLDiagramEditor.ID);
 		} catch (PartInitException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 	
