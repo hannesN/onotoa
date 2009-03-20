@@ -79,6 +79,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 	public void addPages() {
 		FileSelectionWizardPage page1 = new FileSelectionWizardPage();
 		page1.setFileExtensions(getFilterExtensions());
+		page1.setTitle("TMCL Export - File selection");
 		addPage(page1);
 	}
 	

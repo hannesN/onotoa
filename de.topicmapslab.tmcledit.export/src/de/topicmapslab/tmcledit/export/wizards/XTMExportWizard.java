@@ -79,6 +79,7 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 	public void addPages() {
 		FileSelectionWizardPage page1 = new FileSelectionWizardPage();
 		page1.setFileExtensions(getFilterExtensions());
+		page1.setTitle("XTM Export - File selection");
 		addPage(page1);
 	}
 	
