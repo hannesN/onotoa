@@ -100,6 +100,7 @@ public class TMCLDiagramEditorUtil {
 	public static EditPartFactory getEditPartFactory() {
 		return new EditPartFactory() {
 
+			@SuppressWarnings("unchecked")
 			public EditPart createEditPart(EditPart context, Object model) {
 				EditPart part = null;
 				if (model instanceof Diagram) {

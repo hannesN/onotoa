@@ -62,6 +62,7 @@ public class PropertyDetailPageFactory {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public AbstractModelPage getPageFor(Object model) {
 		AbstractModelPage page = emptyPage;
 		

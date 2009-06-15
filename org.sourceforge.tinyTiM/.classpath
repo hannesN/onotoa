@@ -12,7 +12,6 @@
 	<classpathentry exported="true" kind="lib" path="json_simple.jar" sourcepath="org.sourceforge.tinyTiMsrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="openrdf-sesame-2.2.1-onejar.jar" sourcepath="org.sourceforge.tinyTiMsrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="semagia-mio-0.9.3.jar" sourcepath="org.sourceforge.tinyTiMsrc.zip"/>
-	<classpathentry exported="true" kind="lib" path="semagia-mio-ctm-draft-2008-05-15-0.9.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="semagia-mio-ltm-0.9.3.jar" sourcepath="org.sourceforge.tinyTiMsrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="semagia-mio-rdf-0.9.3.jar" sourcepath="org.sourceforge.tinyTiMsrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="semagia-mio-snello-0.9.3.jar" sourcepath="org.sourceforge.tinyTiMsrc.zip"/>
