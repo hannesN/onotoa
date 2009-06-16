@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Onotoa" uid="onotoa" id="de.topicmapslab.tmcledit.application.product" application="de.topicmapslab.tmcledit.application.onotoa" version="1.0.3" useFeatures="true" includeLaunchers="true">
+
+   <configIni use="">
+   </configIni>
+
+   <launcherArgs>
+   </launcherArgs>
+
+   <splash
+      location="de.topicmapslab.tmcledit.application" />
+   <launcher name="onotoa">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.0.3"/>
+      <feature id="de.topicmapslab.tmcledit.application_feature" version="1.0.3"/>
+      <feature id="org.sourceforge.tinyTiM_feature" version="1.5.0"/>
+   </features>
+
+
+</product>
