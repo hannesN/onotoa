@@ -13,11 +13,6 @@
             id="de.topicmapslab.tmcledit.doc.showlicensecommand"
             name="Show License">
       </command>
-      <command
-            defaultHandler="de.topicmapslab.tmcledit.doc.actions.OpenSurveyHandler"
-            id="de.topicmapslab.tmcledit.doc.opensurveycommand"
-            name="Open Survey">
-      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -31,11 +26,6 @@
          <command
                commandId="de.topicmapslab.tmcledit.doc.showlicensecommand"
                label="Show License"
-               style="push">
-         </command>
-         <command
-               commandId="de.topicmapslab.tmcledit.doc.opensurveycommand"
-               label="Open Survey"
                style="push">
          </command>
       </menuContribution>

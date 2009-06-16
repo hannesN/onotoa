@@ -10,8 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application.splash;
 
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
@@ -20,7 +18,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.splash.BasicSplashHandler;
 import org.osgi.framework.Bundle;
 
@@ -28,79 +25,63 @@ import de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class OnotoaSplashHandler extends BasicSplashHandler {
-	
+
 	private Font versionFont;
-	private Font copyrightFont; 
-	
+	private Font copyrightFont;
+
 	@Override
 	public void init(Shell splash) {
 		super.init(splash);
 		createSplash(getContent());
 		getContent().layout(true);
 	}
-	
+
 	private void createSplash(Composite parent) {
 		parent.setLayout(new SplashLayout());
-		
-		if (versionFont==null) {
+
+		if (versionFont == null) {
 			versionFont = new Font(parent.getDisplay(), "Arial", 12, SWT.BOLD);
 		}
 		Label label = new Label(parent, SWT.TRANSPARENT);
 		label.setFont(versionFont);
 		// read bundle version for program
 		Bundle bundle = TmcleditEditPlugin.getPlugin().getBundle();
-		String version = (String) bundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
+		String version = (String) bundle.getHeaders().get(
+				org.osgi.framework.Constants.BUNDLE_VERSION);
 		version = "Version: " + version;
 		label.setText(version);
-		
+
 		label = new Label(parent, SWT.TRANSPARENT);
 		label.setFont(versionFont);
 		label.setText("Create your own Topic Map schema");
-		
-		if (copyrightFont==null)
+
+		if (copyrightFont == null)
 			copyrightFont = new Font(parent.getDisplay(), "Arial", 8, SWT.NONE);
-		
+
 		label = new Label(parent, SWT.TRANSPARENT);
 		label.setFont(copyrightFont);
-		String tmp = "Developer in chief: Hannes Niederhausen\n" +
-					 "Onotoa is a graduate from Topic Maps Lab\n" +
-					 "(C) 2008, 2009 Hannes Niederhauen, Topic Maps Lab";
+		String tmp = "Developer in chief: Hannes Niederhausen\n"
+				+ "Onotoa is a graduate from Topic Maps Lab\n"
+				+ "(C) 2008, 2009 Hannes Niederhauen, Topic Maps Lab";
 		label.setText(tmp);
-		
-		IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
-		if (prefStore.getBoolean("second_start")) {
-			if (!prefStore.getBoolean("survey_done")) {
-				Shell shell = parent.getShell();
-				if (MessageDialog.openQuestion(shell, "A tiny favor..", "Onotoa is part of my diplome thesis.\n" +
-						"Please take the time to fillout my tiny survey about Onotoa.\n" +
-						"Do you want to open the sruvey now?")) {
-					PlatformUI.getPreferenceStore().setValue("shownow", true);
-				}
-			}
-		} else {
-			prefStore.setValue("second_start", true);
-		}
-		
 	}
-	
-	
-	
+
 	@Override
 	public void dispose() {
-		if ( (versionFont!=null) && (!versionFont.isDisposed()) )
+		if ((versionFont != null) && (!versionFont.isDisposed()))
 			versionFont.dispose();
 		super.dispose();
 	}
-	
+
 	private class SplashLayout extends Layout {
 
 		@Override
 		protected Point computeSize(Composite composite, int hint, int hint2,
 				boolean flushCache) {
-			
+
 			return new Point(400, 300);
 		}
 
@@ -110,7 +91,7 @@ public class OnotoaSplashHandler extends BasicSplashHandler {
 			Control child = composite.getChildren()[0];
 			child.setLocation(10, 250);
 			child.setSize(350, 18);
-			
+
 			// progress bar
 			child = composite.getChildren()[1];
 			child.setLocation(10, 280);
@@ -120,18 +101,18 @@ public class OnotoaSplashHandler extends BasicSplashHandler {
 			child = composite.getChildren()[2];
 			child.setLocation(40, 150);
 			child.setSize(350, 18);
-			
+
 			// slogan label
 			child = composite.getChildren()[3];
 			child.setLocation(40, 130);
 			child.setSize(350, 18);
-			
+
 			// copyright statement
 			child = composite.getChildren()[4];
 			child.setLocation(40, 250);
 			child.setSize(350, 50);
-			
+
 		}
-		
+
 	}
 }
