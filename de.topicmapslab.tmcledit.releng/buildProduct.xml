@@ -1,0 +1,97 @@
+<project default="build">
+	<property file="build.properties" />
+	<property file="common.properties" />
+	<property name="builder" value="${basedir}" />
+	<property name="pluginPath" value="${eclipse.home}/plugins">
+	</property>
+	<property name="buildDirectory" value="${basedir}/buildDirectory" />
+	<property name="pluginPath" value="${basedir}/..${path.separator}${deltapack}" />
+	<property name="buildTempFolder" value="${buildDirectory}" />
+
+
+	<target name="init" depends="clean">
+		<echo message="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}/plugins" />
+		<copy todir="${buildDirectory}/plugins">
+			<fileset dir="${basedir}/..">
+				<exclude name="*feature" />
+				<exclude name="*releng" />
+				<exclude name="*/bin" />
+				<exclude name="*/.hg" />
+
+			</fileset>
+		</copy>
+
+		<mkdir dir="${buildDirectory}/features" />
+		<copy todir="${buildDirectory}/features">
+			<fileset dir="${basedir}/..">
+				<include name="*feature/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="onotoa" depends="init">
+		<property file="build.properties" />
+		<property file="common.properties" />
+		<echo message="${buildDirectory}" />
+		
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${eclipse.home}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<arg value="-Dbuilder=${basedir}" />
+			<arg value="-DskipBase=${skipBase}" />
+			<arg value="-DskipFetch=${skipFetch}" />
+			<arg value="-DskipMaps=${skipMaps}" />
+			<arg value="-Dconfigs=${configs}" />
+			<arg value="-DbaseLocation=${baseLocation}" />
+			<arg value="-Dproduct=${product}" />
+			<arg value="-DbuildId=${buildId}" />
+			<arg value="-Dbuilder=${builder}" />
+			<arg value="-DbuildLabel=${buildLabel}" />
+			<arg value="-DCDC-1.1/Foundation-1.1=${CDC-1.1/Foundation-1.1}" />
+			<arg value="-DJ2SE-1.5=${J2SE-1.5}" />
+			<arg value="-DrunPackager=${runPackager}" />
+			<arg value="-DtopLevelElementType=${topLevelElementType}" />
+			<arg value="-DarchivePrefix=${archivePrefix}" />
+			<arg value="-Dp2.artifact.repo=${p2.artifact.repo}" />
+			<arg value="-Dp2.gathering=${p2.gathering}" />
+			<arg value="-Dp2.metadata.repo=${p2.metadata.repo}" />
+
+
+
+
+			<classpath>
+				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+
+		<!--
+		<property name="buildTempFolder" value="${buildDirectory}" />
+		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
+		-->
+		<!--
+		<move todir="${basedir}">
+			<fileset dir="${buildDirectory}/I.TestBuild" includes="*.zip" />
+		</move>
+		-->
+		<!-- refresh the workspace -->
+		<!--
+		<echo message="${basedir}" />
+		<eclipse.convertPath fileSystemPath="${basedir}" property="resourcePath" />
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite" />
+		-->
+	</target>
+
+
+	<target name="build" depends="clean, init, onotoa" />
+
+	<!--This target is responsible for cleaning up the build-directory-->
+	<target name="clean">
+		<echo message="${buildDirectory}" />
+		<delete dir="${buildDirectory}" />
+	</target>
+</project>
