@@ -40,7 +40,6 @@ import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
-import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -155,7 +154,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		GraphicalViewer viewer = getGraphicalViewer();
 		viewer.setEditPartFactory(TMCLDiagramEditorUtil.getEditPartFactory());
 		viewer.setRootEditPart(getRootEditPart());
-		viewer.setKeyHandler(new GraphicalViewerKeyHandler(viewer));
+		viewer.setKeyHandler(new OnotoaKeyHandler(viewer, getActionRegistry()));
 
 		cmProvider = new TMCLEditorContextMenuProvider(
 				viewer, getActionRegistry());
