@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EventObject;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -122,12 +123,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private ViewContentProvider contentProvider;
 	private Action refreshAction;
 	private Action doubleClickAction;
-	//private TMCLDiagramEditor currentEditor;
+	// private TMCLDiagramEditor currentEditor;
 
 	private EditingDomain editingDomain;
 	private ValidateJob validateJob = new ValidateJob();
 	File currFile;
-	
+
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
 
@@ -186,37 +187,39 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			public void selectionChanged(SelectionChangedEvent event) {
-				if (currFile==null) {
+				if (currFile == null) {
 					currentSelection = new StructuredSelection();
 					return;
 				}
-				
-				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+
+				IStructuredSelection sel = (IStructuredSelection) viewer
+						.getSelection();
 				if (sel.isEmpty()) {
 					currentSelection = new StructuredSelection(currFile);
 				} else {
-					
+
 					TreeObject to = (TreeObject) sel.getFirstElement();
-					if (to.getModel()==null)
+					if (to.getModel() == null)
 						currentSelection = new StructuredSelection(currFile);
 					else
-						currentSelection = new StructuredSelection(to.getModel());
+						currentSelection = new StructuredSelection(to
+								.getModel());
 				}
 				fireSelectionChanged();
-				
+
 			}
-			
+
 		});
 		/*
-		adapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-		adapterFactory
-				.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
-		adapterFactory
-				.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-*/
+		 * adapterFactory = new ComposedAdapterFactory(
+		 * ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		 * 
+		 * adapterFactory .addAdapterFactory(new
+		 * ResourceItemProviderAdapterFactory());
+		 * adapterFactory.addAdapterFactory(new
+		 * ModelItemProviderAdapterFactory()); adapterFactory
+		 * .addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+		 */
 		initDragAndDrop();
 	}
 
@@ -225,65 +228,88 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		dragSource.setTransfer(new Transfer[] { TextTransfer.getInstance() });
 		dragSource.addDragListener(new DragSourceAdapter() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void dragStart(DragSourceEvent event) {
 				IStructuredSelection sel = (IStructuredSelection) viewer
 						.getSelection();
-				Object obj = sel.getFirstElement();
-				if (obj instanceof TreeTopic) {
-					event.data = ((TreeTopic) obj).getModel().toString();
+				// concat every model string and ignore other nodes..
+				Iterator<Object> it = sel.iterator();
+				StringBuffer tmp = new StringBuffer();
+				while (it.hasNext()) {
+					Object obj = it.next();
+					if (obj instanceof TreeTopic) {
+						tmp.append(((TreeTopic) obj).getModel().toString());
+						// tmp.append("&*&*");
+					}
+				}
+				if (tmp.length() > 0) {
 					event.doit = true;
+					event.data = tmp.toString();
 				} else {
 					event.doit = false;
 				}
 
 			}
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void dragSetData(DragSourceEvent event) {
 				IStructuredSelection sel = (IStructuredSelection) viewer
 						.getSelection();
-				Object obj = sel.getFirstElement();
-				if (obj instanceof TreeTopic) {
-					event.data = ((TreeTopic) obj).getModel().toString();
+				// concat every model string and ignore other nodes..
+				Iterator<Object> it = sel.iterator();
+				StringBuffer tmp = new StringBuffer();
+				while (it.hasNext()) {
+					Object obj = it.next();
+					if (obj instanceof TreeTopic) {
+						tmp.append(((TreeTopic) obj).getModel().toString());
+						tmp.append("--_--");
+					}
+				}
+				if (tmp.length() > 0) {
+					event.data = tmp.toString();
 				} else {
 					event.data = null;
 				}
 			}
+
 		});
 	}
 
 	@Override
 	public void init(IViewSite site, IMemento memento) throws PartInitException {
 		init(site);
-		if (memento==null)
+		if (memento == null)
 			return;
-		
+
 		String text = memento.getTextData();
-		if ( (text==null) || ("null".equals(text)) )
+		if ((text == null) || ("null".equals(text)))
 			return;
-		
+
 		setFilename(text, false);
-		
+
 		for (IMemento children : memento.getChildren("editor")) {
 			text = children.getTextData();
-	
+
 			Diagram currDiagram = null;
 			for (Diagram d : currFile.getDiagrams()) {
 				if (d.getName().equals(text))
 					currDiagram = d;
 			}
-			if (currDiagram!=null) {
-				getViewSite().getPage().openEditor(new TMCLEditorInput(currDiagram, 
-						getEditingDomain(),
-						(UndoAction) getActionRegistry().get(ActionFactory.UNDO.getId()),
-						(RedoAction) getActionRegistry().get(ActionFactory.REDO.getId()),
-						true), TMCLDiagramEditor.ID);
+			if (currDiagram != null) {
+				getViewSite().getPage().openEditor(
+						new TMCLEditorInput(currDiagram, getEditingDomain(),
+								(UndoAction) getActionRegistry().get(
+										ActionFactory.UNDO.getId()),
+								(RedoAction) getActionRegistry().get(
+										ActionFactory.REDO.getId()), true),
+						TMCLDiagramEditor.ID);
 			}
 		}
-		
+
 	}
-	
+
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
@@ -309,13 +335,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(),
 				redoAction);
 
-
 		CloseAction closeAction = new CloseAction(this);
-		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), closeAction);
-		
+		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(),
+				closeAction);
+
 		actionRegistry.put(ActionFactory.UNDO.getId(), undoAction);
 		actionRegistry.put(ActionFactory.REDO.getId(), redoAction);
-		
+
 		actionBars.updateActionBars();
 	}
 
@@ -346,12 +372,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(refreshAction);
 		manager.add(new Separator());
-		
+
 		manager.add(createDiagramAction);
 		manager.add(createTopicAction);
 		manager.add(new Separator());
 		if (!currentSelection.isEmpty()) {
-			Object selection = ((IStructuredSelection)currentSelection).getFirstElement();
+			Object selection = ((IStructuredSelection) currentSelection)
+					.getFirstElement();
 			if (selection instanceof TopicType) {
 				deleteTopicTypeAction.setType((TopicType) selection);
 				manager.add(deleteTopicTypeAction);
@@ -381,8 +408,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		};
 		refreshAction.setText("Refresh");
 		refreshAction.setToolTipText("Refreshs the Model View");
-		refreshAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
-				.getImageDescriptor(ISharedImages.IMG_ELCL_SYNCED));
+		refreshAction.setImageDescriptor(PlatformUI.getWorkbench()
+				.getSharedImages().getImageDescriptor(
+						ISharedImages.IMG_ELCL_SYNCED));
 
 		doubleClickAction = new Action() {
 			@Override
@@ -412,9 +440,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				new org.eclipse.swt.events.KeyAdapter() {
 					@Override
 					public void keyReleased(KeyEvent e) {
-						if (e.keyCode!=SWT.F2)
+						if (e.keyCode != SWT.F2)
 							return;
-						
+
 						IStructuredSelection sel = (IStructuredSelection) viewer
 								.getSelection();
 						if (sel.isEmpty())
@@ -428,7 +456,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				});
 	}
 
-
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
@@ -441,8 +468,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		if (editingDomain == null) {
 			editingDomain = WorkspaceEditingDomainFactory.INSTANCE
 					.createEditingDomain();
-			IAction action = actionRegistry
-					.get(ActionFactory.UNDO.getId());
+			IAction action = actionRegistry.get(ActionFactory.UNDO.getId());
 			((UndoAction) action).setEditingDomain(editingDomain);
 
 			action = actionRegistry.get(ActionFactory.REDO.getId());
@@ -461,8 +487,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public ISelection getSelection() {
-		if (currentSelection==null)
-			if (currFile!=null)
+		if (currentSelection == null)
+			if (currFile != null)
 				currentSelection = new StructuredSelection(currFile);
 			else
 				currentSelection = new StructuredSelection();
@@ -490,17 +516,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	private void fireSelectionChanged() {
-		SelectionChangedEvent e = new SelectionChangedEvent(this, currentSelection);
+		SelectionChangedEvent e = new SelectionChangedEvent(this,
+				currentSelection);
 		for (ISelectionChangedListener l : listeners) {
 			l.selectionChanged(e);
 		}
 	}
-	
+
 	public void setFilename(String filename, boolean newFile) {
 
 		if (currFile != null) {
 			currFile.eAdapters().remove(dirtyListener);
-		
+
 			IWorkbenchPage page = getViewSite().getPage();
 			for (IEditorReference ref : page.getEditorReferences()) {
 				try {
@@ -513,41 +540,41 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				}
 			}
 		}
-		
+
 		checkSavedState();
-		
-		if (contentProvider!=null)
+
+		if (contentProvider != null)
 			contentProvider.uninitialize();
 
 		if (editingDomain != null)
-			editingDomain.getCommandStack()
-					.removeCommandStackListener(this);
-		
+			editingDomain.getCommandStack().removeCommandStackListener(this);
+
 		editingDomain = null; // clear it for new creation in getter
 		if (filename != null) {
 			if (!newFile)
 				currFile = FileUtil.loadFile(filename);
 			else {
 				currFile = ModelFactory.eINSTANCE.createFile();
-				currFile.setTopicMapSchema(ModelFactory.eINSTANCE.createTopicMapSchema());
+				currFile.setTopicMapSchema(ModelFactory.eINSTANCE
+						.createTopicMapSchema());
 				currFile.setFilename(filename);
 			}
 			currFile.eAdapters().add(dirtyListener);
 
-			// initialize indexer 
+			// initialize indexer
 			ModelIndexer.createInstance(currFile);
 		} else {
 			currFile = null;
 		}
-		if (contentProvider!=null)
+		if (contentProvider != null)
 			contentProvider.initialize();
 
-		if (currFile!=null)
+		if (currFile != null)
 			setSelection(new StructuredSelection(currFile));
-		
+
 		setSelection(new StructuredSelection());
 		firePropertyChange(PROP_DIRTY);
-		if (viewer!=null) {
+		if (viewer != null) {
 			viewer.refresh();
 			viewer.expandToLevel(2);
 		}
@@ -556,9 +583,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	private void checkSavedState() {
 		if (currFile != null) {
 			currFile.eAdapters().remove(dirtyListener);
-			WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+			WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain()
+					.getCommandStack();
 			if (cmdStack.isSaveNeeded()) {
-				if (MessageDialog.openQuestion(getViewSite().getShell(), "Unsaved model", 
+				if (MessageDialog.openQuestion(getViewSite().getShell(),
+						"Unsaved model",
 						"Youre model is not saved. Do you want to save now?")) {
 					doSave(null);
 				}
@@ -569,10 +598,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	public void updateActions() {
 		for (IAction a : actionRegistry.values()) {
 			if (a instanceof UpdateAction)
-				((UpdateAction)a).update();
+				((UpdateAction) a).update();
 		}
 		// updating export selection
-		getViewSite().getActionBars().getGlobalActionHandler(ActionFactory.EXPORT.getId());
+		getViewSite().getActionBars().getGlobalActionHandler(
+				ActionFactory.EXPORT.getId());
 	}
 
 	public Map<String, IAction> getActionRegistry() {
@@ -585,16 +615,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	public void commandStackChanged(EventObject event) {
 		updateActions();
-		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain()
+				.getCommandStack();
 		currFile.setDirty(cmdStack.isSaveNeeded());
-		
+
 		if (!validateJob.isRunning())
 			validateJob.schedule();
 	}
 
 	public void close() {
 		setFilename(null, false);
-		IWorkbenchPage activePage = getViewSite().getWorkbenchWindow().getActivePage();
+		IWorkbenchPage activePage = getViewSite().getWorkbenchWindow()
+				.getActivePage();
 		for (IEditorReference ref : activePage.getEditorReferences()) {
 			if (ref.getId().equals(TMCLDiagramEditor.ID)) {
 				activePage.closeEditor(ref.getEditor(false), false);
@@ -604,23 +636,24 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		updateActions();
 		viewer.refresh();
 	}
-	
+
 	@Override
 	public void saveState(IMemento memento) {
 		String text = "null";
 
-		if (currFile!=null) {
+		if (currFile != null) {
 			java.io.File file = new java.io.File(currFile.getFilename());
 			if (file.exists())
 				text = currFile.getFilename();
 			file = null;
 		}
-		
+
 		memento.putTextData(text);
 		int i = 0;
-		for (IEditorReference ref : getViewSite().getPage().getEditorReferences()) {
+		for (IEditorReference ref : getViewSite().getPage()
+				.getEditorReferences()) {
 			IEditorPart part = ref.getEditor(false);
-			if ( (part!=null) && (part instanceof TMCLDiagramEditor) ) {
+			if ((part != null) && (part instanceof TMCLDiagramEditor)) {
 				i++;
 				TMCLEditorInput ei = (TMCLEditorInput) part.getEditorInput();
 				IMemento partChild = memento.createChild("editor");
@@ -628,14 +661,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 		}
 	}
-	
+
 	public void doSave(IProgressMonitor monitor) {
 		try {
 			FileUtil.saveFile((File) currFile);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain()
+				.getCommandStack();
 		cmdStack.saveIsDone();
 		currFile.setDirty(false);
 	}
@@ -644,11 +678,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public boolean isDirty() {
-		if (currFile==null)
+		if (currFile == null)
 			return false;
 		return currFile.isDirty();
 	}
-	
+
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
@@ -662,12 +696,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		private TreeParent invisibleRoot;
 		private TreeParent diagramNode;
 		private TreeParent schemaNode;
-	
+
 		private AdapterImpl tmsListener = new AdapterImpl() {
 			@Override
 			public void notifyChanged(Notification msg) {
 				if ((msg.getNotifier() instanceof TopicMapSchema)
-					&& (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES)) {
+						&& (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES)) {
 					switch (msg.getEventType()) {
 					case Notification.ADD:
 						addType((TopicType) msg.getNewValue(), true);
@@ -676,8 +710,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 						removeType((TopicType) msg.getOldValue(), true);
 						break;
 					}
-				} else if ((msg.getNotifier() instanceof File) 
-					&& (msg.getFeatureID(EList.class) == ModelPackage.FILE__DIAGRAMS)) {
+				} else if ((msg.getNotifier() instanceof File)
+						&& (msg.getFeatureID(EList.class) == ModelPackage.FILE__DIAGRAMS)) {
 					switch (msg.getEventType()) {
 					case Notification.ADD:
 						addDiagram((Diagram) msg.getNewValue());
@@ -689,20 +723,20 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				}
 			}
 		};
-	
+
 		private TreeParent ttNode;
 		private TreeParent rtNode;
 		private TreeParent ntNode;
 		private TreeParent otNode;
 		private TreeParent atNode;
 		private TreeParent stNode;
-	
+
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
 		}
-	
+
 		public void dispose() {
 		}
-	
+
 		public Object[] getElements(Object parent) {
 			if (parent.equals(getViewSite())) {
 				if (invisibleRoot == null)
@@ -711,27 +745,27 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 			return getChildren(parent);
 		}
-	
+
 		public Object getParent(Object child) {
 			if (child instanceof TreeObject) {
 				return ((TreeObject) child).getParent();
 			}
 			return null;
 		}
-	
+
 		public Object[] getChildren(Object parent) {
 			if (parent instanceof TreeParent) {
 				return ((TreeParent) parent).getChildren();
 			}
 			return new Object[0];
 		}
-	
+
 		public boolean hasChildren(Object parent) {
 			if (parent instanceof TreeParent)
 				return ((TreeParent) parent).hasChildren();
 			return false;
 		}
-	
+
 		public void uninitialize() {
 			if (currFile != null) {
 				getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
@@ -739,44 +773,44 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 			invisibleRoot.dispose();
 		}
-	
+
 		public void initialize() {
-			if (currFile!=null) {
+			if (currFile != null) {
 				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
 				currFile.eAdapters().add(tmsListener);
 			}
 			update();
 		}
-		
+
 		public void update() {
-			
+
 			invisibleRoot = new TreeParent(ModelView.this, "");
 			if (currFile != null) {
 				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
 				schemaNode.setModel(getCurrentTopicMapSchema());
 				diagramNode = new TreeParent(ModelView.this, "Diagrams");
-	
+
 				invisibleRoot.addChild(diagramNode);
 				invisibleRoot.addChild(schemaNode);
-	
+
 				ttNode = new TreeParent(ModelView.this, "TopicTypes");
 				rtNode = new TreeParent(ModelView.this, "RoleTypes");
 				ntNode = new TreeParent(ModelView.this, "NameTypes");
 				otNode = new TreeParent(ModelView.this, "OccurrenceTypes");
 				atNode = new TreeParent(ModelView.this, "AssociationTypes");
 				stNode = new TreeParent(ModelView.this, "ScopeTypes");
-	
+
 				schemaNode.addChild(ttNode);
 				schemaNode.addChild(rtNode);
 				schemaNode.addChild(ntNode);
 				schemaNode.addChild(otNode);
 				schemaNode.addChild(atNode);
 				schemaNode.addChild(stNode);
-	
+
 				for (TopicType tt : getCurrentTopicMapSchema().getTopicTypes()) {
 					addType(tt, false);
 				}
-	
+
 				for (Diagram d : currFile.getDiagrams()) {
 					diagramNode.addChild(new TreeDiagram(ModelView.this, d));
 				}
@@ -786,14 +820,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				TreeParent root = new TreeParent(ModelView.this,
 						"No Diagramm Editor Open");
 				invisibleRoot.addChild(root);
-			}			
+			}
 		}
-	
+
 		private void addDiagram(Diagram diagram) {
 			diagramNode.addChild(new TreeDiagram(ModelView.this, diagram));
 			getViewer().refresh(diagramNode);
 		}
-		
+
 		private void removeDiagram(Diagram diagram) {
 			TreeObject removableNode = null;
 			for (TreeObject to : diagramNode.getChildren()) {
@@ -801,36 +835,37 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 					removableNode = to;
 				}
 			}
-			if (removableNode !=null) {
+			if (removableNode != null) {
 				diagramNode.removeChild(removableNode);
 				getViewer().refresh(diagramNode);
 			}
 		}
-		
+
 		private void addType(TopicType tt, boolean refresh) {
 			TreeTopic to = new TreeTopic(ModelView.this, tt);
 			TreeParent parent = null;
-	
+
 			parent = getParentNode(tt);
-	
+
 			if (parent != null) {
 				parent.addChild(to);
 				for (NameTypeConstraint ntc : tt.getNameContraints()) {
 					to.addChild(new TreeName(ModelView.this, ntc));
 				}
-				for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
+				for (OccurrenceTypeConstraint otc : tt
+						.getOccurrenceConstraints()) {
 					to.addChild(new TreeOccurrence(ModelView.this, otc));
 				}
 				if (refresh)
 					viewer.refresh(parent);
 			}
 		}
-	
+
 		private void removeType(TopicType tt, boolean refresh) {
 			TreeParent parent = ttNode;
-	
+
 			parent = getParentNode(tt);
-	
+
 			for (TreeObject to : parent.getChildren()) {
 				if (((TreeTopic) to).getModel().equals(tt)) {
 					parent.removeChild(to);
@@ -840,7 +875,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			if (refresh)
 				viewer.refresh(parent);
 		}
-	
+
 		private TreeParent getParentNode(TopicType topicType) {
 			TreeParent parent;
 			switch (topicType.getKind()) {
@@ -868,12 +903,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	class ViewLabelProvider extends LabelProvider {
-	
+
 		@Override
 		public String getText(Object obj) {
 			return obj.toString();
 		}
-	
+
 		@Override
 		public Image getImage(Object obj) {
 			return ((TreeObject) obj).getImage();
@@ -889,16 +924,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			if (element instanceof TreeName) {
 				return 2;
 			}
-			
+
 			return super.category(element);
 		}
 	}
-	
+
 	class ValidateJob extends Job {
 		private boolean running = false;
-		
-		private FeedbackRunnable feedBackRunnable = new FeedbackRunnable(); 
-		
+
+		private FeedbackRunnable feedBackRunnable = new FeedbackRunnable();
+
 		public ValidateJob() {
 			super("Validate...");
 		}
@@ -907,18 +942,20 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		protected IStatus run(IProgressMonitor monitor) {
 			if (currFile == null)
 				return Status.OK_STATUS;
-			
+
 			running = true;
 
-			IWorkbenchWindow activeWorkbenchWindow = getViewSite().getWorkbenchWindow(); 
+			IWorkbenchWindow activeWorkbenchWindow = getViewSite()
+					.getWorkbenchWindow();
 			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-			
+
 			File file = currFile;
 
 			ModelValidator validator = new ModelValidator(file);
 
-			List<ValidationResult> list = validator.validate(getEditingDomain().getCommandStack());
-			
+			List<ValidationResult> list = validator.validate(getEditingDomain()
+					.getCommandStack());
+
 			try {
 				ValidationErrorView vew = (ValidationErrorView) activePage
 						.findView(ValidationErrorView.ID);
@@ -944,7 +981,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 			return Status.OK_STATUS;
 		}
-		
+
 		public boolean isRunning() {
 			return running;
 		}
@@ -952,19 +989,19 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		private class FeedbackRunnable implements Runnable {
 			private List<ValidationResult> list;
 			private ValidationErrorView vew;
-			
+
 			public void run() {
 				vew.setValidationResults(list);
 			}
-			
+
 			public void setList(List<ValidationResult> list) {
 				this.list = list;
 			}
-			
+
 			public void setView(ValidationErrorView vew) {
 				this.vew = vew;
 			}
-			
+
 		};
 	}
 
