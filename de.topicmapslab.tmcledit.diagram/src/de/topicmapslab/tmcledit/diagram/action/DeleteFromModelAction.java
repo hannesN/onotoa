@@ -10,13 +10,18 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.action;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.ui.actions.UpdateAction;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
@@ -42,33 +47,57 @@ import de.topicmapslab.tmcledit.model.commands.DeleteRolePlayerConstraintCommand
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
 
-public class DeleteFromModelAction extends Action implements UpdateAction{
-public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
-	
-	private EditPart selectedEditPart;
-	
+public class DeleteFromModelAction extends Action implements UpdateAction {
+	public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
+
+	private IStructuredSelection selections;
 	private final CommandStack commandStack;
-	
-	
-	
+
 	public DeleteFromModelAction(CommandStack commandStack) {
 		super();
 		this.commandStack = commandStack;
+		selections = new StructuredSelection();
 		update();
 	}
 
 	@Override
 	public ImageDescriptor getImageDescriptor() {
-		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
+		ISharedImages sharedImages = PlatformUI.getWorkbench()
+				.getSharedImages();
 		return sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE);
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
-		TMCLEditDomain ed = (TMCLEditDomain) selectedEditPart.getViewer().getEditDomain();
+		TMCLEditDomain ed = null;
+
+		CompoundCommand cmd = new CompoundCommand();
+
+		Iterator it = selections.iterator();
+		while (it.hasNext()) {
+			EditPart selectedEditPart = (EditPart) it.next();
+			if (ed == null)
+				ed = (TMCLEditDomain) selectedEditPart.getViewer()
+						.getEditDomain();
+
+			Object model = selectedEditPart.getModel();
+
+			cmd.append(getCommand(model));
+		}
+		if (cmd != null) {
+			commandStack.execute(new CommandAdapter(ed.getEditingDomain()
+					.getCommandStack(), cmd));
+		}
+	}
+
+	/**
+	 * @param cmd
+	 * @param model
+	 * @return
+	 */
+	private AbstractCommand getCommand(Object model) {
 		AbstractCommand cmd = null;
-		Object model = selectedEditPart.getModel();
-		
 		if (model instanceof TypeNode) {
 			cmd = new DeleteTopicTypeCommand(((TypeNode) model).getTopicType());
 		} else if (model instanceof AbstractConstraint) {
@@ -98,45 +127,55 @@ public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 		} else if (model instanceof Comment) {
 			cmd = new DeleteCommentCommand((Comment) model);
 		}
-
-		
-		if (cmd!=null) {
-			commandStack.execute(new CommandAdapter(ed.getEditingDomain()
-					.getCommandStack(), cmd));
-		}
+		return cmd;
 	}
-	
+
 	@Override
 	public String getText() {
 		return "Delete from Model";
 	}
-	
+
 	@Override
 	public String getId() {
 		return ID;
 	}
-	
-	public void setSelectedEditPart(EditPart selectedEditPart) {
-		this.selectedEditPart = selectedEditPart;
+
+	public void setSelections(IStructuredSelection selections) {
+		this.selections = selections;
 		update();
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public void update() {
-		Object model = null;
-		if (selectedEditPart != null)
-			model = selectedEditPart.getModel();
-		if ( (selectedEditPart instanceof NodeEditPart)
-			|| (model instanceof OccurrenceTypeConstraint)
-			|| (model instanceof NameTypeConstraint)
-			|| (model instanceof SubjectIdentifierConstraint)
-			|| (model instanceof SubjectLocatorConstraint)
-			|| ( (model instanceof Edge) && ((Edge)model).getType()==EdgeType.ROLE_CONSTRAINT_TYPE)
-			|| (model instanceof Comment)
-		 ) {
-			setEnabled(true);
-		} else {
+		if (selections.isEmpty()) {
 			setEnabled(false);
+			return;
 		}
+
+		setEnabled(true);
+
+		Iterator it = selections.iterator();
+		while (it.hasNext()) {
+			EditPart selectedEditPart = (EditPart) it.next();
+			Object model = selectedEditPart.getModel();
+			if (!(selectedEditPart instanceof NodeEditPart)
+					&& !isValidEditPartModel(model)) {
+				setEnabled(false);
+			}
+		}
+	}
+
+	/**
+	 * @param model
+	 * @return
+	 */
+	private boolean isValidEditPartModel(Object model) {
+		return (model instanceof OccurrenceTypeConstraint)
+				|| (model instanceof NameTypeConstraint)
+				|| (model instanceof SubjectIdentifierConstraint)
+				|| (model instanceof SubjectLocatorConstraint)
+				|| ((model instanceof Edge) && ((Edge) model).getType() == EdgeType.ROLE_CONSTRAINT_TYPE)
+				|| (model instanceof Comment);
 	}
 
 }
