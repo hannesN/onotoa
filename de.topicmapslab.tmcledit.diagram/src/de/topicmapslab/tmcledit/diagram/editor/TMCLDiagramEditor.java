@@ -316,7 +316,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		IStructuredSelection sel = (IStructuredSelection) event.getSelection();
-
+		updateSelectionDependentActions(sel);
 		if (sel.isEmpty())
 			return;
 		else {
@@ -325,7 +325,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				if (part instanceof MoveableLabelEditPart) {
 					part = part.getParent();
 				}
-				updateSelectionDependentActions(part);
+				
 				Object model = part.getModel();
 				if (model instanceof TypeNode) {
 					TypeNode node = (TypeNode) model;
@@ -349,9 +349,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		}
 	}
 
-	private void updateSelectionDependentActions(EditPart selection) {
-		removeFromDiagramAction.setSelectedEditPart(selection);
-		deleteFromModelAction.setSelectedEditPart(selection);
+	private void updateSelectionDependentActions(IStructuredSelection selelection) {
+		removeFromDiagramAction.setSelections(selelection);
+		deleteFromModelAction.setSelections(selelection);
 
 	}
 
