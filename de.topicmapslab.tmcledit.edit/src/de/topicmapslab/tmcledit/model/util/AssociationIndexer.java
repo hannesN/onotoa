@@ -42,7 +42,7 @@ public class AssociationIndexer {
 		
 		for (AssociationTypeConstraint atc : topicMapSchema.getAssociationTypeConstraints()) {
 			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
-				if (rpc.getPlayer().equals(topicType))
+				if (topicType.equals(rpc.getPlayer()))
 					result.add(rpc);
 			}
 		}
