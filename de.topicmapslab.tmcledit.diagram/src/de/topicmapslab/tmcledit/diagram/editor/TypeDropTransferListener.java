@@ -75,7 +75,11 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 	protected void handleDrop() {
 		CreateRequest req = ((CreateRequest)getTargetRequest());
 		
-		String objId = (String) getCurrentEvent().data;
+		String ids[] = ((String) getCurrentEvent().data).split("--_--");
+
+		String objId = null;
+		if (ids.length == 1)
+			objId = ids[0];
 		nodeFac.setTopicType(null);
 		
 		TopicType dropedType = null;

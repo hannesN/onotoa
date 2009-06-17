@@ -207,7 +207,7 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 		List<TypeNode> list = typeNodeMap.get(topicType);
 		if (list!=null) {
 			for (TypeNode tn : list) {
-				if (tn.eContainer().equals(diagram))
+				if (diagram.equals(tn.eContainer()))
 					return tn;
 			}
 		}
@@ -222,8 +222,10 @@ public class TopicTypeNodeIndexer extends AdapterImpl{
 	 */
 	public Node getNodeFor(AssociationTypeConstraint assConstraint, Diagram diagram) {
 		List<AssociationNode> list = assNodeMap.get(assConstraint);
+		if (list==null)
+			return null;
 		for (AssociationNode an : list) {
-			if (an.eContainer().equals(diagram))
+			if (diagram.equals(an.eContainer()))
 				return an;
 		}
 		
