@@ -10,12 +10,17 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.editor;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 
@@ -24,30 +29,49 @@ import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactor
 import de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class TypeDropTransferListener extends AbstractTransferDropTargetListener {
+public class TypeDropTransferListener extends
+		AbstractTransferDropTargetListener {
 
 	private TypeNodeCreationFactory nodeFac = new TypeNodeCreationFactory(true);
 	private OccurrenceConstraintCreationFactory occFac = new OccurrenceConstraintCreationFactory();
 
+	private List<TopicType> movedTypes = Collections.emptyList();
+
 	private final TopicMapSchema schema;
-	
+
 	public TypeDropTransferListener(EditPartViewer viewer, Diagram diagram) {
 		super(viewer);
-		this.schema = ((File)diagram.eContainer()).getTopicMapSchema();
+		this.schema = ((File) diagram.eContainer()).getTopicMapSchema();
 	}
-		
+
 	@Override
 	public Transfer getTransfer() {
 		return TextTransfer.getInstance();
 	}
-		
+
+	@Override
+	public void setCurrentEvent(DropTargetEvent currentEvent) {
+		super.setCurrentEvent(currentEvent);
+		if ( (currentEvent==null) || (currentEvent.data==null) ){
+			movedTypes = Collections.emptyList();
+			return;
+		}
+		String ids[] = ((String) currentEvent.data).split("--_--");
+		movedTypes = new ArrayList<TopicType>(ids.length);
+		for (String id : ids) {
+			for (TopicType tt : schema.getTopicTypes()) {
+				if (tt.toString().equals(id))
+					movedTypes.add(tt);
+			}
+		}
+	}
+
 	@Override
 	protected void updateTargetRequest() {
-		CreateRequest req = ((CreateRequest)getTargetRequest());
+		CreateRequest req = ((CreateRequest) getTargetRequest());
 		req.setLocation(getDropLocation());
 		EditPart part = getViewer().findObjectAt(getDropLocation());
 		if (part instanceof NodeEditPart) {
@@ -60,8 +84,6 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 	@Override
 	protected Request createTargetRequest() {
 		CreateRequest req = new CreateRequest();
-		req.setFactory(nodeFac);
-
 		return req;
 	}
 
@@ -73,33 +95,13 @@ public class TypeDropTransferListener extends AbstractTransferDropTargetListener
 
 	@Override
 	protected void handleDrop() {
-		CreateRequest req = ((CreateRequest)getTargetRequest());
-		
-		String ids[] = ((String) getCurrentEvent().data).split("--_--");
+		CreateRequest req = ((CreateRequest) getTargetRequest());
 
-		String objId = null;
-		if (ids.length == 1)
-			objId = ids[0];
-		nodeFac.setTopicType(null);
-		
-		TopicType dropedType = null;
-		for (TopicType tt : schema.getTopicTypes()) {
-			if (tt.toString().equals(objId))
-				dropedType = tt;
-		}
-		
-		
-			nodeFac.setTopicType(dropedType);
-			req.setFactory(nodeFac);
-		  
-		if (dropedType.getKind()==KindOfTopicType.OCCURRENCE_TYPE) {
-			occFac.setTopicType(dropedType);
-			req.setFactory(occFac);
-		} 
-		
-		
+		nodeFac.setTopicTypes(movedTypes);
+		req.setFactory(nodeFac);
+
+
 		super.handleDrop();
 	}
-	
 
 }
