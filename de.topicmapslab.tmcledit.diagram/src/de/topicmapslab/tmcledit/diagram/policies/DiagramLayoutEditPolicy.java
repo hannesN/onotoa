@@ -10,10 +10,13 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.policies;
 
+import java.util.List;
+
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
@@ -34,8 +37,8 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.CreateCommentCommand;
-import de.topicmapslab.tmcledit.model.commands.MoveNodeCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateNodeCommand;
+import de.topicmapslab.tmcledit.model.commands.MoveNodeCommand;
 import de.topicmapslab.tmcledit.model.commands.ResizeCommentCommand;
 
 public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
@@ -63,6 +66,7 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
 		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
@@ -77,9 +81,6 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 		Viewport viewport = manager.getViewport();
 		p.translate(viewport.getViewLocation());
 		
-		
-		
-		
 		Point p2 = new Point(p.x, p.y);
 		if ( (request.getNewObjectType()==TypeNode.class) ||
 			 (request.getNewObjectType()==AssociationNode.class) ){
@@ -90,6 +91,15 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 		} else if (request.getNewObjectType() == Comment.class) {
 			cmd = new CreateCommentCommand(diagram,
 					(Comment) request.getNewObject(), p2);
+		} else if (request.getNewObjectType() == List.class) {
+			cmd = new CompoundCommand();
+			for (Node node : (List<Node>) request.getNewObject() ) {
+				Point tmp = new Point(p2.x, p2.y);
+				((CompoundCommand)cmd).append(new CreateNodeCommand(diagram, tmp,node));
+				p2.x+=40;
+				p2.y+=40;
+			}
+			
 		}
 		if (cmd!=null)
 			return new CommandAdapter(commandStack, cmd);

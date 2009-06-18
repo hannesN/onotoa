@@ -13,6 +13,10 @@
  */
 package de.topicmapslab.tmcledit.diagram.creationfactories;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.gef.requests.CreationFactory;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -24,15 +28,15 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 public final class TypeNodeCreationFactory implements CreationFactory {
 	private KindOfTopicType kind;
 
-	private TopicType topicType;
-	private boolean cache;	// cache the topic type or not (last for palette necessary)
+	private List<TopicType> topicTypes = Collections.emptyList();
+	private boolean cache; // cache the topic type or not (last for palette
+							// necessary)
 
 	public TypeNodeCreationFactory(KindOfTopicType kind, boolean cache) {
 		this.kind = kind;
-		topicType = null;
 		this.cache = cache;
 	}
-	
+
 	/**
 	 * 
 	 * @param kind
@@ -40,30 +44,48 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 	public TypeNodeCreationFactory(KindOfTopicType kind) {
 		this(kind, false);
 	}
-	
+
 	public TypeNodeCreationFactory(boolean cache) {
 		this(KindOfTopicType.TOPIC_TYPE, cache);
 	}
 
 	public Object getNewObject() {
-		TypeNode tn = ModelFactory.eINSTANCE.createTypeNode();
+		if (topicTypes.size() < 2) {
+			TypeNode tn = ModelFactory.eINSTANCE.createTypeNode();
+			TopicType topicType = null;
+			switch (topicTypes.size()) {
+			case 0:
+				topicType = ModelIndexer.getInstance().createTopicType(kind);
+				break;
+			case 1:
+				topicType = topicTypes.get(0);
+			}
 
-		if (topicType == null) {
-			topicType = ModelIndexer.getInstance().createTopicType(kind);
+			tn.setTopicType(topicType);
+
+			if (!cache)
+				topicType = null;
+
+			return tn;
+		} else {
+			ArrayList<TypeNode> nodeList = new ArrayList<TypeNode>(topicTypes.size());
+			for (TopicType tt : topicTypes) {
+				TypeNode tn = ModelFactory.eINSTANCE.createTypeNode();
+				tn.setTopicType(tt);
+				nodeList.add(tn);
+			}
+			return nodeList;
 		}
-		tn.setTopicType(topicType);
-
-		if (!cache)
-			topicType = null;
-		
-		return tn;
 	}
 
-	public void setTopicType(TopicType topicType) {
-		this.topicType = topicType;
+	public void setTopicTypes(List<TopicType> topicTypes) {
+		this.topicTypes = new ArrayList<TopicType>(topicTypes);
 	}
 
 	public Object getObjectType() {
-		return TypeNode.class;
+		if (topicTypes.size() < 2)
+			return TypeNode.class;
+		else
+			return List.class;
 	}
 }
