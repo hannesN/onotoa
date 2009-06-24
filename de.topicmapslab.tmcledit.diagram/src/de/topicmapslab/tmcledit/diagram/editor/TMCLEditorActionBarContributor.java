@@ -103,6 +103,7 @@ public class TMCLEditorActionBarContributor extends ActionBarContributor {
 
 			FileDialog dlg = new FileDialog(editor.getSite().getShell());
 			dlg.setFilterExtensions(new String[] { "*.png" });
+			dlg.setText("Save as...");
 			String file = dlg.open();
 			if (file == null)
 				return;
