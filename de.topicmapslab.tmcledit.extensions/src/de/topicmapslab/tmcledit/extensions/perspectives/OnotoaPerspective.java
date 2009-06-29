@@ -8,7 +8,7 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.tmcledit.application;
+package de.topicmapslab.tmcledit.extensions.perspectives;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
@@ -20,15 +20,15 @@ import de.topicmapslab.tmcledit.extensions.views.PropertyDetailView;
 /**
  * @generated
  */
-public class DiagramEditorPerspective implements IPerspectiveFactory {
-	/**
-	 * @generated NOT
-	 */
+public class OnotoaPerspective implements IPerspectiveFactory {
+
+	public static final String ID = "de.topicmapslab.tmcledit.extensions.OnotoaPerspective";
+	
 	public void createInitialLayout(IPageLayout layout) {
 		layout.setEditorAreaVisible(true);
 				
 		
-		layout.addPerspectiveShortcut(DiagramEditorWorkbenchAdvisor.PERSPECTIVE_ID);
+		layout.addPerspectiveShortcut(ID);
 		IFolderLayout leftSide = layout.createFolder("left", IPageLayout.LEFT, 0.2f, layout.getEditorArea());
 		leftSide.addView(ModelView.ID);
 		

@@ -53,9 +53,13 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
@@ -84,7 +88,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private ScalableFreeformRootEditPart rootEditPart;
 
 	private ISelection currentSelection;
-	private List<ISelectionChangedListener> selectionChangedListeners = Collections.emptyList();
+	private List<ISelectionChangedListener> selectionChangedListeners = Collections
+			.emptyList();
 
 	private RemoveFromDiagramAction removeFromDiagramAction;
 	private DeleteFromModelAction deleteFromModelAction;
@@ -94,17 +99,18 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private OverviewOutlinePage outlinePage;
 
 	private TMCLEditorContextMenuProvider cmProvider;
-	
+
 	public TMCLDiagramEditor() {
 		setEditDomain(new TMCLEditDomain(this));
 	}
-	
+
 	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		super.init(site, input);
 		setPartName(input.getName());
-		getPalettePreferences().setPaletteState(FlyoutPaletteComposite.STATE_PINNED_OPEN);
+		getPalettePreferences().setPaletteState(
+				FlyoutPaletteComposite.STATE_PINNED_OPEN);
 		getPalettePreferences().setPaletteWidth(200);
 	}
 
@@ -115,29 +121,31 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setContents(diagram); // set the contents of this editor
 		viewer.addSelectionChangedListener(this);
 		viewer.setEditDomain(getEditDomain());
-		
+
 		getSite().setSelectionProvider(this);
 		// listen for dropped parts
 		viewer.addDropTargetListener(new TypeDropTransferListener(viewer,
 				diagram));
-		
+
 		viewer.getControl().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
 				try {
-					getEditorSite().getPage()
+					getEditorSite()
+							.getPage()
 							.showView(
 									"de.topicmapslab.tmcledit.extensions.views.PropertyDetailView",
 									null, IWorkbenchPage.VIEW_VISIBLE);
 				} catch (PartInitException e1) {
-					
+
 				}
 			}
+
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (e.button==3) {
-					if ((getEditDomain().getActiveTool()==null) || 
-					    (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
+				if (e.button == 3) {
+					if ((getEditDomain().getActiveTool() == null)
+							|| (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
 						getEditDomain().getPaletteViewer().setActiveTool(null);
 						cmProvider.setActive(false);
 					} else {
@@ -147,6 +155,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			}
 		});
 	}
+
 	@Override
 	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
@@ -156,36 +165,38 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setRootEditPart(getRootEditPart());
 		viewer.setKeyHandler(new OnotoaKeyHandler(viewer, getActionRegistry()));
 
-		cmProvider = new TMCLEditorContextMenuProvider(
-				viewer, getActionRegistry());
+		cmProvider = new TMCLEditorContextMenuProvider(viewer,
+				getActionRegistry());
 		getGraphicalViewer().setContextMenu(cmProvider);
 		getSite().registerContextMenu(cmProvider, viewer);
-		
+
 		List<String> zoomContributions = new ArrayList<String>(5);
 		zoomContributions.add(ZoomManager.FIT_ALL);
 		zoomContributions.add(ZoomManager.FIT_HEIGHT);
 		zoomContributions.add(ZoomManager.FIT_WIDTH);
 
-		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(ZoomManager.class.toString());
-		
+		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(
+				ZoomManager.class.toString());
+
 		manager.setZoomLevelContributions(zoomContributions);
 
 		IAction zoomIn = new ZoomInAction(manager);
 		zoomIn.setAccelerator(0);
 		IAction zoomOut = new ZoomOutAction(manager);
-		
+
 		getActionRegistry().registerAction(zoomIn);
 		getActionRegistry().registerAction(zoomOut);
-		
+
 		viewer.setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.MOD2),
 				MouseWheelZoomHandler.SINGLETON);
-		getPalettePreferences().setPaletteState(FlyoutPaletteComposite.STATE_PINNED_OPEN);
+		getPalettePreferences().setPaletteState(
+				FlyoutPaletteComposite.STATE_PINNED_OPEN);
 	}
 
 	public ZoomManager getZoomManager() {
 		return getRootEditPart().getZoomManager();
 	}
-	
+
 	public ScalableFreeformRootEditPart getRootEditPart() {
 		if (rootEditPart == null) {
 			rootEditPart = new ScalableFreeformRootEditPart();
@@ -194,7 +205,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	}
 
 	public EditingDomain getEditingDomain() {
-		return ((TMCLEditorInput)getEditorInput()).getEditingDomain();
+		return ((TMCLEditorInput) getEditorInput()).getEditingDomain();
 	}
 
 	public Diagram getDiagram() {
@@ -205,15 +216,15 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	public ActionRegistry getActionRegistry() {
 		return super.getActionRegistry();
 	}
-	
+
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		try {
-			FileUtil.saveFile((File)diagram.eContainer());
+			FileUtil.saveFile((File) diagram.eContainer());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		((File)diagram.eContainer()).setDirty(false);
+		((File) diagram.eContainer()).setDirty(false);
 	}
 
 	@Override
@@ -224,17 +235,51 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	protected void createActions() {
 		removeFromDiagramAction = new RemoveFromDiagramAction(getEditDomain()
 				.getCommandStack());
-		deleteFromModelAction = new DeleteFromModelAction(getEditDomain().getCommandStack());
+		deleteFromModelAction = new DeleteFromModelAction(getEditDomain()
+				.getCommandStack());
 		getActionRegistry().registerAction(deleteFromModelAction);
 		getActionRegistry().registerAction(removeFromDiagramAction);
-		
-		
+
 		super.createActions();
 	}
 
 	@Override
 	protected void setInput(IEditorInput input) {
 		super.setInput(input);
+
+		if (input instanceof IFileEditorInput) {
+			IFileEditorInput fei = (IFileEditorInput) input;
+			String filename = fei.getFile().getLocation().toOSString();
+			try {
+				IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow();
+				IWorkbenchPage page = workbenchWindow.getActivePage();
+				String modelViewId = "de.topicmapslab.tmcledit.extensions.views.ModelView";
+				workbenchWindow.getWorkbench()
+						.showPerspective(
+								"de.topicmapslab.tmcledit.extensions.OnotoaPerspective",
+								workbenchWindow);
+				page.showView(modelViewId);
+				ViewPart modelView = (ViewPart) page.findView(modelViewId);
+				if (modelView != null) {
+					String key;
+					// we check if the file exists and it is not empty
+					if ((fei.getFile().exists())
+							&& (fei.getFile().getContents().read() != -1))
+						key = "filename";
+					else
+						// if one of the cases is true we want a new file
+						key = "newfilename";
+
+					modelView.setPartProperty(key, filename);
+				}
+
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+
+			return;
+		}
 
 		TMCLEditorInput ei = (TMCLEditorInput) input;
 		this.diagram = ei.getDiagram();
@@ -243,8 +288,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				.getEditingDomain());
 
 		dirtyAdapter = new DirtyAdapter();
-		((File)diagram.eContainer()).eAdapters().add(dirtyAdapter);
-		
+		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
+
 		IActionBars actionBars = getEditorSite().getActionBars();
 		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), ei
 				.getUndoAction());
@@ -254,7 +299,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		getActionRegistry().registerAction(ei.getUndoAction());
 		getActionRegistry().registerAction(ei.getRedoAction());
 	}
-	
+
 	@Override
 	public boolean isSaveOnCloseNeeded() {
 		return false;
@@ -264,20 +309,20 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isDirty() {
-		if (diagram.eContainer()==null)
+		if (diagram.eContainer() == null)
 			return false;
-		return ((File)diagram.eContainer()).isDirty();
+		return ((File) diagram.eContainer()).isDirty();
 	}
 
 	@Override
 	public void dispose() {
-		((File)diagram.eContainer()).eAdapters().remove(dirtyAdapter);
+		((File) diagram.eContainer()).eAdapters().remove(dirtyAdapter);
 		super.dispose();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class adapter) {
@@ -296,19 +341,22 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		if (adapter == IContentOutlinePage.class)
 			return getContentOutlinePage();
 		if (adapter == ZoomManager.class)
-			return getGraphicalViewer().getProperty(ZoomManager.class.toString());
+			return getGraphicalViewer().getProperty(
+					ZoomManager.class.toString());
 		return super.getAdapter(adapter);
 	}
 
 	public IContentOutlinePage getContentOutlinePage() {
-		if ( (outlinePage == null) && (null!=getGraphicalViewer()) ) {
-			
-			outlinePage = new OverviewOutlinePage((ScalableFreeformRootEditPart) getGraphicalViewer().getRootEditPart());
+		if ((outlinePage == null) && (null != getGraphicalViewer())) {
+
+			outlinePage = new OverviewOutlinePage(
+					(ScalableFreeformRootEditPart) getGraphicalViewer()
+							.getRootEditPart());
 		}
 
 		return outlinePage;
 	}
-	
+
 	@Override
 	protected PaletteRoot getPaletteRoot() {
 		return TMCLDiagramEditorUtil.getPaletteRoot();
@@ -325,7 +373,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				if (part instanceof MoveableLabelEditPart) {
 					part = part.getParent();
 				}
-				
+
 				Object model = part.getModel();
 				if (model instanceof TypeNode) {
 					TypeNode node = (TypeNode) model;
@@ -336,8 +384,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					currentSelection = new StructuredSelection(node
 							.getAssociationConstraint());
 				} else if (model instanceof Edge) {
-					EObject tmp = ((Edge)model).getRoleConstraint();
-					if (tmp!=null)
+					EObject tmp = ((Edge) model).getRoleConstraint();
+					if (tmp != null)
 						currentSelection = new StructuredSelection(tmp);
 					else
 						currentSelection = new StructuredSelection();
@@ -349,7 +397,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		}
 	}
 
-	private void updateSelectionDependentActions(IStructuredSelection selelection) {
+	private void updateSelectionDependentActions(
+			IStructuredSelection selelection) {
 		removeFromDiagramAction.setSelections(selelection);
 		deleteFromModelAction.setSelections(selelection);
 
@@ -397,30 +446,31 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	IFigure getPrintableFigure() {
 		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void updateActions(List actionIds) {
 		super.updateActions(actionIds);
 	}
-	
+
 	private class DirtyAdapter extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(Boolean.class)==ModelPackage.FILE__DIRTY) {
+			if (msg.getFeatureID(Boolean.class) == ModelPackage.FILE__DIRTY) {
 				firePropertyChange(TMCLDiagramEditor.PROP_DIRTY);
 				getCommandStack().markSaveLocation();
-			} else if (msg.getFeatureID(List.class)==ModelPackage.FILE__DIAGRAMS) {
-				if (msg.getEventType()==Notification.REMOVE) {
-					
+			} else if (msg.getFeatureID(List.class) == ModelPackage.FILE__DIAGRAMS) {
+				if (msg.getEventType() == Notification.REMOVE) {
+
 					if (msg.getOldValue().equals(getDiagram())) {
-						getEditorSite().getPage().closeEditor(TMCLDiagramEditor.this, false);
+						getEditorSite().getPage().closeEditor(
+								TMCLDiagramEditor.this, false);
 					}
-						
+
 				}
 			}
-			
+
 		}
 	}
-	
+
 }

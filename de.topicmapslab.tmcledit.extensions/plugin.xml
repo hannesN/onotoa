@@ -15,14 +15,18 @@
          point="org.eclipse.ui.views">
       <category
             id="de.topicmapslab.tmcledit.extensions"
-            name="TMCLEdit">
+            name="Onotoa">
       </category>
       <view
             category="de.topicmapslab.tmcledit.extensions"
             class="de.topicmapslab.tmcledit.extensions.views.ModelView"
             icon="icons/sample.gif"
             id="de.topicmapslab.tmcledit.extensions.views.ModelView"
-            name="Model View">
+            name="Model View"
+            restorable="true">
+         <description>
+            This view is the heart of the onotoa plugin. It contains a tree displaying the whole schema elements.
+         </description>
       </view>
       <view
             category="de.topicmapslab.tmcledit.extensions"
@@ -38,22 +42,6 @@
             name="Error View"
             restorable="true">
       </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="de.topicmapslab.tmcledit.application.TmcleditPerspective">
-         <view
-               closeable="false"
-               id="de.topicmapslab.tmcledit.extensions.views.ModelView"
-               moveable="true"
-               ratio="0.3"
-               relationship="fast"
-               showTitle="true"
-               standalone="true"
-               visible="true">
-         </view>
-      </perspectiveExtension>
    </extension>
    <extension
          point="org.eclipse.help.contexts">
@@ -114,6 +102,14 @@
             commandId="de.topicmapslab.tmcledit.model.validatecommand"
             icon="icons/sample.gif">
       </image>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="de.topicmapslab.tmcledit.extensions.perspectives.OnotoaPerspective"
+            id="de.topicmapslab.tmcledit.extensions.OnotoaPerspective"
+            name="Onotoa">
+      </perspective>
    </extension>
 
 </plugin>

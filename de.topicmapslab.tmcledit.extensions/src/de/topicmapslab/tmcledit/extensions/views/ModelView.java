@@ -255,6 +255,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			@SuppressWarnings("unchecked")
 			@Override
 			public void dragSetData(DragSourceEvent event) {
+				if (viewer==null)
+					return;
+				
 				IStructuredSelection sel = (IStructuredSelection) viewer
 						.getSelection();
 				// concat every model string and ignore other nodes..
@@ -689,6 +692,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	public boolean isSaveOnCloseNeeded() {
 		return isDirty();
+	}
+
+	@Override
+	public void setPartProperty(String key, String value) {
+		if ("newfilename".equals(key))
+			setFilename(value, true);
+		else if ("filename".equals(key))
+			setFilename(value, false);
+		else
+			super.setPartProperty(key, value);
 	}
 
 	class ViewContentProvider implements IStructuredContentProvider,
