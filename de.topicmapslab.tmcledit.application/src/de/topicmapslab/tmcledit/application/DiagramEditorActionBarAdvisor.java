@@ -33,8 +33,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
-
-import de.topicmapslab.tmcledit.extensions.views.ModelView;
+import org.eclipse.ui.part.ViewPart;
 
 
 public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
@@ -93,6 +92,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		register(ActionFactory.RESET_PERSPECTIVE.create(window));
 		
 		register(ActionFactory.EXPORT.create(window));
+		
+		register(ActionFactory.PREFERENCES.create(window));
 	}
 
 	@Override
@@ -184,6 +185,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 			menuX.add(getAction(ActionFactory.RESET_PERSPECTIVE.getId()));
+			menuX.add(getAction(ActionFactory.PREFERENCES.getId()));
 			menu.add(menuX);
 		}
 
@@ -285,14 +287,17 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		IWorkbenchPage page = workbenchWindow.getActivePage();
 		
 		try {
-			page.showView(ModelView.ID);
-			ModelView modelView = (ModelView) page.findView(ModelView.ID);
+			String modelViewId = "de.topicmapslab.tmcledit.extensions.views.ModelView";
+			page.showView(modelViewId);
+			ViewPart modelView =  (ViewPart) page.findView(modelViewId);
 			if (modelView!=null) {
-				modelView.setFilename(filename, newFile);
+				String key = (newFile) ? "newfilename" : "filename";
+				modelView.setPartProperty(key, filename);
 			}
 			
+			
 		} catch (PartInitException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		
 		return true;

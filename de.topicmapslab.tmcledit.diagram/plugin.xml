@@ -17,9 +17,15 @@
             class="de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor"
             contributorClass="de.topicmapslab.tmcledit.diagram.editor.TMCLEditorActionBarContributor"
             default="false"
-            extensions="tmcl"
             id="de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor"
-            name="TMCL Editor">
+            name="Onotoa Diagram">
+      </editor>
+      <editor
+            default="true"
+            extensions="tmcl"
+            id="de.topicmapslab.tmcledit.diagram.editor.TMCLModelEditor"
+            launcher="de.topicmapslab.tmcledit.diagram.editor.OnototaLauncher"
+            name="Onotoa Modelloader">
       </editor>
    </extension>
 

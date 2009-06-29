@@ -15,14 +15,6 @@
       </product>
    </extension>
    <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="de.topicmapslab.tmcledit.application.DiagramEditorPerspective"
-            id="de.topicmapslab.tmcledit.application.TmcleditPerspective"
-            name="Onotota Perspective">
-      </perspective>
-   </extension>
-   <extension
          id="onotoa"
          name="Onotoa"
          point="org.eclipse.core.runtime.applications">

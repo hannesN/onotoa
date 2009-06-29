@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application.splash;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
@@ -20,8 +21,6 @@ import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.splash.BasicSplashHandler;
 import org.osgi.framework.Bundle;
-
-import de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin;
 
 /**
  * @author Hannes Niederhausen
@@ -48,7 +47,9 @@ public class OnotoaSplashHandler extends BasicSplashHandler {
 		Label label = new Label(parent, SWT.TRANSPARENT);
 		label.setFont(versionFont);
 		// read bundle version for program
-		Bundle bundle = TmcleditEditPlugin.getPlugin().getBundle();
+		
+		
+		Bundle bundle = Platform.getBundle("de.topicmapslab.tmcledit.edit");
 		String version = (String) bundle.getHeaders().get(
 				org.osgi.framework.Constants.BUNDLE_VERSION);
 		version = "Version: " + version;

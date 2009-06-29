@@ -16,15 +16,27 @@
       [Enter License Description here.]
    </license>
 
-   <plugin
-         id="de.topicmapslab.tmcledit"
-         download-size="0"
-         install-size="0"
-         version="1.0.3"
-         unpack="false"/>
+   <url>
+      <update url="file:/home/mai00ckx/Desktop/repository"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.gef" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.ui" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.transaction" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.workspace" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms" version="3.3.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+   </requires>
 
    <plugin
-         id="de.topicmapslab.tmcledit.application"
+         id="de.topicmapslab.tmcledit"
          download-size="0"
          install-size="0"
          version="1.0.3"
@@ -46,13 +58,6 @@
 
    <plugin
          id="de.topicmapslab.tmcledit.edit"
-         download-size="0"
-         install-size="0"
-         version="1.0.3"
-         unpack="false"/>
-
-   <plugin
-         id="de.topicmapslab.tmcledit.export"
          download-size="0"
          install-size="0"
          version="1.0.3"

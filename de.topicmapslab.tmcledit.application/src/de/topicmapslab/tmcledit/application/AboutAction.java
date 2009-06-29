@@ -10,13 +10,13 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
-import de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin;
 
 /**
  * @generated
@@ -32,11 +32,8 @@ public class AboutAction extends Action {
 	
 	@Override
 	public void run() {
-		Bundle bundle = TmcleditEditPlugin.getPlugin().getBundle();
+		Bundle bundle = Platform.getBundle("de.topicmapslab.tmcledit.edit");
 		String version = (String) bundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
-//		int i = version.lastIndexOf(".0.0");
-//		if (i > -1)
-//			version = version.substring(0, i);
 		
 		version = "\nVersion: " + version;
 		String copyright = "\n(C) 2009, Hannes Niederhausen, Topic Maps Lab";

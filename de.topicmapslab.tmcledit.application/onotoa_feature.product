@@ -21,15 +21,25 @@
    <vm>
    </vm>
 
-
    <plugins>
    </plugins>
 
    <features>
-      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.0.3"/>
-      <feature id="de.topicmapslab.tmcledit.application_feature" version="1.0.3"/>
+      <feature id="de.topicmapslab.tmcledit.application_feature"/>
       <feature id="org.sourceforge.tinyTiM_feature" version="1.5.0"/>
+      <feature id="de.topicmapslab.tmcledit.core_feature"/>
+      <feature id="de.topicmapslab.tmcledit.export_feature"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="1.1.0.v20090605-1440-7u6Fb3FbPbJP5MjJjZgifk"/>
    </features>
 
+   <configurations>
+      <plugin id="de.topicmapslab.tmcledit" autoStart="false" startLevel="0" />
+      <plugin id="de.topicmapslab.tmcledit.application" autoStart="true" startLevel="0" />
+      <plugin id="de.topicmapslab.tmcledit.diagram" autoStart="false" startLevel="0" />
+      <plugin id="de.topicmapslab.tmcledit.doc" autoStart="false" startLevel="0" />
+      <plugin id="de.topicmapslab.tmcledit.edit" autoStart="false" startLevel="0" />
+      <plugin id="de.topicmapslab.tmcledit.export" autoStart="false" startLevel="0" />
+      <plugin id="de.topicmapslab.tmcledit.extensions" autoStart="false" startLevel="0" />
+   </configurations>
 
 </product>
