@@ -15,19 +15,19 @@
          point="org.eclipse.ui.exportWizards">
       <category
             id="de.topicmapslab.tmcledit.export.tmcledit"
-            name="TMCL">
+            name="Onotoa">
       </category>
       <wizard
             category="de.topicmapslab.tmcledit.export.tmcledit"
             class="de.topicmapslab.tmcledit.export.wizards.TMCLExportWizard"
             id="de.topicmapslab.tmcledit.export.wizards.ExportWizard"
-            name="Export TMCL">
+            name="Export TMCL (CTM)">
       </wizard>
       <wizard
             category="de.topicmapslab.tmcledit.export.tmcledit"
             class="de.topicmapslab.tmcledit.export.wizards.XTMExportWizard"
             id="de.topicmapslab.tmcledit.export.XTMExportWizard"
-            name="Export XTM">
+            name="Export TMCL (XTM2)">
       </wizard>
    </extension>
 

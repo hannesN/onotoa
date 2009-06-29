@@ -34,7 +34,6 @@ public class OnototaLauncher implements IEditorLauncher {
 	 * @see org.eclipse.ui.IEditorLauncher#open(org.eclipse.core.runtime.IPath)
 	 */
 	public void open(IPath filePath) {
-		System.out.println(filePath.toOSString());
 		try {
 			String filename = filePath.toOSString();
 

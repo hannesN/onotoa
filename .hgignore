@@ -4,3 +4,7 @@ syntax: glob
 Diplomarbeit
 Website
 */\${builder}
+onotoa-update-site/artifacts.jar
+onotoa-update-site/content.jar
+onotoa-update-site/features/
+onotoa-update-site/plugins/*
