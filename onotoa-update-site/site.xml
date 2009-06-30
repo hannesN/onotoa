@@ -12,8 +12,8 @@
    <feature url="features/org.sourceforge.tinyTiM_feature_1.5.0.jar" id="org.sourceforge.tinyTiM_feature" version="1.5.0">
       <category name="tinyTiM"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.export_feature_1.0.4.jar" id="de.topicmapslab.tmcledit.export_feature" version="1.0.4">
-      <category name="onotoa"/>
+   <feature url="features/org.sourceforge.tinyTiM_feature_1.5.0.a1.jar" id="org.sourceforge.tinyTiM_feature" version="1.5.0.a1">
+      <category name="tinyTiM"/>
    </feature>
    <category-def name="onotoa" label="Onotoa"/>
    <category-def name="tinyTiM" label="tinyTiM"/>

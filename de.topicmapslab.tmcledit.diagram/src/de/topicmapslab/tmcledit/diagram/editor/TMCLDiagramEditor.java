@@ -53,13 +53,9 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
@@ -246,40 +242,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	@Override
 	protected void setInput(IEditorInput input) {
 		super.setInput(input);
-
-		if (input instanceof IFileEditorInput) {
-			IFileEditorInput fei = (IFileEditorInput) input;
-			String filename = fei.getFile().getLocation().toOSString();
-			try {
-				IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow();
-				IWorkbenchPage page = workbenchWindow.getActivePage();
-				String modelViewId = "de.topicmapslab.tmcledit.extensions.views.ModelView";
-				workbenchWindow.getWorkbench()
-						.showPerspective(
-								"de.topicmapslab.tmcledit.extensions.OnotoaPerspective",
-								workbenchWindow);
-				page.showView(modelViewId);
-				ViewPart modelView = (ViewPart) page.findView(modelViewId);
-				if (modelView != null) {
-					String key;
-					// we check if the file exists and it is not empty
-					if ((fei.getFile().exists())
-							&& (fei.getFile().getContents().read() != -1))
-						key = "filename";
-					else
-						// if one of the cases is true we want a new file
-						key = "newfilename";
-
-					modelView.setPartProperty(key, filename);
-				}
-
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-
-			return;
-		}
 
 		TMCLEditorInput ei = (TMCLEditorInput) input;
 		this.diagram = ei.getDiagram();

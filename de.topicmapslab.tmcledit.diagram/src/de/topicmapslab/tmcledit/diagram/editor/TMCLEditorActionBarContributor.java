@@ -101,7 +101,7 @@ public class TMCLEditorActionBarContributor extends ActionBarContributor {
 			if (editor == null)
 				return;
 
-			FileDialog dlg = new FileDialog(editor.getSite().getShell());
+			FileDialog dlg = new FileDialog(editor.getSite().getShell(), SWT.SAVE);
 			dlg.setFilterExtensions(new String[] { "*.png" });
 			dlg.setText("Save as...");
 			String file = dlg.open();
