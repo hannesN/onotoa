@@ -15,6 +15,9 @@
    <feature url="features/org.sourceforge.tinyTiM_feature_1.5.0.a1.jar" id="org.sourceforge.tinyTiM_feature" version="1.5.0.a1">
       <category name="tinyTiM"/>
    </feature>
+   <feature url="features/org.sourceforge.tinyTiM_feature_2.0.0.a4.jar" id="org.sourceforge.tinyTiM_feature" version="2.0.0.a4">
+      <category name="tinyTiM"/>
+   </feature>
    <category-def name="onotoa" label="Onotoa"/>
    <category-def name="tinyTiM" label="tinyTiM"/>
 </site>
