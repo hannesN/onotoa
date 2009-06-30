@@ -47,14 +47,13 @@ public class OnotoaSplashHandler extends BasicSplashHandler {
 		Label label = new Label(parent, SWT.TRANSPARENT);
 		label.setFont(versionFont);
 		// read bundle version for program
-		
-		
 		Bundle bundle = Platform.getBundle("de.topicmapslab.tmcledit.edit");
-		String version = (String) bundle.getHeaders().get(
-				org.osgi.framework.Constants.BUNDLE_VERSION);
-		version = "Version: " + version;
-		label.setText(version);
-
+		if (bundle != null) {
+			String version = (String) bundle.getHeaders().get(
+					org.osgi.framework.Constants.BUNDLE_VERSION);
+			version = "Version: " + version;
+			label.setText(version);
+		}
 		label = new Label(parent, SWT.TRANSPARENT);
 		label.setFont(versionFont);
 		label.setText("Create your own Topic Map schema");
