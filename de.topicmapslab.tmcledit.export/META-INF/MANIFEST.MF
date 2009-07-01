@@ -6,11 +6,12 @@ Bundle-Version: 1.0.3
 Bundle-Activator: de.topicmapslab.tmcledit.export.Activator
 Bundle-Vendor: H.Niederhausen, Topic Maps Lab
 Eclipse-RegisterBuddy: org.tm4j
-Require-Bundle: org.eclipse.ui,
+Require-Bundle: org.sourceforge.tinyTiM,
+ org.eclipse.ui,
  org.eclipse.core.runtime,
  de.topicmapslab.tmcledit;bundle-version="0.5.0";visibility:=reexport,
- org.sourceforge.tinyTiM;bundle-version="1.5.0",
  de.topicmapslab.tmcledit.extensions;bundle-version="0.5.0",
  org.eclipse.emf.edit;bundle-version="2.4.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Import-Package: org.tinytim.voc
