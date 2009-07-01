@@ -13,13 +13,12 @@ package de.topicmapslab.tmcledit.export.builder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.tinytim.voc.TMCL;
+import org.tinytim.voc.TMDM;
 import org.tmapi.core.Association;
-import org.tmapi.core.FactoryConfigurationException;
 import org.tmapi.core.Locator;
-import org.tmapi.core.TMAPIException;
 import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
-import org.tmapi.core.TopicMapExistsException;
 import org.tmapi.core.TopicMapSystemFactory;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;

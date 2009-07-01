@@ -10,7 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder;
 
-
 import org.tinytim.voc.TMDM;
 import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
