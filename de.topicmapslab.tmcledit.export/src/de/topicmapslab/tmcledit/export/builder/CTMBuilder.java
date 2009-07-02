@@ -128,23 +128,6 @@ public class CTMBuilder {
 	}
 
 	private void processTopicMapSchema() {
-		if (schema.isActiveTopicTypeConstraint())
-			addLine("ttc isa topictype-constraint .");
-		
-		if (schema.isActiveAssociationTypeConstraint())
-			addLine("atc isa associationtype-constraint .");
-		
-		if (schema.isActiveNameTypeConstraint())
-			addLine("ntc isa nametype-constraint .");
-		
-		if (schema.isActiveRoleTypeConstraint())
-			addLine("rtc isa roletype-constraint .");
-		
-		if (schema.isActiveOccurrenceTypeConstraint())
-			addLine("otc isa occurrencetype-constraint .");
-		
-		addLineSeparator();
-		
 		for (TopicType tt : schema.getTopicTypes()) {
 			processTopicType(tt);
 		}

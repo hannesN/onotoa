@@ -32,7 +32,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface OccurrenceType extends ScopedTopicType {
+public interface OccurrenceType extends ScopedTopicType, ScopedReifiableTopicType {
 	/**
 	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
 	 * The default value is <code>"xsd:anyType"</code>.

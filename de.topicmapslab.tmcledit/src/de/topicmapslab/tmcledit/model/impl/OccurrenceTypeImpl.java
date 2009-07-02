@@ -8,10 +8,14 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 
+import de.topicmapslab.tmcledit.model.ReifiableTpoicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.ScopedReifiableTopicType;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -21,6 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getReifierConstraint <em>Reifier Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
@@ -28,6 +33,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements OccurrenceType {
+	/**
+	 * The cached value of the '{@link #getReifierConstraint() <em>Reifier Constraint</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReifierConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected ReifierConstraint reifierConstraint;
+
 	/**
 	 * The default value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,6 +87,44 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ReifierConstraint getReifierConstraint() {
+		if (reifierConstraint != null && reifierConstraint.eIsProxy()) {
+			InternalEObject oldReifierConstraint = (InternalEObject)reifierConstraint;
+			reifierConstraint = (ReifierConstraint)eResolveProxy(oldReifierConstraint);
+			if (reifierConstraint != oldReifierConstraint) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
+			}
+		}
+		return reifierConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReifierConstraint basicGetReifierConstraint() {
+		return reifierConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReifierConstraint(ReifierConstraint newReifierConstraint) {
+		ReifierConstraint oldReifierConstraint = reifierConstraint;
+		reifierConstraint = newReifierConstraint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDataType() {
 		return dataType;
 	}
@@ -96,6 +149,9 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
+				if (resolve) return getReifierConstraint();
+				return basicGetReifierConstraint();
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				return getDataType();
 		}
@@ -110,6 +166,9 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
+				setReifierConstraint((ReifierConstraint)newValue);
+				return;
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				setDataType((String)newValue);
 				return;
@@ -125,6 +184,9 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
+				setReifierConstraint((ReifierConstraint)null);
+				return;
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				setDataType(DATA_TYPE_EDEFAULT);
 				return;
@@ -140,10 +202,54 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
+				return reifierConstraint != null;
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ReifiableTpoicType.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT: return ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT;
+				default: return -1;
+			}
+		}
+		if (baseClass == ScopedReifiableTopicType.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ReifiableTpoicType.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT: return ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT;
+				default: return -1;
+			}
+		}
+		if (baseClass == ScopedReifiableTopicType.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

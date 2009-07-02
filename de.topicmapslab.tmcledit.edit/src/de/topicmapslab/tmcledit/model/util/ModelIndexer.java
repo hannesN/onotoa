@@ -135,27 +135,7 @@ public class ModelIndexer {
 	public List<TopicType> getSubTypes(TopicType topicType) {
 		return topicIndexer.getSubTypes(topicType);
 	}
-	
-	public boolean isFilterActivated(KindOfTopicType kindOfType) {
-		TopicMapSchema topicMapSchema = getInstance().getTopicMapSchema();
-		switch (kindOfType) {
-		case ASSOCIATION_TYPE: 
-				return topicMapSchema.isActiveAssociationTypeConstraint(); 
-		case NAME_TYPE:
-				return topicMapSchema.isActiveNameTypeConstraint();
-		case OCCURRENCE_TYPE:
-				return topicMapSchema.isActiveOccurrenceTypeConstraint();
-		case ROLE_TYPE:
-				return topicMapSchema.isActiveRoleTypeConstraint();
-		case SCOPE_TYPE:
-				return topicMapSchema.isActiveScopeTypeConstraint();
-		case TOPIC_TYPE:
-				return topicMapSchema.isActiveTopicTypeConstraint();
-		}
 		
-		return false;
-	}
-	
 	public List<AssociationType> getAssociationTypes() {
 		return topicIndexer.getAssociationTypes();
 	}

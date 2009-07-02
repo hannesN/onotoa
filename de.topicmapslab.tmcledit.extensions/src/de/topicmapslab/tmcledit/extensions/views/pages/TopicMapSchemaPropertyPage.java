@@ -12,12 +12,12 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
@@ -27,91 +27,80 @@ import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
 public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 
-	private Button ttButton;
-	private Button atButton;
-	private Button ntButton;
-	private Button stButton;
-	private Button otButton;
-	private Button rtButton;
-	
+	private Text name;
+	private Text baseLocator;
+
 	public TopicMapSchemaPropertyPage() {
 		super("topicmapschema");
 	}
-	
+
 	@Override
 	public void updateUI() {
-		if (ttButton!=null) {
-			ttButton.setSelection(getCastedModel().isActiveTopicTypeConstraint());
-			rtButton.setSelection(getCastedModel().isActiveRoleTypeConstraint());
-			atButton.setSelection(getCastedModel().isActiveAssociationTypeConstraint());
-			stButton.setSelection(getCastedModel().isActiveScopeTypeConstraint());
-			ntButton.setSelection(getCastedModel().isActiveNameTypeConstraint());
-			otButton.setSelection(getCastedModel().isActiveOccurrenceTypeConstraint());
+		if (name == null)
+			return;
+		if (getCastedModel() != null) {
+			String tmp = getCastedModel().getBaseLocator();
+			if (tmp != null)
+				baseLocator.setText(tmp);
+			else
+				baseLocator.setText("urn:x-ontopia");
+		} else {
+			name.setText("");
+			baseLocator.setText("");
 		}
 	}
 
 	public TopicMapSchema getCastedModel() {
 		return (TopicMapSchema) getModel();
 	}
-	
+
 	@Override
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		
+
 		Section section = toolkit.createSection(parent, SWT.TITLE);
 		section.setText("Topic Map Schema");
 		Composite comp = toolkit.createComposite(section);
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
-		comp.setLayout(new GridLayout());
+		comp.setLayout(new GridLayout(2, false));
+
+		toolkit.createLabel(comp, "Name:");
+		name = toolkit.createText(comp, "");
+		name.setToolTipText("The name of the Topic Map.");
+
+		toolkit.createLabel(comp, "Base Locator:");
+		baseLocator = toolkit.createText(comp, "");
+		baseLocator
+				.setToolTipText("The base locator of the Topic Map. It is used to create subject identifiers"
+						+ " or subject locators using this url and the name of the topic.");
+
+		updateUI();
+
+		name.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__NAME));
+		baseLocator.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR));
+
 		section.setClient(comp);
-		
-		Section typeConstSection = toolkit.createSection(comp, Section.TITLE_BAR);
-		typeConstSection.setText("Type constraint activation");
-		
-		comp = toolkit.createComposite(typeConstSection);
-		comp.setLayout(new GridLayout());
-		comp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		typeConstSection.setClient(comp);
-		ttButton = createCheckButton(toolkit, comp, "Topic Type Constraint",
-				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT);
-		
-		rtButton = createCheckButton(toolkit, comp, "Role Type Constraint",
-				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT);
-		
-		atButton = createCheckButton(
-				toolkit,
-				comp,
-				"Association Type Constraint",
-				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT);
-		
-		stButton = createCheckButton(toolkit, comp, "Scope Type Constraint",
-				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT);
-		
-		ntButton = createCheckButton(toolkit, comp, "Name Type Constraint",
-				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT);
-		
-		otButton = createCheckButton(toolkit, comp,
-				"Occurrence Type Constraint",
-				ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT);
-		
 		setControl(section);
-	}
-	
-	private Button createCheckButton(FormToolkit toolkit, Composite parent, String msg, final int featureID) {
-		final Button tmp = toolkit.createButton(parent, msg, SWT.CHECK);
-		tmp.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				GenericSetCommand cmd = new GenericSetCommand(getModel(), featureID, tmp.getSelection());
-				getCommandStack().execute(cmd);
-			}	
-		});
-		
-		return tmp;
 	}
 
 	public void notifyChanged(Notification notification) {
 		updateUI();
+	}
+
+	private final class TextFocusListener extends FocusAdapter {
+		private final int feature;
+
+		
+		public TextFocusListener(int feature) {
+			super();
+			this.feature = feature;
+		}
+
+		public void focusLost(FocusEvent e) {
+			Text text = (Text) e.widget;
+			getCommandStack().execute(
+					new GenericSetCommand(getModel(), feature, text.getText()));
+		}
 	}
 
 }

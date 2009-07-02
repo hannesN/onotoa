@@ -96,6 +96,10 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.NAME_TYPE: return createNameType();
 			case ModelPackage.ABSTRACT_TYPED_CARDINALITY_CONSTRAINT: return createAbstractTypedCardinalityConstraint();
 			case ModelPackage.COMMENT: return createComment();
+			case ModelPackage.TMCL_CONSTRUCT: return createTMCLConstruct();
+			case ModelPackage.REIFIER_CONSTRAINT: return createReifierConstraint();
+			case ModelPackage.REIFIABLE_TPOIC_TYPE: return createReifiableTpoicType();
+			case ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE: return createScopedReifiableTopicType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -397,6 +401,46 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public Comment createComment() {
 		CommentImpl comment = new CommentImpl();
 		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TMCLConstruct createTMCLConstruct() {
+		TMCLConstructImpl tmclConstruct = new TMCLConstructImpl();
+		return tmclConstruct;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReifierConstraint createReifierConstraint() {
+		ReifierConstraintImpl reifierConstraint = new ReifierConstraintImpl();
+		return reifierConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReifiableTpoicType createReifiableTpoicType() {
+		ReifiableTpoicTypeImpl reifiableTpoicType = new ReifiableTpoicTypeImpl();
+		return reifiableTpoicType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScopedReifiableTopicType createScopedReifiableTopicType() {
+		ScopedReifiableTopicTypeImpl scopedReifiableTopicType = new ScopedReifiableTopicTypeImpl();
+		return scopedReifiableTopicType;
 	}
 
 	/**

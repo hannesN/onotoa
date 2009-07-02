@@ -15,7 +15,6 @@
  */
 package de.topicmapslab.tmcledit.model;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +32,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractTypedConstraint extends EObject {
+public interface AbstractTypedConstraint extends TMCLConstruct {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

@@ -153,7 +153,7 @@ public class OccurrenceTypeConstraintImpl extends AbstractConstraintImpl impleme
 				if (resolve) return getType();
 				return basicGetType();
 			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
+				return isUnique();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -170,7 +170,7 @@ public class OccurrenceTypeConstraintImpl extends AbstractConstraintImpl impleme
 				setType((TopicType)newValue);
 				return;
 			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				setUnique(((Boolean)newValue).booleanValue());
+				setUnique((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
