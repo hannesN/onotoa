@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.command.CommandStackListener;
@@ -65,6 +66,7 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
@@ -527,11 +529,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public void setFilename(String filename, boolean newFile) {
-
+		IWorkbenchPage page = getViewSite().getPage();
 		if (currFile != null) {
 			currFile.eAdapters().remove(dirtyListener);
 
-			IWorkbenchPage page = getViewSite().getPage();
+			
 			for (IEditorReference ref : page.getEditorReferences()) {
 				try {
 					if (ref.getEditorInput() instanceof TMCLEditorInput) {
@@ -546,6 +548,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		checkSavedState();
 
+		
+		updateTitle(filename);
+		
 		if (contentProvider != null)
 			contentProvider.uninitialize();
 
@@ -581,6 +586,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			viewer.refresh();
 			viewer.expandToLevel(2);
 		}
+	}
+
+	private void updateTitle(String filename) {
+		if (filename != null)
+			getSite().getShell().setText("Onotoa - "+filename);
+		else
+			getSite().getShell().setText("Onotoa");
 	}
 
 	private void checkSavedState() {
@@ -678,6 +690,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public void doSaveAs() {
+		FileDialog dlg = new FileDialog(getSite().getShell(), SWT.SAVE);
+		dlg.setText("Save As..");
+		String result = dlg.open();
+		if (result!=null) {
+			currFile.setFilename(result);
+			doSave(new NullProgressMonitor());
+			updateTitle(currFile.getFilename());
+		}
 	}
 
 	public boolean isDirty() {
@@ -687,7 +707,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public boolean isSaveAsAllowed() {
-		return false;
+		return true;
 	}
 
 	public boolean isSaveOnCloseNeeded() {

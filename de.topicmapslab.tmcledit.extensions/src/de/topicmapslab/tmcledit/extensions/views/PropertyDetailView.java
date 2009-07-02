@@ -94,6 +94,9 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				
 				tmp = ActionFactory.SAVE.getId();
 				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
+				
+				tmp = ActionFactory.CLOSE.getId();
+				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
 			}
 			IStructuredSelection sel = (IStructuredSelection) selection;
 			if (!sel.isEmpty()) {

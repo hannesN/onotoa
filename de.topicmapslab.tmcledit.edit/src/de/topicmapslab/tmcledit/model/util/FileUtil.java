@@ -77,6 +77,19 @@ public class FileUtil {
 		
 	}
 	
+	public static final void saveFileAs(File file, String newFilename) throws IOException {
+		try {
+			URI uri = URI.createFileURI(file.getFilename());
+			Resource resource = new XMIResourceFactoryImpl().createResource(uri);
+			resource.getContents().add(file);
+			
+			resource.save(Collections.EMPTY_MAP);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
 	protected static final void createTestData(File file) {
 		ModelFactory modelInstance = ModelFactory.eINSTANCE;
 		
