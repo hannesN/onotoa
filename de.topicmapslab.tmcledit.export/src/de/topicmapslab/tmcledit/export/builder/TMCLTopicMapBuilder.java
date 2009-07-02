@@ -21,6 +21,7 @@ import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystemFactory;
 
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
@@ -28,6 +29,8 @@ import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
@@ -69,7 +72,7 @@ public class TMCLTopicMapBuilder {
 			}
 
 			createTopicTypes();
-
+			createAssociationConstraints();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -88,8 +91,49 @@ public class TMCLTopicMapBuilder {
 			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
 				setRolePlayerConstraint(atc.getType(), rpc);
 			}
+			AssociationType at = (AssociationType) atc.getType();
+			for (RoleConstraint rc : at.getRoles()) {
+				setRoleConstraint(atc, rc);
+				RoleType rt = (RoleType) rc.getType();
+				for (OtherRolePlayerConstraint orpc : rt.getOtherRoles()) {
+					setOtherRoleConstraint(at, rt, orpc);
+				}
+			}
+			
 		}
 	}
+
+	private void setOtherRoleConstraint(AssociationType at, RoleType rt, OtherRolePlayerConstraint orpc) {
+		Topic constr = createConstraint(TMCL.OTHER_ROLE_CONSTRAINT);
+		createConstrainedStatement(at, constr);
+		createConstrainedRole(rt, constr);
+		createConstrainedTopicType(createTopic(orpc.getPlayer()), constr);
+		createOtherConstrainedRole(rt, constr);
+		createOtherConstrainedTopicType(createTopic(orpc.getPlayer()), constr);
+		
+		
+    }
+
+	private void createOtherConstrainedTopicType(Topic t, Topic constr) {
+		Association ass = topicMap.createAssociation(createTopic(TMCL.OTHER_CONSTRAINED_TOPIC_TYPE));
+		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
+		ass.createRole(createTopic(TMCL.CONSTRAINED), t);
+    }
+
+	private void createOtherConstrainedRole(RoleType rt, Topic constr) {
+	    Association ass = topicMap.createAssociation(createTopic(TMCL.OTHER_CONSTRAINED_ROLE));
+		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
+		ass.createRole(createTopic(TMCL.CONSTRAINED), createTopic(rt));
+    }
+
+	private void setRoleConstraint(AssociationTypeConstraint atc, RoleConstraint rc) {
+		Topic constr = createConstraint(TMCL.ASSOCIATION_ROLE_CONSTRAINT);
+		addCardinalityOccurrences(constr, atc.getCardMin(), atc.getCardMax());
+		
+		createConstrainedRole(rc.getType(), constr);
+		createConstrainedStatement(atc.getType(), constr);
+		
+    }
 
 	private void setRolePlayerConstraint(TopicType type, RolePlayerConstraint rpc) {
 		Topic constr = createConstraint(TMCL.ROLE_PLAYER_CONSTRAINT);
@@ -98,8 +142,8 @@ public class TMCLTopicMapBuilder {
 		createConstrainedStatement(type, constr);
 		createConstrainedTopicType(createTopic(rpc.getPlayer()), constr);
 		createConstrainedRole(rpc.getRole().getType(), constr);
-
 	}
+	
 
 	private void createConstrainedRole(TopicType rt, Topic constr) {
 	    Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_ROLE));
