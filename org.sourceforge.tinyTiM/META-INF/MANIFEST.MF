@@ -3,7 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TinyTiM Core
 Bundle-SymbolicName: org.sourceforge.tinyTiM
 Bundle-Version: 2.0.0.a5-snapshot-200907010942
-Bundle-ClassPath: .
+Bundle-ClassPath: emma.jar,
+ tmapi-2.0a1.jar,
+ trove-2.0.4.jar,
+ tinytim-2.0.0a5-snapshot-200907010934.jar
 Export-Package: com.vladium.app,
  com.vladium.emma,
  com.vladium.emma.data,

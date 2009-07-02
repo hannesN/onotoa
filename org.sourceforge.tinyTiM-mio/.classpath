@@ -2,6 +2,17 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry exported="true" kind="lib" path=""/>
+	<classpathentry exported="true" kind="lib" path="tinytim-mio-2.0.0a5-snapshot-200907010942.jar"/>
+	<classpathentry exported="true" kind="lib" path="jing.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-0.9.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-ctm-0.9.3-working-draft-2009-02-18.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-jtm-0.9.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-ltm-0.9.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-rdf-0.9.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-snello-0.9.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-tmxml-0.9.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="semagia-mio-xtm-0.9.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="slf4j-api-1.5.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="slf4j-jdk14-1.5.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

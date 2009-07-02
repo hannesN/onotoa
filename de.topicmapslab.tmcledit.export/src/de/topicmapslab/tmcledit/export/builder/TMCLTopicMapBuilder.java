@@ -21,8 +21,15 @@ import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystemFactory;
 
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
+import de.topicmapslab.tmcledit.model.NameType;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -72,9 +79,33 @@ public class TMCLTopicMapBuilder {
 
 	private void createTopicTypes() {
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			getTopic(tt);
+			createTopic(tt);
 		}
 	}
+
+	private void createAssociationConstraints() {
+		for (AssociationTypeConstraint atc : topicMapSchema.getAssociationTypeConstraints()) {
+			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+				setRolePlayerConstraint(atc.getType(), rpc);
+			}
+		}
+	}
+
+	private void setRolePlayerConstraint(TopicType type, RolePlayerConstraint rpc) {
+		Topic constr = createConstraint(TMCL.ROLE_PLAYER_CONSTRAINT);
+		addCardinalityOccurrences(constr, rpc.getCardMin(), rpc.getCardMax());
+
+		createConstrainedStatement(type, constr);
+		createConstrainedTopicType(createTopic(rpc.getPlayer()), constr);
+		createConstrainedRole(rpc.getRole().getType(), constr);
+
+	}
+
+	private void createConstrainedRole(TopicType rt, Topic constr) {
+	    Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_ROLE));
+		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
+		ass.createRole(createTopic(TMCL.CONSTRAINED), createTopic(rt));
+    }
 
 	/**
 	 * Creates a topic with the given subject identifier
@@ -86,7 +117,7 @@ public class TMCLTopicMapBuilder {
 		return topicMap.createTopicBySubjectIdentifier(loc);
 	}
 
-	private Topic getTopic(TopicType type) {
+	private Topic createTopic(TopicType type) {
 		Topic t = null;
 
 		Locator itemId = baseLocator.resolve("#" + type.hashCode());
@@ -95,6 +126,8 @@ public class TMCLTopicMapBuilder {
 			return t;
 
 		t = topicMap.createTopicByItemIdentifier(itemId);
+		topicTypeMap.put(itemId, t);
+		t.createName(type.getName());
 
 		for (String id : type.getIdentifiers()) {
 			if (id.indexOf(':') != -1) {
@@ -119,11 +152,11 @@ public class TMCLTopicMapBuilder {
 		t.addType(getTopicTypes(type.getKind()));
 
 		for (TopicType tt : type.getIsa()) {
-			t.addType(getTopic(tt));
+			t.addType(createTopic(tt));
 		}
 
 		for (TopicType tt : type.getAko()) {
-			setSuperType(t, getTopic(tt));
+			setSuperType(t, createTopic(tt));
 		}
 
 		if (type.isAbstract())
@@ -132,17 +165,97 @@ public class TMCLTopicMapBuilder {
 		for (SubjectIdentifierConstraint sic : type.getSubjectIdentifierConstraints()) {
 			setSubjectIdentifierConstraint(t, sic);
 		}
-		
+
 		for (SubjectLocatorConstraint slc : type.getSubjectLocatorConstraint()) {
 			setSubjectLocatorConstraint(t, slc);
 		}
-		
-		topicTypeMap.put(itemId, t);
+
+		for (NameTypeConstraint ntc : type.getNameContraints()) {
+			setNameTypeConstraint(t, ntc);
+		}
+
+		for (OccurrenceTypeConstraint otc : type.getOccurrenceConstraints()) {
+			setOccurrenceConstraint(t, otc);
+		}
+
 		return t;
 	}
 
+	private void setNameTypeConstraint(Topic t, NameTypeConstraint ntc) {
+		NameType nt = (NameType) ntc.getType();
+
+		if (!ntc.getRegexp().equals(".*"))
+			setRegExpConstraint(nt, ntc.getRegexp());
+
+		Topic constr = createConstraint(TMCL.TOPIC_NAME_CONSTRAINT);
+		addCardinalityOccurrences(constr, ntc.getCardMin(), ntc.getCardMax());
+
+		createConstrainedTopicType(t, constr);
+		createConstrainedStatement(nt, constr);
+	}
+
+	private void createConstrainedStatement(TopicType tt, Topic constr) {
+		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_STATEMENT));
+		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
+		ass.createRole(createTopic(TMCL.CONSTRAINED), createTopic(tt));
+	}
+
+	private void createConstrainedTopicType(Topic t, Topic constr) {
+		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_TOPIC_TYPE));
+		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
+		ass.createRole(createTopic(TMCL.CONSTRAINED), t);
+	}
+
+	private void setOccurrenceConstraint(Topic t, OccurrenceTypeConstraint otc) {
+		OccurrenceType otype = (OccurrenceType) otc.getType();
+
+		setOccurrenceDatatype(otype);
+		if (otc.isUnique()) {
+			setUnique(otype);
+		}
+		if (!otc.getRegexp().equals(".*"))
+			setRegExpConstraint(otype, otc.getRegexp());
+
+		Topic constr = createConstraint(TMCL.TOPIC_OCCURRENCE_CONSTRAINT);
+		addCardinalityOccurrences(constr, otc.getCardMin(), otc.getCardMax());
+
+		createConstrainedTopicType(t, constr);
+		createConstrainedStatement(otype, constr);
+
+	}
+
+	private Topic createConstraint(Locator type) {
+		Topic constr = topicMap.createTopic();
+
+		constr.addType(createTopic(type));
+
+		return constr;
+	}
+
+	private void setRegExpConstraint(TopicType type, String regexp) {
+		Topic constr = createConstraint(TMCL.REGULAR_EXPRESSION_CONSTRAINT);
+		constr.createOccurrence(createTopic(TMCL.REGEXP), regexp);
+
+		createConstrainedStatement(type, constr);
+	}
+
+	private void setUnique(OccurrenceType ot) {
+		Topic constr = createConstraint(TMCL.UNIQUE_VALUE_CONSTRAINT);
+		Topic type = createTopic(ot);
+		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_STATEMENT));
+		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
+		ass.createRole(createTopic(TMCL.CONSTRAINED), type);
+	}
+
+	private void setOccurrenceDatatype(OccurrenceType ot) {
+		Topic constr = createConstraint(TMCL.OCCURRENCE_DATATYPE_CONSTRAINT);
+		constr.createOccurrence(createTopic(TMCL.DATATYPE), ot.getDataType());
+
+		createConstrainedStatement(ot, constr);
+	}
+
 	private void setAbstract(Topic t) {
-		Topic abstrConst = topicMap.createTopicBySubjectIdentifier(TMCL.ABSTRACT_TOPIC_TYPE_CONSTRAINT);
+		Topic abstrConst = createTopic(TMCL.ABSTRACT_TOPIC_TYPE_CONSTRAINT);
 
 		Association ass = topicMap.createAssociation(topicMap
 		        .createTopicBySubjectIdentifier(TMCL.CONSTRAINED_TOPIC_TYPE));
@@ -151,40 +264,38 @@ public class TMCLTopicMapBuilder {
 	}
 
 	private void setSubjectIdentifierConstraint(Topic t, SubjectIdentifierConstraint constraint) {
-		Topic constr = createTopic(TMCL.SUBJECT_IDENTIFIER_CONSTRAINT);
+		Topic constr = createConstraint(TMCL.SUBJECT_IDENTIFIER_CONSTRAINT);
 
 		addCardinalityOccurrences(constr, constraint.getCardMin(), constraint.getCardMax());
 		if ((constraint.getRegexp() != null) && (!".*".equals(constraint.getRegexp())))
 			constr.createOccurrence(createTopic(TMCL.REGEXP), constraint.getRegexp());
 
-		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_TOPIC_TYPE));
-		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
-		ass.createRole(createTopic(TMCL.CONSTRAINED), t);
+		createConstrainedTopicType(t, constr);
 
 	}
-	
+
 	private void setSubjectLocatorConstraint(Topic t, SubjectLocatorConstraint constraint) {
-		Topic constr = createTopic(TMCL.SUBJECT_LOCATOR_CONSTRAINT);
+		Topic constr = createConstraint(TMCL.SUBJECT_LOCATOR_CONSTRAINT);
 
 		addCardinalityOccurrences(constr, constraint.getCardMin(), constraint.getCardMax());
 		if ((constraint.getRegexp() != null) && (!".*".equals(constraint.getRegexp())))
 			constr.createOccurrence(createTopic(TMCL.REGEXP), constraint.getRegexp());
 
-		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_TOPIC_TYPE));
-		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
-		ass.createRole(createTopic(TMCL.CONSTRAINED), t);
+		createConstrainedTopicType(t, constr);
 
 	}
 
 	private void addCardinalityOccurrences(Topic constr, String cardMin, String cardMax) {
-		constr.createOccurrence(createTopic(TMCL.CARD_MIN), cardMin);
-		constr.createOccurrence(createTopic(TMCL.CARD_MAX), cardMax);
+		if (!cardMax.equals("0"))
+			constr.createOccurrence(createTopic(TMCL.CARD_MIN), cardMin);
+		if (!cardMax.equals("*"))
+			constr.createOccurrence(createTopic(TMCL.CARD_MAX), cardMax);
 	}
 
 	private void setSuperType(Topic subtype, Topic supertype) {
-		Association ass = topicMap.createAssociation(topicMap.createTopicBySubjectIdentifier(TMDM.SUPERTYPE_SUBTYPE));
-		ass.createRole(topicMap.createTopicBySubjectIdentifier(TMDM.SUPERTYPE), supertype);
-		ass.createRole(topicMap.createTopicBySubjectIdentifier(TMDM.SUBTYPE), subtype);
+		Association ass = topicMap.createAssociation(createTopic(TMDM.SUPERTYPE_SUBTYPE));
+		ass.createRole(createTopic(TMDM.SUPERTYPE), supertype);
+		ass.createRole(createTopic(TMDM.SUBTYPE), subtype);
 
 	}
 
@@ -219,7 +330,7 @@ public class TMCLTopicMapBuilder {
 			loc = TMCL.SCOPE_TYPE;
 			break;
 		}
-		return topicMap.createTopicBySubjectIdentifier(loc);
+		return createTopic(loc);
 	}
 
 }
