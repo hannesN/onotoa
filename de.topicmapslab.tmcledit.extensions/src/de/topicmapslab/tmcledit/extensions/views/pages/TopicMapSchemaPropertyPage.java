@@ -11,6 +11,7 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -27,8 +28,8 @@ import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
 public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 
-	private Text name;
-	private Text baseLocator;
+	private Text nameText;
+	private Text baseLocatorText;
 
 	public TopicMapSchemaPropertyPage() {
 		super("topicmapschema");
@@ -36,17 +37,17 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 
 	@Override
 	public void updateUI() {
-		if (name == null)
+		if (nameText == null)
 			return;
 		if (getCastedModel() != null) {
 			String tmp = getCastedModel().getBaseLocator();
 			if (tmp != null)
-				baseLocator.setText(tmp);
+				baseLocatorText.setText(tmp);
 			else
-				baseLocator.setText("urn:x-ontopia");
+				baseLocatorText.setText("urn:x-ontopia");
 		} else {
-			name.setText("");
-			baseLocator.setText("");
+			nameText.setText("");
+			baseLocatorText.setText("");
 		}
 	}
 
@@ -58,6 +59,8 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 	public void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 
+		GridDataFactory fac = GridDataFactory.createFrom(new GridData(GridData.FILL_HORIZONTAL));
+		
 		Section section = toolkit.createSection(parent, SWT.TITLE);
 		section.setText("Topic Map Schema");
 		Composite comp = toolkit.createComposite(section);
@@ -65,19 +68,21 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 		comp.setLayout(new GridLayout(2, false));
 
 		toolkit.createLabel(comp, "Name:");
-		name = toolkit.createText(comp, "");
-		name.setToolTipText("The name of the Topic Map.");
+		nameText = toolkit.createText(comp, "", SWT.BORDER);
+		fac.applyTo(nameText);
+		nameText.setToolTipText("The nameText of the Topic Map.");
 
 		toolkit.createLabel(comp, "Base Locator:");
-		baseLocator = toolkit.createText(comp, "");
-		baseLocator
+		baseLocatorText = toolkit.createText(comp, "", SWT.BORDER);
+		fac.applyTo(baseLocatorText);
+		baseLocatorText
 				.setToolTipText("The base locator of the Topic Map. It is used to create subject identifiers"
-						+ " or subject locators using this url and the name of the topic.");
+						+ " or subject locators using this url and the nameText of the topic.");
 
 		updateUI();
 
-		name.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__NAME));
-		baseLocator.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR));
+		nameText.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__NAME));
+		baseLocatorText.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR));
 
 		section.setClient(comp);
 		setControl(section);
