@@ -59,12 +59,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/associationTypeConstraints"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicMapSchema/mappings"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/includes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/activeTopicTypeConstraint"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/activeScopeTypeConstraint"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/activeRoleTypeConstraint"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/activeNameTypeConstraint"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/activeAssociationTypeConstraint"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/activeOccurenceTypeConstraint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/baseLocator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicMapSchema/name"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//SubjectLocatorConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//SubjectIdentifierConstraint"/>
@@ -147,5 +143,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Comment/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Comment/height"/>
     </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//TMCLConstruct">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TMCLConstruct/see_also"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TMCLConstruct/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TMCLConstruct/description"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//ReifierConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//ReifiableTpoicType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ReifiableTpoicType/reifierConstraint"/>
+    </genClasses>
+    <genClasses ecoreClass="tmcledit.ecore#//ScopedReifiableTopicType"/>
   </genPackages>
 </genmodel:GenModel>

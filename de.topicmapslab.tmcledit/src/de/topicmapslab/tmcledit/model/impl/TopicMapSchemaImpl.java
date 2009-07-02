@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -49,18 +48,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getAssociationTypeConstraints <em>Association Type Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getMappings <em>Mappings</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getIncludes <em>Includes</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveTopicTypeConstraint <em>Active Topic Type Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveScopeTypeConstraint <em>Active Scope Type Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveRoleTypeConstraint <em>Active Role Type Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveNameTypeConstraint <em>Active Name Type Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveAssociationTypeConstraint <em>Active Association Type Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#isActiveOccurrenceTypeConstraint <em>Active Occurrence Type Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getBaseLocator <em>Base Locator</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
+public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSchema {
 	/**
 	 * The cached value of the '{@link #getTopicTypes() <em>Topic Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -102,124 +97,44 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	protected EList<String> includes;
 
 	/**
-	 * The default value of the '{@link #isActiveTopicTypeConstraint() <em>Active Topic Type Constraint</em>}' attribute.
+	 * The default value of the '{@link #getBaseLocator() <em>Base Locator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isActiveTopicTypeConstraint()
+	 * @see #getBaseLocator()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ACTIVE_TOPIC_TYPE_CONSTRAINT_EDEFAULT = true;
+	protected static final String BASE_LOCATOR_EDEFAULT = "urn:x-ontopia";
 
 	/**
-	 * The cached value of the '{@link #isActiveTopicTypeConstraint() <em>Active Topic Type Constraint</em>}' attribute.
+	 * The cached value of the '{@link #getBaseLocator() <em>Base Locator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isActiveTopicTypeConstraint()
+	 * @see #getBaseLocator()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean activeTopicTypeConstraint = ACTIVE_TOPIC_TYPE_CONSTRAINT_EDEFAULT;
+	protected String baseLocator = BASE_LOCATOR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isActiveScopeTypeConstraint() <em>Active Scope Type Constraint</em>}' attribute.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isActiveScopeTypeConstraint()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ACTIVE_SCOPE_TYPE_CONSTRAINT_EDEFAULT = true;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isActiveScopeTypeConstraint() <em>Active Scope Type Constraint</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isActiveScopeTypeConstraint()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean activeScopeTypeConstraint = ACTIVE_SCOPE_TYPE_CONSTRAINT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isActiveRoleTypeConstraint() <em>Active Role Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveRoleTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ACTIVE_ROLE_TYPE_CONSTRAINT_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isActiveRoleTypeConstraint() <em>Active Role Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveRoleTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean activeRoleTypeConstraint = ACTIVE_ROLE_TYPE_CONSTRAINT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isActiveNameTypeConstraint() <em>Active Name Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveNameTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ACTIVE_NAME_TYPE_CONSTRAINT_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isActiveNameTypeConstraint() <em>Active Name Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveNameTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean activeNameTypeConstraint = ACTIVE_NAME_TYPE_CONSTRAINT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isActiveAssociationTypeConstraint() <em>Active Association Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveAssociationTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ACTIVE_ASSOCIATION_TYPE_CONSTRAINT_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isActiveAssociationTypeConstraint() <em>Active Association Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveAssociationTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean activeAssociationTypeConstraint = ACTIVE_ASSOCIATION_TYPE_CONSTRAINT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isActiveOccurrenceTypeConstraint() <em>Active Occurrence Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveOccurrenceTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isActiveOccurrenceTypeConstraint() <em>Active Occurrence Type Constraint</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isActiveOccurrenceTypeConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean activeOccurrenceTypeConstraint = ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT;
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,8 +208,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isActiveTopicTypeConstraint() {
-		return activeTopicTypeConstraint;
+	public String getBaseLocator() {
+		return baseLocator;
 	}
 
 	/**
@@ -302,11 +217,11 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActiveTopicTypeConstraint(boolean newActiveTopicTypeConstraint) {
-		boolean oldActiveTopicTypeConstraint = activeTopicTypeConstraint;
-		activeTopicTypeConstraint = newActiveTopicTypeConstraint;
+	public void setBaseLocator(String newBaseLocator) {
+		String oldBaseLocator = baseLocator;
+		baseLocator = newBaseLocator;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT, oldActiveTopicTypeConstraint, activeTopicTypeConstraint));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR, oldBaseLocator, baseLocator));
 	}
 
 	/**
@@ -314,8 +229,8 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isActiveScopeTypeConstraint() {
-		return activeScopeTypeConstraint;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -323,95 +238,11 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActiveScopeTypeConstraint(boolean newActiveScopeTypeConstraint) {
-		boolean oldActiveScopeTypeConstraint = activeScopeTypeConstraint;
-		activeScopeTypeConstraint = newActiveScopeTypeConstraint;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT, oldActiveScopeTypeConstraint, activeScopeTypeConstraint));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isActiveRoleTypeConstraint() {
-		return activeRoleTypeConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setActiveRoleTypeConstraint(boolean newActiveRoleTypeConstraint) {
-		boolean oldActiveRoleTypeConstraint = activeRoleTypeConstraint;
-		activeRoleTypeConstraint = newActiveRoleTypeConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT, oldActiveRoleTypeConstraint, activeRoleTypeConstraint));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isActiveNameTypeConstraint() {
-		return activeNameTypeConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setActiveNameTypeConstraint(boolean newActiveNameTypeConstraint) {
-		boolean oldActiveNameTypeConstraint = activeNameTypeConstraint;
-		activeNameTypeConstraint = newActiveNameTypeConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT, oldActiveNameTypeConstraint, activeNameTypeConstraint));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isActiveAssociationTypeConstraint() {
-		return activeAssociationTypeConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setActiveAssociationTypeConstraint(boolean newActiveAssociationTypeConstraint) {
-		boolean oldActiveAssociationTypeConstraint = activeAssociationTypeConstraint;
-		activeAssociationTypeConstraint = newActiveAssociationTypeConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT, oldActiveAssociationTypeConstraint, activeAssociationTypeConstraint));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isActiveOccurrenceTypeConstraint() {
-		return activeOccurrenceTypeConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setActiveOccurrenceTypeConstraint(boolean newActiveOccurrenceTypeConstraint) {
-		boolean oldActiveOccurrenceTypeConstraint = activeOccurrenceTypeConstraint;
-		activeOccurrenceTypeConstraint = newActiveOccurrenceTypeConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT, oldActiveOccurrenceTypeConstraint, activeOccurrenceTypeConstraint));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__NAME, oldName, name));
 	}
 
 	/**
@@ -448,18 +279,10 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				return getMappings();
 			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
 				return getIncludes();
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT:
-				return isActiveTopicTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT:
-				return isActiveScopeTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT:
-				return isActiveRoleTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT:
-				return isActiveNameTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
-				return isActiveAssociationTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
-				return isActiveOccurrenceTypeConstraint() ? Boolean.TRUE : Boolean.FALSE;
+			case ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR:
+				return getBaseLocator();
+			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -489,23 +312,11 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				getIncludes().clear();
 				getIncludes().addAll((Collection<? extends String>)newValue);
 				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT:
-				setActiveTopicTypeConstraint(((Boolean)newValue).booleanValue());
+			case ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR:
+				setBaseLocator((String)newValue);
 				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT:
-				setActiveScopeTypeConstraint(((Boolean)newValue).booleanValue());
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT:
-				setActiveRoleTypeConstraint(((Boolean)newValue).booleanValue());
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT:
-				setActiveNameTypeConstraint(((Boolean)newValue).booleanValue());
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
-				setActiveAssociationTypeConstraint(((Boolean)newValue).booleanValue());
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
-				setActiveOccurrenceTypeConstraint(((Boolean)newValue).booleanValue());
+			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -531,23 +342,11 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
 				getIncludes().clear();
 				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT:
-				setActiveTopicTypeConstraint(ACTIVE_TOPIC_TYPE_CONSTRAINT_EDEFAULT);
+			case ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR:
+				setBaseLocator(BASE_LOCATOR_EDEFAULT);
 				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT:
-				setActiveScopeTypeConstraint(ACTIVE_SCOPE_TYPE_CONSTRAINT_EDEFAULT);
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT:
-				setActiveRoleTypeConstraint(ACTIVE_ROLE_TYPE_CONSTRAINT_EDEFAULT);
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT:
-				setActiveNameTypeConstraint(ACTIVE_NAME_TYPE_CONSTRAINT_EDEFAULT);
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
-				setActiveAssociationTypeConstraint(ACTIVE_ASSOCIATION_TYPE_CONSTRAINT_EDEFAULT);
-				return;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
-				setActiveOccurrenceTypeConstraint(ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT);
+			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -569,18 +368,10 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 				return mappings != null && !mappings.isEmpty();
 			case ModelPackage.TOPIC_MAP_SCHEMA__INCLUDES:
 				return includes != null && !includes.isEmpty();
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT:
-				return activeTopicTypeConstraint != ACTIVE_TOPIC_TYPE_CONSTRAINT_EDEFAULT;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT:
-				return activeScopeTypeConstraint != ACTIVE_SCOPE_TYPE_CONSTRAINT_EDEFAULT;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT:
-				return activeRoleTypeConstraint != ACTIVE_ROLE_TYPE_CONSTRAINT_EDEFAULT;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT:
-				return activeNameTypeConstraint != ACTIVE_NAME_TYPE_CONSTRAINT_EDEFAULT;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT:
-				return activeAssociationTypeConstraint != ACTIVE_ASSOCIATION_TYPE_CONSTRAINT_EDEFAULT;
-			case ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT:
-				return activeOccurrenceTypeConstraint != ACTIVE_OCCURRENCE_TYPE_CONSTRAINT_EDEFAULT;
+			case ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR:
+				return BASE_LOCATOR_EDEFAULT == null ? baseLocator != null : !BASE_LOCATOR_EDEFAULT.equals(baseLocator);
+			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -597,18 +388,10 @@ public class TopicMapSchemaImpl extends EObjectImpl implements TopicMapSchema {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (includes: ");
 		result.append(includes);
-		result.append(", activeTopicTypeConstraint: ");
-		result.append(activeTopicTypeConstraint);
-		result.append(", activeScopeTypeConstraint: ");
-		result.append(activeScopeTypeConstraint);
-		result.append(", activeRoleTypeConstraint: ");
-		result.append(activeRoleTypeConstraint);
-		result.append(", activeNameTypeConstraint: ");
-		result.append(activeNameTypeConstraint);
-		result.append(", activeAssociationTypeConstraint: ");
-		result.append(activeAssociationTypeConstraint);
-		result.append(", activeOccurrenceTypeConstraint: ");
-		result.append(activeOccurrenceTypeConstraint);
+		result.append(", baseLocator: ");
+		result.append(baseLocator);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

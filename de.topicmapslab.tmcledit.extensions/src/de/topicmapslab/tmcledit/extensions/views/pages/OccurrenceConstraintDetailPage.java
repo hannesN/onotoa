@@ -128,12 +128,7 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 		typeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				KindOfTopicType type = null;
-				if (ModelIndexer.getInstance().getTopicMapSchema()
-						.isActiveOccurrenceTypeConstraint()) {
-					type = KindOfTopicType.OCCURRENCE_TYPE;
-				}
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeButton.getShell(), type);
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeButton.getShell(), KindOfTopicType.OCCURRENCE_TYPE);
 				if (Dialog.OK==dlg.open()) {
 					getCommandStack().execute(
 									new GenericSetCommand(

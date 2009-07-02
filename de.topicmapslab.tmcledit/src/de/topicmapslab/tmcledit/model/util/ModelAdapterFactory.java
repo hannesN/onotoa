@@ -201,6 +201,22 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createCommentAdapter();
 			}
 			@Override
+			public Adapter caseTMCLConstruct(TMCLConstruct object) {
+				return createTMCLConstructAdapter();
+			}
+			@Override
+			public Adapter caseReifierConstraint(ReifierConstraint object) {
+				return createReifierConstraintAdapter();
+			}
+			@Override
+			public Adapter caseReifiableTpoicType(ReifiableTpoicType object) {
+				return createReifiableTpoicTypeAdapter();
+			}
+			@Override
+			public Adapter caseScopedReifiableTopicType(ScopedReifiableTopicType object) {
+				return createScopedReifiableTopicTypeAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -637,6 +653,62 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCommentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.TMCLConstruct <em>TMCL Construct</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.TMCLConstruct
+	 * @generated
+	 */
+	public Adapter createTMCLConstructAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ReifierConstraint <em>Reifier Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.ReifierConstraint
+	 * @generated
+	 */
+	public Adapter createReifierConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ReifiableTpoicType <em>Reifiable Tpoic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.ReifiableTpoicType
+	 * @generated
+	 */
+	public Adapter createReifiableTpoicTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ScopedReifiableTopicType <em>Scoped Reifiable Topic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.ScopedReifiableTopicType
+	 * @generated
+	 */
+	public Adapter createScopedReifiableTopicTypeAdapter() {
 		return null;
 	}
 

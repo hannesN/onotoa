@@ -260,7 +260,7 @@ public class FileImpl extends EObjectImpl implements File {
 			case ModelPackage.FILE__FILENAME:
 				return getFilename();
 			case ModelPackage.FILE__DIRTY:
-				return isDirty() ? Boolean.TRUE : Boolean.FALSE;
+				return isDirty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,7 +285,7 @@ public class FileImpl extends EObjectImpl implements File {
 				setFilename((String)newValue);
 				return;
 			case ModelPackage.FILE__DIRTY:
-				setDirty(((Boolean)newValue).booleanValue());
+				setDirty((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

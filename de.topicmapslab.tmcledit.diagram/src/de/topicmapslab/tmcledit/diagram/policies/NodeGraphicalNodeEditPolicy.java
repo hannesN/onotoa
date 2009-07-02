@@ -27,27 +27,26 @@ import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
-import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
 	@Override
 	protected Command getConnectionCompleteCommand(
 			CreateConnectionRequest request) {
-		
-		CreateEdgeCommand cmd = (CreateEdgeCommand) ((CommandAdapter)request
+
+		CreateEdgeCommand cmd = (CreateEdgeCommand) ((CommandAdapter) request
 				.getStartCommand()).getEmfCommand();
-		
-		if (request.getTargetEditPart()==request.getSourceEditPart())
+
+		if (request.getTargetEditPart() == request.getSourceEditPart())
 			return null;
-		
-		if ( (request.getSourceEditPart() instanceof AssociationNodeEditPart) &&
-			 (request.getTargetEditPart() instanceof AssociationNodeEditPart) )
+
+		if ((request.getSourceEditPart() instanceof AssociationNodeEditPart)
+				&& (request.getTargetEditPart() instanceof AssociationNodeEditPart))
 			return null;
-		
+
 		Node node = (Node) request.getTargetEditPart().getModel();
-		
-		if (cmd.getEdge().getType()==EdgeType.ROLE_CONSTRAINT_TYPE) {
+
+		if (cmd.getEdge().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {
 			if (node instanceof AssociationNode)
 				cmd.setSource(node);
 			else
@@ -56,31 +55,30 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			cmd.setTarget(node);
 		}
 
+		if (cmd.getEdge().getType() == EdgeType.IS_ATYPE) {
+			TopicType target = ((TypeNode) cmd.getEdge().getTarget())
+					.getTopicType();
 
-		
-		
-		if (cmd.getEdge().getType()==EdgeType.IS_ATYPE) {
-			TopicType target = ((TypeNode)cmd.getEdge().getTarget()).getTopicType();
-		
-			if ( (target.getKind()==KindOfTopicType.NO_TYPE) && 
-				 (ModelIndexer.getInstance().getTopicMapSchema().isActiveTopicTypeConstraint()) ) {
-				
+			if (target.getKind() == KindOfTopicType.NO_TYPE) {
+
 				return null;
 			}
-			
+
 		}
 		return request.getStartCommand();
 	}
 
 	@Override
 	protected Command getConnectionCreateCommand(CreateConnectionRequest request) {
-		CreateEdgeCommand cmd = new CreateEdgeCommand((Edge) request.getNewObject());
-		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
+		CreateEdgeCommand cmd = new CreateEdgeCommand((Edge) request
+				.getNewObject());
+		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer()
+				.getEditDomain();
 		Diagram d = (Diagram) getHost().getParent().getModel();
 		cmd.setDiagram(d);
-		
+
 		Node node = (Node) getHost().getModel();
-		if (cmd.getEdge().getType()==EdgeType.ROLE_CONSTRAINT_TYPE) {
+		if (cmd.getEdge().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {
 			if (node instanceof AssociationNode)
 				cmd.setSource(node);
 			else
@@ -89,7 +87,8 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			cmd.setSource(node);
 		}
 
-		CommandAdapter cmdAdapter = new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
+		CommandAdapter cmdAdapter = new CommandAdapter(ed.getEditingDomain()
+				.getCommandStack(), cmd);
 		request.setStartCommand(cmdAdapter);
 
 		return cmdAdapter;

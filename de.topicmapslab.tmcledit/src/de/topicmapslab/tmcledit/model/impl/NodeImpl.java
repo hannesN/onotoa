@@ -150,9 +150,9 @@ public class NodeImpl extends EObjectImpl implements Node {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.NODE__POS_X:
-				return new Integer(getPosX());
+				return getPosX();
 			case ModelPackage.NODE__POS_Y:
-				return new Integer(getPosY());
+				return getPosY();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,10 +166,10 @@ public class NodeImpl extends EObjectImpl implements Node {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.NODE__POS_X:
-				setPosX(((Integer)newValue).intValue());
+				setPosX((Integer)newValue);
 				return;
 			case ModelPackage.NODE__POS_Y:
-				setPosY(((Integer)newValue).intValue());
+				setPosY((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

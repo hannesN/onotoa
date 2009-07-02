@@ -142,12 +142,8 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				KindOfTopicType type = (ModelIndexer.getInstance()
-						.getTopicMapSchema()
-						.isActiveAssociationTypeConstraint()) ? KindOfTopicType.ASSOCIATION_TYPE
-						: null;
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						typeText.getShell(), type);
+						typeText.getShell(), KindOfTopicType.ASSOCIATION_TYPE);
 
 				if (dlg.open() == Dialog.OK) {
 					TopicType tt = ((TopicType) dlg.getFirstResult());

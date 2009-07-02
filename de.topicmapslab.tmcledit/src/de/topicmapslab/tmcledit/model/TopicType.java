@@ -17,8 +17,6 @@ package de.topicmapslab.tmcledit.model;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Topic Type</b></em>'.
@@ -47,7 +45,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TopicType extends EObject {
+public interface TopicType extends TMCLConstruct {
 	/**
 	 * Returns the value of the '<em><b>Identifiers</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.

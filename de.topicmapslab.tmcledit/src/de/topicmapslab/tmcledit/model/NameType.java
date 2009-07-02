@@ -26,6 +26,6 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface NameType extends ScopedTopicType {
+public interface NameType extends ScopedTopicType, ScopedReifiableTopicType {
 
 } // NameType

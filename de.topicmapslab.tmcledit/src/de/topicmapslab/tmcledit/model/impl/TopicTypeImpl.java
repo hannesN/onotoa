@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -67,7 +66,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class TopicTypeImpl extends EObjectImpl implements TopicType {
+public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	/**
 	 * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -482,7 +481,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return getIdType();
 			case ModelPackage.TOPIC_TYPE__ABSTRACT:
-				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
+				return isAbstract();
 			case ModelPackage.TOPIC_TYPE__ISA:
 				return getIsa();
 			case ModelPackage.TOPIC_TYPE__AKO:
@@ -524,7 +523,7 @@ public class TopicTypeImpl extends EObjectImpl implements TopicType {
 				setIdType((TopicId)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__ABSTRACT:
-				setAbstract(((Boolean)newValue).booleanValue());
+				setAbstract((Boolean)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__ISA:
 				getIsa().clear();

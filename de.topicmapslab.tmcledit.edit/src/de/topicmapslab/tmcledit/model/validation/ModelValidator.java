@@ -21,16 +21,13 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
-import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationCreateTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationSelectTypeAction;
-import de.topicmapslab.tmcledit.model.validation.actions.DeactivateFlagAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NameConstraintCreateTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NameConstraintSelectTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NewPrefixAction;
@@ -71,72 +68,48 @@ public class ModelValidator {
 			validateOccurrenceConstraint(tt);
 			validateNameConstraint(tt);
 			checkPrefixes(tt);
-			if (ModelIndexer.getInstance().isFilterActivated(
-					KindOfTopicType.TOPIC_TYPE)) {
-				for (TopicType isA_tt : tt.getIsa()) {
-					if (isA_tt.getKind() == KindOfTopicType.NO_TYPE) {
-						ValidationResult vr = new ValidationResult("The topic "
-								+ isA_tt.getName() + " may not be type for "
-								+ tt.getName(), isA_tt);
-						vr.addValidationAction(new RemoveIsAAction(
-								commandStack, tt, isA_tt));
-						vr.addValidationAction(new DeactivateFlagAction(
-										commandStack,
-										schema,
-										ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT,
-										false));
-						addValidationResult(vr);
-					}
+
+			for (TopicType isA_tt : tt.getIsa()) {
+				if (isA_tt.getKind() == KindOfTopicType.NO_TYPE) {
+					ValidationResult vr = new ValidationResult("The topic " + isA_tt.getName()
+					        + " may not be type for " + tt.getName(), isA_tt);
+					vr.addValidationAction(new RemoveIsAAction(commandStack, tt, isA_tt));
+					addValidationResult(vr);
 				}
+
 			}
 		}
 	}
 
 	private void validateAssociationConstraints() {
-		for (AssociationTypeConstraint atc : schema
-				.getAssociationTypeConstraints()) {
+		for (AssociationTypeConstraint atc : schema.getAssociationTypeConstraints()) {
 			if (atc.getType() == null) {
-				ValidationResult vr = new ValidationResult(
-						"No type set for association constraint", atc);
-				vr.addValidationAction(new AssociationCreateTypeAction(
-						commandStack));
-				vr.addValidationAction(new AssociationSelectTypeAction(
-						commandStack));
+				ValidationResult vr = new ValidationResult("No type set for association constraint", atc);
+				vr.addValidationAction(new AssociationCreateTypeAction(commandStack));
+				vr.addValidationAction(new AssociationSelectTypeAction(commandStack));
 				addValidationResult(vr);
 				return;
 			}
-			if ((schema.isActiveAssociationTypeConstraint())
-					&& (atc.getType().getKind() != KindOfTopicType.ASSOCIATION_TYPE)) {
-				ValidationResult vr = new ValidationResult("The topic "
-						+ atc.getType().getName()
-						+ " may not be type for an association constraint", atc
-						.getType());
-				vr.addValidationAction(new DeactivateFlagAction(
-								commandStack,
-								schema,
-								ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT,
-								false));
-				vr.addValidationAction(new AssociationCreateTypeAction(
-						commandStack));
-				vr.addValidationAction(new AssociationSelectTypeAction(
-						commandStack));
+			if (atc.getType().getKind() != KindOfTopicType.ASSOCIATION_TYPE) {
+				ValidationResult vr = new ValidationResult("The topic " + atc.getType().getName()
+				        + " may not be type for an association constraint", atc.getType());
+				vr.addValidationAction(new AssociationCreateTypeAction(commandStack));
+				vr.addValidationAction(new AssociationSelectTypeAction(commandStack));
 				addValidationResult(vr);
 			}
 
 			if (((AssociationType) atc.getType()).getRoles().size() == 0) {
-				ValidationResult vr = new ValidationResult("The topic "
-						+ atc.getType().getName() + " has no roles set", atc
-						.getType());
+				ValidationResult vr = new ValidationResult(
+				        "The topic " + atc.getType().getName() + " has no roles set", atc.getType());
 				addValidationResult(vr);
 			}
-			
+
 			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
-				if (rpc.getRole()==null) {
-					ValidationResult vr = new ValidationResult(
-							"No role set for role player constraint", rpc);
+				if (rpc.getRole() == null) {
+					ValidationResult vr = new ValidationResult("No role set for role player constraint", rpc);
 					addValidationResult(vr);
 				}
-					
+
 			}
 		}
 	}
@@ -155,7 +128,7 @@ public class ModelValidator {
 		if (prefix != null) {
 			if (prefix.equals("mailto"))
 				return;
-				
+
 			boolean found = false;
 			for (MappingElement me : schema.getMappings()) {
 				if (me.getKey().equals(prefix)) {
@@ -164,10 +137,8 @@ public class ModelValidator {
 				}
 			}
 			if (!found) {
-				ValidationResult vr = new ValidationResult(
-						"Unknown prefix used", tt);
-				vr.addValidationAction(new NewPrefixAction(commandStack,
-						schema, prefix));
+				ValidationResult vr = new ValidationResult("Unknown prefix used", tt);
+				vr.addValidationAction(new NewPrefixAction(commandStack, schema, prefix));
 				addValidationResult(vr);
 			}
 		}
@@ -191,28 +162,15 @@ public class ModelValidator {
 	private void validateOccurrenceConstraint(TopicType topicType) {
 		for (OccurrenceTypeConstraint otc : topicType.getOccurrenceConstraints()) {
 			if (otc.getType() == null) {
-				ValidationResult vr = new ValidationResult(
-						"No type for occurrence constraint set", otc);
-				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(
-						commandStack));
-				vr.addValidationAction(new OccurrenceConstraintCreateTypeAction(
-						commandStack));
+				ValidationResult vr = new ValidationResult("No type for occurrence constraint set", otc);
+				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(commandStack));
+				vr.addValidationAction(new OccurrenceConstraintCreateTypeAction(commandStack));
 				addValidationResult(vr);
-			} else if ((schema.isActiveOccurrenceTypeConstraint())
-					&& (otc.getType().getKind() == KindOfTopicType.NO_TYPE)) {
-				ValidationResult vr = new ValidationResult("The topic "
-						+ otc.getType().getName()
-						+ " may not be type for an occurrence constraint", otc
-						.getType());
-				vr.addValidationAction(new DeactivateFlagAction(
-								commandStack,
-								schema,
-								ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT,
-								false));
-				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(
-						commandStack));
-				vr.addValidationAction(new OccurrenceConstraintCreateTypeAction(
-						commandStack));
+			} else if (otc.getType().getKind() != KindOfTopicType.OCCURRENCE_TYPE) {
+				ValidationResult vr = new ValidationResult("The topic " + otc.getType().getName()
+				        + " may not be type for an occurrence constraint", otc.getType());
+				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(commandStack));
+				vr.addValidationAction(new OccurrenceConstraintCreateTypeAction(commandStack));
 				addValidationResult(vr);
 			}
 		}
@@ -222,30 +180,20 @@ public class ModelValidator {
 		for (NameTypeConstraint ntc : topicType.getNameContraints()) {
 			if (ntc.getType() == null) {
 				/*
-				ValidationResult vr = new ValidationResult(
-						"No type for name type constraint set", ntc);
-				vr.addValidationAction(new NameConstraintSelectTypeAction(
-						commandStack));
-				vr.addValidationAction(new NameConstraintCreateTypeAction(
-						commandStack));
-				addValidationResult(vr);
-				*/
-				
-			} else if ((schema.isActiveAssociationTypeConstraint())
-					&& (ntc.getType().getKind() == KindOfTopicType.NO_TYPE)) {
-				ValidationResult vr = new ValidationResult("The topic "
-						+ ntc.getType().getName()
-						+ " may not be type for an name constraint", ntc
-						.getType());
-				vr.addValidationAction(new DeactivateFlagAction(
-								commandStack,
-								schema,
-								ModelPackage.TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT,
-								false));
-				vr.addValidationAction(new NameConstraintSelectTypeAction(
-						commandStack));
-				vr.addValidationAction(new NameConstraintCreateTypeAction(
-						commandStack));
+				 * ValidationResult vr = new ValidationResult(
+				 * "No type for name type constraint set", ntc);
+				 * vr.addValidationAction(new NameConstraintSelectTypeAction(
+				 * commandStack)); vr.addValidationAction(new
+				 * NameConstraintCreateTypeAction( commandStack));
+				 * addValidationResult(vr);
+				 */
+
+			} else if (ntc.getType().getKind() != KindOfTopicType.NAME_TYPE) {
+				ValidationResult vr = new ValidationResult("The topic " + ntc.getType().getName()
+				        + " may not be type for an name constraint", ntc.getType());
+
+				vr.addValidationAction(new NameConstraintSelectTypeAction(commandStack));
+				vr.addValidationAction(new NameConstraintCreateTypeAction(commandStack));
 				addValidationResult(vr);
 			}
 		}

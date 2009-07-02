@@ -23,7 +23,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +38,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public abstract class AbstractCardinalityContraintImpl extends EObjectImpl implements AbstractCardinalityContraint {
+public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl implements AbstractCardinalityContraint {
 	/**
 	 * The default value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->

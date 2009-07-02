@@ -33,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AssociationType extends ScopedTopicType {
+public interface AssociationType extends ScopedTopicType, ScopedReifiableTopicType {
 	/**
 	 * Returns the value of the '<em><b>Roles</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RoleConstraint}.

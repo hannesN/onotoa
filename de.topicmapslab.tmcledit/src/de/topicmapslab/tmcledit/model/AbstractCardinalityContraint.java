@@ -15,7 +15,6 @@
  */
 package de.topicmapslab.tmcledit.model;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractCardinalityContraint extends EObject {
+public interface AbstractCardinalityContraint extends TMCLConstruct {
 	/**
 	 * Returns the value of the '<em><b>Card Min</b></em>' attribute.
 	 * The default value is <code>"0"</code>.

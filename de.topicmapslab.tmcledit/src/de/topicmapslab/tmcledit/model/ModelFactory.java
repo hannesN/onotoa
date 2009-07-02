@@ -269,6 +269,42 @@ public interface ModelFactory extends EFactory {
 	Comment createComment();
 
 	/**
+	 * Returns a new object of class '<em>TMCL Construct</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TMCL Construct</em>'.
+	 * @generated
+	 */
+	TMCLConstruct createTMCLConstruct();
+
+	/**
+	 * Returns a new object of class '<em>Reifier Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reifier Constraint</em>'.
+	 * @generated
+	 */
+	ReifierConstraint createReifierConstraint();
+
+	/**
+	 * Returns a new object of class '<em>Reifiable Tpoic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reifiable Tpoic Type</em>'.
+	 * @generated
+	 */
+	ReifiableTpoicType createReifiableTpoicType();
+
+	/**
+	 * Returns a new object of class '<em>Scoped Reifiable Topic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scoped Reifiable Topic Type</em>'.
+	 * @generated
+	 */
+	ScopedReifiableTopicType createScopedReifiableTopicType();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

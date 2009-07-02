@@ -46,13 +46,17 @@ import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.ReifiableTpoicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -280,6 +284,34 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass tmclConstructEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass reifierConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass reifiableTpoicTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scopedReifiableTopicTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum topicIdEEnum = null;
 
 	/**
@@ -323,20 +355,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link ModelPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -348,7 +370,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		if (isInited) return (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ModelPackageImpl());
+		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ModelPackageImpl());
 
 		isInited = true;
 
@@ -361,6 +383,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Mark meta-data to indicate it can't be changed
 		theModelPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(ModelPackage.eNS_URI, theModelPackage);
 		return theModelPackage;
 	}
 
@@ -612,7 +637,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTopicMapSchema_ActiveTopicTypeConstraint() {
+	public EAttribute getTopicMapSchema_BaseLocator() {
 		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -621,44 +646,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTopicMapSchema_ActiveScopeTypeConstraint() {
+	public EAttribute getTopicMapSchema_Name() {
 		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTopicMapSchema_ActiveRoleTypeConstraint() {
-		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTopicMapSchema_ActiveNameTypeConstraint() {
-		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTopicMapSchema_ActiveAssociationTypeConstraint() {
-		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTopicMapSchema_ActiveOccurrenceTypeConstraint() {
-		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1233,6 +1222,78 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTMCLConstruct() {
+		return tmclConstructEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTMCLConstruct_See_also() {
+		return (EAttribute)tmclConstructEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTMCLConstruct_Comment() {
+		return (EAttribute)tmclConstructEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTMCLConstruct_Description() {
+		return (EAttribute)tmclConstructEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReifierConstraint() {
+		return reifierConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReifiableTpoicType() {
+		return reifiableTpoicTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReifiableTpoicType_ReifierConstraint() {
+		return (EReference)reifiableTpoicTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getScopedReifiableTopicType() {
+		return scopedReifiableTopicTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1315,12 +1376,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS);
 		createEReference(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__MAPPINGS);
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__INCLUDES);
-		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_TOPIC_TYPE_CONSTRAINT);
-		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_SCOPE_TYPE_CONSTRAINT);
-		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_ROLE_TYPE_CONSTRAINT);
-		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_NAME_TYPE_CONSTRAINT);
-		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_ASSOCIATION_TYPE_CONSTRAINT);
-		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__ACTIVE_OCCURRENCE_TYPE_CONSTRAINT);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__BASE_LOCATOR);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__NAME);
 
 		subjectLocatorConstraintEClass = createEClass(SUBJECT_LOCATOR_CONSTRAINT);
 
@@ -1409,6 +1466,18 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(commentEClass, COMMENT__WIDTH);
 		createEAttribute(commentEClass, COMMENT__HEIGHT);
 
+		tmclConstructEClass = createEClass(TMCL_CONSTRUCT);
+		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__SEE_ALSO);
+		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__COMMENT);
+		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__DESCRIPTION);
+
+		reifierConstraintEClass = createEClass(REIFIER_CONSTRAINT);
+
+		reifiableTpoicTypeEClass = createEClass(REIFIABLE_TPOIC_TYPE);
+		createEReference(reifiableTpoicTypeEClass, REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT);
+
+		scopedReifiableTopicTypeEClass = createEClass(SCOPED_REIFIABLE_TOPIC_TYPE);
+
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
 		edgeTypeEEnum = createEEnum(EDGE_TYPE);
@@ -1443,12 +1512,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		topicTypeEClass.getESuperTypes().add(this.getTMCLConstruct());
 		abstractConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		occurrenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		occurrenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		nameTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		nameTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		rolePlayerConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
+		topicMapSchemaEClass.getESuperTypes().add(this.getTMCLConstruct());
 		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		associationTypeConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
@@ -1456,16 +1527,25 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		typeNodeEClass.getESuperTypes().add(this.getNode());
 		associationNodeEClass.getESuperTypes().add(this.getNode());
 		scopeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
+		abstractCardinalityContraintEClass.getESuperTypes().add(this.getTMCLConstruct());
+		abstractTypedConstraintEClass.getESuperTypes().add(this.getTMCLConstruct());
 		scopedTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 		associationTypeEClass.getESuperTypes().add(this.getScopedTopicType());
+		associationTypeEClass.getESuperTypes().add(this.getScopedReifiableTopicType());
 		occurrenceTypeEClass.getESuperTypes().add(this.getScopedTopicType());
+		occurrenceTypeEClass.getESuperTypes().add(this.getScopedReifiableTopicType());
 		roleConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		roleTypeEClass.getESuperTypes().add(this.getTopicType());
 		otherRolePlayerConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		nameTypeEClass.getESuperTypes().add(this.getScopedTopicType());
+		nameTypeEClass.getESuperTypes().add(this.getScopedReifiableTopicType());
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
 		commentEClass.getESuperTypes().add(this.getNode());
+		reifierConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
+		reifiableTpoicTypeEClass.getESuperTypes().add(this.getTopicType());
+		scopedReifiableTopicTypeEClass.getESuperTypes().add(this.getScopedTopicType());
+		scopedReifiableTopicTypeEClass.getESuperTypes().add(this.getReifiableTpoicType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1500,12 +1580,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getTopicMapSchema_AssociationTypeConstraints(), this.getAssociationTypeConstraint(), null, "associationTypeConstraints", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicMapSchema_Mappings(), this.getMappingElement(), null, "mappings", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicMapSchema_Includes(), ecorePackage.getEString(), "includes", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTopicMapSchema_ActiveTopicTypeConstraint(), ecorePackage.getEBoolean(), "activeTopicTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTopicMapSchema_ActiveScopeTypeConstraint(), ecorePackage.getEBoolean(), "activeScopeTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTopicMapSchema_ActiveRoleTypeConstraint(), ecorePackage.getEBoolean(), "activeRoleTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTopicMapSchema_ActiveNameTypeConstraint(), ecorePackage.getEBoolean(), "activeNameTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTopicMapSchema_ActiveAssociationTypeConstraint(), ecorePackage.getEBoolean(), "activeAssociationTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTopicMapSchema_ActiveOccurrenceTypeConstraint(), ecorePackage.getEBoolean(), "activeOccurrenceTypeConstraint", "true", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_BaseLocator(), ecorePackage.getEString(), "baseLocator", "onotoa:", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_Name(), ecorePackage.getEString(), "name", null, 0, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectLocatorConstraintEClass, SubjectLocatorConstraint.class, "SubjectLocatorConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1593,6 +1669,18 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getComment_Content(), ecorePackage.getEString(), "content", null, 1, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComment_Width(), ecorePackage.getEInt(), "width", null, 1, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComment_Height(), ecorePackage.getEInt(), "height", null, 1, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tmclConstructEClass, TMCLConstruct.class, "TMCLConstruct", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTMCLConstruct_See_also(), ecorePackage.getEString(), "see_also", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTMCLConstruct_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTMCLConstruct_Description(), ecorePackage.getEString(), "description", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(reifierConstraintEClass, ReifierConstraint.class, "ReifierConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(reifiableTpoicTypeEClass, ReifiableTpoicType.class, "ReifiableTpoicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReifiableTpoicType_ReifierConstraint(), this.getReifierConstraint(), null, "reifierConstraint", null, 0, 1, ReifiableTpoicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scopedReifiableTopicTypeEClass, ScopedReifiableTopicType.class, "ScopedReifiableTopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");
