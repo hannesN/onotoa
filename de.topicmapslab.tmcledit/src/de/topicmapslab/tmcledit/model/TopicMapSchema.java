@@ -105,7 +105,7 @@ public interface TopicMapSchema extends TMCLConstruct {
 
 	/**
 	 * Returns the value of the '<em><b>Base Locator</b></em>' attribute.
-	 * The default value is <code>"onotoa:"</code>.
+	 * The default value is <code>"urn:x-ontopia"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Base Locator</em>' attribute isn't clear,
@@ -115,7 +115,7 @@ public interface TopicMapSchema extends TMCLConstruct {
 	 * @return the value of the '<em>Base Locator</em>' attribute.
 	 * @see #setBaseLocator(String)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_BaseLocator()
-	 * @model default="onotoa:" required="true"
+	 * @model default="urn:x-ontopia" required="true"
 	 * @generated
 	 */
 	String getBaseLocator();

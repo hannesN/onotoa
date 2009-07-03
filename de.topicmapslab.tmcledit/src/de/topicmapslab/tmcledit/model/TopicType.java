@@ -35,7 +35,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getExclusive <em>Exclusive</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOverlap <em>Overlap</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getLocators <em>Locators</em>}</li>
  * </ul>
@@ -246,20 +246,20 @@ public interface TopicType extends TMCLConstruct {
 	void setKind(KindOfTopicType value);
 
 	/**
-	 * Returns the value of the '<em><b>Exclusive</b></em>' reference list.
+	 * Returns the value of the '<em><b>Overlap</b></em>' reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.TopicType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Exclusive</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Overlap</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exclusive</em>' reference list.
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Exclusive()
+	 * @return the value of the '<em>Overlap</em>' reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_Overlap()
 	 * @model
 	 * @generated
 	 */
-	EList<TopicType> getExclusive();
+	EList<TopicType> getOverlap();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

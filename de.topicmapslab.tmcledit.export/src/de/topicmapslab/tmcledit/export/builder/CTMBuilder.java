@@ -166,11 +166,11 @@ public class CTMBuilder {
 			addLine("isAbstract();");
 		}
 		
-		for (TopicType ett : topicType.getExclusive()) {
-			String exId = getIdString(ett);
-
-			addLine("exclusive-with("+exId+");");
-		}
+//		for (TopicType ett : topicType.getExclusive()) {
+//			String exId = getIdString(ett);
+//
+//			addLine("exclusive-with("+exId+");");
+//		}
 		
 		for (SubjectIdentifierConstraint sic : topicType.getSubjectIdentifierConstraints()) {
 			processSubjectIdentifierConstraint(sic);

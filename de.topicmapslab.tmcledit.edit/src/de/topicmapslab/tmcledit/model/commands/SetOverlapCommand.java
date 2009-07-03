@@ -24,14 +24,14 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author Hannes Niederhausen
  * 
  */
-public class SetExclusiveCommand extends AbstractCommand {
+public class SetOverlapCommand extends AbstractCommand {
 
 	private TopicType topicType;
 
 	private List<TopicType> removeList;
 	private List<TopicType> addList;
 
-	public SetExclusiveCommand(List<TopicType> newList, TopicType topic) {
+	public SetOverlapCommand(List<TopicType> newList, TopicType topic) {
 		super("Set exclusive types");
 		this.topicType = topic;
 		this.removeList = new ArrayList<TopicType>();
@@ -41,22 +41,22 @@ public class SetExclusiveCommand extends AbstractCommand {
 	public void execute() {
 
 		for (TopicType tt : removeList) {
-			tt.getExclusive().remove(topicType);
+			tt.getOverlap().remove(topicType);
 		}
 		for (TopicType tt : addList) {
-			tt.getExclusive().add(topicType);
+			tt.getOverlap().add(topicType);
 		}
 
 		topicType.eSetDeliver(false);
-		topicType.getExclusive().removeAll(removeList);
+		topicType.getOverlap().removeAll(removeList);
 		topicType.eSetDeliver(true);
-		topicType.getExclusive().addAll(addList);
+		topicType.getOverlap().addAll(addList);
 	}
 
 	@Override
 	protected boolean prepare() {
 		removeList = new ArrayList<TopicType>();
-		for (TopicType tt : topicType.getExclusive()) {
+		for (TopicType tt : topicType.getOverlap()) {
 			if (addList.contains(tt)) {
 				addList.remove(tt);
 			} else {
@@ -70,16 +70,16 @@ public class SetExclusiveCommand extends AbstractCommand {
 	@Override
 	public void undo() {
 		for (TopicType tt : removeList) {
-			tt.getExclusive().add(topicType);
+			tt.getOverlap().add(topicType);
 		}
 		for (TopicType tt : addList) {
-			tt.getExclusive().remove(topicType);
+			tt.getOverlap().remove(topicType);
 		}
 
 		topicType.eSetDeliver(false);
-		topicType.getExclusive().addAll(removeList);
+		topicType.getOverlap().addAll(removeList);
 		topicType.eSetDeliver(true);
-		topicType.getExclusive().removeAll(addList);
+		topicType.getOverlap().removeAll(addList);
 	}
 
 	public void redo() {
