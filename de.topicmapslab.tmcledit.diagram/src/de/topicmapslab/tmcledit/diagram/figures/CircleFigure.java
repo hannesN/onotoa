@@ -21,10 +21,8 @@ public class CircleFigure extends Label {
 	@Override
 	public void setBounds(Rectangle rect) {
 		super.setBounds(rect);
-		
-		bounds.width = rect.width+30;
-		bounds.height = rect.height+25;
-		
+		bounds.width = (int) (rect.width*1.4);
+		bounds.height = (int) (rect.height*1.9);
 	}
 	
 	@Override
@@ -32,8 +30,7 @@ public class CircleFigure extends Label {
 		super.paintFigure(graphics);
 		
 		Rectangle rec = getBounds();
-		
-		graphics.drawOval(rec.x+3, rec.y+6, rec.width-8, rec.height-7);
+		graphics.drawOval(rec.x+1, rec.y+1, rec.width-3, rec.height-2);
 	}
 	
 }
