@@ -221,9 +221,20 @@ public class TMCLTopicMapBuilder {
 		for (OccurrenceTypeConstraint otc : type.getOccurrenceConstraints()) {
 			setOccurrenceConstraint(t, otc);
 		}
+		
+		for (TopicType tt : type.getOverlap()) {
+			setOverlapConstraint(type, tt);
+		}
 
 		return t;
 	}
+
+	private void setOverlapConstraint(TopicType type, TopicType othertype) {
+		Association ass = topicMap.createAssociation(createConstraint(TMCL.OVERLAP_DECLARATION));
+		ass.createRole(createTopic(TMCL.OVERLAPS), createTopic(othertype));
+		ass.createRole(createTopic(TMCL.OVERLAPS), createTopic(type));
+	    
+    }
 
 	private void setNameTypeConstraint(Topic t, NameTypeConstraint ntc) {
 		NameType nt = (NameType) ntc.getType();
