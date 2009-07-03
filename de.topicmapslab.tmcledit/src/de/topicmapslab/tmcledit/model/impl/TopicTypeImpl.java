@@ -58,7 +58,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getKind <em>Kind</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getExclusive <em>Exclusive</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getOverlap <em>Overlap</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getLocators <em>Locators</em>}</li>
  * </ul>
@@ -198,14 +198,14 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	protected KindOfTopicType kind = KIND_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getExclusive() <em>Exclusive</em>}' reference list.
+	 * The cached value of the '{@link #getOverlap() <em>Overlap</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExclusive()
+	 * @see #getOverlap()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TopicType> exclusive;
+	protected EList<TopicType> overlap;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -408,11 +408,11 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TopicType> getExclusive() {
-		if (exclusive == null) {
-			exclusive = new EObjectResolvingEList<TopicType>(TopicType.class, this, ModelPackage.TOPIC_TYPE__EXCLUSIVE);
+	public EList<TopicType> getOverlap() {
+		if (overlap == null) {
+			overlap = new EObjectResolvingEList<TopicType>(TopicType.class, this, ModelPackage.TOPIC_TYPE__OVERLAP);
 		}
-		return exclusive;
+		return overlap;
 	}
 
 	/**
@@ -496,8 +496,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				return getSubjectLocatorConstraint();
 			case ModelPackage.TOPIC_TYPE__KIND:
 				return getKind();
-			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
-				return getExclusive();
+			case ModelPackage.TOPIC_TYPE__OVERLAP:
+				return getOverlap();
 			case ModelPackage.TOPIC_TYPE__NAME:
 				return getName();
 			case ModelPackage.TOPIC_TYPE__LOCATORS:
@@ -552,9 +552,9 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__KIND:
 				setKind((KindOfTopicType)newValue);
 				return;
-			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
-				getExclusive().clear();
-				getExclusive().addAll((Collection<? extends TopicType>)newValue);
+			case ModelPackage.TOPIC_TYPE__OVERLAP:
+				getOverlap().clear();
+				getOverlap().addAll((Collection<? extends TopicType>)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__NAME:
 				setName((String)newValue);
@@ -605,8 +605,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__KIND:
 				setKind(KIND_EDEFAULT);
 				return;
-			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
-				getExclusive().clear();
+			case ModelPackage.TOPIC_TYPE__OVERLAP:
+				getOverlap().clear();
 				return;
 			case ModelPackage.TOPIC_TYPE__NAME:
 				setName(NAME_EDEFAULT);
@@ -646,8 +646,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				return subjectLocatorConstraint != null && !subjectLocatorConstraint.isEmpty();
 			case ModelPackage.TOPIC_TYPE__KIND:
 				return kind != KIND_EDEFAULT;
-			case ModelPackage.TOPIC_TYPE__EXCLUSIVE:
-				return exclusive != null && !exclusive.isEmpty();
+			case ModelPackage.TOPIC_TYPE__OVERLAP:
+				return overlap != null && !overlap.isEmpty();
 			case ModelPackage.TOPIC_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.TOPIC_TYPE__LOCATORS:

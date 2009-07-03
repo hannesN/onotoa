@@ -33,7 +33,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
-import de.topicmapslab.tmcledit.model.commands.SetExclusiveCommand;
+import de.topicmapslab.tmcledit.model.commands.SetOverlapCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
@@ -56,7 +56,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	private Button abstractButton;
 
 	private Section section;
-	private Text exclusiveText;
+	private Text overlapText;
 
 	public TopicTypePage() {
 		super("topic type");
@@ -190,23 +190,23 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 		});
 
-		toolkit.createLabel(comp, "exclusive:");
-		exclusiveText = toolkit
+		toolkit.createLabel(comp, "overlap:");
+		overlapText = toolkit
 				.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 1;
-		exclusiveText.setLayoutData(gd);
+		overlapText.setLayoutData(gd);
 		button = toolkit.createButton(comp, "...", SWT.PUSH);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(
-						exclusiveText.getShell(), (TopicType) getModel());
+						overlapText.getShell(), (TopicType) getModel());
 				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
 
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
-							new SetExclusiveCommand(dlg.getSelectedTopics(),
+							new SetOverlapCommand(dlg.getSelectedTopics(),
 									(TopicType) getModel()));
 				}
 			}
@@ -290,14 +290,14 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 				b.setLength(0);
 
-				for (TopicType tt : t.getExclusive()) {
+				for (TopicType tt : t.getOverlap()) {
 					b.append(tt.getName());
 					b.append(", ");
 				}
 				if (b.length() > 0)
-					exclusiveText.setText(b.substring(0, b.length() - 2));
+					overlapText.setText(b.substring(0, b.length() - 2));
 				else
-					exclusiveText.setText("");
+					overlapText.setText("");
 
 				abstractButton.setSelection(t.isAbstract());
 			} else {
@@ -308,7 +308,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				isAText.setText("");
 				akoText.setText("");
 				abstractButton.setSelection(false);
-				exclusiveText.setText("");
+				overlapText.setText("");
 			}
 
 		}

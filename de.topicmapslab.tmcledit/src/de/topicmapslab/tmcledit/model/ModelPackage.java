@@ -243,13 +243,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__KIND = TMCL_CONSTRUCT_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE__EXCLUSIVE = TMCL_CONSTRUCT_FEATURE_COUNT + 10;
+	int TOPIC_TYPE__OVERLAP = TMCL_CONSTRUCT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1759,13 +1759,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_TOPIC_TYPE__KIND = TOPIC_TYPE__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_TOPIC_TYPE__EXCLUSIVE = TOPIC_TYPE__EXCLUSIVE;
+	int SCOPED_TOPIC_TYPE__OVERLAP = TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1931,13 +1931,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__KIND = SCOPED_TOPIC_TYPE__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE__EXCLUSIVE = SCOPED_TOPIC_TYPE__EXCLUSIVE;
+	int ASSOCIATION_TYPE__OVERLAP = SCOPED_TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2121,13 +2121,13 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE__KIND = SCOPED_TOPIC_TYPE__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE__EXCLUSIVE = SCOPED_TOPIC_TYPE__EXCLUSIVE;
+	int OCCURRENCE_TYPE__OVERLAP = SCOPED_TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2384,13 +2384,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__KIND = TOPIC_TYPE__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE__EXCLUSIVE = TOPIC_TYPE__EXCLUSIVE;
+	int ROLE_TYPE__OVERLAP = TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2656,13 +2656,13 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__KIND = SCOPED_TOPIC_TYPE__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE__EXCLUSIVE = SCOPED_TOPIC_TYPE__EXCLUSIVE;
+	int NAME_TYPE__OVERLAP = SCOPED_TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2974,13 +2974,13 @@ public interface ModelPackage extends EPackage {
 	int REIFIABLE_TPOIC_TYPE__KIND = TOPIC_TYPE__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__EXCLUSIVE = TOPIC_TYPE__EXCLUSIVE;
+	int REIFIABLE_TPOIC_TYPE__OVERLAP = TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3146,13 +3146,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_REIFIABLE_TOPIC_TYPE__KIND = SCOPED_TOPIC_TYPE__KIND;
 
 	/**
-	 * The feature id for the '<em><b>Exclusive</b></em>' reference list.
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_REIFIABLE_TOPIC_TYPE__EXCLUSIVE = SCOPED_TOPIC_TYPE__EXCLUSIVE;
+	int SCOPED_REIFIABLE_TOPIC_TYPE__OVERLAP = SCOPED_TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3351,15 +3351,15 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTopicType_Kind();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getExclusive <em>Exclusive</em>}'.
+	 * Returns the meta object for the reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getOverlap <em>Overlap</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Exclusive</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicType#getExclusive()
+	 * @return the meta object for the reference list '<em>Overlap</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getOverlap()
 	 * @see #getTopicType()
 	 * @generated
 	 */
-	EReference getTopicType_Exclusive();
+	EReference getTopicType_Overlap();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}'.
@@ -4439,12 +4439,12 @@ public interface ModelPackage extends EPackage {
 		EAttribute TOPIC_TYPE__KIND = eINSTANCE.getTopicType_Kind();
 
 		/**
-		 * The meta object literal for the '<em><b>Exclusive</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Overlap</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOPIC_TYPE__EXCLUSIVE = eINSTANCE.getTopicType_Exclusive();
+		EReference TOPIC_TYPE__OVERLAP = eINSTANCE.getTopicType_Overlap();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

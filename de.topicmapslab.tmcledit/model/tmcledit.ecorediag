@@ -1107,7 +1107,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_MgOYkaaUEd2nataTrD-UGA" routing="Rectilinear" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_MgOYkqaUEd2nataTrD-UGA" fontName="Sans Serif" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="tmcledit.ecore#//TopicType/exclusive"/>
+    <element xmi:type="ecore:EReference" href="tmcledit.ecore#//TopicType/overlap"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MgOYk6aUEd2nataTrD-UGA" points="[-1, -1, -6, -3]$[-32, -1, -37, -3]$[-32, -60, -37, -62]$[10, -60, 5, -62]$[10, -18, 5, -20]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MgeQMKaUEd2nataTrD-UGA" id="(0.0,0.11)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MgeQMaaUEd2nataTrD-UGA" id="(0.035928145,0.21)"/>

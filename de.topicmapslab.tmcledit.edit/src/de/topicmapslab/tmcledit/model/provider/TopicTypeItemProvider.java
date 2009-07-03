@@ -69,7 +69,7 @@ public class TopicTypeItemProvider
 			addIsaPropertyDescriptor(object);
 			addAkoPropertyDescriptor(object);
 			addKindPropertyDescriptor(object);
-			addExclusivePropertyDescriptor(object);
+			addOverlapPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addLocatorsPropertyDescriptor(object);
 		}
@@ -209,19 +209,19 @@ public class TopicTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Exclusive feature.
+	 * This adds a property descriptor for the Overlap feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addExclusivePropertyDescriptor(Object object) {
+	protected void addOverlapPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TopicType_exclusive_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_exclusive_feature", "_UI_TopicType_type"),
-				 ModelPackage.Literals.TOPIC_TYPE__EXCLUSIVE,
+				 getString("_UI_TopicType_overlap_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TopicType_overlap_feature", "_UI_TopicType_type"),
+				 ModelPackage.Literals.TOPIC_TYPE__OVERLAP,
 				 true,
 				 false,
 				 true,
