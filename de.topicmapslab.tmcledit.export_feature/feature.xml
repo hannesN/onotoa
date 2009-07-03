@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.export_feature"
       label="Onotoa Export Plugins"
-      version="1.0.3">
+      version="1.0.3.b1">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -29,7 +29,7 @@
          id="de.topicmapslab.tmcledit.export"
          download-size="0"
          install-size="0"
-         version="1.0.3"
+         version="1.0.3.b1"
          unpack="false"/>
 
 </feature>

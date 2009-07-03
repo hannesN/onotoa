@@ -26,19 +26,10 @@
 
    <features>
       <feature id="de.topicmapslab.tmcledit.application_feature" version="1.0.3"/>
-      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.0.3"/>
-      <feature id="org.sourceforge.tinyTiM_feature" version="1.5.0.a1"/>
       <feature id="de.topicmapslab.tmcledit.core_feature" version="1.0.3.b1"/>
+      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.0.3.b1"/>
+      <feature id="org.sourceforge.tinyTiM_feature" version="2.0.0.a5-snapshot-200907010942"/>
    </features>
 
-   <configurations>
-      <plugin id="de.topicmapslab.tmcledit" autoStart="false" startLevel="0" />
-      <plugin id="de.topicmapslab.tmcledit.application" autoStart="true" startLevel="0" />
-      <plugin id="de.topicmapslab.tmcledit.diagram" autoStart="false" startLevel="0" />
-      <plugin id="de.topicmapslab.tmcledit.doc" autoStart="false" startLevel="0" />
-      <plugin id="de.topicmapslab.tmcledit.edit" autoStart="false" startLevel="0" />
-      <plugin id="de.topicmapslab.tmcledit.export" autoStart="false" startLevel="0" />
-      <plugin id="de.topicmapslab.tmcledit.extensions" autoStart="false" startLevel="0" />
-   </configurations>
 
 </product>
