@@ -719,26 +719,26 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.ReifiableTpoicType} instances.
+	 * This keeps track of the one adapter used for all {@link de.topicmapslab.tmcledit.model.ReifiableTopicType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ReifiableTpoicTypeItemProvider reifiableTpoicTypeItemProvider;
+	protected ReifiableTopicTypeItemProvider reifiableTopicTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.ReifiableTpoicType}.
+	 * This creates an adapter for a {@link de.topicmapslab.tmcledit.model.ReifiableTopicType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createReifiableTpoicTypeAdapter() {
-		if (reifiableTpoicTypeItemProvider == null) {
-			reifiableTpoicTypeItemProvider = new ReifiableTpoicTypeItemProvider(this);
+	public Adapter createReifiableTopicTypeAdapter() {
+		if (reifiableTopicTypeItemProvider == null) {
+			reifiableTopicTypeItemProvider = new ReifiableTopicTypeItemProvider(this);
 		}
 
-		return reifiableTpoicTypeItemProvider;
+		return reifiableTopicTypeItemProvider;
 	}
 
 	/**
@@ -891,7 +891,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 		if (commentItemProvider != null) commentItemProvider.dispose();
 		if (tmclConstructItemProvider != null) tmclConstructItemProvider.dispose();
 		if (reifierConstraintItemProvider != null) reifierConstraintItemProvider.dispose();
-		if (reifiableTpoicTypeItemProvider != null) reifiableTpoicTypeItemProvider.dispose();
+		if (reifiableTopicTypeItemProvider != null) reifiableTopicTypeItemProvider.dispose();
 		if (scopedReifiableTopicTypeItemProvider != null) scopedReifiableTopicTypeItemProvider.dispose();
 	}
 

@@ -209,8 +209,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createReifierConstraintAdapter();
 			}
 			@Override
-			public Adapter caseReifiableTpoicType(ReifiableTpoicType object) {
-				return createReifiableTpoicTypeAdapter();
+			public Adapter caseReifiableTopicType(ReifiableTopicType object) {
+				return createReifiableTopicTypeAdapter();
 			}
 			@Override
 			public Adapter caseScopedReifiableTopicType(ScopedReifiableTopicType object) {
@@ -685,16 +685,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ReifiableTpoicType <em>Reifiable Tpoic Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ReifiableTopicType <em>Reifiable Topic Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.ReifiableTpoicType
+	 * @see de.topicmapslab.tmcledit.model.ReifiableTopicType
 	 * @generated
 	 */
-	public Adapter createReifiableTpoicTypeAdapter() {
+	public Adapter createReifiableTopicTypeAdapter() {
 		return null;
 	}
 

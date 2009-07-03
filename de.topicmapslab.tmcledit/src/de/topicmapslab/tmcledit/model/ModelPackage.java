@@ -2847,14 +2847,14 @@ public interface ModelPackage extends EPackage {
 	int REIFIER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ReifiableTpoicTypeImpl <em>Reifiable Tpoic Type</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ReifiableTopicTypeImpl <em>Reifiable Topic Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.ReifiableTpoicTypeImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getReifiableTpoicType()
+	 * @see de.topicmapslab.tmcledit.model.impl.ReifiableTopicTypeImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getReifiableTopicType()
 	 * @generated
 	 */
-	int REIFIABLE_TPOIC_TYPE = 32;
+	int REIFIABLE_TOPIC_TYPE = 32;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -2863,7 +2863,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__SEE_ALSO = TOPIC_TYPE__SEE_ALSO;
+	int REIFIABLE_TOPIC_TYPE__SEE_ALSO = TOPIC_TYPE__SEE_ALSO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -2872,7 +2872,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__COMMENT = TOPIC_TYPE__COMMENT;
+	int REIFIABLE_TOPIC_TYPE__COMMENT = TOPIC_TYPE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -2881,7 +2881,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__DESCRIPTION = TOPIC_TYPE__DESCRIPTION;
+	int REIFIABLE_TOPIC_TYPE__DESCRIPTION = TOPIC_TYPE__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -2890,7 +2890,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__IDENTIFIERS = TOPIC_TYPE__IDENTIFIERS;
+	int REIFIABLE_TOPIC_TYPE__IDENTIFIERS = TOPIC_TYPE__IDENTIFIERS;
 
 	/**
 	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
@@ -2899,7 +2899,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
+	int REIFIABLE_TOPIC_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -2908,7 +2908,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__ABSTRACT = TOPIC_TYPE__ABSTRACT;
+	int REIFIABLE_TOPIC_TYPE__ABSTRACT = TOPIC_TYPE__ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Isa</b></em>' reference list.
@@ -2917,7 +2917,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__ISA = TOPIC_TYPE__ISA;
+	int REIFIABLE_TOPIC_TYPE__ISA = TOPIC_TYPE__ISA;
 
 	/**
 	 * The feature id for the '<em><b>Ako</b></em>' reference list.
@@ -2926,7 +2926,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__AKO = TOPIC_TYPE__AKO;
+	int REIFIABLE_TOPIC_TYPE__AKO = TOPIC_TYPE__AKO;
 
 	/**
 	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
@@ -2935,7 +2935,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
+	int REIFIABLE_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
@@ -2944,7 +2944,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
+	int REIFIABLE_TOPIC_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -2953,7 +2953,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
+	int REIFIABLE_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
@@ -2962,7 +2962,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int REIFIABLE_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -2971,7 +2971,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__KIND = TOPIC_TYPE__KIND;
+	int REIFIABLE_TOPIC_TYPE__KIND = TOPIC_TYPE__KIND;
 
 	/**
 	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
@@ -2980,7 +2980,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__OVERLAP = TOPIC_TYPE__OVERLAP;
+	int REIFIABLE_TOPIC_TYPE__OVERLAP = TOPIC_TYPE__OVERLAP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2989,7 +2989,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__NAME = TOPIC_TYPE__NAME;
+	int REIFIABLE_TOPIC_TYPE__NAME = TOPIC_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Locators</b></em>' attribute list.
@@ -2998,7 +2998,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
+	int REIFIABLE_TOPIC_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
 
 	/**
 	 * The feature id for the '<em><b>Reifier Constraint</b></em>' reference.
@@ -3007,16 +3007,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT = TOPIC_TYPE_FEATURE_COUNT + 0;
+	int REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT = TOPIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Reifiable Tpoic Type</em>' class.
+	 * The number of structural features of the '<em>Reifiable Topic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TPOIC_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 1;
+	int REIFIABLE_TOPIC_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopedReifiableTopicTypeImpl <em>Scoped Reifiable Topic Type</em>}' class.
@@ -4266,25 +4266,25 @@ public interface ModelPackage extends EPackage {
 	EClass getReifierConstraint();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ReifiableTpoicType <em>Reifiable Tpoic Type</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ReifiableTopicType <em>Reifiable Topic Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Reifiable Tpoic Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.ReifiableTpoicType
+	 * @return the meta object for class '<em>Reifiable Topic Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ReifiableTopicType
 	 * @generated
 	 */
-	EClass getReifiableTpoicType();
+	EClass getReifiableTopicType();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.ReifiableTpoicType#getReifierConstraint <em>Reifier Constraint</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.ReifiableTopicType#getReifierConstraint <em>Reifier Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Reifier Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.ReifiableTpoicType#getReifierConstraint()
-	 * @see #getReifiableTpoicType()
+	 * @see de.topicmapslab.tmcledit.model.ReifiableTopicType#getReifierConstraint()
+	 * @see #getReifiableTopicType()
 	 * @generated
 	 */
-	EReference getReifiableTpoicType_ReifierConstraint();
+	EReference getReifiableTopicType_ReifierConstraint();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ScopedReifiableTopicType <em>Scoped Reifiable Topic Type</em>}'.
@@ -5189,14 +5189,14 @@ public interface ModelPackage extends EPackage {
 		EClass REIFIER_CONSTRAINT = eINSTANCE.getReifierConstraint();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ReifiableTpoicTypeImpl <em>Reifiable Tpoic Type</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ReifiableTopicTypeImpl <em>Reifiable Topic Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.ReifiableTpoicTypeImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getReifiableTpoicType()
+		 * @see de.topicmapslab.tmcledit.model.impl.ReifiableTopicTypeImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getReifiableTopicType()
 		 * @generated
 		 */
-		EClass REIFIABLE_TPOIC_TYPE = eINSTANCE.getReifiableTpoicType();
+		EClass REIFIABLE_TOPIC_TYPE = eINSTANCE.getReifiableTopicType();
 
 		/**
 		 * The meta object literal for the '<em><b>Reifier Constraint</b></em>' reference feature.
@@ -5204,7 +5204,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT = eINSTANCE.getReifiableTpoicType_ReifierConstraint();
+		EReference REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT = eINSTANCE.getReifiableTopicType_ReifierConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ScopedReifiableTopicTypeImpl <em>Scoped Reifiable Topic Type</em>}' class.

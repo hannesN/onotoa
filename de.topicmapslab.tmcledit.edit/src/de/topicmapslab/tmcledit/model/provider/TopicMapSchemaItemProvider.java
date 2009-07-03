@@ -279,7 +279,7 @@ public class TopicMapSchemaItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ModelPackage.Literals.TOPIC_MAP_SCHEMA__TOPIC_TYPES,
-				 ModelFactory.eINSTANCE.createReifiableTpoicType()));
+				 ModelFactory.eINSTANCE.createReifiableTopicType()));
 
 		newChildDescriptors.add
 			(createChildParameter

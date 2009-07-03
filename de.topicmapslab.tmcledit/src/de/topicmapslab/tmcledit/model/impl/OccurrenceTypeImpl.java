@@ -8,7 +8,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 
-import de.topicmapslab.tmcledit.model.ReifiableTpoicType;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.ScopedReifiableTopicType;
 import org.eclipse.emf.common.notify.Notification;
@@ -217,9 +217,9 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ReifiableTpoicType.class) {
+		if (baseClass == ReifiableTopicType.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT: return ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT;
+				case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT: return ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT;
 				default: return -1;
 			}
 		}
@@ -238,9 +238,9 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ReifiableTpoicType.class) {
+		if (baseClass == ReifiableTopicType.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT: return ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT;
+				case ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT: return ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT;
 				default: return -1;
 			}
 		}
