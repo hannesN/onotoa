@@ -46,7 +46,7 @@ import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.ReifiableTpoicType;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
@@ -298,7 +298,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass reifiableTpoicTypeEClass = null;
+	private EClass reifiableTopicTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1267,8 +1267,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getReifiableTpoicType() {
-		return reifiableTpoicTypeEClass;
+	public EClass getReifiableTopicType() {
+		return reifiableTopicTypeEClass;
 	}
 
 	/**
@@ -1276,8 +1276,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getReifiableTpoicType_ReifierConstraint() {
-		return (EReference)reifiableTpoicTypeEClass.getEStructuralFeatures().get(0);
+	public EReference getReifiableTopicType_ReifierConstraint() {
+		return (EReference)reifiableTopicTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1473,8 +1473,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		reifierConstraintEClass = createEClass(REIFIER_CONSTRAINT);
 
-		reifiableTpoicTypeEClass = createEClass(REIFIABLE_TPOIC_TYPE);
-		createEReference(reifiableTpoicTypeEClass, REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT);
+		reifiableTopicTypeEClass = createEClass(REIFIABLE_TOPIC_TYPE);
+		createEReference(reifiableTopicTypeEClass, REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT);
 
 		scopedReifiableTopicTypeEClass = createEClass(SCOPED_REIFIABLE_TOPIC_TYPE);
 
@@ -1543,9 +1543,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
 		commentEClass.getESuperTypes().add(this.getNode());
 		reifierConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
-		reifiableTpoicTypeEClass.getESuperTypes().add(this.getTopicType());
+		reifiableTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 		scopedReifiableTopicTypeEClass.getESuperTypes().add(this.getScopedTopicType());
-		scopedReifiableTopicTypeEClass.getESuperTypes().add(this.getReifiableTpoicType());
+		scopedReifiableTopicTypeEClass.getESuperTypes().add(this.getReifiableTopicType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1677,8 +1677,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(reifierConstraintEClass, ReifierConstraint.class, "ReifierConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(reifiableTpoicTypeEClass, ReifiableTpoicType.class, "ReifiableTpoicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReifiableTpoicType_ReifierConstraint(), this.getReifierConstraint(), null, "reifierConstraint", null, 0, 1, ReifiableTpoicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(reifiableTopicTypeEClass, ReifiableTopicType.class, "ReifiableTopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReifiableTopicType_ReifierConstraint(), this.getReifierConstraint(), null, "reifierConstraint", null, 0, 1, ReifiableTopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopedReifiableTopicTypeEClass, ScopedReifiableTopicType.class, "ScopedReifiableTopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

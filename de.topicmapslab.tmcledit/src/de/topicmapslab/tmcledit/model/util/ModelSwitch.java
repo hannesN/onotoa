@@ -269,7 +269,7 @@ public class ModelSwitch<T> {
 				T result = caseAssociationType(associationType);
 				if (result == null) result = caseScopedReifiableTopicType(associationType);
 				if (result == null) result = caseScopedTopicType(associationType);
-				if (result == null) result = caseReifiableTpoicType(associationType);
+				if (result == null) result = caseReifiableTopicType(associationType);
 				if (result == null) result = caseTopicType(associationType);
 				if (result == null) result = caseTMCLConstruct(associationType);
 				if (result == null) result = defaultCase(theEObject);
@@ -280,7 +280,7 @@ public class ModelSwitch<T> {
 				T result = caseOccurrenceType(occurrenceType);
 				if (result == null) result = caseScopedReifiableTopicType(occurrenceType);
 				if (result == null) result = caseScopedTopicType(occurrenceType);
-				if (result == null) result = caseReifiableTpoicType(occurrenceType);
+				if (result == null) result = caseReifiableTopicType(occurrenceType);
 				if (result == null) result = caseTopicType(occurrenceType);
 				if (result == null) result = caseTMCLConstruct(occurrenceType);
 				if (result == null) result = defaultCase(theEObject);
@@ -317,7 +317,7 @@ public class ModelSwitch<T> {
 				T result = caseNameType(nameType);
 				if (result == null) result = caseScopedReifiableTopicType(nameType);
 				if (result == null) result = caseScopedTopicType(nameType);
-				if (result == null) result = caseReifiableTpoicType(nameType);
+				if (result == null) result = caseReifiableTopicType(nameType);
 				if (result == null) result = caseTopicType(nameType);
 				if (result == null) result = caseTMCLConstruct(nameType);
 				if (result == null) result = defaultCase(theEObject);
@@ -355,11 +355,11 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.REIFIABLE_TPOIC_TYPE: {
-				ReifiableTpoicType reifiableTpoicType = (ReifiableTpoicType)theEObject;
-				T result = caseReifiableTpoicType(reifiableTpoicType);
-				if (result == null) result = caseTopicType(reifiableTpoicType);
-				if (result == null) result = caseTMCLConstruct(reifiableTpoicType);
+			case ModelPackage.REIFIABLE_TOPIC_TYPE: {
+				ReifiableTopicType reifiableTopicType = (ReifiableTopicType)theEObject;
+				T result = caseReifiableTopicType(reifiableTopicType);
+				if (result == null) result = caseTopicType(reifiableTopicType);
+				if (result == null) result = caseTMCLConstruct(reifiableTopicType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -367,7 +367,7 @@ public class ModelSwitch<T> {
 				ScopedReifiableTopicType scopedReifiableTopicType = (ScopedReifiableTopicType)theEObject;
 				T result = caseScopedReifiableTopicType(scopedReifiableTopicType);
 				if (result == null) result = caseScopedTopicType(scopedReifiableTopicType);
-				if (result == null) result = caseReifiableTpoicType(scopedReifiableTopicType);
+				if (result == null) result = caseReifiableTopicType(scopedReifiableTopicType);
 				if (result == null) result = caseTopicType(scopedReifiableTopicType);
 				if (result == null) result = caseTMCLConstruct(scopedReifiableTopicType);
 				if (result == null) result = defaultCase(theEObject);
@@ -858,17 +858,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reifiable Tpoic Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Reifiable Topic Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reifiable Tpoic Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Reifiable Topic Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseReifiableTpoicType(ReifiableTpoicType object) {
+	public T caseReifiableTopicType(ReifiableTopicType object) {
 		return null;
 	}
 

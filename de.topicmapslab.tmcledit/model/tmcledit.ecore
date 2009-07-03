@@ -193,8 +193,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReifierConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ReifiableTpoicType" eSuperTypes="#//TopicType">
+  <eClassifiers xsi:type="ecore:EClass" name="ReifiableTopicType" eSuperTypes="#//TopicType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reifierConstraint" eType="#//ReifierConstraint"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ScopedReifiableTopicType" eSuperTypes="#//ScopedTopicType #//ReifiableTpoicType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopedReifiableTopicType" eSuperTypes="#//ScopedTopicType #//ReifiableTopicType"/>
 </ecore:EPackage>

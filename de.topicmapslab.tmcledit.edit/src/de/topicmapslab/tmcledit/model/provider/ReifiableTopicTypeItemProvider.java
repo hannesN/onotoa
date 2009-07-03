@@ -7,7 +7,7 @@ package de.topicmapslab.tmcledit.model.provider;
 
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.ReifiableTpoicType;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,12 +24,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.ReifiableTpoicType} object.
+ * This is the item provider adapter for a {@link de.topicmapslab.tmcledit.model.ReifiableTopicType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ReifiableTpoicTypeItemProvider
+public class ReifiableTopicTypeItemProvider
 	extends TopicTypeItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -43,7 +43,7 @@ public class ReifiableTpoicTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReifiableTpoicTypeItemProvider(AdapterFactory adapterFactory) {
+	public ReifiableTopicTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -74,9 +74,9 @@ public class ReifiableTpoicTypeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ReifiableTpoicType_reifierConstraint_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReifiableTpoicType_reifierConstraint_feature", "_UI_ReifiableTpoicType_type"),
-				 ModelPackage.Literals.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT,
+				 getString("_UI_ReifiableTopicType_reifierConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReifiableTopicType_reifierConstraint_feature", "_UI_ReifiableTopicType_type"),
+				 ModelPackage.Literals.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT,
 				 true,
 				 false,
 				 true,
@@ -86,14 +86,14 @@ public class ReifiableTpoicTypeItemProvider
 	}
 
 	/**
-	 * This returns ReifiableTpoicType.gif.
+	 * This returns ReifiableTopicType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ReifiableTpoicType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ReifiableTopicType"));
 	}
 
 	/**
@@ -104,10 +104,10 @@ public class ReifiableTpoicTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ReifiableTpoicType)object).getName();
+		String label = ((ReifiableTopicType)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ReifiableTpoicType_type") :
-			getString("_UI_ReifiableTpoicType_type") + " " + label;
+			getString("_UI_ReifiableTopicType_type") :
+			getString("_UI_ReifiableTopicType_type") + " " + label;
 	}
 
 	/**

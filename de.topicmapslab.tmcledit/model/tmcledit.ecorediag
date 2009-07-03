@@ -742,7 +742,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_TeMHV2cSEd6jTpYgtxwJ_Q"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_TeHO0WcSEd6jTpYgtxwJ_Q" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//ReifiableTpoicType"/>
+    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//ReifiableTopicType"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TeHO0mcSEd6jTpYgtxwJ_Q" x="372" y="564"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_AwbLMGcTEd6jTpYgtxwJ_Q" type="1001">
@@ -1393,7 +1393,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_VvW4sWcSEd6jTpYgtxwJ_Q" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_VvW4smcSEd6jTpYgtxwJ_Q" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="tmcledit.ecore#//ReifiableTpoicType/reifierConstraint"/>
+    <element xmi:type="ecore:EReference" href="tmcledit.ecore#//ReifiableTopicType/reifierConstraint"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VvW4s2cSEd6jTpYgtxwJ_Q" points="[-9, 7, 115, -1]$[-98, 7, 26, -1]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Vvc_UGcSEd6jTpYgtxwJ_Q" id="(0.07042253521126761,0.5116279069767442)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Vvc_UWcSEd6jTpYgtxwJ_Q" id="(0.7984496124031008,0.6976744186046512)"/>

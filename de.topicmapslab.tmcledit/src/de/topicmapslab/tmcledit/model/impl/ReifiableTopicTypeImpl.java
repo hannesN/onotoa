@@ -6,7 +6,7 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.ReifiableTpoicType;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -18,18 +18,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reifiable Tpoic Type</b></em>'.
+ * An implementation of the model object '<em><b>Reifiable Topic Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.ReifiableTpoicTypeImpl#getReifierConstraint <em>Reifier Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.ReifiableTopicTypeImpl#getReifierConstraint <em>Reifier Constraint</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTpoicType {
+public class ReifiableTopicTypeImpl extends TopicTypeImpl implements ReifiableTopicType {
 	/**
 	 * The cached value of the '{@link #getReifierConstraint() <em>Reifier Constraint</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -45,7 +45,7 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ReifiableTpoicTypeImpl() {
+	protected ReifiableTopicTypeImpl() {
 		super();
 	}
 
@@ -56,7 +56,7 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.REIFIABLE_TPOIC_TYPE;
+		return ModelPackage.Literals.REIFIABLE_TOPIC_TYPE;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 			reifierConstraint = (ReifierConstraint)eResolveProxy(oldReifierConstraint);
 			if (reifierConstraint != oldReifierConstraint) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
 			}
 		}
 		return reifierConstraint;
@@ -94,7 +94,7 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 		ReifierConstraint oldReifierConstraint = reifierConstraint;
 		reifierConstraint = newReifierConstraint;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT:
+			case ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT:
 				if (resolve) return getReifierConstraint();
 				return basicGetReifierConstraint();
 		}
@@ -120,7 +120,7 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT:
+			case ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT:
 				setReifierConstraint((ReifierConstraint)newValue);
 				return;
 		}
@@ -135,7 +135,7 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT:
+			case ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT:
 				setReifierConstraint((ReifierConstraint)null);
 				return;
 		}
@@ -150,10 +150,10 @@ public class ReifiableTpoicTypeImpl extends TopicTypeImpl implements ReifiableTp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT:
+			case ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT:
 				return reifierConstraint != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ReifiableTpoicTypeImpl
+} //ReifiableTopicTypeImpl

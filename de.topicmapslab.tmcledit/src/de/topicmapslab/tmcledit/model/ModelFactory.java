@@ -287,13 +287,13 @@ public interface ModelFactory extends EFactory {
 	ReifierConstraint createReifierConstraint();
 
 	/**
-	 * Returns a new object of class '<em>Reifiable Tpoic Type</em>'.
+	 * Returns a new object of class '<em>Reifiable Topic Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Reifiable Tpoic Type</em>'.
+	 * @return a new object of class '<em>Reifiable Topic Type</em>'.
 	 * @generated
 	 */
-	ReifiableTpoicType createReifiableTpoicType();
+	ReifiableTopicType createReifiableTopicType();
 
 	/**
 	 * Returns a new object of class '<em>Scoped Reifiable Topic Type</em>'.

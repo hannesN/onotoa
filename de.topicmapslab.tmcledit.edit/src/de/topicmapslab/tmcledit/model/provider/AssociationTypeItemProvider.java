@@ -78,9 +78,9 @@ public class AssociationTypeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ReifiableTpoicType_reifierConstraint_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReifiableTpoicType_reifierConstraint_feature", "_UI_ReifiableTpoicType_type"),
-				 ModelPackage.Literals.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT,
+				 getString("_UI_ReifiableTopicType_reifierConstraint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReifiableTopicType_reifierConstraint_feature", "_UI_ReifiableTopicType_type"),
+				 ModelPackage.Literals.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT,
 				 true,
 				 false,
 				 true,

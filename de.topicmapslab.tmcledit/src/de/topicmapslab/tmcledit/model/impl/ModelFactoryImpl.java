@@ -98,7 +98,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.COMMENT: return createComment();
 			case ModelPackage.TMCL_CONSTRUCT: return createTMCLConstruct();
 			case ModelPackage.REIFIER_CONSTRAINT: return createReifierConstraint();
-			case ModelPackage.REIFIABLE_TPOIC_TYPE: return createReifiableTpoicType();
+			case ModelPackage.REIFIABLE_TOPIC_TYPE: return createReifiableTopicType();
 			case ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE: return createScopedReifiableTopicType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -428,9 +428,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReifiableTpoicType createReifiableTpoicType() {
-		ReifiableTpoicTypeImpl reifiableTpoicType = new ReifiableTpoicTypeImpl();
-		return reifiableTpoicType;
+	public ReifiableTopicType createReifiableTopicType() {
+		ReifiableTopicTypeImpl reifiableTopicType = new ReifiableTopicTypeImpl();
+		return reifiableTopicType;
 	}
 
 	/**

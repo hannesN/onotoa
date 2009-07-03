@@ -13,6 +13,7 @@ package de.topicmapslab.tmcledit.export.builder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.tinytim.voc.Namespace;
 import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
 import org.tmapi.core.Association;
@@ -30,6 +31,8 @@ import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
@@ -99,7 +102,8 @@ public class TMCLTopicMapBuilder {
 					setOtherRoleConstraint(at, rt, orpc);
 				}
 			}
-			
+			if (at.getReifierConstraint()!=null)
+				setReifierConstraint(at);
 		}
 	}
 
@@ -230,10 +234,16 @@ public class TMCLTopicMapBuilder {
 	}
 
 	private void setOverlapConstraint(TopicType type, TopicType othertype) {
-		Association ass = topicMap.createAssociation(createConstraint(TMCL.OVERLAP_DECLARATION));
-		ass.createRole(createTopic(TMCL.OVERLAPS), createTopic(othertype));
-		ass.createRole(createTopic(TMCL.OVERLAPS), createTopic(type));
-	    
+		Topic constr = createConstraint(TMCL.OVERLAP_DECLARATION);
+		
+		createOverlaps(othertype, constr);
+		createOverlaps(type, constr);
+    }
+
+	private void createOverlaps(TopicType type, Topic constraint) {
+	    Association ass = topicMap.createAssociation(createTopic(TMCL.OVERLAPS));
+		ass.createRole(createTopic(TMCL.ALLOWS), constraint);
+		ass.createRole(createTopic(TMCL.ALLOWED), createTopic(type));
     }
 
 	private void setNameTypeConstraint(Topic t, NameTypeConstraint ntc) {
@@ -247,6 +257,9 @@ public class TMCLTopicMapBuilder {
 
 		createConstrainedTopicType(t, constr);
 		createConstrainedStatement(nt, constr);
+		
+		if (nt.getReifierConstraint()!=null)
+			setReifierConstraint(nt);
 	}
 
 	private void createConstrainedStatement(TopicType tt, Topic constr) {
@@ -276,9 +289,29 @@ public class TMCLTopicMapBuilder {
 
 		createConstrainedTopicType(t, constr);
 		createConstrainedStatement(otype, constr);
+		if (otype.getReifierConstraint()!=null)
+			setReifierConstraint(otype);
 
 	}
-
+	
+	private void setReifierConstraint(ReifiableTopicType rft) {
+		ReifierConstraint constraint = rft.getReifierConstraint();
+		Topic constr = createConstraint(TMCL.REIFIER_CONSTRAINT);
+		addCardinalityOccurrences(constr, constraint.getCardMin(), constraint.getCardMax());
+		
+		createConstrainedStatement(rft, constr);
+		
+		Association ass = topicMap.createAssociation(createTopic(TMCL.ALLOWED_REIFIER));
+		ass.createRole(createTopic(TMCL.ALLOWS), constr);
+		Topic t = null;
+		if ( (constraint.getCardMax().equals("0")) || (constraint.getType()==null) )
+			t = createTopic(topicMap.createLocator(Namespace.TMDM_MODEL+"/subject"));
+		else
+			t = createTopic(constraint.getType());
+		ass.createRole(createTopic(TMCL.ALLOWED), t);
+		
+	}
+	
 	private Topic createConstraint(Locator type) {
 		Topic constr = topicMap.createTopic();
 

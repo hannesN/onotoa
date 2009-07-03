@@ -18,7 +18,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.ReifiableTpoicType;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 
@@ -233,9 +233,9 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ReifiableTpoicType.class) {
+		if (baseClass == ReifiableTopicType.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT: return ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT;
+				case ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT: return ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT;
 				default: return -1;
 			}
 		}
@@ -254,9 +254,9 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ReifiableTpoicType.class) {
+		if (baseClass == ReifiableTopicType.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.REIFIABLE_TPOIC_TYPE__REIFIER_CONSTRAINT: return ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT;
+				case ModelPackage.REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT: return ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT;
 				default: return -1;
 			}
 		}
