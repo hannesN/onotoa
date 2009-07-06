@@ -15,10 +15,13 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
@@ -47,12 +50,24 @@ public class CommentPropertyModelPage extends AbstractModelPage {
 
 	}
 
+	@Override
+	protected void setEnabled(boolean enabled) {
+		contentText.setEnabled(enabled);
+	}
+	
 	private Comment getCastedModel() {
 		return (Comment) getModel();
 	}
 	
 	@Override
-	public void createControl(Composite parent) {
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		CTabItem item = new CTabItem(folder, SWT.None);
+		item.setText("General");
+		item.setControl(createPage(folder));
+	}
+	
+	public Control createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Section section = toolkit.createSection(parent, Section.EXPANDED|Section.TITLE_BAR);
 		section.setText("Comment:");
@@ -68,11 +83,16 @@ public class CommentPropertyModelPage extends AbstractModelPage {
 			}
 		});
 		section.setClient(comp);
-		setControl(section);
+		return section;
 	}
 
 	public void notifyChanged(Notification notification) {
 		updateUI();
+	}
+	
+	@Override
+	protected boolean hasDocumentation() {
+		return false;
 	}
 
 }

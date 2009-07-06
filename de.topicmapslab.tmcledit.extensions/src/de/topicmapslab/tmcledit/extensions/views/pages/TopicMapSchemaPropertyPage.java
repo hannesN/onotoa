@@ -13,6 +13,8 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.layout.GridData;
@@ -30,6 +32,7 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 
 	private Text nameText;
 	private Text baseLocatorText;
+	private CTabItem item;
 
 	public TopicMapSchemaPropertyPage() {
 		super("topicmapschema");
@@ -37,6 +40,7 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 
 	@Override
 	public void updateUI() {
+		super.updateUI();
 		if (nameText == null)
 			return;
 		if (getCastedModel() != null) {
@@ -55,13 +59,12 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 		return (TopicMapSchema) getModel();
 	}
 
-	@Override
-	public void createControl(Composite parent) {
-		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+	protected Composite createPage(CTabFolder folder) {
+		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 
 		GridDataFactory fac = GridDataFactory.createFrom(new GridData(GridData.FILL_HORIZONTAL));
 		
-		Section section = toolkit.createSection(parent, SWT.TITLE);
+		Section section = toolkit.createSection(folder, SWT.TITLE);
 		section.setText("Topic Map Schema");
 		Composite comp = toolkit.createComposite(section);
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -85,7 +88,21 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 		baseLocatorText.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR));
 
 		section.setClient(comp);
-		setControl(section);
+		
+		return comp;
+	}
+	
+	@Override
+	protected void setEnabled(boolean enabled) {
+		item.getControl().setEnabled(enabled);
+	}
+	
+	@Override
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		item = new CTabItem(folder, SWT.None);
+		item.setText("General");
+		item.setControl(createPage(folder));
 	}
 
 	public void notifyChanged(Notification notification) {

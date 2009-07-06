@@ -29,6 +29,8 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -62,6 +64,8 @@ public class PrefixMappingPage extends AbstractModelPage {
 	private Button addButton;
 
 	private Button removeButton;
+
+	private CTabItem item;
 
 	public PrefixMappingPage() {
 		super("prefix mapping");
@@ -104,11 +108,7 @@ public class PrefixMappingPage extends AbstractModelPage {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.part.Page#createControl(org.eclipse.swt.widgets.Composite)
-	 */
-	@Override
-	public void createControl(Composite parent) {
+	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		
 		Composite comp = toolkit.createComposite(parent);
@@ -116,8 +116,25 @@ public class PrefixMappingPage extends AbstractModelPage {
 		
 		createButtonComposite(toolkit, comp);
 		createTableViewer(toolkit, comp);
-		
-		setControl(comp);
+		return comp;
+	}
+	
+	@Override
+	protected boolean hasDocumentation() {
+		return false;
+	}
+	
+	@Override
+	protected void setEnabled(boolean enabled) {
+		item.getControl().setEnabled(enabled);
+	}
+	
+	@Override
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		item = new CTabItem(folder, SWT.None);
+		item.setText("General");
+		item.setControl(createPage(folder));	
 	}
 
 	private void createButtonComposite(FormToolkit toolkit, Composite parent) {

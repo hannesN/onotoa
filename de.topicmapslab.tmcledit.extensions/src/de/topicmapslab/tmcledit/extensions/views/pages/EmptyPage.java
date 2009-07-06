@@ -14,6 +14,9 @@
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -25,15 +28,23 @@ public class EmptyPage extends AbstractModelPage {
 	}
 	
 	@Override
-	public void createControl(Composite parent) {
-		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		Composite comp = toolkit.createComposite(parent);
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
+		CTabItem item = new CTabItem(folder, SWT.NONE);
+
+		Composite comp = toolkit.createComposite(folder);
 		comp.setLayout(new GridLayout());
 		toolkit.createLabel(comp, "No Item Selected");
 		
-		setControl(comp);
+		item.setControl(comp);
 	}
-
+	
+	@Override
+	protected boolean hasDocumentation() {
+		return false;
+	}
+	
 	@Override
 	public void setFocus() {
 	}
@@ -43,5 +54,9 @@ public class EmptyPage extends AbstractModelPage {
 	}
 
 	public void notifyChanged(Notification notification) {
+	}
+	
+	@Override
+	protected void setEnabled(boolean enabled) {
 	}
 }

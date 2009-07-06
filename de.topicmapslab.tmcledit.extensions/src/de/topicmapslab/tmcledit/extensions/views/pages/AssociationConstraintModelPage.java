@@ -51,9 +51,9 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 
 	private Text typeText;
 	private Section section;
+	private CTabItem item;
 
 	private AssociationTypeModelPage typeModelPage;
-	private CTabFolder folder;
 
 	public AssociationConstraintModelPage() {
 		super("association_constraint");
@@ -61,6 +61,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 
 	@Override
 	public void updateUI() {
+		super.updateUI();
 		AssociationTypeConstraint asc = getCastedModel();
 		section.setText("Association Constraint:");
 		if (asc.getType() == null) {
@@ -74,25 +75,19 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		return (AssociationTypeConstraint) getModel();
 	}
 
+	
 	@Override
-	public void createControl(Composite parent) {
-		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
+
+		item = new CTabItem(folder, SWT.NONE);
+		item.setText("Association Constraint Properties");
+		item.setControl(createConstraintSection(folder, toolkit));
 
 		typeModelPage = new AssociationTypeModelPage();
-
-		folder = new CTabFolder(parent, SWT.NONE);
-		typeModelPage.createControl(folder);
-
-		CTabItem item1 = new CTabItem(folder, SWT.NONE);
-		item1.setText("Association Constraint Properties");
-		item1.setControl(createConstraintSection(folder, toolkit));
-
-		CTabItem item2 = new CTabItem(folder, SWT.NONE);
-		item2.setText("Association Type Properties");
-		item2.setControl(typeModelPage.getControl());
-
-		folder.setSelection(item1);
-		setControl(folder);
+		typeModelPage.createItems(folder);
+		
 	}
 
 	private Composite createConstraintSection(Composite parent,
@@ -157,15 +152,14 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 	}
 
 	@Override
-	public void aboutToHide() {
-		super.aboutToHide();
-		folder.setSelection(0);
-	}
-
-	@Override
 	public void setModel(Object model) {
 		super.setModel(model);
 		typeModelPage.setModel(getCastedModel().getType());
+	}
+	
+	@Override
+	protected void setEnabled(boolean enabled) {
+		item.getControl().setEnabled(enabled);
 	}
 
 	@Override

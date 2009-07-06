@@ -37,10 +37,9 @@ public class RoleModelPage extends AbstractModelPage{
 	private Text cardMinText;
 	private Text cardMaxText;
 	private Combo roleCombo;
-
+	private CTabItem item;
 	
 	private AssociationTypeModelPage assPage;
-	private CTabFolder folder;
 	
 	public RoleModelPage() {
 		super("role");
@@ -54,29 +53,29 @@ public class RoleModelPage extends AbstractModelPage{
 		
 		cardMinText.setText(rpc.getCardMin());
 		cardMaxText.setText(rpc.getCardMax());
-		
+		super.updateUI();
 	}
-
+	
+	
 	@Override
-	public void createControl(Composite parent) {
-		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		folder = new CTabFolder(parent, SWT.NONE);
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 
-		CTabItem item1 = new CTabItem(folder, SWT.NONE);
-		item1.setText("Role Player Properties");
+		item = new CTabItem(folder, SWT.NONE);
+		item.setText("Role Player Properties");
 		Composite comp = createRoleConstraintProps(folder, toolkit);
 		
-		item1.setControl(comp);
+		item.setControl(comp);
 		
 		assPage = new AssociationTypeModelPage();
-		assPage.createControl(folder);
-		
-		CTabItem item2 = new CTabItem(folder, SWT.NONE);
-		item2.setText("Association Type Properties");
-		item2.setControl(assPage.getControl());
-		
-		folder.setSelection(item1);
-		setControl(folder);
+		assPage.createItems(folder);
+	}
+	
+
+	@Override
+	protected void setEnabled(boolean enabled) {
+		item.getControl().setEnabled(enabled);
 	}
 
 	@Override
@@ -154,12 +153,6 @@ public class RoleModelPage extends AbstractModelPage{
 
 	protected AssociationType getAssociationType() {
 		return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
-	}
-	
-	@Override
-	public void aboutToHide() {
-		super.aboutToHide();
-		folder.setSelection(0);
 	}
 	
 	public void notifyChanged(Notification notification) {

@@ -205,6 +205,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void updateUI() {
+		super.updateUI();
 		if (getCastedModel() == null)
 			control
 					.setInput((List<? extends AbstractTypedCardinalityConstraint>) Collections

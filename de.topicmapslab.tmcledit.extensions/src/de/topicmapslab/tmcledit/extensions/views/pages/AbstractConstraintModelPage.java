@@ -41,6 +41,7 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 	
 	@Override
 	public void updateUI() {
+		super.updateUI();
 		cardMinText.setText(getCastedModel().getCardMin());
 		cardMaxText.setText(getCastedModel().getCardMax());
 		regExpText.setText(getCastedModel().getRegexp());

@@ -64,11 +64,9 @@ public class RoleTypeModelPage extends TopicTypePage {
 		super("role type");
 	}
 
-	@Override
-	public void createControl(Composite parent) {
-		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		
-		CTabFolder folder = new CTabFolder(parent, SWT.NONE);
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 		
 		CTabItem item1 = new CTabItem(folder, SWT.NONE);
 		item1.setText("Role Type");
@@ -78,11 +76,8 @@ public class RoleTypeModelPage extends TopicTypePage {
 		
 		CTabItem item2 = new CTabItem(folder, SWT.None);
 		item2.setText("Other Role Constraints");
-		
 		item2.setControl(getOtherRoleWidget(folder, toolkit));
 		
-		folder.setSelection(item1);
-		setControl(folder);
 	}
 
 	private Composite getButtonBar(Composite parent, FormToolkit toolkit) {
