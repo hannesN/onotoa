@@ -68,11 +68,7 @@ public class RoleTypeModelPage extends TopicTypePage {
 		super.createItems(folder);
 		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 		
-		CTabItem item1 = new CTabItem(folder, SWT.NONE);
-		item1.setText("Role Type");
-		super.createControl(folder);
-		item1.setControl(getControl());
-		
+		item.setText("Role Type");
 		
 		CTabItem item2 = new CTabItem(folder, SWT.None);
 		item2.setText("Other Role Constraints");
