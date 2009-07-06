@@ -56,7 +56,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	private Text akoText;
 	private Button abstractButton;
 
-	private CTabItem item;
+	protected CTabItem item;
 	private Text overlapText;
 
 	public TopicTypePage() {

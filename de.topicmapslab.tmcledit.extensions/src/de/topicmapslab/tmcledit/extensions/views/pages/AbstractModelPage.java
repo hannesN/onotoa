@@ -210,6 +210,9 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		if (model == null)
 			return;
 
+		if (descriptionText==null)
+			return;
+		
 		String tmp = model.getDescription();
 		if (tmp == null)
 			descriptionText.setText("");
