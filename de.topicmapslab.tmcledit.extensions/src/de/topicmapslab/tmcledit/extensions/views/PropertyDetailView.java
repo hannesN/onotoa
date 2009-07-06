@@ -51,6 +51,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	private ScrolledPageBook pageBook;
 	private AbstractModelPage currentPage;
 	private PropertyDetailPageFactory pageFactory;
+	private Object lastSelection = null;
 
 	@Override
 	public void init(IViewSite site) throws PartInitException {
@@ -105,6 +106,9 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				if (obj instanceof TreeObject) {
 					obj = ((TreeTopic)obj).getModel();
 				}
+				if (obj.equals(lastSelection))
+					return;
+				lastSelection = obj;
 				AbstractModelPage page = pageFactory.getPageFor(obj);
 				setCurrentPage(page);
 				page.setModel(obj);

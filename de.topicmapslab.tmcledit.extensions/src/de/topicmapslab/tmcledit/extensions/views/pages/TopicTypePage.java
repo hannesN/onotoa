@@ -17,6 +17,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -27,14 +29,13 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
-import de.topicmapslab.tmcledit.model.commands.SetOverlapCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
+import de.topicmapslab.tmcledit.model.commands.SetOverlapCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
 import de.topicmapslab.tmcledit.model.dialogs.StringListSelectionDialog;
@@ -55,7 +56,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	private Text akoText;
 	private Button abstractButton;
 
-	private Section section;
+	private CTabItem item;
 	private Text overlapText;
 
 	public TopicTypePage() {
@@ -66,23 +67,15 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		super(id);
 	}
 
-	@Override
-	public void createControl(Composite parent) {
+	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 
-		section = toolkit.createSection(parent, Section.EXPANDED
-				| Section.TITLE_BAR);
-		section.setText("");
-		GridData gd = new GridData(GridData.FILL_BOTH);
-		gd.minimumHeight = 20;
-		gd.minimumWidth = 20;
-		section.setLayoutData(gd);
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(3, false));
 
 		toolkit.createLabel(comp, "Name:");
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		nameText.setLayoutData(gd);
 		nameText.addFocusListener(new FocusAdapter() {
@@ -227,11 +220,17 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			}
 		});
 
-		section.setClient(comp);
-
 		createAdditionalControls(comp, toolkit);
 
-		setControl(section);
+		return comp;
+	}
+	
+	@Override
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		item = new CTabItem(folder, SWT.None);
+		item.setText("Topic Type");
+		item.setControl(createPage(folder));
 	}
 
 	public void notifyChanged(Notification notification) {
@@ -239,12 +238,17 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	}
 
 	@Override
+	protected void setEnabled(boolean enabled) {
+		item.getControl().setEnabled(enabled);
+	}
+	
+	@Override
 	public void updateUI() {
 		if (nameText != null) {
 			TopicType t = (TopicType) getModel();
 			if (t != null) {
 				nameText.setText(t.getName());
-				section.setText(getTopicType(t));
+				item.setText(getTopicType(t));
 
 				StringBuffer b = new StringBuffer();
 				for (String s : t.getIdentifiers()) {
@@ -301,7 +305,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 				abstractButton.setSelection(t.isAbstract());
 			} else {
-				section.setText("");
+				item.setText("Topic Type");
 				nameText.setText("");
 				identifierText.setText("");
 				locatorText.setText("");
@@ -312,7 +316,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			}
 
 		}
-		section.layout(true);
+		super.updateUI();
 	}
 
 	protected void createAdditionalControls(Composite parent,

@@ -12,6 +12,8 @@ package de.topicmapslab.tmcledit.extensions.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.layout.GridData;
@@ -30,14 +32,14 @@ public class DiagramPage extends AbstractModelPage {
 	public DiagramPage() {
 		super("diagram");
 	}
-	
+
 	@Override
 	public void updateUI() {
+		super.updateUI();
 		nameText.setText(((Diagram) getModel()).getName());
 	}
 
-	@Override
-	public void createControl(Composite parent) {
+	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(2, false));
@@ -47,8 +49,22 @@ public class DiagramPage extends AbstractModelPage {
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
 		nameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		setControl(comp);
 		hookNameTextListeners();
+		return comp;
+	}
+
+	@Override
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		CTabItem item = new CTabItem(folder, SWT.NONE, SWT.NONE);
+		item.setText("General");
+
+		item.setControl(createPage(folder));
+	}
+
+	@Override
+	protected void setEnabled(boolean enabled) {
+		nameText.setEnabled(enabled);
 	}
 
 	private void hookNameTextListeners() {
@@ -56,19 +72,26 @@ public class DiagramPage extends AbstractModelPage {
 			@Override
 			public void focusLost(FocusEvent e) {
 				String newName = nameText.getText();
-				
+
 				if (newName.length() == 0)
 					return;
-				
+
 				if (newName.equals(((Diagram) getModel()).getName()))
 					return;
 
-				getCommandStack().execute(new RenameDiagramCommand(newName,
+				getCommandStack()
+						.execute(
+								new RenameDiagramCommand(newName,
 										(Diagram) getModel()));
 
 			}
 		});
 
+	}
+
+	@Override
+	protected boolean hasDocumentation() {
+		return false;
 	}
 
 	public void notifyChanged(Notification notification) {

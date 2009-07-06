@@ -45,30 +45,29 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 	private Section section;
 
 	private NameTypeModelPage typeModelPage;
-	private CTabFolder folder;
+	private CTabItem item;
 
 	public NameConstraintDetailPage() {
 		super("name constraint");
 	}
 
 	@Override
-	public void createControl(Composite parent) {
-		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+	protected void createItems(CTabFolder folder) {
+		super.createItems(folder);
+		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
+
+		item = new CTabItem(folder, SWT.NONE);
+		item.setText("Name Constraint Properties");
+		item.setControl(createConstraintComposite(folder, toolkit));
+
 		typeModelPage = new NameTypeModelPage();
-		folder = new CTabFolder(parent, SWT.NONE);
-		typeModelPage.createControl(folder);
+		typeModelPage.createItems(folder);
 
-		CTabItem item1 = new CTabItem(folder, SWT.NONE);
-		item1.setText("Name Constraint Properties");
-		item1.setControl(createConstraintComposite(folder, toolkit));
-
-		CTabItem item2 = new CTabItem(folder, SWT.NONE);
-		item2.setText("Name Type Properties");
-		item2.setControl(typeModelPage.getControl());
-
-		folder.setSelection(item1);
-		setControl(folder);
-
+	}
+	
+	@Override
+	protected void setEnabled(boolean enabled) {
+		item.getControl().setEnabled(enabled);
 	}
 
 	@Override
@@ -76,12 +75,6 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 		super.setModel(model);
 		if (typeModelPage != null)
 			typeModelPage.setModel(getCastedModel().getType());
-	}
-
-	@Override
-	public void aboutToHide() {
-		super.aboutToHide();
-		folder.setSelection(0);
 	}
 
 	private Composite createConstraintComposite(Composite parent,
@@ -155,8 +148,7 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 				&& (getCastedModel().getType().getName() != null))
 			typeText.setText(getCastedModel().getType().getName());
 		else
-			typeText
-					.setText("http://psi.topicmaps.org/iso13250/model/topic-name");
+			typeText.setText("http://psi.topicmaps.org/iso13250/model/topic-name");
 		super.updateUI();
 	}
 
