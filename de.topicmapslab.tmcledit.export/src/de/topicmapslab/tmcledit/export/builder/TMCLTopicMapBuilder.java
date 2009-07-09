@@ -16,6 +16,7 @@ import java.util.Map;
 import org.tinytim.voc.Namespace;
 import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
+import org.tinytim.voc.XSD;
 import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
 import org.tmapi.core.Topic;
@@ -36,6 +37,8 @@ import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
@@ -109,6 +112,7 @@ public class TMCLTopicMapBuilder {
 			}
 			if (at.getReifierConstraint() != null)
 				setReifierConstraint(at);
+			setScopeConstraints(at);
 		}
 	}
 
@@ -185,7 +189,7 @@ public class TMCLTopicMapBuilder {
 		
 		// setting identifiers
 		for (String id : type.getIdentifiers()) {
-			if (id.indexOf(':') != -1) {
+			if (id.indexOf(':') != -1) { // TODO make it more robust
 				String iri = resolveIRI(id);
 				if (iri != null)
 					t.addSubjectIdentifier(topicMap.createLocator(iri));
@@ -272,6 +276,8 @@ public class TMCLTopicMapBuilder {
 
 		if (nt.getReifierConstraint() != null)
 			setReifierConstraint(nt);
+		
+		setScopeConstraints(nt);
 	}
 
 	private void createConstrainedStatement(TopicType tt, Topic constr) {
@@ -284,6 +290,12 @@ public class TMCLTopicMapBuilder {
 		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_TOPIC_TYPE));
 		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
 		ass.createRole(createTopic(TMCL.CONSTRAINED), t);
+	}
+	
+	private void createAllowesScope(TopicType tt, Topic constr) {
+		Association ass = topicMap.createAssociation(createTopic(TMCL.ALLOWED_SCOPE));
+		ass.createRole(createTopic(TMCL.ALLOWS), constr);
+		ass.createRole(createTopic(TMCL.ALLOWED), createTopic(tt));
 	}
 
 	private void setOccurrenceConstraint(Topic t, OccurrenceTypeConstraint otc) {
@@ -305,8 +317,22 @@ public class TMCLTopicMapBuilder {
 		if (otype.getReifierConstraint() != null)
 			setReifierConstraint(otype);
 
+		setScopeConstraints(otype);
 	}
 
+	private void setScopeConstraints(ScopedTopicType type) {
+		for (ScopeConstraint sc : type.getScope()) {
+			Topic constr = createConstraint(TMCL.SCOPE_CONSTRAINT);
+			addCardinalityOccurrences(constr, sc.getCardMin(), sc.getCardMax());
+			addDocumentationOccurrences(constr, sc);
+			
+			createConstrainedStatement(type, constr);
+			createAllowesScope(sc.getType(), constr);
+		}
+	    
+    }
+
+	// TODO drüber guckn
 	private void setReifierConstraint(ReifiableTopicType rft) {
 		ReifierConstraint constraint = rft.getReifierConstraint();
 		Topic constr = createConstraint(TMCL.REIFIER_CONSTRAINT);
@@ -373,7 +399,7 @@ public class TMCLTopicMapBuilder {
 	}
 
 	private void setAbstract(Topic t) {
-		Topic abstrConst = createTopic(TMCL.ABSTRACT_TOPIC_TYPE_CONSTRAINT);
+		Topic abstrConst = createConstraint(TMCL.ABSTRACT_TOPIC_TYPE_CONSTRAINT);
 
 		Association ass = topicMap.createAssociation(topicMap
 		        .createTopicBySubjectIdentifier(TMCL.CONSTRAINED_TOPIC_TYPE));
@@ -408,10 +434,11 @@ public class TMCLTopicMapBuilder {
 	}
 
 	private void addCardinalityOccurrences(Topic constr, String cardMin, String cardMax) {
+		// needed for templates
 		if (!cardMax.equals("0"))
-			constr.createOccurrence(createTopic(TMCL.CARD_MIN), cardMin);
+			constr.createOccurrence(createTopic(TMCL.CARD_MIN), cardMin, XSD.INTEGER);
 		if (!cardMax.equals("*"))
-			constr.createOccurrence(createTopic(TMCL.CARD_MAX), cardMax);
+			constr.createOccurrence(createTopic(TMCL.CARD_MAX), cardMax, XSD.INTEGER);
 	}
 
 	private void setSuperType(Topic subtype, Topic supertype) {
@@ -425,10 +452,14 @@ public class TMCLTopicMapBuilder {
 		int index = id.indexOf(':');
 		String prefix = id.substring(0, index);
 		String value = prefixMap.get(prefix);
-		if (value != null)
-			return value + id.substring(index + 1);
+		if (value != null) {
+			if (value.endsWith("/"))
+				return value + id.substring(index + 1);
+			else
+				return value + "/" + id.substring(index + 1);
+		}
 
-		return null;
+		return id;
 	}
 
 	private Topic getTopicTypes(KindOfTopicType kind) {

@@ -51,6 +51,8 @@ public class FileSelectionWizardPage extends WizardPage {
 				dlg.setFilterExtensions(fileExtensions);
 				String file = dlg.open();
 				if (file!=null) {
+					if (!file.endsWith(fileExtensions[0].substring(1)))
+						file+=fileExtensions[0].substring(1);
 					text.setText(file);
 				}
 			}
@@ -69,4 +71,7 @@ public class FileSelectionWizardPage extends WizardPage {
 		
 	}
 	
+	public String getFilename() {
+		return text.getText();
+	}
 }
