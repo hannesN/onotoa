@@ -10,7 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.wizards;
 
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -28,14 +28,18 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.tinytim.mio.CTMTopicMapWriter;
+import org.tmapi.core.TopicMap;
 
-import de.topicmapslab.tmcledit.export.builder.CTMBuilder;
+import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class TMCLExportWizard extends Wizard implements IExportWizard {
 
@@ -49,7 +53,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 	@Override
 	public boolean performFinish() {
 		if (schema==null)
-			throw new RuntimeException("No topic map schema selected.");
+			schema = ModelIndexer.getInstance().getTopicMapSchema();
 		
 		java.io.File file = new java.io.File(text.getText());
 		
@@ -63,10 +67,19 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		}
 		try
 		{ 
-			CTMBuilder builder = new CTMBuilder();
-			FileWriter writer = new FileWriter(file);
-			writer.append(builder.getCTMText(schema));
-			writer.close();
+			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema);
+			TopicMap tm = builder.createTopicMap();
+			FileOutputStream stream = new FileOutputStream(file);
+			CTMTopicMapWriter writer = new CTMTopicMapWriter(stream, schema.getBaseLocator());
+			for (MappingElement me : schema.getMappings()) {
+				writer.addPrefix(me.getKey(), me.getValue());
+			}
+			writer.setTMCL(true);
+			writer.setAuthor("Onotoa");
+			writer.setComment("This schema was created with onotoa\nhttp://onotoa.topicmapslab.de");
+			writer.write(tm);
+			stream.flush();
+			stream.close();
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e);

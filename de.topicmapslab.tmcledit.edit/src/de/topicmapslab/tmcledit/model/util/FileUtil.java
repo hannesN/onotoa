@@ -41,7 +41,7 @@ public class FileUtil {
 			java.io.File file = new java.io.File(path);
 			File result = null;
 			if (file.isDirectory())
-				return null; //TODO Exception
+				throw new RuntimeException(file.getName()+" is a directory");
 			if (!file.exists()) {
 				ModelFactory einstance = ModelFactory.eINSTANCE;
 				result = einstance.createFile();

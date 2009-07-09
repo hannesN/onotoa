@@ -27,74 +27,72 @@ import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.tinytim.mio.XTM20TopicMapWriter;
 
-
 import de.topicmapslab.tmcledit.export.builder.TinyTiMTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class XTMExportWizard extends Wizard implements IExportWizard {
-	private Text text;
 	private boolean exportConstraintInfos = true;
 	private TopicMapSchema schema;
-	
+	private WizardPage page1;
+
 	public XTMExportWizard() {
 	}
 
 	@Override
 	public boolean performFinish() {
-		if (schema==null)
-			throw new RuntimeException("No topic map schema selected.");
-		
+		if (schema == null)
+			schema = ModelIndexer.getInstance().getTopicMapSchema();
+
 		TinyTiMTopicMapBuilder ttbuilder = new TinyTiMTopicMapBuilder(schema);
-		
-		
-		java.io.File file = new java.io.File(text.getText());
-		
+
+		java.io.File file = new java.io.File(page1.getFilename());
+
 		if (file.exists()) {
-			if (!MessageDialog.openQuestion(getShell(), "File already exists",  
-					"File already exists. Do you want to overwrite it?"))
+			if (!MessageDialog.openQuestion(getShell(), "File already exists",
+			        "File already exists. Do you want to overwrite it?"))
 				return false;
-			
+
 			file.delete();
-			
+
 		}
-		try
-		{
+		try {
 			FileOutputStream os = new FileOutputStream(file);
 			XTM20TopicMapWriter writer = new XTM20TopicMapWriter(os, "http://psi.topicmapslab.de/tmclschema");
 			writer.write(ttbuilder.getTopicMap(exportConstraintInfos));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		
+
 		return true;
 	}
 
 	@Override
 	public void addPages() {
-		
-		WizardPage page1 = new WizardPage();
+
+		page1 = new WizardPage();
 		page1.setFileExtensions(getFilterExtensions());
 		page1.setTitle("XTM Export - File selection");
 		addPage(page1);
-		
+
 	}
-	
+
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		if (selection.isEmpty())
 			return;
-		
+
 		if (!(selection.getFirstElement() instanceof EObject))
 			return;
-		
+
 		EObject obj = (EObject) selection.getFirstElement();
 		if (obj instanceof TopicMapSchema) {
 			schema = (TopicMapSchema) obj;
-		} else if (obj instanceof File) { 
-			schema = ((File)obj).getTopicMapSchema();
+		} else if (obj instanceof File) {
+			schema = ((File) obj).getTopicMapSchema();
 		} else if (obj.eContainer() instanceof TopicType) {
 			schema = (TopicMapSchema) obj.eContainer().eContainer();
 		} else if (obj.eContainer() instanceof TopicMapSchema) {
@@ -109,13 +107,13 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 			File file = (File) obj.eContainer();
 			schema = file.getTopicMapSchema();
 		}
-		
+
 	}
 
 	public String[] getFilterExtensions() {
-		return new String[]{"*.xtm"};
+		return new String[] { "*.xtm" };
 	}
-	
+
 	private class WizardPage extends FileSelectionWizardPage {
 		@Override
 		public void addAdditionalWidgets(Composite parent) {
@@ -128,10 +126,10 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 			exportButton.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					exportConstraintInfos = ((Button)e.widget).getSelection();
+					exportConstraintInfos = ((Button) e.widget).getSelection();
 				}
 			});
-			
+
 		}
 	}
 }

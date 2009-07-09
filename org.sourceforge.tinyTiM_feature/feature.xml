@@ -17,16 +17,9 @@
    </license>
 
    <plugin
-         id="org.sourceforge.tinyTiM"
+         id="tinyTiM_mio"
          download-size="0"
          install-size="0"
          version="2.0.0.a5-snapshot-200907010942"/>
-
-   <plugin
-         id="org.sourceforge.tinyTiM_mio"
-         download-size="0"
-         install-size="0"
-         version="2.0.0.a5-snapshot-200907010942"
-         unpack="false"/>
 
 </feature>
