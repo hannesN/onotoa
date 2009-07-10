@@ -1,3 +1,15 @@
 instructions.configure=\
-  addRepository(type:0,location:file${#58}///home/mai00ckx/projects/onotoa-update-site);\
-  addRepository(type:1,location:file${#58}///home/mai00ckx/projects/onotoa-update-site);
+  addRepository(type:0,location:http${#58}/onotoa.topicmapslab.de/update);\
+  addRepository(type:1,location:http${#58}/onotoa.topicmapslab.de/update);
+  
+requires.1.namespace = org.eclipse.equinox.p2.iu
+requires.1.name = de.topicmapslab.tmcledit.export_feature.feature.group
+requires.1.range = [1.0.0, 1.1.0)
+
+requires.2.namespace = org.eclipse.equinox.p2.iu
+requires.2.name = de.topicmapslab.tmcledit.core_feature.feature.group
+requires.2.range = [1.0.0, 1.1.0)
+
+requires.3.namespace = org.eclipse.equinox.p2.iu
+requires.3.name = org.sourceforge.tinyTiM_feature.feature.group
+requires.3.range = [2.0.0, 2.1.0)

@@ -11,6 +11,9 @@
 	<property name="eclipse.pdebuild.lib" value="${eclipse.home}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/lib" />
 	<property name="eclipse.pdebuild.scripts" value="${eclipse.home}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts" />
 
+	<property name="p2.metadata.repo" value="file:${builder}/repository"/>
+	<property name="p2.artifact.repo" value="file:${builder}/repository"/>
+	
 	<target name="init" depends="clean">
 		<echo message="${buildDirectory}" />
 		<mkdir dir="${buildDirectory}" />
@@ -108,7 +111,8 @@
 
 		
 
-
+		<!-- moving result from buildDir to builder -->
+	<move file="${buildDirectory}/${buildType}.${buildId}/*.zip" todir="${builder}" />
 
 		<!-- refresh the workspace -->
 		<!--
@@ -118,31 +122,6 @@
 		-->
 	</target>
 
-	<target name="product">
-
-		<echo message="Building application for Linux"/>
-
-		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
-			<arg value="-application org.eclipse.equinox.p2.director.app.application"/>
-			<arg value="-metadataRepository ${buildDirectory}/buildRepo"/>
-			<arg value="-artifactRepository ${buildDirectory}/buildRepo"/>
-			<arg value="-installIU de.topicmapslab.tmcledit.application.product"/>
-			<arg value="-destination /tmp/onotoa/"/>
-			<arg value="-profile Onotoa"/>
-			<arg value="-profileProperties org.eclipse.update.install.features=true"/>
-			<arg value="-bundlepool /tmp/onotoa/"/>
-			<arg value="-p2.os linux"/>
-			<arg value="-p2.ws gtk"/>
-			<arg value="-p2.arch x86"/>
-			<arg value="-roaming"/>
-			<arg value="-vmargs"/>
-			<arg value="-Declipse.p2.data.area=/tmp/onotoa/p2"/>
-
-			<classpath>
-				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
-			</classpath>
-		</java>
-	</target>
 
 	<target name="build" depends="clean, init, onotoa" />
 

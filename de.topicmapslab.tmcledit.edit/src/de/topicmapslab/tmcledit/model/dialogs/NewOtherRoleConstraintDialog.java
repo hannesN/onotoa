@@ -21,12 +21,8 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.events.FocusAdapter;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.VerifyEvent;
-import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -53,8 +49,6 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 	private Text playerText;
 	private Text otherRoleText;
 	private Text otherPlayerText;
-	private Text cardMinText;
-	private Text cardMaxText;
 	
 	private OtherRolePlayerConstraint otherRole;
 	private Button assButton;
@@ -119,22 +113,6 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 		otherPlayerButton = new Button(comp, SWT.PUSH);
 		otherPlayerButton.setText("...");
 		
-		l = new Label(comp, SWT.NONE);
-		l.setText("&cardMin:");
-		cardMinText = new Text(comp, SWT.BORDER);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = 2;
-		cardMinText.setLayoutData(gd);
-		
-		
-		l = new Label(comp, SWT.NONE);
-		l.setText("&cardMax:");
-		cardMaxText = new Text(comp, SWT.BORDER);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = 2;
-		cardMaxText.setLayoutData(gd);	
-		
-		hookTextListeners();
 		hookButtonListeners();
 		
 		validate();
@@ -155,19 +133,6 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 		
 		if (getButton(IDialogConstants.OK_ID)!=null)
 			getButton(IDialogConstants.OK_ID).setEnabled(finished);
-		
-		if ("*".equals(cardMaxText.getText()))
-			return;
-		
-		int cardMin = Integer.parseInt(otherRole.getCardMin());
-		int cardMax = Integer.parseInt(otherRole.getCardMax());
-
-		if (cardMin>cardMax) {
-			otherRole.setCardMax(otherRole.getCardMin());
-			cardMaxText.setText(cardMinText.getText());
-		}
-		
-		
 	}
 
 	public OtherRolePlayerConstraint getOtherRole() {
@@ -230,45 +195,4 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 		});
 	}
 	
-	private void hookTextListeners() {
-		cardMinText.addVerifyListener(new NumberVerifyListener(false));
-		cardMaxText.addVerifyListener(new NumberVerifyListener(true));
-		
-		cardMinText.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				otherRole.setCardMin(cardMinText.getText());
-				validate();
-			}
-		});
-		cardMaxText.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				otherRole.setCardMax(cardMaxText.getText());
-				validate();
-			}
-		});
-	}
-
-	private class NumberVerifyListener implements VerifyListener {
-
-		private final boolean isMax;
-		
-		public NumberVerifyListener(boolean isMax) {
-			this.isMax = isMax;
-		}
-		
-		public void verifyText(VerifyEvent e) {
-			if (isMax) {
-				Text text = (Text) e.widget;
-				if ( (text.getText().length()==0) && (e.text.equals("*")) )
-					return;
-			}
-			for (int i=0; i<e.text.length(); i++) {
-				if (!Character.isDigit(e.text.charAt(i)))
-					e.doit = false;
-			}
-		}
-		
-	}
 }
