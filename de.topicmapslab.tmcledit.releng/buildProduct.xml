@@ -38,7 +38,7 @@
 
 
 
-	<target name="onotoa" depends="init">
+	<target name="onotoa" depends="clean,init">
 		<property file="build.properties" />
 		<property file="common.properties" />
 		<echo message="${buildDirectory}" />
@@ -112,8 +112,14 @@
 		
 
 		<!-- moving result from buildDir to builder -->
-	<move file="${buildDirectory}/${buildType}.${buildId}/*.zip" todir="${builder}" />
-
+		<mkdir dir="${builder}/releases"/>
+		<move todir="${builder}/releases" >
+			<fileset dir="${buildDirectory}/${buildType}.${buildId}">
+					<include name="*.zip" />
+			</fileset>
+		</move>
+		
+		<delete dir="${buildDirectory}" />
 		<!-- refresh the workspace -->
 		<!--
 		<echo message="${basedir}" />
@@ -128,6 +134,7 @@
 	<!--This target is responsible for cleaning up the build-directory-->
 	<target name="clean">
 		<echo message="${buildDirectory}" />
-		<delete dir="${buildDirectory}" />
+		<delete dir="${basedir}/repository"/>
+		<delete dir="${basedir}/releases"/>
 	</target>
 </project>
