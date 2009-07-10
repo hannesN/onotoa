@@ -7,7 +7,6 @@ Bundle-Activator: de.topicmapslab.tmcledit.export.Activator
 Bundle-Vendor: H.Niederhausen, Topic Maps Lab
 Eclipse-RegisterBuddy: org.tm4j
 Require-Bundle: org.sourceforge.tinyTiM;bundle-version="2.0.0",
- tinyTiM_mio;bundle-version="2.0.0",
  org.eclipse.ui,
  org.eclipse.core.runtime,
  de.topicmapslab.tmcledit;bundle-version="1.0.0";visibility:=reexport,

@@ -487,6 +487,7 @@
          id="org.eclipse.equinox.launcher.carbon.macosx"
          os="macosx"
          ws="carbon"
+         arch="ppc,x86"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -496,6 +497,7 @@
          id="org.eclipse.swt.carbon.macosx"
          os="macosx"
          ws="carbon"
+         arch="ppc,x86"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -506,6 +508,7 @@
          id="org.eclipse.equinox.launcher.cocoa.macosx"
          os="macosx"
          ws="cocoa"
+         arch="ppc,x86"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -515,6 +518,7 @@
          id="org.eclipse.swt.cocoa.macosx"
          os="macosx"
          ws="cocoa"
+         arch="ppc,x86"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -656,6 +660,9 @@
 
    <plugin
          id="org.eclipse.equinox.launcher.gtk.linux.x86_64"
+         os="linux"
+         ws="gtk"
+         arch="x86_64"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -663,6 +670,50 @@
 
    <plugin
          id="org.eclipse.swt.gtk.linux.x86_64"
+         os="linux"
+         ws="gtk"
+         arch="x86_64"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.core.filesystem.linux.x86_64"
+         os="linux"
+         ws="gtk"
+         arch="x86_64"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.launcher.cocoa.macosx.x86_64"
+         os="macosx"
+         ws="cocoa"
+         arch="x86_64"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+   <plugin
+         id="org.eclipse.swt.cocoa.macosx.x86_64"
+         os="macosx"
+         ws="cocoa"
+         arch="x86_64"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.cocoa"
+         ws="cocoa"
          download-size="0"
          install-size="0"
          version="0.0.0"
