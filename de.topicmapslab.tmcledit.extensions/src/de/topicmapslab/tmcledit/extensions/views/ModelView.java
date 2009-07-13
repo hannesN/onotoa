@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -124,7 +125,8 @@ import de.topicmapslab.tmcledit.model.validation.ValidationResult;
  */
 
 public class ModelView extends ViewPart implements IEditingDomainProvider,
-		ISelectionProvider, CommandStackListener, ISaveablePart, IResourceChangeListener {
+		ISelectionProvider, CommandStackListener, ISaveablePart,
+		IResourceChangeListener {
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 
@@ -264,9 +266,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			@SuppressWarnings("unchecked")
 			@Override
 			public void dragSetData(DragSourceEvent event) {
-				if (viewer==null)
+				if (viewer == null)
 					return;
-				
+
 				IStructuredSelection sel = (IStructuredSelection) viewer
 						.getSelection();
 				// concat every model string and ignore other nodes..
@@ -328,7 +330,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		actionRegistry = new HashMap<String, IAction>();
 		createActions();
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this,
+				IResourceChangeEvent.POST_CHANGE);
 	}
 
 	public void createActions() {
@@ -539,9 +542,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	public void setFilename(String filename, boolean newFile) {
 		IWorkbenchPage page = getViewSite().getPage();
 		if (currFile != null) {
+			if (currFile.getFilename().equals(filename))
+				return;
+			
 			currFile.eAdapters().remove(dirtyListener);
 
-			
 			for (IEditorReference ref : page.getEditorReferences()) {
 				try {
 					if (ref.getEditorInput() instanceof TMCLEditorInput) {
@@ -556,9 +561,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		checkSavedState();
 
-		
 		updateTitle(filename);
-		
+
 		if (contentProvider != null)
 			contentProvider.uninitialize();
 
@@ -598,7 +602,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	private void updateTitle(String filename) {
 		if (filename != null)
-			getSite().getShell().setText("Onotoa - "+filename);
+			getSite().getShell().setText("Onotoa - " + filename);
 		else
 			getSite().getShell().setText("Onotoa");
 	}
@@ -684,7 +688,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 		}
 	}
-	
+
 	@Override
 	public void dispose() {
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
@@ -693,21 +697,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 	public void doSave(IProgressMonitor monitor) {
 		try {
-			FileUtil.saveFile((File) currFile);
+			FileUtil.saveFile((File) currFile, getEditingDomain());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain()
-				.getCommandStack();
-		cmdStack.saveIsDone();
-		currFile.setDirty(false);
+		
 	}
 
 	public void doSaveAs() {
 		FileDialog dlg = new FileDialog(getSite().getShell(), SWT.SAVE);
 		dlg.setText("Save As..");
 		String result = dlg.open();
-		if (result!=null) {
+		if (result != null) {
 			currFile.setFilename(result);
 			doSave(new NullProgressMonitor());
 			updateTitle(currFile.getFilename());
@@ -739,23 +740,29 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 	}
 
 	public void resourceChanged(IResourceChangeEvent event) {
-	IResourceDelta delta = event.getDelta();
-		if (currFile==null)
+		if (currFile == null)
 			return;
 		String filename = currFile.getFilename();
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(filename));
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IFile file = workspace.getRoot().getFileForLocation(new Path(filename));
+		assert(file!=null);
 		IProject project = file.getProject();
+		if (project == null)
+			return;
 		String projectPath = project.getLocation().toOSString();
 		if (filename.startsWith(projectPath)) {
-			filename = project.getName()+"/"+filename.substring(projectPath.length()+1);
-			
+			filename = project.getName() + "/"
+					+ filename.substring(projectPath.length() + 1);
+
 		}
-		IResourceDelta d2 = delta.findMember(new Path(filename));
-		if (d2==null)
+		
+		IResourceDelta delta = event.getDelta().findMember(new Path(filename));
+		if (delta == null)
 			return;
 		
-		if ((d2.getFlags()&IResourceDelta.MOVED_TO)!=0) {
-			
+		if ((delta.getFlags() & IResourceDelta.MOVED_TO) != 0) {
+			String newPath = workspace.getRoot().getLocation().toOSString()+delta.getMovedToPath().toOSString();
+			currFile.setFilename(newPath);
 		}
 	}
 

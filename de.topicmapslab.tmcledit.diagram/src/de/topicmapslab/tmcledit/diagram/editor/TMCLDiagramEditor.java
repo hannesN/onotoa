@@ -218,11 +218,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		try {
-			FileUtil.saveFile((File) diagram.eContainer());
+			FileUtil.saveFile((File) diagram.eContainer(), getEditingDomain());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		((File) diagram.eContainer()).setDirty(false);
 	}
 
 	@Override
