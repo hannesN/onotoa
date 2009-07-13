@@ -709,7 +709,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 		dlg.setText("Save As..");
 		String result = dlg.open();
 		if (result != null) {
+			if ( (!result.endsWith(".ono"))&&(!result.endsWith(".tmcl")) )
+				result += ".ono";
 			currFile.setFilename(result);
+			
 			doSave(new NullProgressMonitor());
 			updateTitle(currFile.getFilename());
 		}

@@ -34,7 +34,7 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 /**
  * The "New" wizard page allows setting the container for the new file as well
  * as the file name. The page will only accept file name without the extension
- * OR with the extension that matches the expected one (tmcl).
+ * OR with the extension that matches the expected one (ono).
  */
 
 public class NewOnototaFileWizardPage extends WizardPage {
@@ -51,8 +51,8 @@ public class NewOnototaFileWizardPage extends WizardPage {
 	 */
 	public NewOnototaFileWizardPage(ISelection selection) {
 		super("wizardPage");
-		setTitle("Multi-page Editor File");
-		setDescription("This wizard creates a new file with *.tmcl extension.");
+		setTitle("New Onotoa File...");
+		setDescription("This wizard creates a new file with *.ono extension.");
 		this.selection = selection;
 	}
 
@@ -105,7 +105,7 @@ public class NewOnototaFileWizardPage extends WizardPage {
 	 */
 
 	private void initialize() {
-		fileText.setText("new_file.tmcl");
+		fileText.setText("new_file.ono");
 		if (selection != null && selection.isEmpty() == false
 				&& selection instanceof IStructuredSelection) {
 			
@@ -182,8 +182,8 @@ public class NewOnototaFileWizardPage extends WizardPage {
 		int dotLoc = fileName.lastIndexOf('.');
 		if (dotLoc != -1) {
 			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase("tmcl") == false) {
-				updateStatus("File extension must be \"tmcl\"");
+			if (ext.equalsIgnoreCase("ono") == false) {
+				updateStatus("File extension must be \"ono\"");
 				return;
 			}
 		}

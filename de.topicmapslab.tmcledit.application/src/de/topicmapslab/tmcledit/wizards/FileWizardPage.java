@@ -71,15 +71,15 @@ public class FileWizardPage extends WizardPage {
 				
 				String path = dlg.open();
 				if (path!=null) {
-					if (!path.endsWith(".tmcl"))
-						path += ".tmcl";
+					if ( (!path.endsWith(".ono"))&&(!path.endsWith(".tmcl")) )
+						path += ".ono";
 					pathText.setText(path);
 					FileWizardPage.this.path = path;
 				}
 				
 			}
 		});
-		path = System.getProperty("user.home")+File.separator+"default.tmcl";
+		path = System.getProperty("user.home")+File.separator+"default.ono";
 		pathText.setText(path);
 		setControl(comp);
 	}
