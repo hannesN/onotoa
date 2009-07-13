@@ -8,3 +8,5 @@ onotoa-update-site/artifacts.jar
 onotoa-update-site/content.jar
 onotoa-update-site/features/
 onotoa-update-site/plugins/*
+de.topicmapslab.tmcledit.releng/releases
+de.topicmapslab.tmcledit.releng/repository

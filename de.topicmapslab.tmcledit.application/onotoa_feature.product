@@ -26,8 +26,8 @@
 
    <features>
       <feature id="de.topicmapslab.tmcledit.application_feature" version="1.0.3"/>
-      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.0.3.b1"/>
-      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.0.3.b1"/>
+      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.0.3.b4"/>
+      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.0.3.b2"/>
       <feature id="org.sourceforge.tinyTiM_feature" version="2.0.0.a5-snapshot-200907100942"/>
    </features>
 
