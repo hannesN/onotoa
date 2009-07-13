@@ -13,6 +13,7 @@ package de.topicmapslab.tmcledit.extensions.wizards;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -104,22 +105,31 @@ public class NewOnototaFileWizardPage extends WizardPage {
 	 */
 
 	private void initialize() {
+		fileText.setText("new_file.tmcl");
 		if (selection != null && selection.isEmpty() == false
 				&& selection instanceof IStructuredSelection) {
+			
 			IStructuredSelection ssel = (IStructuredSelection) selection;
 			if (ssel.size() > 1)
 				return;
+			
 			Object obj = ssel.getFirstElement();
-			if (obj instanceof IResource) {
-				IContainer container;
-				if (obj instanceof IContainer)
-					container = (IContainer) obj;
-				else
-					container = ((IResource) obj).getParent();
-				containerText.setText(container.getFullPath().toString());
+			IResource res = null;
+			if (obj instanceof IAdaptable) {
+				IAdaptable a = (IAdaptable) obj;
+				res = (IResource) a.getAdapter(IResource.class);
 			}
+			if (res==null)
+				return;
+			
+			IContainer container;
+			if (res instanceof IContainer)
+				container = (IContainer) res;
+			else
+				container = res.getParent();
+			containerText.setText(container.getFullPath().toString());
+			
 		}
-		fileText.setText("new_file.tmcl");
 	}
 
 	/**
