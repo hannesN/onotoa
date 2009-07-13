@@ -111,5 +111,19 @@
             name="Onotoa">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="de.topicmapslab.tmcledit.category"
+            name="Onotoa">
+      </category>
+      <wizard
+            category="de.topicmapslab.tmcledit.category"
+            class="de.topicmapslab.tmcledit.extensions.wizards.NewOnototaFileWizard"
+            icon="icons/sample.gif"
+            id="de.topicmapslab.tmcledit.extensions.wizards.NewOnototaFileWizard"
+            name="New Onotoa File">
+      </wizard>
+   </extension>
 
 </plugin>
