@@ -18,7 +18,6 @@ import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
 import org.tinytim.voc.XSD;
 import org.tmapi.core.Association;
-import org.tmapi.core.Construct;
 import org.tmapi.core.Locator;
 import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;

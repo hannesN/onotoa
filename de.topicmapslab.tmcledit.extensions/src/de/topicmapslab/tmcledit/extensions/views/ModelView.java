@@ -19,9 +19,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.command.CommandStackListener;
@@ -117,7 +124,7 @@ import de.topicmapslab.tmcledit.model.validation.ValidationResult;
  */
 
 public class ModelView extends ViewPart implements IEditingDomainProvider,
-		ISelectionProvider, CommandStackListener, ISaveablePart {
+		ISelectionProvider, CommandStackListener, ISaveablePart, IResourceChangeListener {
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 
@@ -321,6 +328,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		actionRegistry = new HashMap<String, IAction>();
 		createActions();
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	public void createActions() {
@@ -676,6 +684,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			}
 		}
 	}
+	
+	@Override
+	public void dispose() {
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+		super.dispose();
+	}
 
 	public void doSave(IProgressMonitor monitor) {
 		try {
@@ -722,6 +736,27 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 			setFilename(value, false);
 		else
 			super.setPartProperty(key, value);
+	}
+
+	public void resourceChanged(IResourceChangeEvent event) {
+	IResourceDelta delta = event.getDelta();
+		if (currFile==null)
+			return;
+		String filename = currFile.getFilename();
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(filename));
+		IProject project = file.getProject();
+		String projectPath = project.getLocation().toOSString();
+		if (filename.startsWith(projectPath)) {
+			filename = project.getName()+"/"+filename.substring(projectPath.length()+1);
+			
+		}
+		IResourceDelta d2 = delta.findMember(new Path(filename));
+		if (d2==null)
+			return;
+		
+		if ((d2.getFlags()&IResourceDelta.MOVED_TO)!=0) {
+			
+		}
 	}
 
 	class ViewContentProvider implements IStructuredContentProvider,

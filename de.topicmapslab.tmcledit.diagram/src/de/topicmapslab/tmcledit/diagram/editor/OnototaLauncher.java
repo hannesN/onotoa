@@ -48,6 +48,9 @@ public class OnototaLauncher implements IEditorLauncher {
 					workbenchWindow);
 			page.showView(modelViewId);
 			ViewPart modelView = (ViewPart) page.findView(modelViewId);
+			
+			
+			
 			if (modelView != null) {
 				String key;
 				// we check if the file exists and it is not empty
