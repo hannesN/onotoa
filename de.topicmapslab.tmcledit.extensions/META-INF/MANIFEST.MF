@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Extensions Plug-in
 Bundle-SymbolicName: de.topicmapslab.tmcledit.extensions;singleton:=true
-Bundle-Version: 1.0.3.b3
+Bundle-Version: 1.0.3.b4
 Bundle-Activator: de.topicmapslab.tmcledit.extensions.Activator
 Bundle-Vendor: Hannes Niederhausen
 Require-Bundle: org.eclipse.ui,
