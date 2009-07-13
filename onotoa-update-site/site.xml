@@ -3,19 +3,13 @@
    <description name="The Onotoa Update Site" url="file:/home/mai00ckx/projects/onotoa-update-site">
       This is the onotoa update site used to update the onotoa plugins in the Onotoa application or in any other eclipse instance.
    </description>
-   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.0.3.b1.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.0.3.b1">
-      <category name="onotoa"/>
-   </feature>
-   <feature url="features/de.topicmapslab.tmcledit.export_feature_1.0.3.b1.jar" id="de.topicmapslab.tmcledit.export_feature" version="1.0.3.b1">
-      <category name="onotoa"/>
-   </feature>
    <feature url="features/org.sourceforge.tinyTiM_feature_2.0.0.a5-snapshot-200907100942.jar" id="org.sourceforge.tinyTiM_feature" version="2.0.0.a5-snapshot-200907100942">
       <category name="tinyTiM"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.0.3.b2.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.0.3.b2">
+   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.0.3.b4.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.0.3.b4">
       <category name="onotoa"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.0.3.b3.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.0.3.b3">
+   <feature url="features/de.topicmapslab.tmcledit.export_feature_1.0.3.b2.jar" id="de.topicmapslab.tmcledit.export_feature" version="1.0.3.b2">
       <category name="onotoa"/>
    </feature>
    <category-def name="onotoa" label="Onotoa"/>
