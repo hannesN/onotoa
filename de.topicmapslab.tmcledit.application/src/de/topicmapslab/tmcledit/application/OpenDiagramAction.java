@@ -34,13 +34,13 @@ public class OpenDiagramAction extends Action {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		Shell shell = workbench.getActiveWorkbenchWindow().getShell();
 		FileDialog dlg = new FileDialog(shell);
-		dlg.setFilterExtensions(new String[]{"*.tmcl"});
+		dlg.setFilterExtensions(new String[]{"*.ono", "*.tmcl"});
 		dlg.setFilterPath(System.getProperty("user.home"));
 		
 		String path = dlg.open();
 		if (path!=null) {
-			if (!path.endsWith(".tmcl"))
-				path += ".tmcl";
+			if ( (!path.endsWith(".tmcl")) && ((!path.endsWith(".ono"))) )
+				path += ".ono";
 						
 			DiagramEditorActionBarAdvisor.openModelView(workbench, path, false);
 		}

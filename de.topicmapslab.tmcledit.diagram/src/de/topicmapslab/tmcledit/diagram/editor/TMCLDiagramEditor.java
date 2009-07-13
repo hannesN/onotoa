@@ -231,6 +231,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		String result = dlg.open();
 		if (result!=null) {
 			File currFile = (File) diagram.eContainer();
+			if ( (!result.endsWith(".ono"))&&(!result.endsWith(".tmcl")) )
+				result += ".ono";
 			currFile.setFilename(result);
 			doSave(new NullProgressMonitor());
 		}

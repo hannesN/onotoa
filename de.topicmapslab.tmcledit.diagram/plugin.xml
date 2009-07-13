@@ -22,7 +22,7 @@
       </editor>
       <editor
             default="true"
-            extensions="tmcl"
+            extensions="ono,tmcl"
             id="de.topicmapslab.tmcledit.diagram.editor.TMCLModelEditor"
             launcher="de.topicmapslab.tmcledit.diagram.editor.OnototaLauncher"
             name="Onotoa Modelloader">
