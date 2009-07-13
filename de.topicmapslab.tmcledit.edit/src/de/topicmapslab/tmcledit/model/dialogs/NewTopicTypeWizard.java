@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Text;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -79,12 +80,16 @@ public class NewTopicTypeWizard extends Wizard {
 		private Text identifierText;
 		private Text locatorText;
 
+		private boolean syncIdentifier;
+		
 		private Button buttons[];
 		private int selButton = 0;
 		
 		protected NewTypeWizardPage() {
 			super("new type");
 			setTitle("Topic Type");
+			String baseLocator = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
+			syncIdentifier = ((baseLocator!=null) && (baseLocator.length()>0));
 		}
 
 		public void createControl(Composite parent) {
@@ -140,7 +145,21 @@ public class NewTopicTypeWizard extends Wizard {
 			nameText.addModifyListener(new ModifyListener() {
 
 				public void modifyText(ModifyEvent e) {
-					setPageComplete(nameText.getText().length()>0);
+					if (nameText.getText().length()>0) {
+						if (syncIdentifier) {
+							String bl = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
+							identifierText.setText(bl+"/"+nameText.getText().toLowerCase());
+							syncIdentifier=true;
+						}
+						setPageComplete(true);
+					} else {
+						if (syncIdentifier) {
+							identifierText.setText("");
+							syncIdentifier=true;
+						}
+						setPageComplete(false);
+					}
+					
 				}
 				
 			});
@@ -149,6 +168,12 @@ public class NewTopicTypeWizard extends Wizard {
 			label.setText("Subject Identifier:");
 			
 			identifierText = new Text(comp, SWT.BORDER);
+			identifierText.addModifyListener(new ModifyListener() {
+				
+				public void modifyText(ModifyEvent e) {
+					syncIdentifier = false;
+				}
+			});
 			fac.applyTo(identifierText);
 			
 			label = new Label(comp, SWT.NONE);

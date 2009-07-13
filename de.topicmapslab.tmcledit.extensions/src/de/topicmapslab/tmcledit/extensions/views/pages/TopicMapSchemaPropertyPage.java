@@ -22,7 +22,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -48,7 +47,7 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 			if (tmp != null)
 				baseLocatorText.setText(tmp);
 			else
-				baseLocatorText.setText("urn:x-ontopia");
+				baseLocatorText.setText("");
 		} else {
 			nameText.setText("");
 			baseLocatorText.setText("");
@@ -64,9 +63,7 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 
 		GridDataFactory fac = GridDataFactory.createFrom(new GridData(GridData.FILL_HORIZONTAL));
 		
-		Section section = toolkit.createSection(folder, SWT.TITLE);
-		section.setText("Topic Map Schema");
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(folder);
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		comp.setLayout(new GridLayout(2, false));
 
@@ -87,7 +84,6 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 		nameText.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__NAME));
 		baseLocatorText.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR));
 
-		section.setClient(comp);
 		
 		return comp;
 	}
@@ -101,7 +97,7 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
 		item = new CTabItem(folder, SWT.None);
-		item.setText("General");
+		item.setText("Topic Map Schema");
 		item.setControl(createPage(folder));
 	}
 

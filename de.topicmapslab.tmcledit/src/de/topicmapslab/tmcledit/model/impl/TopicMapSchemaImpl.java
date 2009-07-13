@@ -104,7 +104,7 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String BASE_LOCATOR_EDEFAULT = "urn:x-ontopia";
+	protected static final String BASE_LOCATOR_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getBaseLocator() <em>Base Locator</em>}' attribute.
