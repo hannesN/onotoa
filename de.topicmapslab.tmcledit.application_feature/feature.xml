@@ -2,8 +2,9 @@
 <feature
       id="de.topicmapslab.tmcledit.application_feature"
       label="Application Framework"
-      version="1.0.3"
-      provider-name="Topic Maps Lab">
+      version="1.0.3.final"
+      provider-name="Topic Maps Lab"
+      plugin="de.topicmapslab.tmcledit.application">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

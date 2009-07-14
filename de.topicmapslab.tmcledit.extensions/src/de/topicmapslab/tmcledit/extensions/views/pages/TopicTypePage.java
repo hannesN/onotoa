@@ -13,6 +13,11 @@
  */
 package de.topicmapslab.tmcledit.extensions.views.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
@@ -21,6 +26,8 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -30,6 +37,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
@@ -81,11 +90,13 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		nameText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (nameText.getText().length() > 0) {
-					getCommandStack().execute(
-							new RenameTopicTypeCommand((TopicType) getModel(),
-									nameText.getText()));
-				}
+				finishName();
+			}
+		});
+		nameText.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.character==SWT.CR)
+					finishName();
 			}
 		});
 
@@ -103,8 +114,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				StringListSelectionDialog dlg = new StringListSelectionDialog(
 						identifierText.getShell());
 				dlg.setSelectedTopics(type.getIdentifiers());
-				dlg
-						.setInputDescription("Please enter the new subject identifier.");
+				dlg.setInputDescription("Please enter the new subject identifier.");
 
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
@@ -127,8 +137,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				StringListSelectionDialog dlg = new StringListSelectionDialog(
 						identifierText.getShell());
 				dlg.setSelectedTopics(type.getLocators());
-				dlg
-						.setInputDescription("Please enter the new subject locator.");
+				dlg.setInputDescription("Please enter the new subject locator.");
 
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack()
@@ -225,6 +234,23 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		return comp;
 	}
 	
+	private boolean isSyncAllowed() {
+	    TopicType topic = getCastedModel();
+		TopicMapSchema schema = (TopicMapSchema) topic.eContainer();
+		String baseLocator = schema.getBaseLocator();
+		if ( (baseLocator==null) 
+			|| (topic.getIdentifiers().size()>1)	
+			|| (baseLocator.length()==0) ) {
+			return false;
+		}
+		if (topic.getIdentifiers().size()==1) {
+			if (!topic.getIdentifiers().get(0).startsWith(baseLocator))
+				return false;
+		}
+		
+		return true;
+    }
+
 	@Override
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
@@ -234,6 +260,18 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	}
 
 	public void notifyChanged(Notification notification) {
+		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
+			return; 
+		
+		if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__NAME) {
+			updateName();
+			return;
+		}
+		if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__IDENTIFIERS) {
+			updateIdentifierts();
+			return;
+		}
+			
 		updateUI();
 	}
 
@@ -247,21 +285,13 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		if (nameText != null) {
 			TopicType t = (TopicType) getModel();
 			if (t != null) {
-				nameText.setText(t.getName());
+				
 				item.setText(getTopicType(t));
 
+				updateName();
+				updateIdentifierts();
+
 				StringBuffer b = new StringBuffer();
-				for (String s : t.getIdentifiers()) {
-					b.append(s);
-					b.append(", ");
-				}
-				if (b.length() > 0)
-					identifierText.setText(b.substring(0, b.length() - 2));
-				else
-					identifierText.setText("");
-
-				b.setLength(0);
-
 				for (String s : t.getLocators()) {
 					b.append(s);
 					b.append(", ");
@@ -319,6 +349,23 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		super.updateUI();
 	}
 
+	private StringBuffer updateIdentifierts() {
+	    StringBuffer b = new StringBuffer();
+	    for (String s : getCastedModel().getIdentifiers()) {
+	    	b.append(s);
+	    	b.append(", ");
+	    }
+	    if (b.length() > 0)
+	    	identifierText.setText(b.substring(0, b.length() - 2));
+	    else
+	    	identifierText.setText("");
+	    return b;
+    }
+
+	private void updateName() {
+	    nameText.setText(getCastedModel().getName());
+    }
+
 	protected void createAdditionalControls(Composite parent,
 			FormToolkit toolkit) {
 	}
@@ -341,4 +388,38 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			return "Topic Type";
 		}
 	}
+	
+	private TopicType getCastedModel() {
+        return (TopicType) super.getModel();
+    }
+
+	private void finishName() {
+	    if (nameText.getText().length() > 0) {
+	    	Command cmd;
+	    	TopicType tt = getCastedModel();
+	    	if (tt.getName().equals(nameText.getText()))
+	    		return;
+	    	
+	    	if (isSyncAllowed()) {
+	    		CompoundCommand ccmd = new CompoundCommand();
+	    		ccmd.append(new RenameTopicTypeCommand(tt, nameText.getText()));
+	    		List<String> newIds = new ArrayList<String>(1);
+	    		
+	    		TopicMapSchema schema = (TopicMapSchema) tt.eContainer();
+	    		String baseLocator = schema.getBaseLocator();
+	    		
+	    		if (!baseLocator.endsWith("/"))
+	    			baseLocator += "/";
+	    		
+	    		String newId = baseLocator + nameText.getText().toLowerCase();
+	    		newIds.add(newId);
+	    		ccmd.append(new SetTopicTypeIdentifiersCommand(newIds, tt));
+	    		
+	    		cmd = ccmd;
+	    	} else {
+	    		cmd=new RenameTopicTypeCommand(tt, nameText.getText());
+	    	}
+	    	getCommandStack().execute(cmd);
+	    }
+    }
 }
