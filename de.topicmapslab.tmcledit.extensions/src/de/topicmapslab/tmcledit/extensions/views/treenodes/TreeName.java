@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
@@ -28,7 +29,7 @@ public class TreeName extends TreeObject{
 	}
 
 	public TreeName(ModelView modelView, NameTypeConstraint ntc, String name) {
-		super(modelView, name);
+		super(modelView, name, KindOfTopicType.NAME_TYPE);
 		setModel(ntc);
 	}
 

@@ -24,13 +24,14 @@ import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorInput;
 import de.topicmapslab.tmcledit.extensions.Activator;
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
 
 public class TreeDiagram extends TreeObject {
 
 	public TreeDiagram(ModelView modelView, Diagram diagram) {
-		super(modelView);
+		super(modelView, KindOfTopicType.TOPIC_TYPE);
 		setModel(diagram);
 	}
 	

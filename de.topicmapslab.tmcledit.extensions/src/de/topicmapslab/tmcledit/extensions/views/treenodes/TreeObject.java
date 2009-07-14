@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 
 
 public class TreeObject implements IAdaptable, Adapter {
@@ -29,19 +30,25 @@ public class TreeObject implements IAdaptable, Adapter {
 	protected EditingDomain editingDomain;
 	private TreeParent parent;
 	private Notifier target;
+	private final KindOfTopicType kindOfTopicType;
 	
 	private final ModelView modelView;
 	private EObject model;
 
-	public TreeObject(ModelView modelView) {
+	public TreeObject(ModelView modelView, KindOfTopicType kindOfTopicType) {
+		this.kindOfTopicType = kindOfTopicType;
 		this.modelView = modelView;
 	}
 
-	public TreeObject(ModelView modelView, String name) {
-		this(modelView);
+	public TreeObject(ModelView modelView, String name, KindOfTopicType kindOfTopicType) {
+		this(modelView, kindOfTopicType);
 		this.name = name;
 	}
 
+	public KindOfTopicType getKindOfTopicType() {
+	    return kindOfTopicType;
+    }
+	
 	public String getName() {
 		return name;
 	}

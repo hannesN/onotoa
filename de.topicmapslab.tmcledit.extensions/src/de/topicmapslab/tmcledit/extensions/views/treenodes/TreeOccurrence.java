@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
@@ -26,7 +27,7 @@ public class TreeOccurrence extends TreeObject{
 	}
 
 	public TreeOccurrence(ModelView modelView, OccurrenceTypeConstraint otc, String name) {
-		super(modelView, name);
+		super(modelView, name, KindOfTopicType.OCCURRENCE_TYPE);
 		setModel(otc);
 	}
 

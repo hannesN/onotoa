@@ -109,6 +109,7 @@ import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeParent;
 import de.topicmapslab.tmcledit.extensions.views.treenodes.TreeTopic;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -208,8 +209,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 				if (sel.isEmpty()) {
 					currentSelection = new StructuredSelection(currFile);
 				} else {
-
 					TreeObject to = (TreeObject) sel.getFirstElement();
+					createTopicAction.setKindOfTopicType(to.getKindOfTopicType());
 					if (to.getModel() == null)
 						currentSelection = new StructuredSelection(currFile);
 					else
@@ -862,21 +863,21 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 
 		public void update() {
 
-			invisibleRoot = new TreeParent(ModelView.this, "");
+			invisibleRoot = new TreeParent(ModelView.this, "", KindOfTopicType.TOPIC_TYPE);
 			if (currFile != null) {
-				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
+				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema", KindOfTopicType.TOPIC_TYPE);
 				schemaNode.setModel(getCurrentTopicMapSchema());
-				diagramNode = new TreeParent(ModelView.this, "Diagrams");
+				diagramNode = new TreeParent(ModelView.this, "Diagrams", KindOfTopicType.TOPIC_TYPE);
 
 				invisibleRoot.addChild(diagramNode);
 				invisibleRoot.addChild(schemaNode);
 
-				ttNode = new TreeParent(ModelView.this, "TopicTypes");
-				rtNode = new TreeParent(ModelView.this, "RoleTypes");
-				ntNode = new TreeParent(ModelView.this, "NameTypes");
-				otNode = new TreeParent(ModelView.this, "OccurrenceTypes");
-				atNode = new TreeParent(ModelView.this, "AssociationTypes");
-				stNode = new TreeParent(ModelView.this, "ScopeTypes");
+				ttNode = new TreeParent(ModelView.this, "TopicTypes", KindOfTopicType.TOPIC_TYPE);
+				rtNode = new TreeParent(ModelView.this, "RoleTypes", KindOfTopicType.ROLE_TYPE);
+				ntNode = new TreeParent(ModelView.this, "NameTypes", KindOfTopicType.NAME_TYPE);
+				otNode = new TreeParent(ModelView.this, "OccurrenceTypes", KindOfTopicType.OCCURRENCE_TYPE);
+				atNode = new TreeParent(ModelView.this, "AssociationTypes", KindOfTopicType.ASSOCIATION_TYPE);
+				stNode = new TreeParent(ModelView.this, "ScopeTypes", KindOfTopicType.SCOPE_TYPE);
 
 				schemaNode.addChild(ttNode);
 				schemaNode.addChild(rtNode);
@@ -896,7 +897,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider,
 					viewer.refresh();
 			} else {
 				TreeParent root = new TreeParent(ModelView.this,
-						"No Diagramm Editor Open");
+						"No Diagramm Editor Open", KindOfTopicType.TOPIC_TYPE);
 				invisibleRoot.addChild(root);
 			}
 		}

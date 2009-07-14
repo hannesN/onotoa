@@ -16,13 +16,14 @@ package de.topicmapslab.tmcledit.extensions.views.treenodes;
 import java.util.ArrayList;
 
 import de.topicmapslab.tmcledit.extensions.views.ModelView;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 
 
 public class TreeParent extends TreeObject {
 	private ArrayList<TreeObject> children;
 
-	public TreeParent(ModelView viewer, String name) {
-		super(viewer, name);
+	public TreeParent(ModelView viewer, String name, KindOfTopicType kindOfTopicType) {
+		super(viewer, name, kindOfTopicType);
 		children = new ArrayList<TreeObject>();
 	}
 
