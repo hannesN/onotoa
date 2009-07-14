@@ -86,8 +86,9 @@ public class TMCLDiagramEditorUtil {
 						return Comment.class;
 					}
 
-				}, null, null));
-		
+				}, ImageProvider.getImageDescriptor(ImageConstants.COMMENT),
+				ImageProvider.getImageDescriptor(ImageConstants.COMMENT)));
+
 		pr.add(new PaletteSeparator("selection.seperator"));
 		pr.add(getTypePaletteGroup());
 		pr.add(new PaletteSeparator("type.seperator"));
@@ -144,13 +145,14 @@ public class TMCLDiagramEditorUtil {
 				new TypeNodeCreationFactory(KindOfTopicType.NO_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPIC_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPIC)));
-		
+
 		group.add(new CreationToolEntry("Topic Type", "Topic Type",
 				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
 
-		group.add(new CreationToolEntry(
+		group
+				.add(new CreationToolEntry(
 						"Occurrence Type",
 						"Occurrence Type",
 						new TypeNodeCreationFactory(
@@ -218,34 +220,47 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
 
-		group.add(new CreationToolEntry("Subject Identifier Constraint",
-				"Subject Identifier Constraint", new CreationFactory() {
+		group
+				.add(new CreationToolEntry(
+						"Subject Identifier Constraint",
+						"Subject Identifier Constraint",
+						new CreationFactory() {
 
-					public Object getNewObject() {
-						return ModelFactory.eINSTANCE
-								.createSubjectIdentifierConstraint();
-					}
+							public Object getNewObject() {
+								return ModelFactory.eINSTANCE
+										.createSubjectIdentifierConstraint();
+							}
 
-					public Object getObjectType() {
-						return SubjectIdentifierConstraint.class;
-					}
+							public Object getObjectType() {
+								return SubjectIdentifierConstraint.class;
+							}
 
-				}, null, null));
+						},
+						ImageProvider
+								.getImageDescriptor(ImageConstants.SUBJECTIDENTIFIERCONSTRAINT),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.SUBJECTIDENTIFIERCONSTRAINT)));
 
-		group.add(new CreationToolEntry("Subject Locator Constraint",
-				"Subject Locator Constraint", new CreationFactory() {
+		group
+				.add(new CreationToolEntry(
+						"Subject Locator Constraint",
+						"Subject Locator Constraint",
+						new CreationFactory() {
 
-					public Object getNewObject() {
-						return ModelFactory.eINSTANCE
-								.createSubjectLocatorConstraint();
-					}
+							public Object getNewObject() {
+								return ModelFactory.eINSTANCE
+										.createSubjectLocatorConstraint();
+							}
 
-					public Object getObjectType() {
-						return SubjectLocatorConstraint.class;
-					}
+							public Object getObjectType() {
+								return SubjectLocatorConstraint.class;
+							}
 
-				}, null, null));
-
+						},
+						ImageProvider
+								.getImageDescriptor(ImageConstants.SUBJECTLOCATORCONSTRAINT),
+						ImageProvider
+								.getImageDescriptor(ImageConstants.SUBJECTLOCATORCONSTRAINT)));
 		return group;
 	}
 
@@ -308,8 +323,9 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)));
 
-		group.add(new ConnectionCreationToolEntry("Role Player Constraint ...",
-				"Create Role Player Constraint connection", new CreationFactory() {
+		group.add(new ConnectionCreationToolEntry("Role Player Constraint",
+				"Create Role Player Constraint connection",
+				new CreationFactory() {
 
 					public Object getNewObject() {
 						Edge e = ModelFactory.eINSTANCE.createEdge();
@@ -323,7 +339,9 @@ public class TMCLDiagramEditorUtil {
 						return Edge.class;
 					}
 
-				}, null, null));
+				}, ImageProvider
+						.getImageDescriptor(ImageConstants.ROLEPLAYER_SM),
+				ImageProvider.getImageDescriptor(ImageConstants.ROLEPLAYER)));
 
 		return group;
 	}
