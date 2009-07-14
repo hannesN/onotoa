@@ -24,9 +24,8 @@ import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 
 public class CreateTopicAction extends Action {
-	/**
-	 * 
-	 */
+	private KindOfTopicType kindOfTopicType;
+	
 	private final ModelView modelView;
 
 	/**
@@ -41,10 +40,14 @@ public class CreateTopicAction extends Action {
 		return "Create Topic Type";
 	}
 
+	public void setKindOfTopicType(KindOfTopicType kindOfTopicType) {
+	    this.kindOfTopicType = kindOfTopicType;
+    }
+	
 	@Override
 	public void run() {
 		NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-		wizard.setDefaultType(KindOfTopicType.TOPIC_TYPE);
+		wizard.setDefaultType(kindOfTopicType);
 
 		WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getShell(), wizard);

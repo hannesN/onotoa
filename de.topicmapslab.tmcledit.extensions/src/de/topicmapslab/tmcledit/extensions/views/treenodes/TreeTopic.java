@@ -37,7 +37,7 @@ import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 public class TreeTopic extends TreeParent {
 
 	public TreeTopic(ModelView viewer, TopicType topic) {
-		super(viewer, null);
+		super(viewer, null, topic.getKind());
 		setModel(topic);
 	}
 
