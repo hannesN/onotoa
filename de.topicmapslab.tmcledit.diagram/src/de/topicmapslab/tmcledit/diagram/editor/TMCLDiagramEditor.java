@@ -16,6 +16,7 @@ package de.topicmapslab.tmcledit.diagram.editor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -41,6 +42,7 @@ import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -60,6 +62,9 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.topicmapslab.tmcledit.diagram.action.AbstractSelectionAction;
+import de.topicmapslab.tmcledit.diagram.action.AddNameConstraintAction;
+import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
@@ -73,6 +78,7 @@ import de.topicmapslab.tmcledit.model.util.FileUtil;
 
 /**
  * @author Hannes Niederhausen
+ * @param <Action>
  * 
  */
 public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
@@ -88,9 +94,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private ISelection currentSelection;
 	private List<ISelectionChangedListener> selectionChangedListeners = Collections
 			.emptyList();
-
-	private RemoveFromDiagramAction removeFromDiagramAction;
-	private DeleteFromModelAction deleteFromModelAction;
 
 	private DirtyAdapter dirtyAdapter;
 
@@ -229,9 +232,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		FileDialog dlg = new FileDialog(getSite().getShell(), SWT.SAVE);
 		dlg.setText("Save As..");
 		String result = dlg.open();
-		if (result!=null) {
+		if (result != null) {
 			File currFile = (File) diagram.eContainer();
-			if ( (!result.endsWith(".ono"))&&(!result.endsWith(".tmcl")) )
+			if ((!result.endsWith(".ono")) && (!result.endsWith(".tmcl")))
 				result += ".ono";
 			currFile.setFilename(result);
 			doSave(new NullProgressMonitor());
@@ -240,13 +243,14 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	protected void createActions() {
-		removeFromDiagramAction = new RemoveFromDiagramAction(getEditDomain()
-				.getCommandStack());
-		deleteFromModelAction = new DeleteFromModelAction(getEditDomain()
-				.getCommandStack());
-		getActionRegistry().registerAction(deleteFromModelAction);
-		getActionRegistry().registerAction(removeFromDiagramAction);
-
+		getActionRegistry().registerAction(new RemoveFromDiagramAction(getEditDomain()
+				.getCommandStack()));
+		getActionRegistry().registerAction(new DeleteFromModelAction(getEditDomain()
+				.getCommandStack()));
+		getActionRegistry().registerAction(new AddNameConstraintAction(getEditDomain()
+				.getCommandStack()));
+		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEditDomain()
+				.getCommandStack()));
 		super.createActions();
 	}
 
@@ -370,10 +374,16 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void updateSelectionDependentActions(
 			IStructuredSelection selelection) {
-		removeFromDiagramAction.setSelections(selelection);
-		deleteFromModelAction.setSelections(selelection);
+		Iterator<Action> it = getActionRegistry().getActions();
+		while (it.hasNext()) {
+			Object o = it.next();
+			if (o instanceof AbstractSelectionAction) {
+				((AbstractSelectionAction)o).setSelections(selelection);
+			}
+		}
 
 	}
 

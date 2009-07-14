@@ -15,11 +15,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.gef.ui.actions.UpdateAction;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
@@ -29,19 +25,13 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.commands.RemoveNodeCommand;
 
-public class RemoveFromDiagramAction extends Action implements UpdateAction {
+public class RemoveFromDiagramAction extends AbstractSelectionAction {
 
 	public final static String ID = "de.topicmapslab.tmcleditor.removefromdiagram";
 
-	private IStructuredSelection selections;
-
-	private final CommandStack commandStack;
 
 	public RemoveFromDiagramAction(CommandStack commandStack) {
-		super();
-		this.commandStack = commandStack;
-		selections = new StructuredSelection();
-		update();
+		super(commandStack);
 	}
 
 	@Override
@@ -57,7 +47,7 @@ public class RemoveFromDiagramAction extends Action implements UpdateAction {
 		TMCLEditDomain ed = null;
 
 		CompoundCommand cmd = new CompoundCommand();
-		Iterator<Object> it = selections.iterator();
+		Iterator<Object> it = getSelections().iterator();
 		while (it.hasNext()) {
 			EditPart part = (EditPart) it.next();
 			if (ed == null)
@@ -69,7 +59,7 @@ public class RemoveFromDiagramAction extends Action implements UpdateAction {
 			}
 		}
 
-		commandStack.execute(new CommandAdapter(ed.getEditingDomain()
+		getCommandStack().execute(new CommandAdapter(ed.getEditingDomain()
 				.getCommandStack(), cmd));
 
 	}
@@ -84,16 +74,11 @@ public class RemoveFromDiagramAction extends Action implements UpdateAction {
 		return ID;
 	}
 
-	public void setSelections(IStructuredSelection selections) {
-		this.selections = selections;
-		update();
-	}
-
 	@SuppressWarnings("unchecked")
 	public void update() {
 		setEnabled(true);
-		if (!selections.isEmpty()) {
-			Iterator<Object> it = selections.iterator();
+		if (!getSelections().isEmpty()) {
+			Iterator<Object> it = getSelections().iterator();
 			while (it.hasNext()) {
 				if (!(it.next() instanceof de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart)) {
 					setEnabled(false);

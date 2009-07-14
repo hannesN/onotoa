@@ -17,11 +17,7 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.gef.ui.actions.UpdateAction;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
@@ -47,16 +43,13 @@ import de.topicmapslab.tmcledit.model.commands.DeleteRolePlayerConstraintCommand
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
 
-public class DeleteFromModelAction extends Action implements UpdateAction {
+public class DeleteFromModelAction extends AbstractSelectionAction {
 	public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 
-	private IStructuredSelection selections;
-	private final CommandStack commandStack;
+
 
 	public DeleteFromModelAction(CommandStack commandStack) {
-		super();
-		this.commandStack = commandStack;
-		selections = new StructuredSelection();
+		super(commandStack);
 		update();
 	}
 
@@ -74,7 +67,7 @@ public class DeleteFromModelAction extends Action implements UpdateAction {
 
 		CompoundCommand cmd = new CompoundCommand();
 
-		Iterator it = selections.iterator();
+		Iterator it = getSelections().iterator();
 		while (it.hasNext()) {
 			EditPart selectedEditPart = (EditPart) it.next();
 			if (ed == null)
@@ -86,7 +79,7 @@ public class DeleteFromModelAction extends Action implements UpdateAction {
 			cmd.append(getCommand(model));
 		}
 		if (cmd != null) {
-			commandStack.execute(new CommandAdapter(ed.getEditingDomain()
+			getCommandStack().execute(new CommandAdapter(ed.getEditingDomain()
 					.getCommandStack(), cmd));
 		}
 	}
@@ -140,21 +133,16 @@ public class DeleteFromModelAction extends Action implements UpdateAction {
 		return ID;
 	}
 
-	public void setSelections(IStructuredSelection selections) {
-		this.selections = selections;
-		update();
-	}
-
 	@SuppressWarnings("unchecked")
 	public void update() {
-		if (selections.isEmpty()) {
+		if (getSelections().isEmpty()) {
 			setEnabled(false);
 			return;
 		}
 
 		setEnabled(true);
 
-		Iterator it = selections.iterator();
+		Iterator it = getSelections().iterator();
 		while (it.hasNext()) {
 			EditPart selectedEditPart = (EditPart) it.next();
 			Object model = selectedEditPart.getModel();
