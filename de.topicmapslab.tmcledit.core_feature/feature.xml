@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.core_feature"
       label="Onotoa Plugins"
-      version="1.0.3.b4">
+      version="1.0.3.final">
 
    <description>
       The core feature of Onotoa.
@@ -91,35 +91,35 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          id="de.topicmapslab.tmcledit"
          download-size="0"
          install-size="0"
-         version="1.0.3.b4"
+         version="1.0.3.final"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.diagram"
          download-size="0"
          install-size="0"
-         version="1.0.3.b4"
+         version="1.0.3.final"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.doc"
          download-size="0"
          install-size="0"
-         version="1.0.3.b4"
+         version="1.0.3.final"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.edit"
          download-size="0"
          install-size="0"
-         version="1.0.3.b4"
+         version="1.0.3.final"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.extensions"
          download-size="0"
          install-size="0"
-         version="1.0.3.b4"
+         version="1.0.3.final"
          unpack="false"/>
 
 </feature>

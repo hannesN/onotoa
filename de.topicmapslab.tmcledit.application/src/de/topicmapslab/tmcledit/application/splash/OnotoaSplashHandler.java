@@ -51,6 +51,8 @@ public class OnotoaSplashHandler extends BasicSplashHandler {
 		if (bundle != null) {
 			String version = (String) bundle.getHeaders().get(
 					org.osgi.framework.Constants.BUNDLE_VERSION);
+			if (version.endsWith(".final"))
+				version = version.replaceAll("\\.final", "");
 			version = "Version: " + version;
 			label.setText(version);
 		}
