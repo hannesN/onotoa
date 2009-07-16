@@ -194,7 +194,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReifierConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReifiableTopicType" eSuperTypes="#//TopicType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reifierConstraint" eType="#//ReifierConstraint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reifierConstraint" eType="#//ReifierConstraint"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedReifiableTopicType" eSuperTypes="#//ScopedTopicType #//ReifiableTopicType"/>
 </ecore:EPackage>

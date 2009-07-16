@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: de.topicmapslab.tmcledit.edit;singleton:=true
-Bundle-Version: 1.0.3.final
+Bundle-Version: 1.1.0.a1
 Bundle-ClassPath: .
 Bundle-Activator: de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin$Implementation
 Bundle-Vendor: %providerName
