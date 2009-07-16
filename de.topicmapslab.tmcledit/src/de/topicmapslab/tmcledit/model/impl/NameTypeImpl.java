@@ -23,6 +23,7 @@ import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.ScopedReifiableTopicType;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -42,7 +43,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	/**
-	 * The cached value of the '{@link #getReifierConstraint() <em>Reifier Constraint</em>}' reference.
+	 * The cached value of the '{@link #getReifierConstraint() <em>Reifier Constraint</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReifierConstraint()
@@ -77,14 +78,6 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	 * @generated
 	 */
 	public ReifierConstraint getReifierConstraint() {
-		if (reifierConstraint != null && reifierConstraint.eIsProxy()) {
-			InternalEObject oldReifierConstraint = (InternalEObject)reifierConstraint;
-			reifierConstraint = (ReifierConstraint)eResolveProxy(oldReifierConstraint);
-			if (reifierConstraint != oldReifierConstraint) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
-			}
-		}
 		return reifierConstraint;
 	}
 
@@ -93,8 +86,14 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReifierConstraint basicGetReifierConstraint() {
-		return reifierConstraint;
+	public NotificationChain basicSetReifierConstraint(ReifierConstraint newReifierConstraint, NotificationChain msgs) {
+		ReifierConstraint oldReifierConstraint = reifierConstraint;
+		reifierConstraint = newReifierConstraint;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, newReifierConstraint);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -103,10 +102,31 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	 * @generated
 	 */
 	public void setReifierConstraint(ReifierConstraint newReifierConstraint) {
-		ReifierConstraint oldReifierConstraint = reifierConstraint;
-		reifierConstraint = newReifierConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
+		if (newReifierConstraint != reifierConstraint) {
+			NotificationChain msgs = null;
+			if (reifierConstraint != null)
+				msgs = ((InternalEObject)reifierConstraint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT, null, msgs);
+			if (newReifierConstraint != null)
+				msgs = ((InternalEObject)newReifierConstraint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT, null, msgs);
+			msgs = basicSetReifierConstraint(newReifierConstraint, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT, newReifierConstraint, newReifierConstraint));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT:
+				return basicSetReifierConstraint(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -118,8 +138,7 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.NAME_TYPE__REIFIER_CONSTRAINT:
-				if (resolve) return getReifierConstraint();
-				return basicGetReifierConstraint();
+				return getReifierConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

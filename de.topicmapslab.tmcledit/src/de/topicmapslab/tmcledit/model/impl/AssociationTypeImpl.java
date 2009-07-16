@@ -53,7 +53,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class AssociationTypeImpl extends ScopedTopicTypeImpl implements AssociationType {
 	/**
-	 * The cached value of the '{@link #getReifierConstraint() <em>Reifier Constraint</em>}' reference.
+	 * The cached value of the '{@link #getReifierConstraint() <em>Reifier Constraint</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReifierConstraint()
@@ -97,14 +97,6 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 * @generated
 	 */
 	public ReifierConstraint getReifierConstraint() {
-		if (reifierConstraint != null && reifierConstraint.eIsProxy()) {
-			InternalEObject oldReifierConstraint = (InternalEObject)reifierConstraint;
-			reifierConstraint = (ReifierConstraint)eResolveProxy(oldReifierConstraint);
-			if (reifierConstraint != oldReifierConstraint) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
-			}
-		}
 		return reifierConstraint;
 	}
 
@@ -113,8 +105,14 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReifierConstraint basicGetReifierConstraint() {
-		return reifierConstraint;
+	public NotificationChain basicSetReifierConstraint(ReifierConstraint newReifierConstraint, NotificationChain msgs) {
+		ReifierConstraint oldReifierConstraint = reifierConstraint;
+		reifierConstraint = newReifierConstraint;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, newReifierConstraint);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -123,10 +121,17 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 * @generated
 	 */
 	public void setReifierConstraint(ReifierConstraint newReifierConstraint) {
-		ReifierConstraint oldReifierConstraint = reifierConstraint;
-		reifierConstraint = newReifierConstraint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT, oldReifierConstraint, reifierConstraint));
+		if (newReifierConstraint != reifierConstraint) {
+			NotificationChain msgs = null;
+			if (reifierConstraint != null)
+				msgs = ((InternalEObject)reifierConstraint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT, null, msgs);
+			if (newReifierConstraint != null)
+				msgs = ((InternalEObject)newReifierConstraint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT, null, msgs);
+			msgs = basicSetReifierConstraint(newReifierConstraint, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT, newReifierConstraint, newReifierConstraint));
 	}
 
 	/**
@@ -149,6 +154,8 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT:
+				return basicSetReifierConstraint(null, msgs);
 			case ModelPackage.ASSOCIATION_TYPE__ROLES:
 				return ((InternalEList<?>)getRoles()).basicRemove(otherEnd, msgs);
 		}
@@ -164,8 +171,7 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.ASSOCIATION_TYPE__REIFIER_CONSTRAINT:
-				if (resolve) return getReifierConstraint();
-				return basicGetReifierConstraint();
+				return getReifierConstraint();
 			case ModelPackage.ASSOCIATION_TYPE__ROLES:
 				return getRoles();
 		}

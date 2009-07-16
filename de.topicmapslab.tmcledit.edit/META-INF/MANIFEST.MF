@@ -4,13 +4,12 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: de.topicmapslab.tmcledit.edit;singleton:=true
 Bundle-Version: 1.1.0.a1
 Bundle-ClassPath: .
-Bundle-Activator: de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin$Implementation
+Bundle-Activator: de.topicmapslab.tmcledit.model.TmcleditEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.topicmapslab.tmcledit.model.commands,
  de.topicmapslab.tmcledit.model.dialogs,
- de.topicmapslab.tmcledit.model.provider,
  de.topicmapslab.tmcledit.model.util,
  de.topicmapslab.tmcledit.model.validation
 Require-Bundle: org.eclipse.core.runtime,

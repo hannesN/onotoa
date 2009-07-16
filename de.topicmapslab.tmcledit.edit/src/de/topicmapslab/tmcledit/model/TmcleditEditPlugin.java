@@ -3,7 +3,7 @@
  *
  * $Id$
  */
-package de.topicmapslab.tmcledit.model.provider;
+package de.topicmapslab.tmcledit.model;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;

@@ -2,9 +2,9 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="(C) 2008 Hannes Niederhausen, Topic Maps Lab"
-    modelDirectory="/de.topicmapslab.tmcledit/src" modelPluginID="de.topicmapslab.tmcledit"
-    modelName="Tmcledit" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
-    copyrightFields="false" language="">
+    modelDirectory="/de.topicmapslab.tmcledit/src" editDirectory="/de.topicmapslab.tmcledit.edit/src-gen"
+    modelPluginID="de.topicmapslab.tmcledit" modelName="Tmcledit" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" language="">
   <foreignModel>tmcledit.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="de.topicmapslab.tmcledit" disposableProviderFactory="true"
       ecorePackage="tmcledit.ecore#/">
@@ -39,7 +39,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/kind"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/exclusive"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/overlap"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/locators"/>
     </genClasses>
@@ -149,8 +149,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TMCLConstruct/description"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//ReifierConstraint"/>
-    <genClasses ecoreClass="tmcledit.ecore#//ReifiableTpoicType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ReifiableTpoicType/reifierConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//ReifiableTopicType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ReifiableTopicType/reifierConstraint"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//ScopedReifiableTopicType"/>
   </genPackages>

@@ -15,7 +15,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 
 public class ImageProvider {
 

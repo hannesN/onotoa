@@ -30,7 +30,7 @@ import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
-import de.topicmapslab.tmcledit.model.provider.TmcleditEditPlugin;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.util.ModelIndexer;
 
 public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {

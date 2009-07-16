@@ -124,9 +124,7 @@ public class TMCLTopicMapBuilder {
 					setOtherRoleConstraint(at, rt, orpc);
 				}
 			}
-			if (at.getReifierConstraint() != null)
-				setReifierConstraint(at);
-			
+						
 			setScopeConstraints(at);
 		}
 	}
@@ -265,6 +263,10 @@ public class TMCLTopicMapBuilder {
 		for (TopicType tt : type.getOverlap()) {
 			setOverlapConstraint(type, tt);
 		}
+		
+		if (type instanceof ReifiableTopicType) {
+			setReifierConstraint((ReifiableTopicType) type);
+		}
 
 		return t;
 	}
@@ -352,9 +354,6 @@ public class TMCLTopicMapBuilder {
 		createConstrainedTopicType(t, constr);
 		createConstrainedStatement(nt, constr);
 
-		if (nt.getReifierConstraint() != null)
-			setReifierConstraint(nt);
-
 		setScopeConstraints(nt);
 		
 		setSchema(constr);
@@ -377,9 +376,7 @@ public class TMCLTopicMapBuilder {
 		
 		createConstrainedTopicType(t, constr);
 		createConstrainedStatement(otype, constr);
-		if (otype.getReifierConstraint() != null)
-			setReifierConstraint(otype);
-
+		
 		setScopeConstraints(otype);
 	}
 
@@ -396,19 +393,21 @@ public class TMCLTopicMapBuilder {
 	    
     }
 
-	// TODO drüber guckn
 	private void setReifierConstraint(ReifiableTopicType rft) {
 		ReifierConstraint constraint = rft.getReifierConstraint();
+		if (constraint==null)
+			return;
 		Topic constr = createConstraint(TMCL.REIFIER_CONSTRAINT);
 		addDocumentationOccurrences(constr, constraint);
-		addCardinalityOccurrences(constr, constraint.getCardMin(), constraint.getCardMax());
+		constr.createOccurrence(createTopic(TMCL.CARD_MIN), constraint.getCardMin(), XSD.INTEGER);
+		constr.createOccurrence(createTopic(TMCL.CARD_MAX), constraint.getCardMax(), XSD.INTEGER);
 		createConstrainedStatement(rft, constr);
 
 		Association ass = topicMap.createAssociation(createTopic(TMCL.ALLOWED_REIFIER));
 		ass.createRole(createTopic(TMCL.ALLOWS), constr);
 		Topic t = null;
 		if ((constraint.getCardMax().equals("0")) || (constraint.getType() == null))
-			t = createTopic(topicMap.createLocator(Namespace.TMDM_MODEL + "/subject"));
+			t = createTopic(topicMap.createLocator(Namespace.TMDM_MODEL + "subject"));
 		else
 			t = createTopic(constraint.getType());
 		ass.createRole(createTopic(TMCL.ALLOWED), t);
