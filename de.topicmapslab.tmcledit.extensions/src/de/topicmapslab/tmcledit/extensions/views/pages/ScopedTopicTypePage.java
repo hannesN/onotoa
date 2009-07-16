@@ -297,6 +297,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 
 	private void updateReifierUI() {
 		ReifierConstraint rc = getReifiableType().getReifierConstraint();
+		hasReifierConstraintButton.setSelection(rc!=null);
 		if (rc!=null) {
 			if (rc.getType()!=null)
 				reifiertypeText.setText(rc.getType().getName());
@@ -350,7 +351,6 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 	}
 
 	private void setReifierCardinality(int min, int max) {
-		hasReifierConstraintButton.setSelection(getReifiableType().getReifierConstraint()==null);
 		ReifierConstraint rc = getReifiableType().getReifierConstraint();
 		if (rc == null) {
 			rc = ModelFactory.eINSTANCE.createReifierConstraint();

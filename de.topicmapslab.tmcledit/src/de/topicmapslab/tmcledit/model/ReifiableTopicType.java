@@ -24,26 +24,26 @@ package de.topicmapslab.tmcledit.model;
  */
 public interface ReifiableTopicType extends TopicType {
 	/**
-	 * Returns the value of the '<em><b>Reifier Constraint</b></em>' reference.
+	 * Returns the value of the '<em><b>Reifier Constraint</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Reifier Constraint</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Reifier Constraint</em>' reference.
+	 * @return the value of the '<em>Reifier Constraint</em>' containment reference.
 	 * @see #setReifierConstraint(ReifierConstraint)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getReifiableTopicType_ReifierConstraint()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	ReifierConstraint getReifierConstraint();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.ReifiableTopicType#getReifierConstraint <em>Reifier Constraint</em>}' reference.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.ReifiableTopicType#getReifierConstraint <em>Reifier Constraint</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reifier Constraint</em>' reference.
+	 * @param value the new value of the '<em>Reifier Constraint</em>' containment reference.
 	 * @see #getReifierConstraint()
 	 * @generated
 	 */

@@ -1967,7 +1967,7 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__SCOPE = SCOPED_TOPIC_TYPE__SCOPE;
 
 	/**
-	 * The feature id for the '<em><b>Reifier Constraint</b></em>' reference.
+	 * The feature id for the '<em><b>Reifier Constraint</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2157,7 +2157,7 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE__SCOPE = SCOPED_TOPIC_TYPE__SCOPE;
 
 	/**
-	 * The feature id for the '<em><b>Reifier Constraint</b></em>' reference.
+	 * The feature id for the '<em><b>Reifier Constraint</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2692,7 +2692,7 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__SCOPE = SCOPED_TOPIC_TYPE__SCOPE;
 
 	/**
-	 * The feature id for the '<em><b>Reifier Constraint</b></em>' reference.
+	 * The feature id for the '<em><b>Reifier Constraint</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3001,7 +3001,7 @@ public interface ModelPackage extends EPackage {
 	int REIFIABLE_TOPIC_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Reifier Constraint</b></em>' reference.
+	 * The feature id for the '<em><b>Reifier Constraint</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3182,7 +3182,7 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_REIFIABLE_TOPIC_TYPE__SCOPE = SCOPED_TOPIC_TYPE__SCOPE;
 
 	/**
-	 * The feature id for the '<em><b>Reifier Constraint</b></em>' reference.
+	 * The feature id for the '<em><b>Reifier Constraint</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4276,10 +4276,10 @@ public interface ModelPackage extends EPackage {
 	EClass getReifiableTopicType();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.ReifiableTopicType#getReifierConstraint <em>Reifier Constraint</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.topicmapslab.tmcledit.model.ReifiableTopicType#getReifierConstraint <em>Reifier Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Reifier Constraint</em>'.
+	 * @return the meta object for the containment reference '<em>Reifier Constraint</em>'.
 	 * @see de.topicmapslab.tmcledit.model.ReifiableTopicType#getReifierConstraint()
 	 * @see #getReifiableTopicType()
 	 * @generated
@@ -5199,7 +5199,7 @@ public interface ModelPackage extends EPackage {
 		EClass REIFIABLE_TOPIC_TYPE = eINSTANCE.getReifiableTopicType();
 
 		/**
-		 * The meta object literal for the '<em><b>Reifier Constraint</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Reifier Constraint</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
