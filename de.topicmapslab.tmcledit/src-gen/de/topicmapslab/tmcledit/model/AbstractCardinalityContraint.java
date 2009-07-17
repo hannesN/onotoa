@@ -53,7 +53,7 @@ public interface AbstractCardinalityContraint extends TMCLConstruct {
 
 	/**
 	 * Returns the value of the '<em><b>Card Max</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
+	 * The default value is <code>"*"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Card Max</em>' attribute isn't clear,
@@ -63,7 +63,7 @@ public interface AbstractCardinalityContraint extends TMCLConstruct {
 	 * @return the value of the '<em>Card Max</em>' attribute.
 	 * @see #setCardMax(String)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractCardinalityContraint_CardMax()
-	 * @model default="1"
+	 * @model default="*"
 	 * @generated
 	 */
 	String getCardMax();

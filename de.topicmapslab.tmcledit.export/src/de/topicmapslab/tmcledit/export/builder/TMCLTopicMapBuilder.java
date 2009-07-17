@@ -284,6 +284,12 @@ public class TMCLTopicMapBuilder {
     	ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
     	ass.createRole(createTopic(TMCL.CONSTRAINED), createTopic(tt));
     }
+	
+	private void createConstrainedStatement(Topic t, Topic constr) {
+    	Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_STATEMENT));
+    	ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
+    	ass.createRole(createTopic(TMCL.CONSTRAINED), t);
+    }
 
 	private void createConstrainedTopicType(Topic t, Topic constr) {
     	Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_TOPIC_TYPE));
@@ -343,6 +349,11 @@ public class TMCLTopicMapBuilder {
 
 	private void setNameTypeConstraint(Topic t, NameTypeConstraint ntc) {
 		NameType nt = (NameType) ntc.getType();
+		Topic nameTopic = null;
+		if (nt==null)
+			nameTopic = createTopic(TMDM.TOPIC_NAME);
+		else
+			nameTopic = createTopic(nt);
 		
 		if (!ntc.getRegexp().equals(".*"))
 			setRegExpConstraint(nt, ntc.getRegexp());
@@ -352,7 +363,7 @@ public class TMCLTopicMapBuilder {
 		addCardinalityOccurrences(constr, ntc.getCardMin(), ntc.getCardMax());
 
 		createConstrainedTopicType(t, constr);
-		createConstrainedStatement(nt, constr);
+		createConstrainedStatement(nameTopic, constr);
 
 		setScopeConstraints(nt);
 		
@@ -361,8 +372,15 @@ public class TMCLTopicMapBuilder {
 
 	private void setOccurrenceConstraint(Topic t, OccurrenceTypeConstraint otc) {
 		OccurrenceType otype = (OccurrenceType) otc.getType();
-
-		setOccurrenceDatatype(otype);
+		Topic occType = null;
+		if (otype!=null) {
+			setOccurrenceDatatype(otype);
+			occType = createTopic(otype);
+		} else {
+			occType = createTopic(topicMap.createLocator(Namespace.TMDM_MODEL+"subject"));
+		}
+		
+		
 		if (otc.isUnique()) {
 			setUnique(otype);
 		}
@@ -375,7 +393,7 @@ public class TMCLTopicMapBuilder {
 		setSchema(constr);
 		
 		createConstrainedTopicType(t, constr);
-		createConstrainedStatement(otype, constr);
+		createConstrainedStatement(occType, constr);
 		
 		setScopeConstraints(otype);
 	}
