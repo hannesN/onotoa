@@ -32,14 +32,13 @@ import org.tinytim.mio.CTMTopicMapWriter;
 import org.tmapi.core.TopicMap;
 
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
-import de.topicmapslab.tmcledit.extensions.views.ModelView;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.util.ModelIndexer;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class TMCLExportWizard extends Wizard implements IExportWizard {
 
@@ -97,18 +96,6 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 	}
 	
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		if (selection.isEmpty()) {
-			try {
-			ModelView view = (ModelView) workbench.getActiveWorkbenchWindow()
-					.getActivePage().findView(ModelView.ID);
-			if (view!=null)
-				schema = view.getCurrentTopicMapSchema();
-			return;
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-		
 		if (!(selection.getFirstElement() instanceof EObject))
 			return;
 		

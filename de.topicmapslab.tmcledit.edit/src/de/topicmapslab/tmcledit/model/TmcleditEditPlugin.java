@@ -16,6 +16,9 @@ import org.eclipse.emf.common.util.ResourceLocator;
  * @generated
  */
 public final class TmcleditEditPlugin extends EMFPlugin {
+	
+	public final static String DIAGRAMEDITOR_ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
+	
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
