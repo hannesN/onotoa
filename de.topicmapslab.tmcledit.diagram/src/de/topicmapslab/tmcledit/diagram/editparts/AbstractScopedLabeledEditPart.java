@@ -29,16 +29,24 @@ public abstract class AbstractScopedLabeledEditPart extends
 		super();
 	}
 
-	protected void addScopeText(StringBuffer buffer) {
+	protected void addScopeText() {
+		if (getScope().size()==0)
+			return;
+		
+		StringBuffer buffer = new StringBuffer();
 		for (ScopeConstraint sc : getScope()) {
-			buffer.append("\n@");
+			buffer.append("@");
 			buffer.append(sc.getType().getName());
 			buffer.append("  [");
 			buffer.append(sc.getCardMin());
 			buffer.append("..");
 			buffer.append(sc.getCardMax());
 			buffer.append("]");
+			buffer.append("\n");
 		}
+		
+		buffer.setLength(buffer.length()-1);
+		addScopeLabel(buffer.toString());
 	}
 	
 	@Override
