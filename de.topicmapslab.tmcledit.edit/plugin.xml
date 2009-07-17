@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?><!--
+    Copyright (c) 2008, 2009 Topic Maps Lab and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+    
+    Contributors:
+        Hannes Niederhausen - initial API and implementation
+ -->
+
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="de.topicmapslab.tmcledit.extensions"
+            name="Onotoa">
+      </category>
+      <view
+            category="de.topicmapslab.tmcledit.extensions"
+            class="de.topicmapslab.tmcledit.model.views.ModelView"
+            icon="icons/icon.png"
+            id="de.topicmapslab.tmcledit.extensions.views.ModelView"
+            name="Model View"
+            restorable="true">
+         <description>
+            This view is the heart of the onotoa plugin. It contains a tree displaying the whole schema elements.
+         </description>
+      </view>
+      <view
+            category="de.topicmapslab.tmcledit.extensions"
+            class="de.topicmapslab.tmcledit.model.views.PropertyDetailView"
+            icon="icons/icon.png"
+            id="de.topicmapslab.tmcledit.extensions.views.PropertyDetailView"
+            name="Property Details View">
+      </view>
+      <view
+            class="de.topicmapslab.tmcledit.model.views.ValidationErrorView"
+            icon="icons/icon.png"
+            id="de.topicmapslab.tmcledit.extensions.views.ValidationErrorView"
+            name="Error View"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="de.topicmapslab.tmcledit.model.validatecommand"
+            name="Validate">
+      </command>
+      <command
+            id="de.topicmapslab.tmcledit.extensions.showerrorviewcommand"
+            name="Show Error View">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="de.topicmapslab.tmcledit.extensions.toolbar">
+            <command
+                  commandId="de.topicmapslab.tmcledit.model.validatecommand"
+                  id="validateCommandToolbarItem"
+                  label="Validate"
+                  mode="FORCE_TEXT"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:window">
+         <command
+               commandId="de.topicmapslab.tmcledit.extensions.showerrorviewcommand"
+               mode="FORCE_TEXT"
+               style="push"
+               tooltip="Opens the validation error view">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="de.topicmapslab.tmcledit.model.actions.ValidateHandler"
+            commandId="de.topicmapslab.tmcledit.model.validatecommand">
+      </handler>
+      <handler
+            class="de.topicmapslab.tmcledit.model.actions.ShowValidationErrorViewHandler"
+            commandId="de.topicmapslab.tmcledit.extensions.showerrorviewcommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commandImages">
+      <image
+            commandId="de.topicmapslab.tmcledit.model.validatecommand"
+            icon="icons/icon.png">
+      </image>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="de.topicmapslab.tmcledit.model.perspectives.OnotoaPerspective"
+            id="de.topicmapslab.tmcledit.extensions.OnotoaPerspective"
+            name="Onotoa">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="de.topicmapslab.tmcledit.category"
+            name="Onotoa">
+      </category>
+      <wizard
+            category="de.topicmapslab.tmcledit.category"
+            class="de.topicmapslab.tmcledit.model.wizards.NewOnototaFileWizard"
+            icon="icons/icon.png"
+            id="de.topicmapslab.tmcledit.extensions.wizards.NewOnototaFileWizard"
+            name="New Onotoa File">
+      </wizard>
+   </extension>
+
+</plugin>

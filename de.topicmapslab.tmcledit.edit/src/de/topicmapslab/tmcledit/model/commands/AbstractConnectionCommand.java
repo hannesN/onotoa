@@ -25,7 +25,7 @@ import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
-import de.topicmapslab.tmcledit.model.util.ModelIndexer;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public abstract class AbstractConnectionCommand extends AbstractCommand {
 

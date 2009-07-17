@@ -32,7 +32,7 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.util.ModelIndexer;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class XTMExportWizard extends Wizard implements IExportWizard {
 	private boolean exportConstraintInfos = true;

@@ -75,6 +75,7 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
+import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 
 /**
  * @author Hannes Niederhausen
@@ -320,6 +321,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		if (adapter == ZoomManager.class)
 			return getGraphicalViewer().getProperty(
 					ZoomManager.class.toString());
+		if (adapter == org.eclipse.emf.common.command.CommandStack.class)
+			return getEditingDomain().getCommandStack();
 		return super.getAdapter(adapter);
 	}
 
