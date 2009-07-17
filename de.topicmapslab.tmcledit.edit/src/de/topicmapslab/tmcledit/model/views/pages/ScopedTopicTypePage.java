@@ -296,7 +296,18 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 	}
 
 	private void updateReifierUI() {
+		if (getReifiableType()==null) {
+			hasReifierConstraintButton.setEnabled(false);
+			cardCombo.setEnabled(false);
+			browseButton.setEnabled(false);
+			reifiertypeText.setEnabled(false);
+			return;
+		}
 		ReifierConstraint rc = getReifiableType().getReifierConstraint();
+		hasReifierConstraintButton.setEnabled(true);
+		cardCombo.setEnabled(true);
+		browseButton.setEnabled(true);
+		reifiertypeText.setEnabled(true);
 		hasReifierConstraintButton.setSelection(rc!=null);
 		if (rc!=null) {
 			if (rc.getType()!=null)

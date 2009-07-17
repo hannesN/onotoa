@@ -161,12 +161,8 @@ public class ModelValidator {
 
 	private void validateOccurrenceConstraint(TopicType topicType) {
 		for (OccurrenceTypeConstraint otc : topicType.getOccurrenceConstraints()) {
-			if (otc.getType() == null) {
-				ValidationResult vr = new ValidationResult("No type for occurrence constraint set", otc);
-				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(commandStack));
-				vr.addValidationAction(new OccurrenceConstraintCreateTypeAction(commandStack));
-				addValidationResult(vr);
-			} else if (otc.getType().getKind() != KindOfTopicType.OCCURRENCE_TYPE) {
+			
+			if ((otc.getType() != null) && (otc.getType().getKind() != KindOfTopicType.OCCURRENCE_TYPE)) {
 				ValidationResult vr = new ValidationResult("The topic " + otc.getType().getName()
 				        + " may not be type for an occurrence constraint", otc.getType());
 				vr.addValidationAction(new OccurrenceConstraintSelectTypeAction(commandStack));

@@ -11,6 +11,8 @@
 package de.topicmapslab.tmcledit.model.views.pages;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -33,6 +35,7 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
@@ -95,9 +98,10 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 
 				if (dlg.open() == Dialog.OK) {
 					TopicType tt = wizard.getNewTopicType();
-					ModelIndexer.getInstance().getTopicMapSchema()
-							.getTopicTypes().add(tt);
-					getCastedModel().setType(tt);
+					CompoundCommand cCmd = new CompoundCommand();
+					cCmd.append(new CreateTopicTypeCommand(ModelIndexer.getInstance().getTopicMapSchema(), tt));
+					cCmd.append(new GenericSetCommand(getCastedModel(), ModelPackage.NAME_TYPE_CONSTRAINT__TYPE, tt));
+					getCommandStack().execute(cCmd);
 				}
 
 			}
@@ -145,10 +149,14 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 	@Override
 	public void updateUI() {
 		if ((getCastedModel().getType() != null)
-				&& (getCastedModel().getType().getName() != null))
+				&& (getCastedModel().getType().getName() != null)) {
 			typeText.setText(getCastedModel().getType().getName());
-		else
+		} else {
 			typeText.setText("http://psi.topicmaps.org/iso13250/model/topic-name");
+		}
+		item.setText("Name Type");
+		typeModelPage.setModel(getCastedModel().getType());		
+		
 		super.updateUI();
 	}
 
@@ -156,6 +164,21 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 		return (NameTypeConstraint) getModel();
 	}
 
+	@Override
+	public void notifyChanged(Notification notification) {
+		if (notification.getNotifier()==getModel()) { 
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.NAME_TYPE_CONSTRAINT__TYPE) {
+				TopicType tmp = (TopicType) notification.getOldValue();
+				if (tmp!=null)
+					tmp.eAdapters().remove(this);
+				tmp = (TopicType) notification.getNewValue();
+				if (tmp!=null)
+					tmp.eAdapters().add(this);
+			}
+		}
+	    super.notifyChanged(notification);
+	}
+	
 	@Override
 	public void setCommandStack(CommandStack commandStack) {
 		super.setCommandStack(commandStack);
