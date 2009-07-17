@@ -138,7 +138,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="1"/>
+        defaultValueLiteral="*"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LabelPos">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"

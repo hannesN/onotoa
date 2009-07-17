@@ -51,7 +51,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 				getNameLabel().setBorder(null);
 			getNameLabel().setText(otc.getType().getName());
 		} else
-			getNameLabel().setText("No Type Set");
+			getNameLabel().setText("tmdm:subject");
 		
 		buffer.append(" : ");
 		if (otc.getType() instanceof OccurrenceType)

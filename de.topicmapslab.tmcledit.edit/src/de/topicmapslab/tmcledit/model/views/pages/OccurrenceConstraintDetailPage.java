@@ -154,7 +154,7 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 		if (castedModel.getType()!=null) 
 			typeText.setText(castedModel.getType().getName());
 		else
-			typeText.setText("");
+			typeText.setText("http://psi.topicmaps.org/iso13250/model/subject");
 		uniqueButton.setSelection(castedModel.isUnique());
 		
 		super.updateUI();

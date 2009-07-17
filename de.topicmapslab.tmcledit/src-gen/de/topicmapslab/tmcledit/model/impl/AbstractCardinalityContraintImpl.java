@@ -57,7 +57,7 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CARD_MAX_EDEFAULT = "1";
+	protected static final String CARD_MAX_EDEFAULT = "*";
 
 	/**
 	 * The cached value of the '{@link #getCardMax() <em>Card Max</em>}' attribute.
