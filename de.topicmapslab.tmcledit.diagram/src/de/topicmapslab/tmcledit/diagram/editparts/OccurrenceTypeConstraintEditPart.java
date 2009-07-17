@@ -62,8 +62,8 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 		buffer.append(otc.getCardMin());
 		buffer.append("..");
 		buffer.append(otc.getCardMax());	
-		
-		addScopeText(buffer);
+		clearScopeLables();
+		addScopeText();
 		
 		getTypeLabel().setText(buffer.toString());
 	}

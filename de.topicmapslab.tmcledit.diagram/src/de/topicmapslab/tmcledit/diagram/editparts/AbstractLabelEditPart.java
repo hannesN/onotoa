@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
@@ -32,6 +33,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;
 	private Label typeLabel;
+	private Label regExpLabel;
 	private boolean editable = true;
 
 	public AbstractLabelEditPart() {
@@ -50,6 +52,11 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		typeLabel = new Label();
 		typeLabel.setLabelAlignment(PositionConstants.LEFT);
 		figure.add(typeLabel);
+		
+		regExpLabel = new Label();
+		regExpLabel.setLabelAlignment(PositionConstants.LEFT);
+		figure.add(regExpLabel);
+		
 		
 		return figure;
 	}
@@ -121,6 +128,30 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 
 	public Label getTypeLabel() {
 		return typeLabel;
+	}
+	
+	public Label getRegExpLabel() {
+		return regExpLabel;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void clearScopeLables() {
+		int counter = 0;
+		Iterator it = getFigure().getChildren().iterator();
+		while (it.hasNext()) {
+			it.next();
+			if (counter>2) {
+				it.remove();
+			}
+			counter++;
+		}
+	}
+	
+	public void addScopeLabel(String text) {
+		Label scopeLabel = new Label();
+		scopeLabel.setLabelAlignment(PositionConstants.LEFT);
+		getFigure().add(scopeLabel);
+		scopeLabel.setText(text);
 	}
 	
 	public void revertNameChange() {

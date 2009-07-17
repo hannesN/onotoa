@@ -37,16 +37,21 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 			getNameLabel().setText("default");
 		else
 			getNameLabel().setText(ntc.getType().getName());
+		
+		getRegExpLabel().setText("["+ntc.getRegexp()+"]");
+
+		
+		
 		StringBuffer buffer = new StringBuffer(50);
-		buffer.append(" [");
-		buffer.append(ntc.getRegexp());
-		buffer.append("] ");
-		buffer.append(" ");
 		buffer.append(ntc.getCardMin());
 		buffer.append("..");
 		buffer.append(ntc.getCardMax());
-		addScopeText(buffer);
+		
 		getTypeLabel().setText(buffer.toString());
+		
+		buffer.setLength(0);
+		clearScopeLables();
+		addScopeText();
 	}
 
 	@Override
