@@ -294,11 +294,11 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT: {
-				OtherRolePlayerConstraint otherRolePlayerConstraint = (OtherRolePlayerConstraint)theEObject;
-				T result = caseOtherRolePlayerConstraint(otherRolePlayerConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(otherRolePlayerConstraint);
-				if (result == null) result = caseTMCLConstruct(otherRolePlayerConstraint);
+			case ModelPackage.ROLE_COMBINATION_CONSTRAINT: {
+				RoleCombinationConstraint roleCombinationConstraint = (RoleCombinationConstraint)theEObject;
+				T result = caseRoleCombinationConstraint(roleCombinationConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(roleCombinationConstraint);
+				if (result == null) result = caseTMCLConstruct(roleCombinationConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -758,17 +758,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Other Role Player Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Role Combination Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Other Role Player Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Role Combination Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOtherRolePlayerConstraint(OtherRolePlayerConstraint object) {
+	public T caseRoleCombinationConstraint(RoleCombinationConstraint object) {
 		return null;
 	}
 

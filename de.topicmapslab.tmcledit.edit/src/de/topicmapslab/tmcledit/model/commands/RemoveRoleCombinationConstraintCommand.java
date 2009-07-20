@@ -17,35 +17,35 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 
 /**
  * @author Hannes Niederhausen
  *
  */
-public class RemoveOtherRolePlayerConstraintCommand extends AbstractCommand {
-	private final RoleType roleType;
-	private final List<OtherRolePlayerConstraint> constraintList;
+public class RemoveRoleCombinationConstraintCommand extends AbstractCommand {
+	private final AssociationType asssType;
+	private final List<RoleCombinationConstraint> constraintList;
 	
-	public RemoveOtherRolePlayerConstraintCommand(RoleType roleType,
-			List<OtherRolePlayerConstraint> constraintList) {
+	public RemoveRoleCombinationConstraintCommand(AssociationType assType,
+			List<RoleCombinationConstraint> constraintList) {
 		super();
-		this.roleType = roleType;
+		this.asssType = assType;
 		this.constraintList = constraintList;
 	}
 	
 	public void execute() {
-		roleType.getOtherRoles().removeAll(constraintList);
+		asssType.getRoleCombinations().removeAll(constraintList);
 	}
 	
 	public void redo() {
-		roleType.getOtherRoles().removeAll(constraintList);		
+		asssType.getRoleCombinations().removeAll(constraintList);		
 	}
 	
 	@Override
 	public void undo() {
-		roleType.getOtherRoles().addAll(constraintList);
+		asssType.getRoleCombinations().addAll(constraintList);
 	}
 	
 	@Override

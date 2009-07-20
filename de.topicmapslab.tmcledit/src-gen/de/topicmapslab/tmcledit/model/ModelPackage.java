@@ -1975,13 +1975,22 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__ROLES = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Role Combinations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE__ROLE_COMBINATIONS = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Association Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 2;
+	int ASSOCIATION_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl <em>Occurrence Type</em>}' class.
@@ -2401,32 +2410,23 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Other Roles</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_TYPE__OTHER_ROLES = TOPIC_TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Role Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 1;
+	int ROLE_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl <em>Other Role Player Constraint</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleCombinationConstraintImpl <em>Role Combination Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOtherRolePlayerConstraint()
+	 * @see de.topicmapslab.tmcledit.model.impl.RoleCombinationConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleCombinationConstraint()
 	 * @generated
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT = 26;
+	int ROLE_COMBINATION_CONSTRAINT = 26;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -2435,7 +2435,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__SEE_ALSO = ABSTRACT_CARDINALITY_CONTRAINT__SEE_ALSO;
+	int ROLE_COMBINATION_CONSTRAINT__SEE_ALSO = ABSTRACT_CARDINALITY_CONTRAINT__SEE_ALSO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -2444,7 +2444,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__COMMENT = ABSTRACT_CARDINALITY_CONTRAINT__COMMENT;
+	int ROLE_COMBINATION_CONSTRAINT__COMMENT = ABSTRACT_CARDINALITY_CONTRAINT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -2453,7 +2453,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION;
+	int ROLE_COMBINATION_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -2462,7 +2462,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
+	int ROLE_COMBINATION_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -2471,7 +2471,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
+	int ROLE_COMBINATION_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Player</b></em>' reference.
@@ -2480,7 +2480,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
+	int ROLE_COMBINATION_CONSTRAINT__PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Other Player</b></em>' reference.
@@ -2489,7 +2489,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
+	int ROLE_COMBINATION_CONSTRAINT__OTHER_PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Other Role</b></em>' reference.
@@ -2498,25 +2498,25 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 2;
+	int ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Association Type</b></em>' reference.
+	 * The feature id for the '<em><b>Role</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 3;
+	int ROLE_COMBINATION_CONSTRAINT__ROLE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>Other Role Player Constraint</em>' class.
+	 * The number of structural features of the '<em>Role Combination Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_ROLE_PLAYER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 4;
+	int ROLE_COMBINATION_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl <em>Name Type</em>}' class.
@@ -4034,6 +4034,17 @@ public interface ModelPackage extends EPackage {
 	EReference getAssociationType_Roles();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.AssociationType#getRoleCombinations <em>Role Combinations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Role Combinations</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AssociationType#getRoleCombinations()
+	 * @see #getAssociationType()
+	 * @generated
+	 */
+	EReference getAssociationType_RoleCombinations();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OccurrenceType <em>Occurrence Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4075,69 +4086,58 @@ public interface ModelPackage extends EPackage {
 	EClass getRoleType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.RoleType#getOtherRoles <em>Other Roles</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint <em>Role Combination Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Other Roles</em>'.
-	 * @see de.topicmapslab.tmcledit.model.RoleType#getOtherRoles()
-	 * @see #getRoleType()
+	 * @return the meta object for class '<em>Role Combination Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.RoleCombinationConstraint
 	 * @generated
 	 */
-	EReference getRoleType_OtherRoles();
+	EClass getRoleCombinationConstraint();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint <em>Other Role Player Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Other Role Player Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint
-	 * @generated
-	 */
-	EClass getOtherRolePlayerConstraint();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getPlayer <em>Player</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getPlayer <em>Player</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Player</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getPlayer()
-	 * @see #getOtherRolePlayerConstraint()
+	 * @see de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getPlayer()
+	 * @see #getRoleCombinationConstraint()
 	 * @generated
 	 */
-	EReference getOtherRolePlayerConstraint_Player();
+	EReference getRoleCombinationConstraint_Player();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherPlayer <em>Other Player</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherPlayer <em>Other Player</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Other Player</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherPlayer()
-	 * @see #getOtherRolePlayerConstraint()
+	 * @see de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherPlayer()
+	 * @see #getRoleCombinationConstraint()
 	 * @generated
 	 */
-	EReference getOtherRolePlayerConstraint_OtherPlayer();
+	EReference getRoleCombinationConstraint_OtherPlayer();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherRole <em>Other Role</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherRole <em>Other Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Other Role</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherRole()
-	 * @see #getOtherRolePlayerConstraint()
+	 * @see de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherRole()
+	 * @see #getRoleCombinationConstraint()
 	 * @generated
 	 */
-	EReference getOtherRolePlayerConstraint_OtherRole();
+	EReference getRoleCombinationConstraint_OtherRole();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getAssociationType <em>Association Type</em>}'.
+	 * Returns the meta object for the reference '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getRole <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Association Type</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getAssociationType()
-	 * @see #getOtherRolePlayerConstraint()
+	 * @return the meta object for the reference '<em>Role</em>'.
+	 * @see de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getRole()
+	 * @see #getRoleCombinationConstraint()
 	 * @generated
 	 */
-	EReference getOtherRolePlayerConstraint_AssociationType();
+	EReference getRoleCombinationConstraint_Role();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.NameType <em>Name Type</em>}'.
@@ -4993,6 +4993,14 @@ public interface ModelPackage extends EPackage {
 		EReference ASSOCIATION_TYPE__ROLES = eINSTANCE.getAssociationType_Roles();
 
 		/**
+		 * The meta object literal for the '<em><b>Role Combinations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSOCIATION_TYPE__ROLE_COMBINATIONS = eINSTANCE.getAssociationType_RoleCombinations();
+
+		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl <em>Occurrence Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5031,22 +5039,14 @@ public interface ModelPackage extends EPackage {
 		EClass ROLE_TYPE = eINSTANCE.getRoleType();
 
 		/**
-		 * The meta object literal for the '<em><b>Other Roles</b></em>' containment reference list feature.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleCombinationConstraintImpl <em>Role Combination Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.RoleCombinationConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getRoleCombinationConstraint()
 		 * @generated
 		 */
-		EReference ROLE_TYPE__OTHER_ROLES = eINSTANCE.getRoleType_OtherRoles();
-
-		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl <em>Other Role Player Constraint</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.OtherRolePlayerConstraintImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOtherRolePlayerConstraint()
-		 * @generated
-		 */
-		EClass OTHER_ROLE_PLAYER_CONSTRAINT = eINSTANCE.getOtherRolePlayerConstraint();
+		EClass ROLE_COMBINATION_CONSTRAINT = eINSTANCE.getRoleCombinationConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Player</b></em>' reference feature.
@@ -5054,7 +5054,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OTHER_ROLE_PLAYER_CONSTRAINT__PLAYER = eINSTANCE.getOtherRolePlayerConstraint_Player();
+		EReference ROLE_COMBINATION_CONSTRAINT__PLAYER = eINSTANCE.getRoleCombinationConstraint_Player();
 
 		/**
 		 * The meta object literal for the '<em><b>Other Player</b></em>' reference feature.
@@ -5062,7 +5062,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_PLAYER = eINSTANCE.getOtherRolePlayerConstraint_OtherPlayer();
+		EReference ROLE_COMBINATION_CONSTRAINT__OTHER_PLAYER = eINSTANCE.getRoleCombinationConstraint_OtherPlayer();
 
 		/**
 		 * The meta object literal for the '<em><b>Other Role</b></em>' reference feature.
@@ -5070,15 +5070,15 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OTHER_ROLE_PLAYER_CONSTRAINT__OTHER_ROLE = eINSTANCE.getOtherRolePlayerConstraint_OtherRole();
+		EReference ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE = eINSTANCE.getRoleCombinationConstraint_OtherRole();
 
 		/**
-		 * The meta object literal for the '<em><b>Association Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Role</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OTHER_ROLE_PLAYER_CONSTRAINT__ASSOCIATION_TYPE = eINSTANCE.getOtherRolePlayerConstraint_AssociationType();
+		EReference ROLE_COMBINATION_CONSTRAINT__ROLE = eINSTANCE.getRoleCombinationConstraint_Role();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl <em>Name Type</em>}' class.

@@ -15,35 +15,37 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 
 /**
  * @author Hannes Niederhausen
  * 
  */
-public class AddOtherRolePlayerConstraintCommand extends AbstractCommand {
-	private final RoleType roleType;
-	private final OtherRolePlayerConstraint orpc;
+public class AddRoleCombinationConstraintCommand extends AbstractCommand {
+	private final AssociationType associationType;
+	private final RoleCombinationConstraint rcc;
+	private int index;
 
-	public AddOtherRolePlayerConstraintCommand(RoleType roleType,
-			OtherRolePlayerConstraint orpc) {
+	public AddRoleCombinationConstraintCommand(AssociationType associationType,
+			RoleCombinationConstraint rcc) {
 		super();
-		this.roleType = roleType;
-		this.orpc = orpc;
+		this.associationType = associationType;
+		this.rcc = rcc;
 	}
 
 	public void execute() {
-		roleType.getOtherRoles().add(orpc);
+		associationType.getRoleCombinations().add(rcc);
 	}
 
 	public void redo() {
-		roleType.getOtherRoles().add(orpc);
+		associationType.getRoleCombinations().add(index, rcc);
 	}
 
 	@Override
 	public void undo() {
-		roleType.getOtherRoles().remove(orpc);
+		index = associationType.getRoleCombinations().indexOf(rcc); 
+		associationType.getRoleCombinations().remove(rcc);
 	}
 
 	@Override

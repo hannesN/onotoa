@@ -175,8 +175,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createRoleTypeAdapter();
 			}
 			@Override
-			public Adapter caseOtherRolePlayerConstraint(OtherRolePlayerConstraint object) {
-				return createOtherRolePlayerConstraintAdapter();
+			public Adapter caseRoleCombinationConstraint(RoleCombinationConstraint object) {
+				return createRoleCombinationConstraintAdapter();
 			}
 			@Override
 			public Adapter caseNameType(NameType object) {
@@ -591,16 +591,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint <em>Other Role Player Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint <em>Role Combination Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint
+	 * @see de.topicmapslab.tmcledit.model.RoleCombinationConstraint
 	 * @generated
 	 */
-	public Adapter createOtherRolePlayerConstraintAdapter() {
+	public Adapter createRoleCombinationConstraintAdapter() {
 		return null;
 	}
 

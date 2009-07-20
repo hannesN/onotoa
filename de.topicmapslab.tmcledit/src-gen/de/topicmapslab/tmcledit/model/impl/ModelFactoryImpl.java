@@ -82,7 +82,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.OCCURRENCE_TYPE: return createOccurrenceType();
 			case ModelPackage.ROLE_CONSTRAINT: return createRoleConstraint();
 			case ModelPackage.ROLE_TYPE: return createRoleType();
-			case ModelPackage.OTHER_ROLE_PLAYER_CONSTRAINT: return createOtherRolePlayerConstraint();
+			case ModelPackage.ROLE_COMBINATION_CONSTRAINT: return createRoleCombinationConstraint();
 			case ModelPackage.NAME_TYPE: return createNameType();
 			case ModelPackage.ABSTRACT_TYPED_CARDINALITY_CONSTRAINT: return createAbstractTypedCardinalityConstraint();
 			case ModelPackage.COMMENT: return createComment();
@@ -358,9 +358,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OtherRolePlayerConstraint createOtherRolePlayerConstraint() {
-		OtherRolePlayerConstraintImpl otherRolePlayerConstraint = new OtherRolePlayerConstraintImpl();
-		return otherRolePlayerConstraint;
+	public RoleCombinationConstraint createRoleCombinationConstraint() {
+		RoleCombinationConstraintImpl roleCombinationConstraint = new RoleCombinationConstraintImpl();
+		return roleCombinationConstraint;
 	}
 
 	/**

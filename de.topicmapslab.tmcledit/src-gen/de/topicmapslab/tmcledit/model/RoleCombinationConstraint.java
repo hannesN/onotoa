@@ -8,24 +8,24 @@ package de.topicmapslab.tmcledit.model;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Other Role Player Constraint</b></em>'.
+ * A representation of the model object '<em><b>Role Combination Constraint</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getPlayer <em>Player</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherPlayer <em>Other Player</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherRole <em>Other Role</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getAssociationType <em>Association Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getPlayer <em>Player</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherPlayer <em>Other Player</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherRole <em>Other Role</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getRole <em>Role</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.ModelPackage#getOtherRolePlayerConstraint()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleCombinationConstraint()
  * @model
  * @generated
  */
-public interface OtherRolePlayerConstraint extends AbstractCardinalityContraint {
+public interface RoleCombinationConstraint extends AbstractCardinalityContraint {
 	/**
 	 * Returns the value of the '<em><b>Player</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public interface OtherRolePlayerConstraint extends AbstractCardinalityContraint 
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Player</em>' reference.
 	 * @see #setPlayer(TopicType)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOtherRolePlayerConstraint_Player()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleCombinationConstraint_Player()
 	 * @model required="true"
 	 * @generated
 	 */
 	TopicType getPlayer();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getPlayer <em>Player</em>}' reference.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getPlayer <em>Player</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Player</em>' reference.
@@ -62,14 +62,14 @@ public interface OtherRolePlayerConstraint extends AbstractCardinalityContraint 
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Other Player</em>' reference.
 	 * @see #setOtherPlayer(TopicType)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOtherRolePlayerConstraint_OtherPlayer()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleCombinationConstraint_OtherPlayer()
 	 * @model required="true"
 	 * @generated
 	 */
 	TopicType getOtherPlayer();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherPlayer <em>Other Player</em>}' reference.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherPlayer <em>Other Player</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Other Player</em>' reference.
@@ -88,14 +88,14 @@ public interface OtherRolePlayerConstraint extends AbstractCardinalityContraint 
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Other Role</em>' reference.
 	 * @see #setOtherRole(RoleType)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOtherRolePlayerConstraint_OtherRole()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleCombinationConstraint_OtherRole()
 	 * @model required="true"
 	 * @generated
 	 */
 	RoleType getOtherRole();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getOtherRole <em>Other Role</em>}' reference.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherRole <em>Other Role</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Other Role</em>' reference.
@@ -105,29 +105,29 @@ public interface OtherRolePlayerConstraint extends AbstractCardinalityContraint 
 	void setOtherRole(RoleType value);
 
 	/**
-	 * Returns the value of the '<em><b>Association Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Role</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Association Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Role</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Association Type</em>' reference.
-	 * @see #setAssociationType(AssociationType)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOtherRolePlayerConstraint_AssociationType()
+	 * @return the value of the '<em>Role</em>' reference.
+	 * @see #setRole(RoleType)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleCombinationConstraint_Role()
 	 * @model required="true"
 	 * @generated
 	 */
-	AssociationType getAssociationType();
+	RoleType getRole();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint#getAssociationType <em>Association Type</em>}' reference.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getRole <em>Role</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Association Type</em>' reference.
-	 * @see #getAssociationType()
+	 * @param value the new value of the '<em>Role</em>' reference.
+	 * @see #getRole()
 	 * @generated
 	 */
-	void setAssociationType(AssociationType value);
+	void setRole(RoleType value);
 
-} // OtherRolePlayerConstraint
+} // RoleCombinationConstraint
