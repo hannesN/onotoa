@@ -19,13 +19,8 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.tinytim.mio.CTMTopicMapWriter;
@@ -42,31 +37,30 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class TMCLExportWizard extends Wizard implements IExportWizard {
 
-	private Text text;
-	
 	private TopicMapSchema schema;
-	
+
+	private CTMFileSelectionWizardPage page;
+
 	public TMCLExportWizard() {
 	}
 
 	@Override
 	public boolean performFinish() {
-		if (schema==null)
+		if (schema == null)
 			schema = ModelIndexer.getInstance().getTopicMapSchema();
-		
-		java.io.File file = new java.io.File(text.getText());
-		
+
+		java.io.File file = new java.io.File(page.getFilename());
+
 		if (file.exists()) {
-			if (!MessageDialog.openQuestion(getShell(), "File already exists",  
-					"File already exists. Do you want to overwrite it?"))
+			if (!MessageDialog.openQuestion(getShell(), "File already exists",
+			        "File already exists. Do you want to overwrite it?"))
 				return false;
-			
+
 			file.delete();
-			
+
 		}
-		try
-		{ 
-			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema);
+		try {
+			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema, page.isExportSchemaInfos());
 			TopicMap tm = builder.createTopicMap();
 			FileOutputStream stream = new FileOutputStream(file);
 			CTMTopicMapWriter writer = new CTMTopicMapWriter(stream, schema.getBaseLocator());
@@ -79,31 +73,31 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 			writer.write(tm);
 			stream.flush();
 			stream.close();
-			
+
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		
+
 		return true;
 	}
 
 	@Override
 	public void addPages() {
-		FileSelectionWizardPage page1 = new FileSelectionWizardPage();
-		page1.setFileExtensions(getFilterExtensions());
-		page1.setTitle("TMCL Export - File selection");
-		addPage(page1);
+		page = new CTMFileSelectionWizardPage();
+		page.setFileExtensions(getFilterExtensions());
+		page.setTitle("TMCL Export - File selection");
+		addPage(page);
 	}
-	
+
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		if (!(selection.getFirstElement() instanceof EObject))
 			return;
-		
+
 		EObject obj = (EObject) selection.getFirstElement();
 		if (obj instanceof TopicMapSchema) {
 			schema = (TopicMapSchema) obj;
-		} else if (obj instanceof File) { 
-			schema = ((File)obj).getTopicMapSchema();
+		} else if (obj instanceof File) {
+			schema = ((File) obj).getTopicMapSchema();
 		} else if (obj.eContainer() instanceof TopicType) {
 			schema = (TopicMapSchema) obj.eContainer().eContainer();
 		} else if (obj.eContainer() instanceof TopicMapSchema) {
@@ -118,40 +112,30 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 			File file = (File) obj.eContainer();
 			schema = file.getTopicMapSchema();
 		}
-		
+
 	}
 
-	@Override
-	public void createPageControls(Composite pageContainer) {
-		Composite comp = new Composite(pageContainer, SWT.None);
-		comp.setLayout(new GridLayout(3, false));
-		
-		Label l = new Label(comp, SWT.NONE);
-		l.setText("&Filename");
-		
-		text = new Text(comp, SWT.BORDER);
-		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		Button browseButton = new Button(comp, SWT.PUSH);
-		browseButton.setText("...");
-		browseButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				FileDialog dlg = new FileDialog(text.getShell());
-				dlg.setFilterExtensions(getFilterExtensions());
-				String file = dlg.open();
-				if (file!=null) {
-					if (!file.endsWith(".ctm"))
-						file+=".ctm";
-					text.setText(file);
-				}
-			}
-		});
-	}
-
-	
 	public String[] getFilterExtensions() {
-		return new String[]{"*.ctm"};
+		return new String[] { "*.ctm" };
 	}
 
+	private class CTMFileSelectionWizardPage extends FileSelectionWizardPage {
+		private boolean exportSchemaInfos = false;
+
+		public boolean isExportSchemaInfos() {
+			return exportSchemaInfos;
+		}
+
+		@Override
+		public void addAdditionalWidgets(Composite parent) {
+			Button exportSchemainfosbButton = new Button(parent, SWT.CHECK);
+			exportSchemainfosbButton.setText("Export Schema Infos");
+			exportSchemainfosbButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					exportSchemaInfos = ((Button) e.widget).getSelection();
+				}
+			});
+		}
+	}
 }

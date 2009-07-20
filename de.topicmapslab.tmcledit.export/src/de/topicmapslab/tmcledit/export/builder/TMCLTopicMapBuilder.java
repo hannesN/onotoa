@@ -67,11 +67,12 @@ public class TMCLTopicMapBuilder {
 
 	private Map<TopicType,TopicType> overlapMap;
 
-	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema) {
+	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema) {
 		super();
 		this.topicMapSchema = topicMapSchema;
+		this.exportSchema = exportSchema;
 	}
-
+		
 	public TopicMap createTopicMap() {
 		try {
 
@@ -94,6 +95,7 @@ public class TMCLTopicMapBuilder {
 			
 			if (exportSchema) {
 				schema = topicMap.createTopic();
+				addDocumentationOccurrences(schema, topicMapSchema);
 				schema.addType(topicMap.createTopicBySubjectIdentifier(TMCL.SCHEMA));
 			}
 			
@@ -559,4 +561,6 @@ public class TMCLTopicMapBuilder {
 		return createTopic(loc);
 	}
 
+	
+	
 }
