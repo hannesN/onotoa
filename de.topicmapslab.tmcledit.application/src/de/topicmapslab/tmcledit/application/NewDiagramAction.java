@@ -10,8 +10,11 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
+import java.io.File;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
@@ -35,6 +38,15 @@ public class NewDiagramAction extends Action {
 		FileWizard wizard = new FileWizard(true);
 		WizardDialog dlg = new WizardDialog(shell, wizard);
 		if (dlg.open()==Dialog.OK) {
+			File file = new File(wizard.getPath());
+			if (file.exists()) {
+				if (MessageDialog.openQuestion(shell, "File already exists",
+								"A file with the chosen filename already exists. Do you want to overwrite it?")) {
+					file.delete();
+				} else {
+					return;
+				}
+			}
 			
 			DiagramEditorActionBarAdvisor.openModelView(workbench, wizard.getPath(), true);
 		}
