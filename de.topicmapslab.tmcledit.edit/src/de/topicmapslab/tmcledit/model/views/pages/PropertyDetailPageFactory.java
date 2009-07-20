@@ -96,7 +96,7 @@ public class PropertyDetailPageFactory {
 		} else if (model instanceof RoleType) {
 			page = pageMap.get(ROLE_TYPE);
 			if (page==null) {
-				page = new RoleTypeModelPage();
+				page = new TopicTypePage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(ROLE_TYPE, page);
 				pageBook.registerPage(page.getID(), page.getControl());

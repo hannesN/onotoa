@@ -9,6 +9,7 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopedReifiableTopicType;
 
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeImpl#getReifierConstraint <em>Reifier Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeImpl#getRoles <em>Roles</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.AssociationTypeImpl#getRoleCombinations <em>Role Combinations</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,6 +63,16 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 * @ordered
 	 */
 	protected EList<RoleConstraint> roles;
+
+	/**
+	 * The cached value of the '{@link #getRoleCombinations() <em>Role Combinations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRoleCombinations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RoleCombinationConstraint> roleCombinations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,6 +153,18 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RoleCombinationConstraint> getRoleCombinations() {
+		if (roleCombinations == null) {
+			roleCombinations = new EObjectContainmentEList<RoleCombinationConstraint>(RoleCombinationConstraint.class, this, ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS);
+		}
+		return roleCombinations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -148,6 +172,8 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 				return basicSetReifierConstraint(null, msgs);
 			case ModelPackage.ASSOCIATION_TYPE__ROLES:
 				return ((InternalEList<?>)getRoles()).basicRemove(otherEnd, msgs);
+			case ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS:
+				return ((InternalEList<?>)getRoleCombinations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -164,6 +190,8 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 				return getReifierConstraint();
 			case ModelPackage.ASSOCIATION_TYPE__ROLES:
 				return getRoles();
+			case ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS:
+				return getRoleCombinations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -184,6 +212,10 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 				getRoles().clear();
 				getRoles().addAll((Collection<? extends RoleConstraint>)newValue);
 				return;
+			case ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS:
+				getRoleCombinations().clear();
+				getRoleCombinations().addAll((Collection<? extends RoleCombinationConstraint>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -202,6 +234,9 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 			case ModelPackage.ASSOCIATION_TYPE__ROLES:
 				getRoles().clear();
 				return;
+			case ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS:
+				getRoleCombinations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -218,6 +253,8 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 				return reifierConstraint != null;
 			case ModelPackage.ASSOCIATION_TYPE__ROLES:
 				return roles != null && !roles.isEmpty();
+			case ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS:
+				return roleCombinations != null && !roleCombinations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

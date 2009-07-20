@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.AssociationType#getRoles <em>Roles</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.AssociationType#getRoleCombinations <em>Role Combinations</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,5 +40,21 @@ public interface AssociationType extends ScopedTopicType, ScopedReifiableTopicTy
 	 * @generated
 	 */
 	EList<RoleConstraint> getRoles();
+
+	/**
+	 * Returns the value of the '<em><b>Role Combinations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Role Combinations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Role Combinations</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAssociationType_RoleCombinations()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<RoleCombinationConstraint> getRoleCombinations();
 
 } // AssociationType

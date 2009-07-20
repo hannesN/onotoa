@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,9 +35,9 @@ import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
@@ -118,24 +120,23 @@ public class TMCLTopicMapBuilder {
 			AssociationType at = (AssociationType) atc.getType();
 			for (RoleConstraint rc : at.getRoles()) {
 				setRoleConstraint(atc, rc);
-				
-				RoleType rt = (RoleType) rc.getType();
-				for (OtherRolePlayerConstraint orpc : rt.getOtherRoles()) {
-					setOtherRoleConstraint(at, rt, orpc);
-				}
+			}
+			
+			for (RoleCombinationConstraint rcc : at.getRoleCombinations()) {
+				setRoleCombinationConstraint(at, rcc);
 			}
 						
 			setScopeConstraints(at);
 		}
 	}
 
-	private void setOtherRoleConstraint(AssociationType at, RoleType rt, OtherRolePlayerConstraint orpc) {
-		Topic constr = createConstraint(TMCL.OTHER_ROLE_CONSTRAINT);
-		createConstrainedStatement(at, constr);
-		createConstrainedRole(rt, constr);
-		createConstrainedTopicType(createTopic(orpc.getPlayer()), constr);
-		createOtherConstrainedRole(orpc.getOtherRole(), constr);
-		createOtherConstrainedTopicType(createTopic(orpc.getOtherPlayer()), constr);
+	private void setRoleCombinationConstraint(AssociationType type, RoleCombinationConstraint rcc) {
+		Topic constr = createConstraint(TMCL.ROLE_COMBINATION_CONSTRAINT);
+		createConstrainedStatement(type, constr);
+		createConstrainedRole(rcc.getRole(), constr);
+		createConstrainedTopicType(createTopic(rcc.getPlayer()), constr);
+		createOtherConstrainedRole(rcc.getOtherRole(), constr);
+		createOtherConstrainedTopicType(createTopic(rcc.getOtherPlayer()), constr);
 		
 		setSchema(constr);
 	}
@@ -193,7 +194,13 @@ public class TMCLTopicMapBuilder {
 
 	private Topic createTopic(TopicType type) {
 		Topic t = null;
-		Locator itemId = baseLocator.resolve("#" + type.getName() + type.hashCode());
+		String url = (type.getName() + type.hashCode()).replaceAll(" ", "-");
+		try {
+	        url = URLEncoder.encode(url, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+	        throw new RuntimeException(e);
+        }
+		Locator itemId = baseLocator.resolve("#"+url);
 		t = topicTypeMap.get(itemId);
 		if (t != null)
 			return t;

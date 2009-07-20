@@ -223,13 +223,13 @@ public interface ModelFactory extends EFactory {
 	RoleType createRoleType();
 
 	/**
-	 * Returns a new object of class '<em>Other Role Player Constraint</em>'.
+	 * Returns a new object of class '<em>Role Combination Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Other Role Player Constraint</em>'.
+	 * @return a new object of class '<em>Role Combination Constraint</em>'.
 	 * @generated
 	 */
-	OtherRolePlayerConstraint createOtherRolePlayerConstraint();
+	RoleCombinationConstraint createRoleCombinationConstraint();
 
 	/**
 	 * Returns a new object of class '<em>Name Type</em>'.

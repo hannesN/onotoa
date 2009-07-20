@@ -13,6 +13,9 @@
  */
 package de.topicmapslab.tmcledit.model.dialogs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -35,7 +38,8 @@ import org.eclipse.swt.widgets.Text;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.OtherRolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -43,15 +47,18 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author Hannes Niederhausen
  *
  */
-public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListener {
+public class NewRoleCombinationConstraintDialog extends Dialog implements DisposeListener {
 
-	private Text associationText;
+	private Text roleText;
 	private Text playerText;
 	private Text otherRoleText;
 	private Text otherPlayerText;
 	
-	private OtherRolePlayerConstraint otherRole;
-	private Button assButton;
+	private RoleCombinationConstraint roleCombination;
+	
+	private List<RoleType> possibleRoles;
+	
+	private Button roleButton;
 	private Button playerButton;
 	private Button otherRoleButton;
 	private Button otherPlayerButton;
@@ -64,33 +71,38 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 			}
 	};
 	
-	public NewOtherRoleConstraintDialog(Shell parentShell) {
+	public NewRoleCombinationConstraintDialog(Shell parentShell, AssociationType at) {
 		super(parentShell);
+		possibleRoles = new ArrayList<RoleType>(at.getRoles().size());
+		for (RoleConstraint rc : at.getRoles()) {
+			if (rc.getType()!=null)
+				possibleRoles.add((RoleType) rc.getType());
+		}
 	}
 
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setSize(500, 300);
-		newShell.setText("New OtherRolePlayerConstraint...");
+		newShell.setText("New Role Combination Constraint...");
 	}
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		otherRole = ModelFactory.eINSTANCE.createOtherRolePlayerConstraint();
-		otherRole.eAdapters().add(roleListener);
+		roleCombination = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
+		roleCombination.eAdapters().add(roleListener);
 		
 		Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		comp.setLayout(new GridLayout(3, false));
 		
 		Label l = new Label(comp, SWT.NONE);
-		l.setText("&Association:");
-		associationText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
-		associationText.addDisposeListener(this);
-		associationText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		assButton = new Button(comp, SWT.PUSH);
-		assButton.setText("...");
+		l.setText("&Role:");
+		roleText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
+		roleText.addDisposeListener(this);
+		roleText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		roleButton = new Button(comp, SWT.PUSH);
+		roleButton.setText("...");
 		
 		l = new Label(comp, SWT.NONE);
 		l.setText("&Player:");
@@ -122,36 +134,39 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 
 	private void validate() {
 		boolean finished = true;
-		if (otherRole.getAssociationType()==null)
+		if (roleCombination.getRole()==null)
 			finished = false;
-		else if (otherRole.getPlayer()==null)
+		else if (roleCombination.getPlayer()==null)
 			finished = false;
-		else if (otherRole.getOtherRole()==null)
+		else if (roleCombination.getOtherRole()==null)
 			finished = false;
-		else if (otherRole.getOtherPlayer()==null)
+		else if (roleCombination.getOtherPlayer()==null)
 			finished = false;
+		else if (roleCombination.getRole().equals(roleCombination.getOtherRole()))
+			finished = false;
+		
 		
 		if (getButton(IDialogConstants.OK_ID)!=null)
 			getButton(IDialogConstants.OK_ID).setEnabled(finished);
 	}
 
-	public OtherRolePlayerConstraint getOtherRole() {
-		return otherRole;
+	public RoleCombinationConstraint getOtherRole() {
+		return roleCombination;
 	}
 	
 	public void widgetDisposed(DisposeEvent e) {
-		otherRole.eAdapters().remove(roleListener);
+		roleCombination.eAdapters().remove(roleListener);
 	}
 
 	private void hookButtonListeners() {
-		assButton.addSelectionListener(new SelectionAdapter() {
+		roleButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						assButton.getShell(), KindOfTopicType.ASSOCIATION_TYPE);
+						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
-					otherRole.setAssociationType((AssociationType) dlg.getFirstResult());
-					associationText.setText(otherRole.getAssociationType().getName());
+					roleCombination.setRole((RoleType) dlg.getFirstResult());
+					roleText.setText(roleCombination.getRole().getName());
 				}
 			}
 		});
@@ -159,10 +174,10 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						assButton.getShell(), KindOfTopicType.TOPIC_TYPE);
+						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE);
 				if (dlg.open()==Dialog.OK) {
-					otherRole.setPlayer( (TopicType) dlg.getFirstResult());
-					playerText.setText(otherRole.getPlayer().getName());
+					roleCombination.setPlayer( (TopicType) dlg.getFirstResult());
+					playerText.setText(roleCombination.getPlayer().getName());
 				}
 			}
 		});
@@ -171,13 +186,13 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						assButton.getShell(), KindOfTopicType.TOPIC_TYPE);
+						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE);
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = (TopicType) dlg.getFirstResult();
-					if (tt.equals(otherRole.getPlayer()))
+					if (tt.equals(roleCombination.getPlayer()))
 						return;
-					otherRole.setOtherPlayer( (TopicType) dlg.getFirstResult());
-					otherPlayerText.setText(otherRole.getOtherPlayer().getName());
+					roleCombination.setOtherPlayer( (TopicType) dlg.getFirstResult());
+					otherPlayerText.setText(roleCombination.getOtherPlayer().getName());
 				}
 			}
 		});
@@ -185,11 +200,11 @@ public class NewOtherRoleConstraintDialog extends Dialog implements DisposeListe
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						assButton.getShell(), KindOfTopicType.ROLE_TYPE);
+						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
 					RoleType rt = (RoleType) dlg.getFirstResult();
-					otherRole.setOtherRole(rt);
-					otherRoleText.setText(otherRole.getOtherRole().getName());
+					roleCombination.setOtherRole(rt);
+					otherRoleText.setText(roleCombination.getOtherRole().getName());
 				}
 			}
 		});
