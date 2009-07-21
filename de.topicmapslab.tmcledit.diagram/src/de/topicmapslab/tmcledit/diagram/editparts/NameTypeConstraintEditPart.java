@@ -38,7 +38,10 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 		else
 			getNameLabel().setText(ntc.getType().getName());
 		
-		getRegExpLabel().setText("["+ntc.getRegexp()+"]");
+		if (".*".equals(ntc.getRegexp()))
+			getRegExpLabel().setText("");
+		else
+			getRegExpLabel().setText("["+ntc.getRegexp()+"]");
 
 		
 		

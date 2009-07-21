@@ -13,6 +13,7 @@
  */
 package de.topicmapslab.tmcledit.model.dialogs;
 
+import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
@@ -26,11 +27,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.fieldassist.ContentAssistCommandAdapter;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.model.psiprovider.PSIContentProposalProvider;
 
 /**
  * @author Hannes Niederhausen
@@ -84,6 +87,7 @@ public class NewTopicTypeWizard extends Wizard {
 		
 		private Button buttons[];
 		private int selButton = 0;
+		private PSIContentProposalProvider proposalProvider;
 		
 		protected NewTypeWizardPage() {
 			super("new type");
@@ -145,10 +149,13 @@ public class NewTopicTypeWizard extends Wizard {
 			nameText.addModifyListener(new ModifyListener() {
 
 				public void modifyText(ModifyEvent e) {
+					proposalProvider.setName(nameText.getText());
 					if (nameText.getText().length()>0) {
 						if (syncIdentifier) {
 							String bl = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
-							identifierText.setText(bl+"/"+nameText.getText().toLowerCase());
+							String id = bl+"/"+nameText.getText().toLowerCase().replaceAll(" ", "_");
+							
+							identifierText.setText(id);
 							syncIdentifier=true;
 						}
 						setPageComplete(true);
@@ -174,6 +181,13 @@ public class NewTopicTypeWizard extends Wizard {
 					syncIdentifier = false;
 				}
 			});
+			
+			proposalProvider = new PSIContentProposalProvider();
+			new ContentAssistCommandAdapter(identifierText, 
+					new TextContentAdapter(), 
+					proposalProvider, 
+					null,
+					new char[]{'h'}); 
 			fac.applyTo(identifierText);
 			
 			label = new Label(comp, SWT.NONE);

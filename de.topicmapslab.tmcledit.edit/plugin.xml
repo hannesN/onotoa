@@ -11,6 +11,7 @@
  -->
 
 <plugin>
+   <extension-point id="psiprovider" name="PSI Provider" schema="schema/de.topicmapslab.tmcledit.edit.psiprovider.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
@@ -118,6 +119,18 @@
             id="de.topicmapslab.tmcledit.extensions.wizards.NewOnototaFileWizard"
             name="New Onotoa File">
       </wizard>
+   </extension>
+   <extension
+         point="de.topicmapslab.tmcledit.edit.psiprovider">
+      <psiprovider
+            class="de.topicmapslab.tmcledit.model.psiprovider.internal.BasicPSIProvider"
+            name="Base Test provider">
+         psiprovider body text
+      </psiprovider>
+      <psiprovider
+            class="de.topicmapslab.tmcledit.model.psiprovider.internal.Subj3ctPSIProvider"
+            name="Subj3ctPSIProvider">
+      </psiprovider>
    </extension>
 
 </plugin>
