@@ -137,6 +137,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 					cardCombo.select(0);
 					cardCombo.setEnabled(true);
 					browseButton.setEnabled(true);
+					setMayReifier();
 				} else {
 					cardCombo.clearSelection();
 					cardCombo.setEnabled(false);

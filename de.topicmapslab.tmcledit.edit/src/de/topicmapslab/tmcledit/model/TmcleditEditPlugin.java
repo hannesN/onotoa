@@ -5,9 +5,14 @@
  */
 package de.topicmapslab.tmcledit.model;
 
+import java.util.List;
+
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
+
+import de.topicmapslab.tmcledit.model.util.extension.ExtensionManager;
+import de.topicmapslab.tmcledit.model.util.extension.PSIProviderInfo;
 
 /**
  * This is the central singleton for the Tmcledit edit plugin.
@@ -18,6 +23,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 public final class TmcleditEditPlugin extends EMFPlugin {
 	
 	public final static String DIAGRAMEDITOR_ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
+	public final static String PLUGIN_ID = "de.topicmapslab.tmcledit.edit";
 	
 	/**
 	 * Keep track of the singleton.
@@ -77,6 +83,8 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 	 * @generated NOT
 	 */
 	public static class Implementation extends EclipseUIPlugin {
+		private static ExtensionManager extensionManager = new ExtensionManager();
+
 		/**
 		 * Creates an instance.
 		 * <!-- begin-user-doc -->
@@ -90,6 +98,15 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 			//
 			plugin = this;
 		}
+		
+		public static ExtensionManager getExtensionManager() {
+	        return extensionManager;
+        }
+
+		public List<PSIProviderInfo> getPsiProviderInfos() {
+	        return extensionManager.getPsiProviderInfos();
+        }
+		
 		
 	}
 
