@@ -11,13 +11,10 @@
 package de.topicmapslab.tmcledit.model.views.treenodes;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.edit.ui.action.RedoAction;
-import org.eclipse.emf.edit.ui.action.UndoAction;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.actions.ActionFactory;
 
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -47,12 +44,9 @@ public class TreeDiagram extends TreeObject {
 	@Override
 	public void handleDoubleClick() {
 		try {
-			TmcleditEditPlugin.getPlugin().getWorkbench().getActiveWorkbenchWindow()
-					.getActivePage().openEditor(new TMCLEditorInput(getDiagram(), 
-							getModelView().getEditingDomain(),
-							(UndoAction) getModelView().getActionRegistry().get(ActionFactory.UNDO.getId()),
-							(RedoAction) getModelView().getActionRegistry().get(ActionFactory.REDO.getId()),
-							true), TmcleditEditPlugin.DIAGRAMEDITOR_ID);
+			TmcleditEditPlugin.getPlugin().getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
+			        new TMCLEditorInput(getDiagram(), getModelView().getEditingDomain(), getModelView()
+			                .getActionRegistry(), true), TmcleditEditPlugin.DIAGRAMEDITOR_ID);
 		} catch (PartInitException e) {
 			throw new RuntimeException(e);
 		}

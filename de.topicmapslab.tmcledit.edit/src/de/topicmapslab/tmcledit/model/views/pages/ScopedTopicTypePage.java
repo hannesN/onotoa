@@ -322,8 +322,6 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 			cardCombo.setEnabled(false);
 			browseButton.setEnabled(false);
 		}
-			
-
 	}
 
 	@Override

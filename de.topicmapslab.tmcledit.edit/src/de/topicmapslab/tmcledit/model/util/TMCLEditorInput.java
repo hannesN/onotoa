@@ -14,8 +14,7 @@
 package de.topicmapslab.tmcledit.model.util;
 
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.ui.action.RedoAction;
-import org.eclipse.emf.edit.ui.action.UndoAction;
+import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
@@ -32,20 +31,18 @@ public class TMCLEditorInput implements IEditorInput {
 	private final boolean exists;
 	private final EditingDomain editingDomain;
 	
-	private final UndoAction undoAction;
-	private final RedoAction redoAction;
+	private final ActionRegistry actionRegistry;
+	
 	
 	
 	
 	public TMCLEditorInput(Diagram diagram, EditingDomain editingDomain,
-			UndoAction undoAction, RedoAction redoAction, 
-			boolean exists) {
+			ActionRegistry actionRegistry, boolean exists) {
 		super();
 		this.diagram = diagram;
 		this.editingDomain = editingDomain;
-		this.redoAction = redoAction;
-		this.undoAction = undoAction;
 		this.exists = exists;
+		this.actionRegistry = actionRegistry;
 	}
 
 	public boolean exists() {
@@ -80,12 +77,8 @@ public class TMCLEditorInput implements IEditorInput {
 	public Diagram getDiagram() {
 		return diagram;
 	}
-	
-	public RedoAction getRedoAction() {
-		return redoAction;
-	}
-	
-	public UndoAction getUndoAction() {
-		return undoAction;
-	}
+
+	public ActionRegistry getActionRegistry() {
+	    return actionRegistry;
+    }
 }
