@@ -60,6 +60,12 @@ public class PropertyDetailPageFactory {
 		this.pageBook.registerPage(emptyPage.getID(), emptyPage.getControl());
 	}
 	
+	public void dispose() {
+		for (AbstractModelPage page : pageMap.values()) {
+			page.dispose();
+		}
+		pageMap.clear();
+	}
 	
 	
 	@SuppressWarnings("unchecked")

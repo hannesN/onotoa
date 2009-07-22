@@ -79,6 +79,12 @@ public class RoleModelPage extends AbstractModelPage{
 	}
 
 	@Override
+	public void dispose() {
+		assPage.dispose();
+	    super.dispose();
+	}
+	
+	@Override
 	public void setCommandStack(CommandStack commandStack) {
 		super.setCommandStack(commandStack);
 		assPage.setCommandStack(commandStack);

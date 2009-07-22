@@ -75,6 +75,11 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		return (AssociationTypeConstraint) getModel();
 	}
 
+	@Override
+	public void dispose() {
+		typeModelPage.dispose();
+	    super.dispose();
+	}
 	
 	@Override
 	protected void createItems(CTabFolder folder) {

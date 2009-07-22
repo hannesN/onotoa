@@ -63,6 +63,8 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	@Override
 	public void dispose() {
 		getSite().getPage().removeSelectionListener(this);
+		pageFactory.dispose();
+		pageFactory = null;
 		super.dispose();
 	}
 
