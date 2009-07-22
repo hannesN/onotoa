@@ -55,7 +55,7 @@ public abstract class PSIProvider implements IPSIProvider {
 	}
 	
 	protected String getName() {
-	    return name;
+	    return name==null ? "" : name;
     }
 	
 	

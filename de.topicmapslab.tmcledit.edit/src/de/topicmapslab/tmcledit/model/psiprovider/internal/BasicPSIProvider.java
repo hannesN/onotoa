@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.psiprovider.PSIProvider;
 import de.topicmapslab.tmcledit.model.psiprovider.PSIProviderResult;
@@ -23,29 +25,26 @@ import de.topicmapslab.tmcledit.model.psiprovider.PSIProviderResult;
  *
  */
 public class BasicPSIProvider extends PSIProvider {
-	Set<PSIProviderResult> psis = null;
-	
 	public Set<PSIProviderResult> getSubjectIdentifier() {
-		if (psis==null)
-			init();
-	    
-	    return psis;
+		HashSet<String> uris = new HashSet<String>();
+		
+		TopicMapSchema topicMapSchema = ModelIndexer.getInstance().getTopicMapSchema();
+		uris.add(topicMapSchema.getBaseLocator());
+		
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			for (String id : tt.getIdentifiers()) {
+				int lastIndexOf = id.lastIndexOf("/");
+				if (lastIndexOf>0)
+					uris.add(id.substring(0, lastIndexOf));
+			}
+		}
+		
+		Set<PSIProviderResult> resultSet = new HashSet<PSIProviderResult>(uris.size());
+		for (String uri : uris)
+			resultSet.add(new PSIProviderResult(uri, null));
+		
+	    return Collections.unmodifiableSet(resultSet);
     }
 
-	private void init() {
-	    String psi[] = new String[]{"Lutz_Maicher", "Benjamin_Bock", "Hannes_Niederhausen", "JRTM", "RTM", "Daniel Dexter", "Onotoa", "Ontopia"};
-		Set<PSIProviderResult> resultSet = new HashSet<PSIProviderResult>(10);
-		String base = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
-		if (base==null)
-			base = "urn:onotoa/";
-		if (!base.endsWith("/"))
-			base += "/";
-		
-		 for (String s : psi) {
-			 resultSet.add(new PSIProviderResult(base+s.toLowerCase(), null));
-		 }
-		
-	    psis=Collections.unmodifiableSet(resultSet);
-    }
 	
 }
