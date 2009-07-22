@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledPageBook;
 import org.eclipse.ui.part.Page;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -150,6 +151,8 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 			return;
 
 		folder.setSelection(0);
+		ScrolledPageBook pb = (ScrolledPageBook) folder.getParent().getParent();
+		pb.setOrigin(0, 0);
 
 		if (this.model != null)
 			this.model.eAdapters().remove(this);
