@@ -89,6 +89,12 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	}
 
 	@Override
+	public void dispose() {
+		control.dispose();
+	    super.dispose();
+	}
+	
+	@Override
 	public void setCommandStack(CommandStack commandStack) {
 		super.setCommandStack(commandStack);
 		if (control != null)
@@ -212,7 +218,6 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 					((TopicType) notification.getNewValue()).eAdapters().add(this);
 				}
 			}
-			control.getTableViewer().refresh(notification.getNotifier());
 			return;
 		}
 		if (roleCombinationViewer != null)

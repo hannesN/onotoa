@@ -79,6 +79,12 @@ public class NameConstraintDetailPage extends AbstractConstraintModelPage {
 		if (typeModelPage != null)
 			typeModelPage.setModel(getCastedModel().getType());
 	}
+	
+	@Override
+	public void dispose() {
+		typeModelPage.dispose();
+	    super.dispose();
+	}
 
 	private Composite createConstraintComposite(Composite parent,
 			FormToolkit toolkit) {

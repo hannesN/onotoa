@@ -14,7 +14,6 @@
 package de.topicmapslab.tmcledit.model.views.pages;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,7 +35,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -273,7 +271,6 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 					((TopicType) notification.getNewValue()).eAdapters().add(this);
 				}
 			}
-			control.getTableViewer().refresh(notification.getNotifier());
 			return;
 		}
 		if (notification.getNotifier() instanceof ReifierConstraint) {
@@ -381,17 +378,20 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		return (ReifiableTopicType) getModel();
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+	public void dispose() {
+		control.dispose();
+	    super.dispose();
+	}
+	
 	@Override
 	public void updateUI() {
 		super.updateUI();
 		if (getCastedModel() != null)
 			control.setInput(getCastedModel().getScope());
 		else
-			control.setInput((List<? extends AbstractTypedCardinalityConstraint>) Collections.emptyList());
+			control.setInput(null);
 
-		control.getTableViewer().refresh();
-		
 		updateReifierUI();		
 	}
 

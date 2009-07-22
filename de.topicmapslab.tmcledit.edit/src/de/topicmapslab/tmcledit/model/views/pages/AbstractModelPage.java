@@ -144,7 +144,7 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 			return (TMCLConstruct) model;
 		return null;
 	}
-
+	
 	public void setModel(Object model) {
 		if (this.model == model)
 			return;

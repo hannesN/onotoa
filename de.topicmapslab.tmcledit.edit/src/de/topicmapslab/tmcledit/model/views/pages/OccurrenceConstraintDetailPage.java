@@ -73,6 +73,12 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 	protected void setEnabled(boolean enabled) {
 		item.getControl().setEnabled(enabled);
 	}
+	
+	@Override
+	public void dispose() {
+	    typeModelPage.dispose();
+		super.dispose();
+	}
 
 	private Composite createConstraintComposite(Composite parent, FormToolkit toolkit) {
 		section = toolkit.createSection(parent, Section.EXPANDED
