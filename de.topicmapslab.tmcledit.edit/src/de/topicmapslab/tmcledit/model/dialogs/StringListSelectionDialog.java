@@ -60,8 +60,6 @@ public class StringListSelectionDialog extends Dialog {
 		comp.setLayout(new GridLayout(3, false));
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
-		
-		
 		stringListViewer = new ListViewer(comp);
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.widthHint = 150;
@@ -133,8 +131,9 @@ public class StringListSelectionDialog extends Dialog {
 		});
 	}
 
-	private void addString() {
-		InputDialog dlg = new InputDialog(getShell(), "New..", getInputDescription(), "", validator);
+	protected void addString() {
+		InputDialog dlg = getInputDialog("New..", getInputDescription(), "", validator); 
+		
 		if (Dialog.OK == dlg.open()) {
 			String result = dlg.getValue();
 			stringList.add(result);
@@ -142,8 +141,13 @@ public class StringListSelectionDialog extends Dialog {
 		}
 	}
 	
-	private void editString(String string) {
-		InputDialog dlg = new InputDialog(getShell(), "New..", getInputDescription(), string, validator);
+	protected InputDialog getInputDialog(String text, String inputDescription, String init,
+            IInputValidator validator) {
+	    return new InputDialog(getShell(), text, inputDescription, init, validator);
+    }
+
+	protected void editString(String string) {
+		InputDialog dlg = getInputDialog("Edit..", getInputDescription(), string, validator);
 		if (Dialog.OK == dlg.open()) {
 			String result = dlg.getValue();
 			int i = stringList.indexOf(string);
@@ -153,6 +157,13 @@ public class StringListSelectionDialog extends Dialog {
 		}
 	}
 	
+	protected IInputValidator getValidator() {
+	    return validator;
+    }
+	
+	protected ListViewer getStringListViewer() {
+	    return stringListViewer;
+    }
 	
 	@SuppressWarnings("unchecked")
 	private void removeSelection() {
