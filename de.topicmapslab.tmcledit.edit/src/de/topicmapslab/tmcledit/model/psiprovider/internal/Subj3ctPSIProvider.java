@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.model.psiprovider.internal;
 
 
 import java.io.StringReader;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -41,17 +42,18 @@ public class Subj3ctPSIProvider extends PSIProvider {
 			return Collections.emptySet();
 		
 		String url = "http://api.subj3ct.com/subjects/search";
-		
-		HttpClient client = new HttpClient();
-		HttpMethod method = new GetMethod(url);
-
-
-		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>(2);
-		params.add(new NameValuePair("format", "xml"));
-		params.add(new NameValuePair("query", getName()));
-		method.setQueryString(params.toArray(new NameValuePair[params.size()]));
-		
+		HttpMethod method = null;
 		try {
+			HttpClient client = new HttpClient();
+			method = new GetMethod(url);
+	
+	
+			ArrayList<NameValuePair> params = new ArrayList<NameValuePair>(2);
+			params.add(new NameValuePair("format", "xml"));
+			params.add(new NameValuePair("query", getName()));
+			method.setQueryString(params.toArray(new NameValuePair[params.size()]));
+		
+	
 	        client.executeMethod(method);
 	        
 	        String result = method.getResponseBodyAsString();
@@ -67,19 +69,26 @@ public class Subj3ctPSIProvider extends PSIProvider {
 			
 			Set<PSIProviderResult> resultSet = new HashSet<PSIProviderResult>(resultList.size());
 	        for (Subje3ctResult r : resultList) {
-	        	String description = null;
+	        	String description = "";
 	        	if (r.name!=null)
 	        		description = "Name: "+r.name+"\n";
 	        	if (r.description!=null)
-	        		description = "Description: "+r.description+"\n";
+	        		description += "Description: "+r.description+"\n";
+	        	
+	        	description += "\n\nThis service is provided by http://www.subj3ct.com";
 	        	
 	        	resultSet.add(new PSIProviderResult(r.identifier, description));
 	        }
 	        return Collections.unmodifiableSet(resultSet);
-        } catch (Exception e) {
+        } catch (UnknownHostException e) {
+        	// no http connection -> no results
+        	return Collections.emptySet();
+		} catch (Exception e) {
 	        throw new RuntimeException(e);
+	        
         } finally {
-        	method.releaseConnection();
+        	if (method != null)
+        		method.releaseConnection();
         }
         
 
