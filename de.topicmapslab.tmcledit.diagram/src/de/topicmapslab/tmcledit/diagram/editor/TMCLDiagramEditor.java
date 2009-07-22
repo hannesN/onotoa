@@ -268,14 +268,23 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		dirtyAdapter = new DirtyAdapter();
 		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
 
+		ActionRegistry ar = ei.getActionRegistry();
 		IActionBars actionBars = getEditorSite().getActionBars();
-		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), ei
-				.getUndoAction());
-		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(), ei
-				.getRedoAction());
-
-		getActionRegistry().registerAction(ei.getUndoAction());
-		getActionRegistry().registerAction(ei.getRedoAction());
+		
+		IAction a = ar.getAction(ActionFactory.UNDO.getId());
+		actionBars.setGlobalActionHandler(a.getId(), a);
+		getActionRegistry().registerAction(a);
+		
+		a = ar.getAction(ActionFactory.REDO.getId());
+		actionBars.setGlobalActionHandler(a.getId(), a);
+		getActionRegistry().registerAction(a);
+		
+		a = ar.getAction(ActionFactory.SAVE.getId());
+		actionBars.setGlobalActionHandler(a.getId(), a);
+		getActionRegistry().registerAction(a);
+		
+		a = ar.getAction(ActionFactory.CLOSE.getId());
+		getActionRegistry().registerAction(a);
 	}
 
 	@Override

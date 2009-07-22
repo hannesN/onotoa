@@ -13,9 +13,8 @@
  */
 package de.topicmapslab.tmcledit.model.views;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -86,21 +85,21 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		if ( ( (part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView)) 
 				&& (selection instanceof IStructuredSelection) ){
 			// register actions
-			if (part instanceof ModelView) {
-				Map<String, IAction> ar = ((ModelView)part).getActionRegistry();
+			ActionRegistry ar = (ActionRegistry) part.getAdapter(ActionRegistry.class);
+			if (ar != null) {
 				IActionBars actionBars = getViewSite().getActionBars();
 				
 				String tmp = ActionFactory.UNDO.getId();
-				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
+				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
 				
 				tmp = ActionFactory.REDO.getId();
-				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
+				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
 				
 				tmp = ActionFactory.SAVE.getId();
-				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
+				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
 				
 				tmp = ActionFactory.CLOSE.getId();
-				actionBars.setGlobalActionHandler(tmp, (IAction) ar.get(tmp));
+				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
 			}
 			IStructuredSelection sel = (IStructuredSelection) selection;
 			if (!sel.isEmpty()) {

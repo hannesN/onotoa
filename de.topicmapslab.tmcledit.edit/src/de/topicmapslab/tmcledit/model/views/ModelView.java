@@ -14,10 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EventObject;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -42,6 +40,7 @@ import org.eclipse.emf.edit.ui.action.RedoAction;
 import org.eclipse.emf.edit.ui.action.UndoAction;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.emf.workspace.impl.WorkspaceCommandStackImpl;
+import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -134,7 +133,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private ViewContentProvider contentProvider;
 	private Action refreshAction;
 	private Action doubleClickAction;
-	// private TMCLDiagramEditor currentEditor;
 
 	private EditingDomain editingDomain;
 	private ValidateJob validateJob = new ValidateJob();
@@ -143,7 +141,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
 
-	private Map<String, IAction> actionRegistry;
+	//private Map<String, IAction> actionRegistry;
+	private ActionRegistry actionRegistry;
 
 	private AdapterImpl dirtyListener = new AdapterImpl() {
 		@Override
@@ -309,9 +308,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			}
 			if (currDiagram != null) {
 				getViewSite().getPage().openEditor(
-				        new TMCLEditorInput(currDiagram, getEditingDomain(), (UndoAction) getActionRegistry().get(
-				                ActionFactory.UNDO.getId()), (RedoAction) getActionRegistry().get(
-				                ActionFactory.REDO.getId()), true), TmcleditEditPlugin.DIAGRAMEDITOR_ID);
+				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), true), TmcleditEditPlugin.DIAGRAMEDITOR_ID);
 			}
 		}
 
@@ -321,7 +318,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 
-		actionRegistry = new HashMap<String, IAction>();
+		actionRegistry = new ActionRegistry();
 		createActions();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
 	}
@@ -340,9 +337,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		CloseAction closeAction = new CloseAction(this);
 		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), closeAction);
-
-		actionRegistry.put(ActionFactory.UNDO.getId(), undoAction);
-		actionRegistry.put(ActionFactory.REDO.getId(), redoAction);
+		
+		IAction a = ActionFactory.SAVE.create(getViewSite().getWorkbenchWindow());
+		actionRegistry.registerAction(a);
+		
+		actionRegistry.registerAction(closeAction);
+		actionRegistry.registerAction(undoAction);
+		actionRegistry.registerAction(redoAction);
 
 		actionBars.updateActionBars();
 	}
@@ -464,10 +465,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public EditingDomain getEditingDomain() {
 		if (editingDomain == null) {
 			editingDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
-			IAction action = actionRegistry.get(ActionFactory.UNDO.getId());
+			IAction action = actionRegistry.getAction(ActionFactory.UNDO.getId());
 			((UndoAction) action).setEditingDomain(editingDomain);
 
-			action = actionRegistry.get(ActionFactory.REDO.getId());
+			action = actionRegistry.getAction(ActionFactory.REDO.getId());
 			((RedoAction) action).setEditingDomain(editingDomain);
 			editingDomain.getCommandStack().addCommandStackListener(this);
 			updateActions();
@@ -603,8 +604,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 	}
 
-	public void updateActions() {
-		for (IAction a : actionRegistry.values()) {
+	@SuppressWarnings("unchecked")
+    public void updateActions() {
+		Iterator<IAction> it = actionRegistry.getActions();
+		while (it.hasNext()) {
+			IAction a = it.next();
 			if (a instanceof UpdateAction)
 				((UpdateAction) a).update();
 		}
@@ -612,7 +616,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		getViewSite().getActionBars().getGlobalActionHandler(ActionFactory.EXPORT.getId());
 	}
 
-	public Map<String, IAction> getActionRegistry() {
+	public ActionRegistry getActionRegistry() {
 		return actionRegistry;
 	}
 
