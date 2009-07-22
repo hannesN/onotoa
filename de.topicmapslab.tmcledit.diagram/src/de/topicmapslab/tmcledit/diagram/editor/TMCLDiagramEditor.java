@@ -138,6 +138,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 							.showView(
 									"de.topicmapslab.tmcledit.extensions.views.PropertyDetailView",
 									null, IWorkbenchPage.VIEW_VISIBLE);
+					fireSelectionChanged();
 				} catch (PartInitException e1) {
 
 				}
