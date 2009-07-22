@@ -187,7 +187,7 @@ public class NewTopicTypeWizard extends Wizard {
 					new TextContentAdapter(), 
 					proposalProvider, 
 					null,
-					new char[]{'h'}); 
+					PSIContentProposalProvider.KEYS); 
 			fac.applyTo(identifierText);
 			
 			label = new Label(comp, SWT.NONE);

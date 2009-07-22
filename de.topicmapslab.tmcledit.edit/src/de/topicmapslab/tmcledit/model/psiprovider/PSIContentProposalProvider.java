@@ -25,7 +25,7 @@ import de.topicmapslab.tmcledit.model.util.extension.PSIProviderInfo;
  *
  */
 public class PSIContentProposalProvider implements IContentProposalProvider {
-	public final static char keys[] = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+	public final static char KEYS[] = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 	        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
 	        'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2',
 	        '3', '4', '5', '6', '7', '8', '9', '0' };
@@ -43,12 +43,13 @@ public class PSIContentProposalProvider implements IContentProposalProvider {
 		else
 			subString = contents;
 		
+		int providerNumber = 0;
 		for (PSIProviderInfo info : infos) {
 			IPSIProvider prov = info.getProvider();
 			prov.setName(name);
-			
+			providerNumber++;
 			for (PSIProviderResult s : prov.getSubjectIdentifierStartingWith(subString)) {
-				results.add(new PSIContentProposal(s));
+				results.add(new PSIContentProposal(s, position, providerNumber));
 			}
 		}
 		
@@ -66,22 +67,26 @@ public class PSIContentProposalProvider implements IContentProposalProvider {
 	private class PSIContentProposal implements IContentProposal, Comparable<PSIContentProposal> {
 
 		private final PSIProviderResult result;
+		private final int provid;
+		private final int offset;
 		
-		public PSIContentProposal(PSIProviderResult result) {
+		public PSIContentProposal(PSIProviderResult result, int offset, int provid) {
 	        super();
 	        this.result = result;
+	        this.provid = provid;
+	        this.offset = offset;
         }
 
 		public String getContent() {
-	        return result.getIdentifier();
+	        return result.getIdentifier().substring(offset);
         }
 
 		public int getCursorPosition() {
-	       return result.getIdentifier().length();
+	       return result.getIdentifier().length()-offset;
         }
 
 		public String getDescription() {
-	        return result.getDescription()!=null?result.getDescription():"";
+	        return result.getDescription();
         }
 
 		public String getLabel() {
@@ -89,7 +94,14 @@ public class PSIContentProposalProvider implements IContentProposalProvider {
         }
 		
 		public int compareTo(PSIContentProposal o) {
-			return result.getIdentifier().compareTo(o.result.getIdentifier());
+			if (provid==o.provid)
+				return result.getIdentifier().compareTo(o.result.getIdentifier());
+			
+			if (provid<o.provid)
+				return -1;
+			else
+				return 1;
+			
 		}
 		
 	}

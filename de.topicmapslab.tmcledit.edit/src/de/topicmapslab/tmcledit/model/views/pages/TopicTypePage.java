@@ -48,6 +48,7 @@ import de.topicmapslab.tmcledit.model.commands.SetOverlapCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
 import de.topicmapslab.tmcledit.model.dialogs.StringListSelectionDialog;
+import de.topicmapslab.tmcledit.model.dialogs.SubjectIdentifierListDialog;
 import de.topicmapslab.tmcledit.model.dialogs.TopicSelectionDialog;
 
 /**
@@ -111,8 +112,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicType type = (TopicType) getModel();
-				StringListSelectionDialog dlg = new StringListSelectionDialog(
+				SubjectIdentifierListDialog dlg = new SubjectIdentifierListDialog(
 						identifierText.getShell());
+				dlg.setTopicName(getCastedModel().getName());
 				dlg.setSelectedTopics(type.getIdentifiers());
 				dlg.setInputDescription("Please enter the new subject identifier.");
 
