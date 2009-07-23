@@ -56,6 +56,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -268,6 +269,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 		dirtyAdapter = new DirtyAdapter();
 		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
+		diagram.eAdapters().add(dirtyAdapter);
 
 		ActionRegistry ar = ei.getActionRegistry();
 		IActionBars actionBars = getEditorSite().getActionBars();
@@ -307,6 +309,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	public void dispose() {
+		diagram.eAdapters().remove(dirtyAdapter);
 		((File) diagram.eContainer()).eAdapters().remove(dirtyAdapter);
 		super.dispose();
 	}
@@ -452,17 +455,23 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private class DirtyAdapter extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(Boolean.class) == ModelPackage.FILE__DIRTY) {
-				firePropertyChange(TMCLDiagramEditor.PROP_DIRTY);
-				getCommandStack().markSaveLocation();
-			} else if (msg.getFeatureID(List.class) == ModelPackage.FILE__DIAGRAMS) {
-				if (msg.getEventType() == Notification.REMOVE) {
+			if (msg.getNotifier() instanceof File) {
+				if (msg.getFeatureID(Boolean.class) == ModelPackage.FILE__DIRTY) {
+					firePropertyChange(TMCLDiagramEditor.PROP_DIRTY);
+					getCommandStack().markSaveLocation();
+				} else if (msg.getFeatureID(List.class) == ModelPackage.FILE__DIAGRAMS) {
+					if (msg.getEventType() == Notification.REMOVE) {
+						if (msg.getOldValue().equals(getDiagram())) {
+							getEditorSite().getPage().closeEditor(
+									TMCLDiagramEditor.this, false);
+						}
 
-					if (msg.getOldValue().equals(getDiagram())) {
-						getEditorSite().getPage().closeEditor(
-								TMCLDiagramEditor.this, false);
 					}
-
+				}
+			} else if (msg.getNotifier().equals(diagram)) {
+				if (msg.getFeatureID(String.class)== ModelPackage.DIAGRAM__NAME) {
+					setPartName((String) msg.getNewValue());
+					firePropertyChange(IEditorPart.PROP_TITLE);
 				}
 			}
 
