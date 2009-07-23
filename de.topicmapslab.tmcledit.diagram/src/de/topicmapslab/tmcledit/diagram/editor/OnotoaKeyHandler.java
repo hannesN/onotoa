@@ -13,6 +13,7 @@ package de.topicmapslab.tmcledit.diagram.editor;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 
@@ -47,10 +48,14 @@ public class OnotoaKeyHandler extends GraphicalViewerKeyHandler {
 	}
 
 	private void removeSelectionFromModel() {
-		actionRegistry.getAction(DeleteFromModelAction.ID).run();
+		IAction action = actionRegistry.getAction(DeleteFromModelAction.ID);
+		if (action.isEnabled())
+			action.run();
 	}
 
 	private void removeSelectionFromDiagram() {
-		actionRegistry.getAction(RemoveFromDiagramAction.ID).run();
+		IAction action = actionRegistry.getAction(RemoveFromDiagramAction.ID);
+		if (action.isEnabled())
+			action.run();
 	}
 }
