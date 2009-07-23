@@ -197,7 +197,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		getActionRegistry().registerAction(zoomIn);
 		getActionRegistry().registerAction(zoomOut);
 
-		viewer.setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.MOD2),
+		viewer.setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.CTRL),
 				MouseWheelZoomHandler.SINGLETON);
 		getPalettePreferences().setPaletteState(
 				FlyoutPaletteComposite.STATE_PINNED_OPEN);

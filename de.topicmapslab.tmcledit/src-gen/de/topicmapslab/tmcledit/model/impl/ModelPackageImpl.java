@@ -45,6 +45,7 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -297,6 +298,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass scopedReifiableTopicTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eStringToEStringMapEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1249,6 +1257,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTMCLConstruct_Extension() {
+		return (EReference)tmclConstructEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getReifierConstraint() {
 		return reifierConstraintEClass;
 	}
@@ -1278,6 +1295,33 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EClass getScopedReifiableTopicType() {
 		return scopedReifiableTopicTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEStringToEStringMap() {
+		return eStringToEStringMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStringToEStringMap_Key() {
+		return (EAttribute)eStringToEStringMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStringToEStringMap_Value() {
+		return (EAttribute)eStringToEStringMapEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1461,6 +1505,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__SEE_ALSO);
 		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__COMMENT);
 		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__DESCRIPTION);
+		createEReference(tmclConstructEClass, TMCL_CONSTRUCT__EXTENSION);
 
 		reifierConstraintEClass = createEClass(REIFIER_CONSTRAINT);
 
@@ -1468,6 +1513,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(reifiableTopicTypeEClass, REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT);
 
 		scopedReifiableTopicTypeEClass = createEClass(SCOPED_REIFIABLE_TOPIC_TYPE);
+
+		eStringToEStringMapEClass = createEClass(ESTRING_TO_ESTRING_MAP);
+		createEAttribute(eStringToEStringMapEClass, ESTRING_TO_ESTRING_MAP__KEY);
+		createEAttribute(eStringToEStringMapEClass, ESTRING_TO_ESTRING_MAP__VALUE);
 
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
@@ -1665,6 +1714,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTMCLConstruct_See_also(), ecorePackage.getEString(), "see_also", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTMCLConstruct_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTMCLConstruct_Description(), ecorePackage.getEString(), "description", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTMCLConstruct_Extension(), this.getEStringToEStringMap(), null, "extension", null, 0, -1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reifierConstraintEClass, ReifierConstraint.class, "ReifierConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1672,6 +1722,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getReifiableTopicType_ReifierConstraint(), this.getReifierConstraint(), null, "reifierConstraint", null, 0, 1, ReifiableTopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopedReifiableTopicTypeEClass, ScopedReifiableTopicType.class, "ScopedReifiableTopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(eStringToEStringMapEClass, Map.Entry.class, "EStringToEStringMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEStringToEStringMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEStringToEStringMap_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

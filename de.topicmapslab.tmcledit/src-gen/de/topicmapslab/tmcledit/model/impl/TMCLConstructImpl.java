@@ -10,10 +10,16 @@ import de.topicmapslab.tmcledit.model.TMCLConstruct;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TMCLConstructImpl#getSee_also <em>See also</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TMCLConstructImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TMCLConstructImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TMCLConstructImpl#getExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,6 +97,16 @@ public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExtension() <em>Extension</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, String> extension;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,6 +195,32 @@ public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EMap<String, String> getExtension() {
+		if (extension == null) {
+			extension = new EcoreEMap<String,String>(ModelPackage.Literals.ESTRING_TO_ESTRING_MAP, EStringToEStringMapImpl.class, this, ModelPackage.TMCL_CONSTRUCT__EXTENSION);
+		}
+		return extension;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.TMCL_CONSTRUCT__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -187,6 +230,9 @@ public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
 				return getComment();
 			case ModelPackage.TMCL_CONSTRUCT__DESCRIPTION:
 				return getDescription();
+			case ModelPackage.TMCL_CONSTRUCT__EXTENSION:
+				if (coreType) return getExtension();
+				else return getExtension().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -207,6 +253,9 @@ public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
 				return;
 			case ModelPackage.TMCL_CONSTRUCT__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case ModelPackage.TMCL_CONSTRUCT__EXTENSION:
+				((EStructuralFeature.Setting)getExtension()).set(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,6 +278,9 @@ public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
 			case ModelPackage.TMCL_CONSTRUCT__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case ModelPackage.TMCL_CONSTRUCT__EXTENSION:
+				getExtension().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -247,6 +299,8 @@ public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case ModelPackage.TMCL_CONSTRUCT__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case ModelPackage.TMCL_CONSTRUCT__EXTENSION:
+				return extension != null && !extension.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
