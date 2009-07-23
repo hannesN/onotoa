@@ -112,8 +112,12 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 					return;
 				lastSelection = obj;
 				AbstractModelPage page = pageFactory.getPageFor(obj);
+				try {
 				setCurrentPage(page);
 				page.setModel(obj);
+				} catch (Exception e) { 
+					throw new RuntimeException(e); 
+				}
 				
 				if (part instanceof ValidationErrorView)
 					part = part.getSite().getWorkbenchWindow().getActivePage().findView(ModelView.ID);
