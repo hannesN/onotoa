@@ -33,15 +33,12 @@ public class CreateTopicAction extends Action {
 	 */
 	public CreateTopicAction(ModelView modelView) {
 		this.modelView = modelView;
-	}
-
-	@Override
-	public String getText() {
-		return "Create Topic Type";
+		setText("Create Topic Type");
 	}
 
 	public void setKindOfTopicType(KindOfTopicType kindOfTopicType) {
 	    this.kindOfTopicType = kindOfTopicType;
+	    setText("Create " + kindOfTopicType.getName());
     }
 	
 	@Override

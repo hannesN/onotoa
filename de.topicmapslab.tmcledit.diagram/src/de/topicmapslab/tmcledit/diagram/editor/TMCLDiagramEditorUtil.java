@@ -16,8 +16,8 @@ package de.topicmapslab.tmcledit.diagram.editor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
+import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
 import org.eclipse.gef.palette.ConnectionCreationToolEntry;
-import org.eclipse.gef.palette.CreationToolEntry;
 import org.eclipse.gef.palette.MarqueeToolEntry;
 import org.eclipse.gef.palette.PaletteGroup;
 import org.eclipse.gef.palette.PaletteRoot;
@@ -72,7 +72,7 @@ public class TMCLDiagramEditorUtil {
 		pr.add(group);
 		pr.setDefaultEntry(selEntry);
 
-		group.add(new CreationToolEntry("Comment", "Comment",
+		group.add(new CombinedTemplateCreationEntry("Comment", "Comment",
 				new CreationFactory() {
 
 					public Object getNewObject() {
@@ -141,18 +141,18 @@ public class TMCLDiagramEditorUtil {
 	private static PaletteGroup getTypePaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types");
 
-		group.add(new CreationToolEntry("Topic", "Topic",
+		group.add(new CombinedTemplateCreationEntry("Topic", "Topic",
 				new TypeNodeCreationFactory(KindOfTopicType.NO_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPIC_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPIC)));
 
-		group.add(new CreationToolEntry("Topic Type", "Topic Type",
+		group.add(new CombinedTemplateCreationEntry("Topic Type", "Topic Type",
 				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
 
 		group
-				.add(new CreationToolEntry(
+				.add(new CombinedTemplateCreationEntry(
 						"Occurrence Type",
 						"Occurrence Type",
 						new TypeNodeCreationFactory(
@@ -162,24 +162,24 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.OCCURRENCETYPE)));
 
-		group.add(new CreationToolEntry("Role Type", "Role Type",
+		group.add(new CombinedTemplateCreationEntry("Role Type", "Role Type",
 				new TypeNodeCreationFactory(KindOfTopicType.ROLE_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.ROLETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.ROLETYPE)));
 
-		group.add(new CreationToolEntry("Association Type", "Association Type",
+		group.add(new CombinedTemplateCreationEntry("Association Type", "Association Type",
 				new TypeNodeCreationFactory(KindOfTopicType.ASSOCIATION_TYPE),
 				ImageProvider
 						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE_SM),
 				ImageProvider
 						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE)));
 
-		group.add(new CreationToolEntry("Name Type", "Name Type",
+		group.add(new CombinedTemplateCreationEntry("Name Type", "Name Type",
 				new TypeNodeCreationFactory(KindOfTopicType.NAME_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE)));
 
-		group.add(new CreationToolEntry("Scope Type", "Scope Type",
+		group.add(new CombinedTemplateCreationEntry("Scope Type", "Scope Type",
 				new TypeNodeCreationFactory(KindOfTopicType.SCOPE_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.SCOPETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.SCOPETYPE)));
@@ -190,7 +190,7 @@ public class TMCLDiagramEditorUtil {
 	private static PaletteGroup getTypeItemsPaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types Items");
 		group
-				.add(new CreationToolEntry(
+				.add(new CombinedTemplateCreationEntry(
 						"Occurrence Constraint",
 						"Occurrence Constraint",
 						new OccurrenceConstraintCreationFactory(),
@@ -200,7 +200,7 @@ public class TMCLDiagramEditorUtil {
 								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT)));
 
 		group
-				.add(new CreationToolEntry(
+				.add(new CombinedTemplateCreationEntry(
 						"Name Constraint",
 						"Name Constraint",
 						new CreationFactory() {
@@ -221,7 +221,7 @@ public class TMCLDiagramEditorUtil {
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
 
 		group
-				.add(new CreationToolEntry(
+				.add(new CombinedTemplateCreationEntry(
 						"Subject Identifier Constraint",
 						"Subject Identifier Constraint",
 						new CreationFactory() {
@@ -242,7 +242,7 @@ public class TMCLDiagramEditorUtil {
 								.getImageDescriptor(ImageConstants.SUBJECTIDENTIFIERCONSTRAINT)));
 
 		group
-				.add(new CreationToolEntry(
+				.add(new CombinedTemplateCreationEntry(
 						"Subject Locator Constraint",
 						"Subject Locator Constraint",
 						new CreationFactory() {
@@ -299,7 +299,7 @@ public class TMCLDiagramEditorUtil {
 				ImageProvider.getImageDescriptor(ImageConstants.KINDOF)));
 
 		group
-				.add(new CreationToolEntry(
+				.add(new CombinedTemplateCreationEntry(
 						"Association Constraint",
 						"Association Constraint",
 						new CreationFactory() {

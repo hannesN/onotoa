@@ -33,6 +33,8 @@ import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
+import org.eclipse.gef.dnd.TemplateTransferDropTargetListener;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.palette.PaletteRoot;
@@ -41,9 +43,12 @@ import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite;
+import org.eclipse.gef.ui.palette.PaletteViewer;
+import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.util.TransferDropTargetListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -129,6 +134,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		// listen for dropped parts
 		viewer.addDropTargetListener(new TypeDropTransferListener(viewer,
 				diagram));
+		
 
 		viewer.getControl().addMouseListener(new MouseAdapter() {
 			@Override
@@ -195,6 +201,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				MouseWheelZoomHandler.SINGLETON);
 		getPalettePreferences().setPaletteState(
 				FlyoutPaletteComposite.STATE_PINNED_OPEN);
+		
+		getGraphicalViewer().addDropTargetListener((TransferDropTargetListener)
+				new TemplateTransferDropTargetListener(getGraphicalViewer()));
+			
 	}
 
 	public ZoomManager getZoomManager() {
@@ -228,6 +238,20 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	@Override
+	protected PaletteViewerProvider createPaletteViewerProvider() {
+		
+		return new PaletteViewerProvider(getEditDomain()) {
+			@Override
+			protected void configurePaletteViewer(PaletteViewer viewer) {
+				super.configurePaletteViewer(viewer);
+				viewer.addDragSourceListener(new TemplateTransferDragSourceListener(viewer));
+			}
+		};
+		
+		
 	}
 
 	@Override
