@@ -21,6 +21,8 @@ import java.util.List;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
@@ -79,6 +81,12 @@ public class TopicSelectionDialog extends Dialog {
 		availableTopicList.setContentProvider(new ArrayContentProvider());
 		availableTopicList.setLabelProvider(new TopicLableProvider());
 		availableTopicList.setInput(ModelIndexer.getInstance().getTopicTypes());
+		availableTopicList.addDoubleClickListener(new IDoubleClickListener() {
+			
+			public void doubleClick(DoubleClickEvent event) {
+				addSelection();
+			}
+		});
 		availableTopicList.addFilter(new ViewerFilter() {
 
 			@Override
@@ -107,6 +115,12 @@ public class TopicSelectionDialog extends Dialog {
 		selectedTopicList.setContentProvider(new ArrayContentProvider());
 		selectedTopicList.setLabelProvider(new TopicLableProvider());
 		selectedTopicList.setInput(selectedTopics);
+		selectedTopicList.addDoubleClickListener(new IDoubleClickListener() {
+			
+			public void doubleClick(DoubleClickEvent event) {
+				removeSelection();
+			}
+		});
 
 		return comp;
 	}
