@@ -31,12 +31,13 @@ public class DeleteTopicTypeAction extends Action {
 	private ModelView modelView;
 
 	public DeleteTopicTypeAction(ModelView modelView) {
-		setText("Delete");
+		setText("Delete TopicTyype");
 		this.modelView = modelView;
 	}
 
 	public void setType(TopicType type) {
 		this.type = type;
+		setText("Delete "+type.getKind().getName());
 	}
 	
 	@Override

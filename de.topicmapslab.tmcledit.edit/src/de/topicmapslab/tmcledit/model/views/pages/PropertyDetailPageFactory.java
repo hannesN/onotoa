@@ -25,7 +25,6 @@ import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -35,7 +34,6 @@ public class PropertyDetailPageFactory {
 	private static final String TOPIC_MAP_SCHEMA = "TopicMapSchema";
 	private static final String TOPIC_TYPE = "TopicType";
 	private static final String NAME_TYPE = "NameType";
-	private static final String ROLE_TYPE = "RoleType";
 	private static final String OCCURRENCE_TYPE = "OccurrenceType";
 	private static final String ASSOCIATION_TYPE = "AssociationType";
 	private static final String DIAGRAM = "Diagram";
