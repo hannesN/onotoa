@@ -58,19 +58,6 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="toolbar:org.eclipse.ui.main.toolbar">
-         <toolbar
-               id="de.topicmapslab.tmcledit.extensions.toolbar">
-            <command
-                  commandId="de.topicmapslab.tmcledit.model.validatecommand"
-                  id="validateCommandToolbarItem"
-                  label="Validate"
-                  mode="FORCE_TEXT"
-                  style="push">
-            </command>
-         </toolbar>
-      </menuContribution>
-      <menuContribution
             locationURI="menu:window">
          <command
                commandId="de.topicmapslab.tmcledit.extensions.showerrorviewcommand"
@@ -102,6 +89,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="de.topicmapslab.tmcledit.model.perspectives.OnotoaPerspective"
+            icon="icons/icon.png"
             id="de.topicmapslab.tmcledit.extensions.OnotoaPerspective"
             name="Onotoa">
       </perspective>

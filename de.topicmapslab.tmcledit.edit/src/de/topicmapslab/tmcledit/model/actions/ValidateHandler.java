@@ -41,8 +41,7 @@ public class ValidateHandler extends AbstractHandler {
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		ModelView view = (ModelView) activePage
-				.findView(ModelView.ID);
+		ModelView view = (ModelView) activePage.findView(ModelView.ID);
 		if (view == null)
 			return null;
 
