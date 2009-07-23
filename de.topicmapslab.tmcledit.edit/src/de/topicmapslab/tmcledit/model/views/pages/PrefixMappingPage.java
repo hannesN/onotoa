@@ -133,7 +133,7 @@ public class PrefixMappingPage extends AbstractModelPage {
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
 		item = new CTabItem(folder, SWT.None);
-		item.setText("General");
+		item.setText("Prefixes");
 		item.setControl(createPage(folder));	
 	}
 
