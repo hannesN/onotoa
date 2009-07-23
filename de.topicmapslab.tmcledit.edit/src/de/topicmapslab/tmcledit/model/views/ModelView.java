@@ -29,7 +29,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -89,6 +88,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.progress.UIJob;
 
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -975,7 +975,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 	}
 
-	class ValidateJob extends Job {
+	class ValidateJob extends UIJob {
 		private boolean running = false;
 
 		private FeedbackRunnable feedBackRunnable = new FeedbackRunnable();
@@ -985,7 +985,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 
 		@Override
-		protected IStatus run(IProgressMonitor monitor) {
+        public IStatus runInUIThread(IProgressMonitor monitor) {
 			if (currFile == null)
 				return Status.OK_STATUS;
 
@@ -1043,7 +1043,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				this.vew = vew;
 			}
 
-		};
+		}
+
 	}
 
 }

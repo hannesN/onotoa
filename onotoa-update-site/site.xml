@@ -12,6 +12,9 @@
    <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.0.a3.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.0.a3">
       <category name="onotoa"/>
    </feature>
+   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.0.a4.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.0.a4">
+      <category name="onotoa"/>
+   </feature>
    <category-def name="onotoa" label="Onotoa"/>
    <category-def name="tinyTiM" label="tinyTiM"/>
 </site>
