@@ -57,7 +57,7 @@ public class DiagramPage extends AbstractModelPage {
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
 		CTabItem item = new CTabItem(folder, SWT.NONE, SWT.NONE);
-		item.setText("General");
+		item.setText("Diagram");
 
 		item.setControl(createPage(folder));
 	}
