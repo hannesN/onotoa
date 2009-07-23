@@ -5,6 +5,8 @@
  */
 package de.topicmapslab.tmcledit.model;
 
+import org.eclipse.emf.common.util.EMap;
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getSee_also <em>See also</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getComment <em>Comment</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getDescription <em>Description</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,5 +106,22 @@ public interface TMCLConstruct extends EObject {
 	 * @generated
 	 */
 	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Extension</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.String},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extension</em>' map isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extension</em>' map.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTMCLConstruct_Extension()
+	 * @model mapType="de.topicmapslab.tmcledit.model.EStringToEStringMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @generated
+	 */
+	EMap<String, String> getExtension();
 
 } // TMCLConstruct
