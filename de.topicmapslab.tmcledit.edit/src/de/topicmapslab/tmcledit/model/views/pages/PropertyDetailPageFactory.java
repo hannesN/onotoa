@@ -99,16 +99,7 @@ public class PropertyDetailPageFactory {
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 			return page;
-		} else if (model instanceof RoleType) {
-			page = pageMap.get(ROLE_TYPE);
-			if (page==null) {
-				page = new TopicTypePage();
-				page.createControl(pageBook.getContainer());
-				pageMap.put(ROLE_TYPE, page);
-				pageBook.registerPage(page.getID(), page.getControl());
-			}
-			return page;
-		} if (model instanceof TopicType) {
+		} else if (model instanceof TopicType) {
 			page = pageMap.get(TOPIC_TYPE);
 			if (page==null) {
 				page = new TopicTypePage();

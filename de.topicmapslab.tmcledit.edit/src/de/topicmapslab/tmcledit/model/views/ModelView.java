@@ -546,6 +546,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				try {
 					currFile = FileUtil.loadFile(filename);
 				} catch (Exception e) {
+					TmcleditEditPlugin.getPlugin().log(e);
 					currFile = null;
 				}
 			} else {
