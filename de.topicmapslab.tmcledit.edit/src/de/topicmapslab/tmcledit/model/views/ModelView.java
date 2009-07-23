@@ -108,6 +108,7 @@ import de.topicmapslab.tmcledit.model.actions.DeleteTopicTypeAction;
 import de.topicmapslab.tmcledit.model.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.model.actions.UndoActionWrapper;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
+import de.topicmapslab.tmcledit.model.actions.ValidateAction;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.util.FileUtil;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
@@ -131,7 +132,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private TreeViewer viewer;
 	private ViewContentProvider contentProvider;
-	private Action refreshAction;
+	private Action validationAction;
 	private Action doubleClickAction;
 
 	private EditingDomain editingDomain;
@@ -368,12 +369,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
-		manager.add(refreshAction);
+		manager.add(validationAction);
 		manager.add(new Separator());
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		manager.add(refreshAction);
+		manager.add(validationAction);
 		manager.add(new Separator());
 
 		manager.add(createDiagramAction);
@@ -394,24 +395,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
-		manager.add(refreshAction);
+		manager.add(validationAction);
 		manager.add(new Separator());
 
 	}
 
 	private void makeActions() {
-		refreshAction = new Action() {
-			@Override
-			public void run() {
-				contentProvider.update();
-				viewer.setInput(getViewSite());
-				viewer.expandToLevel(2);
-			}
-		};
-		refreshAction.setText("Refresh");
-		refreshAction.setToolTipText("Refreshs the Model View");
-		refreshAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(
-		        ISharedImages.IMG_ELCL_SYNCED));
+		validationAction = new ValidateAction(getSite());
 
 		doubleClickAction = new Action() {
 			@Override

@@ -47,4 +47,7 @@ public interface ImageConstants {
 	public static String ROLEPLAYER_SM = "./rp_sm.gif";
 	public static String SUBJECTIDENTIFIERCONSTRAINT = "./siconstraint.gif";
 	public static String SUBJECTLOCATORCONSTRAINT = "./slconstraint.gif";
+	public static String ICON = "./icon.png";
+	
+	public static String VALIDATE = "./icon.png";
 }

@@ -2,7 +2,8 @@
 <feature
       id="de.topicmapslab.tmcledit.export_feature"
       label="Onotoa Export Plugins"
-      version="1.1.0.a2">
+      version="1.1.0.a2"
+      provider-name="Hannes Niederhausen, Topic Maps Lab">
 
    <description url="http://onotoa.topicmapslab.de">
       This feature contains the export plugins for Onotoa, the topic maps schema eidtor.
@@ -66,7 +67,7 @@ This Agreement is governed by the laws of the State of New York andthe intellect
    </license>
 
    <url>
-      <update url="file:/home/mai00ckx/Desktop/repository"/>
+      <update label="Onotoa" url="http://onotoa.topicmapslab.de/update"/>
       <discovery label="Onotoa Website" url="http://onotoa.topicmapslab.de"/>
       <discovery label="For more information on Topic maps" url="http://isotopicmaps.org"/>
       <discovery label="For more information on Topic maps" url="http://onotoa.topicmapslab.de"/>

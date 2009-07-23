@@ -38,6 +38,9 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchActionConstants;
 
+import de.topicmapslab.tmcledit.model.actions.ValidateAction;
+
+
 /**
  * @author Hannes Niederhausen
  * 
@@ -45,6 +48,7 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 public class TMCLEditorActionBarContributor extends ActionBarContributor {
 
 	ExportAction exportAction = new ExportAction();
+	ValidateAction validateAction = new ValidateAction();
 	
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
@@ -52,6 +56,7 @@ public class TMCLEditorActionBarContributor extends ActionBarContributor {
 		toolBarManager.add(new ZoomComboContributionItem(getPage()));
 		toolBarManager.add(getAction(GEFActionConstants.ZOOM_OUT));
 		toolBarManager.add(exportAction);
+		toolBarManager.add(validateAction);
 	}
 
 	@Override
@@ -62,6 +67,7 @@ public class TMCLEditorActionBarContributor extends ActionBarContributor {
 		viewMenu.add(getAction(GEFActionConstants.ZOOM_IN));
 		viewMenu.add(getAction(GEFActionConstants.ZOOM_OUT));
 		viewMenu.add(exportAction);
+		viewMenu.add(validateAction);
 		menuManager.insertAfter(IWorkbenchActionConstants.M_EDIT, viewMenu);
 
 	}
@@ -83,6 +89,7 @@ public class TMCLEditorActionBarContributor extends ActionBarContributor {
 			exportAction.setEditor((TMCLDiagramEditor) editor);
 		else
 			exportAction.setEditor(null);
+		validateAction.setSite(getPage().getActiveEditor().getSite());
 	}
 
 	private class ExportAction extends Action {
