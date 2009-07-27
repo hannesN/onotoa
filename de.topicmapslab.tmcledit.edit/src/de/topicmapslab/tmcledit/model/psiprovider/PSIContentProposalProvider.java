@@ -45,14 +45,16 @@ public class PSIContentProposalProvider implements IContentProposalProvider {
 		
 		int providerNumber = 0;
 		for (PSIProviderInfo info : infos) {
-			IPSIProvider prov = info.getProvider();
-			prov.setName(name);
-			providerNumber++;
-			for (PSIProviderResult s : prov.getSubjectIdentifierStartingWith(subString)) {
-				results.add(new PSIContentProposal(s, position, providerNumber));
+			if (info.isInUse()) {
+				IPSIProvider prov = info.getProvider();
+				prov.setName(name);
+				providerNumber++;
+				for (PSIProviderResult s : prov.getSubjectIdentifierStartingWith(subString)) {
+					results.add(new PSIContentProposal(s, position, providerNumber));
+				}
 			}
 		}
-		
+
 		// sorting results
 		Collections.sort(results);
 		

@@ -18,13 +18,15 @@ import de.topicmapslab.tmcledit.model.psiprovider.IPSIProvider;
  * @author Hannes Niederhausen
  *
  */
-public class PSIProviderInfo {
+public class PSIProviderInfo implements Comparable<PSIProviderInfo>{
 
 	private final String name;
 	private final String id;
 	
 	private final IPSIProvider provider;
 
+	private transient boolean inUse = true;
+	
 	public PSIProviderInfo(String name, String id, IPSIProvider provider) {
 	    super();
 	    this.name = name;
@@ -44,4 +46,22 @@ public class PSIProviderInfo {
 	    return id;
     }
 	
+	public void setInUse(boolean inUse) {
+	    this.inUse = inUse;
+    }
+	
+	public boolean isInUse() {
+	    return inUse;
+    }
+
+	/**
+	 * Compares the name of the infos. If there are equal the ids will be compared
+	 */
+	public int compareTo(PSIProviderInfo o) {
+		int r = name.compareTo(o.name);
+		if (r==0)
+			r = id.compareTo(o.id);
+		
+	    return r;
+    }
 }

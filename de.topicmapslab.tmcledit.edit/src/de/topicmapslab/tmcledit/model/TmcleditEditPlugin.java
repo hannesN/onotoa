@@ -75,7 +75,10 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 	public static Implementation getPlugin() {
 		return plugin;
 	}
-
+	
+	public static ExtensionManager getExtensionManager() {
+		return Implementation.getExtensionManager();
+	}
 	/**
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 * <!-- begin-user-doc -->

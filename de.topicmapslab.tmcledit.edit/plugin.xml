@@ -111,14 +111,36 @@
    <extension
          point="de.topicmapslab.tmcledit.edit.psiprovider">
       <psiprovider
+      	    id="de.topicmapslab.tmcledit.model.psiprovider.internal.BasicPSIProvider"
             class="de.topicmapslab.tmcledit.model.psiprovider.internal.BasicPSIProvider"
             name="Base Test provider">
          psiprovider body text
       </psiprovider>
       <psiprovider
+      		id="de.topicmapslab.tmcledit.model.psiprovider.internal.Subj3ctPSIProvider"
             class="de.topicmapslab.tmcledit.model.psiprovider.internal.Subj3ctPSIProvider"
             name="Subj3ctPSIProvider">
       </psiprovider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="de.topicmapslab.tmcledit.model.preferences.GeneralPreferencePage"
+            id="de.topicmapslab.tmcledit.edit.preferences.GeneralPreferencePage"
+            name="Onotoa">
+      </page>
+      <page
+            category="de.topicmapslab.tmcledit.edit.preferences.GeneralPreferencePage"
+            class="de.topicmapslab.tmcledit.model.preferences.CompletionPreferencePage"
+            id="de.topicmapslab.tmcledit.edit.preferences.CompletionPreferencePage"
+            name="Identifier Assist">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="de.topicmapslab.tmcledit.model.preferences.PreferenceInitializer">
+      </initializer>
    </extension>
 
 </plugin>
