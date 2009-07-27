@@ -107,14 +107,6 @@
             id="de.topicmapslab.tmcledit.model.wizards.NewOnototaFileWizard"
             name="New Onotoa File">
       </wizard>
-      <wizard
-            category="de.topicmapslab.tmcledit.category"
-            class="de.topicmapslab.tmcledit.model.wizards.NewOnototaProjectWizard"
-            icon="icons/icon.png"
-            id="de.topicmapslab.tmcledit.model.wizards.NewOnototaProjectWizard"
-            name="New Onotoa Projects"
-            project="true">
-      </wizard>
    </extension>
    <extension
          point="de.topicmapslab.tmcledit.edit.psiprovider">

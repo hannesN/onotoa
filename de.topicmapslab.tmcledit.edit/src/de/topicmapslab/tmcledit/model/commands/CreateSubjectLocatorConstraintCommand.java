@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -21,10 +22,13 @@ public class CreateSubjectLocatorConstraintCommand extends AbstractCommand {
 	private final TopicType topicType;
 	private final SubjectLocatorConstraint subjectLocatorConstraint;
 	
-
+	public CreateSubjectLocatorConstraintCommand(TopicType topicType) {
+		this(topicType, ModelFactory.eINSTANCE.createSubjectLocatorConstraint());
+	}
+	
 	public CreateSubjectLocatorConstraintCommand(TopicType topicType,
 			SubjectLocatorConstraint subjectLocatorConstraint) {
-		super("Create Subject Locator");
+		super("Create Subject Locator Constraint");
 		this.topicType = topicType;
 		this.subjectLocatorConstraint = subjectLocatorConstraint;
 	}

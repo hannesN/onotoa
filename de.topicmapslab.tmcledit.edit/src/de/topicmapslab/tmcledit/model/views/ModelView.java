@@ -97,11 +97,17 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.actions.CloseAction;
 import de.topicmapslab.tmcledit.model.actions.CreateDiagramAction;
+import de.topicmapslab.tmcledit.model.actions.CreateNameConstraintAction;
+import de.topicmapslab.tmcledit.model.actions.CreateOccurrenceConstraintAction;
+import de.topicmapslab.tmcledit.model.actions.CreateSubjectIdenifierConstraintAction;
+import de.topicmapslab.tmcledit.model.actions.CreateSubjectLocatorConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateTopicAction;
 import de.topicmapslab.tmcledit.model.actions.DeleteDiagramAction;
 import de.topicmapslab.tmcledit.model.actions.DeleteTopicTypeAction;
@@ -119,6 +125,8 @@ import de.topicmapslab.tmcledit.model.views.treenodes.TreeName;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeOccurrence;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeParent;
+import de.topicmapslab.tmcledit.model.views.treenodes.TreeSubjectIdentifier;
+import de.topicmapslab.tmcledit.model.views.treenodes.TreeSubjectLocator;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
 
 /**
@@ -137,7 +145,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private EditingDomain editingDomain;
 	private ValidateJob validateJob = new ValidateJob();
-	File currFile;
+	private File currFile;
 
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
@@ -162,6 +170,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private DeleteTopicTypeAction deleteTopicTypeAction;
 
 	private DeleteDiagramAction deleteDiagramAction;
+
+	private CreateNameConstraintAction createNameConstraintAction;
+	
+	private CreateOccurrenceConstraintAction createOccurrenceConstraintAction;
+	
+	private CreateSubjectIdenifierConstraintAction createSubjectIdenifierConstraintAction;
+	
+	private CreateSubjectLocatorConstraintAction createSubjectLocatorConstraintAction;
 
 	/**
 	 * The constructor.
@@ -380,16 +396,20 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		manager.add(createDiagramAction);
 		manager.add(createTopicAction);
 		manager.add(new Separator());
-		if (!currentSelection.isEmpty()) {
-			Object selection = ((IStructuredSelection) currentSelection).getFirstElement();
-			if (selection instanceof TopicType) {
-				deleteTopicTypeAction.setType((TopicType) selection);
-				manager.add(deleteTopicTypeAction);
-			} else if (selection instanceof Diagram) {
-				deleteDiagramAction.setDiagram((Diagram) selection);
-				manager.add(deleteDiagramAction);
-			}
-		}
+		
+		if (deleteTopicTypeAction.isEnabled())
+			manager.add(deleteTopicTypeAction);
+		if (createNameConstraintAction.isEnabled())
+			manager.add(createNameConstraintAction);
+		if (createOccurrenceConstraintAction.isEnabled())
+			manager.add(createOccurrenceConstraintAction);
+		if (createSubjectIdenifierConstraintAction.isEnabled())
+			manager.add(createSubjectIdenifierConstraintAction);
+		if (createSubjectLocatorConstraintAction.isEnabled())
+			manager.add(createSubjectLocatorConstraintAction);
+		if (deleteDiagramAction.isEnabled())
+			manager.add(deleteDiagramAction);
+
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -415,6 +435,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		deleteTopicTypeAction = new DeleteTopicTypeAction(this);
 		createDiagramAction = new CreateDiagramAction(this);
 		createTopicAction = new CreateTopicAction(this);
+		
+		createNameConstraintAction = new CreateNameConstraintAction(this);
+		createOccurrenceConstraintAction = new CreateOccurrenceConstraintAction(this);
+		createSubjectIdenifierConstraintAction = new CreateSubjectIdenifierConstraintAction(this);
+		createSubjectLocatorConstraintAction = new CreateSubjectLocatorConstraintAction(this);
+		
 	}
 
 	private void hookDoubleClickAction() {
@@ -902,6 +928,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
 					to.addChild(new TreeOccurrence(ModelView.this, otc));
 				}
+				for (SubjectIdentifierConstraint sic : tt.getSubjectIdentifierConstraints()) {
+					to.addChild(new TreeSubjectIdentifier(ModelView.this, sic));
+				}
+				for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraint()) {
+					to.addChild(new TreeSubjectLocator(ModelView.this, slc));
+				}	
 				if (refresh)
 					viewer.refresh(parent);
 			}
@@ -964,6 +996,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	class NameSorter extends TreePathViewerSorter {
 		@Override
 		public int category(Object element) {
+			if (element instanceof TreeSubjectIdentifier) {
+				return 4;
+			}
+			if (element instanceof TreeSubjectLocator) {
+				return 5;
+			}
 			if (element instanceof TreeOccurrence) {
 				return 3;
 			}
