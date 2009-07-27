@@ -40,7 +40,7 @@ public class TreeOccurrence extends TreeObject{
 		
 		TopicType type = getOccurrenceTypeConstraint().getType();
 		
-		return (type==null) ? "no type set" : type.getName();
+		return (type==null) ? "tmdm:subject" : type.getName();
 	}
 	
 	@Override

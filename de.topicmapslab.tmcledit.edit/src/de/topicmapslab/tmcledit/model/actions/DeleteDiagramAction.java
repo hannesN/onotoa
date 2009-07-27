@@ -16,6 +16,9 @@ package de.topicmapslab.tmcledit.model.actions;
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -26,7 +29,7 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  * @author Hannes Niederhausen
  * 
  */
-public class DeleteDiagramAction extends Action {
+public class DeleteDiagramAction extends Action implements ISelectionChangedListener {
 
 	private Diagram diagram;
 	private ModelView modelView;
@@ -34,10 +37,13 @@ public class DeleteDiagramAction extends Action {
 	public DeleteDiagramAction(ModelView modelView) {
 		setText("Delete Diagram");
 		this.modelView = modelView;
+		modelView.addSelectionChangedListener(this);
+		setDiagram(null);
 	}
 
 	public void setDiagram(Diagram diagram) {
 		this.diagram = diagram;
+		setEnabled(diagram!=null);
 	}
 
 	@Override
@@ -51,6 +57,18 @@ public class DeleteDiagramAction extends Action {
 		}
 
 	}
-	
-	
+
+	public void selectionChanged(SelectionChangedEvent event) {
+		Diagram diagram = null;
+		if ((!event.getSelection().isEmpty()) || ((event.getSelection() instanceof IStructuredSelection))) {
+
+			IStructuredSelection sel = (IStructuredSelection) event.getSelection();
+
+			Object obj = sel.getFirstElement();
+			if (obj instanceof Diagram)
+			diagram = (Diagram) obj;
+		}
+		setDiagram(diagram);
+
+	}
 }

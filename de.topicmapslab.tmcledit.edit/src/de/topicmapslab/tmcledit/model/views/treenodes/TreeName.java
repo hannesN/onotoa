@@ -55,7 +55,7 @@ public class TreeName extends TreeObject{
 	@Override
 	public String getName() {
 		if (getNameTypeConstraint().getType()==null)
-			return "No name type set";
+			return "Default";
 		return getNameTypeConstraint().getType().getName();
 	}
 	
