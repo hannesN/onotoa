@@ -120,8 +120,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createTypeNodeAdapter();
 			}
 			@Override
-			public Adapter caseBendpoints(Bendpoints object) {
-				return createBendpointsAdapter();
+			public Adapter caseBendpoint(Bendpoint object) {
+				return createBendpointAdapter();
 			}
 			@Override
 			public Adapter caseEdge(Edge object) {
@@ -400,16 +400,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Bendpoints <em>Bendpoints</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Bendpoint <em>Bendpoint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.Bendpoints
+	 * @see de.topicmapslab.tmcledit.model.Bendpoint
 	 * @generated
 	 */
-	public Adapter createBendpointsAdapter() {
+	public Adapter createBendpointAdapter() {
 		return null;
 	}
 

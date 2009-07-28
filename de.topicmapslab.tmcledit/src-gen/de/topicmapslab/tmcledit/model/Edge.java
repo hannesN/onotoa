@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface Edge extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Bendpoints</b></em>' containment reference list.
-	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.Bendpoints}.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.Bendpoint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Bendpoints</em>' containment reference list isn't clear,
@@ -45,7 +45,7 @@ public interface Edge extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Bendpoints> getBendpoints();
+	EList<Bendpoint> getBendpoints();
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.

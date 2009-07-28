@@ -12,7 +12,7 @@ import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.Bendpoints;
+import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
@@ -150,7 +150,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass bendpointsEClass = null;
+	private EClass bendpointEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -762,8 +762,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBendpoints() {
-		return bendpointsEClass;
+	public EClass getBendpoint() {
+		return bendpointEClass;
 	}
 
 	/**
@@ -771,8 +771,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBendpoints_PosX() {
-		return (EAttribute)bendpointsEClass.getEStructuralFeatures().get(0);
+	public EAttribute getBendpoint_PosX() {
+		return (EAttribute)bendpointEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -780,8 +780,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBendpoints_PosY() {
-		return (EAttribute)bendpointsEClass.getEStructuralFeatures().get(1);
+	public EAttribute getBendpoint_PosY() {
+		return (EAttribute)bendpointEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1432,9 +1432,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		typeNodeEClass = createEClass(TYPE_NODE);
 		createEReference(typeNodeEClass, TYPE_NODE__TOPIC_TYPE);
 
-		bendpointsEClass = createEClass(BENDPOINTS);
-		createEAttribute(bendpointsEClass, BENDPOINTS__POS_X);
-		createEAttribute(bendpointsEClass, BENDPOINTS__POS_Y);
+		bendpointEClass = createEClass(BENDPOINT);
+		createEAttribute(bendpointEClass, BENDPOINT__POS_X);
+		createEAttribute(bendpointEClass, BENDPOINT__POS_Y);
 
 		edgeEClass = createEClass(EDGE);
 		createEReference(edgeEClass, EDGE__BENDPOINTS);
@@ -1641,12 +1641,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(typeNodeEClass, TypeNode.class, "TypeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeNode_TopicType(), this.getTopicType(), null, "topicType", null, 1, 1, TypeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(bendpointsEClass, Bendpoints.class, "Bendpoints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBendpoints_PosX(), ecorePackage.getEInt(), "posX", null, 1, 1, Bendpoints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBendpoints_PosY(), ecorePackage.getEInt(), "posY", null, 1, 1, Bendpoints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(bendpointEClass, Bendpoint.class, "Bendpoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBendpoint_PosX(), ecorePackage.getEInt(), "posX", null, 1, 1, Bendpoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBendpoint_PosY(), ecorePackage.getEInt(), "posY", null, 1, 1, Bendpoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(edgeEClass, Edge.class, "Edge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEdge_Bendpoints(), this.getBendpoints(), null, "bendpoints", null, 0, -1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEdge_Bendpoints(), this.getBendpoint(), null, "bendpoints", null, 0, -1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_Source(), this.getNode(), null, "source", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_Target(), this.getNode(), null, "target", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEdge_Type(), this.getEdgeType(), "type", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -5,7 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.Bendpoints;
+import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -17,19 +17,19 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Bendpoints</b></em>'.
+ * An implementation of the model object '<em><b>Bendpoint</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.BendpointsImpl#getPosX <em>Pos X</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.BendpointsImpl#getPosY <em>Pos Y</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl#getPosX <em>Pos X</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl#getPosY <em>Pos Y</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class BendpointsImpl extends EObjectImpl implements Bendpoints {
+public class BendpointImpl extends EObjectImpl implements Bendpoint {
 	/**
 	 * The default value of the '{@link #getPosX() <em>Pos X</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -75,7 +75,7 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BendpointsImpl() {
+	protected BendpointImpl() {
 		super();
 	}
 
@@ -86,7 +86,7 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.BENDPOINTS;
+		return ModelPackage.Literals.BENDPOINT;
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 		int oldPosX = posX;
 		posX = newPosX;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.BENDPOINTS__POS_X, oldPosX, posX));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.BENDPOINT__POS_X, oldPosX, posX));
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 		int oldPosY = posY;
 		posY = newPosY;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.BENDPOINTS__POS_Y, oldPosY, posY));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.BENDPOINT__POS_Y, oldPosY, posY));
 	}
 
 	/**
@@ -139,9 +139,9 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.BENDPOINTS__POS_X:
+			case ModelPackage.BENDPOINT__POS_X:
 				return getPosX();
-			case ModelPackage.BENDPOINTS__POS_Y:
+			case ModelPackage.BENDPOINT__POS_Y:
 				return getPosY();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -155,10 +155,10 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.BENDPOINTS__POS_X:
+			case ModelPackage.BENDPOINT__POS_X:
 				setPosX((Integer)newValue);
 				return;
-			case ModelPackage.BENDPOINTS__POS_Y:
+			case ModelPackage.BENDPOINT__POS_Y:
 				setPosY((Integer)newValue);
 				return;
 		}
@@ -173,10 +173,10 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.BENDPOINTS__POS_X:
+			case ModelPackage.BENDPOINT__POS_X:
 				setPosX(POS_X_EDEFAULT);
 				return;
-			case ModelPackage.BENDPOINTS__POS_Y:
+			case ModelPackage.BENDPOINT__POS_Y:
 				setPosY(POS_Y_EDEFAULT);
 				return;
 		}
@@ -191,9 +191,9 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.BENDPOINTS__POS_X:
+			case ModelPackage.BENDPOINT__POS_X:
 				return posX != POS_X_EDEFAULT;
-			case ModelPackage.BENDPOINTS__POS_Y:
+			case ModelPackage.BENDPOINT__POS_Y:
 				return posY != POS_Y_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -217,4 +217,4 @@ public class BendpointsImpl extends EObjectImpl implements Bendpoints {
 		return result.toString();
 	}
 
-} //BendpointsImpl
+} //BendpointImpl

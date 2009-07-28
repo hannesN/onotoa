@@ -12,7 +12,7 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.Bendpoints;
+import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 
@@ -27,7 +27,7 @@ public class AddBendpointCommand extends AbstractCommand {
 	private final int  posX;
 	private final int  posY;
 	
-	private Bendpoints bendpoint;
+	private Bendpoint bendpoint;
 
 	public AddBendpointCommand(Edge edge, int index, int posX, int posY) {
 	    super();
@@ -53,7 +53,7 @@ public class AddBendpointCommand extends AbstractCommand {
 	
 	@Override
 	protected boolean prepare() {
-		bendpoint = ModelFactory.eINSTANCE.createBendpoints();
+		bendpoint = ModelFactory.eINSTANCE.createBendpoint();
 		bendpoint.setPosX(posX);
 		bendpoint.setPosY(posY);
 	    

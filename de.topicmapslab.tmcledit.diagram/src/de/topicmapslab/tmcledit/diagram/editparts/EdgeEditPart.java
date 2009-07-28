@@ -38,7 +38,6 @@ import org.eclipse.swt.SWT;
 
 import de.topicmapslab.tmcledit.diagram.policies.LabelXYLayoutEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.OnotoaBendpointEditPolicy;
-import de.topicmapslab.tmcledit.model.Bendpoints;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -195,7 +194,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		// set bendpoints
 		if (getCastedModel().getBendpoints().size()>0) {
 			List<Bendpoint> points = new ArrayList<Bendpoint>(getCastedModel().getBendpoints().size());
-			for (Bendpoints bp : getCastedModel().getBendpoints()) {
+			for (de.topicmapslab.tmcledit.model.Bendpoint bp : getCastedModel().getBendpoints()) {
 				points.add(new AbsoluteBendpoint(bp.getPosX(), bp.getPosY()));
 			}
 			router.setConstraint((Connection) getFigure(), points);
