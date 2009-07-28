@@ -10,11 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.draw2d.AbsoluteBendpoint;
+import org.eclipse.draw2d.Bendpoint;
 import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
@@ -33,6 +37,8 @@ import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.swt.SWT;
 
 import de.topicmapslab.tmcledit.diagram.policies.LabelXYLayoutEditPolicy;
+import de.topicmapslab.tmcledit.diagram.policies.OnotoaBendpointEditPolicy;
+import de.topicmapslab.tmcledit.model.Bendpoints;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -44,6 +50,8 @@ import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
+	private BendpointConnectionRouter router;
+
 	@Override
 	protected IFigure createFigure()
 	{
@@ -54,7 +62,8 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				super.paint(graphics);
 			}
 		};
-		((PolylineConnection)figure).setConnectionRouter(new BendpointConnectionRouter());
+		router = new BendpointConnectionRouter();
+		((PolylineConnection)figure).setConnectionRouter(router);
 		
 		
 		if (getCastedModel().getType() == EdgeType.AKO_TYPE) {
@@ -78,6 +87,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			deco.setFill(false);
 			((PolylineConnection)figure).setTargetDecoration(deco);
 		}
+		
 		return figure;
 	}
 		
@@ -121,7 +131,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	protected void createEditPolicies() {
 		
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new LabelXYLayoutEditPolicy());
-		
+		installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE, new OnotoaBendpointEditPolicy());
 		installEditPolicy(EditPolicy.CONNECTION_ENDPOINTS_ROLE, new ConnectionEndpointEditPolicy());
 		installEditPolicy(EditPolicy.CONNECTION_ROLE, new ConnectionEditPolicy() {
             @Override
@@ -182,6 +192,15 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	
 	@Override
 	protected void refreshVisuals() {
+		// set bendpoints
+		if (getCastedModel().getBendpoints().size()>0) {
+			List<Bendpoint> points = new ArrayList<Bendpoint>(getCastedModel().getBendpoints().size());
+			for (Bendpoints bp : getCastedModel().getBendpoints()) {
+				points.add(new AbsoluteBendpoint(bp.getPosX(), bp.getPosY()));
+			}
+			router.setConstraint((Connection) getFigure(), points);
+		}
+		
 		if (getCastedModel().getRoleConstraint()!=null) {
 			RolePlayerConstraint rtc = getCastedModel().getRoleConstraint();
 			
