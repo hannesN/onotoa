@@ -15,6 +15,12 @@
    <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.0.a4.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.0.a4">
       <category name="onotoa"/>
    </feature>
+   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.0.alpha-qualifier.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.0.alpha-qualifier">
+      <category name="onotoa"/>
+   </feature>
+   <feature url="features/de.topicmapslab.tmcledit.export_feature_1.1.0.alpha-qualifier.jar" id="de.topicmapslab.tmcledit.export_feature" version="1.1.0.alpha-qualifier">
+      <category name="onotoa"/>
+   </feature>
    <category-def name="onotoa" label="Onotoa"/>
    <category-def name="tinyTiM" label="tinyTiM"/>
 </site>
