@@ -20,13 +20,18 @@ import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.commands.AddBendpointCommand;
+import de.topicmapslab.tmcledit.model.commands.MoveBendpointCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveBendpointCommand;
 
 public class OnotoaBendpointEditPolicy extends BendpointEditPolicy {
 	@Override
 	protected Command getMoveBendpointCommand(BendpointRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		Point location = getLocation(request);
+
+		Edge edge = (Edge) request.getSource().getModel();
+		return new CommandAdapter(getCommandStack(),
+				new MoveBendpointCommand(edge, request.getIndex(),
+										location.x, location.y));
 	}
 
 	@Override
@@ -38,7 +43,7 @@ public class OnotoaBendpointEditPolicy extends BendpointEditPolicy {
 
 	@Override
 	protected Command getCreateBendpointCommand(BendpointRequest request) {
-		Point location = request.getLocation();
+		Point location = getLocation(request);
 
 		Edge edge = (Edge) request.getSource().getModel();
 
@@ -50,5 +55,11 @@ public class OnotoaBendpointEditPolicy extends BendpointEditPolicy {
 		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer()
 				.getEditDomain();
 		return ed.getEditingDomain().getCommandStack();
+	}
+	
+	private Point getLocation(BendpointRequest req) {
+		Point p = req.getLocation().getCopy();
+		req.getSource().getFigure().translateToRelative(p);
+		return p;
 	}
 }

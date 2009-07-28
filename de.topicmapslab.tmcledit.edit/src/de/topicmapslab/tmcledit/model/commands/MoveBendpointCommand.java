@@ -43,11 +43,7 @@ public class MoveBendpointCommand extends AbstractCommand {
 	public void execute() {
 		bendpoint.setPosX(posX);
 		bendpoint.setPosY(posY);
-		
-		
-		NotificationImpl notification = new NotificationImpl(Notification.SET, 0, 0);
-		
-		edge.eNotify(notification);
+		notifyEdgeAdapter();
     }
 
 	public void redo() {
@@ -56,9 +52,15 @@ public class MoveBendpointCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		bendpoint.setPosY(oldX);
+		bendpoint.setPosX(oldX);
 		bendpoint.setPosY(oldY);
+		notifyEdgeAdapter();
 	}
+
+	private void notifyEdgeAdapter() {
+	    NotificationImpl notification = new NotificationImpl(Notification.SET, 0, 0);
+		edge.eNotify(notification);
+    }
 	
 	
 	@Override
