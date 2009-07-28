@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Export Plug-in
 Bundle-SymbolicName: de.topicmapslab.tmcledit.export;singleton:=true
-Bundle-Version: 1.1.0.a2
+Bundle-Version: 1.1.0.alpha-qualifier
 Bundle-Activator: de.topicmapslab.tmcledit.export.Activator
 Bundle-Vendor: H.Niederhausen, Topic Maps Lab
 Eclipse-RegisterBuddy: org.tm4j

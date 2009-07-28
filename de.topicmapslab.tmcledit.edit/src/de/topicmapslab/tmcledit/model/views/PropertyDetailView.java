@@ -14,6 +14,7 @@
 package de.topicmapslab.tmcledit.model.views;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -72,56 +73,59 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	}
 
 	private void setCurrentPage(AbstractModelPage currentPage) {
-		if (this.currentPage!=null)
+		if (this.currentPage != null)
 			this.currentPage.aboutToHide();
-		
+
 		this.currentPage = currentPage;
 		pageBook.showPage(currentPage.getID());
 		pageBook.reflow(true);
 	}
-	
+
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		
-		if ( ( (part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView)) 
-				&& (selection instanceof IStructuredSelection) ){
+
+		if (((part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView))
+		        && (selection instanceof IStructuredSelection)) {
 			// register actions
 			ActionRegistry ar = (ActionRegistry) part.getAdapter(ActionRegistry.class);
 			if (ar != null) {
 				IActionBars actionBars = getViewSite().getActionBars();
-				
+
 				String tmp = ActionFactory.UNDO.getId();
 				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
-				
+
 				tmp = ActionFactory.REDO.getId();
 				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
-				
+
 				tmp = ActionFactory.SAVE.getId();
 				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
-				
+
 				tmp = ActionFactory.CLOSE.getId();
 				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
 			}
 			IStructuredSelection sel = (IStructuredSelection) selection;
 			if (!sel.isEmpty()) {
 				Object obj = sel.getFirstElement();
-				
+
 				if (obj instanceof TreeObject) {
-					obj = ((TreeTopic)obj).getModel();
+					obj = ((TreeTopic) obj).getModel();
 				}
 				if (obj.equals(lastSelection))
 					return;
 				lastSelection = obj;
 				AbstractModelPage page = pageFactory.getPageFor(obj);
-				try {
-				setCurrentPage(page);
-				page.setModel(obj);
-				} catch (Exception e) { 
-					throw new RuntimeException(e); 
+				if (!(obj instanceof EObject)) {
+					return;
 				}
-				
+				try {
+					setCurrentPage(page);
+					page.setModel(obj);
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+
 				if (part instanceof ValidationErrorView)
 					part = part.getSite().getWorkbenchWindow().getActivePage().findView(ModelView.ID);
-				
+
 				if (part instanceof ModelView) {
 					ModelView modelView = (ModelView) part;
 					page.setCommandStack(modelView.getEditingDomain().getCommandStack());
@@ -136,7 +140,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	@Override
 	public void createPartControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		
+
 		pageBook = toolkit.createPageBook(parent, SWT.V_SCROLL);
 		pageBook.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		pageFactory = new PropertyDetailPageFactory(pageBook);
