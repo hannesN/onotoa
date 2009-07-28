@@ -10,8 +10,11 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.validation;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import org.eclipse.emf.common.command.CommandStack;
@@ -26,6 +29,7 @@ import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.validation.ValidationResult.Priority;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationCreateTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationSelectTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NameConstraintCreateTypeAction;
@@ -44,6 +48,7 @@ public class ModelValidator {
 	private List<ValidationResult> resultList = Collections.emptyList();
 
 	private CommandStack commandStack;
+	private List<String> foundNotFoundPrefixes;
 
 	public ModelValidator(File file) {
 		this.schema = file.getTopicMapSchema();
@@ -58,8 +63,12 @@ public class ModelValidator {
 
 	public List<ValidationResult> validate(CommandStack cmdStack) {
 		this.commandStack = cmdStack;
+		foundNotFoundPrefixes = new ArrayList<String>();
 		validateAssociationConstraints();
 		validateTopicTypes();
+		validateDuplicateNames();
+		
+		foundNotFoundPrefixes = null;
 		return resultList;
 	}
 
@@ -137,9 +146,12 @@ public class ModelValidator {
 				}
 			}
 			if (!found) {
-				ValidationResult vr = new ValidationResult("Unknown prefix used", tt);
-				vr.addValidationAction(new NewPrefixAction(commandStack, schema, prefix));
-				addValidationResult(vr);
+				if (!(foundNotFoundPrefixes.contains(prefix))) {					
+					ValidationResult vr = new ValidationResult("Unknown prefix used: '"+prefix+"'", tt);
+					vr.addValidationAction(new NewPrefixAction(commandStack, schema, prefix));
+					addValidationResult(vr);
+					foundNotFoundPrefixes.add(prefix);
+				}
 			}
 		}
 	}
@@ -195,4 +207,31 @@ public class ModelValidator {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+    private void validateDuplicateNames() {
+		Map<String, Object> map = new HashMap<String, Object>(5);
+		
+		for (TopicType tt : schema.getTopicTypes()) {
+			Object o = map.get(tt.getName());
+			if (o==null)
+				map.put(tt.getName(), tt);
+			else if (o instanceof TopicType) {
+				List<TopicType> tmp = new ArrayList<TopicType>();
+				tmp.add(tt);
+				map.put(tt.getName(), tmp);
+			} else {
+				((List<TopicType>)o).add(tt);
+			}
+		}
+		
+		for (Object o : map.values()) {
+			if (o instanceof List<?>) {
+				TopicType tt = ((List<TopicType>)o).get(0);
+				ValidationResult vr = new ValidationResult("More than one topic has the name " + tt.getName(), o, Priority.WARNING);
+				addValidationResult(vr);
+			}
+		}
+		
+	}
+	
 }

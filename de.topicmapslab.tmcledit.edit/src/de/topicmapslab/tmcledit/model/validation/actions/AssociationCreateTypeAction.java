@@ -16,6 +16,7 @@ package de.topicmapslab.tmcledit.model.validation.actions;
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.ecore.EObject;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -39,7 +40,7 @@ public class AssociationCreateTypeAction extends CreateTypeAction {
 		CompoundCommand cmd = new CompoundCommand();
 		cmd.append(new CreateTopicTypeCommand(ModelIndexer.getInstance()
 				.getTopicMapSchema(), topicType));
-		cmd.append(new GenericSetCommand(getModelObject(),
+		cmd.append(new GenericSetCommand((EObject) getModelObject(),
 				ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE,
 				topicType));
 		return cmd;

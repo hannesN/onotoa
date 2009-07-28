@@ -10,7 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.validation;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
 
 /**
@@ -20,6 +19,6 @@ import org.eclipse.jface.action.IAction;
  */
 public interface IValidationAction extends IAction{
 
-	public abstract void setModelObject(EObject modelObject);
+	public abstract void setModelObject(Object modelObject);
 
 }

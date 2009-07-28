@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-
 
 /**
  * @author Hannes Niederhausen
@@ -23,13 +21,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class ValidationResult {
 
+	public enum Priority {
+		FATAL,
+		ERROR,		
+		WARNING
+	}
+	
+	private Priority priority;
 	private String message;
-	private EObject object;
+	private Object object;
 	private List<IValidationAction> actions = Collections.emptyList(); 
 	
-	public ValidationResult(String message, EObject object) {
+	
+	public ValidationResult(String message, Object object) {
+		this(message,object, Priority.ERROR);
+	}
+	
+	public ValidationResult(String message, Object object, Priority priority) {
 		this.message = message;
 		this.object = object;
+		this.priority = priority;
 	}
 	
 	public void addValidationAction(IValidationAction action) {
@@ -44,11 +55,19 @@ public class ValidationResult {
 		return message;
 	}
 	
-	public EObject getObject() {
+	public Object getObject() {
 		return object;
 	}
 	
 	public List<IValidationAction> getActions() {
 		return actions;
 	}
+	
+	public Priority getPriority() {
+	    return priority;
+    }
+	
+	public void setPriority(Priority priority) {
+	    this.priority = priority;
+    }
 }

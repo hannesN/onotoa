@@ -15,6 +15,7 @@ package de.topicmapslab.tmcledit.model.validation.actions;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.ecore.EObject;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -37,7 +38,7 @@ public class AssociationSelectTypeAction extends SelectTypeAction {
 		
 	@Override
 	protected AbstractCommand getCommand(TopicType topicType) {
-		return new GenericSetCommand(getModelObject(),
+		return new GenericSetCommand((EObject) getModelObject(),
 				ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE,
 				topicType);
 	}
