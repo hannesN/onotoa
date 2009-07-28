@@ -72,7 +72,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.MAPPING_ELEMENT: return createMappingElement();
 			case ModelPackage.NODE: return createNode();
 			case ModelPackage.TYPE_NODE: return createTypeNode();
-			case ModelPackage.BENDPOINTS: return createBendpoints();
+			case ModelPackage.BENDPOINT: return createBendpoint();
 			case ModelPackage.EDGE: return createEdge();
 			case ModelPackage.ASSOCIATION_NODE: return createAssociationNode();
 			case ModelPackage.DIAGRAM: return createDiagram();
@@ -250,9 +250,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Bendpoints createBendpoints() {
-		BendpointsImpl bendpoints = new BendpointsImpl();
-		return bendpoints;
+	public Bendpoint createBendpoint() {
+		BendpointImpl bendpoint = new BendpointImpl();
+		return bendpoint;
 	}
 
 	/**

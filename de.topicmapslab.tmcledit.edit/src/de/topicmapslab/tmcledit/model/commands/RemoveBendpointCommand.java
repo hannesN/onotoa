@@ -12,7 +12,7 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.Bendpoints;
+import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Edge;
 
 /**
@@ -24,7 +24,7 @@ public class RemoveBendpointCommand extends AbstractCommand {
 	private final Edge edge;
 	private final int  index;
 	
-	private Bendpoints bendpoint;
+	private Bendpoint bendpoint;
 
 	public RemoveBendpointCommand(Edge edge, int index) {
 	    super();

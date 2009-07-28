@@ -186,9 +186,9 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.BENDPOINTS: {
-				Bendpoints bendpoints = (Bendpoints)theEObject;
-				T result = caseBendpoints(bendpoints);
+			case ModelPackage.BENDPOINT: {
+				Bendpoint bendpoint = (Bendpoint)theEObject;
+				T result = caseBendpoint(bendpoint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -555,17 +555,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bendpoints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Bendpoint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bendpoints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Bendpoint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBendpoints(Bendpoints object) {
+	public T caseBendpoint(Bendpoint object) {
 		return null;
 	}
 

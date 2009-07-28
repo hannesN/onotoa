@@ -124,13 +124,13 @@ public interface ModelFactory extends EFactory {
 	TypeNode createTypeNode();
 
 	/**
-	 * Returns a new object of class '<em>Bendpoints</em>'.
+	 * Returns a new object of class '<em>Bendpoint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bendpoints</em>'.
+	 * @return a new object of class '<em>Bendpoint</em>'.
 	 * @generated
 	 */
-	Bendpoints createBendpoints();
+	Bendpoint createBendpoint();
 
 	/**
 	 * Returns a new object of class '<em>Edge</em>'.

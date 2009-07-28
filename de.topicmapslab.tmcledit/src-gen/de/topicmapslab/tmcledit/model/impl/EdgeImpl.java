@@ -5,7 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.Bendpoints;
+import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.LabelPos;
@@ -56,7 +56,7 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Bendpoints> bendpoints;
+	protected EList<Bendpoint> bendpoints;
 
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
@@ -142,9 +142,9 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Bendpoints> getBendpoints() {
+	public EList<Bendpoint> getBendpoints() {
 		if (bendpoints == null) {
-			bendpoints = new EObjectContainmentEList<Bendpoints>(Bendpoints.class, this, ModelPackage.EDGE__BENDPOINTS);
+			bendpoints = new EObjectContainmentEList<Bendpoint>(Bendpoint.class, this, ModelPackage.EDGE__BENDPOINTS);
 		}
 		return bendpoints;
 	}
@@ -350,7 +350,7 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 		switch (featureID) {
 			case ModelPackage.EDGE__BENDPOINTS:
 				getBendpoints().clear();
-				getBendpoints().addAll((Collection<? extends Bendpoints>)newValue);
+				getBendpoints().addAll((Collection<? extends Bendpoint>)newValue);
 				return;
 			case ModelPackage.EDGE__SOURCE:
 				setSource((Node)newValue);

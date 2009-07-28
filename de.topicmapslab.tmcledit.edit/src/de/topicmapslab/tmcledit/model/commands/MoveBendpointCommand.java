@@ -14,7 +14,7 @@ import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
 
-import de.topicmapslab.tmcledit.model.Bendpoints;
+import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Edge;
 
 /**
@@ -28,7 +28,7 @@ public class MoveBendpointCommand extends AbstractCommand {
 	private final int  posX;
 	private final int  posY;
 	
-	private Bendpoints bendpoint;
+	private Bendpoint bendpoint;
 	private int  oldX;
 	private int  oldY;
 	

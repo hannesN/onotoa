@@ -1217,14 +1217,14 @@ public interface ModelPackage extends EPackage {
 	int TYPE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointsImpl <em>Bendpoints</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl <em>Bendpoint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.BendpointsImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendpoints()
+	 * @see de.topicmapslab.tmcledit.model.impl.BendpointImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendpoint()
 	 * @generated
 	 */
-	int BENDPOINTS = 12;
+	int BENDPOINT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1233,7 +1233,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BENDPOINTS__POS_X = 0;
+	int BENDPOINT__POS_X = 0;
 
 	/**
 	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
@@ -1242,16 +1242,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BENDPOINTS__POS_Y = 1;
+	int BENDPOINT__POS_Y = 1;
 
 	/**
-	 * The number of structural features of the '<em>Bendpoints</em>' class.
+	 * The number of structural features of the '<em>Bendpoint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BENDPOINTS_FEATURE_COUNT = 2;
+	int BENDPOINT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl <em>Edge</em>}' class.
@@ -3913,36 +3913,36 @@ public interface ModelPackage extends EPackage {
 	EReference getTypeNode_TopicType();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Bendpoints <em>Bendpoints</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Bendpoint <em>Bendpoint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Bendpoints</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Bendpoints
+	 * @return the meta object for class '<em>Bendpoint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Bendpoint
 	 * @generated
 	 */
-	EClass getBendpoints();
+	EClass getBendpoint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Bendpoints#getPosX <em>Pos X</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Bendpoint#getPosX <em>Pos X</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Pos X</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Bendpoints#getPosX()
-	 * @see #getBendpoints()
+	 * @see de.topicmapslab.tmcledit.model.Bendpoint#getPosX()
+	 * @see #getBendpoint()
 	 * @generated
 	 */
-	EAttribute getBendpoints_PosX();
+	EAttribute getBendpoint_PosX();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Bendpoints#getPosY <em>Pos Y</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Bendpoint#getPosY <em>Pos Y</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Pos Y</em>'.
-	 * @see de.topicmapslab.tmcledit.model.Bendpoints#getPosY()
-	 * @see #getBendpoints()
+	 * @see de.topicmapslab.tmcledit.model.Bendpoint#getPosY()
+	 * @see #getBendpoint()
 	 * @generated
 	 */
-	EAttribute getBendpoints_PosY();
+	EAttribute getBendpoint_PosY();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Edge <em>Edge</em>}'.
@@ -4989,14 +4989,14 @@ public interface ModelPackage extends EPackage {
 		EReference TYPE_NODE__TOPIC_TYPE = eINSTANCE.getTypeNode_TopicType();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointsImpl <em>Bendpoints</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl <em>Bendpoint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.BendpointsImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendpoints()
+		 * @see de.topicmapslab.tmcledit.model.impl.BendpointImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getBendpoint()
 		 * @generated
 		 */
-		EClass BENDPOINTS = eINSTANCE.getBendpoints();
+		EClass BENDPOINT = eINSTANCE.getBendpoint();
 
 		/**
 		 * The meta object literal for the '<em><b>Pos X</b></em>' attribute feature.
@@ -5004,7 +5004,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BENDPOINTS__POS_X = eINSTANCE.getBendpoints_PosX();
+		EAttribute BENDPOINT__POS_X = eINSTANCE.getBendpoint_PosX();
 
 		/**
 		 * The meta object literal for the '<em><b>Pos Y</b></em>' attribute feature.
@@ -5012,7 +5012,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BENDPOINTS__POS_Y = eINSTANCE.getBendpoints_PosY();
+		EAttribute BENDPOINT__POS_Y = eINSTANCE.getBendpoint_PosY();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl <em>Edge</em>}' class.
