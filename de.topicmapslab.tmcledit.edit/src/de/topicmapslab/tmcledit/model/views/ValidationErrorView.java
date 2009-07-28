@@ -35,6 +35,7 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -47,6 +48,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.tmcledit.model.validation.ValidationResult;
+import de.topicmapslab.tmcledit.model.validation.ValidationResult.Priority;
 
 /**
  * @author Hannes Niederhausen
@@ -93,6 +95,12 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 			
 		});
 				
+		viewer.setSorter(new ViewerSorter() {
+			@Override
+			public int category(Object element) {
+			     return ((ValidationResult)element).getPriority().ordinal();
+			}
+		});
 		hookContextMenu();
 		setSelection(new StructuredSelection());
 		getSite().setSelectionProvider(this);
@@ -156,7 +164,13 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 	private class ValidationLabelProvider implements ITableLabelProvider {
 	
 		public Image getColumnImage(Object element, int columnIndex) {
-			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
+			ValidationResult vr = (ValidationResult) element;
+			if (vr.getPriority()==Priority.ERROR)
+				return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
+			else if (vr.getPriority()==Priority.WARNING)
+				return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_WARN_TSK);
+				
+			return null;
 		}
 	
 		public String getColumnText(Object element, int columnIndex) {
