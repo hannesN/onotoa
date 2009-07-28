@@ -408,6 +408,8 @@ public class TMCLTopicMapBuilder {
 	}
 
 	private void setScopeConstraints(ScopedTopicType type) {
+		if (type==null)
+			return;
 		for (ScopeConstraint sc : type.getScope()) {
 			Topic constr = createConstraint(TMCL.SCOPE_CONSTRAINT);
 			addCardinalityOccurrences(constr, sc.getCardMin(), sc.getCardMax());
