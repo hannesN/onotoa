@@ -148,7 +148,7 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 	
 	public void setModel(Object model) {
 		if (this.model == model) {
-			if (!this.model.eAdapters().contains(this))
+			if ((this.model!=null) && (!this.model.eAdapters().contains(this)) )
 				this.model.eAdapters().add(this);
 			return;
 		}
