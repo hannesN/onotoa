@@ -143,6 +143,8 @@ public class RoleModelPage extends AbstractModelPage{
 		int index = -1;
 		int i=0;
 		roleCombo.removeAll();
+		if (getAssociationType()==null)
+			return;
 		for (RoleConstraint rc : getAssociationType().getRoles()) {
 			roleCombo.add(rc.getType().getName());
 			if (rc.equals(getCastedModel().getRole()))
