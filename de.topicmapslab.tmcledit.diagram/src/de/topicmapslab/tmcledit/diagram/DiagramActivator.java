@@ -19,7 +19,7 @@ import org.osgi.framework.BundleContext;
 public class DiagramActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "de.topicmapslab.tmcledit.diagram";
+	public static final String PLUGIN_ID = "de.topicmapslab.tmcledit.diagram"; //$NON-NLS-1$
 
 	// The shared instance
 	private static DiagramActivator plugin;

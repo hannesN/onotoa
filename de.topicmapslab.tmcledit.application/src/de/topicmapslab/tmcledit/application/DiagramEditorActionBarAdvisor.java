@@ -91,6 +91,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		
 		register(ActionFactory.RESET_PERSPECTIVE.create(window));
 		
+		register(ActionFactory.IMPORT.create(window));
+		
 		register(ActionFactory.EXPORT.create(window));
 		
 		register(ActionFactory.PREFERENCES.create(window));
@@ -126,6 +128,7 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 			menuX.add(new Separator());
 			
+			menuX.add(getAction(ActionFactory.IMPORT.getId()));
 			menuX.add(getAction(ActionFactory.EXPORT.getId()));
 			menuX.add(new Separator());
 			menuX.add(getAction(ActionFactory.QUIT.getId()));
