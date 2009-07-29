@@ -87,7 +87,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 	private void setSelection(ISelection selection) {
 		IStructuredSelection sel = (IStructuredSelection) selection;
-		if (!sel.isEmpty()) {
+		if ((sel!=null) && (!sel.isEmpty())) {
 			Object obj = sel.getFirstElement();
 
 			if (obj instanceof TreeObject) {
