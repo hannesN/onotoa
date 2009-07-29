@@ -401,11 +401,14 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					currentSelection = new StructuredSelection(node
 							.getAssociationConstraint());
 				} else if (model instanceof Edge) {
-					EObject tmp = ((Edge) model).getRoleConstraint();
+					Edge edge = (Edge) model;
+					EObject tmp = edge.getRoleConstraint();
 					if (tmp != null)
 						currentSelection = new StructuredSelection(tmp);
-					else
-						currentSelection = new StructuredSelection();
+					else {
+						tmp = ((TypeNode)edge.getSource()).getTopicType();
+						currentSelection = new StructuredSelection(tmp);
+					}
 				} else {
 					currentSelection = new StructuredSelection(model);
 				}

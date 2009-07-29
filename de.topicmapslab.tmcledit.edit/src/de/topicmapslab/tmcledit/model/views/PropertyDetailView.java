@@ -111,6 +111,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				}
 				if (obj.equals(lastSelection))
 					return;
+				
 				lastSelection = obj;
 				AbstractModelPage page = pageFactory.getPageFor(obj);
 				if (!(obj instanceof EObject)) {

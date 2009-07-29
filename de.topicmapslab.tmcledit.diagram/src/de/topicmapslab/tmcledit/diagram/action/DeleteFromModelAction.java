@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.action;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.command.AbstractCommand;
@@ -42,6 +43,8 @@ import de.topicmapslab.tmcledit.model.commands.DeleteCommentCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteRolePlayerConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
+import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
+import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
 public class DeleteFromModelAction extends AbstractSelectionAction {
 	public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
@@ -110,10 +113,29 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		} else if (model instanceof Edge) {
 			Edge edge = (Edge) model;
 			RolePlayerConstraint roleConstraint = edge.getRoleConstraint();
-			if (roleConstraint != null)
+			if (roleConstraint != null) {
 				cmd = new DeleteRolePlayerConstraintCommand(
 						(AssociationTypeConstraint) roleConstraint.eContainer(),
 						roleConstraint);
+			} else {
+				if (edge.getType() != EdgeType.ROLE_CONSTRAINT_TYPE) {
+					TopicType source = ((TypeNode) edge.getSource()).getTopicType();
+					TopicType target = ((TypeNode) edge.getTarget()).getTopicType();
+					
+					if (edge.getType() == EdgeType.IS_ATYPE) {
+						ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
+						newList.remove(target);
+						
+						cmd = new SetIsACommand(newList, source);
+					} else {
+						ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getAko());
+						newList.remove(target);
+						
+						cmd = new SetAkoCommand(newList, source);
+					}
+					
+				}
+			}
 		} else if (model instanceof AssociationNode) {
 			cmd = new DeleteAssociationConstraintCommand(
 					((AssociationNode) model).getAssociationConstraint());
@@ -162,7 +184,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 				|| (model instanceof NameTypeConstraint)
 				|| (model instanceof SubjectIdentifierConstraint)
 				|| (model instanceof SubjectLocatorConstraint)
-				|| ((model instanceof Edge) && ((Edge) model).getType() == EdgeType.ROLE_CONSTRAINT_TYPE)
+				|| (model instanceof Edge)
 				|| (model instanceof Comment);
 	}
 
