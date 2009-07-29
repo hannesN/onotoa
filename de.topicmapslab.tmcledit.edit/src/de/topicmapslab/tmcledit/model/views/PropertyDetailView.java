@@ -29,7 +29,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledPageBook;
-import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.tmcledit.model.views.pages.AbstractModelPage;
@@ -82,9 +81,43 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		if (((part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView)))
+			setSelection(selection);
+	}
 
-		if (((part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView))
-		        && (selection instanceof IStructuredSelection)) {
+	private void setSelection(ISelection selection) {
+		IStructuredSelection sel = (IStructuredSelection) selection;
+		if (!sel.isEmpty()) {
+			Object obj = sel.getFirstElement();
+
+			if (obj instanceof TreeObject) {
+				obj = ((TreeTopic) obj).getModel();
+			}
+			if (obj.equals(lastSelection))
+				return;
+
+			lastSelection = obj;
+			AbstractModelPage page = pageFactory.getPageFor(obj);
+			if (!(obj instanceof EObject)) {
+				return;
+			}
+			try {
+				setCurrentPage(page);
+				page.setModel(obj);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			registerModelView(page);
+		}
+	}
+
+	private void registerModelView(AbstractModelPage page) {
+		IWorkbenchPart part = getSite().getWorkbenchWindow().getActivePage().findView(ModelView.ID);
+
+		if (part != null) {
+			ModelView modelView = (ModelView) part;
+			page.setCommandStack(modelView.getEditingDomain().getCommandStack());
+			
 			// register actions
 			ActionRegistry ar = (ActionRegistry) part.getAdapter(ActionRegistry.class);
 			if (ar != null) {
@@ -102,39 +135,6 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				tmp = ActionFactory.CLOSE.getId();
 				actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
 			}
-			IStructuredSelection sel = (IStructuredSelection) selection;
-			if (!sel.isEmpty()) {
-				Object obj = sel.getFirstElement();
-
-				if (obj instanceof TreeObject) {
-					obj = ((TreeTopic) obj).getModel();
-				}
-				if (obj.equals(lastSelection))
-					return;
-				
-				lastSelection = obj;
-				AbstractModelPage page = pageFactory.getPageFor(obj);
-				if (!(obj instanceof EObject)) {
-					return;
-				}
-				try {
-					setCurrentPage(page);
-					page.setModel(obj);
-				} catch (Exception e) {
-					throw new RuntimeException(e);
-				}
-
-				if (part instanceof ValidationErrorView)
-					part = part.getSite().getWorkbenchWindow().getActivePage().findView(ModelView.ID);
-
-				if (part instanceof ModelView) {
-					ModelView modelView = (ModelView) part;
-					page.setCommandStack(modelView.getEditingDomain().getCommandStack());
-				} else if (part instanceof EditorPart) {
-					CommandStack cmdStack = (CommandStack) part.getAdapter(CommandStack.class);
-					page.setCommandStack(cmdStack);
-				}
-			}
 		}
 	}
 
@@ -147,7 +147,8 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		pageFactory = new PropertyDetailPageFactory(pageBook);
 
 		setCurrentPage(pageFactory.getEmptyPage());
-
+		setSelection(getSite().getPage().getSelection());
 	}
+	
 
 }
