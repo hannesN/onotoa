@@ -147,8 +147,11 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 	}
 	
 	public void setModel(Object model) {
-		if (this.model == model)
+		if (this.model == model) {
+			if (!this.model.eAdapters().contains(this))
+				this.model.eAdapters().add(this);
 			return;
+		}
 
 		folder.setSelection(0);
 		ScrolledPageBook pb = (ScrolledPageBook) folder.getParent().getParent();
