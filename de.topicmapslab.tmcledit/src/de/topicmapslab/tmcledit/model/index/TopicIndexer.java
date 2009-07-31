@@ -24,19 +24,36 @@ import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class TopicIndexer implements Adapter{
+public class TopicIndexer implements Adapter {
 
 	private int lastDefaultNumber;
-	
+
 	private TopicMapSchema topicMapSchema;
-	
+
 	private Notifier target;
-	
-	
-	public TopicType getTopicType(String name) {
+
+	public TopicType getTopicTypeByName(String name) {
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
 			if (tt.getName().equals(name))
 				return tt;
+		}
+		return null;
+	}
+
+	public TopicType getTopicTypeBySubjectIdentifier(String si) {
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			if (tt.getIdentifiers().contains(si)) {
+					return tt;
+			}
+		}
+		return null;
+	}
+	
+	public TopicType getTopicTypeBySubjectLocator(String sl) {
+		for (TopicType tt : topicMapSchema.getTopicTypes()) {
+			if (tt.getLocators().contains(sl)) {
+					return tt;
+			}
 		}
 		return null;
 	}
@@ -44,39 +61,39 @@ public class TopicIndexer implements Adapter{
 	public List<TopicType> getTopicTypes() {
 		return topicMapSchema.getTopicTypes();
 	}
-	
+
 	public List<TopicType> getRoleTypes() {
 		List<TopicType> result = new ArrayList<TopicType>();
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if (tt.getKind()==KindOfTopicType.ROLE_TYPE)
+			if (tt.getKind() == KindOfTopicType.ROLE_TYPE)
 				result.add(tt);
 		}
-		
+
 		return result;
 	}
-	
+
 	public List<TopicType> getScopeTypes() {
 		List<TopicType> result = new ArrayList<TopicType>();
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if (tt.getKind()==KindOfTopicType.SCOPE_TYPE)
+			if (tt.getKind() == KindOfTopicType.SCOPE_TYPE)
 				result.add(tt);
 		}
-		
+
 		return result;
 	}
-	
-	public TopicType createTopicType(String id) {
-		TopicType tt = getTopicType(id);
-		if (tt==null) {
+
+	public TopicType createTopicTypeByName(String name) {
+		TopicType tt = getTopicTypeByName(name);
+		if (tt == null) {
 			tt = ModelFactory.eINSTANCE.createTopicType();
-			tt.setName(id);
+			tt.setName(name);
 		}
 		return tt;
 	}
-	
+
 	public TopicType createTopicType(KindOfTopicType kind) {
 		TopicType tt;
-		
+
 		switch (kind) {
 		case OCCURRENCE_TYPE:
 			tt = ModelFactory.eINSTANCE.createOccurrenceType();
@@ -96,15 +113,15 @@ public class TopicIndexer implements Adapter{
 		}
 		tt.setKind(kind);
 		String tmp = "default";
-		
-		while (getTopicType(tmp+lastDefaultNumber)!=null) {
+
+		while (getTopicTypeByName(tmp + lastDefaultNumber) != null) {
 			lastDefaultNumber++;
 		}
-		tt.setName(tmp+lastDefaultNumber);
-		
+		tt.setName(tmp + lastDefaultNumber);
+
 		return tt;
 	}
-		
+
 	public Notifier getTarget() {
 		return target;
 	}
@@ -118,84 +135,82 @@ public class TopicIndexer implements Adapter{
 	}
 
 	public void dispose() {
-		if (topicMapSchema==null)
+		if (topicMapSchema == null)
 			return;
 		topicMapSchema.eAdapters().remove(this);
 		topicMapSchema = null;
 	}
-	
+
 	public void setTarget(Notifier newTarget) {
 		this.target = newTarget;
 	}
-	
+
 	public void init(TopicMapSchema schema) {
-		assert(schema!=null);
+		assert (schema != null);
 		if (!schema.equals(topicMapSchema))
 			dispose();
-		
+
 		this.topicMapSchema = schema;
 		topicMapSchema.eAdapters().add(this);
 		lastDefaultNumber = 0;
 	}
 
 	/**
-	 * Returns a list of topic types, which has the given type in
-	 * there ako-list
+	 * Returns a list of topic types, which has the given type in there ako-list
 	 * 
-	 * @param topicType 
+	 * @param topicType
 	 * @return
 	 */
 	public List<TopicType> getSubTypes(TopicType topicType) {
 		List<TopicType> result = new ArrayList<TopicType>();
-		
+
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if(tt.getAko().contains(topicType)) {
+			if (tt.getAko().contains(topicType)) {
 				result.add(tt);
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
-	 * Returns a list of topic types, which has the given type in
-	 * there isa-list
+	 * Returns a list of topic types, which has the given type in there isa-list
 	 * 
-	 * @param topicType 
+	 * @param topicType
 	 * @return
 	 */
 	public List<TopicType> getInstanceTypes(TopicType topicType) {
 		List<TopicType> result = new ArrayList<TopicType>();
-		
+
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if(tt.getIsa().contains(topicType)) {
+			if (tt.getIsa().contains(topicType)) {
 				result.add(tt);
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	public List<ScopedTopicType> getScopedTopicTypes() {
 		List<ScopedTopicType> result = new ArrayList<ScopedTopicType>();
-		
+
 		for (TopicType tt : topicMapSchema.getTopicTypes())
 			if (tt instanceof ScopedTopicType)
 				result.add((ScopedTopicType) tt);
-		
+
 		return result;
 	}
 
 	public List<AssociationType> getAssociationTypes() {
 		List<AssociationType> result = new ArrayList<AssociationType>();
-		
+
 		for (TopicType tt : topicMapSchema.getTopicTypes())
 			if (tt instanceof AssociationType)
-				result.add( (AssociationType) tt);
-		
+				result.add((AssociationType) tt);
+
 		return result;
 	}
-	
+
 	public List<TopicType> getUsedAsIsa(TopicType topicType) {
 		List<TopicType> result = new ArrayList<TopicType>();
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
@@ -204,7 +219,7 @@ public class TopicIndexer implements Adapter{
 		}
 		return result;
 	}
-	
+
 	public List<TopicType> getUsedAsAko(TopicType topicType) {
 		List<TopicType> result = new ArrayList<TopicType>();
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {

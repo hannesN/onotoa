@@ -50,6 +50,7 @@ import de.topicmapslab.tmcledit.model.commands.SetCardinalitiesCommand;
 import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.model.index.TopicIndexer;
 import de.topicmapslab.tmcledit.model.views.widgets.TypedCardinalityConstraintWidget;
 
 /**
@@ -186,7 +187,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				ModelIndexer instance = ModelIndexer.getInstance();
+				TopicIndexer instance = ModelIndexer.getTopicIndexer();
 				List<TopicType> list = new ArrayList<TopicType>();
 				list.addAll(instance.getScopeTypes());
 

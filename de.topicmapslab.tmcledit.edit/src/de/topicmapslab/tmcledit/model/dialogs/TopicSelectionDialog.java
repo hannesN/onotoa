@@ -80,7 +80,7 @@ public class TopicSelectionDialog extends Dialog {
 		availableTopicList.getList().setLayoutData(gd);
 		availableTopicList.setContentProvider(new ArrayContentProvider());
 		availableTopicList.setLabelProvider(new TopicLableProvider());
-		availableTopicList.setInput(ModelIndexer.getInstance().getTopicTypes());
+		availableTopicList.setInput(ModelIndexer.getTopicIndexer().getTopicTypes());
 		availableTopicList.addDoubleClickListener(new IDoubleClickListener() {
 			
 			public void doubleClick(DoubleClickEvent event) {

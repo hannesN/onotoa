@@ -99,7 +99,7 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 		}
 		
 		for (Diagram d : ModelIndexer.getInstance().getDiagrams()) {
-			AssociationNode node = (AssociationNode) ModelIndexer.getInstance()
+			AssociationNode node = (AssociationNode) ModelIndexer.getNodeIndexer()
 					.getNodeFor(constraint, d);
 			if (node!=null) {
 				addNode(d, node);
