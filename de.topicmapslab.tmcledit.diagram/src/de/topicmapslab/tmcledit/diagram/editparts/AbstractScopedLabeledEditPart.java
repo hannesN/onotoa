@@ -21,7 +21,6 @@ import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
-import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
