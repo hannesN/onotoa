@@ -138,6 +138,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	public void clearScopeLables() {
 		int counter = 0;
 		Iterator it = getFigure().getChildren().iterator();
+		// 1. name label, 2nd: type/card label, 3rd: 
 		while (it.hasNext()) {
 			it.next();
 			if (counter>2) {

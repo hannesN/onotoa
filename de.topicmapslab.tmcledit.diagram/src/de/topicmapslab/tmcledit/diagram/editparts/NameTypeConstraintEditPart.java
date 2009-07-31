@@ -55,6 +55,10 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 		buffer.setLength(0);
 		clearScopeLables();
 		addScopeText();
+		
+		getFigure().revalidate();
+		getFigure().getParent().repaint();
+		
 	}
 
 	@Override
@@ -87,7 +91,6 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 		}
 		
 		refreshVisuals();
-		
 	}
 
 	

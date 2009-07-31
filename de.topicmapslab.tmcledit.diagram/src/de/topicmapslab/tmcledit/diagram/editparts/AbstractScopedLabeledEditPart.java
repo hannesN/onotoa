@@ -140,7 +140,7 @@ public abstract class AbstractScopedLabeledEditPart extends
 						sc.getType().eAdapters().remove(this);
 				}
 			}
-		} else if (notification.getFeatureID(RoleConstraint.class)==ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT) {
+		} else if (notification.getFeatureID(ReifierConstraint.class)==ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT) {
 			if (oldValue!=null)
 				oldValue.eAdapters().remove(this);
 			if (newValue!=null)
