@@ -42,8 +42,6 @@ public class CreateOccurrenceConstraintCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
-		otc.setCardMin("0");
-		otc.setCardMin("1");
 		otc.setUnique(false);
 		
 		return true;
