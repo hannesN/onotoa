@@ -55,7 +55,7 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 			TopicType topicType = null;
 			switch (topicTypes.size()) {
 			case 0:
-				topicType = ModelIndexer.getInstance().createTopicType(kind);
+				topicType = ModelIndexer.getTopicIndexer().createTopicType(kind);
 				break;
 			case 1:
 				topicType = topicTypes.get(0);

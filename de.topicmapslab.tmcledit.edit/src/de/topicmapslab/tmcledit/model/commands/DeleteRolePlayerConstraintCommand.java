@@ -61,11 +61,11 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		for (Diagram d : ModelIndexer.getInstance().getDiagrams()) {
-			AssociationNode node = (AssociationNode) ModelIndexer.getInstance()
+			AssociationNode node = (AssociationNode) ModelIndexer.getNodeIndexer()
 					.getNodeFor(associationTypeConstraint, d);
 			
 			if (node!=null) {
-				for (Edge e : ModelIndexer.getInstance().getEdges(d, EdgeType.ROLE_CONSTRAINT_TYPE)) {
+				for (Edge e : ModelIndexer.getNodeIndexer().getEdges(d, EdgeType.ROLE_CONSTRAINT_TYPE)) {
 					if (e.getRoleConstraint().equals(RolePlayerConstraint))
 						addEdge(d, e);
 				}

@@ -61,6 +61,7 @@ import de.topicmapslab.tmcledit.model.commands.RemoveRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewRoleCombinationConstraintDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.model.index.TopicIndexer;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.widgets.TypedCardinalityConstraintWidget;
 
@@ -110,7 +111,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				ModelIndexer instance = ModelIndexer.getInstance();
+				TopicIndexer instance = ModelIndexer.getTopicIndexer();
 				List<TopicType> list = new ArrayList<TopicType>();
 				list.addAll(instance.getRoleTypes());
 

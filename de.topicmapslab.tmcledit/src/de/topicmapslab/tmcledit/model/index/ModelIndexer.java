@@ -13,20 +13,13 @@
  */
 package de.topicmapslab.tmcledit.model.index;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
-
-import de.topicmapslab.tmcledit.model.AssociationType;
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
-import de.topicmapslab.tmcledit.model.Edge;
-import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
-import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -79,84 +72,28 @@ public class ModelIndexer {
 		return instance;
 	}
 
+	public static TopicIndexer getTopicIndexer() {
+	    return getInstance().topicIndexer;
+    }
+	
 	public TopicMapSchema getTopicMapSchema() {
 		return file.getTopicMapSchema();
-	}
-
-	public TopicType createTopicType(KindOfTopicType kind) {
-		return topicIndexer.createTopicType(kind);
-	}
-
-	public TopicType createTopicType(String id) {
-		return topicIndexer.createTopicType(id);
-	}
-
-	public List<TopicType> getRoleTypes() {
-		return topicIndexer.getRoleTypes();
-	}
-
-	public List<TopicType> getScopeTypes() {
-		return topicIndexer.getScopeTypes();
-	}
-
-	public TopicType getTopicType(String id) {
-		return topicIndexer.getTopicType(id);
-	}
-
-	public List<TopicType> getTopicTypes() {
-		return topicIndexer.getTopicTypes();
-	}
-
-	public Node getNodeFor(TopicType topicType, Diagram diagram) {
-		return nodeIndexer.getNodeFor(topicType, diagram);
-	}
-
-	public Node getNodeFor(AssociationTypeConstraint assConstraint,
-			Diagram diagram) {
-		return nodeIndexer.getNodeFor(assConstraint, diagram);
-	}
-
-	public List<Edge> getEdges(Diagram d, EdgeType type) {
-		return nodeIndexer.getEdges(d, type);
-	}
-	
-	public EList<Diagram> getDiagrams() {
-		return file.getDiagrams();
-	}
-
-	public List<Edge> getEdgesUsingTopicType(TopicType type) {
-		return nodeIndexer.getEdgesUsingTopicType(type);
-	}
-
-	public List<TopicType> getInstanceTypes(TopicType topicType) {
-		return topicIndexer.getInstanceTypes(topicType);
-	}
-
-	public List<TopicType> getSubTypes(TopicType topicType) {
-		return topicIndexer.getSubTypes(topicType);
-	}
-		
-	public List<AssociationType> getAssociationTypes() {
-		return topicIndexer.getAssociationTypes();
-	}
-	
-	public List<ScopedTopicType> getScopedTopicTypes() {
-		return topicIndexer.getScopedTopicTypes();
 	}
 
 	public List<RolePlayerConstraint> getRolePlayerConstraintsFor(
 			TopicType topicType) {
 		return associationIndexer.getRolePlayerConstraintsFor(topicType);
 	}
-
-	public List<TopicType> getUsedAsAko(TopicType topicType) {
-		return topicIndexer.getUsedAsAko(topicType);
+	
+	public static TopicTypeNodeIndexer getNodeIndexer() {
+	    return getInstance().nodeIndexer;
+    }
+	
+	public Collection<Diagram> getDiagrams() {
+		return Collections.unmodifiableCollection(file.getDiagrams());
 	}
-
-	public List<TopicType> getUsedAsIsa(TopicType topicType) {
-		return topicIndexer.getUsedAsIsa(topicType);
-	}
 	
-	
-	
+	public static AssociationIndexer getAssociationIndexer() {
+	    return getInstance().associationIndexer;
+    }
 }

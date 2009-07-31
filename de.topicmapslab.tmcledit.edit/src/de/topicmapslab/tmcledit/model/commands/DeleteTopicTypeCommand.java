@@ -149,8 +149,8 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		if (!isPrepared) {
 			// first call of prepare
 			extractTopicNodes();
-			isAList = ModelIndexer.getInstance().getInstanceTypes(topicType);
-			akoList = ModelIndexer.getInstance().getSubTypes(topicType);
+			isAList = ModelIndexer.getTopicIndexer().getInstanceTypes(topicType);
+			akoList = ModelIndexer.getTopicIndexer().getSubTypes(topicType);
 
 			prepareConstraintCommandList();
 
@@ -228,7 +228,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	}
 
 	private void prepareScopeConstraintCommandList() {
-		for (ScopedTopicType stt : ModelIndexer.getInstance().getScopedTopicTypes()) {
+		for (ScopedTopicType stt : ModelIndexer.getTopicIndexer().getScopedTopicTypes()) {
 			if (stt.equals(topicType))
 				continue;
 			
@@ -299,7 +299,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	 */
 	private void extractTopicNodes() {
 		for (Diagram d : ModelIndexer.getInstance().getDiagrams()) {
-			TypeNode node = (TypeNode) ModelIndexer.getInstance().getNodeFor(
+			TypeNode node = (TypeNode) ModelIndexer.getNodeIndexer().getNodeFor(
 					topicType, d);
 			if (node != null) {
 
@@ -308,7 +308,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 				typeNodeList
 						.add(new ContainmentPair<Diagram, TypeNode>(d, node));
 
-				for (Edge e : ModelIndexer.getInstance()
+				for (Edge e : ModelIndexer.getNodeIndexer()
 						.getEdgesUsingTopicType(topicType)) {
 					addToEdgeList(d, e);
 				}

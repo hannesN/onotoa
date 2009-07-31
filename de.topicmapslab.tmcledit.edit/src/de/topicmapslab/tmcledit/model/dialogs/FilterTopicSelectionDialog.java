@@ -69,7 +69,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	protected void fillContentProvider(AbstractContentProvider contentProvider,
 			ItemsFilter itemsFilter, IProgressMonitor progressMonitor)
 			throws CoreException {
-		List<TopicType> types = ModelIndexer.getInstance().getTopicTypes();
+		List<TopicType> types = ModelIndexer.getTopicIndexer().getTopicTypes();
 		progressMonitor.beginTask("Filling Topic List", types.size());
 
 		for (TopicType type : types) {
