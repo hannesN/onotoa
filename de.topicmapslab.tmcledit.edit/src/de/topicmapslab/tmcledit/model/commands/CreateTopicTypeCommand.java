@@ -15,6 +15,7 @@ import org.eclipse.emf.common.command.AbstractCommand;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class CreateTopicTypeCommand extends AbstractCommand {
 
@@ -35,6 +36,13 @@ public class CreateTopicTypeCommand extends AbstractCommand {
 	}
 
 	@Override
+	public boolean canExecute() {
+		if (ModelIndexer.getTopicIndexer().getTopicTypeByName(name)!=null)
+			return false;
+	    return super.canExecute();
+	}
+	
+	@Override
 	protected boolean prepare() {
 		if (topicType == null) {
 			topicType = ModelFactory.eINSTANCE.createTopicType();
@@ -49,7 +57,7 @@ public class CreateTopicTypeCommand extends AbstractCommand {
 
 	@Override
 	public boolean canUndo() {
-		return super.canUndo();
+		return true;
 	}
 
 	public void redo() {
