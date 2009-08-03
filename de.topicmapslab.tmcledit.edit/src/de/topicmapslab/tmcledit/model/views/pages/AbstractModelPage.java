@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledPageBook;
+import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -62,6 +63,10 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		ID = id;
 	}
 
+	public void setSite(IPageSite pageSite) {
+		init(pageSite);
+	}
+	
 	@Override
 	public final void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());

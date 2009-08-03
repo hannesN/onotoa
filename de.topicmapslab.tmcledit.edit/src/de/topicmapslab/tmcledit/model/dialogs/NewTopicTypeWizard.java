@@ -149,11 +149,17 @@ public class NewTopicTypeWizard extends Wizard {
 			nameText.addModifyListener(new ModifyListener() {
 
 				public void modifyText(ModifyEvent e) {
-					proposalProvider.setName(nameText.getText());
-					if (nameText.getText().length()>0) {
+					String newName = nameText.getText();
+					if (ModelIndexer.getTopicIndexer().getTopicTypeByName(newName)!=null) {
+						setPageComplete(false);
+						return;
+					}
+					
+					proposalProvider.setName(newName);
+					if (newName.length()>0) {
 						if (syncIdentifier) {
 							String bl = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
-							String id = bl+"/"+nameText.getText().toLowerCase().replaceAll(" ", "_");
+							String id = bl+"/"+newName.toLowerCase().replaceAll(" ", "_");
 							
 							identifierText.setText(id);
 							syncIdentifier=true;

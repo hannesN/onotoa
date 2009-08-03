@@ -55,8 +55,9 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void init(IViewSite site) throws PartInitException {
-		site.getPage().addSelectionListener(this);
 		super.init(site);
+		site.getPage().addSelectionListener(this);
+
 	}
 
 	@Override
@@ -76,6 +77,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 			this.currentPage.aboutToHide();
 
 		this.currentPage = currentPage;
+		// this.currentPage.setSite(getSite());
 		pageBook.showPage(currentPage.getID());
 		pageBook.reflow(true);
 	}
@@ -87,7 +89,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 	private void setSelection(ISelection selection) {
 		IStructuredSelection sel = (IStructuredSelection) selection;
-		if ((sel!=null) && (!sel.isEmpty())) {
+		if ((sel != null) && (!sel.isEmpty())) {
 			Object obj = sel.getFirstElement();
 
 			if (obj instanceof TreeObject) {
@@ -117,7 +119,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		if (part != null) {
 			ModelView modelView = (ModelView) part;
 			page.setCommandStack(modelView.getEditingDomain().getCommandStack());
-			
+
 			// register actions
 			ActionRegistry ar = (ActionRegistry) part.getAdapter(ActionRegistry.class);
 			if (ar != null) {
@@ -144,11 +146,10 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 		pageBook = toolkit.createPageBook(parent, SWT.V_SCROLL);
 		pageBook.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		pageFactory = new PropertyDetailPageFactory(pageBook);
+		pageFactory = new PropertyDetailPageFactory(pageBook, (IViewSite) getSite());
 
 		setCurrentPage(pageFactory.getEmptyPage());
 		setSelection(getSite().getPage().getSelection());
 	}
-	
 
 }

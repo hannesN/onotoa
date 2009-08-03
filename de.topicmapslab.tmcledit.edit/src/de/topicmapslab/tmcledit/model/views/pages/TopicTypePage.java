@@ -21,6 +21,7 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -423,7 +424,14 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	    	} else {
 	    		cmd=new RenameTopicTypeCommand(tt, nameText.getText());
 	    	}
-	    	getCommandStack().execute(cmd);
+	    	if (cmd.canExecute()) {
+	    		getCommandStack().execute(cmd);
+	    	} else {
+				String errormsg = "Name: "+nameText.getText()+" already used!";
+				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
+				
+				nameText.setText(getCastedModel().getName());
+	    	}
 	    }
     }
 }

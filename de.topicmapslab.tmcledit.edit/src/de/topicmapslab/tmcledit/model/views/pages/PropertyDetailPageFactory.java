@@ -13,7 +13,9 @@ package de.topicmapslab.tmcledit.model.views.pages;
 import java.util.HashMap;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.forms.widgets.ScrolledPageBook;
+import org.eclipse.ui.part.PageSite;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -49,13 +51,15 @@ public class PropertyDetailPageFactory {
 	private HashMap<String, AbstractModelPage> pageMap = new HashMap<String, AbstractModelPage>();
 	
 	private final ScrolledPageBook pageBook;
+	private final IViewSite viewSite;
 
-	public PropertyDetailPageFactory(ScrolledPageBook pageBook) {
+	public PropertyDetailPageFactory(ScrolledPageBook pageBook, IViewSite viewSite) {
 		super();
 		this.pageBook = pageBook;
 		emptyPage = new EmptyPage();
 		emptyPage.createControl(pageBook.getContainer());
 		this.pageBook.registerPage(emptyPage.getID(), emptyPage.getControl());
+		this.viewSite = viewSite;
 	}
 	
 	public void dispose() {
@@ -78,7 +82,6 @@ public class PropertyDetailPageFactory {
 				pageMap.put(OCCURRENCE_TYPE, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-			return page;
 		} else if (model instanceof NameType) {
 			page = pageMap.get(NAME_TYPE);
 			if (page==null) {
@@ -96,7 +99,6 @@ public class PropertyDetailPageFactory {
 				pageMap.put(ASSOCIATION_TYPE, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-			return page;
 		} else if (model instanceof TopicType) {
 			page = pageMap.get(TOPIC_TYPE);
 			if (page==null) {
@@ -105,7 +107,6 @@ public class PropertyDetailPageFactory {
 				pageMap.put(TOPIC_TYPE, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-			return page;
 		} else if  ( (model instanceof MappingElement) || (model instanceof EObjectContainmentEList) ) {
 			page = pageMap.get(PREFIX_MAPPING);
 			if (page==null) {
@@ -179,6 +180,9 @@ public class PropertyDetailPageFactory {
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		}
+		if (page.getSite()==null)
+			page.init(new PageSite(viewSite));
+		
 		return page;
 	}
 

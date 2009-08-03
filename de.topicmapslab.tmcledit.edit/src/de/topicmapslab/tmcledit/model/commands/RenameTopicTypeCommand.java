@@ -17,6 +17,7 @@ package de.topicmapslab.tmcledit.model.commands;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -37,6 +38,13 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 		this.newName = newName;
 	}
 
+	@Override
+	public boolean canExecute() {
+		if (ModelIndexer.getTopicIndexer().getTopicTypeByName(newName)!=null)
+			return false;
+	    return super.canExecute();
+	}
+	
 	public void execute() {
 		tt.setName(newName);
 	}
