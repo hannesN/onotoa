@@ -20,13 +20,6 @@
             id="de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor"
             name="Onotoa Diagram">
       </editor>
-      <editor
-            default="true"
-            extensions="ono,tmcl"
-            id="de.topicmapslab.tmcledit.diagram.editor.TMCLModelEditor"
-            launcher="de.topicmapslab.tmcledit.diagram.editor.OnototaLauncher"
-            name="Onotoa Modelloader">
-      </editor>
    </extension>
 
 </plugin>

@@ -68,15 +68,16 @@ public class FileUtil {
 
 			resource.save(Collections.EMPTY_MAP);
 
-			WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) editingDomain.getCommandStack();
-			cmdStack.saveIsDone();
-			file.setDirty(false);
+			if (editingDomain != null) {
+				WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) editingDomain.getCommandStack();
+				cmdStack.saveIsDone();
+				file.setDirty(false);
 
-			String filename = file.getFilename();
-			IFile fileRes = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(filename));
-			if (fileRes != null)
-				fileRes.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-
+				String filename = file.getFilename();
+				IFile fileRes = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(filename));
+				if (fileRes != null)
+					fileRes.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

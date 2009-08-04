@@ -18,7 +18,6 @@ import de.topicmapslab.tmcledit.model.util.extension.PSIProviderInfo;
  * This is the central singleton for the Tmcledit edit plugin.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * @generated
  */
 public final class TmcleditEditPlugin extends EMFPlugin {
 	
@@ -29,7 +28,6 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public static final TmcleditEditPlugin INSTANCE = new TmcleditEditPlugin();
 
@@ -37,7 +35,6 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	private static Implementation plugin;
 
@@ -45,7 +42,6 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 	 * Create the instance.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public TmcleditEditPlugin() {
 		super

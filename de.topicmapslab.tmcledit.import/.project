@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>de.topicmapslab.tmcledit.export</name>
+	<name>de.topicmapslab.tmcledit.import</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,11 +21,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.pde.api.tools.apiAnalysisBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>net.sourceforge.metrics.builder</name>
 			<arguments>
 			</arguments>
@@ -34,7 +29,6 @@
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.eclipse.pde.api.tools.apiAnalysisNature</nature>
 		<nature>net.sourceforge.metrics.nature</nature>
 	</natures>
 </projectDescription>

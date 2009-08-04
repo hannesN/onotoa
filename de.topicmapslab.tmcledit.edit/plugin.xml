@@ -142,5 +142,14 @@
             class="de.topicmapslab.tmcledit.model.preferences.PreferenceInitializer">
       </initializer>
    </extension>
-
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            default="true"
+            extensions="ono,tmcl"
+            id="de.topicmapslab.tmcledit.model.util.OnototaLauncher"
+            launcher="de.topicmapslab.tmcledit.model.util.OnototaLauncher"
+            name="Onotoa Modelloader">
+      </editor>
+   </extension>
 </plugin>

@@ -1,4 +1,4 @@
-package de.topicmapslab.tmcledit.diagram.editor;
+package de.topicmapslab.tmcledit.model.util;
 import java.io.File;
 
 import org.eclipse.core.runtime.IPath;
