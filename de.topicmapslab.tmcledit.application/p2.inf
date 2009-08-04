@@ -1,6 +1,6 @@
 instructions.configure=\
-  addRepository(type:0,location:http${#58}/onotoa.topicmapslab.de/update);\
-  addRepository(type:1,location:http${#58}/onotoa.topicmapslab.de/update);
+  addRepository(type:0,location:http${#58}//onotoa.topicmapslab.de/update);\
+  addRepository(type:1,location:http${#58}//onotoa.topicmapslab.de/update);
   
 requires.1.namespace = org.eclipse.equinox.p2.iu
 requires.1.name = de.topicmapslab.tmcledit.export_feature.feature.group
