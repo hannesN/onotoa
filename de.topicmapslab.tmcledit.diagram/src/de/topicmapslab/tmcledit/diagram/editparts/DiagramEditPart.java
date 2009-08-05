@@ -118,20 +118,15 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 			Object nextObj = it.next();
 			if (nextObj instanceof TypeNodeEditPart) {
 				NodeEditPart tmpEp = (NodeEditPart) nextObj;
-				if (tmpEp.getModel().equals(edge.getSource()))
-					sep = tmpEp;
-				if (tmpEp.getModel().equals(edge.getTarget()))
-					tep = tmpEp;
+				if ((tmpEp.getModel().equals(edge.getSource())) || (tmpEp.getModel().equals(edge.getTarget())))
+					tmpEp.refresh();
 			} else if (nextObj instanceof AssociationNodeEditPart) {
 				if (edge.getSource().equals(((AssociationNodeEditPart) nextObj).getModel()))
-					sep = (NodeEditPart) nextObj;
+					((NodeEditPart) nextObj).refresh();
 			}
 		}
 		
-		if ((sep!=null) && (tep!=null)) {
-			sep.refresh();
-			tep.refresh();
-		}
+		
 		
 	}
 
