@@ -122,6 +122,9 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 					sep = tmpEp;
 				if (tmpEp.getModel().equals(edge.getTarget()))
 					tep = tmpEp;
+			} else if (nextObj instanceof AssociationNodeEditPart) {
+				if (edge.getSource().equals(((AssociationNodeEditPart) nextObj).getModel()))
+					sep = (NodeEditPart) nextObj;
 			}
 		}
 		
