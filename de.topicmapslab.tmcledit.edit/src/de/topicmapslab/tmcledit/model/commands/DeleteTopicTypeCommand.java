@@ -310,7 +310,8 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 				for (Edge e : ModelIndexer.getNodeIndexer()
 						.getEdgesUsingTopicType(topicType)) {
-					addToEdgeList(d, e);
+					if (e.eContainer().equals(d))
+						addToEdgeList(d, e);
 				}
 			}
 		}
