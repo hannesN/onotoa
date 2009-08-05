@@ -10,6 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.policies;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.GraphicalNodeEditPolicy;
 import org.eclipse.gef.requests.CreateConnectionRequest;
@@ -27,6 +30,8 @@ import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
+import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
+import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
 public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
@@ -58,12 +63,28 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 		if (cmd.getEdge().getType() == EdgeType.IS_ATYPE) {
 			TopicType target = ((TypeNode) cmd.getEdge().getTarget())
 					.getTopicType();
+			TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
 
 			if (target.getKind() == KindOfTopicType.NO_TYPE) {
-
 				return null;
 			}
-
+			
+			List<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
+			newList.add(target);
+			SetIsACommand isACmd = new SetIsACommand(newList, source);
+			return new CommandAdapter(getEditDomain().getEditingDomain().getCommandStack(), isACmd);
+		} else if (cmd.getEdge().getType() == EdgeType.AKO_TYPE) {
+			TopicType target = ((TypeNode) cmd.getEdge().getTarget()).getTopicType();
+			TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
+		
+			if (target.getKind() == KindOfTopicType.NO_TYPE) {
+				return null;
+			}
+			
+			List<TopicType> newList = new ArrayList<TopicType>(source.getAko());
+			newList.add(target);
+			SetAkoCommand akoCmd = new SetAkoCommand(newList, source);
+			return new CommandAdapter(getEditDomain().getEditingDomain().getCommandStack(), akoCmd);
 		}
 		return request.getStartCommand();
 	}
@@ -72,8 +93,7 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 	protected Command getConnectionCreateCommand(CreateConnectionRequest request) {
 		CreateEdgeCommand cmd = new CreateEdgeCommand((Edge) request
 				.getNewObject());
-		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer()
-				.getEditDomain();
+		TMCLEditDomain ed = getEditDomain();
 		Diagram d = (Diagram) getHost().getParent().getModel();
 		cmd.setDiagram(d);
 
@@ -92,6 +112,12 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 		request.setStartCommand(cmdAdapter);
 
 		return cmdAdapter;
+	}
+
+	private TMCLEditDomain getEditDomain() {
+		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer()
+				.getEditDomain();
+		return ed;
 	}
 
 	@Override
