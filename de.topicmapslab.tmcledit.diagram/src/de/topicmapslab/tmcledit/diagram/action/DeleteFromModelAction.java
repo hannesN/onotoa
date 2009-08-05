@@ -97,51 +97,62 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		if (model instanceof TypeNode) {
 			cmd = new DeleteTopicTypeCommand(((TypeNode) model).getTopicType());
 		} else if (model instanceof AbstractConstraint) {
-			int type = -1;
-			if (model instanceof NameTypeConstraint) {
-				type = ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS;
-			} else if (model instanceof OccurrenceTypeConstraint) {
-				type = ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
-			} else if (model instanceof SubjectIdentifierConstraint) {
-				type = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
-			} else if (model instanceof SubjectIdentifierConstraint) {
-				type = ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
-			}
-			AbstractConstraint ac = (AbstractConstraint) model;
-			cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) ac
-					.eContainer(), ac, type);
+			cmd = getDeleteTopicTypeConstraintItemCommand(model);
 		} else if (model instanceof Edge) {
-			Edge edge = (Edge) model;
-			RolePlayerConstraint roleConstraint = edge.getRoleConstraint();
-			if (roleConstraint != null) {
-				cmd = new DeleteRolePlayerConstraintCommand(
-						(AssociationTypeConstraint) roleConstraint.eContainer(),
-						roleConstraint);
-			} else {
-				if (edge.getType() != EdgeType.ROLE_CONSTRAINT_TYPE) {
-					TopicType source = ((TypeNode) edge.getSource()).getTopicType();
-					TopicType target = ((TypeNode) edge.getTarget()).getTopicType();
-					
-					if (edge.getType() == EdgeType.IS_ATYPE) {
-						ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
-						newList.remove(target);
-						
-						cmd = new SetIsACommand(newList, source);
-					} else {
-						ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getAko());
-						newList.remove(target);
-						
-						cmd = new SetAkoCommand(newList, source);
-					}
-					
-				}
-			}
+			cmd = getDeleteEdgeCommand(model);
 		} else if (model instanceof AssociationNode) {
 			cmd = new DeleteAssociationConstraintCommand(
 					((AssociationNode) model).getAssociationConstraint());
 		} else if (model instanceof Comment) {
 			cmd = new DeleteCommentCommand((Comment) model);
 		}
+		return cmd;
+	}
+
+	private AbstractCommand getDeleteEdgeCommand(Object model) {
+		Edge edge = (Edge) model;
+		RolePlayerConstraint roleConstraint = edge.getRoleConstraint();
+		if (roleConstraint != null) {
+			return new DeleteRolePlayerConstraintCommand(
+					(AssociationTypeConstraint) roleConstraint.eContainer(),
+					roleConstraint);
+		} else {
+			if (edge.getType() != EdgeType.ROLE_CONSTRAINT_TYPE) {
+				TopicType source = ((TypeNode) edge.getSource()).getTopicType();
+				TopicType target = ((TypeNode) edge.getTarget()).getTopicType();
+				
+				if (edge.getType() == EdgeType.IS_ATYPE) {
+					ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
+					newList.remove(target);
+					
+					return new SetIsACommand(newList, source);
+				} else {
+					ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getAko());
+					newList.remove(target);
+					
+					return new SetAkoCommand(newList, source);
+				}
+				
+			}
+		}
+		return null;
+	}
+
+	private AbstractCommand getDeleteTopicTypeConstraintItemCommand(Object model) {
+		AbstractCommand cmd;
+		int type = -1;
+		if (model instanceof NameTypeConstraint) {
+			type = ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS;
+		} else if (model instanceof OccurrenceTypeConstraint) {
+			type = ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
+		} else if (model instanceof SubjectIdentifierConstraint) {
+			type = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
+		} else if (model instanceof SubjectIdentifierConstraint) {
+			type = ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+		}
+		AbstractConstraint ac = (AbstractConstraint) model;
+		cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) ac
+				.eContainer(), ac, type);
 		return cmd;
 	}
 
