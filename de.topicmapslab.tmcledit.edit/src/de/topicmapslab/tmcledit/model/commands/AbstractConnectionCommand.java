@@ -89,6 +89,9 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
+		if (isPrepared)
+			return false;
+		
 		createTypeLists();
 		
 		createEdgeLists();
@@ -108,7 +111,7 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		File file = (File) schema.eContainer();
 		
 		for (Diagram d : file.getDiagrams()) {
-			// check if we have a topicnode containing representing the topic
+			// check if we have a topicnode representing the topic
 			TypeNode currentNode = (TypeNode) ModelIndexer.getNodeIndexer().getNodeFor(topic, d);
 			if (currentNode!=null) {
 				findRemoveEdges(d);

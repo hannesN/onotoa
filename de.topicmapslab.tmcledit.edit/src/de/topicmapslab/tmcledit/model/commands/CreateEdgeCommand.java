@@ -11,12 +11,12 @@
 package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.Command;
 
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
 public class CreateEdgeCommand extends AbstractCommand {
@@ -24,6 +24,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 	private Diagram diagram;
 	private Edge edge;
 	private final boolean editType;
+	private Command cmd;
 
 	public CreateEdgeCommand(Edge newEdge) {
 		this(newEdge, null, true);
@@ -63,6 +64,8 @@ public class CreateEdgeCommand extends AbstractCommand {
 			if (edge.getRoleConstraint() != null) {
 				edge.getRoleConstraint().setPlayer(
 						((TypeNode) edge.getTarget()).getTopicType());
+			} else {
+				
 			}
 		} else {
 			return false;
@@ -83,14 +86,8 @@ public class CreateEdgeCommand extends AbstractCommand {
 		if (editType) {
 			switch (edge.getType()) {
 			case AKO_TYPE:
-				TopicType source = ((TypeNode) edge.getSource()).getTopicType();
-				TopicType target = ((TypeNode) edge.getTarget()).getTopicType();
-				source.getAko().remove(target);
-				break;
 			case IS_ATYPE:
-				source = ((TypeNode) edge.getSource()).getTopicType();
-				target = ((TypeNode) edge.getTarget()).getTopicType();
-				source.getIsa().remove(target);
+				cmd.undo();
 				break;
 			case ROLE_CONSTRAINT_TYPE:
 				((AssociationNode) edge.getSource()).getAssociationConstraint()
@@ -108,14 +105,8 @@ public class CreateEdgeCommand extends AbstractCommand {
 		if (editType) {
 			switch (edge.getType()) {
 			case AKO_TYPE:
-				TopicType source = ((TypeNode) edge.getSource()).getTopicType();
-				TopicType target = ((TypeNode) edge.getTarget()).getTopicType();
-				source.getAko().add(target);
-				break;
 			case IS_ATYPE:
-				source = ((TypeNode) edge.getSource()).getTopicType();
-				target = ((TypeNode) edge.getTarget()).getTopicType();
-				source.getIsa().add(target);
+				cmd.redo();
 				break;
 			case ROLE_CONSTRAINT_TYPE:
 				((AssociationNode) edge.getSource()).getAssociationConstraint()
