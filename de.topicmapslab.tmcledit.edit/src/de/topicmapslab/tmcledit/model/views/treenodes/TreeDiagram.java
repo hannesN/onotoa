@@ -17,7 +17,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PartInitException;
 
 import de.topicmapslab.tmcledit.model.Diagram;
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
@@ -27,7 +26,7 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
 public class TreeDiagram extends TreeObject {
 
 	public TreeDiagram(ModelView modelView, Diagram diagram) {
-		super(modelView, KindOfTopicType.TOPIC_TYPE);
+		super(modelView, null);
 		setModel(diagram);
 	}
 	

@@ -14,6 +14,7 @@
 package de.topicmapslab.tmcledit.model.views.treenodes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -21,7 +22,11 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
 
 public class TreeParent extends TreeObject {
 	private ArrayList<TreeObject> children;
-
+	
+	public TreeParent(ModelView viewer, String name) {
+		this(viewer, name, null);
+	}
+			
 	public TreeParent(ModelView viewer, String name, KindOfTopicType kindOfTopicType) {
 		super(viewer, name, kindOfTopicType);
 		children = new ArrayList<TreeObject>();
@@ -56,5 +61,29 @@ public class TreeParent extends TreeObject {
 		for (TreeObject to : children) {
 			to.dispose();
 		}
+	}
+	
+	@Override
+	public void setSyncView(boolean syncView) {
+	    super.setSyncView(syncView);
+	    for (TreeObject child : getChildrenList()) {
+	    	child.setSyncView(syncView);
+	    }
+	}
+	
+	protected void clearChildren() {
+	    for (Iterator<TreeObject> it=getChildrenList().iterator(); it.hasNext();) {
+			TreeObject child = it.next();
+			it.remove();
+			child.dispose();
+		}
+	}
+	
+	public TreeObject findChildPerModel(Object childModel) {
+		for (TreeObject o : children) {
+			if (childModel.equals(o.getModel()))
+				return o;
+		}
+		return null;
 	}
 }

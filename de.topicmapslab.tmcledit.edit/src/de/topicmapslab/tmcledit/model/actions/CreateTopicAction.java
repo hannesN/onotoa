@@ -13,17 +13,23 @@
  */
 package de.topicmapslab.tmcledit.model.actions;
 
+import java.io.File;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.PlatformUI;
 
+import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
-public class CreateTopicAction extends Action {
+public class CreateTopicAction extends Action  {
 	private KindOfTopicType kindOfTopicType;
 	
 	private final ModelView modelView;
@@ -37,8 +43,13 @@ public class CreateTopicAction extends Action {
 	}
 
 	public void setKindOfTopicType(KindOfTopicType kindOfTopicType) {
-	    this.kindOfTopicType = kindOfTopicType;
-	    setText("Create " + kindOfTopicType.getName());
+	    if (kindOfTopicType==null)
+	    	setEnabled(false);
+	    else {
+	    	setEnabled(true);
+	    	this.kindOfTopicType = kindOfTopicType;
+	    	setText("Create " + kindOfTopicType.getName());
+	    }
     }
 	
 	@Override

@@ -24,16 +24,20 @@ import org.eclipse.swt.graphics.Image;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
-
 public class TreeObject implements IAdaptable, Adapter {
 	private String name;
 	protected EditingDomain editingDomain;
 	private TreeParent parent;
 	private Notifier target;
 	private final KindOfTopicType kindOfTopicType;
-	
+	private boolean syncView = false;
+
 	private final ModelView modelView;
 	private EObject model;
+
+	public TreeObject(ModelView modelView) {
+		this(modelView, null);
+	}
 
 	public TreeObject(ModelView modelView, KindOfTopicType kindOfTopicType) {
 		this.kindOfTopicType = kindOfTopicType;
@@ -46,9 +50,9 @@ public class TreeObject implements IAdaptable, Adapter {
 	}
 
 	public KindOfTopicType getKindOfTopicType() {
-	    return kindOfTopicType;
-    }
-	
+		return kindOfTopicType;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -56,9 +60,11 @@ public class TreeObject implements IAdaptable, Adapter {
 	protected ModelView getModelView() {
 		return modelView;
 	}
-	
+
 	public void setParent(TreeParent parent) {
 		this.parent = parent;
+		if (parent != null)
+			this.syncView = parent.isSyncView();
 	}
 
 	public TreeParent getParent() {
@@ -72,22 +78,22 @@ public class TreeObject implements IAdaptable, Adapter {
 
 	@SuppressWarnings("unchecked")
 	public Object getAdapter(Class key) {
-		
+
 		return null;
 	}
-	
+
 	public EObject getModel() {
 		return model;
 	}
-	
+
 	public void setModel(EObject model) {
 		dispose();
 		this.model = model;
 		model.eAdapters().add(this);
 	}
-	
+
 	public void dispose() {
-		if (getModel()!=null) {
+		if (getModel() != null) {
 			getModel().eAdapters().remove(this);
 		}
 	}
@@ -106,20 +112,29 @@ public class TreeObject implements IAdaptable, Adapter {
 	public void setTarget(Notifier newTarget) {
 		target = newTarget;
 	}
-	
+
 	public Image getImage() {
 		return null;
 	}
-	
+
 	public void refresh() {
-		getModelView().getViewer().refresh(this);
+		if (syncView)
+			getModelView().getViewer().refresh(this);
 	}
-	
+
+	protected boolean isSyncView() {
+		return syncView;
+	}
+
+	public void setSyncView(boolean syncView) {
+		this.syncView = syncView;
+	}
+
 	public void handleDoubleClick() {
-		
+
 	}
-	
+
 	public void handleRename() {
-		
+
 	}
 }
