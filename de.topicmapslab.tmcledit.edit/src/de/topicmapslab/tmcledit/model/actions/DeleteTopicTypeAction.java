@@ -22,6 +22,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -29,7 +30,9 @@ import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.DeleteAssociationConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -84,6 +87,9 @@ public class DeleteTopicTypeAction extends Action implements ISelectionChangedLi
 			if (construct instanceof SubjectLocatorConstraint)
 				cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
 				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
+			
+			if (construct instanceof AssociationTypeConstraint)
+				cmd = new DeleteAssociationConstraintCommand((AssociationTypeConstraint) construct);
 
 			if (cmd != null)
 				modelView.getEditingDomain().getCommandStack().execute(cmd);
@@ -99,6 +105,7 @@ public class DeleteTopicTypeAction extends Action implements ISelectionChangedLi
 
 			Object obj = sel.getFirstElement();
 			if ( (obj instanceof TMCLConstruct) 
+			   &&(!(obj instanceof TopicMapSchema))
 			   &&(!(obj instanceof File)) )
 				c = (TMCLConstruct) obj;
 
