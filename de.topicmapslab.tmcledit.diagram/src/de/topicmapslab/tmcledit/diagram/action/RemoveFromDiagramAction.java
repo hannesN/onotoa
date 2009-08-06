@@ -80,7 +80,7 @@ public class RemoveFromDiagramAction extends AbstractSelectionAction {
 		if (!getSelections().isEmpty()) {
 			Iterator<Object> it = getSelections().iterator();
 			while (it.hasNext()) {
-				if (!(it.next() instanceof de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart)) {
+				if (!(it.next() instanceof de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart)) {
 					setEnabled(false);
 					return;
 				}

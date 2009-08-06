@@ -112,67 +112,101 @@ public class CreateNodeCommand extends AbstractCommand {
 	protected boolean prepare() {
 		if (isPrepared)
 			return true;
+		
+		TopicTypeNodeIndexer nodeIndexer = ModelIndexer.getNodeIndexer();
+		
 		switch (type) {
 		case TYPE:
 			TopicType topicType = ((TypeNode) node).getTopicType();
-				if (topicType.eContainer() == null) {
+			if (topicType.eContainer() == null) {
 				createdNewType = true;
 			} else {
-				TopicTypeNodeIndexer nodeIndexer = ModelIndexer.getNodeIndexer();
+				
 				TopicIndexer topicIndexer = ModelIndexer.getTopicIndexer();
-				for(TopicType tt : topicType.getIsa()) {
-					Node node2 = nodeIndexer.getNodeFor(tt, diagram);
-					if (node2!=null) {
-						Edge edge = createEdge(node, node2, EdgeType.IS_ATYPE);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
-						addEdgeCommand(cmd);
-					}
-				}
-				for(TopicType tt : topicIndexer.getUsedAsIsa(topicType) ) {
-					Node node2 = nodeIndexer.getNodeFor(tt, diagram);
-					if (node2!=null) {
-						Edge edge = createEdge(node2, node, EdgeType.IS_ATYPE);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
-						addEdgeCommand(cmd);
-					}
-				}
-				for(TopicType tt : topicType.getAko()) {
-					Node node2 = nodeIndexer.getNodeFor(tt, diagram);
-					if (node2!=null) {
-						Edge edge = createEdge(node, node2, EdgeType.AKO_TYPE);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
-						addEdgeCommand(cmd);
-					}
-				}
-				for(TopicType tt : topicIndexer.getUsedAsAko(topicType)) {
-					Node node2 = nodeIndexer.getNodeFor(tt, diagram);
-					if (node2!=null) {
-						Edge edge = createEdge(node2, node, EdgeType.AKO_TYPE);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
-						addEdgeCommand(cmd);
-					}
-				}
+				createIsAEdges(topicType, nodeIndexer, topicIndexer);
+				createAkOEdges(topicType, nodeIndexer, topicIndexer);
+				
 				for (RolePlayerConstraint rpc : ModelIndexer.getAssociationIndexer().getRolePlayerConstraintsFor(topicType)) {
 					AssociationTypeConstraint atc = (AssociationTypeConstraint) rpc.eContainer();
 					Node node2 = nodeIndexer.getNodeFor(atc, diagram);
 					if (node2!=null) {
-						Edge edge = createEdge(node2, node, EdgeType.ROLE_CONSTRAINT_TYPE);
-						edge.setRoleConstraint(rpc);
-						CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
-						addEdgeCommand(cmd);
+						createRPEdge(node2, node, rpc);
 					}
 				}
 			}
 			break;
 		case ASSOCIATION:
-			if (((AssociationNode) node).getAssociationConstraint()
+			AssociationNode associationNode = (AssociationNode) node;
+			if (associationNode.getAssociationConstraint()
 					.eContainer() == null) {
 				createdNewType = true;
+			} else {
+				AssociationTypeConstraint atc = associationNode.getAssociationConstraint();
+				if (atc!=null) {
+					for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+						TopicType player = rpc.getPlayer();
+						if (player==null)
+							continue;
+						
+						Node pnode = nodeIndexer.getNodeFor(player, diagram);
+						if (pnode==null)
+							continue;
+						createRPEdge(node, pnode, rpc);
+					}
+					
+				}
+					
+				
 			}
 		}
 		isPrepared = true;
 		return true;
 	}
+
+	private void createRPEdge(Node node1, Node node2, RolePlayerConstraint rpc) {
+		Edge edge = createEdge(node1, node2, EdgeType.ROLE_CONSTRAINT_TYPE);
+		edge.setRoleConstraint(rpc);
+		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+		addEdgeCommand(cmd);
+	}
+	
+	private void createAkOEdges(TopicType topicType, TopicTypeNodeIndexer nodeIndexer, TopicIndexer topicIndexer) {
+	    for(TopicType tt : topicType.getAko()) {
+	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
+	    	if (node2!=null) {
+	    		Edge edge = createEdge(node, node2, EdgeType.AKO_TYPE);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		addEdgeCommand(cmd);
+	    	}
+	    }
+	    for(TopicType tt : topicIndexer.getUsedAsAko(topicType)) {
+	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
+	    	if (node2!=null) {
+	    		Edge edge = createEdge(node2, node, EdgeType.AKO_TYPE);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		addEdgeCommand(cmd);
+	    	}
+	    }
+    }
+
+	private void createIsAEdges(TopicType topicType, TopicTypeNodeIndexer nodeIndexer, TopicIndexer topicIndexer) {
+	    for(TopicType tt : topicType.getIsa()) {
+	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
+	    	if (node2!=null) {
+	    		Edge edge = createEdge(node, node2, EdgeType.IS_ATYPE);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		addEdgeCommand(cmd);
+	    	}
+	    }
+	    for(TopicType tt : topicIndexer.getUsedAsIsa(topicType) ) {
+	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
+	    	if (node2!=null) {
+	    		Edge edge = createEdge(node2, node, EdgeType.IS_ATYPE);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		addEdgeCommand(cmd);
+	    	}
+	    }
+    }
 
 	private Edge createEdge(Node node1, Node node2, EdgeType type) {
 		Edge edge = ModelFactory.eINSTANCE.createEdge();

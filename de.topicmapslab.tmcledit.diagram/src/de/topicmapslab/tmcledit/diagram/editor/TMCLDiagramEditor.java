@@ -132,8 +132,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 		getSite().setSelectionProvider(this);
 		// listen for dropped parts
-		viewer.addDropTargetListener(new TypeDropTransferListener(viewer,
-				diagram));
+		viewer.addDropTargetListener(new TypeDropTransferListener(viewer, diagram));
 		
 
 		viewer.getControl().addMouseListener(new MouseAdapter() {
