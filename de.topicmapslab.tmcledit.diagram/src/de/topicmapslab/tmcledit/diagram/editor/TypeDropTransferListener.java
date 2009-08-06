@@ -24,9 +24,11 @@ import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 
+import de.topicmapslab.tmcledit.diagram.creationfactories.AssociationNodeCreationFactory;
 import de.topicmapslab.tmcledit.diagram.creationfactories.OccurrenceConstraintCreationFactory;
 import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -37,9 +39,11 @@ public class TypeDropTransferListener extends
 
 	private TypeNodeCreationFactory nodeFac = new TypeNodeCreationFactory(true);
 	private OccurrenceConstraintCreationFactory occFac = new OccurrenceConstraintCreationFactory();
-
+	private final AssociationNodeCreationFactory assocConstrFac = new AssociationNodeCreationFactory();
+	
 	private List<TopicType> movedTypes = Collections.emptyList();
-
+	private transient AssociationTypeConstraint atc;
+	
 	private final TopicMapSchema schema;
 
 	public TypeDropTransferListener(EditPartViewer viewer, Diagram diagram) {
@@ -48,17 +52,28 @@ public class TypeDropTransferListener extends
 	}
 
 	@Override
-	public Transfer getTransfer() {
+	public Transfer getTransfer() { 
 		return TextTransfer.getInstance();
 	}
 
 	@Override
 	public void setCurrentEvent(DropTargetEvent currentEvent) {
 		super.setCurrentEvent(currentEvent);
-		if ( (currentEvent==null) || (currentEvent.data==null) ){
+		if (  (currentEvent==null) 
+			||(currentEvent.data==null) ) {
 			movedTypes = Collections.emptyList();
 			return;
 		}
+		
+		atc = null;
+		for (AssociationTypeConstraint tmp : schema.getAssociationTypeConstraints()) {
+			if (currentEvent.data.equals(tmp.toString())) {
+				atc = tmp;
+				assocConstrFac.setAssociationTypeConstraint(atc);
+				return;
+			}
+		} 
+		
 		String ids[] = ((String) currentEvent.data).split("--_--");
 		movedTypes = new ArrayList<TopicType>(ids.length);
 		for (String id : ids) {
@@ -74,10 +89,15 @@ public class TypeDropTransferListener extends
 		CreateRequest req = ((CreateRequest) getTargetRequest());
 		req.setLocation(getDropLocation());
 		EditPart part = getViewer().findObjectAt(getDropLocation());
-		if (part instanceof NodeEditPart) {
-			req.setFactory(occFac);
+		
+		if (atc !=null) {
+			req.setFactory(assocConstrFac);
 		} else {
-			req.setFactory(nodeFac);
+			if (part instanceof NodeEditPart) {
+				req.setFactory(occFac);
+			} else {
+				req.setFactory(nodeFac);
+			}
 		}
 	}
 
@@ -100,6 +120,10 @@ public class TypeDropTransferListener extends
 		nodeFac.setTopicTypes(movedTypes);
 		req.setFactory(nodeFac);
 
+		if ( (movedTypes.isEmpty()) && (atc==null) ) {
+			getCurrentEvent().detail = DND.DROP_NONE;
+			return;
+		}
 
 		super.handleDrop();
 	}

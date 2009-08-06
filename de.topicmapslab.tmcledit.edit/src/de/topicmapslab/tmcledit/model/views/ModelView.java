@@ -238,16 +238,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			}
 
 		});
-		/*
-		 * adapterFactory = new ComposedAdapterFactory(
-		 * ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		 * 
-		 * adapterFactory .addAdapterFactory(new
-		 * ResourceItemProviderAdapterFactory());
-		 * adapterFactory.addAdapterFactory(new
-		 * ModelItemProviderAdapterFactory()); adapterFactory
-		 * .addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-		 */
 		initDragAndDrop();
 	}
 
@@ -256,20 +246,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		dragSource.setTransfer(new Transfer[] { TextTransfer.getInstance() });
 		dragSource.addDragListener(new DragSourceAdapter() {
 
-			@SuppressWarnings("unchecked")
 			@Override
 			public void dragStart(DragSourceEvent event) {
+
 				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-				// concat every model string and ignore other nodes..
-				Iterator<Object> it = sel.iterator();
-				StringBuffer tmp = new StringBuffer();
-				while (it.hasNext()) {
-					Object obj = it.next();
-					if (obj instanceof TreeTopic) {
-						tmp.append(((TreeTopic) obj).getModel().toString());
-						// tmp.append("&*&*");
-					}
-				}
+				StringBuffer tmp = prepareTopicTypes(sel);
+
 				if (tmp.length() > 0) {
 					event.doit = true;
 					event.data = tmp.toString();
@@ -279,28 +261,44 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 			}
 
-			@SuppressWarnings("unchecked")
 			@Override
 			public void dragSetData(DragSourceEvent event) {
 				if (viewer == null)
 					return;
 
 				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-				// concat every model string and ignore other nodes..
-				Iterator<Object> it = sel.iterator();
-				StringBuffer tmp = new StringBuffer();
-				while (it.hasNext()) {
-					Object obj = it.next();
-					if (obj instanceof TreeTopic) {
-						tmp.append(((TreeTopic) obj).getModel().toString());
-						tmp.append("--_--");
-					}
-				}
+
+				StringBuffer tmp = prepareTopicTypes(sel);
 				if (tmp.length() > 0) {
 					event.data = tmp.toString();
 				} else {
 					event.data = null;
 				}
+			}
+
+			@SuppressWarnings("unchecked")
+            private StringBuffer prepareTopicTypes(IStructuredSelection sel) {
+				// concat every model string and ignore other nodes..
+				StringBuffer tmp = new StringBuffer();
+
+				if (sel.size() == 1) {
+					TreeObject selObj = (TreeObject) sel.getFirstElement();
+					
+					if ( (selObj.getModel() instanceof AssociationTypeConstraint) 
+					  || (selObj.getModel() instanceof TopicType) ) {
+						tmp.append(selObj.getModel().toString());
+					}
+				} else {
+					Iterator<Object> it = sel.iterator();
+					while (it.hasNext()) {
+						Object obj = it.next();
+						if (obj instanceof TreeTopic) {
+							tmp.append(((TreeTopic) obj).getModel().toString());
+							tmp.append("--_--");
+						}
+					}
+				}
+				return tmp;
 			}
 
 		});
@@ -937,9 +935,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		private void addDiagram(Diagram diagram) {
 			diagramNode.addChild(new TreeDiagram(ModelView.this, diagram));
+			diagramNode.refresh();
 		}
 
-		private void removeDiagram(Diagram diagram) {
+		private void removeDiagram(Diagram diagram) { 
 			TreeObject child = diagramNode.findChildPerModel(diagram);
 			diagramNode.removeChild(child);
 			child.dispose();
