@@ -34,7 +34,7 @@ public interface OccurrenceTypeConstraint extends AbstractConstraint, AbstractTy
 	 * @return the value of the '<em>Unique</em>' attribute.
 	 * @see #setUnique(boolean)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurrenceTypeConstraint_Unique()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	boolean isUnique();

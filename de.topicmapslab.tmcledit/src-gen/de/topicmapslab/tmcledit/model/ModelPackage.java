@@ -2327,13 +2327,22 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE__DATA_TYPE = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCCURRENCE_TYPE__UNIQUE = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Occurrence Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 2;
+	int OCCURRENCE_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl <em>Role Constraint</em>}' class.
@@ -4319,6 +4328,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getOccurrenceType_DataType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurrenceType#isUnique <em>Unique</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unique</em>'.
+	 * @see de.topicmapslab.tmcledit.model.OccurrenceType#isUnique()
+	 * @see #getOccurrenceType()
+	 * @generated
+	 */
+	EAttribute getOccurrenceType_Unique();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.RoleConstraint <em>Role Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5315,6 +5335,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OCCURRENCE_TYPE__DATA_TYPE = eINSTANCE.getOccurrenceType_DataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OCCURRENCE_TYPE__UNIQUE = eINSTANCE.getOccurrenceType_Unique();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.RoleConstraintImpl <em>Role Constraint</em>}' class.
