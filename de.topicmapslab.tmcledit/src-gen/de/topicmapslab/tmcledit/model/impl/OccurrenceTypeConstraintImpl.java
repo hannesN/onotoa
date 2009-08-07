@@ -8,6 +8,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -123,20 +124,26 @@ public class OccurrenceTypeConstraintImpl extends AbstractConstraintImpl impleme
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
+	 * @deprecated use getType().isUnique()
 	 */
 	public boolean isUnique() {
+		if (getType()!=null)
+			return ((OccurrenceType)getType()).isUnique();
 		return unique;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
+	 * @deprecated use getType().setUnique()
 	 */
 	public void setUnique(boolean newUnique) {
 		boolean oldUnique = unique;
 		unique = newUnique;
+		if (getType()!=null)
+			((OccurrenceType)getType()).setUnique(newUnique);
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE, oldUnique, unique));
 	}

@@ -90,6 +90,15 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	}
 
 	@Override
+	protected void setEnabled(boolean enabled) {
+	     super.setEnabled(enabled);
+	     addButton.setEnabled(enabled);
+	     removeButton.setEnabled(enabled);
+	     roleCombinationViewer.getControl().setEnabled(enabled);
+	     control.setEnabled(enabled);
+	}
+	
+	@Override
 	public void dispose() {
 		control.dispose();
 	    super.dispose();
