@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getReifierConstraint <em>Reifier Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getDataType <em>Data Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#isUnique <em>Unique</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +64,26 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 * @ordered
 	 */
 	protected String dataType = DATA_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean UNIQUE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean unique = UNIQUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,6 +173,27 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isUnique() {
+		return unique;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUnique(boolean newUnique) {
+		boolean oldUnique = unique;
+		unique = newUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE__UNIQUE, oldUnique, unique));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -173,6 +215,8 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 				return getReifierConstraint();
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				return getDataType();
+			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
+				return isUnique();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -190,6 +234,9 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 				return;
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				setDataType((String)newValue);
+				return;
+			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
+				setUnique((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,6 +256,9 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				setDataType(DATA_TYPE_EDEFAULT);
 				return;
+			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
+				setUnique(UNIQUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -225,6 +275,8 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 				return reifierConstraint != null;
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
+			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
+				return unique != UNIQUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -283,6 +335,8 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (dataType: ");
 		result.append(dataType);
+		result.append(", unique: ");
+		result.append(unique);
 		result.append(')');
 		return result.toString();
 	}
