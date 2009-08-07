@@ -281,6 +281,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	@Override
 	protected void setEnabled(boolean enabled) {
 		item.getControl().setEnabled(enabled);
+		abstractButton.setEnabled(enabled);
 	}
 	
 	@Override

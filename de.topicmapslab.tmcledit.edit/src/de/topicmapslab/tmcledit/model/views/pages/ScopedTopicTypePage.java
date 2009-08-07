@@ -100,15 +100,24 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		cardCombo = new CCombo(comp, SWT.BORDER);
 		cardCombo.setItems(new String[] { "may", "cannot", "must" });
 		cardCombo.select(0);
-		
 
 		reifiertypeText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		reifiertypeText.setLayoutData(gd);
-		
+
 		browseButton = toolkit.createButton(comp, "...", SWT.PUSH);
 
 		hookReifierListener();
+	}
+
+	@Override
+	protected void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		control.setEnabled(enabled);
+		reifiertypeText.setEnabled(enabled);
+		browseButton.setEnabled(enabled);
+		cardCombo.setEnabled(enabled);
+		hasReifierConstraintButton.setEnabled(enabled);
 	}
 
 	private void hookReifierListener() {
@@ -142,19 +151,21 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 					cardCombo.setEnabled(false);
 					browseButton.setEnabled(false);
 					reifiertypeText.setText("");
-					getCommandStack().execute(new GenericSetCommand(getReifiableType(), ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, null));					
+					getCommandStack().execute(
+					        new GenericSetCommand(getReifiableType(),
+					                ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, null));
 				}
 			}
 		});
-		
-		browseButton.addSelectionListener(new SelectionAdapter(){
+
+		browseButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(browseButton.getShell(), false);
-				if (dlg.open()==Dialog.OK) {
+				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
-							new GenericSetCommand(getReifiableType().getReifierConstraint(), 
-								ModelPackage.REIFIER_CONSTRAINT__TYPE, dlg.getFirstResult()));
+					        new GenericSetCommand(getReifiableType().getReifierConstraint(),
+					                ModelPackage.REIFIER_CONSTRAINT__TYPE, dlg.getFirstResult()));
 				}
 			}
 		});
@@ -260,7 +271,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 
 	@Override
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
+		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
 			return;
 
 		if (notification.getNotifier() instanceof ScopeConstraint) {
@@ -279,12 +290,12 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 			return;
 		}
 		if (notification.getNotifier() instanceof ReifiableTopicType) {
-			if (notification.getFeatureID(ReifierConstraint.class)==ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT) {
+			if (notification.getFeatureID(ReifierConstraint.class) == ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT) {
 				ReifierConstraint rc = (ReifierConstraint) notification.getOldValue();
-				if (rc!=null)
+				if (rc != null)
 					rc.eAdapters().remove(this);
 				rc = (ReifierConstraint) notification.getNewValue();
-				if (rc!=null)
+				if (rc != null)
 					rc.eAdapters().add(this);
 				updateReifierUI();
 				return;
@@ -295,7 +306,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 	}
 
 	private void updateReifierUI() {
-		if (getReifiableType()==null) {
+		if (getReifiableType() == null) {
 			hasReifierConstraintButton.setEnabled(false);
 			cardCombo.setEnabled(false);
 			browseButton.setEnabled(false);
@@ -307,9 +318,9 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		cardCombo.setEnabled(true);
 		browseButton.setEnabled(true);
 		reifiertypeText.setEnabled(true);
-		hasReifierConstraintButton.setSelection(rc!=null);
-		if (rc!=null) {
-			if (rc.getType()!=null)
+		hasReifierConstraintButton.setSelection(rc != null);
+		if (rc != null) {
+			if (rc.getType() != null)
 				reifiertypeText.setText(rc.getType().getName());
 			if (rc.getCardMin().equals("0")) {
 				if (rc.getCardMax().equals("0"))
@@ -364,13 +375,13 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 			rc = ModelFactory.eINSTANCE.createReifierConstraint();
 			rc.setCardMin(Integer.toString(min));
 			rc.setCardMax(Integer.toString(max));
-			getCommandStack().execute(new GenericSetCommand(
-					getReifiableType(), ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, rc));
+			getCommandStack().execute(
+			        new GenericSetCommand(getReifiableType(),
+			                ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, rc));
 			return;
 		}
-		
-		getCommandStack().execute(new SetCardinalitiesCommand(rc, Integer.toString(min),
-				Integer.toString(max)));
+
+		getCommandStack().execute(new SetCardinalitiesCommand(rc, Integer.toString(min), Integer.toString(max)));
 	}
 
 	private ReifiableTopicType getReifiableType() {
@@ -380,9 +391,9 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 	@Override
 	public void dispose() {
 		control.dispose();
-	    super.dispose();
+		super.dispose();
 	}
-	
+
 	@Override
 	public void updateUI() {
 		super.updateUI();
@@ -391,7 +402,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		else
 			control.setInput(null);
 
-		updateReifierUI();		
+		updateReifierUI();
 	}
 
 }

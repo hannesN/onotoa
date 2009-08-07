@@ -343,4 +343,11 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		return tableViewer.getTable().getShell();
 	}
 
+	public void setEnabled(boolean enabled) {
+	    addButton.setEnabled(enabled);
+	    removeButton.setEnabled(enabled);
+	    newButton.setEnabled(enabled);
+	    tableViewer.getControl().setEnabled(enabled);
+    }
+
 }

@@ -28,7 +28,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.commands.SetDatatypeCommand;
 
 /**
@@ -87,6 +89,7 @@ public class OccurrenceTypeModelPage extends ScopedTopicTypePage {
 	
 	private Text datatypeText;
 	private Button datatypeButton;
+	private Button uniqueButton;
 	
 	public OccurrenceTypeModelPage() {
 		super("occurrence type");
@@ -95,6 +98,12 @@ public class OccurrenceTypeModelPage extends ScopedTopicTypePage {
 	@Override
 	protected void createAdditionalControls(Composite parent,
 			FormToolkit toolkit) {
+		
+		toolkit.createLabel(parent, "Unique:");
+		uniqueButton = toolkit.createButton(parent, "", SWT.CHECK);
+		GridData gd = new GridData();
+		gd.horizontalSpan = 2;
+		uniqueButton.setLayoutData(gd);
 		
 		toolkit.createLabel(parent, "Datatype:");
 		datatypeText = toolkit.createText(parent, "", SWT.BORDER);
@@ -113,10 +122,18 @@ public class OccurrenceTypeModelPage extends ScopedTopicTypePage {
 		super.createAdditionalControls(parent, toolkit);
 	}
 	
+	@Override
+	protected void setEnabled(boolean enabled) {
+	    super.setEnabled(enabled);
+	    uniqueButton.setEnabled(enabled);
+	    datatypeText.setEnabled(enabled);
+	    datatypeButton.setEnabled(enabled);
+	}
+	
 	private void hookButtonListener() {
 		
 		datatypeButton.addSelectionListener(new SelectionAdapter() {
-			@Override
+			@Override		
 			public void widgetSelected(SelectionEvent e) {
 				ListDialog dlg = new ListDialog(datatypeButton.getShell());
 				dlg.setLabelProvider(new LabelProvider(){
@@ -142,6 +159,16 @@ public class OccurrenceTypeModelPage extends ScopedTopicTypePage {
 				}
 			}
 		});
+		uniqueButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if ((getModel()!=null) &&
+					(uniqueButton.getSelection()!=getCastedModel().isUnique()) )
+					getCommandStack().execute(
+					        new GenericSetCommand(getModel(), ModelPackage.OCCURRENCE_TYPE__UNIQUE, new Boolean(
+					                uniqueButton.getSelection())));
+			}
+		});
 	}
 	
 	private OccurrenceType getCastedModel() {
@@ -150,11 +177,17 @@ public class OccurrenceTypeModelPage extends ScopedTopicTypePage {
 	
 	@Override
 	public void updateUI() {
-		
-		if ( (getModel()!=null) && (getCastedModel().getDataType()!=null) )
-			datatypeText.setText(getCastedModel().getDataType());
-		else
+		if (getModel()!=null) {
+			if (getCastedModel().getDataType()!=null)
+				datatypeText.setText(getCastedModel().getDataType());
+			else 
+				datatypeText.setText("");
+			
+			uniqueButton.setSelection(getCastedModel().isUnique());
+		} else {
+			uniqueButton.setSelection(false);
 			datatypeText.setText("");
+		}
 		
 		super.updateUI();
 	}

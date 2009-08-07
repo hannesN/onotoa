@@ -43,7 +43,6 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 	
 	private Text typeText;
 	private Button typeButton;
-	private Button uniqueButton;
 	private Section section;
 	
 	private OccurrenceTypeModelPage typeModelPage;
@@ -108,8 +107,6 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 		
 		createCommonConstraintControls(comp, toolkit);
 		
-		toolkit.createLabel(comp, "Unique:");
-		uniqueButton = toolkit.createButton(comp, "", SWT.CHECK);
 		section.setClient(comp);
 		
 		return section;
@@ -142,16 +139,7 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 			}
 		});
 		
-		uniqueButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				getCommandStack().execute(
-						new GenericSetCommand(
-								getModel(),
-								ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE,
-								new Boolean(uniqueButton.getSelection())));
-			}
-		});
+		
 	}
 
 	@Override
@@ -161,7 +149,6 @@ public class OccurrenceConstraintDetailPage extends AbstractConstraintModelPage 
 			typeText.setText(castedModel.getType().getName());
 		else
 			typeText.setText("http://psi.topicmaps.org/iso13250/model/subject");
-		uniqueButton.setSelection(castedModel.isUnique());
 		
 		super.updateUI();
 	}

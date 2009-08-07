@@ -45,7 +45,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 		StringBuffer buffer = new StringBuffer();
 		
 		if (otc.getType()!=null) {
-			if (otc.isUnique())
+			if (((OccurrenceType) otc.getType()).isUnique())
 				getNameLabel().setBorder(border);
 			else
 				getNameLabel().setBorder(null);
