@@ -37,7 +37,7 @@ import de.topicmapslab.tmcledit.model.commands.SetDatatypeCommand;
  * @author Hannes Niederhausen
  *
  */
-public class OccurrenceTypeModelPage extends ScopedTopicTypePage {
+public class OccurrenceTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 
 	private final String xsdDatatypes[] = {
 			"xsd:anyType",
@@ -173,6 +173,11 @@ public class OccurrenceTypeModelPage extends ScopedTopicTypePage {
 	
 	private OccurrenceType getCastedModel() {
 		return (OccurrenceType) getModel();
+	}
+	
+	@Override
+	protected int getRegExpFeatureId() {
+	    return ModelPackage.OCCURRENCE_TYPE__REG_EXP;
 	}
 	
 	@Override

@@ -18,7 +18,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -240,7 +240,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	}
 
 	private void addConstraintCommand(TopicType tt,
-			AbstractConstraint constraint, int featureID) {
+			AbstractTypedCardinalityConstraint constraint, int featureID) {
 		if (constraintCommands == Collections.EMPTY_LIST) {
 			constraintCommands = new ArrayList<DeleteTopicTypeConstraintItemCommand>();
 		}

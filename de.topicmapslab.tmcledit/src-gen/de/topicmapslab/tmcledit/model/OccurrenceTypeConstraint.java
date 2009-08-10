@@ -22,7 +22,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface OccurrenceTypeConstraint extends AbstractConstraint, AbstractTypedCardinalityConstraint {
+public interface OccurrenceTypeConstraint extends AbstractTypedCardinalityConstraint {
 	/**
 	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
 	 * <!-- begin-user-doc -->

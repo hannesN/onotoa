@@ -23,7 +23,7 @@ package de.topicmapslab.tmcledit.model;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractCardinalityContraint extends TMCLConstruct {
+public interface AbstractCardinalityContraint extends AbstractConstraint {
 	/**
 	 * Returns the value of the '<em><b>Card Min</b></em>' attribute.
 	 * The default value is <code>"0"</code>.

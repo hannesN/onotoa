@@ -5,7 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,44 +16,44 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Abstract Constraint</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Reg Exp Topic Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractConstraintImpl#getRegexp <em>Regexp</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractRegExpTopicTypeImpl#getRegExp <em>Reg Exp</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class AbstractConstraintImpl extends AbstractCardinalityContraintImpl implements AbstractConstraint {
+public abstract class AbstractRegExpTopicTypeImpl extends TopicTypeImpl implements AbstractRegExpTopicType {
 	/**
-	 * The default value of the '{@link #getRegexp() <em>Regexp</em>}' attribute.
+	 * The default value of the '{@link #getRegExp() <em>Reg Exp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRegexp()
+	 * @see #getRegExp()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REGEXP_EDEFAULT = ".*";
+	protected static final String REG_EXP_EDEFAULT = ".*";
 
 	/**
-	 * The cached value of the '{@link #getRegexp() <em>Regexp</em>}' attribute.
+	 * The cached value of the '{@link #getRegExp() <em>Reg Exp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRegexp()
+	 * @see #getRegExp()
 	 * @generated
 	 * @ordered
 	 */
-	protected String regexp = REGEXP_EDEFAULT;
+	protected String regExp = REG_EXP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AbstractConstraintImpl() {
+	protected AbstractRegExpTopicTypeImpl() {
 		super();
 	}
 
@@ -64,7 +64,7 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.ABSTRACT_CONSTRAINT;
+		return ModelPackage.Literals.ABSTRACT_REG_EXP_TOPIC_TYPE;
 	}
 
 	/**
@@ -72,8 +72,8 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getRegexp() {
-		return regexp;
+	public String getRegExp() {
+		return regExp;
 	}
 
 	/**
@@ -81,11 +81,11 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRegexp(String newRegexp) {
-		String oldRegexp = regexp;
-		regexp = newRegexp;
+	public void setRegExp(String newRegExp) {
+		String oldRegExp = regExp;
+		regExp = newRegExp;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CONSTRAINT__REGEXP, oldRegexp, regexp));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP, oldRegExp, regExp));
 	}
 
 	/**
@@ -96,8 +96,8 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
-				return getRegexp();
+			case ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP:
+				return getRegExp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,8 +110,8 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
-				setRegexp((String)newValue);
+			case ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP:
+				setRegExp((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +125,8 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
-				setRegexp(REGEXP_EDEFAULT);
+			case ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP:
+				setRegExp(REG_EXP_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +140,8 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CONSTRAINT__REGEXP:
-				return REGEXP_EDEFAULT == null ? regexp != null : !REGEXP_EDEFAULT.equals(regexp);
+			case ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP:
+				return REG_EXP_EDEFAULT == null ? regExp != null : !REG_EXP_EDEFAULT.equals(regExp);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -156,10 +156,10 @@ public abstract class AbstractConstraintImpl extends AbstractCardinalityContrain
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (regexp: ");
-		result.append(regexp);
+		result.append(" (regExp: ");
+		result.append(regExp);
 		result.append(')');
 		return result.toString();
 	}
 
-} //AbstractConstraintImpl
+} //AbstractRegExpTopicTypeImpl

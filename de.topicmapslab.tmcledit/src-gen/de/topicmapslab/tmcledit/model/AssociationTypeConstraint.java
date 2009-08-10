@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AssociationTypeConstraint extends AbstractConstraint, AbstractTypedConstraint {
+public interface AssociationTypeConstraint extends AbstractRegExpConstraint, AbstractTypedCardinalityConstraint {
 	/**
 	 * Returns the value of the '<em><b>Player Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.RolePlayerConstraint}.

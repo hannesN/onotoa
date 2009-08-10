@@ -16,5 +16,5 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface SubjectLocatorConstraint extends AbstractConstraint {
+public interface SubjectLocatorConstraint extends AbstractRegExpConstraint, AbstractCardinalityContraint {
 } // SubjectLocatorConstraint

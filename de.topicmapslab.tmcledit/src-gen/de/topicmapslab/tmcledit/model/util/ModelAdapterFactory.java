@@ -76,8 +76,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createTopicTypeAdapter();
 			}
 			@Override
-			public Adapter caseAbstractConstraint(AbstractConstraint object) {
-				return createAbstractConstraintAdapter();
+			public Adapter caseAbstractRegExpConstraint(AbstractRegExpConstraint object) {
+				return createAbstractRegExpConstraintAdapter();
 			}
 			@Override
 			public Adapter caseOccurrenceTypeConstraint(OccurrenceTypeConstraint object) {
@@ -212,6 +212,14 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createEStringToEStringMapAdapter();
 			}
 			@Override
+			public Adapter caseAbstractRegExpTopicType(AbstractRegExpTopicType object) {
+				return createAbstractRegExpTopicTypeAdapter();
+			}
+			@Override
+			public Adapter caseAbstractConstraint(AbstractConstraint object) {
+				return createAbstractConstraintAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -242,6 +250,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTopicTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractRegExpConstraint <em>Abstract Reg Exp Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.AbstractRegExpConstraint
+	 * @generated
+	 */
+	public Adapter createAbstractRegExpConstraintAdapter() {
 		return null;
 	}
 
@@ -718,6 +740,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEStringToEStringMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractRegExpTopicType <em>Abstract Reg Exp Topic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.AbstractRegExpTopicType
+	 * @generated
+	 */
+	public Adapter createAbstractRegExpTopicTypeAdapter() {
 		return null;
 	}
 

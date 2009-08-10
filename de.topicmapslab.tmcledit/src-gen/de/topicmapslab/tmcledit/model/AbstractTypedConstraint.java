@@ -22,7 +22,7 @@ package de.topicmapslab.tmcledit.model;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractTypedConstraint extends TMCLConstruct {
+public interface AbstractTypedConstraint extends AbstractConstraint {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
