@@ -322,6 +322,9 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		if (rc != null) {
 			if (rc.getType() != null)
 				reifiertypeText.setText(rc.getType().getName());
+			else
+				reifiertypeText.setText("tmdm:subject");
+			
 			if (rc.getCardMin().equals("0")) {
 				if (rc.getCardMax().equals("0"))
 					cardCombo.select(1);

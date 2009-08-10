@@ -641,6 +641,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return actionRegistry;
 	}
 
+	@SuppressWarnings("unchecked")
+    @Override
+	public Object getAdapter(Class adapter) {
+		if (adapter==ActionRegistry.class)
+			return getActionRegistry();
+		
+	    return super.getAdapter(adapter);
+	}
+	
 	public TreeViewer getViewer() {
 		return viewer;
 	}
@@ -824,6 +833,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 
 		public void dispose() {
+			setFilename(null, false);
 		}
 
 		public Object[] getElements(Object parent) {
@@ -967,6 +977,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraint()) {
 					to.addChild(new TreeSubjectLocator(ModelView.this, slc));
 				}
+				parent.refresh();
 				parent.setSyncView(true);
 			}
 		}

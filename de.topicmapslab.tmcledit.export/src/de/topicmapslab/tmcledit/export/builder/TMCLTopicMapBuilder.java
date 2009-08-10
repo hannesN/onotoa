@@ -168,7 +168,7 @@ public class TMCLTopicMapBuilder {
 	private void setRolePlayerConstraint(TopicType type, RolePlayerConstraint rpc) {
 		if (rpc.getPlayer()==null)
 			return;
-		Topic constr = createConstraint(TMCL.ROLE_PLAYER_CONSTRAINT);
+		Topic constr = createConstraint(TMCL.TOPIC_ROLE_CONSTRAINT);
 		addCardinalityOccurrences(constr, rpc.getCardMin(), rpc.getCardMax());
 		addDocumentationOccurrences(constr, rpc);
 		createConstrainedStatement(type, constr);
