@@ -58,7 +58,7 @@ public class ImportWizardPage extends WizardPage {
 		fileSelectionLayout.marginHeight = 0;
 		fileSelectionArea.setLayout(fileSelectionLayout);
 		
-		sourceEditor = new FileFieldEditor("fileSelect","Select File: ",fileSelectionArea); //NON-NLS-1 //NON-NLS-2
+		sourceEditor = new FileFieldEditor("fileSelect","Select Source File: ",fileSelectionArea); //NON-NLS-1 //NON-NLS-2
 		sourceEditor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener(){
 			public void modifyText(ModifyEvent e) {
 				IPath path = new Path(ImportWizardPage.this.sourceEditor.getStringValue());
@@ -69,7 +69,7 @@ public class ImportWizardPage extends WizardPage {
 		sourceEditor.setFileExtensions(extensions);
 		fileSelectionArea.moveAbove(null);
 	
-		targetEditor = new FileFieldEditor("fileSelect","Select File: ",fileSelectionArea); //NON-NLS-1 //NON-NLS-2
+		targetEditor = new FileFieldEditor("fileSelect","Select Target File: ",fileSelectionArea); //NON-NLS-1 //NON-NLS-2
 		targetEditor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener(){
 			public void modifyText(ModifyEvent e) {
 				IPath path = new Path(ImportWizardPage.this.targetEditor.getStringValue());
@@ -79,6 +79,12 @@ public class ImportWizardPage extends WizardPage {
 		extensions = new String[] { "*.ono" }; //NON-NLS-1
 		targetEditor.setFileExtensions(extensions);
 		fileSelectionArea.moveAbove(null);
+		
+		
+		// TODO remove
+		sourceEditor.setStringValue("/home/mai00ckx/Desktop/test.ctm");
+		targetEditor.setStringValue("/home/mai00ckx/Desktop/test.ono");
+		
 	}
 	
 	protected void createLinkTarget() {
