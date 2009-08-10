@@ -13,14 +13,21 @@ package de.topicmapslab.tmcledit.model.views.pages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.util.TextObserver;
 
-public class IdentifierConstraintModelPage extends AbstractConstraintModelPage {
+public class IdentifierConstraintModelPage extends AbstractCardinalityConstraintModelPage {
 
+	private Text regExpText;
+	
 	public IdentifierConstraintModelPage() {
 		super("identifier constraint");
 	}
@@ -34,6 +41,11 @@ public class IdentifierConstraintModelPage extends AbstractConstraintModelPage {
 		comp.setLayout(new GridLayout(2, false));
 		
 		createCommonConstraintControls(comp, toolkit);
+		
+		toolkit.createLabel(parent, "reg. exp");
+		regExpText = toolkit.createText(parent, "", SWT.BORDER);
+		regExpText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		TextObserver.observe(regExpText, this, ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT__REGEXP);
 		
 		
 		return comp;
@@ -61,4 +73,15 @@ public class IdentifierConstraintModelPage extends AbstractConstraintModelPage {
 		super.setModel(model);
 	}
 	
+	@Override
+	public void updateUI() {
+		if (getModel()!=null) {
+			if (regExpText!=null)
+				regExpText.setText(((AbstractRegExpConstraint) getModel()).getRegexp());
+		} else {
+			if (regExpText!=null)
+				regExpText.setText("");
+		}
+	    super.updateUI();
+	}
 }

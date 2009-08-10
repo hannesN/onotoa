@@ -5,54 +5,55 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.OccurrenceType;
-import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Occurrence Type Constraint</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Reg Exp Constraint</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeConstraintImpl#isUnique <em>Unique</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractRegExpConstraintImpl#getRegexp <em>Regexp</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstraintImpl implements OccurrenceTypeConstraint {
+public abstract class AbstractRegExpConstraintImpl extends TMCLConstructImpl implements AbstractRegExpConstraint {
 	/**
-	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * The default value of the '{@link #getRegexp() <em>Regexp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isUnique()
+	 * @see #getRegexp()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean UNIQUE_EDEFAULT = false;
+	protected static final String REGEXP_EDEFAULT = ".*";
 
 	/**
-	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * The cached value of the '{@link #getRegexp() <em>Regexp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isUnique()
+	 * @see #getRegexp()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean unique = UNIQUE_EDEFAULT;
+	protected String regexp = REGEXP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OccurrenceTypeConstraintImpl() {
+	protected AbstractRegExpConstraintImpl() {
 		super();
 	}
 
@@ -63,34 +64,28 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.OCCURRENCE_TYPE_CONSTRAINT;
+		return ModelPackage.Literals.ABSTRACT_REG_EXP_CONSTRAINT;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 * @deprecated use getType().isUnique()
+	 * @generated
 	 */
-	public boolean isUnique() {
-		if (getType()!=null)
-			return ((OccurrenceType)getType()).isUnique();
-		return unique;
+	public String getRegexp() {
+		return regexp;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 * @deprecated use getType().setUnique()
+	 * @generated
 	 */
-	public void setUnique(boolean newUnique) {
-		boolean oldUnique = unique;
-		unique = newUnique;
-		if (getType()!=null)
-			((OccurrenceType)getType()).setUnique(newUnique);
+	public void setRegexp(String newRegexp) {
+		String oldRegexp = regexp;
+		regexp = newRegexp;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE, oldUnique, unique));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT__REGEXP, oldRegexp, regexp));
 	}
 
 	/**
@@ -101,8 +96,8 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				return isUnique();
+			case ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT__REGEXP:
+				return getRegexp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -115,8 +110,8 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				setUnique((Boolean)newValue);
+			case ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT__REGEXP:
+				setRegexp((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -130,8 +125,8 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				setUnique(UNIQUE_EDEFAULT);
+			case ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT__REGEXP:
+				setRegexp(REGEXP_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -145,8 +140,8 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				return unique != UNIQUE_EDEFAULT;
+			case ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT__REGEXP:
+				return REGEXP_EDEFAULT == null ? regexp != null : !REGEXP_EDEFAULT.equals(regexp);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -161,10 +156,10 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (unique: ");
-		result.append(unique);
+		result.append(" (regexp: ");
+		result.append(regexp);
 		result.append(')');
 		return result.toString();
 	}
 
-} //OccurrenceTypeConstraintImpl
+} //AbstractRegExpConstraintImpl

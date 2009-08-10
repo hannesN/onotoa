@@ -41,7 +41,7 @@ import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
-public class NameConstraintDetailPage extends AbstractConstraintModelPage {
+public class NameConstraintDetailPage extends AbstractCardinalityConstraintModelPage {
 
 	private Text typeText;
 	private Button typeButton;

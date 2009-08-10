@@ -14,8 +14,8 @@ package de.topicmapslab.tmcledit.model;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.OccurrenceType#getDataType <em>Data Type</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.OccurrenceType#isUnique <em>Unique</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.OccurrenceType#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,7 +23,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface OccurrenceType extends ScopedTopicType, ScopedReifiableTopicType {
+public interface OccurrenceType extends ScopedTopicType, ScopedReifiableTopicType, AbstractRegExpTopicType {
 	/**
 	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
 	 * The default value is <code>"xsd:anyType"</code>.

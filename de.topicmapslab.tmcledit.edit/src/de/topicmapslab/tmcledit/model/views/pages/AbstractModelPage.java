@@ -152,6 +152,7 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 	}
 	
 	public void setModel(Object model) {
+		setEnabled(model!=null);
 		if (this.model == model) {
 			if ((this.model!=null) && (!this.model.eAdapters().contains(this)) )
 				this.model.eAdapters().add(this);
@@ -165,22 +166,21 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		if (this.model != null)
 			this.model.eAdapters().remove(this);
 
-		if (model == null) {
-			setEnabled(false);
-		} else {
-			setEnabled(true);
-		}
-
 		if (descrItem != null)
 			descrItem.getControl().setEnabled((model instanceof TMCLConstruct));
 
 		this.model = (EObject) model;
 		if (model != null)
 			this.model.eAdapters().add(this);
+		
 		updateUI();
 	}
 
-	protected abstract void setEnabled(boolean enabled);
+	protected void setEnabled(boolean enabled) {
+		seeAlsoText.setEnabled(enabled);
+		commentText.setEnabled(enabled);
+		descriptionText.setEnabled(enabled);
+	}
 
 	@Override
 	public void setFocus() {

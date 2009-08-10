@@ -94,21 +94,21 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ABSTRACT_CONSTRAINT: {
-				AbstractConstraint abstractConstraint = (AbstractConstraint)theEObject;
-				T result = caseAbstractConstraint(abstractConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(abstractConstraint);
-				if (result == null) result = caseTMCLConstruct(abstractConstraint);
+			case ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT: {
+				AbstractRegExpConstraint abstractRegExpConstraint = (AbstractRegExpConstraint)theEObject;
+				T result = caseAbstractRegExpConstraint(abstractRegExpConstraint);
+				if (result == null) result = caseAbstractConstraint(abstractRegExpConstraint);
+				if (result == null) result = caseTMCLConstruct(abstractRegExpConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT: {
 				OccurrenceTypeConstraint occurrenceTypeConstraint = (OccurrenceTypeConstraint)theEObject;
 				T result = caseOccurrenceTypeConstraint(occurrenceTypeConstraint);
-				if (result == null) result = caseAbstractConstraint(occurrenceTypeConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(occurrenceTypeConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(occurrenceTypeConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(occurrenceTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(occurrenceTypeConstraint);
 				if (result == null) result = caseTMCLConstruct(occurrenceTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -116,10 +116,10 @@ public class ModelSwitch<T> {
 			case ModelPackage.NAME_TYPE_CONSTRAINT: {
 				NameTypeConstraint nameTypeConstraint = (NameTypeConstraint)theEObject;
 				T result = caseNameTypeConstraint(nameTypeConstraint);
-				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(nameTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
 				if (result == null) result = caseTMCLConstruct(nameTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -128,6 +128,7 @@ public class ModelSwitch<T> {
 				RolePlayerConstraint rolePlayerConstraint = (RolePlayerConstraint)theEObject;
 				T result = caseRolePlayerConstraint(rolePlayerConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(rolePlayerConstraint);
+				if (result == null) result = caseAbstractConstraint(rolePlayerConstraint);
 				if (result == null) result = caseTMCLConstruct(rolePlayerConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -142,8 +143,9 @@ public class ModelSwitch<T> {
 			case ModelPackage.SUBJECT_LOCATOR_CONSTRAINT: {
 				SubjectLocatorConstraint subjectLocatorConstraint = (SubjectLocatorConstraint)theEObject;
 				T result = caseSubjectLocatorConstraint(subjectLocatorConstraint);
-				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
+				if (result == null) result = caseAbstractRegExpConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(subjectLocatorConstraint);
+				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseTMCLConstruct(subjectLocatorConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -151,8 +153,9 @@ public class ModelSwitch<T> {
 			case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT: {
 				SubjectIdentifierConstraint subjectIdentifierConstraint = (SubjectIdentifierConstraint)theEObject;
 				T result = caseSubjectIdentifierConstraint(subjectIdentifierConstraint);
-				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
+				if (result == null) result = caseAbstractRegExpConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(subjectIdentifierConstraint);
+				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseTMCLConstruct(subjectIdentifierConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -160,9 +163,11 @@ public class ModelSwitch<T> {
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT: {
 				AssociationTypeConstraint associationTypeConstraint = (AssociationTypeConstraint)theEObject;
 				T result = caseAssociationTypeConstraint(associationTypeConstraint);
-				if (result == null) result = caseAbstractConstraint(associationTypeConstraint);
-				if (result == null) result = caseAbstractTypedConstraint(associationTypeConstraint);
+				if (result == null) result = caseAbstractRegExpConstraint(associationTypeConstraint);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(associationTypeConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(associationTypeConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(associationTypeConstraint);
+				if (result == null) result = caseAbstractConstraint(associationTypeConstraint);
 				if (result == null) result = caseTMCLConstruct(associationTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -223,6 +228,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(scopeConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(scopeConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(scopeConstraint);
+				if (result == null) result = caseAbstractConstraint(scopeConstraint);
 				if (result == null) result = caseTMCLConstruct(scopeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -230,6 +236,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT: {
 				AbstractCardinalityContraint abstractCardinalityContraint = (AbstractCardinalityContraint)theEObject;
 				T result = caseAbstractCardinalityContraint(abstractCardinalityContraint);
+				if (result == null) result = caseAbstractConstraint(abstractCardinalityContraint);
 				if (result == null) result = caseTMCLConstruct(abstractCardinalityContraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -243,6 +250,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.ABSTRACT_TYPED_CONSTRAINT: {
 				AbstractTypedConstraint abstractTypedConstraint = (AbstractTypedConstraint)theEObject;
 				T result = caseAbstractTypedConstraint(abstractTypedConstraint);
+				if (result == null) result = caseAbstractConstraint(abstractTypedConstraint);
 				if (result == null) result = caseTMCLConstruct(abstractTypedConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -270,6 +278,7 @@ public class ModelSwitch<T> {
 				OccurrenceType occurrenceType = (OccurrenceType)theEObject;
 				T result = caseOccurrenceType(occurrenceType);
 				if (result == null) result = caseScopedReifiableTopicType(occurrenceType);
+				if (result == null) result = caseAbstractRegExpTopicType(occurrenceType);
 				if (result == null) result = caseScopedTopicType(occurrenceType);
 				if (result == null) result = caseReifiableTopicType(occurrenceType);
 				if (result == null) result = caseTopicType(occurrenceType);
@@ -283,6 +292,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(roleConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(roleConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(roleConstraint);
+				if (result == null) result = caseAbstractConstraint(roleConstraint);
 				if (result == null) result = caseTMCLConstruct(roleConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -299,6 +309,7 @@ public class ModelSwitch<T> {
 				RoleCombinationConstraint roleCombinationConstraint = (RoleCombinationConstraint)theEObject;
 				T result = caseRoleCombinationConstraint(roleCombinationConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(roleCombinationConstraint);
+				if (result == null) result = caseAbstractConstraint(roleCombinationConstraint);
 				if (result == null) result = caseTMCLConstruct(roleCombinationConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -307,6 +318,7 @@ public class ModelSwitch<T> {
 				NameType nameType = (NameType)theEObject;
 				T result = caseNameType(nameType);
 				if (result == null) result = caseScopedReifiableTopicType(nameType);
+				if (result == null) result = caseAbstractRegExpTopicType(nameType);
 				if (result == null) result = caseScopedTopicType(nameType);
 				if (result == null) result = caseReifiableTopicType(nameType);
 				if (result == null) result = caseTopicType(nameType);
@@ -319,6 +331,7 @@ public class ModelSwitch<T> {
 				T result = caseAbstractTypedCardinalityConstraint(abstractTypedCardinalityConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(abstractTypedCardinalityConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(abstractTypedCardinalityConstraint);
+				if (result == null) result = caseAbstractConstraint(abstractTypedCardinalityConstraint);
 				if (result == null) result = caseTMCLConstruct(abstractTypedCardinalityConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -342,6 +355,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(reifierConstraint);
 				if (result == null) result = caseAbstractCardinalityContraint(reifierConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(reifierConstraint);
+				if (result == null) result = caseAbstractConstraint(reifierConstraint);
 				if (result == null) result = caseTMCLConstruct(reifierConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -370,6 +384,21 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE: {
+				AbstractRegExpTopicType abstractRegExpTopicType = (AbstractRegExpTopicType)theEObject;
+				T result = caseAbstractRegExpTopicType(abstractRegExpTopicType);
+				if (result == null) result = caseTopicType(abstractRegExpTopicType);
+				if (result == null) result = caseTMCLConstruct(abstractRegExpTopicType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ABSTRACT_CONSTRAINT: {
+				AbstractConstraint abstractConstraint = (AbstractConstraint)theEObject;
+				T result = caseAbstractConstraint(abstractConstraint);
+				if (result == null) result = caseTMCLConstruct(abstractConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -386,6 +415,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseTopicType(TopicType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Reg Exp Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Reg Exp Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractRegExpConstraint(AbstractRegExpConstraint object) {
 		return null;
 	}
 
@@ -896,6 +940,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseEStringToEStringMap(Map.Entry<String, String> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Reg Exp Topic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Reg Exp Topic Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractRegExpTopicType(AbstractRegExpTopicType object) {
 		return null;
 	}
 

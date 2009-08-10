@@ -13,14 +13,28 @@
  */
 package de.topicmapslab.tmcledit.model.views.pages;
 
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+
+import de.topicmapslab.tmcledit.model.ModelPackage;
+
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
-public class NameTypeModelPage extends ScopedTopicTypePage {
+public class NameTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 	public NameTypeModelPage() {
 		super("name type");
 	}
 
-	
+	@Override
+	protected void createAdditionalControls(Composite parent, FormToolkit toolkit) {
+
+		super.createAdditionalControls(parent, toolkit);
+	}
+
+	@Override
+	protected int getRegExpFeatureId() {
+		return ModelPackage.NAME_TYPE__REG_EXP;
+	}
 }

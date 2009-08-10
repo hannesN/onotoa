@@ -5,6 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
@@ -27,8 +28,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getReifierConstraint <em>Reifier Constraint</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getDataType <em>Data Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getRegExp <em>Reg Exp</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#isUnique <em>Unique</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeImpl#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,24 +48,24 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	protected ReifierConstraint reifierConstraint;
 
 	/**
-	 * The default value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
+	 * The default value of the '{@link #getRegExp() <em>Reg Exp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataType()
+	 * @see #getRegExp()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DATA_TYPE_EDEFAULT = "xsd:anyType";
+	protected static final String REG_EXP_EDEFAULT = ".*";
 
 	/**
-	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
+	 * The cached value of the '{@link #getRegExp() <em>Reg Exp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataType()
+	 * @see #getRegExp()
 	 * @generated
 	 * @ordered
 	 */
-	protected String dataType = DATA_TYPE_EDEFAULT;
+	protected String regExp = REG_EXP_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
@@ -84,6 +86,26 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 * @ordered
 	 */
 	protected boolean unique = UNIQUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DATA_TYPE_EDEFAULT = "xsd:anyType";
+
+	/**
+	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String dataType = DATA_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,6 +174,27 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getRegExp() {
+		return regExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRegExp(String newRegExp) {
+		String oldRegExp = regExp;
+		regExp = newRegExp;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE__REG_EXP, oldRegExp, regExp));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDataType() {
 		return dataType;
 	}
@@ -213,10 +256,12 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		switch (featureID) {
 			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
 				return getReifierConstraint();
-			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
-				return getDataType();
+			case ModelPackage.OCCURRENCE_TYPE__REG_EXP:
+				return getRegExp();
 			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
 				return isUnique();
+			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
+				return getDataType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -232,11 +277,14 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
 				setReifierConstraint((ReifierConstraint)newValue);
 				return;
-			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
-				setDataType((String)newValue);
+			case ModelPackage.OCCURRENCE_TYPE__REG_EXP:
+				setRegExp((String)newValue);
 				return;
 			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
 				setUnique((Boolean)newValue);
+				return;
+			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
+				setDataType((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -253,11 +301,14 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
 				setReifierConstraint((ReifierConstraint)null);
 				return;
-			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
-				setDataType(DATA_TYPE_EDEFAULT);
+			case ModelPackage.OCCURRENCE_TYPE__REG_EXP:
+				setRegExp(REG_EXP_EDEFAULT);
 				return;
 			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
 				setUnique(UNIQUE_EDEFAULT);
+				return;
+			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
+				setDataType(DATA_TYPE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -273,10 +324,12 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		switch (featureID) {
 			case ModelPackage.OCCURRENCE_TYPE__REIFIER_CONSTRAINT:
 				return reifierConstraint != null;
-			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
-				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
+			case ModelPackage.OCCURRENCE_TYPE__REG_EXP:
+				return REG_EXP_EDEFAULT == null ? regExp != null : !REG_EXP_EDEFAULT.equals(regExp);
 			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
 				return unique != UNIQUE_EDEFAULT;
+			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
+				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -296,6 +349,12 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		}
 		if (baseClass == ScopedReifiableTopicType.class) {
 			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == AbstractRegExpTopicType.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OCCURRENCE_TYPE__REG_EXP: return ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP;
 				default: return -1;
 			}
 		}
@@ -320,6 +379,12 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 				default: return -1;
 			}
 		}
+		if (baseClass == AbstractRegExpTopicType.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP: return ModelPackage.OCCURRENCE_TYPE__REG_EXP;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -333,10 +398,12 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (dataType: ");
-		result.append(dataType);
+		result.append(" (regExp: ");
+		result.append(regExp);
 		result.append(", unique: ");
 		result.append(unique);
+		result.append(", dataType: ");
+		result.append(dataType);
 		result.append(')');
 		return result.toString();
 	}

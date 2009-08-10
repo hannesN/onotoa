@@ -18,24 +18,21 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
-import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
-import de.topicmapslab.tmcledit.model.util.TextObserver;
 
 /**
  * 
  * @author Hannes Niederhausen
  *
  */
-public abstract class AbstractConstraintModelPage extends AbstractModelPage {
+public abstract class AbstractCardinalityConstraintModelPage extends AbstractModelPage {
 
 	protected Text cardMinText;
 	protected Text cardMaxText;
-	protected Text regExpText;
 
 	
-	public AbstractConstraintModelPage(String id) {
+	public AbstractCardinalityConstraintModelPage(String id) {
 		super(id);
 	}
 	
@@ -44,7 +41,6 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 		super.updateUI();
 		cardMinText.setText(getCastedModel().getCardMin());
 		cardMaxText.setText(getCastedModel().getCardMax());
-		regExpText.setText(getCastedModel().getRegexp());
 	}
 
 
@@ -67,14 +63,6 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 		cardMaxText = toolkit.createText(parent, "", SWT.BORDER);
 		fac.applyTo(cardMaxText);
 		CardTextObserver.observe(cardMaxText, this, false);
-		
-		toolkit.createLabel(parent, "reg. exp");
-		regExpText = toolkit.createText(parent, "", SWT.BORDER);
-		fac.applyTo(regExpText);
-		TextObserver.observe(regExpText, this, ModelPackage.ABSTRACT_CONSTRAINT__REGEXP);
-		
-		
-		
 	}
 
 	
@@ -88,8 +76,8 @@ public abstract class AbstractConstraintModelPage extends AbstractModelPage {
 		}
 	}
 	
-	private AbstractConstraint getCastedModel() {
-		return (AbstractConstraint) getModel();
+	private AbstractCardinalityContraint getCastedModel() {
+		return (AbstractCardinalityContraint) getModel();
 	}
 
 }

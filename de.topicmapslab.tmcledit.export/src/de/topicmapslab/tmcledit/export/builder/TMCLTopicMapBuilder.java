@@ -364,8 +364,8 @@ public class TMCLTopicMapBuilder {
 		else
 			nameTopic = createTopic(nt);
 		
-		if (!ntc.getRegexp().equals(".*"))
-			setRegExpConstraint(nt, ntc.getRegexp());
+		if (!nt.getRegExp().equals(".*"))
+			setRegExpConstraint(nt, nt.getRegExp());
 
 		Topic constr = createConstraint(TMCL.TOPIC_NAME_CONSTRAINT);
 		addDocumentationOccurrences(constr, ntc);
@@ -393,9 +393,8 @@ public class TMCLTopicMapBuilder {
 		if (otc.isUnique()) {
 			setUnique(otype);
 		}
-		if (!otc.getRegexp().equals(".*"))
-			setRegExpConstraint(otype, otc.getRegexp());
-
+		if (!otype.getRegExp().equals(".*"))
+			setRegExpConstraint(otype, otype.getRegExp());
 		Topic constr = createConstraint(TMCL.TOPIC_OCCURRENCE_CONSTRAINT);
 		addDocumentationOccurrences(constr, otc);
 		addCardinalityOccurrences(constr, otc.getCardMin(), otc.getCardMax());
