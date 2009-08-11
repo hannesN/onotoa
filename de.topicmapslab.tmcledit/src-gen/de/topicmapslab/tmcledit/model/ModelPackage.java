@@ -2643,7 +2643,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__SEE_ALSO = ABSTRACT_CARDINALITY_CONTRAINT__SEE_ALSO;
+	int ROLE_COMBINATION_CONSTRAINT__SEE_ALSO = ABSTRACT_CONSTRAINT__SEE_ALSO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -2652,7 +2652,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__COMMENT = ABSTRACT_CARDINALITY_CONTRAINT__COMMENT;
+	int ROLE_COMBINATION_CONSTRAINT__COMMENT = ABSTRACT_CONSTRAINT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -2661,7 +2661,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION;
+	int ROLE_COMBINATION_CONSTRAINT__DESCRIPTION = ABSTRACT_CONSTRAINT__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' map.
@@ -2670,25 +2670,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__EXTENSION = ABSTRACT_CARDINALITY_CONTRAINT__EXTENSION;
-
-	/**
-	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_COMBINATION_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
-
-	/**
-	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_COMBINATION_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
+	int ROLE_COMBINATION_CONSTRAINT__EXTENSION = ABSTRACT_CONSTRAINT__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Player</b></em>' reference.
@@ -2697,7 +2679,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
+	int ROLE_COMBINATION_CONSTRAINT__PLAYER = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Other Player</b></em>' reference.
@@ -2706,7 +2688,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__OTHER_PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
+	int ROLE_COMBINATION_CONSTRAINT__OTHER_PLAYER = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Other Role</b></em>' reference.
@@ -2715,7 +2697,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 2;
+	int ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' reference.
@@ -2724,7 +2706,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__ROLE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 3;
+	int ROLE_COMBINATION_CONSTRAINT__ROLE = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Role Combination Constraint</em>' class.
@@ -2733,7 +2715,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 4;
+	int ROLE_COMBINATION_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl <em>Name Type</em>}' class.

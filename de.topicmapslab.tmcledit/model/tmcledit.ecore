@@ -169,7 +169,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="RoleType" eSuperTypes="#//TopicType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleCombinationConstraint" eSuperTypes="#//AbstractCardinalityContraint">
+  <eClassifiers xsi:type="ecore:EClass" name="RoleCombinationConstraint" eSuperTypes="#//AbstractConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="player" lowerBound="1"
         eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherPlayer" lowerBound="1"

@@ -77,6 +77,11 @@ public class FileUtil {
 				IFile fileRes = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(filename));
 				if (fileRes != null)
 					fileRes.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+				
+				ModelSerializeOno1 ms = new ModelSerializeOno1();
+				
+				System.out.println(ms.serialize(file));
+				
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);

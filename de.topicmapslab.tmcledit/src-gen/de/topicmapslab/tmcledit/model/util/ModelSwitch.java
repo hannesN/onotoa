@@ -308,7 +308,6 @@ public class ModelSwitch<T> {
 			case ModelPackage.ROLE_COMBINATION_CONSTRAINT: {
 				RoleCombinationConstraint roleCombinationConstraint = (RoleCombinationConstraint)theEObject;
 				T result = caseRoleCombinationConstraint(roleCombinationConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(roleCombinationConstraint);
 				if (result == null) result = caseAbstractConstraint(roleCombinationConstraint);
 				if (result == null) result = caseTMCLConstruct(roleCombinationConstraint);
 				if (result == null) result = defaultCase(theEObject);

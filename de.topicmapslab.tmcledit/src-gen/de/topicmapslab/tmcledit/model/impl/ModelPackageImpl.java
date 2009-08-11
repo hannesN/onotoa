@@ -1635,7 +1635,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		occurrenceTypeEClass.getESuperTypes().add(this.getAbstractRegExpTopicType());
 		roleConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		roleTypeEClass.getESuperTypes().add(this.getTopicType());
-		roleCombinationConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
+		roleCombinationConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		nameTypeEClass.getESuperTypes().add(this.getScopedTopicType());
 		nameTypeEClass.getESuperTypes().add(this.getScopedReifiableTopicType());
 		nameTypeEClass.getESuperTypes().add(this.getAbstractRegExpTopicType());
