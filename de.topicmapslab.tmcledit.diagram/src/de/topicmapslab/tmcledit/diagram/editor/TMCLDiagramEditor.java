@@ -80,8 +80,8 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TypeNode;
-import de.topicmapslab.tmcledit.model.util.FileUtil;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
+import de.topicmapslab.tmcledit.model.util.io.FileUtil;
 
 /**
  * @author Hannes Niederhausen
