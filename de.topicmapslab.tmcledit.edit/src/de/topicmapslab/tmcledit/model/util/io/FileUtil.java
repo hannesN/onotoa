@@ -8,7 +8,7 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.tmcledit.model.util;
+package de.topicmapslab.tmcledit.model.util.io;
 
 import java.io.IOException;
 import java.util.Collections;
