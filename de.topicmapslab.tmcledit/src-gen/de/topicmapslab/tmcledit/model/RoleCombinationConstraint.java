@@ -25,7 +25,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface RoleCombinationConstraint extends AbstractCardinalityContraint {
+public interface RoleCombinationConstraint extends AbstractConstraint {
 	/**
 	 * Returns the value of the '<em><b>Player</b></em>' reference.
 	 * <!-- begin-user-doc -->

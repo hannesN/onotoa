@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class RoleCombinationConstraintImpl extends AbstractCardinalityContraintImpl implements RoleCombinationConstraint {
+public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements RoleCombinationConstraint {
 	/**
 	 * The cached value of the '{@link #getPlayer() <em>Player</em>}' reference.
 	 * <!-- begin-user-doc -->
