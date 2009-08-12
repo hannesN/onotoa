@@ -57,7 +57,6 @@ public class ModelIndexer {
 		
 		getInstance().associationIndexer = new AssociationIndexer();
 		getInstance().associationIndexer.init(file.getTopicMapSchema());
-		
 	}
 	
 	private void dispose() {

@@ -5,21 +5,21 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import java.util.ArrayList;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.TMCLConstruct;
 
 /**
  * <!-- begin-user-doc -->
@@ -325,4 +325,48 @@ public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+	    result = prime * result + ((description == null) ? 0 : description.hashCode());
+	    result = prime * result + ((extension == null) ? 0 : extension.hashCode());
+	    result = prime * result + ((see_also == null) ? 0 : see_also.hashCode());
+	    return result;
+    }
+
+	@SuppressWarnings("unchecked")
+    @Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (obj == null)
+		    return false;
+	    if (getClass() != obj.getClass())
+		    return false;
+	    TMCLConstructImpl other = (TMCLConstructImpl) obj;
+	    if (comment == null) {
+		    if (other.comment != null)
+			    return false;
+	    } else if (!comment.equals(other.comment))
+		    return false;
+	    if (description == null) {
+		    if (other.description != null)
+			    return false;
+	    } else if (!description.equals(other.description))
+		    return false;
+	    
+	    if (!new ArrayList(getExtension()).equals(other.getExtension()))
+		    return false;
+	    if (see_also == null) {
+		    if (other.see_also != null)
+			    return false;
+	    } else if (!see_also.equals(other.see_also))
+		    return false;
+	    return true;
+    }
+
+	
+	
 } //TMCLConstructImpl

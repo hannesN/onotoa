@@ -66,7 +66,7 @@ public class OccurrenceTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 			"xsd:integer",
 			"xsd:language",
 			"xsd:long",
-			"xsd:Name",
+			"xsd:NAME_CONSTRAINT",
 			"xsd:NCName",
 			"xsd:negativeInteger",
 			"xsd:NMTOKEN",

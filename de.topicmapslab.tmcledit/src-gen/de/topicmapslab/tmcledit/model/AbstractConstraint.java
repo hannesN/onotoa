@@ -17,5 +17,4 @@ package de.topicmapslab.tmcledit.model;
  * @generated
  */
 public interface AbstractConstraint extends TMCLConstruct {
-
 } // AbstractConstraint

@@ -162,4 +162,30 @@ public abstract class AbstractRegExpTopicTypeImpl extends TopicTypeImpl implemen
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((regExp == null) ? 0 : regExp.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof AbstractRegExpTopicTypeImpl))
+		    return false;
+	    AbstractRegExpTopicTypeImpl other = (AbstractRegExpTopicTypeImpl) obj;
+	    if (regExp == null) {
+		    if (other.regExp != null)
+			    return false;
+	    } else if (!regExp.equals(other.regExp))
+		    return false;
+	    return true;
+    }
+
+	
 } //AbstractRegExpTopicTypeImpl

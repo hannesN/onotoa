@@ -5,13 +5,14 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,26 +70,20 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 * @deprecated use getType().isUnique()
+	 * @generated
 	 */
 	public boolean isUnique() {
-		if (getType()!=null)
-			return ((OccurrenceType)getType()).isUnique();
 		return unique;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 * @deprecated use getType().setUnique()
+	 * @generated
 	 */
 	public void setUnique(boolean newUnique) {
 		boolean oldUnique = unique;
 		unique = newUnique;
-		if (getType()!=null)
-			((OccurrenceType)getType()).setUnique(newUnique);
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE, oldUnique, unique));
 	}
@@ -167,4 +162,27 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + (unique ? 1231 : 1237);
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof OccurrenceTypeConstraintImpl))
+		    return false;
+	    OccurrenceTypeConstraintImpl other = (OccurrenceTypeConstraintImpl) obj;
+	    if (isUnique() != other.isUnique())
+		    return false;
+	    return true;
+    }
+
+	
 } //OccurrenceTypeConstraintImpl

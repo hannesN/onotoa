@@ -157,7 +157,7 @@ public class TMCLTopicMapBuilder {
 
 	private void setRoleConstraint(AssociationTypeConstraint atc, RoleConstraint rc) {
 		Topic constr = createConstraint(TMCL.ASSOCIATION_ROLE_CONSTRAINT);
-		addCardinalityOccurrences(constr, atc.getCardMin(), atc.getCardMax());
+		addCardinalityOccurrences(constr, rc.getCardMin(), rc.getCardMax());
 
 		createConstrainedRole(rc.getType(), constr);
 		createConstrainedStatement(atc.getType(), constr);

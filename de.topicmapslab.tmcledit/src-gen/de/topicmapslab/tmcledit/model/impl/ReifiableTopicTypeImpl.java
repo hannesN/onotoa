@@ -175,4 +175,30 @@ public class ReifiableTopicTypeImpl extends TopicTypeImpl implements ReifiableTo
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((reifierConstraint == null) ? 0 : reifierConstraint.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof ReifiableTopicTypeImpl))
+		    return false;
+	    ReifiableTopicTypeImpl other = (ReifiableTopicTypeImpl) obj;
+	    if (reifierConstraint == null) {
+		    if (other.reifierConstraint != null)
+			    return false;
+	    } else if (!reifierConstraint.equals(other.reifierConstraint))
+		    return false;
+	    return true;
+    }
+
+	
 } //ReifiableTopicTypeImpl

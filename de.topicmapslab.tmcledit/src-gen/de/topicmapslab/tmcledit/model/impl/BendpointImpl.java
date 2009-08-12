@@ -217,4 +217,30 @@ public class BendpointImpl extends EObjectImpl implements Bendpoint {
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + posX;
+	    result = prime * result + posY;
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (obj == null)
+		    return false;
+	    if (!(obj instanceof BendpointImpl))
+		    return false;
+	    BendpointImpl other = (BendpointImpl) obj;
+	    if (posX != other.posX)
+		    return false;
+	    if (posY != other.posY)
+		    return false;
+	    return true;
+    }
+
+	
 } //BendpointImpl

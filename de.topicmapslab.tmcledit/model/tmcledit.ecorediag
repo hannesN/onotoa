@@ -1183,14 +1183,6 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tQsMqOuuEd2H0_gQiARXZw" id="(0.9350649,0.36585367)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tQsMqeuuEd2H0_gQiARXZw" id="(0.10059172,0.7637795)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_SbTMoOuwEd2H0_gQiARXZw" type="3003" source="_RRDIAGeCEd23RNXf6aIi2g" target="_B-Gm8GVUEd2WgM1R5UUCVQ">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_SbTMoeuwEd2H0_gQiARXZw" routing="Tree" lineColor="0"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_SbTMouuwEd2H0_gQiARXZw" fontName="Segoe UI"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_SbTMo-uwEd2H0_gQiARXZw" points="[128, 16, 1071, 29]$[128, 466, 1071, 479]$[-971, 466, -28, 479]$[-971, -4, -28, 9]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SbTMpOuwEd2H0_gQiARXZw" id="(0.12222222,0.625)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SbTMpeuwEd2H0_gQiARXZw" id="(0.63846153,0.82539684)"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_7IE-0O1REd2oZryb8K1DWg" type="3003" source="_5dUtMe1REd2oZryb8K1DWg" target="_YR0ykGVSEd2WgM1R5UUCVQ">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_7IE-0e1REd2oZryb8K1DWg" routing="Rectilinear" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_7IE-0u1REd2oZryb8K1DWg" fontName="Sans Serif"/>

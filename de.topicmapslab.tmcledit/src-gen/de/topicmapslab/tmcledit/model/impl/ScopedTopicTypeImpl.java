@@ -9,6 +9,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -149,5 +150,32 @@ public abstract class ScopedTopicTypeImpl extends TopicTypeImpl implements Scope
 		}
 		return super.eIsSet(featureID);
 	}
+
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((scope == null) ? 0 : scope.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof ScopedTopicTypeImpl))
+		    return false;
+	    ScopedTopicTypeImpl other = (ScopedTopicTypeImpl) obj;
+	    if (scope == null) {
+		    if (other.scope != null)
+			    return false;
+	    } else if (!new ArrayList<ScopeConstraint>(getScope()).equals(other.getScope()))
+		    return false;
+	    return true;
+    }
+	
+	
 
 } //ScopedTopicTypeImpl

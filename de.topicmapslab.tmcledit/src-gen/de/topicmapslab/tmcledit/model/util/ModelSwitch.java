@@ -8,8 +8,8 @@ package de.topicmapslab.tmcledit.model.util;
 import de.topicmapslab.tmcledit.model.*;
 
 import java.util.List;
-
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -163,9 +163,6 @@ public class ModelSwitch<T> {
 			case ModelPackage.ASSOCIATION_TYPE_CONSTRAINT: {
 				AssociationTypeConstraint associationTypeConstraint = (AssociationTypeConstraint)theEObject;
 				T result = caseAssociationTypeConstraint(associationTypeConstraint);
-				if (result == null) result = caseAbstractRegExpConstraint(associationTypeConstraint);
-				if (result == null) result = caseAbstractTypedCardinalityConstraint(associationTypeConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(associationTypeConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(associationTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(associationTypeConstraint);
 				if (result == null) result = caseTMCLConstruct(associationTypeConstraint);
@@ -429,21 +426,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseAbstractRegExpConstraint(AbstractRegExpConstraint object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Constraint</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractConstraint(AbstractConstraint object) {
 		return null;
 	}
 
@@ -954,6 +936,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseAbstractRegExpTopicType(AbstractRegExpTopicType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractConstraint(AbstractConstraint object) {
 		return null;
 	}
 
