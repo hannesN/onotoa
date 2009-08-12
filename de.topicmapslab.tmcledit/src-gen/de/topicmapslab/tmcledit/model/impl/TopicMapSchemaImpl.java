@@ -11,6 +11,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -386,4 +387,65 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((associationTypeConstraints == null) ? 0 : associationTypeConstraints.hashCode());
+	    result = prime * result + ((baseLocator == null) ? 0 : baseLocator.hashCode());
+	    result = prime * result + ((includes == null) ? 0 : includes.hashCode());
+	    result = prime * result + ((mappings == null) ? 0 : mappings.hashCode());
+	    result = prime * result + ((name == null) ? 0 : name.hashCode());
+	    result = prime * result + ((topicTypes == null) ? 0 : topicTypes.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (getClass() != obj.getClass())
+		    return false;
+	    TopicMapSchemaImpl other = (TopicMapSchemaImpl) obj;
+	    if (associationTypeConstraints == null) {
+		    if (other.associationTypeConstraints != null)
+			    return false;
+	    } else if (! new ArrayList<AssociationTypeConstraint>(getAssociationTypeConstraints()).equals(other.getAssociationTypeConstraints()))
+		    return false;
+	    if (baseLocator == null) {
+		    if (other.baseLocator != null)
+			    return false;
+	    } else if (!baseLocator.equals(other.baseLocator))
+		    return false;
+	    
+	    if (includes == null) {
+		    if (other.includes != null)
+			    return false;
+	    } else if (!new ArrayList<String>(getIncludes()).equals(other.getIncludes()))
+		    return false;
+	    
+	    if (mappings == null) {
+		    if (other.mappings != null)
+			    return false;
+	    } else if (!new ArrayList<MappingElement>(getMappings()).equals(other.getMappings()))
+		    return false;
+	    
+	    if (name == null) {
+		    if (other.name != null)
+			    return false;
+	    } else if (!name.equals(other.name))
+		    return false;
+	    
+	    if (topicTypes == null) {
+		    if (other.topicTypes != null)
+			    return false;
+	    } else if (!new ArrayList<TopicType>(getTopicTypes()).equals(other.getTopicTypes()))
+		    return false;
+	    return true;
+    }
+
+	
+	
 } //TopicMapSchemaImpl

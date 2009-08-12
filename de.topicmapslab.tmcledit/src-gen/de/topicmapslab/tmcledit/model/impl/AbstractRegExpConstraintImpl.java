@@ -162,4 +162,31 @@ public abstract class AbstractRegExpConstraintImpl extends TMCLConstructImpl imp
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((regexp == null) ? 0 : regexp.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof AbstractRegExpConstraintImpl))
+		    return false;
+	    AbstractRegExpConstraintImpl other = (AbstractRegExpConstraintImpl) obj;
+	    if (regexp == null) {
+		    if (other.regexp != null)
+			    return false;
+	    } else if (!regexp.equals(other.regexp))
+		    return false;
+	    return true;
+    }
+	
+	
+
 } //AbstractRegExpConstraintImpl

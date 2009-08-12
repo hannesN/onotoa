@@ -54,6 +54,7 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	 * @ordered
 	 */
 	protected static final String REG_EXP_EDEFAULT = ".*";
+
 	/**
 	 * The cached value of the '{@link #getRegExp() <em>Reg Exp</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -299,4 +300,36 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((regExp == null) ? 0 : regExp.hashCode());
+	    result = prime * result + ((reifierConstraint == null) ? 0 : reifierConstraint.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof NameTypeImpl))
+		    return false;
+	    NameTypeImpl other = (NameTypeImpl) obj;
+	    if (regExp == null) {
+		    if (other.regExp != null)
+			    return false;
+	    } else if (!regExp.equals(other.regExp))
+		    return false;
+	    if (reifierConstraint == null) {
+		    if (other.reifierConstraint != null)
+			    return false;
+	    } else if (!reifierConstraint.equals(other.reifierConstraint))
+		    return false;
+	    return true;
+    }
+
+	
 } //NameTypeImpl

@@ -71,7 +71,7 @@ public class Subj3ctPSIProvider extends PSIProvider {
 	        for (Subje3ctResult r : resultList) {
 	        	String description = "";
 	        	if (r.name!=null)
-	        		description = "Name: "+r.name+"\n";
+	        		description = "NAME_CONSTRAINT: "+r.name+"\n";
 	        	if (r.description!=null)
 	        		description += "Description: "+r.description+"\n";
 	        	

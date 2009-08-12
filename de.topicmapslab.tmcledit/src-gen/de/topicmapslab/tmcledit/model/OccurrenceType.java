@@ -25,33 +25,6 @@ package de.topicmapslab.tmcledit.model;
  */
 public interface OccurrenceType extends ScopedTopicType, ScopedReifiableTopicType, AbstractRegExpTopicType {
 	/**
-	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
-	 * The default value is <code>"xsd:anyType"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Data Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Type</em>' attribute.
-	 * @see #setDataType(String)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurrenceType_DataType()
-	 * @model default="xsd:anyType" required="true"
-	 * @generated
-	 */
-	String getDataType();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OccurrenceType#getDataType <em>Data Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data Type</em>' attribute.
-	 * @see #getDataType()
-	 * @generated
-	 */
-	void setDataType(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -77,5 +50,32 @@ public interface OccurrenceType extends ScopedTopicType, ScopedReifiableTopicTyp
 	 * @generated
 	 */
 	void setUnique(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
+	 * The default value is <code>"xsd:anyType"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Data Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Data Type</em>' attribute.
+	 * @see #setDataType(String)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getOccurrenceType_DataType()
+	 * @model default="xsd:anyType" required="true"
+	 * @generated
+	 */
+	String getDataType();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.OccurrenceType#getDataType <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Data Type</em>' attribute.
+	 * @see #getDataType()
+	 * @generated
+	 */
+	void setDataType(String value);
 
 } // OccurrenceType

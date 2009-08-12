@@ -114,7 +114,7 @@ public class NewTopicTypeWizard extends Wizard {
 			group.setText("Type:");
 			group.setLayout(new GridLayout(3, false));
 			
-			String labels[] = {"Topic Type",  "Occurrence Type", "Name Type", 
+			String labels[] = {"Topic Type",  "Occurrence Type", "NAME_CONSTRAINT Type", 
 					"Role Type", "Association Type", "Scope Type"};
 			
 			buttons = new Button[labels.length];
@@ -142,7 +142,7 @@ public class NewTopicTypeWizard extends Wizard {
 					GridData.FILL_HORIZONTAL));
 			
 			Label label = new Label(comp, SWT.NONE);
-			label.setText("Name:");
+			label.setText("NAME_CONSTRAINT:");
 			
 			nameText = new Text(comp, SWT.BORDER);
 			fac.applyTo(nameText);

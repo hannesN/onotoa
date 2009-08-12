@@ -10,7 +10,9 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -37,6 +39,7 @@ public class SubjectIdentifierConstraintImpl extends AbstractRegExpConstraintImp
 	 * @ordered
 	 */
 	protected static final String CARD_MIN_EDEFAULT = "0";
+
 	/**
 	 * The cached value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -46,6 +49,7 @@ public class SubjectIdentifierConstraintImpl extends AbstractRegExpConstraintImp
 	 * @ordered
 	 */
 	protected String cardMin = CARD_MIN_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getCardMax() <em>Card Max</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,6 +59,7 @@ public class SubjectIdentifierConstraintImpl extends AbstractRegExpConstraintImp
 	 * @ordered
 	 */
 	protected static final String CARD_MAX_EDEFAULT = "*";
+
 	/**
 	 * The cached value of the '{@link #getCardMax() <em>Card Max</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -246,4 +251,36 @@ public class SubjectIdentifierConstraintImpl extends AbstractRegExpConstraintImp
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((cardMax == null) ? 0 : cardMax.hashCode());
+	    result = prime * result + ((cardMin == null) ? 0 : cardMin.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (getClass() != obj.getClass())
+		    return false;
+	    SubjectIdentifierConstraintImpl other = (SubjectIdentifierConstraintImpl) obj;
+	    if (cardMax == null) {
+		    if (other.cardMax != null)
+			    return false;
+	    } else if (!cardMax.equals(other.cardMax))
+		    return false;
+	    if (cardMin == null) {
+		    if (other.cardMin != null)
+			    return false;
+	    } else if (!cardMin.equals(other.cardMin))
+		    return false;
+	    return true;
+    }
+
+	
 } //SubjectIdentifierConstraintImpl

@@ -25,7 +25,7 @@ public class AddNameConstraintAction extends AddConstraintAction {
 	
 	public AddNameConstraintAction(CommandStack commandStack) {
 		super(commandStack);
-		setText("Add Name Constraint");
+		setText("Add NAME_CONSTRAINT Constraint");
 		setId(ID);
 	}
 	

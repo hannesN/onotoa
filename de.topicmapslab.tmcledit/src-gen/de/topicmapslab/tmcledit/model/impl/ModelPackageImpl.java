@@ -48,6 +48,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -76,13 +77,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass abstractRegExpConstraintEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass abstractConstraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -327,6 +321,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum topicIdEEnum = null;
 
 	/**
@@ -546,15 +547,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EAttribute getAbstractRegExpConstraint_Regexp() {
 		return (EAttribute)abstractRegExpConstraintEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAbstractConstraint() {
-		return abstractConstraintEClass;
 	}
 
 	/**
@@ -1120,8 +1112,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOccurrenceType_DataType() {
-		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(1);
+	public EAttribute getOccurrenceType_Unique() {
+		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1129,8 +1121,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOccurrenceType_Unique() {
-		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getOccurrenceType_DataType() {
+		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1381,6 +1373,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractConstraint() {
+		return abstractConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1620,8 +1621,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractRegExpConstraint());
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
-		associationTypeConstraintEClass.getESuperTypes().add(this.getAbstractRegExpConstraint());
-		associationTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
+		associationTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
 		typeNodeEClass.getESuperTypes().add(this.getNode());
 		associationNodeEClass.getESuperTypes().add(this.getNode());
 		scopeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());

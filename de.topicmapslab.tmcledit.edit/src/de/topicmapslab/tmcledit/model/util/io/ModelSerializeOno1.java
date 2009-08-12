@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
+
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.*;
 import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -35,7 +37,6 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.RegExpTopicType;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
@@ -43,6 +44,8 @@ import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -54,6 +57,9 @@ import de.topicmapslab.tmcledit.model.TypeNode;
  */
 public class ModelSerializeOno1 implements ModelSerializer {
 
+	
+	
+	
 	private Document document;
 	private File file;
 
@@ -65,7 +71,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 		try {
 			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().getDOMImplementation().createDocument(
-			        "onotoa.topicmapslab.de", "file", null);
+			        "onotoa.topicmapslab.de", E_FILE, null);
 			this.file = file;
 
 			createFileNode();
@@ -95,14 +101,14 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 	private Element createFileNode() {
 		Element fileNode = document.getDocumentElement();
-		fileNode.setAttribute("version", getVersionString());
+		fileNode.setAttribute(A_VERSION, getVersionString());
 
 		TopicMapSchema schema = file.getTopicMapSchema();
 
-		Element schemaNode = document.createElement("schema");
+		Element schemaNode = document.createElement(E_SCHEMA);
 		String tmp = schema.getBaseLocator();
 		if ((tmp != null) && (tmp.length() > 0))
-			schemaNode.setAttribute("baseLocator", tmp);
+			schemaNode.setAttribute(A_BASE_LOCATOR, tmp);
 		addTMCLConstructElements(schema, schemaNode);
 		fileNode.appendChild(schemaNode);
 
@@ -126,31 +132,31 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void createMappingNode(MappingElement me, Element parent) {
-		Element meNode = document.createElement("mappingelement");
-		meNode.setAttribute("key", me.getKey());
-		meNode.setAttribute("value", me.getValue());
+		Element meNode = document.createElement(E_MAPPING_ELEMENT);
+		meNode.setAttribute(A_KEY, me.getKey());
+		meNode.setAttribute(A_VALUE, me.getValue());
 		parent.appendChild(meNode);
 	}
 
 	private void createDiagramNode(Diagram diagram, Element parent) {
-		Element dNode = document.createElement("diagram");
-		dNode.setAttribute("name", diagram.getName());
+		Element dNode = document.createElement(E_DIAGRAM);
+		dNode.setAttribute(A_NAME, diagram.getName());
 
 		for (Comment c : diagram.getComments()) {
 			Element cNode = document.getDocumentElement();
 			addPositionElements(cNode, c);
-			cNode.setAttribute("w", Integer.toString(c.getWidth()));
-			cNode.setAttribute("h", Integer.toString(c.getHeight()));
+			cNode.setAttribute(A_WIDTH, Integer.toString(c.getWidth()));
+			cNode.setAttribute(A_HEIGHT, Integer.toString(c.getHeight()));
 			dNode.appendChild(cNode);
 		}
 
 		for (de.topicmapslab.tmcledit.model.Node n : diagram.getNodes()) {
-			Element nNode = document.createElement("node");
+			Element nNode = document.createElement(E_NODE);
 			if (n instanceof TypeNode) {
-				nNode.setAttribute("type", "typeNode");
+				nNode.setAttribute(A_TYPE, "typeNode");
 				addTopicReference(nNode, ((TypeNode) n).getTopicType());
 			} else {
-				nNode.setAttribute("type", "associationNode");
+				nNode.setAttribute(A_TYPE, "associationNode");
 				addAssociationConstraintReference(nNode, ((AssociationNode) n).getAssociationConstraint());
 			}
 			dNode.appendChild(nNode);
@@ -159,11 +165,9 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void createAssociationConstraintNode(AssociationTypeConstraint atc, Element parent) {
-		Element atcNode = document.createElement("assocConstr");
+		Element atcNode = document.createElement(E_ASSOCIATION_CONSTRAINT);
 
-		addCardinalityAttributes(atcNode, atc);
 		addTMCLConstructElements(atc, atcNode);
-		addRegExpAttributes(atcNode, atc);
 
 		if (atc.getType() != null)
 			addTopicReference(atcNode, atc.getType());
@@ -176,15 +180,15 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void createRolePlayerConstraint(RolePlayerConstraint rpc, Element atcNode) {
-		Element rpcNode = document.createElement("topicRoleConstr");
+		Element rpcNode = document.createElement(E_TOPIC_ROLE_CONSTRAINT);
 		addCardinalityAttributes(rpcNode, rpc);
 		addTMCLConstructElements(rpc, rpcNode);
 
-		Element playerNode = document.createElement("player");
+		Element playerNode = document.createElement(E_PLAYER);
 		addTopicReference(playerNode, rpc.getPlayer());
 		rpcNode.appendChild(playerNode);
 
-		Element rcNode = document.createElement("roleConstraint");
+		Element rcNode = document.createElement(E_ROLE_CONSTRAINT);
 		addRoleConstraintReference(rcNode, rpc.getRole());
 		rpcNode.appendChild(rcNode);
 
@@ -192,13 +196,13 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void addRoleConstraintReference(Element rcNode, RoleConstraint rc) {
-		Element e = document.createElement("roleConstrRef");
+		Element e = document.createElement(E_ROLE_CONSTRAINT_REFERENCE);
 
 		AssociationType at = (AssociationType) rc.eContainer();
 		int ttIdx = file.getTopicMapSchema().getTopicTypes().indexOf(at);
 		int rtIdx = at.getRoles().indexOf(rc);
 
-		e.setAttribute("ref", "topictypes." + ttIdx + ".roleConstraints." + rtIdx);
+		e.setAttribute(A_REF, "topictypes." + ttIdx + ".roleConstraints." + rtIdx);
 
 		rcNode.appendChild(e);
 
@@ -206,45 +210,45 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 	private void addRegExpAttributes(Element node, AbstractRegExpConstraint rc) {
 		if (rc.getRegexp() != null)
-			node.setAttribute("regExp", rc.getRegexp());
+			node.setAttribute(A_REG_EXP, rc.getRegexp());
 	}
 
 	private void addCardinalityAttributes(Element node, AbstractCardinalityContraint acc) {
 		if (acc.getCardMin() != null)
-			node.setAttribute("cardMin", acc.getCardMin());
+			node.setAttribute(A_CARD_MIN, acc.getCardMin());
 		if (acc.getCardMax() != null)
-			node.setAttribute("cardMax", acc.getCardMax());
+			node.setAttribute(A_CARD_MAX, acc.getCardMax());
 	}
 
 	private void addPositionElements(Element node, de.topicmapslab.tmcledit.model.Node diagramNode) {
-		node.setAttribute("posX", Integer.toString(diagramNode.getPosX()));
-		node.setAttribute("posY", Integer.toString(diagramNode.getPosY()));
+		node.setAttribute(A_POS_X, Integer.toString(diagramNode.getPosX()));
+		node.setAttribute(A_POS_Y, Integer.toString(diagramNode.getPosY()));
 	}
 
 	private void createTopicTypeNode(TopicType tt, Element parent) {
-		Element typeNode = document.createElement("topicType");
-		typeNode.setAttribute("kind", tt.getKind().getLiteral());
+		Element typeNode = document.createElement(E_TOPIC_TYPE);
+		typeNode.setAttribute(A_KIND, tt.getKind().getLiteral());
 
 		addTMCLConstructElements(tt, typeNode);
 
-		Element nameNode = document.createElement("name");
+		Element nameNode = document.createElement(E_NAME);
 		nameNode.setTextContent(tt.getName());
 		typeNode.appendChild(nameNode);
 
 		for (String s : tt.getIdentifiers()) {
-			Element siNode = document.createElement("subjectIdentifier");
+			Element siNode = document.createElement(E_SUBJECT_IDENTIFIER);
 			siNode.setTextContent(s);
 			typeNode.appendChild(siNode);
 		}
 
 		for (String s : tt.getLocators()) {
-			Element slNode = document.createElement("subjectLocator");
+			Element slNode = document.createElement(E_SUBJECT_LOCATOR);
 			slNode.setTextContent(s);
 			typeNode.appendChild(slNode);
 		}
 
 		if (tt.getNameContraints().size() > 0) {
-			Element ncNode = document.createElement("nameConstraints");
+			Element ncNode = document.createElement(E_NAME_CONSTRAINTS);
 			for (NameTypeConstraint ntc : tt.getNameContraints()) {
 				addNameConstraints(ntc, ncNode);
 			}
@@ -252,22 +256,38 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		}
 
 		if (tt.getOccurrenceConstraints().size() > 0) {
-			Element ocNode = document.createElement("occurrenceConstraints");
+			Element ocNode = document.createElement(E_OCCURRENCE_CONSTRAINTS);
 			for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
 				addOccurrenceConstraint(otc, ocNode);
 			}
 			typeNode.appendChild(ocNode);
 		}
 		
+		if (tt.getSubjectIdentifierConstraints().size()>0) {
+			Element idNode = document.createElement(E_SUBJECT_IDENTIFIER_CONSTRAINTS);
+			for (SubjectIdentifierConstraint sic : tt.getSubjectIdentifierConstraints()) {
+				addSubjectIdentifierConstraint(sic, idNode);
+			}
+			typeNode.appendChild(idNode);
+		}
+		
+		if (tt.getSubjectLocatorConstraint().size()>0) {
+			Element idNode = document.createElement(E_SUBJECT_LOCATOR_CONSTRAINTS);
+			for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraint()) {
+				addSubjectLocatorConstraint(slc, idNode);
+			}
+			typeNode.appendChild(idNode);
+		}
+		
 		if (tt.getIsa().size() > 0) {
-			Element isA = document.createElement("isa");
+			Element isA = document.createElement(E_ISA);
 			for (TopicType isaTT : tt.getIsa()) {
 				addTopicReference(isA, isaTT);
 			}
 			typeNode.appendChild(isA);
 		}
 		if (tt.getAko().size() > 0) {
-			Element ako = document.createElement("ako");
+			Element ako = document.createElement(E_AKO);
 			for (TopicType akoTT : tt.getAko()) {
 				addTopicReference(ako, akoTT);
 			}
@@ -278,16 +298,16 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			addScopeNodes((ScopedTopicType) tt, typeNode);
 		}
 
-		if (tt instanceof RegExpTopicType) {
+		if (tt instanceof AbstractRegExpConstraint) {
 			addRegExp((AbstractRegExpTopicType) tt, typeNode);
 		}
 
 		if (tt instanceof OccurrenceType) {
 			OccurrenceType ot = (OccurrenceType) tt;
 			if (ot.isUnique())
-				typeNode.setAttribute("unique", "true");
+				typeNode.setAttribute(A_UNIQUE, "true");
 			if (ot.getDataType() != null)
-				typeNode.setAttribute("datatype", ot.getDataType());
+				typeNode.setAttribute(A_DATATYPE, ot.getDataType());
 
 		}
 
@@ -295,7 +315,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			ReifiableTopicType rtt = (ReifiableTopicType) tt;
 			ReifierConstraint reifierConstraint = rtt.getReifierConstraint();
 			if (reifierConstraint != null) {
-				Element rNode = document.createElement("reifierConstraint");
+				Element rNode = document.createElement(E_REIFIER_CONSTRAINT);
 				addCardinalityAttributes(rNode, reifierConstraint);
 				addTMCLConstructElements(reifierConstraint, rNode);
 				if (reifierConstraint.getType() != null)
@@ -307,40 +327,58 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		if (tt instanceof AssociationType) {
 			AssociationType at = (AssociationType) tt;
 			if (at.getRoles().size() > 0) {
-				Element rcNode = document.createElement("roleConstraints");
+				Element rcNode = document.createElement(E_ROLE_CONSTRAINTS);
 				for (RoleConstraint rc : at.getRoles()) {
 					createRoleConstraintNode(rc, rcNode);
 				}
+				typeNode.appendChild(rcNode);
 			}
 			if (at.getRoleCombinations().size() > 0) {
-				Element rccNode = document.createElement("roleCombinationConstraints");
+				Element rccNode = document.createElement(E_ROLE_COMBINATION_CONSTRAINTS);
 				for (RoleCombinationConstraint rcc : at.getRoleCombinations()) {
 					createRoleCombinationConstraint(rcc, rccNode);
 				}
+				typeNode.appendChild(rccNode);
 			}
 
 		}
 
 		if (tt.isAbstract())
-			typeNode.setAttribute("abstract", "true");
+			typeNode.setAttribute(A_ABSTRACT, "true");
 
 		parent.appendChild(typeNode);
 	}
 
+	private void addSubjectLocatorConstraint(SubjectLocatorConstraint slc, Element idNode) {
+	    Element slNode = document.createElement(E_SUBJECT_LOCATOR_CONSTRAINT);
+	    addRegExpAttributes(slNode, slc);
+	    addCardinalityAttributes(slNode, slc);
+	    addTMCLConstructElements(slc, slNode);
+	    idNode.appendChild(slNode);
+    }
+
+	private void addSubjectIdentifierConstraint(SubjectIdentifierConstraint sic, Element idNode) {
+		Element siNode = document.createElement(E_SUBJECT_IDENTIFIER_CONSTRAINT);
+	    addRegExpAttributes(siNode, sic);
+	    addCardinalityAttributes(siNode, sic);
+	    addTMCLConstructElements(sic, siNode);
+	    idNode.appendChild(siNode);
+    }
+
 	private void addOccurrenceConstraint(OccurrenceTypeConstraint otc, Element parent) {
-	    Element ocNode = document.createElement("occurrenceConstraint");
+	    Element ocNode = document.createElement(E_OCCURRENCE_CONSTRAINT);
 	    addTMCLConstructElements(otc, ocNode);
 	    addCardinalityAttributes(ocNode, otc);
 	    if (otc.getType()!=null)
 	    	addTopicReference(ocNode, otc.getType());
 	    if (otc.isUnique())
-	    	ocNode.setAttribute("unique", "true");
+	    	ocNode.setAttribute(A_UNIQUE, "true");
 	    		
 	    parent.appendChild(ocNode);
     }
 
 	private void addNameConstraints(NameTypeConstraint ntc, Element parent) {
-		Element ncNode = document.createElement("nameConstraint");
+		Element ncNode = document.createElement(E_NAME_CONSTRAINT);
 	    addTMCLConstructElements(ntc, ncNode);
 	    addCardinalityAttributes(ncNode, ntc);	    
 	    if (ntc.getType()!=null)
@@ -349,22 +387,22 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void createRoleCombinationConstraint(RoleCombinationConstraint rcc, Element parent) {
-		Element rccNode = document.createElement("roleCombinationConstraint");
+		Element rccNode = document.createElement(E_ROLE_COMBINATION_CONSTRAINT);
 		addTMCLConstructElements(rcc, rccNode);
 
-		Element player = document.createElement("player");
+		Element player = document.createElement(E_PLAYER);
 		addTopicReference(player, rcc.getPlayer());
 		rccNode.appendChild(player);
 
-		Element role = document.createElement("role");
+		Element role = document.createElement(E_ROLE);
 		addTopicReference(role, rcc.getRole());
 		rccNode.appendChild(role);
 
-		Element otherPlayer = document.createElement("otherPlayer");
+		Element otherPlayer = document.createElement(E_OTHER_PLAYER);
 		addTopicReference(otherPlayer, rcc.getPlayer());
 		rccNode.appendChild(otherPlayer);
 
-		Element otherRole = document.createElement("otherRole");
+		Element otherRole = document.createElement(E_OTHER_ROLE);
 		addTopicReference(otherRole, rcc.getOtherRole());
 		rccNode.appendChild(otherRole);
 
@@ -373,7 +411,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void createRoleConstraintNode(RoleConstraint rc, Element parent) {
-		Element rNode = document.createElement("roleConstraint");
+		Element rNode = document.createElement(E_ROLE_CONSTRAINT);
 
 		addTMCLConstructElements(rc, rNode);
 		addCardinalityAttributes(rNode, rc);
@@ -386,13 +424,13 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 	private void addRegExp(AbstractRegExpTopicType tt, Element parent) {
 		if (tt.getRegExp() != null)
-			parent.setAttribute("regExp", tt.getRegExp());
+			parent.setAttribute(A_REG_EXP, tt.getRegExp());
 
 	}
 
 	private void addScopeNodes(ScopedTopicType tt, Element parent) {
 		for (ScopeConstraint sc : tt.getScope()) {
-			Element scopeConstraintNode = document.createElement("scopeConstraint");
+			Element scopeConstraintNode = document.createElement(E_SCOPE_CONSTRAINT);
 			addTMCLConstructElements(sc, scopeConstraintNode);
 			addCardinalityAttributes(scopeConstraintNode, sc);
 			if (sc.getType() != null)
@@ -403,14 +441,14 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void addTopicReference(Element element, TopicType type) {
-		Element ref = document.createElement("topictypeRef");
-		ref.setAttribute("ref", "topictypes." + file.getTopicMapSchema().getTopicTypes().indexOf(type));
+		Element ref = document.createElement(E_TOPIC_TYPE_REF);
+		ref.setAttribute(A_REF, "topictypes." + file.getTopicMapSchema().getTopicTypes().indexOf(type));
 		element.appendChild(ref);
 	}
 
 	private void addAssociationConstraintReference(Element element, AssociationTypeConstraint atc) {
 		Element ref = document.createElement("assocConstrRef");
-		ref.setAttribute("ref", "assocConstraints."
+		ref.setAttribute(A_REF, "assocConstraints."
 		        + file.getTopicMapSchema().getAssociationTypeConstraints().indexOf(atc));
 		element.appendChild(ref);
 	}
@@ -418,29 +456,29 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	private void addTMCLConstructElements(TMCLConstruct construct, Element node) {
 		String tmp = construct.getComment();
 		if ((tmp != null) && (tmp.length() > 0)) {
-			Element comm = document.createElement("comment");
+			Element comm = document.createElement(E_COMMENT);
 			comm.setTextContent(tmp);
 			node.appendChild(comm);
 		}
 
 		tmp = construct.getDescription();
 		if ((tmp != null) && (tmp.length() > 0)) {
-			Element desc = document.createElement("description");
+			Element desc = document.createElement(E_DESCRIPTION);
 			desc.setTextContent(tmp);
 			node.appendChild(desc);
 		}
 
 		tmp = construct.getSee_also();
 		if ((tmp != null) && (tmp.length() > 0)) {
-			Element see = document.createElement("see-also");
+			Element see = document.createElement(E_SEE_ALSO);
 			see.setTextContent(tmp);
 			node.appendChild(see);
 		}
 
 		for (String key : construct.getExtension().keySet()) {
-			Element extNode = document.createElement("annotation");
-			extNode.setAttribute("key", key);
-			extNode.setAttribute("value", construct.getExtension().get(key));
+			Element extNode = document.createElement(E_ANNOTATION);
+			extNode.setAttribute(A_KEY, key);
+			extNode.setAttribute(A_VALUE, construct.getExtension().get(key));
 			node.appendChild(extNode);
 		}
 	}

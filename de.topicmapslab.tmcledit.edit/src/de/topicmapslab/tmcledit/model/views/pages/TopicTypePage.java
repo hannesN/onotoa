@@ -84,7 +84,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(3, false));
 
-		toolkit.createLabel(comp, "Name:");
+		toolkit.createLabel(comp, "NAME_CONSTRAINT:");
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
@@ -381,7 +381,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		case ROLE_TYPE:
 			return "Role Type";
 		case NAME_TYPE:
-			return "Name Type";
+			return "NAME_CONSTRAINT Type";
 		case ASSOCIATION_TYPE:
 			return "Association Type";
 		case OCCURRENCE_TYPE:
@@ -428,7 +428,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	    	if (cmd.canExecute()) {
 	    		getCommandStack().execute(cmd);
 	    	} else {
-				String errormsg = "Name: "+nameText.getText()+" already used!";
+				String errormsg = "NAME_CONSTRAINT: "+nameText.getText()+" already used!";
 				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
 				
 				nameText.setText(getCastedModel().getName());

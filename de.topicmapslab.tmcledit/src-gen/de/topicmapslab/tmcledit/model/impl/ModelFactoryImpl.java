@@ -8,6 +8,7 @@ package de.topicmapslab.tmcledit.model.impl;
 import de.topicmapslab.tmcledit.model.*;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;

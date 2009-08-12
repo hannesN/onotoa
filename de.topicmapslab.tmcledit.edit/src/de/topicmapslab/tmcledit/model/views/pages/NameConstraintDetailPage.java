@@ -60,7 +60,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 
 		item = new CTabItem(folder, SWT.NONE);
-		item.setText("Name Constraint Properties");
+		item.setText("NAME_CONSTRAINT Constraint Properties");
 		item.setControl(createConstraintComposite(folder, toolkit));
 
 		typeModelPage = new NameTypeModelPage();
@@ -90,7 +90,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 			FormToolkit toolkit) {
 		section = toolkit.createSection(parent, Section.EXPANDED
 				| Section.TITLE_BAR);
-		section.setText("Name Constraint");
+		section.setText("NAME_CONSTRAINT Constraint");
 		Composite comp = toolkit.createComposite(section);
 		comp.setLayout(new GridLayout(2, false));
 
@@ -160,7 +160,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 		} else {
 			typeText.setText("http://psi.topicmaps.org/iso13250/model/topic-name");
 		}
-		item.setText("Name Type");
+		item.setText("NAME_CONSTRAINT Type");
 		typeModelPage.setModel(getCastedModel().getType());		
 		
 		super.updateUI();

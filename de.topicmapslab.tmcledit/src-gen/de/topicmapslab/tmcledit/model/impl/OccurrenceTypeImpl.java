@@ -195,27 +195,6 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDataType() {
-		return dataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDataType(String newDataType) {
-		String oldDataType = dataType;
-		dataType = newDataType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE__DATA_TYPE, oldDataType, dataType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isUnique() {
 		return unique;
 	}
@@ -230,6 +209,27 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		unique = newUnique;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE__UNIQUE, oldUnique, unique));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDataType() {
+		return dataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDataType(String newDataType) {
+		String oldDataType = dataType;
+		dataType = newDataType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OCCURRENCE_TYPE__DATA_TYPE, oldDataType, dataType));
 	}
 
 	/**
@@ -408,4 +408,45 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((dataType == null) ? 0 : dataType.hashCode());
+	    result = prime * result + ((regExp == null) ? 0 : regExp.hashCode());
+	    result = prime * result + ((reifierConstraint == null) ? 0 : reifierConstraint.hashCode());
+	    result = prime * result + (unique ? 1231 : 1237);
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof OccurrenceTypeImpl))
+		    return false;
+	    OccurrenceTypeImpl other = (OccurrenceTypeImpl) obj;
+	    if (dataType == null) {
+		    if (other.dataType != null)
+			    return false;
+	    } else if (!dataType.equals(other.dataType))
+		    return false;
+	    if (regExp == null) {
+		    if (other.regExp != null)
+			    return false;
+	    } else if (!regExp.equals(other.regExp))
+		    return false;
+	    if (reifierConstraint == null) {
+		    if (other.reifierConstraint != null)
+			    return false;
+	    } else if (!reifierConstraint.equals(other.reifierConstraint))
+		    return false;
+	    if (unique != other.unique)
+		    return false;
+	    return true;
+    }
+
+	
 } //OccurrenceTypeImpl

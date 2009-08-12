@@ -156,4 +156,30 @@ public class AssociationNodeImpl extends NodeImpl implements AssociationNode {
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = super.hashCode();
+	    result = prime * result + ((associationConstraint == null) ? 0 : associationConstraint.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (!super.equals(obj))
+		    return false;
+	    if (!(obj instanceof AssociationNodeImpl))
+		    return false;
+	    AssociationNodeImpl other = (AssociationNodeImpl) obj;
+	    if (associationConstraint == null) {
+		    if (other.associationConstraint != null)
+			    return false;
+	    } else if (!associationConstraint.equals(other.associationConstraint))
+		    return false;
+	    return true;
+    }
+
+	
 } //AssociationNodeImpl

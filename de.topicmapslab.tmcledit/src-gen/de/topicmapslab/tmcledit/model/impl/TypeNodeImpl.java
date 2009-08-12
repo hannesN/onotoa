@@ -156,4 +156,31 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + ((topicType == null) ? 0 : topicType.hashCode());
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (obj == null)
+		    return false;
+	    if (getClass() != obj.getClass())
+		    return false;
+	    TypeNodeImpl other = (TypeNodeImpl) obj;
+	    if (topicType == null) {
+		    if (other.topicType != null)
+			    return false;
+	    } else if (!topicType.equals(other.topicType))
+		    return false;
+	  
+	    return super.equals(obj);
+    }
+
+	
 } //TypeNodeImpl

@@ -8,27 +8,21 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.tmcledit.model.actions;
+package de.topicmapslab.tmcledit.model.util.io;
 
-import org.eclipse.emf.common.command.Command;
+import java.io.InputStream;
 
-import de.topicmapslab.tmcledit.model.commands.CreateNameTypeConstraintCommand;
-import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.model.File;
 
 /**
  * @author Hannes Niederhausen
  *
  */
-public class CreateNameConstraintAction extends AbstractCreateConstraintAction {
+public interface ModelDeserializer {
 
-	public CreateNameConstraintAction(ModelView view) {
-	    super(view);
-	    setText("Create &NAME_CONSTRAINT Constraint..");
-    }
-
-	@Override
-	protected Command getCommand() {
-		return new CreateNameTypeConstraintCommand(getTopicType());
-	}
-
+	public String getVersionString();
+	
+	public File deserialize(InputStream is);
+	
+	
 }

@@ -5,10 +5,10 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

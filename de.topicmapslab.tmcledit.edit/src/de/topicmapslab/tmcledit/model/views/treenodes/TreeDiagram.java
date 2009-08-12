@@ -60,7 +60,7 @@ public class TreeDiagram extends TreeObject {
 	public void handleRename() {
 		String oldName = getDiagram().getName();
 		InputDialog dlg = new InputDialog(getModelView().getViewer().getTree()
-				.getShell(), "New Diagram Name..", "Please enter the new diagram name",
+				.getShell(), "New Diagram NAME_CONSTRAINT..", "Please enter the new diagram name",
 				oldName, new IInputValidator() {
 
 					public String isValid(String newText) {
