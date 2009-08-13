@@ -9,6 +9,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -170,7 +171,7 @@ public class AssociationTypeConstraintImpl extends AbstractTypedConstraintImpl i
 	    if (playerConstraints == null) {
 		    if (other.playerConstraints != null)
 			    return false;
-	    } else if (!playerConstraints.equals(other.playerConstraints))
+	    } else if (!new ArrayList<RolePlayerConstraint>(getPlayerConstraints()).equals(other.getPlayerConstraints()))
 		    return false;
 	   
 	    return true;
