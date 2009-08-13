@@ -30,9 +30,12 @@ import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
@@ -56,10 +59,6 @@ import de.topicmapslab.tmcledit.model.TypeNode;
  * 
  */
 public class ModelSerializeOno1 implements ModelSerializer {
-
-	
-	
-	
 	private Document document;
 	private File file;
 
@@ -143,26 +142,78 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		dNode.setAttribute(A_NAME, diagram.getName());
 
 		for (Comment c : diagram.getComments()) {
-			Element cNode = document.getDocumentElement();
+			Element cNode = document.createElement(E_COMMENT);
 			addPositionElements(cNode, c);
 			cNode.setAttribute(A_WIDTH, Integer.toString(c.getWidth()));
 			cNode.setAttribute(A_HEIGHT, Integer.toString(c.getHeight()));
+			cNode.setTextContent(c.getContent());
 			dNode.appendChild(cNode);
 		}
 
 		for (de.topicmapslab.tmcledit.model.Node n : diagram.getNodes()) {
-			Element nNode = document.createElement(E_NODE);
-			if (n instanceof TypeNode) {
-				nNode.setAttribute(A_TYPE, "typeNode");
-				addTopicReference(nNode, ((TypeNode) n).getTopicType());
-			} else {
-				nNode.setAttribute(A_TYPE, "associationNode");
-				addAssociationConstraintReference(nNode, ((AssociationNode) n).getAssociationConstraint());
-			}
-			dNode.appendChild(nNode);
+			addDiagramNode(dNode, n);
+		}
+		
+		for (Edge e : diagram.getEdges()) {
+			addEdgeNode(diagram, dNode, e);
 		}
 		parent.appendChild(dNode);
 	}
+
+	private void addEdgeNode(Diagram diagram, Element dNode, Edge e) {
+	    Element edgeNode = document.createElement(E_EDGE);
+	    edgeNode.setAttribute(A_TYPE, e.getType().getLiteral());
+	    
+	    String tmp = "node."+diagram.getNodes().indexOf(e.getSource());
+	    edgeNode.setAttribute(A_SOURCE, tmp);
+	    tmp = "node."+diagram.getNodes().indexOf(e.getTarget());
+	    edgeNode.setAttribute(A_TARGET, tmp);
+	    
+	    
+	    RolePlayerConstraint rpc = e.getRoleConstraint();
+		if (rpc!=null) {
+			AssociationTypeConstraint atc = (AssociationTypeConstraint) rpc.eContainer();
+	    	int atcIdx = file.getTopicMapSchema().getAssociationTypeConstraints().indexOf(atc);
+	    	
+	    	StringBuilder builder = new StringBuilder(E_ASSOCIATION_CONSTRAINT);
+	    	builder.append(".");
+	    	builder.append(atcIdx);
+	    	builder.append("_");
+	    	builder.append(E_TOPIC_ROLE_CONSTRAINT);
+	    	builder.append(".");
+	    	builder.append(atc.getPlayerConstraints().indexOf(rpc));
+	    	
+	    	edgeNode.setAttribute(A_TOPIC_ROLE_REF, builder.toString());
+		}
+	    
+	    for (Bendpoint bp : e.getBendpoints()) {
+	    	Element bpNode = document.createElement(E_BENDPOINT);
+	    	bpNode.setAttribute(A_POS_X, Integer.toString(bp.getPosX()));
+	    	bpNode.setAttribute(A_POS_Y, Integer.toString(bp.getPosY()));
+	    	edgeNode.appendChild(bpNode);
+	    }
+	    
+	    for (LabelPos pos : e.getLabelPositions()) {
+	    	Element lpNode = document.createElement(E_LABEL_POSITION);
+	    	lpNode.setAttribute(A_POS_X, Integer.toString(pos.getPosX()));
+	    	lpNode.setAttribute(A_POS_Y, Integer.toString(pos.getPosY()));
+	    	edgeNode.appendChild(lpNode);
+	    }
+	    dNode.appendChild(edgeNode);
+    }
+
+	private void addDiagramNode(Element dNode, de.topicmapslab.tmcledit.model.Node n) {
+	    Element nNode = document.createElement(E_NODE);
+	    if (n instanceof TypeNode) {
+	    	nNode.setAttribute(A_TYPE, "typeNode");
+	    	addTopicReference(nNode, ((TypeNode) n).getTopicType());
+	    } else {
+	    	nNode.setAttribute(A_TYPE, "associationNode");
+	    	addAssociationConstraintReference(nNode, ((AssociationNode) n).getAssociationConstraint());
+	    }
+	    addPositionElements(nNode, n);
+	    dNode.appendChild(nNode);
+    }
 
 	private void createAssociationConstraintNode(AssociationTypeConstraint atc, Element parent) {
 		Element atcNode = document.createElement(E_ASSOCIATION_CONSTRAINT);
@@ -202,7 +253,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		int ttIdx = file.getTopicMapSchema().getTopicTypes().indexOf(at);
 		int rtIdx = at.getRoles().indexOf(rc);
 
-		e.setAttribute(A_REF, "topictypes." + ttIdx + ".roleConstraints." + rtIdx);
+		e.setAttribute(A_REF, "topictypes." + ttIdx + "_roleConstraints." + rtIdx);
 
 		rcNode.appendChild(e);
 
@@ -298,7 +349,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			addScopeNodes((ScopedTopicType) tt, typeNode);
 		}
 
-		if (tt instanceof AbstractRegExpConstraint) {
+		if (tt instanceof AbstractRegExpTopicType) {
 			addRegExp((AbstractRegExpTopicType) tt, typeNode);
 		}
 
@@ -399,7 +450,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		rccNode.appendChild(role);
 
 		Element otherPlayer = document.createElement(E_OTHER_PLAYER);
-		addTopicReference(otherPlayer, rcc.getPlayer());
+		addTopicReference(otherPlayer, rcc.getOtherPlayer());
 		rccNode.appendChild(otherPlayer);
 
 		Element otherRole = document.createElement(E_OTHER_ROLE);
@@ -447,7 +498,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void addAssociationConstraintReference(Element element, AssociationTypeConstraint atc) {
-		Element ref = document.createElement("assocConstrRef");
+		Element ref = document.createElement(E_ASSOC_CONSTRAINT_REF);
 		ref.setAttribute(A_REF, "assocConstraints."
 		        + file.getTopicMapSchema().getAssociationTypeConstraints().indexOf(atc));
 		element.appendChild(ref);

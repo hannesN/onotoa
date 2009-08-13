@@ -13,21 +13,30 @@ package de.topicmapslab.tmcledit.model.util.io;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
+import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Bendpoint;
+import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -37,7 +46,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.index.TopicIndexer;
 
 /**
- * @author mai00ckx
+ * @author Hannes Niederhausen
  * 
  */
 class Test {
@@ -46,7 +55,7 @@ class Test {
 	 * @param args
 	 */
 	@SuppressWarnings("unchecked")
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		try {
 			ModelFactory fac = ModelFactory.eINSTANCE;
 			File file = fac.createFile();
@@ -63,33 +72,56 @@ class Test {
 
 			File file2 = ds.deserialize(new ByteArrayInputStream(serialize.getBytes("UTF-8")));
 
+			file2.setFilename(file.getFilename());
+
+			System.out.println("Serialiserungen sind gleich: "+s.serialize(file2).equals(serialize));
+			
 			TopicMapSchema s1 = file.getTopicMapSchema();
 			TopicMapSchema s2 = file2.getTopicMapSchema();
-			// TODO vgl file vs file2
 
-			
-			if (new ArrayList<TopicType>(s1.getTopicTypes()).equals(s2.getTopicTypes()))
-				System.out.println("Topics are equal");
-			else
-				System.out.println("Topics are not equal");
-				
-			if (new ArrayList(s1.getMappings()).equals(s2.getMappings()))
-				System.out.println("Mappings are equal");
+			if (file.equals(file2))
+				System.out.println("Files is equal");
 			else {
-				System.out.println("Mappings are not equal");
-				System.out.println("1: "+s1.getMappings());
-				System.out.println("2: "+s2.getMappings());
+				System.out.println("Files not equal");
+				
+
+				if (s1.equals(s2))
+					System.out.println("Schema is equal");
+				else {
+					System.out.println("Schema not equal");
+					if (new ArrayList<TopicType>(s1.getTopicTypes()).equals(s2.getTopicTypes()))
+						System.out.println("Topics are equal");
+					else
+						System.out.println("Topics are not equal");
+
+					if (new ArrayList(s1.getMappings()).equals(s2.getMappings()))
+						System.out.println("Mappings are equal");
+					else {
+						System.out.println("Mappings are not equal");
+						System.out.println("1: " + s1.getMappings());
+						System.out.println("2: " + s2.getMappings());
+					}
+
+					if (new ArrayList<AssociationTypeConstraint>(s1.getAssociationTypeConstraints()).equals(s2
+					        .getAssociationTypeConstraints()))
+						System.out.println("AssocConstr is equal");
+					else {
+						System.out.println("AssocConstr not equal");
+						System.out.println(s1.getAssociationTypeConstraints().get(0).equals(
+						        s2.getAssociationTypeConstraints().get(0)));
+					}
+				}
+				if (new ArrayList<Diagram>(file.getDiagrams()).equals(file2.getDiagrams()))
+					System.out.println("Diagrams is equal");
+				else {
+					System.out.println("Diagrams not equal");
+				}
 			}
-			
-			if (s1.equals(s2))
-				System.out.println("Schema is equal");
-			else
-				System.out.println("Schema not equal");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
- 
+
 	}
 
 	protected static final void createTestData(File file) {
@@ -98,12 +130,10 @@ class Test {
 		TopicIndexer idx = ModelIndexer.getTopicIndexer();
 
 		TopicMapSchema schema = file.getTopicMapSchema();
-		
+
 		schema.setComment("Das ist ein Kommentar zum, Schema");
 
-		Diagram diagram = fac.createDiagram();
-		diagram.setName("diagram 1");
-		file.getDiagrams().add(diagram);
+		
 
 		MappingElement me = fac.createMappingElement();
 		me.setKey("foo");
@@ -139,6 +169,10 @@ class Test {
 		tt2.getIsa().add(tt);
 		addType(schema, tt2);
 
+		Diagram diagram = fac.createDiagram();
+		diagram.setName("diagram 1");
+		file.getDiagrams().add(diagram);
+		
 		TypeNode tn = fac.createTypeNode();
 		tn.setPosX(50);
 		tn.setPosY(50);
@@ -155,12 +189,48 @@ class Test {
 		e.setSource(tn2);
 		e.setTarget(tn);
 		e.setType(EdgeType.IS_ATYPE);
+		
+		
+
+		Bendpoint bp = fac.createBendpoint();
+		bp.setPosX(100);
+		bp.setPosY(30);
+		e.getBendpoints().add(bp);
+
+		bp = fac.createBendpoint();
+		bp.setPosX(150);
+		bp.setPosY(130);
+		e.getBendpoints().add(bp);
+
+		LabelPos lp = fac.createLabelPos();
+		lp.setPosX(100);
+		lp.setPosY(30);
+		e.getLabelPositions().add(lp);
+
+		lp = fac.createLabelPos();
+		lp.setPosX(150);
+		lp.setPosY(130);
+		e.getLabelPositions().add(lp);
+
 		diagram.getEdges().add(e);
 
-		TopicType ot = idx.createTopicType(KindOfTopicType.OCCURRENCE_TYPE);
+		TopicType st = idx.createTopicType(KindOfTopicType.SCOPE_TYPE);
+		st.setName("Language");
+		addType(schema, st);
+		
+		ScopeConstraint sc = fac.createScopeConstraint();
+		sc.setType(st);
+		sc.setCardMax("1");
+		sc.setCardMin("1");
+		
+		
+		ScopedTopicType ot = (ScopedTopicType) idx.createTopicType(KindOfTopicType.OCCURRENCE_TYPE);
 		ot.setName("Addresse");
 		ot.getIdentifiers().add("foo:Address");
+		ot.getScope().add(sc);
 		addType(schema, ot);
+		
+		
 
 		OccurrenceTypeConstraint otc = fac.createOccurrenceTypeConstraint();
 		otc.setCardMax("*");
@@ -168,9 +238,10 @@ class Test {
 		otc.setType(ot);
 		tt.getOccurrenceConstraints().add(otc);
 
-		TopicType nt = idx.createTopicType(KindOfTopicType.NAME_TYPE);
+		NameType nt = (NameType) idx.createTopicType(KindOfTopicType.NAME_TYPE);
 		nt.setName("Firstname");
 		nt.getIdentifiers().add("foo:Firstname");
+		nt.setRegExp("Hannes .*");
 		addType(schema, nt);
 
 		NameTypeConstraint ntc = fac.createNameTypeConstraint();
@@ -193,11 +264,18 @@ class Test {
 		ws.setAbstract(true);
 		addType(schema, ws);
 
+		sc = fac.createScopeConstraint();
+		sc.setType(st);
+		sc.setCardMax("1");
+		sc.setCardMin("1");
+		
 		// try a association
 		AssociationType at = (AssociationType) idx.createTopicType(KindOfTopicType.ASSOCIATION_TYPE);
 		at.setName("works-for");
+		at.getScope().add(sc);
 		addType(schema, at);
 
+		
 		TopicType date = idx.createTopicType(KindOfTopicType.TOPIC_TYPE);
 		date.setName("date");
 		addType(schema, date);
@@ -213,7 +291,7 @@ class Test {
 		AssociationTypeConstraint atc = fac.createAssociationTypeConstraint();
 		atc.setType(at);
 		schema.getAssociationTypeConstraints().add(atc);
-		
+
 		RoleConstraint employee = fac.createRoleConstraint();
 		employee.setCardMin("1");
 		employee.setCardMax("1");
@@ -227,20 +305,57 @@ class Test {
 		at.getRoles().add(employee);
 		at.getRoles().add(employer);
 
-		
 		RolePlayerConstraint rpc = fac.createRolePlayerConstraint();
 		rpc.setCardMin("1");
 		rpc.setCardMax("1");
 		rpc.setRole(employer);
 		rpc.setPlayer(tt2);
 		atc.getPlayerConstraints().add(rpc);
+
+		RolePlayerConstraint rpc2 = fac.createRolePlayerConstraint();
+		rpc2.setCardMin("1");
+		rpc2.setCardMax("*");
+		rpc2.setRole(employee);
+		rpc2.setPlayer(tt);
+		atc.getPlayerConstraints().add(rpc2);
 		
-		rpc = fac.createRolePlayerConstraint();
-		rpc.setCardMin("1");
-		rpc.setCardMax("*");
-		rpc.setRole(employee);
-		rpc.setPlayer(tt);
-		atc.getPlayerConstraints().add(rpc);
+		
+
+		RoleCombinationConstraint rcc = fac.createRoleCombinationConstraint();
+		rcc.setPlayer(tt);
+		rcc.setOtherPlayer(tt2);
+		rcc.setRole((RoleType) rt1);
+		rcc.setOtherRole((RoleType) rt2);
+		at.getRoleCombinations().add(rcc);
+		
+		AssociationNode an = fac.createAssociationNode();
+		an.setAssociationConstraint(atc);
+		an.setPosX(340);
+		an.setPosY(60);
+		diagram.getNodes().add(an);
+		
+		Edge ae = fac.createEdge();
+		ae.setSource(an);
+		ae.setTarget(tn);
+		ae.setType(EdgeType.ROLE_CONSTRAINT_TYPE);
+		ae.setRoleConstraint(rpc);
+		diagram.getEdges().add(ae);
+		
+		ae = fac.createEdge();
+		ae.setSource(an);
+		ae.setTarget(tn2);
+		ae.setType(EdgeType.ROLE_CONSTRAINT_TYPE);
+		ae.setRoleConstraint(rpc2);
+		diagram.getEdges().add(ae);
+		
+		Comment comment = fac.createComment();
+		comment.setPosX(100);
+		comment.setPosY(100);
+		comment.setWidth(40);
+		comment.setHeight(100);
+		comment.setContent("Dies ist ein Diagrammkommentar");
+		diagram.getComments().add(comment);
+		
 	}
 
 	private static void addType(TopicMapSchema schema, TopicType type) {

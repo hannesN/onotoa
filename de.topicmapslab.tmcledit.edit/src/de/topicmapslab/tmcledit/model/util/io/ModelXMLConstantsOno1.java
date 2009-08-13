@@ -35,8 +35,15 @@ public interface ModelXMLConstantsOno1 {
 	public static final String A_UNIQUE = "unique";
 	public static final String A_VERSION = "version";
 	public static final String A_WIDTH = "width";
+	public static final String A_TARGET = "target";
+	public static final String A_SOURCE = "source";
+	public static final String A_TOPIC_ROLE_REF = "topicRoleRef";
 	
 	
+	public static final String E_LABEL_POSITION = "labelPosition";
+	public static final String E_BENDPOINT = "bendpoint";
+	public static final String E_EDGE = "edge";
+	public static final String E_ASSOC_CONSTRAINT_REF = "assocConstraintRef";
 	public static final String E_AKO = "ako";
 	public static final String E_ANNOTATION = "annotation";
 	public static final String E_ASSOCIATION_CONSTRAINT = "associationConstraint";
