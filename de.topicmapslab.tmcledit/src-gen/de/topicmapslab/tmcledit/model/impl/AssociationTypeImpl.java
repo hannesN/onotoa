@@ -13,7 +13,6 @@ import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopedReifiableTopicType;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -302,44 +301,4 @@ public class AssociationTypeImpl extends ScopedTopicTypeImpl implements Associat
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + ((reifierConstraint == null) ? 0 : reifierConstraint.hashCode());
-	    result = prime * result + ((roleCombinations == null) ? 0 : roleCombinations.hashCode());
-	    result = prime * result + ((roles == null) ? 0 : roles.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (!(obj instanceof AssociationTypeImpl))
-		    return false;
-	    AssociationTypeImpl other = (AssociationTypeImpl) obj;
-	    if (reifierConstraint == null) {
-		    if (other.reifierConstraint != null)
-			    return false;
-	    } else if (!reifierConstraint.equals(other.reifierConstraint))
-		    return false;
-	    
-	    if (roleCombinations == null) {
-		    if (other.roleCombinations != null)
-			    return false;
-	    } else if (!new ArrayList<RoleCombinationConstraint>(getRoleCombinations()).equals(other.getRoleCombinations()))
-		    return false;
-	    
-	    if (roles == null) {
-		    if (other.roles != null)
-			    return false;
-	    } else if (!new ArrayList<RoleConstraint>(getRoles()).equals(other.getRoles()))
-		    return false;
-	    return true;
-    }
-
-	
 } //AssociationTypeImpl

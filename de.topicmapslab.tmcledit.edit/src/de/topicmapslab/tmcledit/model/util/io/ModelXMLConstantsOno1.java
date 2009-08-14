@@ -62,6 +62,7 @@ public interface ModelXMLConstantsOno1 {
 	public static final String E_OCCURRENCE_CONSTRAINTS = "occurrenceConstraints";
 	public static final String E_OTHER_PLAYER = "otherPlayer";
 	public static final String E_OTHER_ROLE = "otherRole";
+	public static final String E_OVERLAP = "overlap";
 	public static final String E_PLAYER = "player";
 	public static final String E_REIFIER_CONSTRAINT = "reifierConstraint";
 	public static final String E_ROLE_COMBINATION_CONSTRAINT = "roleCombinationConstraint";

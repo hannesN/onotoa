@@ -208,30 +208,4 @@ public class ScopedReifiableTopicTypeImpl extends ScopedTopicTypeImpl implements
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + ((reifierConstraint == null) ? 0 : reifierConstraint.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (!(obj instanceof ScopedReifiableTopicTypeImpl))
-		    return false;
-	    ScopedReifiableTopicTypeImpl other = (ScopedReifiableTopicTypeImpl) obj;
-	    if (reifierConstraint == null) {
-		    if (other.reifierConstraint != null)
-			    return false;
-	    } else if (!reifierConstraint.equals(other.reifierConstraint))
-		    return false;
-	    return true;
-    }
-
-	
 } //ScopedReifiableTopicTypeImpl

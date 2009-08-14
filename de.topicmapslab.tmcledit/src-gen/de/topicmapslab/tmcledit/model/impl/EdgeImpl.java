@@ -13,7 +13,6 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -443,60 +442,4 @@ public class EdgeImpl extends EObjectImpl implements Edge {
 		return result.toString();
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = 1;
-	    result = prime * result + ((bendpoints == null) ? 0 : bendpoints.hashCode());
-	    result = prime * result + ((labelPositions == null) ? 0 : labelPositions.hashCode());
-	    result = prime * result + ((roleConstraint == null) ? 0 : roleConstraint.hashCode());
-	    result = prime * result + ((source == null) ? 0 : source.hashCode());
-	    result = prime * result + ((target == null) ? 0 : target.hashCode());
-	    result = prime * result + ((type == null) ? 0 : type.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (obj == null)
-		    return false;
-	    if (!(obj instanceof EdgeImpl))
-		    return false;
-	    EdgeImpl other = (EdgeImpl) obj;
-	    if (bendpoints == null) {
-		    if (other.bendpoints != null)
-			    return false;
-	    } else if (!new ArrayList<Bendpoint>(getBendpoints()).equals(other.getBendpoints()))
-		    return false;
-	    if (labelPositions == null) {
-		    if (other.labelPositions != null)
-			    return false;
-	    } else if (!new ArrayList<LabelPos>(getLabelPositions()).equals(other.getLabelPositions()))
-		    return false;
-	    if (roleConstraint == null) {
-		    if (other.roleConstraint != null)
-			    return false;
-	    } else if (!roleConstraint.equals(other.roleConstraint))
-		    return false;
-	    if (source == null) {
-		    if (other.source != null)
-			    return false;
-	    } else if (!source.equals(other.source))
-		    return false;
-	    if (target == null) {
-		    if (other.target != null)
-			    return false;
-	    } else if (!target.equals(other.target))
-		    return false;
-	    if (type == null) {
-		    if (other.type != null)
-			    return false;
-	    } else if (!type.equals(other.type))
-		    return false;
-	    return true;
-    }
-
-	
 } //EdgeImpl

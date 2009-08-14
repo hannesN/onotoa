@@ -22,7 +22,7 @@ public class Subj3ctXmlHandler extends DefaultHandler {
 	
 	private final String SUBJECT ="Subject";
 	private final String IDENTIFIER = "Identifier";
-	private final String NAME ="NAME_CONSTRAINT";
+	private final String NAME ="Name";
 	private final String DESCRIPTION = "Description";
 	
 	private Subje3ctResult currResult;

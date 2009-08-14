@@ -28,7 +28,7 @@ public class CreateNameTypeConstraintCommand extends AbstractCommand {
 	
 	public CreateNameTypeConstraintCommand(TopicType topicType,
 			NameTypeConstraint nameTypeConstraint) {
-		super("Create NAME_CONSTRAINT Type Constraint");
+		super("Create Name Type Constraint");
 		this.topicType = topicType;
 		this.nameTypeConstraint = nameTypeConstraint;
 	}

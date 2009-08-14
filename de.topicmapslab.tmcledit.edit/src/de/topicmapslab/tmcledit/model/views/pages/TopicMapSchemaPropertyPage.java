@@ -48,6 +48,12 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 				baseLocatorText.setText(tmp);
 			else
 				baseLocatorText.setText("");
+			
+			tmp = getCastedModel().getName();
+			if (tmp != null)
+				nameText.setText(tmp);
+			else
+				nameText.setText("");
 		} else {
 			nameText.setText("");
 			baseLocatorText.setText("");
@@ -67,7 +73,7 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		comp.setLayout(new GridLayout(2, false));
 
-		toolkit.createLabel(comp, "NAME_CONSTRAINT:");
+		toolkit.createLabel(comp, "Name:");
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
 		fac.applyTo(nameText);
 		nameText.setToolTipText("The nameText of the Topic Map.");

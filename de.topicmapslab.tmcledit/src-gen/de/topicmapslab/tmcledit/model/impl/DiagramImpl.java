@@ -11,7 +11,6 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.Node;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -296,50 +295,5 @@ public class DiagramImpl extends EObjectImpl implements Diagram {
 		result.append(')');
 		return result.toString();
 	}
-
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = 1;
-	    result = prime * result + ((comments == null) ? 0 : comments.hashCode());
-	    result = prime * result + ((edges == null) ? 0 : edges.hashCode());
-	    result = prime * result + ((name == null) ? 0 : name.hashCode());
-	    result = prime * result + ((nodes == null) ? 0 : nodes.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (obj == null)
-		    return false;
-	    if (!(obj instanceof DiagramImpl))
-		    return false;
-	    DiagramImpl other = (DiagramImpl) obj;
-	    if (comments == null) {
-		    if (other.comments != null)
-			    return false;
-	    } else if (!new ArrayList<Comment>(getComments()).equals(other.getComments()))
-		    return false;
-	    if (edges == null) {
-		    if (other.edges != null)
-			    return false;
-	    } else if (!new ArrayList<Edge>(getEdges()).equals(other.getEdges()))
-		    return false;
-	    if (name == null) {
-		    if (other.name != null)
-			    return false;
-	    } else if (!name.equals(other.name))
-		    return false;
-	    if (nodes == null) {
-		    if (other.nodes != null)
-			    return false;
-	    } else if (!new ArrayList<Node>(getNodes()).equals(other.getNodes()))
-		    return false;
-	    return true;
-    }
-	
-	
 
 } //DiagramImpl

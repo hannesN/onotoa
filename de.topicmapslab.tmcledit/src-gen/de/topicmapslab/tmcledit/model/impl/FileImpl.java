@@ -10,7 +10,6 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -344,42 +343,4 @@ public class FileImpl extends EObjectImpl implements File {
 		return result.toString();
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = 1;
-	    result = prime * result + ((diagrams == null) ? 0 : diagrams.hashCode());
-	    result = prime * result + ((filename == null) ? 0 : filename.hashCode());
-	    result = prime * result + ((topicMapSchema == null) ? 0 : topicMapSchema.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (obj == null)
-		    return false;
-	    if (!(obj instanceof FileImpl))
-		    return false;
-	    FileImpl other = (FileImpl) obj;
-	    if (diagrams == null) {
-		    if (other.diagrams != null)
-			    return false;
-	    } else if (!new ArrayList<Diagram>(getDiagrams()).equals(other.getDiagrams()))
-		    return false;
-	    if (filename == null) {
-		    if (other.filename != null)
-			    return false;
-	    } else if (!filename.equals(other.filename))
-		    return false;
-	    if (topicMapSchema == null) {
-		    if (other.topicMapSchema != null)
-			    return false;
-	    } else if (!topicMapSchema.equals(other.topicMapSchema))
-		    return false;
-	    return true;
-    }
-
-	
 } //FileImpl

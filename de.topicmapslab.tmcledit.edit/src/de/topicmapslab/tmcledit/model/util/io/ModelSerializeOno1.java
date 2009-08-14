@@ -108,6 +108,9 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		String tmp = schema.getBaseLocator();
 		if ((tmp != null) && (tmp.length() > 0))
 			schemaNode.setAttribute(A_BASE_LOCATOR, tmp);
+		tmp = schema.getName();
+		if ((tmp != null) && (tmp.length() > 0))
+			schemaNode.setAttribute(A_NAME, tmp);
 		addTMCLConstructElements(schema, schemaNode);
 		fileNode.appendChild(schemaNode);
 
@@ -394,6 +397,14 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 		}
 
+		if (tt.getOverlap().size()>0) {
+			Element overlapNode = document.createElement(E_OVERLAP);
+			for (TopicType tt2 : tt.getOverlap()) {
+				addTopicReference(overlapNode, tt2);
+			}
+			typeNode.appendChild(overlapNode);
+		}
+		
 		if (tt.isAbstract())
 			typeNode.setAttribute(A_ABSTRACT, "true");
 
