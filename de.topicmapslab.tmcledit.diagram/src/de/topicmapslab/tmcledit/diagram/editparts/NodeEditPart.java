@@ -36,7 +36,7 @@ public abstract class NodeEditPart extends AdapterGraphicalEditPart implements o
 		List<Edge> resultList = new ArrayList<Edge>();
 		Diagram diagram = (Diagram) getParent().getModel();
 		for (Edge e : diagram.getEdges()) {
-			if (e.getSource().equals(getModel())) {
+			if (getModel().equals(e.getSource())) {
 				resultList.add(e);
 			}
 		}

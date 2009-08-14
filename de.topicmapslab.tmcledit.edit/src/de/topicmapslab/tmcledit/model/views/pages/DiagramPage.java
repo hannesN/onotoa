@@ -44,7 +44,7 @@ public class DiagramPage extends AbstractModelPage {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(2, false));
 
-		toolkit.createLabel(comp, "NAME_CONSTRAINT:");
+		toolkit.createLabel(comp, "Name:");
 
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
 		nameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

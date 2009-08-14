@@ -174,7 +174,7 @@ public class TMCLDiagramEditorUtil {
 				ImageProvider
 						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE)));
 
-		group.add(new CombinedTemplateCreationEntry("NAME_CONSTRAINT Type", "NAME_CONSTRAINT Type",
+		group.add(new CombinedTemplateCreationEntry("Name Type", "Name Type",
 				new TypeNodeCreationFactory(KindOfTopicType.NAME_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE)));
@@ -201,8 +201,8 @@ public class TMCLDiagramEditorUtil {
 
 		group
 				.add(new CombinedTemplateCreationEntry(
-						"NAME_CONSTRAINT Constraint",
-						"NAME_CONSTRAINT Constraint",
+						"Name Constraint",
+						"Name Constraint",
 						new CreationFactory() {
 
 							public Object getNewObject() {

@@ -162,27 +162,4 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 		return result.toString();
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + (unique ? 1231 : 1237);
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (!(obj instanceof OccurrenceTypeConstraintImpl))
-		    return false;
-	    OccurrenceTypeConstraintImpl other = (OccurrenceTypeConstraintImpl) obj;
-	    if (isUnique() != other.isUnique())
-		    return false;
-	    return true;
-    }
-
-	
 } //OccurrenceTypeConstraintImpl

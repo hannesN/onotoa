@@ -32,7 +32,7 @@ public class SetOverlapCommand extends AbstractCommand {
 	private List<TopicType> addList;
 
 	public SetOverlapCommand(List<TopicType> newList, TopicType topic) {
-		super("Set exclusive types");
+		super("Set overlap types");
 		this.topicType = topic;
 		this.removeList = new ArrayList<TopicType>();
 		this.addList = new ArrayList<TopicType>(newList);
@@ -47,7 +47,7 @@ public class SetOverlapCommand extends AbstractCommand {
 			tt.getOverlap().add(topicType);
 		}
 
-		topicType.eSetDeliver(false);
+		topicType.eSetDeliver(addList.isEmpty());
 		topicType.getOverlap().removeAll(removeList);
 		topicType.eSetDeliver(true);
 		topicType.getOverlap().addAll(addList);

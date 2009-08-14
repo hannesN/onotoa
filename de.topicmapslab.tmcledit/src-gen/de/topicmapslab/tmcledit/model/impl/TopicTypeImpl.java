@@ -14,7 +14,6 @@ import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -672,88 +671,5 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 		result.append(')');
 		return result.toString();
 	}
-
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + (abstract_ ? 1231 : 1237);
-	    result = prime * result + ((ako == null) ? 0 : ako.hashCode());
-	    result = prime * result + ((idType == null) ? 0 : idType.hashCode());
-	    result = prime * result + ((identifiers == null) ? 0 : identifiers.hashCode());
-	    result = prime * result + ((isa == null) ? 0 : isa.hashCode());
-	    result = prime * result + ((kind == null) ? 0 : kind.hashCode());
-	    result = prime * result + ((locators == null) ? 0 : locators.hashCode());
-	    result = prime * result + ((name == null) ? 0 : name.hashCode());
-	    result = prime * result + ((nameContraints == null) ? 0 : nameContraints.hashCode());
-	    result = prime * result + ((occurrenceConstraints == null) ? 0 : occurrenceConstraints.hashCode());
-	    result = prime * result + ((overlap == null) ? 0 : overlap.hashCode());
-	    result = prime * result
-	            + ((subjectIdentifierConstraints == null) ? 0 : subjectIdentifierConstraints.hashCode());
-	    result = prime * result + ((subjectLocatorConstraint == null) ? 0 : subjectLocatorConstraint.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (getClass() != obj.getClass())
-		    return false;
-	    TopicTypeImpl other = (TopicTypeImpl) obj;
-	    if (abstract_ != other.abstract_)
-		    return false;
-	    
-	    if (!new ArrayList<TopicType>(getAko()).equals(other.getAko()))
-		    return false;
-	    
-	    if (idType == null) {
-		    if (other.idType != null)
-			    return false;
-	    } else if (!idType.equals(other.idType))
-		    return false;
-	    
-	    if (!new ArrayList<String>(getIdentifiers()).equals(other.getIdentifiers()))
-		    return false;
-	    
-	    if (!new ArrayList<TopicType>(getIsa()).equals(other.getIsa()))
-		    return false;
-	    
-	    if (kind == null) {
-		    if (other.kind != null)
-			    return false;
-	    } else if (!kind.equals(other.kind))
-		    return false;
-	    
-	    if (!new ArrayList<String>(getLocators()).equals(other.getLocators()))
-		    return false;
-	    
-	    if (name == null) {
-		    if (other.name != null)
-			    return false;
-	    } else if (!name.equals(other.name))
-		    return false;
-	    
-	    if (!new ArrayList<NameTypeConstraint>(getNameContraints()).equals(other.getNameContraints()))
-		    return false;
-	    
-	    if (!new ArrayList<OccurrenceTypeConstraint>(getOccurrenceConstraints()).equals(other.getOccurrenceConstraints()))
-		    return false;
-	    
-	    if (!new ArrayList<TopicType>(getOverlap()).equals(other.getOverlap()))
-		    return false;
-	    
-	    if (!new ArrayList<SubjectIdentifierConstraint>(getSubjectIdentifierConstraints()).equals(other.getSubjectIdentifierConstraints()))
-		    return false;
-	    
-	    if (!new ArrayList<SubjectLocatorConstraint>(getSubjectLocatorConstraint()).equals(other.getSubjectLocatorConstraint()))
-		    return false;
-	    
-	    return true;
-    }
-	
-	
 
 } //TopicTypeImpl

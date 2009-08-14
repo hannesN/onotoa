@@ -270,36 +270,4 @@ public class CommentImpl extends NodeImpl implements Comment {
 		return result.toString();
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + ((content == null) ? 0 : content.hashCode());
-	    result = prime * result + height;
-	    result = prime * result + width;
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (!(obj instanceof CommentImpl))
-		    return false;
-	    CommentImpl other = (CommentImpl) obj;
-	    if (content == null) {
-		    if (other.content != null)
-			    return false;
-	    } else if (!content.equals(other.content))
-		    return false;
-	    if (height != other.height)
-		    return false;
-	    if (width != other.width)
-		    return false;
-	    return true;
-    }
-
-	
 } //CommentImpl

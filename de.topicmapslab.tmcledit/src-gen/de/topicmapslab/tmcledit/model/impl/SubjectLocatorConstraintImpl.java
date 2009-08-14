@@ -251,36 +251,4 @@ public class SubjectLocatorConstraintImpl extends AbstractRegExpConstraintImpl i
 		return result.toString();
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + ((cardMax == null) ? 0 : cardMax.hashCode());
-	    result = prime * result + ((cardMin == null) ? 0 : cardMin.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (getClass() != obj.getClass())
-		    return false;
-	    SubjectLocatorConstraintImpl other = (SubjectLocatorConstraintImpl) obj;
-	    if (cardMax == null) {
-		    if (other.cardMax != null)
-			    return false;
-	    } else if (!cardMax.equals(other.cardMax))
-		    return false;
-	    if (cardMin == null) {
-		    if (other.cardMin != null)
-			    return false;
-	    } else if (!cardMin.equals(other.cardMin))
-		    return false;
-	    return true;
-    }
-
-	
 } //SubjectLocatorConstraintImpl

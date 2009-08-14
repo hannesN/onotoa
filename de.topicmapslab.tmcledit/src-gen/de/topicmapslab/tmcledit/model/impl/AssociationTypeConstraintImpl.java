@@ -9,7 +9,6 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -151,31 +150,4 @@ public class AssociationTypeConstraintImpl extends AbstractTypedConstraintImpl i
 		return super.eIsSet(featureID);
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + ((playerConstraints == null) ? 0 : playerConstraints.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (!(obj instanceof AssociationTypeConstraintImpl))
-		    return false;
-	    AssociationTypeConstraintImpl other = (AssociationTypeConstraintImpl) obj;
-	    if (playerConstraints == null) {
-		    if (other.playerConstraints != null)
-			    return false;
-	    } else if (!new ArrayList<RolePlayerConstraint>(getPlayerConstraints()).equals(other.getPlayerConstraints()))
-		    return false;
-	   
-	    return true;
-    }
-
-	
 } //AssociationTypeConstraintImpl

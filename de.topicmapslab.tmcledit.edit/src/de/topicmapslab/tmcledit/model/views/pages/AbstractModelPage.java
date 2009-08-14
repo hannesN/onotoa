@@ -89,18 +89,25 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		descriptionText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
+				if (getCastedModel()==null)
+					return;
 				Text w = (Text) e.widget;
+				if (w.getText().equals(getCastedModel().getDescription()))
+					return;
 				getCommandStack().execute(
 						new GenericSetCommand(getModel(),
-								ModelPackage.TMCL_CONSTRUCT__DESCRIPTION, w
-										.getText()));
+								ModelPackage.TMCL_CONSTRUCT__DESCRIPTION, w.getText()));
 			}
 		});
 
 		commentText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
+				if (getCastedModel()==null)
+					return;
 				Text w = (Text) e.widget;
+				if (w.getText().equals(getCastedModel().getComment()))
+					return;
 				getCommandStack().execute(
 						new GenericSetCommand(getModel(),
 								ModelPackage.TMCL_CONSTRUCT__COMMENT, w
@@ -259,10 +266,13 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		}
 
 		private void handleEvent(Widget widget) {
+			if (getCastedModel()==null)
+				return;
 			Text w = (Text) widget;
+			if (w.getText().equals(getCastedModel().getSee_also()))
+				return;
 			getCommandStack()
-					.execute(
-							new GenericSetCommand(getModel(),
+					.execute(new GenericSetCommand(getModel(),
 									ModelPackage.TMCL_CONSTRUCT__SEE_ALSO, w
 											.getText()));
 		}

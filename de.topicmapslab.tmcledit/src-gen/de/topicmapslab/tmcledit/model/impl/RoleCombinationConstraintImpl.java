@@ -337,48 +337,4 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 		return super.eIsSet(featureID);
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = super.hashCode();
-	    result = prime * result + ((otherPlayer == null) ? 0 : otherPlayer.hashCode());
-	    result = prime * result + ((otherRole == null) ? 0 : otherRole.hashCode());
-	    result = prime * result + ((player == null) ? 0 : player.hashCode());
-	    result = prime * result + ((role == null) ? 0 : role.hashCode());
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (!super.equals(obj))
-		    return false;
-	    if (!(obj instanceof RoleCombinationConstraintImpl))
-		    return false;
-	    RoleCombinationConstraintImpl other = (RoleCombinationConstraintImpl) obj;
-	    if (otherPlayer == null) {
-		    if (other.otherPlayer != null)
-			    return false;
-	    } else if (!otherPlayer.equals(other.otherPlayer))
-		    return false;
-	    if (otherRole == null) {
-		    if (other.otherRole != null)
-			    return false;
-	    } else if (!otherRole.equals(other.otherRole))
-		    return false;
-	    if (player == null) {
-		    if (other.player != null)
-			    return false;
-	    } else if (!player.equals(other.player))
-		    return false;
-	    if (role == null) {
-		    if (other.role != null)
-			    return false;
-	    } else if (!role.equals(other.role))
-		    return false;
-	    return true;
-    }
-
-	
 } //RoleCombinationConstraintImpl

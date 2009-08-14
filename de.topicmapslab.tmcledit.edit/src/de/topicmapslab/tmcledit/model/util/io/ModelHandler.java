@@ -102,7 +102,11 @@ import de.topicmapslab.tmcledit.model.TypeNode;
 class ModelHandler extends DefaultHandler {
 
 	private enum State {
-		NONE, TOPIC_TYPE, NAME_CONSTRAINT, ISA, AKO, OCCURENCE_CONSTRAINT, REIFIER_CONSTRAINT, ROLE_CONSTRAINT, COMMENT, SEE_ALSO, DESCRIPTION, ASSOCIATION_CONSTRAINT, PLAYER, TOPIC_ROLE_CONSTRAINT, TYPE_NODE, ASSOCIATION_NODE, ROLE_COMBINATION, OTHER_PLAYER, OTHER_ROLE, ROLE, DIAGRAM_COMMENT
+		NONE, TOPIC_TYPE, NAME_CONSTRAINT, 
+		ISA, AKO, OCCURENCE_CONSTRAINT, REIFIER_CONSTRAINT, 
+		ROLE_CONSTRAINT, COMMENT, SEE_ALSO, DESCRIPTION, ASSOCIATION_CONSTRAINT, 
+		PLAYER, TOPIC_ROLE_CONSTRAINT, TYPE_NODE, ASSOCIATION_NODE, 
+		ROLE_COMBINATION, OTHER_PLAYER, OTHER_ROLE, ROLE, DIAGRAM_COMMENT, OVERLAP
 	};
 
 	private TopicType currTopicType = null;
@@ -125,6 +129,14 @@ class ModelHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (E_SCHEMA.equals(qName)) {
 			constructs.push(file.getTopicMapSchema());
+			String tmp = attributes.getValue(A_NAME);
+			if (tmp!=null)
+				file.getTopicMapSchema().setName(tmp);
+			
+			tmp = attributes.getValue(A_BASE_LOCATOR);
+			if (tmp!=null)
+				file.getTopicMapSchema().setBaseLocator(tmp);
+			
 		}
 		if (E_MAPPING_ELEMENT.equals(qName)) {
 			addMappingElement(attributes);
@@ -220,6 +232,10 @@ class ModelHandler extends DefaultHandler {
 		
 		if (E_OTHER_PLAYER.equals(qName)) {
 			state = State.OTHER_PLAYER;
+		}
+		
+		if (E_OVERLAP.equals(qName)) {
+			state = State.OVERLAP;
 		}
 		
 
@@ -484,6 +500,8 @@ class ModelHandler extends DefaultHandler {
 					((TopicType) construct).getIsa().add(tt);
 				} else if (state == State.AKO) {
 					((TopicType) construct).getAko().add(tt);
+				} else if (state == State.OVERLAP) {
+					((TopicType) construct).getOverlap().add(tt);
 				}
 			} else if (construct instanceof TypeNode) {
 				((TypeNode) construct).setTopicType(tt);
@@ -654,6 +672,10 @@ class ModelHandler extends DefaultHandler {
 				((AssociationType) currTopicType).getRoles().add((RoleConstraint) constructs.pop());
 				
 			}
+		}
+		
+		if (E_OVERLAP.equals(qName)) {
+			state = State.NONE;
 		}
 		
 		if (E_ROLE_COMBINATION_CONSTRAINT.equals(qName)) {

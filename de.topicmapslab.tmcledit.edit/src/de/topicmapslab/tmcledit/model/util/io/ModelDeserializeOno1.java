@@ -10,8 +10,18 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.*;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ABSTRACT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_DATATYPE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_KIND;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_UNIQUE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAME;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_IDENTIFIER;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_LOCATOR;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_TYPE;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +52,19 @@ public class ModelDeserializeOno1 implements ModelDeserializer {
 	private TopicIndexer idx;
 	private List<TopicType> ttList = new ArrayList<TopicType>(10);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.topicmapslab.tmcledit.model.util.io.ModelDeserializer#deserialize(
-	 * java.io.Reader)
-	 */
+	
+	public File deserialize(String filename) {
+		java.io.File ioFile = new java.io.File(filename);
+		if (ioFile.exists()) {
+			try {
+	            return deserialize(new FileInputStream(ioFile));
+            } catch (FileNotFoundException e) {
+	            throw new RuntimeException(e);
+            }
+		}
+	    return null;
+	}
+	
 	public File deserialize(InputStream is) {
 		try {
 			fac = ModelFactory.eINSTANCE;
@@ -58,11 +74,28 @@ public class ModelDeserializeOno1 implements ModelDeserializer {
 			ModelIndexer.createInstance(file);
 			idx = ModelIndexer.getTopicIndexer();
 
+			byte buffer[] = new byte[500];
+			int counter=0;
+			
+			int tmp; 
+			while ((tmp = is.read())!=-1) {
+				buffer[counter]=(byte) tmp;
+				counter++;
+				if (counter==buffer.length) {
+					byte tmpBuffer[] = new byte[buffer.length*2];
+					System.arraycopy(buffer, 0, tmpBuffer, 0, buffer.length);
+					buffer= tmpBuffer;
+				}
+			}
+			
+			InputStream is2 = new ByteArrayInputStream(buffer, 0, counter);
+			
+			
 			SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
 
-			saxParser.parse(is, new TopicTypeHandler(idx, ttList));
-			is.reset();
-			saxParser.parse(is, new ModelHandler(ttList, file));
+			saxParser.parse(is2, new TopicTypeHandler(idx, ttList));
+			is2.reset();
+			saxParser.parse(is2, new ModelHandler(ttList, file));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,13 +103,6 @@ public class ModelDeserializeOno1 implements ModelDeserializer {
 		return file;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.topicmapslab.tmcledit.model.util.io.ModelDeserializer#getVersionString
-	 * ()
-	 */
 	public String getVersionString() {
 		return "1.0.0";
 	}

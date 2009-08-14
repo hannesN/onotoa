@@ -217,30 +217,4 @@ public class LabelPosImpl extends EObjectImpl implements LabelPos {
 		return result.toString();
 	}
 
-	@Override
-    public int hashCode() {
-	    final int prime = 31;
-	    int result = 1;
-	    result = prime * result + posX;
-	    result = prime * result + posY;
-	    return result;
-    }
-
-	@Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (obj == null)
-		    return false;
-	    if (!(obj instanceof LabelPosImpl))
-		    return false;
-	    LabelPosImpl other = (LabelPosImpl) obj;
-	    if (posX != other.posX)
-		    return false;
-	    if (posY != other.posY)
-		    return false;
-	    return true;
-    }
-
-	
 } //LabelPosImpl

@@ -22,6 +22,8 @@ public interface ModelDeserializer {
 
 	public String getVersionString();
 	
+	public File deserialize(String filename);
+	
 	public File deserialize(InputStream is);
 	
 	
