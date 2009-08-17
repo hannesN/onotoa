@@ -34,7 +34,7 @@ public class OpenDiagramAction extends Action {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		Shell shell = workbench.getActiveWorkbenchWindow().getShell();
 		FileDialog dlg = new FileDialog(shell);
-		dlg.setFilterExtensions(new String[]{"*.ono", "*.tmcl"});
+		dlg.setFilterExtensions(new String[]{"*.ono;*.tmcl", "*.ono", "*.tmcl"});
 		dlg.setFilterPath(System.getProperty("user.home"));
 		
 		String path = dlg.open();
