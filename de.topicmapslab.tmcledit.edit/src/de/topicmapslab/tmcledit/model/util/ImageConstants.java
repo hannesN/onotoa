@@ -24,9 +24,7 @@ public interface ImageConstants {
 	public static String ROLETYPE_SM = "./roletype_sm.gif";
 	public static String NAMECONSTRAINT = "./nameconstraint.gif";
 	public static String ASSOCIATIONROLECONSTRAINT_SM = "./associationroleconstraint_sm.gif";
-	public static String SCOPETYPE = "./scopetype.gif";
 	public static String NAMETYPE = "./nametype.gif";
-	public static String SCOPETYPE_SM = "./scopetype_sm.gif";
 	public static String ISA = "./isa.gif";
 	public static String ASSOCIATIONCONSTRAINT = "./associationconstraint.gif";
 	public static String KINDOF_SM = "./kindof_sm.gif";

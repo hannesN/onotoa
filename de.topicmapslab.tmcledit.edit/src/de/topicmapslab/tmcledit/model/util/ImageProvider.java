@@ -47,8 +47,6 @@ public class ImageProvider {
 				return ImageProvider.getImage(ImageConstants.OCCURRENCETYPE);
 			case ROLE_TYPE:
 				return ImageProvider.getImage(ImageConstants.ROLETYPE);
-			case SCOPE_TYPE:
-				return ImageProvider.getImage(ImageConstants.SCOPETYPE);
 			default:
 				return ImageProvider.getImage(ImageConstants.TOPICTYPE);
 		

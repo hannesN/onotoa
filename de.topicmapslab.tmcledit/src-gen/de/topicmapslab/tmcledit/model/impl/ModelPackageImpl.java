@@ -1597,7 +1597,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void initializePackageContents() {
+	@SuppressWarnings("deprecation")
+    public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 

@@ -178,12 +178,6 @@ public class TMCLDiagramEditorUtil {
 				new TypeNodeCreationFactory(KindOfTopicType.NAME_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE)));
-
-		group.add(new CombinedTemplateCreationEntry("Scope Type", "Scope Type",
-				new TypeNodeCreationFactory(KindOfTopicType.SCOPE_TYPE),
-				ImageProvider.getImageDescriptor(ImageConstants.SCOPETYPE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.SCOPETYPE)));
-
 		return group;
 	}
 

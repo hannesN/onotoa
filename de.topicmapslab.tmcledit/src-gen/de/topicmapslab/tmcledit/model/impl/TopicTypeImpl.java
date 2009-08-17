@@ -384,11 +384,14 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public void setKind(KindOfTopicType newKind) {
+	@SuppressWarnings("deprecation")
+    public void setKind(KindOfTopicType newKind) {
 		KindOfTopicType oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		if (kind==KindOfTopicType.SCOPE_TYPE)
+			kind = KindOfTopicType.TOPIC_TYPE;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_TYPE__KIND, oldKind, kind));
 	}
