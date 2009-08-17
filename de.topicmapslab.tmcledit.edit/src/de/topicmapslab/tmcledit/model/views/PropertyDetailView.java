@@ -15,6 +15,7 @@ package de.topicmapslab.tmcledit.model.views;
 
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -90,7 +91,8 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		
 	}
 
-	private void setSelection(ISelection selection) {
+	@SuppressWarnings("unchecked")
+    private void setSelection(ISelection selection) {
 		IStructuredSelection sel = (IStructuredSelection) selection;
 		if ((sel != null) && (!sel.isEmpty())) {
 			Object obj = sel.getFirstElement();
@@ -103,7 +105,8 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 			lastSelection = obj;
 			AbstractModelPage page = pageFactory.getPageFor(obj);
-			if (!(obj instanceof EObject)) {
+			if ( (!(obj instanceof EObject)) 
+			   &&(!(obj instanceof EObjectContainmentEList)) ){
 				return;
 			}
 			try {
