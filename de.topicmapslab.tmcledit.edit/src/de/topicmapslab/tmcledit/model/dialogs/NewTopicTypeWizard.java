@@ -30,7 +30,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.fieldassist.ContentAssistCommandAdapter;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
-import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.psiprovider.PSIContentProposalProvider;
@@ -211,33 +210,17 @@ public class NewTopicTypeWizard extends Wizard {
 		}
 		
 		private TopicType createNewType() {
-			ModelFactory factory = ModelFactory.eINSTANCE;
-			TopicType type = factory.createTopicType();
 			int selection = -1;
 			for (int i=0; i<buttons.length; i++) {
 				if (buttons[i].getSelection())
 					selection = i;
 			}
 			
-			switch(selection) {
-			case KindOfTopicType.ASSOCIATION_TYPE_VALUE:
-				type = factory.createAssociationType();
-				break;
-			case KindOfTopicType.ROLE_TYPE_VALUE:
-				type = factory.createRoleType();
-				break;
-			case KindOfTopicType.NAME_TYPE_VALUE:
-				type = factory.createNameType();
-				break;
-			case KindOfTopicType.OCCURRENCE_TYPE_VALUE:
-				type = factory.createOccurrenceType();
-				break;
-			default:
-				type = factory.createTopicType();
+			KindOfTopicType kind = KindOfTopicType.NO_TYPE;
+			if (selection!=-1)
+				kind = KindOfTopicType.get(selection);
 				
-				break;
-			}
-			type.setKind(KindOfTopicType.get(selection));
+			TopicType type = ModelIndexer.getTopicIndexer().createTopicType(kind);
 			type.setName(nameText.getText());
 			
 			if (identifierText.getText().length()>0)
