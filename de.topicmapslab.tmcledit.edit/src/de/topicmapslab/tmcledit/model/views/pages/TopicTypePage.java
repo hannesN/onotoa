@@ -412,7 +412,8 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	    		TopicMapSchema schema = (TopicMapSchema) tt.eContainer();
 	    		String baseLocator = schema.getBaseLocator();
 	    		
-	    		if (!baseLocator.endsWith("/"))
+	    		if ( (!baseLocator.endsWith("/"))
+	    		   && (!baseLocator.endsWith(":")) )
 	    			baseLocator += "/";
 	    		
 	    		String newId = baseLocator + nameText.getText().toLowerCase();

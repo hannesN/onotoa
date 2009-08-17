@@ -157,10 +157,15 @@ public class NewTopicTypeWizard extends Wizard {
 					proposalProvider.setName(newName);
 					if (newName.length()>0) {
 						if (syncIdentifier) {
-							String bl = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
-							String id = bl+"/"+newName.toLowerCase().replaceAll(" ", "_");
 							
-							identifierText.setText(id);
+							String bl = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
+							StringBuilder builder = new StringBuilder(bl);
+							if ( (!bl.endsWith(":")) && (!bl.endsWith("/")) ) 
+								builder.append("/");
+							builder.append(newName.toLowerCase().replaceAll(" ", "_"));
+							
+							
+							identifierText.setText(builder.toString());
 							syncIdentifier=true;
 						}
 						setPageComplete(true);
