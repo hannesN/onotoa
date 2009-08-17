@@ -63,19 +63,29 @@ public class TopicIndexer implements Adapter {
 	}
 
 	public List<TopicType> getRoleTypes() {
+		return getTypesByKind(KindOfTopicType.ROLE_TYPE);
+	}
+	
+	public List<TopicType> getTypesByKind(KindOfTopicType kind) {
 		List<TopicType> result = new ArrayList<TopicType>();
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if (tt.getKind() == KindOfTopicType.ROLE_TYPE)
+			if (tt.getKind() == kind)
 				result.add(tt);
 		}
 
 		return result;
 	}
 
+	/**
+	 * 
+	 * @deprecated there are no scope types, use topic types for scope constraints
+	 */
+	@Deprecated
 	public List<TopicType> getScopeTypes() {
 		List<TopicType> result = new ArrayList<TopicType>();
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if (tt.getKind() == KindOfTopicType.SCOPE_TYPE)
+			if ( (tt.getKind() == KindOfTopicType.TOPIC_TYPE)
+			   ||(tt.getKind() == KindOfTopicType.SCOPE_TYPE) ) 
 				result.add(tt);
 		}
 

@@ -114,7 +114,7 @@ public class NewTopicTypeWizard extends Wizard {
 			group.setLayout(new GridLayout(3, false));
 			
 			String labels[] = {"Topic Type",  "Occurrence Type", "Name Type", 
-					"Role Type", "Association Type", "Scope Type"};
+					"Role Type", "Association Type"};
 			
 			buttons = new Button[labels.length];
 			

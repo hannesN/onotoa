@@ -826,7 +826,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		private TreeParent ntNode;
 		private TreeParent otNode;
 		private TreeParent atNode;
-		private TreeParent stNode;
 		private TreeParent acNode;
 
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
@@ -897,7 +896,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				ntNode = new TreeParent(ModelView.this, "NameTypes", KindOfTopicType.NAME_TYPE);
 				otNode = new TreeParent(ModelView.this, "OccurrenceTypes", KindOfTopicType.OCCURRENCE_TYPE);
 				atNode = new TreeParent(ModelView.this, "AssociationTypes", KindOfTopicType.ASSOCIATION_TYPE);
-				stNode = new TreeParent(ModelView.this, "ScopeTypes", KindOfTopicType.SCOPE_TYPE);
 
 				acNode = new TreeParent(ModelView.this, "Association Constraints");
 
@@ -906,7 +904,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				schemaNode.addChild(ntNode);
 				schemaNode.addChild(otNode);
 				schemaNode.addChild(atNode);
-				schemaNode.addChild(stNode);
 				schemaNode.addChild(acNode);
 
 				for (TopicType tt : getCurrentTopicMapSchema().getTopicTypes()) {
@@ -1010,9 +1007,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				break;
 			case ASSOCIATION_TYPE:
 				parent = atNode;
-				break;
-			case SCOPE_TYPE:
-				parent = stNode;
 				break;
 			default:
 				parent = ttNode;

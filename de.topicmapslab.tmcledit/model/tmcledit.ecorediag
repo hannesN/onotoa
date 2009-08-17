@@ -405,9 +405,9 @@
         <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/AssociationType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_MwWRMZlMEd2TKbZ0gzs8EQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_ekdMAJlMEd2TKbZ0gzs8EQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/ScopeType"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_ekdMAZlMEd2TKbZ0gzs8EQ"/>
+      <children xmi:type="notation:Node" xmi:id="_7VhrMYshEd6pdMNuVbD1jw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/RoleType.1"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7VhrMoshEd6pdMNuVbD1jw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_9J_FkOGzEd2eXcEHKGaqwA" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/NoType"/>

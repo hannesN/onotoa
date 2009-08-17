@@ -130,7 +130,7 @@
     <eLiterals name="NameType" value="2"/>
     <eLiterals name="RoleType" value="3"/>
     <eLiterals name="AssociationType" value="4"/>
-    <eLiterals name="ScopeType" value="5"/>
+    <eLiterals name="ScopeType" value="5" literal="ScopeType"/>
     <eLiterals name="NoType" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopeConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>

@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
@@ -76,7 +77,16 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	@Override
 	protected IFigure createFigure() {
 		if (figure == null) {
-			figure = new Figure();
+			figure = new Figure() {
+				@Override
+				protected void paintFigure(Graphics graphics) {
+					graphics.pushState();
+					graphics.setBackgroundColor(ColorConstants.white);
+					graphics.setForegroundColor(ColorConstants.yellow);
+					graphics.fillGradient(getBounds(), true);
+					graphics.popState();
+				}
+			};
 			
 			ToolbarLayout layout = new ToolbarLayout(false);
 			layout.setStretchMinorAxis(true);
@@ -105,7 +115,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			identifierFigure.setLayoutManager(layout);
 			figure.add(identifierFigure);
 			
-			figure.setOpaque(true);
+			figure.setOpaque(false);
 			figure.setBackgroundColor(ColorConstants.yellow);
 			
 			ScopedFigureLayoutManager manager = new ScopedFigureLayoutManager();

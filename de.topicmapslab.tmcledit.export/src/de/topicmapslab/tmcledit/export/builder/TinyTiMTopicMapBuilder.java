@@ -252,9 +252,6 @@ public class TinyTiMTopicMapBuilder {
 		case ROLE_TYPE:
 			t.addType(roleType);
 			break;
-		case SCOPE_TYPE:
-			t.addType(scopeType);
-			break;
 		case TOPIC_TYPE:
 			t.addType(this.topicType);
 			break;

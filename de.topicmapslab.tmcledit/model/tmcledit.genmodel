@@ -23,7 +23,6 @@
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/TopicType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/OccurrenceType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NameType"/>
-      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/RoleType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/AssociationType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/ScopeType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NoType"/>

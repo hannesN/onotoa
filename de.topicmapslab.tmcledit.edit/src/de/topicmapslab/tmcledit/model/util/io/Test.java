@@ -214,7 +214,7 @@ class Test {
 
 		diagram.getEdges().add(e);
 
-		TopicType st = idx.createTopicType(KindOfTopicType.SCOPE_TYPE);
+		TopicType st = idx.createTopicType(KindOfTopicType.TOPIC_TYPE);
 		st.setName("Language");
 		addType(schema, st);
 		

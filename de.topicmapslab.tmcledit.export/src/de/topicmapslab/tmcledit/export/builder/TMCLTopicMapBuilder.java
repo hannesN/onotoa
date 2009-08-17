@@ -480,7 +480,7 @@ public class TMCLTopicMapBuilder {
     }
 
 	private void setAbstract(Topic t) {
-		Topic abstrConst = createConstraint(TMCL.ABSTRACT_TOPIC_TYPE_CONSTRAINT);
+		Topic abstrConst = createConstraint(TMCL.ABSTRACT_CONSTRAINT);
 		Association ass = topicMap.createAssociation(topicMap
 		        .createTopicBySubjectIdentifier(TMCL.CONSTRAINED_TOPIC_TYPE));
 		ass.createRole(createTopic(TMCL.CONSTRAINS), abstrConst);
@@ -554,9 +554,6 @@ public class TMCLTopicMapBuilder {
 			break;
 		case NAME_TYPE:
 			loc = TMCL.NAME_TYPE;
-			break;
-		case SCOPE_TYPE:
-			loc = TMCL.SCOPE_TYPE;
 			break;
 		}
 		return createTopic(loc);

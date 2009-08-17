@@ -105,7 +105,11 @@ public class CommentFigure extends Figure {
 		graphics.pushState();
 		try {
 			graphics.setBackgroundColor(ColorConstants.orange);
-			graphics.fillPolygon(p);
+			
+			graphics.setForegroundColor(ColorConstants.white);
+			graphics.fillGradient(x0, y0+10, x1-x0, y1-y0, true);
+			
+			graphics.setForegroundColor(ColorConstants.black);
 			graphics.drawPolygon(p);
 			graphics.translate(0, 15);
 			paintClientArea(graphics);

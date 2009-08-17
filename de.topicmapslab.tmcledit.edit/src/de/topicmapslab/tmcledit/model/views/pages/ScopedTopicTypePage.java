@@ -200,7 +200,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 
 				TopicIndexer instance = ModelIndexer.getTopicIndexer();
 				List<TopicType> list = new ArrayList<TopicType>();
-				list.addAll(instance.getScopeTypes());
+				list.addAll(instance.getTypesByKind(KindOfTopicType.TOPIC_TYPE));
 
 				ListSelectionDialog dlg = new ListSelectionDialog(control.getShell(), list, new ArrayContentProvider(),
 				        control.new TopicLabelProvider(), "Choose the Scope type");
@@ -229,7 +229,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.SCOPE_TYPE);
+				wizard.setDefaultType(KindOfTopicType.TOPIC_TYPE);
 				WizardDialog dlg = new WizardDialog(control.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {
