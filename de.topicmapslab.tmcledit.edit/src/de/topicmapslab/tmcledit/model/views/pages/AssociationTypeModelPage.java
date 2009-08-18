@@ -269,7 +269,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 		table.setHeaderVisible(true);
 		TableColumn tc = new TableColumn(table, SWT.NONE);
-		tc.setText("Association");
+		tc.setText("Role Type");
 		tc.setWidth(130);
 
 		tc = new TableColumn(table, SWT.NONE);
