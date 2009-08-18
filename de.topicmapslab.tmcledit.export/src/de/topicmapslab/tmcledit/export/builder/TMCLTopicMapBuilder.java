@@ -15,7 +15,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.tinytim.voc.Namespace;
 import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
 import org.tinytim.voc.XSD;
@@ -56,7 +55,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class TMCLTopicMapBuilder {
 	private final TopicMapSchema topicMapSchema;
 
-	private Map<Locator, Topic> topicTypeMap;
+	private Map<TopicType, Topic> topicTypeMap;
 	private Map<String, String> prefixMap;
 
 	private TopicMap topicMap;
@@ -66,6 +65,8 @@ public class TMCLTopicMapBuilder {
 	private Topic schema;
 
 	private Map<TopicType,TopicType> overlapMap;
+	
+	private int topicCounter = 0;
 
 	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema) {
 		super();
@@ -84,7 +85,7 @@ public class TMCLTopicMapBuilder {
 			        baseLoc);
 			baseLocator = topicMap.createLocator(baseLoc);
 
-			topicTypeMap = new HashMap<Locator, Topic>(topicMapSchema.getTopicTypes().size());
+			topicTypeMap = new HashMap<TopicType, Topic>(topicMapSchema.getTopicTypes().size());
 
 			// init prefixMap
 			prefixMap = new HashMap<String, String>(topicMapSchema.getMappings().size());
@@ -196,19 +197,20 @@ public class TMCLTopicMapBuilder {
 
 	private Topic createTopic(TopicType type) {
 		Topic t = null;
-		String url = (type.getName() + type.hashCode()).replaceAll(" ", "-");
+		String url = (type.getName() + (topicCounter)).replaceAll(" ", "-");
+		topicCounter++;
 		try {
 	        url = URLEncoder.encode(url, "utf-8");
         } catch (UnsupportedEncodingException e) {
 	        throw new RuntimeException(e);
         }
 		Locator itemId = baseLocator.resolve("#"+url);
-		t = topicTypeMap.get(itemId);
+		t = topicTypeMap.get(type);
 		if (t != null)
 			return t;
 
 		t = topicMap.createTopicByItemIdentifier(itemId);
-		topicTypeMap.put(itemId, t);
+		topicTypeMap.put(type, t);
 		t.createName(type.getName());
 		setSchema(t);
 
@@ -361,11 +363,12 @@ public class TMCLTopicMapBuilder {
 		Topic nameTopic = null;
 		if (nt==null)
 			nameTopic = createTopic(TMDM.TOPIC_NAME);
-		else
+		else {
 			nameTopic = createTopic(nt);
-		
-		if (!nt.getRegExp().equals(".*"))
-			setRegExpConstraint(nt, nt.getRegExp());
+				
+			if (!nt.getRegExp().equals(".*"))
+				setRegExpConstraint(nt, nt.getRegExp());
+		}
 
 		Topic constr = createConstraint(TMCL.TOPIC_NAME_CONSTRAINT);
 		addDocumentationOccurrences(constr, ntc);
@@ -385,16 +388,17 @@ public class TMCLTopicMapBuilder {
 		if (otype!=null) {
 			setOccurrenceDatatype(otype);
 			occType = createTopic(otype);
+			if (!otype.getRegExp().equals(".*"))
+				setRegExpConstraint(otype, otype.getRegExp());
 		} else {
-			occType = createTopic(topicMap.createLocator(Namespace.TMDM_MODEL+"subject"));
+			occType = createTopic(TMDM.SUBJECT);
 		}
 		
 		
 		if (otc.isUnique()) {
 			setUnique(otype);
 		}
-		if (!otype.getRegExp().equals(".*"))
-			setRegExpConstraint(otype, otype.getRegExp());
+		
 		Topic constr = createConstraint(TMCL.TOPIC_OCCURRENCE_CONSTRAINT);
 		addDocumentationOccurrences(constr, otc);
 		addCardinalityOccurrences(constr, otc.getCardMin(), otc.getCardMax());
@@ -435,7 +439,7 @@ public class TMCLTopicMapBuilder {
 		ass.createRole(createTopic(TMCL.ALLOWS), constr);
 		Topic t = null;
 		if ((constraint.getCardMax().equals("0")) || (constraint.getType() == null))
-			t = createTopic(topicMap.createLocator(Namespace.TMDM_MODEL + "subject"));
+			t = createTopic(TMDM.SUBJECT);
 		else
 			t = createTopic(constraint.getType());
 		ass.createRole(createTopic(TMCL.ALLOWED), t);
