@@ -81,4 +81,47 @@ public class TMCLEditorInput implements IEditorInput {
 	public ActionRegistry getActionRegistry() {
 	    return actionRegistry;
     }
+
+	
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + ((actionRegistry == null) ? 0 : actionRegistry.hashCode());
+	    result = prime * result + ((diagram == null) ? 0 : diagram.hashCode());
+	    result = prime * result + ((editingDomain == null) ? 0 : editingDomain.hashCode());
+	    result = prime * result + (exists ? 1231 : 1237);
+	    return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+	    if (this == obj)
+		    return true;
+	    if (obj == null)
+		    return false;
+	    if (getClass() != obj.getClass())
+		    return false;
+	    TMCLEditorInput other = (TMCLEditorInput) obj;
+	    if (actionRegistry == null) {
+		    if (other.actionRegistry != null)
+			    return false;
+	    } else if (!actionRegistry.equals(other.actionRegistry))
+		    return false;
+	    if (diagram == null) {
+		    if (other.diagram != null)
+			    return false;
+	    } else if (!diagram.equals(other.diagram))
+		    return false;
+	    if (editingDomain == null) {
+		    if (other.editingDomain != null)
+			    return false;
+	    } else if (!editingDomain.equals(other.editingDomain))
+		    return false;
+	    if (exists != other.exists)
+		    return false;
+	    return true;
+    }
+
+	
 }

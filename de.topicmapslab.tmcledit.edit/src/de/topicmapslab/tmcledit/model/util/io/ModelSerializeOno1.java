@@ -242,14 +242,17 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		addTopicReference(playerNode, rpc.getPlayer());
 		rpcNode.appendChild(playerNode);
 
-		Element rcNode = document.createElement(E_ROLE_CONSTRAINT);
-		addRoleConstraintReference(rcNode, rpc.getRole());
-		rpcNode.appendChild(rcNode);
-
+		if (rpc.getRole()!=null) {
+			Element rcNode = document.createElement(E_ROLE_CONSTRAINT);
+			addRoleConstraintReference(rcNode, rpc.getRole());
+			rpcNode.appendChild(rcNode);
+		}
 		atcNode.appendChild(rpcNode);
 	}
 
 	private void addRoleConstraintReference(Element rcNode, RoleConstraint rc) {
+		if (rc==null)
+			return;
 		Element e = document.createElement(E_ROLE_CONSTRAINT_REFERENCE);
 
 		AssociationType at = (AssociationType) rc.eContainer();
@@ -503,6 +506,8 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void addTopicReference(Element element, TopicType type) {
+		if (type==null)
+			return;
 		Element ref = document.createElement(E_TOPIC_TYPE_REF);
 		ref.setAttribute(A_REF, "topictypes." + file.getTopicMapSchema().getTopicTypes().indexOf(type));
 		element.appendChild(ref);
