@@ -55,10 +55,12 @@ public class DeleteTopicTypeAction extends Action implements ISelectionChangedLi
 
 	public void setType(TMCLConstruct type) {
 		this.construct = type;
-		if (this.construct instanceof TopicType)
-			setText("Delete " + ((TopicType) type).getKind().getName());
-		else
+		if (this.construct instanceof TopicType) {
+			setText("Delete " + ((TopicType) construct).getName());
+			
+		} else {
 			setText("Delete Constraint..");
+		}
 		setEnabled(type!=null);
 	}
 
