@@ -388,6 +388,9 @@ class ModelHandler extends DefaultHandler {
 	private Node resolveNodeReference(Diagram d, String tmp) {
 	    tmp = tmp.substring(tmp.indexOf(".")+1);
 	    int idx = Integer.parseInt(tmp);
+	    if ( (idx>=d.getNodes().size()) || (idx==-1) )
+	    	throw new RuntimeException("invalid node index: "+idx);
+	    	
 	    Node src = d.getNodes().get(idx);
 	    return src;
     }

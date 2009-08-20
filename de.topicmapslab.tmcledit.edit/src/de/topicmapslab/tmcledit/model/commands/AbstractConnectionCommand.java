@@ -115,19 +115,20 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 			TypeNode currentNode = (TypeNode) ModelIndexer.getNodeIndexer().getNodeFor(topic, d);
 			if (currentNode!=null) {
 				findRemoveEdges(d);
-			}
 			
-			// now we have the type node and all edges we will remove
-			// its time to create the new edges for the new types
-			for (Node node : d.getNodes()) {
-				if (node instanceof TypeNode) {
-					TypeNode tmpNode = (TypeNode) node;
-					if (addList.contains(tmpNode.getTopicType()) ) {
-						Edge e = ModelFactory.eINSTANCE.createEdge();
-						e.setType(getEdgeType());
-						e.setSource(currentNode);
-						e.setTarget(tmpNode);
-						addEdgeList.add(new EdgeWrapper(d, e));
+			
+				// now we have the type node and all edges we will remove
+				// its time to create the new edges for the new types
+				for (Node node : d.getNodes()) {
+					if (node instanceof TypeNode) {
+						TypeNode tmpNode = (TypeNode) node;
+						if (addList.contains(tmpNode.getTopicType()) ) {
+							Edge e = ModelFactory.eINSTANCE.createEdge();
+							e.setType(getEdgeType());
+							e.setSource(currentNode);
+							e.setTarget(tmpNode);
+							addEdgeList.add(new EdgeWrapper(d, e));
+						}
 					}
 				}
 			}

@@ -42,8 +42,8 @@ public class IdentifierConstraintModelPage extends AbstractCardinalityConstraint
 		
 		createCommonConstraintControls(comp, toolkit);
 		
-		toolkit.createLabel(parent, "reg. exp");
-		regExpText = toolkit.createText(parent, "", SWT.BORDER);
+		toolkit.createLabel(comp, "reg. exp");
+		regExpText = toolkit.createText(comp, "", SWT.BORDER);
 		regExpText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		TextObserver.observe(regExpText, this, ModelPackage.ABSTRACT_REG_EXP_CONSTRAINT__REGEXP);
 		
