@@ -46,6 +46,7 @@ public class FileUtil {
 				result = md.deserialize(path);
 			}
 			result.setFilename(path);
+			
 			return result;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -55,21 +56,13 @@ public class FileUtil {
 
 	public static final void saveFile(File file, EditingDomain editingDomain) throws IOException {
 		try {
-//			URI uri = URI.createFileURI(file.getFilename());
-			
-//			Resource resource = new XMIResourceFactoryImpl().createResource(uri);
-//			resource.getContents().add(file);
-//
-//			resource.save(Collections.EMPTY_MAP);
-
 			java.io.File ioFile = new java.io.File(file.getFilename());
 			FileWriter writer = new FileWriter(ioFile);
-			
-			
+
 			ModelSerializeOno1 ms = new ModelSerializeOno1();
 			writer.append(ms.serialize(file));
 			writer.close();
-			
+
 			if (editingDomain != null) {
 				WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) editingDomain.getCommandStack();
 				cmdStack.saveIsDone();

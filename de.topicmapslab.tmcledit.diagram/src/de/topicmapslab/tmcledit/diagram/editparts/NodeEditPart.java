@@ -48,13 +48,6 @@ public abstract class NodeEditPart extends AdapterGraphicalEditPart implements o
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new NodeGraphicalNodeEditPolicy());	
 	}
 		
-	@Override
-	protected void refreshVisuals() {
-		// refreshing mapping element, because it should always be in the upper corner
-        PrefixMappingEditPart pmep = ((DiagramEditPart)getParent()).getPrefixMappingEditPart();
-        if (pmep!=null)
-        	pmep.refreshVisuals();
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

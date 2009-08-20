@@ -110,7 +110,6 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 	protected Command getConnectionCreateCommand(CreateConnectionRequest request) {
 		CreateEdgeCommand cmd = new CreateEdgeCommand((Edge) request
 				.getNewObject());
-		TMCLEditDomain ed = getEditDomain();
 		Diagram d = (Diagram) getHost().getParent().getModel();
 		cmd.setDiagram(d);
 
