@@ -20,13 +20,11 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -121,11 +119,12 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 
 	@Override
 	protected void refreshVisuals() {
-		Rectangle r = ((GraphicalEditPart) getParent()).getFigure().getBounds()
-				.getCopy();
-		r.setSize(-1, -1);
-		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
-				getFigure(), r);
+//		Rectangle r = ((GraphicalEditPart) getParent()).getFigure().getBounds()
+//				.getCopy();	
+//		r.setSize(-1, -1);
+//		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
+//				getFigure(), r);
+	
 
 	}
 

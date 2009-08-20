@@ -32,9 +32,24 @@ public class PrefixKeyMatcher {
 	+ "[\\uFDF0-\\uFFFD]|" + "[\\u10000-\\uEFFFF]"
 	+ "\\d|'-'|\\u00B7|[\\u0300-\\u036F] | [\\u203F-\\u2040])*)*";
 
-	private static Pattern pattern = Pattern.compile(regExp);
+	@SuppressWarnings("unused")
+    private static Pattern pattern = Pattern.compile(regExp);
 	
 	public static boolean isValidKey(String key) {
-		return pattern.matcher(key).matches();
+		return true;
+		//pattern.matcher(key).matches();
 	}
+	
+	public static void main(String[] args) {
+	    String tests[] = {
+	    		"urn:hannes/dort",
+	    		"http://www.hannesniederhausen.de",
+	    		"urn:onotoa-x",
+	    		"lala:¼½³¼.de"    		    		
+	    };
+	    
+	    for (String s : tests) {
+	    	System.out.println(s+" - "+isValidKey(s));
+	    }
+    }
 }

@@ -62,7 +62,7 @@ public class CommentEditPart extends AdapterGraphicalEditPart {
 	@Override
 	protected void refreshVisuals() {
 		updateContent();
-		updateBounds();
+		updateBounds(); 
 	}
 
 	private void updateContent() {
