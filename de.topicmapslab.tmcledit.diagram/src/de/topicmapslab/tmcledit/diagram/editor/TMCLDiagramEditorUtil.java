@@ -317,8 +317,8 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)));
 
-		group.add(new ConnectionCreationToolEntry("Role Player Constraint",
-				"Create Role Player Constraint connection",
+		group.add(new ConnectionCreationToolEntry("Topic Role Constraint",
+				"Create Topic Role Constraint connection",
 				new CreationFactory() {
 
 					public Object getNewObject() {
@@ -334,8 +334,8 @@ public class TMCLDiagramEditorUtil {
 					}
 
 				}, ImageProvider
-						.getImageDescriptor(ImageConstants.ROLEPLAYER_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.ROLEPLAYER)));
+						.getImageDescriptor(ImageConstants.TOPICROLE_SM),
+				ImageProvider.getImageDescriptor(ImageConstants.TOPICROLE)));
 
 		return group;
 	}
