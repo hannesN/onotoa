@@ -41,8 +41,8 @@ public interface ImageConstants {
 	public static String NAMECONSTRAINT_SM = "./nameconstraint_sm.gif";
 	public static String ASSOCIATIONCONSTRAINT_SM = "./associationconstraint_sm.gif";
 	public static String COMMENT = "./comment.png";
-	public static String ROLEPLAYER = "./rp.gif";
-	public static String ROLEPLAYER_SM = "./rp_sm.gif";
+	public static String TOPICROLE = "./rp.gif";
+	public static String TOPICROLE_SM = "./rp_sm.gif";
 	public static String SUBJECTIDENTIFIERCONSTRAINT = "./siconstraint.gif";
 	public static String SUBJECTLOCATORCONSTRAINT = "./slconstraint.gif";
 	public static String ICON = "./icon.png";
