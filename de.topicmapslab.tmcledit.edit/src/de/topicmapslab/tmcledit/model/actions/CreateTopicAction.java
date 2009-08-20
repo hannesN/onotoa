@@ -13,7 +13,6 @@
  */
 package de.topicmapslab.tmcledit.model.actions;
 
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.PlatformUI;
@@ -22,42 +21,50 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 
-public class CreateTopicAction extends Action  {
+public class CreateTopicAction extends AbstractTreeListenerAction {
 	private KindOfTopicType kindOfTopicType;
-	
-	private final ModelView modelView;
 
 	/**
 	 * @param modelView
 	 */
 	public CreateTopicAction(ModelView modelView) {
-		this.modelView = modelView;
+		super(modelView);
 		setText("Create Topic Type");
 	}
 
 	public void setKindOfTopicType(KindOfTopicType kindOfTopicType) {
-	    if (kindOfTopicType==null)
-	    	setEnabled(false);
-	    else {
-	    	setEnabled(true);
-	    	this.kindOfTopicType = kindOfTopicType;
-	    	setText("Create " + kindOfTopicType.getName());
-	    }
-    }
-	
+		this.kindOfTopicType = kindOfTopicType;
+		if (kindOfTopicType != null)
+			setText("Create " + kindOfTopicType.getName());
+		setEnabled();
+	}
+
+	private void setEnabled() {
+		if ((getTreeObject() == null) || (getTreeObject().getModel() != null) || (kindOfTopicType == null))
+			setEnabled(false);
+		else {
+			setEnabled(true);
+		}
+	}
+
+	@Override
+	protected void setTreeObject(TreeObject treeObject) {
+		super.setTreeObject(treeObject);
+		setEnabled();
+	}
+
 	@Override
 	public void run() {
 		NewTopicTypeWizard wizard = new NewTopicTypeWizard();
 		wizard.setDefaultType(kindOfTopicType);
 
-		WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getShell(), wizard);
-		
-		if (dlg.open()==Dialog.OK) {
-			this.modelView.getEditingDomain().getCommandStack().execute(
-					new CreateTopicTypeCommand(this.modelView
-							.getCurrentTopicMapSchema(), wizard.getNewTopicType()));
+		WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), wizard);
+
+		if (dlg.open() == Dialog.OK) {
+			getView().getEditingDomain().getCommandStack().execute(
+			        new CreateTopicTypeCommand(getView().getCurrentTopicMapSchema(), wizard.getNewTopicType()));
 		}
 
 	}

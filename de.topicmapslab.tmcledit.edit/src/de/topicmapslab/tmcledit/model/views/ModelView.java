@@ -113,6 +113,7 @@ import de.topicmapslab.tmcledit.model.actions.CreateTopicAction;
 import de.topicmapslab.tmcledit.model.actions.DeleteDiagramAction;
 import de.topicmapslab.tmcledit.model.actions.DeleteTopicTypeAction;
 import de.topicmapslab.tmcledit.model.actions.RedoActionWrapper;
+import de.topicmapslab.tmcledit.model.actions.RenameAction;
 import de.topicmapslab.tmcledit.model.actions.UndoActionWrapper;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.actions.ValidateAction;
@@ -161,10 +162,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			if (msg.getFeatureID(Boolean.class) == ModelPackage.FILE__DIRTY) {
 				firePropertyChange(PROP_DIRTY);
 			}
-
 		}
 	};
 
+	private RenameAction renameAction;
+	
 	private CreateDiagramAction createDiagramAction;
 
 	private CreateTopicAction createTopicAction;
@@ -227,6 +229,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					createTopicAction.setEnabled(false);
 				} else {
 					TreeObject to = (TreeObject) sel.getFirstElement();
+					createTopicAction.setEnabled(false);
+					createDiagramAction.setEnabled(false);
+					switch (to.getId()) {
+					case TreeObject.DIAGRAMS:
+						createDiagramAction.setEnabled(true);
+						break;
+					}
+
 					createTopicAction.setKindOfTopicType(to.getKindOfTopicType());
 					if (to.getModel() == null)
 						currentSelection = new StructuredSelection(currFile);
@@ -277,15 +287,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			}
 
 			@SuppressWarnings("unchecked")
-            private StringBuffer prepareTopicTypes(IStructuredSelection sel) {
+			private StringBuffer prepareTopicTypes(IStructuredSelection sel) {
 				// concat every model string and ignore other nodes..
 				StringBuffer tmp = new StringBuffer();
 
 				if (sel.size() == 1) {
 					TreeObject selObj = (TreeObject) sel.getFirstElement();
-					
-					if ( (selObj.getModel() instanceof AssociationTypeConstraint) 
-					  || (selObj.getModel() instanceof TopicType) ) {
+
+					if ((selObj.getModel() instanceof AssociationTypeConstraint)
+					        || (selObj.getModel() instanceof TopicType)) {
 						tmp.append(selObj.getModel().toString());
 					}
 				} else {
@@ -392,17 +402,26 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		manager.add(validationAction);
-		manager.add(new Separator());
 
 		if (createDiagramAction.isEnabled())
 			manager.add(createDiagramAction);
+		
 		if (createTopicAction.isEnabled())
 			manager.add(createTopicAction);
-		manager.add(new Separator());
 
+		if (renameAction.isEnabled()) {
+			manager.add(renameAction);
+		}
+		
+		if (deleteDiagramAction.isEnabled())
+			manager.add(deleteDiagramAction);
+		
 		if (deleteTopicTypeAction.isEnabled())
 			manager.add(deleteTopicTypeAction);
+		
+		
+		manager.add(new Separator());
+		
 		if (createNameConstraintAction.isEnabled())
 			manager.add(createNameConstraintAction);
 		if (createOccurrenceConstraintAction.isEnabled())
@@ -411,8 +430,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			manager.add(createSubjectIdenifierConstraintAction);
 		if (createSubjectLocatorConstraintAction.isEnabled())
 			manager.add(createSubjectLocatorConstraintAction);
-		if (deleteDiagramAction.isEnabled())
-			manager.add(deleteDiagramAction);
+		
 
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
@@ -439,7 +457,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		deleteTopicTypeAction = new DeleteTopicTypeAction(this);
 		createDiagramAction = new CreateDiagramAction(this);
 		createTopicAction = new CreateTopicAction(this);
-
+		renameAction = new RenameAction(this);
+		
 		createNameConstraintAction = new CreateNameConstraintAction(this);
 		createOccurrenceConstraintAction = new CreateOccurrenceConstraintAction(this);
 		createSubjectIdenifierConstraintAction = new CreateSubjectIdenifierConstraintAction(this);
@@ -642,14 +661,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	@SuppressWarnings("unchecked")
-    @Override
+	@Override
 	public Object getAdapter(Class adapter) {
-		if (adapter==ActionRegistry.class)
+		if (adapter == ActionRegistry.class)
 			return getActionRegistry();
-		
-	    return super.getAdapter(adapter);
+
+		return super.getAdapter(adapter);
 	}
-	
+
 	public TreeViewer getViewer() {
 		return viewer;
 	}
@@ -884,9 +903,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 			invisibleRoot = new TreeParent(ModelView.this, "");
 			if (currFile != null) {
-				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema");
+				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema", TreeObject.TOPIC_MAP_SCHEMA);
+				
 				schemaNode.setModel(getCurrentTopicMapSchema());
-				diagramNode = new TreeParent(ModelView.this, "Diagrams");
+				diagramNode = new TreeParent(ModelView.this, "Diagrams", TreeObject.DIAGRAMS);
 
 				invisibleRoot.addChild(diagramNode);
 				invisibleRoot.addChild(schemaNode);
@@ -945,7 +965,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			diagramNode.refresh();
 		}
 
-		private void removeDiagram(Diagram diagram) { 
+		private void removeDiagram(Diagram diagram) {
 			TreeObject child = diagramNode.findChildPerModel(diagram);
 			diagramNode.removeChild(child);
 			child.dispose();

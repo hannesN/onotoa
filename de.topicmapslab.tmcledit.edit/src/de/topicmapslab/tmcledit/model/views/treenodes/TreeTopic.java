@@ -41,6 +41,7 @@ public class TreeTopic extends TreeParent {
 	public TreeTopic(ModelView viewer, TopicType topic) {
 		super(viewer, null, topic.getKind());
 		setModel(topic);
+		setHandleRename(true);
 	}
 
 	@Override

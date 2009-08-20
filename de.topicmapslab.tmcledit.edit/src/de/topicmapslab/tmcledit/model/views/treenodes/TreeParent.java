@@ -32,6 +32,12 @@ public class TreeParent extends TreeObject {
 		children = new ArrayList<TreeObject>();
 	}
 
+	public TreeParent(ModelView modelView, String string, int id) {
+	    this(modelView, string, null);
+	    setId(id);
+	    
+    }
+
 	public void addChild(TreeObject child) {
 		children.add(child);
 		child.setParent(this);

@@ -41,7 +41,7 @@ public class CreateDiagramAction extends Action {
 
 	@Override
 	public String getText() {
-		return "Create Diagram";
+		return "Create New Diagram..";
 	}
 
 	@Override
@@ -89,4 +89,5 @@ public class CreateDiagramAction extends Action {
 		}
 
 	}
+	
 }
