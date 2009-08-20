@@ -162,16 +162,4 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 			}
 		}
 	}
-
-	public static class EdgeWrapper {
-		public final Diagram diagram;
-		public final Edge edge;
-		
-		public EdgeWrapper(Diagram diagram, Edge edge) {
-			super();
-			this.diagram = diagram;
-			this.edge = edge;
-		}
-		
-	}
 }

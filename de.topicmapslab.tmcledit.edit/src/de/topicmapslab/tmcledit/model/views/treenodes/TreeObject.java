@@ -133,6 +133,10 @@ public class TreeObject implements IAdaptable, Adapter {
 	public void handleDoubleClick() {
 
 	}
+	
+	protected Adapter getAdapter() {
+		return this;
+	}
 
 	public void handleRename() {
 

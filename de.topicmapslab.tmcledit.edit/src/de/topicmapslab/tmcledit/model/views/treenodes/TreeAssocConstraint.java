@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.Image;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -44,13 +44,11 @@ public class TreeAssocConstraint extends TreeParent {
 					((EObject) notification.getNewValue()).eAdapters().add(this);
 				if (notification.getOldValue()!=null)
 					((EObject) notification.getOldValue()).eAdapters().remove(this);
-			}
-		} else if (notification.getNotifier().equals(getAssocType())) { 
-			if (notification.getFeatureID(EList.class)==ModelPackage.ASSOCIATION_TYPE__ROLES) {
+			} else if (notification.getFeatureID(EList.class)==ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__PLAYER_CONSTRAINTS) {
 				if (notification.getEventType()==Notification.ADD) {
-					addRoleNode((RoleConstraint) notification.getNewValue());
+					addTopicRoleNode((RolePlayerConstraint) notification.getNewValue());
 				} else if (notification.getEventType()==Notification.REMOVE) {
-					removeRoleNode((RoleConstraint) notification.getOldValue());
+					removeTopicRoleNode((RolePlayerConstraint) notification.getOldValue());
 				}
 				
 			}
@@ -69,22 +67,20 @@ public class TreeAssocConstraint extends TreeParent {
 	}
 
 	private void createChildNodes() {
-		if (getAssocType() != null) {
-			for (RoleConstraint rc : getAssocType().getRoles()) {
-				addRoleNode(rc);
-			}
+		for (RolePlayerConstraint rpc : getCastedModel().getPlayerConstraints()) {
+			addTopicRoleNode(rpc);
 		}
 	}
 	
-	private void addRoleNode(RoleConstraint rc) {
-		TreeRole newChild = new TreeRole(getModelView(), rc, getCastedModel());
+	private void addTopicRoleNode(RolePlayerConstraint rpc) {
+		TreeRolePlayer newChild = new TreeRolePlayer(getModelView(), rpc);
 		addChild(newChild);
 		refresh();
 	}
 
 
-	private void removeRoleNode(RoleConstraint rc) {
-		TreeObject child = findChildPerModel(rc);
+	private void removeTopicRoleNode(RolePlayerConstraint rpc) {
+		TreeObject child = findChildPerModel(rpc);
 		removeChild(child);
 		refresh();
 	}

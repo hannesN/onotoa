@@ -13,6 +13,7 @@ package de.topicmapslab.tmcledit.diagram.policies;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.GraphicalNodeEditPolicy;
 import org.eclipse.gef.requests.CreateConnectionRequest;
@@ -22,13 +23,16 @@ import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.Node;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.model.commands.AddTopicRoleCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
@@ -52,41 +56,54 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 		Node node = (Node) request.getTargetEditPart().getModel();
 
 		if (cmd.getEdge().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {
-			if (node instanceof AssociationNode)
+			if (node instanceof AssociationNode) {
 				cmd.setSource(node);
-			else
+			} else {
 				cmd.setTarget(node);
-		} else {
-			cmd.setTarget(node);
-		}
-
-		if (cmd.getEdge().getType() == EdgeType.IS_ATYPE) {
-			TopicType target = ((TypeNode) cmd.getEdge().getTarget())
-					.getTopicType();
-			TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
-
-			if (target.getKind() == KindOfTopicType.NO_TYPE) {
-				return null;
 			}
+			AssociationTypeConstraint atc = ((AssociationNode) cmd.getEdge().getSource()).getAssociationConstraint();
+			RolePlayerConstraint rpc = cmd.getEdge().getRoleConstraint();
 			
-			List<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
-			newList.add(target);
-			SetIsACommand isACmd = new SetIsACommand(newList, source);
-			return new CommandAdapter(getEditDomain().getEditingDomain().getCommandStack(), isACmd);
-		} else if (cmd.getEdge().getType() == EdgeType.AKO_TYPE) {
-			TopicType target = ((TypeNode) cmd.getEdge().getTarget()).getTopicType();
-			TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
+			AddTopicRoleCommand trCmd = new AddTopicRoleCommand(rpc, atc, ((TypeNode)cmd.getEdge().getTarget()).getTopicType());
+			return new CommandAdapter(getCommandStack(), trCmd);
+		} 
 		
-			if (target.getKind() == KindOfTopicType.NO_TYPE) {
-				return null;
-			}
-			
-			List<TopicType> newList = new ArrayList<TopicType>(source.getAko());
-			newList.add(target);
-			SetAkoCommand akoCmd = new SetAkoCommand(newList, source);
-			return new CommandAdapter(getEditDomain().getEditingDomain().getCommandStack(), akoCmd);
+		cmd.setTarget(node);
+		if (cmd.getEdge().getType() == EdgeType.IS_ATYPE) {
+			return getISACommand(cmd);
+		} else if (cmd.getEdge().getType() == EdgeType.AKO_TYPE) {
+			return getAKOCommand(cmd);
 		}
 		return request.getStartCommand();
+	}
+
+	private Command getISACommand(CreateEdgeCommand cmd) {
+		TopicType target = ((TypeNode) cmd.getEdge().getTarget())
+				.getTopicType();
+		TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
+
+		if (target.getKind() == KindOfTopicType.NO_TYPE) {
+			return null;
+		}
+		
+		List<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
+		newList.add(target);
+		SetIsACommand isACmd = new SetIsACommand(newList, source);
+		return new CommandAdapter(getCommandStack(), isACmd);
+	}
+
+	private Command getAKOCommand(CreateEdgeCommand cmd) {
+		TopicType target = ((TypeNode) cmd.getEdge().getTarget()).getTopicType();
+		TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
+
+		if (target.getKind() == KindOfTopicType.NO_TYPE) {
+			return null;
+		}
+		
+		List<TopicType> newList = new ArrayList<TopicType>(source.getAko());
+		newList.add(target);
+		SetAkoCommand akoCmd = new SetAkoCommand(newList, source);
+		return new CommandAdapter(getCommandStack(), akoCmd);
 	}
 
 	@Override
@@ -107,13 +124,16 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			cmd.setSource(node);
 		}
 
-		CommandAdapter cmdAdapter = new CommandAdapter(ed.getEditingDomain()
-				.getCommandStack(), cmd);
+		CommandAdapter cmdAdapter = new CommandAdapter(getCommandStack(), cmd);
 		request.setStartCommand(cmdAdapter);
 
 		return cmdAdapter;
 	}
 
+	private CommandStack getCommandStack() {
+		return getEditDomain().getEditingDomain().getCommandStack();
+	}
+	
 	private TMCLEditDomain getEditDomain() {
 		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer()
 				.getEditDomain();
