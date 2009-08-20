@@ -90,7 +90,7 @@ public class NewTopicTypeWizard extends Wizard {
 		
 		protected NewTypeWizardPage() {
 			super("new type");
-			setTitle("Topic Type");
+			setTitle("Create Topic Type");
 			String baseLocator = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
 			syncIdentifier = ((baseLocator!=null) && (baseLocator.length()>0));
 		}

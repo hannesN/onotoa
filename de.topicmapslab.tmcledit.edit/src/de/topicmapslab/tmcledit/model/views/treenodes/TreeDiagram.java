@@ -30,6 +30,7 @@ public class TreeDiagram extends TreeObject {
 	public TreeDiagram(ModelView modelView, Diagram diagram) {
 		super(modelView, null);
 		setModel(diagram);
+		setHandleRename(true);
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class TreeDiagram extends TreeObject {
 			        new RenameDiagramCommand(dlg.getValue(), getDiagram()));
 		}
 	}
-
+	
 	@Override
 	public void notifyChanged(Notification notification) {
 		if ((notification.getEventType() == Notification.SET)

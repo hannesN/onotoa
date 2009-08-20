@@ -25,16 +25,29 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 public class TreeObject implements IAdaptable, Adapter {
+	public static final int NOT_SET = -1;
+	public static final int TOPIC_MAP_SCHEMA = 1;
+	public static final int DIAGRAMS = 2;
+	
+	
 	private String name;
 	protected EditingDomain editingDomain;
 	private TreeParent parent;
 	private Notifier target;
 	private final KindOfTopicType kindOfTopicType;
 	private boolean syncView = false;
+	private boolean handleRename = false;
+	
+	private int id = -1;
 
 	private final ModelView modelView;
 	private EObject model;
 
+	public TreeObject(ModelView modelView, int id) {
+		this(modelView, null);
+		this.id = NOT_SET;
+	}
+	
 	public TreeObject(ModelView modelView) {
 		this(modelView, null);
 	}
@@ -67,6 +80,14 @@ public class TreeObject implements IAdaptable, Adapter {
 			this.syncView = parent.isSyncView();
 	}
 
+	public int getId() {
+	    return id;
+    }
+	
+	protected void setId(int id) {
+		this.id = id;
+	}
+	
 	public TreeParent getParent() {
 		return parent;
 	}
@@ -141,4 +162,12 @@ public class TreeObject implements IAdaptable, Adapter {
 	public void handleRename() {
 
 	}
+	
+	public boolean canHandleRename() {
+		return handleRename;
+	}
+	
+	protected void setHandleRename(boolean handleRename) {
+	    this.handleRename = handleRename;
+    }
 }
