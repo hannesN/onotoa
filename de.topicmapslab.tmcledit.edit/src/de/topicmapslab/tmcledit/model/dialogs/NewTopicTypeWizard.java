@@ -104,6 +104,7 @@ public class NewTopicTypeWizard extends Wizard {
 			
 			
 			setControl(comp);
+			setErrorMessage("Topic Type has no name");
 			setPageComplete(false);
 		}
 
@@ -128,6 +129,13 @@ public class NewTopicTypeWizard extends Wizard {
 			
 		}
 		
+		@Override
+		public void setPageComplete(boolean complete) {
+		    super.setPageComplete(complete);
+		    if (complete)
+		    	setErrorMessage(null);
+		}
+		
 		public void setDefaultType(KindOfTopicType type) {
 			this.selButton = type.getValue();
 		}
@@ -150,6 +158,7 @@ public class NewTopicTypeWizard extends Wizard {
 				public void modifyText(ModifyEvent e) {
 					String newName = nameText.getText();
 					if (ModelIndexer.getTopicIndexer().getTopicTypeByName(newName)!=null) {
+						setErrorMessage("Type with this name already exists");
 						setPageComplete(false);
 						return;
 					}
@@ -174,6 +183,7 @@ public class NewTopicTypeWizard extends Wizard {
 							identifierText.setText("");
 							syncIdentifier=true;
 						}
+						setErrorMessage("Topic Type has no name");
 						setPageComplete(false);
 					}
 					
