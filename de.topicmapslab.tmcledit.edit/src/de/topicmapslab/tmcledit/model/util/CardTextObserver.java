@@ -54,9 +54,19 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		 * modelProvider.getModel().eClass().getEStructuralFeature(featureID);
 		 * modelProvider.getModel().eSet(feature, text.getText());
 		 */
+		AbstractCardinalityContraint model = (AbstractCardinalityContraint) modelProvider
+        		.getModel();
+		
+		if (isMin) {
+			if (text.getText().equals(model.getCardMin()))
+				return;
+		} else {
+			if (text.getText().equals(model.getCardMax()))
+				return;
+		}
+		
 		modelProvider.getCommandStack().execute(
-				new SetCardinalityCommand((AbstractCardinalityContraint) modelProvider
-						.getModel(), isMin, text.getText()));
+				new SetCardinalityCommand(model, isMin, text.getText()));
 	}
 
 	public void widgetDisposed(DisposeEvent e) {

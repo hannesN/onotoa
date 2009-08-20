@@ -35,6 +35,13 @@ public class GenericSetCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		oldValue = model.eGet(getFeature()); 
+		if (oldValue==null) {
+			if (newValue==null) 
+				return false;
+		} else {
+			if (oldValue.equals(newValue))
+				return false;
+		}
 		return true;
 	}
 	
