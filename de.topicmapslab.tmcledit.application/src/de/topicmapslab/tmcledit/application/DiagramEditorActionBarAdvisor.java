@@ -59,6 +59,12 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		openDiagramAction = new OpenDiagramAction();
 		aboutAction = new AboutAction();
 		
+		register(newDiagramAction);
+		
+		register(openDiagramAction);
+		
+		register(aboutAction);
+		
 		register(ActionFactory.CLOSE.create(window));
 		
 		register(ActionFactory.SAVE.create(window));
@@ -94,8 +100,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		IWorkbenchAction prefAction = ActionFactory.PREFERENCES.create(window);
 		prefAction.setText(getPointText(prefAction.getText()));
 		register(prefAction);
-		
-		register(aboutAction);
 	}
 
 	@Override
@@ -198,10 +202,11 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 					IWorkbenchActionConstants.M_HELP);
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_START));
-
+			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+			
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_END));
 			
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+
 			menuX.add(aboutAction);
 			menu.add(menuX);
 		}

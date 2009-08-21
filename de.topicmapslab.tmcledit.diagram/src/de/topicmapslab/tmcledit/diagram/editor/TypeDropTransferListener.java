@@ -92,11 +92,14 @@ public class TypeDropTransferListener extends
 		EditPart part = getViewer().findObjectAt(getDropLocation());
 		if (part instanceof DiagramEditPart) {
 			dropAllowed = true;
+
 			if (atc != null) {
 				req.setFactory(assocConstrFac);
 			} else {
 				req.setFactory(nodeFac);
 			}
+		} else {
+			dropAllowed = false;
 		}
 	}
 
@@ -119,11 +122,10 @@ public class TypeDropTransferListener extends
 		nodeFac.setTopicTypes(movedTypes);
 		req.setFactory(nodeFac);
 
-		if (dropAllowed && (movedTypes.isEmpty()) && (atc == null)) {
+		if (!dropAllowed || ((movedTypes.isEmpty()) && (atc == null))) {
 			getCurrentEvent().detail = DND.DROP_NONE;
 			return;
 		}
-
 		super.handleDrop();
 	}
 

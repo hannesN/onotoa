@@ -148,8 +148,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		control.getNewButton().addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.ROLE_TYPE);
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.ROLE_TYPE);
 				WizardDialog dlg = new WizardDialog(control.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {

@@ -98,8 +98,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.NAME_TYPE);
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.NAME_TYPE);
 				WizardDialog dlg = new WizardDialog(section.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {

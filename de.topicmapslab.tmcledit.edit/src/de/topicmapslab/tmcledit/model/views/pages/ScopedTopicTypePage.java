@@ -235,8 +235,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		control.getNewButton().addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.TOPIC_TYPE);
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.TOPIC_TYPE);
 				WizardDialog dlg = new WizardDialog(control.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {

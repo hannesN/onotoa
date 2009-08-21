@@ -17,15 +17,15 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="menu:help">
+            locationURI="menu:help?placement=helpStart">
          <command
                commandId="de.topicmapslab.tmcledit.doc.openhelpcommand"
-               label="&amp;Help"
+               label="&amp;Help..."
                style="push">
          </command>
          <command
                commandId="de.topicmapslab.tmcledit.doc.showlicensecommand"
-               label="Show License"
+               label="Show &amp;License..."
                style="push">
          </command>
       </menuContribution>

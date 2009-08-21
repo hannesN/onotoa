@@ -198,8 +198,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.OCCURRENCE_TYPE);
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.OCCURRENCE_TYPE);
 				WizardDialog dlg = new WizardDialog(availableTopicList.getList().getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {

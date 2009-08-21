@@ -35,8 +35,7 @@ public abstract class CreateTypeAction extends TopicTypeAction {
 	
 	@Override
 	public void run() {
-		NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-		wizard.setDefaultType(getKindOfType());
+		NewTopicTypeWizard wizard = new NewTopicTypeWizard(getKindOfType());
 
 		WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getShell(), wizard);

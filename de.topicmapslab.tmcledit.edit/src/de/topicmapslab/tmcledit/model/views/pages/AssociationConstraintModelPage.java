@@ -110,8 +110,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.ASSOCIATION_TYPE);
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.ASSOCIATION_TYPE);
 				WizardDialog dlg = new WizardDialog(typeText.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {

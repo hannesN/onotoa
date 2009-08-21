@@ -16,10 +16,10 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.ActionFactory;
 
 import de.topicmapslab.tmcledit.wizards.FileWizard;
 
@@ -27,9 +27,10 @@ import de.topicmapslab.tmcledit.wizards.FileWizard;
  */
 public class NewDiagramAction extends Action {
 
-	public NewDiagramAction() { 
+	public NewDiagramAction() {
+		setId(ActionFactory.NEW.getId());
 		setText("New...");
-		setAccelerator(SWT.ALT|'n');
+//		setAccelerator(SWT.CTRL|'N');
 	}
 	
 	@Override
