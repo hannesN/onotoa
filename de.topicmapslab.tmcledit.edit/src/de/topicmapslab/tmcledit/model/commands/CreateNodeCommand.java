@@ -72,17 +72,26 @@ public class CreateNodeCommand extends AbstractCommand {
 
 	@Override
 	public boolean canExecute() {
-		prepare();
-		if ((node instanceof TypeNode) && (!createdNewType)) {
-			TopicType tt = ((TypeNode) node).getTopicType();
-			for (Node n : diagram.getNodes()) {
-				if (n instanceof TypeNode) {
-					if (((TypeNode) n).getTopicType().equals(tt))
+		if (prepare()) {
+			if ((node instanceof TypeNode) && (!createdNewType)) {
+				TopicType tt = ((TypeNode) node).getTopicType();
+				for (Node n : diagram.getNodes()) {
+					if (n instanceof TypeNode) {
+						if (((TypeNode) n).getTopicType().equals(tt))
+							return false;
+					}
+				}
+			} else if (node instanceof AssociationNode) {
+				AssociationTypeConstraint atc = ((AssociationNode) node).getAssociationConstraint();
+				if (atc != null) {
+					if (ModelIndexer.getNodeIndexer().getNodeFor(atc, diagram)!=null)
 						return false;
 				}
 			}
+			
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public void execute() {
