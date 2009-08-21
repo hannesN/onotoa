@@ -13,11 +13,7 @@
  */
 package de.topicmapslab.tmcledit.model.views.pages;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
@@ -39,7 +35,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
@@ -237,23 +232,6 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		return comp;
 	}
 	
-	private boolean isSyncAllowed() {
-	    TopicType topic = getCastedModel();
-		TopicMapSchema schema = (TopicMapSchema) topic.eContainer();
-		String baseLocator = schema.getBaseLocator();
-		if ( (baseLocator==null) 
-			|| (topic.getIdentifiers().size()>1)	
-			|| (baseLocator.length()==0) ) {
-			return false;
-		}
-		if (topic.getIdentifiers().size()==1) {
-			if (!topic.getIdentifiers().get(0).startsWith(baseLocator))
-				return false;
-		}
-		
-		return true;
-    }
-
 	@Override
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
@@ -404,26 +382,8 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	    	if (tt.getName().equals(nameText.getText()))
 	    		return;
 	    	
-	    	if (isSyncAllowed()) {
-	    		CompoundCommand ccmd = new CompoundCommand();
-	    		ccmd.append(new RenameTopicTypeCommand(tt, nameText.getText()));
-	    		List<String> newIds = new ArrayList<String>(1);
-	    		
-	    		TopicMapSchema schema = (TopicMapSchema) tt.eContainer();
-	    		String baseLocator = schema.getBaseLocator();
-	    		
-	    		if ( (!baseLocator.endsWith("/"))
-	    		   && (!baseLocator.endsWith(":")) )
-	    			baseLocator += "/";
-	    		
-	    		String newId = baseLocator + nameText.getText().toLowerCase();
-	    		newIds.add(newId);
-	    		ccmd.append(new SetTopicTypeIdentifiersCommand(newIds, tt));
-	    		
-	    		cmd = ccmd;
-	    	} else {
-	    		cmd=new RenameTopicTypeCommand(tt, nameText.getText());
-	    	}
+	    	cmd=new RenameTopicTypeCommand(tt, nameText.getText());
+	    	
 	    	if (cmd.canExecute()) {
 	    		getCommandStack().execute(cmd);
 	    	} else {
