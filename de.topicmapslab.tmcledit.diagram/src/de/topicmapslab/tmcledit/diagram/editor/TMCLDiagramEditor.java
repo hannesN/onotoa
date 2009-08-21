@@ -90,7 +90,6 @@ import de.topicmapslab.tmcledit.model.util.io.FileUtil;
  */
 public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		implements ISelectionChangedListener, ISelectionProvider {
-	// extends EditorPart {
 
 	public static final String ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
 

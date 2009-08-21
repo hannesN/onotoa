@@ -14,8 +14,12 @@
 package de.topicmapslab.tmcledit.model.commands;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
@@ -28,8 +32,8 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 	private final TopicType tt;
 	private final String oldName;
 	private final String newName;
+	private SetTopicTypeIdentifiersCommand idCmd;
 
-	
 	
 	public RenameTopicTypeCommand(TopicType tt, String newName) {
 		super();
@@ -47,19 +51,55 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 	
 	public void execute() {
 		tt.setName(newName);
+		if (idCmd!=null)
+			idCmd.execute();
 	}
 	
 	@Override
-	public void undo() {
+	public void undo() { 
 		tt.setName(oldName);
+		if (idCmd!=null)
+			idCmd.undo();
 	}
 
 	public void redo() {
-		execute();
+		tt.setName(newName);
+		if (idCmd!=null)
+			idCmd.redo();
 	}
+	
+	private boolean isSyncAllowed() {
+		TopicMapSchema schema = (TopicMapSchema) tt.eContainer();
+		String baseLocator = schema.getBaseLocator();
+		if ( (baseLocator==null) 
+			|| (tt.getIdentifiers().size()>1)	
+			|| (baseLocator.length()==0) ) {
+			return false;
+		}
+		if (tt.getIdentifiers().size()==1) {
+			if (!tt.getIdentifiers().get(0).startsWith(baseLocator))
+				return false;
+		}
+		
+		return true;
+    }
 	
 	@Override
 	protected boolean prepare() {
+		if (isSyncAllowed()) {
+			List<String> newIds = new ArrayList<String>(1);
+    		
+    		TopicMapSchema schema = (TopicMapSchema) tt.eContainer();
+    		String baseLocator = schema.getBaseLocator();
+    		
+    		if ( (!baseLocator.endsWith("/"))
+    		   && (!baseLocator.endsWith(":")) )
+    			baseLocator += "/";
+    		
+    		String newId = baseLocator + newName;
+    		newIds.add(newId);
+    		idCmd = (new SetTopicTypeIdentifiersCommand(newIds, tt));
+		}
 		return true;
 	}
 }

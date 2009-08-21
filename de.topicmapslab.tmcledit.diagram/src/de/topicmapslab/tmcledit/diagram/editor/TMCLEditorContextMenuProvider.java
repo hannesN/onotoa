@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.editor;
 
+
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -43,7 +44,7 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 		if (!active)
 			return;
 		GEFActionConstants.addStandardActionGroups(menu);
-
+		
 		IAction action;
 		action = getActionRegistry().getAction(ActionFactory.UNDO.getId());
 		menu.appendToGroup(GEFActionConstants.GROUP_UNDO, action);
