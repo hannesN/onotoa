@@ -14,6 +14,7 @@
 package de.topicmapslab.tmcledit.application;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
@@ -26,7 +27,8 @@ import org.eclipse.ui.PlatformUI;
 public class OpenDiagramAction extends Action {
 	
 	public OpenDiagramAction() {
-		setText("Open..");
+		setText("Open...");
+		setAccelerator(SWT.ALT|'o');
 	}
 	
 	@Override
@@ -34,6 +36,7 @@ public class OpenDiagramAction extends Action {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		Shell shell = workbench.getActiveWorkbenchWindow().getShell();
 		FileDialog dlg = new FileDialog(shell);
+		dlg.setText("Open Onotoa Model..");
 		dlg.setFilterExtensions(new String[]{"*.ono;*.tmcl", "*.ono", "*.tmcl"});
 		dlg.setFilterPath(System.getProperty("user.home"));
 		

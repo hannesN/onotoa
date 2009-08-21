@@ -79,9 +79,20 @@ public class FileWizardPage extends WizardPage {
 				
 			}
 		});
-		path = System.getProperty("user.home")+File.separator+"default.ono";
+		path = getFilePath();
 		pathText.setText(path);
 		setControl(comp);
+	}
+	
+	private String getFilePath() {
+		path = System.getProperty("user.home")+File.separator+"default";
+		String newPath = path;
+		int i=0;
+		while (new File(newPath+".ono").exists()) {
+			i++;
+			newPath = path+i;
+		}
+		return newPath+".ono";
 	}
 	
 	public String getPath() {

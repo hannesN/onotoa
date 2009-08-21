@@ -22,7 +22,7 @@ public class RenameAction extends AbstractTreeListenerAction {
 
 	public RenameAction(ModelView view) {
 	    super(view);
-	    setText("Rename..");
+	    setText("Rename...");
 	    setId("rename");
     }
 	

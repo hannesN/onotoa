@@ -23,7 +23,7 @@ public class CreateOccurrenceConstraintAction extends AbstractCreateConstraintAc
 
 	public CreateOccurrenceConstraintAction(ModelView view) {
 	    super(view);
-	    setText("Create &Occurrence Constraint..");
+	    setText("Create &Occurrence Constraint...");
     }
 
 	@Override

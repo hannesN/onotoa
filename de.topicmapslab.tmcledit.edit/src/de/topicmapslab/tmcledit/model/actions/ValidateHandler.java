@@ -57,7 +57,7 @@ public class ValidateHandler extends AbstractHandler {
 				
 				if (list.size()==0) {
 					MessageBox box = new MessageBox(activeWorkbenchWindow.getShell());
-					box.setMessage("Everything is fine..");
+					box.setMessage("Everything is fine.");
 					box.setText("Validation message");
 					box.open();
 				} else {

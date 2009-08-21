@@ -23,7 +23,7 @@ public class CreateNameConstraintAction extends AbstractCreateConstraintAction {
 
 	public CreateNameConstraintAction(ModelView view) {
 	    super(view);
-	    setText("Create &Name Constraint..");
+	    setText("Create &Name Constraint...");
     }
 
 	@Override

@@ -15,6 +15,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.ActionFactory;
 import org.osgi.framework.Bundle;
 
 
@@ -26,8 +27,8 @@ public class AboutAction extends Action {
 	
 	
 	public AboutAction() {
-		setText("&About..");
-		setId("about action");
+		setText("&About...");
+		setId(ActionFactory.ABOUT.getId());
 	}
 	
 	@Override
