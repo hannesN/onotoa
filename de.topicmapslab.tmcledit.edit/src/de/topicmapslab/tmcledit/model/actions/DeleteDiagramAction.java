@@ -35,7 +35,7 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 	private ModelView modelView;
 
 	public DeleteDiagramAction(ModelView modelView) {
-		setText("Delete Diagram");
+		setText("Delete");
 		this.modelView = modelView;
 		modelView.addSelectionChangedListener(this);
 		setDiagram(null);

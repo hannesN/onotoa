@@ -90,8 +90,7 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-				wizard.setDefaultType(KindOfTopicType.OCCURRENCE_TYPE);
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.OCCURRENCE_TYPE);
 				WizardDialog dlg = new WizardDialog(section.getShell(), wizard);
 				
 				if (dlg.open()==Dialog.OK) {

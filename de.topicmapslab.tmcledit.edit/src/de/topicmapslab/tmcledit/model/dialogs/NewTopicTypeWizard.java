@@ -22,9 +22,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.fieldassist.ContentAssistCommandAdapter;
@@ -43,16 +41,16 @@ public class NewTopicTypeWizard extends Wizard {
 	private NewTypeWizardPage page1;
 	
 	private TopicType newTopicType;
-	private KindOfTopicType defaultType = KindOfTopicType.TOPIC_TYPE;
+	private KindOfTopicType kind = KindOfTopicType.TOPIC_TYPE;
 	
-	public NewTopicTypeWizard() {
-		setWindowTitle("New Topic Type..");
+	public NewTopicTypeWizard(KindOfTopicType kind) {
+		this.kind = kind;
+		setWindowTitle("New "+kind.getLiteral()+"...");
 	}
 	
 	@Override
 	public void addPages() {
 		page1 = new NewTypeWizardPage();
-		page1.setDefaultType(defaultType);
 		addPage(page1);
 	}
 	
@@ -66,16 +64,6 @@ public class NewTopicTypeWizard extends Wizard {
 		return newTopicType;
 	}
 
-	
-	
-	public void setDefaultType(KindOfTopicType type) {
-		this.defaultType = type;
-		if (page1!=null)
-			page1.setDefaultType(type);
-	}
-
-
-
 	private class NewTypeWizardPage extends WizardPage {
 
 		private Text nameText;
@@ -83,14 +71,12 @@ public class NewTopicTypeWizard extends Wizard {
 		private Text locatorText;
 
 		private boolean syncIdentifier;
-		
-		private Button buttons[];
-		private int selButton = 0;
+	
 		private PSIContentProposalProvider proposalProvider;
 		
 		protected NewTypeWizardPage() {
 			super("new type");
-			setTitle("Create Topic Type");
+			setTitle("Create "+kind.getLiteral()+" ...");
 			String baseLocator = ModelIndexer.getInstance().getTopicMapSchema().getBaseLocator();
 			syncIdentifier = ((baseLocator!=null) && (baseLocator.length()>0));
 		}
@@ -99,7 +85,6 @@ public class NewTopicTypeWizard extends Wizard {
 			Composite comp = new Composite(parent, SWT.NONE);
 			comp.setLayout(new GridLayout());
 			
-			createTypeControl(comp);
 			createNameControl(comp);
 			
 			
@@ -108,27 +93,7 @@ public class NewTopicTypeWizard extends Wizard {
 			setPageComplete(false);
 		}
 
-		private void createTypeControl(Composite parent) {
-			Group group = new Group(parent, SWT.BORDER);
-			group.setLayoutData(new GridData(GridData.FILL_BOTH));
-			group.setText("Type:");
-			group.setLayout(new GridLayout(3, false));
-			
-			String labels[] = {"Topic Type",  "Occurrence Type", "Name Type", 
-					"Role Type", "Association Type"};
-			
-			buttons = new Button[labels.length];
-			
-			for (int i=0; i<labels.length; i++) {
-				buttons[i] = new Button(group, SWT.RADIO);
-				buttons[i].setText(labels[i]);
 				
-			}
-			
-			buttons[selButton].setSelection(true);
-			
-		}
-		
 		@Override
 		public void setPageComplete(boolean complete) {
 		    super.setPageComplete(complete);
@@ -136,10 +101,6 @@ public class NewTopicTypeWizard extends Wizard {
 		    	setErrorMessage(null);
 		}
 		
-		public void setDefaultType(KindOfTopicType type) {
-			this.selButton = type.getValue();
-		}
-
 		private void createNameControl(Composite parent) {
 			Composite comp = new Composite(parent, SWT.NONE);
 			comp.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -225,16 +186,6 @@ public class NewTopicTypeWizard extends Wizard {
 		}
 		
 		private TopicType createNewType() {
-			int selection = -1;
-			for (int i=0; i<buttons.length; i++) {
-				if (buttons[i].getSelection())
-					selection = i;
-			}
-			
-			KindOfTopicType kind = KindOfTopicType.NO_TYPE;
-			if (selection!=-1)
-				kind = KindOfTopicType.get(selection);
-				
 			TopicType type = ModelIndexer.getTopicIndexer().createTopicType(kind);
 			type.setName(nameText.getText());
 			

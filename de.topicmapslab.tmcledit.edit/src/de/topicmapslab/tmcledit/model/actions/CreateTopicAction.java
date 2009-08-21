@@ -57,8 +57,7 @@ public class CreateTopicAction extends AbstractTreeListenerAction {
 
 	@Override
 	public void run() {
-		NewTopicTypeWizard wizard = new NewTopicTypeWizard();
-		wizard.setDefaultType(kindOfTopicType);
+		NewTopicTypeWizard wizard = new NewTopicTypeWizard(kindOfTopicType);
 
 		WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), wizard);
 

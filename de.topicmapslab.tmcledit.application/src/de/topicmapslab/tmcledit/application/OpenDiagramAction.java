@@ -14,7 +14,6 @@
 package de.topicmapslab.tmcledit.application;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
@@ -27,8 +26,9 @@ import org.eclipse.ui.PlatformUI;
 public class OpenDiagramAction extends Action {
 	
 	public OpenDiagramAction() {
+		setId("open onotoa");
 		setText("Open...");
-		setAccelerator(SWT.ALT|'o');
+//		setAccelerator(SWT.CTRL|'O');
 	}
 	
 	@Override
