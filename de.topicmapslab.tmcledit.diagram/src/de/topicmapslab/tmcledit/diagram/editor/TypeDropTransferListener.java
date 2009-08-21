@@ -26,7 +26,7 @@ import org.eclipse.swt.dnd.Transfer;
 
 import de.topicmapslab.tmcledit.diagram.creationfactories.AssociationNodeCreationFactory;
 import de.topicmapslab.tmcledit.diagram.creationfactories.TypeNodeCreationFactory;
-import de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -43,6 +43,7 @@ public class TypeDropTransferListener extends
 
 	private List<TopicType> movedTypes = Collections.emptyList();
 	private transient AssociationTypeConstraint atc;
+	private transient boolean dropAllowed;
 
 	private final TopicMapSchema schema;
 
@@ -89,12 +90,10 @@ public class TypeDropTransferListener extends
 		CreateRequest req = ((CreateRequest) getTargetRequest());
 		req.setLocation(getDropLocation());
 		EditPart part = getViewer().findObjectAt(getDropLocation());
-
-		if (atc != null) {
-			req.setFactory(assocConstrFac);
-		} else {
-			if (part instanceof NodeEditPart) {
-				// req.setFactory(occFac);
+		if (part instanceof DiagramEditPart) {
+			dropAllowed = true;
+			if (atc != null) {
+				req.setFactory(assocConstrFac);
 			} else {
 				req.setFactory(nodeFac);
 			}
@@ -120,7 +119,7 @@ public class TypeDropTransferListener extends
 		nodeFac.setTopicTypes(movedTypes);
 		req.setFactory(nodeFac);
 
-		if ((movedTypes.isEmpty()) && (atc == null)) {
+		if (dropAllowed && (movedTypes.isEmpty()) && (atc == null)) {
 			getCurrentEvent().detail = DND.DROP_NONE;
 			return;
 		}
