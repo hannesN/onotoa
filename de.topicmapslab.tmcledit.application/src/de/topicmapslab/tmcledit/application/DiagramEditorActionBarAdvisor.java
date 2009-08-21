@@ -11,8 +11,6 @@
 package de.topicmapslab.tmcledit.application;
 
 
-import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.ICoolBarManager;
@@ -22,15 +20,13 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarContributionItem;
 import org.eclipse.jface.action.ToolBarManager;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.osgi.util.NLS;
-import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.part.ViewPart;
@@ -95,7 +91,11 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		
 		register(ActionFactory.EXPORT.create(window));
 		
-		register(ActionFactory.PREFERENCES.create(window));
+		IWorkbenchAction prefAction = ActionFactory.PREFERENCES.create(window);
+		prefAction.setText(getPointText(prefAction.getText()));
+		register(prefAction);
+		
+		register(aboutAction);
 	}
 
 	@Override
@@ -259,32 +259,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		}
 	}
 
-	public static boolean openEditor(IWorkbench workbench, URI fileURI) {
-		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
-		IWorkbenchPage page = workbenchWindow.getActivePage();
-		IEditorDescriptor editorDescriptor = workbench.getEditorRegistry()
-				.getDefaultEditor(fileURI.toFileString());
-		if (editorDescriptor == null) {
-			MessageDialog.openError(
-							workbenchWindow.getShell(),
-							Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorTitle,
-							NLS.bind(Messages.DiagramEditorActionBarAdvisor_DefaultFileEditorMessage,
-											fileURI.toFileString()));
-			return false;
-		} else {
-			try {
-				page.openEditor(new URIEditorInput(fileURI), editorDescriptor.getId());
-			} catch (PartInitException exception) {
-				MessageDialog.openError(
-								workbenchWindow.getShell(),
-								Messages.DiagramEditorActionBarAdvisor_DefaultEditorOpenErrorTitle,
-								exception.getMessage());
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	public static boolean openModelView(IWorkbench workbench, String filename, boolean newFile) {
 		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
 		IWorkbenchPage page = workbenchWindow.getActivePage();
@@ -306,4 +280,10 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		return true;
 	}
 
+	private String getPointText(String s) {
+		if (s.endsWith("..."))
+			return s;
+		else
+			return s+"...";
+	}
 }

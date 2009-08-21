@@ -110,6 +110,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				TopicType type = (TopicType) getModel();
 				SubjectIdentifierListDialog dlg = new SubjectIdentifierListDialog(
 						identifierText.getShell());
+				dlg.setText("Subject Identifier...");
 				dlg.setTopicName(getCastedModel().getName());
 				dlg.setSelectedTopics(type.getIdentifiers());
 				dlg.setInputDescription("Please enter the new subject identifier.");
@@ -158,6 +159,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			public void widgetSelected(SelectionEvent e) {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(isAText
 						.getShell(), (TopicType) getModel());
+				dlg.setTitle("Is a Selection...");
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
 				if (dlg.open() == Dialog.OK) {
@@ -180,6 +182,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText
 						.getShell(), (TopicType) getModel());
 				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
+				dlg.setTitle("Kind of Selection...");
 
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
@@ -203,6 +206,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				TopicSelectionDialog dlg = new TopicSelectionDialog(
 						overlapText.getShell(), (TopicType) getModel());
 				dlg.setSelectedTopics(((TopicType) getModel()).getOverlap());
+				dlg.setTitle("Overlap Selection...");
 
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
@@ -213,7 +217,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 		});
 
-		toolkit.createLabel(comp, "isAbstract");
+		toolkit.createLabel(comp, "isAbstract:");
 		abstractButton = toolkit.createButton(comp, "", SWT.CHECK);
 		gd = new GridData();
 		gd.horizontalSpan = 2;

@@ -23,7 +23,7 @@ public class CreateSubjectLocatorConstraintAction extends AbstractCreateConstrai
 
 	public CreateSubjectLocatorConstraintAction(ModelView view) {
 	    super(view);
-	    setText("Create &Subject Locator Constraint..");
+	    setText("Create &Subject Locator Constraint...");
     }
 
 	@Override

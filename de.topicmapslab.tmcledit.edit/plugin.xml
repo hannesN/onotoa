@@ -52,7 +52,7 @@
       </command>
       <command
             id="de.topicmapslab.tmcledit.extensions.showerrorviewcommand"
-            name="Show Error View">
+            name="Show Error View...">
       </command>
    </extension>
    <extension

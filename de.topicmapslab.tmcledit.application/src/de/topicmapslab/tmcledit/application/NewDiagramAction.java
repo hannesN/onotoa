@@ -16,6 +16,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
@@ -26,8 +27,9 @@ import de.topicmapslab.tmcledit.wizards.FileWizard;
  */
 public class NewDiagramAction extends Action {
 
-	public NewDiagramAction() {
-		setText("New..");
+	public NewDiagramAction() { 
+		setText("New...");
+		setAccelerator(SWT.ALT|'n');
 	}
 	
 	@Override
@@ -37,6 +39,7 @@ public class NewDiagramAction extends Action {
 		
 		FileWizard wizard = new FileWizard(true);
 		WizardDialog dlg = new WizardDialog(shell, wizard);
+		dlg.setTitle("New Onotoa Model...");
 		if (dlg.open()==Dialog.OK) {
 			File file = new File(wizard.getPath());
 			if (file.exists()) {
@@ -50,6 +53,6 @@ public class NewDiagramAction extends Action {
 			
 			DiagramEditorActionBarAdvisor.openModelView(workbench, wizard.getPath(), true);
 		}
-		
 	}
+	
 }

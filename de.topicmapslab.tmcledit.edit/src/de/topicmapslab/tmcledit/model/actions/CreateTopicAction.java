@@ -31,7 +31,7 @@ public class CreateTopicAction extends AbstractTreeListenerAction {
 	 */
 	public CreateTopicAction(ModelView modelView) {
 		super(modelView);
-		setText("Create Topic Type");
+		setText("Create Topic Type...");
 	}
 
 	public void setKindOfTopicType(KindOfTopicType kindOfTopicType) {

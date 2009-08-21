@@ -45,6 +45,7 @@ public class StringListSelectionDialog extends Dialog {
 	private ArrayList<String> stringList;
 	private IInputValidator validator;
 	private String inputDescription;
+	private String text;
 	
 	public StringListSelectionDialog(Shell parentShell) {
 		super(parentShell);
@@ -82,7 +83,7 @@ public class StringListSelectionDialog extends Dialog {
 		GridDataFactory fac = GridDataFactory.createFrom(gd);
 		
 		Button addButton = new Button(comp, SWT.PUSH);
-		addButton.setText("Add..");
+		addButton.setText("Add...");
 		addButton.setToolTipText("Add selected Topics");
 		fac.applyTo(addButton);
 		addButton.addSelectionListener(new SelectionAdapter() {
@@ -93,7 +94,7 @@ public class StringListSelectionDialog extends Dialog {
 		});
 		
 		Button editButton = new Button(comp, SWT.PUSH);
-		editButton.setText("Edit..");
+		editButton.setText("Edit...");
 		editButton.setToolTipText("Edit selected Element");
 		fac.applyTo(editButton);
 		editButton.addSelectionListener(new SelectionAdapter() {
@@ -178,6 +179,14 @@ public class StringListSelectionDialog extends Dialog {
 		return (inputDescription==null) ? "" : inputDescription;
 	}
 	
+	public void setText(String text) {
+	    this.text = text;
+    }
+	
+	public String getText() {
+	    return text==null ? "" :text;
+    }
+	
 	public void setInputDescription(String inputDescription) {
 		this.inputDescription = inputDescription;
 	}
@@ -186,6 +195,7 @@ public class StringListSelectionDialog extends Dialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setSize(300, 400);
+		newShell.setText(getText());
 	}
 	
 	public ArrayList<String> getStringList() {

@@ -87,6 +87,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 
 		Composite comp = toolkit.createComposite(parent);
 		GridLayout layout = new GridLayout(3, false);
+		layout.marginWidth = 0;
 		comp.setLayout(layout);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;

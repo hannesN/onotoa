@@ -59,7 +59,7 @@ public class DeleteTopicTypeAction extends Action implements ISelectionChangedLi
 			setText("Delete " + ((TopicType) construct).getName());
 			
 		} else {
-			setText("Delete Constraint..");
+			setText("Delete Constraint");
 		}
 		setEnabled(type!=null);
 	}

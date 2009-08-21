@@ -34,7 +34,7 @@ public class FileWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		String title = (newFile) ? "New File.." : "OpenFile";
+		String title = (newFile) ? "New File..." : "Open File...";
 		page1 = new FileWizardPage(title);
 		addPage(page1);
 		

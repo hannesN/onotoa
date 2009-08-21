@@ -141,6 +141,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 
+	public static final int MODEL_LOADED = 12345;
+	
 	private TreeViewer viewer;
 	private ViewContentProvider contentProvider;
 	private Action validationAction;
@@ -365,6 +367,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(), redoAction);
 
 		CloseAction closeAction = new CloseAction(this);
+		addPropertyListener(closeAction);
 		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), closeAction);
 
 		IAction a = ActionFactory.SAVE.create(getViewSite().getWorkbenchWindow());
@@ -402,7 +405,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-
+		if (currFile==null) {
+			return;
+		}
+		
 		if (createDiagramAction.isEnabled())
 			manager.add(createDiagramAction);
 		
@@ -618,6 +624,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		setSelection(new StructuredSelection());
 		firePropertyChange(PROP_DIRTY);
+
 		if (viewer != null) {
 			viewer.refresh();
 			viewer.expandToLevel(2);
@@ -755,7 +762,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public boolean isSaveAsAllowed() {
-		return true;
+		return (currFile!=null);
 	}
 
 	public boolean isSaveOnCloseNeeded() {

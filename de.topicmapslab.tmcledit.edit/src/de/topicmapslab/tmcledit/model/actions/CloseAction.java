@@ -15,6 +15,7 @@ package de.topicmapslab.tmcledit.model.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.swt.SWT;
+import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.actions.ActionFactory;
 
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -23,12 +24,13 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  * @author Hannes Niederhausen
  *
  */
-public class CloseAction extends Action {
+public class CloseAction extends Action implements IPropertyListener {
 
 	private ModelView modelView;
 	
 	public CloseAction(ModelView modelView) {
 		this.modelView = modelView;
+		setEnabled(modelView.getCurrentTopicMapSchema()!=null);
 	}
 	
 	@Override
@@ -50,5 +52,10 @@ public class CloseAction extends Action {
 	public void run() {
 		modelView.close();
 	}
+
+	
+	public void propertyChanged(Object source, int propId) {
+		setEnabled(modelView.getCurrentTopicMapSchema()!=null);
+    }
 	
 }

@@ -23,7 +23,7 @@ public class CreateSubjectIdenifierConstraintAction extends AbstractCreateConstr
 
 	public CreateSubjectIdenifierConstraintAction(ModelView view) {
 	    super(view);
-	    setText("Create &Subject Identifier Constraint..");
+	    setText("Create &Subject Identifier Constraint...");
     }
 
 	@Override

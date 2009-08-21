@@ -14,6 +14,7 @@
 package de.topicmapslab.tmcledit.model.dialogs;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -23,9 +24,11 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -47,7 +50,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  * @author Hannes Niederhausen
  * 
  */
-public class TopicSelectionDialog extends Dialog {
+public class TopicSelectionDialog extends Dialog implements ISelectionChangedListener {
 
 	private List<TopicType> selectedTopics = Collections.emptyList();
 
@@ -58,6 +61,12 @@ public class TopicSelectionDialog extends Dialog {
 
 	private KindOfTopicType kind;
 
+	private Button addButton;
+
+	private Button removeButton;
+
+	private String title;
+	
 	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType) {
 		this(parentShell, workingTopicType, KindOfTopicType.TOPIC_TYPE);
 	}
@@ -106,6 +115,7 @@ public class TopicSelectionDialog extends Dialog {
 
 		});
 
+		availableTopicList.addSelectionChangedListener(this);
 		createButtonRow(comp);
 
 		selectedTopicList = new ListViewer(comp);
@@ -115,6 +125,7 @@ public class TopicSelectionDialog extends Dialog {
 		selectedTopicList.setContentProvider(new ArrayContentProvider());
 		selectedTopicList.setLabelProvider(new TopicLableProvider());
 		selectedTopicList.setInput(selectedTopics);
+		selectedTopicList.addSelectionChangedListener(this);
 		selectedTopicList.addDoubleClickListener(new IDoubleClickListener() {
 			
 			public void doubleClick(DoubleClickEvent event) {
@@ -133,10 +144,11 @@ public class TopicSelectionDialog extends Dialog {
 		gd.widthHint = 100;
 		GridDataFactory fac = GridDataFactory.createFrom(gd);
 
-		Button addButton = new Button(comp, SWT.PUSH);
+		addButton = new Button(comp, SWT.PUSH);
 		addButton.setText(">");
 		addButton.setToolTipText("Add selected Topics");
 		fac.applyTo(addButton);
+		addButton.setEnabled(false);
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -146,11 +158,19 @@ public class TopicSelectionDialog extends Dialog {
 
 		Button addAllButton = new Button(comp, SWT.PUSH);
 		addAllButton.setText(">>");
+		addAllButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				addAll();
+			}
+		});
 		addAllButton.setToolTipText("Add all Topics");
+		
 		fac.applyTo(addAllButton);
 
-		Button removeButton = new Button(comp, SWT.PUSH);
+		removeButton = new Button(comp, SWT.PUSH);
 		removeButton.setText("<");
+		removeButton.setEnabled(false);
 		removeButton.setToolTipText("Remove selected Topics");
 		fac.applyTo(removeButton);
 		removeButton.addSelectionListener(new SelectionAdapter() {
@@ -162,12 +182,18 @@ public class TopicSelectionDialog extends Dialog {
 
 		Button removeAllButton = new Button(comp, SWT.PUSH);
 		removeAllButton.setText("<<");
+		removeAllButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				removeAll();
+			}
+		});
 		removeAllButton.setToolTipText("Remove all Topics");
 		fac.applyTo(removeAllButton);
 
 		Button createButton = new Button(comp, SWT.PUSH);
 		createButton.setToolTipText("Create new Topic");
-		createButton.setText("New..");
+		createButton.setText("New...");
 		createButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -199,6 +225,14 @@ public class TopicSelectionDialog extends Dialog {
 	}
 
 	@SuppressWarnings("unchecked")
+    private void addAll() {
+		selectedTopics.addAll((Collection<? extends TopicType>) availableTopicList.getInput());		
+		
+		availableTopicList.refresh();
+		selectedTopicList.refresh();
+	}
+	
+	@SuppressWarnings("unchecked")
 	private void removeSelection() {
 		IStructuredSelection sel = (IStructuredSelection) selectedTopicList.getSelection();
 		for (Iterator it = sel.iterator(); it.hasNext();) {
@@ -207,11 +241,19 @@ public class TopicSelectionDialog extends Dialog {
 		availableTopicList.refresh();
 		selectedTopicList.refresh();
 	}
+	
+	private void removeAll() {
+		selectedTopics.clear();		
+		
+		availableTopicList.refresh();
+		selectedTopicList.refresh();
+	}
 
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setSize(500, 400);
+		newShell.setText(getTitle());
 	}
 
 	public List<TopicType> getSelectedTopics() {
@@ -232,4 +274,29 @@ public class TopicSelectionDialog extends Dialog {
 			return super.getText(element);
 		}
 	}
+
+	public String getTitle() {
+	    return title==null ? "" : title;
+    }
+	
+	public void setTitle(String title) {
+	    this.title = title;
+    }
+	
+	public void selectionChanged(SelectionChangedEvent event) {
+	    if (event.getSelectionProvider().equals(availableTopicList)) {
+	    	if (event.getSelection().isEmpty()) {
+	    		addButton.setEnabled(false);
+	    	} else {
+	    		addButton.setEnabled(true);
+	    	}
+	    } else if (event.getSelectionProvider().equals(selectedTopicList)) {
+	    	if (event.getSelection().isEmpty()) {
+	    		removeButton.setEnabled(false);
+	    	} else {
+	    		removeButton.setEnabled(true);
+	    	}
+	    }
+	    
+    }
 }
