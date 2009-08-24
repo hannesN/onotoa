@@ -23,12 +23,6 @@
             id="de.topicmapslab.tmcledit.export.wizards.ExportWizard"
             name="Export TMCL (CTM)">
       </wizard>
-      <wizard
-            category="de.topicmapslab.tmcledit.export.tmcledit"
-            class="de.topicmapslab.tmcledit.export.wizards.XTMExportWizard"
-            id="de.topicmapslab.tmcledit.export.XTMExportWizard"
-            name="Export TMCL (XTM2)">
-      </wizard>
    </extension>
 
 </plugin>
