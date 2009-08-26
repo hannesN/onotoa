@@ -123,6 +123,11 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				TopicIndexer instance = ModelIndexer.getTopicIndexer();
 				List<TopicType> list = new ArrayList<TopicType>();
 				list.addAll(instance.getRoleTypes());
+				
+				for (RoleConstraint rc : getCastedModel().getRoles()) {
+					if (rc.getType()!=null)
+						list.remove(rc.getType());
+				}
 
 				ListSelectionDialog dlg = new ListSelectionDialog(control.getShell(), list, new ArrayContentProvider(),
 				        control.new TopicLabelProvider(), "Choose the Role type");
