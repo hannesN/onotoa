@@ -41,6 +41,14 @@ public abstract class AbstractScopedLabeledEditPart extends
 		super();
 	}
 
+	@Override
+	public Command getCommand(Request request) {
+		Command cmd = super.getCommand(request);
+		if (cmd==null)
+			cmd = getParent().getCommand(request);
+		return cmd;
+	}
+	
 	protected void createEditPolicies() {
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new LayoutEditPolicy() {
 
