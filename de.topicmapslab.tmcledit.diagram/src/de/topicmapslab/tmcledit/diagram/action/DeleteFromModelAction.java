@@ -15,6 +15,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.commands.CommandStack;
@@ -33,7 +34,11 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -43,6 +48,8 @@ import de.topicmapslab.tmcledit.model.commands.DeleteCommentCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteRolePlayerConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
+import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.commands.RemoveScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
@@ -96,8 +103,6 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		AbstractCommand cmd = null;
 		if (model instanceof TypeNode) {
 			cmd = new DeleteTopicTypeCommand(((TypeNode) model).getTopicType());
-		} else if (model instanceof AbstractConstraint) {
-			cmd = getDeleteTopicTypeConstraintItemCommand(model);
 		} else if (model instanceof Edge) {
 			cmd = getDeleteEdgeCommand(model);
 		} else if (model instanceof AssociationNode) {
@@ -105,7 +110,16 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 					((AssociationNode) model).getAssociationConstraint());
 		} else if (model instanceof Comment) {
 			cmd = new DeleteCommentCommand((Comment) model);
+		} else if (model instanceof ReifierConstraint) {
+			ReifiableTopicType rtt = (ReifiableTopicType) ((EObject) model).eContainer();
+			cmd = new GenericSetCommand(rtt, ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, null);
+		} else if (model instanceof ScopeConstraint) {
+			ScopeConstraint sc = (ScopeConstraint) model;
+			cmd = new RemoveScopeConstraintsCommand((ScopedTopicType) sc.eContainer(), sc);
+		} else if (model instanceof AbstractConstraint) {
+			cmd = getDeleteTopicTypeConstraintItemCommand(model);
 		}
+		
 		return cmd;
 	}
 
@@ -147,7 +161,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 			type = ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 		} else if (model instanceof SubjectIdentifierConstraint) {
 			type = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
-		} else if (model instanceof SubjectIdentifierConstraint) {
+		} else if (model instanceof SubjectLocatorConstraint) {
 			type = ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
 		}
 		AbstractConstraint ac = (AbstractConstraint) model;
@@ -196,6 +210,8 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 				|| (model instanceof SubjectIdentifierConstraint)
 				|| (model instanceof SubjectLocatorConstraint)
 				|| (model instanceof Edge)
+				|| (model instanceof ScopeConstraint)
+				|| (model instanceof ReifierConstraint)
 				|| (model instanceof Comment);
 	}
 

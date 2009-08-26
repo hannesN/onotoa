@@ -332,17 +332,17 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 //		return gd;
 //	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void removeChildVisual(EditPart childEditPart) {
-		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
-		List childrenList = child.getChildren();
-		IFigure[] children = (IFigure[]) childrenList.toArray(new IFigure[childrenList.size()]);
-		
-		for (IFigure c : children) {
-			compartmentFigure.add(c);
-		}
-	}
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	protected void removeChildVisual(EditPart childEditPart) {
+//		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
+//		List childrenList = child.getChildren();
+//		IFigure[] children = (IFigure[]) childrenList.toArray(new IFigure[childrenList.size()]);
+//		
+//		for (IFigure c : children) {
+//			compartmentFigure.add(c);
+//		}
+//	}
 			
 	@Override
 	public IFigure getContentPane() {
