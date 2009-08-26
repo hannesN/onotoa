@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.dialogs;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	private KindOfTopicType kindOfTopicType = null;
 
 	private TopicTypeComparator topicTypeComparator;
+	
+	private List<TopicType> excludeList;
 	
 	public FilterTopicSelectionDialog(Shell shell, KindOfTopicType kindOfTopicType) {
 		this(shell, false);
@@ -109,6 +112,16 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		return topicTypeComparator;
 	}
 
+	public void setExcludeList(List<TopicType> excludeList) {
+	    this.excludeList = excludeList;
+    }
+	
+	public List<TopicType> getExcludeList() {
+		if (excludeList==null)
+			return Collections.emptyList();
+		return excludeList;
+    }
+	
 	@Override
 	protected IStatus validateItem(Object item) {
 		return Status.OK_STATUS;
@@ -137,6 +150,9 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		public boolean matchItem(Object item) {
 
 			TopicType tt = (TopicType) item;
+			
+			if (getExcludeList().contains(tt))
+				return false;
 			
 			return matches(tt.getName());
 		}

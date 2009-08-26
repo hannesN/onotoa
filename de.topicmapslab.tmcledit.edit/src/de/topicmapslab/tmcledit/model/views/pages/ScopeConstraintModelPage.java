@@ -10,7 +10,11 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.views.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -32,6 +36,7 @@ import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
@@ -120,6 +125,20 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
 						typeText.getShell(), KindOfTopicType.TOPIC_TYPE);
 
+				if (isScopeConstraint()) {
+					ScopedTopicType stt = (ScopedTopicType) getCastedModel().eContainer();
+					EList<ScopeConstraint> scopeList = stt.getScope();
+					if (scopeList.size()>1) {
+						List<TopicType> tl = new ArrayList<TopicType>(scopeList.size());
+						for (ScopeConstraint sc : scopeList) {
+							if (sc.getType()!=null)
+								tl.add (sc.getType());
+						}
+						dlg.setExcludeList(tl);
+					}
+					
+				}
+				
 				if (dlg.open() == Dialog.OK) {
 					TopicType tt = ((TopicType) dlg.getFirstResult());
 					int featureID = ModelPackage.REIFIER_CONSTRAINT__TYPE;

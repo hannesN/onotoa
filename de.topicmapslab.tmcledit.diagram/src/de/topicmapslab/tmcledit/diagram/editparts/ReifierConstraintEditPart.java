@@ -11,7 +11,9 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -20,12 +22,21 @@ import de.topicmapslab.tmcledit.model.TopicType;
  *
  */
 public class ReifierConstraintEditPart extends AbstractLabelEditPart {
-
+	
 	@Override
 	protected void createEditPolicies() {
 	}
 
 	public void notifyChanged(Notification notification) {
+		if (notification.getFeatureID(TopicType.class)==ModelPackage.REIFIER_CONSTRAINT__TYPE) {
+			EObject oldVal = (EObject) notification.getOldValue();
+			EObject newVal = (EObject) notification.getNewValue();
+			
+			if (oldVal!=null)
+				oldVal.eAdapters().remove(this);
+			if (newVal!=null)
+				newVal.eAdapters().add(this);
+		}
 		refreshVisuals();
 	}
 
