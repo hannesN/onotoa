@@ -22,18 +22,15 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Color;
 
-public class SelectionFigure extends Figure
-{
+public class SelectionFigure extends Figure {
 
 	private boolean selected;
-	
-	public SelectionFigure()
-	{
+
+	public SelectionFigure() {
 		super();
 	}
-	
-	private Rectangle getSelectionRectangle()
-	{
+
+	private Rectangle getSelectionRectangle() {
 		Rectangle bounds = getBounds().getCopy();
 		bounds.expand(new Insets(2, 2, 0, 0));
 		translateToParent(bounds);
@@ -41,15 +38,13 @@ public class SelectionFigure extends Figure
 		return bounds;
 	}
 
-	
 	/**
-	 * paints figure differently depends on the whether the figure has focus or is selected 
+	 * paints figure differently depends on the whether the figure has focus or
+	 * is selected
 	 */
 	@Override
-	protected void paintFigure(Graphics graphics)
-	{
-		if (selected)
-		{
+	protected void paintFigure(Graphics graphics) {
+		if (selected) {
 			graphics.pushState();
 			graphics.setBackgroundColor(ColorConstants.menuBackgroundSelected);
 			graphics.fillRectangle(getSelectionRectangle());
@@ -61,23 +56,32 @@ public class SelectionFigure extends Figure
 	/**
 	 * Sets the selection state of this SimpleActivityLabel
 	 * 
-	 * @param b true will cause the label to appear selected
+	 * @param b
+	 *            true will cause the label to appear selected
 	 */
 	@SuppressWarnings("unchecked")
-	public void setSelected(boolean b)
-	{
+	public void setSelected(boolean b) {
 		selected = b;
 		Color c = (b) ? ColorConstants.white : ColorConstants.black;
 		List children = getChildren();
 		for (Iterator it = children.iterator(); it.hasNext();) {
 			IFigure f = (IFigure) it.next();
 			if (f instanceof Label)
-				((Label)f).setForegroundColor(c);
+				((Label) f).setForegroundColor(c);
 		}
 		repaint();
 	}
-
+	
+	@Override
+	public void remove(IFigure figure) {
+		// TODO Auto-generated method stub
+		super.remove(figure);
+	}
+	
+	@Override
+	public void add(IFigure figure, Object constraint, int index) {
+		// TODO Auto-generated method stub
+		super.add(figure, constraint, index);
+	}
 
 }
-
-

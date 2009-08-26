@@ -13,16 +13,22 @@ package de.topicmapslab.tmcledit.diagram.editparts;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.GridData;
+import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.swt.SWT;
 
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.EditableLabel;
@@ -32,9 +38,11 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;
+	private Label cardLabel;
 	private Label typeLabel;
 	private Label regExpLabel;
 	private boolean editable = true;
+	private Figure compartement;
 
 	public AbstractLabelEditPart() {
 		super();
@@ -44,23 +52,62 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 	protected IFigure createFigure() {
 	
 		figure = new SelectionFigure();
+		ToolbarLayout lm = new ToolbarLayout(false);
+		figure.setLayoutManager(lm);
+		
+		
+		Figure constraint = new Figure();
+		figure.add(constraint);
+		lm = new ToolbarLayout(true);
+		lm.setSpacing(10);
+		constraint.setLayoutManager(lm);
 		
 		nameLabel = new EditableLabel("");
 		nameLabel.setLabelAlignment(PositionConstants.LEFT);
-		figure.add(nameLabel);
+		constraint.add(nameLabel);
+		
+		cardLabel = new Label();
+		cardLabel.setLabelAlignment(PositionConstants.LEFT);
+		constraint.add(cardLabel);
 		
 		typeLabel = new Label();
 		typeLabel.setLabelAlignment(PositionConstants.LEFT);
-		figure.add(typeLabel);
+		constraint.add(typeLabel);
 		
 		regExpLabel = new Label();
 		regExpLabel.setLabelAlignment(PositionConstants.LEFT);
-		figure.add(regExpLabel);
-		
+		constraint.add(regExpLabel);
 		
 		return figure;
 	}
+	
+	@Override
+	protected void addChildVisual(EditPart childEditPart, int index) {
+		super.addChildVisual(childEditPart, index);
+		IFigure f = ((GraphicalEditPart) childEditPart).getFigure();
+		GridData gd = new GridData();
+		gd.horizontalIndent = 20;
+		gd.heightHint = SWT.DEFAULT;
+		getContentPane().getLayoutManager().setConstraint(f, gd);
+	}
 
+	@Override
+	public IFigure getContentPane() {
+		if (compartement==null) {
+			compartement = new Figure();
+			getFigure().add(compartement);
+			org.eclipse.draw2d.GridLayout gl = new GridLayout(1, false);
+			gl.marginHeight = 0;
+			gl.verticalSpacing = 1;
+			compartement.setLayoutManager(gl);
+		}
+		return compartement;
+	}
+	
+	public Label getCardLabel() {
+		return cardLabel;
+	}
+	
 	@Override
 	public void setSelected(int value) {
 		super.setSelected(value);
@@ -71,7 +118,16 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		} else {
 			f.setSelected(true);
 		}
-		
+	}
+	
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		super.removeChildVisual(childEditPart);
+		if (getContentPane().getChildren().size()==0) {
+			getFigure().remove(getContentPane());
+			compartement=null;
+			getFigure().revalidate();
+		}
 		
 	}
 

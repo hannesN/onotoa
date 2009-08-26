@@ -73,6 +73,8 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	
 	private LineFigure firstLine;
 	private LineFigure secondLine;
+
+//	private GridLayout gridLayout;
 	
 	@Override
 	protected IFigure createFigure() {
@@ -117,21 +119,36 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			
 			figure.setOpaque(false);
 			figure.setBackgroundColor(ColorConstants.yellow);
+			figure.add(new LineFigure());
 			
-			ScopedFigureLayoutManager manager = new ScopedFigureLayoutManager();
 			compartmentFigure = new Figure();
-			compartmentFigure.setLayoutManager(manager);
+
+//			gridLayout = new GridLayout(4);
+			compartmentFigure.setLayoutManager(new ToolbarLayout(false));
 			figure.add(compartmentFigure);
 			
+			LineFigure nameLine = new LineFigure();
+//			gridLayout.setConstraint(nameLine, getLineGridData());
+			
 			firstLine = new LineFigure();
-			secondLine = new LineFigure();
-			compartmentFigure.add(new LineFigure());
+//			gridLayout.setConstraint(firstLine, getLineGridData());
+
+			secondLine = nameLine;
+//			gridLayout.setConstraint(secondLine, getLineGridData());
+			
+			
 			compartmentFigure.add(firstLine);
 			compartmentFigure.add(secondLine);
-			
 		}
 		return figure;
 	}
+
+//	private GridData getLineGridData() {
+//		GridData gd = new GridData();
+//		gd.fillHorizontal = true;
+//		gd.spanRow = true;
+//		return gd;
+//	}
 	
 	private void createNameFont() {
 		if (nameFont!=null) {
@@ -188,7 +205,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		} catch (NullPointerException e) {
 			throw new RuntimeException(e);
 		}
-        super.refreshVisuals();
+        getFigure().invalidate();
 	}
 	
 	@Override
@@ -291,17 +308,40 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
+		
 		if (childEditPart instanceof OccurrenceTypeConstraintEditPart) {
 			int i = compartmentFigure.getChildren().indexOf(secondLine);
 			compartmentFigure.add(child, i);
+//			gridLayout.setConstraint(child, getChildGridData());
 		}
 		else if (childEditPart instanceof NameTypeConstraintEditPart) {
 			int i = compartmentFigure.getChildren().indexOf(firstLine);
 			compartmentFigure.add(child, i);
+//			gridLayout.setConstraint(child, getChildGridData());
 		} else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
-				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) )
+				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) ) {
 			compartmentFigure.add(child);
+//			gridLayout.setConstraint(child, getChildGridData());
+		}
 		
+	}
+
+//	private GridData getChildGridData() {
+//		GridData gd = new GridData();
+//		gd.layoutChildren = true;
+//		return gd;
+//	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		IFigure child = ((GraphicalEditPart)childEditPart).getFigure();
+		List childrenList = child.getChildren();
+		IFigure[] children = (IFigure[]) childrenList.toArray(new IFigure[childrenList.size()]);
+		
+		for (IFigure c : children) {
+			compartmentFigure.add(c);
+		}
 	}
 			
 	@Override

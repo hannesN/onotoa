@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -522,6 +523,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return editingDomain;
 	}
 
+	public CommandStack getCommandStack() {
+		return getEditingDomain().getCommandStack();
+	}
+	
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		if (listeners == Collections.EMPTY_LIST)
 			listeners = new ArrayList<ISelectionChangedListener>();
