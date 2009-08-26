@@ -26,7 +26,9 @@ import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -46,6 +48,7 @@ public class PropertyDetailPageFactory {
 	private static final String NAME_CONSTRAINT = "name_constraint";
 	private static final String IDENTIFIER_CONSTRAINT = "idenntifier_constraint";
 	private static final String COMMENT = "comment";
+	private static final String SCOPE_REIFIER_CONSTRAINT = "scopeconstraint";
 	
 	private EmptyPage emptyPage;
 	private HashMap<String, AbstractModelPage> pageMap = new HashMap<String, AbstractModelPage>();
@@ -177,6 +180,14 @@ public class PropertyDetailPageFactory {
 				page = new CommentPropertyModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(COMMENT, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+		} else if ( (model instanceof ScopeConstraint) || (model instanceof ReifierConstraint) ) {
+			page = pageMap.get(SCOPE_REIFIER_CONSTRAINT);
+			if (page==null) {
+				page = new ScopeConstraintModelPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(SCOPE_REIFIER_CONSTRAINT, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		}

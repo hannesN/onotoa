@@ -24,9 +24,10 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 	private NameTypeConstraint getCastedModel() {
 		return (NameTypeConstraint) getModel();
 	}
-
+	
 	@Override
 	protected void createEditPolicies() {
+		super.createEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new NameConstraintDirectEditPolicy());
 
@@ -34,12 +35,13 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 
 	@Override
 	protected void refreshVisuals() {
+		super.refreshVisuals();
 		NameTypeConstraint ntc = getCastedModel();
 		NameType type = (NameType) ntc.getType();
 
-		if (type == null)
+		if (type == null) {
 			getNameLabel().setText("default");
-		else {
+		} else {
 			getNameLabel().setText(type.getName());
 
 			if (".*".equals(type.getRegExp()))
@@ -52,15 +54,14 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 		buffer.append(ntc.getCardMin());
 		buffer.append("..");
 		buffer.append(ntc.getCardMax());
-
-		getTypeLabel().setText(buffer.toString());
+		getCardLabel().setText(buffer.toString());
 
 		buffer.setLength(0);
-		clearScopeLables();
-		addScopeText();
+//		clearScopeLables();
+		// addScopeText();
 
-		getFigure().revalidate();
-		getFigure().getParent().repaint();
+		// getFigure().revalidate();
+		// getFigure().getParent().repaint();
 
 	}
 

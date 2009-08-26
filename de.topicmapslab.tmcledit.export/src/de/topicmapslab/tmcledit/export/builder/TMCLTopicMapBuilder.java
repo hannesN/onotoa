@@ -311,7 +311,12 @@ public class TMCLTopicMapBuilder {
 	private void createAllowesScope(TopicType tt, Topic constr) {
     	Association ass = topicMap.createAssociation(createTopic(TMCL.ALLOWED_SCOPE));
     	ass.createRole(createTopic(TMCL.ALLOWS), constr);
-    	ass.createRole(createTopic(TMCL.ALLOWED), createTopic(tt));
+    	Topic t = null;
+    	if (tt==null)
+    		t = createTopic(TMDM.SUBJECT);
+    	else
+    		t = createTopic(tt);
+    	ass.createRole(createTopic(TMCL.ALLOWED), t);
     }
 
 	private void createOverlaps(TopicType type, Topic constraint) {

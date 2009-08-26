@@ -33,15 +33,23 @@ public class SubjectIdentifierConstraintEditPart extends AbstractLabelEditPart {
 	protected void refreshVisuals() {
 		SubjectIdentifierConstraint sic = getCastedModel();
 		getNameLabel().setText("Subject Identifier");
+		
+		
 		StringBuffer buffer = new StringBuffer(50);
-		buffer.append(" [");
-		buffer.append(sic.getRegexp());
-		buffer.append("] ");
-		buffer.append(" ");
+		
+		if (!(".*".equals(sic.getRegexp()))) {
+			buffer.append("[");
+			buffer.append(sic.getRegexp());
+			buffer.append("]");
+			getRegExpLabel().setText(buffer.toString());
+		} else {
+			getRegExpLabel().setText(buffer.toString());
+		}
+		buffer.setLength(0);
 		buffer.append(sic.getCardMin());
 		buffer.append("..");
 		buffer.append(sic.getCardMax());
-		getTypeLabel().setText(buffer.toString());
+		getCardLabel().setText(buffer.toString());
 	}
 
 	public void notifyChanged(Notification notification) {

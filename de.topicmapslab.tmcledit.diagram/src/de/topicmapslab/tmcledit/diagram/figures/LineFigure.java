@@ -26,7 +26,18 @@ public class LineFigure extends Figure {
 
 	@Override
 	public Dimension getPreferredSize(int hint, int hint2) {
-		return super.getPreferredSize(hint, 10);
+		if (hint>-1)
+			return new Dimension(hint, 10);
+		else
+			return new Dimension(0, 10);
+	}
+	
+	@Override
+	public Dimension getMinimumSize(int wHint, int hHint) {
+		if (wHint>-1)
+			return new Dimension(wHint, 10);
+		else
+			return new Dimension(0, 10);
 	}
 	
 	@Override

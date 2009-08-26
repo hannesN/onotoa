@@ -36,6 +36,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 	
 	@Override
 	protected void createEditPolicies() {
+		super.createEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new OccurrenceConstraintDirectEditPolicy());
 	}
 
@@ -44,30 +45,42 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 		OccurrenceTypeConstraint otc = getCastedModel();
 		StringBuffer buffer = new StringBuffer();
 		
-		if (otc.getType()!=null) {
-			if (((OccurrenceType) otc.getType()).isUnique())
+		TopicType type = otc.getType();
+		if (type!=null) {
+			if (((OccurrenceType) type).isUnique())
 				getNameLabel().setBorder(border);
 			else
 				getNameLabel().setBorder(null);
-			getNameLabel().setText(otc.getType().getName());
+			getNameLabel().setText(type.getName());
 		} else
 			getNameLabel().setText("tmdm:subject");
 		
 		buffer.append(" : ");
-		if (otc.getType() instanceof OccurrenceType)
-			buffer.append(((OccurrenceType) otc.getType()).getDataType());
+		if (type instanceof OccurrenceType)
+			buffer.append(((OccurrenceType) type).getDataType());
 		else
 			buffer.append("xsd:anyType");
-		buffer.append(" ");
+
+		getTypeLabel().setText(buffer.toString());
+		
+		buffer.setLength(0);
 		buffer.append(otc.getCardMin());
 		buffer.append("..");
-		buffer.append(otc.getCardMax());	
-		clearScopeLables();
-		addScopeText();
+		buffer.append(otc.getCardMax());
+		getCardLabel().setText(buffer.toString());
+
+		if ( (type instanceof OccurrenceType) && (!(".*".equals(((OccurrenceType)type).getRegExp()))) ) {
+			getRegExpLabel().setText("["+((OccurrenceType)type).getRegExp()+"]");
+		} else {
+			getRegExpLabel().setText("");
+		}
+
+//		clearScopeLables();
+//		addScopeText();
 		
-		getTypeLabel().setText(buffer.toString());
-		getFigure().revalidate();
-		getFigure().getParent().repaint();
+//		getTypeLabel().setText(buffer.toString());
+//		getFigure().revalidate();
+//		getFigure().getParent().repaint();
 	}
 
 	@Override

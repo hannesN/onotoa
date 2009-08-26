@@ -36,6 +36,8 @@ import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurrenceTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.PrefixMappingElementEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.ReifierConstraintEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.ScopeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.SubjectIdentifierConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.SubjectLocatorConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
@@ -51,6 +53,8 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TypeNode;
@@ -128,6 +132,10 @@ public class TMCLDiagramEditorUtil {
 					part = new MoveableLabelEditPart();
 				} else if (model instanceof Comment) {
 					part = new CommentEditPart();
+				} else if (model instanceof ScopeConstraint) {
+					part = new ScopeConstraintEditPart();
+				} else if (model instanceof ReifierConstraint) {
+					part = new ReifierConstraintEditPart();
 				}
 
 				if (part != null)
@@ -183,8 +191,7 @@ public class TMCLDiagramEditorUtil {
 
 	private static PaletteGroup getTypeItemsPaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types Items");
-		group
-				.add(new CombinedTemplateCreationEntry(
+		group.add(new CombinedTemplateCreationEntry(
 						"Occurrence Constraint",
 						"Occurrence Constraint",
 						new OccurrenceConstraintCreationFactory(),
@@ -193,8 +200,7 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT)));
 
-		group
-				.add(new CombinedTemplateCreationEntry(
+		group.add(new CombinedTemplateCreationEntry(
 						"Name Constraint",
 						"Name Constraint",
 						new CreationFactory() {
@@ -213,9 +219,44 @@ public class TMCLDiagramEditorUtil {
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT_SM),
 						ImageProvider
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
+		
+		group.add(new CombinedTemplateCreationEntry(
+				"Scope Constraint",
+				"Scope Constraint",
+				new CreationFactory() {
 
-		group
-				.add(new CombinedTemplateCreationEntry(
+					public Object getNewObject() {
+						return ModelFactory.eINSTANCE
+								.createScopeConstraint();
+					}
+
+					public Object getObjectType() {
+						return ScopeConstraint.class;
+					}
+
+				},
+				null,
+				null));
+		
+		group.add(new CombinedTemplateCreationEntry(
+				"Reifier Constraint",
+				"Reifier Constraint",
+				new CreationFactory() {
+
+					public Object getNewObject() {
+						return ModelFactory.eINSTANCE
+								.createReifierConstraint();
+					}
+
+					public Object getObjectType() {
+						return ReifierConstraint.class;
+					}
+
+				},
+				null,
+				null));
+
+		group.add(new CombinedTemplateCreationEntry(
 						"Subject Identifier Constraint",
 						"Subject Identifier Constraint",
 						new CreationFactory() {
@@ -235,8 +276,7 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.SUBJECTIDENTIFIERCONSTRAINT)));
 
-		group
-				.add(new CombinedTemplateCreationEntry(
+		group.add(new CombinedTemplateCreationEntry(
 						"Subject Locator Constraint",
 						"Subject Locator Constraint",
 						new CreationFactory() {

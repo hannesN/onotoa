@@ -13,6 +13,7 @@
  */
 package de.topicmapslab.tmcledit.model.commands;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
@@ -30,6 +31,10 @@ public class AddScopeConstraintsCommand extends AbstractCommand {
 	private final List<ScopeConstraint> scopes;
 	
 	
+	public AddScopeConstraintsCommand(ScopedTopicType scopedTopicType,
+			ScopeConstraint... scopes) {
+		this(scopedTopicType, Arrays.asList(scopes));
+	}
 	
 	public AddScopeConstraintsCommand(ScopedTopicType scopedTopicType,
 			List<ScopeConstraint> scopes) {

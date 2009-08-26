@@ -269,7 +269,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			AbstractTypedCardinalityConstraint tc = (AbstractTypedCardinalityConstraint) element;
 			switch (columnIndex) {
 			case 0:
-				return tc.getType().getName();
+				return tc.getType()==null ? "tmdm:subject" : tc.getType().getName();
 			case 1:
 				return tc.getCardMin();
 			case 2:
