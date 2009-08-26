@@ -208,6 +208,10 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 				TopicIndexer instance = ModelIndexer.getTopicIndexer();
 				List<TopicType> list = new ArrayList<TopicType>();
 				list.addAll(instance.getTypesByKind(KindOfTopicType.TOPIC_TYPE));
+				for (ScopeConstraint sc : getCastedModel().getScope()) {
+					if (sc.getType()!=null)
+						list.remove(sc.getType());
+				}
 
 				ListSelectionDialog dlg = new ListSelectionDialog(control.getShell(), list, new ArrayContentProvider(),
 				        control.new TopicLabelProvider(), "Choose the Scope type");
