@@ -43,10 +43,52 @@
    </extension>
       <extension
             point="org.eclipse.ui.bindings">
+         <key
+               commandId="de.topicmapslab.tmcledit.application.newfile"
+               contextId="org.eclipse.ui.contexts.window"
+               schemeId="de.topicmapslab.tmcledit.application.bindingScheme"
+               sequence="M1+N">
+         </key>
+         <key
+               commandId="de.topicmapslab.tmcledit.application.openfile"
+               contextId="org.eclipse.ui.contexts.window"
+               schemeId="de.topicmapslab.tmcledit.application.bindingScheme"
+               sequence="M1+O">
+         </key>
          <scheme
                id="de.topicmapslab.tmcledit.application.bindingScheme"
                name="Onotoa Keys"
                parentId="org.eclipse.ui.defaultAcceleratorConfiguration">
          </scheme>
+      </extension>
+      <extension
+            point="org.eclipse.ui.commands">
+         <command
+               defaultHandler="de.topicmapslab.tmcledit.application.commands.NewFileHandler"
+               id="de.topicmapslab.tmcledit.application.newfile"
+               name="New File">
+         </command>
+         <command
+               defaultHandler="de.topicmapslab.tmcledit.application.commands.OpenFileHandler"
+               id="de.topicmapslab.tmcledit.application.openfile"
+               name="Open file">
+         </command>
+         
+      </extension>
+      <extension
+            point="org.eclipse.ui.menus">
+         <menuContribution
+               locationURI="menu:file?placement=fileStart">
+            <command
+                  commandId="de.topicmapslab.tmcledit.application.newfile"
+                  label="&amp;New"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.tmcledit.application.openfile"
+                  label="&amp;Open"
+                  style="push">
+            </command>
+         </menuContribution>
       </extension>
 </plugin>

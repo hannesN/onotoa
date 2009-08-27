@@ -35,7 +35,7 @@
       <key
             commandId="de.topicmapslab.tmcledit.doc.openhelpcommand"
             contextId="org.eclipse.ui.contexts.window"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            schemeId="de.topicmapslab.tmcledit.application.bindingScheme"
             sequence="F1">
       </key>
    </extension>
