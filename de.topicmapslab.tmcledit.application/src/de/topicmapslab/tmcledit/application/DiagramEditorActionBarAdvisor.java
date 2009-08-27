@@ -40,10 +40,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 	private AboutAction aboutAction;
 	
-	private NewDiagramAction newDiagramAction;
-	
-	private OpenDiagramAction openDiagramAction;
-
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -55,13 +51,10 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		lockToolBarAction = ActionFactory.LOCK_TOOL_BAR.create(window);
 		register(lockToolBarAction);
 
-		newDiagramAction = new NewDiagramAction();
-		openDiagramAction = new OpenDiagramAction();
+		//newDiagramAction = new NewDiagramAction();
 		aboutAction = new AboutAction();
 		
-		register(newDiagramAction);
-		
-		register(openDiagramAction);
+		//register(newDiagramAction);
 		
 		register(aboutAction);
 		
@@ -111,8 +104,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 					IWorkbenchActionConstants.M_FILE);
 
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
-			menuX.add(newDiagramAction);
-			menuX.add(openDiagramAction);
 
 			menuX.add(new Separator());
 
