@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Doc Plug-in
 Bundle-SymbolicName: de.topicmapslab.tmcledit.doc;singleton:=true
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.1.1.beta-qualifier
 Bundle-Activator: de.topicmapslab.tmcledit.doc.Activator
 Bundle-Vendor: Hannes Niederhausen, Topic Maps Lab
 Require-Bundle: org.eclipse.ui,
