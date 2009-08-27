@@ -174,7 +174,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setKeyHandler(new OnotoaKeyHandler(viewer, getActionRegistry()));
 
 		cmProvider = new TMCLEditorContextMenuProvider(viewer,
-				getActionRegistry());
+				getActionRegistry(), diagram);
 		getGraphicalViewer().setContextMenu(cmProvider);
 		getSite().registerContextMenu(cmProvider, viewer);
 
