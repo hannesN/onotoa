@@ -98,6 +98,7 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private boolean mayMove() {
 		IStructuredSelection sel = (IStructuredSelection) getViewer().getSelection();
 		if (sel.isEmpty())

@@ -54,8 +54,9 @@ public class CreateNodeCommand extends AbstractCommand {
 	private List<CreateEdgeCommand> edgeCommands = Collections.emptyList();
 
 	private boolean createdNewType = false;
-
-	public CreateNodeCommand(Diagram diagram, Point location, Node node) {
+	
+	
+	public CreateNodeCommand(Diagram diagram, Node node) {
 		if (node instanceof TypeNode) {
 			this.type = Type.TYPE;
 		} else {
@@ -65,6 +66,10 @@ public class CreateNodeCommand extends AbstractCommand {
 		this.diagram = diagram;
 
 		this.node = node;
+	}
+
+	public CreateNodeCommand(Diagram diagram, Point location, Node node) {
+		this(diagram, node);
 
 		node.setPosX(location.x);
 		node.setPosY(location.y);

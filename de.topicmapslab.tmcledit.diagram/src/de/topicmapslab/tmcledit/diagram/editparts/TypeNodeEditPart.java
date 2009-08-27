@@ -201,10 +201,11 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		}
 		Rectangle r = new Rectangle(tn.getPosX(), tn.getPosY(), -1, -1);
 		try {
-        ((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
+			if (getParent()!=null)
+				((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), r);
 		} catch (NullPointerException e) {
 			throw new RuntimeException(e);
-		}
+		} 
         getFigure().invalidate();
 	}
 	
