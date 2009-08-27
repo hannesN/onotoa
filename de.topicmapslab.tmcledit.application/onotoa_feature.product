@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Onotoa" uid="onotoa" id="de.topicmapslab.tmcledit.application.product" application="de.topicmapslab.tmcledit.application.onotoa" version="1.1.0" useFeatures="true" includeLaunchers="true">
+<product name="Onotoa" uid="onotoa" id="de.topicmapslab.tmcledit.application.product" application="de.topicmapslab.tmcledit.application.onotoa" version="1.1.1" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/de.topicmapslab.tmcledit.application/about.png"/>
+   </aboutInfo>
 
    <configIni use="">
    </configIni>
 
    <launcherArgs>
    </launcherArgs>
+
+   <windowImages/>
 
    <splash
       location="de.topicmapslab.tmcledit.application" />
@@ -18,6 +24,7 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
 
@@ -26,10 +33,10 @@
 
    <features>
       <feature id="org.sourceforge.tinyTiM_feature" version="2.0.0.a6"/>
-      <feature id="de.topicmapslab.tmcledit.application_feature" version="1.1.0.qualifier"/>
-      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.1.0.qualifier"/>
-      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.1.0.qualifier"/>
-      <feature id="de.topicmapslab.tmcledit.import_feature" version="1.0.0.qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.application_feature" version="1.1.1.beta-qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.1.1.beta-qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.1.1.beta-qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.import_feature" version="1.0.1.beta-qualifier"/>
    </features>
 
 

@@ -20,6 +20,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarContributionItem;
 import org.eclipse.jface.action.ToolBarManager;
+import org.eclipse.swt.SWT;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
@@ -38,8 +39,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 	private ActionFactory.IWorkbenchAction toggleCoolbarAction;
 
-	private AboutAction aboutAction;
-	
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -51,13 +50,6 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		lockToolBarAction = ActionFactory.LOCK_TOOL_BAR.create(window);
 		register(lockToolBarAction);
 
-		//newDiagramAction = new NewDiagramAction();
-		aboutAction = new AboutAction();
-		
-		//register(newDiagramAction);
-		
-		register(aboutAction);
-		
 		register(ActionFactory.CLOSE.create(window));
 		
 		register(ActionFactory.SAVE.create(window));
@@ -87,6 +79,8 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		register(ActionFactory.RESET_PERSPECTIVE.create(window));
 		
 		register(ActionFactory.IMPORT.create(window));
+		
+		register(ActionFactory.ABOUT.create(window));
 		
 		register(ActionFactory.EXPORT.create(window));
 		
@@ -183,7 +177,9 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 			menuX.add(getAction(ActionFactory.RESET_PERSPECTIVE.getId()));
-			menuX.add(getAction(ActionFactory.PREFERENCES.getId()));
+			
+			if (!isMac())
+				menuX.add(getAction(ActionFactory.PREFERENCES.getId()));
 			menu.add(menuX);
 		}
 
@@ -196,11 +192,15 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 			
 			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_END));
-			
+			if (!isMac())
+				menuX.add(getAction(ActionFactory.ABOUT.getId()));
 
-			menuX.add(aboutAction);
 			menu.add(menuX);
 		}
+	}
+	
+	private boolean isMac() {
+		return ( ("carbon".equals(SWT.getPlatform())) || ("cocoa".equals(SWT.getPlatform())) );
 	}
 	
 	@Override
