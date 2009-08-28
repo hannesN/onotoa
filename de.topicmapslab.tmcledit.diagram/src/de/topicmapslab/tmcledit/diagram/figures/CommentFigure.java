@@ -23,6 +23,12 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.text.BlockFlow;
 import org.eclipse.draw2d.text.FlowPage;
 import org.eclipse.draw2d.text.TextFlow;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Pattern;
+
+import de.topicmapslab.tmcledit.diagram.DiagramActivator;
+import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme;
+import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
 
 /**
  * @author Hannes Niederhausen
@@ -104,12 +110,17 @@ public class CommentFigure extends Figure {
 		p.addPoint(x0, y0);
 		graphics.pushState();
 		try {
-			graphics.setBackgroundColor(ColorConstants.orange);
+			ColorScheme scheme = DiagramActivator.getCurrentColorScheme();
+			ColorDefinition cd = scheme.getCommentColor();
+			Color bg = cd.createColor(null);
+			cd = scheme.getCommentSecondaryColor();
+			if (cd!=null) {
+				graphics.setBackgroundPattern(new Pattern(null, x1/2, y0, x1/2, y1, bg, cd.createColor(null)));
+			} else {
+				graphics.setBackgroundColor(bg);
+			}
 			
-			graphics.setForegroundColor(ColorConstants.white);
-			graphics.fillGradient(x0, y0+10, x1-x0, y1-y0, true);
-			
-			graphics.setForegroundColor(ColorConstants.black);
+			graphics.fillPolygon(p);
 			graphics.drawPolygon(p);
 			graphics.translate(0, 15);
 			paintClientArea(graphics);

@@ -39,15 +39,20 @@ import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Pattern;
 import org.eclipse.swt.widgets.Display;
 
+import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.LineFigure;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
+import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme;
+import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -82,10 +87,21 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			figure = new Figure() {
 				@Override
 				protected void paintFigure(Graphics graphics) {
+					ColorScheme scheme = DiagramActivator.getCurrentColorScheme();
+					
+					
 					graphics.pushState();
-					graphics.setBackgroundColor(ColorConstants.white);
-					graphics.setForegroundColor(ColorConstants.yellow);
-					graphics.fillGradient(getBounds(), true);
+					
+					Color bg = scheme.getTopicColor().createColor(null);
+					graphics.setBackgroundColor(bg);
+					ColorDefinition tsc = scheme.getTopicSecondaryColor();
+					if (tsc!=null) {
+						Rectangle r = getBounds();
+						graphics.setBackgroundPattern(new Pattern(null, r.x+r.width/2, r.y, r.x+r.width/2, r.y+r.height, bg, tsc.createColor(null)));
+					}
+						
+					
+					graphics.fillRectangle(getBounds());
 					graphics.popState();
 				}
 			};

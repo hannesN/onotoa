@@ -21,5 +21,20 @@
             name="Onotoa Diagram">
       </editor>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="de.topicmapslab.tmcledit.diagram.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="de.topicmapslab.tmcledit.edit.preferences.GeneralPreferencePage"
+            class="de.topicmapslab.tmcledit.diagram.preferences.ColorSchemePreferencePage"
+            id="de.topicmapslab.tmcledit.diagram.preferences.ColorSchemePreferencePage"
+            name="Diagram Colors">
+      </page>
+   </extension>
 
 </plugin>
