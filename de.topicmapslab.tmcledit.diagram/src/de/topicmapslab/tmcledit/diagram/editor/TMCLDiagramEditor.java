@@ -440,6 +440,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				: currentSelection;
 	}
 
+	public void refresh() {
+		getGraphicalViewer().getControl().redraw();
+	}
+	
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
 		if (selectionChangedListeners != Collections.EMPTY_LIST)
