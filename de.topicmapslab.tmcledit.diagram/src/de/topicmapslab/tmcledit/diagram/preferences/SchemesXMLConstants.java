@@ -23,10 +23,12 @@ public interface SchemesXMLConstants {
 	
 	public static final String E_COLOR = "color";
 	
+	public static final String E_TOPIC_FONT_COLOR = "topic_font_color";
 	public static final String E_TOPIC_COLOR = "topic_color";
 	public static final String E_TOPIC_COLOR_SEC = "secondary_topic_color";
 	
 	
+	public static final String E_COMMENT_FONT_COLOR = "comment_font_color";
 	public static final String E_COMMENT_COLOR = "comment_color";
 	public static final String E_COMMENT_COLOR_SEC = "secondary_comment_color";
 	

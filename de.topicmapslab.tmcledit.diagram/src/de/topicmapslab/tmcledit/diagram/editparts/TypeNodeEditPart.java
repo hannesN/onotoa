@@ -86,7 +86,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		if (figure == null) {
 			figure = new Figure() {
 				@Override
-				protected void paintFigure(Graphics graphics) {
+				public void paint(Graphics graphics) {
 					ColorScheme scheme = DiagramActivator.getCurrentColorScheme();
 					
 					
@@ -95,13 +95,18 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 					Color bg = scheme.getTopicColor().createColor(null);
 					graphics.setBackgroundColor(bg);
 					ColorDefinition tsc = scheme.getTopicSecondaryColor();
+					Rectangle rec = getBounds();
 					if (tsc!=null) {
-						Rectangle r = getBounds();
+						Rectangle r = rec;
 						graphics.setBackgroundPattern(new Pattern(null, r.x+r.width/2, r.y, r.x+r.width/2, r.y+r.height, bg, tsc.createColor(null)));
 					}
-						
-					
-					graphics.fillRectangle(getBounds());
+					graphics.fillRectangle(rec);
+					graphics.drawRectangle(rec.x, rec.y, rec.width-1, rec.height-1);
+
+					graphics.setForegroundColor(scheme.getTopicFontColor().createColor(null));
+					graphics.pushState();
+					paintClientArea(graphics);
+					graphics.popState();
 					graphics.popState();
 				}
 			};

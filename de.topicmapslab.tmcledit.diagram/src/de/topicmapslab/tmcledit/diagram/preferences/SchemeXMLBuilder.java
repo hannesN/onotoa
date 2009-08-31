@@ -21,6 +21,9 @@ import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E
 import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_SCHEMES;
 import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_TOPIC_COLOR;
 import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_TOPIC_COLOR_SEC;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_TOPIC_FONT_COLOR;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_COMMENT_FONT_COLOR;
+
 
 import java.io.StringWriter;
 import java.util.List;
@@ -47,6 +50,10 @@ public class SchemeXMLBuilder {
 	private Document doc;
 
 	public String buildSchemeXML(List<ColorScheme> list) {
+		return buildSchemeXML(list, false);
+	}
+	
+	public String buildSchemeXML(List<ColorScheme> list, boolean indent) {
 		try {
 
 			DocumentBuilder documentBuilder = DocumentBuilderFactory
@@ -72,7 +79,10 @@ public class SchemeXMLBuilder {
 
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			serializer.setOutputProperty(OutputKeys.INDENT, "NO");
+			if (indent)
+				serializer.setOutputProperty(OutputKeys.INDENT, "YES");
+			else
+				serializer.setOutputProperty(OutputKeys.INDENT, "NO");
 
 			serializer.transform(domSource, streamResult);
 			
@@ -88,11 +98,13 @@ public class SchemeXMLBuilder {
 		e.setAttribute(A_NAME, cs.getName());
 
 		createColorDefinition(cs.getCommentColor(), E_COMMENT_COLOR, e);
+		createColorDefinition(cs.getTopicFontColor(), E_TOPIC_FONT_COLOR, e);
 		if (cs.getCommentSecondaryColor() != null)
 			createColorDefinition(cs.getCommentSecondaryColor(),
 					E_COMMENT_COLOR_SEC, e);
 
 		createColorDefinition(cs.getTopicColor(), E_TOPIC_COLOR, e);
+		createColorDefinition(cs.getCommentFontColor(), E_COMMENT_FONT_COLOR, e);
 		if (cs.getTopicSecondaryColor() != null)
 			createColorDefinition(cs.getTopicSecondaryColor(),
 					E_TOPIC_COLOR_SEC, e);

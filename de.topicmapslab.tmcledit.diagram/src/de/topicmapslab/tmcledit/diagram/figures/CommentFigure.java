@@ -119,10 +119,11 @@ public class CommentFigure extends Figure {
 			} else {
 				graphics.setBackgroundColor(bg);
 			}
-			
+
 			graphics.fillPolygon(p);
 			graphics.drawPolygon(p);
 			graphics.translate(0, 15);
+			graphics.setForegroundColor(scheme.getCommentFontColor().createColor(null));
 			paintClientArea(graphics);
 		} finally {
 			graphics.popState();
