@@ -49,6 +49,9 @@ public class ColorSchemeEditor extends Dialog {
 	private ColorSelector secTopicColor;
 	private ColorSelector commentColor;
 	private ColorSelector secCommentColor;
+	
+	private ColorSelector commentFontColor;
+	private ColorSelector topicFontColor;
 
 	private Button useGradient;
 
@@ -106,6 +109,15 @@ public class ColorSchemeEditor extends Dialog {
 		l.setText("Comment Color:");
 		commentColor = new ColorSelector(comp);
 		
+		
+		l = new Label(comp, SWT.NONE);
+		l.setText("Topic Font Color:");
+		topicFontColor = new ColorSelector(comp);
+		
+		l = new Label(comp, SWT.NONE);
+		l.setText("Comment Font Color:");
+		commentFontColor = new ColorSelector(comp);
+		
 		useGradient = new Button(comp, SWT.CHECK);
 		useGradient.setText("Use Gradient");
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -160,6 +172,12 @@ public class ColorSchemeEditor extends Dialog {
 
 		cd = scheme.getCommentColor();
 		commentColor.setColorValue(new RGB(cd.r, cd.g, cd.b));
+		
+		cd = scheme.getCommentFontColor();
+		commentFontColor.setColorValue(new RGB(cd.r, cd.g, cd.b));
+		
+		cd = scheme.getTopicFontColor();
+		topicFontColor.setColorValue(new RGB(cd.r, cd.g, cd.b));
 
 		cd = scheme.getTopicSecondaryColor();
 		if (cd != null) {
@@ -242,6 +260,14 @@ public class ColorSchemeEditor extends Dialog {
 		cd.setRGB(commentColor.getColorValue());
 		cd.dispose();
 
+		cd = scheme.getTopicFontColor();
+		cd.setRGB(topicFontColor.getColorValue());
+		cd.dispose();
+		
+		cd = scheme.getCommentFontColor();
+		cd.setRGB(commentFontColor.getColorValue());
+		cd.dispose();
+		
 		if (useGradient.getSelection()) {
 			cd = scheme.getTopicSecondaryColor();
 			RGB rgb = secTopicColor.getColorValue();

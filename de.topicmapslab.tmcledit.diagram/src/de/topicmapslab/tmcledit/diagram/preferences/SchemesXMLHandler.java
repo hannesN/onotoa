@@ -10,16 +10,35 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.preferences;
 
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.A_B;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.A_G;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.A_NAME;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.A_R;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_COLOR;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_COMMENT_COLOR;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_COMMENT_COLOR_SEC;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_SCHEME;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_SCHEMES;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_TOPIC_COLOR;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_TOPIC_COLOR_SEC;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_TOPIC_FONT_COLOR;
+import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.E_COMMENT_FONT_COLOR;
+
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.eclipse.core.runtime.Status;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
+import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
-
-import static de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLConstants.*;
 
 /**
  * SAX Handler to parse Colorscheme xml properties
@@ -32,24 +51,55 @@ public class SchemesXMLHandler extends DefaultHandler2 {
 	enum State {
 		NONE,
 		TOPIC_COLOR,
+		TOPIC_FONT_COLOR,
 		TOPIC_COLOR_SEC,
 		COMMENT_COLOR,
-		COMMENT_COLOR_SEC
+		COMMENT_COLOR_SEC,
+		COMMENT_FONT_COLOR
 	}
 	
 	private List<ColorScheme> schemaList;
 	private ColorScheme currColorSchema;
 	private State state;
+	private boolean docStart;
+	
 	
 	public List<ColorScheme> getSchemaList() {
 		return schemaList;
+	}
+
+	public static List<ColorScheme> parseSchemeList(InputStream is) {
+		try {
+			SchemesXMLHandler handler = new SchemesXMLHandler();
+			
+			SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+			saxParser.parse(is, handler);
+			
+			return handler.getSchemaList();
+		} catch (SAXException saxE) { 
+			return null;		
+		} catch (Exception e) {
+			DiagramActivator.getDefault().getLog().log(new Status(Status.ERROR, DiagramActivator.PLUGIN_ID, "Coudln't parse scheme properties", e));
+			return Collections.emptyList();
+		}
+	}
+	
+	@Override
+	public void startDocument() throws SAXException {
+		docStart = true;
 	}
 	
 	@Override
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
+
+		if ( (docStart) && (!E_SCHEMES.equals(qName)) ) {
+			throw new SAXException("Invalid xml file!");
+		} 
+		
 		if (E_SCHEMES.equals(qName)) {
 			schemaList = new ArrayList<ColorScheme>();
+			docStart = false;
 			return;
 		}
 		
@@ -71,6 +121,12 @@ public class SchemesXMLHandler extends DefaultHandler2 {
 		if (E_TOPIC_COLOR_SEC.equals(qName))
 			state = State.TOPIC_COLOR_SEC;
 		
+		if (E_TOPIC_FONT_COLOR.equals(qName))
+			state = State.TOPIC_FONT_COLOR;
+		
+		if (E_COMMENT_FONT_COLOR.equals(qName))
+			state = State.COMMENT_FONT_COLOR;
+		
 		if (E_COLOR.equals(qName)) {
 			int r = Integer.parseInt(attributes.getValue(A_R));
 			int g = Integer.parseInt(attributes.getValue(A_G));
@@ -91,6 +147,12 @@ public class SchemesXMLHandler extends DefaultHandler2 {
 			case TOPIC_COLOR_SEC:
 				currColorSchema.setTopicSecondaryColor(def);				
 				break;
+			case TOPIC_FONT_COLOR:
+				currColorSchema.setTopicFontColor(def);				
+				break;
+			case COMMENT_FONT_COLOR:
+				currColorSchema.setCommentFontColor(def);				
+				break;
 			}
 		}
 	}
@@ -107,8 +169,10 @@ public class SchemesXMLHandler extends DefaultHandler2 {
 		if ((E_COMMENT_COLOR.equals(qName))
 			||(E_COMMENT_COLOR_SEC.equals(qName))
 			||(E_TOPIC_COLOR.equals(qName))
-			||(E_TOPIC_COLOR_SEC.equals(qName)) ) {
-			state = State.NONE;
+			||(E_TOPIC_COLOR_SEC.equals(qName)) 
+			||(E_TOPIC_FONT_COLOR.equals(qName))
+			||(E_COMMENT_FONT_COLOR.equals(qName)) ) {
+				state = State.NONE;
 		}
 	}
 	

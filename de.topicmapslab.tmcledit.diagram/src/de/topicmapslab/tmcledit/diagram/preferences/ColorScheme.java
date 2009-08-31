@@ -32,6 +32,10 @@ public class ColorScheme implements Cloneable {
 	private ColorDefinition topicColor;
 	
 	private ColorDefinition topicSecondaryColor;
+	
+	private ColorDefinition topicFontColor;
+	
+	private ColorDefinition commentFontColor;
 
 	private static ColorScheme defaultSchema;
 	
@@ -75,11 +79,57 @@ public class ColorScheme implements Cloneable {
 		this.topicSecondaryColor = topicSecondaryColor;
 	}
 	
+	public ColorDefinition getTopicFontColor() {
+		return topicFontColor;
+	}
+	
+	public void setTopicFontColor(ColorDefinition topicFontColor) {
+		this.topicFontColor = topicFontColor;
+	}
+	
+	public ColorDefinition getCommentFontColor() {
+		return commentFontColor;
+	}
+	
+	public void setCommentFontColor(ColorDefinition commentFontColor) {
+		this.commentFontColor = commentFontColor;
+	}
+	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ColorScheme other = (ColorScheme) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
 	@Override
 	protected ColorScheme clone() {
 		ColorScheme scheme = new ColorScheme();
 		scheme.commentColor = commentColor.clone();
 		scheme.topicColor = topicColor.clone();
+		
+		scheme.topicFontColor = topicFontColor.clone();
+		scheme.commentFontColor = commentFontColor.clone();
 		
 		if (commentSecondaryColor!=null)
 			scheme.commentSecondaryColor = commentSecondaryColor.clone();
@@ -103,7 +153,8 @@ public class ColorScheme implements Cloneable {
 			defaultSchema.setTopicColor(new ColorDefinition(255, 255, 0));
 			defaultSchema.setTopicSecondaryColor(new ColorDefinition(255, 255, 255));
 			
-			
+			defaultSchema.setCommentFontColor(new ColorDefinition(0, 0, 0));
+			defaultSchema.setTopicFontColor(new ColorDefinition(0, 0, 0));
 		}
 		
 		return defaultSchema;

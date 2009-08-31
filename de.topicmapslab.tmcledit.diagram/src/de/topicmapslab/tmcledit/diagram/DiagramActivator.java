@@ -14,10 +14,6 @@ import java.io.ByteArrayInputStream;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -62,17 +58,10 @@ public class DiagramActivator extends AbstractUIPlugin {
 			if (xml==null)
 				return Collections.emptyList();
 			
-			SchemesXMLHandler handler = new SchemesXMLHandler();
+			schemeList = SchemesXMLHandler.parseSchemeList(new ByteArrayInputStream(xml.getBytes()));
 		
-			try {
-				SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-				saxParser.parse(new ByteArrayInputStream(xml.getBytes()), handler);
-				
-				schemeList = handler.getSchemaList();
-			} catch (Exception e) {
-				getLog().log(new Status(Status.ERROR, PLUGIN_ID, "Coudln't parse scheme properties", e));
-				return Collections.emptyList();
-			}
+			if (schemeList==null)
+				schemeList =Collections.emptyList();
 			
 			String activated = getPreferenceStore().getString(PreferenceConstants.P_ACTIVE_SCHEME);
 			if (activated!=null) {

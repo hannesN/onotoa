@@ -1,9 +1,15 @@
 package de.topicmapslab.tmcledit.diagram.preferences;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -26,6 +32,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
@@ -51,6 +58,8 @@ public class ColorSchemePreferencePage
 	private List<ColorScheme> schemeList;
 	private ColorScheme selected;
 	private CheckboxTableViewer viewer;
+	private Button exportButton;
+	private Button importButton;
 
 	public ColorSchemePreferencePage() {
 		super();
@@ -121,9 +130,9 @@ public class ColorSchemePreferencePage
 				} 
 				if ( (event.getElement()!=selected) && event.getChecked() ){
 					Object old = selected;
-					selected = (ColorScheme) event.getElement();
 					viewer.setChecked(old, false);
 				}
+				selected = (ColorScheme) event.getElement();
 			}
 		});
 		
@@ -183,8 +192,81 @@ public class ColorSchemePreferencePage
 		gd.verticalAlignment = SWT.CENTER;
 		removeButton.setLayoutData(gd);
 		
+		importButton = new Button(comp, SWT.PUSH);
+		importButton.setText("Import...");
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.verticalAlignment = SWT.CENTER;
+		importButton.setLayoutData(gd);
+		
+		exportButton = new Button(comp, SWT.PUSH);
+		exportButton.setText("Export...");
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.verticalAlignment = SWT.CENTER;
+		exportButton.setLayoutData(gd);
+		
+		
 		hookButtonListener();
 		
+	}
+	
+	private void startImport() {
+		FileDialog dlg = new FileDialog(getShell(), SWT.OPEN);
+		dlg.setFilterExtensions(new String[]{"*.xml"});
+		
+		String filename = dlg.open();
+		if (filename==null)
+			return;
+		
+		if (!filename.endsWith(".xml"))
+			filename += ".xml";
+		
+		File file = new File(filename);
+		
+		try {
+			List<ColorScheme> tmpList = SchemesXMLHandler.parseSchemeList(new FileInputStream(file));
+			if (tmpList==null) {
+				MessageDialog.openError(getShell(), "Invalid file", "The given xml file does not containt scheme data!");
+				return;
+			}
+			schemeList = new ArrayList<ColorScheme>(tmpList);
+			schemeList.add(0, ColorScheme.getDefault());
+			viewer.setInput(schemeList);
+			viewer.setAllChecked(false);
+			viewer.setChecked(ColorScheme.getDefault(), true);
+			selected=ColorScheme.getDefault();
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
+	private void startExport() {
+		FileDialog dlg = new FileDialog(getShell(), SWT.SAVE);
+		dlg.setFilterExtensions(new String[]{"*.xml"});
+		
+		String filename = dlg.open();
+		if (filename==null)
+			return;
+		schemeList.remove(ColorScheme.getDefault());
+		String xml = new SchemeXMLBuilder().buildSchemeXML(schemeList, true);
+
+		
+		File file = new File(filename);
+		if (file.exists()) {
+			if (!MessageDialog.openQuestion(getShell(), "File already exists...", "Do you want to overwrigt the existing file?")) {
+				return;
+			}
+		}
+		try {
+			FileWriter writer = new FileWriter(file);
+			writer.write(xml);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			schemeList.add(0, ColorScheme.getDefault());
+		}
 	}
 	
 	private void hookButtonListener() {
@@ -210,11 +292,29 @@ public class ColorSchemePreferencePage
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-				ColorScheme el = (ColorScheme)sel.getFirstElement();
+				Object firstElement = sel.getFirstElement();
+				ColorScheme el = (ColorScheme)firstElement;
 				if (el!=ColorScheme.getDefault()) {
-					schemeList.remove(sel.getFirstElement());
+					if (viewer.getChecked(firstElement)) {
+						viewer.setChecked(ColorScheme.getDefault(), true);
+					}
+					schemeList.remove(firstElement);
 					viewer.refresh();
 				}
+			}
+		});
+		
+		importButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				startImport();
+			}
+		});
+		
+		exportButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				startExport();
 			}
 		});
 	}
