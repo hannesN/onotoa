@@ -24,7 +24,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.commands.SetCommentContentCommand;
@@ -63,16 +62,13 @@ public class CommentPropertyModelPage extends AbstractModelPage {
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
 		CTabItem item = new CTabItem(folder, SWT.None);
-		item.setText("General");
+		item.setText("Comment");
 		item.setControl(createPage(folder));
 	}
 	
 	public Control createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		Section section = toolkit.createSection(parent, Section.EXPANDED|Section.TITLE_BAR);
-		section.setText("Comment:");
-		
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new FillLayout());
 		
 		contentText = new Text(comp, SWT.MULTI|SWT.H_SCROLL|SWT.V_SCROLL|SWT.WRAP|SWT.BORDER);
@@ -82,8 +78,7 @@ public class CommentPropertyModelPage extends AbstractModelPage {
 				getCommandStack().execute(new SetCommentContentCommand(getCastedModel(), contentText.getText()));
 			}
 		});
-		section.setClient(comp);
-		return section;
+		return comp;
 	}
 
 	public void notifyChanged(Notification notification) {

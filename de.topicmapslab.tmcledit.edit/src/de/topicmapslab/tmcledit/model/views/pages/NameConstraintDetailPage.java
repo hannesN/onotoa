@@ -29,7 +29,6 @@ import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -45,7 +44,6 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 
 	private Text typeText;
 	private Button typeButton;
-	private Section section;
 
 	private NameTypeModelPage typeModelPage;
 	private CTabItem item;
@@ -60,7 +58,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 
 		item = new CTabItem(folder, SWT.NONE);
-		item.setText("Name Constraint Properties");
+		item.setText("Name Constraint");
 		item.setControl(createConstraintComposite(folder, toolkit));
 
 		typeModelPage = new NameTypeModelPage();
@@ -88,10 +86,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 
 	private Composite createConstraintComposite(Composite parent,
 			FormToolkit toolkit) {
-		section = toolkit.createSection(parent, Section.EXPANDED
-				| Section.TITLE_BAR);
-		section.setText("Name Constraint");
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(2, false));
 
 		Hyperlink link = toolkit.createHyperlink(comp, "Type:", SWT.NONE);
@@ -99,7 +94,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
 				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.NAME_TYPE);
-				WizardDialog dlg = new WizardDialog(section.getShell(), wizard);
+				WizardDialog dlg = new WizardDialog(typeButton.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {
 					TopicType tt = wizard.getNewTopicType();
@@ -117,8 +112,7 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 
 		createCommonConstraintControls(comp, toolkit);
 
-		section.setClient(comp);
-		return section;
+		return comp;
 	}
 
 	private void createTypeComposite(FormToolkit toolkit, Composite parent) {
@@ -159,7 +153,6 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 		} else {
 			typeText.setText("http://psi.topicmaps.org/iso13250/model/topic-name");
 		}
-		item.setText("Name Type");
 		typeModelPage.setModel(getCastedModel().getType());		
 		
 		super.updateUI();
