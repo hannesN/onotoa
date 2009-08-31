@@ -43,7 +43,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -264,9 +263,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	}
 
 	private Control getRoleCombinationWidget(Composite parent, FormToolkit toolkit) {
-		Section section = toolkit.createSection(parent, Section.TITLE_BAR | Section.EXPANDED);
-		section.setText("Other Role Constraints");
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(2, false));
 
 		Table table = toolkit.createTable(comp, SWT.BORDER | SWT.FULL_SELECTION);
@@ -296,8 +293,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		Composite buttonBar = getButtonBar(comp, toolkit);
 		buttonBar.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 
-		section.setClient(comp);
-		return section;
+		return comp;
 	}
 
 	@Override

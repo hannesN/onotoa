@@ -28,7 +28,6 @@ import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -43,7 +42,6 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 	
 	private Text typeText;
 	private Button typeButton;
-	private Section section;
 	
 	private OccurrenceTypeModelPage typeModelPage;
 	private CTabItem item;
@@ -58,7 +56,7 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 		
 		item = new CTabItem(folder, SWT.NONE);
-		item.setText("Occurrence Constraint Properties");
+		item.setText("Occurrence Constraint");
 		item.setControl(createConstraintComposite(folder, toolkit));
 		
 		
@@ -80,10 +78,7 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 	}
 
 	private Composite createConstraintComposite(Composite parent, FormToolkit toolkit) {
-		section = toolkit.createSection(parent, Section.EXPANDED
-				| Section.TITLE_BAR);
-		section.setText("Occurrence Constraint");
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(2, false));
 		
 		Hyperlink link = toolkit.createHyperlink(comp, "Type:", SWT.NONE);
@@ -91,7 +86,7 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
 				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.OCCURRENCE_TYPE);
-				WizardDialog dlg = new WizardDialog(section.getShell(), wizard);
+				WizardDialog dlg = new WizardDialog(typeButton.getShell(), wizard);
 				
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = wizard.getNewTopicType();
@@ -106,9 +101,8 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 		
 		createCommonConstraintControls(comp, toolkit);
 		
-		section.setClient(comp);
 		
-		return section;
+		return comp;
 	}
 
 	private void createTypeComposite(FormToolkit toolkit, Composite parent) {

@@ -30,7 +30,6 @@ import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -50,7 +49,6 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 public class AssociationConstraintModelPage extends AbstractModelPage {
 
 	private Text typeText;
-	private Section section;
 	private CTabItem item;
 
 	private AssociationTypeModelPage typeModelPage;
@@ -63,7 +61,6 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 	public void updateUI() {
 		super.updateUI();
 		AssociationTypeConstraint asc = getCastedModel();
-		section.setText("Association Constraint:");
 		if (asc.getType() == null) {
 			typeText.setText("");
 		} else {
@@ -87,7 +84,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 
 		item = new CTabItem(folder, SWT.NONE);
-		item.setText("Association Constraint Properties");
+		item.setText("Association Constraint");
 		item.setControl(createConstraintSection(folder, toolkit));
 
 		typeModelPage = new AssociationTypeModelPage();
@@ -97,13 +94,9 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 
 	private Composite createConstraintSection(Composite parent,
 			FormToolkit toolkit) {
-		section = toolkit.createSection(parent, Section.EXPANDED
-				| Section.TITLE_BAR);
-		section.setText("Dies st ein n test");
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(3, false));
 
-		section.setClient(comp);
 
 		Hyperlink link = toolkit
 				.createHyperlink(comp, "Assoc. Type:", SWT.NONE);
@@ -134,7 +127,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		Button button = toolkit.createButton(comp, "...", SWT.PUSH);
 		hookAddTypeButtonListeners(button);
 
-		return section;
+		return comp;
 	}
 
 	private void hookAddTypeButtonListeners(Button button) {

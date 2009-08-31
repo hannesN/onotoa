@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Section;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -63,7 +62,7 @@ public class RoleModelPage extends AbstractModelPage{
 		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
 
 		item = new CTabItem(folder, SWT.NONE);
-		item.setText("Role Player Properties");
+		item.setText("Topic Role Constraint");
 		Composite comp = createRoleConstraintProps(folder, toolkit);
 		
 		item.setControl(comp);
@@ -93,10 +92,7 @@ public class RoleModelPage extends AbstractModelPage{
 	private Composite createRoleConstraintProps(Composite parent,
 			FormToolkit toolkit) {
 		
-		Section section = toolkit.createSection(parent, Section.EXPANDED
-				| Section.TITLE_BAR);
-		section.setText("Role Player Constraint");
-		Composite comp = toolkit.createComposite(section);
+		Composite comp = toolkit.createComposite(parent);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginWidth = 5;
 		gridLayout.marginHeight = 5;
@@ -135,8 +131,7 @@ public class RoleModelPage extends AbstractModelPage{
 		cardMaxText.setLayoutData(gd);
 		CardTextObserver.observe(cardMaxText, this, false);
 		
-		section.setClient(comp);
-		return section;
+		return comp;
 	}
 	
 	private void updateCombo() {
