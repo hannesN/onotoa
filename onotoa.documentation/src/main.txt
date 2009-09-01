@@ -1,0 +1,12 @@
+:width: 14cm
+
+Onotoa test documentation
+=========================
+Hannes Niederhausen <niederhausen@informatik.uni-leipzig.de>
+
+
+_Onotoa_ is a great application to create Topic Maps schemas. 
+
+
+include::requirement.txt[]
+include::getting_started.txt[]

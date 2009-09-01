@@ -1,0 +1,30 @@
+== Getting started ==
+
+
+=== Using the standalone version of _Onotoa_ ===
+
+After downloading the file zip file for your system and unzipping it you should have
+a *onotoa* folder. This includes a binary file (e.g. onotoa.exe for Windows™ or Onotoa.app on MacOS™).
+
+After starting _Onotoa_ you should see the main window, like in Figure 1.
+
+.Figure 1: Empty _Onotoa_ window
+image:images/emptywin.png["Figure 1: Empty _Onotoa_ window"]
+
+To create a new model, use the *File->New..*.
+Choose the path of the file and name it *example.ono*. After that your window should look like Figure 2
+
+.Figure 2: _Onotoa_ window after creating a file
+image:images/emptyfilewin.png["_Onotoa_ window after creating a file"]
+
+=== Using the plugin version of _Onotoa_ ===
+
+After installing the needed _Onotoa_ features, create a new file using the file wizard. Note that you need a project, where you create the file.
+After creating the new file _Onotoa_ switches to the *Onotoa Perpective*. This should look like Figure 3.
+
+*TODO: add Figure 3*
+
+=== Creating the first diagram ===
+
+With _Onotoa_ it is possible to create multiple diagrams for a Topic Maps schemas. Although it is possible to create the schema using wizards provided
+by the *Model View* it is advised to create the schema using the diagrams.
