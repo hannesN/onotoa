@@ -1,5 +1,5 @@
-Requirement
------------ 
+== Requirement ==
+ 
 
 There are 2 ways to install _Onotoa_.
 

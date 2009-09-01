@@ -1,0 +1,20 @@
+== The Model View ==
+
+The *Model View* is the core of Onotoa. It represents the schema, visualizing it as a tree. The state of the
+schema is saved as attribute of the *ModelView*. The diagram editors are just views on the model, or parts 
+if only a few elements of the schema are visulized in a diagram. This makes it possible to create multiple diagrams
+to realize different views of the same schema.
+
+With the *Model View* it is possible to create almost ervery schema element, by using the context menu of the different nodes. 
+Analog to the creation of diagramms, new topic types can be created in the *Model View*.For instance to create a new topic type,
+just select 'TopicTypes' in the *Model View* and choose 'Create Topic Type...'. A new wizard will open, where the name of the type, 
+a subject identifier or a subject locator can be entered.
+
+Right now _Onotoa_ only supports one name per Topic. When the topic is used to type a constraint, the name is visualized therefor _Onotoa_ 
+forbids topics with the same name. The field for entering the subject identifier provides an assisting facility. By pressing CTRL-Space
+a few proposals for a subject identifier will be produced. These proposals are based on:
+
+* the result of a query to Subj3ct, using the name as query
+* the prefixes of already used subject identifiers
+* if a base locator of the Topic Maps schema is set, a subject identifier is created using this base locator and the name
+
