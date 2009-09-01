@@ -140,6 +140,8 @@
 	<target name="html" depends="init">
 		<exec executable="asciidoc">
 			<arg value="-v" />
+			<arg value="-a" />
+			<arg value="toc" />
 			<arg value="-d" />
 			<arg value="book" />
 			<arg value="-b" />

@@ -1,7 +1,9 @@
-== Getting started ==
+Getting started
+---------------
 
 
 === Using the standalone version of _Onotoa_ ===
+
 
 After downloading the file zip file for your system and unzipping it you should have
 a *onotoa* folder. This includes a binary file (e.g. onotoa.exe for Windows™ or Onotoa.app on MacOS™).
@@ -19,10 +21,15 @@ image:images/emptyfilewin.png["_Onotoa_ window after creating a file"]
 
 === Using the plugin version of _Onotoa_ ===
 
-After installing the needed _Onotoa_ features, create a new file using the file wizard. Note that you need a project, where you create the file.
+After installing the needed _Onotoa_ features, create a new file. Use the context menu entry *New*, choose *Other* and select 
+*New Onotoa File* in the category *Onotoa*. 
+
+NOTE: You need a project, where you create the file. The nature of the project doesn't matter.
+
 After creating the new file _Onotoa_ switches to the *Onotoa Perpective*. This should look like Figure 3.
 
-*TODO: add Figure 3*
+.Figure 3: _Onotoa_ window after creating a file in Navigator
+image:images/emptyfilewin.png["_Onotoa_ window after creating a file in Navigator"]
 
 === Creating the first diagram ===
 

@@ -93,6 +93,8 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 	@SuppressWarnings("unchecked")
     private void setSelection(ISelection selection) {
+		if (!(selection instanceof IStructuredSelection))
+			return;
 		IStructuredSelection sel = (IStructuredSelection) selection;
 		if ((sel != null) && (!sel.isEmpty())) {
 			Object obj = sel.getFirstElement();
