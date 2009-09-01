@@ -1,0 +1,5 @@
+== Editing Properties ==
+
+Every element of an schema has a property page in which the properties of an element may be changed. 
+Examples for properties are the name of a topic type or the cardinality of a contraint. The following
+sections will present the property pages of the elements.

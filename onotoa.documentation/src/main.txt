@@ -1,13 +1,26 @@
 :width: 14cm
 
-Onotoa Handbook
-===============
+= Onotoa Handbook = 
+
 Hannes Niederhausen <niederhausen@informatik.uni-leipzig.de>
 v0.1 Sepember 2009
 
 
-_Onotoa_ is a great application to create Topic Maps schemas. 
+Starting as graduate at the Topic Maps Lab, Onotoa has grown to
+a usable TMCL schema editor. This document explains the different
+functions of Onotoa including some technical background and a
+description of the implementation of the GTM level 1 proposal.
+
+Onotoa is based on the popular eclipse platform, which enable it
+to be easy extensdable. Their usage and the creation of
+additional extensions is explained in this document too.
+ 
+:titles.underlines: "__","==","--","~~","^^"
 
 include::requirement.txt[]
 
 include::getting_started.txt[]
+
+include::modelview.txt[]
+
+include::properties.txt[]
