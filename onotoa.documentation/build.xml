@@ -13,7 +13,7 @@
 	      -->
 	<!-- libs-->
 	<property name="docbook.xsl.dir" value="lib/docbook-xsl-1.75.2" />
-	<property name="html.stylesheet" value="${docbook.xsl.dir}/html/docbook.xsl" />
+	<property name="html.stylesheet" value="${docbook.xsl.dir}/html/chunk.xsl" />
 	<property name="fo.stylesheet" value="${docbook.xsl.dir}/fo/docbook.xsl" />
 	<property name="xalan.lib.dir" value="lib/" />
 
@@ -26,7 +26,7 @@
 	<property name="doc.docbook.html.images" value="${doc.docbook.html}/images" />
 	<property name="doc.docbook.pdf" value="${doc.docbook}/pdf" />
 
-	<property name="build" value="build" />
+	<property name="build" value="${doc.docbook}/build" />
 	<property name="build.fo" value="${build}/fo" />
 
 	<property name="paper.type" value="A4" />
@@ -43,19 +43,6 @@
 		</fileset>
 	</path>
 
-	<target name="all" depends="build-html,build-pdf">
-	</target>
-
-	<!--
-	      - target:  usage
-	      -->
-	<target name="usage" description="Prints the Ant build.xml usage">
-		<echo message="Use -projecthelp to get a list of the available targets." />
-	</target>
-
-	<!--
-	      - target:  clean
-	      -->
 	<target name="clean" description="Cleans up generated files.">
 		<delete dir="${doc}" />
 		<delete dir="${build}" />
@@ -67,6 +54,11 @@
 
 	<target name="clean.pdf" description="Cleans up generated files.">
 		<delete dir="${doc.dir.pdf}" />
+		<delete dir="${build.fo}" />
+	</target>
+
+	<target name="clean.eclipse" description="Cleans up generated files.">
+		<delete dir="${doc.docbook.eclipse}" />
 		<delete dir="${build.fo}" />
 	</target>
 	<!--
@@ -86,7 +78,7 @@
 	      - description:  Iterates through a directory and transforms
 	      -     .xml files into .html files using the DocBook XSL.
 	      -->
-	<target name="build-html" depends="clean.html, depends" description="Generates HTML files from DocBook XML">
+	<target name="docbook.html" depends="clean.html, depends" description="Generates HTML files from DocBook XML">
 		<xslt style="${html.stylesheet}" extension=".html" basedir="${doc.docbook}" destdir="${doc.docbook.html}">
 			<classpath refid="xalan.classpath" />
 			<include name="${filename}.xml" />
@@ -105,7 +97,7 @@
 			</fileset>
 		</copy>
 	</target>
-	<target name="build-pdf" depends="clean.pdf,depends, docbook" description="Generate PDF file from docbook XML">
+	<target name="docbook.pdf" depends="clean.pdf,depends, docbook" description="Generate PDF file from docbook XML">
 		<property name="fop.home" value="lib/fop-0.95" />
 
 		<xslt style="${fo.stylesheet}" extension=".fo" basedir="${doc.docbook}" destdir="${build.fo}">
@@ -129,6 +121,24 @@
 
 		<fop format="application/pdf" basedir="${doc.docbook}" fofile="${build.fo}/${filename}.fo" outfile="${doc.docbook.pdf}/${filename}.pdf" />
 	</target>
+
+	<!-- XSLT Chunking Properties -->
+	<property name="base.dir" value="${htmldir}" />
+
+	<target name="merge">
+		<xsl.xinclude in="${docbooksource}/xslhelp.dbk" out="${docbooksource}/xslhelpcombined.dbk" />
+	</target>
+
+	<target name="docbook.eclipse" depends="clean.eclipse, docbook, docbook.html">
+
+		<copy todir="../de.topicmapslab.tmcledit.doc/html">
+			<fileset dir="${doc.docbook.html}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+	</target>
+
 
 	<target name="init">
 		<mkdir dir="${doc}" />

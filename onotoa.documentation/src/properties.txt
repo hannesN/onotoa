@@ -2,4 +2,15 @@
 
 Every element of an schema has a property page in which the properties of an element may be changed. 
 Examples for properties are the name of a topic type or the cardinality of a contraint. The following
-sections will present the property pages of the elements.
+sections will present the property pages of the elements. These pages are rendered in the *Property Details View*.
+
+NOTE: The property pages support undo and redo for model changes. To omit a lot of changes during entering
+the text, _Onotoa_ perfoms the changes when the text field loses its focus.
+
+include::properties/diagram_tms.txt[]
+
+include::properties/topictype.txt[]
+
+include::properties/nametype.txt[]
+
+include::properties/occurrencetype.txt[]

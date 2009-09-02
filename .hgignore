@@ -12,3 +12,4 @@ onotoa-update-site/plugins/*
 de.topicmapslab.tmcledit.releng/releases
 de.topicmapslab.tmcledit.releng/repository
 onotoa.documentation/doc
+de.topicmapslab.tmcledit.doc/html/*

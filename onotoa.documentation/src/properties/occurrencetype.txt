@@ -1,0 +1,31 @@
+=== Occurrence Type ===
+
+A 'Occurrence Type' inherits the properties  of 'Topic Type' (see <<topictype_pp, 'Topic Type' properties>>).
+In addition it has the following properties.
+
+.Property Page of 'Occurrence Type'
+image::images/occtype_pp.png[]
+
+* *unique:* If this is *true* the TMCL validator will check if the value of occurrences of this type is unqie in 
+the topic map. This means two topics with occurrences of this type may not have the same value. The unique constraint is
+activated by selecting the check box.
+
+* *datatype:* It is possible to set the datatype of the occurrence value. Although it is possible to enter your own 
+type definition URI it is advised to use the XML schema datatypes. These are slectable by the dialog opened with *...*.
+
+* *reg. exp:* This regular expression is used to define the form of the content of the name. 
+
+* *reifier:* It is possible to define which topic may reifier names using the current type. Check the 
+button `has reifier constraint` and choose in the selection box below if the constraint forbids 
+reifying (`cannot`), allows reifying (`may`) or needs reifying (`must`). If refying is allowed
+a type is needed, which defines the type of the reifier. If the type is not needed, just use 
+`tmdm:subject` as type. 
+  
+* *scope:* With the scope constraint is defined, which scoping types may be used for names using this 'Name Type'.
+The scope constraint, as we see later consists of 3 properties: the scoping type, the minimum occurrence (`cardMin`)
+and the maximum occurrence (`cardMax`). To add a 'Scope Constraint' to the type, press `Add` and select the 'Scope Types'
+which may be used as scope. The cardinality values can be changed in the table. To remove a constraint, select 
+it in the table and afterwards press `Remove`. If you need to create a new scoping type, just press `New...`. The 
+wizard to create a 'Topic Type' appears and after filling out the wqizard, a new constraint will created using the new type.
+
+NOTE: If you create a new 'Topic Type' for a 'Scope Constraint' it won't be removed if you remove the 'Scope Constraint'.  

@@ -13,24 +13,22 @@ package de.topicmapslab.tmcledit.doc.actions;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.swt.widgets.Shell;
-
-import de.topicmapslab.tmcledit.doc.dialogs.BrowserDialog;
+import org.eclipse.core.expressions.EvaluationContext;
+import org.eclipse.ui.IWorkbenchWindow;
 
 /**
  * @author Hannes Hannes Niederhausen
  *
  */
 public class ShowHelpHandler extends AbstractHandler {
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
-	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		BrowserDialog dlg = new BrowserDialog((Shell) null, false);
-		dlg.setTitle("Online Help");
-		dlg.setUrl("http://onotoa.topicmapslab.de/documentation");
-		dlg.open();
+		
+		EvaluationContext ctx = (EvaluationContext) event.getApplicationContext();
+		IWorkbenchWindow w = (IWorkbenchWindow) ctx.getParent().getVariable("activeWorkbenchWindow");
+		
+		w.getWorkbench().getHelpSystem().displayHelp();
+		
+		
 		return null;
 	}
 
