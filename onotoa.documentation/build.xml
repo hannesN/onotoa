@@ -190,7 +190,6 @@
 		<exec executable="a2x">
 			<arg value="-f" />
 			<arg value="pdf" />
-			<arg value="--fop" />
 			<arg value="-d" />
 			<arg value="book" />
 			<arg value="${src}" />

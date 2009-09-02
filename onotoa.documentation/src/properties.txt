@@ -14,3 +14,7 @@ include::properties/topictype.txt[]
 include::properties/nametype.txt[]
 
 include::properties/occurrencetype.txt[]
+
+include::properties/assoctype.txt[]
+
+include::properties/roletype.txt[]
