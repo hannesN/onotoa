@@ -18,5 +18,9 @@
  <topic href="html/ch04.html" label="Editing Properties">
  	<topic href="html/ch04.html#_diagram_and_topic_map_schema" label="Diagram and TopicMapSchema" />
  	<topic href="html/ch04s02.html" label="Topic Type" />
+ 	<topic href="html/ch04s03.html" label="Name Type" />
+ 	<topic href="html/ch04s04.html" label="Occurrence Type" />
+ 	<topic href="html/ch04s05.html" label="Association Type" />
+ 	<topic href="html/ch04s06.html" label="Role Type" />
  </topic>
 </toc>
