@@ -11,10 +11,5 @@ just select 'TopicTypes' in the *Model View* and choose 'Create Topic Type...'. 
 a subject identifier or a subject locator can be entered.
 
 Right now _Onotoa_ only supports one name per Topic. When the topic is used to type a constraint, the name is visualized therefor _Onotoa_ 
-forbids topics with the same name. The field for entering the subject identifier provides an assisting facility. By pressing CTRL-Space
-a few proposals for a subject identifier will be produced. These proposals are based on:
-
-* the result of a query to Subj3ct, using the name as query
-* the prefixes of already used subject identifiers
-* if a base locator of the Topic Maps schema is set, a subject identifier is created using this base locator and the name
-
+forbids topics with the same name. If a base locator for the Topic Maps schema is set, a subject locator is reated using this base locator
+and the name of the topic type. Another tool to create subject identifiers is presented later.

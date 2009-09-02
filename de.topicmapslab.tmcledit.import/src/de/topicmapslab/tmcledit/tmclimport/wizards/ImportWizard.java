@@ -17,7 +17,7 @@ import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
 import de.topicmapslab.tmcledit.model.File;
-import de.topicmapslab.tmcledit.model.util.FileUtil;
+import de.topicmapslab.tmcledit.model.util.io.FileUtil;
 import de.topicmapslab.tmcledit.model.util.OnototaLauncher;
 import de.topicmapslab.tmcledit.tmclimport.builder.OnotoaBuilder;
 
