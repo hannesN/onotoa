@@ -57,6 +57,7 @@ image::images/palette.png["Palette of a diagram editor", width="5cm", align="cen
 The following table lists the elements and a short description of their functionality.
 
 .Name and Functions of Palette Tools
+[width="99%"]
 |===========================
 |Select|Tool for selecting diagram elements
 |Marquee| Selection tool for multiple diagram elements

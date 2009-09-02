@@ -13,3 +13,6 @@ a subject identifier or a subject locator can be entered.
 Right now _Onotoa_ only supports one name per Topic. When the topic is used to type a constraint, the name is visualized therefor _Onotoa_ 
 forbids topics with the same name. If a base locator for the Topic Maps schema is set, a subject locator is reated using this base locator
 and the name of the topic type. Another tool to create subject identifiers is presented later.
+
+By selecting the different elements in the *Model View*, an input mask is activated in the *Property Details View* which is explained in the
+folowwing section.
