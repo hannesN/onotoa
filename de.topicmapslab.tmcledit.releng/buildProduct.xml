@@ -23,7 +23,7 @@
 				<exclude name="*feature" />
 				<exclude name="*releng" />
 				<exclude name="*/bin" />
-				<exclude name="*/.hg" />
+				<exclude name=".hg" />
 
 			</fileset>
 		</copy>
@@ -134,6 +134,7 @@
 	<!--This target is responsible for cleaning up the build-directory-->
 	<target name="clean">
 		<echo message="${buildDirectory}" />
+		<delete dir="${buildDirectory}" />
 		<delete dir="${basedir}/repository"/>
 		<delete dir="${basedir}/releases"/>
 	</target>

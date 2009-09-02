@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.import_feature"
       label="Import_feature"
-      version="1.0.0.qualifier"
+      version="1.0.1.beta-qualifier"
       provider-name="Hannes Niederhausen, Topic map Labs">
 
    <description url="http://www.example.com/description">

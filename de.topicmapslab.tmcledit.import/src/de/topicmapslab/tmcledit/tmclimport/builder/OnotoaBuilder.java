@@ -35,6 +35,7 @@ import org.tmapi.core.TopicMapSystemFactory;
 
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -182,7 +183,7 @@ public class OnotoaBuilder {
 		Set<Topic> types = t.getTypes();
 
 		if (types.contains(scopeType))
-			return KindOfTopicType.SCOPE_TYPE;
+			return KindOfTopicType.TOPIC_TYPE;
 
 		if (types.contains(associationType))
 			return KindOfTopicType.ASSOCIATION_TYPE;
@@ -494,7 +495,7 @@ public class OnotoaBuilder {
 		tt.getSubjectLocatorConstraint().add(slc);
 	}
 
-	private void setRegularExpression(Topic constr, AbstractConstraint ac) {
+	private void setRegularExpression(Topic constr, AbstractRegExpConstraint ac) {
 		Set<Occurrence> occurrences = constr.getOccurrences(regExp);
 		if (occurrences.size() > 0)
 			ac.setRegexp(occurrences.iterator().next().getValue());
