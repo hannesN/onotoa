@@ -1,0 +1,26 @@
+=== Occurrence Constraint ===
+
+A 'Occurrence Constraint' is an element of an 'Topic Type'. 
+It has the following properties:
+
+* *type:* A 'Occurrence Type' which is used for the constraint. If the type is not set, the default 
+type `tmdm:subject`  is used.
+* *cardMin:* The minimum number of names with the given type.
+* *cardMax:* The maximum number of names with the given type.
+
+.Property Page for Occurrence Constraint
+image::images/occconstr_pp.png[]
+
+After creating a new 'Occurrence Constraint' the type is set to the default type `tmdm:subject`. This can be changed
+by pressing the button on the right site. A dialog appears, which proposes all 'Occurrence Types' in the schema. To 
+create a new 'Occurrence Type' press the label *Type:* at the left of the text field. This opens the New Type Wizard. After 
+creating the type it is selected as type for this constraint.
+
+If a special type is set it is possible to edit his porperties in the second tab, labeld *Occurrence Type*. It lists
+all type properties, see <<_occurrence_type, Occurrence Type>> for details.
+
+If a constraint is added to a type, it says: A topic of that type needs at least *cardMin* and at most *cardMax*
+occurrences of the given type.
+
+NOTE: Although `tmdm:subject` is set in the TMDM namespace, it is spedified in the TMCL standard. This type just means
+every topic is allowed.

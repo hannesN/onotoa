@@ -18,3 +18,11 @@ include::properties/occurrencetype.txt[]
 include::properties/assoctype.txt[]
 
 include::properties/roletype.txt[]
+
+include::properties/nameconstraint.txt[]
+
+include::properties/occconstraint.txt[]
+
+include::properties/subjectidentifierconstraint.txt[]
+
+include::properties/subjectlocatorconstraint.txt[]
