@@ -244,8 +244,10 @@ public class TMCLDiagramEditorUtil {
 				new CreationFactory() {
 
 					public Object getNewObject() {
-						return ModelFactory.eINSTANCE
+						ReifierConstraint reifierConstraint = ModelFactory.eINSTANCE
 								.createReifierConstraint();
+						reifierConstraint.setCardMax("1");
+						return reifierConstraint;
 					}
 
 					public Object getObjectType() {

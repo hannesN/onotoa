@@ -1,0 +1,13 @@
+=== Role Combination Constraint ===
+
+:rcc: Role Combination Constraint
+
+The '{rcc}' is used to constraint the possible variations of players and role.
+
+.Property Page for '{rcc}'
+image::images/role_comb_constr_pp.png[]
+
+To add a new '{rcc}' press the *Add...* button and fill use the apearing dialog.
+
+.Dialog to create a new '{rcc}'
+image::images/role_comb_constr_dialog.png[width="9cm", align="center"]
