@@ -158,6 +158,10 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		return null;
 	}
 	
+	protected CTabFolder getFolder() {
+	    return folder;
+    }
+	
 	public void setModel(Object model) {
 		setEnabled(model!=null);
 		if (this.model == model) {

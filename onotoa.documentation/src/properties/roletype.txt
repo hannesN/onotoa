@@ -1,0 +1,8 @@
+=== Role Type ===
+
+A 'Role Type' inherits the properties  of 'Topic Type' (see <<topictype_pp, 'Topic Type' properties>>).
+
+
+.Property Page of 'Role Type'
+image::images/roletype_pp.png[]
+

@@ -74,8 +74,11 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 	@Override
 	public void setModel(Object model) {
 		super.setModel(model);
-		if (typeModelPage != null)
-			typeModelPage.setModel(getCastedModel().getType());
+		if (typeModelPage != null) {
+			TopicType type = getCastedModel().getType();
+			typeModelPage.setModel(type);
+			typeModelPage.getItem().setText("Name Type");
+		}
 	}
 	
 	@Override

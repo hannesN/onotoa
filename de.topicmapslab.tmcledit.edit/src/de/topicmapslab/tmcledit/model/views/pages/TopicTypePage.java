@@ -243,6 +243,10 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		item.setText("Topic Type");
 		item.setControl(createPage(folder));
 	}
+	
+	public CTabItem getItem() {
+	    return item;
+    }
 
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.REMOVING_ADAPTER)

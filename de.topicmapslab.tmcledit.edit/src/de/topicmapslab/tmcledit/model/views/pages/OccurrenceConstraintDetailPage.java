@@ -149,8 +149,10 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 	@Override
 	public void setModel(Object model) {
 		super.setModel(model);
-		if (typeModelPage!=null)
+		if (typeModelPage!=null) {
 			typeModelPage.setModel(getCastedModel().getType());
+			typeModelPage.getItem().setText("Occurrence Type");
+		}
 	}
 	
 	protected OccurrenceTypeConstraint getCastedModel() {
