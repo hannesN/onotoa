@@ -1,0 +1,11 @@
+=== Association Constraint ===
+:ac: Association Constraint
+The '{ac}' has only one property:
+
+* *Type:* The type os association which use is constrained. You can select an existing 'Association Type' by
+pressing the right button and select the wanted type. To create a new type, click on the `Type` label on the left. 
+The wizard to create a new type will appear and after the creation the new type will be the type of the constraint. 
+
+.Property Page for '{ac}'
+image::images/assoc_constr_pp.png[]
+

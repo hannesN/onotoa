@@ -10,14 +10,12 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.views.pages;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.command.CompoundCommand;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -32,14 +30,13 @@ import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 
-import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.ScopeConstraint;
-import de.topicmapslab.tmcledit.model.ScopedTopicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.commands.SetCardinalitiesCommand;
 import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -50,13 +47,16 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  * @author Hannes Niederhausen
  * 
  */
-public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModelPage {
+public class ReifierConstraintModelPage extends AbstractModelPage {
 
 	private Text typeText;
+	private CCombo cardCombo;
 	private CTabItem item;
+	private Button browseButton;
+	private Hyperlink link;
 	
-	public ScopeConstraintModelPage() {
-		super("scope constraint");
+	public ReifierConstraintModelPage() {
+		super("reifier constraint");
 	}
 
 	@Override
@@ -70,16 +70,58 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 		comp.setLayout(layout);
 
 		createTypeWidget(toolkit, comp);
+		
+		toolkit.createLabel(comp, "cardinality:");
+		cardCombo = new CCombo(comp, SWT.BORDER);
+		cardCombo.setItems(new String[] { "may", "cannot", "must" });
+		cardCombo.select(0);
+		cardCombo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				switch (cardCombo.getSelectionIndex()) {
+				case 0:
+					setMayReifier();
+					break;
+				case 1:
+					setCannotReifier();
+					break;
+				case 2:
+					setMustHaveReifier();
+					break;
+				}
 
-		createCommonConstraintControls(comp, toolkit);
+			}
+		});
 
 		item = new CTabItem(folder, SWT.NONE);
-		item.setText("Scope Constraint");
+		item.setText("Reifier Constraint");
 		item.setControl(comp);
 	}
 
+	private void setMustHaveReifier() {
+		enableTypeSelection(true);
+		setReifierCardinality(1, 1);
+	}
+
+	private void setCannotReifier() {
+		enableTypeSelection(false);
+		setReifierCardinality(0, 0);
+	}
+
+	private void setMayReifier() {
+		enableTypeSelection(true);
+		setReifierCardinality(0, 1);
+	}
+	
+	private void setReifierCardinality(int min, int max) {
+		ReifierConstraint rc = getCastedModel();
+
+		getCommandStack().execute(new SetCardinalitiesCommand(rc, Integer.toString(min), Integer.toString(max)));
+	}
+
+	
 	private void createTypeWidget(FormToolkit toolkit, Composite parent) {
-	    Hyperlink link = toolkit.createHyperlink(parent, "Topic Type:", SWT.NONE);
+	    link = toolkit.createHyperlink(parent, "Topic Type:", SWT.NONE);
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
@@ -93,8 +135,6 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 					        .getTopicMapSchema(), tt);
 					cmd.append(c1);
 					int featureID = ModelPackage.REIFIER_CONSTRAINT__TYPE;
-					if (isScopeConstraint())
-						featureID = ModelPackage.SCOPE_CONSTRAINT__TYPE;
 						
 					GenericSetCommand c2 = new GenericSetCommand(getModel(), featureID, tt);
 					cmd.append(c2);
@@ -111,11 +151,11 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 		comp.setLayout(layout);
 		comp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
-		typeText = toolkit.createText(comp, "", SWT.BORDER);
+		typeText = toolkit.createText(comp, "", SWT.BORDER|SWT.READ_ONLY);
 		typeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		Button button = toolkit.createButton(comp, "...", SWT.PUSH);
-		hookAddTypeButtonListeners(button);
+		browseButton = toolkit.createButton(comp, "...", SWT.PUSH);
+		hookAddTypeButtonListeners(browseButton);
     }
 
 	private void hookAddTypeButtonListeners(Button button) {
@@ -125,25 +165,10 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
 						typeText.getShell(), KindOfTopicType.TOPIC_TYPE);
 
-				if (isScopeConstraint()) {
-					ScopedTopicType stt = (ScopedTopicType) getCastedModel().eContainer();
-					EList<ScopeConstraint> scopeList = stt.getScope();
-					if (scopeList.size()>1) {
-						List<TopicType> tl = new ArrayList<TopicType>(scopeList.size());
-						for (ScopeConstraint sc : scopeList) {
-							if (sc.getType()!=null)
-								tl.add (sc.getType());
-						}
-						dlg.setExcludeList(tl);
-					}
-					
-				}
 				
 				if (dlg.open() == Dialog.OK) {
 					TopicType tt = ((TopicType) dlg.getFirstResult());
 					int featureID = ModelPackage.REIFIER_CONSTRAINT__TYPE;
-					if (isScopeConstraint())
-						featureID = ModelPackage.SCOPE_CONSTRAINT__TYPE;
 						
 					GenericSetCommand cmd = new GenericSetCommand(getModel(), featureID, tt);
 					getCommandStack().execute(cmd);
@@ -154,12 +179,8 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 	    
     }
 	
-	private boolean isScopeConstraint() {
-		return getModel() instanceof ScopeConstraint;
-	}
-
-	private AbstractTypedCardinalityConstraint getCastedModel() {
-		return (AbstractTypedCardinalityConstraint) getModel();
+	private ReifierConstraint getCastedModel() {
+		return (ReifierConstraint) getModel();
 	}
 
 	@Override
@@ -170,9 +191,29 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 	    else
 	    	typeText.setText(getCastedModel().getType().getName());
 	    
-	    if (isScopeConstraint())
-	    	item.setText("Scope Constraint");
-	    else
-	    	item.setText("Reifier Constraint");
+	    boolean enabled = true;
+	    if ("0".equals(getCastedModel().getCardMin())) {
+	    	if ("0".equals(getCastedModel().getCardMax())) {
+	    		cardCombo.select(1);
+	    		enabled = false;
+	    	} else {
+	    		cardCombo.select(0);
+	    	}
+	    } else {
+	    	cardCombo.select(2);
+	    }
+	    
+	    enableTypeSelection(enabled);
+	    
+    	item.setText("Reifier Constraint");
 	}
+
+	private void enableTypeSelection(boolean enabled) {
+	    browseButton.setEnabled(enabled);
+		link.setEnabled(enabled);
+    }
+
+	public void notifyChanged(Notification notification) {
+		updateUI();
+    }
 }

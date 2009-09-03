@@ -22,5 +22,11 @@
  	<topic href="html/ch04s04.html" label="Occurrence Type" />
  	<topic href="html/ch04s05.html" label="Association Type" />
  	<topic href="html/ch04s06.html" label="Role Type" />
+ 	<topic href="html/ch04s07.html" label="Name Constraint" />
+ 	<topic href="html/ch04s08.html" label="Occurrence Constraint" />
+ 	<topic href="html/ch04s09.html" label="Subject Identifier Constraint" />
+ 	<topic href="html/ch04s10.html" label="Subject Locator Constraint" />
+ 	<topic href="html/ch04s11.html" label="Association Constraint" />
+ 	<topic href="html/ch04s12.html" label="Role Combination Constraint" />
  </topic>
 </toc>

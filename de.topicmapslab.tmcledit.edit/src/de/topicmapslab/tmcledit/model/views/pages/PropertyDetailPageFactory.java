@@ -48,7 +48,8 @@ public class PropertyDetailPageFactory {
 	private static final String NAME_CONSTRAINT = "name_constraint";
 	private static final String IDENTIFIER_CONSTRAINT = "idenntifier_constraint";
 	private static final String COMMENT = "comment";
-	private static final String SCOPE_REIFIER_CONSTRAINT = "scopeconstraint";
+	private static final String SCOPE_CONSTRAINT = "scopeconstraint";
+	private static final String REIFIER_CONSTRAINT = "reifierconstraint";
 	
 	private EmptyPage emptyPage;
 	private HashMap<String, AbstractModelPage> pageMap = new HashMap<String, AbstractModelPage>();
@@ -182,12 +183,20 @@ public class PropertyDetailPageFactory {
 				pageMap.put(COMMENT, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-		} else if ( (model instanceof ScopeConstraint) || (model instanceof ReifierConstraint) ) {
-			page = pageMap.get(SCOPE_REIFIER_CONSTRAINT);
+		} else if (model instanceof ScopeConstraint) {
+			page = pageMap.get(SCOPE_CONSTRAINT);
 			if (page==null) {
 				page = new ScopeConstraintModelPage();
 				page.createControl(pageBook.getContainer());
-				pageMap.put(SCOPE_REIFIER_CONSTRAINT, page);
+				pageMap.put(SCOPE_CONSTRAINT, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+		} else if (model instanceof ReifierConstraint) {
+			page = pageMap.get(REIFIER_CONSTRAINT);
+			if (page==null) {
+				page = new ReifierConstraintModelPage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(REIFIER_CONSTRAINT, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		}

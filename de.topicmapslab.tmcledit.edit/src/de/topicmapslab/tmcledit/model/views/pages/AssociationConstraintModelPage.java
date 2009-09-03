@@ -99,7 +99,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 
 
 		Hyperlink link = toolkit
-				.createHyperlink(comp, "Assoc. Type:", SWT.NONE);
+				.createHyperlink(comp, "Type:", SWT.NONE);
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {

@@ -84,6 +84,18 @@
 			<include name="${filename}.xml" />
 			<param name="html.stylesheet.type" expression="text/css" />
 			<param name="html.stylesheet" expression="css/onotoa.css" />
+			<param name="generate.toc" expression="
+						 appendix  nop
+						 article   toc,title
+						 book      toc,title,figure,table,example,equation
+						 chapter   toc
+						 part      nop
+						 preface   nop
+						 qandadiv  nop
+						 qandaset  nop
+						 reference toc,title
+						 section   nop
+						 set       toc"/>
 		</xslt>
 
 		<copy todir="${doc.docbook.html}">
@@ -105,6 +117,19 @@
 			<classpath refid="xalan.classpath" />
 			<include name="${filename}.xml" />
 			<!-- <param name="default.image.width" expression="8cm" />-->
+			<param name="generate.toc" expression="
+			 appendix  nop
+			 article   toc,title
+			 book      toc,title,figure,table,example,equation
+			 chapter   toc
+			 part      nop
+			 preface   nop
+			 qandadiv  nop
+			 qandaset  nop
+			 reference toc,title
+			 section   nop
+			 set       toc"/>
+
 		</xslt>
 
 		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
