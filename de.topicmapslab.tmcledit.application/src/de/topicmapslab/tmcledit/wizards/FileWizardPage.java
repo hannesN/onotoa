@@ -66,7 +66,7 @@ public class FileWizardPage extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog dlg = new FileDialog(pathText.getShell());
-				dlg.setFilterExtensions(new String[]{"*.tmcl"});
+				dlg.setFilterExtensions(new String[]{"*.ono"});
 				dlg.setFilterPath(System.getProperty("user.home"));
 				
 				String path = dlg.open();
