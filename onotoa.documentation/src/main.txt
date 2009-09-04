@@ -3,7 +3,7 @@
 Onotoa Handbook
 ===============
 Hannes Niederhausen <niederhausen@informatik.uni-leipzig.de>
-v0.2, Sepember 2009: Initial draft extended
+v0.2, September 2009: Initial draft extended
 
 Preface
 =======
@@ -14,7 +14,7 @@ functions of Onotoa including some technical background and a
 description of the implementation of the GTM level 1 proposal.
 
 Onotoa is based on the popular eclipse platform, which enable it
-to be easy extensdable. Their usage and the creation of
+to be easy extendible. Their usage and the creation of
 additional extensions is explained in this document too.
  
 
@@ -32,6 +32,7 @@ include::properties.txt[]
 
 include::diagram.txt[]
 
+/////////////////////////////
 Some Short Tutorials
 ====================
 
@@ -48,3 +49,4 @@ here stuff like:
 * creating PSIProvider
 * extending export
 * extending 
+/////////////////////////////

@@ -4,9 +4,9 @@
 There are 2 ways to install _Onotoa_.
 
 - First you can use the standalone version. This can be downloaded at http://onotoa.topicmapslab.de/download.
-- Alternativly you max install _Onotoa_ as bundle into your eclipse installation. Use the _Onotoa_ update site 
+- Alternatively you max install _Onotoa_ as bundle into your eclipse installation. Use the _Onotoa_ update site 
 The update site is http://onotoa.topicmapslab.de/update.
 
-To run _Onotoa_ you need at least the Java Runtime Environement Version 5.0. You can find the newest Java Version at
+To run _Onotoa_ you need at least the Java Runtime Environment Version 5.0. You can find the newest Java Version at
 http://java.sun.com.
 

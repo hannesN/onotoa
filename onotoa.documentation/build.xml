@@ -13,7 +13,7 @@
 	      -->
 	<!-- libs-->
 	<property name="docbook.xsl.dir" value="lib/docbook-xsl-1.75.2" />
-	<property name="html.stylesheet" value="${docbook.xsl.dir}/html/chunk.xsl" />
+	<property name="html.stylesheet" value="${docbook.xsl.dir}/html/docbook.xsl" />
 	<property name="fo.stylesheet" value="${docbook.xsl.dir}/fo/docbook.xsl" />
 	<property name="xalan.lib.dir" value="lib/" />
 
@@ -110,6 +110,9 @@
 			</fileset>
 		</copy>
 	</target>
+	
+	<target name="all" depends="html, pdf, docbook.eclipse, docbook.html, docbook.pdf"/>
+	
 	<target name="docbook.pdf" depends="clean.pdf,depends, docbook" description="Generate PDF file from docbook XML">
 		<property name="fop.home" value="lib/fop-0.95" />
 
