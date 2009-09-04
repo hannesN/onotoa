@@ -6,3 +6,4 @@ The following sections will explain how to create schema elements and how these 
 
 The following table lists the elements and a short description of their functionality.
 
+include::diagram/palette.txt[]

@@ -7,28 +7,55 @@ image::images/palette.png["Palette of a diagram editor", width="5cm", align="cen
 
 The elements of the palette are:
 
-|Select|Tool for selecting diagram elements
-|Marquee| Selection tool for multiple diagram elements
-|Comment| Creates a non-TMCL comment in the diagram 
-||
-|Topic| Creates a topic element in the diagram
-|Topic Type| Creates a topic type element in the diagram
-|Occurrence Type| Creates an occurrence type element
-|Role Type| Creates a role type element
-|Association Type| Creates an association type element in the diagram
-|Name Type| Creates a name type element in the diagram
-||
-|Occurrence Constraint| Creates an occurrence constraint element to an topic type element.
-|Name Constraint| Creates a name constraint element to an topic type element.
-|Scope Constraint| Creates a scope constraint element to an name, occurrence or association constraint element. This is only possible if the parent constraint does not use a default type. 
-|Reifier Constraint| Creates a reifier constraint element to an name, occurrence or association constraint element. Again this is only possible if the parent constraint does not use a default type. 
-|Subject Identifier Constraint| Creates a subject identifier constraint element to an topic type element.
-|Subject Locator Constraint| Creates a subject locator constraint element to an topic type element.
-|Is A...|Creates a connection between two topic types, which represents a type instance relationship.
-|Kind Of...|Creates a connection betweeen two topic types, which represents a kind of relationship.
-|Association Constraint|Creates an element representing an association constraint in the diagram. This is used as connection point between topic types which are in an relationship.
-|Topic Role Contraint|The connection between a topic type (the player) an an association constraint (the association). 
-|=========================== 
+* *Select:* Tool for selecting diagram elements
 
-NOTE: Not every element is a diagram element. For example, to create a new occurrence constraint you need an existing topic type and drop the palette entry in
-this topic type.
+* *Marquee:* Selection tool for multiple diagram elements
+
+* *Comment:* Creates a non-TMCL comment in the diagram 
+
+* *Topic:* Creates a topic element in the diagram
+
+* *Topic Type:* Creates a topic type element in the diagram
+
+* *Occurrence Type:* Creates an occurrence type element
+
+* *Role Type:* Creates a role type element
+
+* *Association Type:* Creates an association type element in the diagram
+
+* *Name Type:* Creates a name type element in the diagram
+
+* *Occurrence Constraint:* Creates an occurrence constraint element to an topic type element.
+
+* *Name Constraint:* Creates a name constraint element to an topic type element.
+
+* *Scope Constraint:* Creates a scope constraint element to an name, occurrence or association constraint element. This is only possible if the parent constraint does not use a default type. 
+
+* *Reifier Constraint:* Creates a reifier constraint element to an name, occurrence or association constraint element. Again this is only possible if the parent constraint does not use a default type. 
+
+* *Subject Identifier Constraint:* Creates a subject identifier constraint element to an topic type element.
+
+* *Subject Locator Constraint:* Creates a subject locator constraint element to an topic type element.
+
+* *Is A...:* Creates a connection between two topic types, which represents a type instance relationship.
+
+* *Kind Of...:* Creates a connection betweeen two topic types, which represents a kind of relationship.
+
+* *Association Constraint:* Creates an element representing an association constraint in the diagram. This is used as connection point between topic types which are in an relationship.
+
+* *Topic Role Contraint:* The connection between a topic type (the player) an an association constraint (the association). 
+
+To create a new 'Topic Type' just drag the *Topic Type* palette entry in the diagram. A new 'Topic Type' with a default name was created. 
+To add  a new 'Topic Type' repeat.
+
+Adding a 'Name Constraint' to the 'Topic Type' just drag the *Name Constraint* over the 'Topic Type' and a new 'Name Constraint' with 
+default properties will be added to the 'Topic Type'. The other constraint work similiar, only 'Scope Constraint' and 'Reifier Constraint'
+need a scopable or reifieable constraint as parent. These are 'Association, Name' and 'Occurence Constraints'.
+
+To create an 'Is a' or 'Kind of' relationship, click on the tool entry in the palette. After that click on a topic type represenation and 
+after that on another one. In an 'Is a' relationship, the first 'Topic Type' is the instance and the second one is the type. In a 'Kind of'
+relationship the first 'Topic Type' is the subtype and the second one is the supertype.
+The editing state remains in the raltionship creation mode, which menas you can create more than one relationship without selecting the 
+palette entry. To go back to selection mode press the right mouse button or select 'Select' in the palette.
+
+
