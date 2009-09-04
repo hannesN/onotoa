@@ -1,0 +1,34 @@
+=== Palette ===
+
+The palette povides the functionality of the editor. It contains a set of tools to create schema elements. 
+
+.Palette of a diagram editor
+image::images/palette.png["Palette of a diagram editor", width="5cm", align="center"]
+
+The elements of the palette are:
+
+|Select|Tool for selecting diagram elements
+|Marquee| Selection tool for multiple diagram elements
+|Comment| Creates a non-TMCL comment in the diagram 
+||
+|Topic| Creates a topic element in the diagram
+|Topic Type| Creates a topic type element in the diagram
+|Occurrence Type| Creates an occurrence type element
+|Role Type| Creates a role type element
+|Association Type| Creates an association type element in the diagram
+|Name Type| Creates a name type element in the diagram
+||
+|Occurrence Constraint| Creates an occurrence constraint element to an topic type element.
+|Name Constraint| Creates a name constraint element to an topic type element.
+|Scope Constraint| Creates a scope constraint element to an name, occurrence or association constraint element. This is only possible if the parent constraint does not use a default type. 
+|Reifier Constraint| Creates a reifier constraint element to an name, occurrence or association constraint element. Again this is only possible if the parent constraint does not use a default type. 
+|Subject Identifier Constraint| Creates a subject identifier constraint element to an topic type element.
+|Subject Locator Constraint| Creates a subject locator constraint element to an topic type element.
+|Is A...|Creates a connection between two topic types, which represents a type instance relationship.
+|Kind Of...|Creates a connection betweeen two topic types, which represents a kind of relationship.
+|Association Constraint|Creates an element representing an association constraint in the diagram. This is used as connection point between topic types which are in an relationship.
+|Topic Role Contraint|The connection between a topic type (the player) an an association constraint (the association). 
+|=========================== 
+
+NOTE: Not every element is a diagram element. For example, to create a new occurrence constraint you need an existing topic type and drop the palette entry in
+this topic type.
