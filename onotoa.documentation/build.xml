@@ -20,6 +20,7 @@
 	<property name="src.dir" value="src" />
 	<property name="src.dir.images" value="${src.dir}/images" />
 
+	<property name="doc.docbook.eclipse" value="${doc}/docbook/eclipse" />
 	<property name="doc.docbook.html" value="${doc.docbook}/html" />
 	<property name="doc.docbook.html.images" value="${doc.docbook.html}/images" />
 	<property name="doc.docbook.latex" value="${doc.docbook}/latex" />
@@ -95,7 +96,7 @@
 						 qandaset  nop
 						 reference toc,title
 						 section   nop
-						 set       toc"/>
+						 set       toc" />
 		</xslt>
 
 		<copy todir="${doc.docbook.html}">
@@ -128,7 +129,7 @@
 			 qandaset  nop
 			 reference toc,title
 			 section   nop
-			 set       toc"/>
+			 set       toc" />
 
 		</xslt>
 
@@ -154,14 +155,35 @@
 		<xsl.xinclude in="${docbooksource}/xslhelp.dbk" out="${docbooksource}/xslhelpcombined.dbk" />
 	</target>
 
-	<target name="docbook.eclipse" depends="clean.eclipse, docbook, docbook.html">
+	<target name="docbook.eclipse" depends="clean.eclipse, docbook">
 
-		<copy todir="../de.topicmapslab.tmcledit.doc/html">
-			<fileset dir="${doc.docbook.html}">
-				<include name="**/*" />
+		<property name="xalan" value="org.apache.xalan.processor.TransformerFactoryImpl" />
+		
+		<mkdir dir="${doc.docbook.eclipse}" />
+		<mkdir dir="${doc.docbook.eclipse}/html" />
+		
+		<xslt style="${docbook.xsl.dir}/eclipse/eclipse.xsl" in="${doc.docbook}/doc.xml" destdir="${doc.docbook.eclipse}" out="${doc.docbook.eclipse}/test.xml">
+			<factory name="${xalan}" />
+			<param name="navig.showtitles" expression="0" />
+			<param name="base.dir" expression="html/" />
+			<param name="suppress.navigation" expression="1" />
+			<param name="generate.toc" expression="book      toc,title,figure
+			chapter   toc,title
+			section   title" />
+
+		</xslt>
+ 		<copy todir="../de.topicmapslab.tmcledit.doc/html">
+			<fileset dir="${src.dir}">
+				<include name="images/**" />
+				<include name="css/**" />
 			</fileset>
 		</copy>
-
+		<copy todir="../de.topicmapslab.tmcledit.doc/">
+			<fileset dir="${doc.docbook.eclipse}">
+				<include name="**/toc.xml" />
+				<include name="**/*.html" />
+			</fileset>
+		</copy>
 	</target>
 
 
