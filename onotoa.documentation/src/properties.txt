@@ -7,6 +7,8 @@ sections will present the property pages of the elements. These pages are render
 NOTE: The property pages support undo and redo for model changes. To omit a lot of changes during entering
 the text, _Onotoa_ perfoms the changes when the text field loses its focus.
 
+include::properties/documentation.txt[]
+
 include::properties/diagram_tms.txt[]
 
 include::properties/topictype.txt[]

@@ -30,6 +30,8 @@ include::modelview.txt[]
 
 include::properties.txt[]
 
+include::diagram.txt[]
+
 Some Short Tutorials
 ====================
 
