@@ -1,0 +1,8 @@
+=== Graphical Representation ===
+
+This section explains how to interpret the graphical representation of the schema elements.
+The representation is based on the GTM level proposal, which you can find at http://isotopicmaps.org/gtm/gtm-oslo-2008-04.pdf .
+
+==== Topic Type ====
+
+The Topic Type representation is basically a 
