@@ -79,6 +79,9 @@ public class SetCardinalityCommand extends AbstractCommand {
 		else
 			oldValue = cardinalityContraint.getCardMax();
 		
+		if (oldValue.equals(newValue))
+			return false;
+		
 		return true;
 	}
 
