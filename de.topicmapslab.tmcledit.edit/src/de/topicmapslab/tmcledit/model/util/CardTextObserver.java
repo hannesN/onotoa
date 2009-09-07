@@ -85,7 +85,11 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		
 		Text textField = (Text) e.getSource();
 		
-		if ((textField.getText().length()==0) && (text.equals("*")))
+		
+		
+		if ( ( (textField.getText().length()==0) 
+			 || (e.start==0) )
+			&& (text.equals("*")))
 			return;
 
 		char[] chars = text.toCharArray();

@@ -11,6 +11,7 @@
 package de.topicmapslab.tmcledit.model.views.pages;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -28,6 +29,7 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.commands.SetCardinalitiesCommand;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
@@ -112,8 +114,15 @@ public class RoleModelPage extends AbstractModelPage{
 				int index = roleCombo.getSelectionIndex();
 				if (index>-1) {
 					RoleConstraint rc = getAssociationType().getRoles().get(index);
+					CompoundCommand ccmd = new CompoundCommand();
+					
 					SetRoleConstraintCommand cmd = new SetRoleConstraintCommand(getCastedModel(), rc);
-					getCommandStack().execute(cmd);
+					ccmd.append(cmd);
+					
+					SetCardinalitiesCommand cmd2 = new SetCardinalitiesCommand(getCastedModel(), rc.getCardMin(), rc.getCardMax());
+					ccmd.append(cmd2);
+					
+					getCommandStack().execute(ccmd);
 				}
 			}
 		});

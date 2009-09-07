@@ -55,12 +55,19 @@ public class SetCardinalitiesCommand extends AbstractCommand {
 	protected boolean prepare() {
 		oldMin = cardinalityContraint.getCardMin();
 		oldMax = cardinalityContraint.getCardMax();
+		
+		if ( (oldMax.equals(max)) && (oldMin.equals(min))) {
+			return false;
+		}
+		
 		try {
-			int min = Integer.parseInt(this.min);
-			int max = Integer.parseInt(this.max);
+			if (!("*".equals(this.max))) {
+				int min = Integer.parseInt(this.min);
+				int max = Integer.parseInt(this.max);
 
-			if (min > max) {
-				this.min = this.max;
+				if (min > max) {
+					this.min = this.max;
+				}
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
