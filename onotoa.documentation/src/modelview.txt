@@ -11,7 +11,7 @@ just select 'TopicTypes' in the *Model View* and choose 'Create Topic Type...'. 
 a subject identifier or a subject locator can be entered.
 
 .New Topic Type Wizard
-image::images/new_tt_dialog.png[with="9cm"]
+image::images/new_tt_dialog.png[scaledwidth="80%"]
 
 Right now _Onotoa_ only supports one name per Topic. When the topic is used to type a constraint, the name is visualized therefor _Onotoa_ 
 forbids topics with the same name. If a base locator for the Topic Maps schema is set, a subject locator is related using this base locator

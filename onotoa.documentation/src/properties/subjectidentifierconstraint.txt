@@ -4,7 +4,7 @@ The 'Subject Identifier Constraint' is used to  demand for a subject identifier 
 'Topic Type'. It is possible to constraint the number of identifier and also the form, using a regular expression.
 
 .Property Page 'Subject Identifier Constraint'
-image::images/si_constr_pp.png[]
+image::images/si_constr_pp.png[scaledwidth="100%"]
 
 The following attributes can be modified:
 

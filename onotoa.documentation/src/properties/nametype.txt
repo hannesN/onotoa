@@ -5,7 +5,7 @@ In addition it has the following properties.
 
 
 .Property Page of 'Name Type'
-image::images/nametype_pp.png[]
+image::images/nametype_pp.png[scaledwidth="100%"]
 
 
 * *reg. exp:* This regular expression is used to define the form of the content of the name. 

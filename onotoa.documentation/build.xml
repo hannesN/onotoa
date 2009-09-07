@@ -104,18 +104,21 @@
 				<include name="css/*" />
 			</fileset>
 		</copy>
-		<copy todir="${doc.docbook.html}">
+		
+		<antcall target="copyimages">
+			<param name="copy.imagedir" value="${doc.docbook.html}"/>
+		</antcall>
+		<!-- <copy todir="${doc.docbook.html}">
 			<fileset dir="${src.dir}">
 				<include name="images/*" />
 			</fileset>
-		</copy>
+		</copy>-->
 	</target>
 	
 	<target name="all" depends="html, pdf, docbook.eclipse, docbook.html, docbook.pdf"/>
 	
 	<target name="docbook.pdf" depends="clean.pdf,depends, docbook" description="Generate PDF file from docbook XML">
 		<property name="fop.home" value="lib/fop-0.95" />
-
 		<xslt style="${fo.stylesheet}" extension=".fo" basedir="${doc.docbook}" destdir="${build.fo}">
 			<param name="paper.type" expression="${paper.type}" />
 			<classpath refid="xalan.classpath" />
@@ -133,7 +136,6 @@
 			 reference toc,title
 			 section   nop
 			 set       toc" />
-
 		</xslt>
 
 		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
@@ -211,11 +213,14 @@
 			<arg value="${src}" />
 		</exec>
 
-		<copy todir="${doc.html}">
+		<antcall target="copyimages">
+			<param name="copy.imagedir" value="${doc.html}"/>
+		</antcall>
+		<!-- <copy todir="${doc.html}">
 			<fileset dir="src">
-				<include name="images/*" />
+				<include name="images/**/" />
 			</fileset>
-		</copy>
+		</copy>-->
 	</target>
 
 	<target name="docbook" depends="init">
@@ -230,12 +235,25 @@
 			<arg value="${src}" />
 		</exec>
 
-		<copy todir="${doc.docbook}">
+<!-- 		<copy todir="${doc.docbook}">
 			<fileset dir="src">
 				<include name="images/*" />
 			</fileset>
+		</copy>-->
+		
+		<antcall target="copyimages">
+			<param name="copy.imagedir" value="${doc.docbook}"/>
+		</antcall>
+	</target>
+	
+	<target name="copyimages">
+		<copy todir="${copy.imagedir}">
+			<fileset dir="src">
+				<include name="images/**/*" />
+			</fileset>
 		</copy>
 	</target>
+	
 	<target name="pdf" depends="init">
 		<exec executable="a2x">
 			<arg value="-f" />

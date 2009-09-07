@@ -9,7 +9,7 @@ TMDM is used.
 * *cardMax:* The maximum number of names with the given type.
 
 .Property Page for Name Constraint
-image::images/nameconstr_pp.png[]
+image::images/nameconstr_pp.png[scaledwidth="100%"]
 
 After creating a new 'Name Constraint' the type is set to the default name type `tmdm:default-name`. This can be changed
 by pressing the button on the right site. A dialog appears, which proposes all 'Name Types' in the schema. To create a new

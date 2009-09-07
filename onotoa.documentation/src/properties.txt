@@ -11,6 +11,8 @@ include::properties/documentation.txt[]
 
 include::properties/diagram_tms.txt[]
 
+include::properties/prefix.txt[]
+
 include::properties/topictype.txt[]
 
 include::properties/nametype.txt[]

@@ -4,7 +4,7 @@ Every type in TMCL is instance of topic-type, which means they all share a minim
 a 'TopicType' can be seen in the Figure below:
 
 .Property Page of 'TopicType'
-image::images/topictype_pp.png[align="center"]
+image::images/topictype_pp.png[align="center", scaledwidth="100%"]
 
 A 'Topic Type' has the following properties:
 
@@ -15,7 +15,7 @@ The name of the type is also unscoped  and of type _tmdm:default-name_.
 and use the 'Subject Identifier Dialog'. This list may be empty.
 
 .Subject Identifier Dialog
-image::images/si_dialog.png[width="7cm"]
+image::images/si_dialog.png[scaledwidth="40%"]
 
 * *subject locator:* Similiar to subject identifiers contains a 'Topic Type' a list of IRIs representing the subject locators of the topic. 
 This list can be edited by using the dialog opend by *...*. It looks like the Subject Identifier Dialog. The list may be empty too.
@@ -38,4 +38,4 @@ which sets this property to true. This means the 'Topic Type' may be used as sup
 a type-instance relationship.
 
 .Topic Selection Dialog
-image::images/isa_selection.png[width="8cm"]
+image::images/isa_selection.png[scaledwidth="60%"]

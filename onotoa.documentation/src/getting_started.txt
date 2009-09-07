@@ -13,7 +13,7 @@ After starting _Onotoa_ you should see the main window, like in Figure <<empty_w
 .Empty _Onotoa_ window
 [caption="Figure 1:"]
 [[empty_win]]
-image::images/emptywin.png["Empty _Onotoa_ window"]
+image::images/emptywin.png["Empty _Onotoa_ window", scaledwidth="100%"]
 
 
 To create a new model, use the *File->New..*.
@@ -22,7 +22,7 @@ Choose the path of the file and name it *example.ono*. After that your window sh
 .Onotoa window after creating a file
 [caption="Figure 2:"]
 [[emptyfile_win]]
-image::images/emptyfilewin.png["_Onotoa_ window after creating a file"]
+image::images/emptyfilewin.png["_Onotoa_ window after creating a file", scaledwidth="100%"]
 
 === Using the plugin version of _Onotoa_ ===
 
@@ -36,7 +36,7 @@ After creating the new file _Onotoa_ switches to the *Onotoa Perspective*. This 
 ._Onotoa_ window after creating a file in Navigator
 [caption="Figure 3:"]
 [[nonrcp_win]]
-image::images/emptyfilewin_nonrcp.png["_Onotoa_ window after creating a file in Navigator"]
+image::images/emptyfilewin_nonrcp.png["_Onotoa_ window after creating a file in Navigator", scaledwidth="100%"]
 
 === Creating the first diagram ===
 
@@ -52,7 +52,7 @@ At the right side of the editor is a sidebar. This sidebar is called a palette a
 .Palette of a diagram editor
 [caption="Figure 4:"]
 [[palette]]
-image::images/palette.png["Palette of a diagram editor", width="5cm", align="center"]
+image::images/palette.png["Palette of a diagram editor", , scaledwidth="25%", align="center"]
 
 
 

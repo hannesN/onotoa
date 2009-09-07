@@ -10,7 +10,7 @@ The properties are:
 but mostly will be a URL.
 
 .Property Page of documentation
-image::images/documentation_pp.png[]
+image::images/documentation_pp.png[scaledwidth="100%"]
 
 To modify these properties use the documentation tab, which is part of the *Property Details View* of 
 almost every element.  

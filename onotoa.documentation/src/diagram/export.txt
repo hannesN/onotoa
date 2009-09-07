@@ -4,7 +4,7 @@ It is possible to export a diagram as png image. To do this use the button label
 After pressing the button, a file dialog is opened. Choose the file or enter a new filename and save the file.
 
 .The "Export Diagram" button
-image::images/export_diagram_button.png[width="9cm"]
+image::images/export_diagram_button.png[scaledwidth="100%"]
 
 The button is connected to the current diagram editor, this means the diagram in the current editor is exported.
 With no editor open, the button is hidden.
