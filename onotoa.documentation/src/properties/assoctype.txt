@@ -5,7 +5,7 @@ In addition it has the following properties.
 
 
 .Property Page of 'Association Type'
-image::images/assoctype_pp.png[]
+image::images/assoctype_pp.png[scaledwidth="100%"]
 
 
 * *roles:* Which roles are accepted by association with the selected type are defined in the

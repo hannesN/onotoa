@@ -6,11 +6,11 @@ A diagram contains all informations of the graphical represention of the schema 
 diagram editor.
 
 .Property Page of 'Diagram'
-image::images/diagram_pp.png[]
+image::images/diagram_pp.png[scaledwidth="100%"]
 
 Another top level element is the 'TopicMapSchema'. This element contains all the elements of the schema, despite the graphical 
 representations. The 'TopicMapSchema' has only two properties: a name and a base locator. Both properties may be unset, but it is
 advised to set a base locator for automatic creation of subject identifiers. 
 
 .Property Page of 'TopicMapSchema'
-image::images/tmschema_pp.png[]
+image::images/tmschema_pp.png[scaledwidth="100%"]

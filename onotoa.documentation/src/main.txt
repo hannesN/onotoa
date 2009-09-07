@@ -1,5 +1,3 @@
-:width: 14cm
-
 Onotoa Handbook
 ===============
 Hannes Niederhausen <niederhausen@informatik.uni-leipzig.de>
@@ -16,8 +14,6 @@ description of the implementation of the GTM level 1 proposal.
 Onotoa is based on the popular eclipse platform, which enable it
 to be easy extendible. Their usage and the creation of
 additional extensions is explained in this document too.
- 
-
 
 Using Onotoa
 ============

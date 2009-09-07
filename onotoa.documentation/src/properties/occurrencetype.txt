@@ -4,7 +4,7 @@ A 'Occurrence Type' inherits the properties  of 'Topic Type' (see <<topictype_pp
 In addition it has the following properties.
 
 .Property Page of 'Occurrence Type'
-image::images/occtype_pp.png[]
+image::images/occtype_pp.png[scaledwidth="100%"]
 
 * *unique:* If this is *true* the TMCL validator will check if the value of occurrences of this type is unqie in 
 the topic map. This means two topics with occurrences of this type may not have the same value. The unique constraint is

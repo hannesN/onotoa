@@ -4,5 +4,5 @@ A 'Role Type' inherits the properties  of 'Topic Type' (see <<topictype_pp, 'Top
 
 
 .Property Page of 'Role Type'
-image::images/roletype_pp.png[]
+image::images/roletype_pp.png[scaledwidth="100%"]
 

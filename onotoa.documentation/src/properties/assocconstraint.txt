@@ -7,5 +7,5 @@ pressing the right button and select the wanted type. To create a new type, clic
 The wizard to create a new type will appear and after the creation the new type will be the type of the constraint. 
 
 .Property Page for '{ac}'
-image::images/assoc_constr_pp.png[]
+image::images/assoc_constr_pp.png[scaledwidth="100%"]
 

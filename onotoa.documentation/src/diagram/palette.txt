@@ -3,7 +3,7 @@
 The palette povides the functionality of the editor. It contains a set of tools to create schema elements. 
 
 .Palette of a diagram editor
-image::images/palette.png["Palette of a diagram editor", width="5cm", align="center"]
+image::images/palette.png["Palette of a diagram editor", [scaledwidth="25%"], align="center"]
 
 The elements of the palette are:
 

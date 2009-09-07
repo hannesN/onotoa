@@ -149,7 +149,7 @@ public class PrefixMappingPage extends AbstractModelPage {
 		
 		addButton = toolkit.createButton(comp, "Add...", SWT.PUSH);
 		fac.applyTo(addButton);
-		removeButton = toolkit.createButton(comp, "Remove...", SWT.PUSH);
+		removeButton = toolkit.createButton(comp, "Remove", SWT.PUSH);
 		fac.applyTo(removeButton);
 		
 		hookAddButtonListener();
