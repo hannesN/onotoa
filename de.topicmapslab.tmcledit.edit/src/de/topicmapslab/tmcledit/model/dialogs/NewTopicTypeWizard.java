@@ -13,6 +13,8 @@
  */
 package de.topicmapslab.tmcledit.model.dialogs;
 
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.wizard.Wizard;
@@ -73,6 +75,7 @@ public class NewTopicTypeWizard extends Wizard {
 		private boolean syncIdentifier;
 	
 		private PSIContentProposalProvider proposalProvider;
+		private ControlDecoration nameDecoration;
 		
 		protected NewTypeWizardPage() {
 			super("new type");
@@ -112,14 +115,21 @@ public class NewTopicTypeWizard extends Wizard {
 			Label label = new Label(comp, SWT.NONE);
 			label.setText("Name:");
 			
+			
 			nameText = new Text(comp, SWT.BORDER);
+			nameDecoration = new ControlDecoration(nameText, SWT.TOP|SWT.LEFT);
+			FieldDecorationRegistry fieldDecoReg = FieldDecorationRegistry.getDefault();
+			nameDecoration.setImage(fieldDecoReg.getFieldDecoration(FieldDecorationRegistry.DEC_ERROR).getImage());
 			fac.applyTo(nameText);
 			nameText.addModifyListener(new ModifyListener() {
 
 				public void modifyText(ModifyEvent e) {
 					String newName = nameText.getText();
 					if (ModelIndexer.getTopicIndexer().getTopicTypeByName(newName)!=null) {
-						setErrorMessage("Type with this name already exists");
+						String errMsg = "Type with this name already exists";
+						nameDecoration.setDescriptionText(errMsg);
+						nameDecoration.show();
+						setErrorMessage(errMsg);
 						setPageComplete(false);
 						return;
 					}
@@ -138,13 +148,17 @@ public class NewTopicTypeWizard extends Wizard {
 							identifierText.setText(builder.toString());
 							syncIdentifier=true;
 						}
+						nameDecoration.hide();
 						setPageComplete(true);
 					} else {
 						if (syncIdentifier) {
 							identifierText.setText("");
 							syncIdentifier=true;
 						}
-						setErrorMessage("Topic Type has no name");
+						String errMsg = "Topic Type has no name";
+						setErrorMessage(errMsg);
+						nameDecoration.setDescriptionText(errMsg);
+						nameDecoration.show();
 						setPageComplete(false);
 					}
 					
@@ -162,6 +176,10 @@ public class NewTopicTypeWizard extends Wizard {
 					syncIdentifier = false;
 				}
 			});
+
+			ControlDecoration idDeco = new ControlDecoration(identifierText, SWT.TOP|SWT.LEFT);
+			idDeco.setImage(fieldDecoReg.getFieldDecoration(FieldDecorationRegistry.DEC_CONTENT_PROPOSAL).getImage());
+			idDeco.setShowOnlyOnFocus(true);
 			
 			proposalProvider = new PSIContentProposalProvider();
 			new ContentAssistCommandAdapter(identifierText, 

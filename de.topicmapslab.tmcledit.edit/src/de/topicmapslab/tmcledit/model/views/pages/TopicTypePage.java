@@ -18,6 +18,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.fieldassist.FieldDecoration;
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -25,6 +28,8 @@ import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -32,6 +37,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -46,6 +53,7 @@ import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
 import de.topicmapslab.tmcledit.model.dialogs.StringListSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.SubjectIdentifierListDialog;
 import de.topicmapslab.tmcledit.model.dialogs.TopicSelectionDialog;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * Property detail page for topic types.
@@ -64,6 +72,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 	protected CTabItem item;
 	private Text overlapText;
+	private ControlDecoration nameDecorator;
 
 	public TopicTypePage() {
 		super("topic type");
@@ -80,7 +89,11 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		comp.setLayout(new GridLayout(3, false));
 
 		toolkit.createLabel(comp, "Name:");
+		
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
+		nameDecorator = new ControlDecoration(nameText, SWT.LEFT|SWT.TOP);
+		nameDecorator.setMarginWidth(2);
+		nameDecorator.setShowOnlyOnFocus(true);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		nameText.setLayoutData(gd);
@@ -90,10 +103,25 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				finishName();
 			}
 		});
+		
 		nameText.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (e.character==SWT.CR)
 					finishName();
+			}
+		});
+		
+		nameText.addModifyListener(new ModifyListener() {
+			
+			public void modifyText(ModifyEvent e) {
+				TopicType topic = ModelIndexer.getTopicIndexer().getTopicTypeByName(nameText.getText());
+				if ( (topic!=null) && (!topic.equals(getModel())) ){
+					nameDecorator.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_ERROR).getImage());
+					nameDecorator.setDescriptionText("Name already in use!");
+					nameDecorator.show();
+				} else {
+					nameDecorator.hide();
+				}
 			}
 		});
 
@@ -394,12 +422,14 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	    	
 	    	if (cmd.canExecute()) {
 	    		getCommandStack().execute(cmd);
+	    		nameDecorator.hide();
 	    	} else {
 				String errormsg = "Name: "+nameText.getText()+" already used!";
 				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
 				
 				nameText.setText(getCastedModel().getName());
 	    	}
+	    	
 	    }
     }
 }
