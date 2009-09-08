@@ -24,11 +24,11 @@ import org.eclipse.draw2d.text.BlockFlow;
 import org.eclipse.draw2d.text.FlowPage;
 import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Pattern;
 
 import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
+import de.topicmapslab.tmcledit.diagram.util.SWTPattern;
 
 /**
  * @author Hannes Niederhausen
@@ -115,7 +115,7 @@ public class CommentFigure extends Figure {
 			Color bg = cd.createColor(null);
 			cd = scheme.getCommentSecondaryColor();
 			if (cd!=null) {
-				graphics.setBackgroundPattern(new Pattern(null, x1/2, y0, x1/2, y1, bg, cd.createColor(null)));
+				graphics.setBackgroundPattern(new SWTPattern(null, x1/2, y0, x1/2, y1, bg, cd.createColor(null)));
 			} else {
 				graphics.setBackgroundColor(bg);
 			}

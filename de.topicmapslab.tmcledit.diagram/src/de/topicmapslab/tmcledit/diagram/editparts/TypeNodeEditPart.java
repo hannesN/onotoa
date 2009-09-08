@@ -42,7 +42,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.Pattern;
 import org.eclipse.swt.widgets.Display;
 
 import de.topicmapslab.tmcledit.diagram.DiagramActivator;
@@ -53,6 +52,7 @@ import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
+import de.topicmapslab.tmcledit.diagram.util.SWTPattern;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -98,7 +98,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 					Rectangle rec = getBounds();
 					if (tsc!=null) {
 						Rectangle r = rec;
-						graphics.setBackgroundPattern(new Pattern(null, r.x+r.width/2, r.y, r.x+r.width/2, r.y+r.height, bg, tsc.createColor(null)));
+						graphics.setBackgroundPattern(new SWTPattern(null, r.x+r.width/2, r.y, r.x+r.width/2, r.y+r.height, bg, tsc.createColor(null)));
 					}
 					graphics.fillRectangle(rec);
 					graphics.drawRectangle(rec.x, rec.y, rec.width-1, rec.height-1);

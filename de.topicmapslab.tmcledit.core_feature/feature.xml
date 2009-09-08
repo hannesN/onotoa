@@ -87,6 +87,8 @@ This Agreement is governed by the laws of the State of New York andthe intellect
       <import plugin="org.eclipse.emf.workspace" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.forms" version="3.3.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.apache.batik.ext.awt"/>
+      <import plugin="org.apache.batik.svggen"/>
    </requires>
 
    <plugin

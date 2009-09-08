@@ -471,7 +471,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return (TMCLEditorInput) getEditorInput();
 	}
 
-	IFigure getPrintableFigure() {
+	public IFigure getPrintableFigure() {
 		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
 	}
 
