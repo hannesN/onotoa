@@ -6,7 +6,8 @@
       provider-name="Hannes Niederhausen, Topic Maps Lab">
 
    <description url="http://onotoa.topicmapslab.de">
-      This feature contains the export plugins for Onotoa, the topic maps schema eidtor.
+      This feature contains the export plugins for Onotoa, the topic
+maps schema editor.
    </description>
 
    <copyright>
@@ -75,7 +76,7 @@ This Agreement is governed by the laws of the State of New York andthe intellect
 
    <requires>
       <import feature="org.sourceforge.tinyTiM_feature" version="2.0.0" match="greaterOrEqual"/>
-      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.0.3" match="greaterOrEqual"/>
+      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

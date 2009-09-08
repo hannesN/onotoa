@@ -13,12 +13,8 @@
  */
 package de.topicmapslab.tmcledit.diagram.editor;
 
-import java.io.FileOutputStream;
+import java.io.File;
 
-import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.SWTGraphics;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.ui.actions.ActionBarContributor;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.gef.ui.actions.ZoomComboContributionItem;
@@ -28,16 +24,13 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchActionConstants;
 
+import de.topicmapslab.tmcledit.diagram.util.ImageExporter;
 import de.topicmapslab.tmcledit.model.actions.ValidateAction;
 
 
@@ -109,49 +102,33 @@ public class TMCLEditorActionBarContributor extends ActionBarContributor {
 				return;
 
 			FileDialog dlg = new FileDialog(editor.getSite().getShell(), SWT.SAVE);
-			dlg.setFilterExtensions(new String[] { "*.png" });
+			dlg.setFilterExtensions(new String[] { "*.svg;*.png" });
 			dlg.setText("Save as...");
 			String file = dlg.open();
 			if (file == null)
 				return;
 
-			if (!file.endsWith(".png"))
-				file += ".png";
-			
-			
-			IFigure figure = editor.getPrintableFigure();
-			Device device = dlg.getParent().getDisplay();
-			Rectangle r = figure.getBounds();
-			Image image = null;
-			GC gc = null;
-			Graphics g = null;
-			try {
-				FileOutputStream result = new FileOutputStream(file);
-
-				image = new Image(device, r.width, r.height);
-				gc = new GC(image);
-				g = new SWTGraphics(gc);
-				g.translate(r.x * -1, r.y * -1);
-
-				figure.paint(g);
-
-				ImageLoader imageLoader = new ImageLoader();
-				imageLoader.data = new ImageData[] { image.getImageData() };
-				imageLoader.save(result, SWT.IMAGE_PNG);
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			} finally {
-				if (g != null) {
-					g.dispose();
-				}
-				if (gc != null) {
-					gc.dispose();
-				}
-				if (image != null) {
-					image.dispose();
-				}
+			if (file.endsWith(".svg")) {
+				File f = new File(file);
+				if (checkFileExists(f))
+					ImageExporter.exportSvg(editor, f);
+			} else {
+				if (!file.endsWith(".png"))
+					file += ".png";
+				
+				File f = new File(file);
+				if (checkFileExists(f))
+					ImageExporter.exportPng(editor, f);
 			}
 
 		}
+		
+		private boolean checkFileExists(File f) {
+			if (f.exists()) {
+				return MessageDialog.openConfirm(editor.getSite().getShell(), "File already exists!", "The file you've chosen already exists. Do you want to overwrite it?");
+			}
+			return true;
+		}
+
 	}
 }
