@@ -3,7 +3,44 @@
  */
 package de.topicmapslab.tmcledit.tmclimport.builder;
 
-import static org.tinytim.voc.TMCL.*;
+import static org.tinytim.voc.TMCL.ABSTRACT_CONSTRAINT;
+import static org.tinytim.voc.TMCL.ALLOWED;
+import static org.tinytim.voc.TMCL.ALLOWED_REIFIER;
+import static org.tinytim.voc.TMCL.ALLOWED_SCOPE;
+import static org.tinytim.voc.TMCL.ALLOWS;
+import static org.tinytim.voc.TMCL.ASSOCIATION_ROLE_CONSTRAINT;
+import static org.tinytim.voc.TMCL.ASSOCIATION_TYPE;
+import static org.tinytim.voc.TMCL.CARD_MAX;
+import static org.tinytim.voc.TMCL.CARD_MIN;
+import static org.tinytim.voc.TMCL.COMMENT;
+import static org.tinytim.voc.TMCL.CONSTRAINED;
+import static org.tinytim.voc.TMCL.CONSTRAINED_ROLE;
+import static org.tinytim.voc.TMCL.CONSTRAINED_STATEMENT;
+import static org.tinytim.voc.TMCL.CONSTRAINED_TOPIC_TYPE;
+import static org.tinytim.voc.TMCL.CONSTRAINS;
+import static org.tinytim.voc.TMCL.DATATYPE;
+import static org.tinytim.voc.TMCL.DESCRIPTION;
+import static org.tinytim.voc.TMCL.NAME_TYPE;
+import static org.tinytim.voc.TMCL.OCCURRENCE_DATATYPE_CONSTRAINT;
+import static org.tinytim.voc.TMCL.OCCURRENCE_TYPE;
+import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_ROLE;
+import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_TOPIC_TYPE;
+import static org.tinytim.voc.TMCL.REGEXP;
+import static org.tinytim.voc.TMCL.REGULAR_EXPRESSION_CONSTRAINT;
+import static org.tinytim.voc.TMCL.REIFIER_CONSTRAINT;
+import static org.tinytim.voc.TMCL.ROLE_COMBINATION_CONSTRAINT;
+import static org.tinytim.voc.TMCL.ROLE_TYPE;
+import static org.tinytim.voc.TMCL.SCOPE_CONSTRAINT;
+import static org.tinytim.voc.TMCL.SCOPE_TYPE;
+import static org.tinytim.voc.TMCL.SEE_ALSO;
+import static org.tinytim.voc.TMCL.SUBJECT_IDENTIFIER_CONSTRAINT;
+import static org.tinytim.voc.TMCL.SUBJECT_LOCATOR_CONSTRAINT;
+import static org.tinytim.voc.TMCL.TOPIC_NAME_CONSTRAINT;
+import static org.tinytim.voc.TMCL.TOPIC_OCCURRENCE_CONSTRAINT;
+import static org.tinytim.voc.TMCL.TOPIC_REIFIES_CONSTRAINT;
+import static org.tinytim.voc.TMCL.TOPIC_ROLE_CONSTRAINT;
+import static org.tinytim.voc.TMCL.TOPIC_TYPE;
+import static org.tinytim.voc.TMCL.UNIQUE_VALUE_CONSTRAINT;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,7 +59,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.tinytim.mio.TopicMapReader;
 import org.tinytim.voc.Namespace;
-import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
 import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
@@ -34,9 +70,10 @@ import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystemFactory;
 
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
-import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
+import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -45,15 +82,18 @@ import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.impl.NameTypeImpl;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.tmclimport.Activator;
 
 /**
  * @author Hannes Niederhausen
@@ -91,13 +131,10 @@ public class OnotoaBuilder {
 
 	// -- associations
 	private Topic constraintStatement;
-	private Topic cardMin;
-	private Topic cardMax;
 	private Topic constrainedTopicType;
 	private Topic constrainedRole;
 	private Topic allowedReifier;
 	private Topic allowedScope;
-	private Topic regExp;
 	private Topic otherConstrainedRole;
 	private Topic otherConstrainedTopicType;
 
@@ -108,13 +145,13 @@ public class OnotoaBuilder {
 	private Topic allowed;
 
 	// -- constrains
-	private Topic constraint;
-	private Topic abstractTopicTypeConstraint;
+	//private Topic constraint; // -- not needed is super type
+	private Topic abstractConstraint;
 	private Topic subjectIdentifierConstraint;
 	private Topic subjectLocatorConstraint;
 	private Topic topicNameConstraint;
 	private Topic topicOccurrenceConstraint;
-	private Topic rolePlayerConstraint;
+	private Topic topicRoleConstraint;
 	private Topic scopeConstraint;
 	private Topic reifierConstraint;
 	private Topic topicReifiesConstraint;
@@ -123,6 +160,15 @@ public class OnotoaBuilder {
 	private Topic occurrenceDatatypeConstraint;
 	private Topic uniqueValueConstraint;
 	private Topic regularExpressionConstraint;
+	
+	// -- occurrence types
+	private Topic datatype;
+	private Topic cardMin;
+	private Topic cardMax;
+	private Topic regExp;
+	private Topic comment;
+	private Topic seeAlso;
+	private Topic description;
 
 	public OnotoaBuilder(String filename) {
 		this.filename = filename;
@@ -166,17 +212,58 @@ public class OnotoaBuilder {
 				if (topicCache.contains(t)) {
 					TopicType tt = topicTypeMap.get(t);
 					file.getTopicMapSchema().getTopicTypes().add(tt);
-					// TODO remove
-					System.out.println("Created Topic Type: " + tt);
-					System.out.println("From: " + t);
-					System.out.println("Type: ");
-					for (Topic type : t.getTypes()) {
-						System.out.println("\t-" + type);
-					}
-					System.out.println("\n\n");
 				}
 			}
+			
+			createAssociationConstrains();
 		}
+	}
+
+	private void createAssociationConstrains() {
+	    // now create all association constrains
+	    for(RolePlayerConstraintContainer rpcc : rpcContainer) {
+	    	
+	    	AssociationType at = (AssociationType) rpcc.getAssocType();
+	    	
+	    	AssociationTypeConstraint atc = getAssociationTypeConstraint(at);
+
+	    	RoleConstraint roleConstr = null;
+	    	for (RoleConstraint rc : at.getRoles()) {
+	    		if (rc.getType().equals(rpcc.getRoleType()))
+	    			roleConstr = rc;
+	    	}
+	    	
+	    	if (roleConstr==null) {
+	    		Activator.getDefault().logInfo("Found no role constraint for role player");
+	    		continue; // something is wrong
+	    	}
+	    	
+	    	RolePlayerConstraint rpc = modelFactory.createRolePlayerConstraint();
+	    	rpc.setCardMin(rpcc.getCardMin());
+	    	rpc.setCardMax(rpcc.getCardMax());
+	    	rpc.setComment(rpcc.getComment());
+	    	rpc.setPlayer(rpcc.getPlayer());
+	    	rpc.setRole(roleConstr);
+	    	
+	    	atc.getPlayerConstraints().add(rpc);			
+	    	
+	    	EList<AssociationTypeConstraint> atcList = file.getTopicMapSchema().getAssociationTypeConstraints();
+	    	if (!atcList.contains(atc))
+	    		atcList.add(atc);
+	    	
+	    }
+    }
+	
+	private AssociationTypeConstraint getAssociationTypeConstraint(AssociationType at) {
+		for (AssociationTypeConstraint atc : file.getTopicMapSchema().getAssociationTypeConstraints()) {
+			if (at.equals(atc.getType())) {
+				return atc;
+			}
+		}
+		
+		AssociationTypeConstraint atc = modelFactory.createAssociationTypeConstraint();
+		atc.setType(at);
+		return atc;
 	}
 
 	private KindOfTopicType getKindOfTopicType(Topic t) {
@@ -235,12 +322,13 @@ public class OnotoaBuilder {
 		}
 
 		topicTypeMap.put(t, tt);
-
+		setDocumentation(tt, t);
 		addConstraints(t, tt);
 		return tt;
 	}
 
-	private void init() {
+	@SuppressWarnings("deprecation")
+    private void init() {
 
 		// removing TMDM types from cache
 		createStandardTopic(TMDM.TYPE);
@@ -267,6 +355,10 @@ public class OnotoaBuilder {
 		cardMin = createStandardTopic(CARD_MIN);
 		cardMax = createStandardTopic(CARD_MAX);
 		regExp = createStandardTopic(REGEXP);
+		datatype = createStandardTopic(DATATYPE);
+		comment = createStandardTopic(COMMENT);
+		description = createStandardTopic(DESCRIPTION);
+		seeAlso = createStandardTopic(SEE_ALSO);
 
 		// roles
 		constrains = createStandardTopic(CONSTRAINS);
@@ -287,13 +379,13 @@ public class OnotoaBuilder {
 		otherConstrainedRole = createStandardTopic(OTHER_CONSTRAINED_ROLE);
 		otherConstrainedTopicType = createStandardTopic(OTHER_CONSTRAINED_TOPIC_TYPE);
 
-		constraint = createStandardTopic(CONSTRAINT);
-		abstractTopicTypeConstraint = createStandardTopic(ABSTRACT_TOPIC_TYPE_CONSTRAINT);
+//		constraint = createStandardTopic(CONSTRAINT);
+		abstractConstraint = createStandardTopic(ABSTRACT_CONSTRAINT);
 		subjectIdentifierConstraint = createStandardTopic(SUBJECT_IDENTIFIER_CONSTRAINT);
 		subjectLocatorConstraint = createStandardTopic(SUBJECT_LOCATOR_CONSTRAINT);
 		topicNameConstraint = createStandardTopic(TOPIC_NAME_CONSTRAINT);
 		topicOccurrenceConstraint = createStandardTopic(TOPIC_OCCURRENCE_CONSTRAINT);
-		rolePlayerConstraint = createStandardTopic(ROLE_PLAYER_CONSTRAINT);
+		topicRoleConstraint = createStandardTopic(TOPIC_ROLE_CONSTRAINT);
 		scopeConstraint = createStandardTopic(SCOPE_CONSTRAINT);
 		reifierConstraint = createStandardTopic(REIFIER_CONSTRAINT);
 		topicReifiesConstraint = createStandardTopic(TOPIC_REIFIES_CONSTRAINT);
@@ -327,12 +419,15 @@ public class OnotoaBuilder {
 						if (!subject.equals(otherPlayer))
 							tt2 = getTopic(otherPlayer);
 						createOccurrenceConstraint(tt, tt2, constr);
-					} else if (constr.getTypes().contains(rolePlayerConstraint)) {
+					} else if (constr.getTypes().contains(topicRoleConstraint)) {
 						tt2 = getTopic(otherPlayer);
 						createRolePlayerConstraint(tt, tt2, constr);
+					} else if (constr.getTypes().contains(roleCombinationConstraint)) {
+						tt2 = getTopic(otherPlayer);
+						createRoleCombinationConstraint(tt, tt2, constr);
 					}
 				} else {
-					if (constr.getTypes().contains(abstractTopicTypeConstraint)) {
+					if (constr.getTypes().contains(abstractConstraint)) {
 						tt.setAbstract(true);
 					} else if (constr.getTypes().contains(subjectIdentifierConstraint)) {
 						createSubjectIdentifierConstraint(tt, constr);
@@ -356,7 +451,9 @@ public class OnotoaBuilder {
 				} else if (constr.getTypes().contains(associationRoleConstraint)) {
 					processAssociationRoleConstraint(tt, constr);
 				} else if (constr.getTypes().contains(regularExpressionConstraint)) {
-					processRegularExpressionConstraint(constr);
+					processRegularExpressionConstraint(tt, constr);
+				} else if (constr.getTypes().contains(occurrenceDatatypeConstraint)) {
+					processOccurrenceDatatypeConstraint(tt, constr);
 				}
 
 				topicCache.remove(constr);
@@ -365,10 +462,44 @@ public class OnotoaBuilder {
 
 	}
 
-	private void processRegularExpressionConstraint(Topic constr) {
-	    // TODO Auto-generated method stub
+	private void createRoleCombinationConstraint(TopicType tt, TopicType at, Topic constr) {
+		Topic roleType = getOtherPlayer(constr, constrains, constrainedRole, constrained);
+		Topic otherRoleType = getOtherPlayer(constr, constrains, otherConstrainedRole, constrained);
+		
+		Topic otherTopicType = getOtherPlayer(constr, constrains, otherConstrainedTopicType, constrained);
 	    
+		RoleCombinationConstraint rcc = modelFactory.createRoleCombinationConstraint();
+		rcc.setPlayer(tt);
+		rcc.setRole((RoleType) getTopic(roleType));
+		rcc.setOtherPlayer(getTopic(otherTopicType));
+		rcc.setOtherRole((RoleType) getTopic(otherRoleType));
+		
+		setDocumentation(rcc, constr);
+		((AssociationType)at).getRoleCombinations().add(rcc);
     }
+
+	private void processOccurrenceDatatypeConstraint(TopicType tt, Topic constr) {
+		if (tt instanceof OccurrenceType) {
+			String dt = getOccurrenceValue(constr, datatype);
+			((OccurrenceType)tt).setDataType(dt);
+		}
+    }
+
+	private void processRegularExpressionConstraint(TopicType tt, Topic constr) {
+		if (tt instanceof AbstractRegExpTopicType) {
+			String regexp = getOccurrenceValue(constr, regExp);
+			((AbstractRegExpTopicType)tt).setRegExp(regexp);
+		}
+		
+    }
+	
+	private String getOccurrenceValue(Topic topic, Topic occType) {
+		Set<Occurrence> occurrences = topic.getOccurrences(occType);
+		if (occurrences.size()==0)
+			return null;
+		
+		return occurrences.iterator().next().getValue();
+	}
 
 	private void processAssociationRoleConstraint(TopicType tt, Topic constr) {
 		Topic role = getConstrainedPlayer(constr, constrainedRole);
@@ -413,9 +544,12 @@ public class OnotoaBuilder {
 
 	private void processScopeConstraint(TopicType tt, Topic constr) {
 		if (tt instanceof ScopedTopicType) {
-			TopicType scopetype = getTopic(getOtherPlayer(constr, allows, allowedScope, allowed));
-			if (scopetype != null)
-				createScopeConstraint(tt, scopetype, constr);
+			Topic otherPlayer = getOtherPlayer(constr, allows, allowedScope, allowed);
+			TopicType scopetype = null;
+			if (!otherPlayer.equals(subject))
+				scopetype = getTopic(otherPlayer);
+			
+			createScopeConstraint(tt, scopetype, constr);
 		}
 	}
 
@@ -425,8 +559,8 @@ public class OnotoaBuilder {
 			Topic reifier = getOtherPlayer(constr, allows, allowedReifier, allowed);
 			if (!subject.equals(reifier))
 				reifiertype = getTopic(reifier);
-			if (reifiertype != null)
-				createReifierConstraint(tt, reifiertype, constr);
+			
+			createReifierConstraint(tt, reifiertype, constr);
 		}
 	}
 
@@ -434,7 +568,7 @@ public class OnotoaBuilder {
 		ReifierConstraint rc = ModelFactory.eINSTANCE.createReifierConstraint();
 		rc.setType(reifier);
 		setCardinality(constr, rc);
-
+		setDocumentation(rc, constr);
 		((ReifiableTopicType) tt).setReifierConstraint(rc);
 	}
 
@@ -454,25 +588,19 @@ public class OnotoaBuilder {
 	}
 
 	private void createRolePlayerConstraint(TopicType tt, TopicType at, Topic constr) {
-		Set<Role> cRoles = constr.getRolesPlayed(constrains, constrainedRole);
-		if (cRoles.size() > 0) {
-			Association assoc = cRoles.iterator().next().getParent();
-			Set<Role> rRoles = assoc.getRoles(constrained);
-			if (rRoles.size() > 0) {
-				Topic rPlayer = rRoles.iterator().next().getPlayer();
+		Topic role = getOtherPlayer(constr, constrains, constrainedRole, constrained);
+		
+		TopicType roleType = getTopic(role);
 
-				TopicType roleType = getTopic(rPlayer);
+		RolePlayerConstraintContainer rpcc = new RolePlayerConstraintContainer();
+		rpcc.setPlayer(tt);
+		rpcc.setRoleType(roleType);
+		rpcc.setAssocType(at);
 
-				RolePlayerConstraintContainer rpcc = new RolePlayerConstraintContainer();
-				rpcc.setPlayer(tt);
-				rpcc.setRoleType(roleType);
-				rpcc.setAssocType(at);
-
-				setCardinality(constr, rpcc);
-				rpcContainer.add(rpcc);
-				// TODO transform rpccontainer to real rpc
-			}
-		}
+		
+		setCardinality(constr, rpcc);
+		setDocumentation(rpcc, constr);
+		rpcContainer.add(rpcc);
 
 	}
 
@@ -481,6 +609,7 @@ public class OnotoaBuilder {
 
 		setRegularExpression(constr, sic);
 		setCardinality(constr, sic);
+		setDocumentation(sic, constr);
 
 		tt.getSubjectIdentifierConstraints().add(sic);
 	}
@@ -491,14 +620,13 @@ public class OnotoaBuilder {
 		setRegularExpression(constr, slc);
 
 		setCardinality(constr, slc);
-
+		setDocumentation(slc, constr);
 		tt.getSubjectLocatorConstraint().add(slc);
 	}
 
 	private void setRegularExpression(Topic constr, AbstractRegExpConstraint ac) {
-		Set<Occurrence> occurrences = constr.getOccurrences(regExp);
-		if (occurrences.size() > 0)
-			ac.setRegexp(occurrences.iterator().next().getValue());
+		String value = getOccurrenceValue(constr, regExp);
+		ac.setRegexp(value);
 	}
 
 	private Role getConstrainRole(Role role) {
@@ -514,7 +642,7 @@ public class OnotoaBuilder {
 		OccurrenceTypeConstraint otc = ModelFactory.eINSTANCE.createOccurrenceTypeConstraint();
 		otc.setType(nt);
 		setCardinality(constr, otc);
-
+		setDocumentation(otc, constr);
 		tt.getOccurrenceConstraints().add(otc);
 	}
 
@@ -522,6 +650,7 @@ public class OnotoaBuilder {
 		NameTypeConstraint ntc = ModelFactory.eINSTANCE.createNameTypeConstraint();
 		ntc.setType(nt);
 		setCardinality(constr, ntc);
+		setDocumentation(ntc, constr);
 		tt.getNameContraints().add(ntc);
 	}
 
@@ -533,6 +662,20 @@ public class OnotoaBuilder {
 		occurrences = constr.getOccurrences(cardMax);
 		if (occurrences.size() > 0)
 			cc.setCardMax(occurrences.iterator().next().getValue());
+	}
+	
+	private void setDocumentation(TMCLConstruct construct, Topic constr) {
+		String comment = getOccurrenceValue(constr, this.comment);
+		if (comment!=null)
+			construct.setComment(comment);
+		
+		String seeAlso = getOccurrenceValue(constr, this.seeAlso);
+		if (seeAlso!=null)
+			construct.setSee_also(seeAlso);
+		
+		String description = getOccurrenceValue(constr, this.description);
+		if (description!=null)
+			construct.setDescription(description);
 	}
 
 	private class RolePlayerConstraintContainer implements AbstractCardinalityContraint {

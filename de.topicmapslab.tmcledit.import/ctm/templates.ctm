@@ -69,8 +69,8 @@ def plays-role($tt, $rt, $at, $min, $max)
     tmcl:card-max: $max.
   
   tmcl:constrained-topic-type(tmcl:constrains : ?c, tmcl:constrained : $tt)  
-  tmcl:constrained-statement(tmcl:constrains : ?c, tmcl:constrained : $rt)
-  tmcl:constrained-role(tmcl:constrains : ?c, tmcl:constrained : $at)
+  tmcl:constrained-statement(tmcl:constrains : ?c, tmcl:constrained : $at)
+  tmcl:constrained-role(tmcl:constrains : ?c, tmcl:constrained : $rt)
 end
 
 # Scope Constraint

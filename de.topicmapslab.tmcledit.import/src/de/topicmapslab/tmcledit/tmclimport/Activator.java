@@ -1,5 +1,6 @@
 package de.topicmapslab.tmcledit.tmclimport;
 
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -38,6 +39,11 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
+	public void logInfo(String message) {
+		Status s = new Status(Status.INFO, PLUGIN_ID, message);
+		getLog().log(s);
+	}
+	
 	/**
 	 * Returns the shared instance
 	 *
