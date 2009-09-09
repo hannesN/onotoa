@@ -72,16 +72,4 @@ public class SelectionFigure extends Figure {
 		repaint();
 	}
 	
-	@Override
-	public void remove(IFigure figure) {
-		// TODO Auto-generated method stub
-		super.remove(figure);
-	}
-	
-	@Override
-	public void add(IFigure figure, Object constraint, int index) {
-		// TODO Auto-generated method stub
-		super.add(figure, constraint, index);
-	}
-
 }

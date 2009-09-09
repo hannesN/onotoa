@@ -87,7 +87,7 @@ public class TopicMapreaderFactory {
 		}
 
 		reader = new CTMTopicMapReader(topicMap, new ByteArrayInputStream(
-				tmp.toString().getBytes()), "urn:onotoa");
+				tmp.toString().getBytes()), "file:"+file.getAbsolutePath());
 		return reader;
 	}
 
