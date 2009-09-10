@@ -1,7 +1,5 @@
 == Getting started == 
 
-
-
 === Using the standalone version of _Onotoa_ ===
 
 
