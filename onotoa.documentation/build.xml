@@ -1,5 +1,7 @@
 <project basedir="." name="Onotoa Documentation" default="html">
 
+	<property file="build.properties"/>
+	
 	<property name="filename" value="doc" />
 	<property name="src" value="src/main.txt" />
 	<property name="doc" value="doc" />
@@ -200,7 +202,8 @@
 	</target>
 
 	<target name="html" depends="init">
-		<exec executable="asciidoc">
+		<exec executable="python">
+			<arg value="${asciidoc}"/>
 			<arg value="-v" />
 			<arg value="-a" />
 			<arg value="toc" />
