@@ -28,6 +28,8 @@ include::properties.txt[]
 
 include::diagram.txt[]
 
+include::glossary.txt[]
+
 /////////////////////////////
 Some Short Tutorials
 ====================

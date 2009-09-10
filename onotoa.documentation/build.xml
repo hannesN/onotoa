@@ -32,7 +32,7 @@
 	<property name="build" value="${doc.docbook}/build" />
 	<property name="build.fo" value="${build}/fo" />
 
-	<property name="paper.type" value="A4" />
+	<property name="paper.type" value="C5" />
 
 	<!--
 	      - Sets up the classpath for the Xalan and Xerces implementations
@@ -130,7 +130,7 @@
 			 appendix  nop
 			 article   toc,title
 			 book      toc,title,figure,table,example,equation
-			 chapter   toc
+			 chapter   nop
 			 part      nop
 			 preface   nop
 			 qandadiv  nop

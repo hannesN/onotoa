@@ -52,7 +52,7 @@ At the right side of the editor is a sidebar. This sidebar is called a palette a
 .Palette of a diagram editor
 [caption="Figure 4:"]
 [[palette]]
-image::images/palette.png["Palette of a diagram editor", , scaledwidth="25%", align="center"]
+image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", align="center"]
 
 
 
