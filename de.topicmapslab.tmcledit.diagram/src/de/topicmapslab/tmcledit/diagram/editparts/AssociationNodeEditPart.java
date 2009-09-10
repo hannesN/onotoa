@@ -31,6 +31,7 @@ import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -87,6 +88,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		StringBuffer buffer = new StringBuffer();
 		if (associationType != null) {
 			buffer.append(associationType.getName());
+			addReifier(buffer);
 			addScope(buffer);
 		} else {
 			buffer.append("No type set");
@@ -95,6 +97,26 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		((CircleFigure) getFigure()).setText(buffer.toString());
 
 		super.refreshVisuals();
+	}
+
+	private void addReifier(StringBuffer buffer) {
+		AssociationType at = (AssociationType) getCastedModel().getAssociationConstraint().getType();
+		ReifierConstraint rc = at.getReifierConstraint();
+		if (rc!=null) {
+			buffer.append("\n~");
+			if(rc.getType()!=null)
+				buffer.append(rc.getType().getName());
+			else
+				buffer.append("tmdm:subject");
+			
+			buffer.append(" [");
+			buffer.append(rc.getCardMin());
+			buffer.append("..");
+			buffer.append(rc.getCardMax());
+			buffer.append(" ]");
+				
+		}
+		
 	}
 
 	@Override
@@ -136,6 +158,12 @@ public class AssociationNodeEditPart extends NodeEditPart {
 					if (sc.getType() != null)
 						sc.getType().eAdapters().remove(this);
 				}
+				ReifierConstraint reifierConstraint = ((AssociationType) tt).getReifierConstraint();
+				if (reifierConstraint!=null) {
+					reifierConstraint.eAdapters().remove(this);
+					if (reifierConstraint.getType()!=null)
+						reifierConstraint.getType().eAdapters().remove(this);
+				}
 			}
 		}
 		super.setModel(model);
@@ -150,52 +178,62 @@ public class AssociationNodeEditPart extends NodeEditPart {
 					sc.eAdapters().add(this);
 					sc.getType().eAdapters().add(this);
 				}
+				ReifierConstraint reifierConstraint = ((AssociationType) tt).getReifierConstraint();
+				if (reifierConstraint!=null) {
+					reifierConstraint.eAdapters().add(this);
+					if (reifierConstraint.getType()!=null)
+						reifierConstraint.getType().eAdapters().add(this);
+				}
 			}
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType() == Notification.REMOVING_ADAPTER) {
+		int eventType = notification.getEventType();
+		if (eventType == Notification.REMOVING_ADAPTER) {
 			return;
 		}
 		if (notification.getFeatureID(EList.class) == ModelPackage.DIAGRAM__EDGES)
 			refreshSourceConnections();
-		if (notification.getNotifier() == getModel())
+		
+		Object notifier = notification.getNotifier();
+		if (notifier == getModel())
 			refreshVisuals();
-		if ((notification.getEventType() == Notification.SET)
-				&& (notification.getNotifier().equals(getCastedModel()
-						.getAssociationConstraint()))) {
-			if (notification.getFeatureID(TopicType.class) == ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
-				if (notification.getOldValue() != null)
-					((EObject) notification.getOldValue()).eAdapters().remove(
-							this);
-
-				if (notification.getNewValue() != null)
-					((EObject) notification.getNewValue()).eAdapters()
-							.add(this);
+		
+		if (eventType == Notification.SET) {
+			if (notifier.equals(getCastedModel().getAssociationConstraint())) {
+				if (notification.getFeatureID(TopicType.class) == ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
+					processAdapter(notification);
+				}
+			} else if (notifier instanceof ReifierConstraint) {
+				if (notification.getFeatureID(TopicType.class) == ModelPackage.REIFIER_CONSTRAINT__TYPE) {
+					processAdapter(notification);
+				}
 			}
+			
+			
 		} else if (notification.getFeatureID(List.class) == ModelPackage.ASSOCIATION_TYPE__SCOPE) {
-			if (notification.getEventType() == Notification.ADD) {
+			if (eventType == Notification.ADD) {
 				ScopeConstraint sc = (ScopeConstraint) notification
 						.getNewValue();
 				sc.eAdapters().add(this);
 				if (sc.getType() != null)
 					sc.getType().eAdapters().add(this);
-			} else if (notification.getEventType() == Notification.ADD_MANY) {
+			} else if (eventType == Notification.ADD_MANY) {
 				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
 						.getNewValue()) {
 					sc.eAdapters().remove(this);
 					if (sc.getType() != null)
 						sc.getType().eAdapters().remove(this);
 				}
-			} else if (notification.getEventType() == Notification.REMOVE) {
+			} else if (eventType == Notification.REMOVE) {
 				ScopeConstraint sc = (ScopeConstraint) notification
 						.getOldValue();
 				sc.eAdapters().remove(this);
 				if (sc.getType() != null)
 					sc.getType().eAdapters().remove(this);
-			} else if (notification.getEventType() == Notification.REMOVE_MANY) {
+			} else if (eventType == Notification.REMOVE_MANY) {
 				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
 						.getOldValue()) {
 					sc.eAdapters().remove(this);
@@ -203,9 +241,21 @@ public class AssociationNodeEditPart extends NodeEditPart {
 						sc.getType().eAdapters().remove(this);
 				}
 			}
-		}
+		} 
+		
+		
 		refreshVisuals();
 
+	}
+
+	private void processAdapter(Notification notification) {
+		if (notification.getOldValue() != null)
+			((EObject) notification.getOldValue()).eAdapters()
+					.remove(this);
+
+		if (notification.getNewValue() != null)
+			((EObject) notification.getNewValue()).eAdapters().add(
+					this);
 	}
 
 }
