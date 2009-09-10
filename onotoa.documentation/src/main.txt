@@ -1,0 +1,50 @@
+Onotoa Handbook
+===============
+Hannes Niederhausen <niederhausen@informatik.uni-leipzig.de>
+v0.2, September 2009: Initial draft extended
+
+Preface
+=======
+
+Starting as graduate at the Topic Maps Lab, Onotoa has grown to
+a usable TMCL schema editor. This document explains the different
+functions of Onotoa including some technical background and a
+description of the implementation of the GTM level 1 proposal.
+
+Onotoa is based on the popular eclipse platform, which enable it
+to be easy extendible. Their usage and the creation of
+additional extensions is explained in this document too.
+
+Using Onotoa
+============
+
+include::requirement.txt[]
+
+include::getting_started.txt[]
+
+include::modelview.txt[]
+
+include::properties.txt[]
+
+include::diagram.txt[]
+
+include::glossary.txt[]
+
+/////////////////////////////
+Some Short Tutorials
+====================
+
+== TODO ==
+
+* find little tasks
+
+Extending Onotoa
+================
+
+== TODO ==
+here stuff like:
+
+* creating PSIProvider
+* extending export
+* extending 
+/////////////////////////////

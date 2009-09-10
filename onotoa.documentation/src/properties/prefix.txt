@@ -1,0 +1,15 @@
+=== Prefix ===
+
+By pressing on the prefix box in the upper left corner of the diagram, the prefix property page is shown.
+
+.Example of Prefix Property Page
+image::images/prefix_pp.png[scaledwidth="100%"]
+
+To remove a prefix, just select it in the table and press *Remove*.
+To add a new prefix, press *Add...* and a dialog is shown, which provides an input mask for the prefix.
+After pressing *OK* the new prefix is added to the schema and will exported when the CTM export is used. 
+
+
+.Example of Prefix Property Page
+image::images/newprefix_dialog.png[scaledwidth="40%"]
+

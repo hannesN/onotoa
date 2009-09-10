@@ -1,0 +1,16 @@
+syntax: glob
+*.class
+.metadata
+.directory
+Diplomarbeit
+Website
+*/\${builder}
+onotoa-update-site/artifacts.jar
+onotoa-update-site/content.jar
+onotoa-update-site/features/
+onotoa-update-site/plugins/*
+de.topicmapslab.tmcledit.releng/releases
+de.topicmapslab.tmcledit.releng/repository
+onotoa.documentation/doc
+de.topicmapslab.tmcledit.doc/html/*
+glob:onotoa.documentation/build.properties
