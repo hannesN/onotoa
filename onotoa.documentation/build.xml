@@ -227,7 +227,8 @@
 	</target>
 
 	<target name="docbook" depends="init">
-		<exec executable="asciidoc">
+		<exec executable="python">
+			<arg value="${asciidoc}"/>
 			<arg value="-v" />
 			<arg value="-d" />
 			<arg value="book" />
