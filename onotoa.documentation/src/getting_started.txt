@@ -1,7 +1,30 @@
 == Getting started == 
 
-=== Using the standalone version of _Onotoa_ ===
 
+TODO: Describe the goal of this chapter.
+Describe the outline of this chapter.
+
+=== The website of the _Onotoa_ project ===
+
+The _Onotoa_ project maintains a website which provides you with all information about the ongoing developments. The website is available at http://onotoa.topicmapslab.de. In the Figure <<website,1>> you see the screenshot of the Onotoa website. 
+
+.Website of the _Onotoa_ project
+[[website]]
+[caption="Figure [TODO]:"]
+image::images/onotoa_website.png[scaledwidth="50%"]
+
+In the left column of the website you see the latest news from the Onotoa project. There you get all release information about _Onotoa_, but also other important information for the Onotoa community like the announcement of user group meetings. The news are also broadcasted by the RSS feed of the website. Subscribe to the feed and don't miss any news about _Onotoa_. For more details about the RSS feed see the stay tuned section below. 
+
+In the central column of the website some introductive information about the _Onotoa_ project is provided. All background information about _Onotoa_ is provided in the *About _Onotoa_* section of the website, which is one of the tab menu in the navigation of the _Onotoa_ website.
+
+Much more important is the right column. There you get the download packages of the latest realease of _Onotoa_ for the main operation systems. You can directly start to download the appropriate package for your environment. All available download packages, also from outdated relaeses, are provided in the download section of the website, which is one of the tab menue in the navigation of the _Onotoa_ website. You find all details about the download and installation of _Onotoa_ in the section below.  
+
+In the top navigation of the _Onotoa_ website is the *Documentation* tab the most important. In the documentation section you get the full documentation of Onotoa. We highly recommend you to use the documentation when you get started with _Onotoa_.
+
+==== Stay tuned ====
+To get informed about the latest developments in the Onotoa project subscribed to the provided RSS feed. Add the URL of the feed http://onotoa.topicmapslab.de/news.rss to your favourite feed reader. To get more involved in the ongoing discussion about the further development of the _Onotoa_ project subscribe to the Onotoa mailinglist. [TODO: Beschreibung, wie man sich in die Mainlingliste einschreiben kann.]   
+
+=== Using the standalone version of _Onotoa_ ===
 
 After downloading the file zip file for your system and unzipping it you should have
 a *onotoa* folder. This includes a binary file (e.g. onotoa.exe for Windows(TM) or Onotoa.app on MacOS(TM)).
