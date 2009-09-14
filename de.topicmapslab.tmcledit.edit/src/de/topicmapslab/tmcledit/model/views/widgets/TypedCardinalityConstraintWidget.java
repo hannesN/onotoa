@@ -95,6 +95,8 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	public void setInput(List<? extends AbstractTypedCardinalityConstraint> input) {
 		for (AbstractTypedCardinalityConstraint tcc : getInput()) {
 			tcc.eAdapters().remove(this);
+			if (tcc.getType()!=null)
+				tcc.getType().eAdapters().remove(this);
 		}
 
 		this.input = input;
@@ -102,7 +104,10 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 		for (AbstractTypedCardinalityConstraint tcc : getInput()) {
 			tcc.eAdapters().add(this);
+			if (tcc.getType()!=null)
+				tcc.getType().eAdapters().add(this);
 		}
+		
 
 	}
 
