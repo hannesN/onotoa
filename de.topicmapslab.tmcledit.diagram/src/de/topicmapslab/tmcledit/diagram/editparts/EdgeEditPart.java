@@ -151,8 +151,10 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				.getRoleConstraint();
 		if (roleConstraint != null) {
 			roleConstraint.eAdapters().add(adapter);
-			if (roleConstraint.getRole() != null)
+			if (roleConstraint.getRole() != null) {
+				roleConstraint.getRole().eAdapters().add(adapter);
 				roleConstraint.getRole().getType().eAdapters().add(adapter);
+			}
 		}
 		super.activate();
 	}
@@ -165,8 +167,10 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 				.getRoleConstraint();
 		if (roleConstraint != null) {
 			roleConstraint.eAdapters().remove(adapter);
-			if (roleConstraint.getRole() != null)
+			if (roleConstraint.getRole() != null) {
+				roleConstraint.getRole().eAdapters().remove(adapter);
 				roleConstraint.getRole().getType().eAdapters().remove(adapter);
+			}
 
 		}
 		super.deactivate();
