@@ -1,0 +1,10 @@
+Glossary
+--------
+
+[glossary]
+Model::
+	The set of schema and diagram elements is called the model.
+
+Model View::
+	The Model View shows all elements of the Topic Maps schema in a tree viewer. It also
+	lists the diagrams. 
