@@ -41,6 +41,11 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 	}
 
 	@Override
+	protected boolean isEditable() {
+		return false;
+	}
+	
+	@Override
 	protected void refreshVisuals() {
 		OccurrenceTypeConstraint otc = getCastedModel();
 		StringBuffer buffer = new StringBuffer();
