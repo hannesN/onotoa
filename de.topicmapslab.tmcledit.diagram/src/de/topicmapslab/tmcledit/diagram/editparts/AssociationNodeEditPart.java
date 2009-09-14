@@ -13,26 +13,47 @@
  */
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.EllipseAnchor;
+import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ConnectionEditPart;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.editpolicies.LayoutEditPolicy;
+import org.eclipse.gef.requests.CreateRequest;
 
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.figures.CircleFigure;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.AddScopeConstraintsCommand;
+import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
 /**
  * @author Hannes Niederhausen
@@ -40,34 +61,32 @@ import de.topicmapslab.tmcledit.model.TopicType;
  */
 public class AssociationNodeEditPart extends NodeEditPart {
 
-	Label typeLabel;
+	private Label typeLabel;
+	private Figure compartement;
 
 	@Override
 	protected IFigure createFigure() {
-		Label figure = new CircleFigure();
-
-		figure.setText("foo:association");
-
+		Figure figure = new CircleFigure();
+		
+		compartement = new Figure();
+		compartement.setLayoutManager(new ToolbarLayout(false));
+		figure.add(compartement);
+		
+		compartement.setBackgroundColor(ColorConstants.blue);
+		compartement.setOpaque(false);
+		
+		typeLabel = new Label();
+		typeLabel.setText("foo:association");
+		compartement.add(typeLabel);
+		
+		
 		return figure;
 	}
 
-	private void addScope(StringBuffer buffer) {
-		TopicType type = getCastedModel().getAssociationConstraint().getType();
-		if (type == null)
-			return;
-		if (type instanceof AssociationType) {
-			AssociationType assType = (AssociationType) type;
 
-			for (ScopeConstraint sc : assType.getScope()) {
-				buffer.append("\n@");
-				buffer.append(sc.getType().getName());
-				buffer.append("  [");
-				buffer.append(sc.getCardMin());
-				buffer.append("..");
-				buffer.append(sc.getCardMax());
-				buffer.append("]");
-			}
-		}
+	@Override
+	public IFigure getContentPane() {
+		return compartement;
 	}
 
 	private AssociationNode getCastedModel() {
@@ -87,12 +106,11 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		StringBuffer buffer = new StringBuffer();
 		if (associationType != null) {
 			buffer.append(associationType.getName());
-			addScope(buffer);
 		} else {
 			buffer.append("No type set");
 		}
 
-		((CircleFigure) getFigure()).setText(buffer.toString());
+		typeLabel.setText(buffer.toString());
 
 		super.refreshVisuals();
 	}
@@ -118,12 +136,44 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		super.deactivate();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	protected List getModelChildren() {
+		
+		if (getCastedModel()==null)
+			return Collections.emptyList();
+		TopicType type = getCastedModel().getAssociationConstraint().getType();
+		if (type==null)
+			return Collections.emptyList();
+		
+		List<Object> children = new ArrayList<Object>();
+		children.addAll(((ScopedTopicType) type).getScope());
+		
+		if (type instanceof ReifiableTopicType) {
+			ReifierConstraint rc = ((ReifiableTopicType)type).getReifierConstraint();
+			if (rc!=null) {
+				children.add(0, rc);
+			}
+		}
+		if (children.isEmpty())
+			return Collections.emptyList();
+		
+		return children;
+	}
+	
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(
 			ConnectionEditPart connection) {
 		return new EllipseAnchor(getFigure());
 	}
 
+	@Override
+	protected void addChildVisual(EditPart childEditPart, int index) {
+		if (index!=-1)
+			index++;
+		super.addChildVisual(childEditPart, index);
+	}
+	
 	@Override
 	public void setModel(Object model) {
 		if (getCastedModel() != null) {
@@ -135,6 +185,12 @@ public class AssociationNodeEditPart extends NodeEditPart {
 					sc.eAdapters().remove(this);
 					if (sc.getType() != null)
 						sc.getType().eAdapters().remove(this);
+				}
+				ReifierConstraint reifierConstraint = ((AssociationType) tt).getReifierConstraint();
+				if (reifierConstraint!=null) {
+					reifierConstraint.eAdapters().remove(this);
+					if (reifierConstraint.getType()!=null)
+						reifierConstraint.getType().eAdapters().remove(this);
 				}
 			}
 		}
@@ -148,7 +204,15 @@ public class AssociationNodeEditPart extends NodeEditPart {
 			if ((tt instanceof AssociationType)) {
 				for (ScopeConstraint sc : ((AssociationType) tt).getScope()) {
 					sc.eAdapters().add(this);
-					sc.getType().eAdapters().add(this);
+					TopicType type = sc.getType();
+					if (type!=null)
+						type.eAdapters().add(this);
+				}
+				ReifierConstraint reifierConstraint = ((AssociationType) tt).getReifierConstraint();
+				if (reifierConstraint!=null) {
+					reifierConstraint.eAdapters().add(this);
+					if (reifierConstraint.getType()!=null)
+						reifierConstraint.getType().eAdapters().add(this);
 				}
 			}
 		}
@@ -156,46 +220,50 @@ public class AssociationNodeEditPart extends NodeEditPart {
 
 	@SuppressWarnings("unchecked")
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType() == Notification.REMOVING_ADAPTER) {
+		int eventType = notification.getEventType();
+		if (eventType == Notification.REMOVING_ADAPTER) {
 			return;
 		}
 		if (notification.getFeatureID(EList.class) == ModelPackage.DIAGRAM__EDGES)
 			refreshSourceConnections();
-		if (notification.getNotifier() == getModel())
+		
+		Object notifier = notification.getNotifier();
+		if (notifier == getModel())
 			refreshVisuals();
-		if ((notification.getEventType() == Notification.SET)
-				&& (notification.getNotifier().equals(getCastedModel()
-						.getAssociationConstraint()))) {
-			if (notification.getFeatureID(TopicType.class) == ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
-				if (notification.getOldValue() != null)
-					((EObject) notification.getOldValue()).eAdapters().remove(
-							this);
-
-				if (notification.getNewValue() != null)
-					((EObject) notification.getNewValue()).eAdapters()
-							.add(this);
+		
+		if (eventType == Notification.SET) {
+			if (notifier.equals(getCastedModel().getAssociationConstraint())) {
+				if (notification.getFeatureID(TopicType.class) == ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
+					processAdapter(notification);
+				}
+			} else if (notifier instanceof ReifierConstraint) {
+				if (notification.getFeatureID(TopicType.class) == ModelPackage.REIFIER_CONSTRAINT__TYPE) {
+					processAdapter(notification);
+				}
 			}
+			
+			
 		} else if (notification.getFeatureID(List.class) == ModelPackage.ASSOCIATION_TYPE__SCOPE) {
-			if (notification.getEventType() == Notification.ADD) {
+			if (eventType == Notification.ADD) {
 				ScopeConstraint sc = (ScopeConstraint) notification
 						.getNewValue();
 				sc.eAdapters().add(this);
 				if (sc.getType() != null)
 					sc.getType().eAdapters().add(this);
-			} else if (notification.getEventType() == Notification.ADD_MANY) {
+			} else if (eventType == Notification.ADD_MANY) {
 				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
 						.getNewValue()) {
 					sc.eAdapters().remove(this);
 					if (sc.getType() != null)
 						sc.getType().eAdapters().remove(this);
 				}
-			} else if (notification.getEventType() == Notification.REMOVE) {
+			} else if (eventType == Notification.REMOVE) {
 				ScopeConstraint sc = (ScopeConstraint) notification
 						.getOldValue();
 				sc.eAdapters().remove(this);
 				if (sc.getType() != null)
 					sc.getType().eAdapters().remove(this);
-			} else if (notification.getEventType() == Notification.REMOVE_MANY) {
+			} else if (eventType == Notification.REMOVE_MANY) {
 				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
 						.getOldValue()) {
 					sc.eAdapters().remove(this);
@@ -203,9 +271,66 @@ public class AssociationNodeEditPart extends NodeEditPart {
 						sc.getType().eAdapters().remove(this);
 				}
 			}
-		}
+		} 
+		
 		refreshVisuals();
+		refreshChildren();
 
+	}
+
+	private void processAdapter(Notification notification) {
+		if (notification.getOldValue() != null)
+			((EObject) notification.getOldValue()).eAdapters()
+					.remove(this);
+
+		if (notification.getNewValue() != null)
+			((EObject) notification.getNewValue()).eAdapters().add(
+					this);
+	}
+
+	@Override
+	protected void createEditPolicies() {
+		 installEditPolicy(EditPolicy.LAYOUT_ROLE, new LayoutEditPolicy() {
+
+				@Override
+				protected Command getMoveChildrenCommand(Request request) {
+					return null;
+				}
+
+				@Override
+				protected Command getCreateCommand(CreateRequest request) {
+					org.eclipse.emf.common.command.Command cmd = null;
+					AssociationType at = (AssociationType) getCastedModel().getAssociationConstraint().getType();
+					if (at==null)
+						return null;
+					
+					if (request.getNewObjectType() == ScopeConstraint.class) {
+						cmd = new AddScopeConstraintsCommand(at, (ScopeConstraint) request.getNewObject());
+					} else if (request.getNewObjectType() == ReifierConstraint.class) {
+						if (at instanceof ReifiableTopicType) {
+							if ((at != null)
+									&& (at.getReifierConstraint() == null)) {
+								cmd = new GenericSetCommand(
+										at,
+										ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT,
+										(ReifierConstraint) request.getNewObject());
+							}
+						}
+					}
+					if (cmd == null)
+						return null;
+
+					TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer()
+							.getEditDomain();
+					CommandStack cmdStack = ed.getEditingDomain().getCommandStack();
+					return new CommandAdapter(cmdStack, cmd);
+				}
+
+				@Override
+				protected EditPolicy createChildEditPolicy(EditPart child) {
+					return null;
+				}
+		 });
 	}
 
 }
