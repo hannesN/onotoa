@@ -19,7 +19,6 @@ import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 public class CircleFigure extends Figure {
@@ -31,28 +30,6 @@ public class CircleFigure extends Figure {
 		setBorder(new EllipseBorder());
 		setOpaque(false);
 		setLayoutManager(new CenterlayoutManager());
-	}
-	
-	
-	private void setInsets(Rectangle fBounds) {
-		if (insets==null)
-			insets = new Insets();
-		// TODO Auto-generated method stub
-		int xDiff = (int) (fBounds.width*0.3); 
-		insets.right = (int)(xDiff/2.);
-		insets.left = (int)(xDiff/2.);
-		int yDiff = (int) (fBounds.height*0.9);
-		insets.bottom = (int)(yDiff/2.);
-		insets.top = (int)(yDiff/2.);
-	}
-	
-	@Override
-	public void setBounds(Rectangle rect) {
-//		Rectangle rect2 = rect.getCopy();
-//		rect2.width *= 1.3;
-//		rect2.height *= 1.4;
-		super.setBounds(rect);
-//		setInsets(rect2);		
 	}
 	
 	private class EllipseBorder implements Border {
@@ -110,7 +87,6 @@ public class CircleFigure extends Figure {
 				int x = (int) (size.width*0.3/2); 
 				int y = (int) (size.height*0.22);
 				size = f.getPreferredSize();
-				Point p = new Point(x,y);
 				Rectangle rec = container.getBounds().getCopy();
 				rec.translate(x, y);
 				rec.setSize(size);
