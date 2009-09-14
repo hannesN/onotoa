@@ -6,11 +6,11 @@ Describe the outline of this chapter.
 
 === The website of the _Onotoa_ project ===
 
-The _Onotoa_ project maintains a website which provides you with all information about the ongoing developments. The website is available at http://onotoa.topicmapslab.de. In the Figure <<website,1>> you see the screenshot of the Onotoa website. 
+The _Onotoa_ project maintains a website which provides you with all information about the ongoing developments. The website is available at http://onotoa.topicmapslab.de. In <<website>> you see the screenshot of the Onotoa website. 
 
 .Website of the _Onotoa_ project
 [[website]]
-[caption="Figure [TODO]:"]
+[caption="Figure:"]
 image::images/onotoa_website.png[scaledwidth="50%"]
 
 In the left column of the website you see the latest news from the Onotoa project. There you get all release information about _Onotoa_, but also other important information for the Onotoa community like the announcement of user group meetings. The news are also broadcasted by the RSS feed of the website. Subscribe to the feed and don't miss any news about _Onotoa_. For more details about the RSS feed see the stay tuned section below. 
@@ -29,19 +29,19 @@ To get informed about the latest developments in the Onotoa project subscribed t
 After downloading the file zip file for your system and unzipping it you should have
 a *onotoa* folder. This includes a binary file (e.g. onotoa.exe for Windows(TM) or Onotoa.app on MacOS(TM)).
 
-After starting _Onotoa_ you should see the main window, like in Figure <<empty_win,1>>.
+After starting _Onotoa_ you should see the main window, like in <<empty_win>>.
 
 .Empty _Onotoa_ window
-[caption="Figure 1:"]
+[caption="Figure:"]
 [[empty_win]]
 image::images/emptywin.png["Empty _Onotoa_ window", scaledwidth="100%"]
 
 
 To create a new model, use the *File->New..*.
-Choose the path of the file and name it *example.ono*. After that your window should look like Figure <<emptyfile_win,2>>
+Choose the path of the file and name it *example.ono*. After that your window should look like <<emptyfile_win>>
 
 .Onotoa window after creating a file
-[caption="Figure 2:"]
+[caption="Figure:"]
 [[emptyfile_win]]
 image::images/emptyfilewin.png["_Onotoa_ window after creating a file", scaledwidth="100%"]
 
@@ -52,10 +52,10 @@ After installing the needed _Onotoa_ features, create a new file. Use the contex
 
 NOTE: You need a project, where you create the file. The nature of the project doesn't matter.
 
-After creating the new file _Onotoa_ switches to the *Onotoa Perspective*. This should look like Figure <<nonrcp_win,3>>.
+After creating the new file _Onotoa_ switches to the *Onotoa Perspective*. This should look like <<nonrcp_win>>.
 
 ._Onotoa_ window after creating a file in Navigator
-[caption="Figure 3:"]
+[caption="Figure:"]
 [[nonrcp_win]]
 image::images/emptyfilewin_nonrcp.png["_Onotoa_ window after creating a file in Navigator", scaledwidth="100%"]
 
@@ -68,10 +68,10 @@ Vie the context menu of the 'Diagrams' node in the *Model View* a new diagram ca
 diagram. This name should be unique inside one schema definition. After pressing okay, the diagram is added to the 'Diagrams' node and an editor opens where the
 diagram can be edited.
 
-At the right side of the editor is a sidebar. This sidebar is called a palette and contains the tools to create new diagram elements (see Figure <<palette, 4>>).
+At the right side of the editor is a sidebar. This sidebar is called a palette and contains the tools to create new diagram elements (see <<palette>>).
 
 .Palette of a diagram editor
-[caption="Figure 4:"]
+[caption="Figure:"]
 [[palette]]
 image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", align="center"]
 
