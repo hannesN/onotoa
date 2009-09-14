@@ -81,7 +81,7 @@
 	      - description:  Iterates through a directory and transforms
 	      -     .xml files into .html files using the DocBook XSL.
 	      -->
-	<target name="docbook.html" depends="clean.html, depends" description="Generates HTML files from DocBook XML">
+	<target name="docbook.html" depends="clean.html, docbook" description="Generates HTML files from DocBook XML">
 		<xslt style="${html.stylesheet}" extension=".html" basedir="${doc.docbook}" destdir="${doc.docbook.html}">
 			<classpath refid="xalan.classpath" />
 			<include name="${filename}.xml" />
