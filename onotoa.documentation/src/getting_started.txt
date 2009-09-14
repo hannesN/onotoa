@@ -24,6 +24,20 @@ In the top navigation of the _Onotoa_ website is the *Documentation* tab the mos
 ==== Stay tuned ====
 To get informed about the latest developments in the Onotoa project subscribed to the provided RSS feed. Add the URL of the feed http://onotoa.topicmapslab.de/news.rss to your favourite feed reader. To get more involved in the ongoing discussion about the further development of the _Onotoa_ project subscribe to the Onotoa mailinglist. [TODO: Beschreibung, wie man sich in die Mainlingliste einschreiben kann.]   
 
+
+=== Licence and Requirements ===
+
+Onotoa is published under the Eclipse Public License. You can download and use _Onotoa_ for free and without any restrictions in functionality. 
+
+As described bewlo in more detail, there are two ways to install _Onotoa_:
+
+- *Standalone version* This version can downloaded from the Donwload section of the _Onotoa_ website (http://onotoa.topicmapslab.de/download).
+- *Eclipse Puglin* You can use _Onotoa_ as plugin for your Eclipse installation. To integrate _Onotoa_ into your environemt you have to use the _Onotoa_ update site (http://onotoa.topicmapslab.de/update).
+
+As requirement, the Java Runtime Environment Version 5.0 must be installed to run _Onotoa_. The latest Java Version can be downloaded for free (http://java.sun.com).
+
+TIPP: @Hannes TODO: decribe, how to check that Java is installed correctly
+
 === Using the standalone version of _Onotoa_ ===
 
 After downloading the file zip file for your system and unzipping it you should have
