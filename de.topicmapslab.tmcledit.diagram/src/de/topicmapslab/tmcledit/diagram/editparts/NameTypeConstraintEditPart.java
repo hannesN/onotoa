@@ -26,6 +26,11 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 	}
 	
 	@Override
+	protected boolean isEditable() {
+		return false;
+	}
+	
+	@Override
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
