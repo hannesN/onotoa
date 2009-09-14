@@ -5,6 +5,12 @@ v0.2, September 2009: Initial draft extended
 
 Preface
 =======
+//////////////////
+TODO: The Preface must be extended. It must explain what Onotoa is, who is the target group and 
+why someone should use the editor.
+
+Furthermore we need an outline of the whole handbook in the preface.
+/////////////////
 
 Starting as graduate at the Topic Maps Lab, Onotoa has grown to
 a usable TMCL schema editor. This document explains the different
