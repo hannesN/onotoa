@@ -22,6 +22,8 @@ import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
@@ -68,6 +70,15 @@ public class StringListSelectionDialog extends Dialog {
 		stringListViewer.setContentProvider(new ArrayContentProvider());
 		stringListViewer.setLabelProvider(new StringLableProvider());
 		stringListViewer.setInput(stringList);
+		stringListViewer.addDoubleClickListener(new IDoubleClickListener() {
+			
+			public void doubleClick(DoubleClickEvent event) {
+				IStructuredSelection sel = (IStructuredSelection) stringListViewer.getSelection();
+				if (sel.isEmpty())
+					return;
+				editString((String) sel.getFirstElement());
+			}
+		});
 		
 		createButtonRow(comp);
 		
@@ -194,7 +205,7 @@ public class StringListSelectionDialog extends Dialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setSize(300, 400);
+		newShell.setSize(400, 500);
 		newShell.setText(getText());
 	}
 	
