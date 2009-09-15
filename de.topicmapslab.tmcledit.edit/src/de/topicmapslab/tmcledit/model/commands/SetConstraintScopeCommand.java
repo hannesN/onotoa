@@ -36,6 +36,9 @@ public class SetConstraintScopeCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
+		if (scopedTopicType.getScope().equals(newScope))
+			return false;
+		
 		oldScope = new ArrayList<ScopeConstraint>();
 		oldScope.addAll(scopedTopicType.getScope());
 		return true;

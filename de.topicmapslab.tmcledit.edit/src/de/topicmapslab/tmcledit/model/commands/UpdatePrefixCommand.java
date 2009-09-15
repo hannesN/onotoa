@@ -67,6 +67,28 @@ public class UpdatePrefixCommand extends AbstractCommand {
 	
 	@Override
 	protected boolean prepare() {
+		return checkValue() || checkKey();
+	}
+
+	private boolean checkValue() {
+		if (newValue == null) {
+	        if (oldValue == null)
+		        return false;
+        } else {
+	        if (newValue.equals(oldValue))
+		        return false;
+        }
 		return true;
 	}
+	
+	private boolean checkKey() {
+	    if (oldKey == null) {
+	        if (newKey == null)
+		        return false;
+        } else {
+	        if (oldKey.equals(newKey))
+		        return false;
+        }
+	    return true;
+    }
 }

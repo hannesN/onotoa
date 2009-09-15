@@ -33,4 +33,12 @@ public class SetAkoCommand extends AbstractConnectionCommand {
 	protected EdgeType getEdgeType() {
 		return EdgeType.AKO_TYPE;
 	}
+	
+	@Override
+	protected boolean prepare() {
+		if (topic.getAko().equals(newList))
+			return false;
+		
+	    return super.prepare();
+	}
 }

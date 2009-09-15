@@ -60,6 +60,13 @@ public class SetRoleConstraintCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
+		if (newConstraint == null) {
+	        if (oldConstraint == null)
+		        return false;
+        } else {
+	        if (newConstraint.equals(oldConstraint))
+		        return false;
+        }
 		return true;
 	}
 }
