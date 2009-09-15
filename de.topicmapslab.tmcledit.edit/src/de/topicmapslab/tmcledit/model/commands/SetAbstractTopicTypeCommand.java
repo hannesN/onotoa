@@ -54,6 +54,8 @@ public class SetAbstractTopicTypeCommand extends AbstractCommand {
 	
 	@Override
 	protected boolean prepare() {
+		if (isAbstract==tt.isAbstract())
+			return false;
 		return true;
 	}
 }

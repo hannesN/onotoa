@@ -69,6 +69,14 @@ public class SetAssociationTypeCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
+		if (newType==null) {
+			if (oldType==null)
+				return false;
+		} else {
+			if (newType.equals(oldType))
+				return false;
+		}
+		
 		if (constraint.getPlayerConstraints().size()>0)
 			cmds = new ArrayList<SetRoleConstraintCommand>();
 		

@@ -43,6 +43,9 @@ public abstract class AbstractTopicTypeIdentificationCommand extends
 	
 	@Override
 	protected boolean prepare() {
+		if (getStringList().equals(newList))
+			return false;
+		
 		oldList = new ArrayList<String>();
 		oldList.addAll(getStringList());
 		return true;

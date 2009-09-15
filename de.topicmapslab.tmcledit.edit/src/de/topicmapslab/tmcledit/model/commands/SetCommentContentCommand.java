@@ -50,6 +50,13 @@ public class SetCommentContentCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
+		if (oldText==null) {
+			if (newText==null)
+				return false;
+		} else {
+			if (oldText.equals(newText))
+				return false;
+		}
 		return true;
 	}
 }

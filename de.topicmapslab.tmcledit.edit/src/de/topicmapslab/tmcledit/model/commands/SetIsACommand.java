@@ -33,5 +33,12 @@ public class SetIsACommand extends AbstractConnectionCommand {
 	protected EdgeType getEdgeType() {
 		return EdgeType.IS_ATYPE;
 	}
+	
+	@Override
+	protected boolean prepare() {
+		if (newList.equals(topic.getIsa()))
+			return false;
+	    return super.prepare();
+	}
 
 }

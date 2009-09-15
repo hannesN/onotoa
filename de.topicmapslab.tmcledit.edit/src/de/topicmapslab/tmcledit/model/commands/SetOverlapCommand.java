@@ -55,6 +55,9 @@ public class SetOverlapCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
+		if (topicType.getOverlap().equals(addList))
+			return false;
+		
 		removeList = new ArrayList<TopicType>();
 		for (TopicType tt : topicType.getOverlap()) {
 			if (addList.contains(tt)) {

@@ -64,6 +64,10 @@ public class SetLabelPosCommand extends AbstractCommand {
 	protected boolean prepare() {
 		oldPosX = position.getPosX();
 		oldPosY = position.getPosY();
+		
+		if ( (newPosX==oldPosX) && (newPosY==oldPosY) )
+			return false;
+		
 		return true;
 	}
 }

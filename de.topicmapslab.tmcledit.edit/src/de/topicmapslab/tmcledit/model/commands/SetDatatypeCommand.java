@@ -19,16 +19,14 @@ import de.topicmapslab.tmcledit.model.OccurrenceType;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class SetDatatypeCommand extends AbstractCommand {
 
 	private final OccurrenceType type;
 	private final String newString;
 	private final String oldString;
-	
-	
-	
+
 	public SetDatatypeCommand(OccurrenceType type, String newString) {
 		super();
 		this.type = type;
@@ -36,27 +34,39 @@ public class SetDatatypeCommand extends AbstractCommand {
 		this.oldString = type.getDataType();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.emf.common.command.Command#execute()
 	 */
 	public void execute() {
 		type.setDataType(newString);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.emf.common.command.Command#redo()
 	 */
 	public void redo() {
 		type.setDataType(newString);
 	}
-	
+
 	@Override
 	public void undo() {
 		type.setDataType(oldString);
 	}
-	
+
 	@Override
 	protected boolean prepare() {
+		if (newString == null) {
+			if (oldString == null)
+				return false;
+		} else {
+			if (newString.equals(oldString))
+				return false;
+		}
+		
 		return true;
 	};
 
