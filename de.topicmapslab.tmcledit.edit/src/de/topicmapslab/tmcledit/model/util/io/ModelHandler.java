@@ -465,7 +465,7 @@ class ModelHandler extends DefaultHandler {
 	    if (currTopicType != null) {
 	    	SubjectIdentifierConstraint sic = (SubjectIdentifierConstraint) createIdentityConstraint(attributes,
 	    	        ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
-	    	constructs.add(currTopicType);
+	    	constructs.add(sic);
 	    	currTopicType.getSubjectIdentifierConstraints().add(sic);
 	    }
     }

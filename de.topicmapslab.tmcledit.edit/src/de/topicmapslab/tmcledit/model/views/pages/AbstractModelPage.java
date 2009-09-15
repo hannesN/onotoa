@@ -37,6 +37,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.util.IModelProvider;
+import de.topicmapslab.tmcledit.model.views.widgets.AnnotationWidget;
 
 public abstract class AbstractModelPage extends Page implements Adapter,
 		IModelProvider {
@@ -51,12 +52,15 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 
 	private CTabFolder folder;
 	private CTabItem descrItem;
+	private CTabItem annotationItem;
 
 	private Text descriptionText;
 
 	private Text commentText;
 
 	private Text seeAlsoText;
+
+	private AnnotationWidget annotationWidget;
 
 	public AbstractModelPage(String id) {
 		super();
@@ -74,6 +78,7 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 
 		createItems(folder);
 
+		createAnnotationWidgets(toolkit);
 		if (hasDocumentation()) {
 			createDescriptionTab(toolkit);
 			hookModifyListeners();
@@ -180,6 +185,9 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		if (descrItem != null)
 			descrItem.getControl().setEnabled((model instanceof TMCLConstruct));
 
+		if (annotationItem!=null)
+			((AnnotationWidget) annotationItem.getControl()).setModel(model);
+		
 		this.model = (EObject) model;
 		if (model != null)
 			this.model.eAdapters().add(this);
@@ -220,6 +228,8 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 
 	public void setCommandStack(CommandStack commandStack) {
 		this.commandStack = commandStack;
+		if (this.annotationWidget!=null)
+			this.annotationWidget.setCommandStack(commandStack);
 	}
 
 	public void aboutToHide() {
@@ -262,6 +272,13 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		return ID;
 	}
 
+	private void createAnnotationWidgets(FormToolkit toolkit) {
+		annotationItem = new CTabItem(folder, SWT.NONE);
+		annotationItem.setText("Annotations");
+		annotationWidget = new AnnotationWidget(folder, SWT.NONE, toolkit);
+		annotationItem.setControl(annotationWidget);
+	}
+	
 	private final class SeeAlsoListener extends KeyAdapter implements
 			FocusListener {
 		@Override
