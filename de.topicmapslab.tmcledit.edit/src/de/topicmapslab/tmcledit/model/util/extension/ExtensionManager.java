@@ -21,6 +21,8 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
+import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationProposalProvider;
+import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
 import de.topicmapslab.tmcledit.model.psiprovider.IPSIProvider;
 
 
@@ -33,14 +35,17 @@ import de.topicmapslab.tmcledit.model.psiprovider.IPSIProvider;
  */
 public class ExtensionManager {
 	private static final String EXT_PSIPROVIDER = "psiprovider";
+	private static final String EXT_ANNOTATIONPROVIDER = "annotationprovider";
 	
 	private static final String ATT_ID = "id";
 	private static final String ATT_ClASS = "class";
 	private static final String ATT_NAME = "name";
+	private static final String ATT_VALIDATOR = "validator";
+	private static final String ATT_PROPOSALPROVIDER = "proposalprovider";
 	
 	
 	private List<PSIProviderInfo> psiProviderInfos = null;
-	
+	private List<AnnotationProviderInfo> annotationProviderInfos = null;
 	
 	
 	public List<PSIProviderInfo> getPsiProviderInfos() {
@@ -49,6 +54,61 @@ public class ExtensionManager {
 		return psiProviderInfos;
     }
 	
+	public List<AnnotationProviderInfo> getAnnotationProviderInfos() {
+		if (annotationProviderInfos==null)
+			initAnnotationProvider();
+		return annotationProviderInfos;
+    }
+	
+	private void initAnnotationProvider() {
+		List<AnnotationProviderInfo> tmp = new ArrayList<AnnotationProviderInfo>();
+		
+		IExtensionPoint ep = Platform.getExtensionRegistry().getExtensionPoint(
+				TmcleditEditPlugin.PLUGIN_ID, EXT_ANNOTATIONPROVIDER);
+		
+		IExtension exts[] = ep.getExtensions();
+		
+		for (IExtension ext : exts) {
+			IConfigurationElement[] confElemements = ext.getConfigurationElements();
+			
+			for (IConfigurationElement ce : confElemements) {
+				String id = ce.getAttribute(ATT_ID);
+				String name = ce.getAttribute(ATT_NAME);
+				
+				IAnnotationValidator validator = null;
+				IAnnotationProposalProvider proposalprovider = null;
+				
+				
+				String clazz = ce.getAttribute(ATT_VALIDATOR);
+				validator = (IAnnotationValidator) getInstance(ext, clazz);
+				
+				clazz = ce.getAttribute(ATT_PROPOSALPROVIDER);
+				if (clazz!=null)
+					proposalprovider = (IAnnotationProposalProvider) getInstance(ext, clazz);
+				
+				AnnotationProviderInfo info = new AnnotationProviderInfo(id, name, validator, proposalprovider);
+				tmp.add(info);				
+			}
+		}
+		if (tmp.size()==0) {
+			tmp = null;
+			annotationProviderInfos = Collections.emptyList();
+		} else {
+			annotationProviderInfos = Collections.unmodifiableList(tmp);
+		}
+	}
+
+	private Object getInstance(IExtension ext, String clazz) {
+	    Bundle bundle = Platform.getBundle(ext.getNamespaceIdentifier());
+	    try {
+	    	Object o = bundle.loadClass(clazz);
+	    	return ((Class<?>)o).newInstance();
+	    	
+	    } catch (Exception e) {
+	    	TmcleditEditPlugin.getPlugin().log(e);
+	    }
+	    return null;
+    }
 	
 	private void initPsiProvider() {
 		List<PSIProviderInfo> tmp = new ArrayList<PSIProviderInfo>();
