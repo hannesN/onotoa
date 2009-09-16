@@ -153,4 +153,18 @@
             name="Onotoa Modelloader">
       </editor>
    </extension>
+   <extension
+         point="de.topicmapslab.tmcledit.edit.annotationprovider">
+      <annotationprovider
+            id="de.topicmapslab.tmcledit.edit.validationannotation"
+            name="validator.ignore"
+            validator="de.topicmapslab.tmcledit.model.annotationprovider.internal.IgnoreWarningValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="activetm.attributename"
+            name="activetm.attributename"
+            proposalprovider="de.topicmapslab.tmcledit.model.annotationprovider.internal.TestProvider"
+            validator="de.topicmapslab.tmcledit.model.annotationprovider.internal.ActiveTMAttributeValidator">
+      </annotationprovider>
+   </extension>
 </plugin>

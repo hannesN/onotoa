@@ -36,5 +36,5 @@ public interface IAnnotationProposalProvider {
 	 *  
 	 * @return A collection containing valid values for the annotation.
 	 */
-	public Collection<Object> getProposals();
+	public Collection<String> getProposals();
 }

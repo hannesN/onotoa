@@ -5,12 +5,16 @@
  */
 package de.topicmapslab.tmcledit.model;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import de.topicmapslab.tmcledit.model.util.extension.AnnotationProviderInfo;
 import de.topicmapslab.tmcledit.model.util.extension.ExtensionManager;
 import de.topicmapslab.tmcledit.model.util.extension.PSIProviderInfo;
 
@@ -105,8 +109,34 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 		public List<PSIProviderInfo> getPsiProviderInfos() {
 	        return extensionManager.getPsiProviderInfos();
         }
+
+		public List<AnnotationProviderInfo> getAnnotationProviderInfos() {
+	        return extensionManager.getAnnotationProviderInfos();
+        }
 		
+		public Set<String> getAnnotionKeys() {
+			Set<String> names = new HashSet<String>();
+			
+			for (AnnotationProviderInfo a : getAnnotationProviderInfos()) {
+				names.add(a.getName());
+			}
+			
+			if (names.size()==0)
+				return Collections.emptySet();
+			
+			return names;
+		}
 		
+		public AnnotationProviderInfo getAnnotionProviderInfo(String name) {
+			if (name==null)
+				throw new IllegalArgumentException();
+			for (AnnotationProviderInfo a : getAnnotationProviderInfos()) {
+				if (name.equals(a.getName())) {
+					return a;
+				}
+			}
+			return null;
+		}
 	}
 
 }
