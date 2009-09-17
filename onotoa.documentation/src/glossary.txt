@@ -2,9 +2,78 @@ Glossary
 --------
 
 [glossary]
+
+Association Constraint::
+	A association constraint is used to connect an association type with his roles to topic types, which are players.
+
+Association Type::
+	An association type is specialized topic type. Only instances of an association type should be used to type an association.
+
+Cardinality::
+	The cardinality specifies the amount of the usage of an element. With _cardMin_ is defined how often at least the the
+	element must occur. _CardMax_ defines the maximum of the usage of the element.
+
+Constraint::
+	A constraint is a topic which represents a definition of a specific topic type. The topic name constraint for instance is used to
+	define, that a topic has names of a specific type. The topic constraint may have some occurrences, which specify additional 
+	restrictions, for instance the cardinality.
+
+Diagram::
+	A diagram is a view of the Topic Maps schema. It consists of graphical representation of schema elements
+	and connects them if they have a relationship, e.g. the supertype-subtype relationship.
+
 Model::
 	The set of schema and diagram elements is called the model.
 
 Model View::
 	The Model View shows all elements of the Topic Maps schema in a tree viewer. It also
 	lists the diagrams. 
+	
+Name Constraint::
+	A topic may have a number of names of different types. By using name constraints the number of names and their type
+	may be specified for a topic type. All instances of that topic type need to fulfill this constraint.
+
+Name Type::
+	A name type is specialized topic type. Only instances of a name type should be used to type a name.
+	
+Node::
+	A node is an element in the tree of the *Model View*. It has a label, mostly the name of the
+	schema element it represents and may have child elements.
+
+Occurrence Constraint::
+	A topic may have a number of occurrences of different types. By using occurrence constraints the number of occurrences and their type
+	may be specified for a topic type. All instances of that topic type need to fulfill this constraint.
+
+Occurrence Type::
+	An occurrence type is specialized topic type. Only instances of an occurrence type should be used to type an occurrence.
+
+Role Constraint::
+	A role constraint specifies, which role type and cardinality belongs to an association type. This means any association of that type must
+	have a number of roles within the range specified in the constraints cardinality. 	
+
+Role Type::
+	A role type is specialized topic type. Only instances of a role type should be used as roles of association.
+	
+Subject Identifier Constraint::
+	The subject identifier constraints specifies the number of identifier a topic type may have. It also has a property which defines the 
+	syntax of the identifier using a regular expression.
+	
+Subject Locator Constraint::
+	The subject locator constraints specifies the number of locator a topic type may have. It also has a property which defines the 
+	syntax of the locator using a regular expression.
+		
+Topic Maps Schema::
+	A Topic Maps Schema is a description of the form of a topic map. It consists of topic type and 
+	constraints.
+	
+Topic Maps Schema Element::
+	As Topic Maps schema element a part of the schema is meant. This may be any constraint or topic type (and its specializations).
+
+Topic Role Constraint::
+	A topic role constraint specifies which topic type is the player of an association of a specific association type. It also says
+	which role it plays. Additionally this constraint specifies the number of players playing the role.  
+	
+Topic Type::
+	A topic type is a topic which is used in a type-instance relationship. Types are defined in a Topic Maps schema
+	and the instances are created in the topic map.
+	
