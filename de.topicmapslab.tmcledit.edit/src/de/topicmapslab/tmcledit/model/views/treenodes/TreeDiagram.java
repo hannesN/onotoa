@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
@@ -69,15 +70,24 @@ public class TreeDiagram extends TreeObject {
 	public void handleRename() {
 		String oldName = getDiagram().getName();
 		InputDialog dlg = new InputDialog(getModelView().getViewer().getTree().getShell(), "New Diagram Name..",
-		        "Please enter the new diagram name", oldName, new IInputValidator() {
+		        "Please enter the new diagram name", oldName, 
+						new IInputValidator() {
 
-			        public String isValid(String newText) {
-				        if (newText.length() == 0)
-					        return "no name given";
-
-				        return null;
-			        }
-		        });
+							public String isValid(String newText) {
+								if (newText.length()==0)
+									return "Please enter a name.";
+								
+								
+								File file = (File) getDiagram().eContainer();
+								for (Diagram d : file.getDiagrams()) {
+									if ( (d.getName().equals(newText)) && (!(d.equals(getDiagram()))) ) {
+										return "A diagram with that name already exists!";
+									}
+								}
+								return null;										
+							}
+					
+				});
 		if (InputDialog.OK == dlg.open()) {
 			getModelView().getEditingDomain().getCommandStack().execute(
 			        new RenameDiagramCommand(dlg.getValue(), getDiagram()));
