@@ -1,10 +1,65 @@
 == The Model View ==
 
 The *Model View* is the core of Onotoa. It represents the schema, visualizing it as a tree. The state of the
-schema is saved as attribute of the *ModelView*. The diagram editors are just views on the model, or parts 
+schema is saved as attribute of the *Model View*. The diagram editors are just views on the model, or parts 
 if only a few elements of the schema are visualized in a diagram. This makes it possible to create multiple diagrams
 to realize different views of the same schema.
 
+
+.Model View
+[caption="Figure:"]
+image::images/modelview.png[scaledwidth="60%"]
+
+In the title bar of the *Model View* you'll see a button. This button can be used to start a validation of the current schema. 
+Additionally the *Model View* has a menu, which can be opened by clicking on 
+ifdef::basebackend-docbook[]
+image:images/viewmenu_button.png[width="0.3cm"].
+endif::basebackend-docbook[]
+ifndef::basebackend-docbook[]
+image:images/viewmenu_button.png[].
+endif::basebackend-docbook[]
+Right now the menu contains only the validation entry, which does the same like the button.
+
+Every element in the tree is called a node. A node has a parent and may have children. For example the node 'Diagrams' is
+used parent for node representing diagrams. These node are labelled with the name of the diagram. A description of the different 
+nodes and their children follow. Every node has a context menu. To open it just click with the right mouse button on the node. 
+
+If a node represents a schema element or a diagram, the properties of the element are shown in the *Property Details View* after selecting it.
+To select a node, just click on the node with the left mouse button.
+
+=== Managing diagrams ===
+
+The node 'Diagrams' is the parent of all nodes representing diagrams. 
+
+To create a new diagram, use the context menu of the 'Diagrams' node. It contains one entry,  'Create New Diagram...'. Choose this entry, 
+by clicking with the left mouse button on it and a dialog appears and asks for the name of the new diagram.
+If you want to abort, just press the 'Cancel' button. 
+
+Every diagram must have a different name, so if enter a name, which is already used, it is 
+not possible to press 'OK'. After pressing 'OK' a new diagram is created and an editor is automatically opened. You can also recognize, that the 
+node 'Diagrams' got a new child node labelled with the name of the diagram.
+
+.Context menu of 'Diagrams' in the Model View
+[caption="Figure:"]
+image::images/create_diagram_ctx.png[scaledwidth="60%"]
+
+The context menu of a diagram node has two entries:
+
+* Rename... Opens a dialog to rename the diagram.
+* Delete Deletes the diagram and it's content. 
+
+NOTE: The deletion of the diagram does not delete the schema elements, which are represented in the diagram.
+
+=== Managing the schema ===
+
+A Topic Maps schema consists of topic types and their specializations and constraints, which are associated with each other.
+The *Model View* groups the elements of the schema by the topic type. The main node of the Topic Maps schema is labelled as
+'Topic Map Schema'. It represents the current schema. If you select it, the property page of the schema is shown in the
+*Property Details View* which provide an input mask for the schema name and a base locator. For more information see
+<<_diagram_and_topic_map_schema>>
+
+TIP: Set a base locator before you start creating any topic type, to automatically create subject identifiers. 
+ 
 With the *Model View* it is possible to create almost every schema element, by using the context menu of the different nodes. 
 Analog to the creation of diagrams, new topic types can be created in the *Model View*.For instance to create a new topic type,
 just select 'TopicTypes' in the *Model View* and choose 'Create Topic Type...'. A new wizard will open, where the name of the type, 
