@@ -40,6 +40,8 @@ public class RenameDiagramCommand extends AbstractCommand{
 	@Override
 	protected boolean prepare() {
 		oldName = diagram.getName();
+		if (oldName.equals(name))
+			return false;
 		return true;
 	}
 	public void redo() {

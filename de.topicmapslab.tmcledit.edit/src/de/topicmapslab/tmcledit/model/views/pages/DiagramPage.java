@@ -11,11 +11,15 @@
 package de.topicmapslab.tmcledit.model.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -23,12 +27,14 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
 
 public class DiagramPage extends AbstractModelPage {
 
 	private Text nameText;
-
+	private ControlDecoration nameDecorator;
+	
 	public DiagramPage() {
 		super("diagram");
 	}
@@ -45,14 +51,39 @@ public class DiagramPage extends AbstractModelPage {
 		comp.setLayout(new GridLayout(2, false));
 
 		toolkit.createLabel(comp, "Name:");
-
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
 		nameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
+		
+		nameDecorator = new ControlDecoration(nameText, SWT.LEFT|SWT.TOP);
+		nameDecorator.setMarginWidth(2);
+		nameDecorator.setShowOnlyOnFocus(true);
+		
+		nameText.addModifyListener(new ModifyListener() {
+			
+			public void modifyText(ModifyEvent e) {
+				Diagram d = getDiagramByName(nameText.getText());
+				if ( (d!=null) && (!d.equals(getModel())) ){
+					nameDecorator.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_ERROR).getImage());
+					nameDecorator.setDescriptionText("Name already in use!");
+					nameDecorator.show();
+				} else {
+					nameDecorator.hide();
+				}
+			}
+		});
 		hookNameTextListeners();
 		return comp;
 	}
 
+	private Diagram getDiagramByName(String name) {
+		File file = (File) getModel().eContainer();
+		for (Diagram d : file.getDiagrams()) {
+			if (d.getName().equals(name))
+				return d;
+		}
+		return null;
+	}
+	
 	@Override
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
@@ -76,9 +107,13 @@ public class DiagramPage extends AbstractModelPage {
 				if (newName.length() == 0)
 					return;
 
-				if (newName.equals(((Diagram) getModel()).getName()))
+				if (getDiagramByName(newName)!=null) {
+					nameText.setText(((Diagram)getModel()).getName());
 					return;
-
+				}
+				
+					
+				
 				getCommandStack()
 						.execute(
 								new RenameDiagramCommand(newName,
