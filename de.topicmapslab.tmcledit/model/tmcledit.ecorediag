@@ -405,10 +405,6 @@
         <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/AssociationType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_MwWRMZlMEd2TKbZ0gzs8EQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_7VhrMYshEd6pdMNuVbD1jw" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/RoleType.1"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_7VhrMoshEd6pdMNuVbD1jw"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_9J_FkOGzEd2eXcEHKGaqwA" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="tmcledit.ecore#//KindOfTopicType/NoType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_9J_FkeGzEd2eXcEHKGaqwA"/>
@@ -747,11 +743,11 @@
     <children xmi:type="notation:Node" xmi:id="_PayHEHeLEd6vr7o8kDELSA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Pa3moHeLEd6vr7o8kDELSA" type="5001">
       <children xmi:type="notation:Node" xmi:id="_YP2qUHeLEd6vr7o8kDELSA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//EStringToEStringMap/key"/>
+        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//Annotation/key"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YP2qUXeLEd6vr7o8kDELSA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_evj4sHeLEd6vr7o8kDELSA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//EStringToEStringMap/value"/>
+        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//Annotation/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_evj4sXeLEd6vr7o8kDELSA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Pa3moXeLEd6vr7o8kDELSA"/>
@@ -764,7 +760,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Pa4Ns3eLEd6vr7o8kDELSA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_PapkMXeLEd6vr7o8kDELSA" fontColor="4210752" fontName="Sans Serif" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//EStringToEStringMap"/>
+    <element xmi:type="ecore:EClass" href="tmcledit.ecore#//Annotation"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PapkMneLEd6vr7o8kDELSA" x="50" y="-395"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_J2E_EYWGEd6KJ7se4HJVfg" type="1001">

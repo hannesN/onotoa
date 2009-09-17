@@ -156,8 +156,9 @@
    <extension
          point="de.topicmapslab.tmcledit.edit.annotationprovider">
       <annotationprovider
-            id="de.topicmapslab.tmcledit.edit.validationannotation"
-            name="validator.ignore"
+            id="de.topicmapslab.tmcledit.edit.validator.ignoreprefix"
+            internal="true"
+            name="validator.ignoreprefix"
             validator="de.topicmapslab.tmcledit.model.annotationprovider.internal.IgnoreWarningValidator">
       </annotationprovider>
       <annotationprovider

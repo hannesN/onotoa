@@ -13,12 +13,15 @@ package de.topicmapslab.tmcledit.model.validation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import org.eclipse.emf.common.command.CommandStack;
 
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
@@ -29,6 +32,7 @@ import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.actions.IgnorePrefixAction;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult.Priority;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationCreateTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationSelectTypeAction;
@@ -47,6 +51,8 @@ public class ModelValidator {
 	private final TopicMapSchema schema;
 	private List<ValidationResult> resultList = Collections.emptyList();
 
+	private Set<String> ignoredPrefixes = null;
+	
 	private CommandStack commandStack;
 	private List<String> foundNotFoundPrefixes;
 
@@ -63,6 +69,16 @@ public class ModelValidator {
 
 	public List<ValidationResult> validate(CommandStack cmdStack) {
 		this.commandStack = cmdStack;
+		
+		for (Annotation a : schema.getAnnotations()) {
+			if ("validator.ignoreprefix".equals(a.getKey())) {
+				if (ignoredPrefixes==null)
+					ignoredPrefixes = new HashSet<String>();
+				ignoredPrefixes.add(a.getValue());
+			}
+			
+		}
+		
 		foundNotFoundPrefixes = new ArrayList<String>();
 		validateAssociationConstraints();
 		validateTopicTypes();
@@ -72,6 +88,12 @@ public class ModelValidator {
 		return resultList;
 	}
 
+	private Set<String> getIgnoredPrefixes() {
+	    if (ignoredPrefixes==null)
+	    	return Collections.emptySet();
+		return ignoredPrefixes;
+    }
+	
 	private void validateTopicTypes() {
 		for (TopicType tt : schema.getTopicTypes()) {
 			validateOccurrenceConstraint(tt);
@@ -124,6 +146,7 @@ public class ModelValidator {
 	}
 
 	private void checkPrefixes(TopicType type) {
+		
 		for (String id : type.getIdentifiers()) {
 			checkPrefix(type, id);
 		}
@@ -146,10 +169,14 @@ public class ModelValidator {
 				}
 			}
 			if (!found) {
+				if (getIgnoredPrefixes().contains(prefix))
+					return;
 				if (!(foundNotFoundPrefixes.contains(prefix))) {					
 					ValidationResult vr = new ValidationResult("Unknown prefix used: '"+prefix+"'", tt);
 					vr.addValidationAction(new NewPrefixAction(commandStack, schema, prefix));
+					vr.addValidationAction(new IgnorePrefixAction(commandStack, schema, prefix));
 					addValidationResult(vr);
+					
 					foundNotFoundPrefixes.add(prefix);
 				}
 			}

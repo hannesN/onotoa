@@ -7,8 +7,6 @@ package de.topicmapslab.tmcledit.model.util;
 
 import de.topicmapslab.tmcledit.model.*;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -209,8 +207,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createScopedReifiableTopicTypeAdapter();
 			}
 			@Override
-			public Adapter caseEStringToEStringMap(Map.Entry<String, String> object) {
-				return createEStringToEStringMapAdapter();
+			public Adapter caseAnnotation(Annotation object) {
+				return createAnnotationAdapter();
 			}
 			@Override
 			public Adapter caseAbstractRegExpTopicType(AbstractRegExpTopicType object) {
@@ -717,16 +715,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>EString To EString Map</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.Annotation <em>Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see java.util.Map.Entry
+	 * @see de.topicmapslab.tmcledit.model.Annotation
 	 * @generated
 	 */
-	public Adapter createEStringToEStringMapAdapter() {
+	public Adapter createAnnotationAdapter() {
 		return null;
 	}
 

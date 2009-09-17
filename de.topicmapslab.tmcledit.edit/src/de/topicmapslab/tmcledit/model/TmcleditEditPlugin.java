@@ -114,11 +114,12 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 	        return extensionManager.getAnnotationProviderInfos();
         }
 		
-		public Set<String> getAnnotionKeys() {
+		public Set<String> getNoneInternalAnnotionKeys() {
 			Set<String> names = new HashSet<String>();
 			
 			for (AnnotationProviderInfo a : getAnnotationProviderInfos()) {
-				names.add(a.getName());
+				if (!a.isInternal())
+					names.add(a.getName());
 			}
 			
 			if (names.size()==0)

@@ -78,7 +78,6 @@ public enum KindOfTopicType implements Enumerator {
 	 * @see #SCOPE_TYPE_VALUE
 	 * @generated
 	 * @ordered
-	 * @deprecated
 	 */
 	SCOPE_TYPE(5, "ScopeType", "ScopeType"), /**
 	 * The '<em><b>No Type</b></em>' literal object.

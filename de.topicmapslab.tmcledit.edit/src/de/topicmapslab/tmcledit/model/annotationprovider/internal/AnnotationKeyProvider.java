@@ -35,7 +35,7 @@ public class AnnotationKeyProvider implements IContentProposalProvider {
 		
 		
 		
-		Set<String> annotionKeys = TmcleditEditPlugin.getPlugin().getAnnotionKeys();
+		Set<String> annotionKeys = TmcleditEditPlugin.getPlugin().getNoneInternalAnnotionKeys();
 		if (annotionKeys.size()==0)
 			return new IContentProposal[0];
 		

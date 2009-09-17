@@ -5,7 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model;
 
-import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getSee_also <em>See also</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getComment <em>Comment</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getDescription <em>Description</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getExtension <em>Extension</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,20 +108,19 @@ public interface TMCLConstruct extends EObject {
 	void setDescription(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Extension</b></em>' map.
-	 * The key is of type {@link java.lang.String},
-	 * and the value is of type {@link java.lang.String},
+	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.Annotation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Extension</em>' map isn't clear,
+	 * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Extension</em>' map.
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTMCLConstruct_Extension()
-	 * @model mapType="de.topicmapslab.tmcledit.model.EStringToEStringMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @return the value of the '<em>Annotations</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTMCLConstruct_Annotations()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EMap<String, String> getExtension();
+	EList<Annotation> getAnnotations();
 
 } // TMCLConstruct

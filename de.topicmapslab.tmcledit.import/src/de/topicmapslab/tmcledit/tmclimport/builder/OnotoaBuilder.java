@@ -50,7 +50,6 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -72,6 +71,7 @@ import org.tmapi.core.TopicMapSystemFactory;
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
@@ -735,8 +735,8 @@ public class OnotoaBuilder {
 			return null;
 		}
 
-		public EMap<String, String> getExtension() {
-			return null;
+		public EList<Annotation> getAnnotations() {
+		    return null;
 		}
 
 		public String getSee_also() {

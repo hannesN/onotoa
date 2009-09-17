@@ -68,6 +68,7 @@ import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -431,7 +432,10 @@ class ModelHandler extends DefaultHandler {
 	    if (constructs.isEmpty())
 	    	return;
 	    TMCLConstruct construct = (TMCLConstruct) constructs.lastElement();
-	    construct.getExtension().put(attributes.getValue(A_KEY), attributes.getValue(A_VALUE));
+	    Annotation annotation = ModelFactory.eINSTANCE.createAnnotation();
+	    annotation.setKey(attributes.getValue(A_KEY));
+	    annotation.setValue(attributes.getValue(A_VALUE));
+	    construct.getAnnotations().add(annotation);
     }
 
 	private void addOccurrenceConstraint(Attributes attributes) {

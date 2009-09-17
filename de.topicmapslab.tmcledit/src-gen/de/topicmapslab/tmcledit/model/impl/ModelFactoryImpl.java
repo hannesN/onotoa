@@ -7,8 +7,6 @@ package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.*;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -92,7 +90,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.REIFIER_CONSTRAINT: return createReifierConstraint();
 			case ModelPackage.REIFIABLE_TOPIC_TYPE: return createReifiableTopicType();
 			case ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE: return createScopedReifiableTopicType();
-			case ModelPackage.ESTRING_TO_ESTRING_MAP: return (EObject)createEStringToEStringMap();
+			case ModelPackage.ANNOTATION: return createAnnotation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -441,9 +439,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map.Entry<String, String> createEStringToEStringMap() {
-		EStringToEStringMapImpl eStringToEStringMap = new EStringToEStringMapImpl();
-		return eStringToEStringMap;
+	public Annotation createAnnotation() {
+		AnnotationImpl annotation = new AnnotationImpl();
+		return annotation;
 	}
 
 	/**

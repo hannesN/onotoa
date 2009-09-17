@@ -27,6 +27,7 @@ import org.w3c.dom.Element;
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -542,10 +543,10 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			node.appendChild(see);
 		}
 
-		for (String key : construct.getExtension().keySet()) {
+		for (Annotation a : construct.getAnnotations()) {
 			Element extNode = document.createElement(E_ANNOTATION);
-			extNode.setAttribute(A_KEY, key);
-			extNode.setAttribute(A_VALUE, construct.getExtension().get(key));
+			extNode.setAttribute(A_KEY, a.getKey());
+			extNode.setAttribute(A_VALUE, a.getValue());
 			node.appendChild(extNode);
 		}
 	}

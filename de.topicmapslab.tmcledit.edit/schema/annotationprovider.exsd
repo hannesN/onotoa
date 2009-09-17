@@ -61,7 +61,7 @@ add a validator and datatype.
                   
                </documentation>
             </annotation>
-         </attribute> 
+         </attribute>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
@@ -90,7 +90,13 @@ Default is String.
                </appInfo>
             </annotation>
          </attribute>
-        
+         <attribute name="internal" type="boolean">
+            <annotation>
+               <documentation>
+                  An internal annotation is used by the application itself. It is not visible or editable by the user.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

@@ -12,6 +12,8 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.Annotation;
+import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 
 /**
@@ -22,23 +24,25 @@ public class CreateAnnotationCommand extends AbstractCommand {
 
 	private final TMCLConstruct construct;
 
+	private final Annotation annotation;
 	private final String key;
 	private final String value;
 
 	public CreateAnnotationCommand(TMCLConstruct construct, String key, String value) {
 		super();
 		this.construct = construct;
+		annotation = ModelFactory.eINSTANCE.createAnnotation();
 		this.key = key;
 		this.value = value;
 	}
 
 	public void execute() {
-		construct.getExtension().put(key, value);
+		construct.getAnnotations().add(annotation);
 	}
 
 	@Override
 	public void undo() {
-		construct.getExtension().removeKey(key);
+		construct.getAnnotations().remove(annotation);
 	}
 
 	public void redo() {
@@ -47,9 +51,9 @@ public class CreateAnnotationCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
-		if (construct.getExtension().get(key) != null)
-			return false;
-
+		annotation.setKey(key);
+		annotation.setValue(value);
+		
 		return true;
 	}
 

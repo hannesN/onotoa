@@ -11,9 +11,8 @@
 package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
-import org.eclipse.emf.common.util.EMap;
 
-import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.Annotation;
 
 /**
  * @author Hannes Niederhausen
@@ -21,36 +20,26 @@ import de.topicmapslab.tmcledit.model.TMCLConstruct;
  */
 public class ModifyAnnotationKeyCommand extends AbstractCommand {
 
-	private final TMCLConstruct construct;
+	private final Annotation annotation;
 
 	private final String newKey;
 	private final String oldKey;
 
-	public ModifyAnnotationKeyCommand(TMCLConstruct construct, String newKey, String oldKey) {
+	public ModifyAnnotationKeyCommand(Annotation annotation, String newKey) {
 		super();
 		setLabel("Modify Annotation");
-		this.construct = construct;
+		this.annotation = annotation;
 		this.newKey = newKey;
-		this.oldKey = oldKey;
+		this.oldKey = annotation.getKey();
 	}
 
 	public void execute() {
-		
-		
-		EMap<String, String> extension = construct.getExtension();
-		String value = extension.get(oldKey);
-		extension.removeKey(oldKey);
-		extension.put(newKey, value);
-		
+		annotation.setKey(newKey);
 	}
 
 	@Override
 	public void undo() {
-		EMap<String, String> extension = construct.getExtension();
-		String value = extension.get(newKey);
-		
-		extension.removeKey(newKey);
-		extension.put(oldKey, value);
+		annotation.setKey(oldKey);
 	}
 
 	public void redo() {
@@ -60,10 +49,6 @@ public class ModifyAnnotationKeyCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		if (newKey.equals(oldKey))
-			return false;
-		if ((construct.getExtension().get(oldKey)==null))
-			return false;
-		if ((construct.getExtension().get(newKey)!=null))
 			return false;
 		
 		return true;
