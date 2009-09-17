@@ -11,12 +11,8 @@
 package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.Annotation;
 
 /**
  * @author Hannes Niederhausen
@@ -24,47 +20,32 @@ import de.topicmapslab.tmcledit.model.TMCLConstruct;
  */
 public class ModifyAnnotationValueCommand extends AbstractCommand {
 
-	private final TMCLConstruct construct;
-
-	private final String key;
+	private final Annotation annotation;
 	private final String newValue;
 	private final String oldValue;
 
-	public ModifyAnnotationValueCommand(TMCLConstruct construct, String key, String newValue) {
+	public ModifyAnnotationValueCommand(Annotation annotation, String newValue) {
 		super();
-		this.construct = construct;
 		this.newValue = newValue;
-		this.oldValue = construct.getExtension().get(key);
-		this.key = key;
+		this.oldValue = annotation.getValue();
+		this.annotation = annotation;
 	}
 
 	public void execute() {
-		construct.getExtension().put(key, newValue);
-		notifyChanged();
+		annotation.setValue(newValue);
 	}
 
 	@Override
 	public void undo() {
-		construct.getExtension().put(key, oldValue);
-		notifyChanged();
+		annotation.setValue(oldValue);
 	}
 
 	public void redo() {
 		execute();
 	}
-
-	private void notifyChanged() {
-		ENotificationImpl n = new ENotificationImpl((InternalEObject) construct, Notification.SET, null, oldValue, newValue);
-	
-		for (Adapter a : construct.eAdapters()) {
-			a.notifyChanged(n);
-		}
-
-    }
 	
 	@Override
 	protected boolean prepare() {
-		String oldValue = construct.getExtension().get(key);
 		if (oldValue==null)
 			return false;
 		if (oldValue.equals(newValue))

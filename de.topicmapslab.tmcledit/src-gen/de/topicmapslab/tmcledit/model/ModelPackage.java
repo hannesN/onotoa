@@ -97,13 +97,13 @@ public interface ModelPackage extends EPackage {
 	int TMCL_CONSTRUCT__DESCRIPTION = 2;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TMCL_CONSTRUCT__EXTENSION = 3;
+	int TMCL_CONSTRUCT__ANNOTATIONS = 3;
 
 	/**
 	 * The number of structural features of the '<em>TMCL Construct</em>' class.
@@ -152,13 +152,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__DESCRIPTION = TMCL_CONSTRUCT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE__EXTENSION = TMCL_CONSTRUCT__EXTENSION;
+	int TOPIC_TYPE__ANNOTATIONS = TMCL_CONSTRUCT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -324,13 +324,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CONSTRAINT__DESCRIPTION = TMCL_CONSTRUCT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONSTRAINT__EXTENSION = TMCL_CONSTRUCT__EXTENSION;
+	int ABSTRACT_CONSTRAINT__ANNOTATIONS = TMCL_CONSTRUCT__ANNOTATIONS;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Constraint</em>' class.
@@ -379,13 +379,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_REG_EXP_CONSTRAINT__DESCRIPTION = ABSTRACT_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_REG_EXP_CONSTRAINT__EXTENSION = ABSTRACT_CONSTRAINT__EXTENSION;
+	int ABSTRACT_REG_EXP_CONSTRAINT__ANNOTATIONS = ABSTRACT_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -443,13 +443,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION = ABSTRACT_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__EXTENSION = ABSTRACT_CONSTRAINT__EXTENSION;
+	int ABSTRACT_CARDINALITY_CONTRAINT__ANNOTATIONS = ABSTRACT_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -516,13 +516,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__EXTENSION = ABSTRACT_CARDINALITY_CONTRAINT__EXTENSION;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS = ABSTRACT_CARDINALITY_CONTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -598,13 +598,13 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE_CONSTRAINT__DESCRIPTION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE_CONSTRAINT__EXTENSION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__EXTENSION;
+	int OCCURRENCE_TYPE_CONSTRAINT__ANNOTATIONS = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -689,13 +689,13 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE_CONSTRAINT__DESCRIPTION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_CONSTRAINT__EXTENSION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__EXTENSION;
+	int NAME_TYPE_CONSTRAINT__ANNOTATIONS = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -771,13 +771,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_PLAYER_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__EXTENSION = ABSTRACT_CARDINALITY_CONTRAINT__EXTENSION;
+	int ROLE_PLAYER_CONSTRAINT__ANNOTATIONS = ABSTRACT_CARDINALITY_CONTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -862,13 +862,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA__DESCRIPTION = TMCL_CONSTRUCT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA__EXTENSION = TMCL_CONSTRUCT__EXTENSION;
+	int TOPIC_MAP_SCHEMA__ANNOTATIONS = TMCL_CONSTRUCT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Topic Types</b></em>' containment reference list.
@@ -971,13 +971,13 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT__DESCRIPTION = ABSTRACT_REG_EXP_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_LOCATOR_CONSTRAINT__EXTENSION = ABSTRACT_REG_EXP_CONSTRAINT__EXTENSION;
+	int SUBJECT_LOCATOR_CONSTRAINT__ANNOTATIONS = ABSTRACT_REG_EXP_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -1053,13 +1053,13 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_IDENTIFIER_CONSTRAINT__DESCRIPTION = ABSTRACT_REG_EXP_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBJECT_IDENTIFIER_CONSTRAINT__EXTENSION = ABSTRACT_REG_EXP_CONSTRAINT__EXTENSION;
+	int SUBJECT_IDENTIFIER_CONSTRAINT__ANNOTATIONS = ABSTRACT_REG_EXP_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
@@ -1135,13 +1135,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_TYPED_CONSTRAINT__DESCRIPTION = ABSTRACT_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CONSTRAINT__EXTENSION = ABSTRACT_CONSTRAINT__EXTENSION;
+	int ABSTRACT_TYPED_CONSTRAINT__ANNOTATIONS = ABSTRACT_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1199,13 +1199,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE_CONSTRAINT__DESCRIPTION = ABSTRACT_TYPED_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE_CONSTRAINT__EXTENSION = ABSTRACT_TYPED_CONSTRAINT__EXTENSION;
+	int ASSOCIATION_TYPE_CONSTRAINT__ANNOTATIONS = ABSTRACT_TYPED_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1658,13 +1658,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPE_CONSTRAINT__DESCRIPTION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_CONSTRAINT__EXTENSION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__EXTENSION;
+	int SCOPE_CONSTRAINT__ANNOTATIONS = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -1777,13 +1777,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_TOPIC_TYPE__DESCRIPTION = TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_TOPIC_TYPE__EXTENSION = TOPIC_TYPE__EXTENSION;
+	int SCOPED_TOPIC_TYPE__ANNOTATIONS = TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -1958,13 +1958,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__DESCRIPTION = SCOPED_TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE__EXTENSION = SCOPED_TOPIC_TYPE__EXTENSION;
+	int ASSOCIATION_TYPE__ANNOTATIONS = SCOPED_TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -2166,13 +2166,13 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE__DESCRIPTION = SCOPED_TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE__EXTENSION = SCOPED_TOPIC_TYPE__EXTENSION;
+	int OCCURRENCE_TYPE__ANNOTATIONS = SCOPED_TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -2383,13 +2383,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_CONSTRAINT__DESCRIPTION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_CONSTRAINT__EXTENSION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__EXTENSION;
+	int ROLE_CONSTRAINT__ANNOTATIONS = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -2465,13 +2465,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__DESCRIPTION = TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE__EXTENSION = TOPIC_TYPE__EXTENSION;
+	int ROLE_TYPE__ANNOTATIONS = TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -2637,13 +2637,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_COMBINATION_CONSTRAINT__DESCRIPTION = ABSTRACT_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_COMBINATION_CONSTRAINT__EXTENSION = ABSTRACT_CONSTRAINT__EXTENSION;
+	int ROLE_COMBINATION_CONSTRAINT__ANNOTATIONS = ABSTRACT_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Player</b></em>' reference.
@@ -2728,13 +2728,13 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__DESCRIPTION = SCOPED_TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE__EXTENSION = SCOPED_TOPIC_TYPE__EXTENSION;
+	int NAME_TYPE__ANNOTATIONS = SCOPED_TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -2991,13 +2991,13 @@ public interface ModelPackage extends EPackage {
 	int REIFIER_CONSTRAINT__DESCRIPTION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIER_CONSTRAINT__EXTENSION = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__EXTENSION;
+	int REIFIER_CONSTRAINT__ANNOTATIONS = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -3073,13 +3073,13 @@ public interface ModelPackage extends EPackage {
 	int REIFIABLE_TOPIC_TYPE__DESCRIPTION = TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TOPIC_TYPE__EXTENSION = TOPIC_TYPE__EXTENSION;
+	int REIFIABLE_TOPIC_TYPE__ANNOTATIONS = TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -3254,13 +3254,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_REIFIABLE_TOPIC_TYPE__DESCRIPTION = SCOPED_TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_REIFIABLE_TOPIC_TYPE__EXTENSION = SCOPED_TOPIC_TYPE__EXTENSION;
+	int SCOPED_REIFIABLE_TOPIC_TYPE__ANNOTATIONS = SCOPED_TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -3407,14 +3407,14 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_REIFIABLE_TOPIC_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.EStringToEStringMapImpl <em>EString To EString Map</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AnnotationImpl <em>Annotation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.EStringToEStringMapImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEStringToEStringMap()
+	 * @see de.topicmapslab.tmcledit.model.impl.AnnotationImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAnnotation()
 	 * @generated
 	 */
-	int ESTRING_TO_ESTRING_MAP = 34;
+	int ANNOTATION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -3423,7 +3423,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ESTRING_TO_ESTRING_MAP__KEY = 0;
+	int ANNOTATION__KEY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3432,16 +3432,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ESTRING_TO_ESTRING_MAP__VALUE = 1;
+	int ANNOTATION__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>EString To EString Map</em>' class.
+	 * The number of structural features of the '<em>Annotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ESTRING_TO_ESTRING_MAP_FEATURE_COUNT = 2;
+	int ANNOTATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractRegExpTopicTypeImpl <em>Abstract Reg Exp Topic Type</em>}' class.
@@ -3481,13 +3481,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_REG_EXP_TOPIC_TYPE__DESCRIPTION = TOPIC_TYPE__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' map.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_REG_EXP_TOPIC_TYPE__EXTENSION = TOPIC_TYPE__EXTENSION;
+	int ABSTRACT_REG_EXP_TOPIC_TYPE__ANNOTATIONS = TOPIC_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -4692,15 +4692,15 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTMCLConstruct_Description();
 
 	/**
-	 * Returns the meta object for the map '{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getExtension <em>Extension</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TMCLConstruct#getAnnotations <em>Annotations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the map '<em>Extension</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TMCLConstruct#getExtension()
+	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TMCLConstruct#getAnnotations()
 	 * @see #getTMCLConstruct()
 	 * @generated
 	 */
-	EReference getTMCLConstruct_Extension();
+	EReference getTMCLConstruct_Annotations();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ReifierConstraint <em>Reifier Constraint</em>}'.
@@ -4744,38 +4744,36 @@ public interface ModelPackage extends EPackage {
 	EClass getScopedReifiableTopicType();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>EString To EString Map</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Annotation <em>Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EString To EString Map</em>'.
-	 * @see java.util.Map.Entry
-	 * @model keyDataType="org.eclipse.emf.ecore.EString"
-	 *        valueDataType="org.eclipse.emf.ecore.EString"
+	 * @return the meta object for class '<em>Annotation</em>'.
+	 * @see de.topicmapslab.tmcledit.model.Annotation
 	 * @generated
 	 */
-	EClass getEStringToEStringMap();
+	EClass getAnnotation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Annotation#getKey <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Key</em>'.
-	 * @see java.util.Map.Entry
-	 * @see #getEStringToEStringMap()
+	 * @see de.topicmapslab.tmcledit.model.Annotation#getKey()
+	 * @see #getAnnotation()
 	 * @generated
 	 */
-	EAttribute getEStringToEStringMap_Key();
+	EAttribute getAnnotation_Key();
 
 	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.Annotation#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see java.util.Map.Entry
-	 * @see #getEStringToEStringMap()
+	 * @see de.topicmapslab.tmcledit.model.Annotation#getValue()
+	 * @see #getAnnotation()
 	 * @generated
 	 */
-	EAttribute getEStringToEStringMap_Value();
+	EAttribute getAnnotation_Value();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractRegExpTopicType <em>Abstract Reg Exp Topic Type</em>}'.
@@ -5699,12 +5697,12 @@ public interface ModelPackage extends EPackage {
 		EAttribute TMCL_CONSTRUCT__DESCRIPTION = eINSTANCE.getTMCLConstruct_Description();
 
 		/**
-		 * The meta object literal for the '<em><b>Extension</b></em>' map feature.
+		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TMCL_CONSTRUCT__EXTENSION = eINSTANCE.getTMCLConstruct_Extension();
+		EReference TMCL_CONSTRUCT__ANNOTATIONS = eINSTANCE.getTMCLConstruct_Annotations();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ReifierConstraintImpl <em>Reifier Constraint</em>}' class.
@@ -5745,14 +5743,14 @@ public interface ModelPackage extends EPackage {
 		EClass SCOPED_REIFIABLE_TOPIC_TYPE = eINSTANCE.getScopedReifiableTopicType();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.EStringToEStringMapImpl <em>EString To EString Map</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AnnotationImpl <em>Annotation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.EStringToEStringMapImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEStringToEStringMap()
+		 * @see de.topicmapslab.tmcledit.model.impl.AnnotationImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAnnotation()
 		 * @generated
 		 */
-		EClass ESTRING_TO_ESTRING_MAP = eINSTANCE.getEStringToEStringMap();
+		EClass ANNOTATION = eINSTANCE.getAnnotation();
 
 		/**
 		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
@@ -5760,7 +5758,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ESTRING_TO_ESTRING_MAP__KEY = eINSTANCE.getEStringToEStringMap_Key();
+		EAttribute ANNOTATION__KEY = eINSTANCE.getAnnotation_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -5768,7 +5766,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ESTRING_TO_ESTRING_MAP__VALUE = eINSTANCE.getEStringToEStringMap_Value();
+		EAttribute ANNOTATION__VALUE = eINSTANCE.getAnnotation_Value();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractRegExpTopicTypeImpl <em>Abstract Reg Exp Topic Type</em>}' class.

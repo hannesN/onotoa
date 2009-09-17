@@ -11,6 +11,7 @@ import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -46,8 +47,6 @@ import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
-
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -307,7 +306,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass eStringToEStringMapEClass = null;
+	private EClass annotationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1283,7 +1282,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTMCLConstruct_Extension() {
+	public EReference getTMCLConstruct_Annotations() {
 		return (EReference)tmclConstructEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1328,8 +1327,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEStringToEStringMap() {
-		return eStringToEStringMapEClass;
+	public EClass getAnnotation() {
+		return annotationEClass;
 	}
 
 	/**
@@ -1337,8 +1336,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEStringToEStringMap_Key() {
-		return (EAttribute)eStringToEStringMapEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAnnotation_Key() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1346,8 +1345,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEStringToEStringMap_Value() {
-		return (EAttribute)eStringToEStringMapEClass.getEStructuralFeatures().get(1);
+	public EAttribute getAnnotation_Value() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1559,7 +1558,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__SEE_ALSO);
 		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__COMMENT);
 		createEAttribute(tmclConstructEClass, TMCL_CONSTRUCT__DESCRIPTION);
-		createEReference(tmclConstructEClass, TMCL_CONSTRUCT__EXTENSION);
+		createEReference(tmclConstructEClass, TMCL_CONSTRUCT__ANNOTATIONS);
 
 		reifierConstraintEClass = createEClass(REIFIER_CONSTRAINT);
 
@@ -1568,9 +1567,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		scopedReifiableTopicTypeEClass = createEClass(SCOPED_REIFIABLE_TOPIC_TYPE);
 
-		eStringToEStringMapEClass = createEClass(ESTRING_TO_ESTRING_MAP);
-		createEAttribute(eStringToEStringMapEClass, ESTRING_TO_ESTRING_MAP__KEY);
-		createEAttribute(eStringToEStringMapEClass, ESTRING_TO_ESTRING_MAP__VALUE);
+		annotationEClass = createEClass(ANNOTATION);
+		createEAttribute(annotationEClass, ANNOTATION__KEY);
+		createEAttribute(annotationEClass, ANNOTATION__VALUE);
 
 		abstractRegExpTopicTypeEClass = createEClass(ABSTRACT_REG_EXP_TOPIC_TYPE);
 		createEAttribute(abstractRegExpTopicTypeEClass, ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP);
@@ -1597,8 +1596,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("deprecation")
-    public void initializePackageContents() {
+	public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 
@@ -1778,7 +1776,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTMCLConstruct_See_also(), ecorePackage.getEString(), "see_also", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTMCLConstruct_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTMCLConstruct_Description(), ecorePackage.getEString(), "description", null, 0, 1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTMCLConstruct_Extension(), this.getEStringToEStringMap(), null, "extension", null, 0, -1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTMCLConstruct_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, TMCLConstruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reifierConstraintEClass, ReifierConstraint.class, "ReifierConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1787,9 +1785,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(scopedReifiableTopicTypeEClass, ScopedReifiableTopicType.class, "ScopedReifiableTopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(eStringToEStringMapEClass, Map.Entry.class, "EStringToEStringMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEStringToEStringMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStringToEStringMap_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAnnotation_Key(), ecorePackage.getEString(), "key", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnnotation_Value(), ecorePackage.getEString(), "value", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractRegExpTopicTypeEClass, AbstractRegExpTopicType.class, "AbstractRegExpTopicType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractRegExpTopicType_RegExp(), ecorePackage.getEString(), "regExp", ".*", 1, 1, AbstractRegExpTopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

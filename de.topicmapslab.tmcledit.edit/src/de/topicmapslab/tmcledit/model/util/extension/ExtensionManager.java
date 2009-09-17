@@ -40,6 +40,7 @@ public class ExtensionManager {
 	private static final String ATT_ID = "id";
 	private static final String ATT_ClASS = "class";
 	private static final String ATT_NAME = "name";
+	private static final String ATT_INTERNAL = "internal";
 	private static final String ATT_VALIDATOR = "validator";
 	private static final String ATT_PROPOSALPROVIDER = "proposalprovider";
 	
@@ -74,6 +75,10 @@ public class ExtensionManager {
 			for (IConfigurationElement ce : confElemements) {
 				String id = ce.getAttribute(ATT_ID);
 				String name = ce.getAttribute(ATT_NAME);
+				boolean internal = false;
+				if (ce.getAttribute(ATT_INTERNAL)!=null)
+					internal = Boolean.parseBoolean(ce.getAttribute(ATT_INTERNAL));
+				
 				
 				IAnnotationValidator validator = null;
 				IAnnotationProposalProvider proposalprovider = null;
@@ -86,7 +91,7 @@ public class ExtensionManager {
 				if (clazz!=null)
 					proposalprovider = (IAnnotationProposalProvider) getInstance(ext, clazz);
 				
-				AnnotationProviderInfo info = new AnnotationProviderInfo(id, name, validator, proposalprovider);
+				AnnotationProviderInfo info = new AnnotationProviderInfo(id, name, internal, validator, proposalprovider);
 				tmp.add(info);				
 			}
 		}

@@ -13,6 +13,7 @@ package de.topicmapslab.tmcledit.model.util.io;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -149,7 +150,11 @@ class Test {
 		tt.setName("Person");
 		tt.getIdentifiers().add("foo:Person");
 		addType(schema, tt);
-		tt.getExtension().put("Hannes", "Rulz");
+		
+		Annotation a = ModelFactory.eINSTANCE.createAnnotation();
+		a.setKey("Hannes");
+		a.setValue("Rulz");
+		tt.getAnnotations().add(a);
 
 		SubjectIdentifierConstraint sic = fac.createSubjectIdentifierConstraint();
 		sic.setCardMin("1");

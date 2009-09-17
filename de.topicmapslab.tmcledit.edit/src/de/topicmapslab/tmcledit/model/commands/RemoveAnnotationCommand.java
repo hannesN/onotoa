@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 
 /**
@@ -22,23 +23,21 @@ public class RemoveAnnotationCommand extends AbstractCommand {
 
 	private final TMCLConstruct construct;
 
-	private final String key;
-	private final String value;
+	private final Annotation annotation;
 
-	public RemoveAnnotationCommand(TMCLConstruct construct, String key, String value) {
+	public RemoveAnnotationCommand(TMCLConstruct construct, Annotation annotation) {
 		super();
 		this.construct = construct;
-		this.key = key;
-		this.value = value;
+		this.annotation = annotation;
 	}
 
 	public void execute() {
-		construct.getExtension().removeKey(key);
+		construct.getAnnotations().remove(annotation);
 	}
 
 	@Override
 	public void undo() {
-		construct.getExtension().put(key, value);
+		construct.getAnnotations().add(annotation);
 	}
 
 	public void redo() {
@@ -47,7 +46,7 @@ public class RemoveAnnotationCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
-		if (value.equals(construct.getExtension().get(key)))
+		if (construct.getAnnotations().contains(annotation))
 			return true;
 
 		return false;

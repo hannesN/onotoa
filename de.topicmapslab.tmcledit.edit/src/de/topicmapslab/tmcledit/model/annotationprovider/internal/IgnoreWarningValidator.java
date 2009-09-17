@@ -19,13 +19,13 @@ import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
 public class IgnoreWarningValidator implements IAnnotationValidator {
 
 	public Class<?> getType() {
-		return Boolean.class;
+		return String.class;
 	}
 
 	public boolean isValid(Object obj) {
 		if (obj==null)
 			return false;
-		return obj instanceof Boolean;
+		return obj instanceof String;
 	}
 
 }

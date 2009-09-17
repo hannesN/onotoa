@@ -192,8 +192,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="see_also" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" upperBound="-1"
-        eType="#//EStringToEStringMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReifierConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReifiableTopicType" eSuperTypes="#//TopicType">
@@ -201,7 +201,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedReifiableTopicType" eSuperTypes="#//ScopedTopicType #//ReifiableTopicType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EStringToEStringMap" instanceClassName="java.util.Map$Entry">
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

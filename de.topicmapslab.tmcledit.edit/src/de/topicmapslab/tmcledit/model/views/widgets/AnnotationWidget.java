@@ -13,12 +13,12 @@ package de.topicmapslab.tmcledit.model.views.widgets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -53,6 +53,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.fieldassist.ContentAssistCommandAdapter;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationProposalProvider;
@@ -183,7 +184,7 @@ public class AnnotationWidget extends Composite {
 		layout.setColumnData(tc, new ColumnWeightData(1));
 
 		if (model != null)
-			viewer.setInput(model.getExtension().entrySet());
+			viewer.setInput(model.getAnnotations());
 	}
 
 	private void hookButtonListeners() {
@@ -219,16 +220,16 @@ public class AnnotationWidget extends Composite {
 		IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
 		if (sel.isEmpty())
 			return;
-		Entry<String, String> e;
+		Annotation a;
 		if (sel.size() == 1) {
-			e = (Entry<String, String>) sel.getFirstElement();
-			cmdStack.execute(new RemoveAnnotationCommand(model, e.getKey(), e.getValue()));
+			a = (Annotation) sel.getFirstElement();
+			cmdStack.execute(new RemoveAnnotationCommand(model, a));
 		} else {
 			CompoundCommand ccmd = new CompoundCommand();
 			Iterator it = sel.iterator();
 			while (it.hasNext()) {
-				e = (Entry<String, String>) it.next();
-				ccmd.append(new RemoveAnnotationCommand(model, e.getKey(), e.getValue()));
+				a = (Annotation) it.next();
+				ccmd.append(new RemoveAnnotationCommand(model, a));
 			}
 			cmdStack.execute(ccmd);
 		}
@@ -240,16 +241,27 @@ public class AnnotationWidget extends Composite {
 		do {
 			newCounter++;
 			key = "key" + newCounter;
-		} while (model.getExtension().get(key) != null);
+		} while (findAnnotation(key) != null);
 
 		cmdStack.execute(new CreateAnnotationCommand(model, key, "value"));
 		viewer.refresh();
 
 	}
 
+	private Annotation findAnnotation(String key) {
+		for (Annotation a : model.getAnnotations()) {
+			if (a.getKey().equals(key))
+				return a;
+		}
+		return null;
+	}
+	
 	public void setModel(Object model) {
 		if (this.model != null) {
 			this.model.eAdapters().remove(adapter);
+			for (Annotation a : this.model.getAnnotations()) {
+				a.eAdapters().remove(adapter);
+			}
 		}
 
 		if (!(model instanceof TMCLConstruct)) {
@@ -262,12 +274,15 @@ public class AnnotationWidget extends Composite {
 			return;
 
 		this.model.eAdapters().add(adapter);
+		for (Annotation a : this.model.getAnnotations()) {
+			a.eAdapters().add(adapter);
+		}
 		updateAnnotationList();
 	}
 
 	private void updateAnnotationList() {
 		if (viewer != null)
-			viewer.setInput(model.getExtension().entrySet());
+			viewer.setInput(model.getAnnotations());
 	}
 
 	private class AnnotationLabelProvider implements ITableLabelProvider {
@@ -276,12 +291,11 @@ public class AnnotationWidget extends Composite {
 			return null;
 		}
 
-		@SuppressWarnings("unchecked")
 		public String getColumnText(Object element, int columnIndex) {
-			Entry<String, String> e = (Entry<String, String>) element;
+			Annotation a = (Annotation) element;
 			if (columnIndex == 0)
-				return e.getKey();
-			return e.getValue();
+				return a.getKey();
+			return a.getValue();
 		}
 
 		public void addListener(ILabelProviderListener listener) {
@@ -332,24 +346,22 @@ public class AnnotationWidget extends Composite {
 
 		@Override
 		protected void setValue(Object element, Object value) {
-			Entry<String, String> e = cast(element);
-			cmdStack.execute(new ModifyAnnotationKeyCommand(model, (String) value, e.getKey()));
+			Annotation a = cast(element);
+			cmdStack.execute(new ModifyAnnotationKeyCommand(a, (String) value));
 		}
 
-		@SuppressWarnings( "unchecked")
-		private Entry<String, String> cast(Object e) {
-			return (Entry<String, String>) e;
+		private Annotation cast(Object e) {
+			return (Annotation) e;
 		}
 
 	}
 
 	private class KeyLabelProvider extends CellLabelProvider {
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public void update(ViewerCell cell) {
-			Entry<String, String> e = (Entry<String, String>) cell.getElement();
-			cell.setText(e.getKey());
+			Annotation a = (Annotation) cell.getElement();
+			cell.setText(a.getKey());
 		}
 
 	}
@@ -481,7 +493,7 @@ public class AnnotationWidget extends Composite {
 
 		@Override
 		protected void setValue(Object element, Object value) {
-			Entry<String, String> e = cast(element);
+			Annotation a = cast(element);
 			
 			if (value instanceof Boolean)
 				value = ((Boolean)value).toString();
@@ -495,23 +507,21 @@ public class AnnotationWidget extends Composite {
 				return;
 			}
 			
-			cmdStack.execute(new ModifyAnnotationValueCommand(model, e.getKey(), (String) value));
+			cmdStack.execute(new ModifyAnnotationValueCommand(a, (String) value));
 		}
 
-		@SuppressWarnings("unchecked")
-		private Entry<String, String> cast(Object e) {
-			return (Entry<String, String>) e;
+		private Annotation cast(Object e) {
+			return (Annotation) e;
 		}
 		
 	}
 
 	private class ValueLabelProvider extends CellLabelProvider {
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public void update(ViewerCell cell) {
-			Entry<String, String> e = (Entry<String, String>) cell.getElement();
-			cell.setText(e.getValue());
+			Annotation a = (Annotation) cell.getElement();
+			cell.setText(a.getValue());
 		}
 
 	}
@@ -522,6 +532,24 @@ public class AnnotationWidget extends Composite {
 			if (msg.getEventType() == Notification.REMOVING_ADAPTER)
 				return;
 
+			if (msg.getNotifier().equals(model)) {
+				if (msg.getEventType() == Notification.ADD) {
+					EObject obj = (EObject) msg.getNewValue();
+					if (obj!=null)
+						obj.eAdapters().add(adapter);
+				}
+				if (msg.getEventType() == Notification.REMOVE) {
+					EObject obj = (EObject) msg.getOldValue();
+					if (obj!=null)
+						obj.eAdapters().add(adapter);
+				}
+			}
+			
+			if (msg.getNotifier() instanceof Annotation) {
+				viewer.refresh(msg.getNotifier());
+				return;
+			}
+			
 			viewer.refresh();
 		}
 	}

@@ -6,14 +6,16 @@ import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
 public class AnnotationProviderInfo {
 	private String id;
 	private String name;
+	private boolean internal;
 	private IAnnotationValidator validator;
 	private IAnnotationProposalProvider porposalProvider;
 	
-	public AnnotationProviderInfo(String id, String name, IAnnotationValidator validator,
+	public AnnotationProviderInfo(String id, String name, boolean internal, IAnnotationValidator validator,
             IAnnotationProposalProvider porposalProvider) {
 	    super();
 	    this.id = id;
 	    this.name = name;
+	    this.internal = internal;
 	    this.validator = validator;
 	    this.porposalProvider = porposalProvider;
     }
@@ -22,6 +24,10 @@ public class AnnotationProviderInfo {
     	return id;
     }
 
+	public boolean isInternal() {
+	    return internal;
+    }
+	
 	public String getName() {
     	return name;
     }
