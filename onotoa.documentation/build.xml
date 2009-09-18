@@ -99,6 +99,12 @@
 						 reference toc,title
 						 section   nop
 						 set       toc" />
+			<param name="formal.title.placement" expression="
+				figure after
+				example before
+				equation after
+				table before
+				procedure before"/>
 		</xslt>
 
 		<copy todir="${doc.docbook.html}">
@@ -121,7 +127,7 @@
 	
 	<target name="docbook.pdf" depends="clean.pdf,depends, docbook" description="Generate PDF file from docbook XML">
 		<property name="fop.home" value="lib/fop-0.95" />
-		<xslt style="${fo.stylesheet}" extension=".fo" basedir="${doc.docbook}" destdir="${build.fo}">
+		<xslt style="${fo.stylesheet}" extension=".fo" basedir="${doc.docbook}" destdir="${build.fo}" >
 			<param name="paper.type" expression="${paper.type}" />
 			<classpath refid="xalan.classpath" />
 			<include name="${filename}.xml" />
@@ -138,6 +144,14 @@
 			 reference toc,title
 			 section   nop
 			 set       toc" />
+			<param name="formal.title.placement" expression="
+				figure after
+				example before
+				equation after
+				table before
+				procedure before"/>
+			<param name="fop1.extensions" expression="1"/>
+			<param name="double.sided" expression="1"/>
 		</xslt>
 
 		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
@@ -152,7 +166,8 @@
 			</classpath>
 		</taskdef>
 
-		<fop format="application/pdf" basedir="${doc.docbook}" fofile="${build.fo}/${filename}.fo" outfile="${doc.docbook.pdf}/${filename}.pdf" />
+		<fop format="application/pdf" basedir="${doc.docbook}" fofile="${build.fo}/${filename}.fo" outfile="${doc.docbook.pdf}/${filename}.pdf" >
+		</fop>
 	</target>
 
 	<!-- XSLT Chunking Properties -->

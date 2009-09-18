@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.model.psiprovider.internal;
 
 
 import java.io.StringReader;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,9 +87,11 @@ public class Subj3ctPSIProvider extends PSIProvider {
         } catch (UnknownHostException e) {
         	// no http connection -> no results
         	return Collections.emptySet();
+        } catch (SocketTimeoutException e) {
+        	// timeout -> no results
+        	return Collections.emptySet();
     	} catch (Exception e) {
             throw new RuntimeException(e);
-            
         } finally {
         	if (method != null)
         		method.releaseConnection();
