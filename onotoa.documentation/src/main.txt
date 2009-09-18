@@ -28,9 +28,9 @@ include::requirement.txt[]
 
 include::getting_started.txt[]
 
-include::modelview.txt[]
-
 include::properties.txt[]
+
+include::modelview.txt[]
 
 include::diagram.txt[]
 

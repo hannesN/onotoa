@@ -37,7 +37,7 @@ public class CreateTopicAction extends AbstractTreeListenerAction {
 	public void setKindOfTopicType(KindOfTopicType kindOfTopicType) {
 		this.kindOfTopicType = kindOfTopicType;
 		if (kindOfTopicType != null)
-			setText("Create " + kindOfTopicType.getName());
+			setText("Create " + kindOfTopicType.getName()+"...");
 		setEnabled();
 	}
 

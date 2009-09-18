@@ -45,8 +45,8 @@ image::images/create_diagram_ctx.png[scaledwidth="60%"]
 
 The context menu of a diagram node has two entries:
 
-* Rename... Opens a dialog to rename the diagram.
-* Delete Deletes the diagram and it's content. 
+* *Rename...* Opens a dialog to rename the diagram.
+* *Delete* Deletes the diagram and it's content. 
 
 NOTE: The deletion of the diagram does not delete the schema elements, which are represented in the diagram.
 
@@ -56,24 +56,69 @@ A Topic Maps schema consists of topic types and their specializations and constr
 The *Model View* groups the elements of the schema by the topic type. The main node of the Topic Maps schema is labelled as
 'Topic Map Schema'. It represents the current schema. If you select it, the property page of the schema is shown in the
 *Property Details View* which provide an input mask for the schema name and a base locator. For more information see
-<<_diagram_and_topic_map_schema>>
+<<_diagram_and_topic_map_schema>>.
 
-TIP: Set a base locator before you start creating any topic type, to automatically create subject identifiers. 
  
 With the *Model View* it is possible to create almost every schema element, by using the context menu of the different nodes. 
-Analog to the creation of diagrams, new topic types can be created in the *Model View*.For instance to create a new topic type,
-just select 'TopicTypes' in the *Model View* and choose 'Create Topic Type...'. A new wizard will open, where the name of the type, 
-a subject identifier or a subject locator can be entered.
+The properties of new elements can be edited by selecting them and fill out their property page in the *PropertyDetails Views*.
+The first a user should do is selecting the property page of the node 'Topic Map Schema'. Especially the property *base locator* is
+getting handy while creating new topic types. Select the node 'Topic Map Schema' and enter the URL "http://onotoa.topicmapslab.de/example" . 
+
+After setting the base locator it's time to create some topic types. Mostly you only need to create the topic types of you schema. 
+Although it is possible, it is not necessary to create name, association, occurrence or role types.
+These specializations of topic type can be created on demand in the property pages.
+
+To create a new topic type person, use the context menu of the node 'Topic Type'. Choose 'Create TopicType...' and a dialog opens to 
+create a new topic type, like in  <<new_topic_type>>.
 
 .New Topic Type Wizard
-image::images/new_tt_dialog.png[scaledwidth="80%"]
+[[new_topic_type]]
+image::images/new_tt_dialog.png[scaledwidth="100%"]
 
 Right now _Onotoa_ only supports one name per Topic. When the topic is used to type a constraint, the name is visualized therefor _Onotoa_ 
-forbids topics with the same name. If a base locator for the Topic Maps schema is set, a subject locator is related using this base locator
-and the name of the topic type. Another tool to create subject identifiers is presented later.
+forbids topics with the same name. If the schema has a base locator, which it should have right now, you'll realize, that the subject identifier
+textfield is automatically filled with the URL created with the base locator.
 
-By selecting the different elements in the *Model View*, an input mask is activated in the *Property Details View* which is explained in the
-following section.
+Enter the name "Person" and you'll see the topic gets a subject identifier which is "http://onotoa.topicmapslab.de/example/person".
+You may change the identifier by editing the subject identifier textfield. After modifying the subject identifier it won't be changed when you
+change the name anymore. You may recognize while typing a popup window occurs, which show a list of proposals for you're subject identifier. You can navigate
+through the list with the up and down keys. Select one by pressing Enter. The proposals are filtered by the text you already wrote. If you entered
+"http://psi" only identifier starting with that text will be in the proposal list. 
 
-NOTE: Using the context menu to create a constraint, creates a new constraint with default properties. To 
-change the properties use the *Property Details View*.
+
+.Create Person Topic Type
+[[new_person_type]]
+image::images/newperson_dialog.png[scaledwidth="100%"]
+
+Their are different proposal provider installed in _Onotoa_:
+
+* The first is the *Basic Provider*. This provider checks all used subject identifier in the topic map schema and proposes the prefixes of that
+URLs. For instance if you already has a topic type with the subject identifier "http://example.org/topictype" the URL "http://example.org" is 
+proposed.
+* The *Subje3ct PSI Provider* uses the PSI platform http://www.subj3ct.com . This platform provides a psi repository, where you can get a set 
+of subject identifiers after you entered a search string. _Onotoa_ uses the name of the topic type and asks for subject identifiers.
+
+NOTE: Sometimes the connection to the subj3ct server is to slow to get results before the timeout. Therefor it may happen that you get a shorter
+proposal list before you restart the filtering by entering another letter in the subject identifier textfield.
+
+After the topic "Person" was created it is possible to add some constraints to the type. The context menu provides the following entries:
+
+* *Rename...:* Opens a dialog to rename the topic type. This is an alternative to the name field in the property page of the topic type.
+
+* *Delete:* Deletes the topic type. This removes all topic representations in all the diagrams of the schema, too.
+
+* *Create Name Constraint:* Creates a new name constraint, using the default name-type, specified by the TMDM and the default cardinality
+which is 0..* .
+
+* *Create Occurrence Constraint:* Creates a new occurrence constraint, using the tmdm:subject as type, specified by the TMCL standard and the default cardinality
+which is 0..* .
+
+* *Create Subject Identifier Constraint:* Creates a new subject identifier constraint, using the default cardinality which is 0..* .
+
+* *Create Subject Locator Constraint:* Creates a new subject locator constraint, using the default cardinality which is 0..* .
+
+After creating a constraint, you can expand the type node and the constraints of that type are shown as child nodes of the topic type node.
+To edit the properties of a new created constraint, select it in the *Model View* and the property page of that constraint is opend
+in the *Property Details View*.
+
+

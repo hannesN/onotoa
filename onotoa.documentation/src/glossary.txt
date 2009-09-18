@@ -61,6 +61,15 @@ Subject Identifier Constraint::
 Subject Locator Constraint::
 	The subject locator constraints specifies the number of locator a topic type may have. It also has a property which defines the 
 	syntax of the locator using a regular expression.
+
+TMCL::
+	The Topic Maps Constraint Language is the specification of the schema language for Topic Maps. See http://www.isotopicmaps.org/tmcl for
+	more information.
+		
+TMDM::
+	The Topic Maps Data Model is the specification of the standard Topic Maps. See http://www.isotopicmaps.org/sam/sam-model/ for
+	more information.
+	
 		
 Topic Maps Schema::
 	A Topic Maps Schema is a description of the form of a topic map. It consists of topic type and 

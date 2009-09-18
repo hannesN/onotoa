@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema baseLocator="http://onotoa.topicmapslab.de/example">
+        <topicType kind="TopicType">
+            <name>Person</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/person</subjectIdentifier>
+        </topicType>
+    </schema>
+</file>
