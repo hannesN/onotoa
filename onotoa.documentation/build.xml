@@ -83,7 +83,7 @@
 	      -     .xml files into .html files using the DocBook XSL.
 	      -->
 	<target name="docbook.html" depends="clean.html, docbook" description="Generates HTML files from DocBook XML">
-		<xslt style="${html.stylesheet}" extension=".html" basedir="${doc.docbook}" destdir="${doc.docbook.html}">
+		<xslt  style="${html.stylesheet}" extension=".html" basedir="${doc.docbook}" destdir="${doc.docbook.html}">
 			<classpath refid="xalan.classpath" />
 			<include name="${filename}.xml" />
 			<param name="html.stylesheet.type" expression="text/css" />
@@ -92,7 +92,7 @@
 						 appendix  nop
 						 article   toc,title
 						 book      toc,title,figure,table,example,equation
-						 chapter   toc
+						 chapter   nop
 						 part      nop
 						 preface   nop
 						 qandadiv  nop
@@ -106,6 +106,7 @@
 				equation after
 				table before
 				procedure before"/>
+			<outputproperty name="encoding" value="UTF-8"/>
 		</xslt>
 
 		<copy todir="${doc.docbook.html}">
@@ -167,7 +168,10 @@
 			</classpath>
 		</taskdef>
 
-		<fop format="application/pdf" basedir="${doc.docbook}" fofile="${build.fo}/${filename}.fo" outfile="${doc.docbook.pdf}/${filename}.pdf" >
+		<fop messagelevel="debug" format="application/pdf" basedir="${doc.docbook}" outfile="${doc.docbook.pdf}/${filename}.pdf" >
+			 <fileset dir="${build.fo}">
+				<include name="*.fo"/>
+			</fileset>
 		</fop>
 	</target>
 

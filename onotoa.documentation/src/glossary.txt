@@ -47,6 +47,9 @@ Occurrence Constraint::
 Occurrence Type::
 	An occurrence type is specialized topic type. Only instances of an occurrence type should be used to type an occurrence.
 
+Perspective::
+	A perspective defines what views are shown in eclipse and where they are located.
+
 Role Constraint::
 	A role constraint specifies, which role type and cardinality belongs to an association type. This means any association of that type must
 	have a number of roles within the range specified in the constraints cardinality. 	

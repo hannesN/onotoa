@@ -39,10 +39,13 @@ TIP: You can check the your java version by opening a shell and enter 'java -ver
 
 === Using the standalone version of _Onotoa_ ===
 
-After downloading the file zip file for your system and unzipping it you should have
-a *onotoa* folder. This includes a binary file (e.g. onotoa.exe for Windows(TM) or Onotoa.app on MacOS(TM)).
+_Onotoa_ does not come with a installer. You just need to download the file for your system. For instance for 
+Windows(TM) you'll need 'onotoa-1.1.0-win32.win32.x86.zip'. If you have a 64bit Windows(TM) download 'onotoa-1.1.0-win32.win32.x86_64.zip'.
 
-After starting _Onotoa_ you should see the main window, like in <<empty_win>>.
+After downloading the file for your system you'll need to unzip it. The zip file contains a folder named 'onotoa' so it is not necessary to
+create one. After you unzipped the archive you should find an executable for your platform This includes a binary file (e.g. onotoa.exe for Windows(TM) or Onotoa.app on MacOS(TM)).
+
+Start _Onotoa_ and after a short loading time you should see the main window, like in <<empty_win>>.
 
 .Empty _Onotoa_ window
 [caption="Figure:"]
@@ -59,6 +62,22 @@ Choose the path of the file and name it *example.ono*. After that your window sh
 image::images/emptyfilewin.png["_Onotoa_ window after creating a file", scaledwidth="100%"]
 
 === Using the plugin version of _Onotoa_ ===
+
+It is possible to install the _Onotoa_ plugins into an existing eclipse installation. You need eclipse 3.5 (Galileo) for _Onotoa_. 
+
+I assume you have a working installation of eclipse. Choose *Help->Install New Software...* and enter  'http://onotoa.topicmapslab.de/update' into the textfield
+next to *Work with:*. Press enter and the content of the update site will shown (see <<updatemanager>>).
+
+. Update Manager of Eclipse 3.5
+[caption="Figure:"]
+[[updatemanager]]
+image::images/update_manager.png["Update Manager", scaledwidth="100%"]
+
+To create Topic Maps schemas it is only necessary to install the 'Onotoa PLugins'. If you want to export to CTM or import existing CTM files you need to install the Imnport
+feature or export plugins. Both need the tinyTiM feature, so you need to install this to.
+Choose the features you want to install (we advise to install all) and click on *Finish*. After the dependencies are checked you should agree to
+the licence agreements and after the installation restart eclipse.
+
 
 After installing the needed _Onotoa_ features, create a new file. Use the context menu entry *New*, choose *Other* and select 
 *New Onotoa File* in the category *Onotoa*. 
