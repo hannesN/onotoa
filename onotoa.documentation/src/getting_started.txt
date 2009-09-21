@@ -1,5 +1,5 @@
 == Getting started == 
-
+[[start]]
 
 TODO: Describe the goal of this chapter.
 Describe the outline of this chapter.

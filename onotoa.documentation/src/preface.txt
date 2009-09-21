@@ -1,0 +1,64 @@
+
+//////////////////
+TODO: The Preface must be extended. It must explain what Onotoa is, who is the target group and 
+why someone should use the editor.
+
+Furthermore we need an outline of the whole handbook in the preface.
+/////////////////
+
+The Topic Maps standard is a ISO standard (ISO 13250), which defines a representation of meta informations. 
+These informations can be the name of the author of an document or the artist and album of an music file. 
+These informations are mainly stored as so called topics. A topic represents a specific subject. This topic has 
+one ore more identifier. It can be typed, using a topic representing a type. So could be the topic representing
+"Max Powers" be typed with a topic representing the concept of persons.
+
+Topics may have names, which can be typed, via another topic. Additionally occurrences can be added to topics.
+These occurrences represent an additional information of the subject, for instance the c.v. of the person "Max
+Powers". These occurrences have a type, which is a topic too and a datatype. This datatype specifies the kind 
+of information and is usually set to a datatype of the XML schema specification 
+(see http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/).
+
+Topics can be in an relationship, which are represented by associations. These associations use topics to
+type the kind of relationship, for instance the an association typed with a topic representing working for 
+something or someone could be used to say, that a topic representing a person works for a company, which is 
+represented by another topic. Additionally any topic which is part of an association gets another topic, which 
+represents the role. In the association "works for" the person play the role of the "employee" and the company plays
+the role of the "employer". You can see it is very intuitive to model somtehing like: 'The person Max Powers works for the
+Mighty Corporation.' by just defining topics for the roles, the players and the association.
+
+Associations, names and occurrences can be scoped. This means, using topics to set a specific area of validity.
+Mostly this is used to set the language of names or occurrences. With that it is possible to add multiple names to
+a topic which are translations and add the scope, which is a topic representing the topic. 
+
+You can model anything in topic maps. Mostly adding new data to an existing topic map, a sort of input mask is created
+to omit that the editor can change the ontology of the topic map. For instance a topic map containing the employees of a certain
+company should not contain topics representing the company cars. To define the content of the topic map a schema is needed.
+Some engines provide a proprietary schema language, where you define the topic map in the engine specific way. To change the engine
+would mean to recreate the schema. 
+
+To omit this work the working group specifying the Topic Maps standard created a new language: the Topic Maps Constraint Language (TMCL, ISO 19756).
+The TMCL is not a new language, but a definition of topics and association and the specification, how to interpret them. Right now the TMCL
+is in its final draft (see http://isotopicmaps.org/tmcl/). In addition to the topics, TMCL specifies a set of templates for the Compact Topic 
+Maps Notation (CTM, see http://isotopicmaps.org/ctm/ctm.html). With the help of these templates it is possible to create a schema via any text editor.
+
+_Onotoa_ is an editor for TMCL. But instead of editing a text file, _Onotoa_ let you create the schema in a visual editor. The
+visualization is based on the GTM level 1 standard (see http://isotopicmaps.org/gtm/). This standard is far from finalized, so
+some changes had to be made. With _Onotoa_ it is possible to create schemas visually. As the old saying "a picture says more than thousand words" states,
+having a diagram which is easy to understand is more clearer than having hundreds of line of CTM text. In _Onotoa_ you can export the schema to CTM,
+so if you want to have the CTM using the TMCL templates, you can create them. It also is possible to import a CTM schema, so you can reuse you're
+already created schemas and after that create some diagrams. 
+
+_Onotoa_ is based on the popular eclipse platform (see http://www.eclispe.org).
+
+This handbook will explain the functionality of _Onotoa_. 
+In <<_getting_started>> what is needed to install _Onotoa_ will be explained.
+This chapter also introduces the different parts of _Onotoa_ and shows how to create the first diagram.
+
+In <<_property_details_view>> the input masks for all editable elements be explained. It also explains the elements, there properties and
+their relationship to TMCL.
+
+The <<_the_model_view>> explains the part of \_Onotoa\_ which provides an overview of the topic map schema. It provides some functionality, like the
+creation deletion of elements. These are explained in this chapter.
+
+The visual editor will be explained in <<_the_diagram_editor>>. Not only will the functions for creating and deleting elements explained, the 
+visualization of the schema elements is explained in details.

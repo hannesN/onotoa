@@ -220,6 +220,7 @@
 		<exec executable="python">
 			<arg value="${asciidoc}"/>
 			<arg value="-v" />
+			<arg value="-n" />
 			<arg value="-a" />
 			<arg value="toc" />
 			<arg value="-d" />
