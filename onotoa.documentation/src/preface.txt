@@ -1,10 +1,4 @@
-
-//////////////////
-TODO: The Preface must be extended. It must explain what Onotoa is, who is the target group and 
-why someone should use the editor.
-
-Furthermore we need an outline of the whole handbook in the preface.
-/////////////////
+== Preface ==
 
 The Topic Maps standard is a ISO standard (ISO 13250), which defines a representation of meta informations. 
 These informations can be the name of the author of an document or the artist and album of an music file. 

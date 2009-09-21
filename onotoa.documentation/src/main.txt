@@ -3,11 +3,6 @@ Onotoa Handbook
 Hannes Niederhausen <niederhausen@informatik.uni-leipzig.de>
 v0.2, September 2009: Initial draft extended
 
-//////////////////
-Preface
-=======
-//////////////////
-
 include::preface.txt[]
 
 /////////////////////////////
