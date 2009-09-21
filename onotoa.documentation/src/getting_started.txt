@@ -1,8 +1,7 @@
 == Getting started == 
-[[start]]
 
-TODO: Describe the goal of this chapter.
-Describe the outline of this chapter.
+In this chapter we explain how to get _Onotoa_ and what is needed to start it. Afterwards you can find a short description of the parts  _Onotoa_.
+After following the instructions in this chapter you should have a working installation of _Onotoa_ and created your first diagram. 
 
 === The website of the _Onotoa_ project ===
 
@@ -36,7 +35,7 @@ As described below in more detail, there are two ways to install _Onotoa_:
 
 As requirement, the Java Runtime Environment Version 5.0 must be installed to run _Onotoa_. The latest Java Version can be downloaded for free (http://java.sun.com).
 
-TIPP: @Hannes TODO: describe, how to check that Java is installed correctly
+TIP: You can check the your java version by opening a shell and enter 'java -version'. Windows(TM) user open the shell by executing the command 'cmd'.
 
 === Using the standalone version of _Onotoa_ ===
 

@@ -15,8 +15,6 @@ Using Onotoa
 ============
 /////////////////////////////
 
-include::requirement.txt[]
-
 include::getting_started.txt[]
 
 include::properties.txt[]

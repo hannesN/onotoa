@@ -1,7 +1,8 @@
 <project basedir="." name="Onotoa Documentation" default="html">
 
-	<property file="build.properties"/>
+	<!-- <property file="build.properties"/>-->
 	
+	<property name="asciidoc" value="lib/asciidoc/asciidoc.py" />
 	<property name="filename" value="doc" />
 	<property name="src" value="src/main.txt" />
 	<property name="doc" value="doc" />
