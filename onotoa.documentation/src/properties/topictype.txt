@@ -1,9 +1,15 @@
 === Topic Type ===
-[[topictype_pp]]
-Every type in TMCL is instance of topic-type, which means they all share a minimum of properties. The property page of
-a 'TopicType' can be seen in the Figure below:
 
-.Property Page of 'TopicType'
+'Topic Type' is a topic, which specifies that a topic, which is instance of topic type is used as type
+in a type-instance relationship. A schema defines topic types, their names and occurrences and their relationship. Every type
+in a schema is instance of topic type, despite types which are used as names, roles or occurrence type.
+
+Every type in TMCL is instance of topic-type, which means they all share a minimum of properties. The property page of
+a 'Topic Type' can be seen in <<tt_pp>>:
+
+.Property Page of 'Topic Type'
+[caption=Figure:]
+[[tt_pp]]
 image::images/topictype_pp.png[align="center", scaledwidth="100%"]
 
 A 'Topic Type' has the following properties:
@@ -11,31 +17,33 @@ A 'Topic Type' has the following properties:
 * *name:* The name of the 'Topic Type'. Although the TMDM permits having different Topics with the same name, _Onotoa_ forbids that. 
 The name of the type is also unscoped  and of type _tmdm:default-name_.
 
-* *subject identifier:* The subject identifier are a set of IRI. The list of the identifier can be modified by using pressing *...* 
+* *subject identifier:* The subject identifier are a set of IRI. The list of the identifier can be modified by pressing the button labelled *...* 
 and use the 'Subject Identifier Dialog'. This list may be empty.
 
 .Subject Identifier Dialog
 image::images/si_dialog.png[scaledwidth="40%"]
 
-* *subject locator:* Similiar to subject identifiers contains a 'Topic Type' a list of IRIs representing the subject locators of the topic. 
-This list can be edited by using the dialog opend by *...*. It looks like the Subject Identifier Dialog. The list may be empty too.
+* *subject locator:* Similar to subject identifiers contains a 'Topic Type' a list of IRIs representing the subject locators of the topic. 
+This list can be edited by using the dialog opened by pressing the button labelled *...*. It looks like the Subject Identifier Dialog. 
+The list may be empty too.
 
 * *is a:* This property is a list of 'Topic Types' which type the current topic. In the diagram view this is represented by a connection 
-between the topics. The property  page renders a comma seperated list of names of the typinf topics. To add or remove the topic, press 
+between the topics. The property  page renders a comma separated list of names of the typing topics. To add or remove the topic, press the button labelled 
 *...* and a dialog opens. On the left side is a list of 'Topic Types' which are not used as type, on the right is the list of types used. 
 With the help of the buttons in the middle it is possible to move a type to the other side.
 
-* *kind of:* This is a list of topics which are super types of the current 'Topic Type'. Editing this list is similiar to the is a property.
+* *kind of:* This is a list of topics which are super types of the current 'Topic Type'. Editing this list is similar to the *is a* property.
 
 * *overlap:* In TMCL topics are defines as types, which are used as types for instances in a topic map. Per default, a topic may not be type
 of two 'Topic Types' at the same time, for instance a topic should no be of type `Person` and `Car`. To explicitly allow this, the overlap
-property is used. It contains a list of 'Topic Types' like is a or kind of. Editied is the list with the same dialog like is a. The list 
+property is used. It contains a list of 'Topic Types' like is a or kind of. Edited is the list with the same dialog like is a. The list 
 contains all 'Topic Types' which may be used in an type-instance relationship. For instance to allow a topic to be type of `Car` and `Person`
-just add `Car`to the overlap property of `Person`. _Onotoa_ automaticly adds `Person` to the overlap property of `Car`.
+just add `Car` to the overlap property of `Person`. _Onotoa_ automatically adds `Person` to the overlap property of `Car`.
 
-* *is abstract:* A 'Topic Type' may be used as type or super type. To forbid that the 'Topic Type' may be used as type, check the is abstract button,
+* *is abstract:* A 'Topic Type' may be used as type or supertype. To forbid that the 'Topic Type' may be used as type, check the is abstract button,
 which sets this property to true. This means the 'Topic Type' may be used as supertype in a supertype-subtype relationship, but not as type in
 a type-instance relationship.
 
 .Topic Selection Dialog
+[caption=Figure:]
 image::images/isa_selection.png[scaledwidth="60%"]

@@ -1,0 +1,18 @@
+== Preferences ==
+
+In this chapter the preferences if _Onotoa_ will be explained.
+
+=== Proposal Provider ===
+
+You can deactivate proposal provider you don't want to use.
+
+=== Update ===
+
+Add update sites and activate automatic update and so on...
+
+=== Change Diagram Colors ===
+
+* How to create a new color scheme.
+* What is a color scheme?
+* import and export of scheme 
+

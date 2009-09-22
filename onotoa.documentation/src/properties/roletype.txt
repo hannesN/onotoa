@@ -1,6 +1,9 @@
 === Role Type ===
 
-A 'Role Type' inherits the properties  of 'Topic Type' (see <<topictype_pp, 'Topic Type' properties>>).
+A 'Role Type' is used to specify if a topic type is used to specify a role. Every topic which is used as role has to be of the type
+'Role Type'.
+
+A 'Role Type' inherits the properties  of 'Topic Type' (see <<_topic_type, 'Topic Type' properties>>).
 
 
 .Property Page of 'Role Type'

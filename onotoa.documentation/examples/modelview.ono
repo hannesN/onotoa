@@ -2,8 +2,10 @@
 <file version="1.0.0" xmlns="onotoa.topicmapslab.de">
     <schema baseLocator="http://onotoa.topicmapslab.de/example">
         <topicType kind="TopicType">
+            <annotation key="activetm.attributename" value="Prefix10"/>
             <name>Person</name>
             <subjectIdentifier>http://onotoa.topicmapslab.de/example/person</subjectIdentifier>
         </topicType>
     </schema>
+    <diagram name="test"/>
 </file>

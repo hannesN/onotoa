@@ -22,6 +22,9 @@ Diagram::
 	A diagram is a view of the Topic Maps schema. It consists of graphical representation of schema elements
 	and connects them if they have a relationship, e.g. the supertype-subtype relationship.
 
+Diagram Element::
+	A diagram element is any element which is part of the diagram. Basically a diagram element is the visualization of a schema element. 
+	
 Model::
 	The set of schema and diagram elements is called the model.
 
@@ -49,6 +52,9 @@ Occurrence Type::
 
 Perspective::
 	A perspective defines what views are shown in eclipse and where they are located.
+
+Schema Element::
+	A schema element is an element in the schema like a topic or role type, or any constraint added to the schema element.
 
 Role Constraint::
 	A role constraint specifies, which role type and cardinality belongs to an association type. This means any association of that type must

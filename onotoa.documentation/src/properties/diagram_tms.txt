@@ -1,16 +1,27 @@
-=== Diagram and Topic Map Schema ===
+=== Diagram ===
 
-A diagram has only one property: its name. This name can be changed in the property page of the selected diagram. 
-A diagram is selected in the *Model View* or if you click on an empty place in the opened diagram.
-A diagram contains all informations of the graphical represention of the schema elements, which are modified in the 
-diagram editor.
+The diagram has only one property:
+
+* *Name:* The name of the diagram. It is a unique identifier in a schema, which means you can not create two diagrams with the same name.
+
+You can edit the name by modifying the value in the textfield in the property page. If you enter a name which is already used, a red icon will appear on the left side,
+and the name won't be changed, when the focus is lost.  
+
 
 .Property Page of 'Diagram'
 image::images/diagram_pp.png[scaledwidth="100%"]
 
+=== Topic Map Schema ===
+
 Another top level element is the 'TopicMapSchema'. This element contains all the elements of the schema, despite the graphical 
-representations. The 'TopicMapSchema' has only two properties: a name and a base locator. Both properties may be unset, but it is
-advised to set a base locator for automatic creation of subject identifiers. 
+representations. 
+
+The properties of a 'TopicMapSchema' are:
+* *Name:* The name of the schema.
+* *Base Locator* The base locator, used for automatic subject identifier generation. 
+
 
 .Property Page of 'TopicMapSchema'
 image::images/tmschema_pp.png[scaledwidth="100%"]
+
+Both properties are optional.

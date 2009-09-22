@@ -1,17 +1,24 @@
 === Occurrence Type ===
 
-A 'Occurrence Type' inherits the properties  of 'Topic Type' (see <<topictype_pp, 'Topic Type' properties>>).
-In addition it has the following properties.
+An 'Occurrence Type' is used to specify which topics may be used to type an occurrence. In a topic map, a topic may have more than one occurrences.
+Their meaning is realized by using topics, for instance the topic 'content' in a topic 'document'. These topics should be typed with occurrence type.
+The TMCL standard says, that any type of an occurrence which is not instance of 'occurrence-type' is invalid.
+
+Like 'Name Types' 'Occurrence Types' can be reified and scoped.
 
 .Property Page of 'Occurrence Type'
 image::images/occtype_pp.png[scaledwidth="100%"]
 
+A 'Occurrence Type' inherits the properties  of 'Topic Type' (see <<_topic_type, 'Topic Type' properties>>).
+In addition it has the following properties.
+
 * *unique:* If this is *true* the TMCL validator will check if the value of occurrences of this type is unqie in 
 the topic map. This means two topics with occurrences of this type may not have the same value. The unique constraint is
-activated by selecting the check box.
+activated by selecting the check box. Per default this property is false.
 
 * *datatype:* It is possible to set the datatype of the occurrence value. Although it is possible to enter your own 
-type definition URI it is advised to use the XML schema datatypes. These are slectable by the dialog opened with *...*.
+type definition URI it is advised to use the XML schema datatypes. These are selectable by the dialog opened with the button labelled *...*.
+If no datatype is set, 'xsd:anyType' is used, which means every content is valid.
 
 * *reg. exp:* This regular expression is used to define the form of the content of the name. 
 

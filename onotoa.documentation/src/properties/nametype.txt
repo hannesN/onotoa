@@ -1,14 +1,21 @@
 === Name Type ===
 
-A 'Name Type' inherits the properties  of 'Topic Type' (see <<topictype_pp, 'Topic Type' properties>>).
-In addition it has the following properties.
+A 'Name Type' is used to specify which topics may be used to type a name. In a topic map, a topic may have more than one names.
+Their meaning is realized by using topics, for instance the topic 'firstname'. These topics should be typed with name type.
+The TMCL standard says, that any type of a name which is not instance of 'name-type' is invalid.
 
+Names can be reified, which means a topic is used to add more information to the name, like who gave it, what does it mean and so on.
+The topic which may reify names using this name-type can be specified in the reifier property.
+
+It is also possible to add a scope to names of topics. With the *scope* property you can tell which topics may be used as scope and how often.
 
 .Property Page of 'Name Type'
 image::images/nametype_pp.png[scaledwidth="100%"]
 
+A 'Name Type' inherits the properties  of 'Topic Type' (see <<_topic_type, 'Topic Type' properties>>).
+In addition it has the following properties.
 
-* *reg. exp:* This regular expression is used to define the form of the content of the name. 
+* *reg. exp:* This regular expression is used to define the syntax of the content of the name. 
 
 * *reifier:* It is possible to define which topic may reifier names using the current type. Check the 
 button `has reifier constraint` and choose in the selection box below if the constraint forbids 

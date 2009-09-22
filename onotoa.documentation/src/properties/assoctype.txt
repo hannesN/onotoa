@@ -1,12 +1,18 @@
 === Association Type ===
 
-A 'Association Type' inherits the properties  of 'Topic Type' (see <<topictype_pp, 'Topic Type' properties>>).
-In addition it has the following properties.
+An 'Association Type' is used to define a type for an association, for instance 'worksFor'. Using a topic which is not instance
+of 'association-type' is invalid.
 
+In addition an 'Association Type' is related to a set of 'Role Types'. These define which roles may be used when an asssociation of
+this type is created. 
+
+Like names and occurrences asssociation may be reified and scoped.
 
 .Property Page of 'Association Type'
 image::images/assoctype_pp.png[scaledwidth="100%"]
 
+A 'Association Type' inherits the properties  of 'Topic Type' (see <<_topic_type, 'Topic Type' properties>>).
+In addition it has the following properties.
 
 * *roles:* Which roles are accepted by association with the selected type are defined in the
 'Association Type'. A role constraint has 3 properties: The 'Role Type' and the minimum and maximum occurrences.
