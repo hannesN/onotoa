@@ -48,7 +48,9 @@ public class DiagramPage extends AbstractModelPage {
 	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Composite comp = toolkit.createComposite(parent);
-		comp.setLayout(new GridLayout(2, false));
+		GridLayout layout = new GridLayout(2, false);
+		layout.horizontalSpacing=10;
+		comp.setLayout(layout);
 
 		toolkit.createLabel(comp, "Name:");
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
