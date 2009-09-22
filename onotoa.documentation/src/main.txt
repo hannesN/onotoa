@@ -18,6 +18,8 @@ include::modelview.txt[]
 
 include::diagram.txt[]
 
+include::preferences.txt[]
+
 include::glossary.txt[]
 
 /////////////////////////////

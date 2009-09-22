@@ -1,7 +1,6 @@
 === Documentation ===
 
 Every element of the schema has a additional properties, which are used for documenting.
-These elements are mapped to the according TMCL documentation occurrences.
 The properties are:
 
 * *comment:* Used to comment a schema element. This may be used by persons reviewing the schema.
@@ -12,5 +11,7 @@ but mostly will be a URL.
 .Property Page of documentation
 image::images/documentation_pp.png[scaledwidth="100%"]
 
-To modify these properties use the documentation tab, which is part of the *Property Details View* of 
-almost every element.  
+To modify these properties use the tab lablled 'Documentation', which is part of the *Property Details View* of 
+almost every element.
+
+NOTE: When you export the schema the documentation is exported according to the TMCL draft.

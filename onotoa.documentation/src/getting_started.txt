@@ -10,7 +10,7 @@ The _Onotoa_ project maintains a website which provides you with all information
 .Website of the _Onotoa_ project
 [[website]]
 [caption="Figure:"]
-image::images/onotoa_website.png[scaledwidth="50%"]
+image::images/onotoa_website.png[scaledwidth="100%"]
 
 In the left column of the website you see the latest news from the Onotoa project. There you get all release information about _Onotoa_, but also other important information for the Onotoa community like the announcement of user group meetings. The news are also broadcasted by the RSS feed of the website. Subscribe to the feed and don't miss any news about _Onotoa_. For more details about the RSS feed see the stay tuned section below. 
 
