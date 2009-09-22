@@ -168,11 +168,7 @@
 			</classpath>
 		</taskdef>
 
-		<fop messagelevel="debug" format="application/pdf" basedir="${doc.docbook}" outfile="${doc.docbook.pdf}/${filename}.pdf" >
-			 <fileset dir="${build.fo}">
-				<include name="*.fo"/>
-			</fileset>
-		</fop>
+		<fop messagelevel="debug" format="application/pdf" basedir="${doc.docbook}" fofile="${build.fo}/doc.fo" outfile="${doc.docbook.pdf}/${filename}.pdf" />
 	</target>
 
 	<!-- XSLT Chunking Properties -->

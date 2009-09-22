@@ -78,11 +78,24 @@ feature or export plugins. Both need the tinyTiM feature, so you need to install
 Choose the features you want to install (we advise to install all) and click on *Finish*. After the dependencies are checked you should agree to
 the licence agreements and after the installation restart eclipse.
 
+Before you can create a Topic Maps schema, you'll need to create a project. You can use any project type you want. In this example we create a
+simple Project. Select *File->New->Project* in the eclipse menu and choose *General->Project*. Set the name to 'Onotoa Example' and press enter. We will
+use the workspace for our project location. 
 
-After installing the needed _Onotoa_ features, create a new file. Use the context menu entry *New*, choose *Other* and select 
-*New Onotoa File* in the category *Onotoa*. 
+Now we create a new file for _Onotoa_. Create a new file, by selecting *File->New->Other* (see <<newfile1>>). Select *Onotoa->New Onotoa File* and press *Next*.
+The Container of the following wizard page is the project we want to add the file. Press *Browse...* and select the Project 'Onotoa Example'. 
+The other textfield contains the name of the file. Please rename the file to 'example.ono'. The dialog should look like <<newfile2>>. Press finish and the 
+newly created file will be opened.
 
-NOTE: You need a project, where you create the file. The nature of the project doesn't matter.
+.File Wizard of Eclipse
+[[newfile1]]
+[caption="Figure:"]
+image::images/new_file1.png[scaledwidth="80%"]
+
+.File Wizard of Onotoa
+[[newfile2]]
+[caption="Figure:"]
+image::images/new_file2.png[scaledwidth="80%"]
 
 After creating the new file _Onotoa_ switches to the *Onotoa Perspective*. This should look like <<nonrcp_win>>.
 
@@ -91,13 +104,53 @@ After creating the new file _Onotoa_ switches to the *Onotoa Perspective*. This 
 [[nonrcp_win]]
 image::images/emptyfilewin_nonrcp.png["_Onotoa_ window after creating a file in Navigator", scaledwidth="100%"]
 
+=== The Onotoa Perspective ===
+
+A perspective is a definition of the content of the main window. It describes which part of the application are visible and where they are located.
+These parts are called views and editors. Usually views are layouted at the border of the main window, meanwhile the editor is positioned in the
+center of the main window.
+
+_Onotoa_ consists of views and editors which are layouted in the _Onotoa_ perspective. The perspective with labelled views is shown in <<perspective>>.
+
+.The _Onotoa_ perspective
+[caption="Figure:"]
+[[perspective]]
+image::images/perspective.png[scaledwidth="100%"]
+
+==== Model View ====
+
+The *Model View* provides an overview of the topic map schema and the created diagrams. It is the core of the application. Diagrams are cretaed in the *Model View* and by
+double clicking on a diagram name in the tree, an editor will opened. A detailed description of the *Model View* can be found in <<_the_model_view>>. 
+
+==== Diagram Editor ====
+
+The *Diagram Editor* provides the visual editing functionality. In it you can create new topic types and associations. A detailed description can be found
+in <<_the_diagram_editor>>.
+
+==== Outline ====
+
+The *Outline* is an overview of the diagram. You can move to a part of the diagram by clicking in the section you want to move to.
+
+==== Property Details View ====
+
+The *Property Details View* provides input masks to edit the properties of element in _Onotoa_. An element may be a schema construct like constrains
+or topic types or a diagram. Every element has it's own property page, which is a input masks for the properties, which are shown in the 
+*Property Details View*. A detailed description of the property page of every element is given in <<_the_property_details_view>>
+
 === Creating the first diagram ===
 
 With _Onotoa_ it is possible to create multiple diagrams for a Topic Maps schemas. Although it is possible to create the schema using wizards provided
-by the *Model View* it is advised to create the schema using the diagrams.
+by the *Model View* it is advised to create the schema using the diagram editor.
 
-Vie the context menu of the 'Diagrams' node in the *Model View* a new diagram can be created. After selecting *New Diagram* a dialog asks for the name of the
-diagram. This name should be unique inside one schema definition. After pressing okay, the diagram is added to the 'Diagrams' node and an editor opens where the
+Via the context menu of the 'Diagrams' node in the *Model View* a new diagram can be created. After selecting *Create New Diagram...* a dialog asks for the name of the
+diagram. Alternatively you can select *Create New Diagram...* in the drop down menu, marked with 
+ifdef::basebackend-docbook[]
+image:images/viewmenu_button.png[width="0.3cm"].
+endif::basebackend-docbook[]
+ifndef::basebackend-docbook[]
+image:images/viewmenu_button.png[].
+endif::basebackend-docbook[]
+This name should be unique inside one schema definition. After pressing okay, the diagram is added to the 'Diagrams' node and an editor opens where the
 diagram can be edited.
 
 At the right side of the editor is a sidebar. This sidebar is called a palette and contains the tools to create new diagram elements (see <<palette>>).
@@ -107,18 +160,23 @@ At the right side of the editor is a sidebar. This sidebar is called a palette a
 [[palette]]
 image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", align="center"]
 
+Two add a new element to the diagram just drag an palette entry into the position in the diagram. Let's create a new topic type for the persons. Drag the *Topic Type* 
+entry in the palette in the diagram. You'll see a new topic type is created. Types are named default plus a number. To rename the type, click on the topic type in the
+diagram. The *Property Details View* should show the properties of the name, like in <<topictype1>>. You can change the name, by editing the textfield next to *Name:*.
 
+.Property Page of 'TopicType'
+[caption="Figure:"]
+[[topictype1]]
+image::images/new_topictype_pp.png[align="center", scaledwidth="100%"]
 
-Two add a new element to the diagram just drag an palette entry into the position in the diagram.
-
-NOTE: Not every element is a diagram element. For example, to create a new occurrence constraint you need an existing topic type and drop the palette entry in
+NOTE: Not every element is dragged into the diagram. For example, to create a new occurrence constraint you need an existing topic type and drop the palette entry in
 this topic type.
 
 TIP: Instead of Drag and Drop elements of the palette, it is possible to click on them and click on the target point in the diagram. A new element 
 is created after the second click.
 
-Now you should be able to create some topic types and set them in a type-instance relationship.
+Feel free to play a bit with the properties of the type. A detailed description of the other types and constraints and their property pages can be found
+in <<_the_property_details_view>>  
 
-The following section will explain how to edit the properties of a topic type.
 
  
