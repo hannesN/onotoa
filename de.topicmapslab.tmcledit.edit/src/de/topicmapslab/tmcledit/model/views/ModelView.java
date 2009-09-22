@@ -401,6 +401,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
+		manager.add(createDiagramAction);
 		manager.add(validationAction);
 		manager.add(new Separator());
 	}
