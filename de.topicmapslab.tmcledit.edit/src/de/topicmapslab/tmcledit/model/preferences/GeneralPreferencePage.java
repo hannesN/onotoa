@@ -37,7 +37,7 @@ public class GeneralPreferencePage
 	public GeneralPreferencePage() {
 		super(GRID);
 		setPreferenceStore(TmcleditEditPlugin.getPlugin().getPreferenceStore());
-		setDescription("A demonstration of a preference page implementation");
+		setDescription("Please choose a subcategory.");
 	}
 	
 	/**
