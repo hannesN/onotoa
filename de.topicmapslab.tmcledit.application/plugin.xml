@@ -116,7 +116,7 @@
          <activityPatternBinding
                activityId="de.topicmapslab.tmcledit.application"
                isEqualityPattern="false"
-               pattern="org.eclipse.help.ui/.*">
+               pattern="org.eclipse.help.ui/.*PreferencePage">
          </activityPatternBinding>
          <activityPatternBinding
                activityId="de.topicmapslab.tmcledit.application"
