@@ -650,7 +650,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
 			if (cmdStack.isSaveNeeded()) {
 				if (MessageDialog.openQuestion(getViewSite().getShell(), "Unsaved model",
-				        "Youre model is not saved. Do you want to save now?")) {
+				        "Your model is not saved. Do you want to save now?")) {
 					doSave(null);
 				}
 			}
