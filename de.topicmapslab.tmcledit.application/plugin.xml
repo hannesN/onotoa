@@ -108,7 +108,7 @@
                <with
                      variable="rcp">
                   <equals
-                        value="true">
+                        value="false">
                   </equals>
                </with>
             </enabledWhen>
@@ -116,12 +116,12 @@
          <activityPatternBinding
                activityId="de.topicmapslab.tmcledit.application"
                isEqualityPattern="false"
-               pattern="org.eclipse.help.ui.*/.*">
+               pattern="org.eclipse.help.ui/.*">
          </activityPatternBinding>
          <activityPatternBinding
                activityId="de.topicmapslab.tmcledit.application"
                isEqualityPattern="false"
-               pattern="org.eclipse.equinox.security.ui.*/*">
+               pattern="org.eclipse.equinox.security.ui/.*">
          </activityPatternBinding>
       </extension>
       <extension
