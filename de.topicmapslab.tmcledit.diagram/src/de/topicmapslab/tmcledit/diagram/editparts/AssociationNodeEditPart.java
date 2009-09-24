@@ -288,6 +288,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 
 	@Override
 	protected void createEditPolicies() {
+		super.createEditPolicies();
 		 installEditPolicy(EditPolicy.LAYOUT_ROLE, new LayoutEditPolicy() {
 
 				@Override
