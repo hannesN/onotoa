@@ -1,41 +1,60 @@
 === Palette ===
 
-The palette povides the functionality of the editor. It contains a set of tools to create schema elements. 
+The palette provides the functionality of the editor. It contains a set of tools to create new elements. 
+
+_Onotoa_ differentiates between diagram and schema elements. Schema elements are the elements which are used to define the
+Topic Maps schema. These are the different constraints, topic types and their properties. A diagram element is a visual representation
+of a schema element. For example the rectangle, which represents a topic type or the line inside this rectangle which represents constraint 
+of the topic. 
+
+The palette creates a diagram element and a new schema element which it represents. If you select a diagram element the properties of the 
+represented schema element is shown in the *PRoperty Details View*.
+
+The palette can be seen in <<palette_elements>>.
+ 
 
 .Palette of a diagram editor
+[[palette_elements]]
 image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", align="center"]
 
 The elements of the palette are:
 
-* *Select:* Tool for selecting diagram elements
+* *Select:* Tool for selecting one diagram element. The selected element can be moved, if it supports this operation.
 
-* *Marquee:* Selection tool for multiple diagram elements
+* *Marquee:* Selection tool for multiple diagram elements. You can select a group of elements. This can be handy if you want remove or delete more than one element.
 
-* *Comment:* Creates a non-TMCL comment in the diagram 
+* *Comment:* Creates a comment in the diagram. This comment is represented like a post-it note. This comment has no schema element it represents. If you want to export
+your a comment to TMCL use the documentation properties.  
 
-* *Topic:* Creates a topic element in the diagram
+* *Topic:* Creates a topic representation and adds it to the diagram. The represented topic is also created and added to the schema. The representation is positioned where the
+it was dropped.
 
-* *Topic Type:* Creates a topic type element in the diagram
+* *Topic Type:* Creates a topic type representation and adds it to the diagram. The represented topic is also created and added to the schema. The representation is positioned where the
+it was dropped.
 
-* *Occurrence Type:* Creates an occurrence type element
+* *Occurrence Type:* Creates a occurrence type representation and adds it to the diagram. The represented topic is also created and added to the schema. The representation is positioned where the
+it was dropped.
 
-* *Role Type:* Creates a role type element
+* *Role Type:* Creates a role type representation and adds it to the diagram. The represented topic is also created and added to the schema. The representation is positioned where the
+it was dropped.
 
-* *Association Type:* Creates an association type element in the diagram
+* *Association Type:* Creates a association type representation and adds it to the diagram. The represented topic is also created and added to the schema. The representation is positioned where the
+it was dropped.
 
-* *Name Type:* Creates a name type element in the diagram
+* *Name Type:* Creates a name type representation and adds it to the diagram. The represented topic is also created and added to the schema. The representation is positioned where the
+it was dropped.
 
-* *Occurrence Constraint:* Creates an occurrence constraint element to an topic type element.
+* *Occurrence Constraint:* Creates an occurrence constraint representation. You need to drop the new constraint to in a topic type representation. A new schema element is created to.  
 
-* *Name Constraint:* Creates a name constraint element to an topic type element.
+* *Name Constraint:* Creates a name constraint representation. You need to drop the new constraint to in a topic type representation. A new schema element is created to.
 
-* *Scope Constraint:* Creates a scope constraint element to an name, occurrence or association constraint element. This is only possible if the parent constraint does not use a default type. 
+* *Scope Constraint:* Creates a scope constraint representation to an name, occurrence or association constraint representation. This is only possible if the parent constraint does not use a default type. 
 
-* *Reifier Constraint:* Creates a reifier constraint element to an name, occurrence or association constraint element. Again this is only possible if the parent constraint does not use a default type. 
+* *Reifier Constraint:* Creates a reifier constraint representation to an name, occurrence or association constraint representation. Again this is only possible if the parent constraint does not use a default type. 
 
-* *Subject Identifier Constraint:* Creates a subject identifier constraint element to an topic type element.
+* *Subject Identifier Constraint:* Creates a subject identifier constraint representation. You need to drop the new constraint to in a topic type representation. A new schema element is created to.
 
-* *Subject Locator Constraint:* Creates a subject locator constraint element to an topic type element.
+* *Subject Locator Constraint:* Creates a subject locator constraint representation. You need to drop the new constraint to in a topic type representation. A new schema element is created to.
 
 * *Is A...:* Creates a connection between two topic types, which represents a type instance relationship.
 
@@ -46,7 +65,7 @@ The elements of the palette are:
 * *Topic Role Constraint:* The connection between a topic type (the player) an an association constraint (the association). 
 
 To create a new 'Topic Type' just drag the *Topic Type* palette entry in the diagram. A new 'Topic Type' with a default name was created. 
-To add  a new 'Topic Type' repeat.
+To add  another 'Topic Type' repeat. 
 
 Adding a 'Name Constraint' to the 'Topic Type' just drag the *Name Constraint* over the 'Topic Type' and a new 'Name Constraint' with 
 default properties will be added to the 'Topic Type'. The other constraint work similar, only 'Scope Constraint' and 'Reifier Constraint'

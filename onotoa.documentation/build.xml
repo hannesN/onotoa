@@ -154,6 +154,7 @@
 				procedure before"/>
 			<param name="fop1.extensions" expression="1"/>
 			<param name="double.sided" expression="1"/>
+			<param name="body.font.family" expression="Helvetica"/>
 		</xslt>
 
 		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
