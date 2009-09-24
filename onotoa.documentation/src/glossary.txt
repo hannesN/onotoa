@@ -1,5 +1,4 @@
-Glossary
---------
+== Glossary ==
 
 [glossary]
 
@@ -8,6 +7,9 @@ Association Constraint::
 
 Association Type::
 	An association type is specialized topic type. Only instances of an association type should be used to type an association.
+
+Bundle::
+	A bundle or plug-in is a component of an eclipse application.
 
 Cardinality::
 	The cardinality specifies the amount of the usage of an element. With _cardMin_ is defined how often at least the the
@@ -18,12 +20,20 @@ Constraint::
 	define, that a topic has names of a specific type. The topic constraint may have some occurrences, which specify additional 
 	restrictions, for instance the cardinality.
 
+Content Assist::
+	_Onotoa_ provides for some text fields proposals based on the characters already entered. The proposals are shown in a list
+	under the text field. You can select one by using the up and down arrow keys. If some information of the proposal exists, it
+	will be shown in another window to the right of the list. To select a proposal press enter. The whole process is called content assist.
+
 Diagram::
 	A diagram is a view of the Topic Maps schema. It consists of graphical representation of schema elements
 	and connects them if they have a relationship, e.g. the supertype-subtype relationship.
 
 Diagram Element::
 	A diagram element is any element which is part of the diagram. Basically a diagram element is the visualization of a schema element. 
+	
+Feature::
+	A feature bundles a set of plug-ins. Additionally it contains meta informations, like the licence model or copyright information.
 	
 Model::
 	The set of schema and diagram elements is called the model.
@@ -95,3 +105,7 @@ Topic Type::
 	A topic type is a topic which is used in a type-instance relationship. Types are defined in a Topic Maps schema
 	and the instances are created in the topic map.
 	
+Update Site::
+	An update site is a web page containing eclipse features. Adding a new update site to the install dialog
+	of _Onotoa_ you can install this features. Additionally if a new version of the feature is available on an 
+	already used update site, _Onotoa_ realizes and offers an update.

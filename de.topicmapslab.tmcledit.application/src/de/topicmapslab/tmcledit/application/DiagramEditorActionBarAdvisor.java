@@ -87,84 +87,17 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		IWorkbenchAction prefAction = ActionFactory.PREFERENCES.create(window);
 		prefAction.setText(getPointText(prefAction.getText()));
 		register(prefAction);
+		
+		
 	}
 
 	@Override
 	protected void fillMenuBar(IMenuManager menu) {
 
-		{
-			IMenuManager menuX = new MenuManager(
-					Messages.ApplicationMenuName_File,
-					IWorkbenchActionConstants.M_FILE);
+			createFileMenu(menu);
+			createEditMenu(menu);
 
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
-
-			menuX.add(new Separator());
-
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
-
-			menuX.add(new Separator());
-
-			menuX.add(getAction(ActionFactory.CLOSE.getId()));
-
-			menuX.add(new Separator());
-
-			menuX.add(getAction(ActionFactory.SAVE.getId()));
-
-			menuX.add(getAction(ActionFactory.SAVE_AS.getId()));
-
-			menuX.add(getAction(ActionFactory.SAVE_ALL.getId()));
-
-			menuX.add(new Separator());
-			
-			menuX.add(getAction(ActionFactory.IMPORT.getId()));
-			menuX.add(getAction(ActionFactory.EXPORT.getId()));
-			menuX.add(new Separator());
-			menuX.add(getAction(ActionFactory.QUIT.getId()));
-
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_END));
-			menu.add(menuX);
-		}
-
-		{
-			IMenuManager menuX = new MenuManager(
-					Messages.ApplicationMenuName_Edit,
-					IWorkbenchActionConstants.M_EDIT);
-
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.EDIT_START));
-
-			menuX.add(getAction(ActionFactory.UNDO.getId()));
-
-			menuX.add(getAction(ActionFactory.REDO.getId()));
-
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.UNDO_EXT));
-
-			menuX.add(new Separator());
-
-			menuX.add(getAction(ActionFactory.CUT.getId()));
-
-			menuX.add(getAction(ActionFactory.COPY.getId()));
-
-			menuX.add(getAction(ActionFactory.PASTE.getId()));
-
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.CUT_EXT));
-
-			menuX.add(new Separator());
-
-			menuX.add(getAction(ActionFactory.DELETE.getId()));
-
-			menuX.add(getAction(ActionFactory.SELECT_ALL.getId()));
-
-			menuX.add(new Separator());
-
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.ADD_EXT));
-
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.EDIT_END));
-
-			menuX.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-			menu.add(menuX);
-		}
-
+	
 		
 		menu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 
@@ -197,6 +130,80 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 			menu.add(menuX);
 		}
+	}
+
+	private void createEditMenu(IMenuManager menu) {
+		IMenuManager menuX = new MenuManager(
+				Messages.ApplicationMenuName_Edit,
+				IWorkbenchActionConstants.M_EDIT);
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.EDIT_START));
+
+		menuX.add(getAction(ActionFactory.UNDO.getId()));
+
+		menuX.add(getAction(ActionFactory.REDO.getId()));
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.UNDO_EXT));
+
+		menuX.add(new Separator());
+
+		menuX.add(getAction(ActionFactory.CUT.getId()));
+
+		menuX.add(getAction(ActionFactory.COPY.getId()));
+
+		menuX.add(getAction(ActionFactory.PASTE.getId()));
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.CUT_EXT));
+
+		menuX.add(new Separator());
+
+		menuX.add(getAction(ActionFactory.DELETE.getId()));
+
+		menuX.add(getAction(ActionFactory.SELECT_ALL.getId()));
+
+		menuX.add(new Separator());
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.ADD_EXT));
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.EDIT_END));
+
+		menuX.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+		menu.add(menuX);
+	}
+
+	
+	private void createFileMenu(IMenuManager menu) {
+		IMenuManager menuX = new MenuManager(
+				Messages.ApplicationMenuName_File,
+				IWorkbenchActionConstants.M_FILE);
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
+
+		menuX.add(new Separator());
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+
+		menuX.add(new Separator());
+
+		menuX.add(getAction(ActionFactory.CLOSE.getId()));
+
+		menuX.add(new Separator());
+
+		menuX.add(getAction(ActionFactory.SAVE.getId()));
+
+		menuX.add(getAction(ActionFactory.SAVE_AS.getId()));
+
+		menuX.add(getAction(ActionFactory.SAVE_ALL.getId()));
+
+		menuX.add(new Separator());
+		
+		menuX.add(getAction(ActionFactory.IMPORT.getId()));
+		menuX.add(getAction(ActionFactory.EXPORT.getId()));
+		menuX.add(new Separator());
+		menuX.add(getAction(ActionFactory.QUIT.getId()));
+
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_END));
+		menu.add(menuX);
 	}
 	
 	private boolean isMac() {

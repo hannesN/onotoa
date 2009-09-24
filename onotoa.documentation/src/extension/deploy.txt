@@ -1,0 +1,16 @@
+== Deploy the new plug-ins ==
+
+This chapter will shortly explain how to create a feature and update site. 
+
+=== Create a feature ===
+
+Edit the feature.xml. Fill out the text fields and add the provider plug-in.
+
+=== Create a new update site ===
+
+Open site.xml, create a category "Onotoa PSI Provider" and add feature.
+Create the site and copy the content to a webserver.
+
+=== Installing the feature ===
+
+Start _Onotoa_ and choose *Help->Install New Software...*. Enter url of update site and choose the 
