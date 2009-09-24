@@ -58,7 +58,7 @@ A Topic Maps schema consists of topic types and their specializations and constr
 The *Model View* groups the elements of the schema by the topic type. The main node of the Topic Maps schema is labelled as
 'Topic Map Schema'. It represents the current schema. If you select it, the property page of the schema is shown in the
 *Property Details View* which provide an input mask for the schema name and a base locator. For more information see
-<<_diagram_and_topic_map_schema>>.
+<<_topic_map_schema>>.
 
  
 With the *Model View* it is possible to create almost every schema element, by using the context menu of the different nodes. 
@@ -106,7 +106,7 @@ of subject identifiers after you entered a search string. _Onotoa_ uses the name
 to enter a name first before you enter the subject identifier.
 
 NOTE: Sometimes the connection to the subj3ct server is to slow to get results before the timeout. Therefor it may happen that you get a shorter
-proposal list before you restart the filtering by entering another letter in the subject identifier textfield. If you don't want to use the porposal provider
+proposal list before you restart the filtering by entering another letter in the subject identifier textfield. If you don't want to use the proposal provider
 you can deactivate them in the preferences.
 
 After the topic "Person" was created it is possible to add some constraints to the type. The context menu provides the following entries:
