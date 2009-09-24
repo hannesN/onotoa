@@ -31,7 +31,7 @@ Onotoa is published under the Eclipse Public License. You can download and use _
 As described below in more detail, there are two ways to install _Onotoa_:
 
 - *Standalone version* This version can downloaded from the Download section of the _Onotoa_ website (http://onotoa.topicmapslab.de/download).
-- *Eclipse Plugin* You can use _Onotoa_ as plugin for your Eclipse installation. To integrate _Onotoa_ into your environemt you have to use the _Onotoa_ update site (http://onotoa.topicmapslab.de/update).
+- *Eclipse plug-in* You can use _Onotoa_ as plug-in for your Eclipse installation. To integrate _Onotoa_ into your environemt you have to use the _Onotoa_ update site (http://onotoa.topicmapslab.de/update).
 
 As requirement, the Java Runtime Environment Version 5.0 must be installed to run _Onotoa_. The latest Java Version can be downloaded for free (http://java.sun.com).
 
@@ -61,11 +61,11 @@ Choose the path of the file and name it *example.ono*. After that your window sh
 [[emptyfile_win]]
 image::images/emptyfilewin.png["_Onotoa_ window after creating a file", scaledwidth="100%"]
 
-=== Using the plugin version of _Onotoa_ ===
+=== Using the plug-in version of _Onotoa_ ===
 
-It is possible to install the _Onotoa_ plugins into an existing eclipse installation. You need eclipse 3.5 (Galileo) for _Onotoa_. 
+It is possible to install the _Onotoa_ plug-ins into an existing eclipse installation. You need eclipse 3.5 (Galileo) for _Onotoa_. 
 
-I assume you have a working installation of eclipse. Choose *Help->Install New Software...* and enter  'http://onotoa.topicmapslab.de/update' into the textfield
+I assume you have a working installation of eclipse. Choose *Help->Install New Software...* and enter  'http://onotoa.topicmapslab.de/update' into the text field
 next to *Work with:*. Press enter and the content of the update site will shown (see <<updatemanager>>).
 
 . Update Manager of Eclipse 3.5
@@ -73,8 +73,8 @@ next to *Work with:*. Press enter and the content of the update site will shown 
 [[updatemanager]]
 image::images/update_manager.png["Update Manager", scaledwidth="100%"]
 
-To create Topic Maps schemas it is only necessary to install the 'Onotoa PLugins'. If you want to export to CTM or import existing CTM files you need to install the Imnport
-feature or export plugins. Both need the tinyTiM feature, so you need to install this to.
+To create Topic Maps schemas it is only necessary to install the 'Onotoa plug-ins'. If you want to export to CTM or import existing CTM files you need to install the Imnport
+feature or export plug-ins. Both need the tinyTiM feature, so you need to install this to.
 Choose the features you want to install (we advise to install all) and click on *Finish*. After the dependencies are checked you should agree to
 the licence agreements and after the installation restart eclipse.
 
@@ -84,7 +84,7 @@ use the workspace for our project location.
 
 Now we create a new file for _Onotoa_. Create a new file, by selecting *File->New->Other* (see <<newfile1>>). Select *Onotoa->New Onotoa File* and press *Next*.
 The Container of the following wizard page is the project we want to add the file. Press *Browse...* and select the Project 'Onotoa Example'. 
-The other textfield contains the name of the file. Please rename the file to 'example.ono'. The dialog should look like <<newfile2>>. Press finish and the 
+The other text field contains the name of the file. Please rename the file to 'example.ono'. The dialog should look like <<newfile2>>. Press finish and the 
 newly created file will be opened.
 
 .File Wizard of Eclipse
@@ -162,7 +162,7 @@ image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", alig
 
 Two add a new element to the diagram just drag an palette entry into the position in the diagram. Let's create a new topic type for the persons. Drag the *Topic Type* 
 entry in the palette in the diagram. You'll see a new topic type is created. Types are named default plus a number. To rename the type, click on the topic type in the
-diagram. The *Property Details View* should show the properties of the name, like in <<topictype1>>. You can change the name, by editing the textfield next to *Name:*.
+diagram. The *Property Details View* should show the properties of the name, like in <<topictype1>>. You can change the name, by editing the text field next to *Name:*.
 
 .Property Page of 'TopicType'
 [caption="Figure:"]

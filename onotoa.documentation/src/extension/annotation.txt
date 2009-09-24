@@ -1,0 +1,5 @@
+== Create a Annotation Keys ==
+
+With _Onotoa_ it is possible to annotate schema elements. These annotations are a pair of key and value. Basically both are strings. It is possible to
+create an extension to provide an annotation type. This type defines for a specified key, what datatype it contains. It is also possible to
+provide some values to choose from, or proposals, which are used for content assist. 

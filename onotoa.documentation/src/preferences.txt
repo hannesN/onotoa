@@ -19,10 +19,10 @@ image::images/update1_pf.png[scaledwidth="100%"]
 
 If you want to deactivate the automatic update, just uncheck the Button labelled *Automatically find new updates and notify me*.
 In the group *Update schedule* you can tell _Onotoa_ when to look for updates. The following section, called *Download options* let you
-specify when to download the new plugins. In the last group you can tell when to be notified.
+specify when to download the new plug-ins. In the last group you can tell when to be notified.
 
 The second page, shown in <<update_site>> shows a list of update site _Onotoa_ uses. With the help of the buttons it is possible to add new update sites, edit or
-remove existing ones. You also can disable update site, which means, when looking for updates or new installable plugins, this site will be ignored.  
+remove existing ones. You also can disable update site, which means, when looking for updates or new installable plug-ins, this site will be ignored.  
 
 .Preferences for Update Sites
 [[update_site]]

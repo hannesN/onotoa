@@ -83,10 +83,10 @@ image::images/new_tt_dialog.png[scaledwidth="100%"]
 
 Right now _Onotoa_ only supports one name per Topic. When the topic is used to type a constraint, the name is visualized therefor _Onotoa_ 
 forbids topics with the same name. If the schema has a base locator, which it should have right now, you'll realize, that the subject identifier
-textfield is automatically filled with the URL created with the base locator.
+text field is automatically filled with the URL created with the base locator.
 
 Enter the name "Person" and you'll see the topic gets a subject identifier which is "http://onotoa.topicmapslab.de/example/person".
-You may change the identifier by editing the subject identifier textfield. After modifying the subject identifier it won't be changed anymore when you
+You may change the identifier by editing the subject identifier text field. After modifying the subject identifier it won't be changed anymore when you
 change the name. You may recognize while typing a popup window occurs, which show a list of proposals for you're subject identifier. You can navigate
 through the list with the up and down keys. Select one by pressing Enter. The proposals are filtered by the text you already wrote. If you entered
 "http://psi" only identifier starting with that text will be in the proposal list. 
@@ -106,7 +106,7 @@ of subject identifiers after you entered a search string. _Onotoa_ uses the name
 to enter a name first before you enter the subject identifier.
 
 NOTE: Sometimes the connection to the subj3ct server is to slow to get results before the timeout. Therefor it may happen that you get a shorter
-proposal list before you restart the filtering by entering another letter in the subject identifier textfield. If you don't want to use the proposal provider
+proposal list before you restart the filtering by entering another letter in the subject identifier text field. If you don't want to use the proposal provider
 you can deactivate them in the preferences.
 
 After the topic "Person" was created it is possible to add some constraints to the type. The context menu provides the following entries:

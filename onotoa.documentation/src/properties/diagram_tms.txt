@@ -4,7 +4,7 @@ The diagram has only one property:
 
 * *Name:* The name of the diagram. It is a unique identifier in a schema, which means you can not create two diagrams with the same name.
 
-You can edit the name by modifying the value in the textfield in the property page. If you enter a name which is already used, a red icon will appear on the left side,
+You can edit the name by modifying the value in the text field in the property page. If you enter a name which is already used, a red icon will appear on the left side,
 and the name won't be changed, when the focus is lost.  
 
 
