@@ -35,7 +35,4 @@ Extending Onotoa
 include::extension.txt[]
 
 
-Appendix
-========
-
 include::glossary.txt[]

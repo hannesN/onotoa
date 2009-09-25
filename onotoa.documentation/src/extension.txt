@@ -2,6 +2,4 @@ include::extension/introduction.txt[]
 
 include::extension/psiprovider.txt[]
 
-include::extension/annotation.txt[]
-
 include::extension/deploy.txt[]
