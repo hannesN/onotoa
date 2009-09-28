@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOverlap <em>Overlap</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getLocators <em>Locators</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraint <em>Topic Reifies Constraint</em>}</li>
  * </ul>
  * </p>
  *
@@ -292,5 +293,31 @@ public interface TopicType extends TMCLConstruct {
 	 * @generated
 	 */
 	EList<String> getLocators();
+
+	/**
+	 * Returns the value of the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Topic Reifies Constraint</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Topic Reifies Constraint</em>' containment reference.
+	 * @see #setTopicReifiesConstraint(TopicReifiesConstraint)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_TopicReifiesConstraint()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TopicReifiesConstraint getTopicReifiesConstraint();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraint <em>Topic Reifies Constraint</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Topic Reifies Constraint</em>' containment reference.
+	 * @see #getTopicReifiesConstraint()
+	 * @generated
+	 */
+	void setTopicReifiesConstraint(TopicReifiesConstraint value);
 
 } // TopicType

@@ -219,6 +219,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractConstraintAdapter();
 			}
 			@Override
+			public Adapter caseTopicReifiesConstraint(TopicReifiesConstraint object) {
+				return createTopicReifiesConstraintAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -753,6 +757,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.TopicReifiesConstraint <em>Topic Reifies Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.TopicReifiesConstraint
+	 * @generated
+	 */
+	public Adapter createTopicReifiesConstraintAdapter() {
 		return null;
 	}
 

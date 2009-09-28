@@ -21,6 +21,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
@@ -38,15 +39,20 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
+import de.topicmapslab.tmcledit.model.commands.SetCardinalitiesCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 import de.topicmapslab.tmcledit.model.commands.SetOverlapCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
+import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.StringListSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.SubjectIdentifierListDialog;
 import de.topicmapslab.tmcledit.model.dialogs.TopicSelectionDialog;
@@ -70,6 +76,11 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	protected CTabItem item;
 	private Text overlapText;
 	private ControlDecoration nameDecorator;
+	
+	private Text reifiertypeText;
+	private Button browseButton;
+	private CCombo cardCombo;
+	private Button hasReifierConstraintButton;
 
 	public TopicTypePage() {
 		super("topic type");
@@ -277,22 +288,209 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
 			return; 
 		
-		if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__NAME) {
-			updateName();
-			return;
+		if (notification.getNotifier()==getModel()) {
+			if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__NAME) {
+				updateName();
+				return;
+			}
+			if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__IDENTIFIERS) {
+				updateIdentifierts();
+				return;
+			}
+			
+			if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT) {
+				TopicReifiesConstraint tmp = (TopicReifiesConstraint) notification.getOldValue();
+				if (tmp!=null)
+					tmp.eAdapters().remove(this);
+				
+				tmp = (TopicReifiesConstraint) notification.getNewValue();
+				if (tmp!=null)
+					tmp.eAdapters().add(this);
+				
+				updateReifierUI();
+				return;
+			}
 		}
-		if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__IDENTIFIERS) {
-			updateIdentifierts();
-			return;
+		if (notification.getNotifier() instanceof TopicReifiesConstraint) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.TOPIC_REIFIES_CONSTRAINT__TYPE) {
+				TopicType tmp = (TopicType) notification.getOldValue();
+				if (tmp!=null)
+					tmp.eAdapters().remove(this);
+				
+				tmp = (TopicType) notification.getNewValue();
+				if (tmp!=null)
+					tmp.eAdapters().add(this);
+				
+			}
+			
+			updateReifierUI();
+			
+			
+			
 		}
+		
+		
 			
 		updateUI();
 	}
 
+	private void createReifiesControl(Composite parent, FormToolkit toolkit) {
+		GridData gd = new GridData();
+		gd.verticalAlignment = SWT.TOP;
+		toolkit.createLabel(parent, "reifies:").setLayoutData(gd);
+
+		Composite comp = toolkit.createComposite(parent);
+		GridLayout layout = new GridLayout(3, false);
+		layout.marginWidth = 0;
+		comp.setLayout(layout);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalSpan = 2;
+		comp.setLayoutData(gd);
+
+		hasReifierConstraintButton = toolkit.createButton(comp, "constrained", SWT.CHECK);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalSpan = 3;
+		hasReifierConstraintButton.setLayoutData(gd);
+
+		cardCombo = new CCombo(comp, SWT.BORDER);
+		cardCombo.setItems(new String[] { "may", "cannot", "must" });
+		cardCombo.select(0);
+
+		reifiertypeText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		reifiertypeText.setLayoutData(gd);
+
+		browseButton = toolkit.createButton(comp, "...", SWT.PUSH);
+
+		hookReifierListener();
+	}
+	
+	private void hookReifierListener() {
+		cardCombo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				switch (cardCombo.getSelectionIndex()) {
+				case 0:
+					setMayReifier();
+					break;
+				case 1:
+					setCannotReifier();
+					break;
+				case 2:
+					setMustHaveReifier();
+					break;
+				}
+
+			}
+		});
+		hasReifierConstraintButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (hasReifierConstraintButton.getSelection()) {
+					cardCombo.select(0);
+					cardCombo.setEnabled(true);
+					browseButton.setEnabled(true);
+					setMayReifier();
+				} else {
+					cardCombo.clearSelection();
+					cardCombo.setEnabled(false);
+					browseButton.setEnabled(false);
+					reifiertypeText.setText("");
+					getCommandStack().execute(
+					        new GenericSetCommand(getCastedModel(),
+					                ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT, null));
+				}
+			}
+		});
+
+		browseButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(browseButton.getShell(), false);
+				if (dlg.open() == Dialog.OK) {
+					getCommandStack().execute(
+					        new GenericSetCommand(getCastedModel().getTopicReifiesConstraint(),
+					                ModelPackage.TOPIC_REIFIES_CONSTRAINT__TYPE, dlg.getFirstResult()));
+				}
+			}
+		});
+	}
+
+	private void setMustHaveReifier() {
+		browseButton.setEnabled(true);
+		setReifierCardinality(1, 1);
+	}
+
+	private void setCannotReifier() {
+		browseButton.setEnabled(false);
+		setReifierCardinality(0, 0);
+	}
+
+	private void setMayReifier() {
+		browseButton.setEnabled(true);
+		setReifierCardinality(0, 1);
+	}
+	
+	private void setReifierCardinality(int min, int max) {
+		TopicReifiesConstraint trc = getCastedModel().getTopicReifiesConstraint();
+		if (trc == null) {
+			trc = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
+			trc.setCardMin(Integer.toString(min));
+			trc.setCardMax(Integer.toString(max));
+			getCommandStack().execute(
+			        new GenericSetCommand(getCastedModel(),
+			                ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT, trc));
+			return;
+		}
+
+		getCommandStack().execute(new SetCardinalitiesCommand(trc, Integer.toString(min), Integer.toString(max)));
+	}
+	
 	@Override
 	protected void setEnabled(boolean enabled) {
 		item.getControl().setEnabled(enabled);
 		abstractButton.setEnabled(enabled);
+	}
+	
+	private void updateReifierUI() {
+		if (getCastedModel() == null) {
+			hasReifierConstraintButton.setEnabled(false);
+			cardCombo.setEnabled(false);
+			browseButton.setEnabled(false);
+			reifiertypeText.setEnabled(false);
+			reifiertypeText.setText("");
+			return;
+		}
+		TopicReifiesConstraint trc = getCastedModel().getTopicReifiesConstraint();
+		hasReifierConstraintButton.setEnabled(true);
+		cardCombo.setEnabled(true);
+		browseButton.setEnabled(true);
+		reifiertypeText.setEnabled(true);
+		hasReifierConstraintButton.setSelection(trc != null);
+		String text = "";
+		if (trc != null) {
+			if (trc.getType() != null)
+				text = trc.getType().getName();
+			else
+				text = "tmdm:subject";
+			
+			if (trc.getCardMin().equals("0")) {
+				if (trc.getCardMax().equals("0")) {
+					cardCombo.select(1);
+					browseButton.setEnabled(false);
+					text = "";
+				} else {
+					cardCombo.select(0);
+				}
+			} else {
+				cardCombo.select(2);
+			}
+		} else {
+			cardCombo.setEnabled(false);
+			browseButton.setEnabled(false);
+		}
+		
+		reifiertypeText.setText(text);
 	}
 	
 	@Override
@@ -359,11 +557,30 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				abstractButton.setSelection(false);
 				overlapText.setText("");
 			}
-
+			updateReifierUI();
 		}
 		super.updateUI();
 	}
 
+	@Override
+	public void setModel(Object model) {
+		if (getModel()!=null) {
+			TopicReifiesConstraint trc = getCastedModel().getTopicReifiesConstraint();
+			if (trc!=null) {
+				trc.eAdapters().remove(this);
+				if (trc.getType()!=null)
+					trc.getType().eAdapters().remove(this);
+			}
+		}
+	    super.setModel(model);
+	    TopicReifiesConstraint trc = getCastedModel().getTopicReifiesConstraint();
+		if (trc!=null) {
+			trc.eAdapters().add(this);
+			if (trc.getType()!=null)
+				trc.getType().eAdapters().add(this);
+		}
+	}
+	
 	private StringBuffer updateIdentifierts() {
 	    StringBuffer b = new StringBuffer();
 	    for (String s : getCastedModel().getIdentifiers()) {
@@ -383,6 +600,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 	protected void createAdditionalControls(Composite parent,
 			FormToolkit toolkit) {
+		createReifiesControl(parent, toolkit);
 	}
 
 	private String getTopicType(TopicType t) {

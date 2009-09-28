@@ -394,6 +394,17 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.TOPIC_REIFIES_CONSTRAINT: {
+				TopicReifiesConstraint topicReifiesConstraint = (TopicReifiesConstraint)theEObject;
+				T result = caseTopicReifiesConstraint(topicReifiesConstraint);
+				if (result == null) result = caseAbstractTypedCardinalityConstraint(topicReifiesConstraint);
+				if (result == null) result = caseAbstractCardinalityContraint(topicReifiesConstraint);
+				if (result == null) result = caseAbstractTypedConstraint(topicReifiesConstraint);
+				if (result == null) result = caseAbstractConstraint(topicReifiesConstraint);
+				if (result == null) result = caseTMCLConstruct(topicReifiesConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -950,6 +961,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseAbstractConstraint(AbstractConstraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Topic Reifies Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Topic Reifies Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTopicReifiesConstraint(TopicReifiesConstraint object) {
 		return null;
 	}
 

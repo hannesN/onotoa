@@ -81,6 +81,7 @@ public interface ModelXMLConstantsOno1 {
 	public static final String E_SUBJECT_LOCATOR_CONSTRAINT = "subjectLocatorConstraint";
 	public static final String E_SUBJECT_LOCATOR_CONSTRAINTS = "subjectLocatorConstraints";
 	public static final String E_TOPIC_ROLE_CONSTRAINT = "topicRoleConstraint";
+	public static final String E_TOPIC_REIFIES_CONSTRAINT= "topicRefies";
 	public static final String E_TOPIC_TYPE = "topicType";
 	public static final String E_TOPIC_TYPE_REF = "topictypeRef";
 	public static final String A_VALUE = "value";

@@ -97,6 +97,7 @@ import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
@@ -104,7 +105,7 @@ class ModelHandler extends DefaultHandler {
 
 	private enum State {
 		NONE, TOPIC_TYPE, NAME_CONSTRAINT, 
-		ISA, AKO, OCCURENCE_CONSTRAINT, REIFIER_CONSTRAINT, 
+		ISA, AKO, OCCURENCE_CONSTRAINT, REIFIER_CONSTRAINT, TOPIC_REIFIES_CONSTRAINT, 
 		ROLE_CONSTRAINT, COMMENT, SEE_ALSO, DESCRIPTION, ASSOCIATION_CONSTRAINT, 
 		PLAYER, TOPIC_ROLE_CONSTRAINT, TYPE_NODE, ASSOCIATION_NODE, 
 		ROLE_COMBINATION, OTHER_PLAYER, OTHER_ROLE, ROLE, DIAGRAM_COMMENT, OVERLAP
@@ -173,6 +174,10 @@ class ModelHandler extends DefaultHandler {
 		
 		if (E_REIFIER_CONSTRAINT.equals(qName)) {
 			addReifierConstraint(attributes);
+		}
+		
+		if (E_TOPIC_REIFIES_CONSTRAINT.equals(qName)) {
+			addTopicReifiesConstraint(attributes);
 		}
 
 		if (E_ROLE_CONSTRAINT.equals(qName)) {
@@ -416,6 +421,15 @@ class ModelHandler extends DefaultHandler {
 	    	setCardinality(rc, attributes);
 	    	constructs.add(rc);
 	    	state = State.REIFIER_CONSTRAINT;
+	    }
+    }
+	
+	private void addTopicReifiesConstraint(Attributes attributes) {
+	    if (currTopicType!=null) {
+	    	TopicReifiesConstraint trc = fac.createTopicReifiesConstraint();
+	    	setCardinality(trc, attributes);
+	    	constructs.add(trc);
+	    	state = State.TOPIC_REIFIES_CONSTRAINT;
 	    }
     }
 
@@ -667,6 +681,11 @@ class ModelHandler extends DefaultHandler {
 		}
 		if (E_REIFIER_CONSTRAINT.equals(qName)) {
 			((ReifiableTopicType) currTopicType).setReifierConstraint((ReifierConstraint) constructs.pop());
+			state = State.TOPIC_TYPE;
+		}
+		
+		if (E_TOPIC_REIFIES_CONSTRAINT.equals(qName)) {
+			currTopicType.setTopicReifiesConstraint( (TopicReifiesConstraint) constructs.pop());
 			state = State.TOPIC_TYPE;
 		}
 		

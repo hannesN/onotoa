@@ -52,6 +52,7 @@ import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
@@ -382,6 +383,16 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			}
 		}
 
+		TopicReifiesConstraint trc = tt.getTopicReifiesConstraint();
+		if (trc!=null) {
+			Element rNode = document.createElement(E_TOPIC_REIFIES_CONSTRAINT);
+			addCardinalityAttributes(rNode, trc);
+			addTMCLConstructElements(trc, rNode);
+			if (trc.getType() != null)
+				addTopicReference(rNode, trc.getType());
+			typeNode.appendChild(rNode);
+		}
+		
 		if (tt instanceof AssociationType) {
 			AssociationType at = (AssociationType) tt;
 			if (at.getRoles().size() > 0) {
