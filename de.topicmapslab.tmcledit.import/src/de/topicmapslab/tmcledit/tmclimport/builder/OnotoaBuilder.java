@@ -25,6 +25,8 @@ import static org.tinytim.voc.TMCL.OCCURRENCE_DATATYPE_CONSTRAINT;
 import static org.tinytim.voc.TMCL.OCCURRENCE_TYPE;
 import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_ROLE;
 import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_TOPIC_TYPE;
+import static org.tinytim.voc.TMCL.OVERLAPS;
+import static org.tinytim.voc.TMCL.OVERLAP_DECLARATION;
 import static org.tinytim.voc.TMCL.REGEXP;
 import static org.tinytim.voc.TMCL.REGULAR_EXPRESSION_CONSTRAINT;
 import static org.tinytim.voc.TMCL.REIFIER_CONSTRAINT;
@@ -42,8 +44,10 @@ import static org.tinytim.voc.TMCL.TOPIC_ROLE_CONSTRAINT;
 import static org.tinytim.voc.TMCL.TOPIC_TYPE;
 import static org.tinytim.voc.TMCL.UNIQUE_VALUE_CONSTRAINT;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -67,6 +71,7 @@ import org.tmapi.core.Role;
 import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystemFactory;
+import org.tmapi.index.TypeInstanceIndex;
 
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
@@ -91,6 +96,7 @@ import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.tmclimport.Activator;
@@ -137,6 +143,7 @@ public class OnotoaBuilder {
 	private Topic allowedScope;
 	private Topic otherConstrainedRole;
 	private Topic otherConstrainedTopicType;
+//	private Topic overlaps;
 
 	// -- roles
 	private Topic constrains;
@@ -160,6 +167,7 @@ public class OnotoaBuilder {
 	private Topic occurrenceDatatypeConstraint;
 	private Topic uniqueValueConstraint;
 	private Topic regularExpressionConstraint;
+	private Topic overlapDeclaration;
 	
 	// -- occurrence types
 	private Topic datatype;
@@ -295,6 +303,29 @@ public class OnotoaBuilder {
 			if (topicCache.contains(t))
 				getTopic(t);
 		}
+
+		TypeInstanceIndex tii = topicMap.getIndex(TypeInstanceIndex.class);
+
+		for (Topic constr : tii.getTopics(overlapDeclaration)) {
+			List<TopicType> typeList = new ArrayList<TopicType>();
+			for (Role constrR : constr.getRolesPlayed(allows)) {
+				Association a = constrR.getParent();
+				Role role = a.getRoles(allowed).iterator().next();
+				typeList.add(getTopic(role.getPlayer()));
+			}
+
+			for (int i = 0; i < typeList.size(); i++) {
+				TopicType currType = typeList.get(i);
+				for (int j = i + 1; j < typeList.size(); j++) {
+					typeList.get(j).getOverlap().add(currType);
+					currType.getOverlap().add(typeList.get(j));
+				}
+			}
+
+			topicCache.remove(constr);
+
+		}
+
 	}
 
 	private TopicType getTopic(Topic t) {
@@ -374,10 +405,10 @@ public class OnotoaBuilder {
 		otherConstrainedRole = createStandardTopic(OTHER_CONSTRAINED_ROLE);
 		allowedReifier = createStandardTopic(ALLOWED_REIFIER);
 		allowedScope = createStandardTopic(ALLOWED_SCOPE);
-
 		constrainedRole = createStandardTopic(CONSTRAINED_ROLE);
 		otherConstrainedRole = createStandardTopic(OTHER_CONSTRAINED_ROLE);
 		otherConstrainedTopicType = createStandardTopic(OTHER_CONSTRAINED_TOPIC_TYPE);
+		overlaps = createStandardTopic(OVERLAPS);
 
 //		constraint = createStandardTopic(CONSTRAINT);
 		abstractConstraint = createStandardTopic(ABSTRACT_CONSTRAINT);
@@ -394,6 +425,7 @@ public class OnotoaBuilder {
 		occurrenceDatatypeConstraint = createStandardTopic(OCCURRENCE_DATATYPE_CONSTRAINT);
 		uniqueValueConstraint = createStandardTopic(UNIQUE_VALUE_CONSTRAINT);
 		regularExpressionConstraint = createStandardTopic(REGULAR_EXPRESSION_CONSTRAINT);
+		overlapDeclaration = createStandardTopic(OVERLAP_DECLARATION);
 	}
 
 	private Topic createStandardTopic(Locator loc) {
@@ -407,6 +439,10 @@ public class OnotoaBuilder {
 			Role constrRole = getConstrainRole(role);
 			if (role != null) {
 				Topic constr = constrRole.getPlayer();
+				
+				if (constr.getTypes().contains(topicReifiesConstraint))
+					processTopicReifiesConstraint(tt, constr);
+				
 				Topic otherPlayer = getConstrainedPlayer(constr, constraintStatement);
 
 				TopicType tt2 = null;
@@ -459,8 +495,20 @@ public class OnotoaBuilder {
 				topicCache.remove(constr);
 			}
 		}
-
+		
 	}
+
+	private void processTopicReifiesConstraint(TopicType tt, Topic constr) {
+	    
+	    TopicReifiesConstraint trc = modelFactory.createTopicReifiesConstraint();
+	    setDocumentation(trc, constr);
+	    setCardinality(constr, trc);
+	    
+	    Topic t = getConstrainedPlayer(constr, constraintStatement);
+	    if ( (t!=null) && (t!=subject) )
+	    	trc.setType(getTopic(t));
+	    tt.setTopicReifiesConstraint(trc);
+    }
 
 	private void createRoleCombinationConstraint(TopicType tt, TopicType at, Topic constr) {
 		Topic roleType = getOtherPlayer(constr, constrains, constrainedRole, constrained);

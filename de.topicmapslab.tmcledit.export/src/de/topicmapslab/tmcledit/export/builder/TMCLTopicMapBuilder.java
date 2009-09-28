@@ -46,6 +46,7 @@ import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -278,6 +279,8 @@ public class TMCLTopicMapBuilder {
 		if (type instanceof ReifiableTopicType) {
 			setReifierConstraint((ReifiableTopicType) type);
 		}
+		
+		setTopicReifiesConstraint(type);
 
 		return t;
 	}
@@ -448,6 +451,28 @@ public class TMCLTopicMapBuilder {
 		else
 			t = createTopic(constraint.getType());
 		ass.createRole(createTopic(TMCL.ALLOWED), t);
+		
+		setSchema(constr);
+
+	}
+	
+	private void setTopicReifiesConstraint(TopicType tt) {
+		TopicReifiesConstraint trc = tt.getTopicReifiesConstraint();
+		if (trc==null)
+			return;
+		Topic constr = createConstraint(TMCL.TOPIC_REIFIES_CONSTRAINT);
+		addDocumentationOccurrences(constr, trc);
+		constr.createOccurrence(createTopic(TMCL.CARD_MIN), trc.getCardMin(), XSD.INTEGER);
+		constr.createOccurrence(createTopic(TMCL.CARD_MAX), trc.getCardMax(), XSD.INTEGER);
+		createConstrainedTopicType(createTopic(tt), constr);
+
+		if (!("0".equals(trc.getCardMin()) &&  (trc.getCardMin().equals(trc.getCardMax())) )) {
+			TopicType type = trc.getType();
+			if (type==null)
+				createConstrainedStatement(createTopic(TMDM.SUBJECT), constr);
+			else
+				createConstrainedStatement(createTopic(type), constr);
+		}
 		
 		setSchema(constr);
 

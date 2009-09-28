@@ -453,6 +453,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	}
 	
 	private void updateReifierUI() {
+		if (hasReifierConstraintButton==null)
+			return;
+		
 		if (getCastedModel() == null) {
 			hasReifierConstraintButton.setEnabled(false);
 			cardCombo.setEnabled(false);
@@ -573,6 +576,10 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			}
 		}
 	    super.setModel(model);
+	    
+	    if (model==null)
+	    	return;
+	    
 	    TopicReifiesConstraint trc = getCastedModel().getTopicReifiesConstraint();
 		if (trc!=null) {
 			trc.eAdapters().add(this);
