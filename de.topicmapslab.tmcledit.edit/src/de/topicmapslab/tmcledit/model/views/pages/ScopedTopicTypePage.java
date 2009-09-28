@@ -93,7 +93,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 		gd.horizontalSpan = 2;
 		comp.setLayoutData(gd);
 
-		hasReifierConstraintButton = toolkit.createButton(comp, "has reifier constraint", SWT.CHECK);
+		hasReifierConstraintButton = toolkit.createButton(comp, "constrained", SWT.CHECK);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 3;
 		hasReifierConstraintButton.setLayoutData(gd);
@@ -362,7 +362,6 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 			if (rc != null) {
 				rc.eAdapters().remove(this);
 			}
-
 		}
 
 		super.setModel(model);

@@ -21,7 +21,7 @@ in the appearing dialog. To create a new 'Role Type' press the `New...` and fill
 dialog. The cardinality of this constraint can be modified in the table.   
 
 * *reifier:* It is possible to define which topic may reifier names using the current type. Check the 
-button `has reifier constraint` and choose in the selection box below if the constraint forbids 
+button `constrained`, which indicates you want explicitly constraint the reification, and choose in the selection box below if the constraint forbids 
 reifying (`cannot`), allows reifying (`may`) or needs reifying (`must`). If refying is allowed
 a type is needed, which defines the type of the reifier. If the type is not needed, just use 
 `tmdm:subject` as type. 

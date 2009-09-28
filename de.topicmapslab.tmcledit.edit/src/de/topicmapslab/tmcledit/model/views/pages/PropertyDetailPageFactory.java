@@ -28,6 +28,7 @@ import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
@@ -37,6 +38,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class PropertyDetailPageFactory {
 	private static final String TOPIC_MAP_SCHEMA = "TopicMapSchema";
 	private static final String TOPIC_TYPE = "TopicType";
+	private static final String ROLE_TYPE = "ROleType";
 	private static final String NAME_TYPE = "NameType";
 	private static final String OCCURRENCE_TYPE = "OccurrenceType";
 	private static final String ASSOCIATION_TYPE = "AssociationType";
@@ -101,6 +103,14 @@ public class PropertyDetailPageFactory {
 				page = new AssociationTypeModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(ASSOCIATION_TYPE, page);
+				pageBook.registerPage(page.getID(), page.getControl());
+			}
+		} else if (model instanceof RoleType) {
+			page = pageMap.get(ROLE_TYPE);
+			if (page==null) {
+				page = new RoleTypePage();
+				page.createControl(pageBook.getContainer());
+				pageMap.put(ROLE_TYPE, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		} else if (model instanceof TopicType) {

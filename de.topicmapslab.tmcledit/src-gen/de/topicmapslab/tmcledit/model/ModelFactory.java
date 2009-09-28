@@ -304,6 +304,15 @@ public interface ModelFactory extends EFactory {
 	Annotation createAnnotation();
 
 	/**
+	 * Returns a new object of class '<em>Topic Reifies Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Topic Reifies Constraint</em>'.
+	 * @generated
+	 */
+	TopicReifiesConstraint createTopicReifiesConstraint();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
