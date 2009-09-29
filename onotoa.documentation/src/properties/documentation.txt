@@ -11,7 +11,7 @@ but mostly will be a URL.
 .Property Page of documentation
 image::images/documentation_pp.png[scaledwidth="100%"]
 
-To modify these properties use the tab lablled 'Documentation', which is part of the *Property Details View* of 
+To modify these properties use the tab labelled 'Documentation', which is part of the *Property Details View* of 
 almost every element.
 
 NOTE: When you export the schema the documentation is exported according to the TMCL draft.

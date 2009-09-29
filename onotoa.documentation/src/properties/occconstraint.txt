@@ -4,24 +4,24 @@ A occurrence constraint is used to connect a topic type with an occurrence type.
 type "content". This constraint would have a cardMin of 1 and a cardMax of *.
 
 
-A 'Occurrence Constraint' is an element of an 'Topic Type'. 
+A occurrence constraint is an element of an topic type. 
 It has the following properties:
 
-* *type:* A 'Occurrence Type' which is used for the constraint. If the type is not set, the default 
-type `tmdm:subject`  is used, which means the occurrence may be of any type.
+* *type:* A occurrence type which is used for the constraint. If the type is not set, the default 
+type "tmdm:subject"  is used, which means the occurrence may be of any type.
 * *cardMin:* The minimum number of names with the given type. The default is 0.
 * *cardMax:* The maximum number of names with the given type. The default is *, which means infinity.
 
-.Property Page for Occurrence Constraint
+.Property Page for occurrence constraint
 image::images/occconstr_pp.png[scaledwidth="100%"]
 
-After creating a new 'Occurrence Constraint' the type is set to the default type `tmdm:subject`. This can be changed
-by pressing the button on the right site. A dialog appears, which proposes all 'Occurrence Types' in the schema. To 
-create a new 'Occurrence Type' press the label *Type:* at the left of the text field. This opens the New Type Wizard. After 
+After creating a new occurrence constraint the type is set to the default type "tmdm:subject". This can be changed
+by pressing the button on the right site. A dialog appears, which proposes all occurrence types in the schema. To 
+create a new occurrence type press the label *Type:* at the left of the text field. This opens the New Type Wizard. After 
 creating the type it is selected as type for this constraint.
 
-If a special type is set it is possible to edit his properties in the second tab, labelled *Occurrence Type*. It lists
-all type properties, see <<_occurrence_type, Occurrence Type>> for details.
+If a special type is set it is possible to edit his properties in the second tab, labelled 'Occurrence Type'. It lists
+all type properties, see <<_occurrence_type>> for details.
 
-NOTE: Although `tmdm:subject` is set in the TMDM namespace, it is specified in the TMCL standard. This type just means
+NOTE: Although "tmdm:subject" is set in the TMDM namespace, it is specified in the TMCL standard. This type just means
 every topic is allowed.

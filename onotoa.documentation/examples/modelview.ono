@@ -5,6 +5,17 @@
             <annotation key="activetm.attributename" value="Prefix10"/>
             <name>Person</name>
             <subjectIdentifier>http://onotoa.topicmapslab.de/example/person</subjectIdentifier>
+            <nameConstraints>
+                <nameConstraint cardMax="1" cardMin="1">
+                    <topictypeRef ref="topictypes.6"/>
+                </nameConstraint>
+            </nameConstraints>
+            <occurrenceConstraints>
+                <occurrenceConstraint cardMax="1" cardMin="1">
+                    <topictypeRef ref="topictypes.7"/>
+                </occurrenceConstraint>
+            </occurrenceConstraints>
+            <topicRefies cardMax="0" cardMin="0"/>
         </topicType>
         <topicType kind="TopicType">
             <name>Company</name>
@@ -37,6 +48,14 @@
         <topicType kind="TopicType">
             <name>Time</name>
             <subjectIdentifier>http://onotoa.topicmapslab.de/example/time</subjectIdentifier>
+        </topicType>
+        <topicType kind="NameType" regExp=".*">
+            <name>Firstname</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/firstname</subjectIdentifier>
+        </topicType>
+        <topicType datatype="xsd:anyType" kind="OccurrenceType" regExp=".*">
+            <name>Vita</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/vita</subjectIdentifier>
         </topicType>
         <associationConstraint>
             <topictypeRef ref="topictypes.2"/>

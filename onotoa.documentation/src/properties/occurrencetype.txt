@@ -1,15 +1,15 @@
 === Occurrence Type ===
 
-An 'Occurrence Type' is used to specify which topics may be used to type an occurrence. In a topic map, a topic may have more than one occurrences.
+An occurrence type is used to specify which topics may be used to type an occurrence. In a topic map, a topic may have more than one occurrences.
 Their meaning is realized by using topics, for instance the topic 'content' in a topic 'document'. These topics should be typed with occurrence type.
 The TMCL standard says, that any type of an occurrence which is not instance of 'occurrence-type' is invalid.
 
-Like 'Name Types' 'Occurrence Types' can be reified and scoped.
+Like name types 'Occurrence Types' can be reified and scoped.
 
-.Property Page of 'Occurrence Type'
+.Property Page of occurrence type
 image::images/occtype_pp.png[scaledwidth="100%"]
 
-A 'Occurrence Type' inherits the properties  of 'Topic Type' (see <<_topic_type, 'Topic Type' properties>>).
+A occurrence type inherits the properties  of topic type (see <<_topic_type>>).
 In addition it has the following properties.
 
 * *unique:* If this is *true* the TMCL validator will check if the value of occurrences of this type is unqie in 
@@ -18,21 +18,21 @@ activated by selecting the check box. Per default this property is false.
 
 * *datatype:* It is possible to set the datatype of the occurrence value. Although it is possible to enter your own 
 type definition URI it is advised to use the XML schema datatypes. These are selectable by the dialog opened with the button labelled *...*.
-If no datatype is set, 'xsd:anyType' is used, which means every content is valid.
+If no datatype is set, "xsd:anyType" is used, which means every content is valid.
 
 * *reg. exp:* This regular expression is used to define the form of the content of the name. 
 
 * *reifier:* It is possible to define which topic may reifier names using the current type. Check the 
-button `constrained`, which indicates you want explicitly constraint the reification, and choose in the selection box below if the constraint forbids 
-reifying (`cannot`), allows reifying (`may`) or needs reifying (`must`). If refying is allowed
+button *constrained*, which indicates you want explicitly constraint the reification, and choose in the selection box below if the constraint forbids 
+reifying (*cannot*), allows reifying (*may*) or needs reifying (*must*). If reifying is allowed
 a type is needed, which defines the type of the reifier. If the type is not needed, just use 
-`tmdm:subject` as type. 
+"tmdm:subject" as type. 
   
-* *scope:* With the scope constraint is defined, which scoping types may be used for names using this 'Name Type'.
-The scope constraint, as we see later consists of 3 properties: the scoping type, the minimum occurrence (`cardMin`)
-and the maximum occurrence (`cardMax`). To add a 'Scope Constraint' to the type, press `Add` and select the 'Scope Types'
+* *scope:* With the scope constraint is defined, which scoping types may be used for names using this name type.
+The scope constraint, as we see later consists of 3 properties: the scoping type, the minimum occurrence (*cardMin*)
+and the maximum occurrence (*cardMax*). To add a scope constraint to the type, press *Add* and select the 'Scope Types'
 which may be used as scope. The cardinality values can be changed in the table. To remove a constraint, select 
-it in the table and afterwards press `Remove`. If you need to create a new scoping type, just press `New...`. The 
-wizard to create a 'Topic Type' appears and after filling out the wqizard, a new constraint will created using the new type.
+it in the table and afterwards press *Remove*. If you need to create a new scoping type, just press *New...*. The 
+wizard to create a topic type appears and after filling out the wizard, a new constraint will created using the new type.
 
-NOTE: If you create a new 'Topic Type' for a 'Scope Constraint' it won't be removed if you remove the 'Scope Constraint'.  
+NOTE: If you create a new topic type for a scope constraint it won't be removed if you remove the scope constraint.  

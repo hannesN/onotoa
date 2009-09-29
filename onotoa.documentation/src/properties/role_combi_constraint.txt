@@ -1,24 +1,24 @@
 === Role Combination Constraint ===
 
-:rcc: Role Combination Constraint
+:rcc: role combination constraint
 
-The '{rcc}' is used to constraint the possible variations of players and role.
+The {rcc} is used to constraint the possible variations of players and role.
 
-For instance given three topic types "city", "state" and "continent" and an association type "contains". We know, that if a state conatins a specific, 
+For instance given three topic types "city", "state" and "continent" and an association type "contains". We know, that if a state contains a specific, 
 the continent containing this state also contains the city. So we don't want to have explicitly a relationship "continent" contains "city". With the role 
 combination constraint we can specify that if the role "container" in the association "contains" is played by "continent", the role "containee" may only 
 be played by "state". 
 
-In _Onotoa_ you would say: The 'Role Type' is "container" and the 'Topic Type' is "continent". The 'Other Role' is "containee" and the 'Other Topic Type' is
+In _Onotoa_ you would say: The role type is "container" and the topic type is "continent". The other role is "containee" and the other topic type is
 "state".  
 
-The '{rcc}' is a property of 'Association Type' so you can find it an additional tab in the 'Association Type' property page.
+The {rcc} is a property of association type so you can find it an additional tab in the association type property page.
 
-The properties of the '{rcc}' are:
+The properties of the {rcc} are:
 
 * *Role Type* The first of the two roles.
 
-* *Topic Type* The player which plays the role given in 'Role Type'.
+* *Topic Type* The player which plays the role given in role type.
 
 * *Other Role* The second role, which player is dependent of the first player/role combination.
 
@@ -26,12 +26,12 @@ The properties of the '{rcc}' are:
 
 
 
-.Property Page for '{rcc}'
+.Property Page for {rcc}
 image::images/role_comb_constr_pp.png[scaledwidth="100%"]
 
-To add a new '{rcc}' press the *Add...* button and fill use the apearing dialog.
+To add a new {rcc} press the *Add...* button and fill use the appearing dialog.
 
-.Dialog to create a new '{rcc}'
+.Dialog to create a new {rcc}
 image::images/role_comb_constr_dialog.png[scaledwidth="60%", align="center"]
 
 If no specific role combination is specified for the players all combinations are valid.  

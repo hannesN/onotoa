@@ -1,6 +1,6 @@
 === Prefix ===
 
-A Prefix is used to shorten a IRI used in subject identifier or subject locator. Imagine all subject identifier start with:
+A prefix is used to shorten a IRI used in subject identifier or subject locator. Imagine all subject identifier start with:
 http://onotoa.topicmapslab.de/example/topics/. A topic for person could have the subject identifier http://onotoa.topicmapslab.de/example/topics/person.
 Anoter topic has the subject identifier http://onotoa.topicmapslab.de/example/topics/corporation.
 
