@@ -16,9 +16,10 @@ image::images/diagram_pp.png[scaledwidth="100%"]
 Another top level element is the 'TopicMapSchema'. This element contains all the elements of the schema, despite the graphical 
 representations. 
 
-The properties of a 'TopicMapSchema' are:
+The properties of a topic map schema are:
+
 * *Name:* The name of the schema.
-* *Base Locator* The base locator, used for automatic subject identifier generation. 
+* *Base Locator:* The base locator, used for automatic subject identifier generation. 
 
 
 .Property Page of 'TopicMapSchema'

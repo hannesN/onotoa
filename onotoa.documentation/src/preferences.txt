@@ -1,6 +1,6 @@
 == Preferences ==
 
-NOTE: If you are using _Onotoa_ within an eclipse installation, you might only want to read <<_identifier_assists>> and <<_diagram_colors>> 
+NOTE: If you are using _Onotoa_ within an eclipse installation, you might only want to read <<_identifier_assists>> and <<_diagram_colours>> 
 
 _Onotoa_ provides a preference dialog, which will be explained now. To open it just click *Window->Preferences...* in the menu bar.
 
@@ -39,29 +39,29 @@ you can deactivate it by uncheck the checkbox next to the name. Check it again, 
 [[provider]]
 image::images/provider_pf.png[scaledwidth="100%"]
 
-=== Diagram Colors ===
+=== Diagram colours ===
 
-The colors of a diagram can be changed in _Onotoa_. THis might coming handy if the default color scheme doesn't look good, for instance on a beamer.
+The colours of a diagram can be changed in _Onotoa_. THis might coming handy if the default colour scheme doesn't look good, for instance on a beamer.
 
-_Onotoa_ supports color scheme. A color scheme is one setting of colors for topic types and comments. Additionally a secondary color and the font color
+_Onotoa_ supports colour scheme. A colour scheme is one setting of colours for topic types and comments. Additionally a secondary colour and the font colour
 can be set. 
 
-A list of schemes is shown, when you select *Diagram Colors* in the category tree (see <<color_scheme_list>>).
+A list of schemes is shown, when you select *Diagram Colors* in the category tree (see <<colour_scheme_list>>).
  
-.Preferences for Color Schemes
-[[color_scheme_list]]
+.Preferences for colour Schemes
+[[colour_scheme_list]]
 image::images/diagram_1_pf.png[scaledwidth="100%"]
 
-To select a scheme, use the check box left of the name of the scheme. To create a new one press the *Add...* button and the 'Color Scheme Editor' will open
-(see <<color_scheme_dialog>>). Enter a name of the scheme and choose the colors, by pressing the buttons next to the label.
-If you want to use gradients, like the default color, check the *Use Gradient* button and choose a secondary color for the topic type and comment representation.
-The gradient will go from the primary color on the top to the secondary color at the bottom.
+To select a scheme, use the check box left of the name of the scheme. To create a new one press the *Add...* button and the colour scheme editor will open
+(see <<colour_scheme_dialog>>). Enter a name of the scheme and choose the colours, by pressing the buttons next to the label.
+If you want to use gradients, like the default colour, check the *Use Gradient* button and choose a secondary colour for the topic type and comment representation.
+The gradient will go from the primary colour on the top to the secondary colour at the bottom.
 
-.Preferences for Color Schemes
-[[color_scheme_dialog]]
+.Preferences for Colour Schemes
+[[colour_scheme_dialog]]
 image::images/diagram_2_pf.png[scaledwidth="50%"]
 
-It is possible to export your color scheme list and import it to another installation of _Onotoa_. 
+It is possible to export your colour scheme list and import it to another installation of _Onotoa_. 
 
 
-WARNING: If you import color schemes, all schemes already installed are deleted.
+WARNING: If you import colour schemes, all schemes already installed are deleted.

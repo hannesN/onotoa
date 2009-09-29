@@ -64,8 +64,8 @@ these templates it is possible to create a schema via any text editor.
 
 _Onotoa_ is an editor for TMCL. But instead of editing a text file, _Onotoa_ 
 let you create the schema in a visual editor. The
-visualization is based on the GTM level 1 standard (see 
-http://isotopicmaps.org/gtm/). This standard is far from finalized, so
+visualisation is based on the GTM level 1 standard (see 
+http://isotopicmaps.org/gtm/). This standard is far from finalised, so
 some changes had to be made. With _Onotoa_ it is possible to create schemas 
 visually. As the old saying "a picture says more than thousand words" states,
 having a diagram which is easy to understand is more clearer than having 
@@ -77,6 +77,8 @@ already created schemas and after that create some diagrams.
 _Onotoa_ is based on the popular eclipse platform (see http://www.eclispe.org).
 
 This handbook will explain the functionality of _Onotoa_. 
+
+The first part will show you how to use _Onotoa_:
 In <<_getting_started>> what is needed to install _Onotoa_ will be explained.
 This chapter also introduces the different parts of _Onotoa_ and shows how to 
 create the first diagram.
@@ -85,10 +87,17 @@ In <<_property_details_view>> the input masks for all editable elements be
 explained. It also explains the elements, there properties and
 their relationship to TMCL.
 
-The <<_the_model_view>> explains the part of \_Onotoa\_ which provides an 
+The <<_the_model_view>> explains the part of _Onotoa_ which provides an 
 overview of the topic map schema. It provides some functionality, like the
 creation deletion of elements. These are explained in this chapter.
 
 The visual editor will be explained in <<_the_diagram_editor>>. Not only will 
 the functions for creating and deleting elements explained, the 
-visualization of the schema elements is explained in details.
+visualisation of the schema elements is explained in details.
+
+The last chapter of the first part, <<_preferences>> will explain, how _Onotoa_ can be configured.
+
+The second part of this handbook is for developer, who want to extend _Onotoa_.
+In <<_what_you_need_to_extend_onotoa>> will explained what you need to extend _Onotoa_. 
+The following <<_create_a_psiprovider>> will be an example plug-in created, which will be
+deployed in <<_deploy_the_new_plug_ins>>. 

@@ -6,7 +6,7 @@ I assume you created the plug-in described in <<_create_a_psiprovider>>.
 === Create a feature ===
 
 As mentioned earlier, _Onotoa_ can not install plug-ins. To create a installable unit, you need a feature. A feature
-bundles a set of plug-ins and contains a set of meta data like licencing information.
+bundles a set of plug-ins and contains a set of meta data like licensing information.
 
 To create a feature, use *File->New->Other...* and select  *Feature Project*.
 Name the feature "de.topicmapslab.onotoa.psiprovider_feature".

@@ -1,8 +1,8 @@
 == The Model View ==
 
-The *Model View* is the core of Onotoa. It represents the schema, visualizing it as a tree. The state of the
+The *Model View* is the core of _Onotoa_. It represents the schema, visualising it as a tree. The state of the
 schema is saved as attribute of the *Model View*. The diagram editors are just views on the model, or parts 
-if only a few elements of the schema are visualized in a diagram. This makes it possible to create multiple diagrams
+if only a few elements of the schema are visualised in a diagram. This makes it possible to create multiple diagrams
 to realize different views of the same schema.
 
 
@@ -31,15 +31,15 @@ To select a node, just click on the node with the left mouse button.
 
 The node 'Diagrams' is the parent of all nodes representing diagrams. 
 
-To create a new diagram, use the context menu of the 'Diagrams' node. It contains one entry,  'Create New Diagram...'. Choose this entry, 
+To create a new diagram, use the context menu of the 'Diagrams' node. It contains one entry,  *Create New Diagram...*. Choose this entry, 
 by clicking with the left mouse button on it and a dialog appears and asks for the name of the new diagram.
-If you want to abort, just press the 'Cancel' button. 
+If you want to abort, just press the *Cancel* button. 
 
 Every diagram must have a different name, so if you enter a name, which is already used, it is 
-not possible to press 'OK'. After pressing 'OK' a new diagram is created and an editor is automatically opened. You can also recognize, that the 
+not possible to press *OK*. After pressing *OK* a new diagram is created and an editor is automatically opened. You can also recognize, that the 
 node 'Diagrams' got a new child node labelled with the name of the diagram.
 
-.Context menu of 'Diagrams' in the Model View
+.Context menu of 'Diagrams' in the *Model View*
 [caption="Figure:"]
 image::images/create_diagram_ctx.png[scaledwidth="60%"]
 
@@ -54,17 +54,17 @@ To reopen a closed *Diagram Editor* just double click on the node representing t
 
 === Managing the schema ===
 
-A Topic Maps schema consists of topic types and their specializations and constraints, which are associated with each other.
+A Topic Maps schema consists of topic types and their specialisations and constraints, which are associated with each other.
 The *Model View* groups the elements of the schema by the topic type. The main node of the Topic Maps schema is labelled as
-'Topic Map Schema'. It represents the current schema. If you select it, the property page of the schema is shown in the
+topic map schema. It represents the current schema. If you select it, the property page of the schema is shown in the
 *Property Details View* which provide an input mask for the schema name and a base locator. For more information see
 <<_topic_map_schema>>.
 
  
 With the *Model View* it is possible to create almost every schema element, by using the context menu of the different nodes. 
 The properties of new elements can be edited by selecting them and fill out their property page in the *PropertyDetails Views*.
-The first a user should do is selecting the property page of the node 'Topic Map Schema'. Especially the property *base locator* is
-getting handy while creating new topic types. Select the node 'Topic Map Schema' and enter the URL "http://onotoa.topicmapslab.de/example".
+The first a user should do is selecting the property page of the node topic map schema. Especially the property *base locator* is
+getting handy while creating new topic types. Select the node topic map schema and enter the URL "http://onotoa.topicmapslab.de/example".
 The base locator is used to create a subject identifier for any new topic type created. The identifier is build by using the base locator 
 and appending the name. In this example, creating a topic type with the name "person" the subject identifier  "http://onotoa.topicmapslab.de/example/person" is
 created automatically.  
@@ -72,22 +72,22 @@ created automatically.
 
 After setting the base locator it's time to create some topic types. Mostly you only need to create the topic types of you schema. 
 Although it is possible, it is not necessary to create name, association, occurrence or role types.
-These specializations of topic type can be created on demand in the property pages.
+These specialisations of topic type can be created on demand in the property pages.
 
-To create a new topic type person, use the context menu of the node 'Topic Type'. Choose 'Create TopicType...' and a dialog opens to 
+To create a new topic type person, use the context menu of the node topic type. Choose *Create TopicType...* and a dialog opens to 
 create a new topic type, like in  <<new_topic_type>>.
 
 .New Topic Type Wizard
 [[new_topic_type]]
 image::images/new_tt_dialog.png[scaledwidth="100%"]
 
-Right now _Onotoa_ only supports one name per Topic. When the topic is used to type a constraint, the name is visualized therefor _Onotoa_ 
+Right now _Onotoa_ only supports one name per topic. When the topic is used to type a constraint, the name is visualised therefore _Onotoa_ 
 forbids topics with the same name. If the schema has a base locator, which it should have right now, you'll realize, that the subject identifier
 text field is automatically filled with the URL created with the base locator.
 
 Enter the name "Person" and you'll see the topic gets a subject identifier which is "http://onotoa.topicmapslab.de/example/person".
 You may change the identifier by editing the subject identifier text field. After modifying the subject identifier it won't be changed anymore when you
-change the name. You may recognize while typing a popup window occurs, which show a list of proposals for you're subject identifier. You can navigate
+change the name. You may recognise while typing a popup window occurs, which show a list of proposals for you're subject identifier. You can navigate
 through the list with the up and down keys. Select one by pressing Enter. The proposals are filtered by the text you already wrote. If you entered
 "http://psi" only identifier starting with that text will be in the proposal list. 
 
@@ -105,7 +105,7 @@ proposed.
 of subject identifiers after you entered a search string. _Onotoa_ uses the name of the topic type and asks for subject identifiers. So it is advised
 to enter a name first before you enter the subject identifier.
 
-NOTE: Sometimes the connection to the subj3ct server is to slow to get results before the timeout. Therefor it may happen that you get a shorter
+NOTE: Sometimes the connection to the subj3ct server is to slow to get results before the timeout. Therefore it may happen that you get a shorter
 proposal list before you restart the filtering by entering another letter in the subject identifier text field. If you don't want to use the proposal provider
 you can deactivate them in the preferences.
 
@@ -115,10 +115,10 @@ After the topic "Person" was created it is possible to add some constraints to t
 
 * *Delete:* Deletes the topic type. This removes all topic representations in all the diagrams of the schema, too.
 
-* *Create Name Constraint:* Creates a new name constraint, using the default name-type, specified by the TMDM and the default cardinality
+* *Create Name Constraint:* Creates a new name constraint, using the default name type, specified by the TMDM and the default cardinality
 which is 0..* .
 
-* *Create Occurrence Constraint:* Creates a new occurrence constraint, using tmdm:subject as type, specified by the TMCL standard and the default cardinality
+* *Create Occurrence Constraint:* Creates a new occurrence constraint, using "tmdm:subject" as type, specified by the TMCL standard and the default cardinality
 which is 0..* .
 
 * *Create Subject Identifier Constraint:* Creates a new subject identifier constraint, using the default cardinality which is 0..* and the default regular expression ".*".
