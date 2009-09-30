@@ -162,7 +162,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		} else if (model instanceof SubjectIdentifierConstraint) {
 			type = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 		} else if (model instanceof SubjectLocatorConstraint) {
-			type = ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+			type = ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 		}
 		AbstractConstraint ac = (AbstractConstraint) model;
 		cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) ac

@@ -166,7 +166,7 @@ class Test {
 		slc.setCardMin("1");
 		slc.setCardMax("1");
 		slc.setRegexp("ort:.*");
-		tt.getSubjectLocatorConstraint().add(slc);
+		tt.getSubjectLocatorConstraints().add(slc);
 
 		TopicType tt2 = idx.createTopicType(KindOfTopicType.TOPIC_TYPE);
 		tt2.setName("Boss");

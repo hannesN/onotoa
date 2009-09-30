@@ -506,7 +506,7 @@ public class OnotoaBuilder {
 	    Topic t = getConstrainedPlayer(constr, constraintStatement);
 	    if ( (t!=null) && (t!=subject) )
 	    	trc.setType(getTopic(t));
-	    tt.setTopicReifiesConstraint(trc);
+	    tt.getTopicReifiesConstraints().add(trc);
     }
 
 	private void createRoleCombinationConstraint(TopicType tt, TopicType at, Topic constr) {
@@ -668,7 +668,7 @@ public class OnotoaBuilder {
 
 		setCardinality(constr, slc);
 		setDocumentation(slc, constr);
-		tt.getSubjectLocatorConstraint().add(slc);
+		tt.getSubjectLocatorConstraints().add(slc);
 	}
 
 	private void setRegularExpression(Topic constr, AbstractRegExpConstraint ac) {

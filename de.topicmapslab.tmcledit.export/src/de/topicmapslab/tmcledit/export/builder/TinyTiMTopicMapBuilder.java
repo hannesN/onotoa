@@ -266,7 +266,7 @@ public class TinyTiMTopicMapBuilder {
 				createConstraints(otc, t);
 			}
 			
-			for (SubjectLocatorConstraint slc : topicType.getSubjectLocatorConstraint()) {
+			for (SubjectLocatorConstraint slc : topicType.getSubjectLocatorConstraints()) {
 				createLocatorConstraint(slc, t);
 			}
 			

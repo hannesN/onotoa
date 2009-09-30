@@ -260,7 +260,7 @@ public class TMCLTopicMapBuilder {
 			setSubjectIdentifierConstraint(t, sic);
 		}
 
-		for (SubjectLocatorConstraint slc : type.getSubjectLocatorConstraint()) {
+		for (SubjectLocatorConstraint slc : type.getSubjectLocatorConstraints()) {
 			setSubjectLocatorConstraint(t, slc);
 		}
 
@@ -457,24 +457,23 @@ public class TMCLTopicMapBuilder {
 	}
 	
 	private void setTopicReifiesConstraint(TopicType tt) {
-		TopicReifiesConstraint trc = tt.getTopicReifiesConstraint();
-		if (trc==null)
-			return;
-		Topic constr = createConstraint(TMCL.TOPIC_REIFIES_CONSTRAINT);
-		addDocumentationOccurrences(constr, trc);
-		constr.createOccurrence(createTopic(TMCL.CARD_MIN), trc.getCardMin(), XSD.INTEGER);
-		constr.createOccurrence(createTopic(TMCL.CARD_MAX), trc.getCardMax(), XSD.INTEGER);
-		createConstrainedTopicType(createTopic(tt), constr);
-
-		if (!("0".equals(trc.getCardMin()) &&  (trc.getCardMin().equals(trc.getCardMax())) )) {
-			TopicType type = trc.getType();
-			if (type==null)
-				createConstrainedStatement(createTopic(TMDM.SUBJECT), constr);
-			else
-				createConstrainedStatement(createTopic(type), constr);
+		for (TopicReifiesConstraint trc : tt.getTopicReifiesConstraints()) {
+			Topic constr = createConstraint(TMCL.TOPIC_REIFIES_CONSTRAINT);
+			addDocumentationOccurrences(constr, trc);
+			constr.createOccurrence(createTopic(TMCL.CARD_MIN), trc.getCardMin(), XSD.INTEGER);
+			constr.createOccurrence(createTopic(TMCL.CARD_MAX), trc.getCardMax(), XSD.INTEGER);
+			createConstrainedTopicType(createTopic(tt), constr);
+	
+			if (!("0".equals(trc.getCardMin()) &&  (trc.getCardMin().equals(trc.getCardMax())) )) {
+				TopicType type = trc.getType();
+				if (type==null)
+					createConstrainedStatement(createTopic(TMDM.SUBJECT), constr);
+				else
+					createConstrainedStatement(createTopic(type), constr);
+			}
+			
+			setSchema(constr);
 		}
-		
-		setSchema(constr);
 
 	}
 

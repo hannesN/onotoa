@@ -23,12 +23,12 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOccurrenceConstraints <em>Occurrence Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getNameContraints <em>Name Contraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraints <em>Subject Locator Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOverlap <em>Overlap</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getLocators <em>Locators</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraint <em>Topic Reifies Constraint</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraints <em>Topic Reifies Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -191,20 +191,20 @@ public interface TopicType extends TMCLConstruct {
 	EList<SubjectIdentifierConstraint> getSubjectIdentifierConstraints();
 
 	/**
-	 * Returns the value of the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Subject Locator Constraint</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Subject Locator Constraints</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Subject Locator Constraint</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_SubjectLocatorConstraint()
+	 * @return the value of the '<em>Subject Locator Constraints</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_SubjectLocatorConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<SubjectLocatorConstraint> getSubjectLocatorConstraint();
+	EList<SubjectLocatorConstraint> getSubjectLocatorConstraints();
 
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
@@ -295,29 +295,19 @@ public interface TopicType extends TMCLConstruct {
 	EList<String> getLocators();
 
 	/**
-	 * Returns the value of the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.TopicReifiesConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Topic Reifies Constraint</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Topic Reifies Constraints</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Topic Reifies Constraint</em>' containment reference.
-	 * @see #setTopicReifiesConstraint(TopicReifiesConstraint)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_TopicReifiesConstraint()
+	 * @return the value of the '<em>Topic Reifies Constraints</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_TopicReifiesConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TopicReifiesConstraint getTopicReifiesConstraint();
-
-	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraint <em>Topic Reifies Constraint</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Topic Reifies Constraint</em>' containment reference.
-	 * @see #getTopicReifiesConstraint()
-	 * @generated
-	 */
-	void setTopicReifiesConstraint(TopicReifiesConstraint value);
+	EList<TopicReifiesConstraint> getTopicReifiesConstraints();
 
 } // TopicType

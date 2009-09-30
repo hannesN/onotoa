@@ -16,6 +16,9 @@
                 </occurrenceConstraint>
             </occurrenceConstraints>
             <topicRefies cardMax="0" cardMin="0"/>
+            <topicRefies cardMax="1" cardMin="0">
+                <topictypeRef ref="topictypes.8"/>
+            </topicRefies>
         </topicType>
         <topicType kind="TopicType">
             <name>Company</name>
@@ -56,6 +59,10 @@
         <topicType datatype="xsd:anyType" kind="OccurrenceType" regExp=".*">
             <name>Vita</name>
             <subjectIdentifier>http://onotoa.topicmapslab.de/example/vita</subjectIdentifier>
+        </topicType>
+        <topicType kind="TopicType">
+            <name>arbeitet</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/arbeitet</subjectIdentifier>
         </topicType>
         <associationConstraint>
             <topictypeRef ref="topictypes.2"/>

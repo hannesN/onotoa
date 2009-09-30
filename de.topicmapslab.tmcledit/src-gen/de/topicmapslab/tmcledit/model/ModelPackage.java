@@ -233,13 +233,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TMCL_CONSTRUCT_FEATURE_COUNT + 8;
+	int TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -278,13 +278,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__LOCATORS = TMCL_CONSTRUCT_FEATURE_COUNT + 12;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT = TMCL_CONSTRUCT_FEATURE_COUNT + 13;
+	int TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>Topic Type</em>' class.
@@ -1867,13 +1867,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -1912,13 +1912,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_TOPIC_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -2057,13 +2057,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE__SUBJECT_LOCATOR_CONSTRAINT = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int ASSOCIATION_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -2102,13 +2102,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__LOCATORS = SCOPED_TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE__TOPIC_REIFIES_CONSTRAINT = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int ASSOCIATION_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -2274,13 +2274,13 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE__SUBJECT_LOCATOR_CONSTRAINT = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int OCCURRENCE_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -2319,13 +2319,13 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE__LOCATORS = SCOPED_TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE__TOPIC_REIFIES_CONSTRAINT = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int OCCURRENCE_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -2582,13 +2582,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int ROLE_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -2627,13 +2627,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE__TOPIC_REIFIES_CONSTRAINT = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int ROLE_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The number of structural features of the '<em>Role Type</em>' class.
@@ -2854,13 +2854,13 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE__SUBJECT_LOCATOR_CONSTRAINT = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int NAME_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -2899,13 +2899,13 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__LOCATORS = SCOPED_TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE__TOPIC_REIFIES_CONSTRAINT = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int NAME_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -3208,13 +3208,13 @@ public interface ModelPackage extends EPackage {
 	int REIFIABLE_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int REIFIABLE_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -3253,13 +3253,13 @@ public interface ModelPackage extends EPackage {
 	int REIFIABLE_TOPIC_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int REIFIABLE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Reifier Constraint</b></em>' containment reference.
@@ -3398,13 +3398,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_REIFIABLE_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_REIFIABLE_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int SCOPED_REIFIABLE_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = SCOPED_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -3443,13 +3443,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_REIFIABLE_TOPIC_TYPE__LOCATORS = SCOPED_TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_REIFIABLE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int SCOPED_REIFIABLE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -3634,13 +3634,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_REG_EXP_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Subject Locator Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_REG_EXP_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT;
+	int ABSTRACT_REG_EXP_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -3679,13 +3679,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_REG_EXP_TOPIC_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
 
 	/**
-	 * The feature id for the '<em><b>Topic Reifies Constraint</b></em>' containment reference.
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_REG_EXP_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT;
+	int ABSTRACT_REG_EXP_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Reg Exp</b></em>' attribute.
@@ -3917,15 +3917,15 @@ public interface ModelPackage extends EPackage {
 	EReference getTopicType_SubjectIdentifierConstraints();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint <em>Subject Locator Constraint</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraints <em>Subject Locator Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Subject Locator Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraint()
+	 * @return the meta object for the containment reference list '<em>Subject Locator Constraints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraints()
 	 * @see #getTopicType()
 	 * @generated
 	 */
-	EReference getTopicType_SubjectLocatorConstraint();
+	EReference getTopicType_SubjectLocatorConstraints();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}'.
@@ -3972,15 +3972,15 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTopicType_Locators();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraint <em>Topic Reifies Constraint</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraints <em>Topic Reifies Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Topic Reifies Constraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraint()
+	 * @return the meta object for the containment reference list '<em>Topic Reifies Constraints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraints()
 	 * @see #getTopicType()
 	 * @generated
 	 */
-	EReference getTopicType_TopicReifiesConstraint();
+	EReference getTopicType_TopicReifiesConstraints();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractRegExpConstraint <em>Abstract Reg Exp Constraint</em>}'.
@@ -5117,12 +5117,12 @@ public interface ModelPackage extends EPackage {
 		EReference TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = eINSTANCE.getTopicType_SubjectIdentifierConstraints();
 
 		/**
-		 * The meta object literal for the '<em><b>Subject Locator Constraint</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Subject Locator Constraints</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT = eINSTANCE.getTopicType_SubjectLocatorConstraint();
+		EReference TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = eINSTANCE.getTopicType_SubjectLocatorConstraints();
 
 		/**
 		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
@@ -5157,12 +5157,12 @@ public interface ModelPackage extends EPackage {
 		EAttribute TOPIC_TYPE__LOCATORS = eINSTANCE.getTopicType_Locators();
 
 		/**
-		 * The meta object literal for the '<em><b>Topic Reifies Constraint</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT = eINSTANCE.getTopicType_TopicReifiesConstraint();
+		EReference TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = eINSTANCE.getTopicType_TopicReifiesConstraints();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractRegExpConstraintImpl <em>Abstract Reg Exp Constraint</em>}' class.

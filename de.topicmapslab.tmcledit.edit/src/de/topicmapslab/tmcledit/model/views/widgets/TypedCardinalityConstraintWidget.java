@@ -59,6 +59,10 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	private Button addButton;
 	private Button newButton;
 	private Button removeButton;
+	
+	private int minCardinality = 0;
+	private int maxCardinality = -1;
+	
 
 	private CommandStack commandStack;
 	private List<? extends AbstractTypedCardinalityConstraint> input;
@@ -176,7 +180,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		}
 
 		tableViewer = new TableViewer(table);
-		tableViewer.setCellEditors(new CellEditor[] { null, getTextCellEditor(), getTextCellEditor() });
+		tableViewer.setCellEditors(new CellEditor[] { null, getTextCellEditor(true), getTextCellEditor(false) });
 		tableViewer.setColumnProperties(TABLE_PROPS);
 		tableViewer.setContentProvider(new ArrayContentProvider());
 		tableViewer.setLabelProvider(new ScopeTableLabelProvider());
@@ -190,22 +194,38 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			tableViewer.refresh(msg.getNotifier());
 	}
 
-	private CellEditor getTextCellEditor() {
+	private CellEditor getTextCellEditor(final boolean isMin) {
 		TextCellEditor editor = new TextCellEditor(tableViewer.getTable());
 		editor.setValidator(new ICellEditorValidator() {
-
+			boolean min = isMin; 
 			public String isValid(Object value) {
 				String val = (String) value;
 				if (val.length() == 0)
 					return "No text given";
-				if (val.equals("*"))
-					return null;
+				if (val.equals("*")) {
+					if (!min)
+						return null;
+					else
+						return "No infinity for card min allowed";
+				}
 				char[] chars = ((String) value).toCharArray();
 				for (int i = 0; i < chars.length; i++) {
 					if (!Character.isDigit(chars[i])) {
-						return "use only digits or *";
+						return "use only digits";
 					}
 				}
+				
+				int v = Integer.parseInt(val);
+				if (min) {
+					if (v<minCardinality) {
+						return "cardMin must be at least:"+minCardinality;
+					}
+				} else {
+					if (v>maxCardinality) {
+						return "cardMax must be at least:"+maxCardinality;
+					}
+				}
+				
 				return null;
 			}
 		});
@@ -223,6 +243,14 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	public Button getRemoveButton() {
 		return removeButton;
 	}
+	
+	public void setMaxCardinality(int maxCardinality) {
+	    this.maxCardinality = maxCardinality;
+    }
+	
+	public void setMinCardinality(int minCardinality) {
+	    this.minCardinality = minCardinality;
+    }
 
 	private class ConstraintCellModifier implements ICellModifier {
 
@@ -246,6 +274,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			TableItem item = (TableItem) element;
 			AbstractTypedCardinalityConstraint constraint = (AbstractTypedCardinalityConstraint) item.getData();
 			boolean isMin = true;
+			
 			if (property.equals(TABLE_PROPS[1])) {
 				isMin = true;
 			} else if (property.equals(TABLE_PROPS[2])) {

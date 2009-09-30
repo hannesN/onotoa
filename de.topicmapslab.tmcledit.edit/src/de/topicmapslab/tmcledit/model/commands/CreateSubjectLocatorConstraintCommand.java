@@ -34,7 +34,7 @@ public class CreateSubjectLocatorConstraintCommand extends AbstractCommand {
 	}
 	
 	public void execute() {
-		topicType.getSubjectLocatorConstraint().add(subjectLocatorConstraint);
+		topicType.getSubjectLocatorConstraints().add(subjectLocatorConstraint);
 	}
 
 	public void redo() {
@@ -43,7 +43,7 @@ public class CreateSubjectLocatorConstraintCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		topicType.getSubjectLocatorConstraint().remove(subjectLocatorConstraint);
+		topicType.getSubjectLocatorConstraints().remove(subjectLocatorConstraint);
 	}
 	
 	@Override

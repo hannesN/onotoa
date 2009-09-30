@@ -473,9 +473,9 @@ class ModelHandler extends DefaultHandler {
 	private void addSubjectLocatorConstraint(Attributes attributes) {
 	    if (currTopicType != null) {
 	    	SubjectLocatorConstraint slc = (SubjectLocatorConstraint) createIdentityConstraint(attributes,
-	    	        ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
+	    	        ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS);
 	    	constructs.add(slc);
-	    	currTopicType.getSubjectLocatorConstraint().add(slc);
+	    	currTopicType.getSubjectLocatorConstraints().add(slc);
 	    }
     }
 
@@ -685,7 +685,7 @@ class ModelHandler extends DefaultHandler {
 		}
 		
 		if (E_TOPIC_REIFIES_CONSTRAINT.equals(qName)) {
-			currTopicType.setTopicReifiesConstraint( (TopicReifiesConstraint) constructs.pop());
+			currTopicType.getTopicReifiesConstraints().add( (TopicReifiesConstraint) constructs.pop());
 			state = State.TOPIC_TYPE;
 		}
 		

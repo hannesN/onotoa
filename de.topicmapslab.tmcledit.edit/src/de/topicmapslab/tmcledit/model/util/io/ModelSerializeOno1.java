@@ -330,9 +330,9 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			typeNode.appendChild(idNode);
 		}
 		
-		if (tt.getSubjectLocatorConstraint().size()>0) {
+		if (tt.getSubjectLocatorConstraints().size()>0) {
 			Element idNode = document.createElement(E_SUBJECT_LOCATOR_CONSTRAINTS);
-			for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraint()) {
+			for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraints()) {
 				addSubjectLocatorConstraint(slc, idNode);
 			}
 			typeNode.appendChild(idNode);
@@ -383,8 +383,8 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			}
 		}
 
-		TopicReifiesConstraint trc = tt.getTopicReifiesConstraint();
-		if (trc!=null) {
+		
+		for (TopicReifiesConstraint trc : tt.getTopicReifiesConstraints()) {
 			Element rNode = document.createElement(E_TOPIC_REIFIES_CONSTRAINT);
 			addCardinalityAttributes(rNode, trc);
 			addTMCLConstructElements(trc, rNode);

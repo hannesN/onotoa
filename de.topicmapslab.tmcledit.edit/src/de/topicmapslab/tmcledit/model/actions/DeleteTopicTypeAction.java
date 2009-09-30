@@ -85,7 +85,7 @@ public class DeleteTopicTypeAction extends Action implements ISelectionChangedLi
 
 			if (construct instanceof SubjectLocatorConstraint)
 				cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
-				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
+				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS);
 			
 			if (construct instanceof AssociationTypeConstraint)
 				cmd = new DeleteAssociationConstraintCommand((AssociationTypeConstraint) construct);

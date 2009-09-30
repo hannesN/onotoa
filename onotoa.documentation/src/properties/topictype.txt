@@ -44,12 +44,14 @@ just add "Car" to the overlap property of "Person". _Onotoa_ automatically adds 
 which sets this property to true. This means the topic type may be used as supertype in a supertype-subtype relationship, but not as type in
 a type-instance relationship.
 
-* *reifies:* The refies property defines a constraint if the topic type can, must or cannot be used as type for reifiers. Additionally it is possible
-to set a type which may be reified by this type. Is non set "tmdm:subject" is used, which indicates any type. To create a reifier constraint,
-activate the check box labelled *constrained* and choose the kind of constraint in the combo box below. You can choose from: *cannot*, which means 
-this type must not used as type for reifiers, *may* which means it may be used as reifier type and *must* which means it has to be a type for
-reifiers. If you allow the topic type to be a type for reifier, you can select from existing topic types to specify which type is refiable by
-topics of this type.
+* *reifies:* The refies property defines a constraint if the topic type may or must be used as reifier for a topic type. The table consists of
+three columns. The first one specifies the type, which instances may be reified by instances of the current topic type. The *cardMin* value is either
+'0' or '1', so is the value of *cardMax* in the third column. If both cardinality values are '0', the current topic type must not be used as reifier for the
+topic type. If both values are '1' the current topic type has to be a reifier for the type. Is *cardMin* '0' and *cardMax* '1' the use of the current topic
+type as reifier for the type is optional. You can create a new topic reifies constraint using the buttons *Add...* and *New...*. The first one opens
+a selection dialog where you can choose, which types can be reified. The latter is used to create a constraint using a new topic type. After pressing
+this button, the new topic type dialog is opened and after filling out the text fields a new constraint is created using this type. Per default the cardinality
+is set to the optional use. You can edit them directly in the table. Click on the value you want to change and edit the value.
 
 .Topic Selection Dialog
 [caption=Figure:]
