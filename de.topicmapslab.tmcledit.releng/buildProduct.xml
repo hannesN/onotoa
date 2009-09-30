@@ -69,7 +69,7 @@
 			<arg value="-Dp2.metadata.repo=${p2.metadata.repo}" />
 			<arg value="-DfeatureList=${featureList}" />
 			<arg value="-Droot=${root}" />
-			<arg value="-Droot.permissions.755=${root.permissions.755}" />
+			<!-- <arg value="-Droot.permissions.755=${root.permissions.755}" />
 			<arg value="-Droot.macosx.carbon.ppc.permissions.755=${root.macosx.carbon.ppc.permissions.755}" />
 			<arg value="-Droot.win32.win32.x86=${root.win32.win32.x86}" />
 			<arg value="-Droot.linux.motif.x86=${root.linux.motif.x86}" />
@@ -80,7 +80,7 @@
 			<arg value="-Droot.macosx.carbon.ppc.link=${root.macosx.carbon.ppc.link}" />
 			<arg value="-Droot.aix.motif.ppc=${root.aix.motif.ppc}" />
 			<arg value="-Droot.hpux.motif.PA_RISC=${root.hpux.motif.PA_RISC}" />
-			<arg value="-Droot.solaris.gtk.sparc=${root.solaris.gtk.sparc}" />
+			<arg value="-Droot.solaris.gtk.sparc=${root.solaris.gtk.sparc}" />-->
 			<arg value="-DbaseDirectory =${baseDirectory }" />
 			<arg value="-DfilteredDependencyCheck=${filteredDependencyCheck}" />
 			<arg value="-DfeatureList =${featureList }" />
@@ -98,9 +98,8 @@
 			<arg value="-DbuildId=${buildId}" />
 			<arg value="-DbuildType=${buildType}" />
 			<arg value="-DbuildLabel=${buildLabel}" />
-			<arg value="-Dzipargs=${zipargs}" />
-			<arg value="-DunzipArgs=${unzipArgs}" />
 			<arg value="-DarchivePrefix=${archivePrefix}" />
+			<arg value="-DarchivesFormat=${archivesFormat}" />
 			<arg value="-DcollectingFolder=${collectingFolder}" />
 			<arg value="-DpackagingProperties =${packagingProperties }" />
 
@@ -114,12 +113,12 @@
 		<!-- moving result from buildDir to builder -->
 		<mkdir dir="${builder}/releases"/>
 		<move todir="${builder}/releases" >
-			<fileset dir="${buildDirectory}/${buildType}.${buildId}">
+			<fileset dir="${buildDirectory}/${buildId}">
 					<include name="*.zip" />
 			</fileset>
 		</move>
 		
-		<delete dir="${buildDirectory}" />
+		<!-- <delete dir="${buildDirectory}" />-->
 		<!-- refresh the workspace -->
 		<!--
 		<echo message="${basedir}" />
