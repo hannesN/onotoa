@@ -97,7 +97,7 @@ public class TreeTopic extends TreeParent {
 				}
 				refresh();
 			}
-		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT) {
+		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS) {
 			if (notification.getEventType() == Notification.ADD) {
 				addChild(new TreeSubjectLocator(getModelView(),  (SubjectLocatorConstraint) notification.getNewValue()));
 				refresh();

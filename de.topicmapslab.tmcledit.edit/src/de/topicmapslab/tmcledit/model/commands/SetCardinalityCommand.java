@@ -74,13 +74,23 @@ public class SetCardinalityCommand extends AbstractCommand {
 	
 	@Override
 	protected boolean prepare() {
-		if (isMin)
+		if (isMin) {
 			oldValue = cardinalityContraint.getCardMin();
-		else
+		} else {
 			oldValue = cardinalityContraint.getCardMax();
+		}
 		
 		if (oldValue.equals(newValue))
 			return false;
+		
+		if (!isMin) {
+			if ("*".equals(newValue))
+				return true;
+			int val = Integer.parseInt(cardinalityContraint.getCardMin());
+			int val2 = Integer.parseInt(newValue);
+			if (val2<val)
+				return false;
+		}
 		
 		return true;
 	}

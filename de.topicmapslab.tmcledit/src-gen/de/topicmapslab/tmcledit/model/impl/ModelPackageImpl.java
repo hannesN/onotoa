@@ -498,7 +498,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTopicType_SubjectLocatorConstraint() {
+	public EReference getTopicType_SubjectLocatorConstraints() {
 		return (EReference)topicTypeEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -543,7 +543,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTopicType_TopicReifiesConstraint() {
+	public EReference getTopicType_TopicReifiesConstraints() {
 		return (EReference)topicTypeEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -1466,12 +1466,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(topicTypeEClass, TOPIC_TYPE__OCCURRENCE_CONSTRAINTS);
 		createEReference(topicTypeEClass, TOPIC_TYPE__NAME_CONTRAINTS);
 		createEReference(topicTypeEClass, TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
-		createEReference(topicTypeEClass, TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINT);
+		createEReference(topicTypeEClass, TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS);
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__KIND);
 		createEReference(topicTypeEClass, TOPIC_TYPE__OVERLAP);
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__NAME);
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__LOCATORS);
-		createEReference(topicTypeEClass, TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINT);
+		createEReference(topicTypeEClass, TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS);
 
 		abstractRegExpConstraintEClass = createEClass(ABSTRACT_REG_EXP_CONSTRAINT);
 		createEAttribute(abstractRegExpConstraintEClass, ABSTRACT_REG_EXP_CONSTRAINT__REGEXP);
@@ -1688,12 +1688,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getTopicType_OccurrenceConstraints(), this.getOccurrenceTypeConstraint(), null, "occurrenceConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_NameContraints(), this.getNameTypeConstraint(), null, "nameContraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_SubjectIdentifierConstraints(), this.getSubjectIdentifierConstraint(), null, "subjectIdentifierConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopicType_SubjectLocatorConstraint(), this.getSubjectLocatorConstraint(), null, "subjectLocatorConstraint", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopicType_SubjectLocatorConstraints(), this.getSubjectLocatorConstraint(), null, "subjectLocatorConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicType_Kind(), this.getKindOfTopicType(), "kind", "TopicType", 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_Overlap(), this.getTopicType(), null, "overlap", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicType_Name(), ecorePackage.getEString(), "name", null, 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicType_Locators(), ecorePackage.getEString(), "locators", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopicType_TopicReifiesConstraint(), this.getTopicReifiesConstraint(), null, "topicReifiesConstraint", null, 0, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopicType_TopicReifiesConstraints(), this.getTopicReifiesConstraint(), null, "topicReifiesConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractRegExpConstraintEClass, AbstractRegExpConstraint.class, "AbstractRegExpConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractRegExpConstraint_Regexp(), ecorePackage.getEString(), "regexp", ".*", 1, 1, AbstractRegExpConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

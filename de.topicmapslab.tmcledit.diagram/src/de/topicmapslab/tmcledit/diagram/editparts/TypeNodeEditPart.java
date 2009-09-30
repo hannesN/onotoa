@@ -267,7 +267,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		list.addAll(topicType.getOccurrenceConstraints());
 		list.addAll(topicType.getNameContraints());
 		list.addAll(topicType.getSubjectIdentifierConstraints());
-		list.addAll(topicType.getSubjectLocatorConstraint());
+		list.addAll(topicType.getSubjectLocatorConstraints());
 		
 		return list;
 	}

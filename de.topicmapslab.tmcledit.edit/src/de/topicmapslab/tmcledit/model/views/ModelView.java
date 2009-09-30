@@ -1004,7 +1004,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				for (SubjectIdentifierConstraint sic : tt.getSubjectIdentifierConstraints()) {
 					to.addChild(new TreeSubjectIdentifier(ModelView.this, sic));
 				}
-				for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraint()) {
+				for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraints()) {
 					to.addChild(new TreeSubjectLocator(ModelView.this, slc));
 				}
 				parent.refresh();

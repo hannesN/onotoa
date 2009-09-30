@@ -18,7 +18,7 @@
         eType="#//NameTypeConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subjectIdentifierConstraints"
         upperBound="-1" eType="#//SubjectIdentifierConstraint" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subjectLocatorConstraint"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subjectLocatorConstraints"
         upperBound="-1" eType="#//SubjectLocatorConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//KindOfTopicType"
         defaultValueLiteral="TopicType"/>
@@ -27,8 +27,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="locators" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="topicReifiesConstraint"
-        eType="#//TopicReifiesConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topicReifiesConstraints"
+        upperBound="-1" eType="#//TopicReifiesConstraint" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TopicId">
     <eLiterals name="SUBJECT_LOCATOR"/>
