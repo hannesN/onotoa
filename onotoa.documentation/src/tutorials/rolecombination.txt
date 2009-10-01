@@ -1,0 +1,25 @@
+=== How to create a role combination constraint ===
+
+////////////////
+
+Convention:  _Onotoa_ 
+Menueinträge und Labels:  *File->New...* 
+
+In <<label>>
+
+.Bildunterschrift
+[[label]]
+image::images/update2_pf.png[scaledwidth="100%"]
+
+
+inline bild:
+image:images/update2_pf.png[scaledwidth="100%"]
+
+Dies ist ein Paragraph.
+
+Dies der folgende.
+
+NOTE: Note to myself...
+
+
+////////////////
