@@ -39,6 +39,10 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 	private ActionFactory.IWorkbenchAction toggleCoolbarAction;
 
+	private IWorkbenchAction aboutAction;
+
+	private IWorkbenchAction prefAction;
+
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -80,11 +84,12 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		
 		register(ActionFactory.IMPORT.create(window));
 		
-		register(ActionFactory.ABOUT.create(window));
+		aboutAction = ActionFactory.ABOUT.create(window);
+		register(aboutAction);
 		
 		register(ActionFactory.EXPORT.create(window));
 		
-		IWorkbenchAction prefAction = ActionFactory.PREFERENCES.create(window);
+		prefAction = ActionFactory.PREFERENCES.create(window);
 		prefAction.setText(getPointText(prefAction.getText()));
 		register(prefAction);
 		
@@ -94,42 +99,47 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 	@Override
 	protected void fillMenuBar(IMenuManager menu) {
 
-			createFileMenu(menu);
-			createEditMenu(menu);
-
-	
+		createFileMenu(menu);
+		createEditMenu(menu);
 		
 		menu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 
-		{
-			IMenuManager menuX = new MenuManager(
-					Messages.ApplicationMenuName_Window,
-					IWorkbenchActionConstants.M_WINDOW);
-			
+		createWindowMenu(menu);
+		createHelpMenu(menu);
+	}
 
-			
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
-			menuX.add(getAction(ActionFactory.RESET_PERSPECTIVE.getId()));
-			
-			if (!isMac())
-				menuX.add(getAction(ActionFactory.PREFERENCES.getId()));
-			menu.add(menuX);
-		}
+	private void createHelpMenu(IMenuManager menu) {
+		IMenuManager menuX = new MenuManager(
+				Messages.ApplicationMenuName_Help,
+				IWorkbenchActionConstants.M_HELP);
 
-		{
-			IMenuManager menuX = new MenuManager(
-					Messages.ApplicationMenuName_Help,
-					IWorkbenchActionConstants.M_HELP);
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_START));
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+		
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_END));
+		
+		ActionContributionItem aboutItem = new ActionContributionItem(aboutAction);
+		aboutItem.setVisible(!isMac());
+		menuX.add(aboutItem);
 
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_START));
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
-			
-			menuX.add(new GroupMarker(IWorkbenchActionConstants.HELP_END));
-			if (!isMac())
-				menuX.add(getAction(ActionFactory.ABOUT.getId()));
+		menu.add(menuX);
+	}
 
-			menu.add(menuX);
-		}
+	private void createWindowMenu(IMenuManager menu) {
+		IMenuManager menuX = new MenuManager(
+				Messages.ApplicationMenuName_Window,
+				IWorkbenchActionConstants.M_WINDOW);
+		
+
+		
+		menuX.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+		menuX.add(getAction(ActionFactory.RESET_PERSPECTIVE.getId()));
+		
+		ActionContributionItem prefItem = new ActionContributionItem(prefAction);
+		prefItem.setVisible(!isMac());
+		menuX.add(prefItem);
+
+		menu.add(menuX);
 	}
 
 	private void createEditMenu(IMenuManager menu) {
