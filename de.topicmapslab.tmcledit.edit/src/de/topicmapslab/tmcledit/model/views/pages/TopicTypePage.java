@@ -498,8 +498,8 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	    
 	    if (model==null)
 	    	return;
-	    
-	    reifiesControl.setInput(getCastedModel().getTopicReifiesConstraints());
+	    if (reifiesControl!=null)
+	    	reifiesControl.setInput(getCastedModel().getTopicReifiesConstraints());
 	}
 	
 	private StringBuffer updateIdentifierts() {
