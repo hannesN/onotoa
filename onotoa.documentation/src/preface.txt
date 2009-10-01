@@ -98,6 +98,6 @@ visualisation of the schema elements is explained in details.
 The last chapter of the first part, <<_preferences>> will explain, how _Onotoa_ can be configured.
 
 The second part of this handbook is for developer, who want to extend _Onotoa_.
-In <<_what_you_need_to_extend_onotoa>> will explained what you need to extend _Onotoa_. 
+In <<_what_you_need_to_extend_onotoa>> the requirements for writing _Onotoa_ plugins are explained.. 
 The following <<_create_a_psiprovider>> will be an example plug-in created, which will be
 deployed in <<_deploy_the_new_plug_ins>>. 
