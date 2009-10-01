@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.5"?>
+
+<target name="Onotoa Target">
+<locations>
+<location path="${eclipse_delta_pack}" type="Directory"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.tptp.platform.batik.feature.group" version="4.4.0.v200812160100-7H8H-FE-z0VXTWlyZVjcO"/>
+<unit id="org.eclipse.tptp.platform.batik.pdf.feature.group" version="4.4.0.v200812160100-25-7w311917142611"/>
+<unit id="org.eclipse.ecf.core.feature.group" version="3.0.1.v20090916-2238"/>
+<unit id="org.eclipse.ecf.core.source.feature.group" version="3.0.1.v20090916-2238"/>
+<unit id="org.eclipse.help.source.feature.group" version="1.1.1.R35x_v20090811-7e7eFAnFEx2XZoYz0uPgIfwD"/>
+<unit id="org.eclipse.help.feature.group" version="1.1.1.R35x_v20090811-7e7eFAnFEx2XZoYz0uPgIfwD"/>
+<unit id="org.eclipse.equinox.p2.user.ui.source.feature.group" version="1.1.1.R35x_v20090811-7u6FbEFYXk1qWdbS0gnpRg2932"/>
+<unit id="org.eclipse.pde.source.feature.group" version="3.5.1.R35x_v20090811-7Z7_F9zFDX-aT6Ywvh8_S93"/>
+<unit id="org.eclipse.platform.feature.group" version="3.5.1.R35x_v20090910-9gEeG1_FthkNDSP2odXdThaOu9GFDPn83DGB7"/>
+<unit id="org.eclipse.platform.ide" version="3.5.1.M20090917-0800"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.3.200.R35x_v20090724-7M-FneFF9aMTyz0pw04ONXn"/>
+<unit id="org.eclipse.platform.source.feature.group" version="3.5.1.R35x_v20090910-9gEeG1_FthkNDSP2odXdThaOu9GFDPn83DGB7"/>
+<unit id="org.eclipse.platform.sdk" version="3.5.1.M20090917-0800"/>
+<unit id="org.eclipse.sdk.feature.group" version="3.5.1.R35x_v20090811-7Q7bAIBPVUBVbKSMTyyfpOteKTem7_g2paS1__z-Rrmf4"/>
+<unit id="org.eclipse.rcp.feature.group" version="3.5.1.R35x_v20090811-9SA0FxVFqE70OL1ARMrfcO6e7BA6"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="3.5.1.R35x_v20090811-9SA0FxVFqE70OL1ARMrfcO6e7BA6"/>
+<unit id="org.eclipse.rcp.sdk.id" version="3.5.1.M20090917-0800"/>
+<unit id="org.eclipse.sdk.ide" version="3.5.1.M20090917-0800"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.5.1.R35x_v20090811-7sF9-FRFFR1En_CEJqJkQv5n3BB7"/>
+<unit id="org.eclipse.equinox.p2.user.ui.feature.group" version="1.1.1.R35x_v20090811-7u6FbEFYXk1qWdbS0gnpRg2932"/>
+<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.5.1.R35x_v20090811-8q7BGDeG9lvdam1k4a8lAK-7PD93"/>
+<unit id="org.eclipse.draw2d.sdk.feature.group" version="3.5.1.v20090724-1146-7A7E18yD5DH8HAL4HBHH4BC58x42"/>
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.5.1.v20090724-1146-7G7O2A5WNWaQLaPUaUkgjJfXcQKM"/>
+<unit id="org.eclipse.gef.source.feature.group" version="3.5.1.v20090724-1146-777908193B6696L3DA843563"/>
+<unit id="org.eclipse.gmf.sdk.feature.group" version="2.2.1.v20090814-1000-7C7F1BLxlfAqjMDHunFV5S-_YY-Q"/>
+<unit id="org.eclipse.gmf.runtime.notation.source.feature.group" version="1.2.0.v20090729-2029-33-8s733L3C5715J78"/>
+<unit id="org.eclipse.gmf.runtime.thirdparty.feature.group" version="1.2.0.v20090729-2029-7P8W5FHV2CJug06-fEj-aw311A16"/>
+<repository location="http://download.eclipse.org/releases/galileo"/>
+</location>
+</locations>
+</target>
