@@ -1,0 +1,26 @@
+== What you need to extend Onotoa ==
+
+_Onotoa_ is based on the Eclipse RCP platform. This platform provides a framework to create an application based on modules called bundles. These bundles,
+also called plug-ins are bundled in features. These features can be installed in an application based on Eclipse RCP.
+
+The chapters assume you know how to write eclipse plug-ins, features and update sites.
+If you don't, please read the eclipse documentation and come back later. 
+
+For more information see the documentation at http://www.eclipse.org.
+
+To develop an _Onotoa_ plug-in you need an installation of the Eclipse IDE (at least version 3.5). Verify that you can create plug-in projects. 
+You can do this by try to create a new plug-in project using the New...-wizard.
+
+To create a new plug-in for _Onotoa_ you need the plug-ins in your target platform. The target platform us used to create a set
+of plug-ins which may be used by plug-in projects created in the current workspace. Usually all plug-ins installed in the
+eclipse instance are in the target platform. The target platform can be changed in the preferences.
+
+We need to add the _Onotoa_ plug-ins to the target platform. This is possible in two ways:
+
+* Install the _Onotoa_ features in the eclipse installation using the _Onotoa_ update site (http://onotoa.topicmapslab.de/update) and restart eclipse.
+* Add the plug-ins folder of an _Onotoa_ installation to the target platform. Open the preference page for *Target Platform* and edit the active one.
+In the appearing dialog, press add, select *Directory* and add the path to the plug-ins folder of your _Onotoa_ installation.
+
+NOTE: You need Onotoa 1.1.1 or higher.
+
+After that you are ready to create the first _Onotoa_ plug-in. The different extension points of _Onotoa_ will be explained in the following chapters.
