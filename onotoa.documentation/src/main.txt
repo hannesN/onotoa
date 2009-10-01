@@ -35,4 +35,11 @@ Extending Onotoa
 include::extension.txt[]
 
 
+
+
+Short Tutorials
+================
+
+include::tutorials.txt[]
+
 include::glossary.txt[]
