@@ -534,22 +534,26 @@ public class AnnotationWidget extends Composite {
 
 			if (msg.getNotifier().equals(model)) {
 				if (msg.getEventType() == Notification.ADD) {
-					EObject obj = (EObject) msg.getNewValue();
-					if (obj!=null)
-						obj.eAdapters().add(adapter);
+					if (msg.getNewValue() instanceof EObject) {
+						EObject obj = (EObject) msg.getNewValue();
+						if (obj != null)
+							obj.eAdapters().add(adapter);
+					}
 				}
 				if (msg.getEventType() == Notification.REMOVE) {
-					EObject obj = (EObject) msg.getOldValue();
-					if (obj!=null)
-						obj.eAdapters().add(adapter);
+					if (msg.getOldValue() instanceof EObject) {
+						EObject obj = (EObject) msg.getOldValue();
+						if (obj != null)
+							obj.eAdapters().add(adapter);
+					}
 				}
 			}
-			
+
 			if (msg.getNotifier() instanceof Annotation) {
 				viewer.refresh(msg.getNotifier());
 				return;
 			}
-			
+
 			viewer.refresh();
 		}
 	}

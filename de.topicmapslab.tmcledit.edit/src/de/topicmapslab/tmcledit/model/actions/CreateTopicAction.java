@@ -60,7 +60,7 @@ public class CreateTopicAction extends AbstractTreeListenerAction {
 		NewTopicTypeWizard wizard = new NewTopicTypeWizard(kindOfTopicType);
 
 		WizardDialog dlg = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), wizard);
-
+		
 		if (dlg.open() == Dialog.OK) {
 			getView().getEditingDomain().getCommandStack().execute(
 			        new CreateTopicTypeCommand(getView().getCurrentTopicMapSchema(), wizard.getNewTopicType()));

@@ -41,6 +41,11 @@ public class EmptyPage extends AbstractModelPage {
 	}
 	
 	@Override
+	public boolean canAnnotate() {
+	    return false;
+	}
+	
+	@Override
 	protected boolean hasDocumentation() {
 		return false;
 	}
