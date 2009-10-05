@@ -44,6 +44,11 @@ public class DiagramPage extends AbstractModelPage {
 		super.updateUI();
 		nameText.setText(((Diagram) getModel()).getName());
 	}
+	
+	@Override
+	public boolean canAnnotate() {
+		return false;
+	}
 
 	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());

@@ -71,6 +71,10 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		init(pageSite);
 	}
 	
+	public boolean canAnnotate() {
+		return true;
+	}
+	
 	@Override
 	public final void createControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
@@ -78,7 +82,8 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 
 		createItems(folder);
 
-		createAnnotationWidgets(toolkit);
+		if (canAnnotate())
+			createAnnotationWidgets(toolkit);
 		if (hasDocumentation()) {
 			createDescriptionTab(toolkit);
 			hookModifyListeners();
