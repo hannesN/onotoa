@@ -154,6 +154,10 @@
 				procedure before"/>
 			<param name="fop1.extensions" expression="1"/>
 			<param name="double.sided" expression="1"/>
+			<param name="crop.marks" expression="1"/>
+			<param name="crop.marks.width" expression="0.5pt"/>
+			<param name="crop.marks.bleed" expression="6pt"/>
+			
 			<param name="body.font.family" expression="Helvetica"/>
 		</xslt>
 

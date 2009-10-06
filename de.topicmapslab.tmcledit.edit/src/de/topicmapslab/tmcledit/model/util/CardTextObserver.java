@@ -87,11 +87,19 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		
 		
 		
-		if ( ( (textField.getText().length()==0) 
+		String text2 = textField.getText();
+		if ( (text2.equals("*")) && (text.length()>0) ){
+			e.doit = false;
+			return;
+		}
+		
+		if ( ( (text2.length()==0) 
 			 || (e.start==0) )
 			&& (text.equals("*")))
 			return;
 
+		
+		
 		char[] chars = text.toCharArray();
 		for (int i = 0; i < chars.length; i++) {
 			if (!Character.isDigit(chars[i])) {
