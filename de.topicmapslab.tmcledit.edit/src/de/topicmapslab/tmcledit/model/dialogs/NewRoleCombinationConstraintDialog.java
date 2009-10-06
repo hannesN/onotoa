@@ -165,7 +165,10 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
 						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
-					roleCombination.setRole((RoleType) dlg.getFirstResult());
+					RoleType rt =  (RoleType) dlg.getFirstResult();
+					if (rt.equals(roleCombination.getOtherRole()))
+						return;
+					roleCombination.setRole(rt);
 					roleText.setText(roleCombination.getRole().getName());
 				}
 			}
@@ -189,8 +192,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE);
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = (TopicType) dlg.getFirstResult();
-					if (tt.equals(roleCombination.getPlayer()))
-						return;
+					
 					roleCombination.setOtherPlayer( (TopicType) dlg.getFirstResult());
 					otherPlayerText.setText(roleCombination.getOtherPlayer().getName());
 				}
@@ -203,6 +205,9 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
 					RoleType rt = (RoleType) dlg.getFirstResult();
+					if (rt.equals(roleCombination.getRole()))
+						return;
+					
 					roleCombination.setOtherRole(rt);
 					otherRoleText.setText(roleCombination.getOtherRole().getName());
 				}
