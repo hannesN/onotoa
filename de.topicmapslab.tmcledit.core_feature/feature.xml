@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.topicmapslab.tmcledit.core_feature"
+      label="Onotoa Plugins"
+      version="1.1.1.beta-qualifier"
+      provider-name="Hannes Niederhausen, Topic Maps Lab"
+      plugin="de.topicmapslab.tmcledit">
+
+   <description>
+      The core feature of Onotoa.
+   </description>
+
+   <copyright url="http://onotoa.topicmapslab.de">
+      (C) Hannes Niederhausen, Topic Maps Lab 2009
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSEPUBLIC LICENSE (&quot;AGREEMENT&quot;). ANY USE, REPRODUCTION ORDISTRIBUTION OF THE PROGRAM CONSTITUTES RECIPIENT&apos;S ACCEPTANCE OF THISAGREEMENT.
+
+a) in the case of the initial Contributor, the initialcode and documentation distributed under this Agreement, and
+
+
+where such changes and/or additions to the Programoriginate from and are distributed by that particular Contributor. AContribution &apos;originates&apos; from a Contributor if it was added to theProgram by such Contributor itself or anyone acting on suchContributor&apos;s behalf. Contributions do not include additions to theProgram which: (i) are separate modules of software distributed inconjunction with the Program under their own license agreement, and (ii)are not derivative works of the Program.
+&quot;Contributor&quot; means any person or entity that distributesthe Program.
+&quot;Licensed Patents&quot; mean patent claims licensable by aContributor which are necessarily infringed by the use or sale of itsContribution alone or when combined with the Program.
+&quot;Program&quot; means the Contributions distributed in accordancewith this Agreement.
+&quot;Recipient&quot; means anyone who receives the Program underthis Agreement, including all Contributors.
+
+
+a) Subject to the terms of this Agreement, eachContributor hereby grants Recipient a non-exclusive, worldwide,royalty-free copyright license to reproduce, prepare derivative worksof, publicly display, publicly perform, distribute and sublicense theContribution of such Contributor, if any, and such derivative works, insource code and object code form.
+b) Subject to the terms of this Agreement, eachContributor hereby grants Recipient a non-exclusive, worldwide,royalty-free patent license under Licensed Patents to make, use, sell,offer to sell, import and otherwise transfer the Contribution of suchContributor, if any, in source code and object code form. This patentlicense shall apply to the combination of the Contribution and theProgram if, at the time the Contribution is added by the Contributor,such addition of the Contribution causes such combination to be coveredby the Licensed Patents. The patent license shall not apply to any othercombinations which include the Contribution. No hardware per se islicensed hereunder.
+c) Recipient understands that although each Contributorgrants the licenses to its Contributions set forth herein, no assurancesare provided by any Contributor that the Program does not infringe thepatent or other intellectual property rights of any other entity. EachContributor disclaims any liability to Recipient for claims brought byany other entity based on infringement of intellectual property rightsor otherwise. As a condition to exercising the rights and licensesgranted hereunder, each Recipient hereby assumes sole responsibility tosecure any other intellectual property rights needed, if any. Forexample, if a third party patent license is required to allow Recipientto distribute the Program, it is Recipient&apos;s responsibility to acquirethat license before distributing the Program.
+d) Each Contributor represents that to its knowledge ithas sufficient copyright rights in its Contribution, if any, to grantthe copyright license set forth in this Agreement.
+
+
+A Contributor may choose to distribute the Program in object codeform under its own license agreement, provided that:
+a) it complies with the terms and conditions of thisAgreement; and
+
+
+i) effectively disclaims on behalf of all Contributorsall warranties and conditions, express and implied, including warrantiesor conditions of title and non-infringement, and implied warranties orconditions of merchantability and fitness for a particular purpose;
+ii) effectively excludes on behalf of all Contributorsall liability for damages, including direct, indirect, special,incidental and consequential damages, such as lost profits;
+iii) states that any provisions which differ from thisAgreement are offered by that Contributor alone and not by any otherparty; and
+iv) states that source code for the Program is availablefrom such Contributor, and informs licensees how to obtain it in areasonable manner on or through a medium customarily used for softwareexchange.
+
+
+
+
+b) a copy of this Agreement must be included with eachcopy of the Program.
+Contributors may not remove or alter any copyright notices containedwithin the Program.
+Each Contributor must identify itself as the originator of itsContribution, if any, in a manner that reasonably allows subsequentRecipients to identify the originator of the Contribution.
+
+
+Commercial distributors of software may accept certainresponsibilities with respect to end users, business partners and thelike. While this license is intended to facilitate the commercial use ofthe Program, the Contributor who includes the Program in a commercialproduct offering should do so in a manner which does not createpotential liability for other Contributors. Therefore, if a Contributorincludes the Program in a commercial product offering, such Contributor(&quot;Commercial Contributor&quot;) hereby agrees to defend andindemnify every other Contributor (&quot;Indemnified Contributor&quot;)against any losses, damages and costs (collectively &quot;Losses&quot;)arising from claims, lawsuits and other legal actions brought by a thirdparty against the Indemnified Contributor to the extent caused by theacts or omissions of such Commercial Contributor in connection with itsdistribution of the Program in a commercial product offering. Theobligations in this section do not apply to any claims or Lossesrelating to any actual or alleged intellectual property infringement. Inorder to qualify, an Indemnified Contributor must: a) promptly notifythe Commercial Contributor in writing of such claim, and b) allow theCommercial Contributor to control, and cooperate with the CommercialContributor in, the defense and any related settlement negotiations. TheIndemnified Contributor may participate in any such claim at its ownexpense.
+For example, a Contributor might include the Program in a commercialproduct offering, Product X. That Contributor is then a CommercialContributor. If that Commercial Contributor then makes performanceclaims, or offers warranties related to Product X, those performanceclaims and warranties are such Commercial Contributor&apos;s responsibilityalone. Under this section, the Commercial Contributor would have todefend claims against the other Contributors related to thoseperformance claims and warranties, and if a court requires any otherContributor to pay any damages as a result, the Commercial Contributormust pay those damages.
+
+
+EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, THE PROGRAM ISPROVIDED ON AN &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONSOF ANY KIND, EITHER EXPRESS OR IMPLIED INCLUDING, WITHOUT LIMITATION,ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITYOR FITNESS FOR A PARTICULAR PURPOSE. Each Recipient is solelyresponsible for determining the appropriateness of using anddistributing the Program and assumes all risks associated with itsexercise of rights under this Agreement , including but not limited tothe risks and costs of program errors, compliance with applicable laws,damage to or loss of data, programs or equipment, and unavailability orinterruption of operations.
+
+
+EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, NEITHER RECIPIENTNOR ANY CONTRIBUTORS SHALL HAVE ANY LIABILITY FOR ANY DIRECT, INDIRECT,INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDINGWITHOUT LIMITATION LOST PROFITS), HOWEVER CAUSED AND ON ANY THEORY OFLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDINGNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE ORDISTRIBUTION OF THE PROGRAM OR THE EXERCISE OF ANY RIGHTS GRANTEDHEREUNDER, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+If any provision of this Agreement is invalid or unenforceable underapplicable law, it shall not affect the validity or enforceability ofthe remainder of the terms of this Agreement, and without further actionby the parties hereto, such provision shall be reformed to the minimumextent necessary to make such provision valid and enforceable.
+If Recipient institutes patent litigation against any entity(including a cross-claim or counterclaim in a lawsuit) alleging that theProgram itself (excluding combinations of the Program with othersoftware or hardware) infringes such Recipient&apos;s patent(s), then suchRecipient&apos;s rights granted under Section 2(b) shall terminate as of thedate such litigation is filed.
+All Recipient&apos;s rights under this Agreement shall terminate if itfails to comply with any of the material terms or conditions of thisAgreement and does not cure such failure in a reasonable period of timeafter becoming aware of such noncompliance. If all Recipient&apos;s rightsunder this Agreement terminate, Recipient agrees to cease use anddistribution of the Program as soon as reasonably practicable. However,Recipient&apos;s obligations under this Agreement and any licenses granted byRecipient relating to the Program shall continue and survive.
+Everyone is permitted to copy and distribute copies of thisAgreement, but in order to avoid inconsistency the Agreement iscopyrighted and may only be modified in the following manner. TheAgreement Steward reserves the right to publish new versions (includingrevisions) of this Agreement from time to time. No one other than theAgreement Steward has the right to modify this Agreement. The EclipseFoundation is the initial Agreement Steward. The Eclipse Foundation mayassign the responsibility to serve as the Agreement Steward to asuitable separate entity. Each new version of the Agreement will begiven a distinguishing version number. The Program (includingContributions) may always be distributed subject to the version of theAgreement under which it was received. In addition, after a new versionof the Agreement is published, Contributor may elect to distribute theProgram (including its Contributions) under the new version. Except asexpressly stated in Sections 2(a) and 2(b) above, Recipient receives norights or licenses to the intellectual property of any Contributor underthis Agreement, whether expressly, by implication, estoppel orotherwise. All rights in the Program not expressly granted under thisAgreement are reserved.
+This Agreement is governed by the laws of the State of New York andthe intellectual property laws of the United States of America. No partyto this Agreement will bring a legal action under this Agreement morethan one year after the cause of action arose. Each party waives itsrights to a jury trial in any resulting litigation.
+   </license>
+
+   <url>
+      <update label="Onotoa" url="http://onotoa.topicmapslab.de/update"/>
+      <discovery label="Onotoa Website" url="http://onotoa.topicmapslab.de"/>
+      <discovery label="For more information on Topic maps" url="http://isotopicmaps.org"/>
+      <discovery label="For more information on Topic maps" url="http://onotoa.topicmapslab.de"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.gef" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.ui" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.transaction" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.workspace" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms" version="3.3.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.apache.batik.ext.awt"/>
+      <import plugin="org.apache.batik.svggen"/>
+   </requires>
+
+   <plugin
+         id="de.topicmapslab.tmcledit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.tmcledit.diagram"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.tmcledit.doc"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.tmcledit.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.tmcledit.domaindiagram"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

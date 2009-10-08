@@ -1,0 +1,62 @@
+== How to Create a Role Combination Constraint ==
+
+////////////////
+
+Convention:  _Onotoa_ 
+Menueinträge und Labels:  *File->New...* 
+
+In <<label>>
+
+.Bildunterschrift
+[[label]]
+image::images/update2_pf.png[scaledwidth="100%"]
+
+
+inline bild:
+image:images/update2_pf.png[scaledwidth="100%"]
+
+Dies ist ein Paragraph.
+
+Dies der folgende.
+
+NOTE: Note to myself...
+
+
+////////////////
+
+=== Theoretical background === 
+
+With the help of the _role_ _combination_ _constraint_ we are able to avoid unnecessary variations of players and roles.
+
+A common example to figure this constraint out is a transitive association like "contains". Transitive means: If _a_ contains _b_ and _b_ contains _c_, _a_ automatically contains _c_, which is not necessary to specify. 
+According to this, we will create a simple example with the three players "state", "country" and "city" and our association "contains".
+
+Obviously we recognize the top bottom relationship. A state may contains countries and a country may contains cities.
+Other combinations (like a state may contains cities) are not allowed and through the transitive character of the association dispensable.
+
+So all we need to create a topic map schema is:
+
+* *Association Type:* Contains
+
+* *Topic Roles:* Container and containee
+
+* *Topic Types:* State, country and city
+
+With the knowledge of these cornerstones, we can get into _Onotoa_
+
+=== Into Onotoa ===
+
+After creating a new model and a new diagram we are ready start with the real work. First of all we generate our three topic types "state", "country" and "city" 
+(to simplify matters, there is no need for additional details like subject identifiers, occurrences, scopes and so on).
+
+In the *Model View* section we right click on *TopicType->Create TopicType...* and choose "state" as name for our new topic type. We handle "country" and "city" in equal measure.
+
+.New Topic Type Wizard
+[[new_topic_type_1]]
+image::images/documentation/create_new_topic.png[scaledwidth="90%"]
+
+
+
+
+ 
+

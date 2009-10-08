@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Application Plug-in
+Bundle-SymbolicName: de.topicmapslab.tmcledit.application; singleton:=true
+Bundle-Version: 1.1.1.beta-qualifier
+Bundle-Activator: de.topicmapslab.tmcledit.application.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.common.ui,
+ org.eclipse.emf.edit.ui
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: de.topicmapslab.tmcledit.application
