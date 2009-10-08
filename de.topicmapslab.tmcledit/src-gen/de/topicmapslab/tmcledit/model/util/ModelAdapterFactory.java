@@ -223,6 +223,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createTopicReifiesConstraintAdapter();
 			}
 			@Override
+			public Adapter caseDomainDiagram(DomainDiagram object) {
+				return createDomainDiagramAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -771,6 +775,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTopicReifiesConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.DomainDiagram <em>Domain Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.DomainDiagram
+	 * @generated
+	 */
+	public Adapter createDomainDiagramAdapter() {
 		return null;
 	}
 

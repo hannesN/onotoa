@@ -192,8 +192,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE);
 				if (dlg.open()==Dialog.OK) {
 					TopicType tt = (TopicType) dlg.getFirstResult();
-					
-					roleCombination.setOtherPlayer( (TopicType) dlg.getFirstResult());
+					roleCombination.setOtherPlayer(tt);
 					otherPlayerText.setText(roleCombination.getOtherPlayer().getName());
 				}
 			}

@@ -106,6 +106,7 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.actions.CloseAction;
 import de.topicmapslab.tmcledit.model.actions.CreateDiagramAction;
+import de.topicmapslab.tmcledit.model.actions.CreateDomainDiagramAction;
 import de.topicmapslab.tmcledit.model.actions.CreateNameConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateSubjectIdenifierConstraintAction;
@@ -171,6 +172,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private RenameAction renameAction;
 	
 	private CreateDiagramAction createDiagramAction;
+	
+	private CreateDomainDiagramAction createDomainDiagramAction;
 
 	private CreateTopicAction createTopicAction;
 
@@ -234,9 +237,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					TreeObject to = (TreeObject) sel.getFirstElement();
 					createTopicAction.setEnabled(false);
 					createDiagramAction.setEnabled(false);
+					createDomainDiagramAction.setEnabled(false);
 					switch (to.getId()) {
 					case TreeObject.DIAGRAMS:
 						createDiagramAction.setEnabled(true);
+						createDomainDiagramAction.setEnabled(true);
 						break;
 					}
 
@@ -402,6 +407,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(createDiagramAction);
+		manager.add(createDomainDiagramAction);
 		manager.add(validationAction);
 		manager.add(new Separator());
 	}
@@ -413,6 +419,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		
 		if (createDiagramAction.isEnabled())
 			manager.add(createDiagramAction);
+		
+		if (createDomainDiagramAction.isEnabled())
+			manager.add(createDomainDiagramAction);
 		
 		if (createTopicAction.isEnabled())
 			manager.add(createTopicAction);
@@ -464,6 +473,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		deleteDiagramAction = new DeleteDiagramAction(this);
 		deleteTopicTypeAction = new DeleteTopicTypeAction(this);
 		createDiagramAction = new CreateDiagramAction(this);
+		createDomainDiagramAction = new CreateDomainDiagramAction(this);
 		createTopicAction = new CreateTopicAction(this);
 		renameAction = new RenameAction(this);
 		

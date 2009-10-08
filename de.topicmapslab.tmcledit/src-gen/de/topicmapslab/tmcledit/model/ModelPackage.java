@@ -3788,6 +3788,61 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_REIFIES_CONSTRAINT_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl <em>Domain Diagram</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDomainDiagram()
+	 * @generated
+	 */
+	int DOMAIN_DIAGRAM = 38;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__EDGES = DIAGRAM__EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__NODES = DIAGRAM__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__NAME = DIAGRAM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__COMMENTS = DIAGRAM__COMMENTS;
+
+	/**
+	 * The number of structural features of the '<em>Domain Diagram</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM_FEATURE_COUNT = DIAGRAM_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3795,7 +3850,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 38;
+	int TOPIC_ID = 39;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -3805,7 +3860,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 39;
+	int EDGE_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -3815,7 +3870,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 40;
+	int KIND_OF_TOPIC_TYPE = 41;
 
 
 	/**
@@ -4991,6 +5046,16 @@ public interface ModelPackage extends EPackage {
 	EClass getTopicReifiesConstraint();
 
 	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.DomainDiagram <em>Domain Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Domain Diagram</em>'.
+	 * @see de.topicmapslab.tmcledit.model.DomainDiagram
+	 * @generated
+	 */
+	EClass getDomainDiagram();
+
+	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5997,6 +6062,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TOPIC_REIFIES_CONSTRAINT = eINSTANCE.getTopicReifiesConstraint();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl <em>Domain Diagram</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDomainDiagram()
+		 * @generated
+		 */
+		EClass DOMAIN_DIAGRAM = eINSTANCE.getDomainDiagram();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

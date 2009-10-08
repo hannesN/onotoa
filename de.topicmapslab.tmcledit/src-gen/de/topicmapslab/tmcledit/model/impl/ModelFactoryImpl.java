@@ -92,6 +92,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE: return createScopedReifiableTopicType();
 			case ModelPackage.ANNOTATION: return createAnnotation();
 			case ModelPackage.TOPIC_REIFIES_CONSTRAINT: return createTopicReifiesConstraint();
+			case ModelPackage.DOMAIN_DIAGRAM: return createDomainDiagram();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -453,6 +454,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public TopicReifiesConstraint createTopicReifiesConstraint() {
 		TopicReifiesConstraintImpl topicReifiesConstraint = new TopicReifiesConstraintImpl();
 		return topicReifiesConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DomainDiagram createDomainDiagram() {
+		DomainDiagramImpl domainDiagram = new DomainDiagramImpl();
+		return domainDiagram;
 	}
 
 	/**

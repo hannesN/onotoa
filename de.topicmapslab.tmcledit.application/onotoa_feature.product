@@ -31,11 +31,11 @@
    </plugins>
 
    <features>
-      <feature id="org.sourceforge.tinyTiM_feature" version="2.0.0.a6"/>
-      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.1.1.beta-qualifier"/>
-      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.1.1.beta-qualifier"/>
-      <feature id="de.topicmapslab.tmcledit.import_feature" version="1.0.1.beta-qualifier"/>
-      <feature id="de.topicmapslab.tmcledit.application_feature" version="1.1.1.beta-qualifier"/>
+      <feature id="org.sourceforge.tinyTiM_feature"/>
+      <feature id="de.topicmapslab.tmcledit.core_feature"/>
+      <feature id="de.topicmapslab.tmcledit.export_feature"/>
+      <feature id="de.topicmapslab.tmcledit.import_feature"/>
+      <feature id="de.topicmapslab.tmcledit.application_feature"/>
    </features>
 
 

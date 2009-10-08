@@ -215,4 +215,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractConstraint" abstract="true"
       interface="true" eSuperTypes="#//TMCLConstruct"/>
   <eClassifiers xsi:type="ecore:EClass" name="TopicReifiesConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainDiagram" eSuperTypes="#//Diagram"/>
 </ecore:EPackage>

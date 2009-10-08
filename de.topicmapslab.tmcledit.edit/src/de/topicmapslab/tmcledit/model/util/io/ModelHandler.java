@@ -250,7 +250,13 @@ class ModelHandler extends DefaultHandler {
 		}
 		
 		if (E_DIAGRAM.equals(qName)) {
-			Diagram d = fac.createDiagram();
+			String type = attributes.getValue(A_TYPE);
+			Diagram d;
+			if (type==null)
+				d = fac.createDiagram();
+			else
+				d = fac.createDomainDiagram();
+			
 			String name = attributes.getValue(A_NAME);
 			if (name==null)
 				return;
