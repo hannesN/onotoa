@@ -1,59 +1,133 @@
 == How to Create a Role Combination Constraint ==
 
-////////////////
-
-Convention:  _Onotoa_ 
-Menueinträge und Labels:  *File->New...* 
-
-In <<label>>
-
-.Bildunterschrift
-[[label]]
-image::images/update2_pf.png[scaledwidth="100%"]
-
-
-inline bild:
-image:images/update2_pf.png[scaledwidth="100%"]
-
-Dies ist ein Paragraph.
-
-Dies der folgende.
-
-NOTE: Note to myself...
-
-
-////////////////
-
 === Theoretical background === 
 
 With the help of the _role_ _combination_ _constraint_ we are able to avoid unnecessary variations of players and roles.
 
 A common example to figure this constraint out is a transitive association like "contains". Transitive means: If _a_ contains _b_ and _b_ contains _c_, _a_ automatically contains _c_, which is not necessary to specify. 
-According to this, we will create a simple example with the three players "state", "country" and "city" and our association "contains".
+According to this, we will create a simple example with the three players "continent", "country" and "city" and our association "contains".
 
 Obviously we recognize the top bottom relationship. A state may contains countries and a country may contains cities.
 Other combinations (like a state may contains cities) are not allowed and through the transitive character of the association dispensable.
 
 So all we need to create a topic map schema is:
 
-* *Association Type:* Contains
+* *Association Type:* "contains"
 
-* *Topic Roles:* Container and containee
+* *Topic Roles:* "container" and "containee"
 
-* *Topic Types:* State, country and city
+* *Topic Types:* "continent", "country" and "city"
 
 With the knowledge of these cornerstones, we can get into _Onotoa_
 
 === Into Onotoa ===
 
-After creating a new model and a new diagram we are ready start with the real work. First of all we generate our three topic types "state", "country" and "city" 
+First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name for the model. I have choosen _example_rcc.ono_. To create a new diagramm, right click on *Diagram* in the "Model View" and choose *Create New Diagramm...* in the contextmenu.
+After your decision for a diagram name (_example_rcc_ for example), the _Onotoa_ window should looks like this:  
+
+.Onotoa 
+[[tut_create_model_diagram]]
+image::images/documentation/create_model_diagram.png[scaledwidth="50%"]
+
+
+From now on, we are ready to start with the real work. First of all we generate our three topic types "continent", "country" and "city" 
 (to simplify matters, there is no need for additional details like subject identifiers, occurrences, scopes and so on).
 
-In the *Model View* section we right click on *TopicType->Create TopicType...* and choose "state" as name for our new topic type. We handle "country" and "city" in equal measure.
+In the "Model View" section we right click on *TopicType->Create TopicType...* and choose "continent" as name for our new topic type. We handle "country" and "city" in equal measure.
+Like you can see in <<tut_topic_types_in_model_view>>, the three new created Topic Types should appear in the "Model View" and we can add them do the diagram by drag and drop.
 
-.New Topic Type Wizard
-[[new_topic_type_1]]
-image::images/documentation/create_new_topic.png[scaledwidth="90%"]
+NOTE: You change properties of any topic, by use of the "Property Details View" at the bottom of the _Onotoa_ window.
+
+.New created Topic Types
+[[tut_topic_types_in_model_view]]
+image::images/documentation/topic_types_in_model_view.png[scaledwidth="30%"]
+
+Now we create the association "contains" and their according roles. At the left side of the editor window is a "Palette" called box located. Click once on *Association Type* in the "Palette" and twice anywhere in the diagram to add our new type.
+To modify the values of the new Association Type, take a look at "Property Details View" at the bottom. As we can see, the name of our association is "default0". Change it to "contains".
+Every association demands for specific roles and now we step forward to this.
+
+NOTE: There are different methods to create a new topic. You can use the context menu in "Model View", add them by drag and drop from the "Palette" or create them ad-hoc in some cases. I switch between them for demonstrative issues. 
+
+Once again we use the "Model View" to create a new topic. We need exactly two roles: "container" and "containee". Right click on *RoleTypes->Create RoleType...* and give them their names.
+
+.New created Role Type
+[[tut_create_containee_role]]
+image::images/documentation/create_containee_role.png[scaledwidth="50%"]
+
+NOTE: We could add our roles to the diagram, but this is not necessary because their is no need for a graphical representation of these two Role Types. They will appear later in the diagram, when we set the Topic Role Constraints.
+
+After these step, we can finish the "contains" association by editing their role set.
+
+Therefore we proceed to "Property Details View" of the association by clicking on their graphical representation in diagram. We scroll down until the _roles_ entry and click on the "add" button at the ride side.
+The appearing window should list our two created roles and we only have to check the two entries and acknowledge them by pressing the _OK_ button. 
+
+NOTE: Of course it is now possible to change the cardinality values in the "Property Details View" , but we will do this later.
+
+.Choose Role Type
+[[tut_set_roles]]
+image::images/documentation/set_roles.png[scaledwidth="30%"]
+
+At this point, we created and set the basic structures of our example and your diagram window should looks like this:
+
+.Diagram View
+[[tut_diagram_view_1]]
+image::images/documentation/diagram_view_1.png[scaledwidth="50%"]
+
+All Topic Types are defined and finally we can model the exact relationships in the schema.
+To do that, we add an *Association Constraint* by drag and drop from the "Palette". A black circle with the label _No type set_ will appear in the diagram and we recognize what our next task will be.
+Likewise all other topic properties, we can set them in the "Property Details View". Click on the "..." button at the right side an choose "contains" in the pop-up menu. Now the label of the circle should have changed. 
+
+.Choose Type
+[[tut_association_constraint]]
+image::images/documentation/association_constraint.png[scaledwidth="70%"]
+
+TIP: If no Association Type exists, you can alternatively create an new one by clicking on "Type" 
+
+Connecting the Topic Types with the Association Constraint will be the next step. Therefore click on the *Topic Role Constraint* entry in the "Palette" to select it. Click on the type "continent" and the association "contains" to link them. One thin black line with two annotations should appear.
+The first annotation represents the role type and the second the cardinality. Proceed in the same manner with the topic "city". For the topic "country" we must create two Topic Role Constraints, because a country could be a "container" and a "containee". 
+
+.Diagram View
+[[tut_diagram_view_2]]
+image::images/documentation/diagram_view_2.png[scaledwidth="50%"]
+
+TIP: Press and hold the left mouse button to move elements in the diagram for visual purposes.
+
+Now we specify each Topic Role Constraint by selecting a Role Type and setting cardinality:
+
+."continent"
+===============================
+
+Remember: The only role this player could play is "container".
+
+Click on the _No role type set_ label in the diagram and select "container" as role in the "Proper Detail View". As you can see in the diagram, the default role cardinality is “1..1”, which is exactly what we want it to be. 
+So we guarantee the existence of exactly one "container". In some cases no Topic type "continent" will be used, so we have to change the player cardinality. Set the *cardMin* value to 0. The *cardMax* value is correct.       
+===============================
+
+.Topic Role Constraint specification
+[[tut_specify_player_cardinatlity]]
+image::images/documentation/specify_player_cardinality.png[scaledwidth="70%"]
+
+."country"
+===============================
+
+Click on the _No role type set_ label in the diagram and select "container" as role in the "Proper Detail View". As you can see the default cardinality is “1..1”, which is exactly what we want it to be. 
+So we guarantee the possibility of only one "container". But , 
+===============================
+
+."city"
+===============================
+
+Remember: The only role this player could play is "containee".
+
+Set the role to "containee" in the usual way. We set the player cardinality to “0..*” and the role cardinality to "
+So we guarantee the possibility of only one "container". But , 
+===============================
+
+
+
+
+
+
 
 
 
