@@ -23,7 +23,7 @@ import de.topicmapslab.tmcledit.domaindiagram.policies.NodeGraphicalNodeEditPoli
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 
-public abstract class NodeEditPart extends AdapterGraphicalEditPart implements org.eclipse.gef.NodeEditPart{
+public abstract class NodeEditPart extends AdapterGraphicalEditPart implements org.eclipse.gef.NodeEditPart {
 
 	public NodeEditPart() {
 		super();
