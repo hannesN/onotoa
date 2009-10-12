@@ -214,6 +214,9 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	    Element nNode = document.createElement(E_NODE);
 	    if (n instanceof TypeNode) {
 	    	nNode.setAttribute(A_TYPE, "typeNode");
+	    	if (((TypeNode) n).getImage()!=null) {
+	    		nNode.setAttribute(A_IMAGE, ((TypeNode) n).getImage());
+	    	}
 	    	addTopicReference(nNode, ((TypeNode) n).getTopicType());
 	    } else {
 	    	nNode.setAttribute(A_TYPE, "associationNode");

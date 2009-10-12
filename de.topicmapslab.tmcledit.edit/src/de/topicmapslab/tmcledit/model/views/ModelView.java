@@ -93,6 +93,7 @@ import org.eclipse.ui.progress.UIJob;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -343,9 +344,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					currDiagram = d;
 			}
 			if (currDiagram != null) {
+				String id = (currDiagram instanceof DomainDiagram) ? TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
+				
 				getViewSite().getPage().openEditor(
-				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), true),
-				        TmcleditEditPlugin.DIAGRAMEDITOR_ID);
+				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), true), id);
 			}
 		}
 
@@ -733,11 +735,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		int i = 0;
 		for (IEditorReference ref : getViewSite().getPage().getEditorReferences()) {
 			IEditorPart part = ref.getEditor(false);
-			if ((part != null) && (ref.getId().equals(TmcleditEditPlugin.DIAGRAMEDITOR_ID))) {
-				i++;
-				TMCLEditorInput ei = (TMCLEditorInput) part.getEditorInput();
-				IMemento partChild = memento.createChild("editor");
-				partChild.putTextData(ei.getDiagram().getName());
+			if (part!=null) {
+				if ( (ref.getId().equals(TmcleditEditPlugin.DIAGRAMEDITOR_ID)) 
+				    || (ref.getId().equals(TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID)) ) {
+					i++;
+					TMCLEditorInput ei = (TMCLEditorInput) part.getEditorInput();
+					IMemento partChild = memento.createChild("editor");
+					partChild.putTextData(ei.getDiagram().getName());
+				}
 			}
 		}
 	}

@@ -803,6 +803,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTypeNode_Image() {
+		return (EAttribute)typeNodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBendpoint() {
 		return bendpointEClass;
 	}
@@ -1527,6 +1536,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		typeNodeEClass = createEClass(TYPE_NODE);
 		createEReference(typeNodeEClass, TYPE_NODE__TOPIC_TYPE);
+		createEAttribute(typeNodeEClass, TYPE_NODE__IMAGE);
 
 		bendpointEClass = createEClass(BENDPOINT);
 		createEAttribute(bendpointEClass, BENDPOINT__POS_X);
@@ -1752,6 +1762,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(typeNodeEClass, TypeNode.class, "TypeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeNode_TopicType(), this.getTopicType(), null, "topicType", null, 1, 1, TypeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypeNode_Image(), ecorePackage.getEString(), "image", null, 0, 1, TypeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bendpointEClass, Bendpoint.class, "Bendpoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBendpoint_PosX(), ecorePackage.getEInt(), "posX", null, 1, 1, Bendpoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

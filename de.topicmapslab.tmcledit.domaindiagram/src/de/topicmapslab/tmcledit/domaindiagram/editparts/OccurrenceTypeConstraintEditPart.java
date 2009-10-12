@@ -10,25 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.domaindiagram.editparts;
 
-import org.eclipse.draw2d.AbstractBorder;
-import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Insets;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
 
 import de.topicmapslab.tmcledit.domaindiagram.policies.OccurrenceConstraintDirectEditPolicy;
-import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
+public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 
-	private static UnderlineLabelBorder border = new UnderlineLabelBorder();
 	
 	OccurrenceTypeConstraint getCastedModel() {
 		return (OccurrenceTypeConstraint) getModel();
@@ -36,7 +26,6 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 	
 	@Override
 	protected void createEditPolicies() {
-		super.createEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new OccurrenceConstraintDirectEditPolicy());
 	}
 
@@ -48,44 +37,12 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 	@Override
 	protected void refreshVisuals() {
 		OccurrenceTypeConstraint otc = getCastedModel();
-		StringBuffer buffer = new StringBuffer();
-		
 		TopicType type = otc.getType();
 		if (type!=null) {
-			if (((OccurrenceType) type).isUnique())
-				getNameLabel().setBorder(border);
-			else
-				getNameLabel().setBorder(null);
 			getNameLabel().setText(type.getName());
 		} else
 			getNameLabel().setText("tmdm:subject");
 		
-		buffer.append(" : ");
-		if (type instanceof OccurrenceType)
-			buffer.append(((OccurrenceType) type).getDataType());
-		else
-			buffer.append("xsd:anyType");
-
-		getTypeLabel().setText(buffer.toString());
-		
-		buffer.setLength(0);
-		buffer.append(otc.getCardMin());
-		buffer.append("..");
-		buffer.append(otc.getCardMax());
-		getCardLabel().setText(buffer.toString());
-
-		if ( (type instanceof OccurrenceType) && (!(".*".equals(((OccurrenceType)type).getRegExp()))) ) {
-			getRegExpLabel().setText("["+((OccurrenceType)type).getRegExp()+"]");
-		} else {
-			getRegExpLabel().setText("");
-		}
-
-//		clearScopeLables();
-//		addScopeText();
-		
-//		getTypeLabel().setText(buffer.toString());
-//		getFigure().revalidate();
-//		getFigure().getParent().repaint();
 	}
 
 	@Override
@@ -103,9 +60,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 
 	}
 	
-	@Override
 	public void notifyChanged(Notification notification) {
-		super.notifyChanged(notification);
 		if (notification.getEventType()==Notification.SET) {
 			if (notification.getNewValue() instanceof TopicType) {
 				TopicType old = (TopicType) notification.getOldValue();
@@ -118,27 +73,5 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 		}
 		refreshVisuals();
 		
-	}
-
-	private static class UnderlineLabelBorder extends AbstractBorder {
-
-		public Insets getInsets(IFigure figure) {
-			return new Insets(0, 0, 1, 0);
-		}
-
-		@Override
-		public Dimension getPreferredSize(IFigure figure) {
-			Dimension preferredSize = figure.getPreferredSize();
-			return new Dimension(preferredSize.width, preferredSize.height+1);
-		}
-
-		public void paint(IFigure figure, Graphics graphics, Insets insets) {
-			Rectangle rec = figure.getBounds();
-			int y = rec.y+rec.height-1;
-			graphics.pushState();
-			graphics.setForegroundColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
-			graphics.drawLine(rec.x, y, rec.x+rec.width, y);
-			graphics.popState();
-		}
 	}
 }

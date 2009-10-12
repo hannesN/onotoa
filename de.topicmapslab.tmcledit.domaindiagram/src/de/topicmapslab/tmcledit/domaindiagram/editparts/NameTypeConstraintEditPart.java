@@ -19,7 +19,7 @@ import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
+public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 
 	private NameTypeConstraint getCastedModel() {
 		return (NameTypeConstraint) getModel();
@@ -32,7 +32,6 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 	
 	@Override
 	protected void createEditPolicies() {
-		super.createEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new NameConstraintDirectEditPolicy());
 
@@ -48,25 +47,7 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 			getNameLabel().setText("default");
 		} else {
 			getNameLabel().setText(type.getName());
-
-			if (".*".equals(type.getRegExp()))
-				getRegExpLabel().setText("");
-			else
-				getRegExpLabel().setText("[" + type.getRegExp() + "]");
 		}
-
-		StringBuffer buffer = new StringBuffer(50);
-		buffer.append(ntc.getCardMin());
-		buffer.append("..");
-		buffer.append(ntc.getCardMax());
-		getCardLabel().setText(buffer.toString());
-
-		buffer.setLength(0);
-//		clearScopeLables();
-		// addScopeText();
-
-		// getFigure().revalidate();
-		// getFigure().getParent().repaint();
 
 	}
 
@@ -84,10 +65,7 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 		super.deactivate();
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
-		super.notifyChanged(notification);
-
 		if (notification.getNotifier() == getModel()) {
 			if (notification.getFeatureID(TopicType.class) == ModelPackage.NAME_TYPE_CONSTRAINT__TYPE) {
 				TopicType tmp = (TopicType) notification.getOldValue();
@@ -102,4 +80,6 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 		refreshVisuals();
 	}
 
+	
+	
 }

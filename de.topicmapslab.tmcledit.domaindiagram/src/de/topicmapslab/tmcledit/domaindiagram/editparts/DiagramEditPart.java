@@ -28,7 +28,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.swt.SWT;
@@ -36,7 +35,6 @@ import org.eclipse.swt.SWT;
 import de.topicmapslab.tmcledit.domaindiagram.policies.DiagramLayoutEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
-import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 
 /**
@@ -46,8 +44,6 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 public class DiagramEditPart extends AdapterGraphicalEditPart {
 
 	private XYLayout layout;
-
-	private PrefixMappingEditPart prefixMappingEditPart;
 
 	/*
 	 * (non-Javadoc)
@@ -95,12 +91,6 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 						f.setBounds(bounds);
 						
 					}
-					
-					if (getPrefixMappingEditPart()!=null) {
-						IFigure figure = getPrefixMappingEditPart().getFigure();
-						figure.setLocation(new Point(minX, minY));
-						figure.setSize(figure.getPreferredSize());
-					}
 				}
 			};
 			figure.setLayoutManager(layout);
@@ -121,29 +111,12 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 
 	}
 
-	// tiny hack to omit a mess of listeners/adapters
-
-	@Override
-	protected void addChild(EditPart child, int index) {
-		super.addChild(child, index);
-		if (child instanceof PrefixMappingEditPart) {
-			this.prefixMappingEditPart = (PrefixMappingEditPart) child;
-		}
-	}
-
-	public PrefixMappingEditPart getPrefixMappingEditPart() {
-		return prefixMappingEditPart;
-	}
-
-	// hack end
-
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List getModelChildren() {
 		Diagram d = (Diagram) getModel();
 		List result = new ArrayList();
 		result.addAll(d.getNodes());
-		result.add(((File) d.eContainer()).getTopicMapSchema().getMappings());
 		result.addAll(d.getComments());
 		return result;
 	}

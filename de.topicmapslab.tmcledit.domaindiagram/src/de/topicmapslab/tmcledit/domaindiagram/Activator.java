@@ -1,5 +1,8 @@
 package de.topicmapslab.tmcledit.domaindiagram;
 
+import org.eclipse.core.runtime.Status;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -45,6 +48,14 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+
+	public static Shell getCurrentShell() {
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	}
+
+	public void log(Exception e) {
+		getLog().log(new Status(Status.ERROR, PLUGIN_ID, "An error occured", e));
 	}
 
 }

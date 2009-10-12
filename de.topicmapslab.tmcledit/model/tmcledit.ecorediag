@@ -266,6 +266,10 @@
   <children xmi:type="notation:Node" xmi:id="_v6nfUJVWEd2w-LL5U6EnYA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_v6oGYJVWEd2w-LL5U6EnYA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_v6oGYZVWEd2w-LL5U6EnYA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_QCUQULQUEd6ihMhG9cyOmw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tmcledit.ecore#//TypeNode/image"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QCUQUbQUEd6ihMhG9cyOmw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_v6oGYpVWEd2w-LL5U6EnYA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_v6oGY5VWEd2w-LL5U6EnYA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_v6oGZJVWEd2w-LL5U6EnYA"/>
