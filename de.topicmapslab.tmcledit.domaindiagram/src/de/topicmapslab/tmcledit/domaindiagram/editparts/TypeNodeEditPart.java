@@ -26,7 +26,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ToolbarLayout;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
@@ -122,10 +121,6 @@ public class TypeNodeEditPart extends
 					graphics.popState();
 				}
 			};
-
-//			ToolbarLayout layout = new ToolbarLayout(false);
-//			layout.setStretchMinorAxis(true);
-//			layout.setSpacing(2);
 			
 			GridLayout layout = new GridLayout(1, true);
 			
@@ -149,9 +144,14 @@ public class TypeNodeEditPart extends
 
 			
 			lineFigure = new LineFigure();
+			gd = getGridData();
+			layout.setConstraint(lineFigure, gd);
+			
 			compartmentFigure = new Figure();
 			compartmentFigure.setBorder(new MarginBorder(1, 5, 1, 5));
 			compartmentFigure.setLayoutManager(new ToolbarLayout(false));
+			gd = getGridData();
+			layout.setConstraint(compartmentFigure, gd);
 
 		}
 		return figure;
@@ -184,12 +184,14 @@ public class TypeNodeEditPart extends
 		}
 
 		if (!getFigure().equals(imageFigure.getParent())) {
-			byte[] buf = Base64.base64ToByteArray(base64);
-			Image image = new Image(Display.getCurrent(),
-					new ByteArrayInputStream(buf));
-			imageFigure.setImage(image);
 			getFigure().add(imageFigure, 0);
 		}
+		
+		byte[] buf = Base64.base64ToByteArray(base64);
+		Image image = new Image(Display.getCurrent(),
+				new ByteArrayInputStream(buf));
+		imageFigure.setImage(image);
+		
 		currFigString = base64;
 	}
 
@@ -321,6 +323,7 @@ public class TypeNodeEditPart extends
 
 		if (notification.getNotifier().equals(
 				((TypeNode) getModel()).getTopicType())) {
+			updateImage();			
 			refreshChildren();
 		}
 		refreshVisuals();

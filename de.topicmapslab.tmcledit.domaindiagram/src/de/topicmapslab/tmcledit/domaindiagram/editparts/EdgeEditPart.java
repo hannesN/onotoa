@@ -19,6 +19,7 @@ import org.eclipse.draw2d.Bendpoint;
 import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
@@ -176,6 +177,18 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		super.deactivate();
 	}
 
+	@Override
+	protected ConnectionAnchor getSourceConnectionAnchor() {
+		// TODO Auto-generated method stub
+		return super.getSourceConnectionAnchor();
+	}
+	
+	@Override
+	protected ConnectionAnchor getTargetConnectionAnchor() {
+		// TODO Auto-generated method stub
+		return super.getTargetConnectionAnchor();
+	}
+	
 	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER)

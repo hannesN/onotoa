@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.EllipseAnchor;
@@ -61,10 +62,12 @@ public class AssociationNodeEditPart extends NodeEditPart {
 
 	private Label typeLabel;
 	private Figure compartement;
+	private CircleFigure circle;
 
 	@Override
 	protected IFigure createFigure() {
-		Figure figure = new CircleFigure();
+		Figure figure = new Figure();
+		figure.setLayoutManager(new ToolbarLayout(false));
 		
 		compartement = new Figure();
 		compartement.setLayoutManager(new ToolbarLayout(false));
@@ -77,6 +80,12 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		typeLabel.setText("foo:association");
 		compartement.add(typeLabel);
 		
+		circle = new CircleFigure();
+		circle.setBackgroundColor(ColorConstants.black);
+		circle.setOpaque(true);
+		circle.setSize(20, 20);
+		circle.setLayoutManager(null);
+		figure.add(circle);
 		
 		return figure;
 	}
@@ -85,6 +94,22 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@Override
 	public IFigure getContentPane() {
 		return compartement;
+	}
+	
+	@Override
+	public ConnectionAnchor getSourceConnectionAnchor(Request request) {
+		return new ChopboxAnchor(circle);
+	}
+		
+	@Override
+	public ConnectionAnchor getTargetConnectionAnchor(
+			ConnectionEditPart connection) {
+		return new ChopboxAnchor(circle);
+	}
+	
+	@Override
+	public ConnectionAnchor getTargetConnectionAnchor(Request request) {
+		return new ChopboxAnchor(circle);
 	}
 
 	private AssociationNode getCastedModel() {
@@ -137,22 +162,9 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List getModelChildren() {
-		
-		if (getCastedModel()==null)
-			return Collections.emptyList();
-		TopicType type = getCastedModel().getAssociationConstraint().getType();
-		if (type==null)
-			return Collections.emptyList();
-		
 		List<Object> children = new ArrayList<Object>();
-		children.addAll(((ScopedTopicType) type).getScope());
+//		children.addAll(getCastedModel().getAssociationConstraint().getPlayerConstraints());
 		
-		if (type instanceof ReifiableTopicType) {
-			ReifierConstraint rc = ((ReifiableTopicType)type).getReifierConstraint();
-			if (rc!=null) {
-				children.add(0, rc);
-			}
-		}
 		if (children.isEmpty())
 			return Collections.emptyList();
 		
@@ -162,7 +174,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(
 			ConnectionEditPart connection) {
-		return new EllipseAnchor(getFigure());
+		return new EllipseAnchor(circle);
 	}
 
 	@Override
