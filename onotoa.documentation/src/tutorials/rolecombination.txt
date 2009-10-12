@@ -104,7 +104,7 @@ So we guarantee the existence of exactly one "container". In some cases no Topic
 
 .Topic Role Constraint specification
 [[tut_specify_player_cardinatlity]]
-image::images/documentation/specify_player_cardinality.png[scaledwidth="70%"]
+image::images/documentation/set_player_cardinality.png[scaledwidth="70%"]
 
 ."country"
 
