@@ -30,7 +30,6 @@ import org.eclipse.swt.graphics.Point;
 import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.CommentEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.PrefixMappingEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -48,8 +47,6 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 			Object constraint) {
 		DomainEditDomain ed = (DomainEditDomain) getHost().getViewer().getEditDomain();
 		if (constraint instanceof Rectangle) {
-			if (child instanceof PrefixMappingEditPart)
-				return null;
 			AbstractCommand cmd = null;
 			Rectangle rec = (Rectangle) constraint;
 			Node node = (Node) child.getModel();

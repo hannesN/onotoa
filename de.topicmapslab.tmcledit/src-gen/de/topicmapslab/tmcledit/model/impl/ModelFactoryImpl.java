@@ -319,20 +319,22 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public AssociationType createAssociationType() {
 		AssociationTypeImpl associationType = new AssociationTypeImpl();
+		associationType.setKind(KindOfTopicType.ASSOCIATION_TYPE);
 		return associationType;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public OccurrenceType createOccurrenceType() {
 		OccurrenceTypeImpl occurrenceType = new OccurrenceTypeImpl();
+		occurrenceType.setKind(KindOfTopicType.OCCURRENCE_TYPE);
 		return occurrenceType;
 	}
 
@@ -349,10 +351,11 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public RoleType createRoleType() {
 		RoleTypeImpl roleType = new RoleTypeImpl();
+		roleType.setKind(KindOfTopicType.ROLE_TYPE);
 		return roleType;
 	}
 
@@ -369,10 +372,11 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public NameType createNameType() {
 		NameTypeImpl nameType = new NameTypeImpl();
+		nameType.setKind(KindOfTopicType.NAME_TYPE);
 		return nameType;
 	}
 

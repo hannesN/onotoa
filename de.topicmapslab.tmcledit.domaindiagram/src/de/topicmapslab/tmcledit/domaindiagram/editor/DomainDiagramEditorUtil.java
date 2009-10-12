@@ -13,7 +13,6 @@
  */
 package de.topicmapslab.tmcledit.domaindiagram.editor;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
@@ -34,12 +33,6 @@ import de.topicmapslab.tmcledit.domaindiagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.OccurrenceTypeConstraintEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.PrefixMappingEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.PrefixMappingElementEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.ReifierConstraintEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.ScopeConstraintEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.SubjectIdentifierConstraintEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.SubjectLocatorConstraintEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -49,15 +42,12 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.LabelPos;
-import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.ReifierConstraint;
-import de.topicmapslab.tmcledit.model.ScopeConstraint;
-import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
-import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
@@ -105,7 +95,6 @@ public class DomainDiagramEditorUtil {
 	public static EditPartFactory getEditPartFactory() {
 		return new EditPartFactory() {
 
-			@SuppressWarnings("unchecked")
 			public EditPart createEditPart(EditPart context, Object model) {
 				EditPart part = null;
 				if (model instanceof Diagram) {
@@ -120,22 +109,10 @@ public class DomainDiagramEditorUtil {
 					part = new NameTypeConstraintEditPart();
 				} else if (model instanceof Edge) {
 					part = new EdgeEditPart();
-				} else if (model instanceof EList) {
-					part = new PrefixMappingEditPart();
-				} else if (model instanceof MappingElement) {
-					part = new PrefixMappingElementEditPart();
-				} else if (model instanceof SubjectIdentifierConstraint) {
-					part = new SubjectIdentifierConstraintEditPart();
-				} else if (model instanceof SubjectLocatorConstraint) {
-					part = new SubjectLocatorConstraintEditPart();
 				} else if (model instanceof LabelPos) {
 					part = new MoveableLabelEditPart();
 				} else if (model instanceof Comment) {
 					part = new CommentEditPart();
-				} else if (model instanceof ScopeConstraint) {
-					part = new ScopeConstraintEditPart();
-				} else if (model instanceof ReifierConstraint) {
-					part = new ReifierConstraintEditPart();
 				}
 
 				if (part != null)
@@ -149,51 +126,18 @@ public class DomainDiagramEditorUtil {
 	private static PaletteGroup getTypePaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types");
 
-		group.add(new CombinedTemplateCreationEntry("Topic", "Topic",
-				new TypeNodeCreationFactory(KindOfTopicType.NO_TYPE),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPIC_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPIC)));
-
 		group.add(new CombinedTemplateCreationEntry("Topic Type", "Topic Type",
 				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
-
-		group
-				.add(new CombinedTemplateCreationEntry(
-						"Occurrence Type",
-						"Occurrence Type",
-						new TypeNodeCreationFactory(
-								KindOfTopicType.OCCURRENCE_TYPE),
-						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURRENCETYPE_SM),
-						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURRENCETYPE)));
-
-		group.add(new CombinedTemplateCreationEntry("Role Type", "Role Type",
-				new TypeNodeCreationFactory(KindOfTopicType.ROLE_TYPE),
-				ImageProvider.getImageDescriptor(ImageConstants.ROLETYPE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.ROLETYPE)));
-
-		group.add(new CombinedTemplateCreationEntry("Association Type", "Association Type",
-				new TypeNodeCreationFactory(KindOfTopicType.ASSOCIATION_TYPE),
-				ImageProvider
-						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE_SM),
-				ImageProvider
-						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE)));
-
-		group.add(new CombinedTemplateCreationEntry("Name Type", "Name Type",
-				new TypeNodeCreationFactory(KindOfTopicType.NAME_TYPE),
-				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE)));
 		return group;
 	}
 
 	private static PaletteGroup getTypeItemsPaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Topic Types Items");
 		group.add(new CombinedTemplateCreationEntry(
-						"Occurrence Constraint",
-						"Occurrence Constraint",
+						"Occurrence",
+						"Occurrence",
 						new OccurrenceConstraintCreationFactory(),
 						ImageProvider
 								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT_SM),
@@ -201,13 +145,27 @@ public class DomainDiagramEditorUtil {
 								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT)));
 
 		group.add(new CombinedTemplateCreationEntry(
-						"Name Constraint",
-						"Name Constraint",
+						"Name",
+						"Name",
 						new CreationFactory() {
 
 							public Object getNewObject() {
-								return ModelFactory.eINSTANCE
+								NameTypeConstraint ntc = ModelFactory.eINSTANCE
 										.createNameTypeConstraint();
+								
+								int i=0;
+								String n = "name";
+								TopicType tt = null; 
+								while ( (tt=ModelIndexer.getTopicIndexer().getTopicTypeByName(n+i)) != null) {
+									i++;
+								}
+								tt = ModelFactory.eINSTANCE.createNameType();
+								tt.setName(n+i);
+								
+								ntc.setType(tt);
+								
+								
+								return ntc;
 							}
 
 							public Object getObjectType() {
@@ -220,104 +178,12 @@ public class DomainDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
 		
-		group.add(new CombinedTemplateCreationEntry(
-				"Scope Constraint",
-				"Scope Constraint",
-				new CreationFactory() {
-
-					public Object getNewObject() {
-						return ModelFactory.eINSTANCE
-								.createScopeConstraint();
-					}
-
-					public Object getObjectType() {
-						return ScopeConstraint.class;
-					}
-
-				},
-				null,
-				null));
-		
-		group.add(new CombinedTemplateCreationEntry(
-				"Reifier Constraint",
-				"Reifier Constraint",
-				new CreationFactory() {
-
-					public Object getNewObject() {
-						ReifierConstraint reifierConstraint = ModelFactory.eINSTANCE
-								.createReifierConstraint();
-						reifierConstraint.setCardMax("1");
-						return reifierConstraint;
-					}
-
-					public Object getObjectType() {
-						return ReifierConstraint.class;
-					}
-
-				},
-				null,
-				null));
-
-		group.add(new CombinedTemplateCreationEntry(
-						"Subject Identifier Constraint",
-						"Subject Identifier Constraint",
-						new CreationFactory() {
-
-							public Object getNewObject() {
-								return ModelFactory.eINSTANCE
-										.createSubjectIdentifierConstraint();
-							}
-
-							public Object getObjectType() {
-								return SubjectIdentifierConstraint.class;
-							}
-
-						},
-						ImageProvider
-								.getImageDescriptor(ImageConstants.SUBJECTIDENTIFIERCONSTRAINT),
-						ImageProvider
-								.getImageDescriptor(ImageConstants.SUBJECTIDENTIFIERCONSTRAINT)));
-
-		group.add(new CombinedTemplateCreationEntry(
-						"Subject Locator Constraint",
-						"Subject Locator Constraint",
-						new CreationFactory() {
-
-							public Object getNewObject() {
-								return ModelFactory.eINSTANCE
-										.createSubjectLocatorConstraint();
-							}
-
-							public Object getObjectType() {
-								return SubjectLocatorConstraint.class;
-							}
-
-						},
-						ImageProvider
-								.getImageDescriptor(ImageConstants.SUBJECTLOCATORCONSTRAINT),
-						ImageProvider
-								.getImageDescriptor(ImageConstants.SUBJECTLOCATORCONSTRAINT)));
 		return group;
 	}
 
 	private static PaletteGroup getConnectionsPaletteGroup() {
 		PaletteGroup group = new PaletteGroup("Connection Items");
-		group.add(new ConnectionCreationToolEntry("Is A ...",
-				"Create Is A connection", new CreationFactory() {
-
-					public Object getNewObject() {
-						Edge e = ModelFactory.eINSTANCE.createEdge();
-						e.setType(EdgeType.IS_ATYPE);
-						return e;
-					}
-
-					public Object getObjectType() {
-						return Edge.class;
-					}
-
-				}, ImageProvider.getImageDescriptor(ImageConstants.ISA_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.ISA)));
-
+		
 		group.add(new ConnectionCreationToolEntry("Kind Of ...",
 				"Create kind of connection", new CreationFactory() {
 
@@ -334,8 +200,7 @@ public class DomainDiagramEditorUtil {
 				}, ImageProvider.getImageDescriptor(ImageConstants.KINDOF_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.KINDOF)));
 
-		group
-				.add(new CombinedTemplateCreationEntry(
+		group.add(new CombinedTemplateCreationEntry(
 						"Association Constraint",
 						"Association Constraint",
 						new CreationFactory() {

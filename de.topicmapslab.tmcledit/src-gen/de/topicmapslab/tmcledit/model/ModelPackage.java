@@ -1355,13 +1355,22 @@ public interface ModelPackage extends EPackage {
 	int TYPE_NODE__TOPIC_TYPE = NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Image</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_NODE__IMAGE = NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Type Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
+	int TYPE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl <em>Bendpoint</em>}' class.
@@ -4324,6 +4333,17 @@ public interface ModelPackage extends EPackage {
 	EReference getTypeNode_TopicType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TypeNode#getImage <em>Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TypeNode#getImage()
+	 * @see #getTypeNode()
+	 * @generated
+	 */
+	EAttribute getTypeNode_Image();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Bendpoint <em>Bendpoint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5466,6 +5486,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_NODE__TOPIC_TYPE = eINSTANCE.getTypeNode_TopicType();
+
+		/**
+		 * The meta object literal for the '<em><b>Image</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_NODE__IMAGE = eINSTANCE.getTypeNode_Image();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl <em>Bendpoint</em>}' class.

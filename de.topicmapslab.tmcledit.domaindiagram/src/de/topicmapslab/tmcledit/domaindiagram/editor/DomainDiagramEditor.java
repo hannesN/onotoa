@@ -390,6 +390,8 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					part = part.getParent();
 				}
 
+				cmProvider.setSelectedEditPart(part);
+				
 				Object model = part.getModel();
 				if (model instanceof TypeNode) {
 					TypeNode node = (TypeNode) model;

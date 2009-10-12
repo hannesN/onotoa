@@ -29,6 +29,7 @@ import de.topicmapslab.tmcledit.domaindiagram.action.AddOccurrenceConstraintActi
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.MoveToDiagramAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.RemoveFromDiagramAction;
+import de.topicmapslab.tmcledit.domaindiagram.editparts.IActionProvider;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
@@ -38,6 +39,8 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 	private final ActionRegistry actionRegistry;
 	private boolean active;
 	private final Diagram diagram;
+	
+	private  EditPart selectedEditPart;
 	
 	public DomainEditorContextMenuProvider(EditPartViewer viewer, ActionRegistry actionRegistry, Diagram diagram) {
 		super(viewer);
@@ -50,6 +53,10 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 		this.active = active;
 	}
 
+	public void setSelectedEditPart(EditPart selectedEditPart) {
+		this.selectedEditPart = selectedEditPart;
+	}
+	
 	@Override
 	public void buildContextMenu(IMenuManager menu) {
 		if (!active)
@@ -80,6 +87,14 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 			menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
 
 		buildMoveToDiagramActions(menu);
+		
+		if ( (selectedEditPart !=null) && (selectedEditPart instanceof IActionProvider) ) {
+			for (IAction a : ((IActionProvider) selectedEditPart).getActions()) {
+				if (a.isEnabled())
+					menu.add(a);
+			}
+		}
+		
 	}
 	
 	private void buildMoveToDiagramActions(IMenuManager menu) {
