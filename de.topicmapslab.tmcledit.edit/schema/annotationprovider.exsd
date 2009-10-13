@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="de.topicmapslab.tmcledit.edit" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="de.topicmapslab.tmcledit.edit" id="annotationprovider" name="Annotation Provider"/>
+      </appInfo>
+      <documentation>
+         [Enter description of this extension point.]
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="annotationprovider"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="annotationprovider">
+      <annotation>
+         <documentation>
+            This extension point provide a class which defines an annotation. Optionally it is possible to
+add a validator and datatype.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name of the annotation. This is the text, which is used as key of the annotation.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="validator" type="string" use="default" value="de.topicmapslab.tmcledit.model.annotationprovider.StringAnnotationValidator">
+            <annotation>
+               <documentation>
+                  The validator class which validates the value and tells the type of the annotation.
+Default is String.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="proposalprovider" type="string">
+            <annotation>
+               <documentation>
+                  Provides a set of porposals, which can be used for content assist.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationProposalProvider"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="internal" type="boolean">
+            <annotation>
+               <documentation>
+                  An internal annotation is used by the application itself. It is not visible or editable by the user.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         Onotoa 1.1.1
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiinfo"/>
+      </appInfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>
