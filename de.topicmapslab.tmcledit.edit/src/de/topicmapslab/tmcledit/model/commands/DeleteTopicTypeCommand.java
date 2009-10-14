@@ -41,24 +41,22 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 	private List<TopicType> isAList = Collections.emptyList();
 	private List<TopicType> akoList = Collections.emptyList();;
-	private List<ContainmentPair<Diagram, TypeNode>> typeNodeList = Collections
-			.emptyList();
+	private List<ContainmentPair<Diagram, TypeNode>> typeNodeList = Collections.emptyList();
 
-	private List<DeleteTopicTypeConstraintItemCommand> constraintCommands = Collections
-			.emptyList();
+	private List<DeleteTopicTypeConstraintItemCommand> constraintCommands = Collections.emptyList();
 
 	private Map<Diagram, List<Edge>> edgeMap = Collections.emptyMap();
 
-	private List<DeleteAssociationConstraintCommand> associationCommands = Collections
-			.emptyList();
+	private List<DeleteAssociationConstraintCommand> associationCommands = Collections.emptyList();
 
-	private List<RemoveScopeConstraintsCommand> scopeCommands = Collections
-			.emptyList();
-	
+	private List<RemoveScopeConstraintsCommand> scopeCommands = Collections.emptyList();
+
 	private List<RemoveRoleConstraintCommand> roleCommands = Collections.emptyList();
 
 	private List<SetRoleConstraintCommand> roleconstCommands = Collections.emptyList();
-	
+
+	private List<DeleteRolePlayerConstraintCommand> deleteRolePlayerCommands = Collections.emptyList();
+
 	public DeleteTopicTypeCommand(TopicType topicType) {
 		this.topicType = topicType;
 	}
@@ -66,8 +64,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	public void execute() {
 		for (ContainmentPair<Diagram, TypeNode> cp : typeNodeList) {
 			if (edgeMap.get(cp.getContainer()) != null) {
-				cp.container.getEdges().removeAll(
-						edgeMap.get(cp.getContainer()));
+				cp.container.getEdges().removeAll(edgeMap.get(cp.getContainer()));
 			}
 			cp.getContainer().getNodes().remove(cp.getElement());
 		}
@@ -85,28 +82,30 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		for (DeleteAssociationConstraintCommand cmd : associationCommands) {
 			cmd.execute();
 		}
-		
+
 		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
 			cmd.execute();
 		}
-		
+
 		for (RemoveRoleConstraintCommand cmd : roleCommands) {
 			cmd.execute();
 		}
 		
+		for (DeleteRolePlayerConstraintCommand cmd : deleteRolePlayerCommands) {
+			cmd.execute();
+		}
+
 		for (SetRoleConstraintCommand cmd : roleconstCommands) {
 			cmd.execute();
 		}
 
-		ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().remove(
-				topicType);
+		ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().remove(topicType);
 
 	}
 
 	@Override
 	public void undo() {
-		ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(
-				topicType);
+		ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(topicType);
 
 		for (TopicType tt : isAList) {
 			tt.getIsa().add(topicType);
@@ -124,11 +123,15 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		for (DeleteTopicTypeConstraintItemCommand cmd : constraintCommands) {
 			cmd.undo();
 		}
+		
+		for (DeleteRolePlayerConstraintCommand cmd : deleteRolePlayerCommands) {
+			cmd.undo();
+		}
 
 		for (DeleteAssociationConstraintCommand cmd : associationCommands) {
 			cmd.undo();
 		}
-		
+
 		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
 			cmd.undo();
 		}
@@ -167,26 +170,25 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	private void prepareAssociationCommandsList() {
 		TopicMapSchema topicMapSchema = ModelIndexer.getInstance()
 				.getTopicMapSchema();
-		for (AssociationTypeConstraint asc : topicMapSchema
+		for (AssociationTypeConstraint atc : topicMapSchema
 				.getAssociationTypeConstraints()) {
-			if (topicType.equals(asc.getType())) {
+			if (topicType.equals(atc.getType())) {
 				DeleteAssociationConstraintCommand cmd = new DeleteAssociationConstraintCommand(
-						asc);
+						atc);
 				if (cmd.canExecute()) {
 					addAssociationConstraintCommand(cmd);
 				}
 			} else {
-				if ( (asc.getType()!=null) && (asc.getType() instanceof AssociationType) ) {
-					AssociationType at = (AssociationType) asc.getType();
+				if ( (atc.getType()!=null) && (atc.getType() instanceof AssociationType) ) {
+					AssociationType at = (AssociationType) atc.getType();
 				
 					for (RoleConstraint rc : at.getRoles()) {
 						if (topicType.equals(rc.getType())) {
-							RemoveRoleConstraintCommand cmd = new RemoveRoleConstraintCommand
-							(at, rc);
+							RemoveRoleConstraintCommand cmd = new RemoveRoleConstraintCommand(at, rc);
 							if (cmd.canExecute())
 								addRoleConstraintCommand(cmd);
 							// check if theres a roleplayconstraint using this role
-							for (RolePlayerConstraint rpc : asc.getPlayerConstraints()) {
+							for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
 								if ( rc.equals(rpc.getRole()) ) {
 									SetRoleConstraintCommand cmd2 = new SetRoleConstraintCommand(rpc, null);
 									if (cmd2.canExecute())
@@ -196,31 +198,43 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 						}
 					}
 				}
+				for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+					if (topicType.equals(rpc.getPlayer())) {
+						DeleteRolePlayerConstraintCommand cmd2 = new DeleteRolePlayerConstraintCommand(atc, rpc);
+						if (cmd2.canExecute())
+							addDeleteRolePlayerConstraintCommand(cmd2);
+					} 
+				}
+				
 			}
 		}
 
+	}
+
+	private void addDeleteRolePlayerConstraintCommand(DeleteRolePlayerConstraintCommand cmd) {
+		if (deleteRolePlayerCommands == Collections.EMPTY_LIST) {
+			deleteRolePlayerCommands = new ArrayList<DeleteRolePlayerConstraintCommand>();
+		}
+		deleteRolePlayerCommands.add(cmd);
 	}
 
 	/**
 	 * Searches usage of the topic type in constraints of other topics
 	 */
 	private void prepareConstraintCommandList() {
-		for (TopicType tt : ModelIndexer.getInstance().getTopicMapSchema()
-				.getTopicTypes()) {
+		for (TopicType tt : ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes()) {
 			if (tt.equals(topicType))
 				continue;
 
 			for (NameTypeConstraint ntc : tt.getNameContraints()) {
 				if (topicType.equals(ntc.getType())) {
-					addConstraintCommand(tt, ntc,
-							ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS);
+					addConstraintCommand(tt, ntc, ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS);
 				}
 			}
 
 			for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
 				if (topicType.equals(otc.getType())) {
-					addConstraintCommand(tt, otc,
-							ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS);
+					addConstraintCommand(tt, otc, ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS);
 				}
 			}
 
@@ -231,7 +245,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		for (ScopedTopicType stt : ModelIndexer.getTopicIndexer().getScopedTopicTypes()) {
 			if (stt.equals(topicType))
 				continue;
-			
+
 			for (ScopeConstraint sc : stt.getScope()) {
 				if (topicType.equals(sc.getType()))
 					addScopeConstraintCommand(new RemoveScopeConstraintsCommand(stt, sc));
@@ -239,20 +253,17 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		}
 	}
 
-	private void addConstraintCommand(TopicType tt,
-			AbstractTypedCardinalityConstraint constraint, int featureID) {
+	private void addConstraintCommand(TopicType tt, AbstractTypedCardinalityConstraint constraint, int featureID) {
 		if (constraintCommands == Collections.EMPTY_LIST) {
 			constraintCommands = new ArrayList<DeleteTopicTypeConstraintItemCommand>();
 		}
-		DeleteTopicTypeConstraintItemCommand cmd = new DeleteTopicTypeConstraintItemCommand(
-				tt, constraint, featureID);
+		DeleteTopicTypeConstraintItemCommand cmd = new DeleteTopicTypeConstraintItemCommand(tt, constraint, featureID);
 		if (cmd.canExecute()) {
 			constraintCommands.add(cmd);
 		}
 	}
 
-	private void addAssociationConstraintCommand(
-			DeleteAssociationConstraintCommand cmd) {
+	private void addAssociationConstraintCommand(DeleteAssociationConstraintCommand cmd) {
 		if (associationCommands == Collections.EMPTY_LIST) {
 			associationCommands = new ArrayList<DeleteAssociationConstraintCommand>();
 		}
@@ -266,16 +277,16 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		}
 		scopeCommands.add(cmd);
 	}
-	
+
 	private void addRoleConstraintCommand(RemoveRoleConstraintCommand cmd) {
 		if (roleCommands == Collections.EMPTY_LIST) {
 			roleCommands = new ArrayList<RemoveRoleConstraintCommand>();
 		}
 		roleCommands.add(cmd);
 	}
-	
+
 	private void addRoleConstraintCommand(SetRoleConstraintCommand cmd) {
-		if (roleconstCommands== Collections.EMPTY_LIST) {
+		if (roleconstCommands == Collections.EMPTY_LIST) {
 			roleconstCommands = new ArrayList<SetRoleConstraintCommand>();
 		}
 		roleconstCommands.add(cmd);
@@ -299,17 +310,14 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	 */
 	private void extractTopicNodes() {
 		for (Diagram d : ModelIndexer.getInstance().getDiagrams()) {
-			TypeNode node = (TypeNode) ModelIndexer.getNodeIndexer().getNodeFor(
-					topicType, d);
+			TypeNode node = (TypeNode) ModelIndexer.getNodeIndexer().getNodeFor(topicType, d);
 			if (node != null) {
 
 				if (typeNodeList == Collections.EMPTY_LIST)
 					typeNodeList = new ArrayList<ContainmentPair<Diagram, TypeNode>>();
-				typeNodeList
-						.add(new ContainmentPair<Diagram, TypeNode>(d, node));
+				typeNodeList.add(new ContainmentPair<Diagram, TypeNode>(d, node));
 
-				for (Edge e : ModelIndexer.getNodeIndexer()
-						.getEdgesUsingTopicType(topicType)) {
+				for (Edge e : ModelIndexer.getNodeIndexer().getEdgesUsingTopicType(topicType)) {
 					if (e.eContainer().equals(d))
 						addToEdgeList(d, e);
 				}
