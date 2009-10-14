@@ -11,7 +11,6 @@
 package de.topicmapslab.tmcledit.domaindiagram.editparts;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.AbsoluteBendpoint;
@@ -19,7 +18,6 @@ import org.eclipse.draw2d.Bendpoint;
 import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
-import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
@@ -42,12 +40,7 @@ import de.topicmapslab.tmcledit.domaindiagram.policies.OnotoaBendpointEditPolicy
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
-import de.topicmapslab.tmcledit.model.LabelPos;
-import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleConstraint;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.TopicType;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
 	private BendpointConnectionRouter router;
@@ -89,27 +82,6 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		return figure;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	protected List getModelChildren() {
-		if (getCastedModel().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {
-			EList<LabelPos> labelPositions = getCastedModel()
-					.getLabelPositions();
-			if (labelPositions.size() == 0) {
-				LabelPos pos = ModelFactory.eINSTANCE.createLabelPos();
-				pos.setPosX(0);
-				pos.setPosY(0);
-				labelPositions.add(pos);
-				pos = ModelFactory.eINSTANCE.createLabelPos();
-				pos.setPosX(0);
-				pos.setPosY(0);
-				labelPositions.add(pos);
-			}
-			return labelPositions;
-		}
-		return Collections.emptyList();
-	}
-
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		super.addChildVisual(childEditPart, index);
@@ -148,15 +120,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	@Override
 	public void activate() {
 		((Diagram) getRoot().getContents().getModel()).eAdapters().add(adapter);
-		RolePlayerConstraint roleConstraint = getCastedModel()
-				.getRoleConstraint();
-		if (roleConstraint != null) {
-			roleConstraint.eAdapters().add(adapter);
-			if (roleConstraint.getRole() != null) {
-				roleConstraint.getRole().eAdapters().add(adapter);
-				roleConstraint.getRole().getType().eAdapters().add(adapter);
-			}
-		}
+		
 		super.activate();
 	}
 
@@ -164,31 +128,9 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 	public void deactivate() {
 		((Diagram) getRoot().getContents().getModel()).eAdapters().remove(
 				adapter);
-		RolePlayerConstraint roleConstraint = getCastedModel()
-				.getRoleConstraint();
-		if (roleConstraint != null) {
-			roleConstraint.eAdapters().remove(adapter);
-			if (roleConstraint.getRole() != null) {
-				roleConstraint.getRole().eAdapters().remove(adapter);
-				roleConstraint.getRole().getType().eAdapters().remove(adapter);
-			}
-
-		}
 		super.deactivate();
 	}
-
-	@Override
-	protected ConnectionAnchor getSourceConnectionAnchor() {
-		// TODO Auto-generated method stub
-		return super.getSourceConnectionAnchor();
-	}
-	
-	@Override
-	protected ConnectionAnchor getTargetConnectionAnchor() {
-		// TODO Auto-generated method stub
-		return super.getTargetConnectionAnchor();
-	}
-	
+		
 	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
@@ -200,18 +142,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 					getTarget().refresh();
 				if (getSource() != null)
 					getSource().refresh();
-			} else if (notification.getNotifier().equals(
-					getCastedModel().getRoleConstraint())) {
-				if (notification.getFeatureID(TopicType.class) == ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE) {
-					RoleConstraint tmp = (RoleConstraint) notification
-							.getOldValue();
-					if (tmp != null)
-						tmp.eAdapters().remove(adapter);
-					tmp = (RoleConstraint) notification.getNewValue();
-					if (tmp != null)
-						tmp.eAdapters().add(adapter);
-				}
-			}
+			} 
 		}
 		refreshVisuals();
 	}
@@ -228,28 +159,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		}
 		router.setConstraint((Connection) getFigure(), points);
 		getFigure().revalidate();
-		if (getCastedModel().getRoleConstraint()!=null) {
-			RolePlayerConstraint rtc = getCastedModel().getRoleConstraint();
-			
-			String roleText = "no role type set";
-			if (rtc.getRole()!=null)
-				roleText = rtc.getRole().getCardMin() + ".."
-						+ rtc.getRole().getCardMax() + "\n"
-						+ rtc.getRole().getType().getName();
-			
-			if (getChildren().size()>0) {
-				MoveableLabelEditPart roleEditPart = (MoveableLabelEditPart) getChildren().get(0);
-				MoveableLabelEditPart rolePlayerCardEditPart = (MoveableLabelEditPart) getChildren().get(1);
-				
-				roleEditPart.setText(roleText);
-				
-				rolePlayerCardEditPart.setText(rtc.getCardMin()+".."+rtc.getCardMax());
-				
-				
-				rolePlayerCardEditPart.refreshVisuals();
-				roleEditPart.refreshVisuals();
-			}
-		}
+		
 
 	}
 }

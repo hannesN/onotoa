@@ -22,6 +22,8 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.EllipseAnchor;
 import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.GridData;
+import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.ToolbarLayout;
@@ -46,13 +48,7 @@ import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.ReifiableTopicType;
-import de.topicmapslab.tmcledit.model.ReifierConstraint;
-import de.topicmapslab.tmcledit.model.ScopeConstraint;
-import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.AddScopeConstraintsCommand;
-import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
 /**
  * @author Hannes Niederhausen
@@ -67,46 +63,71 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@Override
 	protected IFigure createFigure() {
 		Figure figure = new Figure();
-		figure.setLayoutManager(new ToolbarLayout(false));
+
+		GridLayout layout = new GridLayout();
+		figure.setLayoutManager(layout);
+
+		typeLabel = new Label();
+		typeLabel.setText("foo:association");
+		figure.add(typeLabel);
+		GridData gd = new GridData();
+		gd.horizontalAlignment = GridData.CENTER;
+		layout.setConstraint(typeLabel, gd);
 		
 		compartement = new Figure();
 		compartement.setLayoutManager(new ToolbarLayout(false));
 		figure.add(compartement);
-		
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalAlignment = GridData.CENTER;
+		layout.setConstraint(compartement, gd);
+
 		compartement.setBackgroundColor(ColorConstants.blue);
 		compartement.setOpaque(false);
+
 		
-		typeLabel = new Label();
-		typeLabel.setText("foo:association");
-		compartement.add(typeLabel);
-		
+
+		int size = 25;
 		circle = new CircleFigure();
-		circle.setBackgroundColor(ColorConstants.black);
+		circle.setBackgroundColor(ColorConstants.blue);
+		circle.setForegroundColor(ColorConstants.yellow);
 		circle.setOpaque(true);
-		circle.setSize(20, 20);
-		circle.setLayoutManager(null);
+		circle.setSize(size, size);
 		figure.add(circle);
 		
+		gd = new GridData();
+		gd.grabExcessHorizontalSpace = false;
+		gd.grabExcessVerticalSpace = false;
+		gd.horizontalAlignment = GridData.CENTER;
+		gd.widthHint = size;
+		gd.heightHint = size;
+		layout.setConstraint(circle, gd);
+		
+
 		return figure;
 	}
-
 
 	@Override
 	public IFigure getContentPane() {
 		return compartement;
 	}
-	
+
+	@Override
+	public ConnectionAnchor getSourceConnectionAnchor(
+			ConnectionEditPart connection) {
+		return new EllipseAnchor(circle);
+	}
+
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(Request request) {
 		return new ChopboxAnchor(circle);
 	}
-		
+
 	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(
 			ConnectionEditPart connection) {
 		return new ChopboxAnchor(circle);
 	}
-	
+
 	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(Request request) {
 		return new ChopboxAnchor(circle);
@@ -119,7 +140,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@Override
 	protected void refreshVisuals() {
 		AssociationNode node = getCastedModel();
-		if (getParent()==null)
+		if (getParent() == null)
 			return;
 		Rectangle r = new Rectangle(node.getPosX(), node.getPosY(), -1, -1);
 		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
@@ -163,72 +184,31 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@Override
 	protected List getModelChildren() {
 		List<Object> children = new ArrayList<Object>();
-//		children.addAll(getCastedModel().getAssociationConstraint().getPlayerConstraints());
-		
+		children.addAll(getCastedModel().getAssociationConstraint().getPlayerConstraints());
+
 		if (children.isEmpty())
 			return Collections.emptyList();
-		
+
 		return children;
 	}
-	
-	@Override
-	public ConnectionAnchor getSourceConnectionAnchor(
-			ConnectionEditPart connection) {
-		return new EllipseAnchor(circle);
-	}
 
-	@Override
-	protected void addChildVisual(EditPart childEditPart, int index) {
-		if (index!=-1)
-			index++;
-		super.addChildVisual(childEditPart, index);
-	}
-	
 	@Override
 	public void setModel(Object model) {
 		if (getCastedModel() != null) {
 			TopicType tt = getCastedModel().getAssociationConstraint()
 					.getType();
 			tt.eAdapters().remove(this);
-			if ((tt instanceof AssociationType)) {
-				for (ScopeConstraint sc : ((AssociationType) tt).getScope()) {
-					sc.eAdapters().remove(this);
-					if (sc.getType() != null)
-						sc.getType().eAdapters().remove(this);
-				}
-				ReifierConstraint reifierConstraint = ((AssociationType) tt).getReifierConstraint();
-				if (reifierConstraint!=null) {
-					reifierConstraint.eAdapters().remove(this);
-					if (reifierConstraint.getType()!=null)
-						reifierConstraint.getType().eAdapters().remove(this);
-				}
-			}
 		}
 		super.setModel(model);
 		if (getCastedModel() != null) {
 			TopicType tt = getCastedModel().getAssociationConstraint()
 					.getType();
-			if (tt==null)
+			if (tt == null)
 				return;
 			tt.eAdapters().add(this);
-			if ((tt instanceof AssociationType)) {
-				for (ScopeConstraint sc : ((AssociationType) tt).getScope()) {
-					sc.eAdapters().add(this);
-					TopicType type = sc.getType();
-					if (type!=null)
-						type.eAdapters().add(this);
-				}
-				ReifierConstraint reifierConstraint = ((AssociationType) tt).getReifierConstraint();
-				if (reifierConstraint!=null) {
-					reifierConstraint.eAdapters().add(this);
-					if (reifierConstraint.getType()!=null)
-						reifierConstraint.getType().eAdapters().add(this);
-				}
-			}
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void notifyChanged(Notification notification) {
 		int eventType = notification.getEventType();
 		if (eventType == Notification.REMOVING_ADAPTER) {
@@ -236,53 +216,19 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		}
 		if (notification.getFeatureID(EList.class) == ModelPackage.DIAGRAM__EDGES)
 			refreshSourceConnections();
-		
+
 		Object notifier = notification.getNotifier();
 		if (notifier == getModel())
 			refreshVisuals();
-		
+
 		if (eventType == Notification.SET) {
 			if (notifier.equals(getCastedModel().getAssociationConstraint())) {
 				if (notification.getFeatureID(TopicType.class) == ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
 					processAdapter(notification);
 				}
-			} else if (notifier instanceof ReifierConstraint) {
-				if (notification.getFeatureID(TopicType.class) == ModelPackage.REIFIER_CONSTRAINT__TYPE) {
-					processAdapter(notification);
-				}
 			}
-			
-			
-		} else if (notification.getFeatureID(List.class) == ModelPackage.ASSOCIATION_TYPE__SCOPE) {
-			if (eventType == Notification.ADD) {
-				ScopeConstraint sc = (ScopeConstraint) notification
-						.getNewValue();
-				sc.eAdapters().add(this);
-				if (sc.getType() != null)
-					sc.getType().eAdapters().add(this);
-			} else if (eventType == Notification.ADD_MANY) {
-				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
-						.getNewValue()) {
-					sc.eAdapters().remove(this);
-					if (sc.getType() != null)
-						sc.getType().eAdapters().remove(this);
-				}
-			} else if (eventType == Notification.REMOVE) {
-				ScopeConstraint sc = (ScopeConstraint) notification
-						.getOldValue();
-				sc.eAdapters().remove(this);
-				if (sc.getType() != null)
-					sc.getType().eAdapters().remove(this);
-			} else if (eventType == Notification.REMOVE_MANY) {
-				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
-						.getOldValue()) {
-					sc.eAdapters().remove(this);
-					if (sc.getType() != null)
-						sc.getType().eAdapters().remove(this);
-				}
-			}
-		} 
-		
+		}
+
 		refreshVisuals();
 		refreshChildren();
 
@@ -290,58 +236,44 @@ public class AssociationNodeEditPart extends NodeEditPart {
 
 	private void processAdapter(Notification notification) {
 		if (notification.getOldValue() != null)
-			((EObject) notification.getOldValue()).eAdapters()
-					.remove(this);
+			((EObject) notification.getOldValue()).eAdapters().remove(this);
 
 		if (notification.getNewValue() != null)
-			((EObject) notification.getNewValue()).eAdapters().add(
-					this);
+			((EObject) notification.getNewValue()).eAdapters().add(this);
 	}
 
 	@Override
 	protected void createEditPolicies() {
 		super.createEditPolicies();
-		 installEditPolicy(EditPolicy.LAYOUT_ROLE, new LayoutEditPolicy() {
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new LayoutEditPolicy() {
 
-				@Override
-				protected Command getMoveChildrenCommand(Request request) {
+			@Override
+			protected Command getMoveChildrenCommand(Request request) {
+				return null;
+			}
+
+			@Override
+			protected Command getCreateCommand(CreateRequest request) {
+				org.eclipse.emf.common.command.Command cmd = null;
+				AssociationType at = (AssociationType) getCastedModel()
+						.getAssociationConstraint().getType();
+				if (at == null)
 					return null;
-				}
 
-				@Override
-				protected Command getCreateCommand(CreateRequest request) {
-					org.eclipse.emf.common.command.Command cmd = null;
-					AssociationType at = (AssociationType) getCastedModel().getAssociationConstraint().getType();
-					if (at==null)
-						return null;
-					
-					if (request.getNewObjectType() == ScopeConstraint.class) {
-						cmd = new AddScopeConstraintsCommand(at, (ScopeConstraint) request.getNewObject());
-					} else if (request.getNewObjectType() == ReifierConstraint.class) {
-						if (at instanceof ReifiableTopicType) {
-							if ((at != null)
-									&& (at.getReifierConstraint() == null)) {
-								cmd = new GenericSetCommand(
-										at,
-										ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT,
-										(ReifierConstraint) request.getNewObject());
-							}
-						}
-					}
-					if (cmd == null)
-						return null;
-
-					DomainEditDomain ed = (DomainEditDomain) getHost().getViewer()
-							.getEditDomain();
-					CommandStack cmdStack = ed.getEditingDomain().getCommandStack();
-					return new CommandAdapter(cmdStack, cmd);
-				}
-
-				@Override
-				protected EditPolicy createChildEditPolicy(EditPart child) {
+				if (cmd == null)
 					return null;
-				}
-		 });
+
+				DomainEditDomain ed = (DomainEditDomain) getHost().getViewer()
+						.getEditDomain();
+				CommandStack cmdStack = ed.getEditingDomain().getCommandStack();
+				return new CommandAdapter(cmdStack, cmd);
+			}
+
+			@Override
+			protected EditPolicy createChildEditPolicy(EditPart child) {
+				return null;
+			}
+		});
 	}
 
 }

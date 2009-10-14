@@ -33,6 +33,7 @@ import de.topicmapslab.tmcledit.domaindiagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.OccurrenceTypeConstraintEditPart;
+import de.topicmapslab.tmcledit.domaindiagram.editparts.TopicRoleEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -45,6 +46,7 @@ import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -113,6 +115,8 @@ public class DomainDiagramEditorUtil {
 					part = new MoveableLabelEditPart();
 				} else if (model instanceof Comment) {
 					part = new CommentEditPart();
+				} else if (model instanceof RolePlayerConstraint) {
+					part = new TopicRoleEditPart();
 				}
 
 				if (part != null)

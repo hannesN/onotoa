@@ -72,7 +72,7 @@ import de.topicmapslab.tmcledit.model.util.Base64;
  */
 public class TypeNodeEditPart extends
 		de.topicmapslab.tmcledit.domaindiagram.editparts.NodeEditPart implements
-		NodeEditPart, IActionProvider {
+		NodeEditPart, IContextMenuProvider {
 	protected DirectEditManager editManager;
 
 	private Label titleLabel;
