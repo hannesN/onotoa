@@ -19,6 +19,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -29,7 +30,7 @@ import de.topicmapslab.tmcledit.domaindiagram.action.AddOccurrenceConstraintActi
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.MoveToDiagramAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.RemoveFromDiagramAction;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.IActionProvider;
+import de.topicmapslab.tmcledit.domaindiagram.editparts.IContextMenuProvider;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
@@ -88,10 +89,13 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 
 		buildMoveToDiagramActions(menu);
 		
-		if ( (selectedEditPart !=null) && (selectedEditPart instanceof IActionProvider) ) {
-			for (IAction a : ((IActionProvider) selectedEditPart).getActions()) {
+		if ( (selectedEditPart !=null) && (selectedEditPart instanceof IContextMenuProvider) ) {
+			for (IAction a : ((IContextMenuProvider) selectedEditPart).getActions()) {
 				if (a.isEnabled())
 					menu.add(a);
+			}
+			for (IContributionItem i : ((IContextMenuProvider) selectedEditPart).getItems()) {
+				menu.add(i);
 			}
 		}
 		
