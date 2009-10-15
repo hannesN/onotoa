@@ -14,6 +14,7 @@
 package de.topicmapslab.tmcledit.model.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -67,6 +68,8 @@ public class PrefixMappingPage extends AbstractModelPage {
 
 	private CTabItem item;
 
+	private TopicMapSchema schema;
+
 	public PrefixMappingPage() {
 		super("prefix mapping");
 	}
@@ -74,7 +77,7 @@ public class PrefixMappingPage extends AbstractModelPage {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setModel(Object model) {
-		TopicMapSchema schema = null;
+		schema = null;
 		if (model instanceof MappingElement) {
 			MappingElement me = (MappingElement) model;
 			schema = (TopicMapSchema) me.eContainer(); 
@@ -84,6 +87,7 @@ public class PrefixMappingPage extends AbstractModelPage {
 		}
 		super.setModel(schema);
 		
+		schema.eAdapters().add(this);
 		for (MappingElement me : schema.getMappings()) {
 			me.eAdapters().add(this);
 		}
@@ -227,10 +231,16 @@ public class PrefixMappingPage extends AbstractModelPage {
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
 			return;
-		//if (notification.getNotifier() instanceof  ) {
-			updateUI();
 		
-
+		if (notification.getEventType()==Notification.ADD) {
+			EObject obj = (EObject) notification.getNewValue();
+			obj.eAdapters().add(this);
+		} else if (notification.getEventType()==Notification.REMOVE) {
+			EObject obj = (EObject) notification.getOldValue();
+			obj.eAdapters().remove(this);
+		}
+		
+		updateUI();
 	}
 
 	private class TableLabelProvider implements ITableLabelProvider {
@@ -292,12 +302,13 @@ public class PrefixMappingPage extends AbstractModelPage {
 					return;
 				val = (String) value;
 			}
-			if (PrefixKeyMatcher.isValidKey(key))
+			if (PrefixKeyMatcher.isValidKey(key)) {
 				getCommandStack().execute(new UpdatePrefixCommand(me, key, val));
-			else
+			} else {
 				MessageDialog
 				.openError(addButton.getShell(), "invalid key",
 						"You've entered an invalid key!");
+			}
 			
 		}
 		
