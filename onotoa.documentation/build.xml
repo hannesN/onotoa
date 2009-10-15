@@ -33,7 +33,7 @@
 	<property name="build" value="${doc.docbook}/build" />
 	<property name="build.fo" value="${build}/fo" />
 
-	<property name="paper.type" value="C5" />
+	<property name="paper.type" value="A5" />
 
 	<!--
 	      - Sets up the classpath for the Xalan and Xerces implementations
