@@ -1,91 +1,145 @@
 == Getting started == 
 
-In this chapter we explain how to get _Onotoa_ and what is needed to start it. Afterwards you can find a short description of the parts  _Onotoa_.
-After following the instructions in this chapter you should have a working installation of _Onotoa_ and created your first diagram. 
+This chapter will explain how to get _Onotoa_ and what is needed to start it. 
+It also gives a short description of various the parts  _Onotoa_.
+If you follow the instructions in this chapter you will be able to install  
+_Onotoa_ and create your first diagram. 
 
-=== The website of the _Onotoa_ project ===
+=== The Website of the _Onotoa_ Project ===
 
-The _Onotoa_ project maintains a website which provides you with all information about the ongoing developments. The website is available at http://onotoa.topicmapslab.de. In <<website>> you see the screenshot of the Onotoa website. 
+The _Onotoa_ project maintains a website which provides you with all 
+information about the ongoing developments. 
+The website is available at http://onotoa.topicmapslab.de. In <<website>> you 
+can see a screenshot of the Onotoa website. 
 
 .Website of the _Onotoa_ project
 [[website]]
 [caption="Figure:"]
 image::images/onotoa_website.png[scaledwidth="100%"]
 
-In the left column of the website you see the latest news from the Onotoa project. There you get all release information about _Onotoa_, but also other important information for the Onotoa community like the announcement of user group meetings. The news are also broadcasted by the RSS feed of the website. Subscribe to the feed and don't miss any news about _Onotoa_. For more details about the RSS feed see the stay tuned section below. 
+In the left column of the website you can see the latest news from the Onotoa 
+project. You can get the latest release information about
+_Onotoa_ there, but also other important information for the Onotoa community like 
+announcements of user group meetings. The news are also broadcasted by the 
+RSS feed of the website. Subscribe to the feed and don't miss any news about 
+_Onotoa_! For more details about the RSS feed see the "Stay tuned" section below. 
 
-In the central column of the website some introductive information about the _Onotoa_ project is provided. All background information about _Onotoa_ is provided in the *About _Onotoa_* section of the website, which is one of the tab menu in the navigation of the _Onotoa_ website.
+The central column of the website contains some introductory information about the 
+_Onotoa_ project. All background information about _Onotoa_ is 
+provided in the *About _Onotoa_* section of the website, which is one of the 
+tab menus in the navigation of the _Onotoa_ website.
 
-Much more important is the right column. There you get the download packages of the latest release of _Onotoa_ for the main operation systems. You can directly start to download the appropriate package for your environment. All available download packages, also from outdated releases, are provided in the download section of the website, which is one of the tab menu in the navigation of the _Onotoa_ website. You find all details about the download and installation of _Onotoa_ in the section below.  
+Much more important is the right column. It contains the download packages of 
+the latest release of _Onotoa_ for the main operation systems. You can directly 
+start to download the appropriate package for your environment. All available 
+download packages, also from previous releases, are provided in the download 
+section of the website, which is one of the tab menus in the navigation of the 
+_Onotoa_ website. You find all details about the download and installation of 
+_Onotoa_ in the section below.  
 
-In the top navigation of the _Onotoa_ website is the *Documentation* tab the most important. In the documentation section you get the full documentation of Onotoa. We highly recommend you to use the documentation when you get started with _Onotoa_.
+The *Documentation* tab the most important button in the top navigation of the 
+_Onotoa_ website is . It contains the full documentation of 
+_Onotoa_. We highly recommend you that you read the documentation before you get 
+started with _Onotoa_.
 
-==== Stay tuned ====
-To get informed about the latest developments in the Onotoa project subscribed to the provided RSS feed. Add the URL of the feed http://onotoa.topicmapslab.de/news.rss to your favourite feed reader. To get more involved in the ongoing discussion about the further development of the _Onotoa_ project subscribe to the Onotoa mailinglist. [TODO: Beschreibung, wie man sich in die Mainlingliste einschreiben kann.]   
+==== Stay Tuned ====
+You should subscribe to the RSS feed in order to get updates about the latest 
+developments in the _Onotoa_ project. Add the URL of the feed 
+http://onotoa.topicmapslab.de/news.rss to your favourite feed reader. Get 
+more involved in the ongoing discussion about the further development of the 
+_Onotoa_ project subscribe to the _Onotoa_ mailinglist. 
 
 
 === Licence and Requirements ===
 
-Onotoa is published under the Eclipse Public License. You can download and use _Onotoa_ for free and without any restrictions in functionality. 
+Onotoa is published under the Eclipse Public License. You can download and use 
+_Onotoa_ for free and without any restrictions in functionality. 
 
 As described below in more detail, there are two ways to install _Onotoa_:
 
-- *Standalone version* This version can downloaded from the Download section of the _Onotoa_ website (http://onotoa.topicmapslab.de/download).
-- *Eclipse plug-in* You can use _Onotoa_ as plug-in for your Eclipse installation. To integrate _Onotoa_ into your environemt you have to use the _Onotoa_ update site (http://onotoa.topicmapslab.de/update).
+- *Stand-alone version* This version can be downloaded from the download section of 
+the _Onotoa_ website (http://onotoa.topicmapslab.de/download).
+- *Eclipse plug-in* You can use _Onotoa_ as plug-in for your eclipse 
+installation. To integrate _Onotoa_ into your environemt you have to use the 
+_Onotoa_ update site (http://onotoa.topicmapslab.de/update).
 
-As requirement, the Java Runtime Environment Version 5.0 must be installed to run _Onotoa_. The latest Java Version can be downloaded for free (http://java.sun.com).
+The Java Runtime Environment Version 5.0 must be installed to 
+run _Onotoa_. The latest Java Version can be downloaded for free from
+http://java.sun.com.
 
-TIP: You can check the your java version by opening a shell and enter 'java -version'. Windows(TM) user open the shell by executing the command 'cmd'.
+TIP: You can check the your java version by opening a shell and enter 'java 
+-version'. Windows(TM) user open the shell by executing the command 'cmd'.
 
-=== Using the standalone version of _Onotoa_ ===
+=== Using the stand-alone version of _Onotoa_ ===
 
-_Onotoa_ does not come with a installer. You just need to download the file for your system. For instance for 
-Windows(TM) you'll need 'onotoa-1.1.0-win32.win32.x86.zip'. If you have a 64bit Windows(TM) download 'onotoa-1.1.0-win32.win32.x86_64.zip'.
+_Onotoa_ does not come with an installer. You just need to download the file for 
+your system. For Windows(TM) you'll need 'onotoa-1.1.0-win32.win32.x86.zip' will be required. 
+If you have a 64bit Windows(TM) you will have to download 'onotoa-1.1.0-win32.win32.x86_64.zip'.
 
-After downloading the file for your system you'll need to unzip it. The zip file contains a folder named 'onotoa' so it is not necessary to
-create one. After you unzipped the archive you should find an executable for your platform This includes a binary file (e.g. onotoa.exe for Windows(TM) or Onotoa.app on MacOS(TM)).
+After downloading the file for your system you will have to unzip it. The zip 
+file contains a folder named 'onotoa', so it is not necessary to
+create one. After unzipping the archive you should find an executable for 
+your platform. This will include a binary file (e.g. onotoa.exe for Windows(TM) or 
+Onotoa.app on MacOS(TM)).
 
-Start _Onotoa_ and after a short loading time you should see the main window, like in <<empty_win>>.
+If you start _Onotoa_ you should see the main window, 
+like in <<empty_win>> after a brief for loading.
 
 .Empty _Onotoa_ window
 [caption="Figure:"]
 [[empty_win]]
-image::images/emptywin.png["Empty _Onotoa_ window", scaledwidth="100%"]
+image::images/emptywin.png["Blank _Onotoa_ window", scaledwidth="100%"]
 
 
-To create a new model, use the *File->New..*.
-Choose the path of the file and name it 'example.ono'. After that your window should look like <<emptyfile_win>>
+To create a new model, use *File->New..*.
+Choose the path of the file and name it 'example.ono'. After that your window 
+should look like <<emptyfile_win>>
 
 .Onotoa window after creating a file
 [caption="Figure:"]
 [[emptyfile_win]]
-image::images/emptyfilewin.png["_Onotoa_ window after creating a file", scaledwidth="100%"]
+image::images/emptyfilewin.png["_Onotoa_ window after creating a file", 
+scaledwidth="100%"]
 
 === Using the plug-in version of _Onotoa_ ===
 
-It is possible to install the _Onotoa_ plug-ins into an existing eclipse installation. You need eclipse 3.5 (Galileo) for _Onotoa_. 
+The _Onotoa_ plug-ins can be installed into an existing eclipse 
+installation. You will need eclipse 3.5 (Galileo) for _Onotoa_. 
 
-I assume you have a working installation of eclipse. Choose *Help->Install New Software...* and enter  'http://onotoa.topicmapslab.de/update' into the text field
-next to *Work with:*. Press enter and the content of the update site will shown (see <<updatemanager>>).
+An up and running version of eclipse is required and has to be installed. 
+Choose *Help->Install New Software...* and enter  'http://onotoa.topicmapslab.de/update' into the text 
+field
+next to *Work with:*. Press enter and the content of the update site will be shown 
+(see <<updatemanager>>).
 
 .Update Manager of Eclipse 3.5
 [caption="Figure:"]
 [[updatemanager]]
 image::images/update_manager.png["Update Manager", scaledwidth="100%"]
 
-To create Topic Maps schemas it is only necessary to install the 'Onotoa plug-ins'. If you want to export to CTM or import existing CTM files you need to install the Imnport
-feature or export plug-ins. Both need the tinyTiM feature, so you need to install this to.
-Choose the features you want to install (we advise to install all) and click on *Finish*. After the dependencies are checked you should agree to
-the licence agreements and after the installation restart eclipse.
+To create Topic Maps schemas it is only necessary to install the 'Onotoa 
+plug-ins'. If you want to export to CTM or import existing CTM files you will have 
+to install the Import
+feature or export plug-ins. The tinyTiM feature is needed in both cases, so you will
+have to install this too.
+Choose the features you want to install (we advise to install all) and click on 
+*Finish*. You should agree to the licence agreements  after the dependencies have 
+been checked and then restart eclipse after the installation.
 
-Before you can create a Topic Maps schema, you'll need to create a project. You can use any project type you want. In this example we create a
-simple Project. Select *File->New->Project* in the eclipse menu and choose *General->Project*. Set the name to 'Onotoa Example' and press enter. We will
-use the workspace for our project location. 
+You will have to create a project before you can create a Topic Maps. You 
+can use any project type you want. In this example we will create a
+simple project. Select *File->New->Project* in the eclipse menu and choose 
+*General->Project*. Set the name to 'Onotoa Example' and press enter. We will
+use the workspace as project location. 
 
-Now we create a new file for _Onotoa_. Create a new file, by selecting *File->New->Other* (see <<newfile1>>). Select *Onotoa->New Onotoa File* and press *Next*.
-The Container of the following wizard page is the project we want to add the file. Press *Browse...* and select the Project 'Onotoa Example'. 
-The other text field contains the name of the file. Please rename the file to 'example.ono'. The dialog should look like <<newfile2>>. Press finish and the 
-newly created file will be opened.
+Now create a new file by selecting 
+*File->New->Other* (see <<newfile1>>). Select *Onotoa->New Onotoa File* and 
+press *Next*.
+The Container of the following wizard page is the project we want to add the 
+file. Press *Browse...* and select the Project 'Onotoa Example'. 
+The other text field contains the name of the file. Please rename the file to 
+'example.ono'. The dialog should look like <<newfile2>>. Press finish and the 
+new file will be opened.
 
 .File Wizard of Eclipse
 [[newfile1]]
@@ -97,20 +151,25 @@ image::images/new_file1.png[scaledwidth="80%"]
 [caption="Figure:"]
 image::images/new_file2.png[scaledwidth="80%"]
 
-After creating the new file _Onotoa_ switches to the *Onotoa Perspective*. This should look like <<nonrcp_win>>.
+After creating the new file _Onotoa_ switches to the *Onotoa Perspective*. This 
+should look like <<nonrcp_win>>.
 
 ._Onotoa_ window after creating a file in Navigator
 [caption="Figure:"]
 [[nonrcp_win]]
-image::images/emptyfilewin_nonrcp.png["_Onotoa_ window after creating a file in Navigator", scaledwidth="100%"]
+image::images/emptyfilewin_nonrcp.png["_Onotoa_ window after creating a file in 
+Navigator", scaledwidth="100%"]
 
 === The Onotoa Perspective ===
 
-A perspective is a definition of the content of the main window. It describes which part of the application are visible and where they are located.
-These parts are called views and editors. Usually views are layouted at the border of the main window, meanwhile the editor is positioned in the
+A perspective is a definition of the content of the main window. It describes 
+which parts of the application are visible and where they are located.
+These parts are called views and editors. Usually views are layouted at the 
+border of the main window, whilst the editor is positioned in the
 center of the main window.
 
-_Onotoa_ consists of views and editors which are layouted in the _Onotoa_ perspective. The perspective with labelled views is shown in <<perspective>>.
+_Onotoa_ consists of views and editors which are layouted in the _Onotoa_ 
+perspective. The perspective with labelled views is shown in <<perspective>>.
 
 .The _Onotoa_ perspective
 [caption="Figure:"]
@@ -119,64 +178,87 @@ image::images/perspective.png[scaledwidth="100%"]
 
 ==== Model View ====
 
-The *Model View* provides an overview of the topic map schema and the created diagrams. It is the core of the application. Diagrams are cretaed in the *Model View* and by
-double clicking on a diagram name in the tree, an editor will opened. A detailed description of the *Model View* can be found in <<_the_model_view>>. 
+The *Model View* provides an overview of the topic map schema and the  
+diagrams. It is the centrepiece of the application. Diagrams are created in the *Model 
+View* and an editor will open up by double clicking on a diagram name in the tree. A 
+detailed description of the *Model View* is given in <<_the_model_view>>. 
 
 ==== Diagram Editor ====
 
-The *Diagram Editor* provides the visual editing functionality. In it you can create new topic types and associations. A detailed description can be found
+The *Diagram Editor* provides the visual editing functionality. You can 
+create new topic types and associations in it. A detailed description  is included
 in <<_the_diagram_editor>>.
 
 ==== Outline ====
 
-The *Outline* is an overview of the diagram. You can move to a part of the diagram by clicking in the section you want to move to.
+The *Outline* is an overview of the diagram. You can move to a part of the 
+diagram by clicking on the section you want to move to.
 
 ==== Property Details View ====
 
-The *Property Details View* provides input masks to edit the properties of element in _Onotoa_. An element may be a schema construct like constrains
-or topic types or a diagram. Every element has it's own property page, which is a input masks for the properties, which are shown in the 
-*Property Details View*. A detailed description of the property page of every element is given in <<_the_property_details_view>>
+The *Property Details View* provides a data entry interface  to edit the properties of 
+an element in _Onotoa_. An element may be a schema construct, such as constraints,
+topic types or diagrams. Every element has its own property page, which is 
+an input interface for the properties shown in the 
+*Property Details View*. A detailed description of the property page of every 
+element is given in <<_the_property_details_view>>
 
 === Creating the first diagram ===
 
-With _Onotoa_ it is possible to create multiple diagrams for a Topic Maps schemas. Although it is possible to create the schema using wizards provided
-by the *Model View* it is advised to create the schema using the diagram editor.
+With _Onotoa_ it is possible to create multiple diagrams for a Topic Maps 
+schemas. Although the schema can be created with wizards provided
+by the *Model View*, it is preferable to do so with the diagram editor.
 
-Via the context menu of the *Diagrams* node in the *Model View* a new diagram can be created. After selecting *Create New Diagram...* a dialog asks for the name of the
-diagram. Alternatively you can select *Create New Diagram...* in the drop down menu, marked with 
+Via the context menu of the *Diagrams* node in the *Model View* a new diagram 
+can be created. After selecting *Create New Diagram...* a dialogue box will asks for the 
+name of the
+diagram. Alternatively you can select *Create New Diagram...* in the drop down 
+menu, marked with 
 ifdef::basebackend-docbook[]
 image:images/viewmenu_button.png[width="0.3cm"].
 endif::basebackend-docbook[]
 ifndef::basebackend-docbook[]
 image:images/viewmenu_button.png[].
 endif::basebackend-docbook[]
-This name should be unique inside one schema definition. After pressing okay, the diagram is added to the 'Diagrams' node and an editor opens where the
+This name should be unique within each schema definition. After pressing okay, 
+the diagram will be added to the 'Diagrams' node and an editor will open where the
 diagram can be edited.
 
-At the right side of the editor is a sidebar. This sidebar is called a palette and contains the tools to create new diagram elements (see <<palette>>).
+On the right-hand side of the editor is a sidebar. This sidebar is called palette 
+and contains the tools to create new diagram elements (see <<palette>>).
 
 .Palette of a diagram editor
 [caption="Figure:"]
 [[palette]]
-image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", align="center"]
+image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", 
+align="center"]
 
-Two add a new element to the diagram just drag an palette entry into the position in the diagram. Let's create a new topic type for the persons. Drag the *Topic Type* 
-entry in the palette in the diagram. You'll see a new topic type is created. Types are named default plus a number. To rename the type, click on the topic type in the
-diagram. The *Property Details View* should show the properties of the name, like in <<topictype1>>. You can change the name, by editing the text field next to *Name:*.
+To add a new element to the diagram just drag an palette entry onto the 
+position of the diagram. Let us create a new topic type for persons. Drag 
+the *Topic Type* 
+entry of the palette onto the diagram. You will see a new topic type is being created. 
+Types are named default plus a number. To rename a type, click on the topic 
+type in the
+diagram. The *Property Details View* should show the properties of the name, 
+as in <<topictype1>>. You can change the name, by editing the text field next 
+to *Name:*.
 
 .Property Page of 'TopicType'
 [caption="Figure:"]
 [[topictype1]]
 image::images/new_topictype_pp.png[align="center", scaledwidth="100%"]
 
-NOTE: Not every element is dragged into the diagram. For example, to create a new occurrence constraint you need an existing topic type and drop the palette entry in
-this topic type.
+NOTE: Not every element is dragged into the diagram. For example, to create a 
+new occurrence constraint you will have to drop the palette 
+entry  on an existing topic type.
 
-TIP: Instead of Drag and Drop elements of the palette, it is possible to click on them and click on the target point in the diagram. A new element 
-is created after the second click.
+TIP: Instead of dragging and dropping elements of the palette, it is possible to click 
+on them and click on the target point in the diagram. A new element 
+will be created after the second click.
 
-Feel free to play a bit with the properties of the type. A detailed description of the other types and constraints and their property pages can be found
-in <<_the_property_details_view>>  
+Feel free to play a bit with the properties of a type. A detailed description 
+of the other types and constraints and their property pages is included
+in <<_the_property_details_view>>.
 
 
  
