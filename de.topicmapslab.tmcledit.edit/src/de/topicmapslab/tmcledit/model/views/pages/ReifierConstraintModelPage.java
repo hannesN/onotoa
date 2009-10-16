@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.model.views.pages;
 
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -208,12 +209,36 @@ public class ReifierConstraintModelPage extends AbstractModelPage {
     	item.setText("Reifier Constraint");
 	}
 
+	@Override
+	public void setModel(Object model) {
+		if (getModel()!=null) {
+			if (getCastedModel().getType()!=null)
+				getCastedModel().getType().eAdapters().remove(this);
+		}
+	    super.setModel(model);
+	    if (getModel()!=null) {
+			if (getCastedModel().getType()!=null)
+				getCastedModel().getType().eAdapters().add(this);
+		}
+	}
+	
 	private void enableTypeSelection(boolean enabled) {
 	    browseButton.setEnabled(enabled);
 		link.setEnabled(enabled);
     }
 
 	public void notifyChanged(Notification notification) {
+		if (notification.getFeatureID(TopicType.class) == ModelPackage.REIFIER_CONSTRAINT__TYPE) {
+			if (notification.getEventType()==Notification.SET) {
+				EObject tmp = (EObject) notification.getOldValue();
+				if (tmp!=null)
+					tmp.eAdapters().remove(this);
+				
+				tmp = (EObject) notification.getNewValue();
+				if (tmp!=null)
+					tmp.eAdapters().add(this);
+			}
+		}	
 		updateUI();
     }
 }
