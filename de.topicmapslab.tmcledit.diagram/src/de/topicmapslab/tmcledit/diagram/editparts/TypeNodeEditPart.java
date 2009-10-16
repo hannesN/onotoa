@@ -97,7 +97,8 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 					ColorDefinition tsc = scheme.getTopicSecondaryColor();
 					Rectangle rec = getBounds();
 					if (tsc!=null) {
-						Rectangle r = rec;
+						Rectangle r = rec.getCopy();
+						r.scale(graphics.getAbsoluteScale());
 						graphics.setBackgroundPattern(new SWTPattern(null, r.x+r.width/2, r.y, r.x+r.width/2, r.y+r.height, bg, tsc.createColor(null)));
 					}
 					graphics.fillRectangle(rec);
