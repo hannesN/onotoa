@@ -18,6 +18,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
@@ -329,6 +330,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass topicReifiesConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass domainDiagramEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -788,6 +796,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getTypeNode_TopicType() {
 		return (EReference)typeNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTypeNode_Image() {
+		return (EAttribute)typeNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1407,6 +1424,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDomainDiagram() {
+		return domainDiagramEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1510,6 +1536,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		typeNodeEClass = createEClass(TYPE_NODE);
 		createEReference(typeNodeEClass, TYPE_NODE__TOPIC_TYPE);
+		createEAttribute(typeNodeEClass, TYPE_NODE__IMAGE);
 
 		bendpointEClass = createEClass(BENDPOINT);
 		createEAttribute(bendpointEClass, BENDPOINT__POS_X);
@@ -1605,6 +1632,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		topicReifiesConstraintEClass = createEClass(TOPIC_REIFIES_CONSTRAINT);
 
+		domainDiagramEClass = createEClass(DOMAIN_DIAGRAM);
+
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
 		edgeTypeEEnum = createEEnum(EDGE_TYPE);
@@ -1677,6 +1706,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractRegExpTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 		abstractConstraintEClass.getESuperTypes().add(this.getTMCLConstruct());
 		topicReifiesConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
+		domainDiagramEClass.getESuperTypes().add(this.getDiagram());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1732,6 +1762,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(typeNodeEClass, TypeNode.class, "TypeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeNode_TopicType(), this.getTopicType(), null, "topicType", null, 1, 1, TypeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypeNode_Image(), ecorePackage.getEString(), "image", null, 0, 1, TypeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bendpointEClass, Bendpoint.class, "Bendpoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBendpoint_PosX(), ecorePackage.getEInt(), "posX", null, 1, 1, Bendpoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1826,6 +1857,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(abstractConstraintEClass, AbstractConstraint.class, "AbstractConstraint", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(topicReifiesConstraintEClass, TopicReifiesConstraint.class, "TopicReifiesConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(domainDiagramEClass, DomainDiagram.class, "DomainDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

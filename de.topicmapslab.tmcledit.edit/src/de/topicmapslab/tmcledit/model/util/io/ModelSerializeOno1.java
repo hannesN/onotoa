@@ -34,6 +34,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.LabelPos;
@@ -145,6 +146,8 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	private void createDiagramNode(Diagram diagram, Element parent) {
 		Element dNode = document.createElement(E_DIAGRAM);
 		dNode.setAttribute(A_NAME, diagram.getName());
+		if (diagram instanceof DomainDiagram)
+			dNode.setAttribute(A_TYPE, "domain");
 
 		for (Comment c : diagram.getComments()) {
 			Element cNode = document.createElement(E_COMMENT);
@@ -211,6 +214,9 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	    Element nNode = document.createElement(E_NODE);
 	    if (n instanceof TypeNode) {
 	    	nNode.setAttribute(A_TYPE, "typeNode");
+	    	if (((TypeNode) n).getImage()!=null) {
+	    		nNode.setAttribute(A_IMAGE, ((TypeNode) n).getImage());
+	    	}
 	    	addTopicReference(nNode, ((TypeNode) n).getTopicType());
 	    } else {
 	    	nNode.setAttribute(A_TYPE, "associationNode");
