@@ -143,15 +143,26 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 		else
 			typeText.setText("http://psi.topicmaps.org/iso13250/model/subject");
 		
+		typeModelPage.setModel(getCastedModel().getType());
 		super.updateUI();
 	}
 	
 	@Override
 	public void setModel(Object model) {
+		if (getModel()!=null) {
+			TopicType modelType = getCastedModel().getType();
+			if (modelType!=null)
+				modelType.eAdapters().remove(this);
+		}
 		super.setModel(model);
 		if (typeModelPage!=null) {
 			typeModelPage.setModel(getCastedModel().getType());
 			typeModelPage.getItem().setText("Occurrence Type");
+		}
+		if (getModel()!=null) {
+			TopicType modelType = getCastedModel().getType();
+			if (modelType!=null)
+				modelType.eAdapters().add(this);
 		}
 	}
 	
@@ -168,9 +179,16 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 	
 	@Override
 	public void notifyChanged(Notification notification) {
-		if (notification.getFeatureID(TopicType.class)==ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__TYPE)
-			typeModelPage.setModel(notification.getNewValue());
+		if (notification.getFeatureID(TopicType.class)==ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__TYPE) {
+			TopicType tmp = (TopicType) notification.getOldValue();
+			if (tmp!=null)
+				tmp.eAdapters().remove(this);
+			tmp = (TopicType) notification.getNewValue();
+			if (tmp!=null)
+				tmp.eAdapters().add(this);
+			
+		}
 		super.notifyChanged(notification);
-		
+		updateUI();
 	}
 }
