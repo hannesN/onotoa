@@ -14,17 +14,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.NodeEditPart;
-import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
-import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -73,7 +72,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
-		TMCLEditDomain ed = null;
+		EditDomain ed = null;
 
 		CompoundCommand cmd = new CompoundCommand();
 
@@ -81,7 +80,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		while (it.hasNext()) {
 			EditPart selectedEditPart = (EditPart) it.next();
 			if (ed == null)
-				ed = (TMCLEditDomain) selectedEditPart.getViewer()
+				ed = (EditDomain) selectedEditPart.getViewer()
 						.getEditDomain();
 
 			Object model = selectedEditPart.getModel();
@@ -89,8 +88,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 			cmd.append(getCommand(model));
 		}
 		if (cmd != null) {
-			getCommandStack().execute(new CommandAdapter(ed.getEditingDomain()
-					.getCommandStack(), cmd));
+			getCommandStack().execute(cmd);
 		}
 	}
 

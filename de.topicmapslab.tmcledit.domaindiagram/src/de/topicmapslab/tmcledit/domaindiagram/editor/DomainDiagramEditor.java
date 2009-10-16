@@ -68,12 +68,12 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.topicmapslab.tmcledit.diagram.action.AbstractSelectionAction;
+import de.topicmapslab.tmcledit.diagram.action.AddNameConstraintAction;
+import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
+import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
+import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.diagram.util.IPrintableDiagramEditor;
-import de.topicmapslab.tmcledit.domaindiagram.action.AbstractSelectionAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.AddNameConstraintAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.AddOccurrenceConstraintAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;

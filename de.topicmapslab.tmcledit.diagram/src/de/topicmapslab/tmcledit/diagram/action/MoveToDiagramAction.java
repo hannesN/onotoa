@@ -19,7 +19,6 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.Action;
 
-import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.commands.MoveNodesCommand;
@@ -34,10 +33,10 @@ public class MoveToDiagramAction extends Action {
 	private final EditPartViewer viewer;
 	private final CommandStack commandStack;
 
-	public MoveToDiagramAction(Diagram diagram, EditPartViewer viewer) {
+	public MoveToDiagramAction(CommandStack commandStack, Diagram diagram, EditPartViewer viewer) {
 		this.diagram = diagram;
 		this.viewer = viewer;
-		this.commandStack = ((TMCLEditDomain)viewer.getEditDomain()).getEditingDomain().getCommandStack();
+		this.commandStack = commandStack;
 	}
 
 

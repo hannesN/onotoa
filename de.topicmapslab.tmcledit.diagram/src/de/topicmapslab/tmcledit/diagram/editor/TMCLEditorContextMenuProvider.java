@@ -26,6 +26,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import de.topicmapslab.tmcledit.diagram.action.AddNameConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
+import de.topicmapslab.tmcledit.diagram.action.CopyToDiagramAction;
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.MoveToDiagramAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
@@ -89,14 +90,19 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 			
 			for (Diagram d : file.getDiagrams()) {
 				if (!d.equals(diagram)) {
-					MoveToDiagramAction a = new MoveToDiagramAction(d, getViewer());
+					org.eclipse.emf.common.command.CommandStack commandStack = ((TMCLEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
+					MoveToDiagramAction a = new MoveToDiagramAction(commandStack, d, getViewer());
 					moveMenu.add(a);
+					CopyToDiagramAction a2 = new CopyToDiagramAction(commandStack, d, getViewer());
+					moveMenu.add(a2);
 				}
 			}
 			menu.add(moveMenu);
 			
 		}
 	}
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	private boolean mayMove() {
