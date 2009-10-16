@@ -38,10 +38,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;
-	private Label cardLabel;
-	private Label typeLabel;
-	private Label regExpLabel;
-	private boolean editable = true;
+	private Label secondaryLabel;
 	private Figure compartement;
 
 	public AbstractLabelEditPart() {
@@ -66,17 +63,9 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		nameLabel.setLabelAlignment(PositionConstants.LEFT);
 		constraint.add(nameLabel);
 		
-		cardLabel = new Label();
-		cardLabel.setLabelAlignment(PositionConstants.LEFT);
-		constraint.add(cardLabel);
-		
-		typeLabel = new Label();
-		typeLabel.setLabelAlignment(PositionConstants.LEFT);
-		constraint.add(typeLabel);
-		
-		regExpLabel = new Label();
-		regExpLabel.setLabelAlignment(PositionConstants.LEFT);
-		constraint.add(regExpLabel);
+		secondaryLabel = new Label();
+		secondaryLabel.setLabelAlignment(PositionConstants.LEFT);
+		constraint.add(secondaryLabel);
 		
 		return figure;
 	}
@@ -104,8 +93,8 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		return compartement;
 	}
 	
-	public Label getCardLabel() {
-		return cardLabel;
+	public Label getSecondaryLabel() {
+		return secondaryLabel;
 	}
 	
 	@Override
@@ -146,13 +135,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		super.performRequest(req);
 	}
 
-	protected boolean isEditable() {
-		return editable;
-	}
-	
-	protected void setEditable(boolean editable) {
-		this.editable = editable;
-	}
+	protected abstract boolean isEditable();
 	
 	@SuppressWarnings("unchecked")
 	protected void fillExtendedData(Map extendedData) {		
@@ -182,14 +165,6 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		return nameLabel;
 	}
 
-	public Label getTypeLabel() {
-		return typeLabel;
-	}
-	
-	public Label getRegExpLabel() {
-		return regExpLabel;
-	}
-	
 	@SuppressWarnings("unchecked")
 	public void clearScopeLables() {
 		int counter = 0;
