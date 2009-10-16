@@ -74,6 +74,7 @@ import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
+import de.topicmapslab.tmcledit.diagram.util.IPrintableDiagramEditor;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
@@ -89,7 +90,7 @@ import de.topicmapslab.tmcledit.model.util.io.FileUtil;
  * 
  */
 public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
-		implements ISelectionChangedListener, ISelectionProvider {
+		implements ISelectionChangedListener, ISelectionProvider, IPrintableDiagramEditor {
 
 	public static final String ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
 
@@ -471,6 +472,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return (TMCLEditorInput) getEditorInput();
 	}
 
+	/* (non-Javadoc)
+	 * @see de.topicmapslab.tmcledit.diagram.editor.IPrintableDiagramEditor#getPrintableFigure()
+	 */
 	public IFigure getPrintableFigure() {
 		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
 	}

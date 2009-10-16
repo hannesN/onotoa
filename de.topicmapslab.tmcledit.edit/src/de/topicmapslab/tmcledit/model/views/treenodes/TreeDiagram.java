@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
@@ -52,9 +53,12 @@ public class TreeDiagram extends TreeObject {
 			TMCLEditorInput input = new TMCLEditorInput(getDiagram(), getModelView().getEditingDomain(), getModelView()
 			        .getActionRegistry(), true);
 			IEditorPart part = activePage.findEditor(input);
-			if (part == null)
-				activePage.openEditor(input, TmcleditEditPlugin.DIAGRAMEDITOR_ID);
-			else
+			
+			
+			if (part == null) {
+				String editorId = (getDiagram() instanceof DomainDiagram) ? TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
+				activePage.openEditor(input, editorId);
+			} else
 				activePage.activate(part);
 		} catch (PartInitException e) {
 			throw new RuntimeException(e);
