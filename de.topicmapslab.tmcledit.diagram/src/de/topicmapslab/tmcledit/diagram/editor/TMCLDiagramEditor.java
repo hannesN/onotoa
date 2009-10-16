@@ -164,6 +164,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			}
 		});
 	}
+	
+	protected org.eclipse.emf.common.command.CommandStack getEMFCommandStack() {
+		return ((TMCLEditDomain)getEditDomain()).getEditingDomain().getCommandStack();
+	}
 
 	@Override
 	protected void configureGraphicalViewer() {
@@ -269,14 +273,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	protected void createActions() {
-		getActionRegistry().registerAction(new RemoveFromDiagramAction(getEditDomain()
-				.getCommandStack()));
-		getActionRegistry().registerAction(new DeleteFromModelAction(getEditDomain()
-				.getCommandStack()));
-		getActionRegistry().registerAction(new AddNameConstraintAction(getEditDomain()
-				.getCommandStack()));
-		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEditDomain()
-				.getCommandStack()));
+		getActionRegistry().registerAction(new RemoveFromDiagramAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(new DeleteFromModelAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(new AddNameConstraintAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEMFCommandStack()));
 		super.createActions();
 	}
 

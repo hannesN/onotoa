@@ -8,7 +8,7 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.tmcledit.domaindiagram.action;
+package de.topicmapslab.tmcledit.diagram.action;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +19,6 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.Action;
 
-import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.commands.MoveNodesCommand;
@@ -28,16 +27,16 @@ import de.topicmapslab.tmcledit.model.commands.MoveNodesCommand;
  * @author Hannes Niederhausen
  *
  */
-public class MoveToDiagramAction extends Action {
+public class CopyToDiagramAction extends Action {
 
 	private final Diagram diagram;
 	private final EditPartViewer viewer;
 	private final CommandStack commandStack;
 
-	public MoveToDiagramAction(Diagram diagram, EditPartViewer viewer) {
+	public CopyToDiagramAction(CommandStack commandStack, Diagram diagram, EditPartViewer viewer) {
 		this.diagram = diagram;
 		this.viewer = viewer;
-		this.commandStack = ((DomainEditDomain)viewer.getEditDomain()).getEditingDomain().getCommandStack();
+		this.commandStack = commandStack;
 	}
 
 

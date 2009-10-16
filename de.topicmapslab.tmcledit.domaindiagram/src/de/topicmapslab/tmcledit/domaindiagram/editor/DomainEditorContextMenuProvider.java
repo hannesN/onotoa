@@ -25,11 +25,12 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.actions.ActionFactory;
 
-import de.topicmapslab.tmcledit.domaindiagram.action.AddNameConstraintAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.AddOccurrenceConstraintAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.MoveToDiagramAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.RemoveFromDiagramAction;
+import de.topicmapslab.tmcledit.diagram.action.AddNameConstraintAction;
+import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
+import de.topicmapslab.tmcledit.diagram.action.CopyToDiagramAction;
+import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
+import de.topicmapslab.tmcledit.diagram.action.MoveToDiagramAction;
+import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.IContextMenuProvider;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -41,7 +42,7 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 	private boolean active;
 	private final Diagram diagram;
 	
-	private  EditPart selectedEditPart;
+	private EditPart selectedEditPart;
 	
 	public DomainEditorContextMenuProvider(EditPartViewer viewer, ActionRegistry actionRegistry, Diagram diagram) {
 		super(viewer);
@@ -88,6 +89,7 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 			menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
 
 		buildMoveToDiagramActions(menu);
+		buildCopyToDiagramActions(menu);
 		
 		if ( (selectedEditPart !=null) && (selectedEditPart instanceof IContextMenuProvider) ) {
 			for (IAction a : ((IContextMenuProvider) selectedEditPart).getActions()) {
@@ -108,7 +110,8 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 			
 			for (Diagram d : file.getDiagrams()) {
 				if (!d.equals(diagram)) {
-					MoveToDiagramAction a = new MoveToDiagramAction(d, getViewer());
+					org.eclipse.emf.common.command.CommandStack commandStack = ((DomainEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
+					MoveToDiagramAction a = new MoveToDiagramAction(commandStack, d, getViewer());
 					moveMenu.add(a);
 				}
 			}
@@ -117,6 +120,22 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 		}
 	}
 	
+	private void buildCopyToDiagramActions(IMenuManager menu) {
+		File file = (File) diagram.eContainer();
+		if ( (file.getDiagrams().size()>1) && (mayMove()) ){
+			MenuManager moveMenu = new MenuManager("&Move To...");
+			
+			for (Diagram d : file.getDiagrams()) {
+				if (!d.equals(diagram)) {
+					org.eclipse.emf.common.command.CommandStack commandStack = ((DomainEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
+					CopyToDiagramAction a2 = new CopyToDiagramAction(commandStack, d, getViewer());
+					moveMenu.add(a2);
+				}
+			}
+			menu.add(moveMenu);
+			
+		}
+	}
 	@SuppressWarnings("unchecked")
 	private boolean mayMove() {
 		IStructuredSelection sel = (IStructuredSelection) getViewer().getSelection();

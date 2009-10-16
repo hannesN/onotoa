@@ -17,8 +17,8 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 
-import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.RemoveFromDiagramAction;
+import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
+import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 
 /**
  * This class is the key handler for the graphical viewer.

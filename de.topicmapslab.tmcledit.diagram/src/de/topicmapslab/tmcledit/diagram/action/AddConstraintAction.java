@@ -11,14 +11,12 @@
 package de.topicmapslab.tmcledit.diagram.action;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
-import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
@@ -34,15 +32,7 @@ public abstract class AddConstraintAction extends AbstractSelectionAction {
 
 	@Override
 	public void run() {
-		EditPart selectedEditPart = (EditPart) getSelections()
-				.getFirstElement();
-		TMCLEditDomain ed = null;
-		if (ed == null)
-			ed = (TMCLEditDomain) selectedEditPart.getViewer().getEditDomain();
-
-		getCommandStack().execute(
-				new CommandAdapter(ed.getEditingDomain().getCommandStack(),
-						getEmfCommand()));
+		getCommandStack().execute(getEmfCommand());
 	}
 
 	public void update() {
