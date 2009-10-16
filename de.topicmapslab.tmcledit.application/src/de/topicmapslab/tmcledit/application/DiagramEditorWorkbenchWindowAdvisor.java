@@ -50,7 +50,6 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 		configurer.setTitle(Messages.DiagramEditorWorkbenchWindowAdvisor_Title);
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(true);
-		System.out.println("Platform: "+SWT.getPlatform());
 	}
 	
 }
