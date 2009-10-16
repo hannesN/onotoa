@@ -22,7 +22,6 @@ import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
-import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.emf.common.notify.Notification;
@@ -47,7 +46,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 
 	@Override
 	protected IFigure createFigure() {
-		figure = new PolylineConnection() {
+		PolylineConnection figure = new PolylineConnection() {
 			@Override
 			public void paint(Graphics graphics) {
 				graphics.setAntialias(SWT.ON);
@@ -68,17 +67,10 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			deco.setFill(true);
 			deco.setBackgroundColor(ColorConstants.white);
 			((PolylineConnection) figure).setTargetDecoration(deco);
-		} else if (getCastedModel().getType() == EdgeType.IS_ATYPE) {
-			PolylineDecoration deco = new PolylineDecoration();
-			PointList points = new PointList();
-			points.addPoint(new Point(-2, -2));
-			points.addPoint(new Point(0, 0));
-			points.addPoint(new Point(-2, 2));
-			deco.setTemplate(points);
-			deco.setFill(false);
-			((PolylineConnection) figure).setTargetDecoration(deco);
-		}
-
+			figure.setAntialias(5);
+			figure.setForegroundColor(ColorConstants.gray);
+			figure.setLineStyle(SWT.LINE_DOT);
+		} 
 		return figure;
 	}
 

@@ -31,7 +31,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 
 	@Override
 	protected boolean isEditable() {
-		return false;
+		return (getCastedModel().getType()!=null);
 	}
 	
 	@Override

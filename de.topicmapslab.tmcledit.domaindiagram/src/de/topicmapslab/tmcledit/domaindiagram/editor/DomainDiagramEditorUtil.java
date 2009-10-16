@@ -128,9 +128,9 @@ public class DomainDiagramEditorUtil {
 	}
 
 	private static PaletteGroup getTypePaletteGroup() {
-		PaletteGroup group = new PaletteGroup("Topic Types");
+		PaletteGroup group = new PaletteGroup("Topic");
 
-		group.add(new CombinedTemplateCreationEntry("Topic Type", "Topic Type",
+		group.add(new CombinedTemplateCreationEntry("Topic", "Topic",
 				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
@@ -138,16 +138,7 @@ public class DomainDiagramEditorUtil {
 	}
 
 	private static PaletteGroup getTypeItemsPaletteGroup() {
-		PaletteGroup group = new PaletteGroup("Topic Types Items");
-		group.add(new CombinedTemplateCreationEntry(
-						"Occurrence",
-						"Occurrence",
-						new OccurrenceConstraintCreationFactory(),
-						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT_SM),
-						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT)));
-
+		PaletteGroup group = new PaletteGroup("Topic Items");
 		group.add(new CombinedTemplateCreationEntry(
 						"Name",
 						"Name",
@@ -181,6 +172,15 @@ public class DomainDiagramEditorUtil {
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT_SM),
 						ImageProvider
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
+		
+		group.add(new CombinedTemplateCreationEntry(
+				"Occurrence",
+				"Occurrence",
+				new OccurrenceConstraintCreationFactory(),
+				ImageProvider
+						.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT_SM),
+				ImageProvider
+						.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT)));
 		
 		return group;
 	}

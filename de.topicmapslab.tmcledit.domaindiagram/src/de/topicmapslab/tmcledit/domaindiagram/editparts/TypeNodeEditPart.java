@@ -17,9 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
@@ -43,20 +41,16 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
-import de.topicmapslab.tmcledit.diagram.DiagramActivator;
-import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme;
-import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
-import de.topicmapslab.tmcledit.diagram.util.SWTPattern;
 import de.topicmapslab.tmcledit.domaindiagram.action.AddImageAction;
 import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.figures.LineFigure;
 import de.topicmapslab.tmcledit.domaindiagram.figures.ScalableImageFigure;
+import de.topicmapslab.tmcledit.domaindiagram.figures.TypeFigure;
 import de.topicmapslab.tmcledit.domaindiagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.domaindiagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.domaindiagram.policies.TypeNodeLayoutEditPolicy;
@@ -73,6 +67,7 @@ import de.topicmapslab.tmcledit.model.util.Base64;
 public class TypeNodeEditPart extends
 		de.topicmapslab.tmcledit.domaindiagram.editparts.NodeEditPart implements
 		NodeEditPart, IContextMenuProvider {
+	
 	protected DirectEditManager editManager;
 
 	private Label titleLabel;
@@ -90,37 +85,7 @@ public class TypeNodeEditPart extends
 	@Override
 	protected IFigure createFigure() {
 		if (figure == null) {
-			figure = new Figure() {
-				@Override
-				public void paint(Graphics graphics) {
-					ColorScheme scheme = DiagramActivator
-							.getCurrentColorScheme();
-
-					graphics.pushState();
-
-					Color bg = scheme.getTopicColor().createColor(null);
-					graphics.setBackgroundColor(bg);
-					ColorDefinition tsc = scheme.getTopicSecondaryColor();
-					Rectangle rec = getBounds();
-					if (tsc != null) {
-						Rectangle r = rec;
-						graphics.setBackgroundPattern(new SWTPattern(null, r.x
-								+ r.width / 2, r.y, r.x + r.width / 2, r.y
-								+ r.height, bg, tsc.createColor(null)));
-					}
-					graphics.fillRectangle(rec);
-					Rectangle rec2 = new Rectangle(rec.x, rec.y, rec.width - 1,
-							rec.height - 1);
-					graphics.drawRoundRectangle(rec2, 10, 10);
-
-					graphics.setForegroundColor(scheme.getTopicFontColor()
-							.createColor(null));
-					graphics.pushState();
-					paintClientArea(graphics);
-					graphics.popState();
-					graphics.popState();
-				}
-			};
+			figure = new TypeFigure();
 			
 			GridLayout layout = new GridLayout(1, true);
 			
@@ -140,7 +105,6 @@ public class TypeNodeEditPart extends
 			layout.setConstraint(titleLabel, gd);
 
 			figure.setOpaque(false);
-			figure.setBackgroundColor(ColorConstants.yellow);
 
 			
 			lineFigure = new LineFigure();

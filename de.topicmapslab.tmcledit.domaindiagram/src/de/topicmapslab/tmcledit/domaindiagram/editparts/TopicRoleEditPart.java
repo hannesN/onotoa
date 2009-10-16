@@ -54,12 +54,17 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 		getNameLabel()
 				.setText(getCastedModel().getPlayer().getName() + " isa ");
 		RoleConstraint role = getCastedModel().getRole();
-		getCardLabel().setText("???");
+		getSecondaryLabel().setText("???");
 		if (role != null) {
 			if (role.getType() != null)
-				getCardLabel().setText(role.getType().getName());
+				getSecondaryLabel().setText(role.getType().getName());
 		}
 
+	}
+	
+	@Override
+	protected boolean isEditable() {
+		return false;
 	}
 
 	private RolePlayerConstraint getCastedModel() {
