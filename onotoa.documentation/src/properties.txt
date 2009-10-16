@@ -1,12 +1,12 @@
 == The Property Details View ==
 
-Every element of an schema has a property page in which the properties of an element may be changed. 
+Every element of an schema has a property page where the properties of an element may be changed. 
 Examples for properties are the name of a topic type or the cardinality of a constraint. The following
-sections will present the property pages of the elements. These pages are rendered in the *Property Details View*.
-The show a property page of an element, you need to select it either in the *Model View* or in a *Diagram Editor*.
+sections will explain the property pages of the elements. These pages are shown in the *Property Details View*.
+The view a property page of an element, you will have to select it either in the *Model View* or in a *Diagram Editor*.
 
-NOTE: The property pages support undo and redo for model changes. To omit a lot of changes during entering
-the text, _Onotoa_ performs the changes when the text field loses its focus.
+NOTE: The property pages support undo and redo functions for model changes. To manage a lot of changes during entering
+the text, _Onotoa_ processes the changes after the text field loses its focus.
 
 include::properties/documentation.txt[]
 
