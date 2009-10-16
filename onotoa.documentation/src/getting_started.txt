@@ -224,7 +224,7 @@ This name should be unique within each schema definition. After pressing okay,
 the diagram will be added to the 'Diagrams' node and an editor will open where the
 diagram can be edited.
 
-On the right-hand side of the editor is a sidebar. This sidebar is called palette 
+On the right hand side of the editor is a sidebar. This sidebar is called palette 
 and contains the tools to create new diagram elements (see <<palette>>).
 
 .Palette of a diagram editor
