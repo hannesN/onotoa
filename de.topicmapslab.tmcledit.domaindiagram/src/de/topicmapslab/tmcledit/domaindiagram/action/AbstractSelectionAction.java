@@ -10,10 +10,11 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.domaindiagram.action;
 
-import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.gef.ui.actions.UpdateAction;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+
+import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 
 /**
  * @author Hannes Niederhausen
