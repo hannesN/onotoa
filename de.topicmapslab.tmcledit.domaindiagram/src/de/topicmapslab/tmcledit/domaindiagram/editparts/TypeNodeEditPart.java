@@ -26,6 +26,7 @@ import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -47,7 +48,9 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 import de.topicmapslab.tmcledit.domaindiagram.action.AddImageAction;
+import de.topicmapslab.tmcledit.domaindiagram.action.RemoveImageAction;
 import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
+import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.figures.LineFigure;
 import de.topicmapslab.tmcledit.domaindiagram.figures.ScalableImageFigure;
 import de.topicmapslab.tmcledit.domaindiagram.figures.TypeFigure;
@@ -328,14 +331,20 @@ public class TypeNodeEditPart extends
 		}
 
 	}
+	
+	private CommandStack getCommandStack() {
+		return ((DomainEditDomain) getViewer().getEditDomain()).getEditingDomain().getCommandStack();
+	}
 
 	public List<IAction> getActions() {
-		
-		
-		Action a = new AddImageAction(this.getCastedModel(), "Add Image...");
+		Action a = new AddImageAction(getCommandStack(), this.getCastedModel());
+
+		Action b = new RemoveImageAction(getCommandStack(), this.getCastedModel());
+		b.setEnabled(getCastedModel().getImage()!=null);
 		
 		List<IAction> list = new ArrayList<IAction>(4);
 		list.add(a);
+		list.add(b);
 		return list;
 	}
 

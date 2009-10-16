@@ -1,6 +1,6 @@
 package de.topicmapslab.tmcledit.domaindiagram.action;
 
-import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.action.Action;
 
 public abstract class AbstractCommandStackAction extends Action {

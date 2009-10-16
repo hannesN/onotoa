@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.action.IAction;
@@ -19,7 +18,6 @@ import org.eclipse.jface.wizard.WizardDialog;
 import de.topicmapslab.tmcledit.domaindiagram.Activator;
 import de.topicmapslab.tmcledit.domaindiagram.action.AbstractCommandStackAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -75,7 +73,7 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 		List<IAction> result = new ArrayList<IAction>();
 
 		DeleteFromModelAction model = new DeleteFromModelAction(
-				getGEFCommendStack());
+				getEMFCommendStack());
 		result.add(model);
 
 		return result;
@@ -114,7 +112,7 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 		private SetRoleData data = new SetRoleData();
 
 		public SetRoleAction(SetRoleData data) {
-			super(data.editDomain.getCommandStack());
+			super(data.editDomain.getEditingDomain().getCommandStack());
 			this.data = data;
 			init();
 		}
@@ -141,9 +139,7 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 			c = new SetRoleConstraintCommand(data.rpc, data.rc);
 			cmd.append(c);
 
-			CommandStack cmdStack = data.editDomain.getEditingDomain()
-					.getCommandStack();
-			getCommandStack().execute(new CommandAdapter(cmdStack, cmd));
+			getCommandStack().execute(cmd);
 		}
 
 		private Command createRoleConstraintCommand() {

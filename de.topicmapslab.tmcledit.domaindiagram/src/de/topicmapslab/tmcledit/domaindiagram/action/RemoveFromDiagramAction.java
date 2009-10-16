@@ -10,16 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.domaindiagram.action;
 
-import java.util.Iterator;
+import java.util.Iterator; 
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
@@ -59,8 +58,7 @@ public class RemoveFromDiagramAction extends AbstractSelectionAction {
 			}
 		}
 
-		getCommandStack().execute(new CommandAdapter(ed.getEditingDomain()
-				.getCommandStack(), cmd));
+		getCommandStack().execute(cmd);
 
 	}
 
