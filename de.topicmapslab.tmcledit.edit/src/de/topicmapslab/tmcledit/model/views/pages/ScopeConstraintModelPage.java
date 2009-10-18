@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -54,7 +56,7 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 
 	private Text typeText;
 	private CTabItem item;
-	
+
 	public ScopeConstraintModelPage() {
 		super("scope constraint");
 	}
@@ -79,7 +81,7 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 	}
 
 	private void createTypeWidget(FormToolkit toolkit, Composite parent) {
-	    Hyperlink link = toolkit.createHyperlink(parent, "Topic Type:", SWT.NONE);
+		Hyperlink link = toolkit.createHyperlink(parent, "Topic Type:", SWT.NONE);
 		link.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
@@ -95,7 +97,7 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 					int featureID = ModelPackage.REIFIER_CONSTRAINT__TYPE;
 					if (isScopeConstraint())
 						featureID = ModelPackage.SCOPE_CONSTRAINT__TYPE;
-						
+
 					GenericSetCommand c2 = new GenericSetCommand(getModel(), featureID, tt);
 					cmd.append(c2);
 					getCommandStack().execute(cmd);
@@ -104,56 +106,55 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 			}
 		});
 
-		
 		Composite comp = toolkit.createComposite(parent);
 		GridLayout layout = new GridLayout(2, false);
 		layout.marginWidth = 0;
 		comp.setLayout(layout);
 		comp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		typeText = toolkit.createText(comp, "", SWT.BORDER);
 		typeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Button button = toolkit.createButton(comp, "...", SWT.PUSH);
 		hookAddTypeButtonListeners(button);
-    }
+	}
 
 	private void hookAddTypeButtonListeners(Button button) {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						typeText.getShell(), KindOfTopicType.TOPIC_TYPE);
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(typeText.getShell(),
+				        KindOfTopicType.TOPIC_TYPE);
 
 				if (isScopeConstraint()) {
 					ScopedTopicType stt = (ScopedTopicType) getCastedModel().eContainer();
 					EList<ScopeConstraint> scopeList = stt.getScope();
-					if (scopeList.size()>1) {
+					if (scopeList.size() > 1) {
 						List<TopicType> tl = new ArrayList<TopicType>(scopeList.size());
 						for (ScopeConstraint sc : scopeList) {
-							if (sc.getType()!=null)
-								tl.add (sc.getType());
+							if (sc.getType() != null)
+								tl.add(sc.getType());
 						}
 						dlg.setExcludeList(tl);
 					}
-					
+
 				}
-				
+
 				if (dlg.open() == Dialog.OK) {
 					TopicType tt = ((TopicType) dlg.getFirstResult());
 					int featureID = ModelPackage.REIFIER_CONSTRAINT__TYPE;
 					if (isScopeConstraint())
 						featureID = ModelPackage.SCOPE_CONSTRAINT__TYPE;
-						
+
 					GenericSetCommand cmd = new GenericSetCommand(getModel(), featureID, tt);
 					getCommandStack().execute(cmd);
 				}
 
 			}
 		});
-	    
-    }
-	
+
+	}
+
 	private boolean isScopeConstraint() {
 		return getModel() instanceof ScopeConstraint;
 	}
@@ -163,16 +164,45 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 	}
 
 	@Override
+	public void setModel(Object model) {
+		if (getModel() != null) {
+			if (getCastedModel().getType() != null)
+				getCastedModel().getType().eAdapters().remove(this);
+		}
+		super.setModel(model);
+		if (getModel() != null) {
+			if (getCastedModel().getType() != null)
+				getCastedModel().getType().eAdapters().add(this);
+		}
+	}
+
+	@Override
+	public void notifyChanged(Notification notification) {
+		if (notification.getFeatureID(TopicType.class) == ModelPackage.SCOPE_CONSTRAINT__TYPE) {
+			if (notification.getEventType() == Notification.SET) {
+				EObject tmp = (EObject) notification.getOldValue();
+				if (tmp != null)
+					tmp.eAdapters().remove(this);
+
+				tmp = (EObject) notification.getNewValue();
+				if (tmp != null)
+					tmp.eAdapters().add(this);
+			}
+		}
+		updateUI();
+	}
+
+	@Override
 	public void updateUI() {
-	    super.updateUI();
-	    if (getCastedModel().getType()==null)
-	    	typeText.setText("tmdm:subject");
-	    else
-	    	typeText.setText(getCastedModel().getType().getName());
-	    
-	    if (isScopeConstraint())
-	    	item.setText("Scope Constraint");
-	    else
-	    	item.setText("Reifier Constraint");
+		super.updateUI();
+		if (getCastedModel().getType() == null)
+			typeText.setText("tmdm:subject");
+		else
+			typeText.setText(getCastedModel().getType().getName());
+
+		if (isScopeConstraint())
+			item.setText("Scope Constraint");
+		else
+			item.setText("Reifier Constraint");
 	}
 }

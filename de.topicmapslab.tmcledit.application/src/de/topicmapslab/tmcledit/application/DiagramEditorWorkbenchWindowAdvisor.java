@@ -10,7 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
@@ -50,7 +49,6 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 		configurer.setTitle(Messages.DiagramEditorWorkbenchWindowAdvisor_Title);
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(true);
-		System.out.println("Platform: "+SWT.getPlatform());
 	}
 	
 }

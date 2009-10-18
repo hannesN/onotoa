@@ -191,8 +191,6 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
 						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE);
 				if (dlg.open()==Dialog.OK) {
-					TopicType tt = (TopicType) dlg.getFirstResult();
-					
 					roleCombination.setOtherPlayer( (TopicType) dlg.getFirstResult());
 					otherPlayerText.setText(roleCombination.getOtherPlayer().getName());
 				}
