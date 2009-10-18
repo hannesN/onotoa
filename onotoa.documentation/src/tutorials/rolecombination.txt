@@ -30,10 +30,10 @@ After your decision for a diagram name (_example_rcc_ for example), the _Onotoa_
 image::images/documentation/create_model_diagram.png[scaledwidth="100%"]
 
 
-From now on, we are ready to start with the real work. First of all we generate our three topic types "continent", "country" and "city" 
+From now on, we are ready to start with the real work. First of all we generate our three Topic Types "continent", "country" and "city" 
 (to simplify matters, there is no need for additional details like subject identifiers, occurrences, scopes and so on).
 
-In the "Model View" section we right click on *TopicType->Create TopicType...* and choose "continent" as name for our new topic type. We handle "country" and "city" in equal measure.
+In the "Model View" section we right click on *TopicType->Create TopicType...* and choose "continent" as name for our new Topic Type. We handle "country" and "city" in equal measure.
 Like you can see in <<tut_topic_types_in_model_view>>, the three new created Topic Types should appear in the "Model View" and we can add them do the diagram by drag and drop.
 
 NOTE: You change properties of any topic, by use of the "Property Details View" at the bottom of the _Onotoa_ window.
@@ -95,7 +95,7 @@ TIP: Press and hold the left mouse button to move elements in the diagram for vi
 Now we specify each Topic Role Constraint by selecting a Role Type and setting cardinality:
 
 We start with the "continent". Click on the _No role type set_ label in the diagram and select "container" as role in the "Property Detail View". As you can see in the diagram, the default role cardinality is “1..1”, which is exactly what we want it to be. 
-So we guarantee the existence of exactly one "container". In some cases no Topic type "continent" will be used, so we have to change the player cardinality. Set the *cardMin* value to 0. The *cardMax* value is correct.       
+So we guarantee the existence of exactly one "container". In some cases no Topic Type "continent" will be used, so we have to change the player cardinality. Set the *cardMin* value to 0. The *cardMax* value is correct.       
 
 .Topic Role Constraint specification
 [[tut_specify_player_cardinatlity]]
@@ -145,15 +145,3 @@ Now we have finished the first tutorial and your _Onotoa_ window should looks li
 .Final Onotoa screen
 [[tut_final_screen]]
 image::images/documentation/final_screen.png[scaledwidth="100%"]
-
-Thanks you for reading.
-
-
-
-
-
-
-
-
- 
-
