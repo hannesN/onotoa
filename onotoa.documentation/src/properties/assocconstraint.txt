@@ -1,0 +1,19 @@
+=== Association Constraint ===
+:ac: Association Constraint
+
+An association constrained is used as connection between an association type and it's role player constraints.
+
+
+The '{ac}' has only one property:
+
+* *Type:* The  association type which use is constrained. 
+
+You can select an existing 'Association Type' by
+pressing the right button and select the wanted type. To create a new type, click on the `Type` label on the left. 
+The wizard to create a new type will appear and after the creation the new type will be the type of the constraint. 
+
+.Property Page for '{ac}'
+image::images/assoc_constr_pp.png[scaledwidth="100%"]
+
+NOTE: There is no such thing like an association constraint in the TMCL draft. It was introduced to encapsulate the association type
+and the constraints using this type. 

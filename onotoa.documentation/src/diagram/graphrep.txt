@@ -1,0 +1,136 @@
+=== Graphical Representation ===
+
+This section explains how to interpret the graphical representation of the schema elements.
+The representation is based on the GTM level proposal, which you can find at http://isotopicmaps.org/gtm/gtm-oslo-2008-04.pdf .
+
+==== Topic Type ====
+
+The Topic Type representation is basically a divided rectangle. The first part contains the name of the topic type. Left to the name an icon
+reflects the kind of topic type. The following table lists the icons:
+
+[width="60%", cols="^10%,<90%"]
+|===============
+ifdef::basebackend-docbook[]
+|image:images/types/topictype.gif[width="0.3cm"]|Topic Type
+|image:images/types/associationtype.gif[width="0.3cm"]|Association Type
+|image:images/types/nametype.gif[width="0.3cm"]|Name Type
+|image:images/types/occurrencetype.gif[width="0.3cm"]|Occurrence Type
+|image:images/types/roletype.gif[width="0.3cm"]|Role Type
+endif::basebackend-docbook[]
+ifndef::basebackend-docbook[]
+|image:images/types/topictype.gif[width="1cm"]|Topic Type
+|image:images/types/associationtype.gif[width="1cm"]|Association Type
+|image:images/types/nametype.gif[width="1cm"]|Name Type
+|image:images/types/occurrencetype.gif[width="1cm"]|Occurrence Type
+|image:images/types/roletype.gif[width="1cm"]|Role Type
+endif::basebackend-docbook[]
+|===============
+
+After the centered name a list of subject identifiers and subject locators are renders. The identifier are a bit smaller than the name. To
+differentiate between subject identifier and subject locator the latter is marked with an '='.
+
+.Header of a Topic Type Representation
+image::images/topic_header_rep.png[scaledwidth="35%"]
+
+The next section contains the name constraints of the topic type. This means, all name constraints which are connected to the topic
+type via `tmcl:topic-name-constraint`. The name constraint consist of a name type, a regular expression and the cardinality. This is 
+reflected in the graphical representation. The layout of the name constraint is:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+name type cardMin..cardMax [regExp]
+          ~reifier type [cardMin..cardMax]
+          @scope type [cardMin..cardMax]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the regular expression equals the default value '.*' it is omitted. If the default-name type is used, "default" is written at the name type part. If an 
+own name type is set, it's name is used.
+
+.Name Constraints Representation of a Topic Type Representation
+image::images/name_ex_rep.png[scaledwidth="35%"]
+
+
+NOTE: Constraint regarding scope and reification are bound to the constraining type, not to the constraint. If you reuse a name type
+in two different topic types to create a name constraint, both have the same reifier or scope constraint.
+
+The following section contains the occurrence constraints. Similar to the name constraint, they have the following layout:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+occurrence type cardMin..cardMax : datatype
+          ~reifier type [cardMin..cardMax]
+          @scope type [cardMin..cardMax]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If an occurrence type is set, the name of it will be used. If ot the subject identifier 'tmdm:subject' is used, which represents every topic.
+The regular expression is not visualized in the occurrence constraint. Although it is settable via property page, it was considered to unclear to add
+the regular expression to the graphical representation.
+
+NOTE: Constraint regarding scope and reification are bound to the constraining type, not to the constraint. If you reuse a occurrence type
+in two different topic types to create a occurrence constraint, both have the same reifier or scope constraint.
+
+.Occurrence Constraints Representation of a Topic Type Representation
+image::images/occ_ex_rep.png[scaledwidth="35%"]
+
+The last section contains the identifier constraints. They say how many subject identifier or subject locator a topic type may or must have. They
+also can set a required form of the identifier using a regular expression.
+The layout of these constraints is:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+subject identifier cardMin..cardMax [regexp]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+subject locator cardMin..cardMax [regexp]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Again if the regular expression equals the default, it is omitted.
+
+.Identifier Constraints Representation of a Topic Type Representation
+image::images/identifier_ex_rep.png[scaledwidth="35%"]
+
+.Example for a whole topic representation 
+image::images/topic_rep.png[scaledwidth="35%"]
+
+==== Supertype-Subtype Relationship ====
+
+With the supertype-subtype relationship it is possible to create a hierarchy of topics, where the top is a general representation of a subject and
+the lowest topic a specialization of a subject. In the diagram this represented like the inheritance in UML, with a connection between two topic
+type representation. The supertype is the type where the arrow points. See the following example:
+
+.Example for supertype-subtype relationship
+image::images/supertype_rep.png[scaledwidth="35%"]
+
+==== Type-Instance Relationship ====
+
+Although you seldom use the type-instance relationship in a schema, it is possible to do so in _Onotoa_. An example is shown in the following section.
+The connection representing the relationship has an open arrow, which points to the type. The source of the connection is the instance.
+
+.Example for type-instance relationship
+image::images/typeinstance_rep.png[scaledwidth="48%"]
+
+==== Association Constraint ====
+
+An association constraint is represented by an ellipse. In it is a label, which renders the name of the association type and a list of scope types,
+associated with the association type. This ellipse is used as connection node between the topic types, which represent the players.
+
+The layout of the text in the ellipse is:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+association type
+~reifier type cardMin..cardMax
+@scope type   cardMin..cardMax
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The example shown in <<assoc_constr_rep>> specifies an association constraint for the "works for" association. Instances of that association
+can be reified by any topic and has to be scoped by a topic of type time.
+
+
+.Example Association Constraint in Diagram
+[[assoc_constr_rep]]
+image::images/assoc_constr_rep.png[scaledwidth="100%"]
+
+The use of reifier constraints or scope constraints is optional.
+
+Instead of connecting the ellipse with role types as well, a more clear approach was implemented. The name of the role type, and the cardinality of the
+role constraint are connection labels near the  the ellipse. The connection between the association constraint and a topic type, which is a player in
+the association has another label at the players site. This represents the cardinality of the player. If a role is played by only one player, the 
+player cardinality and the role cardinality should be equal.
+
+
+

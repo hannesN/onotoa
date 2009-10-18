@@ -1,0 +1,36 @@
+=== Association Type ===
+
+An association type is used to define a type for an association, for instance "worksFor". Using a topic which is not instance
+of an association type is invalid.
+
+In addition an association type is related to a set of role types. These define which roles may be used when an association of
+this type is created. 
+
+Like names and occurrences association may be reified and scoped.
+
+.Property Page of association type
+image::images/assoctype_pp.png[scaledwidth="100%"]
+
+A association type inherits the properties  of topic type (see <<_topic_type>>).
+In addition it has the following properties.
+
+* *roles:* Which roles are accepted by association with the selected type are defined in the
+association type. A role constraint has 3 properties: The role type and the minimum and maximum occurrences.
+To add a role constraint press *Add...* if the role type is already in the topic map schema and select it
+in the appearing dialog. To create a new role type press the *New...* and fill out the appearing
+dialog. The cardinality of this constraint can be modified in the table.   
+
+* *reifier:* It is possible to define which topic may reifier names using the current type. Check the 
+button *constrained*, which indicates you want explicitly constraint the reification, and choose in the selection box below if the constraint forbids 
+reifying (*cannot*), allows reifying (*may*) or needs reifying (*must*). If refying is allowed
+a type is needed, which defines the type of the reifier. If the type is not needed, just use 
+"tmdm:subject" as type. 
+  
+* *scope:* With the scope constraint is defined, which scoping types may be used for names using this 'Name Type'.
+The scope constraint, as we see later consists of 3 properties: the scoping type, the minimum occurrence (*cardMin*)
+and the maximum occurrence (*cardMax*). To add a scope constraint to the type, press *Add* and select the scope types
+which may be used as scope. The cardinality values can be changed in the table. To remove a constraint, select 
+it in the table and afterwards press *Remove*. If you need to create a new scoping type, just press *New...*. The 
+wizard to create a topic type appears and after filling out the wizard, a new constraint will created using the new type.
+
+NOTE: If you create a new topic type for a scope constraint or role constraint it won't be removed if you remove the constraint.  
