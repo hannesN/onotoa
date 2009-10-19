@@ -1,10 +1,10 @@
 === Name Type ===
 
-A name type is used to specify which topics may be used to type a name. In a topic map, a topic may have more than one names.
-Their meaning is realized by using topics, for instance the topic "firstname". These topics should be typed with name type.
+A name type is used to specify the topics to type a name. In a topic map, a topic may have more than one names.
+Their meaning is realized by using topics, for instance the topic "firstname". These topics should be typed by a name type.
 The TMCL standard says, that any type of a name which is not instance of 'name-type' is invalid.
 
-Names can be reified, which means a topic is used to add more information to the name, like who gave it, what does it mean and so on.
+Names can be reified, which means a topic is used to add more information to the name, such as its origin, its meaning and so on.
 The topic which may reify names using this name-type can be specified in the reifier property.
 
 It is also possible to add a scope to names of topics. With the *scope* property you can tell which topics may be used as scope and how often.
@@ -12,22 +12,22 @@ It is also possible to add a scope to names of topics. With the *scope* property
 .Property Page of name type
 image::images/nametype_pp.png[scaledwidth="100%"]
 
-A name type inherits the properties  of topic type (see <<_topic_type>>).
-In addition it has the following properties.
+The properties  of topic type are inherited by a name type(see <<_topic_type>>).
+In addition it has the following properties:
 
 * *reg. exp:* This regular expression is used to define the syntax of the content of the name. 
 
-* *reifier:* It is possible to define which topic may reifier names using the current type. Check the 
-button `constrained`, which indicates you want explicitly constraint the reification, and choose in the selection box below if the constraint forbids 
-reifying (*cannot*), allows reifying (*may*) or needs reifying (*must*). If reifying is allowed
+* *reifier:* It is possible to define which topic may reify names using the current type. Check the 
+button *constrained*, which indicates that you want to constrain the reification explicitly, and choose if the constraint restricts 
+reifying (*cannot*), allows reifying (*may*) or needs reifying (*must*) in the selection box below. If reifying is allowed
 a type is needed, which defines the type of the reifier. If the type is not needed, just use 
 "tmdm:subject" as type. 
   
-* *scope:* With the scope constraint is defined, which scoping types may be used for names using this name type.
-The scope constraint, as we see later consists of 3 properties: the scoping type, the minimum occurrence (*cardMin*)
-and the maximum occurrence (*cardMax*). To add a scope constraint to the type, press *Add* and select the scope types
-which may be used as scope. The cardinality values can be changed in the table. To remove a constraint, select 
-it in the table and afterwards press *Remove*. If you need to create a new scoping type, just press *New...*. The 
-wizard to create a topic type appears and after filling out the wizard, a new constraint will created using the new type.
+* *scope:* The scope constraint is defines the scoping types to be used for this name type.
+The scope constraint, as we will see later, consists of 3 properties: the scoping type, the minimum occurrence (*cardMin*)
+and the maximum occurrence (*cardMax*). To add a scope constraint to the type, press *Add* and select the desired scope types. 
+The cardinality values can be changed in the table. To remove a constraint, select 
+it in the table and then press *Remove*. If you need to create a new scoping type, just press *New...*. The 
+wizard to create a topic type will appear and after filling out the wizard, a new constraint will be created using the new type.
 
-NOTE: If you create a new topic type for a scope constraint it won't be removed if you remove the scope constraint.  
+NOTE: If you remove the scope constraint, its topic types will continue to exist.  
