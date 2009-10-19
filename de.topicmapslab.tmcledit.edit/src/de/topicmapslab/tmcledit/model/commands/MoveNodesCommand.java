@@ -9,6 +9,7 @@ import org.eclipse.emf.common.command.AbstractCommand;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -162,6 +163,8 @@ public class MoveNodesCommand extends AbstractCommand {
     }
 
 	private void createIsAEdges(TypeNode node, TopicType topicType) {
+		if (newDiagram instanceof DomainDiagram)
+			return;
 	    for(TopicType tt : topicType.getIsa()) {
 	    	Node node2 = findNode(tt);
 	    	if (node2!=null) {

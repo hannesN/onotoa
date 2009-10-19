@@ -81,6 +81,7 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 			menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
 
 		buildMoveToDiagramActions(menu);
+		buildCopyToDiagramActions(menu);
 	}
 	
 	private void buildMoveToDiagramActions(IMenuManager menu) {
@@ -93,6 +94,21 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 					org.eclipse.emf.common.command.CommandStack commandStack = ((TMCLEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
 					MoveToDiagramAction a = new MoveToDiagramAction(commandStack, d, getViewer());
 					moveMenu.add(a);
+				}
+			}
+			menu.add(moveMenu);
+			
+		}
+	}
+	
+	private void buildCopyToDiagramActions(IMenuManager menu) {
+		File file = (File) diagram.eContainer();
+		if ( (file.getDiagrams().size()>1) && (mayMove()) ){
+			MenuManager moveMenu = new MenuManager("&Copy To...");
+			
+			for (Diagram d : file.getDiagrams()) {
+				if (!d.equals(diagram)) {
+					org.eclipse.emf.common.command.CommandStack commandStack = ((TMCLEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
 					CopyToDiagramAction a2 = new CopyToDiagramAction(commandStack, d, getViewer());
 					moveMenu.add(a2);
 				}
