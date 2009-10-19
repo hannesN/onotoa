@@ -106,6 +106,6 @@ Topic Type::
 	and the instances are created in the topic map.
 	
 Update Site::
-	An update site is a web page containing eclipse features. Adding a new update site to the install dialog
+	An update site is a web page containing eclipse features. Adding a new update site to the install dialogue
 	of _Onotoa_ you can install this features. Additionally if a new version of the feature is available on an 
 	already used update site, _Onotoa_ realizes and offers an update.

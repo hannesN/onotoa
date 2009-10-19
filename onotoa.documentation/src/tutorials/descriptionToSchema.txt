@@ -21,12 +21,13 @@ are three associations those describe the relationships between them:
 We recognize that more than one person could work for a company, but one person could not work for more than one company. That point 
 effects the cardinality. In equal measure we handle the other cardinalities: 
 
-```~75
-Association, Role One, Role Two
-work for, employee [1..*], employer [1..1]
-lives in, inhabitant [1..*], place [1..1]
-located in, locatee [1..1], location [1..1]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[width="50%", cols="^30%,^30%,^40%"]
+|===========================================
+|Association| Role One| Role Two
+|work for| employee [1..*]| employer [1..1]
+|lives in| inhabitant [1..*]| place [1..1]
+|located in| locatee [1..1]| location [1..1]
+|===========================================
 
 At this point, the occurrence "address" does not contains many informations, because only one value per occurrence is allowed. 
 If we want to specify the address, we must transform it into a own Topic Type with its own occurrences. These are:
@@ -163,14 +164,12 @@ context menu in the "Model View". After this I add two Association Constraints f
 To create the roles for the associations take once more a look at the "Property Details View", click on the *Association Type* tap, build the new ones in the usual way and change 
 their cardinality: 
 
-[grid="all]
-.20`20`20'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Association,Role One,Role Two
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-lives in,inhabitant [1..*],place [1..1]
-located in,locatee [1..1],location [1..1]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+[width="55%", cols="^30%,^30%,^40%"]
+|===========================================
+|Association|Role One|Role Two
+|lives in|inhabitant [1..*]|place [1..1]
+|located in|locatee [1..1]|location [1..1]
+|===========================================
 After this, your _Onotoa_ window should looks like these and we completed the tutorial:  
 
 .Final Onotoa screen
