@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema baseLocator="http://onotoa.topicmapslab.de/example">
+        <topicType kind="TopicType">
+            <annotation key="activetm.attributename" value="Prefix10"/>
+            <name>Person</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/person</subjectIdentifier>
+            <nameConstraints>
+                <nameConstraint cardMax="1" cardMin="1">
+                    <topictypeRef ref="topictypes.6"/>
+                </nameConstraint>
+            </nameConstraints>
+            <occurrenceConstraints>
+                <occurrenceConstraint cardMax="1" cardMin="1">
+                    <topictypeRef ref="topictypes.7"/>
+                </occurrenceConstraint>
+            </occurrenceConstraints>
+            <topicRefies cardMax="0" cardMin="0"/>
+            <topicRefies cardMax="1" cardMin="0">
+                <topictypeRef ref="topictypes.8"/>
+            </topicRefies>
+        </topicType>
+        <topicType kind="TopicType">
+            <name>Company</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/Company</subjectIdentifier>
+        </topicType>
+        <topicType kind="AssociationType">
+            <name>worksFor</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/worksfor</subjectIdentifier>
+            <scopeConstraint cardMax="1" cardMin="1">
+                <topictypeRef ref="topictypes.5"/>
+            </scopeConstraint>
+            <reifierConstraint cardMax="1" cardMin="0"/>
+            <roleConstraints>
+                <roleConstraint cardMax="*" cardMin="1">
+                    <topictypeRef ref="topictypes.3"/>
+                </roleConstraint>
+                <roleConstraint cardMax="1" cardMin="1">
+                    <topictypeRef ref="topictypes.4"/>
+                </roleConstraint>
+            </roleConstraints>
+        </topicType>
+        <topicType kind="RoleType">
+            <name>Employee</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/employee</subjectIdentifier>
+        </topicType>
+        <topicType kind="RoleType">
+            <name>Employer</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/employer</subjectIdentifier>
+        </topicType>
+        <topicType kind="TopicType">
+            <name>Time</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/time</subjectIdentifier>
+        </topicType>
+        <topicType kind="NameType" regExp=".*">
+            <name>Firstname</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/firstname</subjectIdentifier>
+        </topicType>
+        <topicType datatype="xsd:anyType" kind="OccurrenceType" regExp=".*">
+            <name>Vita</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/vita</subjectIdentifier>
+        </topicType>
+        <topicType kind="TopicType">
+            <name>arbeitet</name>
+            <subjectIdentifier>http://onotoa.topicmapslab.de/example/arbeitet</subjectIdentifier>
+        </topicType>
+        <associationConstraint>
+            <topictypeRef ref="topictypes.2"/>
+            <topicRoleConstraint cardMax="1" cardMin="1">
+                <player>
+                    <topictypeRef ref="topictypes.1"/>
+                </player>
+                <roleConstraint>
+                    <roleConstraintReference ref="topictypes.2_roleConstraints.1"/>
+                </roleConstraint>
+            </topicRoleConstraint>
+            <topicRoleConstraint cardMax="*" cardMin="1">
+                <player>
+                    <topictypeRef ref="topictypes.0"/>
+                </player>
+                <roleConstraint>
+                    <roleConstraintReference ref="topictypes.2_roleConstraints.0"/>
+                </roleConstraint>
+            </topicRoleConstraint>
+        </associationConstraint>
+    </schema>
+    <diagram name="test">
+        <node posX="68" posY="91" type="typeNode">
+            <topictypeRef ref="topictypes.0"/>
+        </node>
+        <node posX="570" posY="100" type="typeNode">
+            <topictypeRef ref="topictypes.1"/>
+        </node>
+        <node posX="382" posY="271" type="associationNode">
+            <assocConstraintRef ref="assocConstraints.0"/>
+        </node>
+        <edge source="node.2" target="node.1" topicRoleRef="associationConstraint.0_topicRoleConstraint.0" type="ROLE_CONSTRAINT_TYPE">
+            <labelPosition posX="49" posY="-22"/>
+            <labelPosition posX="0" posY="4"/>
+        </edge>
+        <edge source="node.2" target="node.0" topicRoleRef="associationConstraint.0_topicRoleConstraint.1" type="ROLE_CONSTRAINT_TYPE">
+            <labelPosition posX="-112" posY="-15"/>
+            <labelPosition posX="-25" posY="1"/>
+        </edge>
+    </diagram>
+</file>

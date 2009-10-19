@@ -1,0 +1,10 @@
+== Create a Annotation Keys ==
+
+With _Onotoa_ it is possible to annotate schema elements. These annotations are a pair of key and value. Basically both are strings. It is possible to
+create an extension to provide an annotation type. This type defines for a specified key, what datatype it contains. It is also possible to
+provide some values to choose from, or proposals, which are used for content assist. 
+
+Why would you write annotations?
+
+Annotations can be used in different ways. They can control behaviour of the user interface, for example there is an annotation to ignore a prefix errors.
+Another option would be to create a new export plugin. This 
