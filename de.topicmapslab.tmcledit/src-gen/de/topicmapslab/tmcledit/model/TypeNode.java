@@ -15,6 +15,7 @@ package de.topicmapslab.tmcledit.model;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.TypeNode#getTopicType <em>Topic Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TypeNode#getImage <em>Image</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,5 +49,31 @@ public interface TypeNode extends Node {
 	 * @generated
 	 */
 	void setTopicType(TopicType value);
+
+	/**
+	 * Returns the value of the '<em><b>Image</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Image</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Image</em>' attribute.
+	 * @see #setImage(String)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTypeNode_Image()
+	 * @model
+	 * @generated
+	 */
+	String getImage();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TypeNode#getImage <em>Image</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Image</em>' attribute.
+	 * @see #getImage()
+	 * @generated
+	 */
+	void setImage(String value);
 
 } // TypeNode

@@ -10,8 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.action;
 
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.emf.common.command.Command; 
+import org.eclipse.emf.common.command.CommandStack;
 
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand;
