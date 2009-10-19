@@ -21,7 +21,7 @@ import org.eclipse.jface.action.Action;
 
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.commands.MoveNodesCommand;
+import de.topicmapslab.tmcledit.model.commands.CopyNodesCommand;
 
 /**
  * @author Hannes Niederhausen
@@ -43,7 +43,7 @@ public class CopyToDiagramAction extends Action {
 	@Override
 	public void run() {
 		List<Node> nodeList = collectMoveableNodes();
-		MoveNodesCommand cmd = new MoveNodesCommand(nodeList, diagram);
+		CopyNodesCommand cmd = new CopyNodesCommand(nodeList, diagram);
 		if (cmd.canExecute())
 			commandStack.execute(cmd);
 	}		

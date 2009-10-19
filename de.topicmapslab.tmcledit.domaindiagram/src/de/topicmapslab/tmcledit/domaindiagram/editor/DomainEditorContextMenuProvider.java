@@ -123,7 +123,7 @@ public class DomainEditorContextMenuProvider extends ContextMenuProvider {
 	private void buildCopyToDiagramActions(IMenuManager menu) {
 		File file = (File) diagram.eContainer();
 		if ( (file.getDiagrams().size()>1) && (mayMove()) ){
-			MenuManager moveMenu = new MenuManager("&Move To...");
+			MenuManager moveMenu = new MenuManager("&Copy To...");
 			
 			for (Diagram d : file.getDiagrams()) {
 				if (!d.equals(diagram)) {

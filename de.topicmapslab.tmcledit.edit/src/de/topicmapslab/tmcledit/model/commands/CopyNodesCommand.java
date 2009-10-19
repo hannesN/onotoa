@@ -2,13 +2,17 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -23,14 +27,13 @@ import de.topicmapslab.tmcledit.model.index.TopicTypeNodeIndexer;
 
 public class CopyNodesCommand extends AbstractCommand {
 
-	private final Diagram oldDiagram;
 	private final Diagram newDiagram;
 	
 	private final List<Node> nodeList;
 	
-	private List<Edge> oldEdgeList;
 	private List<Edge> newEdgeList;
 	
+	private Map<Node, Node> newNodesMap;
 	
 	
 	
@@ -38,14 +41,11 @@ public class CopyNodesCommand extends AbstractCommand {
 	    super();
 	    this.nodeList = nodeList;
 	    this.newDiagram = newDiagram;
-	    this.oldDiagram = (Diagram) nodeList.get(0).eContainer();
+	    newNodesMap = new HashMap<Node, Node>(nodeList.size());
     }
 
 	public void execute() {
-		oldDiagram.getEdges().removeAll(oldEdgeList);
-		oldDiagram.getNodes().removeAll(nodeList);
-		
-		newDiagram.getNodes().addAll(nodeList);
+		newDiagram.getNodes().addAll(newNodesMap.values());
 		newDiagram.getEdges().addAll(newEdgeList);
 		
 		
@@ -58,19 +58,45 @@ public class CopyNodesCommand extends AbstractCommand {
 	@Override
 	public void undo() {
 		newDiagram.getEdges().removeAll(newEdgeList);
-		newDiagram.getNodes().removeAll(nodeList);
-
-		oldDiagram.getNodes().addAll(nodeList);
-		oldDiagram.getEdges().addAll(oldEdgeList);
-		
+		newDiagram.getNodes().removeAll(newNodesMap.values());
 	}
 	
 	@Override
 	protected boolean prepare() {
-		findRemoveEdges();
+		createNodes();
 		findNewEdges();
 		return true;
 	}
+
+	private void createNodes() {
+		for (Node n : nodeList) {
+			Node newNode = null;
+			if (n instanceof TypeNode) {
+				if (ModelIndexer.getNodeIndexer().getNodeFor(((TypeNode) n).getTopicType(), newDiagram)!=null) {
+					return;
+				}
+				newNode = ModelFactory.eINSTANCE.createTypeNode();
+				((TypeNode) newNode).setImage(((TypeNode) n).getImage());
+				((TypeNode) newNode).setTopicType(((TypeNode) n).getTopicType());
+			} else if (n instanceof AssociationNode) {
+				if (ModelIndexer.getNodeIndexer().getNodeFor(((AssociationNode) n).getAssociationConstraint(), newDiagram)!=null) {
+					return;
+				}
+				newNode = ModelFactory.eINSTANCE.createAssociationNode();
+				((AssociationNode)newNode).setAssociationConstraint(((AssociationNode) n).getAssociationConstraint());
+			} else {
+				newNode = ModelFactory.eINSTANCE.createComment();
+				((Comment)newNode).setWidth(((Comment) n).getWidth());
+				((Comment)newNode).setHeight(((Comment) n).getHeight());
+				((Comment)newNode).setContent(((Comment) n).getContent());
+			}
+			
+			newNode.setPosX(n.getPosX());
+			newNode.setPosY(n.getPosY());
+			newNodesMap.put(n, newNode);
+		}
+	    
+    }
 
 	private void findNewEdges() {
 		newEdgeList = new ArrayList<Edge>();
@@ -92,14 +118,14 @@ public class CopyNodesCommand extends AbstractCommand {
 	    for(TopicType tt : topicType.getAko()) {
 	    	Node node2 = findNode(tt);
 	    	if (node2!=null) {
-	    		Edge edge = createEdge(node, node2, EdgeType.AKO_TYPE);
+	    		Edge edge = createEdge(newNodesMap.get(node), node2, EdgeType.AKO_TYPE);
 	    		addNewEdge(edge);
 	    	}
 	    }
 	    for(TopicType tt : ModelIndexer.getTopicIndexer().getUsedAsAko(topicType)) {
 	    	Node node2 = findNode(tt);
 	    	if (node2!=null) {
-	    		Edge edge = createEdge(node2, node, EdgeType.AKO_TYPE);
+	    		Edge edge = createEdge(node2, newNodesMap.get(node), EdgeType.AKO_TYPE);
 	    		addNewEdge(edge);
 	    	}
 	    }
@@ -116,7 +142,7 @@ public class CopyNodesCommand extends AbstractCommand {
 				else {
 					Node n = findNode(rpc.getPlayer());
 					if (n!=null) {
-						Edge e = createEdge(assocNode, n, EdgeType.ROLE_CONSTRAINT_TYPE);
+						Edge e = createEdge(newNodesMap.get(assocNode), n, EdgeType.ROLE_CONSTRAINT_TYPE);
 						e.setRoleConstraint(rpc);
 						newEdgeList.add(e);
 					}
@@ -129,14 +155,12 @@ public class CopyNodesCommand extends AbstractCommand {
 				AssociationTypeConstraint atc = (AssociationTypeConstraint) rpc.eContainer();
 				Node node2 = nodeIndexer.getNodeFor(atc, newDiagram);
 				if (node2!=null) {
-					Edge e = createEdge(tn, node2, EdgeType.ROLE_CONSTRAINT_TYPE);
+					Edge e = createEdge(newNodesMap.get(tn), node2, EdgeType.ROLE_CONSTRAINT_TYPE);
 					e.setRoleConstraint(rpc);
 					newEdgeList.add(e);
 				}
 			}
 		}
-		
-		
 	}
 	
 	private void addNewEdge(Edge edge) {
@@ -147,6 +171,9 @@ public class CopyNodesCommand extends AbstractCommand {
 		newEdgeList.add(edge);
 	}
 
+	/*
+	 * Finds a node in the new diagram or move list which represents the given topic type
+	 */
 	private Node findNode(TopicType tt) {
 		TopicTypeNodeIndexer nodeIndexer = ModelIndexer.getNodeIndexer();
 	    Node node = nodeIndexer.getNodeFor(tt, newDiagram);
@@ -154,7 +181,7 @@ public class CopyNodesCommand extends AbstractCommand {
 	    	for (Node n : nodeList) {
 	    		if ( (n instanceof TypeNode)
 	    			&& (((TypeNode)n).getTopicType().equals(tt))) {
-	    			return n;
+	    			return newNodesMap.get(n);
 	    		}
 	    	}
 	    }
@@ -162,31 +189,22 @@ public class CopyNodesCommand extends AbstractCommand {
     }
 
 	private void createIsAEdges(TypeNode node, TopicType topicType) {
-	    for(TopicType tt : topicType.getIsa()) {
+	    if (newDiagram instanceof DomainDiagram)
+	    	return;
+		for(TopicType tt : topicType.getIsa()) {
 	    	Node node2 = findNode(tt);
 	    	if (node2!=null) {
-	    		Edge edge = createEdge(node, node2, EdgeType.IS_ATYPE);
+	    		Edge edge = createEdge(newNodesMap.get(node), node2, EdgeType.IS_ATYPE);
 	    		addNewEdge(edge);
 	    	}
 	    }
 	    for(TopicType tt : ModelIndexer.getTopicIndexer().getUsedAsIsa(topicType) ) {
 	    	Node node2 = findNode(tt);
 	    	if (node2!=null) {
-	    		Edge edge = createEdge(node2, node, EdgeType.IS_ATYPE);
+	    		Edge edge = createEdge(node2, newNodesMap.get(node), EdgeType.IS_ATYPE);
 	    		addNewEdge(edge);
 	    	}
 	    }
-    }
-
-	private void findRemoveEdges() {
-		oldEdgeList = new ArrayList<Edge>();
-		for (Edge e : oldDiagram.getEdges()) {
-			if (nodeList.contains(e.getSource()) || nodeList.contains(e.getTarget())) {
-				oldEdgeList.add(e);
-			}
-		}
-		if (oldEdgeList.size()==0)
-			oldEdgeList = Collections.emptyList();
     }
 	
 	private Edge createEdge(Node node1, Node node2, EdgeType type) {
