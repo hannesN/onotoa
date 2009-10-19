@@ -1,14 +1,14 @@
 === Subject Locator Constraint ===
 
-The subject locator constraint is used to  demand for a subject identifier of topics using the containing
-topic type. It is possible to constraint the number of subject locator and also the syntax, using a regular expression.
+The subject locator constraint is used to  request for a subject identifier of topics using the containing
+topic type. It is possible to constraint the number of subject locators and also the syntax with a regular expression.
 
 .Property Page subject locator constraint
 image::images/sl_constr_pp.png[scaledwidth="100%"]
 
 The following attributes can be modified:
 
-* *cardMin:* The minimum number of identifier with the given type. The default is 0.
-* *cardMax:* The maximum number of identifier with the given type. The default is *, which means infinity.
+* *cardMin:* The minimum number of locators with the given type. The default is 0.
+* *cardMax:* The maximum number of locators with the given type. The default is *, which means infinity.
 * *reg. exp:* The regular expression specifying the syntax of the subject locator. The default is ".*", which means any text is valid.
 

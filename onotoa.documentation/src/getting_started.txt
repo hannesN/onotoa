@@ -138,7 +138,7 @@ press *Next*.
 The Container of the following wizard page is the project we want to add the 
 file. Press *Browse...* and select the Project 'Onotoa Example'. 
 The other text field contains the name of the file. Please rename the file to 
-'example.ono'. The dialog should look like <<newfile2>>. Press finish and the 
+'example.ono'. The dialogue should look like <<newfile2>>. Press finish and the 
 new file will be opened.
 
 .File Wizard of Eclipse

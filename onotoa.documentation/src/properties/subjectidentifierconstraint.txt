@@ -1,13 +1,13 @@
 === Subject Identifier Constraint ===
 
-The subject identifier constraint is used to  demand for a subject identifier of topics using the containing
-topic type. It is possible to constraint the number of identifier and also the syntax, using a regular expression.
+The subject identifier constraint is used to  request for a subject identifier of topics using the containing
+topic type. It is possible to constraint the number of identifiers and also the syntax with a regular expression.
 
 .Property Page subject identifier constraint
 image::images/si_constr_pp.png[scaledwidth="100%"]
 
 The following attributes can be modified:
 
-* *cardMin:* The minimum number of identifier with the given type. The default is 0.
-* *cardMax:* The maximum number of identifier with the given type. The default is *, which means infinity.
+* *cardMin:* The minimum number of identifiers with the given type. The default is 0.
+* *cardMax:* The maximum number of identifiers with the given type. The default is *, which means infinity.
 * *reg. exp:* The regular expression specifying the syntax of the subject identifier. The default is ".*", which means any text is valid.
