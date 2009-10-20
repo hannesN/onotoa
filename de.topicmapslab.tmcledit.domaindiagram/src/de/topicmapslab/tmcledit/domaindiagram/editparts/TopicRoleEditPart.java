@@ -23,6 +23,7 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
@@ -34,7 +35,7 @@ import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  * 
  */
 public class TopicRoleEditPart extends AbstractLabelEditPart implements
@@ -44,21 +45,62 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 	protected void createEditPolicies() {
 	}
 
-	public void notifyChanged(Notification notification) {
+	public void notifyChanged(Notification msg) {
+		if (msg.getNotifier() instanceof RolePlayerConstraint) {
+			if (msg.getEventType()==Notification.SET) {
+				if (msg.getFeatureID(RoleConstraint.class)==ModelPackage.ROLE_PLAYER_CONSTRAINT__ROLE) {
+					if (msg.getNewValue()!=null)
+						addRoleConstraintAdapters((RoleConstraint) msg.getNewValue());
+					if (msg.getOldValue()!=null)
+						removeRoleConstraintAdapters((RoleConstraint) msg.getOldValue());
+				}
+			}
+		}
 		refreshVisuals();
+	}
+	
+	private void addRoleConstraintAdapters(RoleConstraint rc) {
+		rc.eAdapters().add(this);
+		if (rc.getType()!=null)
+			rc.getType().eAdapters().add(this);
+	}
+	
+	private void removeRoleConstraintAdapters(RoleConstraint rc) {
+		rc.eAdapters().remove(this);
+		if (rc.getType()!=null)
+			rc.getType().eAdapters().remove(this);
 	}
 
 	@Override
 	protected void refreshVisuals() {
-		getNameLabel()
-				.setText(getCastedModel().getPlayer().getName() + " isa ");
+		getNameLabel().setText(getCastedModel().getPlayer().getName() + " isa ");
 		RoleConstraint role = getCastedModel().getRole();
 		getSecondaryLabel().setText("???");
 		if (role != null) {
 			if (role.getType() != null)
 				getSecondaryLabel().setText(role.getType().getName());
 		}
-
+	}
+	
+	@Override
+	public void setModel(Object model) {
+		if (getModel()!=null) {
+			if (getCastedModel().getPlayer()!=null)
+				getCastedModel().getPlayer().eAdapters().remove(this);
+		if (getCastedModel().getRole()!=null)
+			removeRoleConstraintAdapters(getCastedModel().getRole());
+		}
+		
+		super.setModel(model);
+		
+		if (getModel()==null) 
+			return;
+		
+		if (getCastedModel().getPlayer()!=null)
+			getCastedModel().getPlayer().eAdapters().add(this);
+		if (getCastedModel().getRole()!=null)
+			addRoleConstraintAdapters(getCastedModel().getRole());
+		
 	}
 	
 	@Override
