@@ -34,7 +34,7 @@ import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.figures.EditableLabel;
 import de.topicmapslab.tmcledit.domaindiagram.figures.SelectionFigure;
 
-public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
+public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart implements IDirectEditable {
 
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;
@@ -120,6 +120,9 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable#performRequest(org.eclipse.gef.Request)
+	 */
 	@Override
 	public void performRequest(Request req) {
 		if (req.getType() == RequestConstants.REQ_DIRECT_EDIT) {
@@ -157,6 +160,9 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable#getManager()
+	 */
 	public DirectEditManager getManager() {
 		return manager;
 	}
@@ -186,11 +192,17 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
 		scopeLabel.setText(text);
 	}
 	
+	/* (non-Javadoc)
+	 * @see de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable#revertNameChange()
+	 */
 	public void revertNameChange() {
 		figure.setVisible(true);
 		refreshVisuals();
 	}
 	
+	/* (non-Javadoc)
+	 * @see de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable#handleNameChange(java.lang.String)
+	 */
 	public void handleNameChange(String value) {
 		getNameLabel().setText(value);
 		figure.setVisible(false);

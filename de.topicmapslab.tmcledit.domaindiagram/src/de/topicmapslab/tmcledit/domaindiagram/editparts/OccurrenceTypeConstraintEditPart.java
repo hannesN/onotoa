@@ -13,7 +13,7 @@ package de.topicmapslab.tmcledit.domaindiagram.editparts;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 
-import de.topicmapslab.tmcledit.domaindiagram.policies.OccurrenceConstraintDirectEditPolicy;
+import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -26,7 +26,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 	
 	@Override
 	protected void createEditPolicies() {
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new OccurrenceConstraintDirectEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new AbstractTypedConstraintDirectEditPolicy());
 	}
 
 	@Override

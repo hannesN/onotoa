@@ -27,6 +27,7 @@ import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
@@ -37,28 +38,36 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
+import org.eclipse.gef.requests.DirectEditRequest;
+import org.eclipse.gef.tools.DirectEditManager;
+import org.eclipse.jface.viewers.TextCellEditor;
 
 import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.figures.CircleFigure;
+import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 
 /**
  * @author Hannes Niederhausen
  * 
  */
-public class AssociationNodeEditPart extends NodeEditPart {
+public class AssociationNodeEditPart extends NodeEditPart implements IDirectEditable {
 
 	private Label typeLabel;
 	private Figure compartement;
 	private CircleFigure circle;
+	private DirectEditManager manager;
 
 	@Override
 	protected IFigure createFigure() {
@@ -73,7 +82,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		GridData gd = new GridData();
 		gd.horizontalAlignment = GridData.CENTER;
 		layout.setConstraint(typeLabel, gd);
-		
+
 		compartement = new Figure();
 		compartement.setLayoutManager(new ToolbarLayout(false));
 		figure.add(compartement);
@@ -84,8 +93,6 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		compartement.setBackgroundColor(ColorConstants.blue);
 		compartement.setOpaque(false);
 
-		
-
 		int size = 25;
 		circle = new CircleFigure();
 		circle.setBackgroundColor(ColorConstants.blue);
@@ -93,7 +100,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		circle.setOpaque(true);
 		circle.setSize(size, size);
 		figure.add(circle);
-		
+
 		gd = new GridData();
 		gd.grabExcessHorizontalSpace = false;
 		gd.grabExcessVerticalSpace = false;
@@ -101,7 +108,6 @@ public class AssociationNodeEditPart extends NodeEditPart {
 		gd.widthHint = size;
 		gd.heightHint = size;
 		layout.setConstraint(circle, gd);
-		
 
 		return figure;
 	}
@@ -184,7 +190,8 @@ public class AssociationNodeEditPart extends NodeEditPart {
 	@Override
 	protected List getModelChildren() {
 		List<Object> children = new ArrayList<Object>();
-		children.addAll(getCastedModel().getAssociationConstraint().getPlayerConstraints());
+		children.addAll(getCastedModel().getAssociationConstraint()
+				.getPlayerConstraints());
 
 		if (children.isEmpty())
 			return Collections.emptyList();
@@ -274,6 +281,74 @@ public class AssociationNodeEditPart extends NodeEditPart {
 				return null;
 			}
 		});
+
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
+				new AbstractDirectEditPolicy() {
+					
+					@Override
+					public org.eclipse.emf.common.command.Command getRenameCommand(
+							Object model, DirectEditRequest request) {
+						if (model instanceof AssociationNode) {
+							TopicType tt = ((AssociationNode)model).getAssociationConstraint().getType();
+							if (tt==null)
+								return null;
+							
+							return new RenameTopicTypeCommand(tt, getNewString(request));
+						}
+						return null;
+					}
+				});
+
+	}
+
+	private boolean isEditable() {
+		return (getCastedModel().getAssociationConstraint().getType() != null);
+	}
+
+	@Override
+	public void performRequest(Request req) {
+		if (req.getType() == RequestConstants.REQ_DIRECT_EDIT) {
+			if ((req instanceof DirectEditRequest) && (isEditable())) {
+				Label label = directEditHitTest(((DirectEditRequest) req)
+						.getLocation().getCopy());
+				if (label != null) {
+					performDirectEdit(label);
+				}
+			}
+		}
+		super.performRequest(req);
+	}
+
+	private void performDirectEdit(Label label) {
+		if (manager == null) {
+			manager = new TMCLDirectEditManager(this, TextCellEditor.class,
+					label);
+		}
+		manager.show();
+	}
+
+	protected Label directEditHitTest(Point requestLoc) {
+
+		typeLabel.translateToRelative(requestLoc);
+		if (typeLabel.containsPoint(requestLoc))
+			return typeLabel;
+
+		return null;
+	}
+
+	public DirectEditManager getManager() {
+		return manager;
+	}
+
+	public void revertNameChange() {
+		figure.setVisible(true);
+		refreshVisuals();
+	}
+	
+	public void handleNameChange(String value) {
+		typeLabel.setText(value);
+		figure.setVisible(false);
+		refreshVisuals();
 	}
 
 }

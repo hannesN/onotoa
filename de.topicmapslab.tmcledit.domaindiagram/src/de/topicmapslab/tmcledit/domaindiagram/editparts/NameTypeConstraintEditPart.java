@@ -13,7 +13,7 @@ package de.topicmapslab.tmcledit.domaindiagram.editparts;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 
-import de.topicmapslab.tmcledit.domaindiagram.policies.NameConstraintDirectEditPolicy;
+import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -33,7 +33,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	@Override
 	protected void createEditPolicies() {
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new NameConstraintDirectEditPolicy());
+				new AbstractTypedConstraintDirectEditPolicy());
 
 	}
 
