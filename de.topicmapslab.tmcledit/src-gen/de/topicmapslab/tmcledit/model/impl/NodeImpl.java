@@ -13,7 +13,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +28,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class NodeImpl extends EObjectImpl implements Node {
+public class NodeImpl extends OnoObjectImpl implements Node {
 	/**
 	 * The default value of the '{@link #getPosX() <em>Pos X</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -140,9 +139,9 @@ public class NodeImpl extends EObjectImpl implements Node {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.NODE__POS_X:
-				return getPosX();
+				return new Integer(getPosX());
 			case ModelPackage.NODE__POS_Y:
-				return getPosY();
+				return new Integer(getPosY());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,10 +155,10 @@ public class NodeImpl extends EObjectImpl implements Node {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.NODE__POS_X:
-				setPosX((Integer)newValue);
+				setPosX(((Integer)newValue).intValue());
 				return;
 			case ModelPackage.NODE__POS_Y:
-				setPosY((Integer)newValue);
+				setPosY(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);

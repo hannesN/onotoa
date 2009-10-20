@@ -7,8 +7,6 @@ package de.topicmapslab.tmcledit.model;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>File</b></em>'.
@@ -28,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface File extends EObject {
+public interface File extends OnoObject {
 	/**
 	 * Returns the value of the '<em><b>Diagrams</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.Diagram}.

@@ -5,7 +5,6 @@
  */
 package de.topicmapslab.tmcledit.model;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Bendpoint extends EObject {
+public interface Bendpoint extends OnoObject {
 	/**
 	 * Returns the value of the '<em><b>Pos X</b></em>' attribute.
 	 * <!-- begin-user-doc -->

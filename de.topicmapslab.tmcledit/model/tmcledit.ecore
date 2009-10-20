@@ -70,11 +70,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="playerConstraints" lowerBound="1"
         upperBound="-1" eType="#//RolePlayerConstraint" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingElement" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Node">
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
@@ -83,11 +83,11 @@
         eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Bendpoint">
+  <eClassifiers xsi:type="ecore:EClass" name="Bendpoint" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Edge">
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bendpoints" upperBound="-1"
         eType="#//Bendpoint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -103,7 +103,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationConstraint"
         lowerBound="1" eType="#//AssociationTypeConstraint"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Diagram">
+  <eClassifiers xsi:type="ecore:EClass" name="Diagram" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
         eType="#//Edge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
@@ -112,7 +112,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="comments" upperBound="-1"
         eType="#//Comment" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="File">
+  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="diagrams" upperBound="-1"
         eType="#//Diagram" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="topicMapSchema" lowerBound="1"
@@ -144,7 +144,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="*"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LabelPos">
+  <eClassifiers xsi:type="ecore:EClass" name="LabelPos" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
@@ -191,7 +191,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TMCLConstruct">
+  <eClassifiers xsi:type="ecore:EClass" name="TMCLConstruct" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="see_also" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -204,7 +204,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedReifiableTopicType" eSuperTypes="#//ScopedTopicType #//ReifiableTopicType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Annotation">
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -217,4 +217,8 @@
       interface="true" eSuperTypes="#//TMCLConstruct"/>
   <eClassifiers xsi:type="ecore:EClass" name="TopicReifiesConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="DomainDiagram" eSuperTypes="#//Diagram"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OnoObject" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        iD="true"/>
+  </eClassifiers>
 </ecore:EPackage>

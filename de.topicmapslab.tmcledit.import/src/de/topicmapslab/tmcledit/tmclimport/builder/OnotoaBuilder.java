@@ -871,5 +871,12 @@ public class OnotoaBuilder {
 		public void eSetDeliver(boolean deliver) {
 		}
 
+		public int getId() {
+	        return 0;
+        }
+
+		public void setId(int value) {
+        }
+
 	}
 }

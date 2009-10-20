@@ -497,7 +497,7 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__ID_TYPE:
 				return getIdType();
 			case ModelPackage.TOPIC_TYPE__ABSTRACT:
-				return isAbstract();
+				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.TOPIC_TYPE__ISA:
 				return getIsa();
 			case ModelPackage.TOPIC_TYPE__AKO:
@@ -541,7 +541,7 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				setIdType((TopicId)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__ABSTRACT:
-				setAbstract((Boolean)newValue);
+				setAbstract(((Boolean)newValue).booleanValue());
 				return;
 			case ModelPackage.TOPIC_TYPE__ISA:
 				getIsa().clear();

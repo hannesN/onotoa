@@ -21,8 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -42,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class FileImpl extends EObjectImpl implements File {
+public class FileImpl extends OnoObjectImpl implements File {
 	/**
 	 * The cached value of the '{@link #getDiagrams() <em>Diagrams</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -250,7 +248,7 @@ public class FileImpl extends EObjectImpl implements File {
 			case ModelPackage.FILE__FILENAME:
 				return getFilename();
 			case ModelPackage.FILE__DIRTY:
-				return isDirty();
+				return isDirty() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -275,7 +273,7 @@ public class FileImpl extends EObjectImpl implements File {
 				setFilename((String)newValue);
 				return;
 			case ModelPackage.FILE__DIRTY:
-				setDirty((Boolean)newValue);
+				setDirty(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);

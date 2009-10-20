@@ -60,6 +60,34 @@ public interface ModelPackage extends EPackage {
 	ModelPackage eINSTANCE = de.topicmapslab.tmcledit.model.impl.ModelPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OnoObjectImpl <em>Ono Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.OnoObjectImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOnoObject()
+	 * @generated
+	 */
+	int ONO_OBJECT = 39;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ONO_OBJECT__ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>Ono Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ONO_OBJECT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TMCLConstructImpl <em>TMCL Construct</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,13 +98,22 @@ public interface ModelPackage extends EPackage {
 	int TMCL_CONSTRUCT = 30;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMCL_CONSTRUCT__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TMCL_CONSTRUCT__SEE_ALSO = 0;
+	int TMCL_CONSTRUCT__SEE_ALSO = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -85,7 +122,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMCL_CONSTRUCT__COMMENT = 1;
+	int TMCL_CONSTRUCT__COMMENT = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -94,7 +131,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMCL_CONSTRUCT__DESCRIPTION = 2;
+	int TMCL_CONSTRUCT__DESCRIPTION = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -103,7 +140,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMCL_CONSTRUCT__ANNOTATIONS = 3;
+	int TMCL_CONSTRUCT__ANNOTATIONS = ONO_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>TMCL Construct</em>' class.
@@ -112,7 +149,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMCL_CONSTRUCT_FEATURE_COUNT = 4;
+	int TMCL_CONSTRUCT_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl <em>Topic Type</em>}' class.
@@ -123,6 +160,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int TOPIC_TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_TYPE__ID = TMCL_CONSTRUCT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -306,6 +352,15 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_CONSTRAINT = 36;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CONSTRAINT__ID = TMCL_CONSTRUCT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -359,6 +414,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ABSTRACT_REG_EXP_CONSTRAINT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_REG_EXP_CONSTRAINT__ID = ABSTRACT_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -423,6 +487,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ABSTRACT_CARDINALITY_CONTRAINT = 18;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CARDINALITY_CONTRAINT__ID = ABSTRACT_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -496,6 +569,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT = 28;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID = ABSTRACT_CARDINALITY_CONTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -578,6 +660,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int OCCURRENCE_TYPE_CONSTRAINT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCCURRENCE_TYPE_CONSTRAINT__ID = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -671,6 +762,15 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE_CONSTRAINT = 3;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_TYPE_CONSTRAINT__ID = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -751,6 +851,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ROLE_PLAYER_CONSTRAINT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE_PLAYER_CONSTRAINT__ID = ABSTRACT_CARDINALITY_CONTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -842,6 +951,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int TOPIC_MAP_SCHEMA = 5;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__ID = TMCL_CONSTRUCT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -953,6 +1071,15 @@ public interface ModelPackage extends EPackage {
 	int SUBJECT_LOCATOR_CONSTRAINT = 6;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBJECT_LOCATOR_CONSTRAINT__ID = ABSTRACT_REG_EXP_CONSTRAINT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1033,6 +1160,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int SUBJECT_IDENTIFIER_CONSTRAINT = 7;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBJECT_IDENTIFIER_CONSTRAINT__ID = ABSTRACT_REG_EXP_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -1117,6 +1253,15 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_TYPED_CONSTRAINT = 20;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_TYPED_CONSTRAINT__ID = ABSTRACT_CONSTRAINT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1179,6 +1324,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ASSOCIATION_TYPE_CONSTRAINT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE_CONSTRAINT__ID = ABSTRACT_TYPED_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -1254,13 +1408,22 @@ public interface ModelPackage extends EPackage {
 	int MAPPING_ELEMENT = 9;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ELEMENT__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ELEMENT__KEY = 0;
+	int MAPPING_ELEMENT__KEY = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1269,7 +1432,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ELEMENT__VALUE = 1;
+	int MAPPING_ELEMENT__VALUE = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Element</em>' class.
@@ -1278,7 +1441,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ELEMENT_FEATURE_COUNT = 2;
+	int MAPPING_ELEMENT_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NodeImpl <em>Node</em>}' class.
@@ -1291,13 +1454,22 @@ public interface ModelPackage extends EPackage {
 	int NODE = 10;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__POS_X = 0;
+	int NODE__POS_X = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
@@ -1306,7 +1478,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__POS_Y = 1;
+	int NODE__POS_Y = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -1315,7 +1487,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = 2;
+	int NODE_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TypeNodeImpl <em>Type Node</em>}' class.
@@ -1326,6 +1498,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int TYPE_NODE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_NODE__ID = NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1383,13 +1564,22 @@ public interface ModelPackage extends EPackage {
 	int BENDPOINT = 12;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BENDPOINT__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BENDPOINT__POS_X = 0;
+	int BENDPOINT__POS_X = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
@@ -1398,7 +1588,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BENDPOINT__POS_Y = 1;
+	int BENDPOINT__POS_Y = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Bendpoint</em>' class.
@@ -1407,7 +1597,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BENDPOINT_FEATURE_COUNT = 2;
+	int BENDPOINT_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.EdgeImpl <em>Edge</em>}' class.
@@ -1420,13 +1610,22 @@ public interface ModelPackage extends EPackage {
 	int EDGE = 13;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Bendpoints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__BENDPOINTS = 0;
+	int EDGE__BENDPOINTS = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -1435,7 +1634,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__SOURCE = 1;
+	int EDGE__SOURCE = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -1444,7 +1643,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__TARGET = 2;
+	int EDGE__TARGET = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1453,7 +1652,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__TYPE = 3;
+	int EDGE__TYPE = ONO_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Role Constraint</b></em>' reference.
@@ -1462,7 +1661,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__ROLE_CONSTRAINT = 4;
+	int EDGE__ROLE_CONSTRAINT = ONO_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Label Positions</b></em>' containment reference list.
@@ -1471,7 +1670,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__LABEL_POSITIONS = 5;
+	int EDGE__LABEL_POSITIONS = ONO_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
@@ -1480,7 +1679,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = 6;
+	int EDGE_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AssociationNodeImpl <em>Association Node</em>}' class.
@@ -1491,6 +1690,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ASSOCIATION_NODE = 14;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_NODE__ID = NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
@@ -1539,13 +1747,22 @@ public interface ModelPackage extends EPackage {
 	int DIAGRAM = 15;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__EDGES = 0;
+	int DIAGRAM__EDGES = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -1554,7 +1771,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__NODES = 1;
+	int DIAGRAM__NODES = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1563,7 +1780,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__NAME = 2;
+	int DIAGRAM__NAME = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -1572,7 +1789,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__COMMENTS = 3;
+	int DIAGRAM__COMMENTS = ONO_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Diagram</em>' class.
@@ -1581,7 +1798,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_FEATURE_COUNT = 4;
+	int DIAGRAM_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.FileImpl <em>File</em>}' class.
@@ -1594,13 +1811,22 @@ public interface ModelPackage extends EPackage {
 	int FILE = 16;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Diagrams</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE__DIAGRAMS = 0;
+	int FILE__DIAGRAMS = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Topic Map Schema</b></em>' containment reference.
@@ -1609,7 +1835,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FILE__TOPIC_MAP_SCHEMA = 1;
+	int FILE__TOPIC_MAP_SCHEMA = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Filename</b></em>' attribute.
@@ -1618,7 +1844,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FILE__FILENAME = 2;
+	int FILE__FILENAME = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Dirty</b></em>' attribute.
@@ -1627,7 +1853,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FILE__DIRTY = 3;
+	int FILE__DIRTY = ONO_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>File</em>' class.
@@ -1636,7 +1862,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_FEATURE_COUNT = 4;
+	int FILE_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl <em>Scope Constraint</em>}' class.
@@ -1647,6 +1873,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int SCOPE_CONSTRAINT = 17;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE_CONSTRAINT__ID = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -1731,13 +1966,22 @@ public interface ModelPackage extends EPackage {
 	int LABEL_POS = 19;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL_POS__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_POS__POS_X = 0;
+	int LABEL_POS__POS_X = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Pos Y</b></em>' attribute.
@@ -1746,7 +1990,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_POS__POS_Y = 1;
+	int LABEL_POS__POS_Y = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Label Pos</em>' class.
@@ -1755,7 +1999,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_POS_FEATURE_COUNT = 2;
+	int LABEL_POS_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopedTopicTypeImpl <em>Scoped Topic Type</em>}' class.
@@ -1766,6 +2010,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int SCOPED_TOPIC_TYPE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_TOPIC_TYPE__ID = TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -1956,6 +2209,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ASSOCIATION_TYPE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE__ID = SCOPED_TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -2173,6 +2435,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int OCCURRENCE_TYPE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCCURRENCE_TYPE__ID = SCOPED_TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -2401,6 +2672,15 @@ public interface ModelPackage extends EPackage {
 	int ROLE_CONSTRAINT = 24;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE_CONSTRAINT__ID = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2481,6 +2761,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ROLE_TYPE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE_TYPE__ID = TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -2664,6 +2953,15 @@ public interface ModelPackage extends EPackage {
 	int ROLE_COMBINATION_CONSTRAINT = 26;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE_COMBINATION_CONSTRAINT__ID = ABSTRACT_CONSTRAINT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2753,6 +3051,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int NAME_TYPE = 27;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_TYPE__ID = SCOPED_TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -2963,6 +3270,15 @@ public interface ModelPackage extends EPackage {
 	int COMMENT = 29;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__ID = NODE__ID;
+
+	/**
 	 * The feature id for the '<em><b>Pos X</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3025,6 +3341,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int REIFIER_CONSTRAINT = 31;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REIFIER_CONSTRAINT__ID = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -3107,6 +3432,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int REIFIABLE_TOPIC_TYPE = 32;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REIFIABLE_TOPIC_TYPE__ID = TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -3297,6 +3631,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int SCOPED_REIFIABLE_TOPIC_TYPE = 33;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_REIFIABLE_TOPIC_TYPE__ID = SCOPED_TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -3498,13 +3841,22 @@ public interface ModelPackage extends EPackage {
 	int ANNOTATION = 34;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__ID = ONO_OBJECT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION__KEY = 0;
+	int ANNOTATION__KEY = ONO_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3513,7 +3865,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION__VALUE = 1;
+	int ANNOTATION__VALUE = ONO_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Annotation</em>' class.
@@ -3522,7 +3874,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_FEATURE_COUNT = 2;
+	int ANNOTATION_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractRegExpTopicTypeImpl <em>Abstract Reg Exp Topic Type</em>}' class.
@@ -3533,6 +3885,15 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	int ABSTRACT_REG_EXP_TOPIC_TYPE = 35;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_REG_EXP_TOPIC_TYPE__ID = TOPIC_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -3725,6 +4086,15 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_REIFIES_CONSTRAINT = 37;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_REIFIES_CONSTRAINT__ID = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID;
+
+	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3807,6 +4177,15 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_DIAGRAM = 38;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__ID = DIAGRAM__ID;
+
+	/**
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3859,7 +4238,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 39;
+	int TOPIC_ID = 40;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -3869,7 +4248,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 40;
+	int EDGE_TYPE = 41;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -3879,7 +4258,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 41;
+	int KIND_OF_TOPIC_TYPE = 42;
 
 
 	/**
@@ -5076,6 +5455,27 @@ public interface ModelPackage extends EPackage {
 	EClass getDomainDiagram();
 
 	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OnoObject <em>Ono Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ono Object</em>'.
+	 * @see de.topicmapslab.tmcledit.model.OnoObject
+	 * @generated
+	 */
+	EClass getOnoObject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OnoObject#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see de.topicmapslab.tmcledit.model.OnoObject#getId()
+	 * @see #getOnoObject()
+	 * @generated
+	 */
+	EAttribute getOnoObject_Id();
+
+	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6100,6 +6500,24 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DOMAIN_DIAGRAM = eINSTANCE.getDomainDiagram();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OnoObjectImpl <em>Ono Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.OnoObjectImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOnoObject()
+		 * @generated
+		 */
+		EClass ONO_OBJECT = eINSTANCE.getOnoObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ONO_OBJECT__ID = eINSTANCE.getOnoObject_Id();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

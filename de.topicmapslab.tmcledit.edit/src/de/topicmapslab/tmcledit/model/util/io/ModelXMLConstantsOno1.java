@@ -35,6 +35,7 @@ public interface ModelXMLConstantsOno1 {
 	public static final String A_IMAGE = "image";
 	public static final String A_UNIQUE = "unique";
 	public static final String A_VERSION = "version";
+	public static final String A_ID = "id";
 	public static final String A_WIDTH = "width";
 	public static final String A_TARGET = "target";
 	public static final String A_SOURCE = "source";

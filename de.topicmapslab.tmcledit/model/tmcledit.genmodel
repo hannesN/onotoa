@@ -3,7 +3,8 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="(C) 2008 Hannes Niederhausen, Topic Maps Lab"
     modelDirectory="/de.topicmapslab.tmcledit/src-gen" editDirectory="/de.topicmapslab.tmcledit.edit/src-gen"
-    modelPluginID="de.topicmapslab.tmcledit" modelName="Tmcledit" importerID="org.eclipse.emf.importer.ecore"
+    modelPluginID="de.topicmapslab.tmcledit" templateDirectory="de.topicmapslab.tmcledit/templates"
+    dynamicTemplates="true" modelName="Tmcledit" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false" language="">
   <foreignModel>tmcledit.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="de.topicmapslab.tmcledit" disposableProviderFactory="true"
@@ -23,6 +24,7 @@
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/TopicType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/OccurrenceType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NameType"/>
+      <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/RoleType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/AssociationType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/ScopeType"/>
       <genEnumLiterals ecoreEnumLiteral="tmcledit.ecore#//KindOfTopicType/NoType"/>
@@ -36,14 +38,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/occurrenceConstraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/nameContraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectIdentifierConstraints"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectLocatorConstraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/subjectLocatorConstraints"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/kind"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/overlap"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TopicType/locators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TopicType/topicReifiesConstraints"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractConstraint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractConstraint/regexp"/>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractRegExpConstraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractRegExpConstraint/regexp"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//OccurrenceTypeConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurrenceTypeConstraint/unique"/>
@@ -77,9 +80,9 @@
     <genClasses ecoreClass="tmcledit.ecore#//TypeNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TypeNode/topicType"/>
     </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//Bendpoints">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Bendpoints/posX"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Bendpoints/posY"/>
+    <genClasses ecoreClass="tmcledit.ecore#//Bendpoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Bendpoint/posX"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Bendpoint/posY"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//Edge">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//Edge/bendpoints"/>
@@ -121,19 +124,19 @@
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//AssociationType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationType/roles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//AssociationType/roleCombinations"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//OccurrenceType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurrenceType/unique"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OccurrenceType/dataType"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//RoleConstraint"/>
-    <genClasses ecoreClass="tmcledit.ecore#//RoleType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleType/otherRoles"/>
-    </genClasses>
-    <genClasses ecoreClass="tmcledit.ecore#//OtherRolePlayerConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/player"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/otherPlayer"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/otherRole"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//OtherRolePlayerConstraint/associationType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//RoleType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//RoleCombinationConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleCombinationConstraint/player"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleCombinationConstraint/otherPlayer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleCombinationConstraint/otherRole"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tmcledit.ecore#//RoleCombinationConstraint/role"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//NameType"/>
     <genClasses ecoreClass="tmcledit.ecore#//AbstractTypedCardinalityConstraint"/>
@@ -146,11 +149,24 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TMCLConstruct/see_also"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TMCLConstruct/comment"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//TMCLConstruct/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//TMCLConstruct/annotations"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//ReifierConstraint"/>
     <genClasses ecoreClass="tmcledit.ecore#//ReifiableTopicType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tmcledit.ecore#//ReifiableTopicType/reifierConstraint"/>
     </genClasses>
     <genClasses ecoreClass="tmcledit.ecore#//ScopedReifiableTopicType"/>
+    <genClasses ecoreClass="tmcledit.ecore#//Annotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Annotation/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//Annotation/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractRegExpTopicType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//AbstractRegExpTopicType/regExp"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//AbstractConstraint"/>
+    <genClasses ecoreClass="tmcledit.ecore#//TopicReifiesConstraint"/>
+    <genClasses image="false" ecoreClass="tmcledit.ecore#//OnoObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmcledit.ecore#//OnoObject/id"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

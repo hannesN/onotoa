@@ -259,7 +259,7 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 			case ModelPackage.OCCURRENCE_TYPE__REG_EXP:
 				return getRegExp();
 			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
-				return isUnique();
+				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				return getDataType();
 		}
@@ -281,7 +281,7 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 				setRegExp((String)newValue);
 				return;
 			case ModelPackage.OCCURRENCE_TYPE__UNIQUE:
-				setUnique((Boolean)newValue);
+				setUnique(((Boolean)newValue).booleanValue());
 				return;
 			case ModelPackage.OCCURRENCE_TYPE__DATA_TYPE:
 				setDataType((String)newValue);
