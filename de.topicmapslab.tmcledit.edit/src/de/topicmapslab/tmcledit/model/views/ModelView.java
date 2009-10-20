@@ -100,6 +100,7 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OnoObject;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
@@ -224,7 +225,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
-			public void selectionChanged(SelectionChangedEvent event) {
+			@SuppressWarnings("unchecked")
+            public void selectionChanged(SelectionChangedEvent event) {
 				if (currFile == null) {
 					currentSelection = new StructuredSelection();
 					return;
@@ -250,8 +252,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					createTopicAction.setKindOfTopicType(to.getKindOfTopicType());
 					if (to.getModel() == null)
 						currentSelection = new StructuredSelection(currFile);
-					else
-						currentSelection = new StructuredSelection(to.getModel());
+					
+					Iterator<Object> it = sel.iterator();
+					List<OnoObject> list = new ArrayList<OnoObject>();
+					while (it.hasNext()) {
+						to = (TreeObject) it.next();
+						if (to.getModel()!=null)
+							list.add((OnoObject) to.getModel());
+					}
+					currentSelection = new StructuredSelection(list);
 				}
 				fireSelectionChanged();
 
