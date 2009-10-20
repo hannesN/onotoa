@@ -1,4 +1,4 @@
-package de.topicmapslab.tmcledit.domaindiagram.editparts;
+package de.topicmapslab.tmcledit.domaindiagram.action;
 
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
