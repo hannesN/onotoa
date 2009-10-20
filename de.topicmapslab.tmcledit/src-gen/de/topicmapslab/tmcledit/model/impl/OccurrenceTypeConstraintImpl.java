@@ -97,7 +97,7 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				return isUnique();
+				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -111,7 +111,7 @@ public class OccurrenceTypeConstraintImpl extends AbstractTypedCardinalityConstr
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__UNIQUE:
-				setUnique((Boolean)newValue);
+				setUnique(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);

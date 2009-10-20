@@ -85,6 +85,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OnoObject;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
@@ -100,6 +101,7 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.model.util.IDUtil;
 
 class ModelHandler extends DefaultHandler {
 
@@ -129,8 +131,13 @@ class ModelHandler extends DefaultHandler {
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+		if (E_FILE.equals(qName)) {
+			setId(file, attributes);
+		}
+		
 		if (E_SCHEMA.equals(qName)) {
 			constructs.push(file.getTopicMapSchema());
+			setId(file.getTopicMapSchema(), attributes);
 			String tmp = attributes.getValue(A_NAME);
 			if (tmp!=null)
 				file.getTopicMapSchema().setName(tmp);
@@ -147,6 +154,7 @@ class ModelHandler extends DefaultHandler {
 		if (E_TOPIC_TYPE.equals(qName)) {
 			currTopicType = (topicTypeIt.hasNext()) ? topicTypeIt.next() : null;
 			constructs.push(currTopicType);
+			setId(currTopicType, attributes);
 			if (currTopicType instanceof AbstractRegExpTopicType) {
 				String regExp = attributes.getValue(A_REG_EXP);
 				if (regExp!=null)
@@ -208,12 +216,14 @@ class ModelHandler extends DefaultHandler {
 		
 		if (E_ROLE_COMBINATION_CONSTRAINT.equals(qName)) {
 			RoleCombinationConstraint rcc = fac.createRoleCombinationConstraint();
+			setId(rcc, attributes);
 			constructs.push(rcc);
 		}
 		
 		if (E_ASSOCIATION_CONSTRAINT.equals(qName)) {
 			state = State.ASSOCIATION_CONSTRAINT;
 			AssociationTypeConstraint atc = fac.createAssociationTypeConstraint();
+			setId(atc, attributes);
 			constructs.push(atc);
 		}
 		
@@ -221,6 +231,7 @@ class ModelHandler extends DefaultHandler {
 			state = State.TOPIC_ROLE_CONSTRAINT;
 			RolePlayerConstraint rpc = fac.createRolePlayerConstraint();
 			setCardinality(rpc, attributes);
+			setId(rpc, attributes);
 			constructs.push(rpc);			
 		}
 		
@@ -251,6 +262,7 @@ class ModelHandler extends DefaultHandler {
 		
 		if (E_DIAGRAM.equals(qName)) {
 			Diagram d = fac.createDiagram();
+			setId(d, attributes);
 			String name = attributes.getValue(A_NAME);
 			if (name==null)
 				return;
@@ -282,6 +294,7 @@ class ModelHandler extends DefaultHandler {
 				return;
 			Comment c = fac.createComment();
 			setPosition(c, attributes);
+			setId(c, attributes);
 			String tmp = attributes.getValue(A_WIDTH);
 			if (tmp!=null)
 				c.setWidth(Integer.parseInt(tmp));
@@ -308,9 +321,19 @@ class ModelHandler extends DefaultHandler {
 		if (E_SCOPE_CONSTRAINT.equals(qName)) {
 			ScopeConstraint sc = fac.createScopeConstraint();
 			setCardinality(sc, attributes);
+			setId(sc, attributes);
 			constructs.push(sc);	
 		}
 	}
+
+	private void setId(OnoObject o, Attributes attributes) {
+		String idString = attributes.getValue(A_ID);
+		if (idString==null)
+			return;
+		int id=Integer.parseInt(idString);
+		o.setId(id);
+		IDUtil.setLastId(id);
+    }
 
 	private AssociationTypeConstraint resolveAssociationConstraint(String tmp) {
 	    int idx = Integer.parseInt(tmp.substring(tmp.lastIndexOf('.')+1));
@@ -324,6 +347,7 @@ class ModelHandler extends DefaultHandler {
 	    setPosition(bp, attributes);
 	    Edge e = (Edge) constructs.lastElement();
 	    e.getBendpoints().add(bp);
+	    setId(bp, attributes);
     }
 
 	private void addLabelPosition(Attributes attributes) {
@@ -331,6 +355,7 @@ class ModelHandler extends DefaultHandler {
 	    	return;
 	    LabelPos lp = fac.createLabelPos();			
 	    setPosition(lp, attributes);
+	    setId(lp, attributes);
 	    Edge e = (Edge) constructs.lastElement();
 	    e.getLabelPositions().add(lp);
     }
@@ -346,6 +371,7 @@ class ModelHandler extends DefaultHandler {
 	    	node = fac.createAssociationNode();
 	    }
 	    setPosition(node, attributes);
+	    setId(node, attributes);
 	    constructs.push(node);
     }
 
@@ -376,7 +402,7 @@ class ModelHandler extends DefaultHandler {
 	    		return;
 	    	e.setRoleConstraint(rpc);
 	    }
-	    
+	    setId(e, attributes);
 	    constructs.push(e);
     }
 
@@ -420,6 +446,7 @@ class ModelHandler extends DefaultHandler {
 	    	ReifierConstraint rc = fac.createReifierConstraint();
 	    	setCardinality(rc, attributes);
 	    	constructs.add(rc);
+	    	setId(rc, attributes);
 	    	state = State.REIFIER_CONSTRAINT;
 	    }
     }
@@ -429,6 +456,7 @@ class ModelHandler extends DefaultHandler {
 	    	TopicReifiesConstraint trc = fac.createTopicReifiesConstraint();
 	    	setCardinality(trc, attributes);
 	    	constructs.add(trc);
+	    	setId(trc, attributes);
 	    	state = State.TOPIC_REIFIES_CONSTRAINT;
 	    }
     }
@@ -438,6 +466,7 @@ class ModelHandler extends DefaultHandler {
 	    	RoleConstraint rc = fac.createRoleConstraint();
 	    	setCardinality(rc, attributes);
 	    	constructs.add(rc);
+	    	setId(rc, attributes);
 	    	state = State.ROLE_CONSTRAINT;
 	    }
     }
@@ -447,6 +476,7 @@ class ModelHandler extends DefaultHandler {
 	    	return;
 	    TMCLConstruct construct = (TMCLConstruct) constructs.lastElement();
 	    Annotation annotation = ModelFactory.eINSTANCE.createAnnotation();
+	    setId(annotation, attributes);
 	    annotation.setKey(attributes.getValue(A_KEY));
 	    annotation.setValue(attributes.getValue(A_VALUE));
 	    construct.getAnnotations().add(annotation);
@@ -457,6 +487,7 @@ class ModelHandler extends DefaultHandler {
 	    	state = State.OCCURENCE_CONSTRAINT;
 	    	OccurrenceTypeConstraint otc = fac.createOccurrenceTypeConstraint();
 	    	setCardinality(otc, attributes);
+	    	setId(otc, attributes);
 	    	constructs.add(otc);
 	    }
     }
@@ -466,6 +497,7 @@ class ModelHandler extends DefaultHandler {
 	    	state = State.NAME_CONSTRAINT;
 	    	NameTypeConstraint ntc = fac.createNameTypeConstraint();
 	    	setCardinality(ntc, attributes);
+	    	setId(ntc, attributes);
 	    	constructs.add(ntc);
 	    }
     }
@@ -475,6 +507,7 @@ class ModelHandler extends DefaultHandler {
 	    	SubjectLocatorConstraint slc = (SubjectLocatorConstraint) createIdentityConstraint(attributes,
 	    	        ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS);
 	    	constructs.add(slc);
+	    	setId(slc, attributes);
 	    	currTopicType.getSubjectLocatorConstraints().add(slc);
 	    }
     }
@@ -483,6 +516,7 @@ class ModelHandler extends DefaultHandler {
 	    if (currTopicType != null) {
 	    	SubjectIdentifierConstraint sic = (SubjectIdentifierConstraint) createIdentityConstraint(attributes,
 	    	        ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
+	    	setId(sic, attributes);
 	    	constructs.add(sic);
 	    	currTopicType.getSubjectIdentifierConstraints().add(sic);
 	    }
@@ -497,6 +531,7 @@ class ModelHandler extends DefaultHandler {
 	    TMCLConstruct c = (TMCLConstruct) constructs.lastElement();
 	    if (c instanceof TopicMapSchema) {
 	    	MappingElement me = fac.createMappingElement();
+	    	setId(me, attributes);
 	    	me.setKey(key);
 	    	me.setValue(value);
 	    	((TopicMapSchema) c).getMappings().add(me);

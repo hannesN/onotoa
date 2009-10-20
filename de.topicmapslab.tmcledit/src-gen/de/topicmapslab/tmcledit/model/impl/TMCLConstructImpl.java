@@ -20,8 +20,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -41,7 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class TMCLConstructImpl extends EObjectImpl implements TMCLConstruct {
+public class TMCLConstructImpl extends OnoObjectImpl implements TMCLConstruct {
 	/**
 	 * The default value of the '{@link #getSee_also() <em>See also</em>}' attribute.
 	 * <!-- begin-user-doc -->

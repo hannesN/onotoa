@@ -41,6 +41,7 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OnoObject;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
@@ -103,10 +104,12 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	private Element createFileNode() {
 		Element fileNode = document.getDocumentElement();
 		fileNode.setAttribute(A_VERSION, getVersionString());
+		setId(file, fileNode);
 
 		TopicMapSchema schema = file.getTopicMapSchema();
 
 		Element schemaNode = document.createElement(E_SCHEMA);
+		setId(schema, schemaNode);
 		String tmp = schema.getBaseLocator();
 		if ((tmp != null) && (tmp.length() > 0))
 			schemaNode.setAttribute(A_BASE_LOCATOR, tmp);
@@ -135,19 +138,26 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		return fileNode;
 	}
 
+	private void setId(OnoObject o, Element e) {
+		e.setAttribute(A_ID, Integer.toString(o.getId()));
+	}
+	
 	private void createMappingNode(MappingElement me, Element parent) {
 		Element meNode = document.createElement(E_MAPPING_ELEMENT);
 		meNode.setAttribute(A_KEY, me.getKey());
 		meNode.setAttribute(A_VALUE, me.getValue());
+		setId(me, meNode);
 		parent.appendChild(meNode);
 	}
 
 	private void createDiagramNode(Diagram diagram, Element parent) {
 		Element dNode = document.createElement(E_DIAGRAM);
+		setId(diagram, dNode);
 		dNode.setAttribute(A_NAME, diagram.getName());
 
 		for (Comment c : diagram.getComments()) {
 			Element cNode = document.createElement(E_COMMENT);
+			setId(c, cNode);
 			addPositionElements(cNode, c);
 			cNode.setAttribute(A_WIDTH, Integer.toString(c.getWidth()));
 			cNode.setAttribute(A_HEIGHT, Integer.toString(c.getHeight()));
@@ -167,6 +177,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 	private void addEdgeNode(Diagram diagram, Element dNode, Edge e) {
 	    Element edgeNode = document.createElement(E_EDGE);
+	    setId(e, edgeNode);
 	    edgeNode.setAttribute(A_TYPE, e.getType().getLiteral());
 	    
 	    String tmp = "node."+diagram.getNodes().indexOf(e.getSource());
@@ -193,6 +204,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	    
 	    for (Bendpoint bp : e.getBendpoints()) {
 	    	Element bpNode = document.createElement(E_BENDPOINT);
+	    	setId(bp, bpNode);
 	    	bpNode.setAttribute(A_POS_X, Integer.toString(bp.getPosX()));
 	    	bpNode.setAttribute(A_POS_Y, Integer.toString(bp.getPosY()));
 	    	edgeNode.appendChild(bpNode);
@@ -200,6 +212,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	    
 	    for (LabelPos pos : e.getLabelPositions()) {
 	    	Element lpNode = document.createElement(E_LABEL_POSITION);
+	    	setId(pos, lpNode);
 	    	lpNode.setAttribute(A_POS_X, Integer.toString(pos.getPosX()));
 	    	lpNode.setAttribute(A_POS_Y, Integer.toString(pos.getPosY()));
 	    	edgeNode.appendChild(lpNode);
@@ -209,6 +222,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 	private void addDiagramNode(Element dNode, de.topicmapslab.tmcledit.model.Node n) {
 	    Element nNode = document.createElement(E_NODE);
+	    setId(n, nNode);
 	    if (n instanceof TypeNode) {
 	    	nNode.setAttribute(A_TYPE, "typeNode");
 	    	addTopicReference(nNode, ((TypeNode) n).getTopicType());
@@ -287,7 +301,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	private void createTopicTypeNode(TopicType tt, Element parent) {
 		Element typeNode = document.createElement(E_TOPIC_TYPE);
 		typeNode.setAttribute(A_KIND, tt.getKind().getLiteral());
-
+		
 		addTMCLConstructElements(tt, typeNode);
 
 		Element nameNode = document.createElement(E_NAME);
@@ -533,6 +547,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	}
 
 	private void addTMCLConstructElements(TMCLConstruct construct, Element node) {
+		setId(construct, node);
 		String tmp = construct.getComment();
 		if ((tmp != null) && (tmp.length() > 0)) {
 			Element comm = document.createElement(E_COMMENT);

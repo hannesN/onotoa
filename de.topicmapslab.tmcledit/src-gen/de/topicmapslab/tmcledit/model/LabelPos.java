@@ -5,8 +5,6 @@
  */
 package de.topicmapslab.tmcledit.model;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Label Pos</b></em>'.
@@ -24,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface LabelPos extends EObject {
+public interface LabelPos extends OnoObject {
 	/**
 	 * Returns the value of the '<em><b>Pos X</b></em>' attribute.
 	 * The default value is <code>"0"</code>.
