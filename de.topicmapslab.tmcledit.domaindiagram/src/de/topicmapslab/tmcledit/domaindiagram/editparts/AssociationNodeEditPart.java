@@ -101,7 +101,7 @@ public class AssociationNodeEditPart extends NodeEditPart implements IDirectEdit
 		int size = 25;
 		circle = new CircleFigure();
 		circle.setBackgroundColor(ColorConstants.blue);
-		circle.setForegroundColor(ColorConstants.yellow);
+		circle.setForegroundColor(ColorConstants.white);
 		circle.setOpaque(true);
 		circle.setSize(size, size);
 		figure.add(circle);
