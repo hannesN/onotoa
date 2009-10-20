@@ -18,6 +18,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.domaindiagram.Activator;
 import de.topicmapslab.tmcledit.domaindiagram.action.AbstractCommandStackAction;
+import de.topicmapslab.tmcledit.domaindiagram.action.SetRoleData;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -173,6 +174,5 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 			data.role = (RoleType) tt.getNewTopicType();
 			return cmd;
 		}
-
 	}
 }

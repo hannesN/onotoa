@@ -44,8 +44,12 @@ import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.tools.DirectEditManager;
+import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.TextCellEditor;
 
+import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
+import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
@@ -55,6 +59,7 @@ import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 
@@ -351,4 +356,31 @@ public class AssociationNodeEditPart extends NodeEditPart implements IDirectEdit
 		refreshVisuals();
 	}
 
+	@Override
+	public List<IContributionItem> getItems() {
+		List<IContributionItem> result = new ArrayList<IContributionItem>();
+
+		MenuManager subMenu = new MenuManager("Set Association");
+		SetTypeData data = new SetTypeData();
+		data.typedConstraint = getCastedModel().getAssociationConstraint();
+		data.editDomain = getEditDomain();
+		data.schema = getTopicMapSchema();
+		data.featureId = ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE;
+		
+//		subMenu.add(new SetAssociationAction(data));
+		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
+			if (tt instanceof AssociationType) {
+				SetTypeData d = data.clone();
+				d.type = tt;
+				subMenu.add(new SetTypeAction(d));
+			}
+		}
+		result.add(subMenu);
+
+		return result;
+	}
+
+	private TopicMapSchema getTopicMapSchema() {
+		return (TopicMapSchema) getCastedModel().getAssociationConstraint().eContainer();
+	}
 }

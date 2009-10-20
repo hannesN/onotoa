@@ -10,13 +10,21 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.domaindiagram.editparts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.MenuManager;
 
+import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
+import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
@@ -79,7 +87,32 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 
 		refreshVisuals();
 	}
+	private TopicMapSchema getTopicMapSchema() {
+		return (TopicMapSchema) getCastedModel().getType().eContainer();
+	}
 
-	
+	@Override
+	public List<IContributionItem> getItems() {
+		List<IContributionItem> result = new ArrayList<IContributionItem>();
+
+		MenuManager subMenu = new MenuManager("Set Name");
+		SetTypeData data = new SetTypeData();
+		data.typedConstraint = getCastedModel();
+		data.editDomain = getEditDomain();
+		data.schema = getTopicMapSchema();
+		data.featureId = ModelPackage.NAME_TYPE_CONSTRAINT__TYPE;
+		
+//		subMenu.add(new SetAssociationAction(data));
+		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
+			if (tt instanceof NameType) {
+				SetTypeData d = data.clone();
+				d.type = tt;
+				subMenu.add(new SetTypeAction(d));
+			}
+		}
+		result.add(subMenu);
+
+		return result;
+	}
 	
 }
