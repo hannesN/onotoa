@@ -114,7 +114,7 @@ import de.topicmapslab.tmcledit.model.actions.CreateSubjectIdenifierConstraintAc
 import de.topicmapslab.tmcledit.model.actions.CreateSubjectLocatorConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateTopicAction;
 import de.topicmapslab.tmcledit.model.actions.DeleteDiagramAction;
-import de.topicmapslab.tmcledit.model.actions.DeleteTopicTypeAction;
+import de.topicmapslab.tmcledit.model.actions.DeleteTMCLConstruct;
 import de.topicmapslab.tmcledit.model.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.model.actions.RenameAction;
 import de.topicmapslab.tmcledit.model.actions.UndoActionWrapper;
@@ -178,7 +178,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private CreateTopicAction createTopicAction;
 
-	private DeleteTopicTypeAction deleteTopicTypeAction;
+	private DeleteTMCLConstruct deleteTopicTypeAction;
 
 	private DeleteDiagramAction deleteDiagramAction;
 
@@ -235,6 +235,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					currentSelection = new StructuredSelection(currFile);
 					createTopicAction.setEnabled(false);
 				} else {
+					
 					TreeObject to = (TreeObject) sel.getFirstElement();
 					createTopicAction.setEnabled(false);
 					createDiagramAction.setEnabled(false);
@@ -473,7 +474,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			}
 		};
 		deleteDiagramAction = new DeleteDiagramAction(this);
-		deleteTopicTypeAction = new DeleteTopicTypeAction(this);
+		deleteTopicTypeAction = new DeleteTMCLConstruct(this);
 		createDiagramAction = new CreateDiagramAction(this);
 		createDomainDiagramAction = new CreateDomainDiagramAction(this);
 		createTopicAction = new CreateTopicAction(this);

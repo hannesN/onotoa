@@ -13,7 +13,11 @@
  */
 package de.topicmapslab.tmcledit.model.actions;
 
-import org.eclipse.emf.common.command.Command;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -41,75 +45,81 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  * @author Hannes Niederhausen
  * 
  */
-public class DeleteTopicTypeAction extends Action implements ISelectionChangedListener {
+public class DeleteTMCLConstruct extends Action implements ISelectionChangedListener {
 
-	private TMCLConstruct construct;
+	private List<TMCLConstruct> constructList;
 	private ModelView modelView;
+	
+	
 
-	public DeleteTopicTypeAction(ModelView modelView) {
-		setText("Delete TopicTyype");
+	public DeleteTMCLConstruct(ModelView modelView) {
 		this.modelView = modelView;
 		this.modelView.addSelectionChangedListener(this);
-		setType(null);
+		setText("Delete...");
 	}
 
-	public void setType(TMCLConstruct type) {
-		this.construct = type;
-		if (this.construct instanceof TopicType) {
-			setText("Delete...");
-		} 
-		setEnabled(type!=null);
-	}
+	public List<TMCLConstruct> getConstructList() {
+		if (constructList==null)
+			constructList = new ArrayList<TMCLConstruct>();
+		
+		return constructList;
+    }
 
 	@Override
 	public void run() {
 		Shell shell = modelView.getSite().getShell();
 		if (MessageDialog.openQuestion(shell, "Are you sure?", "Do you really want to delete the selected construct?")) {
 
-			Command cmd = null;
+			CompoundCommand cmd = new CompoundCommand();
 
+			for (TMCLConstruct construct : getConstructList()) {
 			if (construct instanceof TopicType)
-				cmd = new DeleteTopicTypeCommand((TopicType) construct);
+				cmd.append(new DeleteTopicTypeCommand((TopicType) construct));
 
 			if (construct instanceof NameTypeConstraint)
-				cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
-				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS);
+				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
+				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS));
 
 			if (construct instanceof OccurrenceTypeConstraint)
-				cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
-				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS);
+				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
+				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS));
 
 			if (construct instanceof SubjectIdentifierConstraint)
-				cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
-				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS);
+				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
+				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS));
 
 			if (construct instanceof SubjectLocatorConstraint)
-				cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
-				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS);
+				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
+				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS));
 			
 			if (construct instanceof AssociationTypeConstraint)
-				cmd = new DeleteAssociationConstraintCommand((AssociationTypeConstraint) construct);
+				cmd.append(new DeleteAssociationConstraintCommand((AssociationTypeConstraint) construct));
 
+			}
 			if (cmd != null)
 				modelView.getEditingDomain().getCommandStack().execute(cmd);
 		}
 
 	}
 
-	public void selectionChanged(SelectionChangedEvent event) {
-		TMCLConstruct c = null;
-		if ((!event.getSelection().isEmpty()) || ((event.getSelection() instanceof IStructuredSelection))) {
-
+	@SuppressWarnings("unchecked")
+    public void selectionChanged(SelectionChangedEvent event) {
+		getConstructList().clear();
+		if ((!event.getSelection().isEmpty()) && (((event.getSelection() instanceof IStructuredSelection))) ) {
 			IStructuredSelection sel = (IStructuredSelection) event.getSelection();
 
+		
 			Object obj = sel.getFirstElement();
-			if ( (obj instanceof TMCLConstruct) 
-			   &&(!(obj instanceof TopicMapSchema))
-			   &&(!(obj instanceof File)) )
-				c = (TMCLConstruct) obj;
-
+			Iterator<Object> it = sel.iterator();
+			while (it.hasNext()) {
+				obj = it.next();
+				if ( (obj instanceof TMCLConstruct) 
+				   &&(!(obj instanceof TopicMapSchema))
+				   &&(!(obj instanceof File)) ) {
+						getConstructList().add((TMCLConstruct) obj);
+				}
+			}
 		}
-		setType(c);
-
+		setEnabled(!getConstructList().isEmpty());
 	}
 }
