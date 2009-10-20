@@ -5,6 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.util.IDUtil;
 import de.topicmapslab.tmcledit.model.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -142,6 +143,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public TopicType createTopicType() {
 		TopicTypeImpl topicType = new TopicTypeImpl();
+    	createId(topicType);
 		return topicType;
 	}
 
@@ -152,6 +154,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public OccurrenceTypeConstraint createOccurrenceTypeConstraint() {
 		OccurrenceTypeConstraintImpl occurrenceTypeConstraint = new OccurrenceTypeConstraintImpl();
+    	createId(occurrenceTypeConstraint);
 		return occurrenceTypeConstraint;
 	}
 
@@ -162,6 +165,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public NameTypeConstraint createNameTypeConstraint() {
 		NameTypeConstraintImpl nameTypeConstraint = new NameTypeConstraintImpl();
+    	createId(nameTypeConstraint);
 		return nameTypeConstraint;
 	}
 
@@ -172,6 +176,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public RolePlayerConstraint createRolePlayerConstraint() {
 		RolePlayerConstraintImpl rolePlayerConstraint = new RolePlayerConstraintImpl();
+    	createId(rolePlayerConstraint);
 		return rolePlayerConstraint;
 	}
 
@@ -182,6 +187,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public TopicMapSchema createTopicMapSchema() {
 		TopicMapSchemaImpl topicMapSchema = new TopicMapSchemaImpl();
+    	createId(topicMapSchema);
 		return topicMapSchema;
 	}
 
@@ -192,6 +198,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public SubjectLocatorConstraint createSubjectLocatorConstraint() {
 		SubjectLocatorConstraintImpl subjectLocatorConstraint = new SubjectLocatorConstraintImpl();
+    	createId(subjectLocatorConstraint);
 		return subjectLocatorConstraint;
 	}
 
@@ -202,6 +209,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public SubjectIdentifierConstraint createSubjectIdentifierConstraint() {
 		SubjectIdentifierConstraintImpl subjectIdentifierConstraint = new SubjectIdentifierConstraintImpl();
+    	createId(subjectIdentifierConstraint);
 		return subjectIdentifierConstraint;
 	}
 
@@ -212,6 +220,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public AssociationTypeConstraint createAssociationTypeConstraint() {
 		AssociationTypeConstraintImpl associationTypeConstraint = new AssociationTypeConstraintImpl();
+    	createId(associationTypeConstraint);
 		return associationTypeConstraint;
 	}
 
@@ -222,6 +231,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public MappingElement createMappingElement() {
 		MappingElementImpl mappingElement = new MappingElementImpl();
+    	createId(mappingElement);
 		return mappingElement;
 	}
 
@@ -232,6 +242,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public Node createNode() {
 		NodeImpl node = new NodeImpl();
+    	createId(node);
 		return node;
 	}
 
@@ -242,6 +253,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public TypeNode createTypeNode() {
 		TypeNodeImpl typeNode = new TypeNodeImpl();
+    	createId(typeNode);
 		return typeNode;
 	}
 
@@ -252,6 +264,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public Bendpoint createBendpoint() {
 		BendpointImpl bendpoint = new BendpointImpl();
+    	createId(bendpoint);
 		return bendpoint;
 	}
 
@@ -262,6 +275,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public Edge createEdge() {
 		EdgeImpl edge = new EdgeImpl();
+    	createId(edge);
 		return edge;
 	}
 
@@ -272,6 +286,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public AssociationNode createAssociationNode() {
 		AssociationNodeImpl associationNode = new AssociationNodeImpl();
+    	createId(associationNode);
 		return associationNode;
 	}
 
@@ -282,6 +297,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public Diagram createDiagram() {
 		DiagramImpl diagram = new DiagramImpl();
+    	createId(diagram);
 		return diagram;
 	}
 
@@ -292,6 +308,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public File createFile() {
 		FileImpl file = new FileImpl();
+    	createId(file);
 		return file;
 	}
 
@@ -302,6 +319,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public ScopeConstraint createScopeConstraint() {
 		ScopeConstraintImpl scopeConstraint = new ScopeConstraintImpl();
+    	createId(scopeConstraint);
 		return scopeConstraint;
 	}
 
@@ -312,6 +330,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public LabelPos createLabelPos() {
 		LabelPosImpl labelPos = new LabelPosImpl();
+    	createId(labelPos);
 		return labelPos;
 	}
 
@@ -322,6 +341,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public AssociationType createAssociationType() {
 		AssociationTypeImpl associationType = new AssociationTypeImpl();
+    	createId(associationType);
 		return associationType;
 	}
 
@@ -332,6 +352,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public OccurrenceType createOccurrenceType() {
 		OccurrenceTypeImpl occurrenceType = new OccurrenceTypeImpl();
+    	createId(occurrenceType);
 		return occurrenceType;
 	}
 
@@ -342,6 +363,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public RoleConstraint createRoleConstraint() {
 		RoleConstraintImpl roleConstraint = new RoleConstraintImpl();
+    	createId(roleConstraint);
 		return roleConstraint;
 	}
 
@@ -352,6 +374,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public RoleType createRoleType() {
 		RoleTypeImpl roleType = new RoleTypeImpl();
+    	createId(roleType);
 		return roleType;
 	}
 
@@ -362,6 +385,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public RoleCombinationConstraint createRoleCombinationConstraint() {
 		RoleCombinationConstraintImpl roleCombinationConstraint = new RoleCombinationConstraintImpl();
+    	createId(roleCombinationConstraint);
 		return roleCombinationConstraint;
 	}
 
@@ -372,6 +396,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public NameType createNameType() {
 		NameTypeImpl nameType = new NameTypeImpl();
+    	createId(nameType);
 		return nameType;
 	}
 
@@ -382,6 +407,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public AbstractTypedCardinalityConstraint createAbstractTypedCardinalityConstraint() {
 		AbstractTypedCardinalityConstraintImpl abstractTypedCardinalityConstraint = new AbstractTypedCardinalityConstraintImpl();
+    	createId(abstractTypedCardinalityConstraint);
 		return abstractTypedCardinalityConstraint;
 	}
 
@@ -392,6 +418,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public Comment createComment() {
 		CommentImpl comment = new CommentImpl();
+    	createId(comment);
 		return comment;
 	}
 
@@ -402,6 +429,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public TMCLConstruct createTMCLConstruct() {
 		TMCLConstructImpl tmclConstruct = new TMCLConstructImpl();
+    	createId(tmclConstruct);
 		return tmclConstruct;
 	}
 
@@ -412,6 +440,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public ReifierConstraint createReifierConstraint() {
 		ReifierConstraintImpl reifierConstraint = new ReifierConstraintImpl();
+    	createId(reifierConstraint);
 		return reifierConstraint;
 	}
 
@@ -422,6 +451,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public ReifiableTopicType createReifiableTopicType() {
 		ReifiableTopicTypeImpl reifiableTopicType = new ReifiableTopicTypeImpl();
+    	createId(reifiableTopicType);
 		return reifiableTopicType;
 	}
 
@@ -432,6 +462,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public ScopedReifiableTopicType createScopedReifiableTopicType() {
 		ScopedReifiableTopicTypeImpl scopedReifiableTopicType = new ScopedReifiableTopicTypeImpl();
+    	createId(scopedReifiableTopicType);
 		return scopedReifiableTopicType;
 	}
 
@@ -442,6 +473,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public Annotation createAnnotation() {
 		AnnotationImpl annotation = new AnnotationImpl();
+    	createId(annotation);
 		return annotation;
 	}
 
@@ -452,6 +484,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public TopicReifiesConstraint createTopicReifiesConstraint() {
 		TopicReifiesConstraintImpl topicReifiesConstraint = new TopicReifiesConstraintImpl();
+    	createId(topicReifiesConstraint);
 		return topicReifiesConstraint;
 	}
 
@@ -535,4 +568,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		return ModelPackage.eINSTANCE;
 	}
 
+	private void createId(OnoObject o) {
+		o.setId(IDUtil.nextId());
+	}
+	
 } //ModelFactoryImpl

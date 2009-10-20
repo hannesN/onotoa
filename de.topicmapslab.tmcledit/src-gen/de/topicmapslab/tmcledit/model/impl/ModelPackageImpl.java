@@ -31,6 +31,7 @@ import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.OnoObject;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
@@ -335,6 +336,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass onoObjectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum topicIdEEnum = null;
 
 	/**
@@ -378,10 +386,20 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
-	 * <p>This method is used to initialize {@link ModelPackage#eINSTANCE} when that field is accessed.
-	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * Creates, registers, and initializes the <b>Package</b> for this
+	 * model, and for any others upon which it depends.  Simple
+	 * dependencies are satisfied by calling this method on all
+	 * dependent packages before doing anything else.  This method drives
+	 * initialization for interdependent packages directly, in parallel
+	 * with this package, itself.
+	 * <p>Of this package and its interdependencies, all packages which
+	 * have not yet been registered by their URI values are first created
+	 * and registered.  The packages are then initialized in two steps:
+	 * meta-model objects for all of the packages are created before any
+	 * are initialized, since one package's meta-model objects may refer to
+	 * those of another.
+	 * <p>Invocation of this method will not affect any packages that have
+	 * already been initialized.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -393,7 +411,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		if (isInited) return (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ModelPackageImpl());
+		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ModelPackageImpl());
 
 		isInited = true;
 
@@ -406,9 +424,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Mark meta-data to indicate it can't be changed
 		theModelPackage.freeze();
 
-  
-		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(ModelPackage.eNS_URI, theModelPackage);
 		return theModelPackage;
 	}
 
@@ -1407,6 +1422,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOnoObject() {
+		return onoObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOnoObject_Id() {
+		return (EAttribute)onoObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1605,6 +1638,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		topicReifiesConstraintEClass = createEClass(TOPIC_REIFIES_CONSTRAINT);
 
+		onoObjectEClass = createEClass(ONO_OBJECT);
+		createEAttribute(onoObjectEClass, ONO_OBJECT__ID);
+
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
 		edgeTypeEEnum = createEEnum(EDGE_TYPE);
@@ -1650,10 +1686,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractRegExpConstraint());
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		associationTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
+		mappingElementEClass.getESuperTypes().add(this.getOnoObject());
+		nodeEClass.getESuperTypes().add(this.getOnoObject());
 		typeNodeEClass.getESuperTypes().add(this.getNode());
+		bendpointEClass.getESuperTypes().add(this.getOnoObject());
+		edgeEClass.getESuperTypes().add(this.getOnoObject());
 		associationNodeEClass.getESuperTypes().add(this.getNode());
+		diagramEClass.getESuperTypes().add(this.getOnoObject());
+		fileEClass.getESuperTypes().add(this.getOnoObject());
 		scopeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		abstractCardinalityContraintEClass.getESuperTypes().add(this.getAbstractConstraint());
+		labelPosEClass.getESuperTypes().add(this.getOnoObject());
 		abstractTypedConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		scopedTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 		associationTypeEClass.getESuperTypes().add(this.getScopedTopicType());
@@ -1670,10 +1713,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
 		commentEClass.getESuperTypes().add(this.getNode());
+		tmclConstructEClass.getESuperTypes().add(this.getOnoObject());
 		reifierConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		reifiableTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 		scopedReifiableTopicTypeEClass.getESuperTypes().add(this.getScopedTopicType());
 		scopedReifiableTopicTypeEClass.getESuperTypes().add(this.getReifiableTopicType());
+		annotationEClass.getESuperTypes().add(this.getOnoObject());
 		abstractRegExpTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 		abstractConstraintEClass.getESuperTypes().add(this.getTMCLConstruct());
 		topicReifiesConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
@@ -1826,6 +1871,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(abstractConstraintEClass, AbstractConstraint.class, "AbstractConstraint", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(topicReifiesConstraintEClass, TopicReifiesConstraint.class, "TopicReifiesConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(onoObjectEClass, OnoObject.class, "OnoObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOnoObject_Id(), ecorePackage.getEInt(), "id", null, 1, 1, OnoObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

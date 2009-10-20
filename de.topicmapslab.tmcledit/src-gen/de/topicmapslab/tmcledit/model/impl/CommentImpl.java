@@ -183,9 +183,9 @@ public class CommentImpl extends NodeImpl implements Comment {
 			case ModelPackage.COMMENT__CONTENT:
 				return getContent();
 			case ModelPackage.COMMENT__WIDTH:
-				return getWidth();
+				return new Integer(getWidth());
 			case ModelPackage.COMMENT__HEIGHT:
-				return getHeight();
+				return new Integer(getHeight());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,10 +202,10 @@ public class CommentImpl extends NodeImpl implements Comment {
 				setContent((String)newValue);
 				return;
 			case ModelPackage.COMMENT__WIDTH:
-				setWidth((Integer)newValue);
+				setWidth(((Integer)newValue).intValue());
 				return;
 			case ModelPackage.COMMENT__HEIGHT:
-				setHeight((Integer)newValue);
+				setHeight(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);

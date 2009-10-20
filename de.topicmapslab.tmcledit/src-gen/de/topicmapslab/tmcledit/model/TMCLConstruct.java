@@ -7,8 +7,6 @@ package de.topicmapslab.tmcledit.model;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>TMCL Construct</b></em>'.
@@ -28,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TMCLConstruct extends EObject {
+public interface TMCLConstruct extends OnoObject {
 	/**
 	 * Returns the value of the '<em><b>See also</b></em>' attribute.
 	 * <!-- begin-user-doc -->
