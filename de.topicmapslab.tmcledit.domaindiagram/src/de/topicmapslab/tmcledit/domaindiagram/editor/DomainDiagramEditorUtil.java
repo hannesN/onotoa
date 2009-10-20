@@ -132,8 +132,8 @@ public class DomainDiagramEditorUtil {
 
 		group.add(new CombinedTemplateCreationEntry("Topic", "Topic",
 				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
+				ImageProvider.getImageDescriptor(ImageConstants.TOPIC),
+				ImageProvider.getImageDescriptor(ImageConstants.TOPIC_SM)));
 		return group;
 	}
 

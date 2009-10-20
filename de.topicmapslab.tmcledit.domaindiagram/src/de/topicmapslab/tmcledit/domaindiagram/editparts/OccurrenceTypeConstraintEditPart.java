@@ -13,6 +13,7 @@ package de.topicmapslab.tmcledit.domaindiagram.editparts;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.jface.action.IContributionItem;
@@ -26,12 +27,22 @@ import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 
 	
 	OccurrenceTypeConstraint getCastedModel() {
 		return (OccurrenceTypeConstraint) getModel();
+	}
+	
+	@Override
+	protected IFigure createFigure() {
+		IFigure f = super.createFigure();
+		getNameLabel().setIcon(ImageProvider.getImage(ImageConstants.OCCURRENCECONSTRAINT_SM));
+		
+		return f;
 	}
 	
 	@Override
