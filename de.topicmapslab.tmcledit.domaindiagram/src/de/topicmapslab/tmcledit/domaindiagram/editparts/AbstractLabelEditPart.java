@@ -192,17 +192,11 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 		scopeLabel.setText(text);
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable#revertNameChange()
-	 */
 	public void revertNameChange() {
 		figure.setVisible(true);
 		refreshVisuals();
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable#handleNameChange(java.lang.String)
-	 */
 	public void handleNameChange(String value) {
 		getNameLabel().setText(value);
 		figure.setVisible(false);
