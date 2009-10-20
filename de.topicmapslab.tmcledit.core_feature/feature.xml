@@ -95,28 +95,35 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          id="de.topicmapslab.tmcledit"
          download-size="0"
          install-size="0"
-         version="1.1.1.beta-qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.diagram"
          download-size="0"
          install-size="0"
-         version="1.1.1.beta-qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.doc"
          download-size="0"
          install-size="0"
-         version="1.1.1.beta-qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.edit"
          download-size="0"
          install-size="0"
-         version="1.1.1.beta-qualifier"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.tmcledit.domaindiagram"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

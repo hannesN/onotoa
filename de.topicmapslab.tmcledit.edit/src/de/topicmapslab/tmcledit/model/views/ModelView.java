@@ -93,6 +93,7 @@ import org.eclipse.ui.progress.UIJob;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -106,13 +107,14 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.actions.CloseAction;
 import de.topicmapslab.tmcledit.model.actions.CreateDiagramAction;
+import de.topicmapslab.tmcledit.model.actions.CreateDomainDiagramAction;
 import de.topicmapslab.tmcledit.model.actions.CreateNameConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateSubjectIdenifierConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateSubjectLocatorConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateTopicAction;
 import de.topicmapslab.tmcledit.model.actions.DeleteDiagramAction;
-import de.topicmapslab.tmcledit.model.actions.DeleteTopicTypeAction;
+import de.topicmapslab.tmcledit.model.actions.DeleteTMCLConstruct;
 import de.topicmapslab.tmcledit.model.actions.RedoActionWrapper;
 import de.topicmapslab.tmcledit.model.actions.RenameAction;
 import de.topicmapslab.tmcledit.model.actions.UndoActionWrapper;
@@ -171,10 +173,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private RenameAction renameAction;
 	
 	private CreateDiagramAction createDiagramAction;
+	
+	private CreateDomainDiagramAction createDomainDiagramAction;
 
 	private CreateTopicAction createTopicAction;
 
-	private DeleteTopicTypeAction deleteTopicTypeAction;
+	private DeleteTMCLConstruct deleteTopicTypeAction;
 
 	private DeleteDiagramAction deleteDiagramAction;
 
@@ -231,12 +235,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					currentSelection = new StructuredSelection(currFile);
 					createTopicAction.setEnabled(false);
 				} else {
+					
 					TreeObject to = (TreeObject) sel.getFirstElement();
 					createTopicAction.setEnabled(false);
 					createDiagramAction.setEnabled(false);
+					createDomainDiagramAction.setEnabled(false);
 					switch (to.getId()) {
 					case TreeObject.DIAGRAMS:
 						createDiagramAction.setEnabled(true);
+						createDomainDiagramAction.setEnabled(true);
 						break;
 					}
 
@@ -338,9 +345,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					currDiagram = d;
 			}
 			if (currDiagram != null) {
+				String id = (currDiagram instanceof DomainDiagram) ? TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
+				
 				getViewSite().getPage().openEditor(
-				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), true),
-				        TmcleditEditPlugin.DIAGRAMEDITOR_ID);
+				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), true), id);
 			}
 		}
 
@@ -402,6 +410,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(createDiagramAction);
+		manager.add(createDomainDiagramAction);
 		manager.add(validationAction);
 		manager.add(new Separator());
 	}
@@ -413,6 +422,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		
 		if (createDiagramAction.isEnabled())
 			manager.add(createDiagramAction);
+		
+		if (createDomainDiagramAction.isEnabled())
+			manager.add(createDomainDiagramAction);
 		
 		if (createTopicAction.isEnabled())
 			manager.add(createTopicAction);
@@ -462,8 +474,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			}
 		};
 		deleteDiagramAction = new DeleteDiagramAction(this);
-		deleteTopicTypeAction = new DeleteTopicTypeAction(this);
+		deleteTopicTypeAction = new DeleteTMCLConstruct(this);
 		createDiagramAction = new CreateDiagramAction(this);
+		createDomainDiagramAction = new CreateDomainDiagramAction(this);
 		createTopicAction = new CreateTopicAction(this);
 		renameAction = new RenameAction(this);
 		
@@ -723,11 +736,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		int i = 0;
 		for (IEditorReference ref : getViewSite().getPage().getEditorReferences()) {
 			IEditorPart part = ref.getEditor(false);
-			if ((part != null) && (ref.getId().equals(TmcleditEditPlugin.DIAGRAMEDITOR_ID))) {
-				i++;
-				TMCLEditorInput ei = (TMCLEditorInput) part.getEditorInput();
-				IMemento partChild = memento.createChild("editor");
-				partChild.putTextData(ei.getDiagram().getName());
+			if (part!=null) {
+				if ( (ref.getId().equals(TmcleditEditPlugin.DIAGRAMEDITOR_ID)) 
+				    || (ref.getId().equals(TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID)) ) {
+					i++;
+					TMCLEditorInput ei = (TMCLEditorInput) part.getEditorInput();
+					IMemento partChild = memento.createChild("editor");
+					partChild.putTextData(ei.getDiagram().getName());
+				}
 			}
 		}
 	}
