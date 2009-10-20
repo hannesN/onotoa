@@ -19,6 +19,11 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -35,6 +40,7 @@ import de.topicmapslab.tmcledit.model.commands.SetCommentContentCommand;
 public class CommentPropertyModelPage extends AbstractModelPage {
 
 	private Text contentText;
+//	private String oldText;
 	
 	public CommentPropertyModelPage() {
 		super("comment page");
@@ -73,11 +79,29 @@ public class CommentPropertyModelPage extends AbstractModelPage {
 		
 		contentText = new Text(comp, SWT.MULTI|SWT.H_SCROLL|SWT.V_SCROLL|SWT.WRAP|SWT.BORDER);
 		contentText.addFocusListener(new FocusAdapter() {
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+			}
+			
 			@Override
 			public void focusLost(FocusEvent e) {
 				getCommandStack().execute(new SetCommentContentCommand(getCastedModel(), contentText.getText()));
 			}
 		});
+		contentText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if ( (e.character==SWT.CR) && ((e.stateMask&SWT.MOD1)!=0)) {
+					int caretPos = contentText.getCaretPosition();
+					getCommandStack().execute(new SetCommentContentCommand(getCastedModel(), contentText.getText()));
+					e.doit = false;
+					contentText.setSelection(caretPos, caretPos+1);
+					
+				}
+			}
+		});
+		
 		return comp;
 	}
 
