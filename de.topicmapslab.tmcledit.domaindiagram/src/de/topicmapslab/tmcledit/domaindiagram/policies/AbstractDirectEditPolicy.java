@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.CellEditor;
 
 import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.AbstractLabelEditPart;
+import de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable;
 
 public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 
@@ -27,7 +27,7 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
-		if (getHost() instanceof AbstractLabelEditPart) {
+		if (getHost() instanceof IDirectEditable) {
 			DomainEditDomain ed = (DomainEditDomain) getHost().getViewer().getEditDomain();
 			org.eclipse.emf.common.command.Command cmd = getRenameCommand(getHost().getModel(), request);
 			if (cmd!=null)
@@ -46,8 +46,8 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 		
 	@Override
 	protected void revertOldEditValue(DirectEditRequest request) {
-		if (getHost() instanceof AbstractLabelEditPart) {
-			AbstractLabelEditPart otcep = ((AbstractLabelEditPart)getHost());
+		if (getHost() instanceof IDirectEditable) {
+			IDirectEditable otcep = ((IDirectEditable)getHost());
 			
 			otcep.revertNameChange();
 		}
@@ -56,8 +56,8 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 	@Override
 	protected void showCurrentEditValue(DirectEditRequest request) {
 		String value = (String) request.getCellEditor().getValue();
-		AbstractLabelEditPart ep = (AbstractLabelEditPart) getHost();
-		ep.handleNameChange(value);
+		IDirectEditable ep = (IDirectEditable) getHost();
+		((IDirectEditable)ep).handleNameChange(value);
 	}
 
 }
