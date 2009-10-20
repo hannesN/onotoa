@@ -150,9 +150,21 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 
 	@Override
 	public void setModel(Object model) {
+		if (getModel() != null) {
+			TopicType modelType = getCastedModel().getType();
+			if (modelType != null)
+				modelType.eAdapters().remove(this);
+		}
 		super.setModel(model);
 		typeModelPage.setModel(getCastedModel().getType());
 		typeModelPage.getItem().setText("Association Type");
+
+		if (getModel() == null) {
+			return;
+		}
+		TopicType modelType = getCastedModel().getType();
+		if (modelType != null)
+			modelType.eAdapters().add(this);
 	}
 	
 	@Override
