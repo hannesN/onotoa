@@ -2,8 +2,8 @@
 
 The diagram editor is used to visually create and modify Topic Maps schemas. It provides a graphical view of the schema elements.
 The visualization is based on the GTM level 1 proposal (see http://isotopicmaps.org/gtm/gtm-oslo-2008-04.pdf ). GTM is planned to be the standard
-for the visualization of Topic Maps and Topic Maps schemas. Sadly currently is no work done regarding GTM. 
-The following sections will explain how to create schema elements and how these are represented.
+for the visualization of Topic Maps and Topic Maps schemas. Unfortunately there is no work done on GTM at the moment. 
+The following sections will explain how schema elements are created and how they are represented.
 
 
 include::diagram/palette.txt[]
