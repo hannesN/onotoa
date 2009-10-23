@@ -3,7 +3,7 @@
 Every element of the schema has a additional properties, which are used for documentation purposes.
 These properties are:
 
-* *comment:* Is used to comment a schema element. by persons reviewing the schema.
+* *comment:* Is used to comment a schema element by persons reviewing the schema.
 * *description:* Is used to describe the element by the author of the schema.
 * *see also:* Is used to add a location, where more information can be obtained from. This can be any kind of resource 
 but will mostly be a URL.

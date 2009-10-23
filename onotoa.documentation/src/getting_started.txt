@@ -52,7 +52,7 @@ _Onotoa_ project subscribe to the _Onotoa_ mailinglist.
 
 === Licence and Requirements ===
 
-Onotoa is published under the Eclipse Public License. You can download and use 
+_Onotoa_ is published under the Eclipse Public License. You can download and use 
 _Onotoa_ for free and without any restrictions in functionality. 
 
 As described below in more detail, there are two ways to install _Onotoa_:
@@ -60,7 +60,7 @@ As described below in more detail, there are two ways to install _Onotoa_:
 - *Stand-alone version* This version can be downloaded from the download section of 
 the _Onotoa_ website (http://onotoa.topicmapslab.de/download).
 - *Eclipse plug-in* You can use _Onotoa_ as plug-in for your eclipse 
-installation. To integrate _Onotoa_ into your environemt you have to use the 
+installation. To integrate _Onotoa_ into your environment you have to use the 
 _Onotoa_ update site (http://onotoa.topicmapslab.de/update).
 
 The Java Runtime Environment Version 5.0 must be installed to 
@@ -73,26 +73,26 @@ TIP: You can check the your java version by opening a shell and enter 'java
 === Using the stand-alone version of _Onotoa_ ===
 
 _Onotoa_ does not come with an installer. You just need to download the file for 
-your system. For Windows(TM) you'll need 'onotoa-1.1.0-win32.win32.x86.zip' will be required. 
-If you have a 64bit Windows(TM) you will have to download 'onotoa-1.1.0-win32.win32.x86_64.zip'.
+your system. For Windows(TM) you'll need "onotoa-1.1.0-win32.win32.x86.zip" will be required. 
+If you have a 64bit Windows(TM) you will have to download "onotoa-1.1.0-win32.win32.x86_64.zip".
 
 After downloading the file for your system you will have to unzip it. The zip 
-file contains a folder named 'onotoa', so it is not necessary to
+file contains a folder named "onotoa", so it is not necessary to
 create one. After unzipping the archive you should find an executable for 
-your platform. This will include a binary file (e.g. onotoa.exe for Windows(TM) or 
-Onotoa.app on MacOS(TM)).
+your platform. This will include a binary file (e.g. "onotoa.exe" for Windows(TM) or 
+"Onotoa.app" on MacOS(TM)).
 
 If you start _Onotoa_ you should see the main window, 
 like in <<empty_win>> after a brief for loading.
 
-.Empty _Onotoa_ window
+.Blank _Onotoa_ window
 [caption="Figure:"]
 [[empty_win]]
 image::images/emptywin.png["Blank _Onotoa_ window", scaledwidth="100%"]
 
 
 To create a new model, use *File->New..*.
-Choose the path of the file and name it 'example.ono'. After that your window 
+Choose the path of the file and name it "example.ono". After that your window 
 should look like <<emptyfile_win>>
 
 .Onotoa window after creating a file
@@ -117,10 +117,9 @@ next to *Work with:*. Press enter and the content of the update site will be sho
 [[updatemanager]]
 image::images/update_manager.png["Update Manager", scaledwidth="100%"]
 
-To create Topic Maps schemas it is only necessary to install the 'Onotoa 
-plug-ins'. If you want to export to CTM or import existing CTM files you will have 
-to install the Import
-feature or export plug-ins. The tinyTiM feature is needed in both cases, so you will
+To create Topic Maps schemas it is only necessary to install *Onotoa 
+Plugins*. If you want to export to CTM or import existing CTM files you will have 
+to install the *Import_feature* or *Onotoa Export Plugins*. The tinyTiM feature is needed in both cases, so you will
 have to install this too.
 Choose the features you want to install (we advise to install all) and click on 
 *Finish*. You should agree to the licence agreements  after the dependencies have 
@@ -129,16 +128,16 @@ been checked and then restart eclipse after the installation.
 You will have to create a project before you can create a Topic Maps. You 
 can use any project type you want. In this example we will create a
 simple project. Select *File->New->Project* in the eclipse menu and choose 
-*General->Project*. Set the name to 'Onotoa Example' and press enter. We will
+*General->Project*. Set the name to "Onotoa Example" and press enter. We will
 use the workspace as project location. 
 
 Now create a new file by selecting 
 *File->New->Other* (see <<newfile1>>). Select *Onotoa->New Onotoa File* and 
 press *Next*.
 The Container of the following wizard page is the project we want to add the 
-file. Press *Browse...* and select the Project 'Onotoa Example'. 
+file. Press *Browse...* and select the Project "Onotoa Example". 
 The other text field contains the name of the file. Please rename the file to 
-'example.ono'. The dialogue should look like <<newfile2>>. Press finish and the 
+"example.ono". The dialogue should look like <<newfile2>>. Press finish and the 
 new file will be opened.
 
 .File Wizard of Eclipse
@@ -196,7 +195,7 @@ diagram by clicking on the section you want to move to.
 
 ==== Property Details View ====
 
-The *Property Details View* provides a data entry interface  to edit the properties of 
+The *Property Details View* provides a data entry interface to edit the properties of 
 an element in _Onotoa_. An element may be a schema construct, such as constraints,
 topic types or diagrams. Every element has its own property page, which is 
 an input interface for the properties shown in the 
@@ -207,7 +206,7 @@ element is given in <<_the_property_details_view>>
 
 With _Onotoa_ it is possible to create multiple diagrams for a Topic Maps 
 schemas. Although the schema can be created with wizards provided
-by the *Model View*, it is preferable to do so with the diagram editor.
+by the *Model View*, it is preferable to do so with the *Diagram Editor*.
 
 Via the context menu of the *Diagrams* node in the *Model View* a new diagram 
 can be created. After selecting *Create New Diagram...* a dialogue box will asks for the 
@@ -221,7 +220,7 @@ ifndef::basebackend-docbook[]
 image:images/viewmenu_button.png[].
 endif::basebackend-docbook[]
 This name should be unique within each schema definition. After pressing okay, 
-the diagram will be added to the 'Diagrams' node and an editor will open where the
+the diagram will be added to the *Diagrams* node and an editor will open where the
 diagram can be edited.
 
 On the right hand side of the editor is a sidebar. This sidebar is called palette 
@@ -238,8 +237,7 @@ position of the diagram. Let us create a new topic type for persons. Drag
 the *Topic Type* 
 entry of the palette onto the diagram. You will see a new topic type is being created. 
 Types are named default plus a number. To rename a type, click on the topic 
-type in the
-diagram. The *Property Details View* should show the properties of the name, 
+type in the diagram. The *Property Details View* should show the properties of the name, 
 as in <<topictype1>>. You can change the name, by editing the text field next 
 to *Name:*.
 
