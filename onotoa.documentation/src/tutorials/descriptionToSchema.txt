@@ -83,7 +83,7 @@ property page. The incorrect default values for *cardMin* and *cardMax* are zero
 image::images/documentation/description_to_schema/set_occurrence_cardinality.png[scaledwidth="100%"]  
 
 In the end our "fist name" occurrence need a data type. Switch to the *Occurrence Type* tab in the "Property Details View" an scroll 
-down to the *Datatype* entry and press the *...* button at the right. Select "xsd:string" in the following dialog and confirm your decision. 
+down to the *Datatype* entry and press the *...* button at the right. Select "xsd:string" in the following dialogue and confirm your decision. 
 The first occurrence is finished. 
 
 .Select data type

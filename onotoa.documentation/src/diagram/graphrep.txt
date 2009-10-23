@@ -59,8 +59,7 @@ image::images/name_ex_rep.png[scaledwidth="35%"]
 NOTE: Constraints regarding scope and reification are tied to the constraining 
 type, not to the constraint. If you reuse a name type
 in two different topic types to create a name constraint, both will have the 
-same 
-reifier or scope constraint.
+same reifier or scope constraint.
 
 The following section contains the occurrence constraints. Similar to the name 
 constraint, they have the following syntax:

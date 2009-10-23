@@ -1,7 +1,7 @@
 === Role Type ===
 
-A role type is used to specify if a topic type is used to specify a role. Every topic which is used as role has to be typed by
-role type.
+A role type is used to specify if a topic type is used to specify a role. 
+Every topic which is used as role has to be typed by "role-type".
 
 The properties of a topic type are inherited by a role type (see <<_topic_type>>).
 

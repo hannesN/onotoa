@@ -2,9 +2,9 @@
 
 Topic type is a topic, which specifies that a topic, which is instance of topic type is used as type
 in a type-instance relationship. A schema defines topic types, their names and occurrences and their relationship. Every type
-in a schema is instance of the topic "topic-type", except for types which are used as names, roles or occurrence type.
+in a schema is instance of the topic "topic-type", except for types which are used as name, role or occurrence type.
 
-Every type in TMCL is instance of topic-type, which means they all share a minimum of properties. The property page of
+Every type in TMCL is instance of "topic-type", which means they all share a minimum of properties. The property page of
 a topic type can be seen in <<tt_pp>>:
 
 .Property Page of topic type
@@ -50,7 +50,7 @@ three columns. The first one specifies the type, i.e. which instances may be rei
 topic type. If both values are '1' the current topic type has to be a reifier for the type. If *cardMin* is '0' and *cardMax* is '1' the use of the current topic
 type as reifier for the type is optional. You can create a new topic reifies constraint using the buttons *Add...* and *New...*. The first one opens
 a selection dialogue where you can choose the types to be reified. The latter is used to create a constraint using a new topic type. After pressing
-this button, the new topic type dialog is opened and after filling out the text fields a new constraint is created using this type. By default the cardinality
+this button, the new topic type dialogue is opened and after filling out the text fields a new constraint is created using this type. By default the cardinality
 is set to optional use. You can edit them directly in the table. Click on the value that you want to change and edit the value.
 
 .Topic Selection Dialog
