@@ -1,0 +1,100 @@
+== Create a PSIProvider ==
+
+In this chapter a plug-in called 'MyPSIProvider' will be created .This will return 
+the following three PSI proposals:
+
+* http://psi.example.org/topic
+* http://psi.ontopedia.org/topic
+* http://psi.topicmapslab.de/topic
+
+where "topic" is the name of the topic. Let us assume the name is without a 
+blank.
+
+First create a new plug-in project using the new wizard. Name it 
+"de.topicmapslab.onotoa.MyPSIProvider".
+
+Then fill out the second page as in <<new_proj_psi>>.
+
+.Page 2 of the new project wizard
+[[new_proj_psi]]
+image::images/extensions/new_project_psi2.png[scaledwidth="80%"]
+
+Deactivate the check box on the third page, so that no template is used.
+
+Press finish and a dialogue will ask you to switch to the Plug-in Development 
+perspective, then press yes.  
+
+The editor for the plugin.xml is opened automatically. It serves as the 
+configuration file of the plug-in.
+Click on the *Dependencies* tab and add *de.topicmapslab.tmcledit.edit* to 
+*Required Plug-ins*. If you can't find
+the plug-in check your target platform.
+
+After that switch to the *Extensions* tab. Press *Add...* and choose 
+*de.topicmapslab.edit.psiprovider*. Now we
+have to add a provider to these extension point. The provider is added via 
+context menu of the extension point: *New->psiprovider*.
+
+Select the new extension point and you will see the property of the extension 
+point on the right. The properties are:
+
+* *id* The *id* is used to identify the 'PSIProvider'. Use a name which is unlikely 
+to be used in other plug-ins. Typically the *id* of the plug-in
+and a name is used to build it, like the editor already did after creation. 
+Enter the id: "de.topicmapslab.onotoa.MyPSIProvider.ExampleProvider" .
+
+* *name* The name is used as label for the preference page where you can 
+activate or deactivate the 'PSIprovider'. Name it 
+"Example Provider".
+
+* *class* The class attribute is the qualified name of the class, which 
+implements the 'IPSIProvider' interface. If we had already 
+created a class, we could search it by pressing *Browse...*. If not we enter 
+the name "de.topicmapslab.onotoa.mypsiprovider.ExampleProvider" and
+click on the label *class*. A new class wizard will open with the qualified 
+name we entered in the text field. The super class of the class is
+the PSIProvider, which is an abstract implementation of the required interface.
+
+As you can see we need to implement one method: 'getSubjectIdentifier()'. Enter 
+the following implementation:
+
+----
+String name = getName().toLowerCase();
+ 
+Set<PSIProviderResult> results = 
+ 	new HashSet<PSIProviderResult>(3);
+
+results.add(new PSIProviderResult(
+	"http://psi.example.org/"+name, 
+	"A tiny description"));
+	
+results.add(new PSIProviderResult(
+	"http://psi.ontopedia.org/"+name, 
+	"A tiny description"));
+	
+results.add(new PSIProviderResult(
+	"http://psi.topicmapslab.de/"+name, 
+	"A tiny description"));
+	
+return results;
+----
+
+In the first line we get the name of the topic. _Onotoa_ will set the name when 
+asking for proposals. The next line creates an instance of 'Set', which will 
+contain the results. In the next line the results will be created. Every 
+'PSIProviderResult' has two attributes. The identifier and a description. We create the 
+identifier on the fly and add a default description.
+
+Additionally 'PSIProvider' has another method: 'getSubjectIdentifierStartingWith(String 
+prefix)'.
+
+The prefix parameter contains the text, which has already been entered. The 
+implementation in the abstract class 'PSIProvider'
+calls 'getSubjectIdentifier()' and removes all 'PSIProviderResults' which do not 
+have identifier starting with the text in 'prefix'.
+It would be more efficient to not create these results in the first thing, so 
+it is advised to override this method and implement it
+more efficiently. 
+
+That's it. You have just created your first PSIProvider. How to deploy the 
+provider will be described in <<_deploy_the_new_plug_ins>>.

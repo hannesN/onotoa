@@ -1,0 +1,98 @@
+== Deploy the new plug-ins ==
+
+This chapter will shortly explain how to prepare our plug-ins 
+so that they can be installed by _Onotoa_. 
+Let us assume assume you created the plug-in described in 
+<<_create_a_psiprovider>>.
+
+=== Create a feature ===
+
+As mentioned earlier, _Onotoa_ cannot install plug-ins. A feature is required
+in order to create an installable unit. 
+bundles a set of plug-ins and contains a set of meta data like licensing 
+information.
+
+To create a feature, use *File->New->Other...* and select  *Feature Project*.
+Name the feature "de.topicmapslab.onotoa.psiprovider_feature".
+Rename the feature to "Onotoa Examples" and press *Next*.
+
+On the following page, we can add plug-ins to the feature. Select the plug-in: 
+"de.topicmapslab.onotoa.MyPSIProvider" and press *Finish*.
+
+Like plug-ins, features are configured via an xml file, which is called 
+feature.xml. This file is will open automatically after creating the feature 
+project.
+As you can see the data entered in the wizard are shown in the editor. The 
+editor consists of a lot of tabs. The interesting ones are the *Information* 
+tab, where you can
+add a feature description, copyright notice and so on and the *Plug-ins* tab, 
+which shows the list of the plug-ins which are bundles in this feature.
+
+You see that the plug-in has the version (0.0.0). This means the version of the 
+plug-in will set to the version of the feature when the feature is build. 
+
+To get a detailed description of the editor please see the eclipse documentation.
+
+NOTE: If you have created more than one PSIProvider you might consider creating
+a  feature for every provider. 
+
+=== Create a new update site ===
+
+An update site is a collection of features, which can readily be deployed on a web 
+server. Eclipse and _Onotoa_ also provide the option to import an archived update site. 
+Usually you want to provide a public site.
+
+An update site is another project. Open the new wizard (*File->New->Other...*) 
+and choose *Update Site Project*.
+ 
+Name the project "de.topicmapslab.onotoa.update" and press finish.
+
+An update site is basically an xml file, called site.xml. In it you can define 
+categories and features.
+First create a new category. Press the button *New Category* and select the 
+prompted entry in the list. 
+On the right you will find the properties of the entry. 
+The id is "de.topicmapslab.onotoa.psiprovider" and the name "PSIProvider". You 
+may enter a description, but it is not mandatory.
+
+After that, press the button *Add Feature...* and select the 
+*de.topicmapslab.onotoa.psiprovider_feature*. 
+
+NOTE: The update site will save  the version of the feature that you added. After 
+changing the version of the feature. You need to add the new version as
+new feature. 
+
+To create the update site, which will trigger a building process for the features 
+and plug-ins, press *Build All*. To build only the selected features use
+the button labelled *Build*.
+
+The folder of the project will now contain the update site with the feature and 
+plug-in. Copy to content of the directory into a web server.
+
+=== Installing the feature ===
+
+Start _Onotoa_ and choose *Help->Install New Software...*. You can enter the 
+URL of your update site into the text field next to "Work with:" or you
+press the *Add...* button which will open a dialogue. Enter a name, like "Provider 
+Site". If you have a web server hosting the update site add the URL. To 
+test your site and the plug-in it is easier to just use the *Local* button and 
+browse to the directory containing the update site project. This
+will create an URL beginning with 'file:'. Press *OK* and the 
+category will appear in the feature list. Expand this by pressing the arrow and  
+check the feature "Onotoa Examples", as in <<onotoa_update>>. Press next and if 
+every dependency (in our case, non) are solved you can press *Finish*.
+
+.Install "Onotoa Examples"
+[[onotoa_update]]
+image::images/extensions/update_onotoa.png[scaledwidth="90%"]
+
+After the  installation you need to restart _Onotoa_. This will be indicated by a 
+dialog. Press *Yes* and wait.
+It is easy to check, if our new PSIProvider has been installed successfully. Open the preferences 
+dialogue (*Window->Preferences...*) and
+open the *Identifier Assist*. If it looks as <<example_check>> your 
+installation was successful.
+
+.Provider preferences after installing a new provider
+[[example_check]]
+image::images/extensions/example_provider_pref.png[scaledwidth="90%"]
