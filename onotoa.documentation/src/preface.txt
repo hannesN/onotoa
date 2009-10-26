@@ -2,7 +2,7 @@ Preface
 =======
 
 
-The Topic Maps standard is a ISO standard (ISO 13250), which defines a 
+The Topic Maps standard is an ISO standard (ISO 13250), which defines a 
 representation of meta information. 
 This information can be for instance the name of the author of a document or the artist 
 and album of a music file. 

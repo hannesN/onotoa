@@ -2,10 +2,10 @@
 
 A name type is used to specify the topics to type a name. In a topic map, a topic may have more than one names.
 Their meaning is realized by using topics, for instance the topic "firstname". These topics should be typed by a name type.
-The TMCL standard says, that any type of a name which is not instance of 'name-type' is invalid.
+The TMCL standard says, that any type of a name which is not instance of "name-type" is invalid.
 
 Names can be reified, which means a topic is used to add more information to the name, such as its origin, its meaning and so on.
-The topic which may reify names using this name-type can be specified in the reifier property.
+The topic which may reify names using this name type can be specified in the reifier property.
 
 It is also possible to add a scope to names of topics. With the *scope* property you can tell which topics may be used as scope and how often.
 
