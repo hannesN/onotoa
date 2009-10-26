@@ -32,7 +32,7 @@ between the topics. The property  page includes a  list of names of the typing t
 *...* and a dialogue will open. On the left hand side is a list of topic types which are not used as type, on the right hand side is a list of the types in use. 
 The centrally located buttons can be used to move a type from one side to the other.
 
-* *kind of:* This is a list of topics which are super-types of the current topic type. Editing this list is similar to the *is a* property.
+* *kind of:* This is a list of topics which are supertypes of the current topic type. Editing this list is similar to the *is a* property.
 
 * *overlap:* Topics in TMCL are defined as types, which are used as types for instances in a topic map. By default, a topic may not be 
 of two types at the same time, for instance a topic should no be of type "Person" and "Car". To  overcome this restriction the overlap
@@ -40,7 +40,7 @@ property is used. It contains a list of topic types like *is a* or *kind of*. Th
 contains all topic types which may be used in a type-instance relationship. For instance to allow a topic to be typed by "Car" and "Person"
 just add "Car" to the overlap property of "Person". _Onotoa_ automatically adds "Person" to the overlap property of "Car".
 
-* *is abstract:* A topic type may be used as type or super-type. To prevent that the topic type is used as type, check the *is abstract* button,
+* *is abstract:* A topic type may be used as type or supertype. To prevent that the topic type is used as type, check the *is abstract* button,
 which sets this property to true. This means the topic type may be used as supertype in a supertype-subtype relationship, but not as type in
 a type-instance relationship.
 

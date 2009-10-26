@@ -24,6 +24,7 @@ import org.eclipse.gef.palette.PaletteSeparator;
 import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
 
+import de.topicmapslab.tmcledit.domaindiagram.creationfactories.AssociationNodeCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.OccurrenceConstraintCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.AssociationNodeEditPart;
@@ -207,22 +208,7 @@ public class DomainDiagramEditorUtil {
 		group.add(new CombinedTemplateCreationEntry(
 						"Association Constraint",
 						"Association Constraint",
-						new CreationFactory() {
-
-							public Object getNewObject() {
-								AssociationNode node = ModelFactory.eINSTANCE
-										.createAssociationNode();
-								AssociationTypeConstraint ac = ModelFactory.eINSTANCE
-										.createAssociationTypeConstraint();
-								node.setAssociationConstraint(ac);
-								return node;
-							}
-
-							public Object getObjectType() {
-								return AssociationNode.class;
-							}
-
-						},
+						new AssociationNodeCreationFactory(),
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM),
 						ImageProvider

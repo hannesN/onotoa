@@ -1,28 +1,41 @@
 == Preferences ==
 
-NOTE: If you are using _Onotoa_ within an eclipse installation, you might only want to read <<_identifier_assists>> and <<_diagram_colours>> 
+NOTE: If you are using _Onotoa_ within an eclipse installation, you only 
+need to read <<_identifier_assists>> and <<_diagram_colours>> 
 
-_Onotoa_ provides a preference dialog, which will be explained now. To open it just click *Window->Preferences...* in the menu bar.
+_Onotoa_ provides a preference dialogue, which will be explained in this 
+section. To open it just click *Window->Preferences...* in the menu bar.
 
-As you can see, the preference dialog is split in to parts. On the left side is a tree, where you can see the categories and their subcategories of the preferences.
+The preference dialogue is split into two parts. On the left is 
+a tree with the categories and their subcategories of the 
+preferences.
 On the right,  the preferences of the current selected category will be shown. 
-Besides the category *Onotoa* is a category labelled *Install/Update*. This category is used to configure the update mechanism of Onotoa.
+Next to *Onotoa* is a category called *Install/Update*. This 
+category is used to configure the update mechanism of _Onotoa_.
 
 === Install/Update ===
 
-The *Install/Update* node has to subcategories, which can be seen after expanding the node. The first node is the *Automatic Updates* node. Click on it
-and you'll see the preferences for automatic updates on the right, like in <<automatic_update>>.
+The *Install/Update* node has two subcategories, which can be viewed after 
+expanding the node. The first node is the *Automatic Updates* node. Click on it
+and you'll see the preferences for automatic updates on the right, as in 
+<<automatic_update>>.
 
 .Preferences for Automatic Update
 [[automatic_update]]
 image::images/update1_pf.png[scaledwidth="100%"]
 
-If you want to deactivate the automatic update, just uncheck the Button labelled *Automatically find new updates and notify me*.
-In the group *Update schedule* you can tell _Onotoa_ when to look for updates. The following section, called *Download options* let you
-specify when to download the new plug-ins. In the last group you can tell when to be notified.
+If you want to deactivate the automatic update, just uncheck the button 
+labelled *Automatically find new updates and notify me*.
+You can instruct _Onotoa_ to look for updates  in the menu *Update schedule*. 
+The following section, called *Download options* assists
+to configure the download of updates. In the last group you can  give 
+instructions for notification.
 
-The second page, shown in <<update_site>> shows a list of update site _Onotoa_ uses. With the help of the buttons it is possible to add new update sites, edit or
-remove existing ones. You also can disable update site, which means, when looking for updates or new installable plug-ins, this site will be ignored.  
+The second page, shown in <<update_site>> shows a list of update sites used by
+_Onotoa_. With the buttons it is possible to add new update 
+sites, edit or remove existing ones. You also can disable update sites, which 
+means, when looking for updates or new installable plug-ins, this site will be 
+ignored.  
 
 .Preferences for Update Sites
 [[update_site]]
@@ -30,10 +43,14 @@ image::images/update2_pf.png[scaledwidth="100%"]
 
 === Identifier Assists ===
 
-_Onotoa_ provides a content assistant for subject identifier. This assistant creates proposals for topics based on the name or on the already used
-identifier in the topic map schema. The proposals are calculated by so-called PSIProvider. You can create you own provider or install provider from 
-other sources. If you don't want to use a specific PSIProvider, for instance the Subj3ct Provider, because of an slow or non existing internet connection,
-you can deactivate it by uncheck the checkbox next to the name. Check it again, and the PSIProvider is activated again.  
+_Onotoa_ provides a content assistant for subject identifiers. This assistant 
+creates proposals for topics based on the name or on the 
+identifiers in the topic map schema. The proposals are prepared by so-called 
+PSIProvider. You can create you own provider or install providers from 
+other sources. If you don't want to use a specific PSIProvider, for instance 
+the Subj3ct Provider, because of a slow or non existent internet connection,
+you can deactivate it by uncheck the checkbox next to the name. Check it again, 
+and the PSIProvider is activated again.  
 
 .Preferences for Identifier Assists
 [[provider]]
@@ -41,27 +58,37 @@ image::images/provider_pf.png[scaledwidth="100%"]
 
 === Diagram colours ===
 
-The colours of a diagram can be changed in _Onotoa_. THis might coming handy if the default colour scheme doesn't look good, for instance on a beamer.
+The colours of a diagram can be changed in _Onotoa_. This might be useful if 
+the default colour scheme doesn't look good, for instance on a beamer.
 
-_Onotoa_ supports colour scheme. A colour scheme is one setting of colours for topic types and comments. Additionally a secondary colour and the font colour
+_Onotoa_ supports colour schemes. A colour scheme is one setting of colours for 
+topic types and comments. Additionally a secondary colour and the font colour
 can be set. 
 
-A list of schemes is shown, when you select *Diagram Colors* in the category tree (see <<colour_scheme_list>>).
+A list of schemes is shown in *Diagram Colors* in the category 
+tree (see <<colour_scheme_list>>).
  
 .Preferences for colour Schemes
 [[colour_scheme_list]]
 image::images/diagram_1_pf.png[scaledwidth="100%"]
 
-To select a scheme, use the check box left of the name of the scheme. To create a new one press the *Add...* button and the colour scheme editor will open
-(see <<colour_scheme_dialog>>). Enter a name of the scheme and choose the colours, by pressing the buttons next to the label.
-If you want to use gradients, like the default colour, check the *Use Gradient* button and choose a secondary colour for the topic type and comment representation.
-The gradient will go from the primary colour on the top to the secondary colour at the bottom.
+Use the check box left of the name of the scheme to select a scheme. Press the 
+*Add...* button to create a new one and the colour scheme editor will open
+(see <<colour_scheme_dialog>>). Enter a name of the scheme and choose the 
+colours, by pressing the buttons next to the label.
+If you want to use gradients, such as the default colour, check the 
+*Use Gradient* 
+button and choose a secondary colour for the topic type and comment 
+representations.
+The gradient will go from the primary colour on the top to the secondary colour 
+at the bottom.
 
 .Preferences for Colour Schemes
 [[colour_scheme_dialog]]
 image::images/diagram_2_pf.png[scaledwidth="50%"]
 
-It is possible to export your colour scheme list and import it to another installation of _Onotoa_. 
+It is possible to export your colour scheme list and import it to another 
+installation of _Onotoa_. 
 
 
-WARNING: If you import colour schemes, all schemes already installed are deleted.
+WARNING: If you import colour schemes, all existing schemes deleted.

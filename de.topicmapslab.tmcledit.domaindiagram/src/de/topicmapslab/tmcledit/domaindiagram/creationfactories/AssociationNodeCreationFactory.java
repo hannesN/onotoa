@@ -15,6 +15,8 @@ import org.eclipse.gef.requests.CreationFactory;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -30,7 +32,24 @@ public class AssociationNodeCreationFactory implements CreationFactory {
 	
 	public Object getNewObject() {
 		AssociationNode node = ModelFactory.eINSTANCE.createAssociationNode();
+		
+		if (atc==null) {
+			atc = ModelFactory.eINSTANCE.createAssociationTypeConstraint();
+			if (atc.getType()==null) {
+				int i = 0;
+				String n = "association";
+				TopicType tt = null;
+				while ((tt = ModelIndexer.getTopicIndexer().getTopicTypeByName(
+						n + i)) != null) {
+					i++;
+				}
+				tt = ModelFactory.eINSTANCE.createAssociationType();
+				tt.setName(n + i);
+				atc.setType(tt);
+			}
+		}
 		node.setAssociationConstraint(atc);
+		
 		return node;
 	}
 
