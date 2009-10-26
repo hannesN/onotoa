@@ -10,10 +10,13 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Text;
 
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
@@ -23,7 +26,7 @@ import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
  * @author Hannes Niederhausen
  *
  */
-public class TextObserver implements FocusListener, DisposeListener {
+public class TextObserver implements FocusListener, DisposeListener, KeyListener {
 
 	private final IModelProvider modelProvider;
 	private final int featureID;
@@ -36,6 +39,7 @@ public class TextObserver implements FocusListener, DisposeListener {
 		this.modelProvider = modelProvider;
 		this.text.addDisposeListener(this);
 		this.text.addFocusListener(this);
+		this.text.addKeyListener(this);
 		
 	}
 
@@ -47,8 +51,12 @@ public class TextObserver implements FocusListener, DisposeListener {
 		EStructuralFeature feature = modelProvider.getModel().eClass().getEStructuralFeature(featureID);
 		modelProvider.getModel().eSet(feature, text.getText());
 		*/
-		modelProvider.getCommandStack().execute(new GenericSetCommand(modelProvider.getModel(), featureID, text.getText()));
+		finish();
 	}
+
+	private void finish() {
+	    modelProvider.getCommandStack().execute(new GenericSetCommand(modelProvider.getModel(), featureID, text.getText()));
+    }
 
 	public void widgetDisposed(DisposeEvent e) {
 		text.removeFocusListener(this);
@@ -59,4 +67,12 @@ public class TextObserver implements FocusListener, DisposeListener {
 			int featureID) {
 		new TextObserver(text, modelProvider, featureID);
 	}
+
+	public void keyPressed(KeyEvent e) {
+		if (e.character==SWT.CR)
+			finish();
+    }
+
+	public void keyReleased(KeyEvent e) {
+    }
 }
