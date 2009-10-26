@@ -1,3 +1,5 @@
 
 include::tutorials/rolecombination.txt[]
 include::tutorials/descriptionToSchema.txt[]
+include::tutorials/domain_diagram.txt[]
+include::tutorials/domainDiagram.txt[]

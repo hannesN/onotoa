@@ -1,5 +1,5 @@
 === Association Constraint ===
-:ac: Association Constraint
+:ac: association constraint
 
 An association constraint is used as connection between an association type and it's role player constraints.
 

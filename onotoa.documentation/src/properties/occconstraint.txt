@@ -20,7 +20,7 @@ by pressing the button on the right hand side. A dialogue appears proposing all 
 create a new occurrence type press the label *Type:* on the left of the text field. This will open the New Type Wizard. After the creation 
 it will be selected as type for this constraint.
 
-If a special type is set it will be possible to edit his properties in the second tab, called 'Occurrence Type'. It lists
+If a special type is set it will be possible to edit his properties in the second tab, called *Occurrence Type*. It lists
 all type properties, see <<_occurrence_type>> for details.
 
 NOTE: Although "tmdm:subject" is set in the namespace of TMDM, it is specified in the TMCL standard. This type just means

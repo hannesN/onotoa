@@ -14,7 +14,7 @@ image::images/assoctype_pp.png[scaledwidth="100%"]
 The properties of topic type are inherited by association type(see <<_topic_type>>).
 In addition it has the following properties:
 
-* *roles:* The association type defines the assigned role with the selected type A role constraint 
+* *roles:* The association type defines the assigned role with the selected type. A role constraint 
 has 3 properties: The role type and the minimum and maximum occurrences.
 To add a role constraint press *Add...* and select the desired role from
 in the prompted dialogue. To create a new role type press the *New...* and fill out the prompted

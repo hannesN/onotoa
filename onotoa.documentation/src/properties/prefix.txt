@@ -1,10 +1,10 @@
 === Prefix ===
 
 A prefix is used to abbreviate a IRI used in subject identifiers or subject locators. Let us suppose that all subject identifiers start with:
-\'http://onotoa.topicmapslab.de/example/topics/\'. A topic for a person could have the subject identifier \'http://onotoa.topicmapslab.de/example/topics/person'.
+"http://onotoa.topicmapslab.de/example/topics/". A topic for a person could have the subject identifier "http://onotoa.topicmapslab.de/example/topics/person".
 Another topic has the subject identifier \'http://onotoa.topicmapslab.de/example/topics/corporation'.
 
-A prefix such as 'ex' could be used for \'http://onotoa.topicmapslab.de/example' to denote identifiers like: ex:person and ex:corporation.
+A prefix such as "ex" could be used for "http://onotoa.topicmapslab.de/example" to denote identifiers like: "ex:person" and "ex:corporation".
 They are equivalent to like the long versions, but if you want to change the prefix of a URL it only has to be done once in the
 prefix definition not for each individual topic.
 
