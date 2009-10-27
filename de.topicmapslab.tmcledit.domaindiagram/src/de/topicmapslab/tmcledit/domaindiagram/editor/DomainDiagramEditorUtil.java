@@ -37,7 +37,6 @@ import de.topicmapslab.tmcledit.domaindiagram.editparts.OccurrenceTypeConstraint
 import de.topicmapslab.tmcledit.domaindiagram.editparts.TopicRoleEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
