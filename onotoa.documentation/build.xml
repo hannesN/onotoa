@@ -159,8 +159,9 @@
 			<param name="crop.marks.bleed" expression="6pt"/>
 			
 			<param name="body.font.family" expression="Helvetica"/>
+			
 		</xslt>
-
+		
 		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
 			<classpath>
 				<fileset dir="${fop.home}/lib">

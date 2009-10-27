@@ -77,13 +77,13 @@ These specialisations of topic type can be created on demand in the property pag
 To create a new topic type "person", use the context menu of the node *Topic Type*. Choose *Create TopicType...* and a dialogue will open to 
 create a new topic type, as illustrated in  <<new_topic_type>>.
 
-.New Topic Type Wizard
-[[new_topic_type]]
-image::images/new_tt_dialog.png[scaledwidth="100%"]
-
 Currently _Onotoa_ only supports one name per topic. If the topic is used to type a constraint, the name will be displayed therefore _Onotoa_ 
 will not allow topics with the same name. If the schema has a base locator which it should you will realize, that the subject identifier
 text field is automatically filled by the URL created with the base locator.
+
+.New Topic Type Wizard
+[[new_topic_type]]
+image::images/new_tt_dialog.png[scaledwidth="100%"]
 
 For the name "Person" and the topic has the subject identifier "http://onotoa.topicmapslab.de/example/person".
 You may change the identifier by editing the subject identifier text field. After modifying the subject identifier it will not be changed anymore if you

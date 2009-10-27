@@ -8,8 +8,9 @@
                 version='1.0'>
 
 <xsl:include href="../docbook-xsl-1.75.2/fo/docbook.xsl"/>
-
+<!-- 
 <xsl:attribute-set name="body.font.master">11</xsl:attribute-set>
+ -->
 
 <xsl:attribute-set name="section.title.level2.properties">
   <xsl:attribute name="font-size">
