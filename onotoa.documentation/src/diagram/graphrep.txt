@@ -11,8 +11,9 @@ The Topic Type representation is basically a divided rectangle. The first part
 contains the name of the topic type. Left to the name an icon
 reflects the kind of topic type. The following table lists the icons:
 
-[width="60%", cols="^10%,<90%"]
-|===============
+
+[width="53%", cols="^10%,<90%"]
+|======================================================================
 ifdef::basebackend-docbook[]
 |image:images/types/topictype.gif[width="0.3cm"]|Topic Type
 |image:images/types/associationtype.gif[width="0.3cm"]|Association Type
@@ -27,7 +28,7 @@ ifndef::basebackend-docbook[]
 |image:images/types/occurrencetype.gif[width="1cm"]|Occurrence Type
 |image:images/types/roletype.gif[width="1cm"]|Role Type
 endif::basebackend-docbook[]
-|===============
+|======================================================================
 
 After the name a list of subject identifiers and subject locators are 
 shown. The identifiers are a bit smaller than the name. To
@@ -39,18 +40,19 @@ image::images/topic_header_rep.png[scaledwidth="35%"]
 
 The next section contains the name constraints of the topic type. This means, 
 all name constraints which are connected to the topic
-type via `tmcl:topic-name-constraint`. The name constraint consist of a name 
+type via "tmcl:topic-name-constraint". The name constraint consist of a name 
 type, a regular expression and the cardinality. This is 
 reflected in the graphical representation. The syntax of the name constraint is:
 
+[,,0.5]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 name type cardMin..cardMax [regExp]
-          ~reifier type [cardMin..cardMax]
-          @scope type [cardMin..cardMax]
+      ~reifier type [cardMin..cardMax]
+      @scope type [cardMin..cardMax]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the regular expression equals the default value '.*' it is omitted. If the 
-default-name type is used, "default" is written at the name type part.
+If the regular expression equals the default value .* it is omitted. If the 
+default-name type is used, *default* is written at the name type part.
 
 .Name Constraints Representation of a Topic Type Representation
 image::images/name_ex_rep.png[scaledwidth="35%"]
@@ -64,13 +66,13 @@ same reifier or scope constraint.
 The following section contains the occurrence constraints. Similar to the name 
 constraint, they have the following syntax:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-occurrence type cardMin..cardMax : datatype
-          ~reifier type [cardMin..cardMax]
-          @scope type [cardMin..cardMax]
+occu. type cardMin..cardMax : datatype
+      ~reifier type [cardMin..cardMax]
+      @scope type [cardMin..cardMax]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If an occurrence type is set, the name of it will be used. If not the subject 
-identifier 'tmdm:subject' will be used, which represents every topic.
+identifier *tmdm:subject* will be used, which represents every topic.
 The regular expression is not shown in the occurrence constraint. Although 
 it can be set via property page, it was considered too confusing to be added
 to the graphical representation.
@@ -143,7 +145,7 @@ association type
 @scope type   cardMin..cardMax
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The example shown in <<assoc_constr_rep>> illistrates the specification of an 
+The example shown in <<assoc_constr_rep>> illustrates the specification of an 
 association constraint 
 for the "works for" association. Instances of that association
 can be reified by any topic and have to be scoped by a topic of type time.

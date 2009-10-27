@@ -1,7 +1,7 @@
 === Exporting Diagrams ===
 
 It is possible to export a diagram as png or svg image. To do so use the 
-button labelled "Export Diagram".
+button labelled *Export Diagram*.
 After pressing the button, a file dialogue will open. Choose the file or enter a 
 new filename and save the file.
 The fileformat is chosen by the file suffix. If your name end with '.svg' a svg 

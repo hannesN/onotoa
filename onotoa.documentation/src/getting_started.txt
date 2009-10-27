@@ -98,8 +98,7 @@ should look like <<emptyfile_win>>
 .Onotoa window after creating a file
 [caption="Figure:"]
 [[emptyfile_win]]
-image::images/emptyfilewin.png["_Onotoa_ window after creating a file", 
-scaledwidth="100%"]
+image::images/emptyfilewin.png["_Onotoa_ window after creating a file", scaledwidth="100%"]
 
 === Using the plug-in version of _Onotoa_ ===
 

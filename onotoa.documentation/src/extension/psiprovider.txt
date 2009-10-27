@@ -41,7 +41,8 @@ point on the right. The properties are:
 * *id* The *id* is used to identify the 'PSIProvider'. Use a name which is unlikely 
 to be used in other plug-ins. Typically the *id* of the plug-in
 and a name is used to build it, like the editor already did after creation. 
-Enter the id: "de.topicmapslab.onotoa.MyPSIProvider.ExampleProvider" .
+Enter the id: "de.topicmapslab.onotoa.MyPSIProvider. +
+ExampleProvider" .
 
 * *name* The name is used as label for the preference page where you can 
 activate or deactivate the 'PSIprovider'. Name it 
@@ -50,10 +51,11 @@ activate or deactivate the 'PSIprovider'. Name it
 * *class* The class attribute is the qualified name of the class, which 
 implements the 'IPSIProvider' interface. If we had already 
 created a class, we could search it by pressing *Browse...*. If not we enter 
-the name "de.topicmapslab.onotoa.mypsiprovider.ExampleProvider" and
-click on the label *class*. A new class wizard will open with the qualified 
-name we entered in the text field. The super class of the class is
-the PSIProvider, which is an abstract implementation of the required interface.
+the name "de.topicmapslab.onotoa.mypsiprovider. +
+ExampleProvider" and click on the label *class*. A new class wizard will
+open with the qualified  name we entered in the text field. The super class
+of the class is the PSIProvider, which is an abstract implementation of the
+required interface.
 
 As you can see we need to implement one method: 'getSubjectIdentifier()'. Enter 
 the following implementation:
@@ -62,18 +64,21 @@ the following implementation:
 String name = getName().toLowerCase();
  
 Set<PSIProviderResult> results = 
- 	new HashSet<PSIProviderResult>(3);
+  new HashSet<PSIProviderResult>(3);
 
 results.add(new PSIProviderResult(
-	"http://psi.example.org/"+name, 
+	"http://psi.example.org/"
+	+name, 
 	"A tiny description"));
 	
 results.add(new PSIProviderResult(
-	"http://psi.ontopedia.org/"+name, 
+	"http://psi.ontopedia.org/"
+	+name, 
 	"A tiny description"));
 	
 results.add(new PSIProviderResult(
-	"http://psi.topicmapslab.de/"+name, 
+	"http://psi.topicmapslab.de/"
+	+name, 
 	"A tiny description"));
 	
 return results;
