@@ -205,15 +205,15 @@ public class DomainDiagramEditorUtil {
 				ImageProvider.getImageDescriptor(ImageConstants.KINDOF)));
 
 		group.add(new CombinedTemplateCreationEntry(
-						"Association Constraint",
-						"Association Constraint",
+						"Association",
+						"Create an association constraint",
 						new AssociationNodeCreationFactory(),
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM),
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)));
 
-		group.add(new ConnectionCreationToolEntry("Topic Role Constraint",
+		group.add(new ConnectionCreationToolEntry("Player",
 				"Create Topic Role Constraint connection",
 				new CreationFactory() {
 
