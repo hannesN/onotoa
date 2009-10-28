@@ -1,0 +1,23 @@
+=== Prefix ===
+
+A prefix is used to abbreviate a IRI used in subject identifiers or subject locators. Let us suppose that all subject identifiers start with:
+"http://onotoa.topicmapslab.de/example/topics/". A topic for a person could have the subject identifier "http://onotoa.topicmapslab.de/example/topics/person".
+Another topic has the subject identifier \'http://onotoa.topicmapslab.de/example/topics/corporation'.
+
+A prefix such as "ex" could be used for "http://onotoa.topicmapslab.de/example" to denote identifiers like: "ex:person" and "ex:corporation".
+They are equivalent to like the long versions, but if you want to change the prefix of a URL it only has to be done once in the
+prefix definition not for each individual topic.
+
+Every diagram includes a box containing the prefixes. If you click on the prefix box in the upper left corner of the diagram, the prefix property page will open.
+
+.Example of Prefix Property Page
+image::images/prefix_pp.png[scaledwidth="100%"]
+
+To remove a prefix, just select and press *Remove* in the table.
+Press *Add...* to add a new prefix and a dialogue will be shown, which provides an input mask for the prefix.
+After pressing *OK* the new prefix will be added to the schema and will exported if the CTM export is applied. 
+
+
+.Example of Prefix Property Page
+image::images/newprefix_dialog.png[scaledwidth="40%"]
+

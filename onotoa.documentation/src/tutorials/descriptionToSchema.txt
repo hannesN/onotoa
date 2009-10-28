@@ -1,0 +1,178 @@
+== How to Create a Schema based on a natural description ==
+
+=== Theoretical background === 
+
+This tutorial is about the creation of a topic maps schema based on a natural description. In this case _natural_ means spoken word
+or text by men about a real life "thing", its relationships, (inter)acting objects, players and so on. 
+
+Lets think about the following statement:
+
+_"A company is an institution, where many different persons work. These persons have got a name (first and given name) and an address. 
+They may change the company they working for, so an employment is a time relative contract with a beginning and an end. One company 
+differ from another by name and address."_
+
+When we analyze this short statement, we can figure out our two main topics "person" and "company". Both got a name and an address (occurrences). There 
+are three associations those describe the relationships between them:
+
+* "works for" (time relative -> scope)
+* "lives in"
+* "located in"
+
+We recognise that more than one person could work for a company, but one person could not work for more than one company. That point 
+effects the cardinality. In equal measure we handle the other cardinalities: 
+
+[width="50%", cols="^30%,^30%,^40%"]
+|===========================================
+|Association| Role One| Role Two
+|work for| employee [1..*]| employer [1..1]
+|lives in| inhabitant [1..*]| place [1..1]
+|located in| locatee [1..1]| location [1..1]
+|===========================================
+
+At this point, the occurrence "address" does not contains many informations, because only one value per occurrence is allowed. 
+If we want to specify the address, we must transform it into a own Topic Type with its own occurrences. These are:
+
+* street
+* street number
+* postal code
+* city 
+
+Now we are able to associate them to the topics "person" and "company" without the lost of detailed information and can get into _Onotoa_.
+
+
+=== Into Onotoa ===
+
+First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name for the model. I have chosen _example_domain.ono_. To create a new diagram, right click on *Diagram* in the *Model View* and choose *Create New Diagram...* in the context menu.
+After your decision for a diagram name (_example_domain_ for example), the _Onotoa_ window should looks like this:  
+
+.Onotoa 
+[[dom_create_model_diagram]]
+image::images/documentation/description_to_schema/create_model_diagram.png[scaledwidth="100%"]
+
+We start with the creation of the topics "company" and "person". On the left side of the _Onotoa_ window you can see a box, 
+the so called *Palette*. You can add anything in this box by drag and drop into the diagram. Press and hold left mouse button 
+on *Topic Types*, move the cursor into the diagram and release the button and a yellow box will appear. At the bottom of the window 
+is the "Property Details View". There you can modify the properties of a topic. We need to change the name, 
+because "default0" is not correct. So name the new topic "person". As next step, we create the topic "company" in equal measure.
+
+.Set topic name
+[[dom_set_topic_name]]
+image::images/documentation/description_to_schema/set_topic_name.png[scaledwidth="100%"]
+
+TIP: Press and hold the left mouse button to move elements in the diagram for visual purposes.
+
+Now we turn to the deeper details of "person". We specified, that a person works in a company, has got at least one first name, 
+exact one given name and an address.
+
+The *Model View* is on the left side of the editor window. To create an occurrence click right on *OccurrenceTypes* and choose 
+the *Create OccurrenceType...* entry. A pop up appears and we type "first name" as name.
+
+.Create an occurrence
+[[dom_create_occurrence]]
+image::images/documentation/description_to_schema/create_occurrence.png[scaledwidth="50%"]  
+
+To add this occurrence to the "person" topic click once on the *Occurrence Constraints* entry in the *Palette* and twice on the topic 
+in the diagram. In its property page we have to choose a type. Click on the *...* button at the right and select the currently created 
+"fist name" occurrence.
+
+We specified, that a person have got between one and infinite first names. We realize this by the change of the cardinality in the 
+property page. The incorrect default values for *cardMin* and *cardMax* are zero and infinite. Set *cardMax* to 1. 
+
+.Set occurrence cardinality
+[[dom_set_occurrence_cardinality]]
+image::images/documentation/description_to_schema/set_occurrence_cardinality.png[scaledwidth="100%"]  
+
+In the end our "fist name" occurrence need a data type. Switch to the *Occurrence Type* tab in the "Property Details View" an scroll 
+down to the *Datatype* entry and press the *...* button at the right. Select "xsd:string" in the following dialogue and confirm your decision. 
+The first occurrence is finished. 
+
+.Select data type
+[[dom_select_datatype]]
+image::images/documentation/description_to_schema/select_datatype.png[scaledwidth="50%"]  
+
+NOTE: You can specify valid names by the use of regular expressions
+
+After this is done we repeat this procedure to create the "given name" occurrence for "person" and the "name" occurrence" for "company". 
+But set the cardinality in this two cases to "1..1", because this is exactly we want it to be.
+
+A person works for a company. To figure this out, we create the association "works for". Drag an drop an new *Association Constraint* from the 
+*Palette* into the diagram. A circle with the label _No type set" will appear. So far we have not created an Association Type but could do this now.
+Click on *Type* at the left side in the property menu, choose "works for" as name in the appearing window and our new Association Type will be 
+generated.   
+
+.Create association type
+[[dom_create_association_type]]
+image::images/documentation/description_to_schema/create_association_type.png[scaledwidth="100%"] 
+
+An association demands for roles and these are "employer" and "employee". We search for the *roles* entry in the tap *Association Type* in the 
+"Property Details View". There we create a new one by clicking on the *New...* button. Choose "employer" as name an repeat the whole
+procedure for "employee". More than one person could work for a company, so we change the employees *cardMax* value from 1 to *.
+
+.Create Roles
+[[dom_create_roles]]
+image::images/documentation/description_to_schema/create_roles.png[scaledwidth="100%"]
+
+As next step we add this relationship to the diagram. Choose *Topic Role Constraint* in the *Palette*, click once on "person" and twice one the 
+association. Repeat this for the "company" and two thin black lines should be added to the diagram. As we see there are no roles entries. 
+We change this by clicking on the _no role_type_set_ label in the diagram an select of course "employee" for "person" and "employer" for 
+"company" in the property page. 
+
+At this point, there is a incorrect value. According to the diagram, only one person could work for the company. So we must change the 
+player cardinality. Click on the "1..1" entry near "person" and set it to "1..*" in the *Property Detail View*. 
+
+.Diagram view
+[[dom_diagram_view_1]]
+image::images/documentation/description_to_schema/diagram_view_1.png[scaledwidth="100%"]
+
+Of course an employment is a time relative relation and we want to integrate this in our schema. Click once on *Scope Constraint* in the *Palette* and 
+click twice on the "works for" association in the diagram. Choose "time" as name. Set the cardinality to "1..1", because we want exact one scope. 
+No we have created a new topic, but we need two occurrences to specify the scope: "start" and "end". Right click on the "time" topic in the *Model View* and choose the the *Create Occurrence Constraint...* entry in the context menu. 
+In this way create two occurrence constraints. 
+
+.Model view
+[[dom_model_view]]
+image::images/documentation/description_to_schema/model_view.png[scaledwidth="50%"]
+
+Of course both of them need a Topic Type. Click on *Type* in the property page and create one named "start" and and one named "end". 
+As data type, we select "xsd:date" (*Occurrence Type -> Datatype*) and set both cardinalities to "1..1".
+
+.Diagram view
+[[dom_diagram_view_2]]
+image::images/documentation/description_to_schema/diagram_view_2.png[scaledwidth="100%"]
+
+Now the relationship between "company" and "person" is finished. But there is something we miss in both topics: The address. Lets proceed
+with this.
+
+Add a new Topic Type by drag and drop from the *Palette* and name it "address". This topic has got four occurrences: 
+
+* "street"
+* "street number"
+* "postal code"
+* "city"  
+
+Create them in the common way. All of them are needed only once, that is why we set *cardMin* and *cardMax* to 1. As data type we choose "xsd:string".
+If you have done all right, the graphical representation of the topic should looks like these:
+
+.Address Topic Type
+[[dom_address]]
+image::images/documentation/description_to_schema/address.png[scaledwidth="50%"]
+
+Now the last thing to do is the association between "company" respectively "person" and "address". A person lives anywhere and an object 
+like a company is located anywhere. So build the two associations types "located in" and "lives in" in your preferred way. I do this by the use of 
+context menu in the "Model View". After this I add two Association Constraints from the *Palette* to the diagram and allocate the just created Association Types to them.
+
+To create the roles for the associations take once more a look at the "Property Details View", click on the *Association Type* tap, build the new ones in the usual way and change 
+their cardinality: 
+
+[width="55%", cols="^30%,^30%,^40%"]
+|===========================================
+|Association|Role One|Role Two
+|lives in|inhabitant [1..*]|place [1..1]
+|located in|locatee [1..1]|location [1..1]
+|===========================================
+After this, your _Onotoa_ window should looks like these and we completed the tutorial:  
+
+.Final Onotoa screen
+[[dom_final_screen]]
+image::images/documentation/description_to_schema/final_screen.png[scaledwidth="100%"]
+
