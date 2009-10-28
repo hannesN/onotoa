@@ -39,6 +39,8 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 	private final TopicType topicType;
 
+	private final boolean ignoreConstraints;
+	
 	private List<TopicType> isAList = Collections.emptyList();
 	private List<TopicType> akoList = Collections.emptyList();;
 	private List<ContainmentPair<Diagram, TypeNode>> typeNodeList = Collections.emptyList();
@@ -58,7 +60,12 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	private List<DeleteRolePlayerConstraintCommand> deleteRolePlayerCommands = Collections.emptyList();
 
 	public DeleteTopicTypeCommand(TopicType topicType) {
+		this(topicType, false);
+	}
+	
+	public DeleteTopicTypeCommand(TopicType topicType, boolean ignoreConstraints) {
 		this.topicType = topicType;
+		this.ignoreConstraints = ignoreConstraints;
 	}
 
 	public void execute() {
@@ -222,6 +229,8 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	 * Searches usage of the topic type in constraints of other topics
 	 */
 	private void prepareConstraintCommandList() {
+		if (ignoreConstraints)
+			return;
 		for (TopicType tt : ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes()) {
 			if (tt.equals(topicType))
 				continue;

@@ -10,10 +10,13 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Text;
@@ -27,7 +30,7 @@ import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
  * 
  */
 public class CardTextObserver implements FocusListener, DisposeListener,
-		VerifyListener {
+		VerifyListener,  KeyListener {
 
 	private final IModelProvider modelProvider;
 	private final Text text;
@@ -42,6 +45,7 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		this.text.addDisposeListener(this);
 		this.text.addFocusListener(this);
 		this.text.addVerifyListener(this);
+		this.text.addKeyListener(this);
 
 	}
 
@@ -49,7 +53,11 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 	}
 
 	public void focusLost(FocusEvent e) {
-		/*
+		finish();
+	}
+
+	private void finish() {
+	    /*
 		 * EStructuralFeature feature =
 		 * modelProvider.getModel().eClass().getEStructuralFeature(featureID);
 		 * modelProvider.getModel().eSet(feature, text.getText());
@@ -67,7 +75,7 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		
 		modelProvider.getCommandStack().execute(
 				new SetCardinalityCommand(model, isMin, text.getText()));
-	}
+    }
 
 	public void widgetDisposed(DisposeEvent e) {
 		text.removeFocusListener(this);
@@ -108,4 +116,13 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 			}
 		}
 	}
+
+	public void keyPressed(KeyEvent ke) {
+		if (ke.character==SWT.CR)
+			finish();
+    }
+
+	public void keyReleased(KeyEvent ke) {
+    }
+
 }

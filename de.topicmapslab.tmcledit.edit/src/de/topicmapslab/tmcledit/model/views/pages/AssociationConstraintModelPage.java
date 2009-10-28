@@ -182,7 +182,6 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER) {
 			return;
 		}
-
 		if (notification.getEventType() == Notification.SET) {
 			if (notification.getFeatureID(TopicType.class) == ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE) {
 				if (notification.getOldValue() != null)
@@ -195,11 +194,7 @@ public class AssociationConstraintModelPage extends AbstractModelPage {
 
 				typeModelPage.setModel(getCastedModel().getType());
 			}
-
 		}
-
 		updateUI();
-
 	}
-
 }

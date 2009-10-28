@@ -54,6 +54,8 @@ public class CreateNodeCommand extends AbstractCommand {
 	private List<CreateEdgeCommand> edgeCommands = Collections.emptyList();
 
 	private boolean createdNewType = false;
+
+	private boolean addType;
 	
 	
 	public CreateNodeCommand(Diagram diagram, Node node) {
@@ -91,6 +93,9 @@ public class CreateNodeCommand extends AbstractCommand {
 				if (atc != null) {
 					if (ModelIndexer.getNodeIndexer().getNodeFor(atc, diagram)!=null)
 						return false;
+					TopicType at = atc.getType();
+					if ((at!=null) && (at.eContainer()==null))
+						addType = true;
 				}
 			}
 			
@@ -112,6 +117,10 @@ public class CreateNodeCommand extends AbstractCommand {
 			if (createdNewType) {
 				AssociationTypeConstraint atc = ((AssociationNode)node).getAssociationConstraint();
 				File file = (File) diagram.eContainer();
+				
+				if (addType)
+					file.getTopicMapSchema().getTopicTypes().add(atc.getType());
+				
 				file.getTopicMapSchema().getAssociationTypeConstraints().add(atc);
 			}
 		}
@@ -243,6 +252,9 @@ public class CreateNodeCommand extends AbstractCommand {
 			if (createdNewType) {
 				AssociationTypeConstraint atc = ((AssociationNode)node).getAssociationConstraint();
 				File file = (File) diagram.eContainer();
+				if (addType) {
+					file.getTopicMapSchema().getTopicTypes().add(atc.getType());
+				}
 				file.getTopicMapSchema().getAssociationTypeConstraints().add(atc);
 			}
 		}
@@ -271,6 +283,8 @@ public class CreateNodeCommand extends AbstractCommand {
 			if (createdNewType) {
 				AssociationTypeConstraint atc = ((AssociationNode)node).getAssociationConstraint();
 				File file = (File) diagram.eContainer();
+				if (addType)
+					file.getTopicMapSchema().getTopicTypes().add(atc.getType());
 				file.getTopicMapSchema().getAssociationTypeConstraints().remove(atc);
 			}
 		}
