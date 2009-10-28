@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Net Sync
+Bundle-SymbolicName: de.topicmapslab.onotoa.net.sync;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.topicmapslab.onotoa.net.sync.Activator
+Bundle-Vendor: Hannes Niederhausen, Topic Maps Lab
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.topicmapslab.tmcledit;bundle-version="1.1.1",
+ de.topicmapslab.tmcledit.edit;bundle-version="1.1.1",
+ org.eclipse.ecf;bundle-version="3.0.0",
+ org.eclipse.ecf.datashare;bundle-version="2.0.0",
+ org.eclipse.ecf.provider.datashare;bundle-version="1.4.0",
+ org.eclipse.ecf.provider.datashare.nio;bundle-version="0.9.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
