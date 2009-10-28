@@ -9,7 +9,10 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class SetTypeAction extends AbstractCommandStackAction {
 
@@ -42,7 +45,15 @@ public class SetTypeAction extends AbstractCommandStackAction {
 
 		}
 		cmd.append(getCommand());
-		getCommandStack().execute(cmd);
+		TopicType oldType = data.typedConstraint.getType();
+		if (oldType!=null) {
+			if (ModelIndexer.getConstraintIndexer().getConstraintsByType(oldType).size()==1) {
+				cmd.append(new DeleteTopicTypeCommand(oldType, true));
+			}
+		}
+		
+		if (cmd.canExecute())
+			getCommandStack().execute(cmd);
 	}
 
 	protected AbstractCommand getCommand() {
