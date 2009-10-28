@@ -290,6 +290,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		((TMCLEditDomain) getEditDomain()).setEditingDomain(ei
 				.getEditingDomain());
 
+		setTitleImage(input.getImageDescriptor().createImage());
+		
 		dirtyAdapter = new DirtyAdapter();
 		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
 		diagram.eAdapters().add(dirtyAdapter);

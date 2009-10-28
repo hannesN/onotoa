@@ -16,9 +16,11 @@ import java.util.List;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 
+import de.topicmapslab.tmcledit.domaindiagram.action.DeleteTypedConstraintAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
@@ -79,6 +81,15 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 			getCastedModel().getType().eAdapters().remove(this);
 		super.deactivate();
 
+	}
+	
+	@Override
+	public List<IAction> getActions() {
+		ArrayList<IAction> result = new ArrayList<IAction>();
+		
+		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(), getCastedModel()));
+		
+		return result;
 	}
 	
 	public void notifyChanged(Notification notification) {

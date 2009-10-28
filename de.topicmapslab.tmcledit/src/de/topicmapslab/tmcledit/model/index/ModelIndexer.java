@@ -36,6 +36,7 @@ public class ModelIndexer {
 	private AssociationIndexer associationIndexer;
 	private TopicIndexer topicIndexer;
 	private TopicTypeNodeIndexer nodeIndexer;
+	private ConstraintIndexer constraintIndexer;
 	
 	private final File file;
 	
@@ -57,6 +58,9 @@ public class ModelIndexer {
 		
 		getInstance().associationIndexer = new AssociationIndexer();
 		getInstance().associationIndexer.init(file.getTopicMapSchema());
+		
+		getInstance().constraintIndexer = new ConstraintIndexer();
+		getInstance().constraintIndexer.init(file.getTopicMapSchema());
 	}
 	
 	private void dispose() {
@@ -73,6 +77,10 @@ public class ModelIndexer {
 
 	public static TopicIndexer getTopicIndexer() {
 	    return getInstance().topicIndexer;
+    }
+	
+	public static ConstraintIndexer getConstraintIndexer() {
+	    return getInstance().constraintIndexer;
     }
 	
 	public TopicMapSchema getTopicMapSchema() {
