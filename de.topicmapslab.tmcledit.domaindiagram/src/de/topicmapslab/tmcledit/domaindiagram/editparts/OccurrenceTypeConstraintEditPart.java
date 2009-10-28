@@ -34,79 +34,82 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 
-	
 	OccurrenceTypeConstraint getCastedModel() {
 		return (OccurrenceTypeConstraint) getModel();
 	}
-	
+
 	@Override
 	protected IFigure createFigure() {
 		IFigure f = super.createFigure();
-		getNameLabel().setIcon(ImageProvider.getImage(ImageConstants.OCCURRENCECONSTRAINT_SM));
-		
+		getNameLabel().setIcon(
+				ImageProvider.getImage(ImageConstants.OCCURRENCECONSTRAINT_SM));
+
 		return f;
 	}
-	
+
 	@Override
 	protected void createEditPolicies() {
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new AbstractTypedConstraintDirectEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
+				new AbstractTypedConstraintDirectEditPolicy());
 	}
 
 	@Override
 	protected boolean isEditable() {
-		return (getCastedModel().getType()!=null);
+		return (getCastedModel().getType() != null);
 	}
-	
+
 	@Override
 	protected void refreshVisuals() {
 		OccurrenceTypeConstraint otc = getCastedModel();
 		TopicType type = otc.getType();
-		if (type!=null) {
+		if (type != null) {
 			getNameLabel().setText(type.getName());
 		} else
 			getNameLabel().setText("tmdm:subject");
-		
+
 	}
 
 	@Override
 	public void activate() {
-		if (getCastedModel().getType()!=null)
+		if (getCastedModel().getType() != null)
 			getCastedModel().getType().eAdapters().add(this);
 		super.activate();
 	}
-	
+
 	@Override
 	public void deactivate() {
-		if (getCastedModel().getType()!=null)
+		if (getCastedModel().getType() != null)
 			getCastedModel().getType().eAdapters().remove(this);
 		super.deactivate();
 
 	}
-	
+
 	@Override
 	public List<IAction> getActions() {
 		ArrayList<IAction> result = new ArrayList<IAction>();
-		
-		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(), getCastedModel()));
-		
+
+		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(),
+				getCastedModel()));
+
 		return result;
 	}
-	
+
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType()==Notification.SET) {
+		if (notification.getEventType() == Notification.SET) {
 			if (notification.getNewValue() instanceof TopicType) {
 				TopicType old = (TopicType) notification.getOldValue();
-				if (old!=null)
+				if (old != null)
 					old.eAdapters().remove(this);
-				if (notification.getNewValue()!=null)
-					((TopicType) notification.getNewValue()).eAdapters().add(this);
-			
+				if (notification.getNewValue() != null)
+					((TopicType) notification.getNewValue()).eAdapters().add(
+							this);
+
 			}
 		}
 		refreshVisuals();
-		
+
 	}
-	
+
 	private TopicMapSchema getTopicMapSchema() {
 		return (TopicMapSchema) getCastedModel().getType().eContainer();
 	}
@@ -121,17 +124,30 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 		data.editDomain = getEditDomain();
 		data.schema = getTopicMapSchema();
 		data.featureId = ModelPackage.OCCURRENCE_TYPE_CONSTRAINT__TYPE;
-		
-//		subMenu.add(new SetAssociationAction(data));
+
+		// subMenu.add(new SetAssociationAction(data));
+		OccurrenceType ot = (OccurrenceType) getCastedModel().getType();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
-			if (tt instanceof OccurrenceType) {
-				SetTypeData d = data.clone();
-				d.type = tt;
-				subMenu.add(new SetTypeAction(d));
+			if ((tt instanceof OccurrenceType) && (!(tt.equals(ot)))) {
+				if (!alreadyUsed((TopicType)getCastedModel().eContainer(), (OccurrenceType) tt)) {
+					SetTypeData d = data.clone();
+					d.type = tt;
+					subMenu.add(new SetTypeAction(d));
+				}
 			}
 		}
 		result.add(subMenu);
 
 		return result;
+	}
+
+	public boolean alreadyUsed(TopicType tt, OccurrenceType ot) {
+		for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
+			if (otc.equals(getModel()))
+				continue;
+			if (ot.equals(otc.getType()))
+				return true;
+		}
+		return false;
 	}
 }

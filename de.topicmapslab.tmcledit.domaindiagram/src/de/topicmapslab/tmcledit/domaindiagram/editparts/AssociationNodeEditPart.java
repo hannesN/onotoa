@@ -368,8 +368,9 @@ public class AssociationNodeEditPart extends NodeEditPart implements IDirectEdit
 		data.featureId = ModelPackage.ASSOCIATION_TYPE_CONSTRAINT__TYPE;
 		
 //		subMenu.add(new SetAssociationAction(data));
+		AssociationType at = (AssociationType) getCastedModel().getAssociationConstraint().getType();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
-			if (tt instanceof AssociationType) {
+			if ( (tt instanceof AssociationType) && (!(tt.equals(at)))) {
 				SetTypeData d = data.clone();
 				d.type = tt;
 				subMenu.add(new SetTypeAction(d));
