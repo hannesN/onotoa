@@ -1,7 +1,7 @@
 == Getting started == 
 
 This chapter will explain how to get _Onotoa_ and what is needed to start it. 
-It also gives a short description of various the parts  _Onotoa_.
+It also gives a short description of various parts of  _Onotoa_.
 If you follow the instructions in this chapter you will be able to install  
 _Onotoa_ and create your first diagram. 
 
@@ -27,18 +27,18 @@ _Onotoa_! For more details about the RSS feed see the "Stay tuned" section below
 The central column of the website contains some introductory information about the 
 _Onotoa_ project. All background information about _Onotoa_ is 
 provided in the *About _Onotoa_* section of the website, which is one of the 
-tab menus in the navigation of the _Onotoa_ website.
+tab menus in the navigation bar of the _Onotoa_ website.
 
 Much more important is the right column. It contains the download packages of 
 the latest release of _Onotoa_ for the main operation systems. You can directly 
 start to download the appropriate package for your environment. All available 
 download packages, also from previous releases, are provided in the download 
-section of the website, which is one of the tab menus in the navigation of the 
+section of the website, which is one of the tab menus in the navigation bar of the 
 _Onotoa_ website. You find all details about the download and installation of 
 _Onotoa_ in the section below.  
 
-The *Documentation* tab the most important button in the top navigation of the 
-_Onotoa_ website is . It contains the full documentation of 
+The *Documentation* tab is the most important button in the navigation bar of the 
+_Onotoa_ website. It contains the full documentation of 
 _Onotoa_. We highly recommend you that you read the documentation before you get 
 started with _Onotoa_.
 
@@ -47,7 +47,7 @@ You should subscribe to the RSS feed in order to get updates about the latest
 developments in the _Onotoa_ project. Add the URL of the feed 
 http://onotoa.topicmapslab.de/news.rss to your favourite feed reader. Get 
 more involved in the ongoing discussion about the further development of the 
-_Onotoa_ project subscribe to the _Onotoa_ mailinglist. 
+_Onotoa_ project and subscribe to the _Onotoa_ mailinglist. 
 
 
 === Licence and Requirements ===
@@ -155,8 +155,7 @@ should look like <<nonrcp_win>>.
 ._Onotoa_ window after creating a file in Navigator
 [caption="Figure:"]
 [[nonrcp_win]]
-image::images/emptyfilewin_nonrcp.png["_Onotoa_ window after creating a file in 
-Navigator", scaledwidth="100%"]
+image::images/emptyfilewin_nonrcp.png[scaledwidth="100%"]
 
 === The Onotoa Perspective ===
 

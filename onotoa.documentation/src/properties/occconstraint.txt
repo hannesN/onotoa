@@ -9,8 +9,8 @@ It has the following properties:
 
 * *type:* An occurrence type used for the constraint. If the type is not set, the default 
 type "tmdm:subject"  will be used, which means the occurrence may be of any type.
-* *cardMin:* The minimum number of names with the given type. The default is 0.
-* *cardMax:* The maximum number of names with the given type. The default is *, which means infinity.
+* *cardMin:* The minimum number of occurrences with the given type. The default is 0.
+* *cardMax:* The maximum number of occurrences with the given type. The default is *, which means infinity.
 
 .Property Page for occurrence constraint
 image::images/occconstr_pp.png[scaledwidth="100%"]

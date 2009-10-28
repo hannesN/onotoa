@@ -91,4 +91,4 @@ It is possible to export your colour scheme list and import it to another
 installation of _Onotoa_. 
 
 
-WARNING: If you import colour schemes, all existing schemes deleted.
+WARNING: If you import colour schemes, all existing schemes will be deleted.
