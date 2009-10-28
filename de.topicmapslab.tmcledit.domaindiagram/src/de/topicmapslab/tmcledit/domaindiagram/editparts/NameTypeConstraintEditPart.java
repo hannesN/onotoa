@@ -37,20 +37,21 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	private NameTypeConstraint getCastedModel() {
 		return (NameTypeConstraint) getModel();
 	}
-	
+
 	@Override
 	protected IFigure createFigure() {
 		IFigure f = super.createFigure();
-		getNameLabel().setIcon(ImageProvider.getImage(ImageConstants.NAMECONSTRAINT_SM));
-		
+		getNameLabel().setIcon(
+				ImageProvider.getImage(ImageConstants.NAMECONSTRAINT_SM));
+
 		return f;
 	}
-	
+
 	@Override
 	protected boolean isEditable() {
-		return (getCastedModel().getType()!=null);
+		return (getCastedModel().getType() != null);
 	}
-	
+
 	@Override
 	protected void createEditPolicies() {
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
@@ -100,16 +101,18 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 
 		refreshVisuals();
 	}
+
 	private TopicMapSchema getTopicMapSchema() {
 		return (TopicMapSchema) getCastedModel().getType().eContainer();
 	}
-	
+
 	@Override
 	public List<IAction> getActions() {
 		ArrayList<IAction> result = new ArrayList<IAction>();
-		
-		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(), getCastedModel()));
-		
+
+		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(),
+				getCastedModel()));
+
 		return result;
 	}
 
@@ -123,18 +126,31 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		data.editDomain = getEditDomain();
 		data.schema = getTopicMapSchema();
 		data.featureId = ModelPackage.NAME_TYPE_CONSTRAINT__TYPE;
-		
-//		subMenu.add(new SetAssociationAction(data));
+
+		// subMenu.add(new SetAssociationAction(data));
+		NameType nt = (NameType) getCastedModel().getType();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
-			if (tt instanceof NameType) {
-				SetTypeData d = data.clone();
-				d.type = tt;
-				subMenu.add(new SetTypeAction(d));
+			if ((tt instanceof NameType) && (!tt.equals(nt))) {
+				if (!alreadyUsed((TopicType) getCastedModel().eContainer(), (NameType) tt)) {
+					SetTypeData d = data.clone();
+					d.type = tt;
+					subMenu.add(new SetTypeAction(d));
+				}
 			}
 		}
 		result.add(subMenu);
 
 		return result;
 	}
-	
+
+	public boolean alreadyUsed(TopicType tt, NameType nt) {
+		for (NameTypeConstraint ntc : tt.getNameContraints()) {
+			if (ntc.equals(getModel()))
+				continue;
+			if (nt.equals(ntc.getType()))
+				return true;
+		}
+		return false;
+	}
+
 }
