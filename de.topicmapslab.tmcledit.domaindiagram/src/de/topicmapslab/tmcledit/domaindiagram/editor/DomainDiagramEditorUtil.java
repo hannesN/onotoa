@@ -25,6 +25,7 @@ import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
 
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.AssociationNodeCreationFactory;
+import de.topicmapslab.tmcledit.domaindiagram.creationfactories.NameConstraintCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.OccurrenceConstraintCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.AssociationNodeEditPart;
@@ -47,9 +48,7 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
-import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
@@ -142,32 +141,7 @@ public class DomainDiagramEditorUtil {
 		group.add(new CombinedTemplateCreationEntry(
 						"Name",
 						"Name",
-						new CreationFactory() {
-
-							public Object getNewObject() {
-								NameTypeConstraint ntc = ModelFactory.eINSTANCE
-										.createNameTypeConstraint();
-								
-								int i=0;
-								String n = "name";
-								TopicType tt = null; 
-								while ( (tt=ModelIndexer.getTopicIndexer().getTopicTypeByName(n+i)) != null) {
-									i++;
-								}
-								tt = ModelFactory.eINSTANCE.createNameType();
-								tt.setName(n+i);
-								
-								ntc.setType(tt);
-								
-								
-								return ntc;
-							}
-
-							public Object getObjectType() {
-								return NameTypeConstraint.class;
-							}
-
-						},
+						new NameConstraintCreationFactory(),
 						ImageProvider
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT_SM),
 						ImageProvider

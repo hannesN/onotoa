@@ -47,8 +47,11 @@ public class AssociationNodeCreationFactory implements CreationFactory {
 				tt.setName(n + i);
 				atc.setType(tt);
 			}
+			node.setAssociationConstraint(atc);
+			atc = null;
+		} else {
+			node.setAssociationConstraint(atc);
 		}
-		node.setAssociationConstraint(atc);
 		
 		return node;
 	}
