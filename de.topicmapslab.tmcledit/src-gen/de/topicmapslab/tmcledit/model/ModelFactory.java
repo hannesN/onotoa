@@ -313,6 +313,15 @@ public interface ModelFactory extends EFactory {
 	TopicReifiesConstraint createTopicReifiesConstraint();
 
 	/**
+	 * Returns a new object of class '<em>Domain Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Domain Diagram</em>'.
+	 * @generated
+	 */
+	DomainDiagram createDomainDiagram();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

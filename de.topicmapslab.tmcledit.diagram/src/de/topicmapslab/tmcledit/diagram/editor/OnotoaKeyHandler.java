@@ -60,7 +60,6 @@ public class OnotoaKeyHandler extends GraphicalViewerKeyHandler {
 						selectList.add(ep);
 					}
 				}
-				System.out.println("Set selection");
 				getViewer().setSelection(new StructuredSelection(selectList));
 			}
 			return true;
