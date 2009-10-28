@@ -81,6 +81,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeNode" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EReference" name="topicType" lowerBound="1"
         eType="#//TopicType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bendpoint" eSuperTypes="#//OnoObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -215,6 +216,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractConstraint" abstract="true"
       interface="true" eSuperTypes="#//TMCLConstruct"/>
   <eClassifiers xsi:type="ecore:EClass" name="TopicReifiesConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainDiagram" eSuperTypes="#//Diagram"/>
   <eClassifiers xsi:type="ecore:EClass" name="OnoObject" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         iD="true"/>

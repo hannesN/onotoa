@@ -19,10 +19,13 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
@@ -52,9 +55,12 @@ public class TreeDiagram extends TreeObject {
 			TMCLEditorInput input = new TMCLEditorInput(getDiagram(), getModelView().getEditingDomain(), getModelView()
 			        .getActionRegistry(), true);
 			IEditorPart part = activePage.findEditor(input);
-			if (part == null)
-				activePage.openEditor(input, TmcleditEditPlugin.DIAGRAMEDITOR_ID);
-			else
+			
+			
+			if (part == null) {
+				String editorId = (getDiagram() instanceof DomainDiagram) ? TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
+				activePage.openEditor(input, editorId);
+			} else
 				activePage.activate(part);
 		} catch (PartInitException e) {
 			throw new RuntimeException(e);
@@ -63,7 +69,9 @@ public class TreeDiagram extends TreeObject {
 
 	@Override
 	public Image getImage() {
-		return null;// ImageProvider.getImage(ImageConstants.DIAGRAM);
+		if (getDiagram() instanceof DomainDiagram)
+			return ImageProvider.getImage(ImageConstants.DOMAINDIAGRAM);
+		return ImageProvider.getImage(ImageConstants.DIAGRAM);
 	}
 
 	@Override

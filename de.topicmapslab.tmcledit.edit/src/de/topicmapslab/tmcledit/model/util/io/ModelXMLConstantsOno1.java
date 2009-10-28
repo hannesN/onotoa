@@ -32,6 +32,7 @@ public interface ModelXMLConstantsOno1 {
 	public static final String A_REF = "ref";
 	public static final String A_REG_EXP = "regExp";
 	public static final String A_TYPE = "type";
+	public static final String A_IMAGE = "image";
 	public static final String A_UNIQUE = "unique";
 	public static final String A_VERSION = "version";
 	public static final String A_ID = "id";
