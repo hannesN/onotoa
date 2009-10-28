@@ -67,7 +67,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getOnoObject()
 	 * @generated
 	 */
-	int ONO_OBJECT = 38;
+	int ONO_OBJECT = 39;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1536,13 +1536,22 @@ public interface ModelPackage extends EPackage {
 	int TYPE_NODE__TOPIC_TYPE = NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Image</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_NODE__IMAGE = NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Type Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
+	int TYPE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl <em>Bendpoint</em>}' class.
@@ -4158,6 +4167,70 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_REIFIES_CONSTRAINT_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl <em>Domain Diagram</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDomainDiagram()
+	 * @generated
+	 */
+	int DOMAIN_DIAGRAM = 38;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__ID = DIAGRAM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__EDGES = DIAGRAM__EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__NODES = DIAGRAM__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__NAME = DIAGRAM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM__COMMENTS = DIAGRAM__COMMENTS;
+
+	/**
+	 * The number of structural features of the '<em>Domain Diagram</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_DIAGRAM_FEATURE_COUNT = DIAGRAM_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4165,7 +4238,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 39;
+	int TOPIC_ID = 40;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -4175,7 +4248,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 40;
+	int EDGE_TYPE = 41;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -4185,7 +4258,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 41;
+	int KIND_OF_TOPIC_TYPE = 42;
 
 
 	/**
@@ -4637,6 +4710,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypeNode_TopicType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TypeNode#getImage <em>Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TypeNode#getImage()
+	 * @see #getTypeNode()
+	 * @generated
+	 */
+	EAttribute getTypeNode_Image();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.Bendpoint <em>Bendpoint</em>}'.
@@ -5361,6 +5445,16 @@ public interface ModelPackage extends EPackage {
 	EClass getTopicReifiesConstraint();
 
 	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.DomainDiagram <em>Domain Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Domain Diagram</em>'.
+	 * @see de.topicmapslab.tmcledit.model.DomainDiagram
+	 * @generated
+	 */
+	EClass getDomainDiagram();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.OnoObject <em>Ono Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5792,6 +5886,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_NODE__TOPIC_TYPE = eINSTANCE.getTypeNode_TopicType();
+
+		/**
+		 * The meta object literal for the '<em><b>Image</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_NODE__IMAGE = eINSTANCE.getTypeNode_Image();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.BendpointImpl <em>Bendpoint</em>}' class.
@@ -6388,6 +6490,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TOPIC_REIFIES_CONSTRAINT = eINSTANCE.getTopicReifiesConstraint();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl <em>Domain Diagram</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.DomainDiagramImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getDomainDiagram()
+		 * @generated
+		 */
+		EClass DOMAIN_DIAGRAM = eINSTANCE.getDomainDiagram();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.OnoObjectImpl <em>Ono Object</em>}' class.

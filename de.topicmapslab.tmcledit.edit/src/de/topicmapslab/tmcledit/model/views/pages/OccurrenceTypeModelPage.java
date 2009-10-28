@@ -19,6 +19,8 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -113,6 +115,15 @@ public class OccurrenceTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 			public void focusLost(FocusEvent e) {
 				SetDatatypeCommand cmd = new SetDatatypeCommand(getCastedModel(), datatypeText.getText());
 				getCommandStack().execute(cmd);
+			}
+		});
+		datatypeText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character==SWT.CR) {
+					SetDatatypeCommand cmd = new SetDatatypeCommand(getCastedModel(), datatypeText.getText());
+					getCommandStack().execute(cmd);
+				}
 			}
 		});
 		

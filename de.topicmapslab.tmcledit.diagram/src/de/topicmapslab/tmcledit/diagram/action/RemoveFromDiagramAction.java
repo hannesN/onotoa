@@ -12,15 +12,14 @@ package de.topicmapslab.tmcledit.diagram.action;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
-import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.commands.RemoveNodeCommand;
@@ -44,23 +43,22 @@ public class RemoveFromDiagramAction extends AbstractSelectionAction {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
-		TMCLEditDomain ed = null;
+		EditDomain ed = null;
 
 		CompoundCommand cmd = new CompoundCommand();
 		Iterator<Object> it = getSelections().iterator();
 		while (it.hasNext()) {
 			EditPart part = (EditPart) it.next();
 			if (ed == null)
-				ed = (TMCLEditDomain) part.getViewer().getEditDomain();
-			if (part instanceof de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart) {
+				ed =  part.getViewer().getEditDomain();
+			if (part.getModel() instanceof Node) {
 				Node node = (Node) part.getModel();
 				cmd.append(new RemoveNodeCommand((Diagram) node.eContainer(),
 						node));
 			}
 		}
 
-		getCommandStack().execute(new CommandAdapter(ed.getEditingDomain()
-				.getCommandStack(), cmd));
+		getCommandStack().execute(cmd);
 
 	}
 
@@ -80,7 +78,8 @@ public class RemoveFromDiagramAction extends AbstractSelectionAction {
 		if (!getSelections().isEmpty()) {
 			Iterator<Object> it = getSelections().iterator();
 			while (it.hasNext()) {
-				if (!(it.next() instanceof de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart)) {
+				EditPart ep = (EditPart) it.next();
+				if (!(ep.getModel() instanceof Node)) {
 					setEnabled(false);
 					return;
 				}

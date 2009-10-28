@@ -20,6 +20,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 
 /**
  * @author Hannes Niederhausen
@@ -32,9 +33,6 @@ public class TMCLEditorInput implements IEditorInput {
 	private final EditingDomain editingDomain;
 	
 	private final ActionRegistry actionRegistry;
-	
-	
-	
 	
 	public TMCLEditorInput(Diagram diagram, EditingDomain editingDomain,
 			ActionRegistry actionRegistry, boolean exists) {
@@ -50,7 +48,9 @@ public class TMCLEditorInput implements IEditorInput {
 	}
 
 	public ImageDescriptor getImageDescriptor() {
-		return null;
+		if (diagram instanceof DomainDiagram)
+			return ImageProvider.getImageDescriptor(ImageConstants.DOMAINDIAGRAM);
+		return ImageProvider.getImageDescriptor(ImageConstants.DIAGRAM);
 	}
 
 	public String getName() {

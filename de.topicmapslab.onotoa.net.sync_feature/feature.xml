@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.topicmapslab.onotoa.net.sync_feature"
+      label="Sync_feature"
+      version="1.0.0.qualifier"
+      provider-name="Hannes Niederhausen, Topic Maps Lab">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.1.beta-qualifier"/>
+   </requires>
+
+   <plugin
+         id="de.topicmapslab.onotoa.net.sync"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
