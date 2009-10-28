@@ -20,7 +20,7 @@ On the following page, we can add plug-ins to the feature. Select the plug-in:
 "de.topicmapslab.onotoa.MyPSIProvider" and press *Finish*.
 
 Like plug-ins, features are configured via an xml file, which is called 
-feature.xml. This file is will open automatically after creating the feature 
+feature.xml. This file will be opened automatically after creating the feature 
 project.
 As you can see the data entered in the wizard are shown in the editor. The 
 editor consists of a lot of tabs. The interesting ones are the *Information* 

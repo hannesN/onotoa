@@ -23,7 +23,7 @@ and in the subject identifier dialogue. This list may be empty.
 .Subject Identifier Dialog
 image::images/si_dialog.png[scaledwidth="40%"]
 
-* *subject locator:* A topic type a list of IRIs representing the subject locators of the topic, which is similar to the subject identifiers. 
+* *subject locator:* The subject locators are a set of IRIs representing the subject locators of the topic, which is similar to the subject identifiers. 
 This list can be edited by using the dialogue opened by the button *...*. It looks like the subject identifier dialogue. 
 The list may be empty too.
 

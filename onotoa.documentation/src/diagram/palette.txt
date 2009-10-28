@@ -43,24 +43,23 @@ It will be placed where the it was dropped.
 
 * *Topic Type:* Creates a topic type representation and adds it to the diagram. 
 The represented topic is also created and added to the schema. 
-It will be placed where the it was dropped.
+It will be placed where it was dropped.
 
 * *Occurrence Type:* Creates an occurrence type representation and adds it to 
 the diagram. The represented topic is also created and added to the schema. 
-It will be placed where the it was dropped.
+It will be placed where it was dropped.
 
 * *Role Type:* Creates a role type representation and adds it to the diagram. 
 The represented topic is also created and added to the schema. 
-It will be placed where the it was dropped.
+It will be placed where it was dropped.
 
 * *Association Type:* Creates an association type representation and adds it to 
 the diagram. The represented topic is also created and added to the schema. 
-It will be placed where the it was dropped.
+It will be placed where it was dropped.
 
 * *Name Type:* Creates a name type representation and adds it to the diagram. 
 The represented topic is also created and added to the schema. The 
-representation is positioned where the
-it was dropped.
+representation is positioned where it was dropped.
 
 * *Occurrence Constraint:* Creates an occurrence constraint representation. You 
 need to drop the new constraint on a topic type representation. 
@@ -101,7 +100,7 @@ an association constraint (the association).
 
 To create a new 'Topic Type' just drag the *Topic Type* palette entry into the 
 diagram. A new 'Topic Type' with a default name will be created. 
-To add  another 'Topic Type' repeat. 
+To add  another 'Topic Type' simply repeat this process. 
 
 To add a 'Name Constraint' to the 'Topic Type', just drag *Name Constraint* 
 onto the 'Topic Type' and a new 'Name Constraint' with 

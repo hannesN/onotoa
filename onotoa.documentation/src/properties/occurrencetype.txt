@@ -21,7 +21,7 @@ type definition URI, but it is preferable to use the XML schema datatypes.
 These can be chosen from the dialogue opened by the button labelled *...*.
 If no datatype is set, "xsd:anyType" will be used, which means every content will be valid.
 
-* *reg. exp:* This regular expression is used to define the form of the content of the name. 
+* *reg. exp:* This regular expression is used to define the syntax of the content of the occurrence. 
 
 * *reifier:* It is possible to define which topic may reify occurrences using the current type. Check the 
 button *constrained*, which indicates that you want to constrain the reification explicitly, and choose if the constraint restricts 

@@ -49,7 +49,8 @@ activate or deactivate the 'PSIprovider'. Name it
 "Example Provider".
 
 * *class* The class attribute is the qualified name of the class, which 
-implements the 'IPSIProvider' interface. If we had already 
+implements the +
+'IPSIProvider' interface. If we had already 
 created a class, we could search it by pressing *Browse...*. If not we enter 
 the name "de.topicmapslab.onotoa.mypsiprovider. +
 ExampleProvider" and click on the label *class*. A new class wizard will
@@ -97,7 +98,7 @@ The prefix parameter contains the text, which has already been entered. The
 implementation in the abstract class 'PSIProvider'
 calls 'getSubjectIdentifier()' and removes all 'PSIProviderResults' which do not 
 have identifier starting with the text in 'prefix'.
-It would be more efficient to not create these results in the first thing, so 
+It would be more efficient to not create these results in the first place, so 
 it is advised to override this method and implement it
 more efficiently. 
 
