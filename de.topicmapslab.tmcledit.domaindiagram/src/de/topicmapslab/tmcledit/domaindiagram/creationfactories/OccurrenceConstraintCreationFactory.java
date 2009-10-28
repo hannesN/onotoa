@@ -39,10 +39,10 @@ public class OccurrenceConstraintCreationFactory implements CreationFactory {
 			}
 			tt = ModelFactory.eINSTANCE.createOccurrenceType();
 			tt.setName(n + i);
-			occurrenceType = tt;
+			otc.setType(tt);
+		} else {
+			otc.setType(occurrenceType);
 		}
-
-		otc.setType(occurrenceType);
 
 		return otc;
 	}
