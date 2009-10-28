@@ -46,6 +46,8 @@ public interface ImageConstants {
 	public static String SUBJECTIDENTIFIERCONSTRAINT = "./siconstraint.gif";
 	public static String SUBJECTLOCATORCONSTRAINT = "./slconstraint.gif";
 	public static String ICON = "./icon.png";
+	public static String DOMAINDIAGRAM = "./domaindiagram.gif";
+	public static String DIAGRAM = "./diagram.gif";
 	
 	public static String VALIDATE = "./icon.png";
 }

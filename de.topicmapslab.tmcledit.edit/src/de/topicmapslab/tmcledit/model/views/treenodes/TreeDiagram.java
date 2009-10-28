@@ -24,6 +24,8 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
@@ -67,7 +69,9 @@ public class TreeDiagram extends TreeObject {
 
 	@Override
 	public Image getImage() {
-		return null;// ImageProvider.getImage(ImageConstants.DIAGRAM);
+		if (getDiagram() instanceof DomainDiagram)
+			return ImageProvider.getImage(ImageConstants.DOMAINDIAGRAM);
+		return ImageProvider.getImage(ImageConstants.DIAGRAM);
 	}
 
 	@Override

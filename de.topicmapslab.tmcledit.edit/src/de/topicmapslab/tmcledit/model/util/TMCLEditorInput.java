@@ -50,7 +50,7 @@ public class TMCLEditorInput implements IEditorInput {
 	}
 
 	public ImageDescriptor getImageDescriptor() {
-		return null;
+		return ImageProvider.getImageDescriptor(ImageConstants.DIAGRAM);
 	}
 
 	public String getName() {
