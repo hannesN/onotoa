@@ -46,6 +46,8 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 	public boolean canExecute() {
 		if (ModelIndexer.getTopicIndexer().getTopicTypeByName(newName)!=null)
 			return false;
+		if (newName.length()==0)
+			return false;
 	    return super.canExecute();
 	}
 	
