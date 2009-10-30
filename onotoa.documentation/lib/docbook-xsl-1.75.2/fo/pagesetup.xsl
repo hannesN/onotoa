@@ -2048,72 +2048,7 @@
   </xsl:choose>
 </xsl:template>
 
-<xsl:template name="header.content">
-  <xsl:param name="pageclass" select="''"/>
-  <xsl:param name="sequence" select="''"/>
-  <xsl:param name="position" select="''"/>
-  <xsl:param name="gentext-key" select="''"/>
 
-<!--
-  <fo:block>
-    <xsl:value-of select="$pageclass"/>
-    <xsl:text>, </xsl:text>
-    <xsl:value-of select="$sequence"/>
-    <xsl:text>, </xsl:text>
-    <xsl:value-of select="$position"/>
-    <xsl:text>, </xsl:text>
-    <xsl:value-of select="$gentext-key"/>
-  </fo:block>
--->
-
-  <fo:block>
-
-    <!-- sequence can be odd, even, first, blank -->
-    <!-- position can be left, center, right -->
-    <xsl:choose>
-      <xsl:when test="$sequence = 'blank'">
-        <!-- nothing -->
-      </xsl:when>
-
-      <xsl:when test="$position='left'">
-        <!-- Same for odd, even, empty, and blank sequences -->
-        <xsl:call-template name="draft.text"/>
-      </xsl:when>
-
-      <xsl:when test="($sequence='odd' or $sequence='even') and $position='center'">
-        <xsl:if test="$pageclass != 'titlepage'">
-          <xsl:choose>
-            <xsl:when test="ancestor::book and ($double.sided != 0)">
-              <fo:retrieve-marker retrieve-class-name="section.head.marker"
-                                  retrieve-position="first-including-carryover"
-                                  retrieve-boundary="page-sequence"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:apply-templates select="." mode="titleabbrev.markup"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:if>
-      </xsl:when>
-
-      <xsl:when test="$position='center'">
-        <!-- nothing for empty and blank sequences -->
-      </xsl:when>
-
-      <xsl:when test="$position='right'">
-        <!-- Same for odd, even, empty, and blank sequences -->
-        <xsl:call-template name="draft.text"/>
-      </xsl:when>
-
-      <xsl:when test="$sequence = 'first'">
-        <!-- nothing for first pages -->
-      </xsl:when>
-
-      <xsl:when test="$sequence = 'blank'">
-        <!-- nothing for blank pages -->
-      </xsl:when>
-    </xsl:choose>
-  </fo:block>
-</xsl:template>
 
 <xsl:template name="header.footer.width">
   <xsl:param name="location" select="'header'"/>
