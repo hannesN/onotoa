@@ -50,7 +50,7 @@ import org.eclipse.jface.viewers.TextCellEditor;
 
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.figures.CircleFigure;

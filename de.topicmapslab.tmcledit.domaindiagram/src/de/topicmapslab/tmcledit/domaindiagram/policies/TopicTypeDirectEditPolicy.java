@@ -19,8 +19,8 @@ import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
 
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.Activator;
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.NodeEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.TypeNodeEditPart;
