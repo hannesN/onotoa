@@ -413,7 +413,8 @@ public class AnnotationWidget extends Composite {
 				}
 			} else {
 				currValidator = null;
-				proposalProvider.setProvider(null);
+				if (proposalProvider!=null)
+					proposalProvider.setProvider(null);
 			}
 			return getTextEditor();
 		}

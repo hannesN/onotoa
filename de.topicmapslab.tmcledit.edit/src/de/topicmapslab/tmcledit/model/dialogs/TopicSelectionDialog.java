@@ -207,7 +207,6 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 					selectedTopics.add(tt);
 					selectedTopicList.refresh();
 				}
-
 			}
 		});
 		fac.applyTo(createButton);
