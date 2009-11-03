@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="de.topicmapslab.tmcledit.edit.preferences.GeneralPreferencePage"
+            class="de.topicmapslab.onotoa.net.sync.preferences.WorkbenchPreferencePage"
+            id="de.topicmapslab.onotoa.net.sync.preferences.WorkbenchPreferencePage"
+            name="Communication">
+      </page>
+   </extension>
+
+</plugin>

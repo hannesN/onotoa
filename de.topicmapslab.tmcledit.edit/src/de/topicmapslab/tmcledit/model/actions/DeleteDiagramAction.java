@@ -13,7 +13,13 @@
  */
 package de.topicmapslab.tmcledit.model.actions;
 
-import org.eclipse.emf.common.command.AbstractCommand;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -31,19 +37,31 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  */
 public class DeleteDiagramAction extends Action implements ISelectionChangedListener {
 
-	private Diagram diagram;
+	private List<Diagram> diagrams;
 	private ModelView modelView;
 
 	public DeleteDiagramAction(ModelView modelView) {
 		setText("Delete");
 		this.modelView = modelView;
+		diagrams = new ArrayList<Diagram>();
 		modelView.addSelectionChangedListener(this);
 		setDiagram(null);
 	}
 
-	public void setDiagram(Diagram diagram) {
-		this.diagram = diagram;
-		setEnabled(diagram!=null);
+	@SuppressWarnings("unchecked")
+    public void setDiagram(IStructuredSelection sel) {
+		diagrams.clear();
+		if (sel!=null) {
+			Iterator it = sel.iterator();
+			
+			while (it.hasNext()) {
+				Object o = it.next();
+				if (o instanceof Diagram) {
+					diagrams.add((Diagram) o);
+				}
+			}
+		}
+		setEnabled(!diagrams.isEmpty());
 	}
 
 	@Override
@@ -52,23 +70,36 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 		if (MessageDialog.openQuestion(shell, "Are you sure?",
 				"Do you really want to delete the selected diagram?")) {
 			
-			AbstractCommand cmd = new DeleteDiagramCommand(diagram);
-			modelView.getEditingDomain().getCommandStack().execute(cmd);
+			CompoundCommand ccmd = new CompoundCommand();
+			
+			List<DeleteDiagramCommand> cmdList = new ArrayList<DeleteDiagramCommand>();
+			for (Diagram d : diagrams) {
+				DeleteDiagramCommand cmd = new DeleteDiagramCommand(d);
+				cmdList.add(cmd);
+			}
+			
+			// sorting commands, so the diagram deletion can be undone (command uses position in
+			// diagram list therefor the diagrams with the lower indices need to be deleted last)
+			Collections.sort(cmdList, new Comparator<DeleteDiagramCommand>() {
+
+				public int compare(DeleteDiagramCommand o1, DeleteDiagramCommand o2) {
+					if (o1.getIndex()==o2.getIndex())
+						return 0;
+					if (o1.getIndex()<o2.getIndex())
+						return 1;
+					else return -1;
+                }
+				
+			});
+			for (DeleteDiagramCommand cmd : cmdList)
+				ccmd.append(cmd);
+			
+			modelView.getEditingDomain().getCommandStack().execute(ccmd);
 		}
 
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
-		Diagram diagram = null;
-		if ((!event.getSelection().isEmpty()) || ((event.getSelection() instanceof IStructuredSelection))) {
-
-			IStructuredSelection sel = (IStructuredSelection) event.getSelection();
-
-			Object obj = sel.getFirstElement();
-			if (obj instanceof Diagram)
-			diagram = (Diagram) obj;
-		}
-		setDiagram(diagram);
-
+		setDiagram((IStructuredSelection) event.getSelection());
 	}
 }

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TypeNodeImpl#getTopicType <em>Topic Type</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TypeNodeImpl#getImage <em>Image</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,6 +40,25 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 	 * @ordered
 	 */
 	protected TopicType topicType;
+
+	/**
+	 * The default value of the '{@link #getImage() <em>Image</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IMAGE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getImage() <em>Image</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String image = IMAGE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,12 +122,35 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImage(String newImage) {
+		String oldImage = image;
+		image = newImage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TYPE_NODE__IMAGE, oldImage, image));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.TYPE_NODE__TOPIC_TYPE:
 				if (resolve) return getTopicType();
 				return basicGetTopicType();
+			case ModelPackage.TYPE_NODE__IMAGE:
+				return getImage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -122,6 +165,9 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 		switch (featureID) {
 			case ModelPackage.TYPE_NODE__TOPIC_TYPE:
 				setTopicType((TopicType)newValue);
+				return;
+			case ModelPackage.TYPE_NODE__IMAGE:
+				setImage((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,6 +184,9 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 			case ModelPackage.TYPE_NODE__TOPIC_TYPE:
 				setTopicType((TopicType)null);
 				return;
+			case ModelPackage.TYPE_NODE__IMAGE:
+				setImage(IMAGE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -152,8 +201,26 @@ public class TypeNodeImpl extends NodeImpl implements TypeNode {
 		switch (featureID) {
 			case ModelPackage.TYPE_NODE__TOPIC_TYPE:
 				return topicType != null;
+			case ModelPackage.TYPE_NODE__IMAGE:
+				return IMAGE_EDEFAULT == null ? image != null : !IMAGE_EDEFAULT.equals(image);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (image: ");
+		result.append(image);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TypeNodeImpl

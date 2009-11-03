@@ -74,6 +74,7 @@ import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
+import de.topicmapslab.tmcledit.diagram.util.IPrintableDiagramEditor;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
@@ -89,7 +90,7 @@ import de.topicmapslab.tmcledit.model.util.io.FileUtil;
  * 
  */
 public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
-		implements ISelectionChangedListener, ISelectionProvider {
+		implements ISelectionChangedListener, ISelectionProvider, IPrintableDiagramEditor {
 
 	public static final String ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
 
@@ -162,6 +163,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				}
 			}
 		});
+	}
+	
+	protected org.eclipse.emf.common.command.CommandStack getEMFCommandStack() {
+		return ((TMCLEditDomain)getEditDomain()).getEditingDomain().getCommandStack();
 	}
 
 	@Override
@@ -268,14 +273,10 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	protected void createActions() {
-		getActionRegistry().registerAction(new RemoveFromDiagramAction(getEditDomain()
-				.getCommandStack()));
-		getActionRegistry().registerAction(new DeleteFromModelAction(getEditDomain()
-				.getCommandStack()));
-		getActionRegistry().registerAction(new AddNameConstraintAction(getEditDomain()
-				.getCommandStack()));
-		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEditDomain()
-				.getCommandStack()));
+		getActionRegistry().registerAction(new RemoveFromDiagramAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(new DeleteFromModelAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(new AddNameConstraintAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEMFCommandStack()));
 		super.createActions();
 	}
 
@@ -289,6 +290,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		((TMCLEditDomain) getEditDomain()).setEditingDomain(ei
 				.getEditingDomain());
 
+		setTitleImage(input.getImageDescriptor().createImage());
+		
 		dirtyAdapter = new DirtyAdapter();
 		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
 		diagram.eAdapters().add(dirtyAdapter);
@@ -471,6 +474,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return (TMCLEditorInput) getEditorInput();
 	}
 
+	/* (non-Javadoc)
+	 * @see de.topicmapslab.tmcledit.diagram.editor.IPrintableDiagramEditor#getPrintableFigure()
+	 */
 	public IFigure getPrintableFigure() {
 		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
 	}

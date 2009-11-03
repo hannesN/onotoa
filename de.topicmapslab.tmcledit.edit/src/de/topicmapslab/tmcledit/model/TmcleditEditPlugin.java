@@ -25,6 +25,7 @@ import de.topicmapslab.tmcledit.model.util.extension.PSIProviderInfo;
  */
 public final class TmcleditEditPlugin extends EMFPlugin {
 	
+	public static final String DOMAIN_DIAGRAMEDITOR_ID = "de.topicmapslab.tmcledit.domaindiagram.editor.DomainDiagramEditor";
 	public final static String DIAGRAMEDITOR_ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
 	public final static String PLUGIN_ID = "de.topicmapslab.tmcledit.edit";
 	

@@ -10,8 +10,12 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.*;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_HEIGHT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_IMAGE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ID;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_KEY;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_NAME;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_POS_X;
@@ -23,6 +27,7 @@ import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TAR
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TOPIC_ROLE_REF;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TYPE;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_VALUE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_WIDTH;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_AKO;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ANNOTATION;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ASSOCIATION_CONSTRAINT;
@@ -32,6 +37,7 @@ import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_COM
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_DESCRIPTION;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_DIAGRAM;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_EDGE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_FILE;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ISA;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_LABEL_POSITION;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_MAPPING_ELEMENT;
@@ -40,6 +46,7 @@ import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NOD
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OCCURRENCE_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OTHER_PLAYER;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OTHER_ROLE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OVERLAP;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_PLAYER;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_REIFIER_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ROLE;
@@ -51,6 +58,7 @@ import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SCO
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SEE_ALSO;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_IDENTIFIER_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_LOCATOR_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_REIFIES_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_ROLE_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_TYPE;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_TYPE_REF;
@@ -97,6 +105,7 @@ import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -131,6 +140,7 @@ class ModelHandler extends DefaultHandler {
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+		try {
 		if (E_FILE.equals(qName)) {
 			setId(file, attributes);
 		}
@@ -261,7 +271,13 @@ class ModelHandler extends DefaultHandler {
 		}
 		
 		if (E_DIAGRAM.equals(qName)) {
-			Diagram d = fac.createDiagram();
+			String type = attributes.getValue(A_TYPE);
+			Diagram d;
+			if (type==null)
+				d = fac.createDiagram();
+			else
+				d = fac.createDomainDiagram();
+			
 			setId(d, attributes);
 			String name = attributes.getValue(A_NAME);
 			if (name==null)
@@ -324,6 +340,9 @@ class ModelHandler extends DefaultHandler {
 			setId(sc, attributes);
 			constructs.push(sc);	
 		}
+		}catch (Exception e) {
+			TmcleditEditPlugin.getPlugin().log(e);
+		}
 	}
 
 	private void setId(OnoObject o, Attributes attributes) {
@@ -366,6 +385,9 @@ class ModelHandler extends DefaultHandler {
 	    if (type.equals("typeNode")) {
 	    	state = State.TYPE_NODE;
 	    	node = fac.createTypeNode();
+	    	String image = attributes.getValue(A_IMAGE);
+			if (image!=null)
+				((TypeNode) node).setImage(image);
 	    } else {
 	    	state = State.ASSOCIATION_NODE;
 	    	node = fac.createAssociationNode();
