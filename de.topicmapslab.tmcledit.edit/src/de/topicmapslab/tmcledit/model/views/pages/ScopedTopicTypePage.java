@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -42,8 +43,10 @@ import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddScopeConstraintsCommand;
+import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.SetCardinalitiesCommand;
@@ -228,6 +231,7 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 						sc.setCardMax("1");
 						scl.add(sc);
 					}
+					
 					AddScopeConstraintsCommand cmd = new AddScopeConstraintsCommand(getCastedModel(), scl);
 					getCommandStack().execute(cmd);
 
@@ -243,16 +247,21 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 				WizardDialog dlg = new WizardDialog(control.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {
+					CompoundCommand cmd = new CompoundCommand();
 					TopicType tt = wizard.getNewTopicType();
-					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
+					
+					cmd.append(new CreateTopicTypeCommand((TopicMapSchema) getCastedModel().eContainer(), tt)); 
+
 					List<ScopeConstraint> scl = new ArrayList<ScopeConstraint>();
 					ScopeConstraint sc = ModelFactory.eINSTANCE.createScopeConstraint();
 					sc.setType(tt);
 					sc.setCardMin("0");
 					sc.setCardMax("1");
 					scl.add(sc);
-					AddScopeConstraintsCommand cmd = new AddScopeConstraintsCommand(getCastedModel(), scl);
-					getCommandStack().execute(cmd);
+					cmd.append(new AddScopeConstraintsCommand(getCastedModel(), scl));
+					
+					if(cmd.canExecute())
+						getCommandStack().execute(cmd);
 
 				}
 			}

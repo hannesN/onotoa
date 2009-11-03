@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -52,9 +53,11 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddRoleCombinationConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
+import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveRoleCombinationConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewRoleCombinationConstraintDialog;
@@ -156,14 +159,16 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				WizardDialog dlg = new WizardDialog(control.getShell(), wizard);
 
 				if (dlg.open() == Dialog.OK) {
+					CompoundCommand cmd = new CompoundCommand();
 					TopicType tt = wizard.getNewTopicType();
-					ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
+					cmd.append(new CreateTopicTypeCommand((TopicMapSchema)getCastedModel().eContainer(), tt));
 					RoleConstraint rc = ModelFactory.eINSTANCE.createRoleConstraint();
 					rc.setType(tt);
 					rc.setCardMin("1");
 					rc.setCardMax("1");
-					AddRoleConstraintCommand cmd = new AddRoleConstraintCommand(getCastedModel(), rc);
-					getCommandStack().execute(cmd);
+					cmd.append(new AddRoleConstraintCommand(getCastedModel(), rc));
+					if (cmd.canExecute())
+						getCommandStack().execute(cmd);
 				}
 			}
 		});

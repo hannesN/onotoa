@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -51,9 +52,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddTopicReifiesConstraintsCommand;
+import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveTopicReifiesConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
@@ -373,14 +376,16 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 					WizardDialog dlg = new WizardDialog(reifiesControl.getShell(), wizard);
 
 					if (dlg.open() == Dialog.OK) {
+						CompoundCommand cmd = new CompoundCommand();
 						TopicType tt = wizard.getNewTopicType();
-						ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().add(tt);
+						cmd.append(new CreateTopicTypeCommand((TopicMapSchema) getCastedModel().eContainer(), tt));
 						TopicReifiesConstraint trc = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
 						trc.setType(tt);
 						trc.setCardMin("0");
 						trc.setCardMax("1");
-						AddTopicReifiesConstraintsCommand cmd = new AddTopicReifiesConstraintsCommand(getCastedModel(), trc);
-						getCommandStack().execute(cmd);
+						cmd.append(new AddTopicReifiesConstraintsCommand(getCastedModel(), trc));
+						if (cmd.canExecute())
+							getCommandStack().execute(cmd);
 
 					}
 				}
