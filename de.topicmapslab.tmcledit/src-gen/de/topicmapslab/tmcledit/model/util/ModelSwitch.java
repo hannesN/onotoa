@@ -443,6 +443,14 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.DOMAIN_DIAGRAM: {
+				DomainDiagram domainDiagram = (DomainDiagram)theEObject;
+				T result = caseDomainDiagram(domainDiagram);
+				if (result == null) result = caseDiagram(domainDiagram);
+				if (result == null) result = caseOnoObject(domainDiagram);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ModelPackage.ONO_OBJECT: {
 				OnoObject onoObject = (OnoObject)theEObject;
 				T result = caseOnoObject(onoObject);
@@ -1020,6 +1028,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseTopicReifiesConstraint(TopicReifiesConstraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Diagram</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainDiagram(DomainDiagram object) {
 		return null;
 	}
 

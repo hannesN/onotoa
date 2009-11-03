@@ -14,6 +14,7 @@ import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class CreateNameTypeConstraintCommand extends AbstractCommand {
@@ -21,6 +22,7 @@ public class CreateNameTypeConstraintCommand extends AbstractCommand {
 
 	private final TopicType topicType;
 	private final NameTypeConstraint nameTypeConstraint;
+	private TopicMapSchema schema;
 	
 	public CreateNameTypeConstraintCommand(TopicType topicType) {
 		this(topicType, ModelFactory.eINSTANCE.createNameTypeConstraint());
@@ -35,6 +37,8 @@ public class CreateNameTypeConstraintCommand extends AbstractCommand {
 	
 	public void execute() {
 		topicType.getNameContraints().add(nameTypeConstraint);
+		if (schema!=null)
+			schema.getTopicTypes().add(nameTypeConstraint.getType());
 	}
 
 	public void redo() {
@@ -44,10 +48,15 @@ public class CreateNameTypeConstraintCommand extends AbstractCommand {
 	@Override
 	public void undo() {
 		topicType.getNameContraints().remove(nameTypeConstraint);
+		if (schema!=null)
+			schema.getTopicTypes().remove(nameTypeConstraint.getType());
 	}
 	
 	@Override
 	protected boolean prepare() {
+		if ( (nameTypeConstraint.getType()!=null) && (nameTypeConstraint.getType().eContainer()==null) ){
+			schema = (TopicMapSchema) topicType.eContainer();
+		}
 		return true;
 	}
 

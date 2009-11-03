@@ -10,25 +10,22 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.action;
 
-import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.gef.ui.actions.UpdateAction;
-import org.eclipse.jface.action.Action;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+
+import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 
 /**
  * @author Hannes Niederhausen
  * 
  */
-public abstract class AbstractSelectionAction extends Action implements
+public abstract class AbstractSelectionAction extends AbstractCommandStackAction implements
 		UpdateAction {
 
 	private IStructuredSelection selections;
-	private final CommandStack commandStack;
-
 	public AbstractSelectionAction(CommandStack commandStack) {
-		super();
-		this.commandStack = commandStack;
+		super(commandStack);
 		selections = new StructuredSelection();
 		update();
 	}
@@ -36,10 +33,6 @@ public abstract class AbstractSelectionAction extends Action implements
 	public void setSelections(IStructuredSelection selections) {
 		this.selections = selections;
 		update();
-	}
-	
-	protected CommandStack getCommandStack() {
-		return commandStack;
 	}
 	
 	protected IStructuredSelection getSelections() {

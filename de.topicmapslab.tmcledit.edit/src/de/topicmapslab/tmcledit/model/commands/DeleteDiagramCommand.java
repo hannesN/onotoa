@@ -48,6 +48,10 @@ public class DeleteDiagramCommand extends AbstractCommand {
 	public void redo() {
 		execute();
 	}
+	
+	public int getIndex() {
+	    return index;
+    }
 
 	@Override
 	protected boolean prepare() {
