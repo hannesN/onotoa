@@ -19,7 +19,7 @@ import org.eclipse.gef.editpolicies.GraphicalNodeEditPolicy;
 import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gef.requests.ReconnectRequest;
 
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;

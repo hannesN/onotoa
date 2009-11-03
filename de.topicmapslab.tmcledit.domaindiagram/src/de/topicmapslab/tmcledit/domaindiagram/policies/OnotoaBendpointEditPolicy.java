@@ -16,7 +16,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.BendpointEditPolicy;
 import org.eclipse.gef.requests.BendpointRequest;
 
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.commands.AddBendpointCommand;

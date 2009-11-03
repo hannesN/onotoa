@@ -25,7 +25,7 @@ import org.eclipse.gef.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.CreateRequest;
 
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.model.LabelPos;

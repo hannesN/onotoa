@@ -14,7 +14,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ContainerEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;

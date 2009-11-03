@@ -69,7 +69,7 @@ import de.topicmapslab.tmcledit.model.util.Base64;
  */
 public class TypeNodeEditPart extends
 		de.topicmapslab.tmcledit.domaindiagram.editparts.NodeEditPart implements
-		NodeEditPart, IContextMenuProvider {
+		NodeEditPart, IContextMenuProvider, IDirectEditable {
 	
 	protected DirectEditManager editManager;
 
@@ -351,6 +351,10 @@ public class TypeNodeEditPart extends
 	@Override
 	public IFigure getContentPane() {
 		return compartmentFigure;
+	}
+
+	public DirectEditManager getManager() {
+		return editManager;
 	}
 
 }
