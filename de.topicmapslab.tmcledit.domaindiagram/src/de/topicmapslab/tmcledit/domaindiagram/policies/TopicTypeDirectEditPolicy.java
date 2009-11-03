@@ -16,9 +16,11 @@ package de.topicmapslab.tmcledit.domaindiagram.policies;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
 
-import de.topicmapslab.tmcledit.domaindiagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.domaindiagram.Activator;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.NodeEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.TypeNodeEditPart;
@@ -41,7 +43,19 @@ public class TopicTypeDirectEditPolicy extends DirectEditPolicy {
 			String newName = (String) cellEditor.getValue();
 			RenameTopicTypeCommand cmd = new RenameTopicTypeCommand(tn.getTopicType(), newName);
 			DomainEditDomain ed = (DomainEditDomain) getHost().getViewer().getEditDomain();
-			return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
+			
+			if (cmd.canExecute())
+				return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
+			else {
+				String msg = null;
+				if (newName.length()==0)
+					msg = "Please enter a name.";
+				else
+					msg = "The name is already used.";
+				MessageDialog.openError(Activator.getCurrentShell(), "Invalid name", msg);
+			}
+			
+			
 		
 		}
 		return null;

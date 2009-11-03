@@ -60,7 +60,7 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 
 	@Override
 	protected void refreshVisuals() {
-		getNameLabel().setText(getCastedModel().getPlayer().getName() + " isa ");
+		getNameLabel().setText(getCastedModel().getPlayer().getName() + " as ");
 		RoleConstraint role = getCastedModel().getRole();
 		getSecondaryLabel().setText("???");
 		if (role != null) {
