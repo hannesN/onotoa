@@ -14,6 +14,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.jface.dialogs.MessageDialog;
 
+import de.topicmapslab.tmcledit.diagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.domaindiagram.Activator;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
@@ -21,7 +22,7 @@ import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 public class AbstractTypedConstraintDirectEditPolicy extends AbstractDirectEditPolicy {
 
 	@Override
-	public Command getRenameCommand(Object model, DirectEditRequest request) {
+	public Command getCommand(Object model, DirectEditRequest request) {
 
 		if (model instanceof AbstractTypedConstraint) {
 			

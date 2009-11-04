@@ -16,8 +16,8 @@ import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.jface.viewers.CellEditor;
 
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
-import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
-import de.topicmapslab.tmcledit.diagram.editparts.AbstractLabelEditPart;
+import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
+import de.topicmapslab.tmcledit.diagram.editparts.IDirectEditable;
 
 public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 
@@ -27,9 +27,9 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
-		if (getHost() instanceof AbstractLabelEditPart) {
-			TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
-			org.eclipse.emf.common.command.Command cmd = getRenameCommand(getHost().getModel(), request);
+		if (getHost() instanceof IDirectEditable) {
+			IOnotoaEditDomain ed = (IOnotoaEditDomain) getHost().getViewer().getEditDomain();
+			org.eclipse.emf.common.command.Command cmd = getCommand(getHost().getModel(), request);
 			if (cmd!=null)
 				return new CommandAdapter(ed.getEditingDomain().getCommandStack(), cmd);
 		
@@ -42,12 +42,12 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 		return (String) cellEditor.getValue();
 	}
 	
-	public abstract org.eclipse.emf.common.command.Command getRenameCommand(Object model, DirectEditRequest request);
+	public abstract org.eclipse.emf.common.command.Command getCommand(Object model, DirectEditRequest request);
 		
 	@Override
 	protected void revertOldEditValue(DirectEditRequest request) {
-		if (getHost() instanceof AbstractLabelEditPart) {
-			AbstractLabelEditPart otcep = ((AbstractLabelEditPart)getHost());
+		if (getHost() instanceof IDirectEditable) {
+			IDirectEditable otcep = ((IDirectEditable)getHost());
 			
 			otcep.revertNameChange();
 		}
@@ -56,8 +56,8 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 	@Override
 	protected void showCurrentEditValue(DirectEditRequest request) {
 		String value = (String) request.getCellEditor().getValue();
-		AbstractLabelEditPart ep = (AbstractLabelEditPart) getHost();
-		ep.handleNameChange(value);
+		IDirectEditable ep = (IDirectEditable) getHost();
+		((IDirectEditable)ep).handleNameChange(value);
 	}
 
 }

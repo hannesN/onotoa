@@ -16,6 +16,7 @@ package de.topicmapslab.tmcledit.domaindiagram.policies;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.gef.requests.DirectEditRequest;
 
+import de.topicmapslab.tmcledit.diagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 
@@ -28,7 +29,7 @@ import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 public class OccurrenceConstraintDirectEditPolicy extends AbstractDirectEditPolicy {
 
 	@Override
-	public Command getRenameCommand(Object model, DirectEditRequest request) {
+	public Command getCommand(Object model, DirectEditRequest request) {
 		if (model instanceof OccurrenceTypeConstraint)
 			return new RenameTopicTypeCommand(((OccurrenceTypeConstraint) model).getType(), getNewString(request));
 		return null;

@@ -48,13 +48,14 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.TextCellEditor;
 
+import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
+import de.topicmapslab.tmcledit.diagram.editparts.IDirectEditable;
+import de.topicmapslab.tmcledit.diagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
-import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
 import de.topicmapslab.tmcledit.domaindiagram.figures.CircleFigure;
-import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -291,7 +292,7 @@ public class AssociationNodeEditPart extends NodeEditPart implements IDirectEdit
 				new AbstractDirectEditPolicy() {
 					
 					@Override
-					public org.eclipse.emf.common.command.Command getRenameCommand(
+					public org.eclipse.emf.common.command.Command getCommand(
 							Object model, DirectEditRequest request) {
 						if (model instanceof AssociationNode) {
 							TopicType tt = ((AssociationNode)model).getAssociationConstraint().getType();

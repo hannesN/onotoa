@@ -29,7 +29,7 @@ import org.eclipse.swt.graphics.Point;
 
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.CommentEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.CommentEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;

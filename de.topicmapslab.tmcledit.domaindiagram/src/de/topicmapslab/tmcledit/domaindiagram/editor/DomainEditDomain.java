@@ -17,7 +17,9 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.ui.IEditorPart;
 
-public class DomainEditDomain extends DefaultEditDomain {
+import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
+
+public class DomainEditDomain extends DefaultEditDomain implements IOnotoaEditDomain{
 
 	private EditingDomain editingDomain;
 	

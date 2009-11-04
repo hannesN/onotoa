@@ -14,41 +14,42 @@
 package de.topicmapslab.tmcledit.diagram.directedit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.tools.DirectEditManager;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+
+import de.topicmapslab.tmcledit.diagram.figures.CommentFigure;
 
 /**
  * @author Hannes Niederhausen
  *
  */
-public class TMCLDirectEditManager extends DirectEditManager {
+public class CommentDirectEditManager extends DirectEditManager {
 
 	private String originalValue;
-	private Label label;
+	private CommentFigure figure;
 	private Font figureFont;
 
-	@SuppressWarnings("unchecked")
-	public TMCLDirectEditManager(GraphicalEditPart source, Class editorType,
-			Label label) {
-		super(source, editorType, new LabelCellEditorLocator(label));
-		this.label = label;
+	public CommentDirectEditManager(GraphicalEditPart source, 
+			CommentFigure figure) {
+		super(source, TextCellEditor.class, new CommentFigureCellEditorLocator(figure));
+		this.figure = figure;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.tools.DirectEditManager#initCellEditor()
-	 */
 	@Override
 	protected void initCellEditor() {
 		Text text = (Text) getCellEditor().getControl();
 
 		
 		//set the initial value of the
-		originalValue = this.label.getText();
+		originalValue = this.figure.getText();
 		getCellEditor().setValue(originalValue);
 
 		//calculate the font size of the underlying
@@ -58,7 +59,7 @@ public class TMCLDirectEditManager extends DirectEditManager {
 		Dimension fontSize = new Dimension(0, data.getHeight());
 
 		//set the font to be used
-		this.label.translateToAbsolute(fontSize);
+		this.figure.translateToAbsolute(fontSize);
 		data.setHeight(fontSize.height);
 		figureFont = new Font(null, data);
 
@@ -66,5 +67,12 @@ public class TMCLDirectEditManager extends DirectEditManager {
 		text.selectAll();
 	}
 
+	protected CellEditor createCellEditorOn(Composite composite) {
+		try {
+			return new TextCellEditor(composite, SWT.MULTI);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 	
 }

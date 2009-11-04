@@ -13,13 +13,14 @@ package de.topicmapslab.tmcledit.domaindiagram.policies;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.gef.requests.DirectEditRequest;
 
+import de.topicmapslab.tmcledit.diagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 
 public class NameConstraintDirectEditPolicy extends AbstractDirectEditPolicy {
 
 	@Override
-	public Command getRenameCommand(Object model, DirectEditRequest request) {
+	public Command getCommand(Object model, DirectEditRequest request) {
 
 		if (model instanceof AbstractTypedConstraint) 
 			return new RenameTopicTypeCommand(((AbstractTypedConstraint) model).getType(), getNewString(request));

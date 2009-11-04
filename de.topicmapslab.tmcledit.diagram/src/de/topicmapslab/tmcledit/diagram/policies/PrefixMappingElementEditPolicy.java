@@ -26,7 +26,7 @@ public class PrefixMappingElementEditPolicy extends AbstractDirectEditPolicy {
 	public static final String EXT_EDITED_VALUE = "value";
 	
 	@Override
-	public Command getRenameCommand(Object model, DirectEditRequest request) {
+	public Command getCommand(Object model, DirectEditRequest request) {
 		if (model instanceof MappingElement) {
 			MappingElement element = (MappingElement) model;
 			String newKey = element.getKey();

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.jface.dialogs.MessageDialog;
 
+import de.topicmapslab.tmcledit.diagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
 import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
@@ -26,7 +27,7 @@ public class PrefixMappingElementEditPolicy extends AbstractDirectEditPolicy {
 	public static final String EXT_EDITED_VALUE = "value";
 	
 	@Override
-	public Command getRenameCommand(Object model, DirectEditRequest request) {
+	public Command getCommand(Object model, DirectEditRequest request) {
 		if (model instanceof MappingElement) {
 			MappingElement element = (MappingElement) model;
 			String newKey = element.getKey();

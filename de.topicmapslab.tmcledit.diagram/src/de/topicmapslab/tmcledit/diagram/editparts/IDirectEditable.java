@@ -1,4 +1,4 @@
-package de.topicmapslab.tmcledit.domaindiagram.editparts;
+package de.topicmapslab.tmcledit.diagram.editparts;
 
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
