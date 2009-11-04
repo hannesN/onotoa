@@ -25,7 +25,7 @@ import org.eclipse.gef.requests.DirectEditRequest;
 public class OccurrenceConstraintDirectEditPolicy extends AbstractDirectEditPolicy {
 
 	@Override
-	public Command getRenameCommand(Object model, DirectEditRequest request) {
+	public Command getCommand(Object model, DirectEditRequest request) {
 //		if (model instanceof OccurrenceTypeConstraint)
 //			return new RenameTopicTypeCommand(((OccurrenceTypeConstraint) model).getType(), getNewString(request));
 		return null;

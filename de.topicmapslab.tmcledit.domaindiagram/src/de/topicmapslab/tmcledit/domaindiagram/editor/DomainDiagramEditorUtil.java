@@ -24,12 +24,12 @@ import org.eclipse.gef.palette.PaletteSeparator;
 import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
 
+import de.topicmapslab.tmcledit.diagram.editparts.CommentEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.AssociationNodeCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.NameConstraintCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.OccurrenceConstraintCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.creationfactories.TypeNodeCreationFactory;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.AssociationNodeEditPart;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.CommentEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.EdgeEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;

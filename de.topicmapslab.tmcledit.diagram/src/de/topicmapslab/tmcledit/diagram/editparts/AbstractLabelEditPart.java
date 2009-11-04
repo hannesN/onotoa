@@ -34,7 +34,7 @@ import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.EditableLabel;
 import de.topicmapslab.tmcledit.diagram.figures.SelectionFigure;
 
-public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart {
+public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart implements IDirectEditable {
 
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;

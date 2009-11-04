@@ -21,5 +21,8 @@ Export-Package: de.topicmapslab.tmcledit.diagram,
  de.topicmapslab.tmcledit.diagram.action,
  de.topicmapslab.tmcledit.diagram.command,
  de.topicmapslab.tmcledit.diagram.editor,
+ de.topicmapslab.tmcledit.diagram.editparts,
+ de.topicmapslab.tmcledit.diagram.figures,
+ de.topicmapslab.tmcledit.diagram.policies,
  de.topicmapslab.tmcledit.diagram.preferences,
  de.topicmapslab.tmcledit.diagram.util

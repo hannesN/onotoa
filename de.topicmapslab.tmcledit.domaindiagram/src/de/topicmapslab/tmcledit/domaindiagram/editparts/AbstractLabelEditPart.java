@@ -30,6 +30,7 @@ import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 
+import de.topicmapslab.tmcledit.diagram.editparts.IDirectEditable;
 import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.figures.EditableLabel;
 import de.topicmapslab.tmcledit.domaindiagram.figures.SelectionFigure;
