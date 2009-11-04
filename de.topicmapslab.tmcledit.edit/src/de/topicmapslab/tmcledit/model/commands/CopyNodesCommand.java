@@ -34,6 +34,7 @@ public class CopyNodesCommand extends AbstractCommand {
 	private List<Edge> newEdgeList;
 	
 	private Map<Node, Node> newNodesMap;
+	private Map<Comment, Comment> newCommentMap;
 	
 	
 	
@@ -42,12 +43,13 @@ public class CopyNodesCommand extends AbstractCommand {
 	    this.nodeList = nodeList;
 	    this.newDiagram = newDiagram;
 	    newNodesMap = new HashMap<Node, Node>(nodeList.size());
+	    newCommentMap = new HashMap<Comment, Comment>();
     }
 
 	public void execute() {
 		newDiagram.getNodes().addAll(newNodesMap.values());
 		newDiagram.getEdges().addAll(newEdgeList);
-		
+		newDiagram.getComments().addAll(newCommentMap.values());
 		
     }
 
@@ -59,6 +61,7 @@ public class CopyNodesCommand extends AbstractCommand {
 	public void undo() {
 		newDiagram.getEdges().removeAll(newEdgeList);
 		newDiagram.getNodes().removeAll(newNodesMap.values());
+		newDiagram.getComments().removeAll(newCommentMap.values());
 	}
 	
 	@Override
@@ -93,7 +96,11 @@ public class CopyNodesCommand extends AbstractCommand {
 			
 			newNode.setPosX(n.getPosX());
 			newNode.setPosY(n.getPosY());
-			newNodesMap.put(n, newNode);
+			if (n instanceof Comment) {
+				newCommentMap.put((Comment) n, (Comment) newNode);
+			} else {
+				newNodesMap.put(n, newNode);
+			}
 		}
 	    
     }
@@ -148,7 +155,7 @@ public class CopyNodesCommand extends AbstractCommand {
 					}
 				}
 			}
-		} else {
+		} else if (node instanceof TypeNode) {
 			TypeNode tn = (TypeNode) node;
 			AssociationIndexer associationIndexer = ModelIndexer.getAssociationIndexer();
 			for (RolePlayerConstraint rpc : associationIndexer.getRolePlayerConstraintsFor(tn.getTopicType())) {

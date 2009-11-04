@@ -2,12 +2,14 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
@@ -28,6 +30,7 @@ public class MoveNodesCommand extends AbstractCommand {
 	private final Diagram newDiagram;
 	
 	private final List<Node> nodeList;
+	private List<Comment> commentList;
 	
 	private List<Edge> oldEdgeList;
 	private List<Edge> newEdgeList;
@@ -45,10 +48,11 @@ public class MoveNodesCommand extends AbstractCommand {
 	public void execute() {
 		oldDiagram.getEdges().removeAll(oldEdgeList);
 		oldDiagram.getNodes().removeAll(nodeList);
+		oldDiagram.getComments().removeAll(commentList);
 		
 		newDiagram.getNodes().addAll(nodeList);
 		newDiagram.getEdges().addAll(newEdgeList);
-		
+		newDiagram.getComments().addAll(commentList);
 		
     }
 
@@ -60,18 +64,40 @@ public class MoveNodesCommand extends AbstractCommand {
 	public void undo() {
 		newDiagram.getEdges().removeAll(newEdgeList);
 		newDiagram.getNodes().removeAll(nodeList);
+		newDiagram.getComments().removeAll(commentList);
 
 		oldDiagram.getNodes().addAll(nodeList);
 		oldDiagram.getEdges().addAll(oldEdgeList);
+		oldDiagram.getComments().addAll(commentList);
 		
 	}
 	
 	@Override
 	protected boolean prepare() {
+		findCommentNodes();		
 		findRemoveEdges();
 		findNewEdges();
+		
 		return true;
 	}
+	
+	
+
+	private void findCommentNodes() {
+	    Iterator<Node> it = nodeList.iterator();
+	    commentList = new ArrayList<Comment>();
+	    while (it.hasNext()) {
+	    	Node n = it.next();
+	    	if (n instanceof Comment) {
+	    		commentList.add((Comment) n);
+	    		it.remove();
+	    	}
+	    }
+	    
+	    if (commentList.size()==0) {
+	    	commentList=Collections.emptyList();
+	    }
+    }
 
 	private void findNewEdges() {
 		newEdgeList = new ArrayList<Edge>();
