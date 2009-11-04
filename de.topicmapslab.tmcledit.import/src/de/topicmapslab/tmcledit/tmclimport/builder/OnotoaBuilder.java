@@ -26,6 +26,7 @@ import static org.tinytim.voc.TMCL.OCCURRENCE_TYPE;
 import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_ROLE;
 import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_TOPIC_TYPE;
 import static org.tinytim.voc.TMCL.OVERLAP_DECLARATION;
+import static org.tinytim.voc.TMCL.OVERLAPS;
 import static org.tinytim.voc.TMCL.REGEXP;
 import static org.tinytim.voc.TMCL.REGULAR_EXPRESSION_CONSTRAINT;
 import static org.tinytim.voc.TMCL.REIFIER_CONSTRAINT;
@@ -120,7 +121,7 @@ public class OnotoaBuilder {
 	Map<Topic, TopicType> topicTypeMap;
 	Set<RolePlayerConstraintContainer> rpcContainer = new HashSet<RolePlayerConstraintContainer>();
 
-	// some tmdm topics
+	// some tmdm topicsov
 	private Topic topicName;
 	private Topic subject;
 
@@ -407,7 +408,9 @@ public class OnotoaBuilder {
 		constrainedRole = createStandardTopic(CONSTRAINED_ROLE);
 		otherConstrainedRole = createStandardTopic(OTHER_CONSTRAINED_ROLE);
 		otherConstrainedTopicType = createStandardTopic(OTHER_CONSTRAINED_TOPIC_TYPE);
-//		overlaps = createStandardTopic(OVERLAPS);
+//		overlaps = 
+			createStandardTopic(OVERLAP_DECLARATION);
+			createStandardTopic(OVERLAPS);
 
 //		constraint = createStandardTopic(CONSTRAINT);
 		abstractConstraint = createStandardTopic(ABSTRACT_CONSTRAINT);
