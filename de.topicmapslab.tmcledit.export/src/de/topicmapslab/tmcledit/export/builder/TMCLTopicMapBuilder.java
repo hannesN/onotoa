@@ -118,6 +118,9 @@ public class TMCLTopicMapBuilder {
 
 	private void createAssociationConstraints() {
 		for (AssociationTypeConstraint atc : topicMapSchema.getAssociationTypeConstraints()) {
+			if (atc.getType()==null)
+				continue;
+				
 			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
 				setRolePlayerConstraint(atc.getType(), rpc);
 			}
