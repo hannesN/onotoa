@@ -10,29 +10,48 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.action;
 
-import org.eclipse.emf.common.command.Command; 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class AddOccurrenceConstraintAction extends AddConstraintAction {
 	public static final String ID = "de.topicmapslab.tmcleditor.addoccurrenceconstraint";
+	private boolean createType = false;
+	
+	public AddOccurrenceConstraintAction(CommandStack commandStack, boolean createType) {
+		this(commandStack);
+		this.createType = createType;
+	}
+	
 	public AddOccurrenceConstraintAction(CommandStack commandStack) {
 		super(commandStack);
 		setText("Add Occurrence Constraint");
 		setId(ID);
 	}
-	
+
 	@Override
 	protected Command getEmfCommand() {
-		return new CreateOccurrenceConstraintCommand(
-				getSelectedTopicType(), ModelFactory.eINSTANCE
-						.createOccurrenceTypeConstraint());
+		OccurrenceTypeConstraint otc = ModelFactory.eINSTANCE.createOccurrenceTypeConstraint();
+		if (createType) {
+			String newName = "occurrence";
+			int i = 0;
+			while (ModelIndexer.getTopicIndexer().getTopicTypeByName(newName + i) != null) {
+				i++;
+			}
+			OccurrenceType ot = ModelFactory.eINSTANCE.createOccurrenceType();
+			ot.setName(newName + i);
+			otc.setType(ot);
+		}
+		return new CreateOccurrenceConstraintCommand(getSelectedTopicType(), otc);
 	}
 
 }

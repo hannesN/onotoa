@@ -271,8 +271,8 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	protected void createActions() {
 		getActionRegistry().registerAction(new RemoveFromDiagramAction(getEMFCommandStack()));
 		getActionRegistry().registerAction(new DeleteFromModelAction(getEMFCommandStack()));
-		getActionRegistry().registerAction(new AddNameConstraintAction(getEMFCommandStack()));
-		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(new AddNameConstraintAction(getEMFCommandStack(), true));
+		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEMFCommandStack(), true));
 		super.createActions();
 	}
 	
