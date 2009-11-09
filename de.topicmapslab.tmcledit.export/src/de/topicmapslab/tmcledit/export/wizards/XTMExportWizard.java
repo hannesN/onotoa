@@ -26,7 +26,7 @@ import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.tinytim.mio.XTM20TopicMapWriter;
 
-import de.topicmapslab.tmcledit.export.builder.TinyTiMTopicMapBuilder;
+import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
@@ -47,7 +47,7 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		if (schema == null)
 			schema = ModelIndexer.getInstance().getTopicMapSchema();
 
-		TinyTiMTopicMapBuilder ttbuilder = new TinyTiMTopicMapBuilder(schema);
+		TMCLTopicMapBuilder ttbuilder = new TMCLTopicMapBuilder(schema, exportConstraintInfos);
 
 		java.io.File file = new java.io.File(page1.getFilename());
 
@@ -62,7 +62,8 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		try {
 			FileOutputStream os = new FileOutputStream(file);
 			XTM20TopicMapWriter writer = new XTM20TopicMapWriter(os, "http://psi.topicmapslab.de/tmclschema");
-			writer.write(ttbuilder.getTopicMap(exportConstraintInfos));
+			writer.setPrettify(true);
+			writer.write(ttbuilder.createTopicMap());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -118,7 +119,7 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		public void addAdditionalWidgets(Composite parent) {
 			Button exportButton = new Button(parent, SWT.CHECK);
 			exportButton.setSelection(exportConstraintInfos);
-			exportButton.setText("export constraint infos as occurrences");
+			exportButton.setText("Export Schema Infos");
 			GridData gd = new GridData();
 			gd.horizontalSpan = 3;
 			exportButton.setLayoutData(gd);

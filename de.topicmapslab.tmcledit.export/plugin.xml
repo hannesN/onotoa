@@ -20,8 +20,14 @@
       <wizard
             category="de.topicmapslab.tmcledit.export.tmcledit"
             class="de.topicmapslab.tmcledit.export.wizards.TMCLExportWizard"
-            id="de.topicmapslab.tmcledit.export.wizards.ExportWizard"
+            id="de.topicmapslab.tmcledit.export.wizards.CTMExportWizard"
             name="Export TMCL (CTM)">
+      </wizard>
+      <wizard
+            category="de.topicmapslab.tmcledit.export.tmcledit"
+            class="de.topicmapslab.tmcledit.export.wizards.XTMExportWizard"
+            id="de.topicmapslab.tmcledit.export.wizards.XTMExportWizard"
+            name="Export TMCL (XTM)">
       </wizard>
    </extension>
 

@@ -13,7 +13,9 @@ package de.topicmapslab.tmcledit.export.builder;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
@@ -103,6 +105,18 @@ public class TMCLTopicMapBuilder {
 			
 			createTopicTypes();
 			createAssociationConstraints();
+			
+			// cleaning up the topics, removing item identifier where there not needed
+			for (Topic t : topicMap.getTopics()) {
+				if ( (t.getSubjectIdentifiers().size()>0) ||
+					(t.getSubjectLocators().size()>0) ) {
+					Set<Locator> itemIds = new HashSet<Locator>(t.getItemIdentifiers());
+					for (Locator l : itemIds) {
+						t.removeItemIdentifier(l);
+					}
+				}
+			}
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
