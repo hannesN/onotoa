@@ -62,6 +62,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.tinytim.mio.TopicMapReader;
 import org.tinytim.voc.Namespace;
+import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
 import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
@@ -134,6 +135,8 @@ public class OnotoaBuilder {
 	private Topic occurrenceType;
 	private Topic nameType;
 	private Topic scopeType;
+	
+	private Topic topicMapSchema;
 
 	// -- associations
 	private Topic constraintStatement;
@@ -144,12 +147,14 @@ public class OnotoaBuilder {
 	private Topic otherConstrainedRole;
 	private Topic otherConstrainedTopicType;
 //	private Topic overlaps;
+	private Topic belongsTo;
 
 	// -- roles
 	private Topic constrains;
 	private Topic constrained;
 	private Topic allows;
 	private Topic allowed;
+	
 
 	// -- constrains
 	//private Topic constraint; // -- not needed is super type
@@ -205,14 +210,19 @@ public class OnotoaBuilder {
 		TopicMapreaderFactory readerFac = new TopicMapreaderFactory();
 		TopicMapReader reader = readerFac.getReader(new java.io.File(filename), topicMap);
 
+		
+		
 		if (reader != null) {
 			reader.read();
 
 			topicCache = new HashSet<Topic>(topicMap.getTopics());
 
 			init();
+			removeSchemaInformation();
 			createTopicTypes();
 
+			
+			
 			// after creating all topic types and surly removed all
 			// topics representing constraint, add topic types to the
 			// topicMapSchema
@@ -226,6 +236,16 @@ public class OnotoaBuilder {
 			createAssociationConstrains();
 		}
 	}
+
+	private void removeSchemaInformation() {
+	    TypeInstanceIndex idx = topicMap.getIndex(TypeInstanceIndex.class);
+	    for (Association assoc : idx.getAssociations(belongsTo)) {
+	    	assoc.remove();
+	    }
+	    for (Topic t : idx.getTopics(topicMapSchema)) {
+	    	t.remove();
+	    }
+    }
 
 	private void createAssociationConstrains() {
 	    // now create all association constrains
@@ -368,12 +388,18 @@ public class OnotoaBuilder {
 		createStandardTopic(TMDM.SUPERTYPE);
 		createStandardTopic(TMDM.SUBTYPE);
 		createStandardTopic(TMDM.SUPERTYPE_SUBTYPE);
-
+		// removing TMCL roles from cache
+		createStandardTopic(TMCL.CONTAINEE);
+		createStandardTopic(TMCL.CONTAINER);
+		
 		// initialize tmdm topics
 		topicName = createStandardTopic(TMDM.TOPIC_NAME);
 		subject = createStandardTopic(topicMap.createLocator(Namespace.TMDM_MODEL + "subject"));
 
 		topicName = createStandardTopic(TMDM.TOPIC_NAME);
+
+		topicMapSchema = createStandardTopic(TMCL.SCHEMA);
+		belongsTo = createStandardTopic(TMCL.BELONGS_TO_SCHEMA);
 
 		// init topic types
 		topicType = createStandardTopic(TOPIC_TYPE);
