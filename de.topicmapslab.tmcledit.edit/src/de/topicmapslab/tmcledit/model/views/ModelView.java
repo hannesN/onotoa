@@ -596,8 +596,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 			IWorkbenchPage page = getViewSite().getPage();
 			if (currFile != null) {
-				if (currFile.getFilename().equals(filename))
-					return;
+//				if ( (!currFile.isDirty()) && (currFile.getFilename().equals(filename))
+//					return;
 
 				currFile.eAdapters().remove(dirtyListener);
 
