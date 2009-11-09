@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="de.topicmapslab.tmcledit.domaindiagram.editor.DomainDiagramEditor"
+            contributorClass="de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditorActionBarContributor"
+            default="false"
+            id="de.topicmapslab.tmcledit.domaindiagram.editor.DomainDiagramEditor"
+            name="Domain Diagram Editor">
+      </editor>
+   </extension>
+
+</plugin>
