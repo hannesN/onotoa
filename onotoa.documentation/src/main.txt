@@ -20,10 +20,26 @@ include::diagram.txt[]
 
 include::preferences.txt[]
 
+/////////////////////////////
+Some Short Tutorials
+====================
+
+== TODO ==
+
+* find little tasks
+/////////////////////////////
+
 Extending Onotoa
 ================
 
 include::extension.txt[]
 
+
+
+
+Short Tutorials
+================
+
+include::tutorials.txt[]
 
 include::glossary.txt[]
