@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
@@ -111,6 +112,8 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		File file = (File) schema.eContainer();
 		
 		for (Diagram d : file.getDiagrams()) {
+			if ( (d instanceof DomainDiagram) && (getEdgeType()==EdgeType.IS_ATYPE) )
+				continue;
 			// check if we have a topicnode representing the topic
 			TypeNode currentNode = (TypeNode) ModelIndexer.getNodeIndexer().getNodeFor(topic, d);
 			if (currentNode!=null) {
