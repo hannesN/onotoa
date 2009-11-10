@@ -82,7 +82,8 @@ public class SetCardinalityCommand extends AbstractCommand {
 		
 		if (oldValue.equals(newValue))
 			return false;
-		
+		if (newValue.equals("*"))
+			return true;
 		int val2 = Integer.parseInt(newValue);
 		if (!isMin) {
 			if ("*".equals(newValue))
