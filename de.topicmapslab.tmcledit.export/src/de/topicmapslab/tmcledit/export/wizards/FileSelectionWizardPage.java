@@ -12,6 +12,8 @@ package de.topicmapslab.tmcledit.export.wizards;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -41,6 +43,17 @@ public class FileSelectionWizardPage extends WizardPage {
 		
 		text = new Text(comp, SWT.BORDER);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		text.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String tmp = text.getText();
+				for (String s : fileExtensions) {
+					if (tmp.endsWith(s.substring(1)))
+							return;
+				}
+				text.setText(tmp+fileExtensions[0].substring(1));
+			}
+		});
 		
 		Button browseButton = new Button(comp, SWT.PUSH);
 		browseButton.setText("...");
