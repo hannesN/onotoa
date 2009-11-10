@@ -175,6 +175,9 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 	}
 
 	private void prepareAssociationCommandsList() {
+		if (ignoreConstraints)
+			return;
+		
 		TopicMapSchema topicMapSchema = ModelIndexer.getInstance()
 				.getTopicMapSchema();
 		for (AssociationTypeConstraint atc : topicMapSchema
