@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.core_feature"
       label="Onotoa Plugins"
-      version="1.1.1.beta-qualifier"
+      version="1.1.1.beta"
       provider-name="Hannes Niederhausen, Topic Maps Lab"
       plugin="de.topicmapslab.tmcledit">
 

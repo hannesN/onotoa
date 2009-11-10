@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.import_feature"
       label="Import_feature"
-      version="1.0.1.beta-qualifier"
+      version="1.0.1.beta"
       provider-name="Hannes Niederhausen, Topic map Labs">
 
    <description url="http://www.example.com/description">
@@ -16,6 +16,10 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
+
+   <requires>
+      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.1.beta" match="greaterOrEqual"/>
+   </requires>
 
    <plugin
          id="de.topicmapslab.tmcledit.tmclimport"
