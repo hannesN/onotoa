@@ -84,10 +84,10 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (((part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView)))
+		if ( (((part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView))) && !selection.isEmpty())
 			setSelection(selection);
 		else
-			pageFactory.getEmptyPage();
+			setCurrentPage(pageFactory.getEmptyPage());
 		
 	}
 
