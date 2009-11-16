@@ -32,7 +32,7 @@ import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
  * 
  */
 public class CardTextObserver implements FocusListener, DisposeListener,
-		VerifyListener,  KeyListener, ModifyListener {
+		VerifyListener,  KeyListener {
 
 	private final IModelProvider modelProvider;
 	private final Text text;
@@ -91,7 +91,6 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		text.removeFocusListener(this);
 		text.removeVerifyListener(this);
 		text.removeDisposeListener(this);
-		text.removeModifyListener(this);
 	}
 
 	public static void observe(Text text, IModelProvider modelProvider,
@@ -103,8 +102,6 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		String text = e.text;
 		
 		Text textField = (Text) e.getSource();
-		
-		
 		
 		String text2 = textField.getText();
 		if ( (text2.equals("*")) && (text.length()>0) && (e.start!=0)){
@@ -135,15 +132,4 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 
 	public void keyReleased(KeyEvent ke) {
     }
-
-	public void modifyText(ModifyEvent e) {
-		Text t = (Text) e.widget;
-		String newValue = t.getText();
-		if (newValue.length()==0)
-			t.setText(oldText);
-		else
-			oldText = newValue;
-	    
-    }
-
 }
