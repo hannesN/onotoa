@@ -233,11 +233,15 @@ public class PrefixMappingPage extends AbstractModelPage {
 			return;
 		
 		if (notification.getEventType()==Notification.ADD) {
-			EObject obj = (EObject) notification.getNewValue();
-			obj.eAdapters().add(this);
+			if (notification.getNewValue() instanceof MappingElement) {
+				EObject obj = (EObject) notification.getNewValue();
+				obj.eAdapters().add(this);
+			}
 		} else if (notification.getEventType()==Notification.REMOVE) {
-			EObject obj = (EObject) notification.getOldValue();
-			obj.eAdapters().remove(this);
+			if (notification.getOldValue() instanceof MappingElement) {
+				EObject obj = (EObject) notification.getOldValue();
+				obj.eAdapters().remove(this);
+			}
 		}
 		
 		updateUI();
