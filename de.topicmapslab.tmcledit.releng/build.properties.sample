@@ -1,0 +1,11 @@
+#the directory containing the eclipse installation
+eclipse.home=/opt/eclipse3.5
+#the directory where the build is saved
+buildDirectory=${user.home}/eclipse.build
+#deltapackage
+deltapack=${eclipse.home}/dropins/deltapack/eclipse
+#java home
+java.home=/usr/lib/jvm/java-6-openjdk
+
+pdeBuildPluginVersion=3.5.0.v20090527-1800
+equinoxLauncherPluginVersion=1.0.200.v20090520
