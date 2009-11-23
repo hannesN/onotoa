@@ -67,7 +67,7 @@ Choose "homepage" and "statue" as their names.
 At this point of the tutorial we create the two Topic Types "person" and "society", add the Name Constraint "name" and the two Occurrence 
 Constraints "homepage" and "statue". Your _Onotoa_ window should looks like this one:
 
-.Select data type
+.Onotoa
 [[dd_onotoa_screen_1]]
 image::images/documentation/domain_diagram/onotoa_screen_1.png[scaledwidth="100%"] 
 
@@ -113,8 +113,24 @@ to create a new one ( I named it _example_diagram_ ) and a new tap will appear i
 [[dd_second_diagram]]
 image::images/documentation/domain_diagram/second_diagram.png[scaledwidth="50%"]
 
-Click on the Domain Diagram tap to change the diagram. Click right on one topic and look at the context menu. There are two new entries:
+To copy the the whole diagram we have to mark all topics in the diagram. Select the *Marquee* entry in the *Palette* and mark all 
+topics with a frame or press otherwise the key combination *Ctrl + A* and a fat black line should surround every selected part of the 
+diagram.        
 
-.Move and copy entries
-[[dd_new_entries_context_menu]]
-image::images/documentation/domain_diagram/new_entries_context_menu.png[scaledwidth="50%"]
+NOTE: Of course it is also possible to move and copy single elements or selections.      
+
+Access the context menu of one element (for example the topic "person"), click on *Copy To...->example_diagram* and all should be done. 
+
+.Move elements
+[[dd_move_elements]]
+image::images/documentation/domain_diagram/move_elements.png[scaledwidth="50%"]
+
+Take a look at the normal diagram where the complete schema of this tutorial should appears. You can see all informations we create 
+in the last view minutes. We see also that the values for data types and cardinalities are the default values, because we did not set 
+them before in the Domain Diagram. 
+
+.Diagram
+[[dd_normal_diagram]]
+image::images/documentation/domain_diagram/normal_diagram.png[scaledwidth="100%"]
+
+NOTE: The position of the diagram elements could varies after the move / copy operation. 
