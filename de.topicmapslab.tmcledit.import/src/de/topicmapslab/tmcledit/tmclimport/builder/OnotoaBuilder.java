@@ -371,10 +371,27 @@ public class OnotoaBuilder {
 		for (Locator l : t.getSubjectLocators()) {
 			tt.getLocators().add(l.toExternalForm());
 		}
+		
+		
+		
+		
 
 		topicTypeMap.put(t, tt);
 		setDocumentation(tt, t);
 		addConstraints(t, tt);
+		
+		for (Topic topic2 : t.getTypes()) {
+			TopicType tt2 = getTopic(topic2);
+			tt.getIsa().add(tt2);
+		}
+		// get supertype-subtype
+		for (Role r : t.getRolesPlayed(topicMap.createTopicBySubjectIdentifier(TMDM.SUBTYPE))) {
+			for (Role r2 : r.getParent().getRoles(topicMap.createTopicBySubjectIdentifier(TMDM.SUPERTYPE))) {
+				TopicType supertype = getTopic(r2.getPlayer());
+				tt.getAko().add(supertype);
+			}
+		}
+		
 		return tt;
 	}
 

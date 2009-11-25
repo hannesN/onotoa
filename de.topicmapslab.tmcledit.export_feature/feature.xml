@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.export_feature"
       label="Onotoa Export Plugins"
-      version="1.1.1.beta-qualifier"
+      version="1.1.1.beta"
       provider-name="Hannes Niederhausen, Topic Maps Lab">
 
    <description url="http://onotoa.topicmapslab.de">
@@ -76,7 +76,7 @@ This Agreement is governed by the laws of the State of New York andthe intellect
 
    <requires>
       <import feature="org.sourceforge.tinyTiM_feature" version="2.0.0" match="greaterOrEqual"/>
-      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin

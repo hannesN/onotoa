@@ -147,7 +147,7 @@ public class TMCLTopicMapBuilder {
 				setRoleCombinationConstraint(at, rcc);
 			}
 						
-			setScopeConstraints(at);
+//			setScopeConstraints(at);
 		}
 	}
 
@@ -298,6 +298,10 @@ public class TMCLTopicMapBuilder {
 			setReifierConstraint((ReifiableTopicType) type);
 		}
 		
+		if (type instanceof ScopedTopicType) {
+			setScopeConstraints((ScopedTopicType) type);
+		}
+		
 		setTopicReifiesConstraint(type);
 
 		return t;
@@ -403,7 +407,7 @@ public class TMCLTopicMapBuilder {
 		createConstrainedTopicType(t, constr);
 		createConstrainedStatement(nameTopic, constr);
 
-		setScopeConstraints(nt);
+//		setScopeConstraints(nt);
 		
 		setSchema(constr);
 	}
@@ -433,7 +437,7 @@ public class TMCLTopicMapBuilder {
 		createConstrainedTopicType(t, constr);
 		createConstrainedStatement(occType, constr);
 		
-		setScopeConstraints(otype);
+//		setScopeConstraints(otype);
 	}
 
 	private void setScopeConstraints(ScopedTopicType type) {
