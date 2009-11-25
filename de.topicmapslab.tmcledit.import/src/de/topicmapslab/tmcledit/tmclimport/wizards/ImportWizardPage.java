@@ -79,12 +79,6 @@ public class ImportWizardPage extends WizardPage {
 		extensions = new String[] { "*.ono" }; //NON-NLS-1
 		targetEditor.setFileExtensions(extensions);
 		fileSelectionArea.moveAbove(null);
-		
-		
-		// TODO remove
-		sourceEditor.setStringValue("/home/mai00ckx/Desktop/test.ctm");
-		targetEditor.setStringValue("/home/mai00ckx/Desktop/test.ono");
-		
 	}
 	
 	protected void createLinkTarget() {
