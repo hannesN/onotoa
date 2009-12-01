@@ -82,18 +82,21 @@ public class SetCardinalityCommand extends AbstractCommand {
 		
 		if (oldValue.equals(newValue))
 			return false;
-		if (newValue.equals("*"))
-			return true;
-		int val2 = Integer.parseInt(newValue);
+		
+		
 		if (!isMin) {
 			if ("*".equals(newValue))
 				return true;
+			
+			int val2 = Integer.parseInt(newValue);
 			int val = Integer.parseInt(cardinalityContraint.getCardMin());
 			
 			if (val2<val)
 				return false;
+			
+			newValue = Integer.toString(val2);
 		}
-		newValue = Integer.toString(val2);
+
 		return true;
 	}
 

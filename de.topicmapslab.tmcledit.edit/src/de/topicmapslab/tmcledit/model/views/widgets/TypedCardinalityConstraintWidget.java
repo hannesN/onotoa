@@ -32,14 +32,12 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -51,7 +49,6 @@ import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
-import de.topicmapslab.tmcledit.model.util.IModelProvider;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
@@ -205,6 +202,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		TextCellEditor editor = new TextCellEditor(tableViewer.getTable());
 		editor.setValidator(new ICellEditorValidator() {
 			boolean min = isMin; 
+			
 			public String isValid(Object value) {
 				String val = (String) value;
 				if (val.length() == 0)
@@ -228,7 +226,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 						return "cardMin must be at least:"+minCardinality;
 					}
 				} else {
-					if (v>maxCardinality) {
+					if ((maxCardinality!=-1) && (v>maxCardinality)) {
 						return "cardMax must be at least:"+maxCardinality;
 					}
 				}
@@ -237,8 +235,8 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			}
 		});
 		
-//		Text text = (Text) editor.getControl();
-//		CardTextObserver.addVerifyListener(text, isMin);
+		Text text = (Text) editor.getControl();
+		CardTextObserver.addVerifyListener(text, isMin);
 		
 		return editor;
 	}
