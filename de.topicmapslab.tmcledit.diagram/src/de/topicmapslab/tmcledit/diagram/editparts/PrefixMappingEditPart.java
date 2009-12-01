@@ -78,8 +78,11 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (childEditPart instanceof PrefixMappingElementEditPart) {
 			PrefixMappingElementEditPart ep = (PrefixMappingElementEditPart) childEditPart;
-			getContentPane().add(ep.getKeyLabel());
-			getContentPane().add(ep.getUriLabel());
+			if (index==-1)
+				index = getContentPane().getChildren().size()/2;
+			
+			getContentPane().add(ep.getKeyLabel(), index*2);
+			getContentPane().add(ep.getUriLabel(), (index*2)+1);
 		} else 
 			super.addChildVisual(childEditPart, index);
 	}
@@ -101,6 +104,12 @@ public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 	@SuppressWarnings("unchecked")
 	EObjectContainmentEList<MappingElement> getCastedModel() {
 		return (EObjectContainmentEList<MappingElement>) getModel();
+	}
+	
+	@Override
+	public void setLayoutConstraint(EditPart child, IFigure childFigure,
+			Object constraint) {
+		// do nothing... original method would try to set the contraint for the fake figure in the mapping...
 	}
 
 	@Override
