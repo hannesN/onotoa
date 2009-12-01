@@ -728,6 +728,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		firePropertyChange(PROP_DIRTY);
 		updateActions();
 		viewer.refresh();
+		setSelection(new StructuredSelection());
 	}
 
 	@Override

@@ -36,16 +36,25 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 	private final Text text;
 	private final boolean isMin;
 
+	protected CardTextObserver(Text text, boolean isMin) {
+		this(text, null, isMin);
+	}
+	
 	protected CardTextObserver(Text text, IModelProvider modelProvider,
 			boolean isMin) {
 		super();
 		this.text = text;
 		this.isMin = isMin;
 		this.modelProvider = modelProvider;
+
+		if (modelProvider!=null) {
+			this.text.addFocusListener(this);
+			this.text.addKeyListener(this);	
+		}
 		this.text.addDisposeListener(this);
-		this.text.addFocusListener(this);
 		this.text.addVerifyListener(this);
-		this.text.addKeyListener(this);
+		
+		
 
 	}
 
@@ -62,8 +71,15 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		 * modelProvider.getModel().eClass().getEStructuralFeature(featureID);
 		 * modelProvider.getModel().eSet(feature, text.getText());
 		 */
-		AbstractCardinalityContraint model = (AbstractCardinalityContraint) modelProvider
-        		.getModel();
+		
+		AbstractCardinalityContraint model = (AbstractCardinalityContraint) modelProvider.getModel();
+		
+		if (text.getText().length()==0) {
+			if (isMin)
+				text.setText(model.getCardMin());
+			else
+				text.setText(model.getCardMax());
+		}
 		
 		if (isMin) {
 			if (text.getText().equals(model.getCardMin()))
@@ -88,22 +104,31 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		new CardTextObserver(text, modelProvider, isMin);
 	}
 
+	/**
+	 * Creates an instance of the verify listener.
+	 * 
+	 * The methos is used, when the content of a text field should be verified, but the 
+	 * model will be modified elsewhere. For instance in TextCellEditors.
+	 * 
+	 */
+	public static void  addVerifyListener(Text text, boolean isMin) {
+		new CardTextObserver(text, isMin);
+	}
+	
 	public void verifyText(VerifyEvent e) {
 		String text = e.text;
 		
 		Text textField = (Text) e.getSource();
 		
-		
-		
 		String text2 = textField.getText();
-		if ( (text2.equals("*")) && (text.length()>0) ){
+		if ( (text2.equals("*")) && (text.length()>0) && (e.start!=0)){
 			e.doit = false;
 			return;
 		}
 		
 		if ( ( (text2.length()==0) 
 			 || (e.start==0) )
-			&& (text.equals("*")))
+			&& (text.equals("*")) && !isMin)
 			return;
 
 		
@@ -124,5 +149,4 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 
 	public void keyReleased(KeyEvent ke) {
     }
-
 }

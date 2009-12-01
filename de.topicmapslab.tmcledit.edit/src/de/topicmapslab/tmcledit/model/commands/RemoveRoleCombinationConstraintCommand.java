@@ -27,6 +27,7 @@ import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 public class RemoveRoleCombinationConstraintCommand extends AbstractCommand {
 	private final AssociationType asssType;
 	private final List<RoleCombinationConstraint> constraintList;
+	int index = -1;
 	
 	public RemoveRoleCombinationConstraintCommand(AssociationType assType,
 			List<RoleCombinationConstraint> constraintList) {
@@ -45,11 +46,16 @@ public class RemoveRoleCombinationConstraintCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		asssType.getRoleCombinations().addAll(constraintList);
+		if (index!=-1)
+			asssType.getRoleCombinations().add(index, constraintList.get(0));
+		else
+			asssType.getRoleCombinations().addAll(constraintList);
 	}
 	
 	@Override
 	protected boolean prepare() {
+		if (constraintList.size()==1)
+			index = asssType.getRoleCombinations().indexOf(constraintList.get(0));
 		return true;
 	}
 }
