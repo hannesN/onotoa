@@ -36,16 +36,25 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 	private final Text text;
 	private final boolean isMin;
 
+	protected CardTextObserver(Text text, boolean isMin) {
+		this(text, null, isMin);
+	}
+	
 	protected CardTextObserver(Text text, IModelProvider modelProvider,
 			boolean isMin) {
 		super();
 		this.text = text;
 		this.isMin = isMin;
 		this.modelProvider = modelProvider;
+
+		if (modelProvider!=null) {
+			this.text.addFocusListener(this);
+			this.text.addKeyListener(this);	
+		}
 		this.text.addDisposeListener(this);
-		this.text.addFocusListener(this);
 		this.text.addVerifyListener(this);
-		this.text.addKeyListener(this);
+		
+		
 
 	}
 
@@ -95,6 +104,17 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		new CardTextObserver(text, modelProvider, isMin);
 	}
 
+	/**
+	 * Creates an instance of the verify listener.
+	 * 
+	 * The methos is used, when the content of a text field should be verified, but the 
+	 * model will be modified elsewhere. For instance in TextCellEditors.
+	 * 
+	 */
+	public static void  addVerifyListener(Text text, boolean isMin) {
+		new CardTextObserver(text, isMin);
+	}
+	
 	public void verifyText(VerifyEvent e) {
 		String text = e.text;
 		
