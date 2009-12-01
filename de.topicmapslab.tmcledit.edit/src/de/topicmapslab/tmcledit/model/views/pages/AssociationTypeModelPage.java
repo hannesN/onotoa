@@ -18,12 +18,18 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -55,7 +61,6 @@ import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.AddRoleCombinationConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveRoleCombinationConstraintCommand;
@@ -77,6 +82,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	private TableViewer roleCombinationViewer;
 	private Button addButton;
 	private Button removeButton;
+	private Button editButton;
 
 	public AssociationTypeModelPage() {
 		super("asssociation type");
@@ -96,6 +102,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	     super.setEnabled(enabled);
 	     addButton.setEnabled(enabled);
 	     removeButton.setEnabled(enabled);
+	     editButton.setEnabled(enabled);
 	     roleCombinationViewer.getControl().setEnabled(enabled);
 	     control.setEnabled(enabled);
 	}
@@ -198,10 +205,17 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 			public void widgetSelected(SelectionEvent e) {
 				NewRoleCombinationConstraintDialog dlg = new NewRoleCombinationConstraintDialog(addButton.getShell(), getCastedModel());
 				if (dlg.open() == Dialog.OK) {
-					AddRoleCombinationConstraintCommand cmd = new AddRoleCombinationConstraintCommand(getCastedModel(),
-					        dlg.getOtherRole());
+					Command cmd = dlg.getCreateCommand();
 					getCommandStack().execute(cmd);
 				}
+			}
+		});
+		
+		editButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				startRCCEditing();
+			
 			}
 		});
 
@@ -225,7 +239,8 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		});
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getNotifier() instanceof ScopeConstraint) {
 			if (notification.getFeatureID(TopicType.class) == ModelPackage.ROLE_CONSTRAINT__TYPE) {
@@ -238,10 +253,41 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 			}
 			return;
 		}
+		
+		if (notification.getFeatureID(EList.class)==ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS) {
+			if (notification.getEventType()==Notification.ADD) {
+				Object n = notification.getNewValue();
+				((EObject) n).eAdapters().add(this);
+			}
+			if (notification.getEventType()==Notification.ADD_MANY) {
+				List<Object> newList = (List<Object>) notification.getNewValue();
+				for (Object n : newList) {
+					((EObject) n).eAdapters().add(this);
+				}
+			}
+			if (notification.getEventType()==Notification.REMOVE) {
+				Object n = notification.getOldValue();
+				((EObject) n).eAdapters().remove(this);
+			}
+			if (notification.getEventType()==Notification.REMOVE_MANY) {
+				List<Object> oldList = (List<Object>) notification.getOldValue();
+				for (Object n : oldList) {
+					((EObject) n).eAdapters().remove(this);
+				}
+			}
+		}
+		
+		
+		if (notification.getNotifier() instanceof RoleCombinationConstraint) {
+			roleCombinationViewer.refresh(notification.getNotifier());
+			return;
+		}
+
 		if (roleCombinationViewer != null)
 			roleCombinationViewer.setInput(getCastedModel().getRoleCombinations());
-
+		
 		super.notifyChanged(notification);
+		
 	}
 
 	@Override
@@ -252,8 +298,11 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 					rc.getType().eAdapters().remove(this);
 				rc.eAdapters().remove(this);
 			}
+		
+			for (RoleCombinationConstraint rcc : getCastedModel().getRoleCombinations()) { 
+				rcc.eAdapters().remove(this);
+			}
 		}
-
 		super.setModel(model);
 		if (model == null)
 			return;
@@ -263,6 +312,11 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				rc.getType().eAdapters().add(this);
 			rc.eAdapters().add(this);
 		}
+		
+		for (RoleCombinationConstraint rcc : getCastedModel().getRoleCombinations()) { 
+			rcc.eAdapters().add(this);
+		}
+		
 		if (roleCombinationViewer != null)
 			roleCombinationViewer.setInput(getCastedModel().getRoleCombinations());
 	}
@@ -295,6 +349,12 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		roleCombinationViewer.setLabelProvider(new OtherRoleLabelProvider());
 		roleCombinationViewer.setInput(Collections.EMPTY_LIST);
 
+		roleCombinationViewer.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent event) {
+				startRCCEditing();
+			}
+		});
+		
 		Composite buttonBar = getButtonBar(comp, toolkit);
 		buttonBar.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 
@@ -324,6 +384,9 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 
 		addButton = toolkit.createButton(comp, "Add..", SWT.PUSH);
 		fac.applyTo(addButton);
+		
+		editButton = toolkit.createButton(comp, "Edit...", SWT.PUSH);
+		fac.applyTo(editButton);
 
 		removeButton = toolkit.createButton(comp, "Remove", SWT.PUSH);
 		fac.applyTo(removeButton);
@@ -341,6 +404,22 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 			control.setInput(getCastedModel().getRoles());
 		super.updateUI();
 	}
+
+	private void startRCCEditing() {
+	    IStructuredSelection sel = (IStructuredSelection) roleCombinationViewer.getSelection();
+
+	    if (sel.isEmpty())
+	    	return;
+
+	    
+	    RoleCombinationConstraint el = (RoleCombinationConstraint) sel.getFirstElement();
+	    
+	    NewRoleCombinationConstraintDialog dlg = new NewRoleCombinationConstraintDialog(addButton.getShell(), getCastedModel(), el);
+	    if (dlg.open() == Dialog.OK) {
+	    	Command cmd = dlg.getModifyCommand();
+	    	getCommandStack().execute(cmd);
+	    }
+    }
 
 	private class OtherRoleLabelProvider implements ITableLabelProvider {
 
