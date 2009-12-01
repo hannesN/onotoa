@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
@@ -26,25 +27,31 @@ import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
+import de.topicmapslab.tmcledit.model.util.CardTextObserver;
+import de.topicmapslab.tmcledit.model.util.IModelProvider;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
@@ -78,7 +85,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		this.commandStack = commandStack;
 	}
 
-	private CommandStack getCommandStack() {
+	public CommandStack getCommandStack() {
 		return commandStack;
 	}
 
@@ -229,9 +236,21 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 				return null;
 			}
 		});
+		
+//		Text text = (Text) editor.getControl();
+//		CardTextObserver.addVerifyListener(text, isMin);
+		
 		return editor;
 	}
 
+	public EObject getModel() {
+	    IStructuredSelection sel = (IStructuredSelection) tableViewer.getSelection();
+	    if (sel.isEmpty())
+	    	return null;
+	    	
+	    return (EObject) sel.getFirstElement();
+	}
+	
 	public Button getAddButton() {
 		return addButton;
 	}
@@ -275,11 +294,10 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			AbstractTypedCardinalityConstraint constraint = (AbstractTypedCardinalityConstraint) item.getData();
 			boolean isMin = true;
 			
-			if (property.equals(TABLE_PROPS[1])) {
-				isMin = true;
-			} else if (property.equals(TABLE_PROPS[2])) {
+			if (property.equals(TABLE_PROPS[2])) {
 				isMin = false;
 			}
+			
 			if (value instanceof String) {
 				try {
 					SetCardinalityCommand cmd = new SetCardinalityCommand(constraint, isMin, (String) value);
