@@ -3,12 +3,12 @@
  */
 package de.topicmapslab.tmcledit.domaindiagram.action;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 
 import de.topicmapslab.tmcledit.domaindiagram.Activator;
-import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TypeNode;
-import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.commands.SetImageCommand;
 
 public class RemoveImageAction extends AbstractCommandStackAction {
 	/**
@@ -30,7 +30,7 @@ public class RemoveImageAction extends AbstractCommandStackAction {
 	@Override
 	public void run() {
 		try {
-			GenericSetCommand command = new GenericSetCommand(typeNode, ModelPackage.TYPE_NODE__IMAGE, null);
+			Command command = new SetImageCommand(typeNode.getTopicType(), null);
 			getCommandStack().execute(command);
 		} catch (Exception e) {
 			Activator.getDefault().log(e);
