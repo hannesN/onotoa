@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.command.AbstractCommand;
-
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Comment;
@@ -24,12 +22,10 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.index.TopicTypeNodeIndexer;
 
 
-public class MoveNodesCommand extends AbstractCommand {
+public class MoveNodesCommand extends AbstractNodeListCommand {
 
 	private final Diagram oldDiagram;
-	private final Diagram newDiagram;
 	
-	private final List<Node> nodeList;
 	private List<Comment> commentList;
 	
 	private List<Edge> oldEdgeList;
@@ -39,9 +35,7 @@ public class MoveNodesCommand extends AbstractCommand {
 	
 	
 	public MoveNodesCommand(List<Node> nodeList, Diagram newDiagram) {
-	    super();
-	    this.nodeList = nodeList;
-	    this.newDiagram = newDiagram;
+	    super(nodeList, newDiagram);
 	    this.oldDiagram = (Diagram) nodeList.get(0).eContainer();
     }
 
@@ -74,7 +68,9 @@ public class MoveNodesCommand extends AbstractCommand {
 	
 	@Override
 	protected boolean prepare() {
-		findCommentNodes();		
+		// removing nodes from nodelist which are already in the newDiagram
+		removeNodes();
+		findCommentNodes();
 		findRemoveEdges();
 		findNewEdges();
 		
