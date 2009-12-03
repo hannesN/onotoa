@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -25,12 +24,8 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.index.TopicTypeNodeIndexer;
 
 
-public class CopyNodesCommand extends AbstractCommand {
+public class CopyNodesCommand extends AbstractNodeListCommand {
 
-	private final Diagram newDiagram;
-	
-	private final List<Node> nodeList;
-	
 	private List<Edge> newEdgeList;
 	
 	private Map<Node, Node> newNodesMap;
@@ -39,9 +34,7 @@ public class CopyNodesCommand extends AbstractCommand {
 	
 	
 	public CopyNodesCommand(List<Node> nodeList, Diagram newDiagram) {
-	    super();
-	    this.nodeList = nodeList;
-	    this.newDiagram = newDiagram;
+	    super(nodeList, newDiagram);
 	    newNodesMap = new HashMap<Node, Node>(nodeList.size());
 	    newCommentMap = new HashMap<Comment, Comment>();
     }
@@ -66,6 +59,7 @@ public class CopyNodesCommand extends AbstractCommand {
 	
 	@Override
 	protected boolean prepare() {
+		removeNodes();
 		createNodes();
 		findNewEdges();
 		return true;
