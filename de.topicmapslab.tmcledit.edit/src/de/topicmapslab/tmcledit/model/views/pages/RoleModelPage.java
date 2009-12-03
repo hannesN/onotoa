@@ -118,10 +118,7 @@ public class RoleModelPage extends AbstractModelPage{
 					
 					SetRoleConstraintCommand cmd = new SetRoleConstraintCommand(getCastedModel(), rc);
 					ccmd.append(cmd);
-					
-					SetCardinalitiesCommand cmd2 = new SetCardinalitiesCommand(getCastedModel(), rc.getCardMin(), rc.getCardMax());
-					ccmd.append(cmd2);
-					
+									
 					getCommandStack().execute(ccmd);
 				}
 			}
