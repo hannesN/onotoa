@@ -32,11 +32,14 @@ import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
+import org.eclipse.gef.Tool;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.dnd.TemplateTransferDropTargetListener;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
+import org.eclipse.gef.palette.MarqueeToolEntry;
+import org.eclipse.gef.palette.PaletteGroup;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.tools.SelectionTool;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -77,6 +80,7 @@ import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -135,34 +139,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.addDropTargetListener(new TypeDropTransferListener(viewer, diagram));
 		
 
-		viewer.getControl().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-				try {
-					getEditorSite()
-							.getPage()
-							.showView(
-									"de.topicmapslab.tmcledit.extensions.views.PropertyDetailView",
-									null, IWorkbenchPage.VIEW_VISIBLE);
-					fireSelectionChanged();
-				} catch (PartInitException e1) {
-
-				}
-			}
-
-			@Override
-			public void mouseDown(MouseEvent e) {
-				if (e.button == 3) {
-					if ((getEditDomain().getActiveTool() == null)
-							|| (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
-						getEditDomain().getPaletteViewer().setActiveTool(null);
-						cmProvider.setActive(false);
-					} else {
-						cmProvider.setActive(true);
-					}
-				}
-			}
-		});
+		viewer.getControl().addMouseListener(new DiagramMouseListener());
 	}
 
 	@Override
@@ -484,6 +461,78 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	@Override
 	protected void updateActions(List actionIds) {
 		super.updateActions(actionIds);
+	}
+
+	private final class DiagramMouseListener extends MouseAdapter {
+		private boolean marquee = false;
+		private MarqueeToolEntry met;
+
+		public DiagramMouseListener() {
+			init();
+		}
+		
+		private void init() {
+			PaletteGroup toolsGroup = (PaletteGroup) getEditDomain().getPaletteViewer().getPaletteRoot().getChildren().get(0);
+			met = (MarqueeToolEntry) toolsGroup.getChildren().get(1);
+		}
+		
+		@Override
+		public void mouseDoubleClick(MouseEvent e) {
+			try {
+				getEditorSite()
+						.getPage()
+						.showView(
+								"de.topicmapslab.tmcledit.extensions.views.PropertyDetailView",
+								null, IWorkbenchPage.VIEW_VISIBLE);
+				fireSelectionChanged();
+				
+				
+				
+			} catch (PartInitException e1) {
+
+			}
+		}
+
+		@Override
+		public void mouseUp(MouseEvent e) {
+			if ( marquee ) {
+				if ((getEditDomain().getActiveTool() == null)
+						|| (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
+					getEditDomain().getPaletteViewer().setActiveTool(null);
+					cmProvider.setActive(false);
+				} else {
+					cmProvider.setActive(true);
+				}
+				marquee=false;
+			} 
+		}
+
+		@Override
+		public void mouseDown(MouseEvent e) {
+			if ( (e.button == 3)  ) {
+				if ((getEditDomain().getActiveTool() == null)
+						|| (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
+					getEditDomain().getPaletteViewer().setActiveTool(null);
+					cmProvider.setActive(false);
+				} else {
+					cmProvider.setActive(true);
+				}
+			} 
+			if (e.button == 1) {
+				if ((getEditDomain().getActiveTool() == null)
+						|| (getEditDomain().getActiveTool().getClass() == SelectionTool.class)) {
+					if (currentSelection.isEmpty())
+						return;
+					if (((IStructuredSelection) currentSelection).getFirstElement() instanceof DomainDiagram) {
+						
+						getEditDomain().getPaletteViewer().setActiveTool(met);
+						Tool tool = getEditDomain().getActiveTool();
+						tool.mouseDown(e, getGraphicalViewer());
+						marquee=true;
+					}
+				}
+			}
+		}
 	}
 
 	private class DirtyAdapter extends AdapterImpl {

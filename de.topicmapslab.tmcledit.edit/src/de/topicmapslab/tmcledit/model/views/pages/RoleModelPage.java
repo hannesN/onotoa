@@ -29,7 +29,6 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.commands.SetCardinalitiesCommand;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 

@@ -32,11 +32,14 @@ import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
+import org.eclipse.gef.Tool;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.dnd.TemplateTransferDropTargetListener;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
+import org.eclipse.gef.palette.MarqueeToolEntry;
+import org.eclipse.gef.palette.PaletteGroup;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.tools.SelectionTool;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -90,7 +93,8 @@ import de.topicmapslab.tmcledit.model.util.io.FileUtil;
  * 
  */
 public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
-		implements ISelectionChangedListener, ISelectionProvider, IPrintableDiagramEditor {
+		implements ISelectionChangedListener, ISelectionProvider,
+		IPrintableDiagramEditor {
 
 	public static final String ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
 
@@ -132,41 +136,15 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 		getSite().setSelectionProvider(this);
 		// listen for dropped parts
-		viewer.addDropTargetListener(new TypeDropTransferListener(viewer, diagram));
-		
+		viewer.addDropTargetListener(new TypeDropTransferListener(viewer,
+				diagram));
 
-		viewer.getControl().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-				try {
-					getEditorSite()
-							.getPage()
-							.showView(
-									"de.topicmapslab.tmcledit.extensions.views.PropertyDetailView",
-									null, IWorkbenchPage.VIEW_VISIBLE);
-					fireSelectionChanged();
-				} catch (PartInitException e1) {
-
-				}
-			}
-
-			@Override
-			public void mouseDown(MouseEvent e) {
-				if (e.button == 3) {
-					if ((getEditDomain().getActiveTool() == null)
-							|| (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
-						getEditDomain().getPaletteViewer().setActiveTool(null);
-						cmProvider.setActive(false);
-					} else {
-						cmProvider.setActive(true);
-					}
-				}
-			}
-		});
+		viewer.getControl().addMouseListener(new DiagramMouseListener());
 	}
-	
+
 	protected org.eclipse.emf.common.command.CommandStack getEMFCommandStack() {
-		return ((TMCLEditDomain)getEditDomain()).getEditingDomain().getCommandStack();
+		return ((TMCLEditDomain) getEditDomain()).getEditingDomain()
+				.getCommandStack();
 	}
 
 	@Override
@@ -204,10 +182,12 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				MouseWheelZoomHandler.SINGLETON);
 		getPalettePreferences().setPaletteState(
 				FlyoutPaletteComposite.STATE_PINNED_OPEN);
-		
-		getGraphicalViewer().addDropTargetListener((TransferDropTargetListener)
-				new TemplateTransferDropTargetListener(getGraphicalViewer()));
-			
+
+		getGraphicalViewer()
+				.addDropTargetListener(
+						(TransferDropTargetListener) new TemplateTransferDropTargetListener(
+								getGraphicalViewer()));
+
 	}
 
 	public ZoomManager getZoomManager() {
@@ -242,19 +222,20 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	@Override
 	protected PaletteViewerProvider createPaletteViewerProvider() {
-		
+
 		return new PaletteViewerProvider(getEditDomain()) {
 			@Override
 			protected void configurePaletteViewer(PaletteViewer viewer) {
 				super.configurePaletteViewer(viewer);
-				viewer.addDragSourceListener(new TemplateTransferDragSourceListener(viewer));
+				viewer
+						.addDragSourceListener(new TemplateTransferDragSourceListener(
+								viewer));
 			}
 		};
-		
-		
+
 	}
 
 	@Override
@@ -273,10 +254,14 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	protected void createActions() {
-		getActionRegistry().registerAction(new RemoveFromDiagramAction(getEMFCommandStack()));
-		getActionRegistry().registerAction(new DeleteFromModelAction(getEMFCommandStack()));
-		getActionRegistry().registerAction(new AddNameConstraintAction(getEMFCommandStack()));
-		getActionRegistry().registerAction(new AddOccurrenceConstraintAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(
+				new RemoveFromDiagramAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(
+				new DeleteFromModelAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(
+				new AddNameConstraintAction(getEMFCommandStack()));
+		getActionRegistry().registerAction(
+				new AddOccurrenceConstraintAction(getEMFCommandStack()));
 		super.createActions();
 	}
 
@@ -291,26 +276,26 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				.getEditingDomain());
 
 		setTitleImage(input.getImageDescriptor().createImage());
-		
+
 		dirtyAdapter = new DirtyAdapter();
 		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
 		diagram.eAdapters().add(dirtyAdapter);
 
 		ActionRegistry ar = ei.getActionRegistry();
 		IActionBars actionBars = getEditorSite().getActionBars();
-		
+
 		IAction a = ar.getAction(ActionFactory.UNDO.getId());
 		actionBars.setGlobalActionHandler(a.getId(), a);
 		getActionRegistry().registerAction(a);
-		
+
 		a = ar.getAction(ActionFactory.REDO.getId());
 		actionBars.setGlobalActionHandler(a.getId(), a);
 		getActionRegistry().registerAction(a);
-		
+
 		a = ar.getAction(ActionFactory.SAVE.getId());
 		actionBars.setGlobalActionHandler(a.getId(), a);
 		getActionRegistry().registerAction(a);
-		
+
 		a = ar.getAction(ActionFactory.CLOSE.getId());
 		getActionRegistry().registerAction(a);
 	}
@@ -407,7 +392,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					if (tmp != null)
 						currentSelection = new StructuredSelection(tmp);
 					else {
-						tmp = ((TypeNode)edge.getSource()).getTopicType();
+						tmp = ((TypeNode) edge.getSource()).getTopicType();
 						currentSelection = new StructuredSelection(tmp);
 					}
 				} else {
@@ -425,7 +410,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		while (it.hasNext()) {
 			Object o = it.next();
 			if (o instanceof AbstractSelectionAction) {
-				((AbstractSelectionAction)o).setSelections(selelection);
+				((AbstractSelectionAction) o).setSelections(selelection);
 			}
 		}
 
@@ -446,7 +431,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	public void refresh() {
 		getGraphicalViewer().getControl().redraw();
 	}
-	
+
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
 		if (selectionChangedListeners != Collections.EMPTY_LIST)
@@ -474,8 +459,11 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return (TMCLEditorInput) getEditorInput();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.diagram.editor.IPrintableDiagramEditor#getPrintableFigure()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seede.topicmapslab.tmcledit.diagram.editor.IPrintableDiagramEditor#
+	 * getPrintableFigure()
 	 */
 	public IFigure getPrintableFigure() {
 		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
@@ -485,6 +473,78 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	@Override
 	protected void updateActions(List actionIds) {
 		super.updateActions(actionIds);
+	}
+
+	private final class DiagramMouseListener extends MouseAdapter {
+		private boolean marquee = false;
+		private MarqueeToolEntry met;
+
+		public DiagramMouseListener() {
+			init();
+		}
+
+		private void init() {
+			PaletteGroup toolsGroup = (PaletteGroup) getEditDomain()
+					.getPaletteViewer().getPaletteRoot().getChildren().get(0);
+			met = (MarqueeToolEntry) toolsGroup.getChildren().get(1);
+		}
+
+		@Override
+		public void mouseDoubleClick(MouseEvent e) {
+			try {
+				getEditorSite()
+						.getPage()
+						.showView(
+								"de.topicmapslab.tmcledit.extensions.views.PropertyDetailView",
+								null, IWorkbenchPage.VIEW_VISIBLE);
+				fireSelectionChanged();
+
+			} catch (PartInitException e1) {
+
+			}
+		}
+
+		@Override
+		public void mouseUp(MouseEvent e) {
+			if (marquee) {
+				if ((getEditDomain().getActiveTool() == null)
+						|| (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
+					getEditDomain().getPaletteViewer().setActiveTool(null);
+					cmProvider.setActive(false);
+				} else {
+					cmProvider.setActive(true);
+				}
+				marquee = false;
+			}
+		}
+
+		@Override
+		public void mouseDown(MouseEvent e) {
+			if ((e.button == 3)) {
+				if ((getEditDomain().getActiveTool() == null)
+						|| (getEditDomain().getActiveTool().getClass() != SelectionTool.class)) {
+					getEditDomain().getPaletteViewer().setActiveTool(null);
+					cmProvider.setActive(false);
+				} else {
+					cmProvider.setActive(true);
+				}
+			}
+			if (e.button == 1) {
+				if ((getEditDomain().getActiveTool() == null)
+						|| (getEditDomain().getActiveTool().getClass() == SelectionTool.class)) {
+					if (currentSelection.isEmpty())
+						return;
+					if (((IStructuredSelection) currentSelection)
+							.getFirstElement() instanceof Diagram) {
+
+						getEditDomain().getPaletteViewer().setActiveTool(met);
+						Tool tool = getEditDomain().getActiveTool();
+						tool.mouseDown(e, getGraphicalViewer());
+						marquee = true;
+					}
+				}
+			}
+		}
 	}
 
 	private class DirtyAdapter extends AdapterImpl {
@@ -504,7 +564,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 					}
 				}
 			} else if (msg.getNotifier().equals(diagram)) {
-				if (msg.getFeatureID(String.class)== ModelPackage.DIAGRAM__NAME) {
+				if (msg.getFeatureID(String.class) == ModelPackage.DIAGRAM__NAME) {
 					setPartName((String) msg.getNewValue());
 					firePropertyChange(IEditorPart.PROP_TITLE);
 				}
