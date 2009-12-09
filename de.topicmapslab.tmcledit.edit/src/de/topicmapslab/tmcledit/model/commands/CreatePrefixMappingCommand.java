@@ -35,6 +35,13 @@ public class CreatePrefixMappingCommand extends AbstractCommand{
 	@Override
 	protected boolean prepare() {
 		newElement = ModelFactory.eINSTANCE.createMappingElement();
+		
+		for (MappingElement me : schema.getMappings()) {
+			if (me.getKey().equals(newKey))
+				return false;
+		}
+			
+		
 		newElement.setKey(newKey);
 		newElement.setValue(newValue);
 		

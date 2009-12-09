@@ -19,6 +19,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
+import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.commands.CreatePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewPrefixMappingDialog;
@@ -47,10 +48,16 @@ public class NewPrefixAction extends ValidationAction {
 		NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(shell);
 		dlg.setKey(key);
 		if (Dialog.OK==dlg.open()) {
+			for (MappingElement me : schema.getMappings()) {
+				if (me.getKey().equals(dlg.getKey())) {
+					MessageDialog.openError(shell, "Invlaid Key", "A prefix with that key already exists.");
+					return;
+				}
+			}
 			if (PrefixKeyMatcher.isValidKey(dlg.getUri())) {
-			CreatePrefixMappingCommand cmd = new CreatePrefixMappingCommand(schema, 
-					dlg.getKey(), dlg.getUri());
-			getCommandStack().execute(cmd);
+				CreatePrefixMappingCommand cmd = new CreatePrefixMappingCommand(schema, 
+						dlg.getKey(), dlg.getUri());
+				getCommandStack().execute(cmd);
 			} else {
 				MessageDialog
 				.openError(shell, "invalid key",

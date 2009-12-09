@@ -698,13 +698,6 @@ public class TMCLTopicMapBuilder {
 
 			return super.equals(obj);
 		}
-
-		private TMCLTopicMapBuilder getOuterType() {
-	        return TMCLTopicMapBuilder.this;
-        }
-		
-		
-
 	}
 	
 	
