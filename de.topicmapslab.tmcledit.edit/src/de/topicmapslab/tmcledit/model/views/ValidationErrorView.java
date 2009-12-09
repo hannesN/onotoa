@@ -43,6 +43,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
@@ -90,6 +91,11 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 				else {
 					ValidationResult r = (ValidationResult) sel.getFirstElement();
 					setSelection(new StructuredSelection(r.getObject()));
+					try {
+	                    getSite().getWorkbenchWindow().getActivePage().showView(PropertyDetailView.ID);
+                    } catch (PartInitException e) {
+                    	throw new RuntimeException(e);
+                    }
 				}				
 			}
 			
