@@ -63,6 +63,8 @@ public class TMCLTopicMapBuilder {
 	// set to store the crerated roleconstraints and roleplayerconstraint
 	private final Set<ConstraintWrapper> constraintSet = new HashSet<ConstraintWrapper>();
 
+	private final Set<OccurrenceType> occTypes = new HashSet<OccurrenceType>();
+	
 	private Map<TopicType, Topic> topicTypeMap;
 	private Map<String, String> prefixMap;
 
@@ -115,6 +117,10 @@ public class TMCLTopicMapBuilder {
 
 			createTopicTypes();
 			createAssociationConstraints();
+			
+			for(OccurrenceType ot : occTypes) {
+				setOccurrenceDatatype(ot);
+			}
 
 			// cleaning up the topics, removing item identifier where there not
 			// needed
@@ -431,7 +437,7 @@ public class TMCLTopicMapBuilder {
 		OccurrenceType otype = (OccurrenceType) otc.getType();
 		Topic occType = null;
 		if (otype != null) {
-			setOccurrenceDatatype(otype);
+			occTypes.add(otype);
 			occType = createTopic(otype);
 			if (!otype.getRegExp().equals(".*"))
 				setRegExpConstraint(otype, otype.getRegExp());
@@ -533,6 +539,7 @@ public class TMCLTopicMapBuilder {
 
 	private void setOccurrenceDatatype(OccurrenceType ot) {
 		Topic constr = createConstraint(TMCL.OCCURRENCE_DATATYPE_CONSTRAINT);
+		System.out.println(ot.getName()+"--"+ot.getDataType());
 		constr.createOccurrence(createTopic(TMCL.DATATYPE), ot.getDataType());
 
 		createConstrainedStatement(ot, constr);
@@ -645,15 +652,17 @@ public class TMCLTopicMapBuilder {
 	        
 	        if (constraint instanceof RoleConstraint) {
 				RoleConstraint rc = (RoleConstraint) constraint;
-				
-				result = prime * result + rc.getType().hashCode();
+				if (rc.getType()!=null)
+					result = prime * result + rc.getType().hashCode();
 				
 				
 			} else if (constraint instanceof RolePlayerConstraint) {
 				RolePlayerConstraint rpc = (RolePlayerConstraint) constraint;
-
-				result = prime * result + rpc.getPlayer().hashCode();
-				result += prime * result + rpc.getRole().hashCode();
+				
+				if (rpc.getPlayer()!=null)
+					result = prime * result + rpc.getPlayer().hashCode();
+				if (rpc.getRole()!=null)
+					result += prime * result + rpc.getRole().hashCode();
 			}
 	        if (constraint instanceof AbstractCardinalityContraint) {
 	        	AbstractCardinalityContraint acc = (AbstractCardinalityContraint) constraint;
@@ -677,6 +686,12 @@ public class TMCLTopicMapBuilder {
 				RoleConstraint rc1 = (RoleConstraint) constraint;
 				RoleConstraint rc2 = (RoleConstraint) otherC;
 
+				if (rc1.getType()==null) {
+					if (rc2.getType()!=null) {
+						return false;
+					}
+				}
+				
 				if (!rc1.getType().equals(rc2.getType()))
 					return false;
 				if ((rc1.getCardMin().equals(rc2.getCardMin())) && (rc1.getCardMax().equals(rc2.getCardMax())))
@@ -685,10 +700,21 @@ public class TMCLTopicMapBuilder {
 			} else if (constraint instanceof RolePlayerConstraint) {
 				RolePlayerConstraint rpc1 = (RolePlayerConstraint) constraint;
 				RolePlayerConstraint rpc2 = (RolePlayerConstraint) otherC;
-
+				
+				if (rpc1.getPlayer()==null) {
+					if (rpc2.getPlayer()!=null) {
+						return false;
+					}
+				}
 				if (!rpc1.getPlayer().equals(rpc2.getPlayer()))
 					return false;
 				
+
+				if (rpc1.getRole()==null) {
+					if (rpc2.getRole()!=null) {
+						return false;
+					}
+				}
 				if (!rpc1.getRole().equals(rpc2.getRole()))
 					return false;
 
