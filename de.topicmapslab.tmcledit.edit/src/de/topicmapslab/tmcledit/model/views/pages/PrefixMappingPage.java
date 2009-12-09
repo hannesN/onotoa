@@ -39,6 +39,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -183,9 +184,16 @@ public class PrefixMappingPage extends AbstractModelPage {
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				Shell shell = addButton.getShell();
 				NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(
-						addButton.getShell());
+						shell);
 				if (dlg.open() == Dialog.OK) {
+					for (MappingElement me : schema.getMappings()) {
+						if (me.getKey().equals(dlg.getKey())) {
+							MessageDialog.openError(shell, "Invlaid Key", "A prefix with that key already exists.");
+							return;
+						}
+					}
 					if (PrefixKeyMatcher.isValidKey(dlg.getKey()))
 						getCommandStack().execute(
 								new CreatePrefixMappingCommand(
@@ -193,7 +201,7 @@ public class PrefixMappingPage extends AbstractModelPage {
 										dlg.getUri()));
 					else
 						MessageDialog
-								.openError(addButton.getShell(), "invalid key",
+								.openError(shell, "invalid key",
 										"You've entered an invalid key!");
 				}
 			}
