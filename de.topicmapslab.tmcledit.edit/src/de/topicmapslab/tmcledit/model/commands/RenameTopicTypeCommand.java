@@ -98,7 +98,7 @@ public class RenameTopicTypeCommand extends AbstractCommand {
     		   && (!baseLocator.endsWith(":")) )
     			baseLocator += "/";
     		
-    		String newId = baseLocator + newName;
+    		String newId = baseLocator + newName.replaceAll(" ", "_").toLowerCase();
     		newIds.add(newId);
     		idCmd = (new SetTopicTypeIdentifiersCommand(newIds, tt));
 		}
