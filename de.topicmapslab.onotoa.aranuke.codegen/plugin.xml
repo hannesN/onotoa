@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="de.topicmapslab.onotoa.aranuke.codegen.category1"
+            name="name">
+      </category>
+      <wizard
+            class="de.topicmapslab.onotoa.aranuke.codegen.wizards.AranukaExportWizard"
+            id="de.topicmapslab.onotoa.aranuke.codegen.wizard"
+            name="Aranuka Code Generator">
+      </wizard>
+   </extension>
+
+</plugin>

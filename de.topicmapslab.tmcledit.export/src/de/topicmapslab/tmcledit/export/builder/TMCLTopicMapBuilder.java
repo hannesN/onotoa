@@ -690,10 +690,9 @@ public class TMCLTopicMapBuilder {
 					if (rc2.getType()!=null) {
 						return false;
 					}
-				}
-				
-				if (!rc1.getType().equals(rc2.getType()))
+				} else if (!rc1.getType().equals(rc2.getType()))
 					return false;
+				
 				if ((rc1.getCardMin().equals(rc2.getCardMin())) && (rc1.getCardMax().equals(rc2.getCardMax())))
 					return true;
 				
@@ -705,8 +704,7 @@ public class TMCLTopicMapBuilder {
 					if (rpc2.getPlayer()!=null) {
 						return false;
 					}
-				}
-				if (!rpc1.getPlayer().equals(rpc2.getPlayer()))
+				} else if (!rpc1.getPlayer().equals(rpc2.getPlayer()))
 					return false;
 				
 
@@ -714,8 +712,7 @@ public class TMCLTopicMapBuilder {
 					if (rpc2.getRole()!=null) {
 						return false;
 					}
-				}
-				if (!rpc1.getRole().equals(rpc2.getRole()))
+				} else if (!rpc1.getRole().equals(rpc2.getRole()))
 					return false;
 
 				if ((rpc1.getCardMin().equals(rpc2.getCardMin())) && (rpc1.getCardMax().equals(rpc2.getCardMax())))

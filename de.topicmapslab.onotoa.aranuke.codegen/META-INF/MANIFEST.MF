@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Codegen
+Bundle-SymbolicName: de.topicmapslab.onotoa.aranuke.codegen;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.topicmapslab.onotoa.aranuke.codegen.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.topicmapslab.tmcledit.export;bundle-version="1.1.1",
+ org.sourceforge.tinyTiM;bundle-version="2.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: lib/tmql4j-1.0.1.jar,
+ lib/aranuka_codegen-0.0.1-SNAPSHOT.jar,
+ lib/aranuka-0.0.1-SNAPSHOT.jar,
+ .
