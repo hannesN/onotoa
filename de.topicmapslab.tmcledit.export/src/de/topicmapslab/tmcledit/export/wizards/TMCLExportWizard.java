@@ -75,6 +75,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 			stream.close();
 
 		} catch (Exception e) {
+			MessageDialog.openError(getShell(), "Export Error!", "An error occurred while exporting: "+e.getMessage());
 			throw new RuntimeException(e);
 		}
 
