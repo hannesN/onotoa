@@ -5,8 +5,8 @@ Examples for properties are the name of a topic type or the cardinality of a con
 sections will explain the property pages of the elements. These pages are shown in the *Property Details View*.
 The view a property page of an element, you will have to select it either in the *Model View* or in a *Diagram Editor*.
 
-NOTE: The property pages support undo and redo functions for model changes. To manage a lot of changes during entering
-the text, _Onotoa_ processes the changes after the text field loses its focus.
+NOTE: The property pages support undo and redo functions for model changes. To manage a lot of changes during entering the text, 
+_Onotoa_ processes the changes after the text field loses its focus or the enter key was pressed.
 
 include::properties/documentation.txt[]
 
