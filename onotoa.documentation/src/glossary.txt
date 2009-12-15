@@ -32,6 +32,11 @@ Diagram::
 Diagram Element::
 	A diagram element is any element which is part of the diagram. Basically a diagram element is the visualization of a schema element. 
 	
+Domain Diagram::
+	A Domain Diagram is an abstract view of the Topic Maps schema. It consists of graphical representations of schema elements
+	and connects them if they have a relationship, e.g. the "Kind of" relationship, but in a more abstract way than the normal diagram. 
+	Some informations, e.g. cardinalities, aren´t displayed in this diagram type. 
+
 Feature::
 	A feature bundles a set of plug-ins. Additionally it contains meta information, such as  the licence model or copyright information.
 	
@@ -59,9 +64,16 @@ Occurrence Constraint::
 
 Occurrence Type::
 	An occurrence type is a specialized topic type. Only instances of an occurrence type should be used to type an occurrence.
-
+	
+Palette::
+	The palette provides the functionality of the editor. It contains a set of tools to create new elements.
+	
 Perspective::
 	A perspective defines what views are shown in eclipse and where they are located.
+
+Property Details View::
+	The Property Details View contains property pages for every element of an schema and provides input masks to change their 
+	properties.
 
 Schema Element::
 	A schema element is an element in the schema like a topic or role type, or any constraint added to the schema element.
