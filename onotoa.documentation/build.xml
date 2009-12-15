@@ -248,11 +248,13 @@
 			</fileset>
 		</copy>-->
 	</target>
-
+	
 	<target name="docbook" depends="init">
 		<exec executable="python">
 			<arg value="${asciidoc}"/>
 			<arg value="-v" />
+			<arg value="-a" />
+			<arg value="docinfo" />
 			<arg value="-d" />
 			<arg value="book" />
 			<arg value="-b" />
