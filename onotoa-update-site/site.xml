@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="The Onotoa Update Site" url="file:/home/mai00ckx/projects/onotoa-update-site">
+      This is the onotoa update site used to update the onotoa plugins in the Onotoa application or in any other eclipse instance.
+   </description>
+   <feature url="features/org.sourceforge.tinyTiM_feature_2.0.0.a6.jar" id="org.sourceforge.tinyTiM_feature" version="2.0.0.a6">
+      <category name="tinyTiM"/>
+   </feature>
+   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.1.beta.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.1.beta">
+      <category name="onotoa"/>
+   </feature>
+   <feature url="features/de.topicmapslab.tmcledit.export_feature_1.1.1.beta.jar" id="de.topicmapslab.tmcledit.export_feature" version="1.1.1.beta">
+      <category name="onotoa"/>
+   </feature>
+   <feature url="features/de.topicmapslab.tmcledit.import_feature_1.0.1.beta.jar" id="de.topicmapslab.tmcledit.import_feature" version="1.0.1.beta">
+      <category name="onotoa"/>
+   </feature>
+   <category-def name="onotoa" label="Onotoa"/>
+   <category-def name="tinyTiM" label="tinyTiM"/>
+</site>
