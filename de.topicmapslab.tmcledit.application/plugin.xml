@@ -6,7 +6,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="de.topicmapslab.tmcledit.application.onotoa"
+            application="org.eclipse.equinox.p2.director"
             name="Onotoa">
          <property
                name="appName"
