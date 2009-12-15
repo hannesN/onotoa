@@ -11,3 +11,151 @@ include::diagram/palette.txt[]
 include::diagram/graphrep.txt[]
 
 include::diagram/export.txt[]
+
+== The Domain Diagram Editor ==
+
+The *Diagram Editor* should be the editors first choice to create and modify a Topic Maps schema. It displays detailed informations 
+about the schema and represents an exact graphical representation. 
+
+The *Domain Diagram Editor* presents the informations in an abstract way without the loss of important information. Because of this it is predestined 
+for demonstrative issues. The diagram is reduced to the main aspects of a schema and does not seem to be overcharged. Schemas could be created in a
+fast and easy way. The following information does not appear in the diagram:
+
+* Cardinalities
+* Scope constraints
+* Reifier constraints  
+* Data types
+
+Look at the images below to see the differences.
+
+.Diagram of a schema
+[[ex_diagram_view]]
+image::images/example_diagram_view.png[scaledwidth="100%"]
+
+.Domain Diagram
+[[ex_domain_diagram_view]]
+image::images/example_domain_diagram_view.png[scaledwidth="100%"]
+
+The *Palette* of the *Domain Diagram Editor* also differs from the one of the *Diagram Editor*. Some constraints, types and the *Is A...* relation
+are absent to simplify the menu. There is no loss of complexity. All missing properties are still available and modifiable 
+in the *Property Detail View* below the diagram but this is not the recommended way to use the *Domain Diagram Editor*. 
+
+.Domain Diagram Palette
+[[domain_diagram_palette]]
+image::images/domain_diagram_palette.png[scaledwidth="35%"]
+
+In contrast to the *Diagram Editor*, two additional operations are directly available by the use of the context menu:
+
+* Add and remove picture (see below)
+* Set and create new roles for an association
+
+The *Domain Diagram* provides the insertion of an image for each Topic Type to increase the visual accessibility. 
+Click on the *Add image...* entry in the context menu of a Topic Type, choose one from the file system and confirm your choice to 
+add an image. The entries of the context menu change after the adding of an image. Instead of the add function the following ones will 
+appear:
+
+* *Change Image...* Opens a dialogue to select a new image.
+* *Remove Image...* Removes the image from the topic representation.  
+
+.Context Menu
+[[context_menu_image]]
+image::images/context_menu_image.png[scaledwidth="50%"]
+
+=== Palette ===
+
+The palette will create a diagram element and a new schema element which it 
+represents. If you select a diagram element the properties of the 
+represented schema element will be shown in the *Property Details View*.
+
+The palette can be seen in <<domain_palette_elements>>.
+ 
+
+.Palette of a Domain Diagram editor
+[[domain_palette_elements]]
+image::images/domain_diagram_palette.png[ scaledwidth="35%",align="center"]
+
+The elements of the palette are:
+
+* *Select:* Tool for selecting a diagram element. The selected element can be 
+moved, if it supports this operation.
+
+* *Marquee:* Selection tool for multiple diagram elements. You can select a 
+group of elements. This can be useful if you want remove or delete more than 
+one element.
+
+* *Comment:* Creates a comment in the diagram. This comment is represented like 
+a post-it note. This comment does not exist as schema element. If you want to 
+export
+your a comment to TMCL use the documentation properties.  
+
+* *Topic:* Creates a topic type representation and adds it to the diagram. 
+The represented topic is also created and added to the schema. 
+It will be placed where it was dropped.
+
+* *Name:* Creates a name constraint representation. You need to drop 
+the new constraint on a topic type representation. The according name type is also 
+created and added to the schema. 
+
+* *Occurrence:* Creates an occurrence constraint representation. You 
+need to drop the new constraint on a topic type representation. The according 
+occurrence type is also created and added to the schema. 
+
+* *Kind Of...:* Creates a connection between two topic types, which represents 
+a kind of relationship.
+
+* *Association:* Creates an element representing an association 
+constraint in the diagram. This is used as connection point between topic types 
+which are in an relationship. The according association type is also created and 
+added to the schema.
+
+* *Player:* The connection between a topic type (the player) and 
+an association constraint (the association).
+
+To create a new 'Topic Type' just drag the *Topic* palette entry into the 
+diagram. A new 'Topic Type' with a default name will be created. 
+To add  another 'Topic Type' simply repeat this process. 
+
+To add a 'Name Constraint' to the 'Topic Type', just drag *Name* onto the 'Topic Type' and a new 'Name Constraint' with 
+default properties will be added to the 'Topic Type'. The 'Occurrence Constraint' works similarly. 
+
+To create a'Kind of' relationship, click on the tool entry in the palette. Then click on a topic type representation 
+and after that one another one.
+
+To add a 'Association' just drag the *Association* palette entry into the diagram. A new Association Constraint with a default 
+name will be created and the specific Association Type too.  
+
+To add a 'Topic Role Constraint' just click on the *Player* palette entry. Then click (order does not matter) on the 
+association representation and the topic representation. 
+
+The editing state will remain in the relationship creation mode, so you don't have to go through the palette menu again for creating 
+another relationship. To go back to selection mode press the right mouse button or 'Select' in the palette.
+
+
+=== Creating a schema with the Domain Diagram ===
+
+The domain diagram shows the topic types and their associations. For a topic type the type of anems and occurrences are shown too, but
+it is not possible to see or modify the cardinality, scope, reification or regular expression of the types. It is possible to create a schema
+with the *Domain Diagram Editor* first and refine it afterwards using the *Property Details View*.
+
+The goal of the design of the *Domain Diagram Editor* was to allow the creation of a schema in the editor without the use of any other view.
+To achieve this goal the diagram context menu was extended. It is possible to set a type of a name or occurence via the context menu. 
+Another change is, that the creation of a constraint automatically creates a typing topic. This topic can be renamed by clicking on the name in the diagram.
+If a typing topic should be used which already exists, it is possible to select it in the context menu. After choosing an existing type, the new created type will be deleted.
+
+
+=== Interaction between Diagram and Domain Diagram ===
+
+Every newly created diagram is reachable by its respective named tab at the top of the main editor window. 
+
+_Onotoa_ provides the exchange of elements between a *Domain Diagram Editor* and the *Diagram Editor*. There are two different methods to perform this exchange 
+as you can see in the context menu of every Topic type:
+
+.Move and Copy
+[[move_copy_context]]
+image::images/move_copy_context.png[scaledwidth="50%"]
+
+* *Move To...* Move selected elements to the target diagram and remove them from the current one.
+* *Copy To ...* Copy selected elements to the target diagram without removing them from the current one.  
+
+The user could choose the number of elements he would move or copy. It is possible to copy or move single topics as well as selections or the whole 
+schema. Use the *Marquee* feature or click on each element while holding the *Ctrl* key pressed to make a selection.   

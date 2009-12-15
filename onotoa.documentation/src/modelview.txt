@@ -29,24 +29,24 @@ To select a node, just click on the node with the left mouse button.
 
 === Managing diagrams ===
 
-The node *Diagrams* is the parent of all nodes representing diagrams. 
+The node 'Diagrams' is the parent of all nodes representing diagrams. 
 
-To create a new diagram, use the context menu of the *Diagrams* node. It contains one entry,  *Create New Diagram...*. Choose this entry, 
-by clicking with the left mouse button on it and a dialogue will appear and ask for the name of the new diagram.
+To create a new diagram, use the context menu of the 'Diagrams' node. It contains two entries,  *Create New Diagram...* and *Create New Domain Diagram...*. Choose the entries, 
+by clicking with the left mouse button on it and a dialogue appears and asks for the name of the new diagram.
 If you want to abort, just press the *Cancel* button. 
 
-Every diagram must have a different name, so if you enter a name, which is already used, it will 
-not be possible to press *OK*. After pressing *OK* a new diagram will be created and an editor will automatically open. 
-You will also notice, that the node *Diagrams* will have a new child node with the name of the diagram.
+Every diagram must have a different name, so if you enter a name, which is already used, it is 
+not possible to press *OK*. After pressing *OK* a new diagram is created and an editor is automatically opened. You can also recognize, that the 
+node 'Diagrams' got a new child node labelled with the name of the diagram.
 
-.Context menu of *Diagrams*' in the *Model View*
+.Context menu of 'Diagrams' in the *Model View*
 [caption="Figure:"]
-image::images/create_diagram_ctx.png[scaledwidth="60%"]
+image::images/create_diagram_ctx_1.png[scaledwidth="60%"]
 
 The context menu of a diagram node has two entries:
 
-* *Rename...* Will open a dialogue to rename the diagram.
-* *Delete* Will delete the diagram and its content. 
+* *Rename...* Opens a dialogue to rename the diagram.
+* *Delete* Deletes the diagram and it's content. 
 
 NOTE: The deletion of the diagram does not delete the schema elements, which are represented in the diagram.
 

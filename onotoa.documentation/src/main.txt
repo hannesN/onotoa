@@ -1,7 +1,5 @@
 Onotoa Handbook
 ===============
-Hannes Niederhausen <niederhausen@informatik.uni-leipzig.de>
-v0.2, September 2009: Initial draft extended
 
 include::preface.txt[]
 
@@ -19,6 +17,8 @@ include::modelview.txt[]
 include::diagram.txt[]
 
 include::preferences.txt[]
+
+include::export.txt[]
 
 /////////////////////////////
 Some Short Tutorials
