@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="de.topicmapslab.tmcledit.export_feature"
-      label="Onotoa Export Plugins"
-      version="1.1.1.beta"
+      label="Onotoa TMCL Export Plugin"
+      version="1.1.1.qualifier"
       provider-name="Hannes Niederhausen, Topic Maps Lab">
 
    <description url="http://onotoa.topicmapslab.de">
@@ -83,7 +83,7 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          id="de.topicmapslab.tmcledit.export"
          download-size="0"
          install-size="0"
-         version="1.1.1.beta-qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
 </feature>

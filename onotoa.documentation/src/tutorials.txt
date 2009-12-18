@@ -1,6 +1,7 @@
 include::tutorials/descriptionToSchema.txt[]
 include::tutorials/unaryAssociation.txt[]
 include::tutorials/domainDiagram.txt[]
+/////////////////////////
 include::tutorials/rolecombination.txt[]
-
+/////////////////////////
 
