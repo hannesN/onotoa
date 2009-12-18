@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Application Plug-in
 Bundle-SymbolicName: de.topicmapslab.tmcledit.application; singleton:=true
-Bundle-Version: 1.1.1.beta-qualifier
+Bundle-Version: 1.1.1.qualifier
 Bundle-Activator: de.topicmapslab.tmcledit.application.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
