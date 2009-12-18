@@ -2,19 +2,19 @@
 
 === Theoretical background === 
 
-The objective of the Domain Diagrams is the fast creation of Topic Maps schemata and the clearly arranged presentation of these. As red line 
+The objective of domain diagrams is the fast creation of Topic Maps schemas and the clearly arranged presentation of these. As red line 
 for these tutorial we choose the following example:
 
 _A person has got at name and a homepage. These person is the member of a unique named society. This society has got a 
 homepage too and a statue._
 
-Through the analyze of these example we figure out the following topics:
+Through the analyse of these example we figure out the following topics:
 
 * *Topic Types:* "person" and "society"
 
 * *Association Type:* "member of"
 
-* *Topic Roles:* "member" and "organization"
+* *Topic Roles:* "member" and "organisation"
 
 * *Occurrence Types:* "homepage" and "statue"
 
@@ -27,18 +27,18 @@ all we need. Let us get into _Onotoa_.
 
 ==== Creating a schema in the Domain Diagram ==== 
 
-First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name for the model. 
-I have chosen _example_domain.ono_. To create a new Domain Diagram, right click on *Diagram* in the *Model View* and choose 
-*Create New Domain Diagram...* in the context menu. After your decision for a diagram name (_example_domain_ for example), 
+First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name for the model,
+e.g. "example_domain.ono". To create a new Domain Diagram, right click on *Diagram* in the *Model View* and choose 
+*Create New Domain Diagram...* in the context menu. After your decision for a diagram name  
 the _Onotoa_ window should looks like this:
 
 .Onotoa 
 [[dd_create_model_diagram]]
 image::images/documentation/domain_diagram/create_model_diagram.png[scaledwidth="100%"]
 
-Now we create the topic "person". At the right hand side of the editor window you find the *Palette*. Add per drag and drop a new Topic to 
+Now we create the topic "person". At the right hand side of the editor window you find the *Palette*. Add per drag and drop a new topic to 
 the diagram. Press and hold left mouse button on *Topic*, move the cursor into the the diagram and release the button. A yellow box 
-named _default0_ will appears. Click on the topic to get the focus and click on the name to enter the editor modus to change 
+named "default0" will appears. Click on the topic to get the focus and click on the name to enter the editor modus to change 
 this value. Type "person" and confirm this by pressing the enter key. Repeat this to create the "society" topic type.
 
 .Set Topic name 
@@ -48,34 +48,31 @@ image::images/documentation/domain_diagram/set_topic_name.png[scaledwidth="50%"]
 NOTE: All properties of a topic are also editable in the *Property Details View*, even more than in the Domain Diagram. We do not use it for 
 demonstrative reasons in this tutorial. Because of this, we do not set cardinalities, select data types for occurrences and so on.    
 
-A person should have one Name Constraint. We add these by the use of the context menu. Right click on the topic and chose 
-*Add Name Constraint*. A new entry named _name0_ will appear in the box. Click on it to get the focus and click twice to change 
+A person should have one name constraint. We add these by the use of the context menu. Right click on the topic and chose 
+*Add Name Constraint*. A new entry named "name0" will appear in the box. Click on it to get the focus and click twice to change 
 the entry to "name".  
 
 .New Name Constraint
 [[dd_name_constraint]]
 image::images/documentation/domain_diagram/name_constraint.png[scaledwidth="50%"]
 
-The topic "society" also needs a Name Constraint (in our example the same one), but this time we add it per drag and drop from the *Palette*. 
+The topic "society" also needs a name constraint (in our example the same one), but this time we add it per drag and drop from the *Palette*. 
 Press and hold left mouse button on *Name*, move the cursor into the the topic "society" and release the button. We just created the 
 Topic Type "name". Because of this, is is not necessary to re-create this one. Right click on the constraint and click on *Set Name->name* to 
-chose the existing one. 
+chose the existing one. The name created with the constraint will be deleted automatically.
 
-All our topics still need are some occurrences. Add them per drag and drop or by the use of the context menu(*->Add Occurrence Constrain*t). 
-Choose "homepage" and "statue" as their names.
+All our topics still need are some occurrences. Add them per drag and drop or by the use of the context menu(*Add Occurrence Constraint*). 
+Enter "homepage" and "statue" as their names.
  
-At this point of the tutorial we create the two Topic Types "person" and "society", add the Name Constraint "name" and the two Occurrence 
-Constraints "homepage" and "statue". Your _Onotoa_ window should looks like this one:
+Afterwards your _Onotoa_ window should looks like this:
 
 .Onotoa
 [[dd_onotoa_screen_1]]
 image::images/documentation/domain_diagram/onotoa_screen_1.png[scaledwidth="100%"] 
 
 The next step will be the creation of the "member of" association. Add an association per drag and drop from the *Palette* to the 
-diagram and a "association0" named blue big dot will appear. The according Association Type will be generated automatically. Click on 
+diagram and a blue big dot will appear labelled "association0". The according association type will be generated automatically. Click on 
 the dot to get the focus and click on the name to edit it. Type "member of" and press the enter key to acknowledge your decision. 
-
-TIP: Press and hold the left mouse button to move elements in the diagram for visual purposes.
 
 The entry *Player* in the *Palette* represents the Player Association Constraint. We need this to connect topics and associations. Select the 
 *Player" entry from the *Palette*. Now click first on the topic "person" and twice on the "member of" association". A thin black line appears to 
@@ -85,8 +82,8 @@ show the connection. Repeat this for the "society" topic.
 [[dd_create_association]]
 image::images/documentation/domain_diagram/create_association.png[scaledwidth="50%"]
 
-If we look at the association labels in the diagram, we will see three interrogaten marks instead of roles, because we did not 
-create them until now. Let us do this next. Click right on _person isa ???_ to open the context menu, proceed with *Set Role -> 
+If we look at the association labels in the diagram, we will see three question marks instead of roles, because we did not 
+create them until now. Let us do this next. Click right on *person as ???* to open the context menu, proceed with *Set Role -> 
 New Role...* and type "member" as name in the appearing window. Repeat this for the player "society" but name the role "organization".
 
 .Create Role Type
@@ -107,7 +104,7 @@ Sometimes it will be necessary to switch between the different diagram types for
 the complete schema or only parts of this. These operations are lossless and easy to do.
 
 First of all we have to create an normal diagram additional to the existing Domain Diagram. Use the context menu in the *Model View* 
-to create a new one ( I named it _example_diagram_ ) and a new tap will appear in the editor window. 
+to create a new one named "example_diagram" ) and a new tap will appear in the editor window. 
 
 .Create a second Diagram
 [[dd_second_diagram]]

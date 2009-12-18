@@ -11,7 +11,73 @@
 package de.topicmapslab.tmcledit.model.util.io;
 
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.*;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ABSTRACT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_DATATYPE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_HEIGHT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ID;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_IMAGE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_KEY;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_KIND;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_NAME;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_POS_X;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_POS_Y;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_REF;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_REG_EXP;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_SOURCE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TARGET;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TOPIC_ROLE_REF;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TYPE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_UNIQUE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_VALUE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_VERSION;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_WIDTH;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_AKO;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ANNOTATION;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ASSOCIATION_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ASSOC_CONSTRAINT_REF;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_BENDPOINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_COMMENT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_DESCRIPTION;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_DIAGRAM;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_EDGE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_FILE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ISA;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_LABEL_POSITION;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_MAPPING_ELEMENT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAME;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAME_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAME_CONSTRAINTS;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NODE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OCCURRENCE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OCCURRENCE_CONSTRAINTS;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OTHER_PLAYER;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OTHER_ROLE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OVERLAP;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_PLAYER;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_REIFIER_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ROLE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ROLE_COMBINATION_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ROLE_COMBINATION_CONSTRAINTS;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ROLE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ROLE_CONSTRAINTS;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_ROLE_CONSTRAINT_REFERENCE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SCHEMA;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SCOPE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SEE_ALSO;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_IDENTIFIER;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_IDENTIFIER_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_IDENTIFIER_CONSTRAINTS;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_LOCATOR;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_LOCATOR_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_SUBJECT_LOCATOR_CONSTRAINTS;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_REIFIES_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_ROLE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_TYPE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_TOPIC_TYPE_REF;
+
 import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -53,6 +119,7 @@ import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -87,7 +154,8 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			try {
 				tf.setAttribute("indent-number", Integer.toString(4));
 			} catch (IllegalArgumentException iae) {
-				iae.printStackTrace(); // TODO remove me and log
+				TmcleditEditPlugin.logError(iae);
+				throw new RuntimeException(iae);
 			}
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
