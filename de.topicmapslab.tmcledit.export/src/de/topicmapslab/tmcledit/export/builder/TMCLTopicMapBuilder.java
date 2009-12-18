@@ -265,10 +265,21 @@ public class TMCLTopicMapBuilder {
 		for (String id : type.getIdentifiers()) {
 			if (id.indexOf(':') != -1) { // TODO make it more robust
 				String iri = resolveIRI(id);
-				if (iri != null)
-					t.addSubjectIdentifier(topicMap.createLocator(iri));
+				if (iri != null) {
+					Locator loc = topicMap.createLocator(iri);
+					Topic exTopix = topicMap.getTopicBySubjectIdentifier(loc);
+					if (exTopix!=null)
+						t.mergeIn(exTopix);
+					else
+						t.addSubjectIdentifier(loc);
+				}
 			} else {
-				t.addSubjectIdentifier(topicMap.createLocator(id));
+				Locator loc = topicMap.createLocator(id);
+				Topic exTopix = topicMap.getTopicBySubjectIdentifier(loc);
+				if (exTopix!=null)
+					t.mergeIn(exTopix);
+				else
+					t.addSubjectIdentifier(loc);
 			}
 		}
 
@@ -283,7 +294,9 @@ public class TMCLTopicMapBuilder {
 		}
 
 		// add types
-		t.addType(getTopicTypes(type.getKind()));
+		Topic typeTopic = getTopicTypes(type.getKind());
+		if (typeTopic!=null)
+			t.addType(typeTopic);
 
 		for (TopicType tt : type.getIsa()) {
 			t.addType(createTopic(tt));
