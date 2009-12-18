@@ -2,7 +2,7 @@
 
 === Theoretical background === 
 
-This tutorial is about the creation of a topic maps schema based on a natural description. In this case _natural_ means spoken word
+This tutorial is about the creation of a Topic Maps schema based on a natural description. In this case _natural_ means spoken word
 or text by men about a real life "thing", its relationships, (inter)acting objects, players and so on. 
 
 Lets think about the following statement:
@@ -11,8 +11,8 @@ _"A company is an institution, where many different persons work. These persons 
 They may change the company they working for, so an employment is a time relative contract with a beginning and an end. One company 
 differ from another by name and address."_
 
-When we analyze this short statement, we can figure out our two main topics "person" and "company". Both got a name and an address (occurrences). There 
-are three associations those describe the relationships between them:
+When we analyse this short statement, we can figure out our two main topics "person" and "company". Both got a name and an address 
+(occurrences). There are three associations those describe the relationships between them:
 
 * "works for" (time relative -> scope)
 * "lives in"
@@ -23,10 +23,10 @@ effects the cardinality. In equal measure we handle the other cardinalities:
 
 [width="50%", cols="^30%,^30%,^40%"]
 |===========================================
-|Association| Role One| Role Two
-|work for| employee [1..*]| employer [1..1]
-|lives in| inhabitant [1..*]| place [1..1]
-|located in| locatee [1..1]| location [1..1]
+|Association| Role One| Role Two 
+|work for| employee [1..*]| employer [1..1] 
+|lives in| inhabitant [1..*]| place [1..1] 
+|located in| locatee [1..1]| location [1..1] 
 |===========================================
 
 At this point, the occurrence "address" does not contains many informations, because only one value per occurrence is allowed. 
@@ -42,10 +42,12 @@ Now we are able to associate them to the topics "person" and "company" without t
 
 === Into Onotoa ===
 
-First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name for the model. I have chosen _example_domain.ono_. To create a new diagram, right click on *Diagram* in the *Model View* and choose *Create New Diagram...* in the context menu.
-After your decision for a diagram name (_example_domain_ for example), the _Onotoa_ window should looks like this:  
+First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name for the model, e. g.
+"example_domain.ono". To create a new diagram, right click on *Diagram* in the *Model View* and choose *Create New Diagram...* in 
+the context menu.
+After your decision for a diagram name, the _Onotoa_ window should looks like this:  
 
-.Onotoa 
+.Onotoa with an empty diagram
 [[dom_create_model_diagram]]
 image::images/documentation/description_to_schema/create_model_diagram.png[scaledwidth="100%"]
 
@@ -53,13 +55,13 @@ We start with the creation of the topics "company" and "person". On the left sid
 the so called *Palette*. You can add anything in this box by drag and drop into the diagram. Press and hold left mouse button 
 on *Topic Types*, move the cursor into the diagram and release the button and a yellow box will appear. At the bottom of the window 
 is the "Property Details View". There you can modify the properties of a topic. We need to change the name, 
-because "default0" is not correct. So name the new topic "person". As next step, we create the topic "company" in equal measure.
+because "default0" is not correct. So name the new topic "person" by clicking on the name and an editor
+will open. As next step, we create the topic "company" in equal measure.
 
 .Set topic name
 [[dom_set_topic_name]]
 image::images/documentation/description_to_schema/set_topic_name.png[scaledwidth="100%"]
 
-TIP: Press and hold the left mouse button to move elements in the diagram for visual purposes.
 
 Now we turn to the deeper details of "person". We specified, that a person works in a company, has got at least one first name, 
 exact one given name and an address.
@@ -90,14 +92,14 @@ The first occurrence is finished.
 [[dom_select_datatype]]
 image::images/documentation/description_to_schema/select_datatype.png[scaledwidth="50%"]  
 
-NOTE: You can specify valid names by the use of regular expressions
+NOTE: You can specify valid names by the use of regular expressions.
 
 After this is done we repeat this procedure to create the "given name" occurrence for "person" and the "name" occurrence" for "company". 
 But set the cardinality in this two cases to "1..1", because this is exactly we want it to be.
 
 A person works for a company. To figure this out, we create the association "works for". Drag an drop an new *Association Constraint* from the 
-*Palette* into the diagram. A circle with the label _No type set" will appear. So far we have not created an Association Type but could do this now.
-Click on *Type* at the left side in the property menu, choose "works for" as name in the appearing window and our new Association Type will be 
+*Palette* into the diagram. A circle with the label "No type set" will appear. So far we have not created an Association Type but could do this now.
+Click on *Type* at the left side in the property menu, enter "works for" as name in the appearing window and our new Association Type will be 
 generated.   
 
 .Create association type
@@ -114,19 +116,21 @@ image::images/documentation/description_to_schema/create_roles.png[scaledwidth="
 
 As next step we add this relationship to the diagram. Choose *Topic Role Constraint* in the *Palette*, click once on "person" and twice one the 
 association. Repeat this for the "company" and two thin black lines should be added to the diagram. As we see there are no roles entries. 
-We change this by clicking on the _no role_type_set_ label in the diagram an select of course "employee" for "person" and "employer" for 
+We change this by clicking on the "_no role_type_set_" label in the diagram an select of course "employee" for "person" and "employer" for 
 "company" in the property page. 
 
-At this point, there is a incorrect value. According to the diagram, only one person could work for the company. So we must change the 
-player cardinality. Click on the "1..1" entry near "person" and set it to "1..*" in the *Property Detail View*. 
+The cardinality of a  *Topic Role Constraint* tells how often a specific instance of the player type may be used in associations of
+the given association type.  In the example we set the cardinality of the company to 1..* and for the person 1..*.
+
 
 .Diagram view
 [[dom_diagram_view_1]]
 image::images/documentation/description_to_schema/diagram_view_1.png[scaledwidth="100%"]
 
-Of course an employment is a time relative relation and we want to integrate this in our schema. Click once on *Scope Constraint* in the *Palette* and 
-click twice on the "works for" association in the diagram. Choose "time" as name. Set the cardinality to "1..1", because we want exact one scope. 
-No we have created a new topic, but we need two occurrences to specify the scope: "start" and "end". Right click on the "time" topic in the *Model View* and choose the the *Create Occurrence Constraint...* entry in the context menu. 
+Of course an employment is a time relative relation and we want to integrate this in our schema. Click once on *Scope Constraint* in the 
+*Palette* and click twice on the "works for" association in the diagram. Choose "time" as name. Set the cardinality to "1..1", because
+we want exact one scope. No we have created a new topic, but we need two occurrences to specify the scope: "start" and "end". Right 
+click on the "time" topic in the  *Model View* and choose the the *Create Occurrence Constraint...* entry in the context menu. 
 In this way create two occurrence constraints. 
 
 .Model view
@@ -164,7 +168,7 @@ context menu in the "Model View". After this I add two Association Constraints f
 To create the roles for the associations take once more a look at the "Property Details View", click on the *Association Type* tap, build the new ones in the usual way and change 
 their cardinality: 
 
-[width="55%", cols="^30%,^30%,^40%"]
+[width="50%", cols="^30%,^30%,^40%"]
 |===========================================
 |Association|Role One|Role Two
 |lives in|inhabitant [1..*]|place [1..1]
