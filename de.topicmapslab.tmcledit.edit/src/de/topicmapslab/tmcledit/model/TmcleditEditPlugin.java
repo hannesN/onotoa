@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -80,6 +82,11 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 	public static ExtensionManager getExtensionManager() {
 		return Implementation.getExtensionManager();
 	}
+	
+	public static void logError(Exception e) {
+		getPlugin().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage()));
+	}
+	
 	/**
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 * <!-- begin-user-doc -->
@@ -139,6 +146,8 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 			}
 			return null;
 		}
+		
+		
 	}
 
 }

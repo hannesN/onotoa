@@ -89,7 +89,6 @@ This Agreement is governed by the laws of the State of New York andthe intellect
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.apache.batik.ext.awt"/>
       <import plugin="org.apache.batik.svggen"/>
-      <import feature="de.topicmapslab.tmcledit.doc_feature" version="1.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

@@ -16,6 +16,10 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.1.qualifier"/>
+   </requires>
+
    <plugin
          id="de.topicmapslab.tmcledit.doc"
          download-size="0"
