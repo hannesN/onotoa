@@ -172,6 +172,13 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(browseButton.getShell(), false);
+				
+				ModelIndexer modelIndexer = ModelIndexer.getInstance();
+				List<TopicType> tList = new ArrayList<TopicType>(modelIndexer.getTopicMapSchema().getTopicTypes());
+				tList.removeAll(ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.TOPIC_TYPE));
+				
+				dlg.setExcludeList(tList);
+				
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
 					        new GenericSetCommand(getReifiableType().getReifierConstraint(),

@@ -358,6 +358,9 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			case OCCURRENCE_TYPE:
 				img = ImageConstants.OCCURRENCETYPE;
 				break;
+			case NAME_TYPE:
+				img = ImageConstants.NAMETYPE;
+				break;
 			}
 
 			return ImageProvider.getImage(img);

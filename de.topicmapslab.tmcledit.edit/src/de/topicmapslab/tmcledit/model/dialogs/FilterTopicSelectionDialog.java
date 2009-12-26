@@ -55,7 +55,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		
 		setListLabelProvider(new ListLabelProvider());
 		setDetailsLabelProvider(new DetailLabelProvider());
-		
+		setInitialPattern("?");
 	}
 	
 	@Override
