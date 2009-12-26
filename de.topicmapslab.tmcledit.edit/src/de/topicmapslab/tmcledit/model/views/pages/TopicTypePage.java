@@ -340,7 +340,10 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 
 					TopicIndexer instance = ModelIndexer.getTopicIndexer();
 					List<TopicType> list = new ArrayList<TopicType>();
-					list.addAll(instance.getTypesByKind(KindOfTopicType.TOPIC_TYPE));
+					list.addAll(instance.getTopicTypes());
+					list.removeAll(instance.getTypesByKind(KindOfTopicType.TOPIC_TYPE));
+					
+					
 					for (TopicReifiesConstraint rc : getCastedModel().getTopicReifiesConstraints()) {
 						if (rc.getType()!=null)
 							list.remove(rc.getType());
