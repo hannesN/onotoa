@@ -1,4 +1,4 @@
-package de.topicmapslab.tmcledit.domaindiagram.action;
+package de.topicmapslab.tmcledit.diagram.action;
 
 import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
 import de.topicmapslab.tmcledit.model.RoleConstraint;

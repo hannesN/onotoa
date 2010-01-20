@@ -14,6 +14,8 @@ import java.io.ByteArrayInputStream;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -109,4 +111,11 @@ public class DiagramActivator extends AbstractUIPlugin {
 		return plugin;
 	}
 	
+	/**
+	 * returns the current shell representing the active workbench window
+	 * @return the current shell
+	 */
+	public static Shell getCurrentShell() {
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	}
 }

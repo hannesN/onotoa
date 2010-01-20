@@ -359,5 +359,4 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	public IFigure getContentPane() {
 		return compartmentFigure;
 	}
-	
 }
