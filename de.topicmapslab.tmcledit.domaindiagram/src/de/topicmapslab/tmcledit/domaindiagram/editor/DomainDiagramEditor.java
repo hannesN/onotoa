@@ -75,6 +75,7 @@ import de.topicmapslab.tmcledit.diagram.action.AbstractSelectionAction;
 import de.topicmapslab.tmcledit.diagram.action.AddNameConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
+import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorContextMenuProvider;
 import de.topicmapslab.tmcledit.diagram.util.IPrintableDiagramEditor;
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;
@@ -110,7 +111,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	private OverviewOutlinePage outlinePage;
 
-	private DomainEditorContextMenuProvider cmProvider;
+	private TMCLEditorContextMenuProvider cmProvider;
 
 	public DomainDiagramEditor() {
 		setEditDomain(new DomainEditDomain(this));
@@ -151,7 +152,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		viewer.setRootEditPart(getRootEditPart());
 		viewer.setKeyHandler(new OnotoaKeyHandler(viewer, getActionRegistry()));
 
-		cmProvider = new DomainEditorContextMenuProvider(viewer,
+		cmProvider = new TMCLEditorContextMenuProvider(viewer,
 				getActionRegistry(), diagram);
 		getGraphicalViewer().setContextMenu(cmProvider);
 		getSite().registerContextMenu(cmProvider, viewer);
