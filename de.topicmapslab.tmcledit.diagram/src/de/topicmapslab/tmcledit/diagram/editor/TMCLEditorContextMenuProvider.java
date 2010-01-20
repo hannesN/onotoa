@@ -113,7 +113,7 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 			
 			for (Diagram d : file.getDiagrams()) {
 				if (!d.equals(diagram)) {
-					org.eclipse.emf.common.command.CommandStack commandStack = ((TMCLEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
+					org.eclipse.emf.common.command.CommandStack commandStack = ((IOnotoaEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
 					MoveToDiagramAction a = new MoveToDiagramAction(commandStack, d, getViewer());
 					moveMenu.add(a);
 				}
@@ -130,7 +130,7 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 			
 			for (Diagram d : file.getDiagrams()) {
 				if (!d.equals(diagram)) {
-					org.eclipse.emf.common.command.CommandStack commandStack = ((TMCLEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
+					org.eclipse.emf.common.command.CommandStack commandStack = ((IOnotoaEditDomain)getViewer().getEditDomain()).getEditingDomain().getCommandStack();
 					CopyToDiagramAction a2 = new CopyToDiagramAction(commandStack, d, getViewer());
 					moveMenu.add(a2);
 				}
