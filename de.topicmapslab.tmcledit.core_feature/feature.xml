@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.core_feature"
       label="Onotoa"
-      version="1.1.1.qualifier"
+      version="1.1.2.qualifier"
       provider-name="Hannes Niederhausen, Topic Maps Lab"
       plugin="de.topicmapslab.tmcledit">
 
@@ -95,28 +95,28 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          id="de.topicmapslab.tmcledit"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.1.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.diagram"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.1.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.edit"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.1.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.domaindiagram"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.1.2.qualifier"
          unpack="false"/>
 
 </feature>
