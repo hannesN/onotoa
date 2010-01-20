@@ -31,6 +31,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -189,6 +191,9 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		tableViewer.setContentProvider(new ArrayContentProvider());
 		tableViewer.setLabelProvider(new ScopeTableLabelProvider());
 		tableViewer.setCellModifier(new ConstraintCellModifier());
+		
+		tableViewer.setSorter(new TypeViewerSorter());
+		
 		return comp;
 	}
 
@@ -307,6 +312,19 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 		}
 
+	}
+	
+	private class TypeViewerSorter extends ViewerSorter {
+	
+		@Override
+		public int compare(Viewer viewer, Object e1, Object e2) {
+			AbstractTypedCardinalityConstraint tc1 = (AbstractTypedCardinalityConstraint) e1;
+			AbstractTypedCardinalityConstraint tc2 = (AbstractTypedCardinalityConstraint) e2;
+			
+			String name1 = tc1.getType().getName();
+			String name2 = tc2.getType().getName();
+			return name1.compareTo(name2);
+		}
 	}
 
 	private class ScopeTableLabelProvider implements ITableLabelProvider {
