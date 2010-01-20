@@ -19,6 +19,7 @@ import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 
+import de.topicmapslab.tmcledit.diagram.editparts.AdapterGraphicalEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.policies.NodeGraphicalNodeEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;

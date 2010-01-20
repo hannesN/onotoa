@@ -47,6 +47,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
+import de.topicmapslab.tmcledit.diagram.editparts.IContextMenuProvider;
 import de.topicmapslab.tmcledit.diagram.editparts.IDirectEditable;
 import de.topicmapslab.tmcledit.domaindiagram.action.AddImageAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.RemoveImageAction;

@@ -12,6 +12,7 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
+import de.topicmapslab.tmcledit.diagram.editparts.IContextMenuProvider;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetRoleAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetRoleData;
 import de.topicmapslab.tmcledit.model.ModelPackage;

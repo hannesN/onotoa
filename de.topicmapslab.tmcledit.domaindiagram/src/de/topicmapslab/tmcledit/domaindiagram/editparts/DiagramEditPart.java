@@ -32,6 +32,7 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.swt.SWT;
 
+import de.topicmapslab.tmcledit.diagram.editparts.AdapterGraphicalEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.policies.DiagramLayoutEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;

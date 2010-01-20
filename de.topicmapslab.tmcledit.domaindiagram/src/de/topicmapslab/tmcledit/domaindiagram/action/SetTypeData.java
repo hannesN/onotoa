@@ -1,6 +1,6 @@
 package de.topicmapslab.tmcledit.domaindiagram.action;
 
-import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
+import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -9,7 +9,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class SetTypeData implements Cloneable {
 	public TopicType type;
 	public TopicMapSchema schema;
-	public DomainEditDomain editDomain;
+	public IOnotoaEditDomain editDomain;
 	public AbstractTypedConstraint typedConstraint;
 	public KindOfTopicType kind;
 	public int featureId;
