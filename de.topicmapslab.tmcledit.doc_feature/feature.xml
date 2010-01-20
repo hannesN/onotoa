@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.doc_feature"
       label="Onotoa Documentation"
-      version="1.1.1.qualifier">
+      version="1.1.2.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -24,7 +24,7 @@
          id="de.topicmapslab.tmcledit.doc"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.1.2.qualifier"
          unpack="false"/>
 
 </feature>
