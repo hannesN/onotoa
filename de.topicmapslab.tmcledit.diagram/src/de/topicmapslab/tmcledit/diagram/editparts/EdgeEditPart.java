@@ -34,10 +34,16 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ConnectionEditPolicy;
 import org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy;
 import org.eclipse.gef.requests.GroupRequest;
+import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
 
+import de.topicmapslab.tmcledit.diagram.action.SetRoleAction;
+import de.topicmapslab.tmcledit.diagram.action.SetRoleData;
 import de.topicmapslab.tmcledit.diagram.policies.LabelXYLayoutEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.OnotoaBendpointEditPolicy;
+import de.topicmapslab.tmcledit.model.AssociationNode;
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -46,6 +52,8 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 public class EdgeEditPart extends AdapterConnectionEditPart {
@@ -238,5 +246,36 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 			}
 		}
 
+	}
+	
+	@Override
+	public List<IContributionItem> getItems() {
+		if (getCastedModel().getType()!=EdgeType.ROLE_CONSTRAINT_TYPE)
+			return super.getItems();
+		
+		List<IContributionItem> result = new ArrayList<IContributionItem>();
+
+		MenuManager subMenu = new MenuManager("Set Role");
+
+		Edge e = getCastedModel();
+		
+		AssociationNode n = (AssociationNode) e.getSource();
+		AssociationType at = (AssociationType) n.getAssociationConstraint().getType();
+		
+		SetRoleData data = new SetRoleData();
+		data.rpc = getCastedModel().getRoleConstraint();
+		data.editDomain = getEditDomain();
+		data.role = null;
+		data.schema = (TopicMapSchema) at.eContainer();
+
+		for (RoleConstraint rc : at.getRoles()) {
+			SetRoleData d = data.clone();
+			d.role = (RoleType) rc.getType();
+			subMenu.add(new SetRoleAction(d));
+		}
+		result.add(subMenu);
+
+		return result;
+		
 	}
 }

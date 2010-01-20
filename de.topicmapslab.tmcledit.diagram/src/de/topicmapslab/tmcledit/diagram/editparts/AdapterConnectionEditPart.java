@@ -10,14 +10,21 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 
+import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
 import de.topicmapslab.tmcledit.model.Edge;
 
-public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPart {
+public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPart implements IContextMenuProvider {
 
 	protected Adapter adapter = new Adapter() {
 		private Notifier target;
@@ -57,5 +64,25 @@ public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPa
 	public void deactivate() {
 		((Edge)getModel()).eAdapters().remove(adapter);
 		super.deactivate();
+	}
+	
+	public List<IAction> getActions() {
+		return Collections.emptyList();
+	}
+	
+	public List<IContributionItem> getItems() {
+		return Collections.emptyList();
+	}
+	
+	protected org.eclipse.gef.commands.CommandStack getGEFCommendStack() {
+		return getEditDomain().getCommandStack();
+	}
+	
+	protected CommandStack getEMFCommendStack() {
+		return getEditDomain().getEditingDomain().getCommandStack();
+	}
+	
+	protected IOnotoaEditDomain getEditDomain() {
+		return ((IOnotoaEditDomain) getViewer().getEditDomain());
 	}
 }
