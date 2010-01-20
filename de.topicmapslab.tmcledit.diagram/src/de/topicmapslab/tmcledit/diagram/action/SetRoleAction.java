@@ -1,16 +1,14 @@
 /**
  * 
  */
-package de.topicmapslab.tmcledit.domaindiagram.action;
+package de.topicmapslab.tmcledit.diagram.action;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 
-import de.topicmapslab.tmcledit.domaindiagram.Activator;
-import de.topicmapslab.tmcledit.domaindiagram.action.AbstractCommandStackAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.SetRoleData;
+import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -79,7 +77,7 @@ public class SetRoleAction extends AbstractCommandStackAction {
 	private Command createRoleCommand() {
 		NewTopicTypeWizard tt = new NewTopicTypeWizard(
 				KindOfTopicType.ROLE_TYPE);
-		WizardDialog dlg = new WizardDialog(Activator.getCurrentShell(), tt);
+		WizardDialog dlg = new WizardDialog(DiagramActivator.getCurrentShell(), tt);
 		if (dlg.open() != Dialog.OK) {
 			return null;
 		}

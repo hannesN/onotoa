@@ -6,6 +6,7 @@ package de.topicmapslab.tmcledit.domaindiagram.action;
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.command.CompoundCommand;
 
+import de.topicmapslab.tmcledit.diagram.action.AbstractCommandStackAction;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;

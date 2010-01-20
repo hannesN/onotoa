@@ -6,6 +6,7 @@ package de.topicmapslab.tmcledit.domaindiagram.action;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 
+import de.topicmapslab.tmcledit.diagram.action.AbstractCommandStackAction;
 import de.topicmapslab.tmcledit.domaindiagram.Activator;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.SetImageCommand;
