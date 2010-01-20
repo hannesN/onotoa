@@ -30,7 +30,7 @@ import de.topicmapslab.tmcledit.diagram.action.CopyToDiagramAction;
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.MoveToDiagramAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
-import de.topicmapslab.tmcledit.domaindiagram.editparts.IContextMenuProvider;
+import de.topicmapslab.tmcledit.diagram.editparts.IContextMenuProvider;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;

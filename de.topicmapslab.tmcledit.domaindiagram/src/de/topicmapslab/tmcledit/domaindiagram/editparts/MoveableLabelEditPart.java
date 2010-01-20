@@ -22,6 +22,7 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DragEditPartsTracker;
 
+import de.topicmapslab.tmcledit.diagram.editparts.AdapterGraphicalEditPart;
 import de.topicmapslab.tmcledit.domaindiagram.figures.MovableConnectionLocator;
 import de.topicmapslab.tmcledit.model.LabelPos;
 

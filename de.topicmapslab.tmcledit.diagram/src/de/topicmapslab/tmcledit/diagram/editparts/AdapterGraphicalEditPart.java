@@ -13,16 +13,24 @@
  */
 package de.topicmapslab.tmcledit.diagram.editparts;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
+
+import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
 
 /**
  * @author Hannes Niederhausen
  *
  */
-public abstract class AdapterGraphicalEditPart extends AbstractGraphicalEditPart implements Adapter{
+public abstract class AdapterGraphicalEditPart extends AbstractGraphicalEditPart implements Adapter, IContextMenuProvider {
 
 	private Notifier target;
 	
@@ -58,4 +66,23 @@ public abstract class AdapterGraphicalEditPart extends AbstractGraphicalEditPart
 		super.deactivate();
 	}
 	
+	public List<IAction> getActions() {
+		return Collections.emptyList();
+	}
+	
+	public List<IContributionItem> getItems() {
+		return Collections.emptyList();
+	}
+	
+	protected org.eclipse.gef.commands.CommandStack getGEFCommendStack() {
+		return getEditDomain().getCommandStack();
+	}
+	
+	protected CommandStack getEMFCommendStack() {
+		return getEditDomain().getEditingDomain().getCommandStack();
+	}
+	
+	protected IOnotoaEditDomain getEditDomain() {
+		return ((IOnotoaEditDomain) getViewer().getEditDomain());
+	}
 }
