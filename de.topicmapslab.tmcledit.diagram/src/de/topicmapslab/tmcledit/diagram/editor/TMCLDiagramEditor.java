@@ -373,6 +373,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		else {
 			if (sel.getFirstElement() instanceof EditPart) {
 				EditPart part = (EditPart) sel.getFirstElement();
+				
+				cmProvider.setSelectedEditPart(part);
+				
 				if (part instanceof MoveableLabelEditPart) {
 					part = part.getParent();
 				}

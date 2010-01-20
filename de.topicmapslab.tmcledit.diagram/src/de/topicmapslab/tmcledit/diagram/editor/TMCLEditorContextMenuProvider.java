@@ -19,6 +19,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -30,6 +31,7 @@ import de.topicmapslab.tmcledit.diagram.action.CopyToDiagramAction;
 import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.MoveToDiagramAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
+import de.topicmapslab.tmcledit.diagram.editparts.IContextMenuProvider;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
@@ -40,6 +42,9 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 	private boolean active;
 	private final Diagram diagram;
 	
+	private EditPart selectedEditPart;
+	
+	
 	public TMCLEditorContextMenuProvider(EditPartViewer viewer, ActionRegistry actionRegistry, Diagram diagram) {
 		super(viewer);
 		this.actionRegistry = actionRegistry;
@@ -49,6 +54,10 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 	
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	public void setSelectedEditPart(EditPart selectedEditPart) {
+		this.selectedEditPart = selectedEditPart;
 	}
 
 	@Override
@@ -80,6 +89,19 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 		if (action.isEnabled())
 			menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
 
+		if ((selectedEditPart != null)
+				&& (selectedEditPart instanceof IContextMenuProvider)) {
+			for (IAction a : ((IContextMenuProvider) selectedEditPart)
+					.getActions()) {
+				if (a.isEnabled())
+					menu.add(a);
+			}
+			for (IContributionItem i : ((IContextMenuProvider) selectedEditPart)
+					.getItems()) {
+				menu.add(i);
+			}
+		}
+		
 		buildMoveToDiagramActions(menu);
 		buildCopyToDiagramActions(menu);
 	}
