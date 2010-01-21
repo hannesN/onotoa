@@ -660,10 +660,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void updateTitle(String filename) {
-		if (filename != null)
+		if (filename != null) {
 			getSite().getShell().setText("Onotoa - " + filename);
-		else
+		} else {
 			getSite().getShell().setText("Onotoa");
+		}
 	}
 
 	private void checkSavedState() {
@@ -781,9 +782,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			if ((!result.endsWith(".ono")) && (!result.endsWith(".tmcl")))
 				result += ".ono";
 			currFile.setFilename(result);
-
-			doSave(new NullProgressMonitor());
 			updateTitle(currFile.getFilename());
+			doSave(new NullProgressMonitor());
+
 		}
 	}
 
