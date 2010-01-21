@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.application_feature"
       label="Application Framework"
-      version="1.1.1.qualifier"
+      version="1.1.2.qualifier"
       provider-name="Topic Maps Lab"
       plugin="de.topicmapslab.tmcledit.application">
 
@@ -764,7 +764,7 @@
          id="de.topicmapslab.tmcledit.application"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.1.2.qualifier"
          unpack="false"/>
 
    <plugin
