@@ -4,8 +4,8 @@
    <extension
          point="org.eclipse.ui.exportWizards">
       <category
-            id="de.topicmapslab.onotoa.aranuke.codegen.category1"
-            name="name">
+            id="de.topicmapslab.tmcledit.export.tmcledit"
+            name="Onotoa">
       </category>
       <wizard
             class="de.topicmapslab.onotoa.aranuke.codegen.wizards.AranukaExportWizard"
