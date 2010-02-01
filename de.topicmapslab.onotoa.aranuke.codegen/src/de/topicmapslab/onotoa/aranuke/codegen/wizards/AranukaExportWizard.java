@@ -5,6 +5,7 @@ package de.topicmapslab.onotoa.aranuke.codegen.wizards;
 
 import java.io.File;
 
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -23,10 +24,8 @@ import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.tmapi.core.TopicMap;
 
-import de.topicmapslab.aranuka.codegen.core.TopicMap2JavaMapper;
-import de.topicmapslab.aranuka.codegen.core.code.POJOTypes;
-import de.topicmapslab.aranuka.codegen.core.exception.TopicMap2JavaMapperException;
-import de.topicmapslab.aranuka.codegen.core.factory.TMCLTopicAnnotationFactory;
+import de.topicmapslab.aranuka.codegen.core.CodeGenerator;
+import de.topicmapslab.onotoa.aranuke.codegen.Activator;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -57,23 +56,19 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 	 */
 	@Override
 	public boolean performFinish() {
-		TopicMap2JavaMapper mapper;
 		try {
-			TopicMapSchema schema = ModelIndexer.getInstance()
-					.getTopicMapSchema();
+			TopicMapSchema schema = ModelIndexer.getInstance().getTopicMapSchema();
 
 			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema, false);
 
 			TopicMap topicMap = builder.createTopicMap();
 
-			mapper = new TopicMap2JavaMapper(null, topicMap, packageName,
-					path + packageName.replaceAll("\\.",	"/"),
-					new TMCLTopicAnnotationFactory(topicMap));
-			mapper.run(POJOTypes.SIMPLE_POJO);
-
-		} catch (TopicMap2JavaMapperException e) {
+			CodeGenerator gen = new CodeGenerator();
+			gen.generateCode(topicMap, new File(path), packageName);
+		} catch (Exception e) {
 			MessageDialog.openError(getShell(), "Error while generating code",
-					"An error occurred:" + e.getMessage());
+					"An error occurred:" + e.getMessage() + "["+e.getClass().getName()+"]");
+			
 			return true;
 		}
 
@@ -125,7 +120,9 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			setControl(comp);
 			
 			sourcePathText.setText("/tmp/aranuka");
+			path = sourcePathText.getText();
 			packageNameText.setText("de.test");
+			packageName = packageNameText.getText();
 		}
 		
 		private void hookListeners() {
