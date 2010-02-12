@@ -6,19 +6,19 @@
    <feature url="features/org.sourceforge.tinyTiM_feature_2.0.0.a6.jar" id="org.sourceforge.tinyTiM_feature" version="2.0.0.a6">
       <category name="tinyTiM"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.2.201002011450.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.2.201002011450">
+   <feature url="features/de.topicmapslab.onotoa.aranuke.codegen_feature_1.0.0.201002091138.jar" id="de.topicmapslab.onotoa.aranuke.codegen_feature" version="1.0.0.201002091138">
       <category name="onotoa"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.doc_feature_1.1.2.201002011450.jar" id="de.topicmapslab.tmcledit.doc_feature" version="1.1.2.201002011450">
+   <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.2.201002091138.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.2.201002091138">
       <category name="onotoa"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.export_feature_1.1.2.201002011450.jar" id="de.topicmapslab.tmcledit.export_feature" version="1.1.2.201002011450">
+   <feature url="features/de.topicmapslab.tmcledit.doc_feature_1.1.2.201002091138.jar" id="de.topicmapslab.tmcledit.doc_feature" version="1.1.2.201002091138">
       <category name="onotoa"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.import_feature_1.1.2.201002011450.jar" id="de.topicmapslab.tmcledit.import_feature" version="1.1.2.201002011450">
+   <feature url="features/de.topicmapslab.tmcledit.export_feature_1.1.2.201002091138.jar" id="de.topicmapslab.tmcledit.export_feature" version="1.1.2.201002091138">
       <category name="onotoa"/>
    </feature>
-   <feature url="features/de.topicmapslab.onotoa.aranuke.codegen_feature_1.0.0.201002011450.jar" id="de.topicmapslab.onotoa.aranuke.codegen_feature" version="1.0.0.201002011450">
+   <feature url="features/de.topicmapslab.tmcledit.import_feature_1.1.2.201002091138.jar" id="de.topicmapslab.tmcledit.import_feature" version="1.1.2.201002091138">
       <category name="onotoa"/>
    </feature>
    <category-def name="onotoa" label="Onotoa"/>

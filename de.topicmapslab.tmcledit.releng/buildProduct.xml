@@ -110,14 +110,14 @@
 
 		
 
-		<!-- moving result from buildDir to builder -->
+		<!-- moving result from buildDir to builder
 		<mkdir dir="${builder}/releases"/>
 		<move todir="${builder}/releases" >
 			<fileset dir="${buildDirectory}/${buildId}">
 					<include name="*.zip" />
 			</fileset>
 		</move>
-		
+		 -->
 		<!-- <delete dir="${buildDirectory}" />-->
 		<!-- refresh the workspace -->
 		<!--
