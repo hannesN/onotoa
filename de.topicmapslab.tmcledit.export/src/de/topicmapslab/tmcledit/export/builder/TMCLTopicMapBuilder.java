@@ -150,18 +150,18 @@ public class TMCLTopicMapBuilder {
 		for (AssociationTypeConstraint atc : topicMapSchema.getAssociationTypeConstraints()) {
 			if (atc.getType() == null)
 				continue;
-
+			AssociationType at = (AssociationType) atc.getType();
 			for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
-				ConstraintWrapper w = new ConstraintWrapper(rpc);
+				ConstraintWrapper w = new ConstraintWrapper(rpc, at);
 				if (constraintSet.contains(w))
 					continue;
 				
 				setRolePlayerConstraint(atc.getType(), rpc);
 				constraintSet.add(w);
 			}
-			AssociationType at = (AssociationType) atc.getType();
+			
 			for (RoleConstraint rc : at.getRoles()) {
-				ConstraintWrapper w = new ConstraintWrapper(rc);
+				ConstraintWrapper w = new ConstraintWrapper(rc, at);
 				if (constraintSet.contains(w))
 					continue;
 				
@@ -650,30 +650,32 @@ public class TMCLTopicMapBuilder {
 
 	private class ConstraintWrapper {
 		private final AbstractConstraint constraint;
+		private final AssociationType at;
 
-		public ConstraintWrapper(AbstractConstraint constraint) {
+		public ConstraintWrapper(AbstractConstraint constraint, AssociationType at) {
 			super();
 			this.constraint = constraint;
+			this.at = at;
 		}
 
 		@Override
         public int hashCode() {
 	        final int prime = 31;
-	        int result = 1;
+	        int result = at.hashCode();
 	        
 	       
 	        
 	        if (constraint instanceof RoleConstraint) {
 				RoleConstraint rc = (RoleConstraint) constraint;
 				if (rc.getType()!=null)
-					result = prime * result + rc.getType().hashCode();
+					result += prime * result + rc.getType().hashCode();
 				
 				
 			} else if (constraint instanceof RolePlayerConstraint) {
 				RolePlayerConstraint rpc = (RolePlayerConstraint) constraint;
 				
 				if (rpc.getPlayer()!=null)
-					result = prime * result + rpc.getPlayer().hashCode();
+					result += prime * result + rpc.getPlayer().hashCode();
 				if (rpc.getRole()!=null)
 					result += prime * result + rpc.getRole().hashCode();
 			}
@@ -692,6 +694,9 @@ public class TMCLTopicMapBuilder {
 
 			AbstractConstraint otherC = ((ConstraintWrapper) obj).constraint;
 
+			if (!(at.equals(((ConstraintWrapper) obj).at)))
+				return false;
+			
 			if (!constraint.getClass().equals(otherC.getClass()))
 				return false;
 
