@@ -6,6 +6,7 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
+import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl#getReifierConstraint <em>Reifier Constraint</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl#getRegExp <em>Reg Exp</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.NameTypeImpl#isUnique <em>Unique</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,6 +66,26 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	 * @ordered
 	 */
 	protected String regExp = REG_EXP_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean UNIQUE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean unique = UNIQUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -153,6 +175,27 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isUnique() {
+		return unique;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUnique(boolean newUnique) {
+		boolean oldUnique = unique;
+		unique = newUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.NAME_TYPE__UNIQUE, oldUnique, unique));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -174,6 +217,8 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 				return getReifierConstraint();
 			case ModelPackage.NAME_TYPE__REG_EXP:
 				return getRegExp();
+			case ModelPackage.NAME_TYPE__UNIQUE:
+				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,6 +236,9 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 				return;
 			case ModelPackage.NAME_TYPE__REG_EXP:
 				setRegExp((String)newValue);
+				return;
+			case ModelPackage.NAME_TYPE__UNIQUE:
+				setUnique(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -210,6 +258,9 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 			case ModelPackage.NAME_TYPE__REG_EXP:
 				setRegExp(REG_EXP_EDEFAULT);
 				return;
+			case ModelPackage.NAME_TYPE__UNIQUE:
+				setUnique(UNIQUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -226,6 +277,8 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 				return reifierConstraint != null;
 			case ModelPackage.NAME_TYPE__REG_EXP:
 				return REG_EXP_EDEFAULT == null ? regExp != null : !REG_EXP_EDEFAULT.equals(regExp);
+			case ModelPackage.NAME_TYPE__UNIQUE:
+				return unique != UNIQUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -251,6 +304,12 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 		if (baseClass == AbstractRegExpTopicType.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.NAME_TYPE__REG_EXP: return ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP;
+				default: return -1;
+			}
+		}
+		if (baseClass == AbstractUniqueValueTopicType.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.NAME_TYPE__UNIQUE: return ModelPackage.ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE;
 				default: return -1;
 			}
 		}
@@ -281,6 +340,12 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 				default: return -1;
 			}
 		}
+		if (baseClass == AbstractUniqueValueTopicType.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE: return ModelPackage.NAME_TYPE__UNIQUE;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -296,6 +361,8 @@ public class NameTypeImpl extends ScopedTopicTypeImpl implements NameType {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (regExp: ");
 		result.append(regExp);
+		result.append(", unique: ");
+		result.append(unique);
 		result.append(')');
 		return result.toString();
 	}

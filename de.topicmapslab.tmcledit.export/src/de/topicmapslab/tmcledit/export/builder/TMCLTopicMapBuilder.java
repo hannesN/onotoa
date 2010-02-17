@@ -30,6 +30,7 @@ import com.semagia.mio.rdf.sesame.aduna.collections.ArrayMap;
 
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -336,6 +337,10 @@ public class TMCLTopicMapBuilder {
 		if (type instanceof ScopedTopicType) {
 			setScopeConstraints((ScopedTopicType) type);
 		}
+		
+		if (type instanceof AbstractUniqueValueTopicType) {
+			setUnique((AbstractUniqueValueTopicType) type);
+		}
 
 		setTopicReifiesConstraint(type);
 
@@ -458,10 +463,6 @@ public class TMCLTopicMapBuilder {
 			occType = createTopic(TMDM.SUBJECT);
 		}
 
-		if (otc.isUnique()) {
-			setUnique(otype);
-		}
-
 		Topic constr = createConstraint(TMCL.TOPIC_OCCURRENCE_CONSTRAINT);
 		addDocumentationOccurrences(constr, otc);
 		addCardinalityOccurrences(constr, otc.getCardMin(), otc.getCardMax());
@@ -540,9 +541,9 @@ public class TMCLTopicMapBuilder {
 		setSchema(constr);
 	}
 
-	private void setUnique(OccurrenceType ot) {
+	private void setUnique(AbstractUniqueValueTopicType ut) {
 		Topic constr = createConstraint(TMCL.UNIQUE_VALUE_CONSTRAINT);
-		Topic type = createTopic(ot);
+		Topic type = createTopic(ut);
 		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_STATEMENT));
 		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
 		ass.createRole(createTopic(TMCL.CONSTRAINED), type);

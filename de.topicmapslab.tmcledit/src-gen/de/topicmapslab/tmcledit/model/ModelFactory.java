@@ -322,6 +322,15 @@ public interface ModelFactory extends EFactory {
 	DomainDiagram createDomainDiagram();
 
 	/**
+	 * Returns a new object of class '<em>Abstract Unique Value Topic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Unique Value Topic Type</em>'.
+	 * @generated
+	 */
+	AbstractUniqueValueTopicType createAbstractUniqueValueTopicType();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -10,16 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.editparts;
 
-import org.eclipse.draw2d.AbstractBorder;
-import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Insets;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
 
 import de.topicmapslab.tmcledit.diagram.policies.OccurrenceConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
@@ -118,27 +110,5 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 		}
 		refreshVisuals();
 		
-	}
-
-	private static class UnderlineLabelBorder extends AbstractBorder {
-
-		public Insets getInsets(IFigure figure) {
-			return new Insets(0, 0, 1, 0);
-		}
-
-		@Override
-		public Dimension getPreferredSize(IFigure figure) {
-			Dimension preferredSize = figure.getPreferredSize();
-			return new Dimension(preferredSize.width, preferredSize.height+1);
-		}
-
-		public void paint(IFigure figure, Graphics graphics, Insets insets) {
-			Rectangle rec = figure.getBounds();
-			int y = rec.y+rec.height-1;
-			graphics.pushState();
-			graphics.setForegroundColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
-			graphics.drawLine(rec.x, y, rec.x+rec.width, y);
-			graphics.popState();
-		}
 	}
 }

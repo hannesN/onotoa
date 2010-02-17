@@ -41,10 +41,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexp" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=".*"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OccurrenceTypeConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        transient="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OccurrenceTypeConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="NameTypeConstraint" eSuperTypes="#//AbstractTypedCardinalityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="RolePlayerConstraint" eSuperTypes="#//AbstractCardinalityContraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="player" lowerBound="1"
@@ -164,9 +161,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleCombinations" upperBound="-1"
         eType="#//RoleCombinationConstraint" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OccurrenceType" eSuperTypes="#//ScopedTopicType #//ScopedReifiableTopicType #//AbstractRegExpTopicType">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OccurrenceType" eSuperTypes="#//ScopedTopicType #//ScopedReifiableTopicType #//AbstractRegExpTopicType #//AbstractUniqueValueTopicType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="xsd:anyType"/>
   </eClassifiers>
@@ -181,7 +176,7 @@
         eType="#//RoleType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="#//RoleType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NameType" eSuperTypes="#//ScopedTopicType #//ScopedReifiableTopicType #//AbstractRegExpTopicType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NameType" eSuperTypes="#//ScopedTopicType #//ScopedReifiableTopicType #//AbstractRegExpTopicType #//AbstractUniqueValueTopicType"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractTypedCardinalityConstraint"
       eSuperTypes="#//AbstractCardinalityContraint #//AbstractTypedConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//Node">
@@ -220,5 +215,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="OnoObject" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractUniqueValueTopicType" eSuperTypes="#//TopicType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
 </ecore:EPackage>

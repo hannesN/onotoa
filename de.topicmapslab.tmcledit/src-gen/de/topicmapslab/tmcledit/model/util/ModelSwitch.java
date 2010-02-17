@@ -298,6 +298,7 @@ public class ModelSwitch<T> {
 				T result = caseOccurrenceType(occurrenceType);
 				if (result == null) result = caseScopedReifiableTopicType(occurrenceType);
 				if (result == null) result = caseAbstractRegExpTopicType(occurrenceType);
+				if (result == null) result = caseAbstractUniqueValueTopicType(occurrenceType);
 				if (result == null) result = caseScopedTopicType(occurrenceType);
 				if (result == null) result = caseReifiableTopicType(occurrenceType);
 				if (result == null) result = caseTopicType(occurrenceType);
@@ -341,6 +342,7 @@ public class ModelSwitch<T> {
 				T result = caseNameType(nameType);
 				if (result == null) result = caseScopedReifiableTopicType(nameType);
 				if (result == null) result = caseAbstractRegExpTopicType(nameType);
+				if (result == null) result = caseAbstractUniqueValueTopicType(nameType);
 				if (result == null) result = caseScopedTopicType(nameType);
 				if (result == null) result = caseReifiableTopicType(nameType);
 				if (result == null) result = caseTopicType(nameType);
@@ -454,6 +456,15 @@ public class ModelSwitch<T> {
 			case ModelPackage.ONO_OBJECT: {
 				OnoObject onoObject = (OnoObject)theEObject;
 				T result = caseOnoObject(onoObject);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE: {
+				AbstractUniqueValueTopicType abstractUniqueValueTopicType = (AbstractUniqueValueTopicType)theEObject;
+				T result = caseAbstractUniqueValueTopicType(abstractUniqueValueTopicType);
+				if (result == null) result = caseTopicType(abstractUniqueValueTopicType);
+				if (result == null) result = caseTMCLConstruct(abstractUniqueValueTopicType);
+				if (result == null) result = caseOnoObject(abstractUniqueValueTopicType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1058,6 +1069,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseOnoObject(OnoObject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Unique Value Topic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Unique Value Topic Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractUniqueValueTopicType(AbstractUniqueValueTopicType object) {
 		return null;
 	}
 

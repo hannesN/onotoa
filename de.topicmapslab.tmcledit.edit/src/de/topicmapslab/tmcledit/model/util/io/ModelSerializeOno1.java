@@ -93,6 +93,7 @@ import org.w3c.dom.Element;
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
+import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -457,6 +458,13 @@ public class ModelSerializeOno1 implements ModelSerializer {
 				typeNode.setAttribute(A_DATATYPE, ot.getDataType());
 
 		}
+		
+		if (tt instanceof AbstractUniqueValueTopicType) {
+			AbstractUniqueValueTopicType ot = (AbstractUniqueValueTopicType) tt;
+			if (ot.isUnique())
+				typeNode.setAttribute(A_UNIQUE, "true");
+
+		}
 
 		if (tt instanceof ReifiableTopicType) {
 			ReifiableTopicType rtt = (ReifiableTopicType) tt;
@@ -536,8 +544,6 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	    addCardinalityAttributes(ocNode, otc);
 	    if (otc.getType()!=null)
 	    	addTopicReference(ocNode, otc.getType());
-	    if (otc.isUnique())
-	    	ocNode.setAttribute(A_UNIQUE, "true");
 	    		
 	    parent.appendChild(ocNode);
     }

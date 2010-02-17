@@ -43,8 +43,6 @@ public class CreateOccurrenceConstraintCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
-		otc.setUnique(false);
-		
 		if (otc.getType()!=null) {
 			if (otc.getType().eContainer()==null) {
 				schema = (TopicMapSchema) topicType.eContainer();
