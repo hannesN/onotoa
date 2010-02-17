@@ -53,7 +53,7 @@ public class TreeDiagram extends TreeObject {
 			        .getActivePage();
 
 			TMCLEditorInput input = new TMCLEditorInput(getDiagram(), getModelView().getEditingDomain(), getModelView()
-			        .getActionRegistry(), true);
+			        .getActionRegistry(), getModelView(), true);
 			IEditorPart part = activePage.findEditor(input);
 			
 			
