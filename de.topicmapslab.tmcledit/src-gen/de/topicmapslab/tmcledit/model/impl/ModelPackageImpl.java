@@ -11,6 +11,7 @@ import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
+import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -351,6 +352,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractUniqueValueTopicTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum topicIdEEnum = null;
 
 	/**
@@ -595,15 +603,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EClass getOccurrenceTypeConstraint() {
 		return occurrenceTypeConstraintEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOccurrenceTypeConstraint_Unique() {
-		return (EAttribute)occurrenceTypeConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1160,17 +1159,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOccurrenceType_Unique() {
-		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getOccurrenceType_DataType() {
-		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)occurrenceTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1466,6 +1456,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractUniqueValueTopicType() {
+		return abstractUniqueValueTopicTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractUniqueValueTopicType_Unique() {
+		return (EAttribute)abstractUniqueValueTopicTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1536,7 +1544,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(abstractRegExpConstraintEClass, ABSTRACT_REG_EXP_CONSTRAINT__REGEXP);
 
 		occurrenceTypeConstraintEClass = createEClass(OCCURRENCE_TYPE_CONSTRAINT);
-		createEAttribute(occurrenceTypeConstraintEClass, OCCURRENCE_TYPE_CONSTRAINT__UNIQUE);
 
 		nameTypeConstraintEClass = createEClass(NAME_TYPE_CONSTRAINT);
 
@@ -1619,7 +1626,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(associationTypeEClass, ASSOCIATION_TYPE__ROLE_COMBINATIONS);
 
 		occurrenceTypeEClass = createEClass(OCCURRENCE_TYPE);
-		createEAttribute(occurrenceTypeEClass, OCCURRENCE_TYPE__UNIQUE);
 		createEAttribute(occurrenceTypeEClass, OCCURRENCE_TYPE__DATA_TYPE);
 
 		roleConstraintEClass = createEClass(ROLE_CONSTRAINT);
@@ -1669,6 +1675,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		onoObjectEClass = createEClass(ONO_OBJECT);
 		createEAttribute(onoObjectEClass, ONO_OBJECT__ID);
+
+		abstractUniqueValueTopicTypeEClass = createEClass(ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE);
+		createEAttribute(abstractUniqueValueTopicTypeEClass, ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE);
 
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
@@ -1733,12 +1742,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		occurrenceTypeEClass.getESuperTypes().add(this.getScopedTopicType());
 		occurrenceTypeEClass.getESuperTypes().add(this.getScopedReifiableTopicType());
 		occurrenceTypeEClass.getESuperTypes().add(this.getAbstractRegExpTopicType());
+		occurrenceTypeEClass.getESuperTypes().add(this.getAbstractUniqueValueTopicType());
 		roleConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		roleTypeEClass.getESuperTypes().add(this.getTopicType());
 		roleCombinationConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		nameTypeEClass.getESuperTypes().add(this.getScopedTopicType());
 		nameTypeEClass.getESuperTypes().add(this.getScopedReifiableTopicType());
 		nameTypeEClass.getESuperTypes().add(this.getAbstractRegExpTopicType());
+		nameTypeEClass.getESuperTypes().add(this.getAbstractUniqueValueTopicType());
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
 		commentEClass.getESuperTypes().add(this.getNode());
@@ -1752,6 +1763,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractConstraintEClass.getESuperTypes().add(this.getTMCLConstruct());
 		topicReifiesConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		domainDiagramEClass.getESuperTypes().add(this.getDiagram());
+		abstractUniqueValueTopicTypeEClass.getESuperTypes().add(this.getTopicType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1774,7 +1786,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getAbstractRegExpConstraint_Regexp(), ecorePackage.getEString(), "regexp", ".*", 1, 1, AbstractRegExpConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(occurrenceTypeConstraintEClass, OccurrenceTypeConstraint.class, "OccurrenceTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOccurrenceTypeConstraint_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, OccurrenceTypeConstraint.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nameTypeConstraintEClass, NameTypeConstraint.class, "NameTypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1857,7 +1868,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getAssociationType_RoleCombinations(), this.getRoleCombinationConstraint(), null, "roleCombinations", null, 0, -1, AssociationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(occurrenceTypeEClass, OccurrenceType.class, "OccurrenceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOccurrenceType_Unique(), ecorePackage.getEBoolean(), "unique", "false", 0, 1, OccurrenceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOccurrenceType_DataType(), ecorePackage.getEString(), "dataType", "xsd:anyType", 1, 1, OccurrenceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleConstraintEClass, RoleConstraint.class, "RoleConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1907,6 +1917,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(onoObjectEClass, OnoObject.class, "OnoObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOnoObject_Id(), ecorePackage.getEInt(), "id", null, 1, 1, OnoObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractUniqueValueTopicTypeEClass, AbstractUniqueValueTopicType.class, "AbstractUniqueValueTopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractUniqueValueTopicType_Unique(), ecorePackage.getEBoolean(), "unique", "false", 0, 1, AbstractUniqueValueTopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

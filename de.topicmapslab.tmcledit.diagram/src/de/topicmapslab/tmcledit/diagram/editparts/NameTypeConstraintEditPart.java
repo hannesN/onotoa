@@ -21,6 +21,8 @@ import de.topicmapslab.tmcledit.model.TopicType;
 
 public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 
+	private static UnderlineLabelBorder border = new UnderlineLabelBorder();
+	
 	private NameTypeConstraint getCastedModel() {
 		return (NameTypeConstraint) getModel();
 	}
@@ -45,8 +47,13 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 		NameType type = (NameType) ntc.getType();
 
 		if (type == null) {
+			
 			getNameLabel().setText("default");
 		} else {
+			if (((NameType) type).isUnique())
+				getNameLabel().setBorder(border);
+			else
+				getNameLabel().setBorder(null);
 			getNameLabel().setText(type.getName());
 
 			if (".*".equals(type.getRegExp()))

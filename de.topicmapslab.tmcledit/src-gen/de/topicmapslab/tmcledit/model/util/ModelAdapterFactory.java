@@ -231,6 +231,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createOnoObjectAdapter();
 			}
 			@Override
+			public Adapter caseAbstractUniqueValueTopicType(AbstractUniqueValueTopicType object) {
+				return createAbstractUniqueValueTopicTypeAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -807,6 +811,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOnoObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType <em>Abstract Unique Value Topic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType
+	 * @generated
+	 */
+	public Adapter createAbstractUniqueValueTopicTypeAdapter() {
 		return null;
 	}
 

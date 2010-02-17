@@ -734,22 +734,13 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE_CONSTRAINT__TYPE = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Unique</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCCURRENCE_TYPE_CONSTRAINT__UNIQUE = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Occurrence Type Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 1;
+	int OCCURRENCE_TYPE_CONSTRAINT_FEATURE_COUNT = ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeConstraintImpl <em>Name Type Constraint</em>}' class.
@@ -3251,13 +3242,22 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__REG_EXP = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_TYPE__UNIQUE = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Name Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 2;
+	int NAME_TYPE_FEATURE_COUNT = SCOPED_TOPIC_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.CommentImpl <em>Comment</em>}' class.
@@ -4231,6 +4231,205 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_DIAGRAM_FEATURE_COUNT = DIAGRAM_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractUniqueValueTopicTypeImpl <em>Abstract Unique Value Topic Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.AbstractUniqueValueTopicTypeImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractUniqueValueTopicType()
+	 * @generated
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE = 40;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__ID = TOPIC_TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>See also</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__SEE_ALSO = TOPIC_TYPE__SEE_ALSO;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__COMMENT = TOPIC_TYPE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__DESCRIPTION = TOPIC_TYPE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__ANNOTATIONS = TOPIC_TYPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__IDENTIFIERS = TOPIC_TYPE__IDENTIFIERS;
+
+	/**
+	 * The feature id for the '<em><b>Id Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__ID_TYPE = TOPIC_TYPE__ID_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__ABSTRACT = TOPIC_TYPE__ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Isa</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__ISA = TOPIC_TYPE__ISA;
+
+	/**
+	 * The feature id for the '<em><b>Ako</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__AKO = TOPIC_TYPE__AKO;
+
+	/**
+	 * The feature id for the '<em><b>Occurrence Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Subject Locator Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS = TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__KIND = TOPIC_TYPE__KIND;
+
+	/**
+	 * The feature id for the '<em><b>Overlap</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__OVERLAP = TOPIC_TYPE__OVERLAP;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__NAME = TOPIC_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Locators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__LOCATORS = TOPIC_TYPE__LOCATORS;
+
+	/**
+	 * The feature id for the '<em><b>Topic Reifies Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE = TOPIC_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Unique Value Topic Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4238,7 +4437,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 40;
+	int TOPIC_ID = 41;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -4248,7 +4447,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 41;
+	int EDGE_TYPE = 42;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -4258,7 +4457,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 42;
+	int KIND_OF_TOPIC_TYPE = 43;
 
 
 	/**
@@ -4455,17 +4654,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getOccurrenceTypeConstraint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint#isUnique <em>Unique</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Unique</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint#isUnique()
-	 * @see #getOccurrenceTypeConstraint()
-	 * @generated
-	 */
-	EAttribute getOccurrenceTypeConstraint_Unique();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.NameTypeConstraint <em>Name Type Constraint</em>}'.
@@ -5118,17 +5306,6 @@ public interface ModelPackage extends EPackage {
 	EClass getOccurrenceType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurrenceType#isUnique <em>Unique</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Unique</em>'.
-	 * @see de.topicmapslab.tmcledit.model.OccurrenceType#isUnique()
-	 * @see #getOccurrenceType()
-	 * @generated
-	 */
-	EAttribute getOccurrenceType_Unique();
-
-	/**
 	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.OccurrenceType#getDataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5476,6 +5653,27 @@ public interface ModelPackage extends EPackage {
 	EAttribute getOnoObject_Id();
 
 	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType <em>Abstract Unique Value Topic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Unique Value Topic Type</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType
+	 * @generated
+	 */
+	EClass getAbstractUniqueValueTopicType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType#isUnique <em>Unique</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unique</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType#isUnique()
+	 * @see #getAbstractUniqueValueTopicType()
+	 * @generated
+	 */
+	EAttribute getAbstractUniqueValueTopicType_Unique();
+
+	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5676,14 +5874,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass OCCURRENCE_TYPE_CONSTRAINT = eINSTANCE.getOccurrenceTypeConstraint();
-
-		/**
-		 * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OCCURRENCE_TYPE_CONSTRAINT__UNIQUE = eINSTANCE.getOccurrenceTypeConstraint_Unique();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.NameTypeConstraintImpl <em>Name Type Constraint</em>}' class.
@@ -6216,14 +6406,6 @@ public interface ModelPackage extends EPackage {
 		EClass OCCURRENCE_TYPE = eINSTANCE.getOccurrenceType();
 
 		/**
-		 * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OCCURRENCE_TYPE__UNIQUE = eINSTANCE.getOccurrenceType_Unique();
-
-		/**
 		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6518,6 +6700,24 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ONO_OBJECT__ID = eINSTANCE.getOnoObject_Id();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractUniqueValueTopicTypeImpl <em>Abstract Unique Value Topic Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.AbstractUniqueValueTopicTypeImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractUniqueValueTopicType()
+		 * @generated
+		 */
+		EClass ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE = eINSTANCE.getAbstractUniqueValueTopicType();
+
+		/**
+		 * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE = eINSTANCE.getAbstractUniqueValueTopicType_Unique();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

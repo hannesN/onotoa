@@ -6,6 +6,7 @@
 package de.topicmapslab.tmcledit.model.impl;
 
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
+import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
@@ -358,6 +359,12 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 				default: return -1;
 			}
 		}
+		if (baseClass == AbstractUniqueValueTopicType.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OCCURRENCE_TYPE__UNIQUE: return ModelPackage.ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -382,6 +389,12 @@ public class OccurrenceTypeImpl extends ScopedTopicTypeImpl implements Occurrenc
 		if (baseClass == AbstractRegExpTopicType.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.ABSTRACT_REG_EXP_TOPIC_TYPE__REG_EXP: return ModelPackage.OCCURRENCE_TYPE__REG_EXP;
+				default: return -1;
+			}
+		}
+		if (baseClass == AbstractUniqueValueTopicType.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE: return ModelPackage.OCCURRENCE_TYPE__UNIQUE;
 				default: return -1;
 			}
 		}

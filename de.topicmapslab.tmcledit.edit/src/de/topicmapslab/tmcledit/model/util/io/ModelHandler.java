@@ -10,7 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR; 
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_HEIGHT;
@@ -26,6 +26,7 @@ import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_SOU
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TARGET;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TOPIC_ROLE_REF;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_TYPE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_UNIQUE;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_VALUE;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_WIDTH;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_AKO;
@@ -76,6 +77,7 @@ import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
+import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -169,6 +171,12 @@ class ModelHandler extends DefaultHandler {
 				String regExp = attributes.getValue(A_REG_EXP);
 				if (regExp!=null)
 					((AbstractRegExpTopicType) currTopicType).setRegExp(regExp);
+			}
+			if (currTopicType instanceof AbstractUniqueValueTopicType) {
+				String unique = attributes.getValue(A_UNIQUE);
+				if (unique!=null) {
+					((AbstractUniqueValueTopicType) currTopicType).setUnique(Boolean.parseBoolean(unique));
+				}
 			}
 			state = State.TOPIC_TYPE;
 		}
