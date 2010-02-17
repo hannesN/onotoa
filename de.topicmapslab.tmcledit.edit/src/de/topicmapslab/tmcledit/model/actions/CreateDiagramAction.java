@@ -82,6 +82,7 @@ public class CreateDiagramAction extends Action {
 						.getActivePage().openEditor(new TMCLEditorInput(command.getDiagram(), 
 								this.modelView.getEditingDomain(),
 								this.modelView.getActionRegistry(),
+								modelView,
 								true), TmcleditEditPlugin.DIAGRAMEDITOR_ID);
 			} catch (PartInitException e) {
 				throw new RuntimeException(e);

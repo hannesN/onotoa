@@ -13,14 +13,12 @@
  */
 package de.topicmapslab.tmcledit.diagram.editor;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -61,7 +59,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -85,7 +82,7 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
-import de.topicmapslab.tmcledit.model.util.io.FileUtil;
+import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
  * @author Hannes Niederhausen
@@ -111,6 +108,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private OverviewOutlinePage outlinePage;
 
 	private TMCLEditorContextMenuProvider cmProvider;
+	
+	private ModelView modelView;
 
 	public TMCLDiagramEditor() {
 		setEditDomain(new TMCLEditDomain(this));
@@ -216,11 +215,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
-		try {
-			FileUtil.saveFile((File) diagram.eContainer(), getEditingDomain());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		modelView.doSave(monitor);
 	}
 
 	@Override
@@ -230,8 +225,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			@Override
 			protected void configurePaletteViewer(PaletteViewer viewer) {
 				super.configurePaletteViewer(viewer);
-				viewer
-						.addDragSourceListener(new TemplateTransferDragSourceListener(
+				viewer.addDragSourceListener(new TemplateTransferDragSourceListener(
 								viewer));
 			}
 		};
@@ -240,16 +234,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	public void doSaveAs() {
-		FileDialog dlg = new FileDialog(getSite().getShell(), SWT.SAVE);
-		dlg.setText("Save As..");
-		String result = dlg.open();
-		if (result != null) {
-			File currFile = (File) diagram.eContainer();
-			if ((!result.endsWith(".ono")) && (!result.endsWith(".tmcl")))
-				result += ".ono";
-			currFile.setFilename(result);
-			doSave(new NullProgressMonitor());
-		}
+		modelView.doSaveAs();
 	}
 
 	@Override
@@ -271,6 +256,8 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 		TMCLEditorInput ei = (TMCLEditorInput) input;
 		this.diagram = ei.getDiagram();
+		
+		this.modelView = ei.getModelView();
 
 		((TMCLEditDomain) getEditDomain()).setEditingDomain(ei
 				.getEditingDomain());
@@ -307,14 +294,12 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	@Override
 	public boolean isSaveAsAllowed() {
-		return true;
+		return modelView.isSaveAsAllowed();
 	}
 
 	@Override
 	public boolean isDirty() {
-		if (diagram.eContainer() == null)
-			return false;
-		return ((File) diagram.eContainer()).isDirty();
+		return modelView.isDirty();
 	}
 
 	@Override

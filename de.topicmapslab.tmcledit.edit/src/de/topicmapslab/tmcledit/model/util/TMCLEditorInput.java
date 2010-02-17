@@ -18,9 +18,11 @@ import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
+import org.eclipse.ui.ISaveablePart;
 
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
+import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
  * @author Hannes Niederhausen
@@ -33,14 +35,16 @@ public class TMCLEditorInput implements IEditorInput {
 	private final EditingDomain editingDomain;
 	
 	private final ActionRegistry actionRegistry;
+	private ModelView modelView;
 	
 	public TMCLEditorInput(Diagram diagram, EditingDomain editingDomain,
-			ActionRegistry actionRegistry, boolean exists) {
+			ActionRegistry actionRegistry, ModelView modelView, boolean exists) {
 		super();
 		this.diagram = diagram;
 		this.editingDomain = editingDomain;
 		this.exists = exists;
 		this.actionRegistry = actionRegistry;
+		this.modelView = modelView;
 	}
 
 	public boolean exists() {
@@ -67,6 +71,8 @@ public class TMCLEditorInput implements IEditorInput {
 
 	@SuppressWarnings("unchecked")
 	public Object getAdapter(Class adapter) {
+		if (adapter==ISaveablePart.class)
+			return modelView;
 		return null;
 	}
 	
@@ -82,6 +88,9 @@ public class TMCLEditorInput implements IEditorInput {
 	    return actionRegistry;
     }
 
+	public ModelView getModelView() {
+	    return modelView;
+    }
 	
 	@Override
     public int hashCode() {

@@ -357,7 +357,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				String id = (currDiagram instanceof DomainDiagram) ? TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
 				
 				getViewSite().getPage().openEditor(
-				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), true), id);
+				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), this, true), id);
 			}
 		}
 
@@ -635,7 +635,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			} else {
 				currFile = ModelFactory.eINSTANCE.createFile();
 				currFile.setTopicMapSchema(ModelFactory.eINSTANCE.createTopicMapSchema());
-				currFile.setFilename(filename);
+				if (filename.length()>0)
+					currFile.setFilename(filename);
 			}
 			currFile.eAdapters().add(dirtyListener);
 
@@ -661,6 +662,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private void updateTitle(String filename) {
 		if (filename != null) {
+			if (filename.length()==0)
+				filename = "New File...";
 			getSite().getShell().setText("Onotoa - " + filename);
 		} else {
 			getSite().getShell().setText("Onotoa");
@@ -767,6 +770,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	public void doSave(IProgressMonitor monitor) {
 		try {
+			if (currFile.getFilename()==null)
+				doSaveAs();
+			
 			FileUtil.saveFile((File) currFile, getEditingDomain());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
