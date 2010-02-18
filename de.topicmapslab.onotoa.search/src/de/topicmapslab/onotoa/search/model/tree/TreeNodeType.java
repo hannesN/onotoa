@@ -15,10 +15,13 @@ package de.topicmapslab.onotoa.search.model.tree;
  *
  */
 public enum TreeNodeType {
+	None,
 	User,
 	Type,
 	Supertype,
 	Nametype,
 	OccurrenceType,
-	Association
+	Association,
+	Role,
+	Player
 }

@@ -37,6 +37,12 @@ public class AssociationIndexer {
 		topicMapSchema = schema;	
 	}
 	
+	/**
+	 * Returns the player of association constraints with the given type.
+	 * 
+	 * @param topicType the association constraint
+	 * @return a list of role player constraints
+	 */
 	public List<RolePlayerConstraint> getRolePlayerConstraintsFor(TopicType topicType) {
 		List<RolePlayerConstraint> result = new ArrayList<RolePlayerConstraint>();
 		

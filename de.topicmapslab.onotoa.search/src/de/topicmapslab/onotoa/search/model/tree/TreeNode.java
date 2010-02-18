@@ -16,7 +16,8 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 
-import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -36,11 +37,26 @@ public class TreeNode {
 	/**
 	 * 
 	 */
+	public TreeNode(Object object) {
+		this(object, TreeNodeType.None);
+	}
+	
 	public TreeNode(Object object, TreeNodeType type) {
 		this.object = object;
 		this.type = type;
+		if (object instanceof AssociationTypeConstraint)
+			createPlayerChildren((AssociationTypeConstraint)object);
 	}
 	
+	/**
+	 * @param object
+	 */
+	private void createPlayerChildren(AssociationTypeConstraint atc) {
+		for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+			addChild(new TreeNode(rpc.getPlayer().getName()));
+		}
+	}
+
 	/**
 	 * @return the children
 	 */
@@ -68,17 +84,21 @@ public class TreeNode {
 		
 		switch (type) {
 		case Association:
-			break;
+			return "Association Constraint";
 		case Nametype:
+			return "Name Constraint";
 		case OccurrenceType:
-			return ((AbstractTypedConstraint)object).getType().getName();
+			return "Occurrence Constraint";
 		case Supertype:
 			return "A kind of..";
 		case Type:
 			return "Instance of..";
+		case Role:
+			return "Role";
+		case Player:
+			return "Player";
 		case User:
 			return ((TopicType) object).getName();
-		
 		}
 		return object.toString();
 	}
@@ -86,7 +106,8 @@ public class TreeNode {
 	public Image getImage() {
 		switch(type){
 		case Association:
-			break;
+		case Role:
+			return ImageProvider.getImage(ImageConstants.ASSOCIATIONCONSTRAINT_SM);
 		case Nametype:
 			return ImageProvider.getImage(ImageConstants.NAMECONSTRAINT);
 		case OccurrenceType:
