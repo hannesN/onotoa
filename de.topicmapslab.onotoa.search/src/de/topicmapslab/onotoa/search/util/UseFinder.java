@@ -17,10 +17,15 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.topicmapslab.onotoa.search.model.tree.TreeNode;
 import de.topicmapslab.onotoa.search.model.tree.TreeNodeType;
+import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -29,12 +34,14 @@ import de.topicmapslab.tmcledit.model.TopicType;
 public class UseFinder {
 
 	
+	private static TopicMapSchema schema;
+
 	public static final List<TreeNode> findUse(TopicType type, IProgressMonitor monitor) {
 		List<TreeNode> result = new ArrayList<TreeNode>();
 		
-		TopicMapSchema schema = (TopicMapSchema) type.eContainer();
+		schema = (TopicMapSchema) type.eContainer();
 		
-		monitor.beginTask("Search topic type using "+type.getName(), schema.getTopicTypes().size()-1);
+		monitor.beginTask("Search topic type using "+type.getName(), schema.getTopicTypes().size()-1+schema.getAssociationTypeConstraints().size());
 		
 		for (TopicType tt : schema.getTopicTypes()) {
 			if (tt.equals(type))
@@ -48,6 +55,10 @@ public class UseFinder {
 			monitor.worked(1);
 		}
 		
+		for (AssociationTypeConstraint atc : schema.getAssociationTypeConstraints()) {
+			if (atc.getType().equals(type))
+				result.add(new TreeNode(atc, TreeNodeType.Association));
+		}
 		
 		monitor.done();
 		
@@ -81,6 +92,20 @@ public class UseFinder {
 				tn.addChild(new TreeNode(otc, TreeNodeType.OccurrenceType));
 			}
 		}
+		
+		if (tt instanceof AssociationType) {
+			for (RolePlayerConstraint rpc : ModelIndexer.getAssociationIndexer().getRolePlayerConstraintsFor(tt)) {
+				if (rpc.getPlayer().equals(type))
+					tn.addChild(new TreeNode(rpc, TreeNodeType.Player));
+			}
+			
+			for (RoleConstraint rc : ((AssociationType)tt).getRoles()) {
+				if (rc.getType().equals(type)) {
+					tn.addChild(new TreeNode(rc, TreeNodeType.Role));
+				}
+			}
+		}
+		
 		
 		if (tn.getChildren().size()>0)
 			return tn;
