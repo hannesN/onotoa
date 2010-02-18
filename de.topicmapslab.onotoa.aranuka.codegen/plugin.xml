@@ -8,8 +8,9 @@
             name="Onotoa">
       </category>
       <wizard
-            class="de.topicmapslab.onotoa.aranuke.codegen.wizards.AranukaExportWizard"
-            id="de.topicmapslab.onotoa.aranuke.codegen.wizard"
+            category="de.topicmapslab.tmcledit.export.tmcledit"
+            class="de.topicmapslab.onotoa.aranuka.codegen.wizards.AranukaExportWizard"
+            id="de.topicmapslab.onotoa.aranuka.codegen.wizard"
             name="Aranuka Code Generator">
       </wizard>
    </extension>
