@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.topicmapslab.onotoa.aranuke.codegen_feature"
+      id="de.topicmapslab.onotoa.aranuka.codegen_feature"
       label="Aranuka Code Generation"
       version="1.0.0.qualifier">
 

@@ -1,4 +1,4 @@
-package de.topicmapslab.onotoa.aranuke.codegen;
+package de.topicmapslab.onotoa.aranuka.codegen;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
