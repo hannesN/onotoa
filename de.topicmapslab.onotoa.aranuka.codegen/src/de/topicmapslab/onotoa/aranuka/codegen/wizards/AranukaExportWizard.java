@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.topicmapslab.onotoa.aranuke.codegen.wizards;
+package de.topicmapslab.onotoa.aranuka.codegen.wizards;
 
 import java.io.File;
 

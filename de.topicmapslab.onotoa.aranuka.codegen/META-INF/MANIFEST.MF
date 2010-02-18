@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Codegen
-Bundle-SymbolicName: de.topicmapslab.onotoa.aranuke.codegen;singleton:=true
+Bundle-SymbolicName: de.topicmapslab.onotoa.aranuka.codegen;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: de.topicmapslab.onotoa.aranuke.codegen.Activator
+Bundle-Activator: de.topicmapslab.onotoa.aranuka.codegen.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  de.topicmapslab.tmcledit.export;bundle-version="1.1.1",
