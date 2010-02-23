@@ -79,10 +79,29 @@ public class TMCLTopicMapBuilder {
 
 	private int topicCounter = 0;
 
+	private boolean createDiagramNodes;
+	
+	// topics for the diagram informations
+	
+	// topics for the classes
+	private Topic diagramTopic;
+	private Topic nodeTopic;
+	private Topic edgeTopic;
+	private Topic commentTopic;
+	
+	
+		
+	
+
 	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema) {
+		this(topicMapSchema, exportSchema, false);
+	}
+	
+	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema, boolean createDiagramNodes) {
 		super();
 		this.topicMapSchema = topicMapSchema;
 		this.exportSchema = exportSchema;
+		this.createDiagramNodes = createDiagramNodes;
 	}
 
 	public TopicMap createTopicMap() {

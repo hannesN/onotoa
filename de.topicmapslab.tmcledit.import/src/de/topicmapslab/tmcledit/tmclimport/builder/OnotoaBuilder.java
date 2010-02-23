@@ -44,6 +44,7 @@ import static org.tinytim.voc.TMCL.TOPIC_ROLE_CONSTRAINT;
 import static org.tinytim.voc.TMCL.TOPIC_TYPE;
 import static org.tinytim.voc.TMCL.UNIQUE_VALUE_CONSTRAINT;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,6 +58,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -922,6 +924,10 @@ public class OnotoaBuilder {
         }
 
 		public void setId(int value) {
+        }
+
+		public Object eInvoke(EOperation operation, EList<?> arguments) throws InvocationTargetException {
+	        return null;
         }
 
 	}
