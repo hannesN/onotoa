@@ -10,6 +10,30 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder;
 
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.BENDPOINT;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.COMMENT;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.CONNECTOR;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.CONNECTS;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.CONTAINEE;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.CONTAINER;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.CONTAINS;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.CONTENT;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.DIAGRAM;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.EDGE;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.HEIGHT;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.ID;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.NODE;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.POSX;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.POSY;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.PREFIX;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.REFEREE;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.REFERER;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.REFERS;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.SOURCE;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.TARGET;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.TYPE;
+import static de.topicmapslab.tmcledit.export.voc.IOnotoaUris.WIDTH;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -26,17 +50,21 @@ import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystemFactory;
 
-import com.semagia.mio.rdf.sesame.aduna.collections.ArrayMap;
-
 import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Bendpoint;
+import de.topicmapslab.tmcledit.model.Comment;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
@@ -53,6 +81,7 @@ import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
  * @author Hannes Niederhausen
@@ -67,6 +96,7 @@ public class TMCLTopicMapBuilder {
 	private final Set<OccurrenceType> occTypes = new HashSet<OccurrenceType>();
 	
 	private Map<TopicType, Topic> topicTypeMap;
+	private Map<Node, Topic> nodeMap;
 	private Map<String, String> prefixMap;
 
 	private TopicMap topicMap;
@@ -87,11 +117,43 @@ public class TMCLTopicMapBuilder {
 	private Topic diagramTopic;
 	private Topic nodeTopic;
 	private Topic edgeTopic;
+	private Topic bendpointTopic;
+
 	private Topic commentTopic;
-	
-	
-		
-	
+
+	private Topic idType;
+
+	private Topic typeType;
+
+	private Topic posxType;
+
+	private Topic posyType;
+
+	private Topic widthType;
+
+	private Topic heightType;
+
+	private Topic content;
+
+	private Topic sourceTopic;
+
+	private Topic targetTopic;
+
+	private Topic connectorTopic;
+
+	private Topic containerTopic;
+
+	private Topic containeeTopic;
+
+	private Topic refererTopic;
+
+	private Topic refereeTopic;
+
+	private Topic refersTopic;
+
+	private Topic connectsTopic;
+
+	private Topic containsTopic;
 
 	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema) {
 		this(topicMapSchema, exportSchema, false);
@@ -127,7 +189,7 @@ public class TMCLTopicMapBuilder {
 
 			topicTypeMap = new HashMap<TopicType, Topic>(topicMapSchema.getTopicTypes().size());
 
-			overlapMap = new ArrayMap<TopicType, TopicType>(10);
+			overlapMap = new HashMap<TopicType, TopicType>(10);
 
 			if (exportSchema) {
 				schema = topicMap.createTopic();
@@ -152,6 +214,11 @@ public class TMCLTopicMapBuilder {
 					}
 				}
 			}
+			
+			if (createDiagramNodes) {
+				nodeMap = new HashMap<Node, Topic>();
+				createDiagramNodes();
+			}
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -159,6 +226,138 @@ public class TMCLTopicMapBuilder {
 
 		return topicMap;
 	}
+
+	private void createDiagramNodes() {
+	    // init types
+		diagramTopic = createTopic(DIAGRAM);
+		edgeTopic = createTopic(EDGE);
+		nodeTopic = createTopic(NODE);
+		commentTopic = createTopic(COMMENT);
+		bendpointTopic = createTopic(BENDPOINT);
+		
+		// occurrences
+		idType = createTopic(ID);
+		typeType = createTopic(TYPE);
+		posxType = createTopic(POSX);
+		posyType = createTopic(POSY);
+		widthType = createTopic(WIDTH);
+		heightType = createTopic(HEIGHT);
+		content = createTopic(CONTENT);
+		
+		// roles
+		sourceTopic = createTopic(SOURCE);
+		targetTopic = createTopic(TARGET);
+		connectorTopic = createTopic(CONNECTOR);
+		containerTopic = createTopic(CONTAINER);
+		containeeTopic = createTopic(CONTAINEE);
+		refererTopic = createTopic(REFERER);
+		refereeTopic = createTopic(REFEREE);
+		
+		// associations
+		refersTopic = createTopic(REFERS);
+		connectsTopic = createTopic(CONNECTS);
+		containsTopic = createTopic(CONTAINS);
+		
+		File file = (File) topicMapSchema.eContainer();
+		
+		for (Diagram d : file.getDiagrams()) {
+			createDiagram(d);
+		}
+		
+    }
+
+	private void createDiagram(Diagram d) {
+		Locator id = topicMap.createLocator(PREFIX+"/diagrams/"+d.getName().toLowerCase());
+		Topic diagram = createTopic(id);
+		diagram.addType(diagramTopic);
+		
+		diagram.createName(d.getName());
+		
+		for (Comment c : d.getComments()) {
+			createComment(diagram, c);
+		}
+		
+		for (Node n : d.getNodes()) {
+			createNode(diagram, n);
+		}
+		
+		for (Edge e : d.getEdges()) {
+			createEdge(diagram, e);
+		}
+		
+	    
+    }
+
+	private void createEdge(Topic diagram, Edge e) {
+	    Locator l = topicMap.createLocator(EDGE+"/"+e.getId());
+	    Topic edge = createTopic(l);
+	    edge.addType(edgeTopic);
+	    
+	    edge.createOccurrence(typeType, e.getType().getLiteral());
+	    
+	    Association assoc = topicMap.createAssociation(connectsTopic);
+		assoc.createRole(connectorTopic, edge);
+		assoc.createRole(sourceTopic, nodeMap.get(e.getSource()));
+		assoc.createRole(targetTopic, nodeMap.get(e.getTarget()));
+		
+		for (Bendpoint bp : e.getBendpoints()) {
+			createBendPoints(bp, edge);
+		}
+	    // TODO role constraint - contraint which represents this thing
+    }
+
+	private void createBendPoints(Bendpoint bp, Topic edge) {
+		Locator l = topicMap.createLocator(BENDPOINT+"/"+bp.getId());
+	    Topic bendpoint = createTopic(l);
+	    bendpoint.addType(bendpointTopic);
+	    
+	    bendpoint.createOccurrence(posyType, Integer.toString(bp.getPosY()));
+	    bendpoint.createOccurrence(posxType, Integer.toString(bp.getPosX()));
+	    
+	    Association assoc = topicMap.createAssociation(containsTopic);
+		assoc.createRole(containerTopic, edge);
+		assoc.createRole(containeeTopic, bendpoint);
+	    
+    }
+
+	private void createNode(Topic diagram, Node n) {
+	    Locator l = topicMap.createLocator(NODE+"/"+n.getId());
+	    Topic node = createTopic(l);
+	    node.addType(typeType);
+	    
+	    node.createOccurrence(posyType, Integer.toString(n.getPosY()));
+		node.createOccurrence(posxType, Integer.toString(n.getPosX()));
+		
+		if (n instanceof TypeNode) {
+			Topic t = topicTypeMap.get(((TypeNode) n).getTopicType());
+			Association assoc = topicMap.createAssociation(refersTopic);
+			assoc.createRole(refereeTopic, t);
+			assoc.createRole(refersTopic, node);
+		} else {
+			// TODO assoc nodes
+		}
+		
+		Association assoc = topicMap.createAssociation(containsTopic);
+		assoc.createRole(containerTopic, diagram);
+		assoc.createRole(containeeTopic, node);
+	    nodeMap.put(n, node);
+    }
+
+	private void createComment(Topic diagram, Comment c) {
+	    Locator l = topicMap.createLocator(COMMENT+"/"+c.getId());
+		Topic comment = createTopic(l);
+		comment.addType(commentTopic);
+		
+		comment.createOccurrence(content, c.getContent());
+		comment.createOccurrence(posyType, Integer.toString(c.getPosY()));
+		comment.createOccurrence(posxType, Integer.toString(c.getPosX()));
+		comment.createOccurrence(widthType, Integer.toString(c.getWidth()));
+		comment.createOccurrence(heightType, Integer.toString(c.getHeight()));
+		
+		Association assoc = topicMap.createAssociation(containsTopic);
+		assoc.createRole(containerTopic, diagram);
+		assoc.createRole(containeeTopic, comment);
+    }
 
 	private void createTopicTypes() {
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
@@ -257,6 +456,11 @@ public class TMCLTopicMapBuilder {
 	 */
 	private Topic createTopic(Locator loc) {
 		return topicMap.createTopicBySubjectIdentifier(loc);
+	}
+	
+	private Topic createTopic(String uri) {
+		Locator loc = topicMap.createLocator(uri);
+		return createTopic(loc);
 	}
 
 	private Topic createTopic(TopicType type) {
@@ -359,6 +563,10 @@ public class TMCLTopicMapBuilder {
 		
 		if (type instanceof AbstractUniqueValueTopicType) {
 			setUnique((AbstractUniqueValueTopicType) type);
+		}
+		
+		if (type instanceof OccurrenceType) {
+			setOccurrenceDatatype((OccurrenceType) type);
 		}
 
 		setTopicReifiesConstraint(type);
@@ -561,6 +769,8 @@ public class TMCLTopicMapBuilder {
 	}
 
 	private void setUnique(AbstractUniqueValueTopicType ut) {
+		if (!ut.isUnique())
+			return;
 		Topic constr = createConstraint(TMCL.UNIQUE_VALUE_CONSTRAINT);
 		Topic type = createTopic(ut);
 		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_STATEMENT));
@@ -572,8 +782,7 @@ public class TMCLTopicMapBuilder {
 
 	private void setOccurrenceDatatype(OccurrenceType ot) {
 		Topic constr = createConstraint(TMCL.OCCURRENCE_DATATYPE_CONSTRAINT);
-		System.out.println(ot.getName()+"--"+ot.getDataType());
-		constr.createOccurrence(createTopic(TMCL.DATATYPE), ot.getDataType());
+		constr.createOccurrence(createTopic(TMCL.DATATYPE), ot.getDataType(), XSD.ANY_URI);
 
 		createConstrainedStatement(ot, constr);
 
