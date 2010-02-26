@@ -93,7 +93,7 @@ public class TMCLTopicMapBuilder {
 	// set to store the crerated roleconstraints and roleplayerconstraint
 	private final Set<ConstraintWrapper> constraintSet = new HashSet<ConstraintWrapper>();
 
-	private final Set<OccurrenceType> occTypes = new HashSet<OccurrenceType>();
+//	private final Set<OccurrenceType> occTypes = new HashSet<OccurrenceType>();
 	
 	private Map<TopicType, Topic> topicTypeMap;
 	private Map<Node, Topic> nodeMap;
@@ -200,9 +200,9 @@ public class TMCLTopicMapBuilder {
 			createTopicTypes();
 			createAssociationConstraints();
 			
-			for(OccurrenceType ot : occTypes) {
-				setOccurrenceDatatype(ot);
-			}
+//			for(OccurrenceType ot : occTypes) {
+//				setOccurrenceDatatype(ot);
+//			}
 
 			// cleaning up the topics, removing item identifier where there not
 			// needed
@@ -682,7 +682,6 @@ public class TMCLTopicMapBuilder {
 		OccurrenceType otype = (OccurrenceType) otc.getType();
 		Topic occType = null;
 		if (otype != null) {
-			occTypes.add(otype);
 			occType = createTopic(otype);
 			if (!otype.getRegExp().equals(".*"))
 				setRegExpConstraint(otype, otype.getRegExp());
