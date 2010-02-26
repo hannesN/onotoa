@@ -74,6 +74,7 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 
 		// getFigure().revalidate();
 		// getFigure().getParent().repaint();
+		refreshChildren();
 
 	}
 

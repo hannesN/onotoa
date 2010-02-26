@@ -78,6 +78,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 //		getTypeLabel().setText(buffer.toString());
 //		getFigure().revalidate();
 //		getFigure().getParent().repaint();
+		refreshChildren();
 	}
 
 	@Override
