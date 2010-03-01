@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="tmapi-2.0a2.jar"/>
+	<classpathentry exported="true" kind="lib" path="tmapi-2.0a2.jar" sourcepath="/home/mai00ckx/Projekte/tmapi/src/main/java"/>
 	<classpathentry exported="true" kind="lib" path="jing.jar"/>
 	<classpathentry exported="true" kind="lib" path="semagia-mio-0.9.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="semagia-mio-ctm-0.9.3-working-draft-2009-02-18.jar"/>

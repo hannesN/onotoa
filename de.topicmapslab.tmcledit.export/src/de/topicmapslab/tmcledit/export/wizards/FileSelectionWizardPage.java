@@ -60,7 +60,7 @@ public class FileSelectionWizardPage extends WizardPage {
 		browseButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FileDialog dlg = new FileDialog(text.getShell());
+				FileDialog dlg = new FileDialog(text.getShell(), SWT.SAVE);
 				dlg.setFilterExtensions(fileExtensions);
 				String file = dlg.open();
 				if (file!=null) {

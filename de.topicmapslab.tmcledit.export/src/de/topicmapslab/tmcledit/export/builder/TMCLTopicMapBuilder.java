@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.tinytim.voc.Namespace;
 import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
 import org.tinytim.voc.XSD;
@@ -781,7 +782,14 @@ public class TMCLTopicMapBuilder {
 
 	private void setOccurrenceDatatype(OccurrenceType ot) {
 		Topic constr = createConstraint(TMCL.OCCURRENCE_DATATYPE_CONSTRAINT);
-		constr.createOccurrence(createTopic(TMCL.DATATYPE), ot.getDataType(), XSD.ANY_URI);
+		
+		String dataType = ot.getDataType();
+		if (dataType.startsWith("xsd:")) {
+			dataType = dataType.replace("xsd:", Namespace.XSD);
+		}
+		
+		
+		constr.createOccurrence(createTopic(TMCL.DATATYPE), dataType, XSD.ANY_URI);
 
 		createConstrainedStatement(ot, constr);
 

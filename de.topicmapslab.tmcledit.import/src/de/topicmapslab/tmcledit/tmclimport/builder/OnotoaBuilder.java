@@ -926,7 +926,9 @@ public class OnotoaBuilder {
 		public void setId(int value) {
         }
 
-		public Object eInvoke(EOperation operation, EList<?> arguments) throws InvocationTargetException {
+		@SuppressWarnings("unused")
+		// needed in new emf version
+        public Object eInvoke(EOperation operation, EList<?> arguments) throws InvocationTargetException {
 	        return null;
         }
 

@@ -16,6 +16,14 @@
                name="preferenceCustomization"
                value="plugin_customization.ini">
          </property>
+         <property
+               name="aboutImage"
+               value="about.png">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/onotoa_16_16.png,icons/onotoa_32_32.png,icons/onotoa_48_48.png,icons/onotoa_64_64.png,icons/onotoa_128_128.png">
+         </property>
       </product>
    </extension>
    <extension
