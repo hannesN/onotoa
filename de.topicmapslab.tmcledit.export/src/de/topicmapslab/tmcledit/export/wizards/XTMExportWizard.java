@@ -36,6 +36,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class XTMExportWizard extends Wizard implements IExportWizard {
 	private boolean exportConstraintInfos = true;
+	private boolean exportDiagram = true;
 	private TopicMapSchema schema;
 	private WizardPage page1;
 
@@ -47,7 +48,7 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		if (schema == null)
 			schema = ModelIndexer.getInstance().getTopicMapSchema();
 
-		TMCLTopicMapBuilder ttbuilder = new TMCLTopicMapBuilder(schema, exportConstraintInfos);
+		TMCLTopicMapBuilder ttbuilder = new TMCLTopicMapBuilder(schema, exportConstraintInfos, exportDiagram);
 
 		java.io.File file = new java.io.File(page1.getFilename());
 
@@ -127,6 +128,19 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					exportConstraintInfos = ((Button) e.widget).getSelection();
+				}
+			});
+
+			exportButton = new Button(parent, SWT.CHECK);
+			exportButton.setSelection(exportDiagram);
+			exportButton.setText("Export Diagram Infos");
+			gd = new GridData();
+			gd.horizontalSpan = 3;
+			exportButton.setLayoutData(gd);
+			exportButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					exportDiagram = ((Button) e.widget).getSelection();
 				}
 			});
 
