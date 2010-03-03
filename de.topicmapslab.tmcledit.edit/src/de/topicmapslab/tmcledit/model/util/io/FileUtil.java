@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
@@ -57,11 +58,15 @@ public class FileUtil {
 	public static final void saveFile(File file, EditingDomain editingDomain) throws IOException {
 		try {
 			java.io.File ioFile = new java.io.File(file.getFilename());
-			FileWriter writer = new FileWriter(ioFile);
+			FileOutputStream fos = new FileOutputStream(ioFile);
 
 			ModelSerializeOno1 ms = new ModelSerializeOno1();
-			writer.append(ms.serialize(file));
-			writer.close();
+			
+			String string = ms.serialize(file);
+			System.out.println(string);
+			fos.write(string.getBytes("UTF-8"));
+			fos.close();
+			
 
 			if (editingDomain != null) {
 				WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) editingDomain.getCommandStack();
