@@ -770,8 +770,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	public void doSave(IProgressMonitor monitor) {
 		try {
-			if (currFile.getFilename()==null)
+			if (currFile.getFilename()==null) {
 				doSaveAs();
+				return;
+			}
 			
 			FileUtil.saveFile((File) currFile, getEditingDomain());
 		} catch (IOException e) {
