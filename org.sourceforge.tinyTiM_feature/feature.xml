@@ -204,4 +204,10 @@ are
          install-size="0"
          version="2.0.0.a6"/>
 
+   <plugin
+         id="org.tmapi"
+         download-size="0"
+         install-size="0"
+         version="2.0.1.snapshot"/>
+
 </feature>
