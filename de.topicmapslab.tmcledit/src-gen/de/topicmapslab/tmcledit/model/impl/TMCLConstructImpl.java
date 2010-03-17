@@ -328,4 +328,18 @@ public class TMCLConstructImpl extends OnoObjectImpl implements TMCLConstruct {
 		return result.toString();
 	}
 
+	@Override
+    public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + ((annotations == null) ? 0 : annotations.hashCode());
+	    result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+	    result = prime * result + ((description == null) ? 0 : description.hashCode());
+	    result = prime * result + ((see_also == null) ? 0 : see_also.hashCode());
+	    return result;
+    }
+
+
+
+	
 } //TMCLConstructImpl
