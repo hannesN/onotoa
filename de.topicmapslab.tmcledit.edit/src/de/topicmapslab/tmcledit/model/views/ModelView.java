@@ -739,7 +739,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public void saveState(IMemento memento) {
 		String text = "null";
 
-		if (currFile != null) {
+		if ( (currFile != null) && (currFile.getFilename()!=null) ){
 			java.io.File file = new java.io.File(currFile.getFilename());
 			if (file.exists())
 				text = currFile.getFilename();
