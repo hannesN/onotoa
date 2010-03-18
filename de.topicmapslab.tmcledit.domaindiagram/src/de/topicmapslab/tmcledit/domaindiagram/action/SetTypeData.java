@@ -6,7 +6,7 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class SetTypeData implements Cloneable {
+public class SetTypeData implements Cloneable, Comparable<SetTypeData> {
 	public TopicType type;
 	public TopicMapSchema schema;
 	public IOnotoaEditDomain editDomain;
@@ -30,5 +30,11 @@ public class SetTypeData implements Cloneable {
 		newData.featureId = featureId;
 		
 		return newData;
+	}
+
+
+	public int compareTo(SetTypeData o) {
+		return this.type.getName().toLowerCase().compareTo(
+				o.type.getName().toLowerCase());
 	}
 }

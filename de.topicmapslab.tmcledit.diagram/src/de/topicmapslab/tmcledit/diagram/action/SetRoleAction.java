@@ -14,7 +14,6 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;

@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.diagram.editparts;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.draw2d.AbsoluteBendpoint;
@@ -254,7 +255,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		
 		List<IContributionItem> result = new ArrayList<IContributionItem>();
 
-		MenuManager subMenu = new MenuManager("Set Role");
+		MenuManager subMenu = new MenuManager("Set Role Type");
 
 		Edge e = getCastedModel();
 		
@@ -267,11 +268,20 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		data.role = null;
 		data.schema = (TopicMapSchema) at.eContainer();
 
+		
+		List <SetRoleData> dataList = new ArrayList<SetRoleData>();
 		for (RoleConstraint rc : at.getRoles()) {
 			SetRoleData d = data.clone();
 			d.role =  rc.getType();
-			subMenu.add(new SetRoleAction(d));
+			dataList.add(d);
 		}
+		
+
+		Collections.sort(dataList);
+		
+		for (SetRoleData d : dataList)
+			subMenu.add(new SetRoleAction(d));
+		
 		result.add(subMenu);
 
 		return result;

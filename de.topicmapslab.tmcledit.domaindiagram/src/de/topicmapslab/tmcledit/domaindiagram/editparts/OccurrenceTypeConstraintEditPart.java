@@ -21,7 +21,6 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteTypedConstraintAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -118,7 +117,7 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 	public List<IContributionItem> getItems() {
 		List<IContributionItem> result = new ArrayList<IContributionItem>();
 
-		MenuManager subMenu = new MenuManager("Set Occurrence");
+		MenuManager subMenu = new MenuManager("Set Occurrence Type");
 		SetTypeData data = new SetTypeData();
 		data.typedConstraint = getCastedModel();
 		data.editDomain = getEditDomain();
@@ -127,15 +126,19 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 
 		// subMenu.add(new SetAssociationAction(data));
 		OccurrenceType ot = (OccurrenceType) getCastedModel().getType();
+		List<SetTypeData> dataList = new ArrayList<SetTypeData>();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
 			if ((tt instanceof OccurrenceType) && (!(tt.equals(ot)))) {
 				if (!alreadyUsed((TopicType)getCastedModel().eContainer(), (OccurrenceType) tt)) {
 					SetTypeData d = data.clone();
 					d.type = tt;
-					subMenu.add(new SetTypeAction(d));
+					dataList.add(d);
 				}
 			}
 		}
+		
+		EditPartUtil.sortAndAddAction(dataList, subMenu);
+		
 		result.add(subMenu);
 
 		return result;
