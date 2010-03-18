@@ -202,12 +202,12 @@ are
          id="org.sourceforge.tinyTiM"
          download-size="0"
          install-size="0"
-         version="2.0.0.a6"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.tmapi"
          download-size="0"
          install-size="0"
-         version="2.0.1.snapshot"/>
+         version="0.0.0"/>
 
 </feature>
