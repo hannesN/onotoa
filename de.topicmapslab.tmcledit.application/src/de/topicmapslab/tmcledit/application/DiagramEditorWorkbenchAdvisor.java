@@ -19,13 +19,14 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
 
 /**
- * @generated
  */
 public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
+	
 	/**
 	 * @generated
 	 */
 	public static final String PERSPECTIVE_ID = "de.topicmapslab.tmcledit.extensions.OnotoaPerspective"; //$NON-NLS-1$
+	private String[] args;
 
 	/**
 	 * @generated
@@ -51,6 +52,13 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	@Override
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
-		return new DiagramEditorWorkbenchWindowAdvisor(configurer);
+		DiagramEditorWorkbenchWindowAdvisor advisor = new DiagramEditorWorkbenchWindowAdvisor(configurer);
+		advisor.setArguments(args);
+		return advisor;
 	}
+
+	public void setArguments(String[] args) {
+		this.args = args;
+	}
+
 }
