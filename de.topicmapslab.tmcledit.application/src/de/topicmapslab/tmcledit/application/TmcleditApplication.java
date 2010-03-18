@@ -10,8 +10,13 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
+import java.io.File;
+import java.net.URL;
+
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.osgi.service.datalocation.Location;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
@@ -23,7 +28,15 @@ import org.eclipse.ui.PlatformUI;
 public class TmcleditApplication implements IApplication {
 
 	public Object start(IApplicationContext context) throws Exception {
+		String newLoc = System.getProperty("user.home")+"/.onotoa";
+		
+		Location workspaceLoc = Platform.getInstanceLocation();
+		workspaceLoc.release();
+		workspaceLoc.set(new URL("file:"+newLoc), false);
+		
+		
 		Display display = PlatformUI.createDisplay();
+		
 		try {
 			int returnCode = PlatformUI.createAndRunWorkbench(display,
 					new DiagramEditorWorkbenchAdvisor());
