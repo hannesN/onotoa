@@ -73,7 +73,6 @@ import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
@@ -414,7 +413,7 @@ public class TMCLTopicMapBuilder {
 		ass.createRole(createTopic(TMCL.CONSTRAINED), t);
 	}
 
-	private void createOtherConstrainedRole(RoleType rt, Topic constr) {
+	private void createOtherConstrainedRole(TopicType rt, Topic constr) {
 		Association ass = topicMap.createAssociation(createTopic(TMCL.OTHER_CONSTRAINED_ROLE));
 		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
 		ass.createRole(createTopic(TMCL.CONSTRAINED), createTopic(rt));
@@ -445,6 +444,13 @@ public class TMCLTopicMapBuilder {
 
 	private void createConstrainedRole(TopicType rt, Topic constr) {
 		Association ass = topicMap.createAssociation(createTopic(TMCL.CONSTRAINED_ROLE));
+		
+		Topic rtTopic = createTopic(rt);
+		// check if type is a topic type, if so, add the role-type to isa list
+		if (rt.getKind()==KindOfTopicType.TOPIC_TYPE) {
+			rtTopic.addType(getTopicType(KindOfTopicType.ROLE_TYPE));
+		}
+		
 		ass.createRole(createTopic(TMCL.CONSTRAINS), constr);
 		ass.createRole(createTopic(TMCL.CONSTRAINED), createTopic(rt));
 	}
@@ -519,7 +525,7 @@ public class TMCLTopicMapBuilder {
 		}
 
 		// add types
-		Topic typeTopic = getTopicTypes(type.getKind());
+		Topic typeTopic = getTopicType(type.getKind());
 		if (typeTopic!=null)
 			t.addType(typeTopic);
 
@@ -863,7 +869,7 @@ public class TMCLTopicMapBuilder {
 		return id;
 	}
 
-	private Topic getTopicTypes(KindOfTopicType kind) {
+	private Topic getTopicType(KindOfTopicType kind) {
 		Locator loc = TMCL.TOPIC_TYPE;
 		switch (kind) {
 		case NO_TYPE:

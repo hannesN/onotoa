@@ -15,6 +15,7 @@ import de.topicmapslab.tmcledit.diagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.diagram.action.SetRoleAction;
 import de.topicmapslab.tmcledit.diagram.action.SetRoleData;
 import de.topicmapslab.tmcledit.diagram.editparts.IContextMenuProvider;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
@@ -127,9 +128,9 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 
 		subMenu.add(new SetRoleAction(data));
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
-			if (tt instanceof RoleType) {
+			if ( (tt instanceof RoleType) || (tt.getKind()==KindOfTopicType.TOPIC_TYPE) ) {
 				SetRoleData d = data.clone();
-				d.role = (RoleType) tt;
+				d.role = tt;
 				subMenu.add(new SetRoleAction(d));
 			}
 		}

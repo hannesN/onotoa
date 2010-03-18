@@ -3,11 +3,11 @@ package de.topicmapslab.tmcledit.diagram.action;
 import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 public class SetRoleData implements Cloneable {
-	public RoleType role;
+	public TopicType role;
 	public TopicMapSchema schema;
 	public IOnotoaEditDomain editDomain;
 	public RolePlayerConstraint rpc;

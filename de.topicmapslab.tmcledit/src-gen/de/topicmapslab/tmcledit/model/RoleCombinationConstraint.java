@@ -87,12 +87,12 @@ public interface RoleCombinationConstraint extends AbstractConstraint {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Other Role</em>' reference.
-	 * @see #setOtherRole(RoleType)
+	 * @see #setOtherRole(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleCombinationConstraint_OtherRole()
 	 * @model required="true"
 	 * @generated
 	 */
-	RoleType getOtherRole();
+	TopicType getOtherRole();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getOtherRole <em>Other Role</em>}' reference.
@@ -102,7 +102,7 @@ public interface RoleCombinationConstraint extends AbstractConstraint {
 	 * @see #getOtherRole()
 	 * @generated
 	 */
-	void setOtherRole(RoleType value);
+	void setOtherRole(TopicType value);
 
 	/**
 	 * Returns the value of the '<em><b>Role</b></em>' reference.
@@ -113,12 +113,12 @@ public interface RoleCombinationConstraint extends AbstractConstraint {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Role</em>' reference.
-	 * @see #setRole(RoleType)
+	 * @see #setRole(TopicType)
 	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getRoleCombinationConstraint_Role()
 	 * @model required="true"
 	 * @generated
 	 */
-	RoleType getRole();
+	TopicType getRole();
 
 	/**
 	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.RoleCombinationConstraint#getRole <em>Role</em>}' reference.
@@ -128,6 +128,6 @@ public interface RoleCombinationConstraint extends AbstractConstraint {
 	 * @see #getRole()
 	 * @generated
 	 */
-	void setRole(RoleType value);
+	void setRole(TopicType value);
 
 } // RoleCombinationConstraint

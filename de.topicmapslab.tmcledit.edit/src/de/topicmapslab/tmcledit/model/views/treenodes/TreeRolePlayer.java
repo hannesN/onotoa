@@ -7,7 +7,6 @@ import org.eclipse.swt.graphics.Image;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
@@ -28,7 +27,7 @@ public class TreeRolePlayer extends TreeObject {
 	    
 	    Object notifier = notification.getNotifier();
 		if (notifier instanceof RoleConstraint) {
-			if (notification.getFeatureID(RoleType.class)==ModelPackage.ROLE_CONSTRAINT__TYPE) {
+			if (notification.getFeatureID(TopicType.class)==ModelPackage.ROLE_CONSTRAINT__TYPE) {
 				EObject tmp = (EObject) notification.getOldValue();
 				if (tmp!=null)
 					tmp.eAdapters().remove(getAdapter());
