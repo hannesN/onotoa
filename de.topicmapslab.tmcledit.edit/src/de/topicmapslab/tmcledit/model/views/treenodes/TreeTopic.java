@@ -145,7 +145,8 @@ public class TreeTopic extends TreeParent {
 				        if (newText.length() == 0)
 					        return "no name given";
 
-				        if (ModelIndexer.getTopicIndexer().getTopicTypeByName(newText) != null) {
+				        TopicType tt = ModelIndexer.getTopicIndexer().getTopicTypeByName(newText);
+						if ( (tt != null) && (tt != getTopicType()) ){
 					        return "name already used";
 				        }
 				        return null;
