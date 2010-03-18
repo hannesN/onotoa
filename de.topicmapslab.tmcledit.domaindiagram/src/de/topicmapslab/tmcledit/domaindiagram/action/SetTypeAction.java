@@ -4,15 +4,21 @@
 package de.topicmapslab.tmcledit.domaindiagram.action;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.wizard.WizardDialog;
 
+import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.action.AbstractCommandStackAction;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class SetTypeAction extends AbstractCommandStackAction {
@@ -45,6 +51,11 @@ public class SetTypeAction extends AbstractCommandStackAction {
 			}
 
 		}
+		
+		if (data.type==null) {
+			cmd.append(createTypeCommand());
+		}
+		
 		cmd.append(getCommand());
 		TopicType oldType = data.typedConstraint.getType();
 		if (oldType!=null) {
@@ -60,6 +71,21 @@ public class SetTypeAction extends AbstractCommandStackAction {
 	protected AbstractCommand getCommand() {
 		return new GenericSetCommand(data.typedConstraint, data.featureId,
 				data.type);
+	}
+	
+	private Command createTypeCommand() {
+		NewTopicTypeWizard tt = new NewTopicTypeWizard(
+				data.kind);
+		WizardDialog dlg = new WizardDialog(DiagramActivator.getCurrentShell(), tt);
+		if (dlg.open() != Dialog.OK) {
+			return null;
+		}
+
+		CreateTopicTypeCommand cmd = new CreateTopicTypeCommand(
+				data.schema, tt.getNewTopicType());
+
+		data.type = tt.getNewTopicType();
+		return cmd;
 	}
 
 }

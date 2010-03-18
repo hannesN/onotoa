@@ -21,8 +21,10 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteTypedConstraintAction;
+import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -65,7 +67,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		NameType type = (NameType) ntc.getType();
 
 		if (type == null) {
-			getNameLabel().setText("default");
+			getNameLabel().setText("default name");
 		} else {
 			getNameLabel().setText(type.getName());
 		}
@@ -102,7 +104,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	}
 
 	private TopicMapSchema getTopicMapSchema() {
-		return (TopicMapSchema) getCastedModel().getType().eContainer();
+		return (TopicMapSchema) getCastedModel().eContainer().eContainer();
 	}
 
 	@Override
@@ -124,9 +126,11 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		data.typedConstraint = getCastedModel();
 		data.editDomain = getEditDomain();
 		data.schema = getTopicMapSchema();
+		data.kind = KindOfTopicType.NAME_TYPE;
 		data.featureId = ModelPackage.NAME_TYPE_CONSTRAINT__TYPE;
 
-		// subMenu.add(new SetAssociationAction(data));
+		subMenu.add(new SetTypeAction(data));
+		
 		NameType nt = (NameType) getCastedModel().getType();
 		List<SetTypeData> dataList = new ArrayList<SetTypeData>();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
