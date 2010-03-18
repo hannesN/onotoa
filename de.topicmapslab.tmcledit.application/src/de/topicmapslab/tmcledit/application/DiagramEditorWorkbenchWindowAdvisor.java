@@ -16,11 +16,16 @@ import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
+
 
 /**
  * @generated
  */
 public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
+
+	public static final String MODEL_VIEW_ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
+	private String[] args;
 
 	/**
 	 * @generated
@@ -49,6 +54,16 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 		configurer.setTitle(Messages.DiagramEditorWorkbenchWindowAdvisor_Title);
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(true);
+		
+		if (args.length==0)
+			return;
+		// temporary storing the filename in the preference store of the edit plugin
+		TmcleditEditPlugin.getPlugin().getPreferenceStore().setValue("cmdLineFilename", args[0]);
 	}
+
+	public void setArguments(String[] args) {
+		this.args = args;		
+	}
+	
 	
 }

@@ -15,6 +15,8 @@ package de.topicmapslab.tmcledit.model.preferences;
  */
 public class PreferenceConstants {
 
+	public static final String P_LOADFILE = "cmdLineFilename";
+	
 	public static final String P_PSIPREFERENCES = "psiPreferences";
 
 	

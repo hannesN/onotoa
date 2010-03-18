@@ -49,6 +49,7 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
@@ -122,6 +123,7 @@ import de.topicmapslab.tmcledit.model.actions.UndoActionWrapper;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.actions.ValidateAction;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.model.preferences.PreferenceConstants;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.util.io.FileUtil;
 import de.topicmapslab.tmcledit.model.validation.ModelValidator;
@@ -336,6 +338,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	@Override
 	public void init(IViewSite site, IMemento memento) throws PartInitException {
 		init(site);
+		
+		IPreferenceStore pref = TmcleditEditPlugin.getPlugin().getPreferenceStore();
+		String filename = pref.getString(PreferenceConstants.P_LOADFILE);
+		if ( (filename!=null) && (filename.length()>0) ) {
+			setFilename(filename, false);
+			pref.setValue(PreferenceConstants.P_LOADFILE, "");
+			return;
+		}
+		
+		
 		if (memento == null)
 			return;
 

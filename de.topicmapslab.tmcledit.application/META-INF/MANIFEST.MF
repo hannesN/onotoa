@@ -7,7 +7,8 @@ Bundle-Activator: de.topicmapslab.tmcledit.application.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.common.ui,
- org.eclipse.emf.edit.ui
+ org.eclipse.emf.edit.ui,
+ de.topicmapslab.tmcledit.edit
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.topicmapslab.tmcledit.application

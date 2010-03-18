@@ -8,7 +8,8 @@ Bundle-Activator: de.topicmapslab.tmcledit.model.TmcleditEditPlugin$Implementati
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: de.topicmapslab.tmcledit.model.actions,
+Export-Package: de.topicmapslab.tmcledit.model,
+ de.topicmapslab.tmcledit.model.actions,
  de.topicmapslab.tmcledit.model.annotationprovider,
  de.topicmapslab.tmcledit.model.commands,
  de.topicmapslab.tmcledit.model.dialogs,
