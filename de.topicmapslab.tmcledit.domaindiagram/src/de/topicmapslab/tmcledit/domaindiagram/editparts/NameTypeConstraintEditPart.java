@@ -67,7 +67,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		NameType type = (NameType) ntc.getType();
 
 		if (type == null) {
-			getNameLabel().setText("default name");
+			getNameLabel().setText("name");
 		} else {
 			getNameLabel().setText(type.getName());
 		}

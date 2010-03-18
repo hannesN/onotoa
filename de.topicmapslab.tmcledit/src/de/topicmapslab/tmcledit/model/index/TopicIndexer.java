@@ -34,7 +34,7 @@ public class TopicIndexer implements Adapter {
 
 	public TopicType getTopicTypeByName(String name) {
 		for (TopicType tt : topicMapSchema.getTopicTypes()) {
-			if (tt.getName().equalsIgnoreCase(name))
+			if (tt.getName().equals(name))
 				return tt;
 		}
 		return null;
