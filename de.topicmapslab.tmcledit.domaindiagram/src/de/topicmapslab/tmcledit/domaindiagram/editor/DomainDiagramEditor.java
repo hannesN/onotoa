@@ -97,6 +97,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	public static final String ID = "de.topicmapslab.tmcledit.domaindiagram.editor.DomainDiagramEditor";
 
 	private Diagram diagram;
+	private File file;
 
 	private ScalableFreeformRootEditPart rootEditPart;
 
@@ -250,6 +251,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 		TMCLEditorInput ei = (TMCLEditorInput) input;
 		this.diagram = ei.getDiagram();
+		this.file = (File) this.diagram.eContainer();
 		this.modelView = ei.getModelView();
 		
 		setTitleImage(input.getImageDescriptor().createImage());
@@ -258,7 +260,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				.getEditingDomain());
 
 		dirtyAdapter = new DirtyAdapter();
-		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
+		this.file.eAdapters().add(dirtyAdapter);
 		diagram.eAdapters().add(dirtyAdapter);
 
 		ActionRegistry ar = ei.getActionRegistry();
@@ -298,7 +300,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	@Override
 	public void dispose() {
 		diagram.eAdapters().remove(dirtyAdapter);
-		((File) diagram.eContainer()).eAdapters().remove(dirtyAdapter);
+		file.eAdapters().remove(dirtyAdapter);
 		super.dispose();
 	}
 

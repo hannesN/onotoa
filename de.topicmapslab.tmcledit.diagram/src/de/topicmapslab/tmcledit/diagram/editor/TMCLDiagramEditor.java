@@ -96,6 +96,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	public static final String ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
 
 	private Diagram diagram;
+	private File file;
 
 	private ScalableFreeformRootEditPart rootEditPart;
 
@@ -256,7 +257,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 		TMCLEditorInput ei = (TMCLEditorInput) input;
 		this.diagram = ei.getDiagram();
-		
+		file = ((File) diagram.eContainer());
 		this.modelView = ei.getModelView();
 
 		((TMCLEditDomain) getEditDomain()).setEditingDomain(ei
@@ -265,7 +266,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		setTitleImage(input.getImageDescriptor().createImage());
 
 		dirtyAdapter = new DirtyAdapter();
-		((File) diagram.eContainer()).eAdapters().add(dirtyAdapter);
+		file.eAdapters().add(dirtyAdapter);
 		diagram.eAdapters().add(dirtyAdapter);
 
 		ActionRegistry ar = ei.getActionRegistry();
@@ -305,7 +306,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	@Override
 	public void dispose() {
 		diagram.eAdapters().remove(dirtyAdapter);
-		((File) diagram.eContainer()).eAdapters().remove(dirtyAdapter);
+		file.eAdapters().remove(dirtyAdapter);
 		super.dispose();
 	}
 
