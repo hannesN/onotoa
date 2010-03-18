@@ -565,9 +565,9 @@ public class OnotoaBuilder {
 	    
 		RoleCombinationConstraint rcc = modelFactory.createRoleCombinationConstraint();
 		rcc.setPlayer(tt);
-		rcc.setRole((RoleType) getTopic(roleType));
+		rcc.setRole(getTopic(roleType));
 		rcc.setOtherPlayer(getTopic(otherTopicType));
-		rcc.setOtherRole((RoleType) getTopic(otherRoleType));
+		rcc.setOtherRole(getTopic(otherRoleType));
 		
 		setDocumentation(rcc, constr);
 		((AssociationType)at).getRoleCombinations().add(rcc);

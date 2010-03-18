@@ -173,8 +173,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherPlayer" lowerBound="1"
         eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherRole" lowerBound="1"
-        eType="#//RoleType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="#//RoleType"/>
+        eType="#//TopicType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="#//TopicType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NameType" eSuperTypes="#//ScopedTopicType #//ScopedReifiableTopicType #//AbstractRegExpTopicType #//AbstractUniqueValueTopicType"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractTypedCardinalityConstraint"

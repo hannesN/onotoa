@@ -85,7 +85,7 @@ public class SetRoleAction extends AbstractCommandStackAction {
 		CreateTopicTypeCommand cmd = new CreateTopicTypeCommand(
 				data.schema, tt.getNewTopicType());
 
-		data.role = (RoleType) tt.getNewTopicType();
+		data.role = tt.getNewTopicType();
 		return cmd;
 	}
 }

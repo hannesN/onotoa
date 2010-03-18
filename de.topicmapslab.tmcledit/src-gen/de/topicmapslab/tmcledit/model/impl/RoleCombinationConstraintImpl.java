@@ -5,17 +5,14 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
-import de.topicmapslab.tmcledit.model.TopicType;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,7 +59,7 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected RoleType otherRole;
+	protected TopicType otherRole;
 
 	/**
 	 * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
@@ -72,7 +69,7 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected RoleType role;
+	protected TopicType role;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,10 +171,10 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleType getOtherRole() {
+	public TopicType getOtherRole() {
 		if (otherRole != null && otherRole.eIsProxy()) {
 			InternalEObject oldOtherRole = (InternalEObject)otherRole;
-			otherRole = (RoleType)eResolveProxy(oldOtherRole);
+			otherRole = (TopicType)eResolveProxy(oldOtherRole);
 			if (otherRole != oldOtherRole) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE, oldOtherRole, otherRole));
@@ -191,7 +188,7 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleType basicGetOtherRole() {
+	public TopicType basicGetOtherRole() {
 		return otherRole;
 	}
 
@@ -200,8 +197,8 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOtherRole(RoleType newOtherRole) {
-		RoleType oldOtherRole = otherRole;
+	public void setOtherRole(TopicType newOtherRole) {
+		TopicType oldOtherRole = otherRole;
 		otherRole = newOtherRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE, oldOtherRole, otherRole));
@@ -212,10 +209,10 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleType getRole() {
+	public TopicType getRole() {
 		if (role != null && role.eIsProxy()) {
 			InternalEObject oldRole = (InternalEObject)role;
-			role = (RoleType)eResolveProxy(oldRole);
+			role = (TopicType)eResolveProxy(oldRole);
 			if (role != oldRole) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE_COMBINATION_CONSTRAINT__ROLE, oldRole, role));
@@ -229,7 +226,7 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleType basicGetRole() {
+	public TopicType basicGetRole() {
 		return role;
 	}
 
@@ -238,8 +235,8 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRole(RoleType newRole) {
-		RoleType oldRole = role;
+	public void setRole(TopicType newRole) {
+		TopicType oldRole = role;
 		role = newRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE_COMBINATION_CONSTRAINT__ROLE, oldRole, role));
@@ -284,10 +281,10 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 				setOtherPlayer((TopicType)newValue);
 				return;
 			case ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE:
-				setOtherRole((RoleType)newValue);
+				setOtherRole((TopicType)newValue);
 				return;
 			case ModelPackage.ROLE_COMBINATION_CONSTRAINT__ROLE:
-				setRole((RoleType)newValue);
+				setRole((TopicType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,10 +305,10 @@ public class RoleCombinationConstraintImpl extends TMCLConstructImpl implements 
 				setOtherPlayer((TopicType)null);
 				return;
 			case ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE:
-				setOtherRole((RoleType)null);
+				setOtherRole((TopicType)null);
 				return;
 			case ModelPackage.ROLE_COMBINATION_CONSTRAINT__ROLE:
-				setRole((RoleType)null);
+				setRole((TopicType)null);
 				return;
 		}
 		super.eUnset(featureID);

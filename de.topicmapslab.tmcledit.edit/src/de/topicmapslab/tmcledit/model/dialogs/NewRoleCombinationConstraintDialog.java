@@ -40,7 +40,6 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddRoleCombinationConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
@@ -58,7 +57,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 	
 	private RoleCombinationConstraint roleCombination;
 	
-	private List<RoleType> possibleRoles;
+	private List<TopicType> possibleRoles;
 	
 	private Button roleButton;
 	private Button playerButton;
@@ -75,11 +74,11 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 	
 	public NewRoleCombinationConstraintDialog(Shell parentShell, AssociationType at) {
 		super(parentShell);
-		possibleRoles = new ArrayList<RoleType>(at.getRoles().size());
+		possibleRoles = new ArrayList<TopicType>(at.getRoles().size());
 		this.at = at;
 		for (RoleConstraint rc : at.getRoles()) {
 			if (rc.getType()!=null)
-				possibleRoles.add((RoleType) rc.getType());
+				possibleRoles.add((TopicType) rc.getType());
 		}
 	}
 	
@@ -176,9 +175,9 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 	public Command getCreateCommand() {
 		roleCombination = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
 		roleCombination.setPlayer(player);
-		roleCombination.setRole((RoleType) role);
+		roleCombination.setRole(role);
 		roleCombination.setOtherPlayer(otherPlayer);
-		roleCombination.setOtherRole((RoleType) otherRole);
+		roleCombination.setOtherRole(otherRole);
 		
 		return new AddRoleCombinationConstraintCommand(at, roleCombination);
 	}
@@ -215,7 +214,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
 						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
-					RoleType rt =  (RoleType) dlg.getFirstResult();
+					TopicType rt =  (TopicType) dlg.getFirstResult();
 
 					role = rt;
 					roleText.setText(role.getName());
@@ -254,7 +253,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
 						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
-					RoleType rt = (RoleType) dlg.getFirstResult();
+					TopicType rt = (TopicType) dlg.getFirstResult();
 					
 					otherRole = rt;
 					otherRoleText.setText(otherRole.getName());

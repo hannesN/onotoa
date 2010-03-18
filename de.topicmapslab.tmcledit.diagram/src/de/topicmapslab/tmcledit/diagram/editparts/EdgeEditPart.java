@@ -52,7 +52,6 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -270,7 +269,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 
 		for (RoleConstraint rc : at.getRoles()) {
 			SetRoleData d = data.clone();
-			d.role = (RoleType) rc.getType();
+			d.role =  rc.getType();
 			subMenu.add(new SetRoleAction(d));
 		}
 		result.add(subMenu);
