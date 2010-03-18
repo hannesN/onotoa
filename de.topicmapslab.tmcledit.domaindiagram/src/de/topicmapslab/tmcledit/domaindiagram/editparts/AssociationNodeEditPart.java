@@ -51,7 +51,6 @@ import org.eclipse.jface.viewers.TextCellEditor;
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editparts.IDirectEditable;
 import de.topicmapslab.tmcledit.diagram.policies.AbstractDirectEditPolicy;
-import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.editor.DomainEditDomain;
@@ -361,7 +360,7 @@ public class AssociationNodeEditPart extends NodeEditPart implements IDirectEdit
 	public List<IContributionItem> getItems() {
 		List<IContributionItem> result = new ArrayList<IContributionItem>();
 
-		MenuManager subMenu = new MenuManager("Set Association");
+		MenuManager subMenu = new MenuManager("Set Association Type");
 		SetTypeData data = new SetTypeData();
 		data.typedConstraint = getCastedModel().getAssociationConstraint();
 		data.editDomain = getEditDomain();
@@ -370,13 +369,17 @@ public class AssociationNodeEditPart extends NodeEditPart implements IDirectEdit
 		
 //		subMenu.add(new SetAssociationAction(data));
 		AssociationType at = (AssociationType) getCastedModel().getAssociationConstraint().getType();
+		List<SetTypeData> dataList = new ArrayList<SetTypeData>();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
 			if ( (tt instanceof AssociationType) && (!(tt.equals(at)))) {
 				SetTypeData d = data.clone();
 				d.type = tt;
-				subMenu.add(new SetTypeAction(d));
+				dataList.add(d);
 			}
 		}
+		
+		EditPartUtil.sortAndAddAction(dataList, subMenu);
+		
 		result.add(subMenu);
 
 		return result;

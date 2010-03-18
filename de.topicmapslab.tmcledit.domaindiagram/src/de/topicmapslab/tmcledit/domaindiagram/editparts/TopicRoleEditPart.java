@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.domaindiagram.editparts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -119,7 +120,7 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 	public List<IContributionItem> getItems() {
 		List<IContributionItem> result = new ArrayList<IContributionItem>();
 
-		MenuManager subMenu = new MenuManager("Set Role");
+		MenuManager subMenu = new MenuManager("Set Role Type");
 		SetRoleData data = new SetRoleData();
 		data.rpc = getCastedModel();
 		data.editDomain = getEditDomain();
@@ -127,13 +128,21 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 		data.schema = getTopicMapSchema();
 
 		subMenu.add(new SetRoleAction(data));
+		
+		List <SetRoleData> dataList = new ArrayList<SetRoleData>();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
 			if ( (tt instanceof RoleType) || (tt.getKind()==KindOfTopicType.TOPIC_TYPE) ) {
 				SetRoleData d = data.clone();
 				d.role = tt;
-				subMenu.add(new SetRoleAction(d));
+				dataList.add(d);
 			}
 		}
+		
+		Collections.sort(dataList);
+		
+		for (SetRoleData d : dataList)
+			subMenu.add(new SetRoleAction(d));
+		
 		result.add(subMenu);
 
 		return result;

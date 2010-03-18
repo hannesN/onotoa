@@ -6,7 +6,7 @@ import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-public class SetRoleData implements Cloneable {
+public class SetRoleData implements Cloneable, Comparable<SetRoleData> {
 	public TopicType role;
 	public TopicMapSchema schema;
 	public IOnotoaEditDomain editDomain;
@@ -26,5 +26,11 @@ public class SetRoleData implements Cloneable {
 		newData.rpc = this.rpc;
 		
 		return newData;
+	}
+
+
+	public int compareTo(SetRoleData o) {
+		return this.role.getName().toLowerCase().compareTo(
+				o.role.getName().toLowerCase());
 	}
 }

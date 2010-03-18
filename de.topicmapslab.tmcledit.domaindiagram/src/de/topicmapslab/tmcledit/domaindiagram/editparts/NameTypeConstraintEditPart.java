@@ -21,7 +21,6 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteTypedConstraintAction;
-import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -120,7 +119,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	public List<IContributionItem> getItems() {
 		List<IContributionItem> result = new ArrayList<IContributionItem>();
 
-		MenuManager subMenu = new MenuManager("Set Name");
+		MenuManager subMenu = new MenuManager("Set Name Type");
 		SetTypeData data = new SetTypeData();
 		data.typedConstraint = getCastedModel();
 		data.editDomain = getEditDomain();
@@ -129,15 +128,18 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 
 		// subMenu.add(new SetAssociationAction(data));
 		NameType nt = (NameType) getCastedModel().getType();
+		List<SetTypeData> dataList = new ArrayList<SetTypeData>();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
 			if ((tt instanceof NameType) && (!tt.equals(nt))) {
 				if (!alreadyUsed((TopicType) getCastedModel().eContainer(), (NameType) tt)) {
 					SetTypeData d = data.clone();
 					d.type = tt;
-					subMenu.add(new SetTypeAction(d));
+					dataList.add(d);
 				}
 			}
 		}
+		EditPartUtil.sortAndAddAction(dataList, subMenu);
+		
 		result.add(subMenu);
 
 		return result;
