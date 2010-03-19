@@ -10,7 +10,5 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.topicmapslab.tmcledit.model,
  de.topicmapslab.tmcledit.model.index,
  de.topicmapslab.tmcledit.model.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Import-Package: de.topicmapslab.tmcledit.model
