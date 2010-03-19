@@ -90,7 +90,7 @@ import de.topicmapslab.tmcledit.model.TypeNode;
 public class TMCLTopicMapBuilder {
 	private final TopicMapSchema topicMapSchema;
 	
-	// set to store the crerated roleconstraints and roleplayerconstraint
+	// set to store the created roleconstraints and roleplayerconstraint
 	private final Set<ConstraintWrapper> constraintSet = new HashSet<ConstraintWrapper>();
 
 //	private final Set<OccurrenceType> occTypes = new HashSet<OccurrenceType>();
@@ -481,7 +481,7 @@ public class TMCLTopicMapBuilder {
 		}
 		Locator itemId = baseLocator.resolve("#" + url);
 		t = topicTypeMap.get(type);
-		if (t != null)
+		if ((t != null) && (t.getParent()!=null))
 			return t;
 
 		t = topicMap.createTopicByItemIdentifier(itemId);
