@@ -12,7 +12,6 @@ package de.topicmapslab.tmcledit.diagram.editparts;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.draw2d.AbsoluteBendpoint;
