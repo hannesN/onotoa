@@ -20,9 +20,13 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
 public class TreeObject implements IAdaptable, Adapter {
 	public static final int NOT_SET = -1;
@@ -152,7 +156,11 @@ public class TreeObject implements IAdaptable, Adapter {
 	}
 
 	public void handleDoubleClick() {
-
+		try {
+	        getModelView().getViewSite().getWorkbenchWindow().getActivePage().showView(PropertyDetailView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
+        } catch (PartInitException e) {
+        	TmcleditEditPlugin.getPlugin().log(e);
+        }
 	}
 	
 	protected Adapter getAdapter() {
