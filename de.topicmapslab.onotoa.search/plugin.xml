@@ -13,6 +13,11 @@
             id="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
             name="List All Subject Identifiers">
       </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
+            id="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
+            name="No Identifier Topics">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -30,6 +35,11 @@
             <command
                   commandId="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
                   label="List All Subject &amp;Identifiers"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
+                  label="List Topics &amp;without Identifier"
                   style="push">
             </command>
          </menu>
