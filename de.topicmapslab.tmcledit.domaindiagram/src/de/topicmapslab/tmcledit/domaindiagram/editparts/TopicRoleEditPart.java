@@ -141,7 +141,7 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 		Collections.sort(dataList);
 		
 		for (SetRoleData d : dataList)
-			subMenu.add(new SetRoleAction(d));
+			subMenu.add(new SetRoleAction(d, true));
 		
 		result.add(subMenu);
 
