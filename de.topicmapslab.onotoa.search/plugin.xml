@@ -8,6 +8,11 @@
             id="de.topicmapslab.onotoa.search.use"
             name="Find Usage">
       </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
+            id="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
+            name="List All Subject Identifiers">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -20,6 +25,11 @@
                   commandId="de.topicmapslab.onotoa.search.use"
                   id="use"
                   label="Find &amp;Use"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
+                  label="List All Subject &amp;Identifiers"
                   style="push">
             </command>
          </menu>
