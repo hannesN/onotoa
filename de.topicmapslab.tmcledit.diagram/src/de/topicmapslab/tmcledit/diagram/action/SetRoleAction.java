@@ -16,22 +16,28 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.commands.DeleteRoleCommand;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 
 public class SetRoleAction extends AbstractCommandStackAction {
 
 	private SetRoleData data = new SetRoleData();
-
+	private boolean removeOldRCP;
+	
 	public SetRoleAction(SetRoleData data) {
+		this(data, false);
+	}
+	
+	public SetRoleAction(SetRoleData data, boolean removeOldRCP) {
 		super(data.editDomain.getEditingDomain().getCommandStack());
 		this.data = data;
+		this.removeOldRCP = removeOldRCP;
 		init();
 	}
 
 	private void init() {
-		String text = (data.role == null) ? "New Role..." : data.role
-				.getName();
+		String text = (data.role == null) ? "New Role..." : data.role.getName();
 		setText(text);
 	}
 
@@ -50,6 +56,16 @@ public class SetRoleAction extends AbstractCommandStackAction {
 		if (c != null)
 			cmd.append(c);
 
+	
+		if (removeOldRCP) {
+			// check if a roleplayer has a role and if so, remove it
+			RoleConstraint role = data.rpc.getRole();
+			if (role != null) {
+				AssociationType at = (AssociationType) role.eContainer();
+				cmd.append(new DeleteRoleCommand(at, role, false));
+			}
+		}
+		
 		c = new SetRoleConstraintCommand(data.rpc, data.rc);
 		cmd.append(c);
 
