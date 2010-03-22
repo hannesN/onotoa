@@ -5,13 +5,15 @@
  */
 package de.topicmapslab.tmcledit.model.tests;
 
+import junit.framework.Assert;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.OnoObject;
-import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.compare.OnoObjectComparator;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
 /**
  * <!-- begin-user-doc --> A test case for the model object '
@@ -19,7 +21,7 @@ import junit.framework.TestCase;
  * 
  * @generated
  */
-public abstract class OnoObjectTest extends TestCase {
+public class OnoObjectTest  {
 
 	/**
 	 * The fixture for this Ono Object test case. <!-- begin-user-doc --> <!--
@@ -28,6 +30,9 @@ public abstract class OnoObjectTest extends TestCase {
 	 * @generated
 	 */
 	protected OnoObject fixture = null;
+	private OnoObject testObject1;
+	private OnoObject testObject2;
+	private OnoObjectComparator comp;
 
 	/**
 	 * Constructs a new Ono Object test case with the given name. <!--
@@ -35,8 +40,8 @@ public abstract class OnoObjectTest extends TestCase {
 	 * 
 	 * @generated
 	 */
-	public OnoObjectTest(String name) {
-		super(name);
+	public OnoObjectTest() {
+		super();
 	}
 
 	/**
@@ -59,35 +64,31 @@ public abstract class OnoObjectTest extends TestCase {
 		return fixture;
 	}
 
-	public void testOnoObject() {
+	@Before
+	public void prepare() {
 
-		OnoObject testObject1 = ModelFactory.eINSTANCE.createTMCLConstruct();
-		OnoObject testObject2 = ModelFactory.eINSTANCE.createTMCLConstruct();
+		if (testObject1==null)
+			testObject1 = ModelFactory.eINSTANCE.createTMCLConstruct();
+		if (testObject2==null)
+			testObject2 = ModelFactory.eINSTANCE.createTMCLConstruct();
 
-		OnoObjectComparator comp = new OnoObjectComparator();
-
-		this.allTests(testObject1, testObject2, comp);
-
+		comp = new OnoObjectComparator();
 	}
 
-	/**
-	 * Includes id and null object test.
-	 * 
-	 * @param testObject1
-	 * @param testObject2
-	 * @param comp
-	 */
-
-	protected void allTests(OnoObject testObject1, OnoObject testObject2,
-			OnoObjectComparator comp) {
-
-		// NULL test
-		nullTest(testObject1, comp);
-
-		// set id
-		idTest(testObject1, testObject2, comp);
+	@After
+	public void shutdown() {
+		testObject1=null;
+		testObject2=null;
 	}
 
+	protected void setTestObject1(OnoObject testObject1) {
+		this.testObject1 = testObject1;
+	}
+	
+	protected void setTestObject2(OnoObject testObject2) {
+		this.testObject2 = testObject2;
+	}
+	
 	/**
 	 * Method compares Object with NULL and proves the equality of two NULL
 	 * Objects
@@ -97,8 +98,8 @@ public abstract class OnoObjectTest extends TestCase {
 	 * @param comp
 	 *            specific comparator
 	 */
-
-	protected void nullTest(OnoObject testObject1, OnoObjectComparator comp) {
+	@Test
+	public void nullTest() {
 
 		Assert.assertFalse(comp.equals(testObject1, null));
 		Assert.assertFalse(comp.equals(null, testObject1));
@@ -116,9 +117,8 @@ public abstract class OnoObjectTest extends TestCase {
 	 * @param comp
 	 *            specific comparator
 	 */
-
-	protected void idTest(OnoObject testObject1, OnoObject testObject2,
-			OnoObjectComparator comp) {
+	@Test
+	public void idTest() {
 
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject1.setId(testObject2.getId());

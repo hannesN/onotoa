@@ -5,13 +5,15 @@
  */
 package de.topicmapslab.tmcledit.model.tests;
 
+import junit.framework.Assert;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
-
-import junit.framework.Assert;
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc --> A test case for the model object '
@@ -19,60 +21,21 @@ import junit.textui.TestRunner;
  * 
  * @generated
  */
-public class TopicTypeTest extends TMCLConstructTest {
+public class TopicTypeTest  {
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(TopicTypeTest.class);
+	private TopicType testObject1;
+	private TopicType testObject2;
+	private TopicTypeComparator comp;
+
+	@Before
+	public void startUp() {
+		testObject1 = ModelFactory.eINSTANCE.createTopicType();
+		testObject2 = ModelFactory.eINSTANCE.createTopicType();
+		
+		testObject1.setId(testObject2.getId());
+		comp = new TopicTypeComparator();
 	}
-
-	/**
-	 * Constructs a new Topic Type test case with the given name. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public TopicTypeTest(String name) {
-		super(name);
-	}
-
-	/**
-	 * Returns the fixture for this Topic Type test case. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	protected TopicType getFixture() {
-		return (TopicType) fixture;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(ModelFactory.eINSTANCE.createTopicType());
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-
+	
 	public void testTopicType() {
 
 		TopicType testObject1 = ModelFactory.eINSTANCE.createTopicType();
@@ -80,7 +43,7 @@ public class TopicTypeTest extends TMCLConstructTest {
 
 		TopicTypeComparator comp = new TopicTypeComparator();
 
-		super.allTests(testObject1, testObject2, comp);
+//		super.allTests(testObject1, testObject2, comp);
 
 		// set abstract
 		testAbstract(testObject1, testObject2, comp);
@@ -92,7 +55,7 @@ public class TopicTypeTest extends TMCLConstructTest {
 		idTypeTest(testObject1, testObject2, comp);
 
 		// set isa
-		isaTest(testObject1, testObject2, comp);
+//		isaTest(testObject1, testObject2, comp);
 		
 		// set 
 
@@ -105,9 +68,8 @@ public class TopicTypeTest extends TMCLConstructTest {
 	 * @param testObject2
 	 * @param comp
 	 */
-	
-	protected void isaTest(TopicType testObject1, TopicType testObject2,
-			TopicTypeComparator comp) {
+	@Test
+	public void isaTest() {
 
 		TopicType topicType1 = ModelFactory.eINSTANCE.createTopicType();
 		TopicType topicType2 = ModelFactory.eINSTANCE.createTopicType();
@@ -127,7 +89,7 @@ public class TopicTypeTest extends TMCLConstructTest {
 		// testObject2.getIsa().add(topicType3);
 		testObject2.getIsa().add(topicType4);
 		topicType4.setId(topicType3.getId());
-		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		Assert.assertTrue("Checked isa changes", comp.equals(testObject1, testObject2));
 
 		topicType3.setName("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
