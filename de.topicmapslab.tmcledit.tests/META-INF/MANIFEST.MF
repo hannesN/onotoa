@@ -11,5 +11,5 @@ Export-Package: de.topicmapslab.tmcledit.model.tests
 Require-Bundle: org.eclipse.core.runtime,
  de.topicmapslab.tmcledit;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.junit;visibility:=reexport
+ org.junit4;bundle-version="4.5.0"
 Bundle-ActivationPolicy: lazy
