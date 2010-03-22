@@ -80,11 +80,7 @@ public class TypeNodeTest extends NodeTest {
 		
 		TypeNodeComparator comp = new TypeNodeComparator();
 		
-		// NULL test
-		super.nullTest(testObject1, comp);
-
-		// set id
-		super.idTest(testObject1, testObject2, comp);
+		super.allTests(testObject1, testObject2, comp);
 		
 		// set image
 		testObject1.setImage("TMCL");
@@ -92,9 +88,6 @@ public class TypeNodeTest extends NodeTest {
 		testObject2.setImage("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
-		// set posX and posY
-		super.positionTest(testObject1, testObject2, comp);
-		
 		// TODO set Topic Type
 		TopicType type = ModelFactory.eINSTANCE.createTopicType();
 		

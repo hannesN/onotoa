@@ -5,6 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.tests;
 
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.compare.TMCLConstructComperator;
@@ -81,31 +82,84 @@ public class TMCLConstructTest extends OnoObjectTest {
 
 		TMCLConstructComperator comp = new TMCLConstructComperator();
 
-		// NULL test
-		super.nullTest(testObject1, comp);
+		this.allTests(testObject1, testObject2, comp);
 
-		// set id
-		super.idTest(testObject1, testObject2, comp);
+	}
+
+	/**
+	 * Includes super class tests and comment, description, see_also and
+	 * annotation test.
+	 * 
+	 * 
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
+	 */
+
+	protected void allTests(TMCLConstruct testObject1,
+			TMCLConstruct testObject2, TMCLConstructComperator comp) {
+
+		super.allTests(testObject1, testObject2, comp);
 
 		// set comments
-		testObject1.setComment("TMCL");
-		Assert.assertFalse(comp.equals(testObject1, testObject2));
-		testObject2.setComment("TMCL");
-		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		commentTest(testObject1, testObject2, comp);
 
 		// set descriptions
-		testObject1.setDescription("TMCL");
-		Assert.assertFalse(comp.equals(testObject1, testObject2));
-		testObject2.setDescription("TMCL");
-		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		descriptionTest(testObject1, testObject2, comp);
 
 		// set see_also
+		seeAlsoTest(testObject1, testObject2, comp);
+
+		// set annotations
+		annotationTest(testObject1, testObject2, comp);
+	}
+
+	protected void seeAlsoTest(TMCLConstruct testObject1,
+			TMCLConstruct testObject2, TMCLConstructComperator comp) {
 		testObject1.setSee_also("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setSee_also("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-
-		// TODO set annotations
 	}
 
+	protected void descriptionTest(TMCLConstruct testObject1,
+			TMCLConstruct testObject2, TMCLConstructComperator comp) {
+		testObject1.setDescription("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.setDescription("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+	}
+
+	protected void commentTest(TMCLConstruct testObject1,
+			TMCLConstruct testObject2, TMCLConstructComperator comp) {
+		testObject1.setComment("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.setComment("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+	}
+
+	protected void annotationTest(TMCLConstruct testObject1,
+			TMCLConstruct testObject2, TMCLConstructComperator comp) {
+
+		Annotation annotation1 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation2 = ModelFactory.eINSTANCE.createAnnotation();
+
+		// add annotation to testObject1
+		annotation1.setKey("TMCL");
+		annotation1.setValue("TMCL");
+		testObject1.getAnnotations().add(annotation1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// add a different annotation to testObject2
+		annotation2.setId(annotation1.getId());
+		annotation2.setKey("TMC");
+		annotation2.setValue("TMC");
+		testObject2.getAnnotations().add(annotation2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make both annotations the same
+		annotation2.setKey("TMCL");
+		annotation2.setValue("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+	}
 } // TMCLConstructTest

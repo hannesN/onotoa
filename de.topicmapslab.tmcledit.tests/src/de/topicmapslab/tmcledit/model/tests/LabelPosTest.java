@@ -13,16 +13,16 @@ import junit.framework.Assert;
 import junit.textui.TestRunner;
 
 /**
- * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Label Pos</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A test case for the model object '
+ * <em><b>Label Pos</b></em>'. <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class LabelPosTest extends OnoObjectTest {
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static void main(String[] args) {
@@ -30,9 +30,9 @@ public class LabelPosTest extends OnoObjectTest {
 	}
 
 	/**
-	 * Constructs a new Label Pos test case with the given name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Constructs a new Label Pos test case with the given name. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public LabelPosTest(String name) {
@@ -40,19 +40,19 @@ public class LabelPosTest extends OnoObjectTest {
 	}
 
 	/**
-	 * Returns the fixture for this Label Pos test case.
-	 * <!-- begin-user-doc -->
+	 * Returns the fixture for this Label Pos test case. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected LabelPos getFixture() {
-		return (LabelPos)fixture;
+		return (LabelPos) fixture;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
@@ -62,8 +62,8 @@ public class LabelPosTest extends OnoObjectTest {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
@@ -71,33 +71,42 @@ public class LabelPosTest extends OnoObjectTest {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
-	
-	public void testLabelPos(){
-		
+
+	public void testLabelPos() {
+
 		LabelPos testObject1 = ModelFactory.eINSTANCE.createLabelPos();
 		LabelPos testObject2 = ModelFactory.eINSTANCE.createLabelPos();
-		
-		LabelPosComparator comp = new LabelPosComparator();
-		
-		// NULL test
-		super.nullTest(testObject1, comp);
 
-		// set id
-		super.idTest(testObject1, testObject2, comp);
-		
+		LabelPosComparator comp = new LabelPosComparator();
+
+		this.allTests(testObject1, testObject2, comp);
+
+	}
+
+	/**
+	 * Includes super class tests and posX and posY test.
+	 * 
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
+	 */
+
+	protected void allTests(LabelPos testObject1, LabelPos testObject2,
+			LabelPosComparator comp) {
+
+		super.allTests(testObject1, testObject2, comp);
+
 		// set posX DEFAULT = 0
 		testObject1.setPosX(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setPosX(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		// set posY DEFAULT = 0
 		testObject1.setPosY(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setPosY(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
 	}
-	                           
 
-} //LabelPosTest
+} // LabelPosTest

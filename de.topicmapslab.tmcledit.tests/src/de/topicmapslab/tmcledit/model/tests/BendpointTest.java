@@ -13,16 +13,16 @@ import junit.framework.Assert;
 import junit.textui.TestRunner;
 
 /**
- * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Bendpoint</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A test case for the model object '
+ * <em><b>Bendpoint</b></em>'. <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class BendpointTest extends OnoObjectTest {
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static void main(String[] args) {
@@ -30,9 +30,9 @@ public class BendpointTest extends OnoObjectTest {
 	}
 
 	/**
-	 * Constructs a new Bendpoint test case with the given name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Constructs a new Bendpoint test case with the given name. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public BendpointTest(String name) {
@@ -40,19 +40,19 @@ public class BendpointTest extends OnoObjectTest {
 	}
 
 	/**
-	 * Returns the fixture for this Bendpoint test case.
-	 * <!-- begin-user-doc -->
+	 * Returns the fixture for this Bendpoint test case. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected Bendpoint getFixture() {
-		return (Bendpoint)fixture;
+		return (Bendpoint) fixture;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
@@ -62,8 +62,8 @@ public class BendpointTest extends OnoObjectTest {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
@@ -72,32 +72,41 @@ public class BendpointTest extends OnoObjectTest {
 		setFixture(null);
 	}
 
-public void testNode(){
-		
+	public void testNode() {
+
 		Bendpoint testObject1 = ModelFactory.eINSTANCE.createBendpoint();
 		Bendpoint testObject2 = ModelFactory.eINSTANCE.createBendpoint();
-		
-		BendpointComparator comp = new BendpointComparator();
-		
-		// NULL test
-		super.nullTest(testObject1, comp);
 
-		// set id
-		super.idTest(testObject1, testObject2, comp);
-		
+		BendpointComparator comp = new BendpointComparator();
+
+		this.allTests(testObject1, testObject2, comp);
+
+	}
+
+	/**
+	 * Includes super class tests and posX and posY tests.
+	 * 
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
+	 */
+
+	protected void allTests(Bendpoint testObject1, Bendpoint testObject2,
+			BendpointComparator comp) {
+
+		super.allTests(testObject1, testObject2, comp);
+
 		// set posX DEFAULT = 0
 		testObject1.setPosX(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setPosX(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		// set posY DEFAULT = 0
 		testObject1.setPosY(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setPosY(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
 	}
 
-	
-} //BendpointTest
+} // BendpointTest

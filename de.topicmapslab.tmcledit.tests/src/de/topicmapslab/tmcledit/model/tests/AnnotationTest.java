@@ -79,18 +79,28 @@ public class AnnotationTest extends OnoObjectTest {
 
 		AnnotationComparator comp = new AnnotationComparator();
 
-		// NULL test
-		super.nullTest(testObject1, comp);
+		this.allTests(testObject1, testObject2, comp);
+	}
 
-		// set id
-		super.idTest(testObject1, testObject2, comp);
-		
+	/**
+	 * Includes all super class tests and key and value test.
+	 * 
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
+	 */
+
+	protected void allTests(Annotation testObject1, Annotation testObject2,
+			AnnotationComparator comp) {
+
+		super.allTests(testObject1, testObject2, comp);
+
 		// set key
 		testObject1.setKey("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setKey("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		// set value
 		testObject1.setValue("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));

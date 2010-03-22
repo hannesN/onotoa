@@ -80,10 +80,10 @@ public class EdgeTest extends OnoObjectTest {
 		EdgeComparator comp = new EdgeComparator();
 
 		// NULL test
-		super.nullTest(testObject1, comp);
+		nullTest(testObject1, comp);
 
 		// set id
-		super.idTest(testObject1, testObject2, comp);
+		idTest(testObject1, testObject2, comp);
 		
 
 	}

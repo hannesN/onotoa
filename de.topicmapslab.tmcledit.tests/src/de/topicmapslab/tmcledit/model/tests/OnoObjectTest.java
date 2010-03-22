@@ -66,40 +66,60 @@ public abstract class OnoObjectTest extends TestCase {
 
 		OnoObjectComparator comp = new OnoObjectComparator();
 
+		this.allTests(testObject1, testObject2, comp);
+
+	}
+
+	/**
+	 * Includes id and null object test.
+	 * 
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
+	 */
+
+	protected void allTests(OnoObject testObject1, OnoObject testObject2,
+			OnoObjectComparator comp) {
+
 		// NULL test
 		nullTest(testObject1, comp);
 
 		// set id
 		idTest(testObject1, testObject2, comp);
-		
 	}
 
 	/**
-	 * Method compares Object with NULL and proves the equality of two NULL Objects 
+	 * Method compares Object with NULL and proves the equality of two NULL
+	 * Objects
 	 * 
-	 * @param testObject1 Object #1
-	 * @param comp specific comparator
+	 * @param testObject1
+	 *            Object #1
+	 * @param comp
+	 *            specific comparator
 	 */
-	
+
 	protected void nullTest(OnoObject testObject1, OnoObjectComparator comp) {
-		
+
 		Assert.assertFalse(comp.equals(testObject1, null));
 		Assert.assertFalse(comp.equals(null, testObject1));
 		Assert.assertTrue(comp.equals(null, null));
 	}
 
 	/**
-	 * Method compares two objects with different IDs in the first run and
-	 * set equal IDs in the second.
+	 * Method compares two objects with different IDs in the first run and set
+	 * equal IDs in the second.
 	 * 
-	 * @param testObject1 OnoObject #1
-	 * @param testObject2 OnoObject #2
-	 * @param comp specific comparator
+	 * @param testObject1
+	 *            OnoObject #1
+	 * @param testObject2
+	 *            OnoObject #2
+	 * @param comp
+	 *            specific comparator
 	 */
-	
+
 	protected void idTest(OnoObject testObject1, OnoObject testObject2,
 			OnoObjectComparator comp) {
-	
+
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject1.setId(testObject2.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
