@@ -79,34 +79,40 @@ public class CommentTest extends NodeTest {
 
 		CommentComparator comp = new CommentComparator();
 
-		// NULL test
-		super.nullTest(testObject1, comp);
+		this.allTests(testObject1, testObject2, comp);
 
-		// set id
-		super.idTest(testObject1, testObject2, comp);
+	}
 
-		// set posX and posY
-		super.positionTest(testObject1, testObject2, comp);
-		
+	/**
+	 * Includes super class tests and content, height and width test.
+	 * 
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
+	 */
+
+	protected void allTests(Comment testObject1, Comment testObject2,
+			CommentComparator comp) {
+
+		super.allTests(testObject1, testObject2, comp);
+
 		// set content
 		testObject1.setContent("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setContent("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		// set height
 		testObject1.setHeight(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setHeight(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		// set width
 		testObject1.setWidth(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setWidth(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
-		
 	}
 
 } // CommentTest

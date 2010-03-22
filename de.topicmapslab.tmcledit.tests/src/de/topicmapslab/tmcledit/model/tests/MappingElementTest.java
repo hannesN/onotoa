@@ -81,12 +81,24 @@ public class MappingElementTest extends OnoObjectTest {
 
 		MappingElementComparator comp = new MappingElementComparator();
 
-		// NULL test
-		super.nullTest(testObject1, comp);
+		this.allTests(testObject1, testObject2, comp);
 
-		// set id
-		super.idTest(testObject1, testObject2, comp);
+	}
 
+	/**
+	 * Includes super class tests and key and value test.
+	 * 
+	 * 
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
+	 */
+	
+	protected void allTests(MappingElement testObject1,
+			MappingElement testObject2, MappingElementComparator comp) {
+
+		super.allTests(testObject1, testObject2, comp);
+		
 		// set key
 		testObject1.setKey("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
@@ -98,7 +110,6 @@ public class MappingElementTest extends OnoObjectTest {
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setValue("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-
 	}
 
 } // MappingElementTest

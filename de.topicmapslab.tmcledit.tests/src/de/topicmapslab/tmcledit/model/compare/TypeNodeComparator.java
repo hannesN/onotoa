@@ -29,7 +29,7 @@ public class TypeNodeComparator extends NodeComparator {
 		if (super.equals(o1, o2) == false)
 			return false;
 		
-		if (super.stringCompare(o1.getImage(), o2.getImage()) == false)
+		if (stringCompare(o1.getImage(), o2.getImage()) == false)
 			return false;
 
 		return true;

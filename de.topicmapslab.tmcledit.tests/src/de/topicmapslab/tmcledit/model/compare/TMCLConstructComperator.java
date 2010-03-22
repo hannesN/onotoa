@@ -31,17 +31,25 @@ public class TMCLConstructComperator extends OnoObjectComparator {
 		if (super.equals(o1, o2) == false)
 			return false;
 
-		if (super.stringCompare(o1.getComment(), o2.getComment()) == false)
+		if (stringCompare(o1.getComment(), o2.getComment()) == false)
 			return false;
 
-		if (super.stringCompare(o1.getDescription(), o2.getDescription()) == false)
+		if (stringCompare(o1.getDescription(), o2.getDescription()) == false)
 			return false;
 
-		if (super.stringCompare(o1.getSee_also(), o2.getSee_also()) == false)
+		if (stringCompare(o1.getSee_also(), o2.getSee_also()) == false)
 			return false;
-//
-//		if (super.objCompare(o1.getAnnotations(), o2.getAnnotations()) == false)
-//			return false;
+
+		if (o1.getAnnotations().size() == o2.getAnnotations().size() == false)
+			return false;
+
+		AnnotationComparator comp = new AnnotationComparator();
+
+		for (int i = 0; i < o1.getAnnotations().size(); i++) {
+			if (comp.equals(o1.getAnnotations().get(i), o2.getAnnotations()
+					.get(i)) == false)
+				return false;
+		}
 		return true;
 	}
 } // TMCLConstructTest

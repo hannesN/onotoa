@@ -79,26 +79,39 @@ public class NodeTest extends OnoObjectTest {
 
 		NodeComparator comp = new NodeComparator();
 
-		// NULL test
-		super.nullTest(testObject1, comp);
-
-		// set id
-		super.idTest(testObject1, testObject2, comp);
-		
-		// position test for X and Y value
-		positionTest(testObject1, testObject2, comp);
+		this.allTests(testObject1, testObject2, comp);
 
 	}
 
 	/**
-	 * Method inserts values for the X and Y position which are different 
-	 * from the default ones for assertion tests.
+	 * Includes super class tests and posX and posY test.
 	 * 
-	 * @param testObject1 Node #1
-	 * @param testObject2 Node #2
-	 * @param comp specific comparator
+	 * @param testObject1
+	 * @param testObject2
+	 * @param comp
 	 */
-	
+
+	protected void allTests(Node testObject1, Node testObject2,
+			NodeComparator comp) {
+
+		super.allTests(testObject1, testObject2, comp);
+
+		// position test for X and Y value
+		positionTest(testObject1, testObject2, comp);
+	}
+
+	/**
+	 * Method inserts values for the X and Y position which are different from
+	 * the default ones for assertion tests.
+	 * 
+	 * @param testObject1
+	 *            Node #1
+	 * @param testObject2
+	 *            Node #2
+	 * @param comp
+	 *            specific comparator
+	 */
+
 	protected void positionTest(Node testObject1, Node testObject2,
 			NodeComparator comp) {
 

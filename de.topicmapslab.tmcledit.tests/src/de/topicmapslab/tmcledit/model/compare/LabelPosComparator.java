@@ -29,10 +29,10 @@ public class LabelPosComparator extends OnoObjectComparator {
 		if (super.equals(o1, o2) == false)
 			return false;
 
-		if (super.intCompare(o1.getPosX(), o2.getPosX()) == false)
+		if (intCompare(o1.getPosX(), o2.getPosX()) == false)
 			return false;
 
-		if (super.intCompare(o1.getPosY(), o2.getPosY()) == false)
+		if (intCompare(o1.getPosY(), o2.getPosY()) == false)
 			return false;
 
 		return true;

@@ -29,10 +29,10 @@ public class AnnotationComparator extends OnoObjectComparator {
 		if (super.equals(o1, o2) == false)
 			return false;
 
-		if (super.stringCompare(o1.getKey(), o2.getKey()) == false)
+		if (stringCompare(o1.getKey(), o2.getKey()) == false)
 			return false;
 
-		if (super.stringCompare(o1.getValue(), o2.getValue()) == false)
+		if (stringCompare(o1.getValue(), o2.getValue()) == false)
 			return false;
 
 		return true;

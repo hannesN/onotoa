@@ -29,13 +29,13 @@ public class CommentComparator extends NodeComparator {
 		if (super.equals(o1, o2) == false)
 			return false;
 
-		if (super.stringCompare(o1.getContent(), o2.getContent()) == false)
+		if (stringCompare(o1.getContent(), o2.getContent()) == false)
 			return false;
 
-		if (super.intCompare(o1.getHeight(), o2.getHeight()) == false)
+		if (intCompare(o1.getHeight(), o2.getHeight()) == false)
 			return false;
 
-		if (super.intCompare(o1.getWidth(), o2.getWidth()) == false)
+		if (intCompare(o1.getWidth(), o2.getWidth()) == false)
 			return false;
 
 		return true;
