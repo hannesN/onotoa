@@ -15,7 +15,6 @@ import de.topicmapslab.tmcledit.model.compare.OnoObjectComparator;
 
 public class OnoObjectTest {
 
-	protected OnoObject fixture = null;
 	private OnoObject testObject1;
 	private OnoObject testObject2;
 	private OnoObjectComparator comp;
@@ -38,13 +37,8 @@ public class OnoObjectTest {
 	}
 
 	/**
-	 * Method compares Object with NULL and proves the equality of two NULL
+	 * Test compares Object with NULL and proves the equality of two NULL
 	 * Objects
-	 * 
-	 * @param testObject1
-	 *            Object #1
-	 * @param comp
-	 *            specific comparator
 	 */
 
 	@Test
@@ -56,15 +50,7 @@ public class OnoObjectTest {
 	}
 
 	/**
-	 * Method compares two objects with different IDs in the first run and set
-	 * equal IDs in the second.
-	 * 
-	 * @param testObject1
-	 *            OnoObject #1
-	 * @param testObject2
-	 *            OnoObject #2
-	 * @param comp
-	 *            specific comparator
+	 * Test compares two objects with different and same IDs.
 	 */
 
 	@Test
