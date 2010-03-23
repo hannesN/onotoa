@@ -22,43 +22,19 @@ import de.topicmapslab.tmcledit.model.compare.TMCLConstructComperator;
  * @generated
  */
 
-public class TMCLConstructTest extends OnoObjectTest {
+public class TMCLConstructTest {
 
 	private TMCLConstruct testObject1;
 	private TMCLConstruct testObject2;
 	private TMCLConstructComperator comp;
 
-	
-	@Before
-	public void prepare() {
-
-		testObject1 = ModelFactory.eINSTANCE.createTMCLConstruct();
-		super.setTestObject1(testObject1);
-		
-		testObject2 = ModelFactory.eINSTANCE.createTMCLConstruct();
-		super.setTestObject1(testObject2);
-		
-		testObject1.setId(testObject2.getId());
-		comp = new TMCLConstructComperator();
-	}
-	
-	protected void setTestObject1(TMCLConstruct testObject1) {
-		this.testObject1 = testObject1;
-		super.setTestObject1(testObject1);
-	}
-	
-	protected void setTestObject2(TMCLConstruct testObject2) {
-		this.testObject2 = testObject2;
-		super.setTestObject2(testObject2);
-	}
-
 	@Test
 	public void checkId() {
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		testObject1 = ModelFactory.eINSTANCE.createTMCLConstruct();
 		testObject2 = ModelFactory.eINSTANCE.createTMCLConstruct();
-		
+
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 	}
 
