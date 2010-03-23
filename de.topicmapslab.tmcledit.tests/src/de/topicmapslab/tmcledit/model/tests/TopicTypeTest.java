@@ -139,8 +139,8 @@ public class TopicTypeTest {
 	}
 
 	/**
-	 * Method compares objects with different and equal ID types. Default ID
-	 * type: identifier.
+	 * Test compares objects with different and equal ID types. Default ID type:
+	 * identifier.
 	 */
 
 	@Test
@@ -163,11 +163,11 @@ public class TopicTypeTest {
 	}
 
 	/**
-	 * Method compares objects with different and equal names.
+	 * Test compares objects with different and equal names.
 	 */
 
 	@Test
-	public void testName() {
+	public void nameTest() {
 
 		testObject1.setId(testObject2.getId());
 
@@ -178,11 +178,11 @@ public class TopicTypeTest {
 	}
 
 	/**
-	 * Method compares two objects with different and equal abstract booleans.
+	 * Test compares two objects with different and equal abstract booleans.
 	 */
 
 	@Test
-	public void testAbstract() {
+	public void abstractTest() {
 
 		testObject1.setId(testObject2.getId());
 
@@ -194,7 +194,7 @@ public class TopicTypeTest {
 	}
 
 	/**
-	 * Method compares objects depending on their isa lists.
+	 * Test compares objects depending on their isa lists.
 	 */
 
 	@Test
@@ -227,12 +227,10 @@ public class TopicTypeTest {
 
 		// edit name of list entry #2
 		topicType3.setName("TMCL");
-		System.out.println(testObject1.getIsa().get(2).getName());
-		System.out.println(testObject2.getIsa().get(2).getName());
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		topicType4.setName("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		// edit ID type of list entry #2
 		TopicId topicId = TopicId.SUBJECT_IDENTIFIER;
 		topicType3.setIdType(topicId);
@@ -242,7 +240,7 @@ public class TopicTypeTest {
 	}
 
 	/**
-	 * Method compares objects depending on their ako lists.
+	 * Test compares objects depending on their ako lists.
 	 */
 
 	@Test
@@ -255,35 +253,40 @@ public class TopicTypeTest {
 		TopicType topicType3 = ModelFactory.eINSTANCE.createTopicType();
 		TopicType topicType4 = ModelFactory.eINSTANCE.createTopicType();
 
+		// add same entry to both list
 		testObject1.getAko().add(topicType1);
 		testObject2.getAko().add(topicType1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
+		// add 2 new entries to list 1
 		testObject1.getAko().add(topicType2);
 		testObject1.getAko().add(topicType3);
 		// testObject1.getAko().add(topicType4);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
+		// make both lists the same
 		testObject2.getAko().add(topicType2);
 		// testObject2.getAko().add(topicType3);
 		testObject2.getAko().add(topicType4);
 		topicType4.setId(topicType3.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
+		// edit name of list entry #2
 		topicType3.setName("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		topicType4.setName("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
+		// edit ID type of list entry #2
 		TopicId topicId = TopicId.SUBJECT_IDENTIFIER;
 		topicType3.setIdType(topicId);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		topicType4.setIdType(topicId);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 	}
-	
+
 	/**
-	 * Method compares objects depending on their overlap lists.
+	 * Test compares objects depending on their overlap lists.
 	 */
 
 	@Test
@@ -296,26 +299,31 @@ public class TopicTypeTest {
 		TopicType topicType3 = ModelFactory.eINSTANCE.createTopicType();
 		TopicType topicType4 = ModelFactory.eINSTANCE.createTopicType();
 
+		// add same entry to both list
 		testObject1.getOverlap().add(topicType1);
 		testObject2.getOverlap().add(topicType1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
+		// add 2 new entries to list 1
 		testObject1.getOverlap().add(topicType2);
 		testObject1.getOverlap().add(topicType3);
 		// testObject1.getOverlap().add(topicType4);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
+		// make both lists the same
 		testObject2.getOverlap().add(topicType2);
 		// testObject2.getOverlap().add(topicType3);
 		testObject2.getOverlap().add(topicType4);
 		topicType4.setId(topicType3.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
+		// edit name of list entry #2
 		topicType3.setName("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		topicType4.setName("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
+		// edit ID type of list entry #2
 		TopicId topicId = TopicId.SUBJECT_IDENTIFIER;
 		topicType3.setIdType(topicId);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
@@ -323,5 +331,49 @@ public class TopicTypeTest {
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 	}
 
+	/**
+	 * Test compares two objects depending on their locator list
+	 */
+
+	@Test
+	public void locatorTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		testObject1.getLocators().add("TMCL");
+		testObject1.getLocators().add("TMQL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getLocators().add("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getLocators().add("TMQL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
+
+	/**
+	 * Test compares two objects depending on their identifier list
+	 */
+
+	@Test
+	public void identifierTest() {
+		
+		testObject1.setId(testObject2.getId());
+		
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		testObject1.getIdentifiers().add("TMCL");
+		testObject1.getIdentifiers().add("TMQL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getIdentifiers().add("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getIdentifiers().add("TMQL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		
+	}
+	
+	@Test
+	public void test (){
+		
+	}
 
 } // TopicTypeTest
