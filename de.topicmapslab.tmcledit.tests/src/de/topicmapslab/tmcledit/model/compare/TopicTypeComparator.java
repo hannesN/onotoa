@@ -5,9 +5,9 @@
  */
 
 package de.topicmapslab.tmcledit.model.compare;
+
 import org.eclipse.emf.common.util.EList;
 import de.topicmapslab.tmcledit.model.TopicType;
-
 
 /**
  * <!-- begin-user-doc --> A test case for the model object '
@@ -55,35 +55,35 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 		} else
 			return false;
 
+		if (stringListCompare(o1.getLocators(), o2.getLocators()) == false)
+			return false;
+
+		if (stringListCompare(o1.getIdentifiers(), o2.getIdentifiers()) == false)
+			return false;
+		
 		return true;
 
 	}
 
 	/**
-	 * Compares two lists with topic type entries 
+	 * Compares two lists with topic type entries
 	 * 
 	 * @param list1
 	 * @param list2
 	 * @return boolean result of the compare
 	 */
-	
+
 	protected boolean topicTypeListCompare(EList<TopicType> list1,
 			EList<TopicType> list2) {
 
-		if (list1.size() == 0)
-			return true;
-
-		// System.out.println(list1.size());
 		TopicTypeComparator comp = new TopicTypeComparator();
 
 		for (int i = 0; i < list1.size(); i++) {
 
 			if (comp.equals(list1.get(i), list2.get(i)) == false) {
-				System.out.println("i= " + i);
 				return false;
 			}
 		}
-		System.out.println("lala");
 		return true;
 	}
 

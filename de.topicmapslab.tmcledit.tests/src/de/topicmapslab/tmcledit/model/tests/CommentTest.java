@@ -72,7 +72,7 @@ public class CommentTest extends NodeTest {
 		setFixture(null);
 	}
 
-	public void testComent() {
+	public void testComment() {
 
 		Comment testObject1 = ModelFactory.eINSTANCE.createComment();
 		Comment testObject2 = ModelFactory.eINSTANCE.createComment();
