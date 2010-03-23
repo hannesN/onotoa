@@ -5,6 +5,8 @@
  */
 package de.topicmapslab.tmcledit.model.tests;
 
+import java.util.ArrayList;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -57,7 +59,8 @@ public class TopicTypeTest  {
 		// set isa
 //		isaTest(testObject1, testObject2, comp);
 		
-		// set 
+		// set ako
+		
 
 	}
 
@@ -68,6 +71,14 @@ public class TopicTypeTest  {
 	 * @param testObject2
 	 * @param comp
 	 */
+	
+	private ArrayList<TopicType> lala(){
+
+		ArrayList<TopicType> typeList = new ArrayList<TopicType>();
+		
+		return typeList;
+	}
+	
 	@Test
 	public void isaTest() {
 
