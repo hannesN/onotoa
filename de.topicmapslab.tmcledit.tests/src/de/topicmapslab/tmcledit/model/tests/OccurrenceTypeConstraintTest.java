@@ -18,56 +18,12 @@ import junit.textui.TestRunner;
  */
 public class OccurrenceTypeConstraintTest extends AbstractTypedCardinalityConstraintTest {
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(OccurrenceTypeConstraintTest.class);
-	}
-
-	/**
-	 * Constructs a new Occurrence Type Constraint test case with the given name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public OccurrenceTypeConstraintTest(String name) {
 		super(name);
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Returns the fixture for this Occurrence Type Constraint test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected OccurrenceTypeConstraint getFixture() {
-		return (OccurrenceTypeConstraint)fixture;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(ModelFactory.eINSTANCE.createOccurrenceTypeConstraint());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
+	
+	
 
 } //OccurrenceTypeConstraintTest
