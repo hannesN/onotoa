@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
@@ -357,9 +358,9 @@ public class TopicTypeTest {
 
 	@Test
 	public void identifierTest() {
-		
+
 		testObject1.setId(testObject2.getId());
-		
+
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 		testObject1.getIdentifiers().add("TMCL");
 		testObject1.getIdentifiers().add("TMQL");
@@ -368,12 +369,63 @@ public class TopicTypeTest {
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.getIdentifiers().add("TMQL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
-	}
-	
-	@Test
-	public void test (){
-		
+
 	}
 
+	@Test
+	public void occurrenceConstraintsTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		OccurrenceTypeConstraint oTypeConstraint1 = ModelFactory.eINSTANCE
+				.createOccurrenceTypeConstraint();
+		OccurrenceTypeConstraint oTypeConstraint2 = ModelFactory.eINSTANCE
+				.createOccurrenceTypeConstraint();
+		OccurrenceTypeConstraint oTypeConstraint3 = ModelFactory.eINSTANCE
+				.createOccurrenceTypeConstraint();
+		OccurrenceTypeConstraint oTypeConstraint4 = ModelFactory.eINSTANCE
+				.createOccurrenceTypeConstraint();
+
+		// add the same OccurrenceTypeConstraint into both lists
+		testObject1.getOccurrenceConstraints().add(oTypeConstraint1);
+		testObject2.getOccurrenceConstraints().add(oTypeConstraint1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// add two OccurrenceTypeConstraint into list #1
+		testObject1.getOccurrenceConstraints().add(oTypeConstraint2);
+		testObject1.getOccurrenceConstraints().add(oTypeConstraint3);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// equal list lengths but entry #2 is different
+		testObject2.getOccurrenceConstraints().add(oTypeConstraint2);
+		testObject2.getOccurrenceConstraints().add(oTypeConstraint4);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make list entry #2 equal
+		oTypeConstraint4.setId(oTypeConstraint3.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMax of list entry #2
+		oTypeConstraint3.setCardMax("5");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		oTypeConstraint4.setCardMax("5");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit see_Also of list entry #2
+		oTypeConstraint3.setSee_also("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		oTypeConstraint4.setSee_also("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// set topic types of list entry #2
+		TopicType topicType1 = ModelFactory.eINSTANCE.createTopicType();
+		TopicType topicType2 = ModelFactory.eINSTANCE.createTopicType();
+
+		oTypeConstraint3.setType(topicType1);
+		oTypeConstraint4.setType(topicType2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		oTypeConstraint4.setType(topicType1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
 } // TopicTypeTest
