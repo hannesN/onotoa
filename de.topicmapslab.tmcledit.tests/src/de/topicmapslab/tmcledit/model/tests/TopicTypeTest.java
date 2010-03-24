@@ -386,18 +386,22 @@ public class TopicTypeTest {
 		OccurrenceTypeConstraint oTypeConstraint4 = ModelFactory.eINSTANCE
 				.createOccurrenceTypeConstraint();
 
-		// add the same OccurrenceTypeConstraint into both lists
+		/*
+		 * add the same OccurrenceTypeConstraint into both lists, which is not
+		 * possible.
+		 */
 		testObject1.getOccurrenceConstraints().add(oTypeConstraint1);
 		testObject2.getOccurrenceConstraints().add(oTypeConstraint1);
-		Assert.assertTrue(comp.equals(testObject1, testObject2));
-
-		// add two OccurrenceTypeConstraint into list #1
-		testObject1.getOccurrenceConstraints().add(oTypeConstraint2);
-		testObject1.getOccurrenceConstraints().add(oTypeConstraint3);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
-		// equal list lengths but entry #2 is different
-		testObject2.getOccurrenceConstraints().add(oTypeConstraint2);
+		// add an equal occurrence into list #1
+		testObject1.getOccurrenceConstraints().add(oTypeConstraint2);
+		oTypeConstraint2.setId(oTypeConstraint1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// test different list lengths and different entries
+		testObject1.getOccurrenceConstraints().add(oTypeConstraint3);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.getOccurrenceConstraints().add(oTypeConstraint4);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
@@ -409,6 +413,12 @@ public class TopicTypeTest {
 		oTypeConstraint3.setCardMax("5");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		oTypeConstraint4.setCardMax("5");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMin of list entry #2
+		oTypeConstraint3.setCardMin("1");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		oTypeConstraint4.setCardMin("1");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 		// edit see_Also of list entry #2

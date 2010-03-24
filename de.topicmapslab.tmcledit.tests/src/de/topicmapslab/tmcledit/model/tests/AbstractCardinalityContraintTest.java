@@ -18,29 +18,6 @@ import de.topicmapslab.tmcledit.model.compare.AbstractCardinalityConstraintCompa
 public abstract class AbstractCardinalityContraintTest extends
 		TMCLConstructTest {
 
-	/**
-	 * Constructs a new Abstract Cardinality Contraint test case with the given
-	 * name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public AbstractCardinalityContraintTest(String name) {
-		super(name);
-	}
-
-	/**
-	 * Returns the fixture for this Abstract Cardinality Contraint test case.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	protected AbstractCardinalityContraint getFixture() {
-		return (AbstractCardinalityContraint) fixture;
-	}
-
-	public void testAbstractCardinality() {
-
-	}
+	
 
 } // AbstractCardinalityContraintTest

@@ -5,12 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.compare;
 
-import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
-import de.topicmapslab.tmcledit.model.tests.OnoObjectTest;
-
-import junit.framework.Assert;
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc --> A test case for the model object '
