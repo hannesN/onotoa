@@ -8,6 +8,7 @@ package de.topicmapslab.tmcledit.model.compare;
 
 import org.eclipse.emf.common.util.EList;
 
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -63,17 +64,55 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 		if (stringListCompare(o1.getIdentifiers(), o2.getIdentifiers()) == false)
 			return false;
 
-		if (o1.getOccurrenceConstraints().size() != o2
-				.getOccurrenceConstraints().size())
+		if (o1.getOccurrenceConstraints().size() == o2
+				.getOccurrenceConstraints().size()) {
+			if (oConstraintListCompare(o1.getOccurrenceConstraints(), o2
+					.getOccurrenceConstraints()) == false)
+				return false;
+		} else
 			return false;
 
-		if (oConstraintListCompare(o1.getOccurrenceConstraints(), o2
-				.getOccurrenceConstraints()) == false)
+		if (o1.getNameContraints().size() == o2.getNameContraints().size()) {
+			if (nConstraintListCompare(o1.getNameContraints(), o2
+					.getNameContraints()) == false)
+				return false;
+		} else
 			return false;
 
 		return true;
 
 	}
+
+	/**
+	 * Compares two lists with NameTypeConstraint entries
+	 * 
+	 * @param list1
+	 * @param list2
+	 * @return boolean result of the compare
+	 */
+
+	protected boolean nConstraintListCompare(EList<NameTypeConstraint> list1,
+			EList<NameTypeConstraint> list2) {
+
+		NameTypeConstraintComparator comp = new NameTypeConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+	}
+
+	/**
+	 * Compares two lists with OccurrenceTypeConstraint entries
+	 * 
+	 * @param list1
+	 * @param list2
+	 * @return boolean result of the compare
+	 */
 
 	protected boolean oConstraintListCompare(
 			EList<OccurrenceTypeConstraint> list1,
