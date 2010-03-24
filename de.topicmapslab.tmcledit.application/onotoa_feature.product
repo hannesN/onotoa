@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Onotoa" uid="onotoa" id="de.topicmapslab.tmcledit.application.product" application="de.topicmapslab.tmcledit.application.onotoa" version="1.1.2" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/de.topicmapslab.tmcledit.application/about.png"/>
+   </aboutInfo>
+
+   <configIni use="">
+   </configIni>
+
+   <launcherArgs>
+   </launcherArgs>
+
+   <windowImages i16="/de.topicmapslab.tmcledit.application/icons/onotoa_16_16.png" i32="/de.topicmapslab.tmcledit.application/icons/onotoa_32_32.png" i48="/de.topicmapslab.tmcledit.application/icons/onotoa_48_48.png" i64="/de.topicmapslab.tmcledit.application/icons/onotoa_64_64.png" i128="/de.topicmapslab.tmcledit.application/icons/onotoa_128_128.png"/>
+
+   <splash
+      location="de.topicmapslab.tmcledit.application" />
+   <launcher name="onotoa">
+      <linux icon="/de.topicmapslab.tmcledit.application/icons/onotoa.xpm"/>
+      <macosx icon="/de.topicmapslab.tmcledit.application/icons/onotoa.icns"/>
+      <solaris/>
+      <win useIco="false">
+         <ico path="/de.topicmapslab.tmcledit.application/icons/onotoa.ico"/>
+         <bmp
+            winSmallHigh="/de.topicmapslab.tmcledit.application/icons/onotoa_16_16.bmp"
+            winSmallLow="/de.topicmapslab.tmcledit.application/icons/onotoa_16_16_8.bmp"
+            winMediumHigh="/de.topicmapslab.tmcledit.application/icons/onotoa_32_32.bmp"
+            winMediumLow="/de.topicmapslab.tmcledit.application/icons/onotoa_32_32_8.bmp"
+            winLargeHigh="/de.topicmapslab.tmcledit.application/icons/onotoa_48_48.bmp"
+            winLargeLow="/de.topicmapslab.tmcledit.application/icons/onotoa_48_48_8.bmp"/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.sourceforge.tinyTiM_feature" version="2.0.0"/>
+      <feature id="de.topicmapslab.tmcledit.application_feature" version="1.1.2.qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.core_feature" version="1.1.2.qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.doc_feature" version="1.1.2.qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.export_feature" version="1.1.2.qualifier"/>
+      <feature id="de.topicmapslab.tmcledit.import_feature" version="1.1.2.qualifier"/>
+      <feature id="onotoa_thirdparty_plugins" version="1.0.0.qualifier"/>
+   </features>
+
+  <configurations>
+      <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.equinox.preferences" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.equinox.registry" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="3" />
+      <plugin id="org.tmapi" autoStart="true" startLevel="4" />
+   </configurations>
+
+</product>

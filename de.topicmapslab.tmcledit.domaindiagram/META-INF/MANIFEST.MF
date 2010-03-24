@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Domain Diagram
+Bundle-SymbolicName: de.topicmapslab.tmcledit.domaindiagram;singleton:=true
+Bundle-Version: 1.1.2.qualifier
+Bundle-Activator: de.topicmapslab.tmcledit.domaindiagram.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.gef,
+ de.topicmapslab.tmcledit.diagram;bundle-version="1.1.1",
+ org.eclipse.emf.common,
+ org.eclipse.emf.common.ui,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.edit.ui,
+ de.topicmapslab.tmcledit;bundle-version="1.1.1",
+ de.topicmapslab.tmcledit.edit;bundle-version="1.1.1"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
