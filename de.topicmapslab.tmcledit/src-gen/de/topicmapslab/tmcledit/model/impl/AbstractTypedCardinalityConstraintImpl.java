@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class AbstractTypedCardinalityConstraintImpl extends AbstractCardinalityContraintImpl implements AbstractTypedCardinalityConstraint {
+public class AbstractTypedCardinalityConstraintImpl extends AbstractCardinalityConstraintImpl implements AbstractTypedCardinalityConstraint {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->

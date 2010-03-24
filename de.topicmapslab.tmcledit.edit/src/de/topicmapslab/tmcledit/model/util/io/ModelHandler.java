@@ -10,7 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR; 
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;  
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_HEIGHT;
@@ -44,6 +44,7 @@ import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_LAB
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_MAPPING_ELEMENT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAME_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NODE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NOTES;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OCCURRENCE_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OTHER_PLAYER;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OTHER_ROLE;
@@ -73,7 +74,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
@@ -117,7 +118,7 @@ import de.topicmapslab.tmcledit.model.util.IDUtil;
 class ModelHandler extends DefaultHandler {
 
 	private enum State {
-		NONE, TOPIC_TYPE, NAME_CONSTRAINT, 
+		NONE, TOPIC_TYPE, NAME_CONSTRAINT, NOTES,
 		ISA, AKO, OCCURENCE_CONSTRAINT, REIFIER_CONSTRAINT, TOPIC_REIFIES_CONSTRAINT, 
 		ROLE_CONSTRAINT, COMMENT, SEE_ALSO, DESCRIPTION, ASSOCIATION_CONSTRAINT, 
 		PLAYER, TOPIC_ROLE_CONSTRAINT, TYPE_NODE, ASSOCIATION_NODE, 
@@ -131,7 +132,7 @@ class ModelHandler extends DefaultHandler {
 	private Iterator<TopicType> topicTypeIt;
 	private Stack<EObject> constructs;
 	private ModelFactory fac = ModelFactory.eINSTANCE;
-
+	
 	public ModelHandler(List<TopicType> ttList, File file) {
 		super();
 		this.ttList = ttList;
@@ -145,6 +146,11 @@ class ModelHandler extends DefaultHandler {
 		try {
 		if (E_FILE.equals(qName)) {
 			setId(file, attributes);
+		}
+		
+		if (E_NOTES.equals(qName)) {
+			state = State.NOTES;
+			constructs.push(file);
 		}
 		
 		if (E_SCHEMA.equals(qName)) {
@@ -645,12 +651,12 @@ class ModelHandler extends DefaultHandler {
 		if (regExp != null)
 			c.setRegexp(regExp);
 
-		setCardinality((AbstractCardinalityContraint) c, attributes);
+		setCardinality((AbstractCardinalityConstraint) c, attributes);
 
 		return c;
 	}
 
-	private void setCardinality(AbstractCardinalityContraint acc, Attributes attributes) {
+	private void setCardinality(AbstractCardinalityConstraint acc, Attributes attributes) {
 		String attr = attributes.getValue(A_CARD_MIN);
 		if (attr != null)
 			acc.setCardMin(attr);
@@ -688,6 +694,10 @@ class ModelHandler extends DefaultHandler {
 		
 		String tmp = new String(ch, start, length);
 		 
+		if (state==State.NOTES) {
+			file.setNotes(tmp);
+		}
+		
 		EObject c =  constructs.lastElement();
 		if (c instanceof TMCLConstruct) {
 			switch (state) {
@@ -717,6 +727,10 @@ class ModelHandler extends DefaultHandler {
 			state = State.NONE;
 		}
 		if (E_SCHEMA.equals(qName)) {
+			constructs.pop();
+		}
+		if (E_NOTES.equals(qName)) {
+			state = State.NONE;
 			constructs.pop();
 		}
 		if ((E_SUBJECT_IDENTIFIER_CONSTRAINT.equals(qName)) || (E_SUBJECT_LOCATOR_CONSTRAINT.equals(qName))) {

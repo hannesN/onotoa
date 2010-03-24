@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class RolePlayerConstraintImpl extends AbstractCardinalityContraintImpl implements RolePlayerConstraint {
+public class RolePlayerConstraintImpl extends AbstractCardinalityConstraintImpl implements RolePlayerConstraint {
 	/**
 	 * The cached value of the '{@link #getPlayer() <em>Player</em>}' reference.
 	 * <!-- begin-user-doc -->

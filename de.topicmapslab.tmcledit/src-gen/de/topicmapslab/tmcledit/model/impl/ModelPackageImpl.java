@@ -5,7 +5,14 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
@@ -51,14 +58,6 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -198,7 +197,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractCardinalityContraintEClass = null;
+	private EClass abstractCardinalityConstraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1024,6 +1023,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFile_Notes() {
+		return (EAttribute)fileEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScopeConstraint() {
 		return scopeConstraintEClass;
 	}
@@ -1033,8 +1041,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbstractCardinalityContraint() {
-		return abstractCardinalityContraintEClass;
+	public EClass getAbstractCardinalityConstraint() {
+		return abstractCardinalityConstraintEClass;
 	}
 
 	/**
@@ -1042,8 +1050,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractCardinalityContraint_CardMin() {
-		return (EAttribute)abstractCardinalityContraintEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAbstractCardinalityConstraint_CardMin() {
+		return (EAttribute)abstractCardinalityConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1051,8 +1059,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractCardinalityContraint_CardMax() {
-		return (EAttribute)abstractCardinalityContraintEClass.getEStructuralFeatures().get(1);
+	public EAttribute getAbstractCardinalityConstraint_CardMax() {
+		return (EAttribute)abstractCardinalityConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1604,12 +1612,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(fileEClass, FILE__TOPIC_MAP_SCHEMA);
 		createEAttribute(fileEClass, FILE__FILENAME);
 		createEAttribute(fileEClass, FILE__DIRTY);
+		createEAttribute(fileEClass, FILE__NOTES);
 
 		scopeConstraintEClass = createEClass(SCOPE_CONSTRAINT);
 
-		abstractCardinalityContraintEClass = createEClass(ABSTRACT_CARDINALITY_CONTRAINT);
-		createEAttribute(abstractCardinalityContraintEClass, ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN);
-		createEAttribute(abstractCardinalityContraintEClass, ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX);
+		abstractCardinalityConstraintEClass = createEClass(ABSTRACT_CARDINALITY_CONSTRAINT);
+		createEAttribute(abstractCardinalityConstraintEClass, ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN);
+		createEAttribute(abstractCardinalityConstraintEClass, ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX);
 
 		labelPosEClass = createEClass(LABEL_POS);
 		createEAttribute(labelPosEClass, LABEL_POS__POS_X);
@@ -1717,12 +1726,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractRegExpConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		occurrenceTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		nameTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
-		rolePlayerConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
+		rolePlayerConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityConstraint());
 		topicMapSchemaEClass.getESuperTypes().add(this.getTMCLConstruct());
 		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractRegExpConstraint());
-		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
+		subjectLocatorConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityConstraint());
 		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractRegExpConstraint());
-		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
+		subjectIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityConstraint());
 		associationTypeConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
 		mappingElementEClass.getESuperTypes().add(this.getOnoObject());
 		nodeEClass.getESuperTypes().add(this.getOnoObject());
@@ -1733,7 +1742,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		diagramEClass.getESuperTypes().add(this.getOnoObject());
 		fileEClass.getESuperTypes().add(this.getOnoObject());
 		scopeConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
-		abstractCardinalityContraintEClass.getESuperTypes().add(this.getAbstractConstraint());
+		abstractCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		labelPosEClass.getESuperTypes().add(this.getOnoObject());
 		abstractTypedConstraintEClass.getESuperTypes().add(this.getAbstractConstraint());
 		scopedTopicTypeEClass.getESuperTypes().add(this.getTopicType());
@@ -1750,7 +1759,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		nameTypeEClass.getESuperTypes().add(this.getScopedReifiableTopicType());
 		nameTypeEClass.getESuperTypes().add(this.getAbstractRegExpTopicType());
 		nameTypeEClass.getESuperTypes().add(this.getAbstractUniqueValueTopicType());
-		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityContraint());
+		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityConstraint());
 		abstractTypedCardinalityConstraintEClass.getESuperTypes().add(this.getAbstractTypedConstraint());
 		commentEClass.getESuperTypes().add(this.getNode());
 		tmclConstructEClass.getESuperTypes().add(this.getOnoObject());
@@ -1846,12 +1855,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getFile_TopicMapSchema(), this.getTopicMapSchema(), null, "topicMapSchema", null, 1, 1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFile_Filename(), ecorePackage.getEString(), "filename", null, 0, 1, File.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFile_Dirty(), ecorePackage.getEBoolean(), "dirty", "false", 1, 1, File.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFile_Notes(), ecorePackage.getEString(), "notes", null, 0, 1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopeConstraintEClass, ScopeConstraint.class, "ScopeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(abstractCardinalityContraintEClass, AbstractCardinalityContraint.class, "AbstractCardinalityContraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractCardinalityContraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, AbstractCardinalityContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractCardinalityContraint_CardMax(), ecorePackage.getEString(), "cardMax", "*", 0, 1, AbstractCardinalityContraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractCardinalityConstraintEClass, AbstractCardinalityConstraint.class, "AbstractCardinalityConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractCardinalityConstraint_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, AbstractCardinalityConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractCardinalityConstraint_CardMax(), ecorePackage.getEString(), "cardMax", "*", 0, 1, AbstractCardinalityConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(labelPosEClass, LabelPos.class, "LabelPos", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLabelPos_PosX(), ecorePackage.getEInt(), "posX", "0", 1, 1, LabelPos.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

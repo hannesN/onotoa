@@ -143,8 +143,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createScopeConstraintAdapter();
 			}
 			@Override
-			public Adapter caseAbstractCardinalityContraint(AbstractCardinalityContraint object) {
-				return createAbstractCardinalityContraintAdapter();
+			public Adapter caseAbstractCardinalityConstraint(AbstractCardinalityConstraint object) {
+				return createAbstractCardinalityConstraintAdapter();
 			}
 			@Override
 			public Adapter caseLabelPos(LabelPos object) {
@@ -507,16 +507,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint <em>Abstract Cardinality Contraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint <em>Abstract Cardinality Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityContraint
+	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint
 	 * @generated
 	 */
-	public Adapter createAbstractCardinalityContraintAdapter() {
+	public Adapter createAbstractCardinalityConstraintAdapter() {
 		return null;
 	}
 

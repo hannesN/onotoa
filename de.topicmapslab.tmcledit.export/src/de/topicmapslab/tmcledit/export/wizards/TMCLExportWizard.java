@@ -12,20 +12,19 @@ package de.topicmapslab.tmcledit.export.wizards;
 
 import java.io.FileOutputStream;
 
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
-import org.tinytim.mio.CTMTopicMapWriter;
 import org.tmapi.core.TopicMap;
+import org.tmapix.io.LTMTopicMapWriter;
+import org.tmapix.io.TopicMapWriter;
+import org.tmapix.io.XTM20TopicMapWriter;
 
+import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -39,7 +38,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 
 	private TopicMapSchema schema;
 
-	private CTMFileSelectionWizardPage page;
+	private TMCLExportWizardPage page;
 
 	public TMCLExportWizard() {
 	}
@@ -49,7 +48,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		if (schema == null)
 			schema = ModelIndexer.getInstance().getTopicMapSchema();
 
-		java.io.File file = new java.io.File(page.getFilename());
+		java.io.File file = new java.io.File(page.getFileName());
 
 		if (file.exists()) {
 			if (!MessageDialog.openQuestion(getShell(), "File already exists",
@@ -60,16 +59,11 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 
 		}
 		try {
-			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema, page.isExportSchemaInfos());
+			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema, page.isExportSchemaInfos(), page.isExportDiagramInfos());
 			TopicMap tm = builder.createTopicMap();
 			FileOutputStream stream = new FileOutputStream(file);
-			CTMTopicMapWriter writer = new CTMTopicMapWriter(stream, schema.getBaseLocator());
-			for (MappingElement me : schema.getMappings()) {
-				writer.addPrefix(me.getKey(), me.getValue());
-			}
-			writer.setTMCL(true);
-			writer.setAuthor("Onotoa");
-			writer.setComment("This schema was created with onotoa\nhttp://onotoa.topicmapslab.de");
+			
+			TopicMapWriter writer = getTopicMapWriter(stream, schema.getBaseLocator());
 			writer.write(tm);
 			stream.flush();
 			stream.close();
@@ -82,10 +76,38 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		return true;
 	}
 
+	private TopicMapWriter getTopicMapWriter(FileOutputStream stream, String baseLocator) {
+	    String suffix = page.getFileSuffix();
+		
+	    try {
+	        if ("xtm".equals(suffix)) {
+		        return new XTM20TopicMapWriter(stream, baseLocator);
+	        }
+	        if ("ltm".equals(suffix)) {
+		        return new LTMTopicMapWriter(stream, baseLocator);
+	        }
+	        if ("ctm".equals(suffix)) {
+		        CTMTopicMapWriter writer = new CTMTopicMapWriter(stream, baseLocator);
+		        
+		        // TODO add include 
+//		        writer.
+		        
+		        for (MappingElement me : schema.getMappings()) {
+		        	writer.setPrefix(me.getValue(), me.getKey());
+		        }
+		        // TODO set templates
+		        
+		        return writer;
+	        }
+        } catch (Exception e) {
+	        throw new RuntimeException(e);
+        }
+		return null;
+    }
+
 	@Override
 	public void addPages() {
-		page = new CTMFileSelectionWizardPage();
-		page.setFileExtensions(getFilterExtensions());
+		page = new TMCLExportWizardPage("exportpage");
 		page.setTitle("TMCL Export - File selection");
 		addPage(page);
 	}
@@ -116,27 +138,4 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 
 	}
 
-	public String[] getFilterExtensions() {
-		return new String[] { "*.ctm" };
-	}
-
-	private class CTMFileSelectionWizardPage extends FileSelectionWizardPage {
-		private boolean exportSchemaInfos = false;
-
-		public boolean isExportSchemaInfos() {
-			return exportSchemaInfos;
-		}
-
-		@Override
-		public void addAdditionalWidgets(Composite parent) {
-			Button exportSchemainfosbButton = new Button(parent, SWT.CHECK);
-			exportSchemainfosbButton.setText("Export Schema Infos");
-			exportSchemainfosbButton.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					exportSchemaInfos = ((Button) e.widget).getSelection();
-				}
-			});
-		}
-	}
 }

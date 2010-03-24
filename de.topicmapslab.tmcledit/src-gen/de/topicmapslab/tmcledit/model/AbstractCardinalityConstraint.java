@@ -8,22 +8,22 @@ package de.topicmapslab.tmcledit.model;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Abstract Cardinality Contraint</b></em>'.
+ * A representation of the model object '<em><b>Abstract Cardinality Constraint</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMin <em>Card Min</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMax <em>Card Max</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMin <em>Card Min</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMax <em>Card Max</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractCardinalityContraint()
+ * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractCardinalityConstraint()
  * @model abstract="true"
  * @generated
  */
-public interface AbstractCardinalityContraint extends AbstractConstraint {
+public interface AbstractCardinalityConstraint extends AbstractConstraint {
 	/**
 	 * Returns the value of the '<em><b>Card Min</b></em>' attribute.
 	 * The default value is <code>"0"</code>.
@@ -35,14 +35,14 @@ public interface AbstractCardinalityContraint extends AbstractConstraint {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Card Min</em>' attribute.
 	 * @see #setCardMin(String)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractCardinalityContraint_CardMin()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractCardinalityConstraint_CardMin()
 	 * @model default="0"
 	 * @generated
 	 */
 	String getCardMin();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMin <em>Card Min</em>}' attribute.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMin <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Card Min</em>' attribute.
@@ -62,14 +62,14 @@ public interface AbstractCardinalityContraint extends AbstractConstraint {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Card Max</em>' attribute.
 	 * @see #setCardMax(String)
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractCardinalityContraint_CardMax()
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getAbstractCardinalityConstraint_CardMax()
 	 * @model default="*"
 	 * @generated
 	 */
 	String getCardMax();
 
 	/**
-	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMax <em>Card Max</em>}' attribute.
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMax <em>Card Max</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Card Max</em>' attribute.
@@ -78,4 +78,4 @@ public interface AbstractCardinalityContraint extends AbstractConstraint {
 	 */
 	void setCardMax(String value);
 
-} // AbstractCardinalityContraint
+} // AbstractCardinalityConstraint

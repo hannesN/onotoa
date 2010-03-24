@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Text;
 public class FileSelectionWizardPage extends WizardPage {
 	private Text text;
 
-	private String[] fileExtensions;
+	private String[] fileExtensions = {".ctm", ".xtm"};
 	
 	public FileSelectionWizardPage() {
 		super("File Selection");

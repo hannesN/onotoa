@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
 /**
@@ -76,8 +76,8 @@ public abstract class AbstractCardinalityConstraintModelPage extends AbstractMod
 		}
 	}
 	
-	private AbstractCardinalityContraint getCastedModel() {
-		return (AbstractCardinalityContraint) getModel();
+	private AbstractCardinalityConstraint getCastedModel() {
+		return (AbstractCardinalityConstraint) getModel();
 	}
 
 }

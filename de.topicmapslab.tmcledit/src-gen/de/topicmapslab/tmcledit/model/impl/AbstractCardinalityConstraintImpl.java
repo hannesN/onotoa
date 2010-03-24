@@ -5,7 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,19 +16,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Abstract Cardinality Contraint</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Cardinality Constraint</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityContraintImpl#getCardMin <em>Card Min</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityContraintImpl#getCardMax <em>Card Max</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityConstraintImpl#getCardMin <em>Card Min</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityConstraintImpl#getCardMax <em>Card Max</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl implements AbstractCardinalityContraint {
+public abstract class AbstractCardinalityConstraintImpl extends TMCLConstructImpl implements AbstractCardinalityConstraint {
 	/**
 	 * The default value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AbstractCardinalityContraintImpl() {
+	protected AbstractCardinalityConstraintImpl() {
 		super();
 	}
 
@@ -85,7 +85,7 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.ABSTRACT_CARDINALITY_CONTRAINT;
+		return ModelPackage.Literals.ABSTRACT_CARDINALITY_CONSTRAINT;
 	}
 
 	/**
@@ -106,7 +106,7 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 		String oldCardMin = cardMin;
 		cardMin = newCardMin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN, oldCardMin, cardMin));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN, oldCardMin, cardMin));
 	}
 
 	/**
@@ -127,7 +127,7 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 		String oldCardMax = cardMax;
 		cardMax = newCardMax;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX, oldCardMax, cardMax));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX, oldCardMax, cardMax));
 	}
 
 	/**
@@ -138,9 +138,9 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN:
 				return getCardMin();
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX:
 				return getCardMax();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -154,10 +154,10 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN:
 				setCardMin((String)newValue);
 				return;
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX:
 				setCardMax((String)newValue);
 				return;
 		}
@@ -172,10 +172,10 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN:
 				setCardMin(CARD_MIN_EDEFAULT);
 				return;
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX:
 				setCardMax(CARD_MAX_EDEFAULT);
 				return;
 		}
@@ -190,9 +190,9 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN:
 				return CARD_MIN_EDEFAULT == null ? cardMin != null : !CARD_MIN_EDEFAULT.equals(cardMin);
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX:
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX:
 				return CARD_MAX_EDEFAULT == null ? cardMax != null : !CARD_MAX_EDEFAULT.equals(cardMax);
 		}
 		return super.eIsSet(featureID);
@@ -216,4 +216,4 @@ public abstract class AbstractCardinalityContraintImpl extends TMCLConstructImpl
 		return result.toString();
 	}
 
-} //AbstractCardinalityContraintImpl
+} //AbstractCardinalityConstraintImpl

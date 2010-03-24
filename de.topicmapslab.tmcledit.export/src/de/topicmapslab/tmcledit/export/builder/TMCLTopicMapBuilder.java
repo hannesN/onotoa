@@ -51,7 +51,7 @@ import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystemFactory;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -921,8 +921,8 @@ public class TMCLTopicMapBuilder {
 				if (rpc.getRole()!=null)
 					result += prime * result + rpc.getRole().hashCode();
 			}
-	        if (constraint instanceof AbstractCardinalityContraint) {
-	        	AbstractCardinalityContraint acc = (AbstractCardinalityContraint) constraint;
+	        if (constraint instanceof AbstractCardinalityConstraint) {
+	        	AbstractCardinalityConstraint acc = (AbstractCardinalityConstraint) constraint;
 	        	result += prime * result + acc.getCardMin().hashCode();
 				result += prime * result + acc.getCardMax().hashCode();
 	        }

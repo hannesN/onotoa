@@ -16,5 +16,5 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface AbstractTypedCardinalityConstraint extends AbstractCardinalityContraint, AbstractTypedConstraint {
+public interface AbstractTypedCardinalityConstraint extends AbstractCardinalityConstraint, AbstractTypedConstraint {
 } // AbstractTypedCardinalityConstraint

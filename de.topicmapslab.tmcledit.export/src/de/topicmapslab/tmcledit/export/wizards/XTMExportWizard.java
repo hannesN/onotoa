@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
-import org.tinytim.mio.XTM20TopicMapWriter;
+import org.tmapix.io.XTM20TopicMapWriter;
 
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -35,8 +35,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class XTMExportWizard extends Wizard implements IExportWizard {
-	private boolean exportConstraintInfos = true;
-	private boolean exportDiagram = true;
+	private boolean exportConstraintInfos = false;
 	private TopicMapSchema schema;
 	private WizardPage page1;
 
@@ -48,7 +47,7 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 		if (schema == null)
 			schema = ModelIndexer.getInstance().getTopicMapSchema();
 
-		TMCLTopicMapBuilder ttbuilder = new TMCLTopicMapBuilder(schema, exportConstraintInfos, exportDiagram);
+		TMCLTopicMapBuilder ttbuilder = new TMCLTopicMapBuilder(schema, exportConstraintInfos, false);
 
 		java.io.File file = new java.io.File(page1.getFilename());
 
@@ -128,19 +127,6 @@ public class XTMExportWizard extends Wizard implements IExportWizard {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					exportConstraintInfos = ((Button) e.widget).getSelection();
-				}
-			});
-
-			exportButton = new Button(parent, SWT.CHECK);
-			exportButton.setSelection(exportDiagram);
-			exportButton.setText("Export Diagram Infos");
-			gd = new GridData();
-			gd.horizontalSpan = 3;
-			exportButton.setLayoutData(gd);
-			exportButton.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					exportDiagram = ((Button) e.widget).getSelection();
 				}
 			});
 

@@ -40,6 +40,7 @@ public interface ModelXMLConstantsOno1 {
 	public static final String A_TARGET = "target";
 	public static final String A_SOURCE = "source";
 	public static final String A_TOPIC_ROLE_REF = "topicRoleRef";
+	public static final String A_KEY = "key";
 	
 	
 	public static final String E_LABEL_POSITION = "labelPosition";
@@ -54,7 +55,7 @@ public interface ModelXMLConstantsOno1 {
 	public static final String E_DIAGRAM = "diagram";
 	public static final String E_FILE = "file";
 	public static final String E_ISA = "isa";
-	public static final String A_KEY = "key";
+	public static final String E_NOTES = "notes";
 	public static final String E_MAPPING_ELEMENT = "mappingElement";
 	public static final String E_NAME = "name";
 	public static final String E_NAME_CONSTRAINT = "nameConstraint";

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.topicmapslab.tmcledit.model.File#getTopicMapSchema <em>Topic Map Schema</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.File#getFilename <em>Filename</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.File#isDirty <em>Dirty</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.File#getNotes <em>Notes</em>}</li>
  * </ul>
  * </p>
  *
@@ -121,5 +122,31 @@ public interface File extends OnoObject {
 	 * @generated
 	 */
 	void setDirty(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Notes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Notes</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Notes</em>' attribute.
+	 * @see #setNotes(String)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getFile_Notes()
+	 * @model
+	 * @generated
+	 */
+	String getNotes();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.File#getNotes <em>Notes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Notes</em>' attribute.
+	 * @see #getNotes()
+	 * @generated
+	 */
+	void setNotes(String value);
 
 } // File

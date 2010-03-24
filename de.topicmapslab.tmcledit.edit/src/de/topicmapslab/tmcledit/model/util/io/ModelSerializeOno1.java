@@ -11,7 +11,7 @@
 package de.topicmapslab.tmcledit.model.util.io;
 
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ABSTRACT;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ABSTRACT; 
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
@@ -51,6 +51,7 @@ import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAM
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAME_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NAME_CONSTRAINTS;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NODE;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_NOTES;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OCCURRENCE_CONSTRAINT;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OCCURRENCE_CONSTRAINTS;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_OTHER_PLAYER;
@@ -90,7 +91,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
@@ -176,6 +177,11 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		fileNode.setAttribute(A_VERSION, getVersionString());
 		setId(file, fileNode);
 
+		
+		Element notesNode = document.createElement(E_NOTES);
+		notesNode.appendChild(document.createTextNode(file.getNotes()));
+		fileNode.appendChild(notesNode);
+		
 		TopicMapSchema schema = file.getTopicMapSchema();
 
 		Element schemaNode = document.createElement(E_SCHEMA);
@@ -188,7 +194,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			schemaNode.setAttribute(A_NAME, tmp);
 		addTMCLConstructElements(schema, schemaNode);
 		fileNode.appendChild(schemaNode);
-
+		
 		for (MappingElement me : schema.getMappings()) {
 			createMappingNode(me, schemaNode);
 		}
@@ -361,7 +367,7 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			node.setAttribute(A_REG_EXP, rc.getRegexp());
 	}
 
-	private void addCardinalityAttributes(Element node, AbstractCardinalityContraint acc) {
+	private void addCardinalityAttributes(Element node, AbstractCardinalityConstraint acc) {
 		if (acc.getCardMin() != null)
 			node.setAttribute(A_CARD_MIN, acc.getCardMin());
 		if (acc.getCardMax() != null)

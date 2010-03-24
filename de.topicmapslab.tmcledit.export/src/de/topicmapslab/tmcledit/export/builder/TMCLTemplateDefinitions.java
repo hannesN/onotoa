@@ -51,6 +51,7 @@ import static org.tinytim.voc.TMCL.TOPIC_ROLE_CONSTRAINT;
 import static org.tinytim.voc.TMCL.TOPIC_TYPE;
 import static org.tinytim.voc.TMCL.UNIQUE_VALUE_CONSTRAINT;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.tinytim.voc.Namespace;
@@ -60,20 +61,27 @@ import org.tmapi.core.Locator;
 import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 
+import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
 import de.topicmapslab.ctm.writer.templates.Template;
+import de.topicmapslab.ctm.writer.templates.TemplateFactory;
+import de.topicmapslab.ctm.writer.templates.entry.AssociationEntry;
+import de.topicmapslab.ctm.writer.templates.entry.EntryFactory;
 import de.topicmapslab.ctm.writer.templates.entry.IsInstanceOfEntry;
+import de.topicmapslab.ctm.writer.templates.entry.RoleEntry;
 
 /**
  * A class which creates {@link Template}s for the CTM Serializer.
  * 
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class TMCLTemplateDefinitions {
 
-	private  List<Template> templates;
+	private List<Template> templates;
 	private TopicMap topicMap;
-	
+	private final TemplateFactory templateFactory;
+
+	private EntryFactory entryFactory;
 	// -- topic types
 	private Topic topicType;
 	private Topic associationType;
@@ -81,7 +89,7 @@ public class TMCLTemplateDefinitions {
 	private Topic occurrenceType;
 	private Topic nameType;
 	private Topic scopeType;
-	
+
 	private Topic topicMapSchema;
 
 	// -- associations
@@ -100,10 +108,9 @@ public class TMCLTemplateDefinitions {
 	private Topic constrained;
 	private Topic allows;
 	private Topic allowed;
-	
 
 	// -- constrains
-	//private Topic constraint; // -- not needed is super type
+	// private Topic constraint; // -- not needed is super type
 	private Topic abstractConstraint;
 	private Topic subjectIdentifierConstraint;
 	private Topic subjectLocatorConstraint;
@@ -119,7 +126,7 @@ public class TMCLTemplateDefinitions {
 	private Topic uniqueValueConstraint;
 	private Topic regularExpressionConstraint;
 	private Topic overlapDeclaration;
-	
+
 	// -- occurrence types
 	private Topic datatype;
 	private Topic cardMin;
@@ -129,25 +136,28 @@ public class TMCLTemplateDefinitions {
 	private Topic seeAlso;
 	private Topic description;
 
-	
 	// -- tmdm
 	private Topic topicName;
 	private Topic subject;
-	
-	public TMCLTemplateDefinitions(TopicMap topicMap) {
-		this.topicMap = topicMap;
-    }
-	
-	public  List<Template> getTemplates() {
-		if (templates==null)
-			init();
-		
-		return templates;
-    }
 
-	private  void init() {
+	public TMCLTemplateDefinitions(CTMTopicMapWriter writer, TopicMap topicMap) {
+		this.topicMap = topicMap;
+		this.templateFactory = new TemplateFactory(writer);
+		this.entryFactory = this.templateFactory.getEntryFactory();
+	}
+
+	public List<Template> getTemplates() {
+		if (templates == null)
+			init();
+
+		return templates;
+	}
+
+	private void init() {
 		initTypes();
 		
+		templates = new ArrayList<Template>();
+
 		addOverlaps();
 		addHasSubjectIdentifier();
 		addHasSubjectLocator();
@@ -168,7 +178,7 @@ public class TMCLTemplateDefinitions {
 		addMatchesRegExp();
 		addBelongsTo();
 	}
-	
+
 	private void initTypes() {
 
 		// removing TMDM types from cache
@@ -181,7 +191,7 @@ public class TMCLTemplateDefinitions {
 		// removing TMCL roles from cache
 		topicMap.createTopicBySubjectIdentifier(TMCL.CONTAINEE);
 		topicMap.createTopicBySubjectIdentifier(TMCL.CONTAINER);
-		
+
 		// initialize tmdm topics
 		topicName = topicMap.createTopicBySubjectIdentifier(TMDM.TOPIC_NAME);
 		subject = topicMap.createTopicBySubjectIdentifier(topicMap.createLocator(Namespace.TMDM_MODEL + "subject"));
@@ -223,7 +233,7 @@ public class TMCLTemplateDefinitions {
 		otherConstrainedTopicType = topicMap.createTopicBySubjectIdentifier(OTHER_CONSTRAINED_TOPIC_TYPE);
 		overlaps = topicMap.createTopicBySubjectIdentifier(OVERLAP_DECLARATION);
 
-//		constraint = topicMap.createTopicBySubjectIdentifier(CONSTRAINT);
+		// constraint = topicMap.createTopicBySubjectIdentifier(CONSTRAINT);
 		abstractConstraint = topicMap.createTopicBySubjectIdentifier(ABSTRACT_CONSTRAINT);
 		subjectIdentifierConstraint = topicMap.createTopicBySubjectIdentifier(SUBJECT_IDENTIFIER_CONSTRAINT);
 		subjectLocatorConstraint = topicMap.createTopicBySubjectIdentifier(SUBJECT_LOCATOR_CONSTRAINT);
@@ -241,109 +251,118 @@ public class TMCLTemplateDefinitions {
 		overlapDeclaration = topicMap.createTopicBySubjectIdentifier(OVERLAP_DECLARATION);
 	}
 
-	private  void addOverlaps() {
-		Template t = new Template("overlaps");
+	private void addOverlaps() {
+
 		
 		
-//		IsInstanceOfEntry e = new IsInstanceOfEntry(properties, ctmIdentity, type)
+//		
+//		IsInstanceOfEntry e1 = entryFactory.newIsInstanceOfEntry(overlapDeclaration);
+//		e1.setValueOrVariable("?c");
+//		
+//		RoleEntry r1 = entryFactory.newRoleEntry(constrained, )
+//		
+//		AssociationEntry e2 = entryFactory.newAssociationEntry(associationType, roleEntries)
+//		
+//		Template t = templateFactory.newTemplate("overlaps", e1);
+//		t.
+//		templates.add(t);
 		
-		
-//		?c isa tmcl:overlap-declaration.
-//		tmcl:overlaps(tmcl:allows : ?c, tmcl:allowed : $tt1)
-//		tmcl:overlaps(tmcl:allows : ?c, tmcl:allowed : $tt2)
-    }
+		// IsInstanceOfEntry e = new IsInstanceOfEntry(properties, ctmIdentity,
+		// type)
 
-	private  void addHasSubjectIdentifier() {
-	    // TODO Auto-generated method stub
-	    
-    }
+		// ?c isa tmcl:overlap-declaration.
+		// tmcl:overlaps(tmcl:allows : ?c, tmcl:allowed : $tt1)
+		// tmcl:overlaps(tmcl:allows : ?c, tmcl:allowed : $tt2)
+	}
 
-	private  void addHasSubjectLocator() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addHasSubjectIdentifier() {
+		// TODO Auto-generated method stub
 
-	private  void addHasName() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addHasOccurrence() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addHasSubjectLocator() {
+		// TODO Auto-generated method stub
 
-	private  void addPlaysRole() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addHasScope() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addHasName() {
+		// TODO Auto-generated method stub
 
-	private  void addMustHaveReifier() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addCannotHaveReifier() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addHasOccurrence() {
+		// TODO Auto-generated method stub
 
-	private  void addMayHaveReifier() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addMustReify() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addPlaysRole() {
+		// TODO Auto-generated method stub
 
-	private  void addCannotReify() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addMayReify() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addHasScope() {
+		// TODO Auto-generated method stub
 
-	private  void addHasRole() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addRoleCombination() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addMustHaveReifier() {
+		// TODO Auto-generated method stub
 
-	private  void addHasDatatype() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addIsUnique() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	private void addCannotHaveReifier() {
+		// TODO Auto-generated method stub
 
-	private  void addMatchesRegExp() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	}
 
-	private  void addBelongsTo() {
-	    // TODO Auto-generated method stub
-	    
-    }
-	
-	
-	
-	
+	private void addMayHaveReifier() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addMustReify() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addCannotReify() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addMayReify() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addHasRole() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addRoleCombination() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addHasDatatype() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addIsUnique() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addMatchesRegExp() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void addBelongsTo() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

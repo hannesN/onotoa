@@ -21,7 +21,7 @@ import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Text;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
 
 /**
@@ -72,7 +72,7 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		 * modelProvider.getModel().eSet(feature, text.getText());
 		 */
 		
-		AbstractCardinalityContraint model = (AbstractCardinalityContraint) modelProvider.getModel();
+		AbstractCardinalityConstraint model = (AbstractCardinalityConstraint) modelProvider.getModel();
 		
 		if (text.getText().length()==0) {
 			if (isMin)

@@ -62,7 +62,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.tinytim.mio.TopicMapReader;
 import org.tinytim.voc.Namespace;
 import org.tinytim.voc.TMCL;
 import org.tinytim.voc.TMDM;
@@ -75,8 +74,9 @@ import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystemFactory;
 import org.tmapi.index.TypeInstanceIndex;
+import org.tmapix.io.TopicMapReader;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.Annotation;
@@ -748,7 +748,7 @@ public class OnotoaBuilder {
 		tt.getNameContraints().add(ntc);
 	}
 
-	private void setCardinality(Topic constr, AbstractCardinalityContraint cc) {
+	private void setCardinality(Topic constr, AbstractCardinalityConstraint cc) {
 		Set<Occurrence> occurrences = constr.getOccurrences(cardMin);
 		if (occurrences.size() > 0)
 			cc.setCardMin(occurrences.iterator().next().getValue());
@@ -772,7 +772,7 @@ public class OnotoaBuilder {
 			construct.setDescription(description);
 	}
 
-	private class RolePlayerConstraintContainer implements AbstractCardinalityContraint {
+	private class RolePlayerConstraintContainer implements AbstractCardinalityConstraint {
 
 		private TopicType player;
 		private TopicType assocType;

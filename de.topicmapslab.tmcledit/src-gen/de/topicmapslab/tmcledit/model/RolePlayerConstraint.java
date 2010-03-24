@@ -23,7 +23,7 @@ package de.topicmapslab.tmcledit.model;
  * @model
  * @generated
  */
-public interface RolePlayerConstraint extends AbstractCardinalityContraint {
+public interface RolePlayerConstraint extends AbstractCardinalityConstraint {
 	/**
 	 * Returns the value of the '<em><b>Player</b></em>' reference.
 	 * <!-- begin-user-doc -->

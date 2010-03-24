@@ -82,6 +82,7 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
@@ -148,7 +149,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 
 	public static final int MODEL_LOADED = 12345;
-	
+
 	private TreeViewer viewer;
 	private ViewContentProvider contentProvider;
 	private Action validationAction;
@@ -174,9 +175,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	};
 
 	private RenameAction renameAction;
-	
+
 	private CreateDiagramAction createDiagramAction;
-	
+
 	private CreateDomainDiagramAction createDomainDiagramAction;
 
 	private CreateTopicAction createTopicAction;
@@ -228,7 +229,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@SuppressWarnings("unchecked")
-            public void selectionChanged(SelectionChangedEvent event) {
+			public void selectionChanged(SelectionChangedEvent event) {
 				if (currFile == null) {
 					currentSelection = new StructuredSelection();
 					return;
@@ -239,7 +240,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					currentSelection = new StructuredSelection(currFile);
 					createTopicAction.setEnabled(false);
 				} else {
-					
+
 					TreeObject to = (TreeObject) sel.getFirstElement();
 					createTopicAction.setEnabled(false);
 					createDiagramAction.setEnabled(false);
@@ -254,12 +255,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					createTopicAction.setKindOfTopicType(to.getKindOfTopicType());
 					if (to.getModel() == null)
 						currentSelection = new StructuredSelection(currFile);
-					
+
 					Iterator<Object> it = sel.iterator();
 					List<OnoObject> list = new ArrayList<OnoObject>();
 					while (it.hasNext()) {
 						to = (TreeObject) it.next();
-						if (to.getModel()!=null)
+						if (to.getModel() != null)
 							list.add((OnoObject) to.getModel());
 					}
 					currentSelection = new StructuredSelection(list);
@@ -338,16 +339,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	@Override
 	public void init(IViewSite site, IMemento memento) throws PartInitException {
 		init(site);
-		
+
 		IPreferenceStore pref = TmcleditEditPlugin.getPlugin().getPreferenceStore();
 		String filename = pref.getString(PreferenceConstants.P_LOADFILE);
-		if ( (filename!=null) && (filename.length()>0) ) {
+		if ((filename != null) && (filename.length() > 0)) {
 			setFilename(filename, false);
 			pref.setValue(PreferenceConstants.P_LOADFILE, "");
 			return;
 		}
-		
-		
+
 		if (memento == null)
 			return;
 
@@ -366,8 +366,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					currDiagram = d;
 			}
 			if (currDiagram != null) {
-				String id = (currDiagram instanceof DomainDiagram) ? TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
-				
+				String id = (currDiagram instanceof DomainDiagram) ? TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID
+				        : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
+
 				getViewSite().getPage().openEditor(
 				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), this, true), id);
 			}
@@ -437,32 +438,31 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		if (currFile==null) {
+		if (currFile == null) {
 			return;
 		}
-		
+
 		if (createDiagramAction.isEnabled())
 			manager.add(createDiagramAction);
-		
+
 		if (createDomainDiagramAction.isEnabled())
 			manager.add(createDomainDiagramAction);
-		
+
 		if (createTopicAction.isEnabled())
 			manager.add(createTopicAction);
 
 		if (renameAction.isEnabled()) {
 			manager.add(renameAction);
 		}
-		
+
 		if (deleteDiagramAction.isEnabled())
 			manager.add(deleteDiagramAction);
-		
+
 		if (deleteTopicTypeAction.isEnabled())
 			manager.add(deleteTopicTypeAction);
-		
-		
+
 		manager.add(new Separator());
-		
+
 		if (createNameConstraintAction.isEnabled())
 			manager.add(createNameConstraintAction);
 		if (createOccurrenceConstraintAction.isEnabled())
@@ -471,7 +471,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			manager.add(createSubjectIdenifierConstraintAction);
 		if (createSubjectLocatorConstraintAction.isEnabled())
 			manager.add(createSubjectLocatorConstraintAction);
-		
 
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
@@ -500,7 +499,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		createDomainDiagramAction = new CreateDomainDiagramAction(this);
 		createTopicAction = new CreateTopicAction(this);
 		renameAction = new RenameAction(this);
-		
+
 		createNameConstraintAction = new CreateNameConstraintAction(this);
 		createOccurrenceConstraintAction = new CreateOccurrenceConstraintAction(this);
 		createSubjectIdenifierConstraintAction = new CreateSubjectIdenifierConstraintAction(this);
@@ -561,7 +560,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public CommandStack getCommandStack() {
 		return getEditingDomain().getCommandStack();
 	}
-	
+
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		if (listeners == Collections.EMPTY_LIST)
 			listeners = new ArrayList<ISelectionChangedListener>();
@@ -604,12 +603,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public void setFilename(String filename, boolean newFile) {
-		if (getViewSite() != null) {
+		IViewSite viewSite = getViewSite();
+		if (viewSite != null) {
 
-			IWorkbenchPage page = getViewSite().getPage();
+			IWorkbenchPage page = viewSite.getPage();
 			if (currFile != null) {
-//				if ( (!currFile.isDirty()) && (currFile.getFilename().equals(filename))
-//					return;
+				// if ( (!currFile.isDirty()) &&
+				// (currFile.getFilename().equals(filename))
+				// return;
 
 				currFile.eAdapters().remove(dirtyListener);
 
@@ -647,7 +648,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			} else {
 				currFile = ModelFactory.eINSTANCE.createFile();
 				currFile.setTopicMapSchema(ModelFactory.eINSTANCE.createTopicMapSchema());
-				if (filename.length()>0)
+				if (filename.length() > 0)
 					currFile.setFilename(filename);
 			}
 			currFile.eAdapters().add(dirtyListener);
@@ -670,11 +671,22 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			viewer.refresh();
 			viewer.expandToLevel(2);
 		}
+
+		// inform NotesView
+		if (viewSite != null) {
+			IWorkbenchWindow workbenchWindow = viewSite.getWorkbenchWindow();
+			IWorkbenchPage activePage = workbenchWindow.getActivePage();
+			if (activePage != null) {
+				IViewPart notesView = activePage.findView(NotesView.ID);
+				if (notesView != null)
+					((NotesView) notesView).update();
+			}
+		}
 	}
 
 	private void updateTitle(String filename) {
 		if (filename != null) {
-			if (filename.length()==0)
+			if (filename.length() == 0)
 				filename = "New File...";
 			getSite().getShell().setText("Onotoa - " + filename);
 		} else {
@@ -717,6 +729,12 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		if (adapter == ActionRegistry.class)
 			return getActionRegistry();
 
+		if (adapter == File.class)
+			return currFile;
+
+		if (adapter == CommandStack.class)
+			return getEditingDomain().getCommandStack();
+
 		return super.getAdapter(adapter);
 	}
 
@@ -751,7 +769,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public void saveState(IMemento memento) {
 		String text = "null";
 
-		if ( (currFile != null) && (currFile.getFilename()!=null) ){
+		if ((currFile != null) && (currFile.getFilename() != null)) {
 			java.io.File file = new java.io.File(currFile.getFilename());
 			if (file.exists())
 				text = currFile.getFilename();
@@ -762,9 +780,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		int i = 0;
 		for (IEditorReference ref : getViewSite().getPage().getEditorReferences()) {
 			IEditorPart part = ref.getEditor(false);
-			if (part!=null) {
-				if ( (ref.getId().equals(TmcleditEditPlugin.DIAGRAMEDITOR_ID)) 
-				    || (ref.getId().equals(TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID)) ) {
+			if (part != null) {
+				if ((ref.getId().equals(TmcleditEditPlugin.DIAGRAMEDITOR_ID))
+				        || (ref.getId().equals(TmcleditEditPlugin.DOMAIN_DIAGRAMEDITOR_ID))) {
 					i++;
 					TMCLEditorInput ei = (TMCLEditorInput) part.getEditorInput();
 					IMemento partChild = memento.createChild("editor");
@@ -782,11 +800,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	public void doSave(IProgressMonitor monitor) {
 		try {
-			if (currFile.getFilename()==null) {
+			if (currFile.getFilename() == null) {
 				doSaveAs();
 				return;
 			}
-			
+
 			FileUtil.saveFile((File) currFile, getEditingDomain());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -815,7 +833,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public boolean isSaveAsAllowed() {
-		return (currFile!=null);
+		return (currFile != null);
 	}
 
 	public boolean isSaveOnCloseNeeded() {
@@ -964,7 +982,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			invisibleRoot = new TreeParent(ModelView.this, "");
 			if (currFile != null) {
 				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema", TreeObject.TOPIC_MAP_SCHEMA);
-				
+
 				schemaNode.setModel(getCurrentTopicMapSchema());
 				diagramNode = new TreeParent(ModelView.this, "Diagrams", TreeObject.DIAGRAMS);
 

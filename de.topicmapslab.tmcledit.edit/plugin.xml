@@ -44,6 +44,12 @@
             name="Error View"
             restorable="true">
       </view>
+      <view
+            class="de.topicmapslab.tmcledit.model.views.NotesView"
+            id="de.topicmapslab.tmcledit.model.views.NotesView"
+            name="Notes"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

@@ -107,7 +107,7 @@ public class ModelSwitch<T> {
 				OccurrenceTypeConstraint occurrenceTypeConstraint = (OccurrenceTypeConstraint)theEObject;
 				T result = caseOccurrenceTypeConstraint(occurrenceTypeConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(occurrenceTypeConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(occurrenceTypeConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(occurrenceTypeConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(occurrenceTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(occurrenceTypeConstraint);
 				if (result == null) result = caseTMCLConstruct(occurrenceTypeConstraint);
@@ -119,7 +119,7 @@ public class ModelSwitch<T> {
 				NameTypeConstraint nameTypeConstraint = (NameTypeConstraint)theEObject;
 				T result = caseNameTypeConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(nameTypeConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(nameTypeConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(nameTypeConstraint);
 				if (result == null) result = caseAbstractConstraint(nameTypeConstraint);
 				if (result == null) result = caseTMCLConstruct(nameTypeConstraint);
@@ -130,7 +130,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.ROLE_PLAYER_CONSTRAINT: {
 				RolePlayerConstraint rolePlayerConstraint = (RolePlayerConstraint)theEObject;
 				T result = caseRolePlayerConstraint(rolePlayerConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(rolePlayerConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(rolePlayerConstraint);
 				if (result == null) result = caseAbstractConstraint(rolePlayerConstraint);
 				if (result == null) result = caseTMCLConstruct(rolePlayerConstraint);
 				if (result == null) result = caseOnoObject(rolePlayerConstraint);
@@ -149,7 +149,7 @@ public class ModelSwitch<T> {
 				SubjectLocatorConstraint subjectLocatorConstraint = (SubjectLocatorConstraint)theEObject;
 				T result = caseSubjectLocatorConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseAbstractRegExpConstraint(subjectLocatorConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(subjectLocatorConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectLocatorConstraint);
 				if (result == null) result = caseTMCLConstruct(subjectLocatorConstraint);
 				if (result == null) result = caseOnoObject(subjectLocatorConstraint);
@@ -160,7 +160,7 @@ public class ModelSwitch<T> {
 				SubjectIdentifierConstraint subjectIdentifierConstraint = (SubjectIdentifierConstraint)theEObject;
 				T result = caseSubjectIdentifierConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseAbstractRegExpConstraint(subjectIdentifierConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(subjectIdentifierConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseAbstractConstraint(subjectIdentifierConstraint);
 				if (result == null) result = caseTMCLConstruct(subjectIdentifierConstraint);
 				if (result == null) result = caseOnoObject(subjectIdentifierConstraint);
@@ -239,7 +239,7 @@ public class ModelSwitch<T> {
 				ScopeConstraint scopeConstraint = (ScopeConstraint)theEObject;
 				T result = caseScopeConstraint(scopeConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(scopeConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(scopeConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(scopeConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(scopeConstraint);
 				if (result == null) result = caseAbstractConstraint(scopeConstraint);
 				if (result == null) result = caseTMCLConstruct(scopeConstraint);
@@ -247,12 +247,12 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT: {
-				AbstractCardinalityContraint abstractCardinalityContraint = (AbstractCardinalityContraint)theEObject;
-				T result = caseAbstractCardinalityContraint(abstractCardinalityContraint);
-				if (result == null) result = caseAbstractConstraint(abstractCardinalityContraint);
-				if (result == null) result = caseTMCLConstruct(abstractCardinalityContraint);
-				if (result == null) result = caseOnoObject(abstractCardinalityContraint);
+			case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT: {
+				AbstractCardinalityConstraint abstractCardinalityConstraint = (AbstractCardinalityConstraint)theEObject;
+				T result = caseAbstractCardinalityConstraint(abstractCardinalityConstraint);
+				if (result == null) result = caseAbstractConstraint(abstractCardinalityConstraint);
+				if (result == null) result = caseTMCLConstruct(abstractCardinalityConstraint);
+				if (result == null) result = caseOnoObject(abstractCardinalityConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -311,7 +311,7 @@ public class ModelSwitch<T> {
 				RoleConstraint roleConstraint = (RoleConstraint)theEObject;
 				T result = caseRoleConstraint(roleConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(roleConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(roleConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(roleConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(roleConstraint);
 				if (result == null) result = caseAbstractConstraint(roleConstraint);
 				if (result == null) result = caseTMCLConstruct(roleConstraint);
@@ -354,7 +354,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.ABSTRACT_TYPED_CARDINALITY_CONSTRAINT: {
 				AbstractTypedCardinalityConstraint abstractTypedCardinalityConstraint = (AbstractTypedCardinalityConstraint)theEObject;
 				T result = caseAbstractTypedCardinalityConstraint(abstractTypedCardinalityConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(abstractTypedCardinalityConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(abstractTypedCardinalityConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(abstractTypedCardinalityConstraint);
 				if (result == null) result = caseAbstractConstraint(abstractTypedCardinalityConstraint);
 				if (result == null) result = caseTMCLConstruct(abstractTypedCardinalityConstraint);
@@ -381,7 +381,7 @@ public class ModelSwitch<T> {
 				ReifierConstraint reifierConstraint = (ReifierConstraint)theEObject;
 				T result = caseReifierConstraint(reifierConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(reifierConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(reifierConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(reifierConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(reifierConstraint);
 				if (result == null) result = caseAbstractConstraint(reifierConstraint);
 				if (result == null) result = caseTMCLConstruct(reifierConstraint);
@@ -437,7 +437,7 @@ public class ModelSwitch<T> {
 				TopicReifiesConstraint topicReifiesConstraint = (TopicReifiesConstraint)theEObject;
 				T result = caseTopicReifiesConstraint(topicReifiesConstraint);
 				if (result == null) result = caseAbstractTypedCardinalityConstraint(topicReifiesConstraint);
-				if (result == null) result = caseAbstractCardinalityContraint(topicReifiesConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(topicReifiesConstraint);
 				if (result == null) result = caseAbstractTypedConstraint(topicReifiesConstraint);
 				if (result == null) result = caseAbstractConstraint(topicReifiesConstraint);
 				if (result == null) result = caseTMCLConstruct(topicReifiesConstraint);
@@ -743,17 +743,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Cardinality Contraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Cardinality Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Cardinality Contraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Cardinality Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractCardinalityContraint(AbstractCardinalityContraint object) {
+	public T caseAbstractCardinalityConstraint(AbstractCardinalityConstraint object) {
 		return null;
 	}
 

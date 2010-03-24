@@ -479,14 +479,14 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_REG_EXP_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityContraintImpl <em>Abstract Cardinality Contraint</em>}' class.
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityConstraintImpl <em>Abstract Cardinality Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.topicmapslab.tmcledit.model.impl.AbstractCardinalityContraintImpl
-	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractCardinalityContraint()
+	 * @see de.topicmapslab.tmcledit.model.impl.AbstractCardinalityConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractCardinalityConstraint()
 	 * @generated
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT = 18;
+	int ABSTRACT_CARDINALITY_CONSTRAINT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -495,7 +495,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__ID = ABSTRACT_CONSTRAINT__ID;
+	int ABSTRACT_CARDINALITY_CONSTRAINT__ID = ABSTRACT_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -504,7 +504,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__SEE_ALSO = ABSTRACT_CONSTRAINT__SEE_ALSO;
+	int ABSTRACT_CARDINALITY_CONSTRAINT__SEE_ALSO = ABSTRACT_CONSTRAINT__SEE_ALSO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -513,7 +513,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__COMMENT = ABSTRACT_CONSTRAINT__COMMENT;
+	int ABSTRACT_CARDINALITY_CONSTRAINT__COMMENT = ABSTRACT_CONSTRAINT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -522,7 +522,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION = ABSTRACT_CONSTRAINT__DESCRIPTION;
+	int ABSTRACT_CARDINALITY_CONSTRAINT__DESCRIPTION = ABSTRACT_CONSTRAINT__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -531,7 +531,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__ANNOTATIONS = ABSTRACT_CONSTRAINT__ANNOTATIONS;
+	int ABSTRACT_CARDINALITY_CONSTRAINT__ANNOTATIONS = ABSTRACT_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -540,7 +540,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
+	int ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -549,16 +549,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
+	int ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Abstract Cardinality Contraint</em>' class.
+	 * The number of structural features of the '<em>Abstract Cardinality Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 2;
+	int ABSTRACT_CARDINALITY_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractTypedCardinalityConstraintImpl <em>Abstract Typed Cardinality Constraint</em>}' class.
@@ -577,7 +577,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID = ABSTRACT_CARDINALITY_CONTRAINT__ID;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ID = ABSTRACT_CARDINALITY_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -586,7 +586,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__SEE_ALSO = ABSTRACT_CARDINALITY_CONTRAINT__SEE_ALSO;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__SEE_ALSO = ABSTRACT_CARDINALITY_CONSTRAINT__SEE_ALSO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -595,7 +595,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__COMMENT = ABSTRACT_CARDINALITY_CONTRAINT__COMMENT;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__COMMENT = ABSTRACT_CARDINALITY_CONSTRAINT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -604,7 +604,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONSTRAINT__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -613,7 +613,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS = ABSTRACT_CARDINALITY_CONTRAINT__ANNOTATIONS;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__ANNOTATIONS = ABSTRACT_CARDINALITY_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -622,7 +622,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -631,7 +631,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -640,7 +640,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT__TYPE = ABSTRACT_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Typed Cardinality Constraint</em>' class.
@@ -649,7 +649,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
+	int ABSTRACT_TYPED_CARDINALITY_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.OccurrenceTypeConstraintImpl <em>Occurrence Type Constraint</em>}' class.
@@ -850,7 +850,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__ID = ABSTRACT_CARDINALITY_CONTRAINT__ID;
+	int ROLE_PLAYER_CONSTRAINT__ID = ABSTRACT_CARDINALITY_CONSTRAINT__ID;
 
 	/**
 	 * The feature id for the '<em><b>See also</b></em>' attribute.
@@ -859,7 +859,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__SEE_ALSO = ABSTRACT_CARDINALITY_CONTRAINT__SEE_ALSO;
+	int ROLE_PLAYER_CONSTRAINT__SEE_ALSO = ABSTRACT_CARDINALITY_CONSTRAINT__SEE_ALSO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -868,7 +868,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__COMMENT = ABSTRACT_CARDINALITY_CONTRAINT__COMMENT;
+	int ROLE_PLAYER_CONSTRAINT__COMMENT = ABSTRACT_CARDINALITY_CONSTRAINT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -877,7 +877,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONTRAINT__DESCRIPTION;
+	int ROLE_PLAYER_CONSTRAINT__DESCRIPTION = ABSTRACT_CARDINALITY_CONSTRAINT__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -886,7 +886,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__ANNOTATIONS = ABSTRACT_CARDINALITY_CONTRAINT__ANNOTATIONS;
+	int ROLE_PLAYER_CONSTRAINT__ANNOTATIONS = ABSTRACT_CARDINALITY_CONSTRAINT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -895,7 +895,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
+	int ROLE_PLAYER_CONSTRAINT__CARD_MIN = ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -904,7 +904,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
+	int ROLE_PLAYER_CONSTRAINT__CARD_MAX = ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX;
 
 	/**
 	 * The feature id for the '<em><b>Player</b></em>' reference.
@@ -913,7 +913,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__PLAYER = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 0;
+	int ROLE_PLAYER_CONSTRAINT__PLAYER = ABSTRACT_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' reference.
@@ -922,7 +922,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT__ROLE = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 1;
+	int ROLE_PLAYER_CONSTRAINT__ROLE = ABSTRACT_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Role Player Constraint</em>' class.
@@ -931,7 +931,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_PLAYER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONTRAINT_FEATURE_COUNT + 2;
+	int ROLE_PLAYER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_CARDINALITY_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl <em>Topic Map Schema</em>}' class.
@@ -1847,13 +1847,22 @@ public interface ModelPackage extends EPackage {
 	int FILE__DIRTY = ONO_OBJECT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Notes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__NOTES = ONO_OBJECT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>File</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 4;
+	int FILE_FEATURE_COUNT = ONO_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl <em>Scope Constraint</em>}' class.
@@ -5148,6 +5157,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getFile_Dirty();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.File#getNotes <em>Notes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Notes</em>'.
+	 * @see de.topicmapslab.tmcledit.model.File#getNotes()
+	 * @see #getFile()
+	 * @generated
+	 */
+	EAttribute getFile_Notes();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ScopeConstraint <em>Scope Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5158,36 +5178,36 @@ public interface ModelPackage extends EPackage {
 	EClass getScopeConstraint();
 
 	/**
-	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint <em>Abstract Cardinality Contraint</em>}'.
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint <em>Abstract Cardinality Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Cardinality Contraint</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityContraint
+	 * @return the meta object for class '<em>Abstract Cardinality Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint
 	 * @generated
 	 */
-	EClass getAbstractCardinalityContraint();
+	EClass getAbstractCardinalityConstraint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMin <em>Card Min</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMin <em>Card Min</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Card Min</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMin()
-	 * @see #getAbstractCardinalityContraint()
+	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMin()
+	 * @see #getAbstractCardinalityConstraint()
 	 * @generated
 	 */
-	EAttribute getAbstractCardinalityContraint_CardMin();
+	EAttribute getAbstractCardinalityConstraint_CardMin();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMax <em>Card Max</em>}'.
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMax <em>Card Max</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Card Max</em>'.
-	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityContraint#getCardMax()
-	 * @see #getAbstractCardinalityContraint()
+	 * @see de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint#getCardMax()
+	 * @see #getAbstractCardinalityConstraint()
 	 * @generated
 	 */
-	EAttribute getAbstractCardinalityContraint_CardMax();
+	EAttribute getAbstractCardinalityConstraint_CardMax();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.LabelPos <em>Label Pos</em>}'.
@@ -6272,6 +6292,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute FILE__DIRTY = eINSTANCE.getFile_Dirty();
 
 		/**
+		 * The meta object literal for the '<em><b>Notes</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE__NOTES = eINSTANCE.getFile_Notes();
+
+		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ScopeConstraintImpl <em>Scope Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6282,14 +6310,14 @@ public interface ModelPackage extends EPackage {
 		EClass SCOPE_CONSTRAINT = eINSTANCE.getScopeConstraint();
 
 		/**
-		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityContraintImpl <em>Abstract Cardinality Contraint</em>}' class.
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractCardinalityConstraintImpl <em>Abstract Cardinality Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.topicmapslab.tmcledit.model.impl.AbstractCardinalityContraintImpl
-		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractCardinalityContraint()
+		 * @see de.topicmapslab.tmcledit.model.impl.AbstractCardinalityConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getAbstractCardinalityConstraint()
 		 * @generated
 		 */
-		EClass ABSTRACT_CARDINALITY_CONTRAINT = eINSTANCE.getAbstractCardinalityContraint();
+		EClass ABSTRACT_CARDINALITY_CONSTRAINT = eINSTANCE.getAbstractCardinalityConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Card Min</b></em>' attribute feature.
@@ -6297,7 +6325,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN = eINSTANCE.getAbstractCardinalityContraint_CardMin();
+		EAttribute ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN = eINSTANCE.getAbstractCardinalityConstraint_CardMin();
 
 		/**
 		 * The meta object literal for the '<em><b>Card Max</b></em>' attribute feature.
@@ -6305,7 +6333,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX = eINSTANCE.getAbstractCardinalityContraint_CardMax();
+		EAttribute ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX = eINSTANCE.getAbstractCardinalityConstraint_CardMax();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.LabelPosImpl <em>Label Pos</em>}' class.

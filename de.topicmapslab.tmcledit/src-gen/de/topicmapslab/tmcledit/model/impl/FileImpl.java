@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#getTopicMapSchema <em>Topic Map Schema</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#getFilename <em>Filename</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#isDirty <em>Dirty</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.FileImpl#getNotes <em>Notes</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,6 +101,26 @@ public class FileImpl extends OnoObjectImpl implements File {
 	 * @ordered
 	 */
 	protected boolean dirty = DIRTY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNotes() <em>Notes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNotes()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NOTES_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNotes() <em>Notes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNotes()
+	 * @generated
+	 * @ordered
+	 */
+	protected String notes = NOTES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,6 +243,27 @@ public class FileImpl extends OnoObjectImpl implements File {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getNotes() {
+		return notes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNotes(String newNotes) {
+		String oldNotes = notes;
+		notes = newNotes;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.FILE__NOTES, oldNotes, notes));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -249,6 +291,8 @@ public class FileImpl extends OnoObjectImpl implements File {
 				return getFilename();
 			case ModelPackage.FILE__DIRTY:
 				return isDirty() ? Boolean.TRUE : Boolean.FALSE;
+			case ModelPackage.FILE__NOTES:
+				return getNotes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -275,6 +319,9 @@ public class FileImpl extends OnoObjectImpl implements File {
 			case ModelPackage.FILE__DIRTY:
 				setDirty(((Boolean)newValue).booleanValue());
 				return;
+			case ModelPackage.FILE__NOTES:
+				setNotes((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -299,6 +346,9 @@ public class FileImpl extends OnoObjectImpl implements File {
 			case ModelPackage.FILE__DIRTY:
 				setDirty(DIRTY_EDEFAULT);
 				return;
+			case ModelPackage.FILE__NOTES:
+				setNotes(NOTES_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -319,6 +369,8 @@ public class FileImpl extends OnoObjectImpl implements File {
 				return FILENAME_EDEFAULT == null ? filename != null : !FILENAME_EDEFAULT.equals(filename);
 			case ModelPackage.FILE__DIRTY:
 				return dirty != DIRTY_EDEFAULT;
+			case ModelPackage.FILE__NOTES:
+				return NOTES_EDEFAULT == null ? notes != null : !NOTES_EDEFAULT.equals(notes);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -337,6 +389,8 @@ public class FileImpl extends OnoObjectImpl implements File {
 		result.append(filename);
 		result.append(", dirty: ");
 		result.append(dirty);
+		result.append(", notes: ");
+		result.append(notes);
 		result.append(')');
 		return result.toString();
 	}

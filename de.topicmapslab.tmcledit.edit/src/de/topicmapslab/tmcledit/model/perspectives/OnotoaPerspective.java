@@ -15,6 +15,7 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
 import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.model.views.NotesView;
 import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
 /**
@@ -39,6 +40,9 @@ public class OnotoaPerspective implements IPerspectiveFactory {
 		IFolderLayout bottom = layout.createFolder(
 				"bottom", IPageLayout.BOTTOM, 0.75f, layout.getEditorArea()); //$NON-NLS-1$
 		bottom.addView(PropertyDetailView.ID);
+		
+		layout.addView(NotesView.ID, IPageLayout.RIGHT, 0.4f, "botton");
+		
 		
 		
 				   

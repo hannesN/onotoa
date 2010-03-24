@@ -5,15 +5,13 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -206,10 +204,10 @@ public class SubjectIdentifierConstraintImpl extends AbstractRegExpConstraintImp
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == AbstractCardinalityContraint.class) {
+		if (baseClass == AbstractCardinalityConstraint.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MIN: return ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN;
-				case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MAX: return ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX;
+				case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MIN: return ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN;
+				case ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MAX: return ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX;
 				default: return -1;
 			}
 		}
@@ -223,10 +221,10 @@ public class SubjectIdentifierConstraintImpl extends AbstractRegExpConstraintImp
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == AbstractCardinalityContraint.class) {
+		if (baseClass == AbstractCardinalityConstraint.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MIN: return ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MIN;
-				case ModelPackage.ABSTRACT_CARDINALITY_CONTRAINT__CARD_MAX: return ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MAX;
+				case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MIN: return ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MIN;
+				case ModelPackage.ABSTRACT_CARDINALITY_CONSTRAINT__CARD_MAX: return ModelPackage.SUBJECT_IDENTIFIER_CONSTRAINT__CARD_MAX;
 				default: return -1;
 			}
 		}

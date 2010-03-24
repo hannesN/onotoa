@@ -12,11 +12,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.tinytim.mio.CTMTopicMapReader;
-import org.tinytim.mio.LTMTopicMapReader;
-import org.tinytim.mio.TopicMapReader;
-import org.tinytim.mio.XTMTopicMapReader;
 import org.tmapi.core.TopicMap;
+import org.tmapix.io.CTMTopicMapReader;
+import org.tmapix.io.LTMTopicMapReader;
+import org.tmapix.io.TopicMapReader;
+import org.tmapix.io.XTMTopicMapReader;
 
 import de.topicmapslab.tmcledit.tmclimport.Activator;
 

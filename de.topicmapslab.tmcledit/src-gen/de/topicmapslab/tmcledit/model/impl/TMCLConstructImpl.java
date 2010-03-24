@@ -308,6 +308,26 @@ public class TMCLConstructImpl extends OnoObjectImpl implements TMCLConstruct {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (see_also: ");
+		result.append(see_also);
+		result.append(", comment: ");
+		result.append(comment);
+		result.append(", description: ");
+		result.append(description);
+		result.append(')');
+		return result.toString();
+	}
+
 	
 
 
