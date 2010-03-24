@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.NameType;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -435,6 +437,73 @@ public class TopicTypeTest {
 		oTypeConstraint4.setType(topicType2);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		oTypeConstraint4.setType(topicType1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
+
+	@Test
+	public void nameConstraintTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		NameTypeConstraint nTypeConstraint1 = ModelFactory.eINSTANCE
+				.createNameTypeConstraint();
+		NameTypeConstraint nTypeConstraint2 = ModelFactory.eINSTANCE
+				.createNameTypeConstraint();
+		NameTypeConstraint nTypeConstraint3 = ModelFactory.eINSTANCE
+				.createNameTypeConstraint();
+		NameTypeConstraint nTypeConstraint4 = ModelFactory.eINSTANCE
+				.createNameTypeConstraint();
+
+		/*
+		 * add the same NameTypeConstraint into both lists, which is not
+		 * possible.
+		 */
+		testObject1.getNameContraints().add(nTypeConstraint1);
+		testObject2.getNameContraints().add(nTypeConstraint1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// add an equal NameTypeConstraint into list #1
+		testObject1.getNameContraints().add(nTypeConstraint2);
+		nTypeConstraint2.setId(nTypeConstraint1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// test different list lengths and different entries
+		testObject1.getNameContraints().add(nTypeConstraint3);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getNameContraints().add(nTypeConstraint4);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make list entry #2 equal
+		nTypeConstraint4.setId(nTypeConstraint3.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMax of list entry #2
+		nTypeConstraint3.setCardMax("5");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		nTypeConstraint4.setCardMax("5");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMin of list entry #2
+		nTypeConstraint3.setCardMin("1");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		nTypeConstraint4.setCardMin("1");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit see_Also of list entry #2
+		nTypeConstraint3.setSee_also("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		nTypeConstraint4.setSee_also("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// set topic types of list entry #2
+		TopicType topicType1 = ModelFactory.eINSTANCE.createTopicType();
+		TopicType topicType2 = ModelFactory.eINSTANCE.createTopicType();
+
+		nTypeConstraint3.setType(topicType1);
+		nTypeConstraint4.setType(topicType2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		nTypeConstraint4.setType(topicType1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 	}
