@@ -11,13 +11,33 @@ import de.topicmapslab.tmcledit.model.tests.AbstractTypedCardinalityConstraintTe
 
 import junit.textui.TestRunner;
 
-/**
- * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Occurrence Type Constraint</b></em>'.
- * <!-- end-user-doc -->
- * @generated
- */
-public class OccurrenceTypeConstraintComparator extends AbstractTypedCardinalityConstraintComparator{
+public class OccurrenceTypeConstraintComparator extends
+		AbstractTypedCardinalityConstraintComparator {
 
-	
-} //OccurrenceTypeConstraintTest
+	public boolean equals(OccurrenceTypeConstraint o1,
+			OccurrenceTypeConstraint o2) {
+
+		if ((o1 == null) ^ (o2 == null))
+			return false;
+
+		if ((o1 == null) && (o2 == null))
+			return true;
+
+		if (super.equals(o1, o2) == false)
+			return false;
+
+		if (stringCompare(o1.getCardMin(), o2.getCardMin()) == false)
+			return false;
+
+		if (stringCompare(o1.getCardMax(), o2.getCardMax()) == false)
+			return false;
+
+		TopicTypeComparator comp = new TopicTypeComparator();
+
+		if (comp.equals(o1.getType(), o2.getType()) == false)
+			return false;
+
+		return true;
+	}
+
+} // OccurrenceTypeConstraintTest
