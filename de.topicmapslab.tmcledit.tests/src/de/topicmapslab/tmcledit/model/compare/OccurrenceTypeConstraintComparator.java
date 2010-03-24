@@ -5,11 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.compare;
 
-import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.tests.AbstractTypedCardinalityConstraintTest;
-
-import junit.textui.TestRunner;
 
 public class OccurrenceTypeConstraintComparator extends
 		AbstractTypedCardinalityConstraintComparator {

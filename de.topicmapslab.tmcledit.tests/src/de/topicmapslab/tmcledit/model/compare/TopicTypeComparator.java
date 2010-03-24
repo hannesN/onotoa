@@ -7,6 +7,8 @@
 package de.topicmapslab.tmcledit.model.compare;
 
 import org.eclipse.emf.common.util.EList;
+
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -60,9 +62,33 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 
 		if (stringListCompare(o1.getIdentifiers(), o2.getIdentifiers()) == false)
 			return false;
-		
+
+		if (o1.getOccurrenceConstraints().size() != o2
+				.getOccurrenceConstraints().size())
+			return false;
+
+		if (oConstraintListCompare(o1.getOccurrenceConstraints(), o2
+				.getOccurrenceConstraints()) == false)
+			return false;
+
 		return true;
 
+	}
+
+	protected boolean oConstraintListCompare(
+			EList<OccurrenceTypeConstraint> list1,
+			EList<OccurrenceTypeConstraint> list2) {
+
+		OccurrenceTypeConstraintComparator comp = new OccurrenceTypeConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
 	}
 
 	/**
@@ -80,9 +106,9 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 
 		for (int i = 0; i < list1.size(); i++) {
 
-			if (comp.equals(list1.get(i), list2.get(i)) == false) {
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
 				return false;
-			}
+
 		}
 		return true;
 	}
