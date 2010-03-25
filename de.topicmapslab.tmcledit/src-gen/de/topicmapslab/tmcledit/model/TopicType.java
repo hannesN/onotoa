@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getIsa <em>Isa</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getAko <em>Ako</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getOccurrenceConstraints <em>Occurrence Constraints</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getNameContraints <em>Name Contraints</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getNameConstraints <em>Name Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectLocatorConstraints <em>Subject Locator Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getKind <em>Kind</em>}</li>
@@ -159,20 +159,20 @@ public interface TopicType extends TMCLConstruct {
 	EList<OccurrenceTypeConstraint> getOccurrenceConstraints();
 
 	/**
-	 * Returns the value of the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.NameTypeConstraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name Contraints</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Name Constraints</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name Contraints</em>' containment reference list.
-	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_NameContraints()
+	 * @return the value of the '<em>Name Constraints</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_NameConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<NameTypeConstraint> getNameContraints();
+	EList<NameTypeConstraint> getNameConstraints();
 
 	/**
 	 * Returns the value of the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.

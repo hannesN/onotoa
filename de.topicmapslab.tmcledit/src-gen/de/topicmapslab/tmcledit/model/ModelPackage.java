@@ -261,13 +261,13 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE__NAME_CONTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 6;
+	int TOPIC_TYPE__NAME_CONSTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -2111,13 +2111,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_TOPIC_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
+	int SCOPED_TOPIC_TYPE__NAME_CONSTRAINTS = TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -2310,13 +2310,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_TYPE__OCCURRENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TYPE__NAME_CONTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONTRAINTS;
+	int ASSOCIATION_TYPE__NAME_CONSTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -2536,13 +2536,13 @@ public interface ModelPackage extends EPackage {
 	int OCCURRENCE_TYPE__OCCURRENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OCCURRENCE_TYPE__NAME_CONTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONTRAINTS;
+	int OCCURRENCE_TYPE__NAME_CONSTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -2862,13 +2862,13 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
+	int ROLE_TYPE__NAME_CONSTRAINTS = TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -3152,13 +3152,13 @@ public interface ModelPackage extends EPackage {
 	int NAME_TYPE__OCCURRENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAME_TYPE__NAME_CONTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONTRAINTS;
+	int NAME_TYPE__NAME_CONSTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -3542,13 +3542,13 @@ public interface ModelPackage extends EPackage {
 	int REIFIABLE_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REIFIABLE_TOPIC_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
+	int REIFIABLE_TOPIC_TYPE__NAME_CONSTRAINTS = TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -3741,13 +3741,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_REIFIABLE_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = SCOPED_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPED_REIFIABLE_TOPIC_TYPE__NAME_CONTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONTRAINTS;
+	int SCOPED_REIFIABLE_TOPIC_TYPE__NAME_CONSTRAINTS = SCOPED_TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -3995,13 +3995,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_REG_EXP_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_REG_EXP_TOPIC_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
+	int ABSTRACT_REG_EXP_TOPIC_TYPE__NAME_CONSTRAINTS = TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -4349,13 +4349,13 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Name Contraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__NAME_CONTRAINTS = TOPIC_TYPE__NAME_CONTRAINTS;
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__NAME_CONSTRAINTS = TOPIC_TYPE__NAME_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list.
@@ -4546,15 +4546,15 @@ public interface ModelPackage extends EPackage {
 	EReference getTopicType_OccurrenceConstraints();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getNameContraints <em>Name Contraints</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getNameConstraints <em>Name Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Name Contraints</em>'.
-	 * @see de.topicmapslab.tmcledit.model.TopicType#getNameContraints()
+	 * @return the meta object for the containment reference list '<em>Name Constraints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getNameConstraints()
 	 * @see #getTopicType()
 	 * @generated
 	 */
-	EReference getTopicType_NameContraints();
+	EReference getTopicType_NameConstraints();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}'.
@@ -5804,12 +5804,12 @@ public interface ModelPackage extends EPackage {
 		EReference TOPIC_TYPE__OCCURRENCE_CONSTRAINTS = eINSTANCE.getTopicType_OccurrenceConstraints();
 
 		/**
-		 * The meta object literal for the '<em><b>Name Contraints</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Name Constraints</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOPIC_TYPE__NAME_CONTRAINTS = eINSTANCE.getTopicType_NameContraints();
+		EReference TOPIC_TYPE__NAME_CONSTRAINTS = eINSTANCE.getTopicType_NameConstraints();
 
 		/**
 		 * The meta object literal for the '<em><b>Subject Identifier Constraints</b></em>' containment reference list feature.

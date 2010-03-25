@@ -64,7 +64,7 @@ public class DeleteTypedConstraintAction extends AbstractCommandStackAction {
 		AbstractCommand cmd;
 		int type = -1;
 		if (model instanceof NameTypeConstraint) {
-			type = ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS;
+			type = ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS;
 		} else if (model instanceof OccurrenceTypeConstraint) {
 			type = ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS;
 		}

@@ -45,7 +45,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getIsa <em>Isa</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getAko <em>Ako</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getOccurrenceConstraints <em>Occurrence Constraints</em>}</li>
- *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getNameContraints <em>Name Contraints</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getNameConstraints <em>Name Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectIdentifierConstraints <em>Subject Identifier Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getSubjectLocatorConstraints <em>Subject Locator Constraints</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getKind <em>Kind</em>}</li>
@@ -140,14 +140,14 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	protected EList<OccurrenceTypeConstraint> occurrenceConstraints;
 
 	/**
-	 * The cached value of the '{@link #getNameContraints() <em>Name Contraints</em>}' containment reference list.
+	 * The cached value of the '{@link #getNameConstraints() <em>Name Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNameContraints()
+	 * @see #getNameConstraints()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<NameTypeConstraint> nameContraints;
+	protected EList<NameTypeConstraint> nameConstraints;
 
 	/**
 	 * The cached value of the '{@link #getSubjectIdentifierConstraints() <em>Subject Identifier Constraints</em>}' containment reference list.
@@ -353,11 +353,11 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<NameTypeConstraint> getNameContraints() {
-		if (nameContraints == null) {
-			nameContraints = new EObjectContainmentEList<NameTypeConstraint>(NameTypeConstraint.class, this, ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS);
+	public EList<NameTypeConstraint> getNameConstraints() {
+		if (nameConstraints == null) {
+			nameConstraints = new EObjectContainmentEList<NameTypeConstraint>(NameTypeConstraint.class, this, ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS);
 		}
-		return nameContraints;
+		return nameConstraints;
 	}
 
 	/**
@@ -472,8 +472,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 		switch (featureID) {
 			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
 				return ((InternalEList<?>)getOccurrenceConstraints()).basicRemove(otherEnd, msgs);
-			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
-				return ((InternalEList<?>)getNameContraints()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS:
+				return ((InternalEList<?>)getNameConstraints()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				return ((InternalEList<?>)getSubjectIdentifierConstraints()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS:
@@ -504,8 +504,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				return getAko();
 			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
 				return getOccurrenceConstraints();
-			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
-				return getNameContraints();
+			case ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS:
+				return getNameConstraints();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				return getSubjectIdentifierConstraints();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS:
@@ -555,9 +555,9 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				getOccurrenceConstraints().clear();
 				getOccurrenceConstraints().addAll((Collection<? extends OccurrenceTypeConstraint>)newValue);
 				return;
-			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
-				getNameContraints().clear();
-				getNameContraints().addAll((Collection<? extends NameTypeConstraint>)newValue);
+			case ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS:
+				getNameConstraints().clear();
+				getNameConstraints().addAll((Collection<? extends NameTypeConstraint>)newValue);
 				return;
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				getSubjectIdentifierConstraints().clear();
@@ -615,8 +615,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
 				getOccurrenceConstraints().clear();
 				return;
-			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
-				getNameContraints().clear();
+			case ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS:
+				getNameConstraints().clear();
 				return;
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				getSubjectIdentifierConstraints().clear();
@@ -663,8 +663,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				return ako != null && !ako.isEmpty();
 			case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
 				return occurrenceConstraints != null && !occurrenceConstraints.isEmpty();
-			case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
-				return nameContraints != null && !nameContraints.isEmpty();
+			case ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS:
+				return nameConstraints != null && !nameConstraints.isEmpty();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS:
 				return subjectIdentifierConstraints != null && !subjectIdentifierConstraints.isEmpty();
 			case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS:

@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.topicmapslab.onotoa.search.dialogs.NonSubjectIdentifierDialog;
-import de.topicmapslab.onotoa.search.dialogs.SubjectIdentifierDialog;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 

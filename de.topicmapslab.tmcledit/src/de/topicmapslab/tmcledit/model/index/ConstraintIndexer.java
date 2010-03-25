@@ -39,7 +39,7 @@ public class ConstraintIndexer {
 		HashSet<AbstractTypedConstraint> result = new HashSet<AbstractTypedConstraint>();
 		
 		for (TopicType topictype : topicMapSchema.getTopicTypes()) {
-			checkConstraints(tt, result, topictype.getNameContraints());
+			checkConstraints(tt, result, topictype.getNameConstraints());
 			checkConstraints(tt, result, topictype.getOccurrenceConstraints());
 			if (tt instanceof ReifiableTopicType) {
 				ReifierConstraint reifierConstraint = ((ReifiableTopicType)tt).getReifierConstraint();

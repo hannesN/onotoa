@@ -745,7 +745,7 @@ public class OnotoaBuilder {
 		ntc.setType(nt);
 		setCardinality(constr, ntc);
 		setDocumentation(ntc, constr);
-		tt.getNameContraints().add(ntc);
+		tt.getNameConstraints().add(ntc);
 	}
 
 	private void setCardinality(Topic constr, AbstractCardinalityConstraint cc) {

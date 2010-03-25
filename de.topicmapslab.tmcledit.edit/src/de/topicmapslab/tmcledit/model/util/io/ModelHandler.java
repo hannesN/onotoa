@@ -754,7 +754,7 @@ class ModelHandler extends DefaultHandler {
 
 		if (E_NAME_CONSTRAINT.equals(qName)) {
 			if (currTopicType != null) {
-				currTopicType.getNameContraints().add((NameTypeConstraint) constructs.pop());
+				currTopicType.getNameConstraints().add((NameTypeConstraint) constructs.pop());
 				state = State.TOPIC_TYPE;
 			}
 		}

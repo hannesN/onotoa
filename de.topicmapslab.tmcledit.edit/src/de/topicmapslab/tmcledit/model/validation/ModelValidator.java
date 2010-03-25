@@ -212,7 +212,7 @@ public class ModelValidator {
 	}
 
 	private void validateNameConstraint(TopicType topicType) {
-		for (NameTypeConstraint ntc : topicType.getNameContraints()) {
+		for (NameTypeConstraint ntc : topicType.getNameConstraints()) {
 			if (ntc.getType() == null) {
 				/*
 				 * ValidationResult vr = new ValidationResult(

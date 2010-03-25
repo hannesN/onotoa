@@ -36,7 +36,7 @@ public class CreateNameTypeConstraintCommand extends AbstractCommand {
 	}
 	
 	public void execute() {
-		topicType.getNameContraints().add(nameTypeConstraint);
+		topicType.getNameConstraints().add(nameTypeConstraint);
 		if (schema!=null)
 			schema.getTopicTypes().add(nameTypeConstraint.getType());
 	}
@@ -47,7 +47,7 @@ public class CreateNameTypeConstraintCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		topicType.getNameContraints().remove(nameTypeConstraint);
+		topicType.getNameConstraints().remove(nameTypeConstraint);
 		if (schema!=null)
 			schema.getTopicTypes().remove(nameTypeConstraint.getType());
 	}
