@@ -60,8 +60,8 @@ public class DeleteTopicTypeConstraintItemCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		switch (featureID) {
-		case ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS:
-			constraintList = topicType.getNameContraints();
+		case ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS:
+			constraintList = topicType.getNameConstraints();
 			break;
 		case ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS:
 			constraintList = topicType.getOccurrenceConstraints();

@@ -14,7 +14,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ako" upperBound="-1" eType="#//TopicType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="occurrenceConstraints"
         upperBound="-1" eType="#//OccurrenceTypeConstraint" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nameContraints" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nameConstraints" upperBound="-1"
         eType="#//NameTypeConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subjectIdentifierConstraints"
         upperBound="-1" eType="#//SubjectIdentifierConstraint" containment="true"/>

@@ -266,7 +266,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		List<EObject> list = new ArrayList<EObject>();
 		TopicType topicType = getCastedModel().getTopicType();
 		list.addAll(topicType.getOccurrenceConstraints());
-		list.addAll(topicType.getNameContraints());
+		list.addAll(topicType.getNameConstraints());
 		list.addAll(topicType.getSubjectIdentifierConstraints());
 		list.addAll(topicType.getSubjectLocatorConstraints());
 		

@@ -251,7 +251,7 @@ class Test {
 
 		NameTypeConstraint ntc = fac.createNameTypeConstraint();
 		ntc.setType(nt);
-		tt.getNameContraints().add(ntc);
+		tt.getNameConstraints().add(ntc);
 
 		TopicType rt1 = idx.createTopicType(KindOfTopicType.ROLE_TYPE);
 		rt1.setName("Employee");

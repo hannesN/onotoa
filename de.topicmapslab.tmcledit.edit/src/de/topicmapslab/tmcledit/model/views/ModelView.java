@@ -1060,7 +1060,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			if (parent != null) {
 				parent.setSyncView(refresh);
 				parent.addChild(to);
-				for (NameTypeConstraint ntc : tt.getNameContraints()) {
+				for (NameTypeConstraint ntc : tt.getNameConstraints()) {
 					to.addChild(new TreeName(ModelView.this, ntc));
 				}
 				for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {

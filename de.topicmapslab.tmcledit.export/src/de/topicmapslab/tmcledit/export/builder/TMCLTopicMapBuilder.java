@@ -548,7 +548,7 @@ public class TMCLTopicMapBuilder {
 			setSubjectLocatorConstraint(t, slc);
 		}
 
-		for (NameTypeConstraint ntc : type.getNameContraints()) {
+		for (NameTypeConstraint ntc : type.getNameConstraints()) {
 			setNameTypeConstraint(t, ntc);
 		}
 

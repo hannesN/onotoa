@@ -401,9 +401,9 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			typeNode.appendChild(slNode);
 		}
 
-		if (tt.getNameContraints().size() > 0) {
+		if (tt.getNameConstraints().size() > 0) {
 			Element ncNode = document.createElement(E_NAME_CONSTRAINTS);
-			for (NameTypeConstraint ntc : tt.getNameContraints()) {
+			for (NameTypeConstraint ntc : tt.getNameConstraints()) {
 				addNameConstraints(ntc, ncNode);
 			}
 			typeNode.appendChild(ncNode);

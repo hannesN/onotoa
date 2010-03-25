@@ -150,7 +150,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	}
 
 	public boolean alreadyUsed(TopicType tt, NameType nt) {
-		for (NameTypeConstraint ntc : tt.getNameContraints()) {
+		for (NameTypeConstraint ntc : tt.getNameConstraints()) {
 			if (ntc.equals(getModel()))
 				continue;
 			if (nt.equals(ntc.getType()))

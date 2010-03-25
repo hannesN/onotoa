@@ -65,7 +65,7 @@ public class TreeTopic extends TreeParent {
 				}
 				refresh();
 			}
-		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS) {
+		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS) {
 			if (notification.getEventType() == Notification.ADD) {
 				addChild(new TreeName(getModelView(), (NameTypeConstraint) notification.getNewValue()));
 				refresh();

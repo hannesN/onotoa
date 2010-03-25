@@ -78,7 +78,7 @@ public class DeleteTMCLConstruct extends Action implements ISelectionChangedList
 
 			if (construct instanceof NameTypeConstraint)
 				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
-				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS));
+				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS));
 
 			if (construct instanceof OccurrenceTypeConstraint)
 				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),

@@ -81,7 +81,7 @@ public class UseFinder {
 				tn.addChild(new TreeNode(ako, TreeNodeType.Supertype));
 		}
 		
-		for (NameTypeConstraint ntc : tt.getNameContraints()) {
+		for (NameTypeConstraint ntc : tt.getNameConstraints()) {
 			if (ntc.getType().equals(type)) {
 				tn.addChild(new TreeNode(ntc, TreeNodeType.Nametype));
 			}

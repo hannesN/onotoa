@@ -246,7 +246,7 @@ public class TypeNodeEditPart extends
 		List<EObject> list = new ArrayList<EObject>();
 		TopicType topicType = getCastedModel().getTopicType();
 		list.addAll(topicType.getOccurrenceConstraints());
-		list.addAll(topicType.getNameContraints());
+		list.addAll(topicType.getNameConstraints());
 
 		return list;
 	}

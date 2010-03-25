@@ -238,9 +238,9 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			if (tt.equals(topicType))
 				continue;
 
-			for (NameTypeConstraint ntc : tt.getNameContraints()) {
+			for (NameTypeConstraint ntc : tt.getNameConstraints()) {
 				if (topicType.equals(ntc.getType())) {
-					addConstraintCommand(tt, ntc, ModelPackage.TOPIC_TYPE__NAME_CONTRAINTS);
+					addConstraintCommand(tt, ntc, ModelPackage.TOPIC_TYPE__NAME_CONSTRAINTS);
 				}
 			}
 
