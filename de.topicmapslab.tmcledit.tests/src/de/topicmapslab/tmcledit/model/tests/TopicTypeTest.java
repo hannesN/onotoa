@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
@@ -507,4 +507,74 @@ public class TopicTypeTest {
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 	}
+
+	@Test
+	public void subjectIdentifierConstraintTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		SubjectIdentifierConstraint sIdentifierConstraint1 = ModelFactory.eINSTANCE
+				.createSubjectIdentifierConstraint();
+		SubjectIdentifierConstraint sIdentifierConstraint2 = ModelFactory.eINSTANCE
+				.createSubjectIdentifierConstraint();
+		SubjectIdentifierConstraint sIdentifierConstraint3 = ModelFactory.eINSTANCE
+				.createSubjectIdentifierConstraint();
+		SubjectIdentifierConstraint sIdentifierConstraint4 = ModelFactory.eINSTANCE
+				.createSubjectIdentifierConstraint();
+
+		/*
+		 * add the same SubjectIdentifierConstraint into both lists, which is
+		 * not possible.
+		 */
+		testObject1.getSubjectIdentifierConstraints().add(
+				sIdentifierConstraint1);
+		testObject2.getSubjectIdentifierConstraints().add(
+				sIdentifierConstraint1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// add an equal SubjectIdentifierConstraint into list #1
+		testObject1.getSubjectIdentifierConstraints().add(
+				sIdentifierConstraint2);
+		sIdentifierConstraint2.setId(sIdentifierConstraint1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// test different list lengths and different entries
+		testObject1.getSubjectIdentifierConstraints().add(
+				sIdentifierConstraint3);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getSubjectIdentifierConstraints().add(
+				sIdentifierConstraint4);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make list entry #2 equal
+		sIdentifierConstraint4.setId(sIdentifierConstraint3.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMax of list entry #2
+		sIdentifierConstraint3.setCardMax("5");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sIdentifierConstraint4.setCardMax("5");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMin of list entry #2
+		sIdentifierConstraint3.setCardMin("1");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sIdentifierConstraint4.setCardMin("1");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit see_Also of list entry #2
+		sIdentifierConstraint3.setSee_also("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sIdentifierConstraint4.setSee_also("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// set regular Expression for list entry #2
+		sIdentifierConstraint3.setRegexp("TMCL");
+		sIdentifierConstraint4.setRegexp("TMQL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sIdentifierConstraint4.setRegexp("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
+
 } // TopicTypeTest

@@ -117,6 +117,8 @@ public class TMCLConstructTest {
 		testObject1.setId(testObject2.getId());
 		Annotation annotation1 = ModelFactory.eINSTANCE.createAnnotation();
 		Annotation annotation2 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation3 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation4 = ModelFactory.eINSTANCE.createAnnotation();
 
 		// add annotation to testObject1
 		annotation1.setKey("TMCL");
@@ -135,5 +137,17 @@ public class TMCLConstructTest {
 		annotation2.setKey("TMCL");
 		annotation2.setValue("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		
+		// add the same annotation into both lists
+		testObject1.getAnnotations().add(annotation3);
+		testObject2.getAnnotations().add(annotation3);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		
+		// make list length equal, but at the first run not entry #1
+		testObject1.getAnnotations().add(annotation4);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		annotation4.setId(annotation3.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		
 	}
 } // TMCLConstructTest
