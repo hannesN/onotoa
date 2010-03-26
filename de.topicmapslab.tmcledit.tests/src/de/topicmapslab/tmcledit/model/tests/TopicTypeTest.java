@@ -14,6 +14,7 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
@@ -375,7 +376,7 @@ public class TopicTypeTest {
 	}
 
 	@Test
-	public void occurrenceConstraintsTest() {
+	public void occurrenceConstraintTest() {
 
 		testObject1.setId(testObject2.getId());
 
@@ -459,19 +460,19 @@ public class TopicTypeTest {
 		 * add the same NameTypeConstraint into both lists, which is not
 		 * possible.
 		 */
-		testObject1.getNameContraints().add(nTypeConstraint1);
-		testObject2.getNameContraints().add(nTypeConstraint1);
+		testObject1.getNameConstraints().add(nTypeConstraint1);
+		testObject2.getNameConstraints().add(nTypeConstraint1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
 		// add an equal NameTypeConstraint into list #1
-		testObject1.getNameContraints().add(nTypeConstraint2);
+		testObject1.getNameConstraints().add(nTypeConstraint2);
 		nTypeConstraint2.setId(nTypeConstraint1.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 		// test different list lengths and different entries
-		testObject1.getNameContraints().add(nTypeConstraint3);
+		testObject1.getNameConstraints().add(nTypeConstraint3);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
-		testObject2.getNameContraints().add(nTypeConstraint4);
+		testObject2.getNameConstraints().add(nTypeConstraint4);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
 		// make list entry #2 equal
@@ -573,6 +574,70 @@ public class TopicTypeTest {
 		sIdentifierConstraint4.setRegexp("TMQL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		sIdentifierConstraint4.setRegexp("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
+
+	@Test
+	public void subjectLocatorConstraintTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		SubjectLocatorConstraint sLocatorConstraint1 = ModelFactory.eINSTANCE
+				.createSubjectLocatorConstraint();
+		SubjectLocatorConstraint sLocatorConstraint2 = ModelFactory.eINSTANCE
+				.createSubjectLocatorConstraint();
+		SubjectLocatorConstraint sLocatorConstraint3 = ModelFactory.eINSTANCE
+				.createSubjectLocatorConstraint();
+		SubjectLocatorConstraint sLocatorConstraint4 = ModelFactory.eINSTANCE
+				.createSubjectLocatorConstraint();
+
+		/*
+		 * add the same SubjectIdentifierConstraint into both lists, which is
+		 * not possible.
+		 */
+		testObject1.getSubjectLocatorConstraints().add(sLocatorConstraint1);
+		testObject2.getSubjectLocatorConstraints().add(sLocatorConstraint1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// add an equal SubjectIdentifierConstraint into list #1
+		testObject1.getSubjectLocatorConstraints().add(sLocatorConstraint2);
+		sLocatorConstraint2.setId(sLocatorConstraint1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// test different list lengths and different entries
+		testObject1.getSubjectLocatorConstraints().add(sLocatorConstraint3);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getSubjectLocatorConstraints().add(sLocatorConstraint4);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make list entry #2 equal
+		sLocatorConstraint4.setId(sLocatorConstraint3.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMax of list entry #2
+		sLocatorConstraint3.setCardMax("5");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sLocatorConstraint4.setCardMax("5");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMin of list entry #2
+		sLocatorConstraint3.setCardMin("1");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sLocatorConstraint4.setCardMin("1");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit see_Also of list entry #2
+		sLocatorConstraint3.setSee_also("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sLocatorConstraint4.setSee_also("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// set regular Expression for list entry #2
+		sLocatorConstraint3.setRegexp("TMCL");
+		sLocatorConstraint4.setRegexp("TMQL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		sLocatorConstraint4.setRegexp("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 	}
