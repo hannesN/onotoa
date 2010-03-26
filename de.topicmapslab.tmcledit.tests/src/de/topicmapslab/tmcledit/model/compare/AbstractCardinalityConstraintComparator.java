@@ -5,19 +5,13 @@
  */
 package de.topicmapslab.tmcledit.model.compare;
 
-import de.topicmapslab.tmcledit.model.AbstractCardinalityContraint;
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Abstract Cardinality Contraint</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public abstract class AbstractCardinalityConstraintComparator extends
 		TMCLConstructComperator {
 
-	public boolean equals(AbstractCardinalityContraint o1,
-			AbstractCardinalityContraint o2) {
+	public boolean equals(AbstractCardinalityConstraint o1,
+			AbstractCardinalityConstraint o2) {
 
 		if ((o1 == null) ^ (o2 == null))
 			return false;

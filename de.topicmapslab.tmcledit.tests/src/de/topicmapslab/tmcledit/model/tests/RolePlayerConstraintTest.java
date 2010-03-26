@@ -16,7 +16,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RolePlayerConstraintTest extends AbstractCardinalityContraintTest {
+public class RolePlayerConstraintTest extends AbstractCardinalityConstraintTest {
 
 	/**
 	 * <!-- begin-user-doc -->

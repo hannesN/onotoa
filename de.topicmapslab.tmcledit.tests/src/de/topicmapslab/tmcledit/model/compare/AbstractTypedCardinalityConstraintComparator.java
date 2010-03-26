@@ -7,7 +7,7 @@ package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.AbstractTypedCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.tests.AbstractCardinalityContraintTest;
+import de.topicmapslab.tmcledit.model.tests.AbstractCardinalityConstraintTest;
 
 import junit.textui.TestRunner;
 
