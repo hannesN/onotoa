@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import de.topicmapslab.tmcledit.model.Annotation;
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
@@ -195,6 +196,29 @@ public class TopicTypeTest {
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject1.setAbstract(false);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
+	}
+
+	/**
+	 * Test compares objects with different and equal kindOf types. Default =
+	 * Topic_Type
+	 */
+
+	@Test
+	public void kindTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		KindOfTopicType kindOfTopicType1 = KindOfTopicType.ASSOCIATION_TYPE;
+		KindOfTopicType kindOfTopicType2 = KindOfTopicType.NAME_TYPE;
+
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		testObject1.setKind(kindOfTopicType1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.setKind(kindOfTopicType2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.setKind(kindOfTopicType1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
 	}
 
 	/**
@@ -593,8 +617,8 @@ public class TopicTypeTest {
 				.createSubjectLocatorConstraint();
 
 		/*
-		 * add the same SubjectLocatorConstraint into both lists, which is
-		 * not possible.
+		 * add the same SubjectLocatorConstraint into both lists, which is not
+		 * possible.
 		 */
 		testObject1.getSubjectLocatorConstraints().add(sLocatorConstraint1);
 		testObject2.getSubjectLocatorConstraints().add(sLocatorConstraint1);
