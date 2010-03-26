@@ -20,4 +20,4 @@ public abstract class AbstractCardinalityConstraintTest extends
 
 	
 
-} // AbstractCardinalityContraintTest
+} // AbstractCardinalityConstraintTest
