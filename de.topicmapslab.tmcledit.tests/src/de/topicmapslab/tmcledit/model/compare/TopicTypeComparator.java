@@ -72,9 +72,9 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 		} else
 			return false;
 
-		if (o1.getNameContraints().size() == o2.getNameContraints().size()) {
-			if (nConstraintListCompare(o1.getNameContraints(), o2
-					.getNameContraints()) == false)
+		if (o1.getNameConstraints().size() == o2.getNameConstraints().size()) {
+			if (nConstraintListCompare(o1.getNameConstraints(), o2
+					.getNameConstraints()) == false)
 				return false;
 		} else
 			return false;

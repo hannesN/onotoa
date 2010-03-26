@@ -16,7 +16,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class AbstractTypedCardinalityConstraintTest extends AbstractCardinalityContraintTest {
+public class AbstractTypedCardinalityConstraintTest extends AbstractCardinalityConstraintTest {
 
 	/**
 	 * <!-- begin-user-doc -->
