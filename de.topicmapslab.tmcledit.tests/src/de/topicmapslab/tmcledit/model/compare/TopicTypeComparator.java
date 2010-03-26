@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -88,11 +89,45 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 				return false;
 		} else
 			return false;
+		
+		if (o1.getSubjectLocatorConstraints().size() == o2
+				.getSubjectLocatorConstraints().size()) {
+			if (sLocatorConstraintListCompare(o1
+					.getSubjectLocatorConstraints(), o2
+					.getSubjectLocatorConstraints()) == false)
+				return false;
+		} else
+			return false;
 
 		return true;
 
 	}
 
+	
+	/**
+	 * Compares two lists with SubjectLocatorConstraint entries
+	 * 
+	 * @param list1
+	 * @param list2
+	 * @return boolean result of the compare
+	 */
+
+	protected boolean sLocatorConstraintListCompare(
+			EList<SubjectLocatorConstraint> list1,
+			EList<SubjectLocatorConstraint> list2) {
+
+		SubjectLocatorConstraintComparator comp = new SubjectLocatorConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+	}
+	
 	/**
 	 * Compares two lists with SubjectIdentifierConstraint entries
 	 * 
