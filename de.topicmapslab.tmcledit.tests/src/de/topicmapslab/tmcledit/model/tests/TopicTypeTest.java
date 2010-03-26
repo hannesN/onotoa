@@ -593,14 +593,14 @@ public class TopicTypeTest {
 				.createSubjectLocatorConstraint();
 
 		/*
-		 * add the same SubjectIdentifierConstraint into both lists, which is
+		 * add the same SubjectLocatorConstraint into both lists, which is
 		 * not possible.
 		 */
 		testObject1.getSubjectLocatorConstraints().add(sLocatorConstraint1);
 		testObject2.getSubjectLocatorConstraints().add(sLocatorConstraint1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
-		// add an equal SubjectIdentifierConstraint into list #1
+		// add an equal SubjectLocatorConstraint into list #1
 		testObject1.getSubjectLocatorConstraints().add(sLocatorConstraint2);
 		sLocatorConstraint2.setId(sLocatorConstraint1.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));

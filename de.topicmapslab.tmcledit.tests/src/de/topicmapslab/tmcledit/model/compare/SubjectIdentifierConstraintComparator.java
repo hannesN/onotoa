@@ -28,8 +28,8 @@ public class SubjectIdentifierConstraintComparator extends
 		if (stringCompare(o1.getCardMax(), o2.getCardMax()) == false)
 			return false;
 
-		if (stringCompare(o1.getRegexp(), o2.getRegexp()) == false)
-			return false;
+//		if (stringCompare(o1.getRegexp(), o2.getRegexp()) == false)
+//			return false;
 
 		return true;
 
