@@ -41,6 +41,9 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 
 		if (o1.isAbstract() != o2.isAbstract())
 			return false;
+		
+		if (o1.getKind() != o2.getKind() == false)
+			return false;
 
 		if (o1.getIsa().size() == o2.getIsa().size()) {
 			if (topicTypeListCompare(o1.getIsa(), o2.getIsa()) == false)

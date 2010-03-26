@@ -204,7 +204,7 @@ public class TopicTypeTest {
 	 */
 
 	@Test
-	public void kindTest() {
+	public void kindOfTest() {
 
 		testObject1.setId(testObject2.getId());
 
