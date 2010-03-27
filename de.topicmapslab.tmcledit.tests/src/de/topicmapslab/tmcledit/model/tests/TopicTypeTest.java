@@ -17,6 +17,7 @@ import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicId;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
 
@@ -66,6 +67,7 @@ public class TopicTypeTest {
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject1.setId(testObject2.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
 	}
 
 	/**
@@ -464,6 +466,16 @@ public class TopicTypeTest {
 		oTypeConstraint4.setType(topicType1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
+		// edit annotation list for list entry #2
+		Annotation annotation1 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation2 = ModelFactory.eINSTANCE.createAnnotation();
+
+		oTypeConstraint3.getAnnotations().add(annotation1);
+		oTypeConstraint4.getAnnotations().add(annotation2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		annotation2.setId(annotation1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
 	}
 
 	@Test
@@ -529,6 +541,16 @@ public class TopicTypeTest {
 		nTypeConstraint4.setType(topicType2);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		nTypeConstraint4.setType(topicType1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit annotation list for list entry #2
+		Annotation annotation1 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation2 = ModelFactory.eINSTANCE.createAnnotation();
+
+		nTypeConstraint3.getAnnotations().add(annotation1);
+		nTypeConstraint4.getAnnotations().add(annotation2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		annotation2.setId(annotation1.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 	}
@@ -600,6 +622,16 @@ public class TopicTypeTest {
 		sIdentifierConstraint4.setRegexp("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
+		// edit annotation list for list entry #2
+		Annotation annotation1 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation2 = ModelFactory.eINSTANCE.createAnnotation();
+
+		sIdentifierConstraint3.getAnnotations().add(annotation1);
+		sIdentifierConstraint4.getAnnotations().add(annotation2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		annotation2.setId(annotation1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
 	}
 
 	@Test
@@ -662,6 +694,93 @@ public class TopicTypeTest {
 		sLocatorConstraint4.setRegexp("TMQL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		sLocatorConstraint4.setRegexp("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit annotation list for list entry #2
+		Annotation annotation1 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation2 = ModelFactory.eINSTANCE.createAnnotation();
+
+		sLocatorConstraint3.getAnnotations().add(annotation1);
+		sLocatorConstraint4.getAnnotations().add(annotation2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		annotation2.setId(annotation1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
+
+	@Test
+	public void topicReifiesConstraintTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		TopicReifiesConstraint topicReifiesConstraint1 = ModelFactory.eINSTANCE
+				.createTopicReifiesConstraint();
+		TopicReifiesConstraint topicReifiesConstraint2 = ModelFactory.eINSTANCE
+				.createTopicReifiesConstraint();
+		TopicReifiesConstraint topicReifiesConstraint3 = ModelFactory.eINSTANCE
+				.createTopicReifiesConstraint();
+		TopicReifiesConstraint topicReifiesConstraint4 = ModelFactory.eINSTANCE
+				.createTopicReifiesConstraint();
+
+		/*
+		 * add the same OccurrenceTypeConstraint into both lists, which is not
+		 * possible.
+		 */
+		testObject1.getTopicReifiesConstraints().add(topicReifiesConstraint1);
+		testObject2.getTopicReifiesConstraints().add(topicReifiesConstraint1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// add an equal occurrence into list #1
+		testObject1.getTopicReifiesConstraints().add(topicReifiesConstraint2);
+		topicReifiesConstraint2.setId(topicReifiesConstraint1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// test different list lengths and different entries
+		testObject1.getTopicReifiesConstraints().add(topicReifiesConstraint3);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.getTopicReifiesConstraints().add(topicReifiesConstraint4);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make list entry #2 equal
+		topicReifiesConstraint4.setId(topicReifiesConstraint3.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMax of list entry #2
+		topicReifiesConstraint3.setCardMax("5");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicReifiesConstraint4.setCardMax("5");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMin of list entry #2
+		topicReifiesConstraint3.setCardMin("1");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicReifiesConstraint4.setCardMin("1");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit see_Also of list entry #2
+		topicReifiesConstraint3.setSee_also("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicReifiesConstraint4.setSee_also("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// set topic types of list entry #2
+		TopicType topicType1 = ModelFactory.eINSTANCE.createTopicType();
+		TopicType topicType2 = ModelFactory.eINSTANCE.createTopicType();
+
+		topicReifiesConstraint3.setType(topicType1);
+		topicReifiesConstraint4.setType(topicType2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicReifiesConstraint4.setType(topicType1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit annotation list for list entry #2
+		Annotation annotation1 = ModelFactory.eINSTANCE.createAnnotation();
+		Annotation annotation2 = ModelFactory.eINSTANCE.createAnnotation();
+
+		topicReifiesConstraint3.getAnnotations().add(annotation1);
+		topicReifiesConstraint4.getAnnotations().add(annotation2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		annotation2.setId(annotation1.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 	}
