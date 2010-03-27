@@ -12,6 +12,7 @@ import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -101,11 +102,47 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 				return false;
 		} else
 			return false;
+		
+		if (o1.getTopicReifiesConstraints().size() == o2
+				.getTopicReifiesConstraints().size()) {
+			if (topicReifiesConstraintListCompare(o1
+					.getTopicReifiesConstraints(), o2
+					.getTopicReifiesConstraints()) == false)
+				return false;
+		} else
+			return false;
+		
+		
+		
 
 		return true;
 
 	}
 
+	
+	/**
+	 * Compares two lists with TopicReifiesConstraint entries
+	 * 
+	 * @param list1
+	 * @param list2
+	 * @return boolean result of the compare
+	 */
+
+	protected boolean topicReifiesConstraintListCompare(
+			EList<TopicReifiesConstraint> list1,
+			EList<TopicReifiesConstraint> list2) {
+
+		TopicReifiesConstraintComparator comp = new TopicReifiesConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+	}
 	
 	/**
 	 * Compares two lists with SubjectLocatorConstraint entries
