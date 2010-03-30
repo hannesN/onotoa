@@ -20,6 +20,8 @@ public class RolePlayerConstraintComparator extends
 
 		if (super.equals(o1, o2) == false)
 			return false;
+		
+		
 
 		return true;
 
