@@ -15,12 +15,6 @@ import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Topic Type</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class TopicTypeComparator extends TMCLConstructComperator {
 
 	public boolean equals(TopicType o1, TopicType o2) {
@@ -42,7 +36,7 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 
 		if (o1.isAbstract() != o2.isAbstract())
 			return false;
-		
+
 		if (o1.getKind() != o2.getKind())
 			return false;
 
@@ -93,16 +87,16 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 				return false;
 		} else
 			return false;
-		
+
 		if (o1.getSubjectLocatorConstraints().size() == o2
 				.getSubjectLocatorConstraints().size()) {
-			if (sLocatorConstraintListCompare(o1
-					.getSubjectLocatorConstraints(), o2
-					.getSubjectLocatorConstraints()) == false)
+			if (sLocatorConstraintListCompare(
+					o1.getSubjectLocatorConstraints(), o2
+							.getSubjectLocatorConstraints()) == false)
 				return false;
 		} else
 			return false;
-		
+
 		if (o1.getTopicReifiesConstraints().size() == o2
 				.getTopicReifiesConstraints().size()) {
 			if (topicReifiesConstraintListCompare(o1
@@ -111,15 +105,11 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 				return false;
 		} else
 			return false;
-		
-		
-		
 
 		return true;
 
 	}
 
-	
 	/**
 	 * Compares two lists with TopicReifiesConstraint entries
 	 * 
@@ -143,7 +133,7 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 
 		return true;
 	}
-	
+
 	/**
 	 * Compares two lists with SubjectLocatorConstraint entries
 	 * 
@@ -167,7 +157,7 @@ public class TopicTypeComparator extends TMCLConstructComperator {
 
 		return true;
 	}
-	
+
 	/**
 	 * Compares two lists with SubjectIdentifierConstraint entries
 	 * 
