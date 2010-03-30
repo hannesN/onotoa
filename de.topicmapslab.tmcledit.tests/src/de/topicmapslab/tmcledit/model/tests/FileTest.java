@@ -16,13 +16,13 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
-import de.topicmapslab.tmcledit.model.compare.EdgeComparator;
+import de.topicmapslab.tmcledit.model.compare.FileComparator;
 
 public class FileTest extends OnoObjectTest {
 
 	private File testObject1;
 	private File testObject2;
-	private EdgeComparator comp;
+	private FileComparator comp;
 
 	@Before
 	public void prepare() {
@@ -32,7 +32,7 @@ public class FileTest extends OnoObjectTest {
 		if (testObject2 == null)
 			testObject2 = ModelFactory.eINSTANCE.createFile();
 
-		comp = new EdgeComparator();
+		comp = new FileComparator();
 	}
 
 	@After
