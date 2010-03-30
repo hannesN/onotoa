@@ -5,107 +5,94 @@
  */
 package de.topicmapslab.tmcledit.model.tests;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.compare.AnnotationComparator;
 
 import junit.framework.Assert;
-import junit.textui.TestRunner;
 
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Annotation</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class AnnotationTest extends OnoObjectTest {
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(AnnotationTest.class);
+	private Annotation testObject1;
+	private Annotation testObject2;
+	private AnnotationComparator comp;
+
+	@Before
+	public void prepare() {
+
+		if (testObject1 == null)
+			testObject1 = ModelFactory.eINSTANCE.createAnnotation();
+		if (testObject2 == null)
+			testObject2 = ModelFactory.eINSTANCE.createAnnotation();
+
+		comp = new AnnotationComparator();
+	}
+
+	@After
+	public void shutdown() {
+		testObject1 = null;
+		testObject2 = null;
 	}
 
 	/**
-	 * Constructs a new Annotation test case with the given name. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * Test compares Object with NULL and proves the equality of two NULL
+	 * Objects
 	 */
-	public AnnotationTest(String name) {
-		super(name);
+
+	@Test
+	public void nullTest() {
+
+		Assert.assertFalse(comp.equals(testObject1, null));
+		Assert.assertFalse(comp.equals(null, testObject1));
+		Assert.assertTrue(comp.equals(null, null));
 	}
 
 	/**
-	 * Returns the fixture for this Annotation test case. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * Test compares two objects with different and same IDs.
 	 */
-	@Override
-	protected Annotation getFixture() {
-		return (Annotation) fixture;
+
+	@Test
+	public void idTest() {
+
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject1.setId(testObject2.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(ModelFactory.eINSTANCE.createAnnotation());
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-
-	public void testAnnotation() {
-
-		Annotation testObject1 = ModelFactory.eINSTANCE.createAnnotation();
-		Annotation testObject2 = ModelFactory.eINSTANCE.createAnnotation();
-
-		AnnotationComparator comp = new AnnotationComparator();
-
-		this.allTests(testObject1, testObject2, comp);
-	}
-
-	/**
-	 * Includes all super class tests and key and value test.
-	 * 
-	 * @param testObject1
-	 * @param testObject2
-	 * @param comp
+	 * Test compares two objects with different and same keys.
 	 */
 
-	protected void allTests(Annotation testObject1, Annotation testObject2,
-			AnnotationComparator comp) {
+	@Test
+	public void keyTest() {
 
-		super.allTests(testObject1, testObject2, comp);
+		testObject1.setId(testObject2.getId());
 
-		// set key
 		testObject1.setKey("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setKey("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
-		// set value
+	}
+
+	/**
+	 * Test compares two objects with different and same values.
+	 */
+
+	@Test
+	public void valueTest() {
+
+		testObject1.setId(testObject2.getId());
+
 		testObject1.setValue("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setValue("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
 	}
 
 } // AnnotationTest
