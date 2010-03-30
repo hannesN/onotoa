@@ -12,12 +12,33 @@ import de.topicmapslab.tmcledit.model.tests.AbstractCardinalityConstraintTest;
 import junit.textui.TestRunner;
 
 /**
- * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Abstract Typed Cardinality Constraint</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A test case for the model object '
+ * <em><b>Abstract Typed Cardinality Constraint</b></em>'. <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class AbstractTypedCardinalityConstraintComparator extends AbstractCardinalityConstraintComparator {
+public class AbstractTypedCardinalityConstraintComparator extends
+		AbstractCardinalityConstraintComparator {
 
+	public boolean equals(AbstractTypedCardinalityConstraint o1,
+			AbstractTypedCardinalityConstraint o2) {
 
-} //AbstractTypedCardinalityConstraintTest
+		if ((o1 == null) ^ (o2 == null))
+			return false;
+
+		if ((o1 == null) && (o2 == null))
+			return true;
+
+		if (super.equals(o1, o2) == false)
+			return false;
+
+		TopicTypeComparator comp = new TopicTypeComparator();
+
+		if (comp.equals(o1.getType(), o2.getType()) == false)
+			return false;
+		
+		return true;
+
+	}
+
+} // AbstractTypedCardinalityConstraintTest
