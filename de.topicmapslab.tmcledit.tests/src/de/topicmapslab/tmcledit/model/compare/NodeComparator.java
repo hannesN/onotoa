@@ -5,7 +5,6 @@
  */
 package de.topicmapslab.tmcledit.model.compare;
 
-import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.Node;
 
 import junit.textui.TestRunner;

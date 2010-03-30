@@ -86,9 +86,9 @@ public class EdgeTest extends OnoObjectTest {
 		node1.setPosX(1);
 		node1.setPosY(1);
 		node1.setId(1);
-		node1.setPosX(2);
-		node1.setPosY(2);
-		node1.setId(2);
+		node2.setPosX(2);
+		node2.setPosY(2);
+		node2.setId(2);
 
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 		testObject1.setSource(node1);
@@ -119,9 +119,9 @@ public class EdgeTest extends OnoObjectTest {
 		node1.setPosX(1);
 		node1.setPosY(1);
 		node1.setId(1);
-		node1.setPosX(2);
-		node1.setPosY(2);
-		node1.setId(2);
+		node2.setPosX(2);
+		node2.setPosY(2);
+		node2.setId(2);
 
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 		testObject1.setTarget(node1);
@@ -269,7 +269,7 @@ public class EdgeTest extends OnoObjectTest {
 	}
 
 	@Test
-	public void ConstraintTest() {
+	public void constraintTest() {
 
 		testObject1.setId(testObject2.getId());
 
@@ -321,7 +321,71 @@ public class EdgeTest extends OnoObjectTest {
 		playerTest(rolePlayerConstraint1, rolePlayerConstraint2);
 
 		// set role
-		roleTest(rolePlayerConstraint1, rolePlayerConstraint2);
+		RoleConstraint roleConstraint1 = ModelFactory.eINSTANCE
+				.createRoleConstraint();
+		RoleConstraint roleConstraint2 = ModelFactory.eINSTANCE
+				.createRoleConstraint();
+
+		// set different role constraints
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		rolePlayerConstraint1.setRole(roleConstraint1);
+		rolePlayerConstraint2.setRole(roleConstraint2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make both role constraints the same
+		roleConstraint2.setId(roleConstraint1.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// edit cardMax
+		roleConstraint1.setCardMax("1");
+		roleConstraint2.setCardMax("2");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		roleConstraint2.setCardMax("1");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// set comment
+		roleConstraint1.setComment("TMCL");
+		roleConstraint2.setComment("TMQL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		roleConstraint2.setComment("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// set topic type
+		TopicType topicType1 = ModelFactory.eINSTANCE.createTopicType();
+		TopicType topicType2 = ModelFactory.eINSTANCE.createTopicType();
+
+		// set different topic types
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		roleConstraint1.setType(topicType1);
+		roleConstraint2.setType(topicType2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+
+		// make both topic types the same
+		topicType1.setId(topicType2.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		// change some values of the topic types
+		topicType1.setAbstract(true);
+		topicType2.setAbstract(false);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicType2.setAbstract(true);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		topicType1.setName("TMCL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicType2.setName("TMQL");
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicType2.setName("TMCL");
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+		TopicId topicId1 = TopicId.SUBJECT_IDENTIFIER;
+		TopicId topicId2 = TopicId.ITEM_IDENTIFIER;
+
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+		topicType1.setIdType(topicId1);
+		topicType2.setIdType(topicId2);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		topicType1.setIdType(topicId2);
 
 	}
 
