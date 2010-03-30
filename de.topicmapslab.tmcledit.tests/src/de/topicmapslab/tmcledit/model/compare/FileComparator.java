@@ -11,6 +11,21 @@ public class FileComparator extends OnoObjectComparator {
 
 	public boolean equals(File o1, File o2) {
 
+		if ((o1 == null) ^ (o2 == null))
+			return false;
+
+		if ((o1 == null) && (o2 == null))
+			return true;
+
+		if (super.equals(o1, o2) == false)
+			return false;
+
+		if (stringCompare(o1.getFilename(), o2.getFilename()) == false)
+			return false;
+
+		if (o1.isDirty() != o2.isDirty())
+			return false;
+		
 		return true;
 
 	}

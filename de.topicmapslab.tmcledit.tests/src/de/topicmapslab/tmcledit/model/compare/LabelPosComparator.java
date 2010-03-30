@@ -6,9 +6,7 @@
 package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.LabelPos;
-import de.topicmapslab.tmcledit.model.ModelFactory;
 
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc --> A test case for the model object '
