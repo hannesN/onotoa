@@ -63,7 +63,7 @@ public class TMCLConstructTest {
 	}
 
 	/**
-	 * Test compares two objects with differnet and equal see_Also values. 
+	 * Test compares two objects with different and equal see_Also values. 
 	 */
 	
 	@Test
