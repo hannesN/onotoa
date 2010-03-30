@@ -5,114 +5,144 @@
  */
 package de.topicmapslab.tmcledit.model.tests;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.compare.CommentComparator;
 
 import junit.framework.Assert;
-import junit.textui.TestRunner;
 
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Comment</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class CommentTest extends NodeTest {
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(CommentTest.class);
+	private Comment testObject1;
+	private Comment testObject2;
+	private CommentComparator comp;
+
+	@Before
+	public void prepare() {
+
+		if (testObject1 == null)
+			testObject1 = ModelFactory.eINSTANCE.createComment();
+		if (testObject2 == null)
+			testObject2 = ModelFactory.eINSTANCE.createComment();
+
+		comp = new CommentComparator();
+	}
+
+	@After
+	public void shutdown() {
+		testObject1 = null;
+		testObject2 = null;
 	}
 
 	/**
-	 * Constructs a new Comment test case with the given name. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * Test compares Object with NULL and proves the equality of two NULL
+	 * Objects
 	 */
-	public CommentTest(String name) {
-		super(name);
+
+	@Test
+	public void nullTest() {
+
+		Assert.assertFalse(comp.equals(testObject1, null));
+		Assert.assertFalse(comp.equals(null, testObject1));
+		Assert.assertTrue(comp.equals(null, null));
 	}
 
 	/**
-	 * Returns the fixture for this Comment test case. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * Test compares two objects with different and same IDs.
 	 */
-	@Override
-	protected Comment getFixture() {
-		return (Comment) fixture;
+
+	@Test
+	public void idTest() {
+
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject1.setId(testObject2.getId());
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(ModelFactory.eINSTANCE.createComment());
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-
-	public void testComment() {
-
-		Comment testObject1 = ModelFactory.eINSTANCE.createComment();
-		Comment testObject2 = ModelFactory.eINSTANCE.createComment();
-
-		CommentComparator comp = new CommentComparator();
-
-		this.allTests(testObject1, testObject2, comp);
-
-	}
-
-	/**
-	 * Includes super class tests and content, height and width test.
-	 * 
-	 * @param testObject1
-	 * @param testObject2
-	 * @param comp
+	 * Test compares two objects with different and same contents
 	 */
 
-	protected void allTests(Comment testObject1, Comment testObject2,
-			CommentComparator comp) {
+	@Test
+	public void contentTest() {
 
-		super.allTests(testObject1, testObject2, comp);
+		testObject1.setId(testObject2.getId());
 
-		// set content
 		testObject1.setContent("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setContent("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
-		// set height
+	}
+
+	/**
+	 * Test compares two objects with different and same vales for the x
+	 * position. DEFAULT = 0
+	 */
+
+	@Test
+	public void posXTEst() {
+
+		testObject1.setId(testObject2.getId());
+
+		testObject1.setPosX(1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.setPosX(1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
+
+	/**
+	 * Test compares two objects with different and same vales for the y
+	 * position. DEFAULT = 0
+	 */
+
+	@Test
+	public void posYTest() {
+
+		testObject1.setId(testObject2.getId());
+
+		testObject1.setPosY(1);
+		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		testObject2.setPosY(1);
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
+	}
+
+	/**
+	 * Test compares two objects with different and same heights. DEFAULT = 0
+	 */
+
+	@Test
+	public void heightTest() {
+
+		testObject1.setId(testObject2.getId());
+
 		testObject1.setHeight(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setHeight(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
-		// set width
+	}
+
+	/**
+	 * Test compares two objects with different and same widths. DEFAULT = 0
+	 */
+
+	@Test
+	public void widthTest() {
+
+		testObject1.setId(testObject2.getId());
+
 		testObject1.setWidth(1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.setWidth(1);
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
+
 	}
 
 } // CommentTest
