@@ -191,13 +191,16 @@ public class RoleConstraintTest {
 
 	@Test
 	public void topicTypeTest() {
+		
+		testObject1.setId(testObject2.getId());
+
 
 		TopicType topicType1 = ModelFactory.eINSTANCE.createTopicType();
 		TopicType topicType2 = ModelFactory.eINSTANCE.createTopicType();
 
 		// set different topic types
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		testObject1.setType(topicType2);
+		testObject1.setType(topicType1);
 		testObject2.setType(topicType2);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 

@@ -277,7 +277,7 @@ public class RolePlayerConstraintTest extends AbstractCardinalityConstraintTest 
 
 		// set different topic types
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		roleConstraint1.setType(topicType2);
+		roleConstraint1.setType(topicType1);
 		roleConstraint2.setType(topicType2);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 
