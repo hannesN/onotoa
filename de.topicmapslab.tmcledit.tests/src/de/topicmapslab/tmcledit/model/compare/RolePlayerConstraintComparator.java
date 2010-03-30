@@ -21,6 +21,16 @@ public class RolePlayerConstraintComparator extends
 		if (super.equals(o1, o2) == false)
 			return false;
 		
+		TopicTypeComparator comp = new TopicTypeComparator();
+		
+		if (comp.equals(o1.getPlayer(), o2.getPlayer()) == false)
+			return false;
+
+		RoleConstraintComparator comp1 = new RoleConstraintComparator();
+		
+		if (comp1.equals(o1.getRole(), o2.getRole()) == false)
+			return false;
+
 		
 
 		return true;
