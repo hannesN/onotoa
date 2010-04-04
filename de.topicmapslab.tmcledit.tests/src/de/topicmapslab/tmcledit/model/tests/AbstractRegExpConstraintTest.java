@@ -17,12 +17,6 @@ import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.compare.AbstractRegExpConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.SubjectIdentifierConstraintComparator;
 
-/**
- * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Abstract Reg Exp Constraint</b></em>'.
- * <!-- end-user-doc -->
- * @generated
- */
 public class AbstractRegExpConstraintTest extends TMCLConstructTest {
 
 	private SubjectIdentifierConstraint testObject1;
@@ -167,4 +161,4 @@ public class AbstractRegExpConstraintTest extends TMCLConstructTest {
 
 	}
 
-} //AbstractRegExpConstraintTest
+} // AbstractRegExpConstraintTest
