@@ -25,6 +25,9 @@ public class FileComparator extends OnoObjectComparator {
 
 		if (stringCompare(o1.getFilename(), o2.getFilename()) == false)
 			return false;
+		
+		if (stringCompare(o1.getNotes(), o2.getNotes()) == false)
+			return false;
 
 		if (o1.isDirty() != o2.isDirty())
 			return false;
