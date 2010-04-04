@@ -13,7 +13,7 @@ import de.topicmapslab.tmcledit.model.TMCLConstruct;
  * 
  * @generated
  */
-public class TMCLConstructComperator extends OnoObjectComparator {
+public class TMCLConstructComparator extends OnoObjectComparator {
 
 	public boolean equals(TMCLConstruct o1, TMCLConstruct o2) {
 
