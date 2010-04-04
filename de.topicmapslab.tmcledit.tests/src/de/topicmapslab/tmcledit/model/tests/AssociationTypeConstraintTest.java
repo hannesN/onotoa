@@ -6,68 +6,24 @@
 package de.topicmapslab.tmcledit.model.tests;
 
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.compare.AbstractTypedConstraintComparator;
 
-import junit.textui.TestRunner;
+public class AssociationTypeConstraintTest extends
+		AbstractTypedConstraintComparator {
 
-/**
- * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Association Type Constraint</b></em>'.
- * <!-- end-user-doc -->
- * @generated
- */
-public class AssociationTypeConstraintTest extends AbstractTypedConstraintTest {
+	public boolean equals(AssociationTypeConstraint o1,
+			AssociationTypeConstraint o2) {
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(AssociationTypeConstraintTest.class);
+		if ((o1 == null) ^ (o2 == null))
+			return false;
+
+		if ((o1 == null) && (o2 == null))
+			return true;
+
+		if (super.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
 	}
-
-	/**
-	 * Constructs a new Association Type Constraint test case with the given name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AssociationTypeConstraintTest(String name) {
-		super(name);
-	}
-
-	/**
-	 * Returns the fixture for this Association Type Constraint test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected AssociationTypeConstraint getFixture() {
-		return (AssociationTypeConstraint)fixture;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(ModelFactory.eINSTANCE.createAssociationTypeConstraint());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-
-} //AssociationTypeConstraintTest
+} // AssociationTypeConstraintTest

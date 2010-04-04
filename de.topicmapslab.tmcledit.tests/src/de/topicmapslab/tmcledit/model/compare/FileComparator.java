@@ -32,7 +32,7 @@ public class FileComparator extends OnoObjectComparator {
 		if (o1.isDirty() != o2.isDirty())
 			return false;
 
-		TopicMapSchemaComparatror comp = new TopicMapSchemaComparatror();
+		TopicMapSchemaComparator comp = new TopicMapSchemaComparator();
 
 		if (comp.equals(o1.getTopicMapSchema(), o2.getTopicMapSchema()) == false)
 			return false;
