@@ -338,7 +338,7 @@ public class TopicMapSchemaTest extends TMCLConstructTest {
 
 		// make list entry #2 equal
 		mElement4.setId(mElement3.getId());
-		Assert.assertFalse(comp.equals(testObject1, testObject2));
+		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 		// edit key of list entry #2
 		mElement3.setKey("TMCL");
