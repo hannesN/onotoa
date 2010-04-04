@@ -12,13 +12,13 @@ import org.junit.Test;
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
-import de.topicmapslab.tmcledit.model.compare.TMCLConstructComperator;
+import de.topicmapslab.tmcledit.model.compare.TMCLConstructComparator;
 
 public class TMCLConstructTest {
 
 	private TMCLConstruct testObject1;
 	private TMCLConstruct testObject2;
-	private TMCLConstructComperator comp;
+	private TMCLConstructComparator comp;
 
 	@Before
 	public void prepare() {
@@ -28,7 +28,7 @@ public class TMCLConstructTest {
 		if (testObject2 == null)
 			testObject2 = ModelFactory.eINSTANCE.createTMCLConstruct();
 
-		comp = new TMCLConstructComperator();
+		comp = new TMCLConstructComparator();
 	}
 
 	@After

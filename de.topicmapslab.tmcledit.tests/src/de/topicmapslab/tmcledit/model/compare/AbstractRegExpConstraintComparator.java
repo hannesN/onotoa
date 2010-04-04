@@ -14,7 +14,7 @@ import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
  * @generated
  */
 public class AbstractRegExpConstraintComparator extends
-		TMCLConstructComperator {
+		TMCLConstructComparator {
 
 	public boolean equals(AbstractRegExpConstraint o1,
 			AbstractRegExpConstraint o2) {
