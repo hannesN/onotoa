@@ -363,7 +363,7 @@ public class TopicMapSchemaTest extends TMCLConstructTest {
 	 */
 
 	@Test
-	public void topicTypetest() {
+	public void topicTypeTest() {
 
 		testObject1.setId(testObject2.getId());
 
