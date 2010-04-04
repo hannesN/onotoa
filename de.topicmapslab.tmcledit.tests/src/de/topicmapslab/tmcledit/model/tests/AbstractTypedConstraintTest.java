@@ -15,25 +15,4 @@ import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
  */
 public abstract class AbstractTypedConstraintTest extends TMCLConstructTest {
 
-	/**
-	 * Constructs a new Abstract Typed Constraint test case with the given name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AbstractTypedConstraintTest(String name) {
-		super(name);
-	}
-
-	/**
-	 * Returns the fixture for this Abstract Typed Constraint test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected AbstractTypedConstraint getFixture() {
-		return (AbstractTypedConstraint)fixture;
-	}
-
 } //AbstractTypedConstraintTest
