@@ -22,6 +22,11 @@ public class ScopedReifiableTopicTypeComparator extends
 		if (super.equals(o1, o2) == false)
 			return false;
 
+		ReifierConstraintComparator comp = new ReifierConstraintComparator();
+
+		if (comp.equals(o1.getReifierConstraint(), o2.getReifierConstraint()) == false)
+			return false;
+
 		return true;
 
 	}
