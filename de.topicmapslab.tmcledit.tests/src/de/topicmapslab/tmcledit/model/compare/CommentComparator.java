@@ -6,16 +6,7 @@
 package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.Comment;
-import de.topicmapslab.tmcledit.model.ModelFactory;
 
-import junit.textui.TestRunner;
-
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Comment</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class CommentComparator extends NodeComparator {
 
 	public boolean equals(Comment o1, Comment o2) {

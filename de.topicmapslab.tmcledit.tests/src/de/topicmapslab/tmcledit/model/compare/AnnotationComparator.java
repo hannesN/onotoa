@@ -6,16 +6,7 @@
 package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.Annotation;
-import de.topicmapslab.tmcledit.model.ModelFactory;
 
-import junit.textui.TestRunner;
-
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Annotation</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class AnnotationComparator extends OnoObjectComparator {
 
 	public boolean equals(Annotation o1, Annotation o2) {
