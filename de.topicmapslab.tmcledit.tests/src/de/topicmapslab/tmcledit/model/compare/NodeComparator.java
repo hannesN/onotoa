@@ -7,14 +7,6 @@ package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.Node;
 
-import junit.textui.TestRunner;
-
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Node</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class NodeComparator extends OnoObjectComparator {
 
 	public boolean equals(Node o1, Node o2) {
