@@ -7,13 +7,6 @@ package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.LabelPos;
 
-
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Label Pos</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class LabelPosComparator extends OnoObjectComparator {
 
 	public boolean equals(LabelPos o1, LabelPos o2) {
