@@ -6,17 +6,6 @@
 package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.Bendpoint;
-import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.Node;
-
-import junit.textui.TestRunner;
-
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Bendpoint</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 
 public class BendpointComparator extends OnoObjectComparator {
 
