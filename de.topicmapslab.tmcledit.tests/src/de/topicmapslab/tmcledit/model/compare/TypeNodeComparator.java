@@ -23,6 +23,11 @@ public class TypeNodeComparator extends NodeComparator {
 		if (stringCompare(o1.getImage(), o2.getImage()) == false)
 			return false;
 
+		TopicTypeComparator comp = new TopicTypeComparator();
+
+		if (comp.equals(o1.getTopicType(), o2.getTopicType()) == false)
+			return false;
+
 		return true;
 
 	}
