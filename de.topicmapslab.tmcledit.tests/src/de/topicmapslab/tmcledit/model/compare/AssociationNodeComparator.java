@@ -21,6 +21,12 @@ public class AssociationNodeComparator extends NodeComparator {
 		if (super.equals(o1, o2) == false)
 			return false;
 
+		AssociationTypeConstraintComparator comp = new AssociationTypeConstraintComparator();
+
+		if (comp.equals(o1.getAssociationConstraint(), o2
+				.getAssociationConstraint()) == false)
+			return false;
+
 		return true;
 	}
 } // AssociationNodeTest
