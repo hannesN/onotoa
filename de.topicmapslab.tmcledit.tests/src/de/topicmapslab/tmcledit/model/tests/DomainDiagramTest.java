@@ -10,24 +10,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.topicmapslab.tmcledit.model.Comment;
-import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.compare.DiagramComparator;
 import de.topicmapslab.tmcledit.model.compare.DomainDiagramComparator;
 
 import junit.framework.Assert;
-import junit.textui.TestRunner;
 
-/**
- * <!-- begin-user-doc --> A test case for the model object '
- * <em><b>Domain Diagram</b></em>'. <!-- end-user-doc -->
- * 
- * @generated
- */
 public class DomainDiagramTest extends DiagramTest {
 
 	private DomainDiagram testObject1;
