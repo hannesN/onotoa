@@ -972,10 +972,11 @@ public class AssociationTypeTest {
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
 
 	}
+
 	/**
 	 * Test compares objects with different and equal scopeConstraints
 	 */
-	
+
 	@Test
 	public void scopeTest() {
 
@@ -990,7 +991,7 @@ public class AssociationTypeTest {
 		testObject1.getScope().add(scope1);
 		testObject2.getScope().add(scope1);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
-		
+
 		// add an equal scope
 		scope2.setId(scope1.getId());
 		testObject1.getScope().add(scope2);
@@ -1001,7 +1002,7 @@ public class AssociationTypeTest {
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		testObject2.getScope().add(scope4);
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
-		
+
 		// make list entry #2 equal
 		scope3.setId(scope4.getId());
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
@@ -1012,14 +1013,14 @@ public class AssociationTypeTest {
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		scope4.setCardMax("1");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 		scope3.setComment("TMCL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		scope4.setComment("TMQL");
 		Assert.assertFalse(comp.equals(testObject1, testObject2));
 		scope4.setComment("TMCL");
 		Assert.assertTrue(comp.equals(testObject1, testObject2));
-		
+
 	}
 
 } // AssociationTypeTest

@@ -189,6 +189,10 @@ public class ScopeConstraintTest {
 
 	}
 
+	/**
+	 * Test compares objects with different and equal topicTypes
+	 */
+	
 	@Test
 	public void topicTypeTest() {
 

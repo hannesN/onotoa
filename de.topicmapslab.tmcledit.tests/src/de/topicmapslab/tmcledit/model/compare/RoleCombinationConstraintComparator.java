@@ -5,12 +5,13 @@
  */
 package de.topicmapslab.tmcledit.model.compare;
 
-import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 
-public class ReifierConstraintComparator extends
-		AbstractTypedCardinalityConstraintComparator {
+public class RoleCombinationConstraintComparator extends
+		TMCLConstructComparator {
 
-	public boolean equals(ReifierConstraint o1, ReifierConstraint o2) {
+	public boolean equals(RoleCombinationConstraint o1,
+			RoleCombinationConstraint o2) {
 
 		if ((o1 == null) ^ (o2 == null))
 			return false;
@@ -20,8 +21,9 @@ public class ReifierConstraintComparator extends
 
 		if (super.equals(o1, o2) == false)
 			return false;
-		
+
 		return true;
 
 	}
-} // ReifierConstraintTest
+
+} // RoleCombinationConstraintTest
