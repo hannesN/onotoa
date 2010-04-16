@@ -13,13 +13,11 @@
  */
 package de.topicmapslab.tmcledit.model.command.tests;
 
-import org.eclipse.emf.common.command.AbstractCommand;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -47,11 +45,8 @@ public class DeleteDiagramCommandTest {
 
 		}
 
-		if (delDia == null) {
-
+		if (delDia == null)
 			delDia = new DeleteDiagramCommand(dia);
-
-		}
 
 	}
 
@@ -74,57 +69,38 @@ public class DeleteDiagramCommandTest {
 	public void executeTest() {
 
 		size = file.getDiagrams().size();
+		Assert.assertTrue(file.getDiagrams().contains(dia));
 		delDia.execute();
 		Assert.assertTrue((size - 1) == file.getDiagrams().size());
 		Assert.assertFalse(file.getDiagrams().contains(dia));
-		 size = file.getDiagrams().size();
-		 delDia.undo();
-		 Assert.assertTrue((size + 1) == file.getDiagrams().size());
-		 Assert.assertTrue(file.getDiagrams().contains(dia));
 
 	}
 
-//	@Test
-//	public void undoTest() {
-//
-//		size = file.getDiagrams().size();
-//		delDia.undo();
-//		Assert.assertTrue((size + 1) == file.getDiagrams().size());
-//		Assert.assertTrue(file.getDiagrams().contains(dia));
-//
-//	}
+	@Test
+	public void undoTest() {
 
-	// private final File file;
-	// private final Diagram diagram;
-	// private final int index;
-	//	
-	//	
-	// public DeleteDiagramCommandTest(Diagram diagram) {
-	// super();
-	// this.diagram = diagram;
-	// this.file = (File) diagram.eContainer();
-	// this.index = file.getDiagrams().indexOf(diagram);
-	// }
-	//
-	// public void execute() {
-	// file.getDiagrams().remove(diagram);
-	// }
-	//
-	// @Override
-	// public void undo() {
-	// file.getDiagrams().add(index, diagram);
-	// }
-	//
-	// public void redo() {
-	// execute();
-	// }
-	//	
-	// public int getIndex() {
-	// return index;
-	// }
-	//
-	// @Override
-	// protected boolean prepare() {
-	// return true;
-	// }
+		delDia.execute();
+
+		size = file.getDiagrams().size();
+		Assert.assertFalse(file.getDiagrams().contains(dia));
+		delDia.undo();
+		Assert.assertTrue((size + 1) == file.getDiagrams().size());
+		Assert.assertTrue(file.getDiagrams().contains(dia));
+
+	}
+
+	@Test
+	public void redoTest() {
+
+		delDia.execute();
+		delDia.undo();
+
+		size = file.getDiagrams().size();
+		Assert.assertTrue(file.getDiagrams().contains(dia));
+		delDia.redo();
+		Assert.assertTrue((size - 1) == file.getDiagrams().size());
+		Assert.assertFalse(file.getDiagrams().contains(dia));
+
+	}
+
 }
