@@ -38,7 +38,6 @@ public class RenameCommandTest {
 	@Test
 	public void canExecuteTest() {
 
-		System.out.println(topicType.getName());
 		Assert.assertTrue(renameCommand.canExecute());
 
 	}
