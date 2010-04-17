@@ -109,7 +109,7 @@ public class CreateAnnotationCommandTest {
 		for (int i = 0; i < construct.getAnnotations().size(); i++) {
 
 			anno = construct.getAnnotations().get(i);
-			if (anno.getKey() == this.key && anno.getValue() == this.value)
+			if ((anno.getKey() == this.key) && (anno.getValue() == this.value))
 				return true;
 
 		}
