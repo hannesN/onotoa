@@ -16,10 +16,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.commands.AddBendpointCommand;
 
 /**
