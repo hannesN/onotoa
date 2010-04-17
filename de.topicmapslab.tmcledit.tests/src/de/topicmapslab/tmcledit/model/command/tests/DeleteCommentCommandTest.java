@@ -13,9 +13,8 @@
  */
 package de.topicmapslab.tmcledit.model.command.tests;
 
-import junit.framework.Assert;
-
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +22,8 @@ import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.commands.DeleteCommentCommand;
+import de.topicmapslab.tmcledit.model.compare.CommentComparator;
+import de.topicmapslab.tmcledit.model.tests.CommentTest;
 
 /**
  * @author Hannes Niederhausen
