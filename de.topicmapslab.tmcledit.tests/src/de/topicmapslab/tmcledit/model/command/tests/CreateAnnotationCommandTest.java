@@ -28,7 +28,7 @@ import de.topicmapslab.tmcledit.model.commands.CreateAnnotationCommand;
 public class CreateAnnotationCommandTest {
 
 	private TMCLConstruct construct;
-	private CreateAnnotationCommand createAnno;
+	private CreateAnnotationCommand command;
 	private int size;
 	private String key = "TMCL";
 	private String value = "TMQL";
@@ -42,9 +42,9 @@ public class CreateAnnotationCommandTest {
 
 		}
 
-		if (createAnno == null) {
+		if (command == null) {
 
-			createAnno = new CreateAnnotationCommand(construct, "TMCL", "TMQL");
+			command = new CreateAnnotationCommand(construct, "TMCL", "TMQL");
 
 		}
 
@@ -60,7 +60,7 @@ public class CreateAnnotationCommandTest {
 	@Test
 	public void tcanExecuteTest() {
 
-		Assert.assertTrue(createAnno.canExecute());
+		Assert.assertTrue(command.canExecute());
 
 	}
 
@@ -69,20 +69,27 @@ public class CreateAnnotationCommandTest {
 
 		size = construct.getAnnotations().size();
 		Assert.assertFalse(contains(construct));
-		createAnno.execute();
+		command.execute();
 		Assert.assertTrue((size + 1) == construct.getAnnotations().size());
 		Assert.assertTrue(contains(construct));
 
+	}
+	
+	@Test
+	public void canUndoTest(){
+		
+		Assert.assertTrue(command.canUndo());
+		
 	}
 
 	@Test
 	public void undoTest() {
 
-		createAnno.execute();
+		command.execute();
 
 		size = construct.getAnnotations().size();
 		Assert.assertTrue(contains(construct));
-		createAnno.undo();
+		command.undo();
 		Assert.assertTrue((size - 1) == construct.getAnnotations().size());
 		Assert.assertFalse(contains(construct));
 
@@ -91,12 +98,12 @@ public class CreateAnnotationCommandTest {
 	@Test
 	public void redoTest() {
 
-		createAnno.execute();
-		createAnno.undo();
+		command.execute();
+		command.undo();
 
 		size = construct.getAnnotations().size();
 		Assert.assertFalse(contains(construct));
-		createAnno.redo();
+		command.redo();
 		Assert.assertTrue((size + 1) == construct.getAnnotations().size());
 		Assert.assertTrue(contains(construct));
 
