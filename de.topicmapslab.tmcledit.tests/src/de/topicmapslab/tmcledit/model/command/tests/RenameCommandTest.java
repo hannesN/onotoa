@@ -13,7 +13,7 @@ import de.topicmapslab.tmcledit.model.commands.RenameCommand;
 public class RenameCommandTest {
 
 	private TopicType topicType;
-	private RenameCommand renameCommand;
+	private RenameCommand command;
 
 	@Before
 	public void prepare() {
@@ -23,29 +23,29 @@ public class RenameCommandTest {
 			topicType.setName("oldName");
 		}
 
-		if (renameCommand == null)
-			renameCommand = new RenameCommand(topicType, "newName");
+		if (command == null)
+			command = new RenameCommand(topicType, "newName");
 	}
 
 	@After
 	public void shutdown() {
 
 		topicType = null;
-		renameCommand = null;
+		command = null;
 
 	}
 
 	@Test
 	public void canExecuteTest() {
 
-		Assert.assertTrue(renameCommand.canExecute());
+		Assert.assertTrue(command.canExecute());
 
 	}
 
 	@Test
 	public void executeTest() {
 
-		renameCommand.execute();
+		command.execute();
 		Assert.assertEquals("newName", topicType.getName());
 
 	}
@@ -53,14 +53,14 @@ public class RenameCommandTest {
 	@Test
 	public void canUndo() {
 
-		Assert.assertTrue(renameCommand.canUndo());
+		Assert.assertTrue(command.canUndo());
 
 	}
 
 	@Test
 	public void undoTest() {
 
-		renameCommand.undo();
+		command.undo();
 		Assert.assertEquals("oldName", topicType.getName());
 
 	}
@@ -68,7 +68,7 @@ public class RenameCommandTest {
 	@Test
 	public void redoTest() {
 
-		renameCommand.redo();
+		command.redo();
 		Assert.assertEquals("newName", topicType.getName());
 
 	}

@@ -18,20 +18,24 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
-import de.topicmapslab.tmcledit.model.commands.AddRoleCombinationConstraintCommand;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
 
 /**
  * @author Hannes Niederhausen
  * 
  */
-public class AddRoleCombinationConstraintCommandTest {
+public class AddRoleConstraintCommandTest {
 
-	private AddRoleCombinationConstraintCommand command;
 	private AssociationType aType;
-	private RoleCombinationConstraint rcc;
+	private List<RoleConstraint> rolesList;
+	private AddRoleConstraintCommand command;
+	private RoleConstraint rc;
 	private int size;
 
 	@Before
@@ -40,26 +44,37 @@ public class AddRoleCombinationConstraintCommandTest {
 		if (aType == null)
 			aType = ModelFactory.eINSTANCE.createAssociationType();
 
-		if (rcc == null)
-			rcc = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
+		if (rolesList == null) {
+
+			rolesList = new ArrayList<RoleConstraint>();
+			RoleConstraint rc1 = ModelFactory.eINSTANCE.createRoleConstraint();
+			RoleConstraint rc2 = ModelFactory.eINSTANCE.createRoleConstraint();
+			rolesList.add(rc1);
+			rolesList.add(rc2);
+
+		}
 
 		if (command == null)
-			command = new AddRoleCombinationConstraintCommand(aType, rcc);
+			command = new AddRoleConstraintCommand(aType, rolesList);
+
+		if (rc == null)
+			rc = ModelFactory.eINSTANCE.createRoleConstraint();
 
 	}
 
 	@After
 	public void shutdown() {
 
-		command = null;
-		rcc = null;
 		aType = null;
+		rolesList = null;
+		command = null;
+		rc = null;
 
 	}
 
 	@Test
 	public void canExecuteTest() {
-		
+
 		Assert.assertTrue(command.canExecute());
 
 	}
@@ -67,31 +82,31 @@ public class AddRoleCombinationConstraintCommandTest {
 	@Test
 	public void executeTest() {
 
-		size = aType.getRoleCombinations().size();
-		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
+		size = aType.getRoles().size();
+		Assert.assertFalse(aType.getRoles().containsAll(rolesList));
 		command.execute();
-		Assert.assertTrue((size + 1) == aType.getRoleCombinations().size());
-		Assert.assertTrue(aType.getRoleCombinations().contains(rcc));
+		Assert.assertTrue((size + 2) == aType.getRoles().size());
+		Assert.assertTrue(aType.getRoles().containsAll(rolesList));
 
 	}
 
 	@Test
-	public void canUndoTest(){
-		
+	public void canUndoTest() {
+
 		Assert.assertTrue(command.canUndo());
-		
+
 	}
-	
+
 	@Test
 	public void undoTest() {
 
 		command.execute();
 
-		size = aType.getRoleCombinations().size();
-		Assert.assertTrue(aType.getRoleCombinations().contains(rcc));
+		size = aType.getRoles().size();
+		Assert.assertTrue(aType.getRoles().containsAll(rolesList));
 		command.undo();
-		Assert.assertTrue((size - 1) == aType.getRoleCombinations().size());
-		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
+		Assert.assertTrue((size - 2) == aType.getRoles().size());
+		Assert.assertFalse(aType.getRoles().containsAll(rolesList));
 
 	}
 
@@ -101,11 +116,11 @@ public class AddRoleCombinationConstraintCommandTest {
 		command.execute();
 		command.undo();
 
-		size = aType.getRoleCombinations().size();
-		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
+		size = aType.getRoles().size();
+		Assert.assertFalse(aType.getRoles().containsAll(rolesList));
 		command.redo();
-		Assert.assertTrue((size + 1) == aType.getRoleCombinations().size());
-		Assert.assertTrue(aType.getRoleCombinations().contains(rcc));
+		Assert.assertTrue((size + 2) == aType.getRoles().size());
+		Assert.assertTrue(aType.getRoles().containsAll(rolesList));
 
 	}
 

@@ -30,7 +30,7 @@ import de.topicmapslab.tmcledit.model.commands.DeleteCommentCommand;
 public class DeleteCommentCommandTest {
 
 	private Comment comment;
-	private DeleteCommentCommand delCom;
+	private DeleteCommentCommand command;
 	private Diagram diagram;
 	private int size;
 
@@ -51,8 +51,8 @@ public class DeleteCommentCommandTest {
 
 		}
 
-		if (delCom == null)
-			delCom = new DeleteCommentCommand(comment);
+		if (command == null)
+			command = new DeleteCommentCommand(comment);
 	}
 
 	@After
@@ -66,7 +66,7 @@ public class DeleteCommentCommandTest {
 	@Test
 	public void canExecuteTest() {
 
-		Assert.assertTrue(delCom.canExecute());
+		Assert.assertTrue(command.canExecute());
 
 	}
 
@@ -75,20 +75,27 @@ public class DeleteCommentCommandTest {
 
 		size = diagram.getComments().size();
 		Assert.assertTrue(diagram.getComments().contains(comment));
-		delCom.execute();
+		command.execute();
 		Assert.assertTrue((size - 1) == diagram.getComments().size());
 		Assert.assertFalse(diagram.getComments().contains(comment));
 
 	}
 
 	@Test
+	public void canUndoTest(){
+		
+		Assert.assertTrue(command.canUndo());
+		
+	}
+	
+	@Test
 	public void undoTest() {
 
-		delCom.execute();
+		command.execute();
 
 		size = diagram.getComments().size();
 		Assert.assertFalse(diagram.getComments().contains(comment));
-		delCom.undo();
+		command.undo();
 		Assert.assertTrue((size + 1) == diagram.getComments().size());
 		Assert.assertTrue(diagram.getComments().contains(comment));
 
@@ -97,12 +104,12 @@ public class DeleteCommentCommandTest {
 	@Test
 	public void redoTest() {
 
-		delCom.execute();
-		delCom.undo();
+		command.execute();
+		command.undo();
 
 		size = diagram.getComments().size();
 		Assert.assertTrue(diagram.getComments().contains(comment));
-		delCom.redo();
+		command.redo();
 		Assert.assertTrue((size - 1) == diagram.getComments().size());
 		Assert.assertFalse(diagram.getComments().contains(comment));
 
