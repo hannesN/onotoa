@@ -44,7 +44,7 @@ public class RenameCommandTest {
 
 	@Test
 	public void executeTest() {
-
+		Assert.assertTrue(command.canExecute());
 		command.execute();
 		Assert.assertEquals("newName", topicType.getName());
 
