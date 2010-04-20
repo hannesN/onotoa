@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.command.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -58,6 +60,7 @@ public class CreateDiagramCommandTest {
 
 		size = file.getDiagrams().size();
 		Assert.assertFalse(contains(file));
+		assertTrue(command.canExecute());
 		command.execute();
 		Assert.assertTrue((size + 1) == file.getDiagrams().size());
 		Assert.assertTrue(contains(file));
@@ -74,13 +77,15 @@ public class CreateDiagramCommandTest {
 	@Test
 	public void undoTest() {
 
+		assertTrue(command.canExecute());
 		command.execute();
 
 	}
 
 	@Test
 	public void redoTest() {
-
+		
+		assertTrue(command.canExecute());
 		command.execute();
 		command.undo();
 
