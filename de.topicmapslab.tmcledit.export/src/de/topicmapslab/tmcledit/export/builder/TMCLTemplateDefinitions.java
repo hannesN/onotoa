@@ -68,6 +68,11 @@ import de.topicmapslab.ctm.writer.templates.entry.AssociationEntry;
 import de.topicmapslab.ctm.writer.templates.entry.EntryFactory;
 import de.topicmapslab.ctm.writer.templates.entry.IsInstanceOfEntry;
 import de.topicmapslab.ctm.writer.templates.entry.RoleEntry;
+import de.topicmapslab.ctm.writer.templates.entry.TopicEntry;
+import de.topicmapslab.ctm.writer.templates.entry.param.IEntryParam;
+import de.topicmapslab.ctm.writer.templates.entry.param.TopicTypeParam;
+import de.topicmapslab.ctm.writer.templates.entry.param.VariableParam;
+import de.topicmapslab.ctm.writer.templates.entry.param.WildcardParam;
 
 /**
  * A class which creates {@link Template}s for the CTM Serializer.
@@ -148,12 +153,17 @@ public class TMCLTemplateDefinitions {
 
 	public List<Template> getTemplates() {
 		if (templates == null)
-			init();
+	        try {
+	            init();
+            } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+            }
 
 		return templates;
 	}
 
-	private void init() {
+	private void init() throws Exception {
 		initTypes();
 		
 		templates = new ArrayList<Template>();
@@ -251,28 +261,27 @@ public class TMCLTemplateDefinitions {
 		overlapDeclaration = topicMap.createTopicBySubjectIdentifier(OVERLAP_DECLARATION);
 	}
 
-	private void addOverlaps() {
+	private void addOverlaps() throws Exception {
+		Template t = templateFactory.newTemplate("overlaps");
+		
+		IEntryParam constrParam = entryFactory.newWildcardParam("c");
+		TopicEntry t1 = entryFactory.newTopicEntry(constrParam);
+		
+		t1.add(entryFactory.newIsInstanceOfEntry(entryFactory.newTopicTypeParam(overlapDeclaration)));
+		t.add(t1);
+		
+		RoleEntry r1 = entryFactory.newRoleEntry(constrains, constrParam);
+		RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("tt1"));
+		AssociationEntry a1 = entryFactory.newAssociationEntry(overlaps, r1, r2);
+		t.add(a1);
+		
+		r1 = entryFactory.newRoleEntry(constrains, constrParam);
+		r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("tt2"));
+		AssociationEntry a2 = entryFactory.newAssociationEntry(overlaps, r1, r2);
+		t.add(a2);
 
+		templates.add(t);
 		
-		
-//		
-//		IsInstanceOfEntry e1 = entryFactory.newIsInstanceOfEntry(overlapDeclaration);
-//		e1.setValueOrVariable("?c");
-//		
-//		RoleEntry r1 = entryFactory.newRoleEntry(constrained, )
-//		
-//		AssociationEntry e2 = entryFactory.newAssociationEntry(associationType, roleEntries)
-//		
-//		Template t = templateFactory.newTemplate("overlaps", e1);
-//		t.
-//		templates.add(t);
-		
-		// IsInstanceOfEntry e = new IsInstanceOfEntry(properties, ctmIdentity,
-		// type)
-
-		// ?c isa tmcl:overlap-declaration.
-		// tmcl:overlaps(tmcl:allows : ?c, tmcl:allowed : $tt1)
-		// tmcl:overlaps(tmcl:allows : ?c, tmcl:allowed : $tt2)
 	}
 
 	private void addHasSubjectIdentifier() {

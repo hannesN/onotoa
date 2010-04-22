@@ -25,6 +25,8 @@ import org.tmapix.io.TopicMapWriter;
 import org.tmapix.io.XTM20TopicMapWriter;
 
 import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
+import de.topicmapslab.ctm.writer.templates.Template;
+import de.topicmapslab.tmcledit.export.builder.TMCLTemplateDefinitions;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -63,7 +65,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 			TopicMap tm = builder.createTopicMap();
 			FileOutputStream stream = new FileOutputStream(file);
 			
-			TopicMapWriter writer = getTopicMapWriter(stream, schema.getBaseLocator());
+			TopicMapWriter writer = getTopicMapWriter(stream, schema.getBaseLocator(), tm);
 			writer.write(tm);
 			stream.flush();
 			stream.close();
@@ -76,7 +78,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		return true;
 	}
 
-	private TopicMapWriter getTopicMapWriter(FileOutputStream stream, String baseLocator) {
+	private TopicMapWriter getTopicMapWriter(FileOutputStream stream, String baseLocator, TopicMap topicMap) {
 	    String suffix = page.getFileSuffix();
 		
 	    try {
@@ -95,7 +97,9 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		        for (MappingElement me : schema.getMappings()) {
 		        	writer.setPrefix(me.getValue(), me.getKey());
 		        }
-		        // TODO set templates
+		        TMCLTemplateDefinitions def = new TMCLTemplateDefinitions(writer, topicMap);
+		        for (Template t : def.getTemplates())
+		        	writer.addTemplate(t);
 		        
 		        return writer;
 	        }
