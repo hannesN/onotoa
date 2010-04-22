@@ -33,32 +33,37 @@ import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
 public class AddRoleConstraintCommandTest {
 
 	private AssociationType aType;
-	private List<RoleConstraint> rolesList;
+	private List<RoleConstraint> rolesList1;
+	private List<RoleConstraint> rolesList2;
 	private AddRoleConstraintCommand command;
 	private RoleConstraint rc;
 	private int size;
+	private int constructor = 1;
 
 	@Before
 	public void prepare() {
 
-		if (aType == null)
-			aType = ModelFactory.eINSTANCE.createAssociationType();
+		if (rc == null && constructor == 2) {
 
-		if (rolesList == null) {
+			rc = ModelFactory.eINSTANCE.createRoleConstraint();
+			rc.setId(0);
+		}
 
-			rolesList = new ArrayList<RoleConstraint>();
+		aType = ModelFactory.eINSTANCE.createAssociationType();
+
+		if (rolesList1 == null && constructor == 1) {
+
+			rolesList1 = new ArrayList<RoleConstraint>();
 			RoleConstraint rc1 = ModelFactory.eINSTANCE.createRoleConstraint();
-			RoleConstraint rc2 = ModelFactory.eINSTANCE.createRoleConstraint();
-			rolesList.add(rc1);
-			rolesList.add(rc2);
+			rc1.setId(2);
+			rolesList1.add(rc1);
 
 		}
 
-		if (command == null)
-			command = new AddRoleConstraintCommand(aType, rolesList);
-
-		if (rc == null)
-			rc = ModelFactory.eINSTANCE.createRoleConstraint();
+		if (command == null && constructor == 1)
+			command = new AddRoleConstraintCommand(aType, rolesList1);
+		else
+			command = new AddRoleConstraintCommand(aType, rc);
 
 	}
 
@@ -66,7 +71,7 @@ public class AddRoleConstraintCommandTest {
 	public void shutdown() {
 
 		aType = null;
-		rolesList = null;
+		rolesList1 = null;
 		command = null;
 		rc = null;
 
@@ -77,51 +82,146 @@ public class AddRoleConstraintCommandTest {
 
 		Assert.assertTrue(command.canExecute());
 
+		if (constructor == 1) {
+			constructor = 2;
+			prepare();
+			canExecuteTest();
+
+		}
+
+		constructor = 1;
+
 	}
 
 	@Test
 	public void executeTest() {
 
+		Assert.assertTrue(command.canExecute());
 		size = aType.getRoles().size();
-		Assert.assertFalse(aType.getRoles().containsAll(rolesList));
+		rolesList2 = new ArrayList<RoleConstraint>(aType.getRoles());
+		rolesList2.add(rc);
+
+		Assert.assertFalse((aType.getRoles().containsAll(rolesList1))
+				&& (aType.getRoles().contains(rc)));
+
 		command.execute();
-		Assert.assertTrue((size + 2) == aType.getRoles().size());
-		Assert.assertTrue(aType.getRoles().containsAll(rolesList));
+
+		if (constructor == 1) {
+
+			Assert.assertTrue((aType.getRoles().containsAll(rolesList1)));
+			Assert.assertTrue(Tools.roleConstraintListCompare(rolesList1, aType
+					.getRoles()));
+
+		}
+
+		if (constructor == 2) {
+
+			Assert.assertTrue((aType.getRoles().contains(rc)));
+			Assert.assertTrue(Tools.roleConstraintListCompare(rolesList2, aType
+					.getRoles()));
+
+		}
+
+		if (constructor == 1) {
+			constructor = 2;
+			prepare();
+			executeTest();
+
+		}
+
+		constructor = 1;
 
 	}
 
 	@Test
 	public void canUndoTest() {
 
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		Assert.assertTrue(command.canUndo());
+
+		if (constructor == 1) {
+			constructor = 2;
+			prepare();
+			canUndoTest();
+
+		}
+
+		constructor = 1;
 
 	}
 
 	@Test
 	public void undoTest() {
 
-		command.execute();
+		Assert.assertTrue(command.canExecute());
 
 		size = aType.getRoles().size();
-		Assert.assertTrue(aType.getRoles().containsAll(rolesList));
+		rolesList2 = new ArrayList<RoleConstraint>(aType.getRoles());
+
+		command.execute();
+		Assert.assertTrue(command.canUndo());
 		command.undo();
-		Assert.assertTrue((size - 2) == aType.getRoles().size());
-		Assert.assertFalse(aType.getRoles().containsAll(rolesList));
+
+		Assert.assertTrue((size) == aType.getRoles().size());
+		Assert.assertFalse(aType.getRoles().containsAll(rolesList1)
+				&& aType.getRoles().contains(rc));
+
+		Assert.assertTrue(Tools.roleConstraintListCompare(rolesList2, aType
+				.getRoles()));
+
+		if (constructor == 1) {
+			constructor = 2;
+			prepare();
+			undoTest();
+
+		}
+
+		constructor = 1;
 
 	}
 
 	@Test
 	public void redoTest() {
 
+		Assert.assertTrue(command.canExecute());
 		command.execute();
-		command.undo();
-
+		
 		size = aType.getRoles().size();
-		Assert.assertFalse(aType.getRoles().containsAll(rolesList));
+		rolesList2 = new ArrayList<RoleConstraint>(aType.getRoles());
+		
+		Assert.assertTrue(command.canUndo());
+		command.undo();
 		command.redo();
-		Assert.assertTrue((size + 2) == aType.getRoles().size());
-		Assert.assertTrue(aType.getRoles().containsAll(rolesList));
 
+		Assert.assertTrue((size ) == aType.getRoles().size());
+		
+		if (constructor == 1) {
+
+			Assert.assertTrue((aType.getRoles().containsAll(rolesList1)));
+			Assert.assertTrue(Tools.roleConstraintListCompare(rolesList1, aType
+					.getRoles()));
+
+		}
+
+		if (constructor == 2) {
+
+			Assert.assertTrue((aType.getRoles().contains(rc)));
+			Assert.assertTrue(Tools.roleConstraintListCompare(rolesList2, aType
+					.getRoles()));
+
+		}
+		
+		if (constructor == 1) {
+			constructor = 2;
+			prepare();
+			redoTest();
+
+		}
+
+		constructor = 1;
+
+		
 	}
 
 }

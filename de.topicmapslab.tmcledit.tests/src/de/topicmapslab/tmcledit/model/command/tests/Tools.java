@@ -3,7 +3,9 @@ package de.topicmapslab.tmcledit.model.command.tests;
 import java.util.List;
 
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 
 public class Tools {
 
@@ -39,4 +41,22 @@ public class Tools {
 
 	}
 	
+	public static boolean roleConstraintListCompare(List<RoleConstraint> list1, List<RoleConstraint> list2){
+		
+		if (list1.size() != list2.size())
+			return false;
+	
+		RoleConstraintComparator comp = new RoleConstraintComparator();
+		
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+		
+	}
+
 }
