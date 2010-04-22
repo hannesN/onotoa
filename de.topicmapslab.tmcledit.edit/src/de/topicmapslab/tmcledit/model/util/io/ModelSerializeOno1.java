@@ -177,11 +177,11 @@ public class ModelSerializeOno1 implements ModelSerializer {
 		fileNode.setAttribute(A_VERSION, getVersionString());
 		setId(file, fileNode);
 
-		
-		Element notesNode = document.createElement(E_NOTES);
-		notesNode.appendChild(document.createTextNode(file.getNotes()));
-		fileNode.appendChild(notesNode);
-		
+		if ((file.getNotes()!=null) && (file.getNotes().length()>0)) {
+			Element notesNode = document.createElement(E_NOTES);
+			notesNode.appendChild(document.createTextNode(file.getNotes()));
+			fileNode.appendChild(notesNode);
+		}
 		TopicMapSchema schema = file.getTopicMapSchema();
 
 		Element schemaNode = document.createElement(E_SCHEMA);

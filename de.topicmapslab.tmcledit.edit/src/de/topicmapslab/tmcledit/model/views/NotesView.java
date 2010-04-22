@@ -76,7 +76,8 @@ public class NotesView extends ViewPart {
 		IWorkbenchPage activePage = workbenchWindow.getActivePage();
 		if (activePage!=null) {
 			IViewPart view = activePage.findView(ModelView.ID);
-			file = (File) view.getAdapter(File.class);
+			if (view!=null)
+				file = (File) view.getAdapter(File.class);
 		}
 		if ( (file!=null) && (file.getNotes()!=null) )
 			content = file.getNotes();
