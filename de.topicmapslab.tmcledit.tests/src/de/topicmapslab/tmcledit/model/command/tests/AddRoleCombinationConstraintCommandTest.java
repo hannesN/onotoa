@@ -13,7 +13,9 @@
  */
 package de.topicmapslab.tmcledit.model.command.tests;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,7 +37,7 @@ public class AddRoleCombinationConstraintCommandTest {
 	private AssociationType aType;
 	private RoleCombinationConstraint rcc;
 	private RoleCombinationConstraintComparator comp;
-	private EList<RoleCombinationConstraint> list;
+	private List<RoleCombinationConstraint> list;
 	private int size;
 
 	@Before
@@ -72,7 +74,7 @@ public class AddRoleCombinationConstraintCommandTest {
 	public void executeTest() {
 
 		comp = new RoleCombinationConstraintComparator();
-		list = aType.getRoleCombinations();
+		list = new ArrayList<RoleCombinationConstraint>(aType.getRoleCombinations());
 		size = aType.getRoleCombinations().size();
 		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
 
