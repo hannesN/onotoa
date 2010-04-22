@@ -25,7 +25,6 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.commands.AddRoleCombinationConstraintCommand;
-import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 
 /**
  * @author Hannes Niederhausen
@@ -36,7 +35,6 @@ public class AddRoleCombinationConstraintCommandTest {
 	private AddRoleCombinationConstraintCommand command;
 	private AssociationType aType;
 	private RoleCombinationConstraint rcc;
-	private RoleCombinationConstraintComparator comp;
 	private List<RoleCombinationConstraint> list;
 	private int size;
 
@@ -73,29 +71,30 @@ public class AddRoleCombinationConstraintCommandTest {
 	@Test
 	public void executeTest() {
 
-		comp = new RoleCombinationConstraintComparator();
-		list = new ArrayList<RoleCombinationConstraint>(aType.getRoleCombinations());
-		size = aType.getRoleCombinations().size();
+		Assert.assertTrue(command.canExecute());
 		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
+
+		list = new ArrayList<RoleCombinationConstraint>(aType
+				.getRoleCombinations());
+		list.add(rcc);
+		size = aType.getRoleCombinations().size();
 
 		command.execute();
 
 		Assert.assertTrue((size + 1) == aType.getRoleCombinations().size());
 		Assert.assertTrue(aType.getRoleCombinations().contains(rcc));
-		list.add(rcc);
-
-		for (int i = 0; i < list.size(); i++) {
-
-			Assert.assertTrue(comp.equals(list.get(i), aType
-					.getRoleCombinations().get(i)));
-
-		}
+		Assert.assertTrue(Tools.roleCombinationConstraintCompare(rcc, aType
+				.getRoleCombinations().get(size)));
+		Assert.assertTrue(Tools.roleCombinationConstraintListCompare(list,
+				aType.getRoleCombinations()));
 
 	}
 
 	@Test
 	public void canUndoTest() {
 
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		Assert.assertTrue(command.canUndo());
 
 	}
@@ -103,49 +102,42 @@ public class AddRoleCombinationConstraintCommandTest {
 	@Test
 	public void undoTest() {
 
-		comp = new RoleCombinationConstraintComparator();
-		list = aType.getRoleCombinations();
+		Assert.assertTrue(command.canExecute());
+
+		list = new ArrayList<RoleCombinationConstraint>(aType
+				.getRoleCombinations());
+		size = aType.getRoleCombinations().size();
 
 		command.execute();
-
-		size = aType.getRoleCombinations().size();
-		Assert.assertTrue(aType.getRoleCombinations().contains(rcc));
+		Assert.assertTrue(command.canUndo());
 		command.undo();
-		Assert.assertTrue((size - 1) == aType.getRoleCombinations().size());
+
 		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
-
-		for (int i = 0; i < list.size(); i++) {
-
-			Assert.assertTrue(comp.equals(list.get(i), aType
-					.getRoleCombinations().get(i)));
-
-		}
+		Assert.assertTrue((size) == aType.getRoleCombinations().size());
+		Assert.assertTrue(Tools.roleCombinationConstraintListCompare(list,
+				aType.getRoleCombinations()));
 
 	}
 
 	@Test
 	public void redoTest() {
 
+		Assert.assertTrue(command.canExecute());
 		command.execute();
-		command.undo();
 
-		comp = new RoleCombinationConstraintComparator();
-		list = aType.getRoleCombinations();
+		list = new ArrayList<RoleCombinationConstraint>(aType
+				.getRoleCombinations());
 		size = aType.getRoleCombinations().size();
-		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
 
+		Assert.assertTrue(command.canUndo());
+		command.undo();
 		command.redo();
 
-		Assert.assertTrue((size + 1) == aType.getRoleCombinations().size());
-		Assert.assertTrue(aType.getRoleCombinations().contains(rcc));
-		list.add(rcc);
-
-		for (int i = 0; i < list.size(); i++) {
-
-			Assert.assertTrue(comp.equals(list.get(i), aType
-					.getRoleCombinations().get(i)));
-
-		}
+		Assert.assertTrue(size == aType.getRoleCombinations().size());
+		Assert.assertTrue(Tools.roleCombinationConstraintCompare(rcc, aType
+				.getRoleCombinations().get(size - 1)));
+		Assert.assertTrue(Tools.roleCombinationConstraintListCompare(list,
+				aType.getRoleCombinations()));
 
 	}
 
