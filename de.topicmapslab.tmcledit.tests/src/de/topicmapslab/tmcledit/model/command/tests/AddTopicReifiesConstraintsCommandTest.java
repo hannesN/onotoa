@@ -34,36 +34,62 @@ public class AddTopicReifiesConstraintsCommandTest {
 
 	private AddTopicReifiesConstraintsCommand command;
 	private TopicType tt;
-	private List<TopicReifiesConstraint> trConstraintsList;
+	private List<TopicReifiesConstraint> trConstraintsList1;
+	private List<TopicReifiesConstraint> trConstraintsList2;
+	private TopicReifiesConstraint trc1;
+	private TopicReifiesConstraint trc2;
 	private int size;
+	private int constructor = 1;
 
 	@Before
 	public void prepare() {
 
-		if (tt == null)
-			tt = ModelFactory.eINSTANCE.createTopicType();
+		tt = ModelFactory.eINSTANCE.createTopicType();
 
-		if (trConstraintsList == null) {
+		if (trConstraintsList1 == null && constructor == 1) {
 
-			trConstraintsList = new ArrayList<TopicReifiesConstraint>();
+			trConstraintsList1 = new ArrayList<TopicReifiesConstraint>();
 			TopicReifiesConstraint trc1 = ModelFactory.eINSTANCE
 					.createTopicReifiesConstraint();
 			TopicReifiesConstraint trc2 = ModelFactory.eINSTANCE
 					.createTopicReifiesConstraint();
-			trConstraintsList.add(trc1);
-			trConstraintsList.add(trc2);
+			trc1.setId(0);
+			trc2.setId(1);
+			trConstraintsList1.add(trc1);
+			trConstraintsList1.add(trc2);
 
 		}
 
-		if (command == null)
+		if (trc1 == null && constructor == 2) {
+
+			trc1 = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
+			trc1.setId(3);
+
+		}
+
+		if (trc2 == null && constructor == 2) {
+
+			trc2 = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
+			trc2.setId(4);
+
+		}
+
+		if (command == null && constructor == 1)
 			command = new AddTopicReifiesConstraintsCommand(tt,
-					trConstraintsList);
+					trConstraintsList1);
+		else
+			command = new AddTopicReifiesConstraintsCommand(tt, trc1, trc2);
 
 	}
 
 	@After
 	public void shutdown() {
 
+		tt = null;
+		trConstraintsList1 = null;
+		trConstraintsList2 = null;
+		trc1 = null;
+		trc2 = null;
 		command = null;
 
 	}
@@ -73,55 +99,162 @@ public class AddTopicReifiesConstraintsCommandTest {
 
 		Assert.assertTrue(command.canExecute());
 
+		if (constructor == 1) {
+
+			constructor = 2;
+			prepare();
+			canExecuteTest();
+
+		}
+
+		constructor = 1;
+
 	}
 
 	@Test
 	public void executeTest() {
 
+		Assert.assertTrue(command.canExecute());
 		size = tt.getTopicReifiesConstraints().size();
+		trConstraintsList2 = new ArrayList<TopicReifiesConstraint>(tt
+				.getTopicReifiesConstraints());
+		trConstraintsList2.add(trc1);
+		trConstraintsList2.add(trc2);
+
 		Assert.assertFalse(tt.getTopicReifiesConstraints().containsAll(
-				trConstraintsList));
+				trConstraintsList1));
+		Assert.assertFalse(tt.getTopicReifiesConstraints().contains(trc1));
+		Assert.assertFalse(tt.getTopicReifiesConstraints().contains(trc2));
+
 		command.execute();
+
 		Assert.assertTrue((size + 2) == tt.getTopicReifiesConstraints().size());
-		Assert.assertTrue(tt.getTopicReifiesConstraints().containsAll(
-				trConstraintsList));
+
+		if (constructor == 1) {
+
+			Assert.assertTrue(tt.getTopicReifiesConstraints().containsAll(
+					trConstraintsList1));
+			Assert.assertTrue(Tools.topicReifiesConstraintsListCompare(
+					trConstraintsList1, tt.getTopicReifiesConstraints()));
+
+		}
+
+		if (constructor == 2) {
+
+			Assert.assertTrue(tt.getTopicReifiesConstraints().contains(trc1));
+			Assert.assertTrue(tt.getTopicReifiesConstraints().contains(trc2));
+			Assert.assertTrue(Tools.topicReifiesConstraintsListCompare(
+					trConstraintsList2, tt.getTopicReifiesConstraints()));
+
+		}
+
+		if (constructor == 1) {
+
+			constructor = 2;
+			prepare();
+			executeTest();
+
+		}
+
+		constructor = 1;
 
 	}
 
 	@Test
 	public void canUndoTest() {
 
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		Assert.assertTrue(command.canUndo());
+
+		if (constructor == 1) {
+
+			constructor = 2;
+			prepare();
+			canUndoTest();
+
+		}
+
+		constructor = 1;
 
 	}
 
 	@Test
 	public void undoTest() {
 
-		command.execute();
+		Assert.assertTrue(command.canExecute());
 
 		size = tt.getTopicReifiesConstraints().size();
-		Assert.assertTrue(tt.getTopicReifiesConstraints().containsAll(
-				trConstraintsList));
+		trConstraintsList2 = new ArrayList<TopicReifiesConstraint>(tt
+				.getTopicReifiesConstraints());
+
+		command.execute();
+		Assert.assertTrue(command.canUndo());
 		command.undo();
-		Assert.assertTrue((size - 2) == tt.getTopicReifiesConstraints().size());
+
+		Assert.assertTrue(size == tt.getTopicReifiesConstraints().size());
 		Assert.assertFalse(tt.getTopicReifiesConstraints().containsAll(
-				trConstraintsList));
+				trConstraintsList1));
+		Assert.assertFalse(tt.getTopicReifiesConstraints().contains(trc1));
+		Assert.assertFalse(tt.getTopicReifiesConstraints().contains(trc2));
+		Assert.assertTrue(Tools.topicReifiesConstraintsListCompare(
+				trConstraintsList2, tt.getTopicReifiesConstraints()));
+
+		if (constructor == 1) {
+
+			constructor = 2;
+			prepare();
+			undoTest();
+
+		}
+
+		constructor = 1;
+
 	}
 
 	@Test
 	public void redoTest() {
 
+		Assert.assertTrue(command.canExecute());
 		command.execute();
-		command.undo();
 
 		size = tt.getTopicReifiesConstraints().size();
-		Assert.assertFalse(tt.getTopicReifiesConstraints().containsAll(
-				trConstraintsList));
+		trConstraintsList2 = new ArrayList<TopicReifiesConstraint>(tt
+				.getTopicReifiesConstraints());
+
+		Assert.assertTrue(command.canUndo());
+		command.undo();
 		command.redo();
-		Assert.assertTrue((size + 2) == tt.getTopicReifiesConstraints().size());
-		Assert.assertTrue(tt.getTopicReifiesConstraints().containsAll(
-				trConstraintsList));
+
+		Assert.assertTrue(size == tt.getTopicReifiesConstraints().size());
+
+		if (constructor == 1) {
+
+			Assert.assertTrue(tt.getTopicReifiesConstraints().containsAll(
+					trConstraintsList1));
+			Assert.assertTrue(Tools.topicReifiesConstraintsListCompare(
+					trConstraintsList1, tt.getTopicReifiesConstraints()));
+
+		}
+
+		if (constructor == 2) {
+
+			Assert.assertTrue(tt.getTopicReifiesConstraints().contains(trc1));
+			Assert.assertTrue(tt.getTopicReifiesConstraints().contains(trc2));
+			Assert.assertTrue(Tools.topicReifiesConstraintsListCompare(
+					trConstraintsList2, tt.getTopicReifiesConstraints()));
+
+		}
+
+		if (constructor == 1) {
+
+			constructor = 2;
+			prepare();
+			redoTest();
+
+		}
+
+		constructor = 1;
 
 	}
 
