@@ -2,10 +2,12 @@ package de.topicmapslab.tmcledit.model.command.tests;
 
 import java.util.List;
 
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
+import de.topicmapslab.tmcledit.model.compare.AnnotationComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
@@ -131,6 +133,36 @@ public class Tools {
 			TopicReifiesConstraint o1, TopicReifiesConstraint o2) {
 
 		TopicReifiesConstraintComparator comp = new TopicReifiesConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean annotationsListCompare(List<Annotation> list1,
+			List<Annotation> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		AnnotationComparator comp = new AnnotationComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean annotationsCompare(Annotation o1, Annotation o2) {
+
+		AnnotationComparator comp = new AnnotationComparator();
 
 		if (comp.equals(o1, o2) == false)
 			return false;
