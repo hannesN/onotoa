@@ -10,9 +10,11 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.command.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +32,8 @@ public class CreateAnnotationCommandTest {
 
 	private TMCLConstruct construct;
 	private CreateAnnotationCommand command;
+	private Annotation annotation;
+	private List<Annotation> list;
 	private int size;
 	private String key = "TMCL";
 	private String value = "TMQL";
@@ -45,8 +49,15 @@ public class CreateAnnotationCommandTest {
 
 		if (command == null) {
 
-			command = new CreateAnnotationCommand(construct, "TMCL", "TMQL");
+			command = new CreateAnnotationCommand(construct, key, value);
 
+		}
+
+		if (annotation == null) {
+
+			annotation = ModelFactory.eINSTANCE.createAnnotation();
+			annotation.setKey(key);
+			annotation.setValue(value);
 		}
 
 	}
@@ -54,12 +65,17 @@ public class CreateAnnotationCommandTest {
 	@After
 	public void shutdown() {
 
+		annotation = null;
 		construct = null;
+		key = null;
+		value = null;
+		list = null;
+		command = null;
 
 	}
 
 	@Test
-	public void tcanExecuteTest() {
+	public void canExecuteTest() {
 
 		Assert.assertTrue(command.canExecute());
 
@@ -68,61 +84,65 @@ public class CreateAnnotationCommandTest {
 	@Test
 	public void executeTest() {
 
+		Assert.assertTrue(command.canExecute());
+
 		size = construct.getAnnotations().size();
-		Assert.assertFalse(contains(construct));
+		list = new ArrayList<Annotation>(construct.getAnnotations());
+
 		command.execute();
+
+		annotation.setId(construct.getAnnotations().get(size).getId());
+		list.add(annotation);
+
 		Assert.assertTrue((size + 1) == construct.getAnnotations().size());
-		Assert.assertTrue(contains(construct));
+		Assert.assertTrue(Tools.annotationsListCompare(list, construct
+				.getAnnotations()));
 
 	}
-	
+
 	@Test
-	public void canUndoTest(){
-		
+	public void canUndoTest() {
+
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		Assert.assertTrue(command.canUndo());
-		
+
 	}
 
 	@Test
 	public void undoTest() {
 
-		command.execute();
+		Assert.assertTrue(command.canExecute());
 
 		size = construct.getAnnotations().size();
-		Assert.assertTrue(contains(construct));
+		list = new ArrayList<Annotation>(construct.getAnnotations());
+
+		command.execute();
+		Assert.assertTrue(command.canUndo());
 		command.undo();
-		Assert.assertTrue((size - 1) == construct.getAnnotations().size());
-		Assert.assertFalse(contains(construct));
+
+		Assert.assertTrue(size == construct.getAnnotations().size());
+		Assert.assertTrue(Tools.annotationsListCompare(list, construct
+				.getAnnotations()));
 
 	}
 
 	@Test
 	public void redoTest() {
 
+		Assert.assertTrue(command.canExecute());
 		command.execute();
-		command.undo();
 
 		size = construct.getAnnotations().size();
-		Assert.assertFalse(contains(construct));
+		list = new ArrayList<Annotation>(construct.getAnnotations());
+
+		Assert.assertTrue(command.canUndo());
+		command.undo();
 		command.redo();
-		Assert.assertTrue((size + 1) == construct.getAnnotations().size());
-		Assert.assertTrue(contains(construct));
 
-	}
-
-	private boolean contains(TMCLConstruct construct) {
-
-		Annotation anno;
-
-		for (int i = 0; i < construct.getAnnotations().size(); i++) {
-
-			anno = construct.getAnnotations().get(i);
-			if ((anno.getKey() == this.key) && (anno.getValue() == this.value))
-				return true;
-
-		}
-
-		return false;
+		Assert.assertTrue(size == construct.getAnnotations().size());
+		Assert.assertTrue(Tools.annotationsListCompare(list, construct
+				.getAnnotations()));
 
 	}
 
