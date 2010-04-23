@@ -130,45 +130,4 @@ public class CreateDiagramCommandTest {
 
 	}
 
-	// private final String name;
-	// private final File file;
-	//	
-	// private Diagram diagram;
-	//	
-	//	
-	//	
-	// public CreateDiagramCommandTest(String name, File file) {
-	// super();
-	// this.name = name;
-	// this.file = file;
-	// }
-	//	
-	// public void execute() {
-	// file.getDiagrams().add(diagram);
-	// }
-	//	
-	// @Override
-	// public void undo() {
-	// file.getDiagrams().remove(diagram);
-	// }
-	//	
-	// @Override
-	// protected boolean prepare() {
-	// diagram = ModelFactory.eINSTANCE.createDiagram();
-	// diagram.setName(name);
-	// return true;
-	// }
-	//	
-	// public void redo() {
-	// execute();
-	// }
-	//	
-	// @Override
-	// public String getLabel() {
-	// return "Create new diagram";
-	// }
-	//	
-	// public Diagram getDiagram() {
-	// return diagram;
-	// }
 }
