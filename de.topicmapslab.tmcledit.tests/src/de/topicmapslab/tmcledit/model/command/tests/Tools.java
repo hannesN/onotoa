@@ -5,9 +5,11 @@ import java.util.List;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.TopicReifiesConstraintComparator;
 
 public class Tools {
 
@@ -97,6 +99,38 @@ public class Tools {
 			ScopeConstraint o2) {
 
 		ScopeConstraintComparator comp = new ScopeConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean topicReifiesConstraintsListCompare(
+			List<TopicReifiesConstraint> list1,
+			List<TopicReifiesConstraint> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		TopicReifiesConstraintComparator comp = new TopicReifiesConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean topicReifiesConstraintCompare(
+			TopicReifiesConstraint o1, TopicReifiesConstraint o2) {
+
+		TopicReifiesConstraintComparator comp = new TopicReifiesConstraintComparator();
 
 		if (comp.equals(o1, o2) == false)
 			return false;
