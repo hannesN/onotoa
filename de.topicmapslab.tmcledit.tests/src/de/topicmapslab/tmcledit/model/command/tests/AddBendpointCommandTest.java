@@ -136,43 +136,4 @@ public class AddBendpointCommandTest {
 
 	}
 
-	// private final Edge edge;
-	// private final int index;
-	// private final int posX;
-	// private final int posY;
-	//	
-	// private Bendpoint bendpoint;
-	//
-	// public AddBendpointCommandTest(Edge edge, int index, int posX, int posY)
-	// {
-	// super();
-	// this.edge = edge;
-	// this.index = index;
-	// this.posX = posX;
-	// this.posY = posY;
-	// }
-	//
-	// public void execute() {
-	// edge.getBendpoints().add(index, bendpoint);
-	// }
-	//
-	// public void redo() {
-	// execute();
-	// }
-	//	
-	// @Override
-	// public void undo() {
-	// edge.getBendpoints().remove(index);
-	// }
-	//	
-	//	
-	// @Override
-	// protected boolean prepare() {
-	// bendpoint = ModelFactory.eINSTANCE.createBendpoint();
-	// bendpoint.setPosX(posX);
-	// bendpoint.setPosY(posY);
-	//	    
-	// return true;
-	// }
-
 }
