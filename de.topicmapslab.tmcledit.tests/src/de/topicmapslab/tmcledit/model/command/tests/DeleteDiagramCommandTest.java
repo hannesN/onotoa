@@ -13,6 +13,9 @@
  */
 package de.topicmapslab.tmcledit.model.command.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,6 +35,7 @@ public class DeleteDiagramCommandTest {
 	private Diagram dia;
 	private DeleteDiagramCommand command;
 	private File file;
+	private List<Diagram> list;
 	private int size;
 
 	@Before
@@ -53,6 +57,8 @@ public class DeleteDiagramCommandTest {
 	@After
 	public void shutdown() {
 
+		list = null;
+		file = null;
 		dia = null;
 		command = null;
 
@@ -68,45 +74,64 @@ public class DeleteDiagramCommandTest {
 	@Test
 	public void executeTest() {
 
-		size = file.getDiagrams().size();
+		Assert.assertTrue(command.canExecute());
 		Assert.assertTrue(file.getDiagrams().contains(dia));
+
+		size = file.getDiagrams().size();
+		list = new ArrayList<Diagram>(file.getDiagrams());
+		list.remove(dia);
+
 		command.execute();
+
 		Assert.assertTrue((size - 1) == file.getDiagrams().size());
 		Assert.assertFalse(file.getDiagrams().contains(dia));
+		Assert.assertTrue(Tools.diagramListCompare(list, file.getDiagrams()));
 
 	}
-	
+
 	@Test
-	public void canUndoTest(){
-		
+	public void canUndoTest() {
+
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		Assert.assertTrue(command.canUndo());
-		
+
 	}
 
 	@Test
 	public void undoTest() {
 
-		command.execute();
+		Assert.assertTrue(command.canExecute());
 
 		size = file.getDiagrams().size();
-		Assert.assertFalse(file.getDiagrams().contains(dia));
+		list = new ArrayList<Diagram>(file.getDiagrams());
+
+		command.execute();
+		Assert.assertTrue(command.canUndo());
 		command.undo();
-		Assert.assertTrue((size + 1) == file.getDiagrams().size());
+
+		Assert.assertTrue(size == file.getDiagrams().size());
 		Assert.assertTrue(file.getDiagrams().contains(dia));
+		Assert.assertTrue(Tools.diagramListCompare(list, file.getDiagrams()));
 
 	}
 
 	@Test
 	public void redoTest() {
 
+		Assert.assertTrue(command.canExecute());
 		command.execute();
-		command.undo();
 
 		size = file.getDiagrams().size();
-		Assert.assertTrue(file.getDiagrams().contains(dia));
+		list = new ArrayList<Diagram>(file.getDiagrams());
+
+		Assert.assertTrue(command.canUndo());
+		command.undo();
 		command.redo();
-		Assert.assertTrue((size - 1) == file.getDiagrams().size());
+
+		Assert.assertTrue(size == file.getDiagrams().size());
 		Assert.assertFalse(file.getDiagrams().contains(dia));
+		Assert.assertTrue(Tools.diagramListCompare(list, file.getDiagrams()));
 
 	}
 
