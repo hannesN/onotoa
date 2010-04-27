@@ -135,99 +135,102 @@ public class CreateEdgeCommandTest {
 
 	}
 
-//	@Test
-//	public void canExecute() {
-//
-//		while (constructor == 1) {
-//
-//			Assert.assertTrue(command.canExecute());
-//
-//			if (edgeTypeSwitch % 3 == 1)
-//				typeOfEdge = "IS_ATYPE";
-//
-//			if (edgeTypeSwitch % 3 == 2)
-//				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
-//
-//			if (edgeTypeSwitch == 3) {
-//				typeOfEdge = "AKO_TYPE";
-//				hasRoleConstraint = true;
-//			}
-//
-//			if (edgeTypeSwitch == 6) {
-//
-//				hasRoleConstraint = false;
-//				constructor++;
-//				edgeTypeSwitch = 1;
-//				break;
-//
-//			}
-//			prepare();
-//			edgeTypeSwitch++;
-//		}
-//		prepare();
-//
-//		while (constructor == 2) {
-//
-//			Assert.assertTrue(command.canExecute());
-//
-//			if (edgeTypeSwitch % 3 == 1)
-//				typeOfEdge = "IS_ATYPE";
-//
-//			if (edgeTypeSwitch % 3 == 2)
-//				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
-//
-//			if (edgeTypeSwitch == 3) {
-//
-//				typeOfEdge = "AKO_TYPE";
-//				hasRoleConstraint = true;
-//
-//			}
-//			if (edgeTypeSwitch == 6) {
-//
-//				hasRoleConstraint = false;
-//				constructor++;
-//				edgeTypeSwitch = 1;
-//				break;
-//
-//			}
-//			prepare();
-//			edgeTypeSwitch++;
-//		}
-//		prepare();
-//
-//		while (constructor == 3) {
-//
-//			Assert.assertTrue(command.canExecute());
-//
-//			if (edgeTypeSwitch % 3 == 1)
-//				typeOfEdge = "IS_ATYPE";
-//
-//			if (edgeTypeSwitch % 3 == 2)
-//				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
-//
-//			if (edgeTypeSwitch == 3) {
-//
-//				typeOfEdge = "AKO_TYPE";
-//				hasRoleConstraint = true;
-//
-//			}
-//			if (edgeTypeSwitch == 6) {
-//
-//				hasRoleConstraint = false;
-//				constructor++;
-//				edgeTypeSwitch = 1;
-//				break;
-//
-//			}
-//			prepare();
-//			edgeTypeSwitch++;
-//		}
-//
-//		constructor = 1;
-//		hasRoleConstraint = false;
-//		edgeTypeSwitch = 1;
-//
-//	}
+	@Test
+	public void canExecute() {
+
+		while (constructor == 1) {
+
+			Assert.assertTrue(command.canExecute());
+
+			if (edgeTypeSwitch % 3 == 1)
+				typeOfEdge = "IS_ATYPE";
+
+			if (edgeTypeSwitch % 3 == 2)
+				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+			if (edgeTypeSwitch == 3) {
+				typeOfEdge = "AKO_TYPE";
+				hasRoleConstraint = true;
+			}
+
+			if (edgeTypeSwitch == 6) {
+
+				typeOfEdge = "AKO_TYPE";
+				hasRoleConstraint = false;
+				constructor++;
+				edgeTypeSwitch = 1;
+				break;
+
+			}
+			prepare();
+			edgeTypeSwitch++;
+		}
+		prepare();
+
+		while (constructor == 2) {
+
+			Assert.assertTrue(command.canExecute());
+
+			if (edgeTypeSwitch % 3 == 1)
+				typeOfEdge = "IS_ATYPE";
+
+			if (edgeTypeSwitch % 3 == 2)
+				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+			if (edgeTypeSwitch == 3) {
+
+				typeOfEdge = "AKO_TYPE";
+				hasRoleConstraint = true;
+
+			}
+			if (edgeTypeSwitch == 6) {
+
+				typeOfEdge = "AKO_TYPE";
+				hasRoleConstraint = false;
+				constructor++;
+				edgeTypeSwitch = 1;
+				break;
+
+			}
+			prepare();
+			edgeTypeSwitch++;
+		}
+		prepare();
+
+		while (constructor == 3) {
+
+			Assert.assertTrue(command.canExecute());
+
+			if (edgeTypeSwitch % 3 == 1)
+				typeOfEdge = "IS_ATYPE";
+
+			if (edgeTypeSwitch % 3 == 2)
+				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+			if (edgeTypeSwitch == 3) {
+
+				typeOfEdge = "AKO_TYPE";
+				hasRoleConstraint = true;
+
+			}
+			if (edgeTypeSwitch == 6) {
+
+				typeOfEdge = "AKO_TYPE";
+				hasRoleConstraint = false;
+				constructor++;
+				edgeTypeSwitch = 1;
+				break;
+
+			}
+			prepare();
+			edgeTypeSwitch++;
+		}
+
+		constructor = 1;
+		hasRoleConstraint = false;
+		edgeTypeSwitch = 1;
+
+	}
 
 	@Test
 	public void executeTest() {
