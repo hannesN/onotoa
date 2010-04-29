@@ -6,6 +6,7 @@ import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
@@ -14,6 +15,7 @@ import de.topicmapslab.tmcledit.model.compare.AnnotationComparator;
 import de.topicmapslab.tmcledit.model.compare.BendpointComparator;
 import de.topicmapslab.tmcledit.model.compare.CommentComparator;
 import de.topicmapslab.tmcledit.model.compare.DiagramComparator;
+import de.topicmapslab.tmcledit.model.compare.EdgeComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
@@ -257,6 +259,36 @@ public class Tools {
 	}
 
 	public static boolean bendpointCompare(Bendpoint o1, Bendpoint o2) {
+
+		BendpointComparator comp = new BendpointComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+	
+	public static boolean edgeListCompare(List<Edge> list1,
+			List<Edge> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		EdgeComparator comp = new EdgeComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean edgeCompare(Edge o1, Edge o2) {
 
 		BendpointComparator comp = new BendpointComparator();
 

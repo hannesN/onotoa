@@ -10,6 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.command.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,15 +30,16 @@ import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
 
 public class CreateEdgeCommandTest {
 
-	private Edge newEdge;
+	private Edge edge;
 	private Diagram diagram;
 	private TopicType topicType;
 	private EdgeType edgeType;
-	private boolean hasRoleConstraint = false;
-	private final boolean DEBUG = true;
+	private boolean hasRoleConstraint = true;
+	private final boolean DEBUG = false;
 	private String typeOfEdge = "AKO_TYPE";
 	private CreateEdgeCommand command;
-	private int constructor = 1;
+	private List<Edge> list;
+	private int constructor = 0;
 	private int edgeTypeSwitch = 1;
 	private int size = 0;
 	private RolePlayerConstraint rpc;
@@ -71,31 +75,38 @@ public class CreateEdgeCommandTest {
 
 		}
 
-		newEdge = ModelFactory.eINSTANCE.createEdge();
-		newEdge.setSource(source);
-		newEdge.setTarget(target);
-		newEdge.setType(edgeType);
+		edge = ModelFactory.eINSTANCE.createEdge();
+		edge.setId(111);
+		edge.setSource(source);
+		edge.setTarget(target);
+		edge.setType(edgeType);
 
 		if (rpc == null && hasRoleConstraint == true)
 			rpc = ModelFactory.eINSTANCE.createRolePlayerConstraint();
 
 		if (hasRoleConstraint == true)
-			newEdge.setRoleConstraint(rpc);
+			edge.setRoleConstraint(rpc);
 
 		diagram = ModelFactory.eINSTANCE.createDiagram();
-		diagram.getEdges().add(newEdge);
 
-		// impossible constructor
-		// if (command == null && constructor == 1)
-		// command = new CreateEdgeCommand(newEdge);
+		if (constructor == 0) {
+
+			if (DEBUG)
+				System.out.println("constructor = " + constructor
+						+ " , hasRoleConstraint = " + hasRoleConstraint
+						+ " , edgeType = " + edge.getType());
+			command = new CreateEdgeCommand(edge);
+			command.setDiagram(diagram);
+
+		}
 
 		if (constructor == 1) {
 
 			if (DEBUG)
 				System.out.println("constructor = " + constructor
 						+ " , hasRoleConstraint = " + hasRoleConstraint
-						+ " , edgeType = " + newEdge.getType());
-			command = new CreateEdgeCommand(newEdge, diagram);
+						+ " , edgeType = " + edge.getType());
+			command = new CreateEdgeCommand(edge, diagram);
 
 		}
 		if (constructor == 2) {
@@ -103,8 +114,8 @@ public class CreateEdgeCommandTest {
 			if (DEBUG)
 				System.out.println("constructor = " + constructor
 						+ " , hasRoleConstraint = " + hasRoleConstraint
-						+ " , edgeType = " + newEdge.getType());
-			command = new CreateEdgeCommand(newEdge, diagram, true);
+						+ " , edgeType = " + edge.getType());
+			command = new CreateEdgeCommand(edge, diagram, true);
 
 		}
 		if (constructor == 3) {
@@ -112,8 +123,8 @@ public class CreateEdgeCommandTest {
 			if (DEBUG)
 				System.out.println("constructor = " + constructor
 						+ " , hasRoleConstraint = " + hasRoleConstraint
-						+ " , edgeType = " + newEdge.getType());
-			command = new CreateEdgeCommand(newEdge, diagram, false);
+						+ " , edgeType = " + edge.getType());
+			command = new CreateEdgeCommand(edge, diagram, false);
 
 		}
 
@@ -127,7 +138,7 @@ public class CreateEdgeCommandTest {
 		edgeType = null;
 		typeOfEdge = null;
 		rpc = null;
-		newEdge = null;
+		edge = null;
 		source = null;
 		target = null;
 		diagram = null;
@@ -135,133 +146,927 @@ public class CreateEdgeCommandTest {
 
 	}
 
+	 @Test
+	 public void canExecuteAll() {
+	
+	 while (constructor == 0) {
+	
+	 Assert.assertTrue(command.canExecute());
+	
+	 if (edgeTypeSwitch % 3 == 1)
+	 typeOfEdge = "IS_ATYPE";
+	
+	 if (edgeTypeSwitch % 3 == 2)
+	 typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+	
+	 if (edgeTypeSwitch == 3) {
+	 typeOfEdge = "AKO_TYPE";
+	 constructor++;
+	 edgeTypeSwitch = 1;
+	 break;
+	
+	 }
+	
+	 prepare();
+	 edgeTypeSwitch++;
+	 }
+	 prepare();
+	
+	 while (constructor == 1) {
+	
+	 Assert.assertTrue(command.canExecute());
+	
+	 if (edgeTypeSwitch % 3 == 1)
+	 typeOfEdge = "IS_ATYPE";
+	
+	 if (edgeTypeSwitch % 3 == 2)
+	 typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+	
+	 if (edgeTypeSwitch == 3) {
+	 typeOfEdge = "AKO_TYPE";
+	 constructor++;
+	 edgeTypeSwitch = 1;
+	 break;
+	
+	 }
+	
+	 prepare();
+	 edgeTypeSwitch++;
+	 }
+	 prepare();
+	
+	 while (constructor == 2) {
+	
+	 Assert.assertTrue(command.canExecute());
+	
+	 if (edgeTypeSwitch % 3 == 1)
+	 typeOfEdge = "IS_ATYPE";
+	
+	 if (edgeTypeSwitch % 3 == 2)
+	 typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+	
+	 if (edgeTypeSwitch == 3) {
+	
+	 typeOfEdge = "AKO_TYPE";
+	 hasRoleConstraint = true;
+	
+	 }
+	 if (edgeTypeSwitch == 3) {
+	 typeOfEdge = "AKO_TYPE";
+	 constructor++;
+	 edgeTypeSwitch = 1;
+	 break;
+	
+	 }
+	
+	 prepare();
+	 edgeTypeSwitch++;
+	 }
+	
+	 hasRoleConstraint = false;
+	 prepare();
+	
+	 while (constructor == 3) {
+	
+	 Assert.assertTrue(command.canExecute());
+	
+	 if (edgeTypeSwitch % 3 == 1)
+	 typeOfEdge = "IS_ATYPE";
+	
+	 if (edgeTypeSwitch % 3 == 2)
+	 typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+	
+	 if (edgeTypeSwitch == 3) {
+	 typeOfEdge = "AKO_TYPE";
+	 constructor++;
+	 edgeTypeSwitch = 1;
+	 break;
+	
+	 }
+	
+	 prepare();
+	 edgeTypeSwitch++;
+	 }
+	
+	 constructor = 0;
+	 hasRoleConstraint = true;
+	 edgeTypeSwitch = 1;
+	
+	 }
+
 	@Test
-	public void canExecute() {
+	public void executeC0TrueTest() {
 
-		while (constructor == 1) {
+		try {
+			while (constructor == 0) {
 
-			Assert.assertTrue(command.canExecute());
+				Assert.assertTrue(command.canExecute());
 
-			if (edgeTypeSwitch % 3 == 1)
-				typeOfEdge = "IS_ATYPE";
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+				list.add(edge);
 
-			if (edgeTypeSwitch % 3 == 2)
-				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+				command.execute();
 
-			if (edgeTypeSwitch == 3) {
-				typeOfEdge = "AKO_TYPE";
-				hasRoleConstraint = true;
-			}
+				Assert.assertTrue((size + 1) == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
 
-			if (edgeTypeSwitch == 6) {
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
 
-				typeOfEdge = "AKO_TYPE";
-				hasRoleConstraint = false;
-				constructor++;
-				edgeTypeSwitch = 1;
-				break;
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
 
-			}
-			prepare();
-			edgeTypeSwitch++;
-		}
-		prepare();
+				if (edgeTypeSwitch == 3) {
 
-		while (constructor == 2) {
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
 
-			Assert.assertTrue(command.canExecute());
+				}
 
-			if (edgeTypeSwitch % 3 == 1)
-				typeOfEdge = "IS_ATYPE";
-
-			if (edgeTypeSwitch % 3 == 2)
-				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
-
-			if (edgeTypeSwitch == 3) {
-
-				typeOfEdge = "AKO_TYPE";
-				hasRoleConstraint = true;
+				prepare();
+				edgeTypeSwitch++;
 
 			}
-			if (edgeTypeSwitch == 6) {
 
-				typeOfEdge = "AKO_TYPE";
-				hasRoleConstraint = false;
-				constructor++;
-				edgeTypeSwitch = 1;
-				break;
+		} catch (Exception e) {
 
-			}
-			prepare();
-			edgeTypeSwitch++;
-		}
-		prepare();
+			constructor = 1;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
 
-		while (constructor == 3) {
-
-			Assert.assertTrue(command.canExecute());
-
-			if (edgeTypeSwitch % 3 == 1)
-				typeOfEdge = "IS_ATYPE";
-
-			if (edgeTypeSwitch % 3 == 2)
-				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
-
-			if (edgeTypeSwitch == 3) {
-
-				typeOfEdge = "AKO_TYPE";
-				hasRoleConstraint = true;
-
-			}
-			if (edgeTypeSwitch == 6) {
-
-				typeOfEdge = "AKO_TYPE";
-				hasRoleConstraint = false;
-				constructor++;
-				edgeTypeSwitch = 1;
-				break;
-
-			}
-			prepare();
-			edgeTypeSwitch++;
 		}
 
 		constructor = 1;
-		hasRoleConstraint = false;
-		edgeTypeSwitch = 1;
 
 	}
 
 	@Test
-	public void executeTest() {
+	public void executeC1TrueTest() {
 
-		while (constructor == 1) {
+		constructor = 1;
+		prepare();
 
-			Assert.assertTrue(command.canExecute());
-			command.execute();
+		try {
+			while (constructor == 1) {
 
-			if (edgeTypeSwitch % 3 == 1)
-				typeOfEdge = "IS_ATYPE";
+				Assert.assertTrue(command.canExecute());
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+				list.add(edge);
 
-			if (edgeTypeSwitch % 3 == 2)
-				typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+				command.execute();
 
-			if (edgeTypeSwitch == 3) {
-				typeOfEdge = "AKO_TYPE";
-				hasRoleConstraint = true;
+				Assert.assertTrue((size + 1) == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
 			}
 
-			if (edgeTypeSwitch == 6) {
+		} catch (Exception e) {
 
-				hasRoleConstraint = false;
-				constructor++;
-				edgeTypeSwitch = 1;
-				break;
+			constructor = 2;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
 
-			}
-			prepare();
-			edgeTypeSwitch++;
 		}
+
+		constructor = 2;
+
+	}
+
+	@Test
+	public void executeC2TrueTest() {
+
+		constructor = 2;
+		prepare();
+
+		try {
+			while (constructor == 2) {
+
+				Assert.assertTrue(command.canExecute());
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+				list.add(edge);
+
+				command.execute();
+
+				Assert.assertTrue((size + 1) == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 3;
+			hasRoleConstraint = false;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 3;
+		hasRoleConstraint = false;
+
+	}
+
+	@Test
+	public void executeC3FalseTest() {
+
+		constructor = 3;
+		hasRoleConstraint = false;
+		prepare();
+
+		try {
+			while (constructor == 3) {
+
+				Assert.assertTrue(command.canExecute());
+
+				size = diagram.getEdges().size();
+				System.out.println("size " + size);
+				System.out.println("diagram " + diagram.getEdges().size());
+				list = new ArrayList<Edge>(diagram.getEdges());
+				list.add(edge);
+
+				command.execute();
+
+				System.out.println("size " + size);
+				System.out.println("diagram " + diagram.getEdges().size());
+
+				Assert.assertTrue((size + 1) == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					constructor++;
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 0;
+
+	}
+
+	@Test
+	public void canUndoC0TrueTest() {
+
+		try {
+			while (constructor == 0) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 1;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 1;
+
+	}
+
+	@Test
+	public void canUndoC1TrueTest() {
+
+		constructor = 1;
+		prepare();
+
+		try {
+			while (constructor == 1) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 2;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 2;
+
+	}
+
+	@Test
+	public void canUndoC2TrueTest() {
+
+		constructor = 2;
+		prepare();
+
+		try {
+			while (constructor == 2) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 3;
+			hasRoleConstraint = false;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 3;
+		hasRoleConstraint = false;
+
+	}
+
+	@Test
+	public void canUndoC3FalseTest() {
+
+		constructor = 3;
+		hasRoleConstraint = false;
+		prepare();
+
+		try {
+			while (constructor == 3) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					constructor++;
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 0;
+
+	}
+
+	@Test
+	public void undoC0TrueTest() {
+
+		try {
+			while (constructor == 0) {
+
+				Assert.assertTrue(command.canExecute());
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 1;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 1;
+
+	}
+
+	@Test
+	public void undoC1TrueTest() {
+
+		constructor = 1;
+		prepare();
+
+		try {
+			while (constructor == 1) {
+
+				Assert.assertTrue(command.canExecute());
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 2;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 2;
+
+	}
+
+	@Test
+	public void undoC2TrueTest() {
+
+		constructor = 2;
+		prepare();
+
+		try {
+			while (constructor == 2) {
+
+				Assert.assertTrue(command.canExecute());
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 3;
+			hasRoleConstraint = false;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 3;
+		hasRoleConstraint = false;
+
+	}
+
+	@Test
+	public void undoC3FalseTest() {
+
+		constructor = 3;
+		hasRoleConstraint = false;
+		prepare();
+
+		try {
+			while (constructor == 3) {
+
+				Assert.assertTrue(command.canExecute());
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				command.execute();
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					constructor++;
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 0;
+
+	}
+
+	@Test
+	public void redoC0TrueTest() {
+
+		try {
+			while (constructor == 0) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+				command.redo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 1;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 1;
+
+	}
+
+	@Test
+	public void redoC1TrueTest() {
+
+		constructor = 1;
+		prepare();
+
+		try {
+			while (constructor == 1) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+				command.redo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 2;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 2;
+
+	}
+
+	@Test
+	public void redoC2TrueTest() {
+
+		constructor = 2;
+		prepare();
+
+		try {
+			while (constructor == 2) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+				command.redo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			constructor = 3;
+			hasRoleConstraint = false;
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 3;
+		hasRoleConstraint = false;
+
+	}
+
+	@Test
+	public void redoC3FalseTest() {
+
+		constructor = 3;
+		hasRoleConstraint = false;
+		prepare();
+
+		try {
+			while (constructor == 3) {
+
+				Assert.assertTrue(command.canExecute());
+				command.execute();
+
+				size = diagram.getEdges().size();
+				list = new ArrayList<Edge>(diagram.getEdges());
+
+				Assert.assertTrue(command.canUndo());
+				command.undo();
+				command.redo();
+
+				Assert.assertTrue(size == diagram.getEdges().size());
+				Assert.assertTrue(Tools.edgeListCompare(list, diagram
+						.getEdges()));
+
+				if (edgeTypeSwitch % 3 == 1)
+					typeOfEdge = "IS_ATYPE";
+
+				if (edgeTypeSwitch % 3 == 2)
+					typeOfEdge = "ROLE_CONSTRAINT_TYPE";
+
+				if (edgeTypeSwitch == 3) {
+
+					typeOfEdge = "AKO_TYPE";
+					constructor++;
+					edgeTypeSwitch = 1;
+					break;
+
+				}
+
+				prepare();
+				edgeTypeSwitch++;
+
+			}
+
+		} catch (Exception e) {
+
+			Assert.fail("Exception was thrown:" + e.getClass());
+			e.printStackTrace();
+
+		}
+
+		constructor = 0;
 
 	}
 
