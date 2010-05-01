@@ -7,19 +7,25 @@ import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.compare.AnnotationComparator;
 import de.topicmapslab.tmcledit.model.compare.BendpointComparator;
 import de.topicmapslab.tmcledit.model.compare.CommentComparator;
 import de.topicmapslab.tmcledit.model.compare.DiagramComparator;
 import de.topicmapslab.tmcledit.model.compare.EdgeComparator;
+import de.topicmapslab.tmcledit.model.compare.NameTypeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.TopicMapSchemaComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicReifiesConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
 
 public class Tools {
 
@@ -268,9 +274,8 @@ public class Tools {
 		return true;
 
 	}
-	
-	public static boolean edgeListCompare(List<Edge> list1,
-			List<Edge> list2) {
+
+	public static boolean edgeListCompare(List<Edge> list1, List<Edge> list2) {
 
 		if (list1.size() != list2.size())
 			return false;
@@ -299,4 +304,96 @@ public class Tools {
 
 	}
 
+	public static boolean nameTypeConstraintListCompare(
+			List<NameTypeConstraint> list1, List<NameTypeConstraint> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		NameTypeConstraintComparator comp = new NameTypeConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean nameTypeConstraintCompare(NameTypeConstraint o1,
+			NameTypeConstraint o2) {
+
+		BendpointComparator comp = new BendpointComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean topicMapSchemaListCompare(List<TopicMapSchema> list1,
+			List<TopicMapSchema> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		TopicMapSchemaComparator comp = new TopicMapSchemaComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean topicMapSchemaCompare(TopicMapSchema o1,
+			TopicMapSchema o2) {
+
+		TopicMapSchemaComparator comp = new TopicMapSchemaComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+	
+	public static boolean topicTypeListCompare(List<TopicType> list1,
+			List<TopicType> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		TopicTypeComparator comp = new TopicTypeComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean topicTypeCompare(TopicType o1,
+			TopicType o2) {
+
+		TopicTypeComparator comp = new TopicTypeComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
 }
