@@ -13,6 +13,7 @@ import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -27,6 +28,7 @@ import de.topicmapslab.tmcledit.model.compare.OccurrenceTypeConstraintComparator
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.SubjectIdentifierConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicMapSchemaComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicReifiesConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
@@ -455,6 +457,38 @@ public class Tools {
 			MappingElement o2) {
 
 		MappingElementComparator comp = new MappingElementComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean subjectIdentifierConstraintListCompare(
+			List<SubjectIdentifierConstraint> list1,
+			List<SubjectIdentifierConstraint> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		SubjectIdentifierConstraintComparator comp = new SubjectIdentifierConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean subjectIdentifierConstraintCompare(
+			SubjectIdentifierConstraint o1, SubjectIdentifierConstraint o2) {
+
+		SubjectIdentifierConstraintComparator comp = new SubjectIdentifierConstraintComparator();
 
 		if (comp.equals(o1, o2) == false)
 			return false;
