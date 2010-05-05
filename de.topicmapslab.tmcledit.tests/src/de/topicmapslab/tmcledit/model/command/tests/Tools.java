@@ -14,6 +14,7 @@ import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -29,6 +30,7 @@ import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparato
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.SubjectIdentifierConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.SubjectLocatorConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicMapSchemaComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicReifiesConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
@@ -489,6 +491,38 @@ public class Tools {
 			SubjectIdentifierConstraint o1, SubjectIdentifierConstraint o2) {
 
 		SubjectIdentifierConstraintComparator comp = new SubjectIdentifierConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean subjectLocatorConstraintListCompare(
+			List<SubjectLocatorConstraint> list1,
+			List<SubjectLocatorConstraint> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		SubjectLocatorConstraintComparator comp = new SubjectLocatorConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean subjectLocatorConstraintCompare(
+			SubjectLocatorConstraint o1, SubjectLocatorConstraint o2) {
+
+		SubjectLocatorConstraintComparator comp = new SubjectLocatorConstraintComparator();
 
 		if (comp.equals(o1, o2) == false)
 			return false;
