@@ -7,6 +7,7 @@ import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
@@ -20,6 +21,7 @@ import de.topicmapslab.tmcledit.model.compare.BendpointComparator;
 import de.topicmapslab.tmcledit.model.compare.CommentComparator;
 import de.topicmapslab.tmcledit.model.compare.DiagramComparator;
 import de.topicmapslab.tmcledit.model.compare.EdgeComparator;
+import de.topicmapslab.tmcledit.model.compare.MappingElementComparator;
 import de.topicmapslab.tmcledit.model.compare.NameTypeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.OccurrenceTypeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
@@ -422,6 +424,37 @@ public class Tools {
 			OccurrenceTypeConstraint o1, OccurrenceTypeConstraint o2) {
 
 		OccurrenceTypeConstraintComparator comp = new OccurrenceTypeConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean mappingElementListCompare(List<MappingElement> list1,
+			List<MappingElement> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		MappingElementComparator comp = new MappingElementComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean mappingElementCompare(MappingElement o1,
+			MappingElement o2) {
+
+		MappingElementComparator comp = new MappingElementComparator();
 
 		if (comp.equals(o1, o2) == false)
 			return false;
