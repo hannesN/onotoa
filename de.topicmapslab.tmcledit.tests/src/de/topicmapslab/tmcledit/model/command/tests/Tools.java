@@ -8,6 +8,7 @@ import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
@@ -20,6 +21,7 @@ import de.topicmapslab.tmcledit.model.compare.CommentComparator;
 import de.topicmapslab.tmcledit.model.compare.DiagramComparator;
 import de.topicmapslab.tmcledit.model.compare.EdgeComparator;
 import de.topicmapslab.tmcledit.model.compare.NameTypeConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.OccurrenceTypeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
@@ -365,7 +367,7 @@ public class Tools {
 		return true;
 
 	}
-	
+
 	public static boolean topicTypeListCompare(List<TopicType> list1,
 			List<TopicType> list2) {
 
@@ -385,8 +387,7 @@ public class Tools {
 
 	}
 
-	public static boolean topicTypeCompare(TopicType o1,
-			TopicType o2) {
+	public static boolean topicTypeCompare(TopicType o1, TopicType o2) {
 
 		TopicTypeComparator comp = new TopicTypeComparator();
 
@@ -396,4 +397,37 @@ public class Tools {
 		return true;
 
 	}
+
+	public static boolean occurrenceTypeConstraintListCompare(
+			List<OccurrenceTypeConstraint> list1,
+			List<OccurrenceTypeConstraint> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		OccurrenceTypeConstraintComparator comp = new OccurrenceTypeConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean occurrenceTypeConstraintCompare(
+			OccurrenceTypeConstraint o1, OccurrenceTypeConstraint o2) {
+
+		OccurrenceTypeConstraintComparator comp = new OccurrenceTypeConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
 }
