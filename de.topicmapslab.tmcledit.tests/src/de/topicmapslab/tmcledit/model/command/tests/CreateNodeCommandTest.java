@@ -55,16 +55,42 @@ public class CreateNodeCommandTest {
 
 	private CreateNodeCommand command;
 	private Type type;
+	private TopicType topicType;
 	private Node node;
 	private TypeNode typeNode;
 	private Diagram diagram;
 	private Point point;
+	private File file;
+	private TopicMapSchema schema;
 	private List<CreateEdgeCommand> edgeCommands = Collections.emptyList();
+	private List<Node> nodeList;
+	private List<TopicType> topicTypeList;
 	private boolean createdNewType = false;
 	private boolean addType;
+	private int topicTypeSize;
+	private int nodeSize;
 
 	@Before
 	public void prepare() {
+
+		if (diagram == null)
+			diagram = ModelFactory.eINSTANCE.createDiagram();
+
+		if (topicType == null)
+			topicType = ModelFactory.eINSTANCE.createTopicType();
+
+		if (schema == null)
+			schema = ModelFactory.eINSTANCE.createTopicMapSchema();
+
+		if (file == null) {
+
+			file = ModelFactory.eINSTANCE.createFile();
+			file.setTopicMapSchema(schema);
+			file.getDiagrams().add(diagram);
+
+		}
+
+		ModelIndexer.createInstance(file);
 
 	}
 
@@ -82,19 +108,153 @@ public class CreateNodeCommandTest {
 	}
 
 	@Test
-	public void canExecuteC0Node() {
+	public void canExecuteC0TypeNodeNoContainer() {
 
-//		File file = ModelFactory.eINSTANCE.createFile();
-//		TopicMapSchema schema = ModelFactory.eINSTANCE.createTopicMapSchema();
+		typeNode = ModelFactory.eINSTANCE.createTypeNode();
+		typeNode.setTopicType(topicType);
 
-		diagram = ModelFactory.eINSTANCE.createDiagram();
-		node = ModelFactory.eINSTANCE.createNode();
-
-//		file.setTopicMapSchema(schema);
-//		file.getDiagrams().add(diagram);
-
-		command = new CreateNodeCommand(diagram, node);
+		command = new CreateNodeCommand(diagram, typeNode);
 		Assert.assertTrue(command.canExecute());
+		// createNewType = true
+
+	}
+
+	@Test
+	public void canExecuteC0TypeNodeContainer() {
+
+		schema.getTopicTypes().add(topicType);
+		typeNode = ModelFactory.eINSTANCE.createTypeNode();
+		typeNode.setTopicType(topicType);
+
+		command = new CreateNodeCommand(diagram, typeNode);
+		Assert.assertTrue(command.canExecute());
+		// createNewType = false
+		
+		schema.getTopicTypes().add(topicType);
+		topicType.getIsa();
+		typeNode = ModelFactory.eINSTANCE.createTypeNode();
+		typeNode.setTopicType(topicType);
+
+		command = new CreateNodeCommand(diagram, typeNode);
+		Assert.assertTrue(command.canExecute());
+		// createNewType = false
+
+
+	}
+
+	@Test
+	public void executeC0TypeNodeNoContainer() {
+
+		typeNode = ModelFactory.eINSTANCE.createTypeNode();
+		typeNode.setTopicType(topicType);
+
+		command = new CreateNodeCommand(diagram, typeNode);
+		Assert.assertTrue(command.canExecute());
+
+		// clone of topicTypes list from schema
+		topicTypeSize = file.getTopicMapSchema().getTopicTypes().size();
+		topicTypeList = new ArrayList<TopicType>(file.getTopicMapSchema()
+				.getTopicTypes());
+		topicTypeList.add(topicType);
+
+		// clone of nodes list from diagram
+		nodeSize = diagram.getNodes().size();
+		nodeList = new ArrayList<Node>(diagram.getNodes());
+		nodeList.add(typeNode);
+
+		command.execute();
+
+		// test topicTypes list from schema
+		Assert.assertTrue((topicTypeSize + 1) == file.getTopicMapSchema()
+				.getTopicTypes().size());
+		Assert.assertTrue(Tools.topicTypeListCompare(topicTypeList, file
+				.getTopicMapSchema().getTopicTypes()));
+
+		// test nodes list from diagram
+		Assert.assertTrue((nodeSize + 1) == diagram.getNodes().size());
+		Assert.assertTrue(Tools.nodeListCompare(nodeList, diagram.getNodes()));
+
+	}
+
+	@Test
+	public void canUndoC0TypeNodeNoContainer() {
+
+		typeNode = ModelFactory.eINSTANCE.createTypeNode();
+		typeNode.setTopicType(topicType);
+
+		command = new CreateNodeCommand(diagram, typeNode);
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+		Assert.assertTrue(command.canUndo());
+
+	}
+
+	@Test
+	public void undoC0TypeNodeNoContainer() {
+
+		typeNode = ModelFactory.eINSTANCE.createTypeNode();
+		typeNode.setTopicType(topicType);
+
+		command = new CreateNodeCommand(diagram, typeNode);
+		Assert.assertTrue(command.canExecute());
+
+		// clone of topicTypes list from schema
+		topicTypeSize = file.getTopicMapSchema().getTopicTypes().size();
+		topicTypeList = new ArrayList<TopicType>(file.getTopicMapSchema()
+				.getTopicTypes());
+
+		// clone of nodes list from diagram
+		nodeSize = diagram.getNodes().size();
+		nodeList = new ArrayList<Node>(diagram.getNodes());
+
+		command.execute();
+		Assert.assertTrue(command.canUndo());
+		command.undo();
+
+		// test topicTypes list from schema
+		Assert.assertTrue(topicTypeSize == file.getTopicMapSchema()
+				.getTopicTypes().size());
+		Assert.assertTrue(Tools.topicTypeListCompare(topicTypeList, file
+				.getTopicMapSchema().getTopicTypes()));
+
+		// test nodes list from diagram
+		Assert.assertTrue(nodeSize == diagram.getNodes().size());
+		Assert.assertTrue(Tools.nodeListCompare(nodeList, diagram.getNodes()));
+
+	}
+
+	@Test
+	public void redoC0TypeNodeNoContainer() {
+
+		typeNode = ModelFactory.eINSTANCE.createTypeNode();
+		typeNode.setTopicType(topicType);
+
+		command = new CreateNodeCommand(diagram, typeNode);
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+
+		// clone of topicTypes list from schema
+		topicTypeSize = file.getTopicMapSchema().getTopicTypes().size();
+		topicTypeList = new ArrayList<TopicType>(file.getTopicMapSchema()
+				.getTopicTypes());
+
+		// clone of nodes list from diagram
+		nodeSize = diagram.getNodes().size();
+		nodeList = new ArrayList<Node>(diagram.getNodes());
+
+		Assert.assertTrue(command.canUndo());
+		command.undo();
+		command.redo();
+
+		// test topicTypes list from schema
+		Assert.assertTrue(topicTypeSize == file.getTopicMapSchema()
+				.getTopicTypes().size());
+		Assert.assertTrue(Tools.topicTypeListCompare(topicTypeList, file
+				.getTopicMapSchema().getTopicTypes()));
+
+		// test nodes list from diagram
+		Assert.assertTrue(nodeSize == diagram.getNodes().size());
+		Assert.assertTrue(Tools.nodeListCompare(nodeList, diagram.getNodes()));
 
 	}
 
