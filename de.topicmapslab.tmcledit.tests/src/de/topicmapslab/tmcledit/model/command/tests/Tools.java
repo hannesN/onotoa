@@ -3,15 +3,18 @@ package de.topicmapslab.tmcledit.model.command.tests;
 import java.util.List;
 
 import de.topicmapslab.tmcledit.model.Annotation;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Bendpoint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
@@ -19,15 +22,18 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.compare.AnnotationComparator;
+import de.topicmapslab.tmcledit.model.compare.AssociationTypeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.BendpointComparator;
 import de.topicmapslab.tmcledit.model.compare.CommentComparator;
 import de.topicmapslab.tmcledit.model.compare.DiagramComparator;
 import de.topicmapslab.tmcledit.model.compare.EdgeComparator;
 import de.topicmapslab.tmcledit.model.compare.MappingElementComparator;
 import de.topicmapslab.tmcledit.model.compare.NameTypeConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.NodeComparator;
 import de.topicmapslab.tmcledit.model.compare.OccurrenceTypeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleCombinationConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.RoleConstraintComparator;
+import de.topicmapslab.tmcledit.model.compare.RolePlayerConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.ScopeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.SubjectIdentifierConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.SubjectLocatorConstraintComparator;
@@ -523,6 +529,98 @@ public class Tools {
 			SubjectLocatorConstraint o1, SubjectLocatorConstraint o2) {
 
 		SubjectLocatorConstraintComparator comp = new SubjectLocatorConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean nodeListCompare(List<Node> list1, List<Node> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		NodeComparator comp = new NodeComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean nodeCompare(Node o1, Node o2) {
+
+		NodeComparator comp = new NodeComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean associationTypeConstraintListCompare(
+			List<AssociationTypeConstraint> list1,
+			List<AssociationTypeConstraint> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		AssociationTypeConstraintComparator comp = new AssociationTypeConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean associationTypeConstraintCompare(
+			AssociationTypeConstraint o1, AssociationTypeConstraint o2) {
+
+		AssociationTypeConstraintComparator comp = new AssociationTypeConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean rolePlayerConstraintListCompare(
+			List<RolePlayerConstraint> list1, List<RolePlayerConstraint> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		RolePlayerConstraintComparator comp = new RolePlayerConstraintComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean rolePlayerConstraintCompare(RolePlayerConstraint o1,
+			RolePlayerConstraint o2) {
+
+		RolePlayerConstraintComparator comp = new RolePlayerConstraintComparator();
 
 		if (comp.equals(o1, o2) == false)
 			return false;
