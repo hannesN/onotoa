@@ -31,7 +31,8 @@ public class AddBendpointCommandTest {
 
 	private Edge edge;
 	private AddBendpointCommand command;
-	private Bendpoint bendpoint;
+	private Bendpoint bendpoint1;
+	private Bendpoint bendpoint0;
 	private List<Bendpoint> list;
 	private int index = 0;
 	private int posX = 1;
@@ -41,16 +42,23 @@ public class AddBendpointCommandTest {
 	@Before
 	public void prepare() {
 
-		if (bendpoint == null) {
+		if (bendpoint0 == null)
+			bendpoint0 = ModelFactory.eINSTANCE.createBendpoint();
 
-			bendpoint = ModelFactory.eINSTANCE.createBendpoint();
-			bendpoint.setPosX(posX);
-			bendpoint.setPosY(posY);
+		if (bendpoint1 == null) {
+
+			bendpoint1 = ModelFactory.eINSTANCE.createBendpoint();
+			bendpoint1.setPosX(posX);
+			bendpoint1.setPosY(posY);
 
 		}
 
-		if (edge == null)
+		if (edge == null) {
+
 			edge = ModelFactory.eINSTANCE.createEdge();
+			edge.getBendpoints().add(bendpoint0);
+
+		}
 
 		if (command == null)
 			command = new AddBendpointCommand(edge, index, posX, posY);
@@ -81,8 +89,8 @@ public class AddBendpointCommandTest {
 		list = new ArrayList<Bendpoint>(edge.getBendpoints());
 
 		command.execute();
-		bendpoint.setId(edge.getBendpoints().get(index).getId());
-		list.add(bendpoint);
+		bendpoint1.setId(edge.getBendpoints().get(index).getId());
+		list.add(index, bendpoint1);
 
 		Assert.assertTrue((size + 1) == edge.getBendpoints().size());
 		Assert.assertTrue(Tools
