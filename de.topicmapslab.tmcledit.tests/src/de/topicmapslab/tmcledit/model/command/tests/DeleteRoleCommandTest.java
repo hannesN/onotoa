@@ -49,11 +49,13 @@ public class DeleteRoleCommandTest {
 	private Diagram diagram1;
 	private TopicMapSchema schema;
 	private List<RoleConstraint> roleConstraintList;
+	private List<RolePlayerConstraint> rpcList;
 	private List<Edge> edgesList0;
 	private List<Edge> edgesList1;
 	private AssociationNode associationNode0;
 	private AssociationNode associationNode1;
 	private boolean cascade;
+	private int rpcSize;
 	private int roleConstraintSize;
 	private int edgesSize0;
 	private int edgesSize1;
@@ -242,6 +244,11 @@ public class DeleteRoleCommandTest {
 		edgesSize1 = diagram1.getEdges().size();
 		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 
+		// clone associationTypeConstraints rpc
+		rpcSize = associationTypeConstraint.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(associationTypeConstraint
+				.getPlayerConstraints());
+
 		command.execute();
 
 		// check associationTypes roles
@@ -259,6 +266,12 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList1, diagram1.getEdges()));
+
+		// check associationTypeConstraints rpc
+		Assert.assertTrue(rpcSize == associationTypeConstraint
+				.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList,
+				associationTypeConstraint.getPlayerConstraints()));
 
 		roleConstraintList.add(toDeleteRoleConstraint);
 		roleConstraintList.remove(existingRoleConstraint);
@@ -292,7 +305,20 @@ public class DeleteRoleCommandTest {
 		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 		edgesList1.remove(edge1);
 
+		// clone associationTypeConstraints rpc
+		rpcSize = associationTypeConstraint.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(associationTypeConstraint
+				.getPlayerConstraints());
+		rpcList.remove(rolePlayerConstraint0);
+		rpcList.remove(rolePlayerConstraint1);
+
+		System.out.println(associationTypeConstraint.getPlayerConstraints()
+				.size());
+
 		command.execute();
+
+		System.out.println(associationTypeConstraint.getPlayerConstraints()
+				.size());
 
 		// check associationTypes roles
 		Assert.assertTrue((roleConstraintSize - 1) == associationType
@@ -309,6 +335,12 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue((edgesSize1 - 1) == diagram1.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList1, diagram1.getEdges()));
+
+		// check associationTypeConstraints rpc
+		Assert.assertTrue((rpcSize - 2) == associationTypeConstraint
+				.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList,
+				associationTypeConstraint.getPlayerConstraints()));
 
 	}
 
@@ -357,6 +389,11 @@ public class DeleteRoleCommandTest {
 		edgesSize1 = diagram1.getEdges().size();
 		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 
+		// clone associationTypeConstraints rpc
+		rpcSize = associationTypeConstraint.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(associationTypeConstraint
+				.getPlayerConstraints());
+
 		command.execute();
 		Assert.assertTrue(command.canUndo());
 		command.undo();
@@ -376,6 +413,12 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList1, diagram1.getEdges()));
+
+		// check associationTypeConstraints rpc
+		Assert.assertTrue(rpcSize == associationTypeConstraint
+				.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList,
+				associationTypeConstraint.getPlayerConstraints()));
 
 		roleConstraintList.remove(existingRoleConstraint);
 
@@ -400,11 +443,15 @@ public class DeleteRoleCommandTest {
 		// clone diagrams edges 0
 		edgesSize0 = diagram0.getEdges().size();
 		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
-		
+
 		// clone diagrams edges 1
 		edgesSize1 = diagram1.getEdges().size();
 		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 
+		// clone associationTypeConstraints rpc
+		rpcSize = associationTypeConstraint.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(associationTypeConstraint
+				.getPlayerConstraints());
 
 		command.execute();
 		Assert.assertTrue(command.canUndo());
@@ -425,7 +472,13 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList1, diagram1.getEdges()));
-		
+
+		// check associationTypeConstraints rpc
+		Assert.assertTrue(rpcSize == associationTypeConstraint
+				.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList,
+				associationTypeConstraint.getPlayerConstraints()));
+
 	}
 
 	@Test
@@ -439,10 +492,15 @@ public class DeleteRoleCommandTest {
 		// clone diagrams edges 0
 		edgesSize0 = diagram0.getEdges().size();
 		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
-		
+
 		// clone diagrams edges 1
 		edgesSize1 = diagram1.getEdges().size();
 		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
+
+		// clone associationTypeConstraints rpc
+		rpcSize = associationTypeConstraint.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(associationTypeConstraint
+				.getPlayerConstraints());
 
 		command.execute();
 
@@ -465,13 +523,17 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList0, diagram0.getEdges()));
-		
 
 		// check diagrams edges 1
 		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList1, diagram1.getEdges()));
 
+		// check associationTypeConstraints rpc
+		Assert.assertTrue(rpcSize == associationTypeConstraint
+				.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList,
+				associationTypeConstraint.getPlayerConstraints()));
 
 	}
 
@@ -492,11 +554,15 @@ public class DeleteRoleCommandTest {
 		// clone diagrams edges 0
 		edgesSize0 = diagram0.getEdges().size();
 		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
-		
+
 		// clone diagrams edges 1
 		edgesSize1 = diagram1.getEdges().size();
 		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 
+		// clone associationTypeConstraints rpc
+		rpcSize = associationTypeConstraint.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(associationTypeConstraint
+				.getPlayerConstraints());
 
 		Assert.assertTrue(command.canUndo());
 		command.undo();
@@ -512,12 +578,17 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList0, diagram0.getEdges()));
-		
 
 		// check diagrams edges 1
 		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
 		Assert.assertTrue(Tools
 				.edgeListCompare(edgesList1, diagram1.getEdges()));
+
+		// check associationTypeConstraints rpc
+		Assert.assertTrue(rpcSize == associationTypeConstraint
+				.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList,
+				associationTypeConstraint.getPlayerConstraints()));
 
 	}
 
