@@ -32,8 +32,9 @@ import de.topicmapslab.tmcledit.model.commands.DeleteCommentCommand;
  */
 public class DeleteCommentCommandTest {
 
-	private Comment comment;
 	private DeleteCommentCommand command;
+	private Comment comment0;
+	private Comment comment1;
 	private Diagram diagram;
 	private List<Comment> list;
 	private int size;
@@ -41,22 +42,22 @@ public class DeleteCommentCommandTest {
 	@Before
 	public void prepare() {
 
-		if (comment == null) {
-
-			comment = ModelFactory.eINSTANCE.createComment();
-			comment.setContent("TMCL");
-
-		}
+		if (comment0 == null) 
+			comment0 = ModelFactory.eINSTANCE.createComment();
+		
+		if (comment1 == null) 
+			comment1 = ModelFactory.eINSTANCE.createComment();
 
 		if (diagram == null) {
 
 			diagram = ModelFactory.eINSTANCE.createDiagram();
-			diagram.getComments().add(comment);
+			diagram.getComments().add(comment0);
+			diagram.getComments().add(comment1);
 
 		}
 
 		if (command == null)
-			command = new DeleteCommentCommand(comment);
+			command = new DeleteCommentCommand(comment0);
 	}
 
 	@After
@@ -64,7 +65,8 @@ public class DeleteCommentCommandTest {
 
 		list = null;
 		diagram = null;
-		comment = null;
+		comment0 = null;
+		comment1 = null;
 		command = null;
 
 	}
@@ -83,13 +85,13 @@ public class DeleteCommentCommandTest {
 
 		list = new ArrayList<Comment>(diagram.getComments());
 		size = diagram.getComments().size();
-		Assert.assertTrue(diagram.getComments().contains(comment));
+		Assert.assertTrue(diagram.getComments().contains(comment0));
 
 		command.execute();
 
 		Assert.assertTrue((size - 1) == diagram.getComments().size());
-		Assert.assertFalse(diagram.getComments().contains(comment));
-		list.remove(comment);
+		Assert.assertFalse(diagram.getComments().contains(comment0));
+		list.remove(comment0);
 		Assert.assertTrue(Tools
 				.commentListCompare(list, diagram.getComments()));
 
@@ -116,7 +118,7 @@ public class DeleteCommentCommandTest {
 		Assert.assertTrue(command.canUndo());
 		command.undo();
 
-		Assert.assertTrue(diagram.getComments().contains(comment));
+		Assert.assertTrue(diagram.getComments().contains(comment0));
 		Assert.assertTrue(size == diagram.getComments().size());
 		Assert.assertTrue(Tools
 				.commentListCompare(list, diagram.getComments()));
@@ -137,7 +139,7 @@ public class DeleteCommentCommandTest {
 		command.redo();
 		
 		Assert.assertTrue(size == diagram.getComments().size());
-		Assert.assertFalse(diagram.getComments().contains(comment));
+		Assert.assertFalse(diagram.getComments().contains(comment0));
 		Assert.assertTrue(Tools.commentListCompare(list, diagram.getComments()));
 		
 	}
