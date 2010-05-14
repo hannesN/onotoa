@@ -34,21 +34,29 @@ public class AddRoleCombinationConstraintCommandTest {
 
 	private AddRoleCombinationConstraintCommand command;
 	private AssociationType aType;
-	private RoleCombinationConstraint rcc;
+	private RoleCombinationConstraint rcc0;
+	private RoleCombinationConstraint rcc1;
 	private List<RoleCombinationConstraint> list;
 	private int size;
 
 	@Before
 	public void prepare() {
 
-		if (aType == null)
+		if (aType == null){
+			
 			aType = ModelFactory.eINSTANCE.createAssociationType();
-
-		if (rcc == null)
-			rcc = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
+			aType.getRoleCombinations().add(rcc1);
+			
+		}
+			
+		if (rcc0 == null)
+			rcc0 = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
+		
+		if (rcc1 == null)
+			rcc1 = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
 
 		if (command == null)
-			command = new AddRoleCombinationConstraintCommand(aType, rcc);
+			command = new AddRoleCombinationConstraintCommand(aType, rcc0);
 
 	}
 
@@ -56,7 +64,7 @@ public class AddRoleCombinationConstraintCommandTest {
 	public void shutdown() {
 
 		command = null;
-		rcc = null;
+		rcc0 = null;
 		aType = null;
 
 	}
@@ -72,18 +80,18 @@ public class AddRoleCombinationConstraintCommandTest {
 	public void executeTest() {
 
 		Assert.assertTrue(command.canExecute());
-		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
+		Assert.assertFalse(aType.getRoleCombinations().contains(rcc0));
 
 		list = new ArrayList<RoleCombinationConstraint>(aType
 				.getRoleCombinations());
-		list.add(rcc);
+		list.add(rcc0);
 		size = aType.getRoleCombinations().size();
 
 		command.execute();
 
 		Assert.assertTrue((size + 1) == aType.getRoleCombinations().size());
-		Assert.assertTrue(aType.getRoleCombinations().contains(rcc));
-		Assert.assertTrue(Tools.roleCombinationConstraintCompare(rcc, aType
+		Assert.assertTrue(aType.getRoleCombinations().contains(rcc0));
+		Assert.assertTrue(Tools.roleCombinationConstraintCompare(rcc0, aType
 				.getRoleCombinations().get(size)));
 		Assert.assertTrue(Tools.roleCombinationConstraintListCompare(list,
 				aType.getRoleCombinations()));
@@ -112,7 +120,7 @@ public class AddRoleCombinationConstraintCommandTest {
 		Assert.assertTrue(command.canUndo());
 		command.undo();
 
-		Assert.assertFalse(aType.getRoleCombinations().contains(rcc));
+		Assert.assertFalse(aType.getRoleCombinations().contains(rcc0));
 		Assert.assertTrue((size) == aType.getRoleCombinations().size());
 		Assert.assertTrue(Tools.roleCombinationConstraintListCompare(list,
 				aType.getRoleCombinations()));
@@ -134,7 +142,7 @@ public class AddRoleCombinationConstraintCommandTest {
 		command.redo();
 
 		Assert.assertTrue(size == aType.getRoleCombinations().size());
-		Assert.assertTrue(Tools.roleCombinationConstraintCompare(rcc, aType
+		Assert.assertTrue(Tools.roleCombinationConstraintCompare(rcc0, aType
 				.getRoleCombinations().get(size - 1)));
 		Assert.assertTrue(Tools.roleCombinationConstraintListCompare(list,
 				aType.getRoleCombinations()));
