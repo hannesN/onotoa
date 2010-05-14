@@ -36,30 +36,27 @@ public class DeleteRoleCommandTest {
 
 	private DeleteRoleCommand command;
 	private AssociationType associationType;
-	private AssociationType associationTypeClone;
 	private RoleConstraint toDeleteRoleConstraint;
-	private RoleConstraint toDeleteRoleConstraintClone;
 	private RoleConstraint existingRoleConstraint;
-	private RoleConstraint existingRoleConstraintClone;
-	private RolePlayerConstraint rolePlayerConstraint;
-	private RolePlayerConstraint rolePlayerConstraintClone;
+	private RolePlayerConstraint rolePlayerConstraint0;
+	private RolePlayerConstraint rolePlayerConstraint1;
 	private AssociationTypeConstraint associationTypeConstraint;
-	private AssociationTypeConstraint associationTypeConstraintClone;
 	private File file;
-	private Edge edge;
-	private Edge edgeClone;
+	private Edge edge0;
+	private Edge edge1;
 	private EdgeType edgeType;
-	private EdgeType edgeTypeClone;
-	private Diagram diagram;
-	private Diagram diagramClone;
+	private Diagram diagram0;
+	private Diagram diagram1;
 	private TopicMapSchema schema;
 	private List<RoleConstraint> roleConstraintList;
-	private List<Edge> edgesList;
-	private AssociationNode associationNode;
-	private AssociationNode associationNodeClone;
+	private List<Edge> edgesList0;
+	private List<Edge> edgesList1;
+	private AssociationNode associationNode0;
+	private AssociationNode associationNode1;
 	private boolean cascade;
 	private int roleConstraintSize;
-	private int edgesSize;
+	private int edgesSize0;
+	private int edgesSize1;
 
 	@Before
 	public void prepare() {
@@ -72,22 +69,6 @@ public class DeleteRoleCommandTest {
 			toDeleteRoleConstraint = ModelFactory.eINSTANCE
 					.createRoleConstraint();
 
-		if (existingRoleConstraintClone == null) {
-
-			existingRoleConstraintClone = ModelFactory.eINSTANCE
-					.createRoleConstraint();
-			existingRoleConstraintClone.setId(existingRoleConstraint.getId());
-
-		}
-
-		if (toDeleteRoleConstraintClone == null) {
-
-			toDeleteRoleConstraintClone = ModelFactory.eINSTANCE
-					.createRoleConstraint();
-			toDeleteRoleConstraintClone.setId(toDeleteRoleConstraint.getId());
-
-		}
-
 		if (associationType == null) {
 
 			associationType = ModelFactory.eINSTANCE.createAssociationType();
@@ -96,30 +77,19 @@ public class DeleteRoleCommandTest {
 
 		}
 
-		if (associationTypeClone == null) {
+		if (rolePlayerConstraint0 == null) {
 
-			associationTypeClone = ModelFactory.eINSTANCE
-					.createAssociationType();
-			associationTypeClone.setId(associationType.getId());
-			associationTypeClone.getRoles().add(existingRoleConstraintClone);
-			associationTypeClone.getRoles().add(toDeleteRoleConstraintClone);
+			rolePlayerConstraint0 = ModelFactory.eINSTANCE
+					.createRolePlayerConstraint();
+			rolePlayerConstraint0.setRole(toDeleteRoleConstraint);
 
 		}
 
-		if (rolePlayerConstraint == null) {
+		if (rolePlayerConstraint1 == null) {
 
-			rolePlayerConstraint = ModelFactory.eINSTANCE
+			rolePlayerConstraint1 = ModelFactory.eINSTANCE
 					.createRolePlayerConstraint();
-			rolePlayerConstraint.setRole(toDeleteRoleConstraint);
-
-		}
-
-		if (rolePlayerConstraintClone == null) {
-
-			rolePlayerConstraintClone = ModelFactory.eINSTANCE
-					.createRolePlayerConstraint();
-			rolePlayerConstraintClone.setId(rolePlayerConstraint.getId());
-			rolePlayerConstraintClone.setRole(toDeleteRoleConstraintClone);
+			rolePlayerConstraint1.setRole(toDeleteRoleConstraint);
 
 		}
 
@@ -129,19 +99,9 @@ public class DeleteRoleCommandTest {
 					.createAssociationTypeConstraint();
 			associationTypeConstraint.setType(associationType);
 			associationTypeConstraint.getPlayerConstraints().add(
-					rolePlayerConstraint);
-
-		}
-
-		if (associationTypeConstraintClone == null) {
-
-			associationTypeConstraintClone = ModelFactory.eINSTANCE
-					.createAssociationTypeConstraint();
-			associationTypeConstraintClone.setId(associationTypeConstraint
-					.getId());
-			associationTypeConstraintClone.setType(associationTypeClone);
-			associationTypeConstraintClone.getPlayerConstraints().add(
-					rolePlayerConstraintClone);
+					rolePlayerConstraint0);
+			associationTypeConstraint.getPlayerConstraints().add(
+					rolePlayerConstraint1);
 
 		}
 
@@ -150,61 +110,57 @@ public class DeleteRoleCommandTest {
 			schema = ModelFactory.eINSTANCE.createTopicMapSchema();
 			schema.getAssociationTypeConstraints().add(
 					associationTypeConstraint);
-			schema.getAssociationTypeConstraints().add(
-					associationTypeConstraintClone);
 
 		}
 
-		if (edge == null) {
-
-			edge = ModelFactory.eINSTANCE.createEdge();
+		if (edgeType == null)
 			edgeType = EdgeType.ROLE_CONSTRAINT_TYPE;
-			edge.setType(edgeType);
-			edge.setRoleConstraint(rolePlayerConstraint);
+
+		if (edge0 == null) {
+
+			edge0 = ModelFactory.eINSTANCE.createEdge();
+			edge0.setType(edgeType);
+			edge0.setRoleConstraint(rolePlayerConstraint0);
 
 		}
 
-		if (edgeClone == null) {
+		if (edge1 == null) {
 
-			edgeClone = ModelFactory.eINSTANCE.createEdge();
-			edgeClone.setId(edge.getId());
-			edgeTypeClone = EdgeType.ROLE_CONSTRAINT_TYPE;
-			edgeClone.setType(edgeTypeClone);
-			edgeClone.setRoleConstraint(rolePlayerConstraintClone);
+			edge1 = ModelFactory.eINSTANCE.createEdge();
+			edge1.setType(edgeType);
+			edge1.setRoleConstraint(rolePlayerConstraint0);
 
 		}
 
-		if (associationNode == null) {
+		if (associationNode0 == null) {
 
-			associationNode = ModelFactory.eINSTANCE.createAssociationNode();
-			associationNode.setAssociationConstraint(associationTypeConstraint);
-
-		}
-
-		if (associationNodeClone == null) {
-
-			associationNodeClone = ModelFactory.eINSTANCE
-					.createAssociationNode();
-			associationNodeClone.setId(associationNode.getId());
-			associationNodeClone
-					.setAssociationConstraint(associationTypeConstraintClone);
+			associationNode0 = ModelFactory.eINSTANCE.createAssociationNode();
+			associationNode0
+					.setAssociationConstraint(associationTypeConstraint);
 
 		}
 
-		if (diagram == null) {
+		if (associationNode1 == null) {
 
-			diagram = ModelFactory.eINSTANCE.createDiagram();
-			diagram.getEdges().add(edge);
-			diagram.getNodes().add(associationNode);
+			associationNode1 = ModelFactory.eINSTANCE.createAssociationNode();
+			associationNode1
+					.setAssociationConstraint(associationTypeConstraint);
 
 		}
 
-		if (diagramClone == null) {
+		if (diagram0 == null) {
 
-			diagramClone = ModelFactory.eINSTANCE.createDiagram();
-			diagramClone.setId(diagram.getId());
-			diagramClone.getEdges().add(edgeClone);
-			diagramClone.getNodes().add(associationNodeClone);
+			diagram0 = ModelFactory.eINSTANCE.createDiagram();
+			diagram0.getEdges().add(edge0);
+			diagram0.getNodes().add(associationNode0);
+
+		}
+
+		if (diagram1 == null) {
+
+			diagram1 = ModelFactory.eINSTANCE.createDiagram();
+			diagram1.getEdges().add(edge1);
+			diagram1.getNodes().add(associationNode1);
 
 		}
 
@@ -212,8 +168,8 @@ public class DeleteRoleCommandTest {
 
 			file = ModelFactory.eINSTANCE.createFile();
 			file.setTopicMapSchema(schema);
-			file.getDiagrams().add(diagram);
-			file.getDiagrams().add(diagramClone);
+			file.getDiagrams().add(diagram0);
+			file.getDiagrams().add(diagram1);
 
 		}
 
@@ -226,24 +182,20 @@ public class DeleteRoleCommandTest {
 
 		file = null;
 		schema = null;
-		diagram = null;
-		diagramClone = null;
+		diagram0 = null;
+		diagram1 = null;
 		existingRoleConstraint = null;
-		existingRoleConstraintClone = null;
 		toDeleteRoleConstraint = null;
-		toDeleteRoleConstraintClone = null;
 		associationType = null;
-		associationTypeClone = null;
-		associationNode = null;
-		associationNodeClone = null;
+		associationNode0 = null;
+		associationNode1 = null;
 		associationTypeConstraint = null;
-		associationTypeConstraintClone = null;
-		rolePlayerConstraint = null;
-		rolePlayerConstraintClone = null;
-		edge = null;
-		edgeClone = null;
+		rolePlayerConstraint0 = null;
+		rolePlayerConstraint1 = null;
+		edge0 = null;
+		edge1 = null;
 		roleConstraintList = null;
-		edgesList = null;
+		edgesList0 = null;
 		command = null;
 
 	}
@@ -282,9 +234,13 @@ public class DeleteRoleCommandTest {
 				.getRoles());
 		roleConstraintList.remove(toDeleteRoleConstraint);
 
-		// clone diagrams edges
-		edgesSize = diagram.getEdges().size();
-		edgesList = new ArrayList<Edge>(diagram.getEdges());
+		// clone diagrams edges 0
+		edgesSize0 = diagram0.getEdges().size();
+		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
+
+		// clone diagrams edges 1
+		edgesSize1 = diagram1.getEdges().size();
+		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 
 		command.execute();
 
@@ -294,9 +250,15 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(Tools.roleConstraintListCompare(roleConstraintList,
 				associationType.getRoles()));
 
-		// check diagrams edges
-		Assert.assertTrue(edgesSize == diagram.getEdges().size());
-		Assert.assertTrue(Tools.edgeListCompare(edgesList, diagram.getEdges()));
+		// check diagrams edges 0
+		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList0, diagram0.getEdges()));
+
+		// check diagrams edges 1
+		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList1, diagram1.getEdges()));
 
 		roleConstraintList.add(toDeleteRoleConstraint);
 		roleConstraintList.remove(existingRoleConstraint);
@@ -320,10 +282,15 @@ public class DeleteRoleCommandTest {
 				.getRoles());
 		roleConstraintList.remove(toDeleteRoleConstraint);
 
-		// clone diagrams edges
-		edgesSize = diagram.getEdges().size();
-		edgesList = new ArrayList<Edge>(diagram.getEdges());
-		edgesList.remove(edge);
+		// clone diagrams edges 0
+		edgesSize0 = diagram0.getEdges().size();
+		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
+		edgesList0.remove(edge0);
+
+		// clone diagrams edges 1
+		edgesSize1 = diagram1.getEdges().size();
+		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
+		edgesList1.remove(edge1);
 
 		command.execute();
 
@@ -333,9 +300,15 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(Tools.roleConstraintListCompare(roleConstraintList,
 				associationType.getRoles()));
 
-		// check diagrams edges
-		Assert.assertTrue((edgesSize - 1) == diagram.getEdges().size());
-		Assert.assertTrue(Tools.edgeListCompare(edgesList, diagram.getEdges()));
+		// check diagrams edges 0
+		Assert.assertTrue((edgesSize0 - 1) == diagram0.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList0, diagram0.getEdges()));
+
+		// check diagrams edges 1
+		Assert.assertTrue((edgesSize1 - 1) == diagram1.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList1, diagram1.getEdges()));
 
 	}
 
@@ -376,9 +349,13 @@ public class DeleteRoleCommandTest {
 		roleConstraintList = new ArrayList<RoleConstraint>(associationType
 				.getRoles());
 
-		// clone diagrams edges
-		edgesSize = diagram.getEdges().size();
-		edgesList = new ArrayList<Edge>(diagram.getEdges());
+		// clone diagrams edges 0
+		edgesSize0 = diagram0.getEdges().size();
+		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
+
+		// clone diagrams edges 1
+		edgesSize1 = diagram1.getEdges().size();
+		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 
 		command.execute();
 		Assert.assertTrue(command.canUndo());
@@ -390,9 +367,15 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(Tools.roleConstraintListCompare(roleConstraintList,
 				associationType.getRoles()));
 
-		// check diagrams edges
-		Assert.assertTrue(edgesSize == diagram.getEdges().size());
-		Assert.assertTrue(Tools.edgeListCompare(edgesList, diagram.getEdges()));
+		// check diagrams edges 0
+		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList0, diagram0.getEdges()));
+
+		// check diagrams edges 1
+		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList1, diagram1.getEdges()));
 
 		roleConstraintList.remove(existingRoleConstraint);
 
@@ -414,9 +397,14 @@ public class DeleteRoleCommandTest {
 		roleConstraintList = new ArrayList<RoleConstraint>(associationType
 				.getRoles());
 
-		// clone diagrams edges
-		edgesSize = diagram.getEdges().size();
-		edgesList = new ArrayList<Edge>(diagram.getEdges());
+		// clone diagrams edges 0
+		edgesSize0 = diagram0.getEdges().size();
+		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
+		
+		// clone diagrams edges 1
+		edgesSize1 = diagram1.getEdges().size();
+		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
+
 
 		command.execute();
 		Assert.assertTrue(command.canUndo());
@@ -428,10 +416,16 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(Tools.roleConstraintListCompare(roleConstraintList,
 				associationType.getRoles()));
 
-		// check diagrams edges
-		Assert.assertTrue(edgesSize == diagram.getEdges().size());
-		Assert.assertTrue(Tools.edgeListCompare(edgesList, diagram.getEdges()));
+		// check diagrams edges 0
+		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList0, diagram0.getEdges()));
 
+		// check diagrams edges 1
+		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList1, diagram1.getEdges()));
+		
 	}
 
 	@Test
@@ -442,9 +436,13 @@ public class DeleteRoleCommandTest {
 				toDeleteRoleConstraint, cascade);
 		Assert.assertTrue(command.canExecute());
 
-		// clone diagrams edges
-		edgesSize = diagram.getEdges().size();
-		edgesList = new ArrayList<Edge>(diagram.getEdges());
+		// clone diagrams edges 0
+		edgesSize0 = diagram0.getEdges().size();
+		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
+		
+		// clone diagrams edges 1
+		edgesSize1 = diagram1.getEdges().size();
+		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
 
 		command.execute();
 
@@ -463,9 +461,17 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(Tools.roleConstraintListCompare(roleConstraintList,
 				associationType.getRoles()));
 
-		// check diagrams edges
-		Assert.assertTrue(edgesSize == diagram.getEdges().size());
-		Assert.assertTrue(Tools.edgeListCompare(edgesList, diagram.getEdges()));
+		// check diagrams edges 0
+		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList0, diagram0.getEdges()));
+		
+
+		// check diagrams edges 1
+		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList1, diagram1.getEdges()));
+
 
 	}
 
@@ -483,9 +489,14 @@ public class DeleteRoleCommandTest {
 		roleConstraintList = new ArrayList<RoleConstraint>(associationType
 				.getRoles());
 
-		// clone diagrams edges
-		edgesSize = diagram.getEdges().size();
-		edgesList = new ArrayList<Edge>(diagram.getEdges());
+		// clone diagrams edges 0
+		edgesSize0 = diagram0.getEdges().size();
+		edgesList0 = new ArrayList<Edge>(diagram0.getEdges());
+		
+		// clone diagrams edges 1
+		edgesSize1 = diagram1.getEdges().size();
+		edgesList1 = new ArrayList<Edge>(diagram1.getEdges());
+
 
 		Assert.assertTrue(command.canUndo());
 		command.undo();
@@ -497,9 +508,16 @@ public class DeleteRoleCommandTest {
 		Assert.assertTrue(Tools.roleConstraintListCompare(roleConstraintList,
 				associationType.getRoles()));
 
-		// check diagrams edges
-		Assert.assertTrue(edgesSize == diagram.getEdges().size());
-		Assert.assertTrue(Tools.edgeListCompare(edgesList, diagram.getEdges()));
+		// check diagrams edges 0
+		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList0, diagram0.getEdges()));
+		
+
+		// check diagrams edges 1
+		Assert.assertTrue(edgesSize1 == diagram1.getEdges().size());
+		Assert.assertTrue(Tools
+				.edgeListCompare(edgesList1, diagram1.getEdges()));
 
 	}
 
