@@ -32,7 +32,8 @@ import de.topicmapslab.tmcledit.model.commands.DeleteDiagramCommand;
  */
 public class DeleteDiagramCommandTest {
 
-	private Diagram dia;
+	private Diagram diagram0;
+	private Diagram diagram1;
 	private DeleteDiagramCommand command;
 	private File file;
 	private List<Diagram> list;
@@ -41,16 +42,22 @@ public class DeleteDiagramCommandTest {
 	@Before
 	public void prepare() {
 
-		if (dia == null) {
+		if (diagram0 == null)
+			diagram0 = ModelFactory.eINSTANCE.createDiagram();
 
-			dia = ModelFactory.eINSTANCE.createDiagram();
+		if (diagram1 == null)
+			diagram1 = ModelFactory.eINSTANCE.createDiagram();
+
+		if (file == null) {
+
 			file = ModelFactory.eINSTANCE.createFile();
-			file.getDiagrams().add(dia);
+			file.getDiagrams().add(diagram0);
+			file.getDiagrams().add(diagram1);
 
 		}
 
 		if (command == null)
-			command = new DeleteDiagramCommand(dia);
+			command = new DeleteDiagramCommand(diagram0);
 
 	}
 
@@ -59,7 +66,7 @@ public class DeleteDiagramCommandTest {
 
 		list = null;
 		file = null;
-		dia = null;
+		diagram0 = null;
 		command = null;
 
 	}
@@ -75,16 +82,16 @@ public class DeleteDiagramCommandTest {
 	public void executeTest() {
 
 		Assert.assertTrue(command.canExecute());
-		Assert.assertTrue(file.getDiagrams().contains(dia));
+		Assert.assertTrue(file.getDiagrams().contains(diagram0));
 
 		size = file.getDiagrams().size();
 		list = new ArrayList<Diagram>(file.getDiagrams());
-		list.remove(dia);
+		list.remove(diagram0);
 
 		command.execute();
 
 		Assert.assertTrue((size - 1) == file.getDiagrams().size());
-		Assert.assertFalse(file.getDiagrams().contains(dia));
+		Assert.assertFalse(file.getDiagrams().contains(diagram0));
 		Assert.assertTrue(Tools.diagramListCompare(list, file.getDiagrams()));
 
 	}
@@ -111,7 +118,7 @@ public class DeleteDiagramCommandTest {
 		command.undo();
 
 		Assert.assertTrue(size == file.getDiagrams().size());
-		Assert.assertTrue(file.getDiagrams().contains(dia));
+		Assert.assertTrue(file.getDiagrams().contains(diagram0));
 		Assert.assertTrue(Tools.diagramListCompare(list, file.getDiagrams()));
 
 	}
@@ -130,7 +137,7 @@ public class DeleteDiagramCommandTest {
 		command.redo();
 
 		Assert.assertTrue(size == file.getDiagrams().size());
-		Assert.assertFalse(file.getDiagrams().contains(dia));
+		Assert.assertFalse(file.getDiagrams().contains(diagram0));
 		Assert.assertTrue(Tools.diagramListCompare(list, file.getDiagrams()));
 
 	}
