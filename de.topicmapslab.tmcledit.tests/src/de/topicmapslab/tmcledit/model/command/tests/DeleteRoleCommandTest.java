@@ -198,6 +198,7 @@ public class DeleteRoleCommandTest {
 		edge1 = null;
 		roleConstraintList = null;
 		edgesList0 = null;
+		edgesList1 = null;
 		command = null;
 
 	}
