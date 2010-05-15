@@ -41,6 +41,7 @@ public class DeleteRolePlayerConstraintCommandTest {
 	private File file;
 	private Edge edge0;
 	private Edge edge1;
+	private Edge edge2;
 	private EdgeType edgeType;
 	private Diagram diagram0;
 	private Diagram diagram1;
@@ -77,7 +78,6 @@ public class DeleteRolePlayerConstraintCommandTest {
 
 			associationTypeConstraint = ModelFactory.eINSTANCE
 					.createAssociationTypeConstraint();
-			// associationTypeConstraint.setType(associationType);
 			associationTypeConstraint.getPlayerConstraints().add(
 					rolePlayerConstraint0);
 			associationTypeConstraint.getPlayerConstraints().add(
@@ -112,6 +112,9 @@ public class DeleteRolePlayerConstraintCommandTest {
 
 		}
 
+		if (edge2 == null)
+			edge2 = ModelFactory.eINSTANCE.createEdge();
+
 		if (associationNode0 == null) {
 
 			associationNode0 = ModelFactory.eINSTANCE.createAssociationNode();
@@ -132,6 +135,7 @@ public class DeleteRolePlayerConstraintCommandTest {
 
 			diagram0 = ModelFactory.eINSTANCE.createDiagram();
 			diagram0.getEdges().add(edge0);
+			diagram0.getEdges().add(edge2);
 			diagram0.getNodes().add(associationNode0);
 
 		}
@@ -160,10 +164,10 @@ public class DeleteRolePlayerConstraintCommandTest {
 					associationTypeConstraint, rolePlayerConstraint0);
 
 	}
-	
+
 	@After
-	public void shutdown(){
-		
+	public void shutdown() {
+
 		file = null;
 		schema = null;
 		diagram0 = null;
@@ -174,13 +178,15 @@ public class DeleteRolePlayerConstraintCommandTest {
 		associationTypeConstraint = null;
 		rolePlayerConstraint0 = null;
 		rolePlayerConstraint1 = null;
+		edgeType = null;
 		edge0 = null;
 		edge1 = null;
+		edge2 = null;
 		edgesList0 = null;
 		edgesList1 = null;
+		rpcList = null;
 		command = null;
 
-		
 	}
 
 	@Test
@@ -263,12 +269,6 @@ public class DeleteRolePlayerConstraintCommandTest {
 		Assert.assertTrue(command.canUndo());
 		command.undo();
 
-		System.out.println("original: "
-				+ associationTypeConstraint.getPlayerConstraints().indexOf(
-						rolePlayerConstraint0));
-		System.out
-				.println("rpcList: " + rpcList.indexOf(rolePlayerConstraint0));
-
 		// check diagrams edges 0
 		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
 		Assert.assertTrue(Tools
@@ -309,12 +309,6 @@ public class DeleteRolePlayerConstraintCommandTest {
 		Assert.assertTrue(command.canUndo());
 		command.undo();
 		command.redo();
-
-		System.out.println("original: "
-				+ associationTypeConstraint.getPlayerConstraints().indexOf(
-						rolePlayerConstraint0));
-		System.out
-				.println("rpcList: " + rpcList.indexOf(rolePlayerConstraint0));
 
 		// check diagrams edges 0
 		Assert.assertTrue(edgesSize0 == diagram0.getEdges().size());
