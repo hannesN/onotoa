@@ -10,19 +10,28 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.command.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.Edge;
+import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.AddTopicRoleCommand;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -34,40 +43,86 @@ public class AddTopicRoleCommandTest {
 	private RolePlayerConstraint rpc;
 	private AssociationTypeConstraint atc;
 	private TopicType player;
-	private int size;
+	private AssociationNode source;
+	private TypeNode target;
 	private TopicMapSchema schema;
+	private Diagram diagram;
 	private File file;
+	private EdgeType edgeType;
+	private Edge edge0;
+	private List<RolePlayerConstraint> rpcList;
+	private List<Edge> edgeList;
+	private int rpcSize;
+	private int edgeSize;
 
 	TopicTypeComparator comp;
 
 	@Before
 	public void prepare() {
 
-		if (file == null)
-			file = ModelFactory.eINSTANCE.createFile();
-
-		if (schema == null) {
-
-			schema = ModelFactory.eINSTANCE.createTopicMapSchema();
-			file.setTopicMapSchema(schema);
-
-		}
-
 		if (rpc == null)
 			rpc = ModelFactory.eINSTANCE.createRolePlayerConstraint();
 
-		if (atc == null) {
-
+		if (atc == null)
 			atc = ModelFactory.eINSTANCE.createAssociationTypeConstraint();
-			schema.getAssociationTypeConstraints().add(atc);
-
-		}
 
 		if (player == null)
 			player = ModelFactory.eINSTANCE.createTopicType();
 
+		if (schema == null) {
+
+			schema = ModelFactory.eINSTANCE.createTopicMapSchema();
+			schema.getAssociationTypeConstraints().add(atc);
+
+		}
+
+		if (source == null) {
+
+			source = ModelFactory.eINSTANCE.createAssociationNode();
+			source.setAssociationConstraint(atc);
+
+		}
+
+		if (target == null) {
+
+			target = ModelFactory.eINSTANCE.createTypeNode();
+			target.setTopicType(player);
+
+		}
+
+		if (edgeType == null)
+			edgeType = EdgeType.ROLE_CONSTRAINT_TYPE;
+
+		if (edge0 == null) {
+
+			edge0 = ModelFactory.eINSTANCE.createEdge();
+			edge0.setSource(source);
+			edge0.setTarget(target);
+			edge0.setType(edgeType);
+			edge0.setRoleConstraint(rpc);
+
+		}
+
+		if (diagram == null) {
+
+			diagram = ModelFactory.eINSTANCE.createDiagram();
+			diagram.getNodes().add(source);
+			diagram.getNodes().add(target);
+
+		}
+
+		if (file == null) {
+
+			file = ModelFactory.eINSTANCE.createFile();
+			file.getDiagrams().add(diagram);
+			file.setTopicMapSchema(schema);
+
+		}
+
 		if (command == null)
 			command = new AddTopicRoleCommand(rpc, atc, player);
+
+		ModelIndexer.createInstance(file);
 
 	}
 
@@ -88,25 +143,70 @@ public class AddTopicRoleCommandTest {
 
 		Assert.assertTrue(command.canExecute());
 
+		schema.getAssociationTypeConstraints().remove(atc);
+		command = new AddTopicRoleCommand(rpc, atc, player);
+		Assert.assertFalse(command.canExecute());
+
+		schema.getAssociationTypeConstraints().add(atc);
+		file.setTopicMapSchema(null);
+		command = new AddTopicRoleCommand(rpc, atc, player);
+		Assert.assertFalse(command.canExecute());
+
 	}
 
 	@Test
 	public void executeTest() {
 
-		comp = new TopicTypeComparator();
-		size = atc.getPlayerConstraints().size();
+		Assert.assertTrue(command.canExecute());
 
-		Assert.assertFalse(atc.getPlayerConstraints().contains(rpc));
+		// clone atcs rpc
+		rpcSize = atc.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(atc
+				.getPlayerConstraints());
+		rpcList.add(rpc);
+
+		// clone diagrams edges
+		edgeSize = diagram.getEdges().size();
+		edgeList = new ArrayList<Edge>(diagram.getEdges());
+
 		command.execute();
-		Assert.assertTrue((size + 1) == atc.getPlayerConstraints().size());
-		Assert.assertTrue(atc.getPlayerConstraints().contains(rpc));
-		Assert.assertTrue(comp.equals(rpc.getPlayer(), player));
+
+		int id = diagram.getEdges().get(0).getId();
+		edge0.setId(id);
+		edgeList.add(edge0);
+
+		// check atcs rpc
+		Assert.assertTrue((rpcSize + 1) == atc.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList, atc
+				.getPlayerConstraints()));
+
+		// check diagrams edges
+		Assert.assertTrue((edgeSize + 1) == diagram.getEdges().size());
+		Assert.assertTrue(Tools.edgeListCompare(edgeList, diagram.getEdges()));
+
+		// check rpcs player
+		Assert.assertTrue(Tools.topicTypeCompare(player, rpc.getPlayer()));
+
+
+		// test with already existing edge
+		
+		// clone diagrams edges
+		edgeSize = diagram.getEdges().size();
+		edgeList = new ArrayList<Edge>(diagram.getEdges());
+		
+		command.execute();
+		
+		// check diagrams edges
+		Assert.assertTrue(edgeSize == diagram.getEdges().size());
+		Assert.assertTrue(Tools.edgeListCompare(edgeList, diagram.getEdges()));
 
 	}
 
 	@Test
 	public void canUndoTest() {
 
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		Assert.assertTrue(command.canUndo());
 
 	}
@@ -114,102 +214,66 @@ public class AddTopicRoleCommandTest {
 	@Test
 	public void undoTest() {
 
-		player = rpc.getPlayer();
+		Assert.assertTrue(command.canExecute());
+
+		// clone atcs rpc
+		rpcSize = atc.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(atc
+				.getPlayerConstraints());
+
+		// clone diagrams edges
+		edgeSize = diagram.getEdges().size();
+		edgeList = new ArrayList<Edge>(diagram.getEdges());
 
 		command.execute();
-
-		comp = new TopicTypeComparator();
-		size = atc.getPlayerConstraints().size();
-
-		Assert.assertTrue(atc.getPlayerConstraints().contains(rpc));
+		Assert.assertTrue(command.canUndo());
 		command.undo();
-		Assert.assertTrue((size - 1) == atc.getPlayerConstraints().size());
-		Assert.assertFalse(atc.getPlayerConstraints().contains(rpc));
-		Assert.assertTrue(comp.equals(rpc.getPlayer(), player));
+
+		// check atcs rpc
+		Assert.assertTrue(rpcSize == atc.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList, atc
+				.getPlayerConstraints()));
+
+		// check diagrams edges
+		Assert.assertTrue(edgeSize == diagram.getEdges().size());
+		Assert.assertTrue(Tools.edgeListCompare(edgeList, diagram.getEdges()));
+
+		// check rpcs player
+		Assert.assertFalse(Tools.topicTypeCompare(player, rpc.getPlayer()));
 
 	}
 
 	@Test
 	public void redoTest() {
 
+		Assert.assertTrue(command.canExecute());
 		command.execute();
+
+		// clone atcs rpc
+		rpcSize = atc.getPlayerConstraints().size();
+		rpcList = new ArrayList<RolePlayerConstraint>(atc
+				.getPlayerConstraints());
+
+		// clone diagrams edges
+		edgeSize = diagram.getEdges().size();
+		edgeList = new ArrayList<Edge>(diagram.getEdges());
+
+		Assert.assertTrue(command.canUndo());
 		command.undo();
-
-		comp = new TopicTypeComparator();
-		size = atc.getPlayerConstraints().size();
-
-		Assert.assertFalse(atc.getPlayerConstraints().contains(rpc));
 		command.redo();
-		Assert.assertTrue((size + 1) == atc.getPlayerConstraints().size());
-		Assert.assertTrue(atc.getPlayerConstraints().contains(rpc));
-		Assert.assertTrue(comp.equals(rpc.getPlayer(), player));
+
+		// check atcs rpc
+		Assert.assertTrue(rpcSize == atc.getPlayerConstraints().size());
+		Assert.assertTrue(Tools.rolePlayerConstraintListCompare(rpcList, atc
+				.getPlayerConstraints()));
+
+		// check diagrams edges
+		Assert.assertTrue(edgeSize == diagram.getEdges().size());
+		Assert.assertTrue(Tools.edgeListCompare(edgeList, diagram.getEdges()));
+
+		// check rpcs player
+		Assert.assertTrue(Tools.topicTypeCompare(player, rpc.getPlayer()));
 
 	}
-
-	// private final RolePlayerConstraint rpc;
-	// private final AssociationTypeConstraint atc;
-	//	
-	// private List<EdgeWrapper> list = new ArrayList<EdgeWrapper>();
-	// private TopicType player;
-	//	
-	// public AddTopicRoleCommandTest(RolePlayerConstraint rpc,
-	// AssociationTypeConstraint atc, TopicType player) {
-	// super();
-	// this.rpc = rpc;
-	// this.atc = atc;
-	// this.player = player;
-	// }
-	//
-	// public void execute() {
-	// rpc.setPlayer(player);
-	// atc.getPlayerConstraints().add(rpc);
-	// for (EdgeWrapper ew : list) {
-	// ew.diagram.getEdges().add(ew.edge);
-	// }
-	// }
-	//
-	// public void redo() {
-	// execute();
-	// }
-	//	
-	// @Override
-	// protected boolean prepare() {
-	// if (atc.eContainer()==null)
-	// return false;
-	//		
-	// TopicMapSchema schema = (TopicMapSchema) atc.eContainer();
-	// if (schema==null)
-	// return false;
-	//	    
-	// File file = (File) schema.eContainer();
-	// if (file==null)
-	// return false;
-	//	    
-	// for (Diagram d : file.getDiagrams()) {
-	// Node source = ModelIndexer.getNodeIndexer().getNodeFor(atc, d);
-	// if (source!=null) {
-	// Node target = ModelIndexer.getNodeIndexer().getNodeFor(player, d);
-	// if (target!=null) {
-	// Edge e = ModelFactory.eINSTANCE.createEdge();
-	// e.setType(EdgeType.ROLE_CONSTRAINT_TYPE);
-	// e.setSource(source);
-	// e.setTarget(target);
-	// e.setRoleConstraint(rpc);
-	// list.add(new EdgeWrapper(d, e));
-	// }
-	// }
-	//			
-	// }
-	//		
-	// return true;
-	// }
-	//	
-	// @Override
-	// public void undo() {
-	// for (EdgeWrapper ew : list) {
-	// ew.diagram.getEdges().remove(ew.edge);
-	// }
-	// atc.getPlayerConstraints().remove(rpc);
-	// }
 
 }
