@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.dialogs;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -38,15 +39,15 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 	private static final String SETTINGS = FilterTopicSelectionDialog.class.getCanonicalName();
 	
-	private KindOfTopicType kindOfTopicType = null;
+	private List<KindOfTopicType> kindOfTopicType = null;
 
 	private TopicTypeComparator topicTypeComparator;
 	
 	private List<TopicType> excludeList;
 	
-	public FilterTopicSelectionDialog(Shell shell, KindOfTopicType kindOfTopicType) {
+	public FilterTopicSelectionDialog(Shell shell, KindOfTopicType... kind) {
 		this(shell, false);
-		this.kindOfTopicType = kindOfTopicType;
+		this.kindOfTopicType = Arrays.asList(kind);
 		setInitialPattern("?");
 	}
 	
@@ -55,6 +56,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		
 		setListLabelProvider(new ListLabelProvider());
 		setDetailsLabelProvider(new DetailLabelProvider());
+		this.kindOfTopicType = Collections.emptyList();
 		setInitialPattern("?");
 	}
 	
@@ -76,8 +78,8 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		progressMonitor.beginTask("Filling Topic List", types.size());
 
 		for (TopicType type : types) {
-			if (kindOfTopicType!=null) {
-				if (type.getKind()==kindOfTopicType) {
+			if (kindOfTopicType.size()>0) {
+				if (kindOfTopicType.contains(type.getKind())) {
 					contentProvider.add(type, itemsFilter);
 				}
 			} else {

@@ -212,7 +212,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
+						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE, KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
 					TopicType rt =  (TopicType) dlg.getFirstResult();
 
@@ -251,7 +251,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						roleButton.getShell(), KindOfTopicType.ROLE_TYPE);
+						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE, KindOfTopicType.ROLE_TYPE);
 				if (dlg.open()==Dialog.OK) {
 					TopicType rt = (TopicType) dlg.getFirstResult();
 					
