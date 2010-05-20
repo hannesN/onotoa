@@ -63,6 +63,9 @@ public class ModifyAnnotationKeyCommandTest {
 	public void canExecuteTest() {
 
 		Assert.assertTrue(command.canExecute());
+		annotation.setKey(newKey);
+		command = new ModifyAnnotationKeyCommand(annotation, newKey);
+		Assert.assertFalse(command.canExecute());
 
 	}
 
