@@ -17,45 +17,45 @@ import org.junit.Test;
 
 import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.commands.ModifyAnnotationKeyCommand;
+import de.topicmapslab.tmcledit.model.commands.ModifyAnnotationValueCommand;
 
 /**
  * @author Hannes Niederhausen
  * 
  */
-public class ModifyAnnotationKeyCommandTest {
+public class ModifyAnnotationValueCommandTest {
 
-	private ModifyAnnotationKeyCommand command;
+	private ModifyAnnotationValueCommand command;
 	private Annotation annotation;
-	private String newKey;
-	private String oldKey;
+	private String newValue;
+	private String oldValue;
 
 	@Before
 	public void prepare() {
 
-		if (newKey == null)
-			newKey = "newKey";
+		if (newValue == null)
+			newValue = "newValue";
 
-		if (oldKey == null)
-			oldKey = "oldKey";
+		if (oldValue == null)
+			oldValue = "oldValue";
 
 		if (annotation == null) {
 
 			annotation = ModelFactory.eINSTANCE.createAnnotation();
-			annotation.setKey(oldKey);
-			
+			annotation.setValue(oldValue);
+
 		}
 
 		if (command == null)
-			command = new ModifyAnnotationKeyCommand(annotation, newKey);
-		
+			command = new ModifyAnnotationValueCommand(annotation, newValue);
+
 	}
 
 	@After
 	public void shutdown() {
 
-		newKey = null;
-		oldKey = null;
+		newValue = null;
+		oldValue = null;
 		annotation = null;
 		command = null;
 
@@ -65,8 +65,13 @@ public class ModifyAnnotationKeyCommandTest {
 	public void canExecuteTest() {
 
 		Assert.assertTrue(command.canExecute());
-		annotation.setKey(newKey);
-		command = new ModifyAnnotationKeyCommand(annotation, newKey);
+
+		annotation.setValue(newValue);
+		command = new ModifyAnnotationValueCommand(annotation, newValue);
+		Assert.assertFalse(command.canExecute());
+
+		annotation.setValue(null);
+		command = new ModifyAnnotationValueCommand(annotation, newValue);
 		Assert.assertFalse(command.canExecute());
 
 	}
@@ -76,7 +81,7 @@ public class ModifyAnnotationKeyCommandTest {
 
 		Assert.assertTrue(command.canExecute());
 		command.execute();
-		Assert.assertEquals(newKey, annotation.getKey());
+		Assert.assertEquals(newValue, annotation.getValue());
 
 	}
 
@@ -95,7 +100,7 @@ public class ModifyAnnotationKeyCommandTest {
 		Assert.assertTrue(command.canExecute());
 		command.execute();
 		command.undo();
-		Assert.assertEquals(oldKey, annotation.getKey());
+		Assert.assertEquals(oldValue, annotation.getValue());
 
 	}
 
@@ -103,7 +108,7 @@ public class ModifyAnnotationKeyCommandTest {
 	public void redoTest() {
 
 		command.redo();
-		Assert.assertEquals(newKey, annotation.getKey());
+		Assert.assertEquals(newValue, annotation.getValue());
 
 	}
 
