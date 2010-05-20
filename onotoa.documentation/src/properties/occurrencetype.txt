@@ -1,0 +1,39 @@
+=== Occurrence Type ===
+
+An occurrence type is used to specify the topics to type an occurrence. In a topic map, a topic may have more than one occurrence.
+Their meaning is realized by using topics, for instance the topic "content" in a topic "document". These topics should be typed with occurrence type.
+The TMCL standard says, that any type of an occurrence which is not instance of "occurrence-type" is invalid.
+
+Occurrence types can be reified and scoped similar to name types.
+
+.Property Page of occurrence type
+image::images/occtype_pp.png[scaledwidth="100%"]
+
+The properties of a topic type are inherited by an occurence type (see <<_topic_type>>).
+In addition it has the following properties:
+
+* *unique:* If this is *true* the TMCL validator will check if the value of occurrences of this type is unique in 
+the topic map. This means two topics with occurrences of this type may not have the same value. The unique constraint is
+activated by selecting the check box.   Otherwise this property is false.
+
+* *datatype:* It is possible to set the datatype of the occurrence value. You can enter your own 
+type definition URI, but it is preferable to use the XML schema datatypes. 
+These can be chosen from the dialogue opened by the button labelled *...*.
+If no datatype is set, "xsd:anyType" will be used, which means every content will be valid.
+
+* *reg. exp:* This regular expression is used to define the syntax of the content of the occurrence. 
+
+* *reifier:* It is possible to define which topic may reify occurrences using the current type. Check the 
+button *constrained*, which indicates that you want to constrain the reification explicitly, and choose if the constraint restricts 
+reifying (*cannot*), allows reifying (*may*) or needs reifying (*must*) in the selection box below. If reifying is allowed
+a type is needed, which defines the type of the reifier. If the type is not needed, just use 
+"tmdm:subject" as type. 
+   
+* *scope:* The scope constraint is defines the scoping types to be used for this occurrence type.
+The scope constraint, as we will see later, consists of 3 properties: the scoping type, the minimum occurrence (*cardMin*)
+and the maximum occurrence (*cardMax*). To add a scope constraint to the type, press *Add* and select the desired scope types. 
+The cardinality values can be changed in the table. To remove a constraint, select 
+it in the table and then press *Remove*. If you need to create a new scoping type, just press *New...*. The 
+wizard to create a topic type will appear and after filling out the wizard, a new constraint will be created using the new type.
+
+NOTE: If you remove the scope constraint its topic types will continue to exist.  
