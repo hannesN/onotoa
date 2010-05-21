@@ -1,8 +1,9 @@
 package de.topicmapslab.tmcledit.model.command.tests;
 
-import junit.framework.Assert;
+
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,6 +45,7 @@ public class RenameCommandTest {
 
 	@Test
 	public void executeTest() {
+		
 		Assert.assertTrue(command.canExecute());
 		command.execute();
 		Assert.assertEquals("newName", topicType.getName());
@@ -53,6 +55,8 @@ public class RenameCommandTest {
 	@Test
 	public void canUndo() {
 
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		Assert.assertTrue(command.canUndo());
 
 	}
@@ -60,6 +64,8 @@ public class RenameCommandTest {
 	@Test
 	public void undoTest() {
 
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		command.undo();
 		Assert.assertEquals("oldName", topicType.getName());
 
@@ -68,6 +74,8 @@ public class RenameCommandTest {
 	@Test
 	public void redoTest() {
 
+		Assert.assertTrue(command.canExecute());
+		command.execute();
 		command.redo();
 		Assert.assertEquals("newName", topicType.getName());
 
