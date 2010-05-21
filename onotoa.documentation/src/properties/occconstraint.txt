@@ -1,0 +1,27 @@
+=== Occurrence Constraint ===
+
+An occurrence constraint is used to connect a topic type with an occurrence type. For instance the topic "document" has to have at least one occurrence of
+type "content". This constraint will have a cardMin of 1 and a cardMax of *.
+
+
+An occurrence constraint is an element of a topic type. 
+It has the following properties:
+
+* *type:* An occurrence type used for the constraint. If the type is not set, the default 
+type "tmdm:subject"  will be used, which means the occurrence may be of any type.
+* *cardMin:* The minimum number of occurrences with the given type. The default is 0.
+* *cardMax:* The maximum number of occurrences with the given type. The default is *, which means infinity.
+
+.Property Page for occurrence constraint
+image::images/occconstr_pp.png[scaledwidth="100%"]
+
+After creating a new occurrence constraint the type is set to the default type "tmdm:subject". This can be changed
+by pressing the button on the right hand side. A dialogue appears proposing all occurrence types in the schema. To 
+create a new occurrence type press the label *Type:* on the left of the text field. This will open the New Type Wizard. After the creation 
+it will be selected as type for this constraint.
+
+If a special type is set it will be possible to edit his properties in the second tab, called *Occurrence Type*. It lists
+all type properties, see <<_occurrence_type>> for details.
+
+NOTE: Although "tmdm:subject" is set in the namespace of TMDM, it is specified in the TMCL standard. This type just means
+every topic is allowed.

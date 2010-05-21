@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.topicmapslab.tmcledit.doc_feature"
+      label="Onotoa Documentation"
+      version="1.1.2.qualifier">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.1.qualifier"/>
+   </requires>
+
+   <plugin
+         id="de.topicmapslab.tmcledit.doc"
+         download-size="0"
+         install-size="0"
+         version="1.1.2.qualifier"
+         unpack="false"/>
+
+</feature>
