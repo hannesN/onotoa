@@ -10,12 +10,12 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;  
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_HEIGHT;
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_IMAGE;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ID;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_IMAGE;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_KEY;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_NAME;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_POS_X;
@@ -102,7 +102,6 @@ import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
@@ -604,13 +603,13 @@ class ModelHandler extends DefaultHandler {
 					rcc.setPlayer(tt);
 					return;
 				case ROLE:
-					rcc.setRole((RoleType) tt);
+					rcc.setRole(tt);
 					return;
 				case OTHER_PLAYER:
 					rcc.setOtherPlayer(tt);
 					return;
 				case OTHER_ROLE:
-					rcc.setOtherRole((RoleType) tt);
+					rcc.setOtherRole(tt);
 					return;
 				}
 			}
