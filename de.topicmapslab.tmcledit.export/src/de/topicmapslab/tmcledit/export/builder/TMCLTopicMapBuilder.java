@@ -643,7 +643,7 @@ public class TMCLTopicMapBuilder {
 
 	private void addCardinalityOccurrences(Topic constr, String cardMin, String cardMax) {
 		// needed for templates
-		if (!cardMax.equals("0"))
+		if (!cardMin.equals("0"))
 			constr.createOccurrence(createTopic(ITMCLURIs.CARD_MIN), cardMin, XSD.INTEGER);
 		if (!cardMax.equals("*"))
 			constr.createOccurrence(createTopic(ITMCLURIs.CARD_MAX), cardMax, XSD.INTEGER);
