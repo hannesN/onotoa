@@ -64,6 +64,7 @@ public class RenameCommandTest {
 
 		Assert.assertTrue(command.canExecute());
 		command.execute();
+		Assert.assertTrue(command.canUndo());
 		command.undo();
 		Assert.assertEquals("oldName", topicType.getName());
 
@@ -74,6 +75,8 @@ public class RenameCommandTest {
 
 		Assert.assertTrue(command.canExecute());
 		command.execute();
+		Assert.assertTrue(command.canUndo());
+		command.undo();
 		command.redo();
 		Assert.assertEquals("newName", topicType.getName());
 
