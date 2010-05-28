@@ -31,7 +31,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  */
 public class RenameTopicTypeCommandTest {
 
-	private final String BASELOCATOR = "http://onotoa.topicmapslab.de/";
+	private final String BASELOCATOR_1 = "http://onotoa.topicmapslab.de/";
 
 	private RenameTopicTypeCommand command;
 	private TopicType topicType0;
@@ -49,7 +49,7 @@ public class RenameTopicTypeCommandTest {
 			oldName = "oldName";
 
 		if (newName == null)
-			newName = "newName";
+			newName = "new Name";
 
 		if (otherName == null)
 			otherName = "otherName";
@@ -73,7 +73,6 @@ public class RenameTopicTypeCommandTest {
 			schema = ModelFactory.eINSTANCE.createTopicMapSchema();
 			schema.getTopicTypes().add(topicType0);
 			schema.getTopicTypes().add(topicType1);
-			schema.setBaseLocator(BASELOCATOR);
 
 		}
 
@@ -119,6 +118,22 @@ public class RenameTopicTypeCommandTest {
 	}
 
 	@Test
+	public void canExecuteTestWithBaseLocator() {
+
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		schema.setBaseLocator(BASELOCATOR_1);
+
+		Assert.assertTrue(command.canExecute());
+
+		command = new RenameTopicTypeCommand(topicType0, otherName);
+		Assert.assertFalse(command.canExecute());
+
+		command = new RenameTopicTypeCommand(topicType0, "");
+		Assert.assertFalse(command.canExecute());
+
+	}
+
+	@Test
 	public void executeTest() {
 
 		Assert.assertTrue(command.canExecute());
@@ -129,7 +144,34 @@ public class RenameTopicTypeCommandTest {
 	}
 
 	@Test
+	public void executeTestWithBaseLocator() {
+
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		schema.setBaseLocator(BASELOCATOR_1);
+
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+
+		Assert.assertTrue("http://onotoa.topicmapslab.de/new_name"
+				.equals(topicType0.getIdentifiers().get(0)));
+		Assert.assertEquals(newName, topicType0.getName());
+
+	}
+
+	@Test
 	public void canUndo() {
+
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+		Assert.assertTrue(command.canUndo());
+
+	}
+
+	@Test
+	public void canUndoWithBaseLocator() {
+
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		schema.setBaseLocator(BASELOCATOR_1);
 
 		Assert.assertTrue(command.canExecute());
 		command.execute();
@@ -150,6 +192,23 @@ public class RenameTopicTypeCommandTest {
 	}
 
 	@Test
+	public void undoTestWithBaseLocator() {
+
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		schema.setBaseLocator(BASELOCATOR_1);
+
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+		Assert.assertTrue(command.canUndo());
+		command.undo();
+
+		Assert.assertTrue("http://onotoa.topicmapslab.de/test/"
+				.equals(topicType0.getIdentifiers().get(0)));
+		Assert.assertEquals(oldName, topicType0.getName());
+
+	}
+
+	@Test
 	public void redoTest() {
 
 		Assert.assertTrue(command.canExecute());
@@ -158,6 +217,24 @@ public class RenameTopicTypeCommandTest {
 		command.undo();
 		command.redo();
 
+		Assert.assertEquals(newName, topicType0.getName());
+
+	}
+
+	@Test
+	public void redoTestWithBaseLocator() {
+
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		schema.setBaseLocator(BASELOCATOR_1);
+
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+		Assert.assertTrue(command.canUndo());
+		command.undo();
+		command.redo();
+
+		Assert.assertTrue("http://onotoa.topicmapslab.de/new_name"
+				.equals(topicType0.getIdentifiers().get(0)));
 		Assert.assertEquals(newName, topicType0.getName());
 
 	}
