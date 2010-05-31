@@ -48,7 +48,14 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 			return false;
 		if (newName.length()==0)
 			return false;
-	    return super.canExecute();
+		
+		if (!super.canExecute())
+			return false;
+		
+		if ((idCmd != null) && (!idCmd.canExecute()))
+			return false;
+		
+	    return true;
 	}
 	
 	public void execute() {
@@ -79,6 +86,7 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 			return false;
 		}
 		if (tt.getIdentifiers().size()==1) {
+			// todo check if si was changed manually
 			if (!tt.getIdentifiers().get(0).startsWith(baseLocator))
 				return false;
 		}
