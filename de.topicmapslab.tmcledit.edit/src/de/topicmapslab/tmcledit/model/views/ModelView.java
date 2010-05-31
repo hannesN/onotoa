@@ -434,6 +434,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		manager.add(createDiagramAction);
 		manager.add(createDomainDiagramAction);
 		manager.add(validationAction);
+	
 		manager.add(new Separator());
 	}
 
@@ -477,6 +478,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
+		validationAction.setEnabled(currFile!=null);
 		manager.add(validationAction);
 		manager.add(new Separator());
 
@@ -505,6 +507,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		createSubjectIdenifierConstraintAction = new CreateSubjectIdenifierConstraintAction(this);
 		createSubjectLocatorConstraintAction = new CreateSubjectLocatorConstraintAction(this);
 
+		boolean enabled = (currFile!=null);
+		createDiagramAction.setEnabled(enabled);
+		createDomainDiagramAction.setEnabled(enabled);
+		validationAction.setEnabled(enabled);
 	}
 
 	private void hookDoubleClickAction() {
@@ -671,6 +677,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			viewer.refresh();
 			viewer.expandToLevel(2);
 		}
+		
+		// update actions of modelview
+		updateModelViewActions();
 
 		// inform NotesView
 		if (viewSite != null) {
@@ -684,6 +693,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 	}
 
+	private void updateModelViewActions() {
+		// the actions aren't initalized therefor we return
+		if (createDiagramAction==null)
+			return;
+		
+		boolean enabled = (currFile!=null);
+		
+		createDiagramAction.setEnabled(enabled);
+		createDomainDiagramAction.setEnabled(enabled);
+		validationAction.setEnabled(enabled);
+	}
+	
 	private void updateTitle(String filename) {
 		if (filename != null) {
 			if (filename.length() == 0)
@@ -725,7 +746,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Object getAdapter(Class adapter) {
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == ActionRegistry.class)
 			return getActionRegistry();
 
