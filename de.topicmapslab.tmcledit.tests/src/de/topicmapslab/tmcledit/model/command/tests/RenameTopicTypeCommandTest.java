@@ -120,7 +120,7 @@ public class RenameTopicTypeCommandTest {
 	@Test
 	public void canExecuteTestWithBaseLocator() {
 
-		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test");
 		schema.setBaseLocator(BASELOCATOR_1);
 
 		Assert.assertTrue(command.canExecute());
@@ -146,7 +146,7 @@ public class RenameTopicTypeCommandTest {
 	@Test
 	public void executeTestWithBaseLocator() {
 
-		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test");
 		schema.setBaseLocator(BASELOCATOR_1);
 
 		Assert.assertTrue(command.canExecute());
@@ -156,6 +156,29 @@ public class RenameTopicTypeCommandTest {
 				.equals(topicType0.getIdentifiers().get(0)));
 		Assert.assertEquals(newName, topicType0.getName());
 
+	}
+	
+	@Test
+	public void executeTestWithBaseLocatorAndModifiedName() {
+
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test2");
+		schema.setBaseLocator(BASELOCATOR_1);
+
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+
+		Assert.assertTrue("http://onotoa.topicmapslab.de/test2"
+				.equals(topicType0.getIdentifiers().get(0)));
+		Assert.assertEquals(newName, topicType0.getName());
+
+		// get new subject identifier
+		String si = topicType0.getIdentifiers().get(0);
+		topicType0.getIdentifiers().clear();
+		si = si + "2";
+		topicType0.getIdentifiers().add(si);
+		
+		
+		
 	}
 
 	@Test
@@ -170,7 +193,7 @@ public class RenameTopicTypeCommandTest {
 	@Test
 	public void canUndoWithBaseLocator() {
 
-		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test");
 		schema.setBaseLocator(BASELOCATOR_1);
 
 		Assert.assertTrue(command.canExecute());
@@ -194,7 +217,7 @@ public class RenameTopicTypeCommandTest {
 	@Test
 	public void undoTestWithBaseLocator() {
 
-		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test");
 		schema.setBaseLocator(BASELOCATOR_1);
 
 		Assert.assertTrue(command.canExecute());
@@ -202,7 +225,7 @@ public class RenameTopicTypeCommandTest {
 		Assert.assertTrue(command.canUndo());
 		command.undo();
 
-		Assert.assertTrue("http://onotoa.topicmapslab.de/test/"
+		Assert.assertTrue("http://onotoa.topicmapslab.de/test"
 				.equals(topicType0.getIdentifiers().get(0)));
 		Assert.assertEquals(oldName, topicType0.getName());
 
