@@ -91,15 +91,17 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 	        if ("ctm".equals(suffix)) {
 		        CTMTopicMapWriter writer = new CTMTopicMapWriter(stream, baseLocator);
 		        
-		        // TODO add include 
-//		        writer.
-		        
 		        for (MappingElement me : schema.getMappings()) {
-		        	writer.setPrefix(me.getValue(), me.getKey());
+		        	writer.setPrefix(me.getKey(), me.getValue());
 		        }
-		        TMCLTemplateDefinitions def = new TMCLTemplateDefinitions(writer, topicMap);
-		        for (Template t : def.getTemplates())
-		        	writer.addTemplate(t);
+		        writer.setPrefix("tmcl", "http://psi.topicmaps.org/tmcl/");
+		        writer.setPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
+		        writer.setPrefix("iso", "http://psi.topicmaps.org/iso13250/");
+		        
+		        writer.addInclude("http://www.isotopicmaps.org/tmcl/templates.ctm");
+//		        TMCLTemplateDefinitions def = new TMCLTemplateDefinitions(writer, topicMap);
+//		        for (Template t : def.getTemplates())
+//		        	writer.addTemplate(t);
 		        
 		        return writer;
 	        }

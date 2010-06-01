@@ -239,6 +239,7 @@ public class TMCLTemplateDefinitions {
 		AssociationEntry a2 = entryFactory.newAssociationEntry(overlaps, r1, r2);
 		t.add(a2);
 
+		t.setSerialize(false);
 		templates.add(t);
 		
 	}
