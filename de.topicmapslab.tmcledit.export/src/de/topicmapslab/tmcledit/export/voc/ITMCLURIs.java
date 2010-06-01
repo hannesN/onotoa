@@ -23,7 +23,7 @@ public interface ITMCLURIs {
 
 	public static String TOPIC_MAP = PREFIX + "topic-map";
 
-	// constrains
+	// constraints
 
 	public static String CONSTRAINT = PREFIX + "constraint";
 

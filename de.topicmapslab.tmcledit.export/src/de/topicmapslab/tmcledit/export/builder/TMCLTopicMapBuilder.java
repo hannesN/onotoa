@@ -861,7 +861,7 @@ public class TMCLTopicMapBuilder {
 		String prefix = id.substring(0, index);
 		String value = prefixMap.get(prefix);
 		if (value != null) {
-			if (value.endsWith("/"))
+			if ((value.endsWith("/")) || (value.endsWith("#"))) 
 				return value + id.substring(index + 1);
 			else
 				return value + "/" + id.substring(index + 1);
