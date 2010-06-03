@@ -199,13 +199,6 @@ are
    </url>
 
    <plugin
-         id="org.tinytim"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.tmapi"
          download-size="0"
          install-size="0"
@@ -227,6 +220,13 @@ are
 
    <plugin
          id="ctm-writer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.tinytim"
          download-size="0"
          install-size="0"
          version="0.0.0"

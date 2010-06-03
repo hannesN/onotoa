@@ -12,7 +12,6 @@ package de.topicmapslab.tmcledit.export.wizards;
 
 import java.io.FileOutputStream;
 
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -25,8 +24,6 @@ import org.tmapix.io.TopicMapWriter;
 import org.tmapix.io.XTM20TopicMapWriter;
 
 import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
-import de.topicmapslab.ctm.writer.templates.Template;
-import de.topicmapslab.tmcledit.export.builder.TMCLTemplateDefinitions;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;

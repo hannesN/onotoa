@@ -3,46 +3,8 @@
  */
 package de.topicmapslab.tmcledit.tmclimport.builder;
 
-import static org.tinytim.voc.TMCL.ABSTRACT_CONSTRAINT;
-import static org.tinytim.voc.TMCL.ALLOWED;
-import static org.tinytim.voc.TMCL.ALLOWED_REIFIER;
-import static org.tinytim.voc.TMCL.ALLOWED_SCOPE;
-import static org.tinytim.voc.TMCL.ALLOWS;
-import static org.tinytim.voc.TMCL.ASSOCIATION_ROLE_CONSTRAINT;
-import static org.tinytim.voc.TMCL.ASSOCIATION_TYPE;
-import static org.tinytim.voc.TMCL.CARD_MAX;
-import static org.tinytim.voc.TMCL.CARD_MIN;
-import static org.tinytim.voc.TMCL.COMMENT;
-import static org.tinytim.voc.TMCL.CONSTRAINED;
-import static org.tinytim.voc.TMCL.CONSTRAINED_ROLE;
-import static org.tinytim.voc.TMCL.CONSTRAINED_STATEMENT;
-import static org.tinytim.voc.TMCL.CONSTRAINED_TOPIC_TYPE;
-import static org.tinytim.voc.TMCL.CONSTRAINS;
-import static org.tinytim.voc.TMCL.DATATYPE;
-import static org.tinytim.voc.TMCL.DESCRIPTION;
-import static org.tinytim.voc.TMCL.NAME_TYPE;
-import static org.tinytim.voc.TMCL.OCCURRENCE_DATATYPE_CONSTRAINT;
-import static org.tinytim.voc.TMCL.OCCURRENCE_TYPE;
-import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_ROLE;
-import static org.tinytim.voc.TMCL.OTHER_CONSTRAINED_TOPIC_TYPE;
-import static org.tinytim.voc.TMCL.OVERLAPS;
-import static org.tinytim.voc.TMCL.OVERLAP_DECLARATION;
-import static org.tinytim.voc.TMCL.REGEXP;
-import static org.tinytim.voc.TMCL.REGULAR_EXPRESSION_CONSTRAINT;
-import static org.tinytim.voc.TMCL.REIFIER_CONSTRAINT;
-import static org.tinytim.voc.TMCL.ROLE_COMBINATION_CONSTRAINT;
-import static org.tinytim.voc.TMCL.ROLE_TYPE;
-import static org.tinytim.voc.TMCL.SCOPE_CONSTRAINT;
-import static org.tinytim.voc.TMCL.SCOPE_TYPE;
-import static org.tinytim.voc.TMCL.SEE_ALSO;
-import static org.tinytim.voc.TMCL.SUBJECT_IDENTIFIER_CONSTRAINT;
-import static org.tinytim.voc.TMCL.SUBJECT_LOCATOR_CONSTRAINT;
-import static org.tinytim.voc.TMCL.TOPIC_NAME_CONSTRAINT;
-import static org.tinytim.voc.TMCL.TOPIC_OCCURRENCE_CONSTRAINT;
-import static org.tinytim.voc.TMCL.TOPIC_REIFIES_CONSTRAINT;
-import static org.tinytim.voc.TMCL.TOPIC_ROLE_CONSTRAINT;
-import static org.tinytim.voc.TMCL.TOPIC_TYPE;
-import static org.tinytim.voc.TMCL.UNIQUE_VALUE_CONSTRAINT;
+
+import static de.topicmapslab.tmcledit.tmclimport.voc.Namespaces.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -62,9 +24,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.tinytim.voc.Namespace;
-import org.tinytim.voc.TMCL;
-import org.tinytim.voc.TMDM;
 import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
 import org.tmapi.core.Name;
@@ -386,8 +345,8 @@ public class OnotoaBuilder {
 			tt.getIsa().add(tt2);
 		}
 		// get supertype-subtype
-		for (Role r : t.getRolesPlayed(topicMap.createTopicBySubjectIdentifier(TMDM.SUBTYPE))) {
-			for (Role r2 : r.getParent().getRoles(topicMap.createTopicBySubjectIdentifier(TMDM.SUPERTYPE))) {
+		for (Role r : t.getRolesPlayed(createStandardTopic(TMDM.SUBTYPE))) {
+			for (Role r2 : r.getParent().getRoles(createStandardTopic(TMDM.SUPERTYPE))) {
 				TopicType supertype = getTopic(r2.getPlayer());
 				tt.getAko().add(supertype);
 			}
@@ -412,73 +371,73 @@ public class OnotoaBuilder {
 		
 		// initialize tmdm topics
 		topicName = createStandardTopic(TMDM.TOPIC_NAME);
-		subject = createStandardTopic(topicMap.createLocator(Namespace.TMDM_MODEL + "subject"));
+		subject = createStandardTopic(TMDM.SUBJECT);
 
 		topicName = createStandardTopic(TMDM.TOPIC_NAME);
 
 		topicMapSchema = createStandardTopic(TMCL.SCHEMA);
-		belongsTo = createStandardTopic(TMCL.BELONGS_TO_SCHEMA);
+		belongsTo = createStandardTopic(TMCL.BELONGS_TO);
 
 		// init topic types
-		topicType = createStandardTopic(TOPIC_TYPE);
-		nameType = createStandardTopic(NAME_TYPE);
-		associationType = createStandardTopic(ASSOCIATION_TYPE);
-		roleType = createStandardTopic(ROLE_TYPE);
-		occurrenceType = createStandardTopic(OCCURRENCE_TYPE);
-		scopeType = createStandardTopic(SCOPE_TYPE);
+		topicType = createStandardTopic(TMCL.TOPIC_TYPE);
+		nameType = createStandardTopic(TMCL.NAME_TYPE);
+		associationType = createStandardTopic(TMCL.ASSOCIATION_TYPE);
+		roleType = createStandardTopic(TMCL.ROLE_TYPE);
+		occurrenceType = createStandardTopic(TMCL.OCCURRENCE_TYPE);
 
-		cardMin = createStandardTopic(CARD_MIN);
-		cardMax = createStandardTopic(CARD_MAX);
-		regExp = createStandardTopic(REGEXP);
-		datatype = createStandardTopic(DATATYPE);
-		comment = createStandardTopic(COMMENT);
-		description = createStandardTopic(DESCRIPTION);
-		seeAlso = createStandardTopic(SEE_ALSO);
+		cardMin = createStandardTopic(TMCL.CARD_MIN);
+		cardMax = createStandardTopic(TMCL.CARD_MAX);
+		regExp = createStandardTopic(TMCL.REGEXP);
+		datatype = createStandardTopic(TMCL.DATATYPE);
+		comment = createStandardTopic(TMCL.COMMENT);
+		description = createStandardTopic(TMCL.DESCRIPTION);
+		seeAlso = createStandardTopic(TMCL.SEE_ALSO);
 
 		// roles
-		constrains = createStandardTopic(CONSTRAINS);
-		constrained = createStandardTopic(CONSTRAINED);
-		allowed = createStandardTopic(ALLOWED);
-		allows = createStandardTopic(ALLOWS);
+		constrains = createStandardTopic(TMCL.CONSTRAINT);
+		constrained = createStandardTopic(TMCL.CONSTRAINED);
+		allowed = createStandardTopic(TMCL.ALLOWED);
+		allows = createStandardTopic(TMCL.ALLOWS);
 
 		// associations
-		constraintStatement = createStandardTopic(CONSTRAINED_STATEMENT);
-		constrainedTopicType = createStandardTopic(CONSTRAINED_TOPIC_TYPE);
-		constrainedRole = createStandardTopic(CONSTRAINED_ROLE);
-		otherConstrainedTopicType = createStandardTopic(OTHER_CONSTRAINED_TOPIC_TYPE);
-		otherConstrainedRole = createStandardTopic(OTHER_CONSTRAINED_ROLE);
-		allowedReifier = createStandardTopic(ALLOWED_REIFIER);
-		allowedScope = createStandardTopic(ALLOWED_SCOPE);
-		constrainedRole = createStandardTopic(CONSTRAINED_ROLE);
-		otherConstrainedRole = createStandardTopic(OTHER_CONSTRAINED_ROLE);
-		otherConstrainedTopicType = createStandardTopic(OTHER_CONSTRAINED_TOPIC_TYPE);
+		constraintStatement = createStandardTopic(TMCL.CONSTRAINED_STATEMENT);
+		constrainedTopicType = createStandardTopic(TMCL.CONSTRAINED_TOPIC_TYPE);
+		constrainedRole = createStandardTopic(TMCL.CONSTRAINED_ROLE);
+		otherConstrainedTopicType = createStandardTopic(TMCL.OTHER_CONSTRAINED_TOPIC_TYPE);
+		otherConstrainedRole = createStandardTopic(TMCL.OTHER_CONSTRAINED_ROLE);
+		allowedReifier = createStandardTopic(TMCL.ALLOWED_REIFIER);
+		constrainedRole = createStandardTopic(TMCL.CONSTRAINED_ROLE);
+		otherConstrainedRole = createStandardTopic(TMCL.OTHER_CONSTRAINED_ROLE);
+		otherConstrainedTopicType = createStandardTopic(TMCL.OTHER_CONSTRAINED_TOPIC_TYPE);
 //		overlaps = 
-			createStandardTopic(OVERLAP_DECLARATION);
-			createStandardTopic(OVERLAPS);
+			createStandardTopic(TMCL.OVERLAP_DECLARATION);
+			createStandardTopic(TMCL.OVERLAPS);
 
-//		constraint = createStandardTopic(CONSTRAINT);
-		abstractConstraint = createStandardTopic(ABSTRACT_CONSTRAINT);
-		subjectIdentifierConstraint = createStandardTopic(SUBJECT_IDENTIFIER_CONSTRAINT);
-		subjectLocatorConstraint = createStandardTopic(SUBJECT_LOCATOR_CONSTRAINT);
-		topicNameConstraint = createStandardTopic(TOPIC_NAME_CONSTRAINT);
-		topicOccurrenceConstraint = createStandardTopic(TOPIC_OCCURRENCE_CONSTRAINT);
-		topicRoleConstraint = createStandardTopic(TOPIC_ROLE_CONSTRAINT);
-		scopeConstraint = createStandardTopic(SCOPE_CONSTRAINT);
-		reifierConstraint = createStandardTopic(REIFIER_CONSTRAINT);
-		topicReifiesConstraint = createStandardTopic(TOPIC_REIFIES_CONSTRAINT);
-		associationRoleConstraint = createStandardTopic(ASSOCIATION_ROLE_CONSTRAINT);
-		roleCombinationConstraint = createStandardTopic(ROLE_COMBINATION_CONSTRAINT);
-		occurrenceDatatypeConstraint = createStandardTopic(OCCURRENCE_DATATYPE_CONSTRAINT);
-		uniqueValueConstraint = createStandardTopic(UNIQUE_VALUE_CONSTRAINT);
-		regularExpressionConstraint = createStandardTopic(REGULAR_EXPRESSION_CONSTRAINT);
-		overlapDeclaration = createStandardTopic(OVERLAP_DECLARATION);
+//		constraint = createStandardTopic(TMCL.CONSTRAINT);
+		abstractConstraint = createStandardTopic(TMCL.ABSTRACT_CONSTRAINT);
+		subjectIdentifierConstraint = createStandardTopic(TMCL.SUBJECT_IDENTIFIER_CONSTRAINT);
+		subjectLocatorConstraint = createStandardTopic(TMCL.SUBJECT_LOCATOR_CONSTRAINT);
+		topicNameConstraint = createStandardTopic(TMCL.TOPIC_NAME_CONSTRAINT);
+		topicOccurrenceConstraint = createStandardTopic(TMCL.TOPIC_OCCURRENCE_CONSTRAINT);
+		topicRoleConstraint = createStandardTopic(TMCL.TOPIC_ROLE_CONSTRAINT);
+		scopeConstraint = createStandardTopic(TMCL.SCOPE_CONSTRAINT);
+		reifierConstraint = createStandardTopic(TMCL.REIFIER_CONSTRAINT);
+		topicReifiesConstraint = createStandardTopic(TMCL.TOPIC_REIFIES_CONSTRAINT);
+		associationRoleConstraint = createStandardTopic(TMCL.ASSOCIATION_ROLE_CONSTRAINT);
+		roleCombinationConstraint = createStandardTopic(TMCL.ROLE_COMBINATION_CONSTRAINT);
+		occurrenceDatatypeConstraint = createStandardTopic(TMCL.OCCURRENCE_DATATYPE_CONSTRAINT);
+		uniqueValueConstraint = createStandardTopic(TMCL.UNIQUE_VALUE_CONSTRAINT);
+		regularExpressionConstraint = createStandardTopic(TMCL.REGULAR_EXPRESSION_CONSTRAINT);
+		overlapDeclaration = createStandardTopic(TMCL.OVERLAP_DECLARATION);
 	}
 
-	private Topic createStandardTopic(Locator loc) {
-		Topic t = topicMap.createTopicBySubjectIdentifier(loc);
+	private Topic createStandardTopic(String si) {
+		Topic t = topicMap.createTopicBySubjectIdentifier(topicMap.createLocator(si));
 		topicCache.remove(t);
 		return t;
 	}
+	
+	
 
 	private void addConstraints(Topic t, TopicType tt) {
 		for (Role role : t.getRolesPlayed(constrained, constrainedTopicType)) {
