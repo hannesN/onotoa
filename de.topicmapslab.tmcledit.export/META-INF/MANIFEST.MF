@@ -11,10 +11,11 @@ Require-Bundle: org.eclipse.ui,
  de.topicmapslab.tmcledit;bundle-version="1.1.1";visibility:=reexport,
  org.eclipse.emf.edit,
  org.eclipse.core.resources,
- org.tmapix_0.3;bundle-version="0.3.0",
- org.tinytim;bundle-version="0.0.0",
  org.tmapi;bundle-version="[2.0.2,3.0.0)",
- ctm-writer;bundle-version="1.0.5"
+ de.topicmapslab.ctmwriter;bundle-version="1.0.7",
+ org.tmapix_0.3;bundle-version="0.3.0",
+ semagia;bundle-version="0.9.5",
+ de.topicmapslab.majortom;bundle-version="0.0.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: de.topicmapslab.tmcledit.model.util

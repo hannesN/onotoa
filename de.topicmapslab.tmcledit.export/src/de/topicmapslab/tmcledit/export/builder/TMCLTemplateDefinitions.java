@@ -10,15 +10,48 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder;
 
-import static de.topicmapslab.tmcledit.export.voc.ITMCLURIs.*;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ABSTRACT_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ALLOWED;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ALLOWED_REIFIER;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ALLOWS;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ASSOCIATION_ROLE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ASSOCIATION_TYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.BELONGS_TO;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CARD_MAX;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CARD_MIN;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.COMMENT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_ROLE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_STATEMENT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_TOPIC_TYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.DATATYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.DESCRIPTION;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.NAME_TYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.OCCURRENCE_DATATYPE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.OCCURRENCE_TYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.OTHER_CONSTRAINED_ROLE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.OTHER_CONSTRAINED_TOPIC_TYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.OVERLAP_DECLARATION;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.REGEXP;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.REGULAR_EXPRESSION_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.REIFIER_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ROLE_COMBINATION_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ROLE_TYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.SCOPE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.SEE_ALSO;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.SUBJECT_IDENTIFIER_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.SUBJECT_LOCATOR_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.TOPIC_NAME_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.TOPIC_OCCURRENCE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.TOPIC_REIFIES_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.TOPIC_ROLE_CONSTRAINT;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.TOPIC_TYPE;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.UNIQUE_VALUE_CONSTRAINT;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.tinytim.voc.Namespace;
-import org.tinytim.voc.TMCL;
-import org.tinytim.voc.TMDM;
-import org.tmapi.core.Locator;
 import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 
@@ -27,13 +60,11 @@ import de.topicmapslab.ctm.writer.templates.Template;
 import de.topicmapslab.ctm.writer.templates.TemplateFactory;
 import de.topicmapslab.ctm.writer.templates.entry.AssociationEntry;
 import de.topicmapslab.ctm.writer.templates.entry.EntryFactory;
-import de.topicmapslab.ctm.writer.templates.entry.IsInstanceOfEntry;
 import de.topicmapslab.ctm.writer.templates.entry.RoleEntry;
 import de.topicmapslab.ctm.writer.templates.entry.TopicEntry;
 import de.topicmapslab.ctm.writer.templates.entry.param.IEntryParam;
-import de.topicmapslab.ctm.writer.templates.entry.param.TopicTypeParam;
-import de.topicmapslab.ctm.writer.templates.entry.param.VariableParam;
-import de.topicmapslab.ctm.writer.templates.entry.param.WildcardParam;
+import de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL;
+import de.topicmapslab.tmcledit.export.voc.Namespaces.TMDM;
 
 /**
  * A class which creates {@link Template}s for the CTM Serializer.
@@ -152,22 +183,22 @@ public class TMCLTemplateDefinitions {
 	private void initTypes() {
 
 		// removing TMDM types from cache
-		topicMap.createTopicBySubjectIdentifier(TMDM.TYPE);
-		topicMap.createTopicBySubjectIdentifier(TMDM.INSTANCE);
-		topicMap.createTopicBySubjectIdentifier(TMDM.TYPE_INSTANCE);
-		topicMap.createTopicBySubjectIdentifier(TMDM.SUPERTYPE);
-		topicMap.createTopicBySubjectIdentifier(TMDM.SUBTYPE);
-		topicMap.createTopicBySubjectIdentifier(TMDM.SUPERTYPE_SUBTYPE);
+		createTopic(TMDM.TYPE);
+		createTopic(TMDM.INSTANCE);
+		createTopic(TMDM.TYPE_INSTANCE);
+		createTopic(TMDM.SUPERTYPE);
+		createTopic(TMDM.SUBTYPE);
+		createTopic(TMDM.SUPERTYPE_SUBTYPE);
 		// removing TMCL roles from cache
-		topicMap.createTopicBySubjectIdentifier(TMCL.CONTAINEE);
-		topicMap.createTopicBySubjectIdentifier(TMCL.CONTAINER);
+		createTopic(TMCL.CONTAINEE);
+		createTopic(TMCL.CONTAINER);
 
 		// initialize tmdm topics
-		topicName = topicMap.createTopicBySubjectIdentifier(TMDM.TOPIC_NAME);
-		subject = topicMap.createTopicBySubjectIdentifier(topicMap.createLocator(Namespace.TMDM_MODEL + "subject"));
+		topicName = createTopic(TMDM.TOPIC_NAME);
+		subject = createTopic(TMDM.SUBJECT + "subject");
 
-		topicMapSchema = topicMap.createTopicBySubjectIdentifier(TMCL.SCHEMA);
-		belongsTo = topicMap.createTopicBySubjectIdentifier(TMCL.BELONGS_TO_SCHEMA);
+		topicMapSchema = createTopic(TMCL.SCHEMA);
+		belongsTo = createTopic(BELONGS_TO);
 
 		// init topic types
 		topicType = createTopic(TOPIC_TYPE);

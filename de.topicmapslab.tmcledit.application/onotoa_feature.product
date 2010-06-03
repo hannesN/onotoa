@@ -40,16 +40,15 @@
    </plugins>
 
    <features>
-      <feature id="org.sourceforge.tinyTiM_feature" version="2.0.0"/>
       <feature id="de.topicmapslab.tmcledit.application_feature" version="1.1.2.qualifier"/>
       <feature id="de.topicmapslab.tmcledit.core_feature" version="1.1.2.qualifier"/>
       <feature id="de.topicmapslab.tmcledit.doc_feature" version="1.1.2.qualifier"/>
       <feature id="de.topicmapslab.tmcledit.export_feature" version="1.1.2.qualifier"/>
       <feature id="de.topicmapslab.tmcledit.import_feature" version="1.1.2.qualifier"/>
-      <feature id="onotoa_thirdparty_plugins" version="1.0.0.qualifier"/>
+      <feature id="de.topicmapslab.engine_feature" version="1.0.0.qualifier"/>
    </features>
 
-  <configurations>
+   <configurations>
       <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="3" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="3" />
       <plugin id="org.eclipse.equinox.preferences" autoStart="true" startLevel="3" />
