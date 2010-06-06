@@ -30,23 +30,23 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
-import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
+import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
  * 
  */
-public class SetAkoCommandTest {
+public class SetIsACommandTest {
 
-	private SetAkoCommand command;
+	private SetIsACommand command;
 	private TopicType topicType;
-	private TopicType oldAkoTopicType0;
-	private TopicType oldAkoTopicType1;
-	private TopicType sameAkoTopicType;
-	private TopicType newAkoTopicType0;
-	private TopicType newAkoTopicType1;
-	private TopicType newAkoTopicType2;
+	private TopicType oldIsaTopicType0;
+	private TopicType oldIsaTopicType1;
+	private TopicType sameIsaTopicType;
+	private TopicType newIsaTopicType0;
+	private TopicType newIsaTopicType1;
+	private TopicType newIsaTopicType2;
 	private TypeNode diaNode0Source, diaNode1Source;
 	private TypeNode diaNode0Target, diaNode1Target, diaNode2Target;
 	private TypeNode domNode0Source, domNode1Source;
@@ -72,31 +72,31 @@ public class SetAkoCommandTest {
 	@Before
 	public void prepare() {
 
-		if (oldAkoTopicType0 == null)
-			oldAkoTopicType0 = ModelFactory.eINSTANCE.createTopicType();
+		if (oldIsaTopicType0 == null)
+			oldIsaTopicType0 = ModelFactory.eINSTANCE.createTopicType();
 
-		if (oldAkoTopicType1 == null)
-			oldAkoTopicType1 = ModelFactory.eINSTANCE.createTopicType();
+		if (oldIsaTopicType1 == null)
+			oldIsaTopicType1 = ModelFactory.eINSTANCE.createTopicType();
 
-		if (sameAkoTopicType == null)
-			sameAkoTopicType = ModelFactory.eINSTANCE.createTopicType();
+		if (sameIsaTopicType == null)
+			sameIsaTopicType = ModelFactory.eINSTANCE.createTopicType();
 
-		if (newAkoTopicType0 == null)
-			newAkoTopicType0 = ModelFactory.eINSTANCE.createTopicType();
+		if (newIsaTopicType0 == null)
+			newIsaTopicType0 = ModelFactory.eINSTANCE.createTopicType();
 
-		if (newAkoTopicType1 == null)
-			newAkoTopicType1 = ModelFactory.eINSTANCE.createTopicType();
+		if (newIsaTopicType1 == null)
+			newIsaTopicType1 = ModelFactory.eINSTANCE.createTopicType();
 
-		if (newAkoTopicType2 == null)
-			newAkoTopicType2 = ModelFactory.eINSTANCE.createTopicType();
+		if (newIsaTopicType2 == null)
+			newIsaTopicType2 = ModelFactory.eINSTANCE.createTopicType();
 
 		if (newList == null) {
 
 			newList = new ArrayList<TopicType>();
-			newList.add(newAkoTopicType0);
-			newList.add(newAkoTopicType1);
-			newList.add(newAkoTopicType2);
-			newList.add(sameAkoTopicType);
+			newList.add(newIsaTopicType0);
+			newList.add(newIsaTopicType1);
+			newList.add(newIsaTopicType2);
+			newList.add(sameIsaTopicType);
 
 		}
 
@@ -106,9 +106,9 @@ public class SetAkoCommandTest {
 		if (topicType == null) {
 
 			topicType = ModelFactory.eINSTANCE.createTopicType();
-			topicType.getAko().add(oldAkoTopicType0);
-			topicType.getAko().add(oldAkoTopicType1);
-			topicType.getAko().add(sameAkoTopicType);
+			topicType.getIsa().add(oldIsaTopicType0);
+			topicType.getIsa().add(oldIsaTopicType1);
+			topicType.getIsa().add(sameIsaTopicType);
 
 		}
 
@@ -125,21 +125,21 @@ public class SetAkoCommandTest {
 		if (diaNode0Target == null) {
 
 			diaNode0Target = ModelFactory.eINSTANCE.createTypeNode();
-			diaNode0Target.setTopicType(oldAkoTopicType0);
+			diaNode0Target.setTopicType(oldIsaTopicType0);
 
 		}
 
 		if (diaNode1Target == null) {
 
 			diaNode1Target = ModelFactory.eINSTANCE.createTypeNode();
-			diaNode1Target.setTopicType(oldAkoTopicType1);
+			diaNode1Target.setTopicType(oldIsaTopicType1);
 
 		}
 
 		if (diaNode2Target == null) {
 
 			diaNode2Target = ModelFactory.eINSTANCE.createTypeNode();
-			diaNode2Target.setTopicType(sameAkoTopicType);
+			diaNode2Target.setTopicType(sameIsaTopicType);
 
 		}
 
@@ -156,68 +156,68 @@ public class SetAkoCommandTest {
 		if (domNode0Target == null) {
 
 			domNode0Target = ModelFactory.eINSTANCE.createTypeNode();
-			domNode0Target.setTopicType(oldAkoTopicType0);
+			domNode0Target.setTopicType(oldIsaTopicType0);
 
 		}
 
 		if (domNode1Target == null) {
 
 			domNode1Target = ModelFactory.eINSTANCE.createTypeNode();
-			domNode1Target.setTopicType(oldAkoTopicType1);
+			domNode1Target.setTopicType(oldIsaTopicType1);
 
 		}
 
 		if (domNode2Target == null) {
 
 			domNode2Target = ModelFactory.eINSTANCE.createTypeNode();
-			domNode2Target.setTopicType(sameAkoTopicType);
+			domNode2Target.setTopicType(sameIsaTopicType);
 
 		}
 
 		if (newDiaNode0Target == null) {
 
 			newDiaNode0Target = ModelFactory.eINSTANCE.createTypeNode();
-			newDiaNode0Target.setTopicType(newAkoTopicType0);
+			newDiaNode0Target.setTopicType(newIsaTopicType0);
 
 		}
 
 		if (newDiaNode1Target == null) {
 
 			newDiaNode1Target = ModelFactory.eINSTANCE.createTypeNode();
-			newDiaNode1Target.setTopicType(newAkoTopicType1);
+			newDiaNode1Target.setTopicType(newIsaTopicType1);
 
 		}
 
 		if (newDiaNode2Target == null) {
 
 			newDiaNode2Target = ModelFactory.eINSTANCE.createTypeNode();
-			newDiaNode2Target.setTopicType(newAkoTopicType2);
+			newDiaNode2Target.setTopicType(newIsaTopicType2);
 
 		}
 
 		if (newDomNode0Target == null) {
 
 			newDomNode0Target = ModelFactory.eINSTANCE.createTypeNode();
-			newDomNode0Target.setTopicType(newAkoTopicType0);
+			newDomNode0Target.setTopicType(newIsaTopicType0);
 
 		}
 
 		if (newDomNode1Target == null) {
 
 			newDomNode1Target = ModelFactory.eINSTANCE.createTypeNode();
-			newDomNode1Target.setTopicType(newAkoTopicType1);
+			newDomNode1Target.setTopicType(newIsaTopicType1);
 
 		}
 
 		if (newDomNode2Target == null) {
 
 			newDomNode2Target = ModelFactory.eINSTANCE.createTypeNode();
-			newDomNode2Target.setTopicType(newAkoTopicType2);
+			newDomNode2Target.setTopicType(newIsaTopicType2);
 
 		}
 
 		if (edgeType == null)
-			edgeType = EdgeType.AKO_TYPE;
+			edgeType = EdgeType.IS_ATYPE;
 
 		if (diaEdge0 == null) {
 
@@ -277,12 +277,12 @@ public class SetAkoCommandTest {
 
 			schema = ModelFactory.eINSTANCE.createTopicMapSchema();
 			schema.getTopicTypes().add(topicType);
-			schema.getTopicTypes().add(oldAkoTopicType0);
-			schema.getTopicTypes().add(oldAkoTopicType1);
-			schema.getTopicTypes().add(sameAkoTopicType);
-			schema.getTopicTypes().add(newAkoTopicType0);
-			schema.getTopicTypes().add(newAkoTopicType1);
-			schema.getTopicTypes().add(newAkoTopicType2);
+			schema.getTopicTypes().add(oldIsaTopicType0);
+			schema.getTopicTypes().add(oldIsaTopicType1);
+			schema.getTopicTypes().add(sameIsaTopicType);
+			schema.getTopicTypes().add(newIsaTopicType0);
+			schema.getTopicTypes().add(newIsaTopicType1);
+			schema.getTopicTypes().add(newIsaTopicType2);
 
 		}
 
@@ -365,12 +365,12 @@ public class SetAkoCommandTest {
 		newDomNode1Target = null;
 		newDomNode2Target = null;
 		emptyList = null;
-		oldAkoTopicType0 = null;
-		oldAkoTopicType1 = null;
-		sameAkoTopicType = null;
-		newAkoTopicType2 = null;
-		newAkoTopicType1 = null;
-		newAkoTopicType0 = null;
+		oldIsaTopicType0 = null;
+		oldIsaTopicType1 = null;
+		sameIsaTopicType = null;
+		newIsaTopicType2 = null;
+		newIsaTopicType1 = null;
+		newIsaTopicType0 = null;
 		schema = null;
 		dia = null;
 		domDia = null;
@@ -382,10 +382,10 @@ public class SetAkoCommandTest {
 	@Test
 	public void canExecuteTestDiagramSet() {
 
-		command = new SetAkoCommand(newList, topicType);
+		command = new SetIsACommand(newList, topicType);
 		Assert.assertTrue(command.canExecute());
 
-		command = new SetAkoCommand(topicType.getAko(), topicType);
+		command = new SetIsACommand(topicType.getIsa(), topicType);
 		Assert.assertFalse(command.canExecute());
 
 	}
@@ -393,7 +393,7 @@ public class SetAkoCommandTest {
 	@Test
 	public void canExecuteTestClear() {
 
-		command = new SetAkoCommand(emptyList, topicType);
+		command = new SetIsACommand(emptyList, topicType);
 		Assert.assertTrue(command.canExecute());
 
 	}
@@ -401,19 +401,24 @@ public class SetAkoCommandTest {
 	@Test
 	public void executeTestSet() {
 
-		command = new SetAkoCommand(newList, topicType);
+		command = new SetIsACommand(newList, topicType);
 		Assert.assertTrue(command.canExecute());
+
+		edgeSizeDom = domDia.getEdges().size();
+		edgeListDom = new ArrayList<Edge>(domDia.getEdges());
 
 		command.execute();
 
-		Assert.assertTrue(newList.size() == topicType.getAko().size());
+		Assert.assertTrue(newList.size() == topicType.getIsa().size());
 		Assert.assertTrue(newList.size() == dia.getEdges().size());
-		Assert.assertTrue(newList.size() == domDia.getEdges().size());
+		Assert.assertTrue(edgeSizeDom == domDia.getEdges().size());
 		Assert.assertTrue(newEdgeTest(dia));
-		Assert.assertTrue(newEdgeTest(domDia));
+		Assert
+				.assertTrue(Tools.edgeListCompare(edgeListDom, domDia
+						.getEdges()));
 
 		for (TopicType tt : newList)
-			if (!topicType.getAko().contains(tt))
+			if (!topicType.getIsa().contains(tt))
 				Assert.fail();
 
 	}
@@ -421,20 +426,27 @@ public class SetAkoCommandTest {
 	@Test
 	public void executeTestSetClear() {
 
-		command = new SetAkoCommand(emptyList, topicType);
+		command = new SetIsACommand(emptyList, topicType);
+
+		edgeSizeDom = domDia.getEdges().size();
+		edgeListDom = new ArrayList<Edge>(domDia.getEdges());
 
 		Assert.assertTrue(command.canExecute());
 		command.execute();
-		Assert.assertTrue(topicType.getAko().size() == 0);
+		Assert.assertTrue(topicType.getIsa().size() == 0);
 		Assert.assertTrue(dia.getEdges().size() == 0);
-		Assert.assertTrue(domDia.getEdges().size() == 0);
+
+		Assert.assertTrue(edgeSizeDom == domDia.getEdges().size());
+		Assert
+				.assertTrue(Tools.edgeListCompare(edgeListDom, domDia
+						.getEdges()));
 
 	}
 
 	@Test
 	public void canUndoSet() {
 
-		command = new SetAkoCommand(newList, topicType);
+		command = new SetIsACommand(newList, topicType);
 		Assert.assertTrue(command.canExecute());
 
 		command.execute();
@@ -445,7 +457,7 @@ public class SetAkoCommandTest {
 	@Test
 	public void canUndoClear() {
 
-		command = new SetAkoCommand(emptyList, topicType);
+		command = new SetIsACommand(emptyList, topicType);
 		Assert.assertTrue(command.canExecute());
 
 		command.execute();
@@ -456,11 +468,12 @@ public class SetAkoCommandTest {
 	@Test
 	public void undoTestSet() {
 
-		command = new SetAkoCommand(newList, topicType);
+		command = new SetIsACommand(newList, topicType);
 		Assert.assertTrue(command.canExecute());
 
-		topicTypeSize = topicType.getAko().size();
-		topicTypeList = new ArrayList<TopicType>(topicType.getAko());
+		topicTypeSize = topicType.getIsa().size();
+		topicTypeList = new ArrayList<TopicType>(topicType.getIsa());
+
 		edgeListDia = new ArrayList<Edge>(dia.getEdges());
 		edgeListDom = new ArrayList<Edge>(domDia.getEdges());
 
@@ -472,9 +485,9 @@ public class SetAkoCommandTest {
 		Assert
 				.assertTrue(Tools.edgeListCompare(edgeListDom, domDia
 						.getEdges()));
-		Assert.assertTrue(topicTypeSize == topicType.getAko().size());
+		Assert.assertTrue(topicTypeSize == topicType.getIsa().size());
 		for (TopicType tt : topicTypeList)
-			if (!topicType.getAko().contains(tt))
+			if (!topicType.getIsa().contains(tt))
 				Assert.fail();
 
 	}
@@ -482,7 +495,7 @@ public class SetAkoCommandTest {
 	@Test
 	public void undoTestClear() {
 
-		command = new SetAkoCommand(emptyList, topicType);
+		command = new SetIsACommand(emptyList, topicType);
 		Assert.assertTrue(command.canExecute());
 
 		edgeSizeDia = dia.getEdges().size();
@@ -491,16 +504,16 @@ public class SetAkoCommandTest {
 		edgeListDia = new ArrayList<Edge>(dia.getEdges());
 		edgeListDom = new ArrayList<Edge>(domDia.getEdges());
 
-		topicTypeSize = topicType.getAko().size();
-		topicTypeList = new ArrayList<TopicType>(topicType.getAko());
+		topicTypeSize = topicType.getIsa().size();
+		topicTypeList = new ArrayList<TopicType>(topicType.getIsa());
 
 		command.execute();
 		Assert.assertTrue(command.canUndo());
 		command.undo();
 
-		Assert.assertTrue(topicTypeSize == topicType.getAko().size());
+		Assert.assertTrue(topicTypeSize == topicType.getIsa().size());
 		for (TopicType tt : topicTypeList)
-			if (!topicType.getAko().contains(tt))
+			if (!topicType.getIsa().contains(tt))
 				Assert.fail();
 
 		Assert.assertTrue(dia.getEdges().size() == edgeSizeDia);
@@ -515,7 +528,7 @@ public class SetAkoCommandTest {
 	@Test
 	public void redoTestSet() {
 
-		command = new SetAkoCommand(newList, topicType);
+		command = new SetIsACommand(newList, topicType);
 		Assert.assertTrue(command.canExecute());
 		command.execute();
 
@@ -531,9 +544,9 @@ public class SetAkoCommandTest {
 				.assertTrue(Tools.edgeListCompare(edgeListDom, domDia
 						.getEdges()));
 
-		Assert.assertTrue(newList.size() == topicType.getAko().size());
+		Assert.assertTrue(newList.size() == topicType.getIsa().size());
 		for (TopicType tt : newList)
-			if (!topicType.getAko().contains(tt))
+			if (!topicType.getIsa().contains(tt))
 				Assert.fail();
 
 	}
@@ -541,16 +554,23 @@ public class SetAkoCommandTest {
 	@Test
 	public void redoTestClear() {
 
-		command = new SetAkoCommand(emptyList, topicType);
+		command = new SetIsACommand(emptyList, topicType);
 		Assert.assertTrue(command.canExecute());
 		command.execute();
+
+		edgeSizeDom = domDia.getEdges().size();
+		edgeListDom = new ArrayList<Edge>(domDia.getEdges());
+
 		Assert.assertTrue(command.canUndo());
 		command.undo();
 		command.redo();
 
-		Assert.assertTrue(topicType.getAko().size() == 0);
+		Assert.assertTrue(topicType.getIsa().size() == 0);
 		Assert.assertTrue(dia.getEdges().size() == 0);
-		Assert.assertTrue(domDia.getEdges().size() == 0);
+		Assert.assertTrue(edgeSizeDom == domDia.getEdges().size());
+		Assert
+				.assertTrue(Tools.edgeListCompare(edgeListDom, domDia
+						.getEdges()));
 
 	}
 
