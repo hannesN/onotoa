@@ -21,6 +21,7 @@ import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.compare.AnnotationComparator;
 import de.topicmapslab.tmcledit.model.compare.AssociationTypeConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.BendpointComparator;
@@ -40,6 +41,7 @@ import de.topicmapslab.tmcledit.model.compare.SubjectLocatorConstraintComparator
 import de.topicmapslab.tmcledit.model.compare.TopicMapSchemaComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicReifiesConstraintComparator;
 import de.topicmapslab.tmcledit.model.compare.TopicTypeComparator;
+import de.topicmapslab.tmcledit.model.compare.TypeNodeComparator;
 
 public class Tools {
 
@@ -619,6 +621,36 @@ public class Tools {
 
 	public static boolean rolePlayerConstraintCompare(RolePlayerConstraint o1,
 			RolePlayerConstraint o2) {
+
+		RolePlayerConstraintComparator comp = new RolePlayerConstraintComparator();
+
+		if (comp.equals(o1, o2) == false)
+			return false;
+
+		return true;
+
+	}
+
+	public static boolean typeNodeListCompare(List<TypeNode> list1,
+			List<TypeNode> list2) {
+
+		if (list1.size() != list2.size())
+			return false;
+
+		TypeNodeComparator comp = new TypeNodeComparator();
+
+		for (int i = 0; i < list1.size(); i++) {
+
+			if (comp.equals(list1.get(i), list2.get(i)) == false)
+				return false;
+
+		}
+
+		return true;
+
+	}
+
+	public static boolean typeNodeCompare(TypeNode o1, TypeNode o2) {
 
 		RolePlayerConstraintComparator comp = new RolePlayerConstraintComparator();
 
