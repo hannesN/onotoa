@@ -180,14 +180,14 @@ public class SetImageCommandTest {
 
 		command = new SetImageCommand(null, newValue);
 		Assert.assertFalse(command.canExecute());
-		//
-		// command = new SetImageCommand(type, oldValue);
-		// Assert.assertFalse(command.canExecute());
-		//		
-		// node0DiaOne.setImage(null);
-		// node1DiaOne.setImage(null);
-		// command = new SetImageCommand(type, null);
-		// Assert.assertFalse(command.canExecute());
+		
+		 command = new SetImageCommand(type, oldValue);
+		 Assert.assertFalse(command.canExecute());
+				
+		 node0DiaOne.setImage(null);
+		 node1DiaOne.setImage(null);
+		 command = new SetImageCommand(type, null);
+		 Assert.assertFalse(command.canExecute());
 
 	}
 
