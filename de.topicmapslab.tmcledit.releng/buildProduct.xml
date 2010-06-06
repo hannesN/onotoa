@@ -1,0 +1,140 @@
+<project default="build">
+	<property file="build.properties" />
+	<property file="common.properties" />
+	<property file="packager.properties" />
+	<property file="packaging.properties" />
+	<property name="builder" value="${basedir}" />
+	<property name="pluginPath" value="${eclipse.home}/plugins" />
+	<property name="buildDirectory" value="${basedir}/buildDirectory" />
+	<property name="pluginPath" value="${basedir}/..${path.separator}${deltapack}" />
+	<property name="buildTempFolder" value="${buildDirectory}" />
+	<property name="eclipse.pdebuild.lib" value="${eclipse.home}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/lib" />
+	<property name="eclipse.pdebuild.scripts" value="${eclipse.home}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts" />
+
+	<property name="p2.metadata.repo" value="file:${builder}/repository"/>
+	<property name="p2.artifact.repo" value="file:${builder}/repository"/>
+	
+	<target name="init" depends="clean">
+		<echo message="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}/plugins" />
+		<copy todir="${buildDirectory}/plugins">
+			<fileset dir="${basedir}/..">
+				<exclude name="*feature" />
+				<exclude name="*releng" />
+				<exclude name="*/bin" />
+				<exclude name=".hg" />
+
+			</fileset>
+		</copy>
+
+		<mkdir dir="${buildDirectory}/features" />
+		<copy todir="${buildDirectory}/features">
+			<fileset dir="${basedir}/..">
+				<include name="*feature/*" />
+			</fileset>
+		</copy>
+	</target>
+
+
+
+	<target name="onotoa" depends="clean,init">
+		<property file="build.properties" />
+		<property file="common.properties" />
+		<echo message="${buildDirectory}" />
+
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${eclipse.home}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<arg value="-Dbuilder=${builder}" />
+			<arg value="-DskipBase=${skipBase}" />
+			<arg value="-DskipFetch=${skipFetch}" />
+			<arg value="-DskipMaps=${skipMaps}" />
+			<arg value="-Dconfigs=${configs}" />
+			<arg value="-DbaseLocation=${baseLocation}" />
+			<arg value="-Dproduct=${product}" />
+			<arg value="-DbuildId=${buildId}" />
+			<arg value="-Dbuilder=${builder}" />
+			<arg value="-DbuildLabel=${buildLabel}" />
+			<arg value="-DCDC-1.1/Foundation-1.1=${CDC-1.1/Foundation-1.1}" />
+			<arg value="-DJ2SE-1.5=${J2SE-1.5}" />
+			<arg value="-DrunPackager=${runPackager}" />
+			<arg value="-DtopLevelElementType=${topLevelElementType}" />
+			<arg value="-DarchivePrefix=${archivePrefix}" />
+			<arg value="-Dp2.artifact.repo=${p2.artifact.repo}" />
+			<arg value="-Dp2.gathering=${p2.gathering}" />
+			<arg value="-Dp2.metadata.repo=${p2.metadata.repo}" />
+			<arg value="-DfeatureList=${featureList}" />
+			<arg value="-Droot=${root}" />
+			<!-- <arg value="-Droot.permissions.755=${root.permissions.755}" />
+			<arg value="-Droot.macosx.carbon.ppc.permissions.755=${root.macosx.carbon.ppc.permissions.755}" />
+			<arg value="-Droot.win32.win32.x86=${root.win32.win32.x86}" />
+			<arg value="-Droot.linux.motif.x86=${root.linux.motif.x86}" />
+			<arg value="-Droot.linux.gtk.x86=${root.linux.gtk.x86}" />
+			<arg value="-Droot.linux.gtk.x86_64=${root.linux.gtk.x86_64}" />
+			<arg value="-Droot.linux.gtk.ppc=${root.linux.gtk.ppc}" />
+			<arg value="-Droot.macosx.carbon.ppc=${root.macosx.carbon.ppc}" />
+			<arg value="-Droot.macosx.carbon.ppc.link=${root.macosx.carbon.ppc.link}" />
+			<arg value="-Droot.aix.motif.ppc=${root.aix.motif.ppc}" />
+			<arg value="-Droot.hpux.motif.PA_RISC=${root.hpux.motif.PA_RISC}" />
+			<arg value="-Droot.solaris.gtk.sparc=${root.solaris.gtk.sparc}" />-->
+			<arg value="-DbaseDirectory =${baseDirectory }" />
+			<arg value="-DfilteredDependencyCheck=${filteredDependencyCheck}" />
+			<arg value="-DfeatureList =${featureList }" />
+			<arg value="-Dconfig=${config}" />
+			<arg value="-DnormalizeWhilePackaging=${normalizeWhilePackaging}" />
+			<arg value="-DprefilledTarget =${prefilledTarget }" />
+			<arg value="-DcomponentFilter=${componentFilter}" />
+			<arg value="-DcontentFilter=${contentFilter}" />
+			<arg value="-DworkingDirectory =${workingDirectory }" />
+			<arg value="-DbuildDirectory =${buildDirectory }" />
+			<arg value="-DdownloadDirectory =${downloadDirectory }" />
+			<arg value="-DtempDirectory =${tempDirectory }" />
+			<arg value="-DsourceFolder =${sourceFolder }" />
+			<arg value="-Dtarget =${target }" />
+			<arg value="-DbuildId=${buildId}" />
+			<arg value="-DbuildType=${buildType}" />
+			<arg value="-DbuildLabel=${buildLabel}" />
+			<arg value="-DarchivePrefix=${archivePrefix}" />
+			<arg value="-DarchivesFormat=${archivesFormat}" />
+			<arg value="-DcollectingFolder=${collectingFolder}" />
+			<arg value="-DpackagingProperties =${packagingProperties }" />
+
+			<classpath>
+				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+
+		
+
+		<!-- moving result from buildDir to builder
+		<mkdir dir="${builder}/releases"/>
+		<move todir="${builder}/releases" >
+			<fileset dir="${buildDirectory}/${buildId}">
+					<include name="*.zip" />
+			</fileset>
+		</move>
+		 -->
+		<!-- <delete dir="${buildDirectory}" />-->
+		<!-- refresh the workspace -->
+		<!--
+		<echo message="${basedir}" />
+		<eclipse.convertPath fileSystemPath="${basedir}" property="resourcePath" />
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite" />
+		-->
+	</target>
+
+
+	<target name="build" depends="clean, init, onotoa" />
+
+	<!--This target is responsible for cleaning up the build-directory-->
+	<target name="clean">
+		<echo message="${buildDirectory}" />
+		<delete dir="${buildDirectory}" />
+		<delete dir="${basedir}/repository"/>
+		<delete dir="${basedir}/releases"/>
+	</target>
+</project>

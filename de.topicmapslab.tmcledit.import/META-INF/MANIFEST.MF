@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TMCL Import
+Bundle-SymbolicName: de.topicmapslab.tmcledit.tmclimport;singleton:=true
+Bundle-Version: 1.1.2.qualifier
+Bundle-Activator: de.topicmapslab.tmcledit.tmclimport.Activator
+Bundle-Vendor: Hannes Niederhausen, Topic Maps Lab
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ de.topicmapslab.tmcledit;bundle-version="1.1.1",
+ de.topicmapslab.tmcledit.edit;bundle-version="1.1.1",
+ org.tmapi;bundle-version="2.0.2",
+ org.eclipse.emf.edit;bundle-version="2.5.0",
+ org.tmapix_0.3;bundle-version="0.3.0",
+ semagia;bundle-version="0.9.5"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
