@@ -86,6 +86,12 @@ public class SetTopicTypeIdentifiersCommandTest {
 	@After
 	public void shutdown() {
 
+		oldList = null;
+		newList = null;
+		oldValue0 = null;
+		oldValue1 = null;
+		newValue0 = null;
+		newValue1 = null;
 		topicType = null;
 		command = null;
 
