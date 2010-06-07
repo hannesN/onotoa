@@ -33,8 +33,6 @@ public class ImportWizardPage extends WizardPage {
 	
 	protected FileFieldEditor sourceEditor;
 	
-	protected FileFieldEditor targetEditor;
-	
 	private String file;
 	
 	private String newFile;
@@ -67,17 +65,6 @@ public class ImportWizardPage extends WizardPage {
 		});
 		String[] extensions = new String[] { "*.ctm;*.xtm" }; //NON-NLS-1
 		sourceEditor.setFileExtensions(extensions);
-		fileSelectionArea.moveAbove(null);
-	
-		targetEditor = new FileFieldEditor("fileSelect","Select Target File: ",fileSelectionArea); //NON-NLS-1 //NON-NLS-2
-		targetEditor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener(){
-			public void modifyText(ModifyEvent e) {
-				IPath path = new Path(ImportWizardPage.this.targetEditor.getStringValue());
-				newFile = path.toOSString();
-			}
-		});
-		extensions = new String[] { "*.ono" }; //NON-NLS-1
-		targetEditor.setFileExtensions(extensions);
 		fileSelectionArea.moveAbove(null);
 	}
 	

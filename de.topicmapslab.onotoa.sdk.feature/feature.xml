@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.topicmapslab.engine_feature"
-      label="Topic Maps Engine"
-      version="1.0.0.qualifier">
+      id="de.topicmapslab.onotoa.sdk.feature"
+      label="Onotoa SDK"
+      version="1.1.2.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -15,19 +15,6 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
-
-   <plugin
-         id="de.topicmapslab.ctmwriter"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.topicmapslab.majortom"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
    <plugin
          id="org.tmapi"
@@ -49,15 +36,16 @@
          version="0.0.0"/>
 
    <plugin
-         id="de.topicmapslab.tmql4j"
+         id="de.topicmapslab.majortom"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="gnu.trove"
+         id="de.topicmapslab.ctmwriter"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

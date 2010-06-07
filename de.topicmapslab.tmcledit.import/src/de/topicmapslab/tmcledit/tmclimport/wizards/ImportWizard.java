@@ -10,15 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.tmclimport.wizards;
 
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.model.File;
-import de.topicmapslab.tmcledit.model.util.io.FileUtil;
-import de.topicmapslab.tmcledit.model.util.OnototaLauncher;
+import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.tmclimport.builder.OnotoaBuilder;
 
 public class ImportWizard extends Wizard implements IImportWizard {
@@ -34,11 +34,19 @@ public class ImportWizard extends Wizard implements IImportWizard {
 		
 		File file = builder.getFile();
 
-		file.setFilename(mainPage.getNewFile());
-		
 		try {
-			FileUtil.saveFile(file, null);
-			new OnototaLauncher().open(new Path(file.getFilename()));
+			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			ModelView mv = (ModelView) activePage.findView(ModelView.ID);
+			if (mv==null) {
+				// TODO look at msg
+				System.out.println("Error, please show a dialog");
+			}
+			
+			mv.setFilename("", true, file);
+			
+			
+			activePage.activate(mv);
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
