@@ -609,6 +609,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public void setFilename(String filename, boolean newFile) {
+		setFilename(filename, newFile, null);
+	}
+	
+	// TODO refactor me PLEEEEAAASSE!!!
+	public void setFilename(String filename, boolean newFile, File newOnotoaFile) {
 		IViewSite viewSite = getViewSite();
 		if (viewSite != null) {
 
@@ -651,7 +656,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					TmcleditEditPlugin.getPlugin().log(e);
 					currFile = null;
 				}
-			} else {
+			} else if (newOnotoaFile!=null){
+				currFile = newOnotoaFile;
+			} else{
 				currFile = ModelFactory.eINSTANCE.createFile();
 				currFile.setTopicMapSchema(ModelFactory.eINSTANCE.createTopicMapSchema());
 				if (filename.length() > 0)

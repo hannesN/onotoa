@@ -96,9 +96,12 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		        writer.setPrefix("iso", "http://psi.topicmaps.org/iso13250/");
 		        
 		        writer.addInclude("http://www.isotopicmaps.org/tmcl/templates.ctm");
+		        // template detection doesn't work :(
 //		        TMCLTemplateDefinitions def = new TMCLTemplateDefinitions(writer, topicMap);
-//		        for (Template t : def.getTemplates())
-//		        	writer.addTemplate(t);
+//		        for (Template tmpl : def.getTemplates()) {
+//		        	tmpl.setSerialize(false);
+//		        	writer.addTemplate(tmpl);
+//		        }
 		        
 		        return writer;
 	        }
