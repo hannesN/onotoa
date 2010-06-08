@@ -4,17 +4,39 @@
       label="Onotoa SDK"
       version="1.1.2.qualifier">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description>
+      This feature contains the third party plugins needed to develope
+Onotoa.
+In detail these are:
+CTMWriter
+MaJorToM
+TMAPI
+TAMPIx including semagia-mio
+TMQL4j
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright>
+      CTMWriter (C) Topic Maps Lab
+MaJorToM (C) Topic Maps Lab
+TMQL4j  (C) Topic Maps Lab
+The libraries TMAPI and TAMPIx are maintained by Lars Heuer the
+Topic Maps community
+Semagia-mio
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license>
+      The license of TMAPI is unknown.
+
+All other libraries are released under the Apache 2 license. See http://www.apache.org/licenses/LICENSE-2.0 for more onformation.
    </license>
+
+   <url>
+      <discovery label="Semagia Mio site" url="http://code.google.com/p/mio/"/>
+      <discovery label="TMAPIX site" url="http://code.google.com/p/tmapix/"/>
+      <discovery label="TMQL4J site" url="http://code.google.com/p/tmql/"/>
+      <discovery label="MaJorToM site" url="http://code.google.com/p/majortom/"/>
+      <discovery label="ctm-writer site" url="http://code.google.com/p/ctm-writer/"/>
+   </url>
 
    <plugin
          id="org.tmapi"
@@ -22,18 +44,6 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.tmapix_0.3"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="semagia"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
    <plugin
          id="de.topicmapslab.majortom"
@@ -47,5 +57,17 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.tmapix_0.4_snapshot"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="de.topicmapslab.tmql4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>

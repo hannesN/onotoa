@@ -29,7 +29,7 @@ public class TypesTest extends AbstractImportTest{
 
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
-		loadTopicMap("resources/typestest.ctm");
+		loadTopicMap("resources/typestest.xtm");
 		
 	}
 	
