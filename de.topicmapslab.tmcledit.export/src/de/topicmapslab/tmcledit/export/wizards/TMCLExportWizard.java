@@ -21,7 +21,8 @@ import org.eclipse.ui.IWorkbench;
 import org.tmapi.core.TopicMap;
 import org.tmapix.io.LTMTopicMapWriter;
 import org.tmapix.io.TopicMapWriter;
-import org.tmapix.io.XTM20TopicMapWriter;
+import org.tmapix.io.XTM2TopicMapWriter;
+import org.tmapix.io.XTM2TopicMapWriter.Version;
 
 import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
@@ -80,7 +81,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		
 	    try {
 	        if ("xtm".equals(suffix)) {
-		        return new XTM20TopicMapWriter(stream, baseLocator);
+		        return new XTM2TopicMapWriter(stream, baseLocator, Version.XTM_20);
 	        }
 	        if ("ltm".equals(suffix)) {
 		        return new LTMTopicMapWriter(stream, baseLocator);

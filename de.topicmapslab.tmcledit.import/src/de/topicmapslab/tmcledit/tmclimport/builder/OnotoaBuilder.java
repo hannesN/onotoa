@@ -36,7 +36,11 @@ import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -118,19 +122,33 @@ IAssociationTypeConstraintsListener, IRoleTypeConstraintsListener{
 	    return topicMap;
     }
 
-	public void subjectIndicatorConstraintElement(Topic arg0, String arg1, String arg2, String arg3) {
-	    // TODO Auto-generated method stub
-	    
+	public void subjectIndicatorConstraintElement(Topic type, String arg1, String arg2, String arg3) {
+	    SubjectIdentifierConstraint sic = modelFactory.createSubjectIdentifierConstraint();
+	    sic.setCardMin(arg1);
+	    sic.setCardMax(arg1);
+	    sic.setRegexp(arg3);
+			    
+	    getTopicType(type).getSubjectIdentifierConstraints().add(sic);
     }
 
 	public void subjectLocatorConstraintElement(Topic arg0, String arg1, String arg2, String arg3) {
-	    // TODO Auto-generated method stub
+		SubjectLocatorConstraint slc = modelFactory.createSubjectLocatorConstraint();
+	    slc.setCardMin(arg1);
+	    slc.setCardMax(arg1);
+	    slc.setRegexp(arg3);
+			    
+	    getTopicType(arg0).getSubjectLocatorConstraints().add(slc);
 	    
     }
 
 	public void aKindOf(Topic arg0, Topic arg1) {
-	    // TODO Auto-generated method stub
-	    
+		try {
+			TopicType tt1 = getTopicType(arg0);
+			TopicType tt2 = getTopicType(arg1);
+			tt1.getAko().add(tt2);
+		    } catch (Exception e) {
+		    	// do nothing cause TMCL types aren't supported
+		    }
     }
 
 	public void isAbstractElement(Topic arg0) {
@@ -139,17 +157,25 @@ IAssociationTypeConstraintsListener, IRoleTypeConstraintsListener{
     }
 
 	public void isInstanceOf(Topic arg0, Topic arg1) {
-	    // TODO Auto-generated method stub
-	    
+	    try {
+		TopicType tt1 = getTopicType(arg0);
+		TopicType tt2 = getTopicType(arg1);
+		tt1.getIsa().add(tt2);
+	    } catch (Exception e) {
+	    	// do nothing cause TMCL types aren't supported
+	    }
     }
 
 	public void overlapDeclarationElement(Topic arg0, Topic arg1) {
-	    // TODO Auto-generated method stub
+		TopicType tt1 = getTopicType(arg0);
+		TopicType tt2 = getTopicType(arg1);
 	    
+
+		tt1.getOverlap().add(tt2);
+		tt2.getOverlap().add(tt1);
     }
 
 	public void subjectIdentifier(Topic arg0, String arg1) {
-	    // TODO Auto-generated method stub
 	    
     }
 
@@ -169,19 +195,31 @@ IAssociationTypeConstraintsListener, IRoleTypeConstraintsListener{
     }
 
 	public void cannotReifierConstraintElement(Topic arg0) {
-	    // TODO Auto-generated method stub
-	    
+		createReifyConstraint(arg0, null, "0", "0");
     }
 
 	public void mayReifierConstraintElement(Topic arg0, Topic arg1) {
-	    // TODO Auto-generated method stub
-	    
+		createReifyConstraint(arg0, arg1, "0", "1");	    
     }
 
 	public void mustReifierConstraintElement(Topic arg0, Topic arg1) {
-	    // TODO Auto-generated method stub
-	    
+		createReifyConstraint(arg0, arg1, "1", "1");
     }
+	
+	private void createReifyConstraint(Topic topic, Topic reifier, String cardMin, String cardMax) {
+		ReifierConstraint rc = modelFactory.createReifierConstraint();
+		rc.setCardMin(cardMin);
+		rc.setCardMax(cardMax);
+		
+		try {
+	        rc.setType(getTopicType(reifier));
+        } catch (Exception e) {
+	        // if unknown type exception ignore
+        }
+        
+        ReifiableTopicType rtt = (ReifiableTopicType) getTopicType(topic);
+        rtt.setReifierConstraint(rc);
+	}
 
 	public void reifierConstraintElement(Topic arg0, Topic arg1, String arg2, String arg3) {
 	    // TODO Auto-generated method stub
@@ -321,7 +359,7 @@ IAssociationTypeConstraintsListener, IRoleTypeConstraintsListener{
         if (tt==null) {
         	throw new RuntimeException("Unknown type!");
         }
-        return null;
+        return tt;
     }
 
 	

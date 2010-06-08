@@ -28,7 +28,7 @@ public class CharacteristicsTest extends AbstractImportTest{
 
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
-		loadTopicMap("resources/characteristicstest.ctm");
+		loadTopicMap("resources/characteristicstest.xtm");
 		
 	}
 	
@@ -57,7 +57,7 @@ public class CharacteristicsTest extends AbstractImportTest{
 				
 				assertEquals(tt.getName()+":", 1, tt.getSubjectIdentifierConstraints().size());
 				
-				
+				assertEquals(tt.getName()+":", 1, tt.getSubjectLocatorConstraints().size());
 				
 			} else {
 				assertTrue(tt.isAbstract());
