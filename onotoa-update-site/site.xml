@@ -3,10 +3,10 @@
    <description name="The Onotoa Update Site" url="file:/home/mai00ckx/projects/onotoa-update-site">
       This is the onotoa update site used to update the onotoa plugins in the Onotoa application or in any other eclipse instance.
    </description>
-   <feature url="features/de.topicmapslab.engine_feature_1.0.0.qualifier.jar" id="de.topicmapslab.engine_feature" version="1.0.0.qualifier">
-      <category name="onotoa"/>
+   <feature url="features/de.topicmapslab.onotoa.sdk.feature_1.1.2.qualifier.jar" id="de.topicmapslab.onotoa.sdk.feature" version="1.1.2.qualifier">
+      <category name="onotoa_sdk"/>
    </feature>
-   <feature url="features/de.topicmapslab.tmcledit.application_feature_1.1.2.qualifier.jar" id="de.topicmapslab.tmcledit.application_feature" version="1.1.2.qualifier">
+   <feature url="features/de.topicmapslab.engine_feature_1.0.0.qualifier.jar" id="de.topicmapslab.engine_feature" version="1.0.0.qualifier">
       <category name="onotoa"/>
    </feature>
    <feature url="features/de.topicmapslab.tmcledit.core_feature_1.1.2.qualifier.jar" id="de.topicmapslab.tmcledit.core_feature" version="1.1.2.qualifier">
@@ -20,9 +20,6 @@
    </feature>
    <feature url="features/de.topicmapslab.tmcledit.import_feature_1.1.2.qualifier.jar" id="de.topicmapslab.tmcledit.import_feature" version="1.1.2.qualifier">
       <category name="onotoa"/>
-   </feature>
-   <feature url="features/de.topicmapslab.onotoa.sdk.feature_1.1.2.qualifier.jar" id="de.topicmapslab.onotoa.sdk.feature" version="1.1.2.qualifier">
-      <category name="onotoa_sdk"/>
    </feature>
    <category-def name="onotoa" label="Onotoa"/>
    <category-def name="onotoa_sdk" label="Onotoa SDK"/>
