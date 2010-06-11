@@ -671,7 +671,7 @@ public class TMCLTopicMapBuilder {
 			t = createTopic(TMDM.SUBJECT);
 		else
 			t = createTopic(tt);
-		ass.createRole(createTopic(ALLOWED), t);
+		ass.createRole(createTopic(CONSTRAINED), t);
 	}
 
 	private void createOverlaps(TopicType type, Topic constraint) {
