@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file id="12" version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema baseLocator="tm:" id="13">
+        <mappingElement id="19" key="tm" value="http://testmap.de/"/>
+        <topicType id="21" kind="TopicType">
+            <name>TestReifier</name>
+            <subjectIdentifier>tm:testreifier</subjectIdentifier>
+            <topicRefies cardMax="1" cardMin="0" id="26">
+                <topictypeRef ref="topictypes.1"/>
+            </topicRefies>
+            <topicRefies cardMax="1" cardMin="1" id="27">
+                <topictypeRef ref="topictypes.2"/>
+            </topicRefies>
+            <topicRefies cardMax="0" cardMin="0" id="32">
+                <topictypeRef ref="topictypes.3"/>
+            </topicRefies>
+        </topicType>
+        <topicType id="23" kind="NameType" regExp=".*">
+            <name>ReifiedName</name>
+            <subjectIdentifier>tm:reifiedname</subjectIdentifier>
+        </topicType>
+        <topicType datatype="xsd:anyType" id="25" kind="OccurrenceType" regExp=".*">
+            <name>ReifiedOccurrence</name>
+            <subjectIdentifier>tm:reifiedoccurrence</subjectIdentifier>
+        </topicType>
+        <topicType id="31" kind="AssociationType">
+            <name>NotReifiedAssoc</name>
+            <subjectIdentifier>tm:notreifiedassoc</subjectIdentifier>
+        </topicType>
+    </schema>
+    <diagram id="14" name="Test">
+        <node id="20" posX="418" posY="80" type="typeNode">
+            <topictypeRef ref="topictypes.0"/>
+        </node>
+        <node id="22" posX="218" posY="247" type="typeNode">
+            <topictypeRef ref="topictypes.1"/>
+        </node>
+        <node id="24" posX="655" posY="222" type="typeNode">
+            <topictypeRef ref="topictypes.2"/>
+        </node>
+        <node id="30" posX="422" posY="254" type="typeNode">
+            <topictypeRef ref="topictypes.3"/>
+        </node>
+    </diagram>
+</file>

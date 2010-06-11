@@ -3,8 +3,7 @@
  */
 package de.topicmapslab.de.tmcledit.tests;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
@@ -15,136 +14,98 @@ import org.junit.Test;
 import org.tmapi.core.TMAPIException;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
-import de.topicmapslab.tmcledit.model.NameType;
-import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurrenceType;
-import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.ReifierConstraint;
-import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
-import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
-
-/**
- * @author Hannes Niederhausen
- *
- */
-public class ReifierTest extends AbstractImportTest{
+public class ReifierTest extends AbstractImportTest {
 
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/reifier.xtm");
-		
+
 	}
-	
+
 	@Test
 	public void countType() {
-		assertEquals(7, getFile().getTopicMapSchema().getTopicTypes().size());
+		assertEquals(4, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
-	
+
 	@Test
 	public void checkTopicType() {
-		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.TOPIC_TYPE);
-		assertEquals(3, ttList.size());
-		
-		for (TopicType tt : ttList) {
-			assertNotNull(tt.getName());
-			if ("TestReifier".equals(tt.getName())) {
-				
-				assertFalse(tt.isAbstract());
-				
-				assertEquals(1, tt.getIdentifiers().size());
-				assertEquals("http://testmap.de/testreifier", tt.getIdentifiers().get(0));
-				
-			} else if ("Test1".equals(tt.getName())) {
-				assertFalse(tt.isAbstract());
-				assertEquals(1, tt.getIdentifiers().size());
-				assertEquals("http://testmap.de/test1", tt.getIdentifiers().get(0));
-				
-				assertEquals(1, tt.getNameConstraints().size());
-				
-				NameTypeConstraint ntc = tt.getNameConstraints().get(0);
-				assertEquals("1", ntc.getCardMin());
-				assertEquals("1", ntc.getCardMax());
-				
-				NameType nt = (NameType) ntc.getType();
-				assertEquals("testNameMustReify", nt.getName());
-				assertEquals("http://testmap.de/testnamemustreify", nt.getIdentifiers().get(0));
-				assertEquals(".*", nt.getRegExp());
-				
-				assertNotNull(nt.getReifierConstraint());
-				
-				ReifierConstraint rf = nt.getReifierConstraint();
-				assertEquals("1", rf.getCardMin());
-				assertEquals("1", rf.getCardMax());
-				assertEquals("TestReifier", rf.getType().getName());
-				
-				
-				
-				assertEquals(1, tt.getOccurrenceConstraints());
-				OccurrenceTypeConstraint otc = tt.getOccurrenceConstraints().get(0);
-				assertEquals("0", otc.getCardMin());
-				assertEquals("*", otc.getCardMax());
-				
-				OccurrenceType ot = (OccurrenceType) otc.getType();
-				assertEquals("xsd:anyType", ot.getDataType());
-				assertNotNull(ot.getReifierConstraint());
-				rf = ot.getReifierConstraint();
-				assertEquals("0", rf.getCardMin());
-				assertEquals("1", rf.getCardMax());
-				assertEquals("TestReifier", rf.getType().getName());
-				
-				assertEquals(1, tt.getSubjectIdentifierConstraints().size());
-				SubjectIdentifierConstraint sic = tt.getSubjectIdentifierConstraints().get(0);
-				assertEquals("1", sic.getCardMin());
-				assertEquals("7", sic.getCardMax());
-				assertEquals("http://psi\\..*", sic.getRegexp());
-				
-			} else if ("Test2".equals(tt.getName())) {
-				assertFalse(tt.isAbstract());
-				assertEquals(1, tt.getIdentifiers().size());
-				assertEquals("http://testmap.de/test2", tt.getIdentifiers().get(0));
-				
-				assertEquals(1, tt.getNameConstraints().size());
-				
-				NameTypeConstraint ntc = tt.getNameConstraints().get(0);
-				assertEquals("1", ntc.getCardMin());
-				assertEquals("5", ntc.getCardMax());
-				
-				NameType nt = (NameType) ntc.getType();
-				assertEquals("TestnameCannotReify", nt.getName());
-				assertEquals("http://testmap.de/testnamecannotreify", nt.getIdentifiers().get(0));
-				assertEquals(".*", nt.getRegExp());
-				
-				assertNotNull(nt.getReifierConstraint());
-				
-				ReifierConstraint rf = nt.getReifierConstraint();
-				assertEquals("1", rf.getCardMin());
-				assertEquals("1", rf.getCardMax());
-				assertNull(rf.getType().getName());
-				
-				assertEquals(1, tt.getOccurrenceConstraints());
-				OccurrenceTypeConstraint otc = tt.getOccurrenceConstraints().get(0);
-				assertEquals("0", otc.getCardMin());
-				assertEquals("*", otc.getCardMax());
-				
-				OccurrenceType ot = (OccurrenceType) otc.getType();
-				assertEquals("xsd:negativeInteger", ot.getDataType());
-				assertNotNull(ot.getReifierConstraint());
-				rf = ot.getReifierConstraint();
-				assertEquals("0", rf.getCardMin());
-				assertEquals("0", rf.getCardMax());
-				assertNull(rf.getType().getName());
-				
-				assertEquals(1, tt.getSubjectIdentifierConstraints().size());
-				SubjectLocatorConstraint sic = tt.getSubjectLocatorConstraints().get(0);
-				assertEquals("0", sic.getCardMin());
-				assertEquals("*", sic.getCardMax());
-				assertEquals(".*", sic.getRegexp());
-				
-			} 
+		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(
+				KindOfTopicType.TOPIC_TYPE);
+		assertEquals(1, ttList.size());
+
+		TopicType tt = ttList.get(0);
+		assertEquals("TestReifier", tt.getName());
+		assertEquals(1, tt.getIdentifiers().size());
+		assertEquals("http://testmap.de/testreifier", tt.getIdentifiers()
+				.get(0));
+		assertEquals(3, tt.getTopicReifiesConstraints().size());
+	}
+
+	@Test
+	public void checkAssocReifierConstraint() {
+		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(
+				KindOfTopicType.TOPIC_TYPE);
+		assertEquals(1, ttList.size());
+
+		TopicType tt = ttList.get(0);
+		assertEquals("TestReifier", tt.getName());
+		assertEquals(3, tt.getTopicReifiesConstraints().size());
+		for (TopicReifiesConstraint trc : tt.getTopicReifiesConstraints()) {
+			assertNotNull(trc.getType());
+			if (trc.getType().getKind() == KindOfTopicType.ASSOCIATION_TYPE)
+				checkType(trc, "NotReifiedAssoc", 0, 0);
 		}
-		
+
+	}
+
+	@Test
+	public void checkNameReifierConstraint() {
+		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(
+				KindOfTopicType.TOPIC_TYPE);
+		assertEquals(1, ttList.size());
+
+		TopicType tt = ttList.get(0);
+		assertEquals("TestReifier", tt.getName());
+		assertEquals(3, tt.getTopicReifiesConstraints().size());
+		for (TopicReifiesConstraint trc : tt.getTopicReifiesConstraints()) {
+			assertNotNull(trc.getType());
+			if (trc.getType().getKind() == KindOfTopicType.NAME_TYPE)
+				checkType(trc, "ReifiedName", 0, 1);
+		}
+
+	}
+
+	@Test
+	public void checkOccurrenceReifierConstraint() {
+		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(
+				KindOfTopicType.TOPIC_TYPE);
+		assertEquals(1, ttList.size());
+
+		TopicType tt = ttList.get(0);
+		assertEquals("TestReifier", tt.getName());
+		assertEquals(3, tt.getTopicReifiesConstraints().size());
+		for (TopicReifiesConstraint trc : tt.getTopicReifiesConstraints()) {
+			assertNotNull(trc.getType());
+			if (trc.getType().getKind() == KindOfTopicType.OCCURRENCE_TYPE)
+				checkType(trc, "ReifiedOccurrence", 1, 1);
+		}
+
+	}
+
+	private void checkType(TopicReifiesConstraint trc, String name,
+			int cardMin, int cardMax) {
+		TopicType tt = trc.getType();
+		assertEquals(name, tt.getName());
+		assertEquals(1, tt.getIdentifiers());
+		assertEquals("http://testmap.de/" + name.toLowerCase(), tt
+				.getIdentifiers().get(0));
+
+		assertEquals(Integer.toString(cardMin), trc.getCardMin());
+		assertEquals(Integer.toString(cardMax), trc.getCardMax());
+
 	}
 }
