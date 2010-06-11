@@ -13,12 +13,14 @@ MaJorToM
 TMAPI
 TAMPIx including semagia-mio
 TMQL4j
+Kuria
    </description>
 
    <copyright>
       CTMWriter (C) Topic Maps Lab
 MaJorToM (C) Topic Maps Lab
 TMQL4j  (C) Topic Maps Lab
+Kuria  (C) Topic Maps Lab
 The libraries TMAPI and TAMPIx are maintained by Lars Heuer the
 Topic Maps community
 Semagia-mio
@@ -36,6 +38,7 @@ All other libraries are released under the Apache 2 license. See http://www.apac
       <discovery label="TMQL4J site" url="http://code.google.com/p/tmql/"/>
       <discovery label="MaJorToM site" url="http://code.google.com/p/majortom/"/>
       <discovery label="ctm-writer site" url="http://code.google.com/p/ctm-writer/"/>
+      <discovery label="Kuria site" url="http://code.google.com/p/kuria/"/>
    </url>
 
    <plugin
@@ -66,6 +69,12 @@ All other libraries are released under the Apache 2 license. See http://www.apac
 
    <plugin
          id="de.topicmapslab.tmql4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="de.topicmapslab.kuria"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
