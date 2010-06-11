@@ -76,11 +76,11 @@ public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 		org.eclipse.draw2d.geometry.Point p = request.getLocation().getCopy();
 
 		ZoomManager manager = (ZoomManager) getHost().getViewer().getProperty(ZoomManager.class.toString());
-	//	manager.getViewport().translateToAbsolute(request.getLocation().getCopy());
 		
 		Viewport viewport = manager.getViewport();
 		p.translate(viewport.getViewLocation());
-		
+		p.scale(1/manager.getZoom());
+
 		Point p2 = new Point(p.x, p.y);
 		if ( (request.getNewObjectType()==TypeNode.class) ||
 			 (request.getNewObjectType()==AssociationNode.class) ){
