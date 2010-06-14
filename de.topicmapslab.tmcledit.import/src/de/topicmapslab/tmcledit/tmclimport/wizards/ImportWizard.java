@@ -19,6 +19,7 @@ import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.tmclimport.Activator;
 import de.topicmapslab.tmcledit.tmclimport.builder.OnotoaBuilder;
 
 public class ImportWizard extends Wizard implements IImportWizard {
@@ -34,6 +35,8 @@ public class ImportWizard extends Wizard implements IImportWizard {
 		
 		File file = builder.getFile();
 
+		Activator.getDefault().getPreferenceStore().putValue("last_imported_file", builder.getFile().getFilename());
+		
 		try {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			ModelView mv = (ModelView) activePage.findView(ModelView.ID);
