@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -28,25 +29,25 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import de.topicmapslab.tmcledit.tmclimport.Activator;
 
 public class ImportWizardPage extends WizardPage {
-	
+
 	protected FileFieldEditor sourceEditor;
-	
+
 	private String file;
-	
+
 	private String newFile;
 
 	public ImportWizardPage(String pageName, IStructuredSelection selection) {
 		super(pageName);
-		setTitle(pageName); //NON-NLS-1
-		setDescription("Import a TMCL schema"); //NON-NLS-1
+		setTitle(pageName); // NON-NLS-1
+		setDescription("Import a TMCL schema"); // NON-NLS-1
 	}
 
 	protected void createAdvancedControls(Composite parent) {
 		Composite fileSelectionArea = new Composite(parent, SWT.NONE);
-		GridData fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL
-				| GridData.FILL_HORIZONTAL);
+		GridData fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL | GridData.FILL_HORIZONTAL);
 		fileSelectionArea.setLayoutData(fileSelectionData);
 
 		GridLayout fileSelectionLayout = new GridLayout();
@@ -55,19 +56,28 @@ public class ImportWizardPage extends WizardPage {
 		fileSelectionLayout.marginWidth = 0;
 		fileSelectionLayout.marginHeight = 0;
 		fileSelectionArea.setLayout(fileSelectionLayout);
+
+
+
+		sourceEditor = new FileFieldEditor("fileSelect", "Select Source File: ", fileSelectionArea);
+		sourceEditor.setPreferenceName("lastfile");
 		
-		sourceEditor = new FileFieldEditor("fileSelect","Select Source File: ",fileSelectionArea); //NON-NLS-1 //NON-NLS-2
-		sourceEditor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener(){
+		sourceEditor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				IPath path = new Path(ImportWizardPage.this.sourceEditor.getStringValue());
 				file = path.toOSString();
 			}
 		});
-		String[] extensions = new String[] { "*.ctm;*.xtm" }; //NON-NLS-1
+		String[] extensions = new String[] { "*.ctm;*.xtm" }; // NON-NLS-1
 		sourceEditor.setFileExtensions(extensions);
+		
+		String file = Activator.getDefault().getPreferenceStore().getString("last_imported_file");
+		if (file!=null)
+			sourceEditor.setStringValue(file);
+		
 		fileSelectionArea.moveAbove(null);
 	}
-	
+
 	protected void createLinkTarget() {
 	}
 
@@ -78,31 +88,35 @@ public class ImportWizardPage extends WizardPage {
 			return null;
 		}
 	}
-
+	
 	public String getFile() {
 		return file;
 	}
-	
+
 	public String getNewFile() {
 		return newFile;
 	}
-	
+
 	protected String getNewFileLabel() {
-		return "New File Name:"; //NON-NLS-1
+		return "New File Name:"; // NON-NLS-1
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.dialogs.WizardNewFileCreationPage#validateLinkedResource()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.dialogs.WizardNewFileCreationPage#validateLinkedResource()
 	 */
 	protected IStatus validateLinkedResource() {
-		return new Status(IStatus.OK, "de.topicmapslab.tmcledit.tmclimport", IStatus.OK, "", null); //NON-NLS-1 //NON-NLS-2
+		return new Status(IStatus.OK, "de.topicmapslab.tmcledit.tmclimport", IStatus.OK, "", null); // NON-NLS-1
+																									// //NON-NLS-2
 	}
 
 	public void createControl(Composite parent) {
 		Composite comp = new Composite(parent, SWT.None);
 		comp.setLayout(new GridLayout());
 		createAdvancedControls(comp);
-	
+
 		setControl(comp);
 	}
 }

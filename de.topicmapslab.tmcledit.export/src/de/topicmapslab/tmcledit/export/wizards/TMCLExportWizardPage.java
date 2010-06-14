@@ -10,7 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.wizards;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -43,6 +43,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+
+import de.topicmapslab.tmcledit.export.Activator;
+
 
 /**
  * @author niederhausen
@@ -200,7 +203,16 @@ public class TMCLExportWizardPage extends WizardPage {
 	    			
 	    		String[] fileExtensions = suffixes.toArray(new String[suffixes.size()]);
 				dlg.setFilterExtensions(fileExtensions);
-				String file = dlg.open();
+				
+				String file = Activator.getDefault().getPreferenceStore().getString("exported_file");
+				if (file!=null) {
+//					dlg.setFileName(file);
+					dlg.setFilterPath(file.substring(0, file.lastIndexOf("/")));
+					
+				}
+					
+				
+				file = dlg.open();
 				if (file!=null) {
 					file = updateType(file);
 					fileName.setText(file);

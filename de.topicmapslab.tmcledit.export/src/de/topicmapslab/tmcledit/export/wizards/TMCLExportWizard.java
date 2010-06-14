@@ -25,6 +25,7 @@ import org.tmapix.io.XTM2TopicMapWriter;
 import org.tmapix.io.XTM2TopicMapWriter.Version;
 
 import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
+import de.topicmapslab.tmcledit.export.Activator;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -68,6 +69,8 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 			stream.flush();
 			stream.close();
 
+			
+			Activator.getDefault().getPreferenceStore().putValue("exported_file", page.getFileName());
 		} catch (Exception e) {
 			MessageDialog.openError(getShell(), "Export Error!", "An error occurred while exporting: "+e.getMessage());
 			throw new RuntimeException(e);
