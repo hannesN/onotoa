@@ -125,6 +125,7 @@ import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.actions.ValidateAction;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.preferences.PreferenceConstants;
+import de.topicmapslab.tmcledit.model.preferences.RecentUsedManager;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.util.io.FileUtil;
 import de.topicmapslab.tmcledit.model.validation.ModelValidator;
@@ -610,6 +611,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	public void setFilename(String filename, boolean newFile) {
 		setFilename(filename, newFile, null);
+		if (filename!=null&&filename.length()>0)
+			RecentUsedManager.addFile(filename);
 	}
 	
 	// TODO refactor me PLEEEEAAASSE!!!
@@ -852,6 +855,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				result += ".ono";
 			currFile.setFilename(result);
 			updateTitle(currFile.getFilename());
+			RecentUsedManager.addFile(currFile.getFilename());
 			doSave(new NullProgressMonitor());
 
 		}

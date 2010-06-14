@@ -212,6 +212,9 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		menuX.add(new Separator());
 		menuX.add(getAction(ActionFactory.QUIT.getId()));
 
+		menuX.add(new Separator());
+		menuX.add(new GroupMarker("recent"));
+		
 		menuX.add(new GroupMarker(IWorkbenchActionConstants.FILE_END));
 		menu.add(menuX);
 	}
