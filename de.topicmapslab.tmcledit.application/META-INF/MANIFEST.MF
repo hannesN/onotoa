@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.common.ui,
  org.eclipse.emf.edit.ui,
- de.topicmapslab.tmcledit.edit
+ de.topicmapslab.tmcledit.edit,
+ org.eclipse.core.expressions;bundle-version="3.4.200"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.topicmapslab.tmcledit.application
