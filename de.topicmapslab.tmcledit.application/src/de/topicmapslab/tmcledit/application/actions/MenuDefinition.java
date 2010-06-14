@@ -10,25 +10,14 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application.actions;
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.ActionContributionItem;
-import org.eclipse.jface.action.ContributionItem;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
 import org.eclipse.ui.services.IServiceLocator;
 
-import de.topicmapslab.tmcledit.application.DiagramEditorActionBarAdvisor;
-import de.topicmapslab.tmcledit.application.DiagramEditorWorkbenchAdvisor;
-import de.topicmapslab.tmcledit.application.DiagramEditorWorkbenchWindowAdvisor;
-import de.topicmapslab.tmcledit.model.preferences.RecentUsedManager;
-
 /**
- * @author niederhausen
+ * Defineition which contributes the recentused contribution item
+ * 
+ * @author Hannes Niederhausen
  *
  */
 public class MenuDefinition extends ExtensionContributionFactory {
@@ -37,12 +26,8 @@ public class MenuDefinition extends ExtensionContributionFactory {
 	 * 
 	 */
 	public MenuDefinition() {
-		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.menus.AbstractContributionFactory#createContributionItems(org.eclipse.ui.services.IServiceLocator, org.eclipse.ui.menus.IContributionRoot)
-	 */
 	@Override
 	public void createContributionItems(IServiceLocator serviceLocator,
 			IContributionRoot additions) {

@@ -1,7 +1,5 @@
 package de.topicmapslab.tmcledit.model.preferences;
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.E_FILE;
-
 import java.io.ByteArrayInputStream;
 import java.io.StringWriter;
 import java.util.List;
