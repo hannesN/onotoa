@@ -3,11 +3,12 @@
  */
 package de.topicmapslab.de.tmcledit.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.tmapi.core.TMAPIException;
@@ -30,7 +31,6 @@ public class TypesTest extends AbstractImportTest{
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/typestest.xtm");
-		
 	}
 	
 	@Test

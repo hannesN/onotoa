@@ -6,6 +6,7 @@ package de.topicmapslab.de.tmcledit.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,9 +46,10 @@ public class AkoIsaTest extends AbstractImportTest{
 			assertNotNull(tt.getName());
 			if ("AbstractTest1".equals(tt.getName())) {
 				
-				assertFalse(tt.isAbstract());
+				assertTrue(tt.isAbstract());
 				
 				assertEquals(1, tt.getIdentifiers().size());
+				assertEquals(0, tt.getIsa().size());
 				assertEquals("http://testmap.de/abstracttest1", tt.getIdentifiers().get(0));
 				
 			} else if ("Test1".equals(tt.getName())) {
@@ -56,6 +58,7 @@ public class AkoIsaTest extends AbstractImportTest{
 				assertEquals("http://testmap.de/test1", tt.getIdentifiers().get(0));
 				
 				assertEquals(1, tt.getAko().size());
+				assertEquals(0, tt.getIsa().size());
 				assertEquals("AbstractTest1", tt.getAko().get(0).getName());
 			} else if ("Instance".equals(tt.getName())) {
 				assertFalse(tt.isAbstract());
@@ -63,7 +66,7 @@ public class AkoIsaTest extends AbstractImportTest{
 				assertEquals("http://testmap.de/instance", tt.getIdentifiers().get(0));
 				
 				assertEquals(1, tt.getIsa().size());
-				assertEquals("Test1", tt.getAko().get(0).getName());
+				assertEquals("Test1", tt.getIsa().get(0).getName());
 			}
 		}
 		

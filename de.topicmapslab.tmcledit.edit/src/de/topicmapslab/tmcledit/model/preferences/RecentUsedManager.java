@@ -65,7 +65,7 @@ public class RecentUsedManager {
 		list.add(0, file);
 		
 		if (list.size()>5)
-			list.remove(6);
+			list.remove(5);
 		
 		persistList();
 	}

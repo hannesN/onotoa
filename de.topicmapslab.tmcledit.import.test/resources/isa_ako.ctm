@@ -17,37 +17,37 @@
 
 
 # topic definitions
-tmcl:constrained-topic-type  .
-
-^<http://testmap.de//e7e63272-11af-450c-8367-14a0c4221571>  
-	 isa tmcl:abstract-constraint.
-
 tm:test1  
 	 isa tmcl:topic-type;
 	 ako tm:abstracttest1;
 	 -  <http://psi.topicmaps.org/iso13250/model/topic-name> : "Test1".
 
-tmcl:abstract-constraint  .
-
-tmcl:topic-type  .
-
-tmcl:constrained  .
-
-tm:instance  
-	 isa tm:test1;
-	 isa tmcl:topic-type;
-	 isa tm:abstracttest1;
-	 -  <http://psi.topicmaps.org/iso13250/model/topic-name> : "Instance".
-
-tmcl:constraint  .
+^<http://testmap.de//27ae2008-6f69-46ca-bf1b-d3f0922f21d7>  
+	 isa tmcl:abstract-constraint.
 
 tm:abstracttest1  
 	 isa tmcl:topic-type;
 	 -  <http://psi.topicmaps.org/iso13250/model/topic-name> : "AbstractTest1".
 
+tmcl:topic-type  .
+
+tmcl:constraint  .
+
+tmcl:abstract-constraint  .
+
+tmcl:constrained  .
+
+tmcl:constrained-topic-type  .
+
+tm:instance  
+	 isa tm:abstracttest1;
+	 isa tmcl:topic-type;
+	 isa tm:test1;
+	 -  <http://psi.topicmaps.org/iso13250/model/topic-name> : "Instance".
+
 # association definitions
 tmcl:constrained-topic-type (
-	 tmcl:constraint : ^<http://testmap.de//e7e63272-11af-450c-8367-14a0c4221571>,
+	 tmcl:constraint : ^<http://testmap.de//27ae2008-6f69-46ca-bf1b-d3f0922f21d7>,
 	 tmcl:constrained : tm:abstracttest1
 )
 
