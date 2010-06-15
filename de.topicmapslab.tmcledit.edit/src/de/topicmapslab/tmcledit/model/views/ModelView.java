@@ -754,7 +754,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return actionRegistry;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == ActionRegistry.class)
@@ -849,6 +848,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public void doSaveAs() {
 		FileDialog dlg = new FileDialog(getSite().getShell(), SWT.SAVE);
 		dlg.setText("Save As..");
+		List<String> filesList = RecentUsedManager.getFilesList();
+		if (!filesList.isEmpty()) {
+			String file = filesList.get(0);
+			dlg.setFilterPath(file.substring(0, file.lastIndexOf("/")));
+		}
 		String result = dlg.open();
 		if (result != null) {
 			if ((!result.endsWith(".ono")) && (!result.endsWith(".tmcl")))
