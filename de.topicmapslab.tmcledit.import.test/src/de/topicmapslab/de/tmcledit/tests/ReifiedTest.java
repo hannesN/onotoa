@@ -74,7 +74,7 @@ public class ReifiedTest extends AbstractImportTest{
 				assertEquals("http://testmap.de/testnamemustreify", nt.getIdentifiers().get(0));
 				assertEquals(".*", nt.getRegExp());
 				
-				assertNotNull(nt.getReifierConstraint());
+				assertNotNull("Check if reifier constraint exists", nt.getReifierConstraint());
 				
 				ReifierConstraint rf = nt.getReifierConstraint();
 				assertEquals("1", rf.getCardMin());
@@ -117,7 +117,7 @@ public class ReifiedTest extends AbstractImportTest{
 				assertEquals("http://testmap.de/testnamecannotreify", nt.getIdentifiers().get(0));
 				assertEquals(".*", nt.getRegExp());
 				
-				assertNotNull(nt.getReifierConstraint());
+				assertNotNull("Check if reifier constraint exists", nt.getReifierConstraint());
 				
 				ReifierConstraint rf = nt.getReifierConstraint();
 				assertEquals("0", rf.getCardMin());

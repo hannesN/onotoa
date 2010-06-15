@@ -29,16 +29,16 @@
         </topicType>
     </schema>
     <diagram id="14" name="Test">
-        <node id="20" posX="418" posY="80" type="typeNode">
+        <node id="20" posX="321" posY="64" type="typeNode">
             <topictypeRef ref="topictypes.0"/>
         </node>
-        <node id="22" posX="218" posY="247" type="typeNode">
+        <node id="22" posX="72" posY="115" type="typeNode">
             <topictypeRef ref="topictypes.1"/>
         </node>
         <node id="24" posX="655" posY="222" type="typeNode">
             <topictypeRef ref="topictypes.2"/>
         </node>
-        <node id="30" posX="422" posY="254" type="typeNode">
+        <node id="30" posX="477" posY="55" type="typeNode">
             <topictypeRef ref="topictypes.3"/>
         </node>
     </diagram>

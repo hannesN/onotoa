@@ -17,9 +17,9 @@ import org.tmapix.io.CTMTopicMapReader;
 import org.tmapix.io.XTM10TopicMapReader;
 import org.tmapix.io.XTM20TopicMapReader;
 
-import de.topicmapslab.engine.core.TopicMapSystemFactoryImpl;
-import de.topicmapslab.engine.inMemory.store.InMemoryTopicMapStore;
-import de.topicmapslab.engine.store.TopicMapStoreProperty;
+import de.topicmapslab.majortom.core.TopicMapSystemFactoryImpl;
+import de.topicmapslab.majortom.inMemory.store.InMemoryTopicMapStore;
+import de.topicmapslab.majortom.store.TopicMapStoreProperty;
 import de.topicmapslab.tmcl.loader.listener.IAssociationTypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.INameTypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.IOccurrenceTypeConstraintsListener;
@@ -28,7 +28,10 @@ import de.topicmapslab.tmcl.loader.listener.ITopicTypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.ITypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.ITypesListener;
 import de.topicmapslab.tmcl.loader.reader.ConstraintReader;
+import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
+import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameType;
@@ -37,6 +40,9 @@ import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.ReifiableTopicType;
 import de.topicmapslab.tmcledit.model.ReifierConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.ScopedTopicType;
@@ -44,6 +50,7 @@ import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
@@ -80,6 +87,9 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		file = modelFactory.createFile();
 		file.setTopicMapSchema(modelFactory.createTopicMapSchema());
 
+		ModelIndexer.createInstance(file);
+		
+		
 		TopicMapSystemFactoryImpl topicMapSystemFactory = new TopicMapSystemFactoryImpl();
 		// TODO remove with new default store impl
 		if (topicMapSystemFactory instanceof TopicMapSystemFactoryImpl) {
@@ -172,13 +182,15 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 	}
 
 	public void subjectIdentifier(Topic arg0, String arg1) {
-		
+		// done in fill data
 	}
 
 	public void subjectLocator(Topic arg0, String arg1) {
+		// done in fill data
 	}
 
 	public void typeName(Topic arg0, String arg1) {
+		// done in fill data
 	}
 
 	public void scopeConstraintElement(Topic type, Topic scopeType, String cardMin, String cardMax) {
@@ -213,18 +225,51 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 	}
 
 	public void regularExpressionConstraintElement(Topic arg0, String arg1) {
-		// TODO Auto-generated method stub
+		TopicType tt = getTopicType(arg0);
+		if (tt instanceof AbstractRegExpTopicType) {
+			((AbstractRegExpTopicType) tt).setRegExp(arg1);
+		}
 
 	}
 
-	public void associationRoleConstraintElement(Topic arg0, Topic arg1, String arg2, String arg3) {
-		// TODO Auto-generated method stub
-
+	public void associationRoleConstraintElement(Topic type, Topic roleType, String cardMin, String cardMax) {
+		try {
+			AssociationType at = (AssociationType) getTopicType(type);
+			TopicType rt = getTopicType(roleType);
+			
+			RoleConstraint rc = modelFactory.createRoleConstraint();
+			rc.setCardMin(cardMin);
+			rc.setCardMax(cardMax);
+			rc.setType(rt);
+			at.getRoles().add(rc);
+		} catch (Exception e) {
+			
+		}
+	    
 	}
 
-	public void roleCombinationConstraintElement(Topic arg0, Topic arg1, Topic arg2, Topic arg3, Topic arg4) {
-		// TODO Auto-generated method stub
-
+	public void roleCombinationConstraintElement(Topic type, Topic roleType, Topic playerType, Topic otherRoleType,
+	        Topic otherPlayerType) {
+		try {
+			AssociationType at = (AssociationType) getTopicType(type);
+			
+			TopicType rt = getTopicType(roleType);
+			TopicType pt = getTopicType(playerType);
+			
+			TopicType ort = getTopicType(otherRoleType);
+			TopicType opt = getTopicType(otherPlayerType);
+			
+			RoleCombinationConstraint rcc = modelFactory.createRoleCombinationConstraint();
+			rcc.setPlayer(pt);
+			rcc.setRole(rt);
+			rcc.setOtherPlayer(opt);
+			rcc.setOtherRole(ort);
+			
+			at.getRoleCombinations().add(rcc);
+			
+		} catch (Exception e) {
+			
+		}
 	}
 
 	public void occurrenceDatatypeConstraintElement(Topic arg0, String arg1) {
@@ -245,8 +290,9 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 	}
 
 	public void uniqueValueConstraintElement(Topic arg0) {
-		// TODO Auto-generated method stub
-
+		TopicType tt = getTopicType(arg0);
+		if (tt instanceof AbstractUniqueValueTopicType)
+			((AbstractUniqueValueTopicType) tt).setUnique(true);
 	}
 
 	public void topicNameConstraintElement(Topic arg0, Topic arg1, String arg2, String arg3) {
@@ -286,9 +332,28 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		}
 	}
 
-	public void topicRoleConstraintElement(Topic type, Topic roleType, Topic associationType, String cardMin,
+	public void topicRoleConstraintElement(Topic type, Topic associationType, Topic roleType, String cardMin,
 	        String cardMax) {
-		// TODO Auto-generated method stub
+		try {
+			AssociationType at =  (AssociationType) getTopicType(associationType);
+			TopicType rt = getTopicType(roleType);
+			TopicType player = getTopicType(type);
+			
+			
+			AssociationTypeConstraint atc = findAssociationConstraint(at);
+			
+			
+			RolePlayerConstraint rpc = modelFactory.createRolePlayerConstraint();
+			rpc.setPlayer(player);
+			rpc.setRole(findRoleConstraint(at, rt));
+			rpc.setCardMin(cardMin);
+			rpc.setCardMax(cardMax);
+
+			atc.getPlayerConstraints().add(rpc);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 
 	}
 
@@ -331,6 +396,29 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		fillData(tt, arg0);
 	}
 
+	private AssociationTypeConstraint findAssociationConstraint(AssociationType at) {
+		for (AssociationTypeConstraint atc : file.getTopicMapSchema().getAssociationTypeConstraints()) {
+			if (at.equals(atc.getType()))
+				return atc;
+		}
+
+		AssociationTypeConstraint atc = modelFactory.createAssociationTypeConstraint();
+		atc.setType(at);
+		file.getTopicMapSchema().getAssociationTypeConstraints().add(atc);
+
+		return atc;
+	}
+
+	private RoleConstraint findRoleConstraint(AssociationType at, TopicType rt) {
+        RoleConstraint roleConstraint = null;
+        
+        for (RoleConstraint rc : at.getRoles()) {
+        	if (rc.getType().equals(rt))
+        		roleConstraint = rc;
+        }
+        return roleConstraint;
+    }
+
 	private void fillData(TopicType tt, Topic arg0) {
 		if (arg0.getNames().size() == 0)
 			throw new RuntimeException("Invalid topic - no name given");
@@ -341,12 +429,18 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		for (Locator loc : arg0.getSubjectIdentifiers()) {
 			tt.getIdentifiers().add(loc.toExternalForm());
 		}
+		
+		for (Locator loc : arg0.getSubjectLocators()) {
+			tt.getLocators().add(loc.toExternalForm());
+		}
 
 		topicTypeMap.put(arg0, tt);
 		file.getTopicMapSchema().getTopicTypes().add(tt);
 	}
 
 	private TopicType getTopicType(Topic arg0) {
+		if (arg0==null)
+			throw new NullPointerException("Argument is null");
 		TopicType tt = topicTypeMap.get(arg0);
 		if (tt == null) {
 			throw new RuntimeException("Unknown type!");
