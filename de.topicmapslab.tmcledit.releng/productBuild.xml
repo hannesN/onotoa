@@ -10,48 +10,80 @@
  -->
 <project name="Build a Product" default="main">
 
-<!-- ===================================================================== -->
-<!-- Global properties.  See the build.properties for information on -->
-<!-- the properties which callers can control. -->
-<!-- ===================================================================== -->
-<property name="allElementsFile" value="${eclipse.pdebuild.scripts}/productBuild/allElements.xml"/>
-<import file="${eclipse.pdebuild.scripts}/build.xml"/>
-<property name="pluginPath" value=""/>
-<property name="pluginList" value=""/>
-<property name="featureList" value=""/>
-<property name="includeLaunchers" value="true"/>
-<property name="generatedBuildProperties" value=""/>
+	<!-- ===================================================================== -->
+	<!-- Global properties.  See the build.properties for information on -->
+	<!-- the properties which callers can control. -->
+	<!-- ===================================================================== -->
+	<property name="allElementsFile" value="${eclipse.pdebuild.scripts}/productBuild/allElements.xml"/>
+	<import file="${eclipse.pdebuild.scripts}/build.xml"/>
+	<property file="build.properties"/>
+	<property name="pluginPath" value=""/>
+	<property name="pluginList" value=""/>
+	<property name="featureList" value=""/>
+	<property name="includeLaunchers" value="true"/>
+	<property name="generatedBuildProperties" value="" />
 
-<!-- ===================================================================== -->
-<!-- main entry point to setup, fetch, generate, build etc. Use -->
-<!-- the customTargets.xml to modify the build behaviour. -->
-<!-- ===================================================================== -->
-<target name="main" description="the main build target">	
-	<antcall target="preBuild" />
-	<antcall target="processRepos"/>
-	<antcall target="generateFeature"> <!-- Generate the feature to drive the fetch -->
-		<param name="verify" value="false"/>
-	</antcall>
- 	<antcall target="fetch" />
-	<antcall target="generateFeature"> <!-- We are calling generate feature a second time so that we can get the pack / unpack clause fixed -->
-		<param name="verify" value="true"/>
-	</antcall> 
-	<antcall target="generate" /> 
-	<antcall target="process" /> 
-	<antcall target="assemble" />
-	<antcall target="package" />
-	<antcall target="postBuild" />
-</target>
-	
-	
 
-<!-- ===================================================================== -->
-<!-- Generate a container feature based on the product file                -->
-<!-- The plugin or feature containing the .product file will need to exist -->
-<!-- already, use preSetup or postSetup to fetch it if necessary           -->
-<!-- ===================================================================== -->
-<target name="generateFeature">
-	<eclipse.generateFeature
+
+
+
+	<target name="init" description="Initializes build directory. Meaning: copies features and plugins">
+		<echo message="${buildDirectory}" />
+	<!--	<deltree dir="${buildDirectory}"/> -->
+		<mkdir dir="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}/plugins" />
+		<copy todir="${buildDirectory}/plugins">
+			<fileset dir="${basedir}/..">
+				
+				<exclude name="*feature/**" />
+				<exclude name="onotoa.documentation/**" />
+				<exclude name="**/bin/**" />
+				<exclude name=".hg/**" />
+				<exclude name=".hg*" />
+			</fileset>
+		</copy>
+		<mkdir dir="${buildDirectory}/features" />
+		<copy todir="${buildDirectory}/features">
+			<fileset dir="${basedir}/..">
+				<include name="*feature/**" />
+			</fileset>
+		</copy>
+
+	</target>
+
+
+	<!-- ===================================================================== -->
+	<!-- main entry point to setup, fetch, generate, build etc. Use -->
+	<!-- the customTargets.xml to modify the build behaviour. -->
+	<!-- ===================================================================== -->
+	<target name="main" description="the main build target" depends="init">
+		<antcall target="preBuild" />
+		<antcall target="processRepos"/>
+		<antcall target="generateFeature">
+			<!-- Generate the feature to drive the fetch -->
+			<param name="verify" value="false"/>
+		</antcall>
+		<antcall target="fetch" />
+		<antcall target="generateFeature">
+			<!-- We are calling generate feature a second time so that we can get the pack / unpack clause fixed -->
+			<param name="verify" value="true"/>
+		</antcall>
+		<antcall target="generate" />
+		<antcall target="process" />
+		<antcall target="assemble" />
+		<antcall target="package" />
+		<antcall target="postBuild" />
+	</target>
+
+
+
+	<!-- ===================================================================== -->
+	<!-- Generate a container feature based on the product file                -->
+	<!-- The plugin or feature containing the .product file will need to exist -->
+	<!-- already, use preSetup or postSetup to fetch it if necessary           -->
+	<!-- ===================================================================== -->
+	<target name="generateFeature">
+		<eclipse.generateFeature
 		featureId="org.eclipse.pde.build.container.feature"
 		buildDirectory="${buildDirectory}"
 		baseLocation="${baseLocation}"
@@ -64,7 +96,7 @@
 		includeLaunchers="${includeLaunchers}"
 		buildPropertiesFile="${generatedBuildProperties}"
 	/>
-</target>
+	</target>
 
 
 </project>
