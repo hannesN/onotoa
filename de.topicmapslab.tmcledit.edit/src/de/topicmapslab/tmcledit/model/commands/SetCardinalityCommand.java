@@ -95,6 +95,9 @@ public class SetCardinalityCommand extends AbstractCommand {
 				return false;
 			
 			newValue = Integer.toString(val2);
+		} else {
+			if ("*".equals(newValue))
+				return false;
 		}
 
 		return true;
