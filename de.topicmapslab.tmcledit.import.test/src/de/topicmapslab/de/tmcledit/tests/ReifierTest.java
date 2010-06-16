@@ -100,7 +100,7 @@ public class ReifierTest extends AbstractImportTest {
 			int cardMin, int cardMax) {
 		TopicType tt = trc.getType();
 		assertEquals(name, tt.getName());
-		assertEquals(1, tt.getIdentifiers());
+		assertEquals(1, tt.getIdentifiers().size());
 		assertEquals("http://testmap.de/" + name.toLowerCase(), tt
 				.getIdentifiers().get(0));
 
