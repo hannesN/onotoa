@@ -61,6 +61,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		}
 		try {
 			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema, page.isExportSchemaInfos(), page.isExportDiagramInfos());
+			builder.setExportTopicTypesOnly(page.isExportTopicTypes());
 			TopicMap tm = builder.createTopicMap();
 			FileOutputStream stream = new FileOutputStream(file);
 			
