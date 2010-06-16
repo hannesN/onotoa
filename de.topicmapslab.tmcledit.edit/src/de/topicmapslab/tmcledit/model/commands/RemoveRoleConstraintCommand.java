@@ -35,6 +35,7 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	private final List<RoleConstraint> roles;
 	
 	private List<SetRoleConstraintCommand> roleConstraintList = Collections.emptyList();
+	private List<RoleConstraint> oldRoleConstraintList = Collections.emptyList();
 	
 	public RemoveRoleConstraintCommand(AssociationType associationType,
 			RoleConstraint role) {
@@ -68,7 +69,8 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		associationType.getRoles().addAll(roles);
+		associationType.getRoles().clear();
+		associationType.getRoles().addAll(oldRoleConstraintList);
 		for (SetRoleConstraintCommand cmd : roleConstraintList) {
 			cmd.undo();
 		}
@@ -85,7 +87,7 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	protected boolean prepare() {
 		
 		prepareRoleConstraintCommands();	
-		
+		oldRoleConstraintList = new ArrayList<RoleConstraint>(associationType.getRoles());
 		return true;
 	}
 
