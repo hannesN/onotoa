@@ -19,13 +19,14 @@ public class RemoveDiagramCommand extends AbstractCommand{
 
 	private final File file;
 	private final Diagram diagram;
-	
+	private final int index;
 	
 	
 	public RemoveDiagramCommand(Diagram diagram, File file) {
 		super();
 		this.diagram = diagram;
 		this.file = file;
+		this.index = this.file.getDiagrams().indexOf(this.diagram);
 	}
 	
 	public void execute() {
@@ -34,7 +35,7 @@ public class RemoveDiagramCommand extends AbstractCommand{
 	
 	@Override
 	public void undo() {
-		file.getDiagrams().add(diagram);
+		file.getDiagrams().add(index, diagram);
 	}
 	
 	@Override
