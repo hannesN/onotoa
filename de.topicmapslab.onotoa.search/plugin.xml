@@ -73,5 +73,37 @@
             sequence="CTRL+F">
       </key>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="de.topicmapslab.tmcledit.extensions.OnotoaPerspective">
+         <view
+               id="de.topicmapslab.onotoa.search.views.SearchResults"
+               ratio="0.5"
+               relationship="top"
+               relative="de.topicmapslab.tmcledit.model.views.NotesView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="de.topicmapslab.onotoa.search"
+            name="Sample Category">
+      </category>
+      <view
+            category="de.topicmapslab.tmcledit.extensions"
+            class="de.topicmapslab.onotoa.search.views.Searchr"
+            icon="icons/sample.gif"
+            id="de.topicmapslab.onotoa.search.views.SearchResults"
+            name="Search">
+      </view>
+   </extension>
 
 </plugin>
