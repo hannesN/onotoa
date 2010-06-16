@@ -39,6 +39,8 @@ public class AddTopicRoleCommand extends AbstractCommand {
 	private List<EdgeWrapper> list = new ArrayList<EdgeWrapper>();
 	private TopicType player;
 	
+	private TopicType oldPlayer;
+	
 	public AddTopicRoleCommand(RolePlayerConstraint rpc, AssociationTypeConstraint atc, TopicType player) {
 	    super();
 	    this.rpc = rpc;
@@ -71,6 +73,8 @@ public class AddTopicRoleCommand extends AbstractCommand {
 	    if (file==null)
 	    	return false;
 	    
+	    oldPlayer = rpc.getPlayer();
+	    
 		for (Diagram d : file.getDiagrams()) {
 			Node source = ModelIndexer.getNodeIndexer().getNodeFor(atc, d);
 			if (source!=null) {
@@ -96,6 +100,7 @@ public class AddTopicRoleCommand extends AbstractCommand {
 			ew.diagram.getEdges().remove(ew.edge);
 		}
 		atc.getPlayerConstraints().remove(rpc);
+		rpc.setPlayer(oldPlayer);
 	}
 
 }
