@@ -21,28 +21,34 @@ import org.eclipse.emf.common.command.AbstractCommand;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class DeleteAssociationConstraintCommand extends AbstractCommand {
 	
 	private final AssociationTypeConstraint constraint;
-	
+	private final TopicMapSchema tms;
 	private List<DeleteRolePlayerConstraintCommand> cmds = Collections.emptyList();
 	
 	private Map<Diagram, Node> nodeMap = Collections.emptyMap();
+	private Map<Diagram, Integer> indexMap = Collections.emptyMap();
+	
+	private int atcIndex;
+
+	
 	
 	public DeleteAssociationConstraintCommand(
 			AssociationTypeConstraint constraint) {
 		super();
 		this.constraint = constraint;
+		tms = (TopicMapSchema) constraint.eContainer();
 	}
 	
 	
 	public void execute() {
-		ModelIndexer indexer = ModelIndexer.getInstance();
-		
 		
 		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
 			cmd.execute();
@@ -53,12 +59,11 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 			d.getNodes().remove(nodeMap.get(d));
 		}
 		
-		indexer.getTopicMapSchema().getAssociationTypeConstraints().remove(constraint);
+		tms.getAssociationTypeConstraints().remove(constraint);
 		
 	}
 
 	public void redo() {
-		ModelIndexer indexer = ModelIndexer.getInstance();
 		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
 			cmd.redo();
 		}
@@ -67,18 +72,18 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 			d.getNodes().remove(nodeMap.get(d));
 		}
 		
-		indexer.getTopicMapSchema().getAssociationTypeConstraints().remove(constraint);
+		tms.getAssociationTypeConstraints().remove(constraint);
 	}
 	
 	@Override
 	public void undo() {
-		ModelIndexer indexer = ModelIndexer.getInstance();
 		
-		indexer.getTopicMapSchema().getAssociationTypeConstraints().add(constraint);
+		tms.getAssociationTypeConstraints().add(atcIndex, constraint);
 		
 		
 		for (Diagram d : nodeMap.keySet()) {
-			d.getNodes().add(nodeMap.get(d));
+			int idx = indexMap.get(d);
+			d.getNodes().add(idx, nodeMap.get(d));
 		}
 		
 		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
@@ -92,13 +97,16 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 			cmds = new ArrayList<DeleteRolePlayerConstraintCommand>(constraint.getPlayerConstraints().size());
 		}
 		
+		atcIndex = tms.getAssociationTypeConstraints().indexOf(constraint);
+		
 		for (RolePlayerConstraint rpc : constraint.getPlayerConstraints()) {
 			DeleteRolePlayerConstraintCommand cmd = new DeleteRolePlayerConstraintCommand(constraint, rpc);
 			if (cmd.canExecute())
 				cmds.add(cmd);
 		}
 		
-		for (Diagram d : ModelIndexer.getInstance().getDiagrams()) {
+		File file = (File) tms.eContainer();
+		for (Diagram d : file.getDiagrams()) {
 			AssociationNode node = (AssociationNode) ModelIndexer.getNodeIndexer()
 					.getNodeFor(constraint, d);
 			if (node!=null) {
@@ -115,8 +123,14 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 			nodeMap = new HashMap<Diagram, Node>();
 		}
 		nodeMap.put(d, node);
+		addIndex(d, d.getNodes().indexOf(node));
 	}	
 
-
+	private void addIndex(Diagram d, int idx) {
+		if (indexMap==Collections.EMPTY_MAP) {
+			indexMap = new HashMap<Diagram, Integer>();
+		}
+		indexMap.put(d, idx);
+	}	
 
 }
