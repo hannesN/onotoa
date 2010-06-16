@@ -69,6 +69,8 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	private int minCardinality = 0;
 	private int maxCardinality = -1;
 	
+	private boolean createLabel;
+	
 
 	private CommandStack commandStack;
 	private List<? extends AbstractTypedCardinalityConstraint> input;
@@ -76,6 +78,11 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	private Label label;
 
 	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack) {
+		this(parent, toolkit, commandStack, true);
+	}
+	
+	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack, boolean createLabel) {
+		this.createLabel = createLabel;
 		this.commandStack = commandStack;
 		createControls(parent, toolkit);
 	}
@@ -123,12 +130,15 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 	protected void createControls(Composite parent, FormToolkit toolkit) {
 
-		label = toolkit.createLabel(parent, "label:");
-		GridData gd = new GridData();
-		gd.verticalAlignment = SWT.TOP;
-		label.setLayoutData(gd);
+		if (createLabel) {
+			label = toolkit.createLabel(parent, "label:");
+			GridData gd = new GridData();
+			gd.verticalAlignment = SWT.TOP;
+			label.setLayoutData(gd);
+		}
+		
 		Composite comp = toolkit.createComposite(parent);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		comp.setLayoutData(gd);
 		GridLayout layout = new GridLayout(2, false);

@@ -29,6 +29,8 @@ import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -61,6 +63,7 @@ import de.topicmapslab.tmcledit.model.commands.RemoveTopicReifiesConstraintsComm
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
+import de.topicmapslab.tmcledit.model.commands.SetCannotReifyConstraint;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 import de.topicmapslab.tmcledit.model.commands.SetOverlapCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
@@ -87,6 +90,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	private Text isAText;
 	private Text akoText;
 	private Button abstractButton;
+	private Button cannotReifyButton;
 
 	protected CTabItem item;
 	private Text overlapText;
@@ -311,7 +315,8 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 			}
 			
 			if (notification.getFeatureID(EList.class)== ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS) {
-				reifiesControl.getTableViewer().refresh();
+				refreshRefies();
+				
 			}
 
 		}
@@ -319,9 +324,31 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 		updateUI();
 	}
 
+	private void refreshRefies() {
+		TopicType t = getCastedModel();
+		if (t.getTopicReifiesConstraints().size()==1) {
+			boolean cannotReify = t.getTopicReifiesConstraints().get(0).getType()==null;
+			cannotReifyButton.setSelection(cannotReify);
+			reifiesControl.setEnabled(!cannotReify);
+		} else {
+			cannotReifyButton.setSelection(false);
+			reifiesControl.setEnabled(true);
+		}
+		reifiesControl.getTableViewer().refresh();
+    }
+
 	private void createReifiesControl(Composite parent, FormToolkit toolkit) {
-		reifiesControl = new TypedCardinalityConstraintWidget(parent, toolkit, getCommandStack());
-		reifiesControl.setText("reifies:");
+		toolkit.createLabel(parent, "Refies:");
+		GridData gd = new GridData();
+		gd.verticalAlignment = SWT.TOP;
+		cannotReifyButton = toolkit.createButton(parent, "Cannot reify", SWT.CHECK);
+		gd = new GridData();
+		gd.horizontalSpan = 2;
+		cannotReifyButton.setLayoutData(gd);
+		// placeholder
+		toolkit.createComposite(parent);
+		
+		reifiesControl = new TypedCardinalityConstraintWidget(parent, toolkit, getCommandStack(), false);
 		reifiesControl.setMaxCardinality(1);
 		hookReifierListener();
 	}
@@ -414,6 +441,28 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				}
 			});
 			
+			reifiesControl.getTableViewer().addFilter(new ViewerFilter() {
+				@Override
+				public boolean select(Viewer viewer, Object parentElement, Object element) {
+					TopicReifiesConstraint trc = (TopicReifiesConstraint) element;
+					
+				    return trc.getType()!=null;
+				}
+			});
+			
+			cannotReifyButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					if (cannotReifyButton.getSelection()) {
+						getCommandStack().execute(new SetCannotReifyConstraint(getCastedModel()));
+					} else {
+						getCommandStack().execute(
+								new RemoveTopicReifiesConstraintsCommand(getCastedModel(), 
+										getCastedModel().getTopicReifiesConstraints()));
+					}
+					reifiesControl.setEnabled(!cannotReifyButton.getSelection());
+				}
+			});
 	}
 
 	
@@ -478,6 +527,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 					overlapText.setText("");
 
 				abstractButton.setSelection(t.isAbstract());
+				
+				refreshRefies();
+				
 			} else {
 				item.setText("Topic Type");
 				nameText.setText("");
@@ -487,6 +539,7 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 				akoText.setText("");
 				abstractButton.setSelection(false);
 				overlapText.setText("");
+				cannotReifyButton.setSelection(false);
 			}
 
 		}
@@ -506,8 +559,14 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	    
 	    if (model==null)
 	    	return;
-	    if (reifiesControl!=null)
+	    if (reifiesControl!=null) {
 	    	reifiesControl.setInput(getCastedModel().getTopicReifiesConstraints());
+	    	if (((TopicType) model).getTopicReifiesConstraints().size()==1) {
+				boolean cannotReify = ((TopicType) model).getTopicReifiesConstraints().get(0).getType()==null;
+				cannotReifyButton.setSelection(cannotReify);
+				reifiesControl.setEnabled(!cannotReify);
+			}
+	    }
 	}
 	
 	private StringBuffer updateIdentifierts() {
