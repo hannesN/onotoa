@@ -27,23 +27,26 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 
 	private final AssociationTypeConstraint associationTypeConstraint;
-	private final RolePlayerConstraint RolePlayerConstraint;
+	private final RolePlayerConstraint rolePlayerConstraint;
 	
 	private Map<Diagram, Edge>  edgeMap = Collections.emptyMap();
+	private Map<Diagram, Integer> indexMap  = Collections.emptyMap();
+	
+	private int contraintIndex;
 	
 	public DeleteRolePlayerConstraintCommand(
 			AssociationTypeConstraint associationTypeConstraint,
 			RolePlayerConstraint RolePlayerConstraint) {
 		super();
 		this.associationTypeConstraint = associationTypeConstraint;
-		this.RolePlayerConstraint = RolePlayerConstraint;
+		this.rolePlayerConstraint = RolePlayerConstraint;
 	}
 
 	public void execute() {
 		for (Diagram d : edgeMap.keySet()) {
 			d.getEdges().remove(edgeMap.get(d));
 		}
-		associationTypeConstraint.getPlayerConstraints().remove(RolePlayerConstraint);
+		associationTypeConstraint.getPlayerConstraints().remove(rolePlayerConstraint);
 	}
 
 	public void redo() {
@@ -52,9 +55,10 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		associationTypeConstraint.getPlayerConstraints().add(RolePlayerConstraint);
+		associationTypeConstraint.getPlayerConstraints().add(contraintIndex, rolePlayerConstraint);
 		for (Diagram d : edgeMap.keySet()) {
-			d.getEdges().add(edgeMap.get(d));
+			int idx = indexMap.get(d);
+			d.getEdges().add(idx, edgeMap.get(d));
 		}
 	}
 	
@@ -66,11 +70,14 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 			
 			if (node!=null) {
 				for (Edge e : ModelIndexer.getNodeIndexer().getEdges(d, EdgeType.ROLE_CONSTRAINT_TYPE)) {
-					if (e.getRoleConstraint().equals(RolePlayerConstraint))
+					if (e.getRoleConstraint().equals(rolePlayerConstraint)) {
 						addEdge(d, e);
+					}
 				}
 			}
 		}
+		
+		contraintIndex = associationTypeConstraint.getPlayerConstraints().indexOf(rolePlayerConstraint);
 		return true;
 	}
 
@@ -79,5 +86,13 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 			edgeMap = new HashMap<Diagram, Edge>();
 		}
 		edgeMap.put(d, e);
+		addIndex(d, d.getEdges().indexOf(e));
+	}
+	
+	private void addIndex(Diagram d, int idx) {
+		if (indexMap==Collections.EMPTY_MAP) {
+			indexMap = new HashMap<Diagram, Integer>();
+		}
+		indexMap.put(d, idx);
 	}
 }
