@@ -13,6 +13,7 @@
  */
 package de.topicmapslab.tmcledit.model.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
@@ -25,37 +26,35 @@ import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
  *
  */
 public class RemoveRoleCombinationConstraintCommand extends AbstractCommand {
-	private final AssociationType asssType;
+	private final AssociationType assType;
 	private final List<RoleCombinationConstraint> constraintList;
-	int index = -1;
+
+	private List<RoleCombinationConstraint> oldConstraintList;
 	
 	public RemoveRoleCombinationConstraintCommand(AssociationType assType,
 			List<RoleCombinationConstraint> constraintList) {
 		super();
-		this.asssType = assType;
+		this.assType = assType;
 		this.constraintList = constraintList;
 	}
 	
 	public void execute() {
-		asssType.getRoleCombinations().removeAll(constraintList);
+		assType.getRoleCombinations().removeAll(constraintList);
 	}
 	
 	public void redo() {
-		asssType.getRoleCombinations().removeAll(constraintList);		
+		assType.getRoleCombinations().removeAll(constraintList);		
 	}
 	
 	@Override
 	public void undo() {
-		if (index!=-1)
-			asssType.getRoleCombinations().add(index, constraintList.get(0));
-		else
-			asssType.getRoleCombinations().addAll(constraintList);
+		assType.getRoleCombinations().clear();
+		assType.getRoleCombinations().addAll(oldConstraintList);
 	}
 	
 	@Override
 	protected boolean prepare() {
-		if (constraintList.size()==1)
-			index = asssType.getRoleCombinations().indexOf(constraintList.get(0));
+		oldConstraintList = new ArrayList<RoleCombinationConstraint>(assType.getRoleCombinations());
 		return true;
 	}
 }

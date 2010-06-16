@@ -86,7 +86,7 @@
       </extension> 
       <extension 
             point="org.eclipse.ui.menus"> 
-         <menuContribution 
+         <menuContribution
                locationURI="menu:file?placement=fileStart"> 
             <command 
                   commandId="de.topicmapslab.tmcledit.application.newfile"
@@ -97,7 +97,12 @@
                   commandId="de.topicmapslab.tmcledit.application.openfile"
                   label="&amp;Open"
                   style="push"> 
-            </command> 
+            </command>
+         </menuContribution>
+         <menuContribution
+               allPopups="false"
+               class="de.topicmapslab.tmcledit.application.actions.MenuDefinition"
+               locationURI="menu:file?placement=recent">
          </menuContribution> 
       </extension> 
       <extension 

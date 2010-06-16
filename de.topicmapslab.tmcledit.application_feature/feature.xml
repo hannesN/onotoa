@@ -18,10 +18,6 @@
       [Enter License Description here.]
    </license>
 
-   <requires>
-      <import feature="onotoa_thirdparty_plugins" version="1.0.0.qualifier"/>
-   </requires>
-
    <plugin
          id="org.eclipse.draw2d"
          download-size="0"
@@ -55,14 +51,6 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.core.resources.compatibility"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
          unpack="false"/>
 
    <plugin
@@ -674,13 +662,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.equinox.p2.exemplarysetup"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.equinox.p2.garbagecollector"
          download-size="0"
          install-size="0"
@@ -696,20 +677,6 @@
 
    <plugin
          id="org.eclipse.equinox.p2.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.equinox.p2.ui.sdk"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.equinox.p2.ui.sdk.scheduler"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -959,6 +926,41 @@
 
    <plugin
          id="org.eclipse.equinox.p2.publisher"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.batik.ext.awt"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.p2.operations"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.batik.svggen"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.batik.util"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.batik.util.gui"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -87,9 +87,9 @@ import org.tmapi.index.LiteralIndex;
 import org.tmapi.index.ScopedIndex;
 import org.tmapi.index.TypeInstanceIndex;
 
-import de.topicmapslab.engine.core.TopicMapSystemFactoryImpl;
-import de.topicmapslab.engine.inMemory.store.InMemoryTopicMapStore;
-import de.topicmapslab.engine.store.TopicMapStoreProperty;
+import de.topicmapslab.majortom.core.TopicMapSystemFactoryImpl;
+import de.topicmapslab.majortom.inMemory.store.InMemoryTopicMapStore;
+import de.topicmapslab.majortom.store.TopicMapStoreProperty;
 import de.topicmapslab.tmcledit.export.voc.Namespaces;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.Onotoa;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL;
@@ -97,6 +97,7 @@ import de.topicmapslab.tmcledit.export.voc.Namespaces.TMDM;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.XSD;
 import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -147,6 +148,7 @@ public class TMCLTopicMapBuilder {
 	private Locator baseLocator;
 
 	private boolean exportSchema = true;
+	private boolean exportTopicTypesOnly = false;
 	private Topic schema;
 
 	private Map<TopicType, TopicType> overlapMap;
@@ -209,6 +211,10 @@ public class TMCLTopicMapBuilder {
 		this.exportSchema = exportSchema;
 		this.createDiagramNodes = createDiagramNodes;
 	}
+	
+	public void setExportTopicTypesOnly(boolean exportTopicTypesOnly) {
+	    this.exportTopicTypesOnly = exportTopicTypesOnly;
+    }
 
 	public TopicMap createTopicMap() {
 		try {
@@ -246,7 +252,9 @@ public class TMCLTopicMapBuilder {
 			}
 
 			createTopicTypes();
-			createAssociationConstraints();
+			if (!exportTopicTypesOnly) {
+				createAssociationConstraints();
+			}
 			
 //			for(OccurrenceType ot : occTypes) {
 //				setOccurrenceDatatype(ot);
@@ -268,7 +276,7 @@ public class TMCLTopicMapBuilder {
 				createDiagramNodes();
 			}
 
-			// open indexes because nobody else dows it...
+			// open indexes because nobody else does it...
 			topicMap.getIndex(TypeInstanceIndex.class).open();
 			topicMap.getIndex(ScopedIndex.class).open();
 			topicMap.getIndex(LiteralIndex.class).open();
@@ -543,8 +551,7 @@ public class TMCLTopicMapBuilder {
 		t.createName(type.getName());
 		setSchema(t);
 
-		// creating doc occs
-		addDocumentationOccurrences(t, type);
+		
 
 		// setting identifiers
 		for (String id : type.getIdentifiers()) {
@@ -582,15 +589,21 @@ public class TMCLTopicMapBuilder {
 		Topic typeTopic = getTopicType(type.getKind());
 		if (typeTopic!=null)
 			t.addType(typeTopic);
-
+		
 		for (TopicType tt : type.getIsa()) {
 			t.addType(createTopic(tt));
 		}
-
 		for (TopicType tt : type.getAko()) {
 			setSuperType(t, createTopic(tt));
 		}
 
+		// don't start with constraints if not wanted
+		if (exportTopicTypesOnly)
+			return t;
+		
+		// creating doc occs
+		addDocumentationOccurrences(t, type);
+		
 		if (type.isAbstract())
 			setAbstract(t);
 
@@ -626,9 +639,15 @@ public class TMCLTopicMapBuilder {
 			setUnique((AbstractUniqueValueTopicType) type);
 		}
 		
+		if (type instanceof AbstractRegExpTopicType) {
+			setRegExpConstraint((AbstractRegExpTopicType) type);
+		}
+		
 		if (type instanceof OccurrenceType) {
 			setOccurrenceDatatype((OccurrenceType) type);
 		}
+		
+		
 
 		setTopicReifiesConstraint(type);
 
@@ -637,6 +656,7 @@ public class TMCLTopicMapBuilder {
 	private Topic createConstraint(String type) {
 		return createConstraint(topicMap.createLocator(type));
 	}
+	
 	private Topic createConstraint(Locator type) {
 		Topic constr = topicMap.createTopic();
 
@@ -671,7 +691,7 @@ public class TMCLTopicMapBuilder {
 			t = createTopic(TMDM.SUBJECT);
 		else
 			t = createTopic(tt);
-		ass.createRole(createTopic(ALLOWED), t);
+		ass.createRole(createTopic(CONSTRAINED), t);
 	}
 
 	private void createOverlaps(TopicType type, Topic constraint) {
@@ -724,9 +744,6 @@ public class TMCLTopicMapBuilder {
 			nameTopic = createTopic(TMDM.TOPIC_NAME);
 		else {
 			nameTopic = createTopic(nt);
-
-			if (!nt.getRegExp().equals(".*"))
-				setRegExpConstraint(nt, nt.getRegExp());
 		}
 
 		Topic constr = createConstraint(TOPIC_NAME_CONSTRAINT);
@@ -746,8 +763,6 @@ public class TMCLTopicMapBuilder {
 		Topic occType = null;
 		if (otype != null) {
 			occType = createTopic(otype);
-			if (!otype.getRegExp().equals(".*"))
-				setRegExpConstraint(otype, otype.getRegExp());
 		} else {
 			occType = createTopic(TMDM.SUBJECT);
 		}
@@ -809,22 +824,18 @@ public class TMCLTopicMapBuilder {
 			constr.createOccurrence(createTopic(CARD_MAX), trc.getCardMax(), topicMap.createLocator(XSD.INTEGER));
 			createConstrainedTopicType(createTopic(tt), constr);
 
-			if (!("0".equals(trc.getCardMin()) && (trc.getCardMin().equals(trc.getCardMax())))) {
-				TopicType type = trc.getType();
-				if (type == null)
-					createConstrainedStatement(createTopic(TMDM.SUBJECT), constr);
-				else
+			TopicType type = trc.getType();
+				if (type != null)
 					createConstrainedStatement(createTopic(type), constr);
-			}
 
 			setSchema(constr);
 		}
 
 	}
 
-	private void setRegExpConstraint(TopicType type, String regexp) {
+	private void setRegExpConstraint(AbstractRegExpTopicType type) {
 		Topic constr = createConstraint(REGULAR_EXPRESSION_CONSTRAINT);
-		constr.createOccurrence(createTopic(REGEXP), regexp);
+		constr.createOccurrence(createTopic(REGEXP), type.getRegExp());
 		createConstrainedStatement(type, constr);
 
 		setSchema(constr);

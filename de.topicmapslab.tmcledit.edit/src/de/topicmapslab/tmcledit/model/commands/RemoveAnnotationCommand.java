@@ -22,13 +22,14 @@ import de.topicmapslab.tmcledit.model.TMCLConstruct;
 public class RemoveAnnotationCommand extends AbstractCommand {
 
 	private final TMCLConstruct construct;
-
+	private final int index;
 	private final Annotation annotation;
 
 	public RemoveAnnotationCommand(TMCLConstruct construct, Annotation annotation) {
 		super();
 		this.construct = construct;
 		this.annotation = annotation;
+		index = this.construct.getAnnotations().indexOf(annotation);
 	}
 
 	public void execute() {
@@ -37,7 +38,7 @@ public class RemoveAnnotationCommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		construct.getAnnotations().add(annotation);
+		construct.getAnnotations().add(index, annotation);
 	}
 
 	public void redo() {

@@ -19,5 +19,5 @@ public class PreferenceConstants {
 	
 	public static final String P_PSIPREFERENCES = "psiPreferences";
 
-	
+	public final static String RECENT_USED = "recentUsed";
 }

@@ -29,9 +29,9 @@ public class DeleteTopicTypeConstraintItemCommand extends AbstractCommand {
 	private final AbstractConstraint constraint;
 	private final TopicType topicType;
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes" })
 	private List constraintList;
-	int index;
+	private int index;
 	
 	/**
 	 * 
@@ -54,7 +54,7 @@ public class DeleteTopicTypeConstraintItemCommand extends AbstractCommand {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void undo() {
-		constraintList.add(constraint);
+		constraintList.add(index, constraint);
 	}
 
 	@Override

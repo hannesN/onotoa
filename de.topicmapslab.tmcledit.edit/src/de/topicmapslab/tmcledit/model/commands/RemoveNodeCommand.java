@@ -28,11 +28,15 @@ public class RemoveNodeCommand extends AbstractCommand {
 	private final Diagram diagram;
 
 	private List<Edge> edgeList = Collections.emptyList();
+	private List<Edge> oldList = Collections.emptyList();
+	
+	private int nodeIndex;
 
 	public RemoveNodeCommand(Diagram diagram, Node node) {
 		super();
 		this.diagram = diagram;
 		this.node = node;
+		this.nodeIndex = diagram.getNodes().indexOf(node);
 	}
 	
 	public void execute() {
@@ -47,8 +51,9 @@ public class RemoveNodeCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		diagram.getNodes().add(node);
-		diagram.getEdges().addAll(edgeList);
+		diagram.getNodes().add(nodeIndex, node);
+		diagram.getEdges().clear();
+		diagram.getEdges().addAll(oldList);
 	}
 
 	@Override
@@ -60,6 +65,7 @@ public class RemoveNodeCommand extends AbstractCommand {
 				edgeList.add(e);
 			}
 		}
+		oldList = new ArrayList<Edge>(diagram.getEdges());
 		return true;
 	}
 	

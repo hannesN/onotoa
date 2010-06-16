@@ -125,6 +125,7 @@ import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.actions.ValidateAction;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.preferences.PreferenceConstants;
+import de.topicmapslab.tmcledit.model.preferences.RecentUsedManager;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.util.io.FileUtil;
 import de.topicmapslab.tmcledit.model.validation.ModelValidator;
@@ -609,6 +610,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public void setFilename(String filename, boolean newFile) {
+		setFilename(filename, newFile, null);
+		if (filename!=null&&filename.length()>0)
+			RecentUsedManager.addFile(filename);
+	}
+	
+	// TODO refactor me PLEEEEAAASSE!!!
+	public void setFilename(String filename, boolean newFile, File newOnotoaFile) {
 		IViewSite viewSite = getViewSite();
 		if (viewSite != null) {
 
@@ -651,7 +659,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					TmcleditEditPlugin.getPlugin().log(e);
 					currFile = null;
 				}
-			} else {
+			} else if (newOnotoaFile!=null){
+				currFile = newOnotoaFile;
+			} else{
 				currFile = ModelFactory.eINSTANCE.createFile();
 				currFile.setTopicMapSchema(ModelFactory.eINSTANCE.createTopicMapSchema());
 				if (filename.length() > 0)
@@ -744,7 +754,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return actionRegistry;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == ActionRegistry.class)
@@ -839,12 +848,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public void doSaveAs() {
 		FileDialog dlg = new FileDialog(getSite().getShell(), SWT.SAVE);
 		dlg.setText("Save As..");
+		List<String> filesList = RecentUsedManager.getFilesList();
+		if (!filesList.isEmpty()) {
+			String file = filesList.get(0);
+			dlg.setFilterPath(file.substring(0, file.lastIndexOf("/")));
+		}
 		String result = dlg.open();
 		if (result != null) {
 			if ((!result.endsWith(".ono")) && (!result.endsWith(".tmcl")))
 				result += ".ono";
 			currFile.setFilename(result);
 			updateTitle(currFile.getFilename());
+			RecentUsedManager.addFile(currFile.getFilename());
 			doSave(new NullProgressMonitor());
 
 		}
