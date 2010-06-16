@@ -105,6 +105,12 @@ public class SetOverlapCommandTest {
 		command = new SetOverlapCommand(oldList, topicType);
 		Assert.assertFalse(command.canExecute());
 
+		List<TopicType> sameListOtherOrder = new ArrayList<TopicType>();
+		sameListOtherOrder.add(oldOverlap1);
+		sameListOtherOrder.add(sameOverlap);
+		sameListOtherOrder.add(oldOverlap0);
+		command = new SetOverlapCommand(sameListOtherOrder, topicType);
+		Assert.assertFalse(command.canExecute());
 	}
 
 	@Test

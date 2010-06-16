@@ -28,61 +28,49 @@ public class SetOverlapCommand extends AbstractCommand {
 
 	private TopicType topicType;
 
-	private List<TopicType> removeList;
-	private List<TopicType> addList;
-
+	private List<TopicType> newList;
+	private List<TopicType> oldList;
+	
 	public SetOverlapCommand(List<TopicType> newList, TopicType topic) {
 		super("Set overlap types");
 		this.topicType = topic;
-		this.removeList = new ArrayList<TopicType>();
-		this.addList = new ArrayList<TopicType>(newList);
+		this.newList = newList;
 	}
 
 	public void execute() {
-
-		for (TopicType tt : removeList) {
-			tt.getOverlap().remove(topicType);
-		}
-		for (TopicType tt : addList) {
-			tt.getOverlap().add(topicType);
-		}
-
-		topicType.eSetDeliver(addList.isEmpty());
-		topicType.getOverlap().removeAll(removeList);
 		topicType.eSetDeliver(true);
-		topicType.getOverlap().addAll(addList);
+		topicType.getOverlap().clear();
+		topicType.eSetDeliver(true);
+		topicType.getOverlap().addAll(newList);
 	}
 
 	@Override
 	protected boolean prepare() {
-		if (topicType.getOverlap().equals(addList))
-			return false;
 		
-		removeList = new ArrayList<TopicType>();
-		for (TopicType tt : topicType.getOverlap()) {
-			if (addList.contains(tt)) {
-				addList.remove(tt);
-			} else {
-				removeList.add(tt);
+		boolean sameObjects = true;
+		
+		// check if it is the same list of objects (ignoring order)
+		if (newList.size()==topicType.getOverlap().size()) {
+			for (TopicType tt : newList) {
+				if (!topicType.getOverlap().contains(tt)) {
+					sameObjects = true;
+					break;
+				}
 			}
+			if (sameObjects)
+				return false;
 		}
+		oldList = new ArrayList<TopicType>(topicType.getOverlap());
 
 		return true;
 	}
 
 	@Override
 	public void undo() {
-		for (TopicType tt : removeList) {
-			tt.getOverlap().add(topicType);
-		}
-		for (TopicType tt : addList) {
-			tt.getOverlap().remove(topicType);
-		}
-
 		topicType.eSetDeliver(false);
-		topicType.getOverlap().addAll(removeList);
+		topicType.getOverlap().clear();
 		topicType.eSetDeliver(true);
-		topicType.getOverlap().removeAll(addList);
+		topicType.getOverlap().addAll(oldList);
 	}
 
 	public void redo() {
