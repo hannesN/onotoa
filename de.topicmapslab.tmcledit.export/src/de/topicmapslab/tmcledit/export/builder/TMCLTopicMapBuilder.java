@@ -148,6 +148,7 @@ public class TMCLTopicMapBuilder {
 	private Locator baseLocator;
 
 	private boolean exportSchema = true;
+	private boolean exportTopicTypesOnly = false;
 	private Topic schema;
 
 	private Map<TopicType, TopicType> overlapMap;
@@ -210,6 +211,10 @@ public class TMCLTopicMapBuilder {
 		this.exportSchema = exportSchema;
 		this.createDiagramNodes = createDiagramNodes;
 	}
+	
+	public void setExportTopicTypesOnly(boolean exportTopicTypesOnly) {
+	    this.exportTopicTypesOnly = exportTopicTypesOnly;
+    }
 
 	public TopicMap createTopicMap() {
 		try {
@@ -247,7 +252,9 @@ public class TMCLTopicMapBuilder {
 			}
 
 			createTopicTypes();
-			createAssociationConstraints();
+			if (!exportTopicTypesOnly) {
+				createAssociationConstraints();
+			}
 			
 //			for(OccurrenceType ot : occTypes) {
 //				setOccurrenceDatatype(ot);
@@ -269,7 +276,7 @@ public class TMCLTopicMapBuilder {
 				createDiagramNodes();
 			}
 
-			// open indexes because nobody else dows it...
+			// open indexes because nobody else does it...
 			topicMap.getIndex(TypeInstanceIndex.class).open();
 			topicMap.getIndex(ScopedIndex.class).open();
 			topicMap.getIndex(LiteralIndex.class).open();
@@ -544,8 +551,7 @@ public class TMCLTopicMapBuilder {
 		t.createName(type.getName());
 		setSchema(t);
 
-		// creating doc occs
-		addDocumentationOccurrences(t, type);
+		
 
 		// setting identifiers
 		for (String id : type.getIdentifiers()) {
@@ -591,6 +597,13 @@ public class TMCLTopicMapBuilder {
 			setSuperType(t, createTopic(tt));
 		}
 
+		// don't start with constraints if not wanted
+		if (exportTopicTypesOnly)
+			return t;
+		
+		// creating doc occs
+		addDocumentationOccurrences(t, type);
+		
 		if (type.isAbstract())
 			setAbstract(t);
 
@@ -643,6 +656,7 @@ public class TMCLTopicMapBuilder {
 	private Topic createConstraint(String type) {
 		return createConstraint(topicMap.createLocator(type));
 	}
+	
 	private Topic createConstraint(Locator type) {
 		Topic constr = topicMap.createTopic();
 
