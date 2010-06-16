@@ -35,6 +35,12 @@ public class SetImageCommand extends AbstractCommand {
 	
 	private Set<TypeNode> nodes;
 	
+	/**
+	 * Constructor for the SetImageCommand.
+	 * 
+	 * @param type the tpye which gets the 
+	 * @param newValue <code>null</code> to delete an image or the path to the image
+	 */
 	public SetImageCommand(TopicType type, String newValue) {
 	    super();
 	    this.newValue = newValue;
@@ -78,7 +84,10 @@ public class SetImageCommand extends AbstractCommand {
 		
 		this.nodes = result;
 		this.oldValue = nodes.iterator().next().getImage();
-	    return true;
+		if (oldValue==null)
+			return newValue!=null;
+		else
+			return !oldValue.equals(newValue);
 	}
 
 	public Set<TypeNode> getNodes() {
