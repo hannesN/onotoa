@@ -29,6 +29,7 @@ public class RemoveTopicReifiesConstraintsCommand extends AbstractCommand {
 
 	private final TopicType topicType;
 	private final List<TopicReifiesConstraint> reifies;
+	private final List<TopicReifiesConstraint> oldReifies;
 	
 	public RemoveTopicReifiesConstraintsCommand(TopicType topicType,
 			TopicReifiesConstraint refiesConstraint) {
@@ -41,6 +42,7 @@ public class RemoveTopicReifiesConstraintsCommand extends AbstractCommand {
 		super("Remove Topic Reifies Constraint");
 		this.topicType = topicType;
 		this.reifies = refiesConstraints;
+		this.oldReifies = new ArrayList<TopicReifiesConstraint>(this.topicType.getTopicReifiesConstraints());
 	}
 
 	public void execute() {
@@ -53,7 +55,8 @@ public class RemoveTopicReifiesConstraintsCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		topicType.getTopicReifiesConstraints().addAll(reifies);
+		topicType.getTopicReifiesConstraints().clear();
+		topicType.getTopicReifiesConstraints().addAll(oldReifies);
 	}
 
 	@Override
