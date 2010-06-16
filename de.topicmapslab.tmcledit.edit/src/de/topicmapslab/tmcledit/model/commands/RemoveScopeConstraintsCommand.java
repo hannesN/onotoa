@@ -29,6 +29,7 @@ public class RemoveScopeConstraintsCommand extends AbstractCommand {
 
 	private final ScopedTopicType scopedTopicType;
 	private final List<ScopeConstraint> scope;
+	private final List<ScopeConstraint> oldScope;
 	
 	public RemoveScopeConstraintsCommand(ScopedTopicType scopedTopicType,
 			 ScopeConstraint scope) {
@@ -41,6 +42,7 @@ public class RemoveScopeConstraintsCommand extends AbstractCommand {
 		super("Remove Scope");
 		this.scopedTopicType = scopedTopicType;
 		this.scope = scope;
+		this.oldScope = new ArrayList<ScopeConstraint>(this.scopedTopicType.getScope());
 	}
 
 	public void execute() {
@@ -53,7 +55,8 @@ public class RemoveScopeConstraintsCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		scopedTopicType.getScope().addAll(scope);
+		scopedTopicType.getScope().clear();
+		scopedTopicType.getScope().addAll(oldScope);
 	}
 
 	@Override

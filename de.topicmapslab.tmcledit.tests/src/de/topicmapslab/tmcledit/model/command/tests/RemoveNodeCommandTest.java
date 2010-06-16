@@ -162,7 +162,6 @@ public class RemoveNodeCommandTest {
 		// copy diagrams nodes
 		nodeSize = diagram.getNodes().size();
 		nodeList = new ArrayList<Node>(diagram.getNodes());
-		nodeList.remove(node0);
 
 		command.execute();
 		Assert.assertTrue(command.canUndo());

@@ -111,7 +111,7 @@ public class RemovePrefixMappingCommandTest {
 
 		command.execute();
 		Assert.assertTrue(command.canUndo());
-		command.canUndo();
+		command.undo();
 
 		Assert.assertTrue(size == schema.getMappings().size());
 		Assert.assertTrue(Tools.mappingElementListCompare(list, schema

@@ -26,11 +26,13 @@ public class DeleteCommentCommand extends AbstractCommand {
 
 	private final Diagram diagram;
 	private final Comment comment;
+	private final int index;
 	
 	public DeleteCommentCommand(Comment comment) {
 		super();
 		this.diagram = (Diagram) comment.eContainer();
 		this.comment = comment;
+		this.index = this.diagram.getComments().indexOf(comment);
 	}
 
 
@@ -44,7 +46,7 @@ public class DeleteCommentCommand extends AbstractCommand {
 	
 	@Override
 	public void undo() {
-		diagram.getComments().add(comment);
+		diagram.getComments().add(index, comment);
 	}
 
 	@Override

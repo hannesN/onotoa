@@ -12,9 +12,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.emf.common.ui,
  org.eclipse.emf.edit.ui,
- org.eclipse.core.resources,
- org.apache.batik.svggen,
- org.apache.batik.ext.awt
+ org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.topicmapslab.tmcledit.diagram,
@@ -26,3 +24,5 @@ Export-Package: de.topicmapslab.tmcledit.diagram,
  de.topicmapslab.tmcledit.diagram.policies,
  de.topicmapslab.tmcledit.diagram.preferences,
  de.topicmapslab.tmcledit.diagram.util
+Import-Package: org.apache.batik.ext.awt.g2d;version="1.5.0",
+ org.apache.batik.svggen;version="1.5.0"

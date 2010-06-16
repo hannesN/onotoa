@@ -1,4 +1,6 @@
 package de.topicmapslab.tmcledit.application.commands;
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -8,6 +10,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.application.DiagramEditorActionBarAdvisor;
+import de.topicmapslab.tmcledit.model.preferences.RecentUsedManager;
 
 /*******************************************************************************
  * Copyright (c) 2008, 2009 Topic Maps Lab and others.
@@ -33,6 +36,13 @@ public class OpenFileHandler extends AbstractHandler {
 		dlg.setText("Open Onotoa Model..");
 		dlg.setFilterExtensions(new String[]{"*.ono;*.tmcl", "*.ono", "*.tmcl"});
 		dlg.setFilterPath(System.getProperty("user.home"));
+		
+		
+		List<String> filesList = RecentUsedManager.getFilesList();
+		if (!filesList.isEmpty()) {
+			String file = filesList.get(0);
+			dlg.setFilterPath(file.substring(0, file.lastIndexOf("/")));
+		}
 		
 		String path = dlg.open();
 		if (path!=null) {
