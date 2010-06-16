@@ -72,6 +72,9 @@ public class SetCardinalitiesCommand extends AbstractCommand {
 					this.min = Integer.toString(min);
 				}
 				this.max = Integer.toString(max);
+			} else {
+				if (this.min.equals("*"))
+					return false;
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
