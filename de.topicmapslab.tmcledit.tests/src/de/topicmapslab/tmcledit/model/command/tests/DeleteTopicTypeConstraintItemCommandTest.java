@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -44,10 +45,12 @@ public class DeleteTopicTypeConstraintItemCommandTest {
 	private List<NameTypeConstraint> nameTypeConstraintsList;
 	private List<OccurrenceTypeConstraint> occurrenceTypeConstraintsList;
 	private List<SubjectIdentifierConstraint> subjectIdentifierConstraintsList;
+	private List<ItemIdentifierConstraint> itemIdentifierConstraintsList;
 	private List<SubjectLocatorConstraint> subjectLocatorConstraintsList;
 	private int nameTypeSize;
 	private int occurrenceTypeSize;
 	private int subjectIdentifierSize;
+	private int itemIdentifierSize;
 	private int subjectLocatorSize;
 
 	@Before
@@ -115,6 +118,25 @@ public class DeleteTopicTypeConstraintItemCommandTest {
 				.createSubjectIdentifierConstraint();
 		topicType.getSubjectIdentifierConstraints().add(
 				(SubjectIdentifierConstraint) constraint1);
+		featureID = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
+
+		command = new DeleteTopicTypeConstraintItemCommand(topicType,
+				constraint0, featureID);
+		Assert.assertTrue(command.canExecute());
+
+	}
+	
+	@Test
+	public void canExecuteTestItemIdentifier() {
+
+		constraint0 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint0);
+		constraint1 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint1);
 		featureID = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 
 		command = new DeleteTopicTypeConstraintItemCommand(topicType,
@@ -229,6 +251,39 @@ public class DeleteTopicTypeConstraintItemCommandTest {
 						.getSubjectIdentifierConstraints()));
 
 	}
+	
+	@Test
+	public void executeTestItemIdentifier() {
+
+		constraint0 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint0);
+		constraint1 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint1);
+		featureID = ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
+
+		command = new DeleteTopicTypeConstraintItemCommand(topicType,
+				constraint0, featureID);
+		Assert.assertTrue(command.canExecute());
+
+		itemIdentifierSize = topicType.getItemIdentifierConstraints()
+				.size();
+		itemIdentifierConstraintsList = new ArrayList<ItemIdentifierConstraint>(
+				topicType.getItemIdentifierConstraints());
+		itemIdentifierConstraintsList.remove(constraint0);
+
+		command.execute();
+
+		Assert.assertTrue((itemIdentifierSize - 1) == topicType
+				.getItemIdentifierConstraints().size());
+		Assert.assertTrue(Tools.itemIdentifierConstraintListCompare(
+				itemIdentifierConstraintsList, topicType
+						.getItemIdentifierConstraints()));
+
+	}
 
 	@Test
 	public void executeTestSubjectLocator() {
@@ -308,6 +363,27 @@ public class DeleteTopicTypeConstraintItemCommandTest {
 		topicType.getSubjectIdentifierConstraints().add(
 				(SubjectIdentifierConstraint) constraint1);
 		featureID = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
+
+		command = new DeleteTopicTypeConstraintItemCommand(topicType,
+				constraint0, featureID);
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+		Assert.assertTrue(command.canUndo());
+
+	}
+	
+	@Test
+	public void canUndoTestItemIdentifier() {
+
+		constraint0 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint0);
+		constraint1 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint1);
+		featureID = ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 
 		command = new DeleteTopicTypeConstraintItemCommand(topicType,
 				constraint0, featureID);
@@ -427,6 +503,40 @@ public class DeleteTopicTypeConstraintItemCommandTest {
 		Assert.assertTrue(Tools.subjectIdentifierConstraintListCompare(
 				subjectIdentifierConstraintsList, topicType
 						.getSubjectIdentifierConstraints()));
+
+	}
+	
+	@Test
+	public void undoTestItemIdentifier() {
+
+		constraint0 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint0);
+		constraint1 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint1);
+		featureID = ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
+
+		command = new DeleteTopicTypeConstraintItemCommand(topicType,
+				constraint0, featureID);
+		Assert.assertTrue(command.canExecute());
+
+		itemIdentifierSize = topicType.getItemIdentifierConstraints()
+				.size();
+		itemIdentifierConstraintsList = new ArrayList<ItemIdentifierConstraint>(
+				topicType.getItemIdentifierConstraints());
+
+		command.execute();
+		Assert.assertTrue(command.canUndo());
+		command.undo();
+
+		Assert.assertTrue(itemIdentifierSize == topicType
+				.getItemIdentifierConstraints().size());
+		Assert.assertTrue(Tools.itemIdentifierConstraintListCompare(
+				itemIdentifierConstraintsList, topicType
+						.getItemIdentifierConstraints()));
 
 	}
 
@@ -555,6 +665,42 @@ public class DeleteTopicTypeConstraintItemCommandTest {
 		Assert.assertTrue(Tools.subjectIdentifierConstraintListCompare(
 				subjectIdentifierConstraintsList, topicType
 						.getSubjectIdentifierConstraints()));
+
+	}
+	
+	
+	@Test
+	public void redoTestItemIdentifier() {
+
+		constraint0 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint0);
+		constraint1 = ModelFactory.eINSTANCE
+				.createItemIdentifierConstraint();
+		topicType.getItemIdentifierConstraints().add(
+				(ItemIdentifierConstraint) constraint1);
+		featureID = ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
+
+		command = new DeleteTopicTypeConstraintItemCommand(topicType,
+				constraint0, featureID);
+		Assert.assertTrue(command.canExecute());
+		command.execute();
+
+		itemIdentifierSize = topicType.getItemIdentifierConstraints()
+				.size();
+		itemIdentifierConstraintsList = new ArrayList<ItemIdentifierConstraint>(
+				topicType.getItemIdentifierConstraints());
+
+		Assert.assertTrue(command.canUndo());
+		command.undo();
+		command.redo();
+
+		Assert.assertTrue(itemIdentifierSize == topicType
+				.getItemIdentifierConstraints().size());
+		Assert.assertTrue(Tools.itemIdentifierConstraintListCompare(
+				itemIdentifierConstraintsList, topicType
+						.getItemIdentifierConstraints()));
 
 	}
 

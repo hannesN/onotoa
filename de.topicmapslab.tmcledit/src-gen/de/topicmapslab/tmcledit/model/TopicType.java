@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getLocators <em>Locators</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getTopicReifiesConstraints <em>Topic Reifies Constraints</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicType#getItemIdentifierConstraints <em>Item Identifier Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -309,5 +310,21 @@ public interface TopicType extends TMCLConstruct {
 	 * @generated
 	 */
 	EList<TopicReifiesConstraint> getTopicReifiesConstraints();
+
+	/**
+	 * Returns the value of the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link de.topicmapslab.tmcledit.model.ItemIdentifierConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Item Identifier Constraints</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Item Identifier Constraints</em>' containment reference list.
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicType_ItemIdentifierConstraints()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ItemIdentifierConstraint> getItemIdentifierConstraints();
 
 } // TopicType

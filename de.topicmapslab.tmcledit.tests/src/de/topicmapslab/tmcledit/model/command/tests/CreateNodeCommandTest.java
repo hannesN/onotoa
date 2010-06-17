@@ -13,35 +13,26 @@
  */
 package de.topicmapslab.tmcledit.model.command.tests;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.swt.graphics.Point;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.eclipse.emf.common.command.AbstractCommand;
-import org.eclipse.swt.graphics.Point;
-
-import de.topicmapslab.tmcledit.model.AssociationNode;
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
-import de.topicmapslab.tmcledit.model.Edge;
-import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.Node;
-import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateNodeCommand;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
-import de.topicmapslab.tmcledit.model.index.TopicIndexer;
-import de.topicmapslab.tmcledit.model.index.TopicTypeNodeIndexer;
 
 /**
  * @author Hannes Niederhausen

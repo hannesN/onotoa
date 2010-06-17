@@ -235,6 +235,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractUniqueValueTopicTypeAdapter();
 			}
 			@Override
+			public Adapter caseItemIdentifierConstraint(ItemIdentifierConstraint object) {
+				return createItemIdentifierConstraintAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -825,6 +829,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractUniqueValueTopicTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.topicmapslab.tmcledit.model.ItemIdentifierConstraint <em>Item Identifier Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.topicmapslab.tmcledit.model.ItemIdentifierConstraint
+	 * @generated
+	 */
+	public Adapter createItemIdentifierConstraintAdapter() {
 		return null;
 	}
 

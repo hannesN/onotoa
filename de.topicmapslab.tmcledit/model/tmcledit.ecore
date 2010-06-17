@@ -29,6 +29,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="topicReifiesConstraints"
         upperBound="-1" eType="#//TopicReifiesConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemIdentifierConstraints"
+        upperBound="-1" eType="#//ItemIdentifierConstraint" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TopicId">
     <eLiterals name="SUBJECT_LOCATOR"/>
@@ -221,4 +223,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemIdentifierConstraint" eSuperTypes="#//AbstractRegExpConstraint #//AbstractCardinalityConstraint"/>
 </ecore:EPackage>
