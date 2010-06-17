@@ -42,19 +42,20 @@ public class AddRoleCombinationConstraintCommandTest {
 	@Before
 	public void prepare() {
 
-		if (aType == null){
-			
-			aType = ModelFactory.eINSTANCE.createAssociationType();
-			aType.getRoleCombinations().add(rcc1);
-			
-		}
+		
 			
 		if (rcc0 == null)
 			rcc0 = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
 		
 		if (rcc1 == null)
 			rcc1 = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
-
+		
+		if (aType == null){
+			
+			aType = ModelFactory.eINSTANCE.createAssociationType();
+			aType.getRoleCombinations().add(rcc1);
+			
+		}
 		if (command == null)
 			command = new AddRoleCombinationConstraintCommand(aType, rcc0);
 

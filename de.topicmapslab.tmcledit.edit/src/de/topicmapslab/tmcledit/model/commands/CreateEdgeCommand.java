@@ -11,9 +11,7 @@
 package de.topicmapslab.tmcledit.model.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
-import org.eclipse.emf.common.command.Command;
 
-import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.Node;
@@ -23,21 +21,10 @@ public class CreateEdgeCommand extends AbstractCommand {
 
 	private Diagram diagram;
 	private Edge edge;
-	private final boolean editType;
-	private Command cmd;
-
-	public CreateEdgeCommand(Edge newEdge) {
-		this(newEdge, null, true);
-	}
 
 	public CreateEdgeCommand(Edge newEdge, Diagram diagram) {
-		this(newEdge, diagram, true);
-	}
-
-	public CreateEdgeCommand(Edge newEdge, Diagram diagram, boolean editType) {
 		edge = newEdge;
 		this.diagram = diagram;
-		this.editType = editType;
 	}
 
 	public void setSource(Node source) {
@@ -64,9 +51,7 @@ public class CreateEdgeCommand extends AbstractCommand {
 			if (edge.getRoleConstraint() != null) {
 				edge.getRoleConstraint().setPlayer(
 						((TypeNode) edge.getTarget()).getTopicType());
-			} else {
-				
-			}
+			} 
 		} else {
 			return false;
 		}
@@ -83,39 +68,10 @@ public class CreateEdgeCommand extends AbstractCommand {
 
 	@Override
 	public void undo() {
-		if (editType) {
-			switch (edge.getType()) {
-			case AKO_TYPE:
-			case IS_ATYPE:
-				cmd.undo();
-				break;
-			case ROLE_CONSTRAINT_TYPE:
-				((AssociationNode) edge.getSource()).getAssociationConstraint()
-						.getPlayerConstraints()
-						.remove(edge.getRoleConstraint());
-				diagram.getEdges().remove(edge);
-				break;
-
-			}
-		}
 		diagram.getEdges().remove(edge);
 	}
 
 	public void redo() {
-		if (editType) {
-			switch (edge.getType()) {
-			case AKO_TYPE:
-			case IS_ATYPE:
-				cmd.redo();
-				break;
-			case ROLE_CONSTRAINT_TYPE:
-				((AssociationNode) edge.getSource()).getAssociationConstraint()
-						.getPlayerConstraints().add(edge.getRoleConstraint());
-				diagram.getEdges().add(edge);
-				break;
-
-			}
-		}
 		diagram.getEdges().add(edge);
 
 	}

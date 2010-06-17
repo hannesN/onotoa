@@ -189,7 +189,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	private void createRPEdge(Node node1, Node node2, RolePlayerConstraint rpc) {
 		Edge edge = createEdge(node1, node2, EdgeType.ROLE_CONSTRAINT_TYPE);
 		edge.setRoleConstraint(rpc);
-		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
 		addEdgeCommand(cmd);
 	}
 	
@@ -198,7 +198,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node, node2, EdgeType.AKO_TYPE);
-	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
 	    		addEdgeCommand(cmd);
 	    	}
 	    }
@@ -206,7 +206,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node2, node, EdgeType.AKO_TYPE);
-	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
 	    		addEdgeCommand(cmd);
 	    	}
 	    }
@@ -217,7 +217,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node, node2, EdgeType.IS_ATYPE);
-	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
 	    		addEdgeCommand(cmd);
 	    	}
 	    }
@@ -225,7 +225,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	Node node2 = nodeIndexer.getNodeFor(tt, diagram);
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node2, node, EdgeType.IS_ATYPE);
-	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram, false);
+	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
 	    		addEdgeCommand(cmd);
 	    	}
 	    }

@@ -147,6 +147,7 @@ public class RenameTopicTypeCommandTest {
 	public void executeTestWithBaseLocator() {
 
 		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test");
+		topicType0.setName("Test");
 		schema.setBaseLocator(BASELOCATOR_1);
 
 		Assert.assertTrue(command.canExecute());
@@ -247,7 +248,8 @@ public class RenameTopicTypeCommandTest {
 	@Test
 	public void redoTestWithBaseLocator() {
 
-		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test/");
+		topicType0.getIdentifiers().add(BASELOCATOR_1 + "test");
+		topicType0.setName("Test");
 		schema.setBaseLocator(BASELOCATOR_1);
 
 		Assert.assertTrue(command.canExecute());
