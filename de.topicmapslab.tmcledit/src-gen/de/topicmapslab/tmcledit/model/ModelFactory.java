@@ -331,6 +331,15 @@ public interface ModelFactory extends EFactory {
 	AbstractUniqueValueTopicType createAbstractUniqueValueTopicType();
 
 	/**
+	 * Returns a new object of class '<em>Item Identifier Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Item Identifier Constraint</em>'.
+	 * @generated
+	 */
+	ItemIdentifierConstraint createItemIdentifierConstraint();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

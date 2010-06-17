@@ -468,6 +468,17 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.ITEM_IDENTIFIER_CONSTRAINT: {
+				ItemIdentifierConstraint itemIdentifierConstraint = (ItemIdentifierConstraint)theEObject;
+				T result = caseItemIdentifierConstraint(itemIdentifierConstraint);
+				if (result == null) result = caseAbstractRegExpConstraint(itemIdentifierConstraint);
+				if (result == null) result = caseAbstractCardinalityConstraint(itemIdentifierConstraint);
+				if (result == null) result = caseAbstractConstraint(itemIdentifierConstraint);
+				if (result == null) result = caseTMCLConstruct(itemIdentifierConstraint);
+				if (result == null) result = caseOnoObject(itemIdentifierConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1084,6 +1095,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseAbstractUniqueValueTopicType(AbstractUniqueValueTopicType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Item Identifier Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Item Identifier Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseItemIdentifierConstraint(ItemIdentifierConstraint object) {
 		return null;
 	}
 

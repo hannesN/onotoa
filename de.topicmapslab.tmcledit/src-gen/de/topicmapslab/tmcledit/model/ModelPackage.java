@@ -333,13 +333,22 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = TMCL_CONSTRUCT_FEATURE_COUNT + 14;
+
+	/**
 	 * The number of structural features of the '<em>Topic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_TYPE_FEATURE_COUNT = TMCL_CONSTRUCT_FEATURE_COUNT + 14;
+	int TOPIC_TYPE_FEATURE_COUNT = TMCL_CONSTRUCT_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.AbstractConstraint <em>Abstract Constraint</em>}' class.
@@ -2183,6 +2192,15 @@ public interface ModelPackage extends EPackage {
 	int SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2380,6 +2398,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSOCIATION_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -2606,6 +2633,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int OCCURRENCE_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCCURRENCE_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -2934,6 +2970,15 @@ public interface ModelPackage extends EPackage {
 	int ROLE_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
+
+	/**
 	 * The number of structural features of the '<em>Role Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3222,6 +3267,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAME_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -3614,6 +3668,15 @@ public interface ModelPackage extends EPackage {
 	int REIFIABLE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REIFIABLE_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Reifier Constraint</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3811,6 +3874,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCOPED_REIFIABLE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = SCOPED_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_REIFIABLE_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = SCOPED_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' containment reference list.
@@ -4065,6 +4137,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_REG_EXP_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_REG_EXP_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Reg Exp</b></em>' attribute.
@@ -4421,6 +4502,15 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Item Identifier Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Unique</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4439,6 +4529,97 @@ public interface ModelPackage extends EPackage {
 	int ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE_FEATURE_COUNT = TOPIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.ItemIdentifierConstraintImpl <em>Item Identifier Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.topicmapslab.tmcledit.model.impl.ItemIdentifierConstraintImpl
+	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getItemIdentifierConstraint()
+	 * @generated
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT = 41;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__ID = ABSTRACT_REG_EXP_CONSTRAINT__ID;
+
+	/**
+	 * The feature id for the '<em><b>See also</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__SEE_ALSO = ABSTRACT_REG_EXP_CONSTRAINT__SEE_ALSO;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__COMMENT = ABSTRACT_REG_EXP_CONSTRAINT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__DESCRIPTION = ABSTRACT_REG_EXP_CONSTRAINT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__ANNOTATIONS = ABSTRACT_REG_EXP_CONSTRAINT__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Regexp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__REGEXP = ABSTRACT_REG_EXP_CONSTRAINT__REGEXP;
+
+	/**
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__CARD_MIN = ABSTRACT_REG_EXP_CONSTRAINT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT__CARD_MAX = ABSTRACT_REG_EXP_CONSTRAINT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Item Identifier Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_IDENTIFIER_CONSTRAINT_FEATURE_COUNT = ABSTRACT_REG_EXP_CONSTRAINT_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4446,7 +4627,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getTopicId()
 	 * @generated
 	 */
-	int TOPIC_ID = 41;
+	int TOPIC_ID = 42;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.EdgeType <em>Edge Type</em>}' enum.
@@ -4456,7 +4637,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 42;
+	int EDGE_TYPE = 43;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.KindOfTopicType <em>Kind Of Topic Type</em>}' enum.
@@ -4466,7 +4647,7 @@ public interface ModelPackage extends EPackage {
 	 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getKindOfTopicType()
 	 * @generated
 	 */
-	int KIND_OF_TOPIC_TYPE = 43;
+	int KIND_OF_TOPIC_TYPE = 44;
 
 
 	/**
@@ -4632,6 +4813,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTopicType_TopicReifiesConstraints();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.topicmapslab.tmcledit.model.TopicType#getItemIdentifierConstraints <em>Item Identifier Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Item Identifier Constraints</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicType#getItemIdentifierConstraints()
+	 * @see #getTopicType()
+	 * @generated
+	 */
+	EReference getTopicType_ItemIdentifierConstraints();
 
 	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.AbstractRegExpConstraint <em>Abstract Reg Exp Constraint</em>}'.
@@ -5694,6 +5886,16 @@ public interface ModelPackage extends EPackage {
 	EAttribute getAbstractUniqueValueTopicType_Unique();
 
 	/**
+	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.ItemIdentifierConstraint <em>Item Identifier Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Item Identifier Constraint</em>'.
+	 * @see de.topicmapslab.tmcledit.model.ItemIdentifierConstraint
+	 * @generated
+	 */
+	EClass getItemIdentifierConstraint();
+
+	/**
 	 * Returns the meta object for enum '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5866,6 +6068,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS = eINSTANCE.getTopicType_TopicReifiesConstraints();
+
+		/**
+		 * The meta object literal for the '<em><b>Item Identifier Constraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS = eINSTANCE.getTopicType_ItemIdentifierConstraints();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.AbstractRegExpConstraintImpl <em>Abstract Reg Exp Constraint</em>}' class.
@@ -6746,6 +6956,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE = eINSTANCE.getAbstractUniqueValueTopicType_Unique();
+
+		/**
+		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.ItemIdentifierConstraintImpl <em>Item Identifier Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.topicmapslab.tmcledit.model.impl.ItemIdentifierConstraintImpl
+		 * @see de.topicmapslab.tmcledit.model.impl.ModelPackageImpl#getItemIdentifierConstraint()
+		 * @generated
+		 */
+		EClass ITEM_IDENTIFIER_CONSTRAINT = eINSTANCE.getItemIdentifierConstraint();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.TopicId <em>Topic Id</em>}' enum.

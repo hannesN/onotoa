@@ -72,6 +72,9 @@ public class DeleteTopicTypeConstraintItemCommand extends AbstractCommand {
 		case ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS:
 			constraintList = topicType.getSubjectLocatorConstraints();
 			break;
+		case ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS:
+			constraintList = topicType.getItemIdentifierConstraints();
+			break;
 		}
 		
 		index = constraintList.indexOf(constraint);

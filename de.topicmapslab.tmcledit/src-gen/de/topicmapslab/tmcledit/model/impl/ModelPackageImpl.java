@@ -30,6 +30,7 @@ import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
@@ -358,6 +359,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass itemIdentifierConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum topicIdEEnum = null;
 
 	/**
@@ -575,6 +583,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getTopicType_TopicReifiesConstraints() {
 		return (EReference)topicTypeEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTopicType_ItemIdentifierConstraints() {
+		return (EReference)topicTypeEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1482,6 +1499,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getItemIdentifierConstraint() {
+		return itemIdentifierConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTopicId() {
 		return topicIdEEnum;
 	}
@@ -1547,6 +1573,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__NAME);
 		createEAttribute(topicTypeEClass, TOPIC_TYPE__LOCATORS);
 		createEReference(topicTypeEClass, TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS);
+		createEReference(topicTypeEClass, TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS);
 
 		abstractRegExpConstraintEClass = createEClass(ABSTRACT_REG_EXP_CONSTRAINT);
 		createEAttribute(abstractRegExpConstraintEClass, ABSTRACT_REG_EXP_CONSTRAINT__REGEXP);
@@ -1688,6 +1715,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		abstractUniqueValueTopicTypeEClass = createEClass(ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE);
 		createEAttribute(abstractUniqueValueTopicTypeEClass, ABSTRACT_UNIQUE_VALUE_TOPIC_TYPE__UNIQUE);
 
+		itemIdentifierConstraintEClass = createEClass(ITEM_IDENTIFIER_CONSTRAINT);
+
 		// Create enums
 		topicIdEEnum = createEEnum(TOPIC_ID);
 		edgeTypeEEnum = createEEnum(EDGE_TYPE);
@@ -1773,6 +1802,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		topicReifiesConstraintEClass.getESuperTypes().add(this.getAbstractTypedCardinalityConstraint());
 		domainDiagramEClass.getESuperTypes().add(this.getDiagram());
 		abstractUniqueValueTopicTypeEClass.getESuperTypes().add(this.getTopicType());
+		itemIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractRegExpConstraint());
+		itemIdentifierConstraintEClass.getESuperTypes().add(this.getAbstractCardinalityConstraint());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(topicTypeEClass, TopicType.class, "TopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1790,6 +1821,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTopicType_Name(), ecorePackage.getEString(), "name", null, 1, 1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicType_Locators(), ecorePackage.getEString(), "locators", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopicType_TopicReifiesConstraints(), this.getTopicReifiesConstraint(), null, "topicReifiesConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopicType_ItemIdentifierConstraints(), this.getItemIdentifierConstraint(), null, "itemIdentifierConstraints", null, 0, -1, TopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractRegExpConstraintEClass, AbstractRegExpConstraint.class, "AbstractRegExpConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractRegExpConstraint_Regexp(), ecorePackage.getEString(), "regexp", ".*", 1, 1, AbstractRegExpConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1930,6 +1962,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(abstractUniqueValueTopicTypeEClass, AbstractUniqueValueTopicType.class, "AbstractUniqueValueTopicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractUniqueValueTopicType_Unique(), ecorePackage.getEBoolean(), "unique", "false", 0, 1, AbstractUniqueValueTopicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(itemIdentifierConstraintEClass, ItemIdentifierConstraint.class, "ItemIdentifierConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(topicIdEEnum, TopicId.class, "TopicId");

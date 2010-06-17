@@ -5,6 +5,7 @@
  */
 package de.topicmapslab.tmcledit.model.impl;
 
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -53,6 +54,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getLocators <em>Locators</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getTopicReifiesConstraints <em>Topic Reifies Constraints</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicTypeImpl#getItemIdentifierConstraints <em>Item Identifier Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -238,6 +240,16 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	 * @ordered
 	 */
 	protected EList<TopicReifiesConstraint> topicReifiesConstraints;
+
+	/**
+	 * The cached value of the '{@link #getItemIdentifierConstraints() <em>Item Identifier Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getItemIdentifierConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ItemIdentifierConstraint> itemIdentifierConstraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -467,6 +479,18 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ItemIdentifierConstraint> getItemIdentifierConstraints() {
+		if (itemIdentifierConstraints == null) {
+			itemIdentifierConstraints = new EObjectContainmentEList<ItemIdentifierConstraint>(ItemIdentifierConstraint.class, this, ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS);
+		}
+		return itemIdentifierConstraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -480,6 +504,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				return ((InternalEList<?>)getSubjectLocatorConstraints()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS:
 				return ((InternalEList<?>)getTopicReifiesConstraints()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS:
+				return ((InternalEList<?>)getItemIdentifierConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -520,6 +546,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				return getLocators();
 			case ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS:
 				return getTopicReifiesConstraints();
+			case ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS:
+				return getItemIdentifierConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -585,6 +613,10 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				getTopicReifiesConstraints().clear();
 				getTopicReifiesConstraints().addAll((Collection<? extends TopicReifiesConstraint>)newValue);
 				return;
+			case ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS:
+				getItemIdentifierConstraints().clear();
+				getItemIdentifierConstraints().addAll((Collection<? extends ItemIdentifierConstraint>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -639,6 +671,9 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 			case ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS:
 				getTopicReifiesConstraints().clear();
 				return;
+			case ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS:
+				getItemIdentifierConstraints().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -679,6 +714,8 @@ public class TopicTypeImpl extends TMCLConstructImpl implements TopicType {
 				return locators != null && !locators.isEmpty();
 			case ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS:
 				return topicReifiesConstraints != null && !topicReifiesConstraints.isEmpty();
+			case ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS:
+				return itemIdentifierConstraints != null && !itemIdentifierConstraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
