@@ -22,6 +22,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -32,16 +33,17 @@ import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
-public class RoleModelPage extends AbstractModelPage{
-
+public class TopicRoleConstraintPage extends AbstractModelPage{
+	private Label playerLabel;
 	private Text cardMinText;
 	private Text cardMaxText;
 	private Combo roleCombo;
 	private CTabItem item;
 	
 	private AssociationTypeModelPage assPage;
+
 	
-	public RoleModelPage() {
+	public TopicRoleConstraintPage() {
 		super("role");
 	}
 	
@@ -53,6 +55,7 @@ public class RoleModelPage extends AbstractModelPage{
 		
 		cardMinText.setText(rpc.getCardMin());
 		cardMaxText.setText(rpc.getCardMax());
+		playerLabel.setText(rpc.getPlayer().getName());
 		super.updateUI();
 	}
 	
@@ -98,8 +101,14 @@ public class RoleModelPage extends AbstractModelPage{
 		gridLayout.marginWidth = 5;
 		gridLayout.marginHeight = 5;
 		gridLayout.verticalSpacing = 0;
-		gridLayout.horizontalSpacing = 0;
+		gridLayout.horizontalSpacing = 2;
 		comp.setLayout(gridLayout);
+		
+		toolkit.createLabel(comp, "Player:");
+		playerLabel = toolkit.createLabel(comp, "", SWT.READ_ONLY|SWT.BORDER|SWT.NO_FOCUS);
+		playerLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		playerLabel.setCapture(false);
+		playerLabel.setBackground(comp.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		
 		
 		toolkit.createLabel(comp, "Role:");
@@ -174,12 +183,17 @@ public class RoleModelPage extends AbstractModelPage{
 		if ( (rpc!=null) && (rpc.getRole()!=null) )
 			rpc.getRole().eAdapters().remove(this);
 		
+		if ( (rpc!=null) && (rpc.getPlayer()!=null) )
+			rpc.getPlayer().eAdapters().remove(this);
+		
 		super.setModel(model);
 		
 		rpc = (RolePlayerConstraint) model;
 		
 		if (rpc.getRole()!=null)
 			rpc.getRole().eAdapters().add(this);
+		
+		rpc.getPlayer().eAdapters().add(this);
 		
 		if (assPage != null)
 			assPage.setModel(getAssociationType());

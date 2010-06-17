@@ -140,7 +140,7 @@ public class PropertyDetailPageFactory {
 		} else if (model instanceof RolePlayerConstraint) {
 			page = pageMap.get(ROLE);
 			if (page==null) {
-				page = new RoleModelPage();
+				page = new TopicRoleConstraintPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(ROLE, page);
 				pageBook.registerPage(page.getID(), page.getControl());
