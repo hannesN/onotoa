@@ -75,7 +75,6 @@ public class PrefixMappingPage extends AbstractModelPage {
 		super("prefix mapping");
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void setModel(Object model) {
 		schema = null;

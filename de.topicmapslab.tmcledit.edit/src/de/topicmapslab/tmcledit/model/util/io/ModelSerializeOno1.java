@@ -11,7 +11,7 @@
 package de.topicmapslab.tmcledit.model.util.io;
 
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_ABSTRACT; 
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.*; 
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
@@ -105,6 +105,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -425,6 +426,14 @@ public class ModelSerializeOno1 implements ModelSerializer {
 			typeNode.appendChild(idNode);
 		}
 		
+		if (tt.getItemIdentifierConstraints().size()>0) {
+			Element idNode = document.createElement(E_ITEM_IDENTIFIER_CONSTRAINTS);
+			for (ItemIdentifierConstraint iic : tt.getItemIdentifierConstraints()) {
+				addItemIdentifierConstraint(iic, idNode);
+			}
+			typeNode.appendChild(idNode);
+		}
+		
 		if (tt.getSubjectLocatorConstraints().size()>0) {
 			Element idNode = document.createElement(E_SUBJECT_LOCATOR_CONSTRAINTS);
 			for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraints()) {
@@ -541,6 +550,14 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	    addRegExpAttributes(siNode, sic);
 	    addCardinalityAttributes(siNode, sic);
 	    addTMCLConstructElements(sic, siNode);
+	    idNode.appendChild(siNode);
+    }
+	
+	private void addItemIdentifierConstraint(ItemIdentifierConstraint iic, Element idNode) {
+		Element siNode = document.createElement(E_ITEM_IDENTIFIER_CONSTRAINT);
+	    addRegExpAttributes(siNode, iic);
+	    addCardinalityAttributes(siNode, iic);
+	    addTMCLConstructElements(iic, siNode);
 	    idNode.appendChild(siNode);
     }
 

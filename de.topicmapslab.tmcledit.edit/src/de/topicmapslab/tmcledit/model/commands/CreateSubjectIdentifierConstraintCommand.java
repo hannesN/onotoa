@@ -29,7 +29,7 @@ public class CreateSubjectIdentifierConstraintCommand extends AbstractCommand {
 	
 	public CreateSubjectIdentifierConstraintCommand(TopicType topicType,
 			SubjectIdentifierConstraint subjectIdentifierConstraint) {
-		super("Create Subject Idnetifier Constraint");
+		super("Create Subject Identifier Constraint");
 		this.topicType = topicType;
 		this.subjectIdentifierConstraint = subjectIdentifierConstraint;
 	}
