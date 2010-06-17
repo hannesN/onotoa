@@ -35,6 +35,11 @@ public class SetIsACommand extends AbstractConnectionCommand {
 	}
 	
 	@Override
+	protected List<TopicType> getTypeList() {
+	    return topic.getIsa();
+	}
+	
+	@Override
 	protected boolean prepare() {
 		if (newList.equals(topic.getIsa()))
 			return false;
