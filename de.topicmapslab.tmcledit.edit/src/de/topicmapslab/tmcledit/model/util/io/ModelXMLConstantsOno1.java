@@ -78,6 +78,8 @@ public interface ModelXMLConstantsOno1 {
 	public static final String E_SCOPE_CONSTRAINT = "scopeConstraint";
 	public static final String E_SEE_ALSO = "see-also";
 	public static final String E_SUBJECT_IDENTIFIER = "subjectIdentifier";
+	public static final String E_ITEM_IDENTIFIER_CONSTRAINT = "itemIdentifierConstraint";
+	public static final String E_ITEM_IDENTIFIER_CONSTRAINTS = "itemIdentifierConstraints";
 	public static final String E_SUBJECT_IDENTIFIER_CONSTRAINT = "subjectIdentifierConstraint";
 	public static final String E_SUBJECT_IDENTIFIER_CONSTRAINTS = "subjectIdentifierConstraints";
 	public static final String E_SUBJECT_LOCATOR = "subjectLocator";

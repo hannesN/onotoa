@@ -44,6 +44,7 @@ public interface ImageConstants {
 	public static String TOPICROLE = "./rp.gif";
 	public static String TOPICROLE_SM = "./rp_sm.gif";
 	public static String SUBJECTIDENTIFIERCONSTRAINT = "./siconstraint.gif";
+	public static String ITEMIDENTIFIERCONSTRAINT = "./iiconstraint.gif";
 	public static String SUBJECTLOCATORCONSTRAINT = "./slconstraint.gif";
 	public static String ICON = "./icon.png";
 	public static String DOMAINDIAGRAM = "./domaindiagram.gif";

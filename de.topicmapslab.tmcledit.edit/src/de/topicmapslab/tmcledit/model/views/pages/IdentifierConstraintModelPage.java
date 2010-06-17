@@ -21,6 +21,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.model.AbstractRegExpConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.util.TextObserver;
 
@@ -68,8 +69,11 @@ public class IdentifierConstraintModelPage extends AbstractCardinalityConstraint
 	public void setModel(Object model) {
 		if (model instanceof SubjectLocatorConstraint)
 			item.setText("Subject Locator");
-		else
+		else if (model instanceof SubjectIdentifierConstraint)
 			item.setText("Subject Identifier");
+		else
+			item.setText("Item Identifier");
+		
 		super.setModel(model);
 	}
 	

@@ -21,6 +21,7 @@ import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.graphics.Image;
 
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
@@ -113,6 +114,22 @@ public class TreeTopic extends TreeParent {
 				}
 				refresh();
 			}
+		} else if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS) {
+			if (notification.getEventType() == Notification.ADD) {
+				addChild(new TreeItemIdentifier(getModelView(),  (ItemIdentifierConstraint) notification.getNewValue()));
+				refresh();
+			} else if (notification.getEventType() == Notification.REMOVE) {
+				for (Iterator<TreeObject> it = getChildrenList().iterator(); it.hasNext();) {
+					TreeObject obj = it.next();
+					if (obj instanceof TreeItemIdentifier) {
+						if (obj.getModel().equals(notification.getOldValue())) {
+							it.remove();
+							break;
+						}
+					}
+				}
+				refresh();
+			}
 		}
 
 	}
@@ -126,7 +143,6 @@ public class TreeTopic extends TreeParent {
 		return getTopicType().getName();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class key) {
 		if (getTopicType() == null)

@@ -21,6 +21,7 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -76,7 +77,6 @@ public class PropertyDetailPageFactory {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	public AbstractModelPage getPageFor(Object model) {
 		AbstractModelPage page = emptyPage;
 		
@@ -169,7 +169,9 @@ public class PropertyDetailPageFactory {
 				pageMap.put(NAME_CONSTRAINT, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
-		} else if  ((model instanceof SubjectLocatorConstraint) || (model instanceof SubjectIdentifierConstraint) ) {
+		} else if  ((model instanceof SubjectLocatorConstraint) 
+					|| (model instanceof SubjectIdentifierConstraint)
+					|| (model instanceof ItemIdentifierConstraint)) {
 			page = pageMap.get(IDENTIFIER_CONSTRAINT);
 			if (page==null) {
 				page = new IdentifierConstraintModelPage();

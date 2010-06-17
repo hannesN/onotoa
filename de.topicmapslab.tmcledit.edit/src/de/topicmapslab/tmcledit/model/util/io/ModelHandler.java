@@ -10,7 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.util.io;
 
-import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_BASE_LOCATOR;
+import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.*;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MAX;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_CARD_MIN;
 import static de.topicmapslab.tmcledit.model.util.io.ModelXMLConstantsOno1.A_HEIGHT;
@@ -89,6 +89,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
@@ -187,6 +188,9 @@ class ModelHandler extends DefaultHandler {
 		}
 		if (E_SUBJECT_IDENTIFIER_CONSTRAINT.equals(qName)) {
 			addSubjectIdentifierConstraint(attributes);
+		}
+		if (E_ITEM_IDENTIFIER_CONSTRAINT.equals(qName)) {
+			addItemIdentifierConstraint(attributes);
 		}
 		if (E_SUBJECT_LOCATOR_CONSTRAINT.equals(qName)) {
 			addSubjectLocatorConstraint(attributes);
@@ -556,6 +560,16 @@ class ModelHandler extends DefaultHandler {
 	    	currTopicType.getSubjectIdentifierConstraints().add(sic);
 	    }
     }
+	
+	private void addItemIdentifierConstraint(Attributes attributes) {
+	    if (currTopicType != null) {
+	    	ItemIdentifierConstraint iic = (ItemIdentifierConstraint) createIdentityConstraint(attributes,
+	    	        ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS);
+	    	setId(iic, attributes);
+	    	constructs.add(iic);
+	    	currTopicType.getItemIdentifierConstraints().add(iic);
+	    }
+    }
 
 	private void addMappingElement(Attributes attributes) {
 	    String key = attributes.getValue(A_KEY);
@@ -643,8 +657,10 @@ class ModelHandler extends DefaultHandler {
 		AbstractRegExpConstraint c = null;
 		if (featureID == ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS) {
 			c = fac.createSubjectIdentifierConstraint();
-		} else {
+		} else if (featureID == ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS) {
 			c = fac.createSubjectLocatorConstraint();
+		} else {
+			c = fac.createItemIdentifierConstraint();
 		}
 		String regExp = attributes.getValue(A_REG_EXP);
 		if (regExp != null)
@@ -732,7 +748,9 @@ class ModelHandler extends DefaultHandler {
 			state = State.NONE;
 			constructs.pop();
 		}
-		if ((E_SUBJECT_IDENTIFIER_CONSTRAINT.equals(qName)) || (E_SUBJECT_LOCATOR_CONSTRAINT.equals(qName))) {
+		if ((E_SUBJECT_IDENTIFIER_CONSTRAINT.equals(qName)) 
+				|| (E_ITEM_IDENTIFIER_CONSTRAINT.equals(qName))
+			    || (E_SUBJECT_LOCATOR_CONSTRAINT.equals(qName))) {
 			if (currTopicType != null) {
 				constructs.pop();
 				state = State.TOPIC_TYPE;

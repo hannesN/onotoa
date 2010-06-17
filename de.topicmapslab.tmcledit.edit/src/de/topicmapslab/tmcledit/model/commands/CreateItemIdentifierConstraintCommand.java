@@ -28,10 +28,10 @@ public class CreateItemIdentifierConstraintCommand extends AbstractCommand {
 	}
 	
 	public CreateItemIdentifierConstraintCommand(TopicType topicType,
-			ItemIdentifierConstraint subjectIdentifierConstraint) {
-		super("Create Subject Idnetifier Constraint");
+			ItemIdentifierConstraint itemIdentifierConstraint) {
+		super("Create Item Identifier Constraint");
 		this.topicType = topicType;
-		this.itemIdentifierConstraint = subjectIdentifierConstraint;
+		this.itemIdentifierConstraint = itemIdentifierConstraint;
 	}
 	
 	public void execute() {

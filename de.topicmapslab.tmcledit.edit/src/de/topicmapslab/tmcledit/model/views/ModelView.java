@@ -97,6 +97,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -111,6 +112,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.actions.CloseAction;
 import de.topicmapslab.tmcledit.model.actions.CreateDiagramAction;
 import de.topicmapslab.tmcledit.model.actions.CreateDomainDiagramAction;
+import de.topicmapslab.tmcledit.model.actions.CreateItemIdenifierConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateNameConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.model.actions.CreateSubjectIdenifierConstraintAction;
@@ -132,6 +134,7 @@ import de.topicmapslab.tmcledit.model.validation.ModelValidator;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeAssocConstraint;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeDiagram;
+import de.topicmapslab.tmcledit.model.views.treenodes.TreeItemIdentifier;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeName;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeOccurrence;
@@ -192,6 +195,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private CreateOccurrenceConstraintAction createOccurrenceConstraintAction;
 
 	private CreateSubjectIdenifierConstraintAction createSubjectIdenifierConstraintAction;
+	
+	private CreateItemIdenifierConstraintAction createItemIdenifierConstraintAction;
 
 	private CreateSubjectLocatorConstraintAction createSubjectLocatorConstraintAction;
 
@@ -469,6 +474,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			manager.add(createNameConstraintAction);
 		if (createOccurrenceConstraintAction.isEnabled())
 			manager.add(createOccurrenceConstraintAction);
+		if (createItemIdenifierConstraintAction.isEnabled())
+			manager.add(createItemIdenifierConstraintAction);
 		if (createSubjectIdenifierConstraintAction.isEnabled())
 			manager.add(createSubjectIdenifierConstraintAction);
 		if (createSubjectLocatorConstraintAction.isEnabled())
@@ -505,6 +512,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		createNameConstraintAction = new CreateNameConstraintAction(this);
 		createOccurrenceConstraintAction = new CreateOccurrenceConstraintAction(this);
+		createItemIdenifierConstraintAction = new CreateItemIdenifierConstraintAction(this);
 		createSubjectIdenifierConstraintAction = new CreateSubjectIdenifierConstraintAction(this);
 		createSubjectLocatorConstraintAction = new CreateSubjectLocatorConstraintAction(this);
 
@@ -1104,6 +1112,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				}
 				for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
 					to.addChild(new TreeOccurrence(ModelView.this, otc));
+				}
+				for (ItemIdentifierConstraint iic : tt.getItemIdentifierConstraints()) {
+					to.addChild(new TreeItemIdentifier(ModelView.this, iic));
 				}
 				for (SubjectIdentifierConstraint sic : tt.getSubjectIdentifierConstraints()) {
 					to.addChild(new TreeSubjectIdentifier(ModelView.this, sic));
