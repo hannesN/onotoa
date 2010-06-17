@@ -35,6 +35,11 @@ public class SetAkoCommand extends AbstractConnectionCommand {
 	}
 	
 	@Override
+	protected List<TopicType> getTypeList() {
+	    return topic.getAko();
+	}
+	
+	@Override
 	protected boolean prepare() {
 		if (topic.getAko().equals(newList))
 			return false;

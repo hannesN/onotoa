@@ -12,7 +12,10 @@ package de.topicmapslab.tmcledit.model.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
@@ -30,14 +33,12 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public abstract class AbstractConnectionCommand extends AbstractCommand {
 
-	private List<TopicType> removeList = Collections.emptyList();
-	private List<TopicType> addList = Collections.emptyList();
-	private List<EdgeWrapper> removeEdgeList = Collections.emptyList();
-
-
-
-	private List<EdgeWrapper> addEdgeList;
+	private List<TopicType> oldList = Collections.emptyList();
 	protected List<TopicType> newList;
+	
+	private Map<Diagram, List<Edge>> newEdgesMaps;
+	private Map<Diagram, List<Edge>> oldEdgesMaps;
+	
 	protected final TopicType topic;
 
 
@@ -50,41 +51,45 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 
 	protected abstract EdgeType getEdgeType();
 	
+	protected abstract List<TopicType> getTypeList();
+	
 	public void execute() {
-		if (getEdgeType()==EdgeType.AKO_TYPE) {
-			topic.getAko().removeAll(removeList);
-			topic.getAko().addAll(addList);
-		} else if (getEdgeType()==EdgeType.IS_ATYPE) {
-			topic.getIsa().removeAll(removeList);
-			topic.getIsa().addAll(addList);
-		}
-		for (EdgeWrapper ew : addEdgeList) {
-			ew.diagram.getEdges().add(ew.edge);
-		}
-		for (EdgeWrapper ew : removeEdgeList) {
-			ew.diagram.getEdges().remove(ew.edge);
+		topic.eSetDeliver(newList.size()!=0);
+		getTypeList().clear();
+		topic.eSetDeliver(true);
+		getTypeList().addAll(newList);
+			
+		for (Entry<Diagram, List<Edge>> e : newEdgesMaps.entrySet()) {
+			Diagram d = e.getKey();
+			List<Edge> edges = e.getValue();
+			
+			d.eSetDeliver(edges.size()>0);
+			d.getEdges().clear();
+			d.eSetDeliver(true);
+			d.getEdges().addAll(edges);
 		}
 		
 	}
-
+	
 	public void redo() {
 		execute();
 	}
 
 	@Override
 	public void undo() {
-		if (getEdgeType()==EdgeType.AKO_TYPE) {
-			topic.getAko().addAll(removeList);
-			topic.getAko().removeAll(addList);
-		} else if (getEdgeType()==EdgeType.IS_ATYPE) {
-			topic.getIsa().addAll(removeList);
-			topic.getIsa().removeAll(addList);
-		}
-		for (EdgeWrapper ew : addEdgeList) {
-			ew.diagram.getEdges().remove(ew.edge);
-		}
-		for (EdgeWrapper ew : removeEdgeList) {
-			ew.diagram.getEdges().add(ew.edge);
+		topic.eSetDeliver(oldList.size()!=0);
+		getTypeList().clear();
+		topic.eSetDeliver(true);
+		getTypeList().addAll(oldList);
+		
+		for (Entry<Diagram, List<Edge>> e : oldEdgesMaps.entrySet()) {
+			Diagram d = e.getKey();
+			List<Edge> edges = e.getValue();
+			
+			d.eSetDeliver(edges.size()>0);
+			d.getEdges().clear();
+			d.eSetDeliver(true);
+			d.getEdges().addAll(edges);
 		}
 	}
 
@@ -98,15 +103,10 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		createEdgeLists();
 		
 		
-		// sort of clean up ;)
-		newList = null;
 		return true;
 	}
 
 	private void createEdgeLists() {
-		addEdgeList = new ArrayList<EdgeWrapper>();
-		removeEdgeList = new ArrayList<EdgeWrapper>();
-		
 		// now the more costly part.. finding edges which represent the current state
 		TopicMapSchema schema = (TopicMapSchema) topic.eContainer();
 		File file = (File) schema.eContainer();
@@ -117,7 +117,11 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 			// check if we have a topicnode representing the topic
 			TypeNode currentNode = (TypeNode) ModelIndexer.getNodeIndexer().getNodeFor(topic, d);
 			if (currentNode!=null) {
-				findRemoveEdges(d);
+				
+				List<Edge> newEdges = new ArrayList<Edge>(d.getEdges());
+				
+				// remove the edges which aren't needed anymore
+				findRemoveEdges(d, newEdges);
 			
 			
 				// now we have the type node and all edges we will remove
@@ -125,44 +129,50 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 				for (Node node : d.getNodes()) {
 					if (node instanceof TypeNode) {
 						TypeNode tmpNode = (TypeNode) node;
-						if (addList.contains(tmpNode.getTopicType()) ) {
+						if ( (newList.contains(tmpNode.getTopicType())) 
+								&& (!oldList.contains(tmpNode.getTopicType())) ) {
+							
 							Edge e = ModelFactory.eINSTANCE.createEdge();
 							e.setType(getEdgeType());
 							e.setSource(currentNode);
 							e.setTarget(tmpNode);
-							addEdgeList.add(new EdgeWrapper(d, e));
+							newEdges.add(e);
 						}
 					}
 				}
+				putNewEdgesEntry(d, newEdges);
 			}
 			
 		}
 	}
 
-	private void findRemoveEdges(Diagram d) {
+	private void findRemoveEdges(Diagram d, List<Edge> edges) {
 		for (Edge edge : ModelIndexer.getNodeIndexer().getEdges(d, getEdgeType())) {
 			if (((TypeNode)edge.getSource()).getTopicType().equals(topic)) {
 				TypeNode target = (TypeNode) edge.getTarget();
-				if (removeList.contains(target.getTopicType()) )
-					removeEdgeList.add(new EdgeWrapper(d, edge));
+				if (oldList.contains(target.getTopicType()) && (!newList.contains(target.getTopicType())) )
+					edges.remove(edge);
 			}
 		}
 	}
 
 	private void createTypeLists() {
 		List<TopicType> tmpList = (getEdgeType()==EdgeType.AKO_TYPE) ? topic.getAko() : topic.getIsa();
-		addList = new ArrayList<TopicType>();
-		for (TopicType tt : newList) {
-			if (!tmpList.contains(tt)) {
-				addList.add(tt);
-			}
+		oldList = new ArrayList<TopicType>(tmpList);
+	}
+	
+	/**
+	 * Puts an entry to the newEntriesMap and oldEntriesMap
+	 * @param d
+	 * @param list
+	 */
+	private void putNewEdgesEntry(Diagram d, List<Edge> list) {
+		if (newEdgesMaps==null) {
+			newEdgesMaps = new HashMap<Diagram, List<Edge>>();
+			oldEdgesMaps = new HashMap<Diagram, List<Edge>>();
 		}
-		removeList = new ArrayList<TopicType>();
 		
-		for (TopicType tt : tmpList) {
-			if (!newList.contains(tt)) {
-				removeList.add(tt);
-			}
-		}
+		newEdgesMaps.put(d, list);
+		oldEdgesMaps.put(d, new ArrayList<Edge>(d.getEdges()));
 	}
 }
