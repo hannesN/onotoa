@@ -325,6 +325,9 @@ public class TopicTypePage extends AbstractModelPage implements Adapter {
 	}
 
 	private void refreshRefies() {
+		// widgets aren't initialized
+		if (cannotReifyButton==null)
+			return;
 		TopicType t = getCastedModel();
 		if (t.getTopicReifiesConstraints().size()==1) {
 			boolean cannotReify = t.getTopicReifiesConstraints().get(0).getType()==null;

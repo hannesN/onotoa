@@ -108,10 +108,10 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
 	@Override
 	protected Command getConnectionCreateCommand(CreateConnectionRequest request) {
-		CreateEdgeCommand cmd = new CreateEdgeCommand((Edge) request
-				.getNewObject());
 		Diagram d = (Diagram) getHost().getParent().getModel();
-		cmd.setDiagram(d);
+		CreateEdgeCommand cmd = new CreateEdgeCommand((Edge) request
+				.getNewObject(), d);
+		
 
 		Node node = (Node) getHost().getModel();
 		if (cmd.getEdge().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {

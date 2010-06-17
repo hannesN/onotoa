@@ -10,8 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.commands;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
@@ -29,7 +30,7 @@ public class DeleteRoleCommand extends AbstractCommand {
 	private final RoleConstraint roleConstraint;
 	private final boolean cascade;
 	
-	private List<DeleteRolePlayerConstraintCommand> deletePlayerCmds = Collections.emptyList();
+	private LinkedList<DeleteRolePlayerConstraintCommand> deletePlayerCmds = null;
 	private int idx;
 	
 	public DeleteRoleCommand(
@@ -49,23 +50,29 @@ public class DeleteRoleCommand extends AbstractCommand {
 	}
 
 	public void execute() {
-		for (DeleteRolePlayerConstraintCommand cmd : deletePlayerCmds)
+		for (DeleteRolePlayerConstraintCommand cmd : getDeletePlayerCmds())
 			if (cmd.canExecute())
 				cmd.execute();
 		associationType.getRoles().remove(roleConstraint);
 	}
 
 	public void redo() {
-		for (DeleteRolePlayerConstraintCommand cmd : deletePlayerCmds)
+		for (DeleteRolePlayerConstraintCommand cmd : getDeletePlayerCmds())
 			cmd.redo();
 		associationType.getRoles().remove(roleConstraint);
 	}
 
 	@Override
 	public void undo() {
-		for (DeleteRolePlayerConstraintCommand cmd : deletePlayerCmds)
-			if (cmd.canUndo())
-				cmd.undo();
+		if (getDeletePlayerCmds().size() > 0) {
+			LinkedList<DeleteRolePlayerConstraintCommand> l = (LinkedList<DeleteRolePlayerConstraintCommand>) getDeletePlayerCmds();
+			Iterator<DeleteRolePlayerConstraintCommand> it = l.descendingIterator();
+			while (it.hasNext()) {
+				DeleteRolePlayerConstraintCommand cmd = it.next();
+				if (cmd.canUndo())
+					cmd.undo();
+			}
+		}
 		associationType.getRoles().add(idx, roleConstraint);
 	}
 	
@@ -92,10 +99,16 @@ public class DeleteRoleCommand extends AbstractCommand {
 		}
 		return true;
 	}
+	
+	private List<DeleteRolePlayerConstraintCommand> getDeletePlayerCmds() {
+		if (deletePlayerCmds==null)
+			return Collections.emptyList();
+	    return deletePlayerCmds;
+    }
 
 	private void addCommand(AssociationTypeConstraint atc, RolePlayerConstraint rpc) {
-		if (deletePlayerCmds==Collections.EMPTY_LIST)
-			deletePlayerCmds = new ArrayList<DeleteRolePlayerConstraintCommand>();
+		if (deletePlayerCmds==null)
+			deletePlayerCmds = new LinkedList<DeleteRolePlayerConstraintCommand>();
 		
 		deletePlayerCmds.add(new DeleteRolePlayerConstraintCommand(atc, rpc));
 	}

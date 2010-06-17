@@ -87,8 +87,14 @@ public class RenameTopicTypeCommand extends AbstractCommand {
 		}
 		if (tt.getIdentifiers().size()==1) {
 			// todo check if si was changed manually
-			if (!tt.getIdentifiers().get(0).startsWith(baseLocator))
+			String id = tt.getIdentifiers().get(0);
+			if (!id.startsWith(baseLocator))
 				return false;
+			else {
+				id = id.replace(baseLocator, "");
+				if (!id.equals(tt.getName().toLowerCase()))
+					return false;
+			}
 		}
 		
 		return true;
