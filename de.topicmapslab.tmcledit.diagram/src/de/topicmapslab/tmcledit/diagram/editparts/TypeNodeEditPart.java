@@ -267,6 +267,7 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		TopicType topicType = getCastedModel().getTopicType();
 		list.addAll(topicType.getOccurrenceConstraints());
 		list.addAll(topicType.getNameConstraints());
+		list.addAll(topicType.getItemIdentifierConstraints());
 		list.addAll(topicType.getSubjectIdentifierConstraints());
 		list.addAll(topicType.getSubjectLocatorConstraints());
 		
@@ -341,8 +342,9 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 			int i = compartmentFigure.getChildren().indexOf(firstLine);
 			compartmentFigure.add(child, i);
 //			gridLayout.setConstraint(child, getChildGridData());
-		} else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) ||
-				  ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) ) {
+		} else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) 
+				|| ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) 
+				|| ((childEditPart instanceof ItemIdentifierConstraintEditPart)) ) {
 			compartmentFigure.add(child);
 //			gridLayout.setConstraint(child, getChildGridData());
 		}
