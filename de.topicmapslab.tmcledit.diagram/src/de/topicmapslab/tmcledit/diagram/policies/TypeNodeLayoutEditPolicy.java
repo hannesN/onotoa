@@ -23,12 +23,14 @@ import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.commands.CreateItemIdentifierConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateNameTypeConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateSubjectIdentifierConstraintCommand;
@@ -43,23 +45,36 @@ public class TypeNodeLayoutEditPolicy extends LayoutEditPolicy {
 		TMCLEditDomain ed = (TMCLEditDomain) getHost().getViewer().getEditDomain();
 		AbstractCommand cmd = null;
 		
-		if (request.getNewObjectType()==OccurrenceTypeConstraint.class) {
+		if (request.getNewObjectType() == OccurrenceTypeConstraint.class) {
 			// getting container which is a diagram
 			Diagram diagram = (Diagram) node.eContainer();
-			if (diagram==null)
+			if (diagram == null)
 				return null;
-			TopicType tt = ((TypeNodeEditPart)getHost()).getCastedModel().getTopicType();
-			
-			cmd = new CreateOccurrenceConstraintCommand(tt, (OccurrenceTypeConstraint) request.getNewObject());
-		} else if (request.getNewObjectType()==NameTypeConstraint.class) {
-			TopicType tt = ((TypeNodeEditPart)getHost()).getCastedModel().getTopicType();
-			cmd = new CreateNameTypeConstraintCommand(tt, (NameTypeConstraint) request.getNewObject());
-		} else if (request.getNewObjectType()==SubjectIdentifierConstraint.class) {
-			TopicType tt = ((TypeNodeEditPart)getHost()).getCastedModel().getTopicType();
-			cmd = new CreateSubjectIdentifierConstraintCommand(tt, (SubjectIdentifierConstraint) request.getNewObject());
-		} else if (request.getNewObjectType()==SubjectLocatorConstraint.class) {
-				TopicType tt = ((TypeNodeEditPart)getHost()).getCastedModel().getTopicType();
-				cmd = new CreateSubjectLocatorConstraintCommand(tt, (SubjectLocatorConstraint) request.getNewObject());
+			TopicType tt = ((TypeNodeEditPart) getHost()).getCastedModel()
+					.getTopicType();
+
+			cmd = new CreateOccurrenceConstraintCommand(tt,
+					(OccurrenceTypeConstraint) request.getNewObject());
+		} else if (request.getNewObjectType() == NameTypeConstraint.class) {
+			TopicType tt = ((TypeNodeEditPart) getHost()).getCastedModel()
+					.getTopicType();
+			cmd = new CreateNameTypeConstraintCommand(tt,
+					(NameTypeConstraint) request.getNewObject());
+		} else if (request.getNewObjectType() == SubjectIdentifierConstraint.class) {
+			TopicType tt = ((TypeNodeEditPart) getHost()).getCastedModel()
+					.getTopicType();
+			cmd = new CreateSubjectIdentifierConstraintCommand(tt,
+					(SubjectIdentifierConstraint) request.getNewObject());
+		} else if (request.getNewObjectType() == SubjectLocatorConstraint.class) {
+			TopicType tt = ((TypeNodeEditPart) getHost()).getCastedModel()
+					.getTopicType();
+			cmd = new CreateSubjectLocatorConstraintCommand(tt,
+					(SubjectLocatorConstraint) request.getNewObject());
+		} else if (request.getNewObjectType() == ItemIdentifierConstraint.class) {
+			TopicType tt = ((TypeNodeEditPart) getHost()).getCastedModel()
+					.getTopicType();
+			cmd = new CreateItemIdentifierConstraintCommand(tt,
+					(ItemIdentifierConstraint) request.getNewObject());
 		}
 		
 		if (cmd!=null)

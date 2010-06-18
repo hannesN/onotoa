@@ -263,6 +263,26 @@ public class TMCLDiagramEditorUtil {
 				null));
 
 		group.add(new CombinedTemplateCreationEntry(
+				"Item Identifier Constraint",
+				"Item Identifier Constraint",
+				new CreationFactory() {
+
+					public Object getNewObject() {
+						return ModelFactory.eINSTANCE
+								.createItemIdentifierConstraint();
+					}
+
+					public Object getObjectType() {
+						return ItemIdentifierConstraint.class;
+					}
+
+				},
+				ImageProvider
+						.getImageDescriptor(ImageConstants.ITEMIDENTIFIERCONSTRAINT),
+				ImageProvider
+						.getImageDescriptor(ImageConstants.ITEMIDENTIFIERCONSTRAINT)));
+		
+		group.add(new CombinedTemplateCreationEntry(
 						"Subject Identifier Constraint",
 						"Subject Identifier Constraint",
 						new CreationFactory() {
