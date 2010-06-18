@@ -47,6 +47,7 @@ import org.eclipse.swt.widgets.Display;
 import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.LineFigure;
+import de.topicmapslab.tmcledit.diagram.figures.SelectionFigure;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
@@ -79,6 +80,11 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 	private LineFigure firstLine;
 	private LineFigure secondLine;
 
+	// indices of identifier constraints
+	private int lastIIIndex = 0;
+	private int lastSIIndex = 0;
+	private int lastSLIndex = 0;
+	
 //	private GridLayout gridLayout;
 	
 	@Override
@@ -345,10 +351,22 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		} else if ( (childEditPart instanceof SubjectLocatorConstraintEditPart) 
 				|| ((childEditPart instanceof SubjectIdentifierConstraintEditPart)) 
 				|| ((childEditPart instanceof ItemIdentifierConstraintEditPart)) ) {
-			compartmentFigure.add(child);
+			int i = findIndex(childEditPart);
+			compartmentFigure.add(child, i);
 //			gridLayout.setConstraint(child, getChildGridData());
 		}
-		
+	}
+	
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		if (childEditPart instanceof ItemIdentifierConstraintEditPart) {
+			 lastIIIndex--;
+		} else if (childEditPart instanceof SubjectIdentifierConstraintEditPart) {
+			 lastSIIndex--;
+		} else if (childEditPart instanceof SubjectLocatorConstraintEditPart) {
+			 lastSLIndex--;
+		}
+		super.removeChildVisual(childEditPart);
 	}
 
 //	private GridData getChildGridData() {
@@ -357,6 +375,29 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 //		return gd;
 //	}
 	
+	/**
+	 * Looks for the last position of an identifier of the given type 
+	 */
+	private int findIndex(EditPart childEditPart) {
+		List<?> childrenList = compartmentFigure.getChildren();
+		int i = childrenList.indexOf(secondLine)+1;
+		
+		int result = i;
+		
+		if (childEditPart instanceof ItemIdentifierConstraintEditPart) {
+			 result = i+lastIIIndex;
+			 lastIIIndex++;
+		} else if (childEditPart instanceof SubjectIdentifierConstraintEditPart) {
+			 result = i+lastIIIndex+lastSIIndex;
+			 lastSIIndex++;
+		} else if (childEditPart instanceof SubjectLocatorConstraintEditPart) {
+			 result = i+lastIIIndex+lastSIIndex+lastSLIndex;
+			 lastSLIndex++;
+		}
+		
+		return result;
+	}
+
 	@Override
 	public IFigure getContentPane() {
 		return compartmentFigure;
