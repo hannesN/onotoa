@@ -30,6 +30,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
@@ -69,14 +70,13 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		return sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
 		EditDomain ed = null;
 
 		CompoundCommand cmd = new CompoundCommand();
 
-		Iterator it = getSelections().iterator();
+		Iterator<?> it = getSelections().iterator();
 		while (it.hasNext()) {
 			EditPart selectedEditPart = (EditPart) it.next();
 			if (ed == null)
@@ -109,11 +109,16 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		} else if (model instanceof Comment) {
 			cmd = new DeleteCommentCommand((Comment) model);
 		} else if (model instanceof ReifierConstraint) {
-			ReifiableTopicType rtt = (ReifiableTopicType) ((EObject) model).eContainer();
-			cmd = new GenericSetCommand(rtt, ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, null);
+			ReifiableTopicType rtt = (ReifiableTopicType) ((EObject) model)
+					.eContainer();
+			cmd = new GenericSetCommand(
+					rtt,
+					ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT,
+					null);
 		} else if (model instanceof ScopeConstraint) {
 			ScopeConstraint sc = (ScopeConstraint) model;
-			cmd = new RemoveScopeConstraintsCommand((ScopedTopicType) sc.eContainer(), sc);
+			cmd = new RemoveScopeConstraintsCommand(
+					(ScopedTopicType) sc.eContainer(), sc);
 		} else if (model instanceof AbstractConstraint) {
 			cmd = getDeleteTopicTypeConstraintItemCommand(model);
 		}
@@ -161,6 +166,8 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 			type = ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS;
 		} else if (model instanceof SubjectLocatorConstraint) {
 			type = ModelPackage.TOPIC_TYPE__SUBJECT_LOCATOR_CONSTRAINTS;
+		} else if (model instanceof ItemIdentifierConstraint) {
+			type = ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 		}
 		AbstractConstraint ac = (AbstractConstraint) model;
 		cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) ac
@@ -178,7 +185,6 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		return ID;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void update() {
 		if (getSelections().isEmpty()) {
 			setEnabled(false);
@@ -187,7 +193,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 
 		setEnabled(true);
 
-		Iterator it = getSelections().iterator();
+		Iterator<?> it = getSelections().iterator();
 		while (it.hasNext()) {
 			EditPart selectedEditPart = (EditPart) it.next();
 			Object model = selectedEditPart.getModel();
@@ -205,6 +211,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 	private boolean isValidEditPartModel(Object model) {
 		return (model instanceof OccurrenceTypeConstraint)
 				|| (model instanceof NameTypeConstraint)
+				|| (model instanceof ItemIdentifierConstraint)
 				|| (model instanceof SubjectIdentifierConstraint)
 				|| (model instanceof SubjectLocatorConstraint)
 				|| (model instanceof Edge)

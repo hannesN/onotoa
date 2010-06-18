@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Shell;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
@@ -84,6 +85,11 @@ public class DeleteTMCLConstruct extends Action implements ISelectionChangedList
 				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
 				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__OCCURRENCE_CONSTRAINTS));
 
+			if (construct instanceof ItemIdentifierConstraint)
+				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
+				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS));
+
+			
 			if (construct instanceof SubjectIdentifierConstraint)
 				cmd.append(new DeleteTopicTypeConstraintItemCommand((TopicType) construct.eContainer(),
 				        (AbstractConstraint) construct, ModelPackage.TOPIC_TYPE__SUBJECT_IDENTIFIER_CONSTRAINTS));
