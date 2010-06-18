@@ -32,6 +32,8 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 	private Text nameText;
 	private Text baseLocatorText;
 	private CTabItem item;
+	
+	private PrefixMappingPage prefixPage;
 
 	public TopicMapSchemaPropertyPage() {
 		super("topicmapschema");
@@ -105,10 +107,20 @@ public class TopicMapSchemaPropertyPage extends AbstractModelPage {
 		item = new CTabItem(folder, SWT.None);
 		item.setText("Topic Map Schema");
 		item.setControl(createPage(folder));
+		
+		prefixPage = new PrefixMappingPage();
+		prefixPage.createItems(folder);
 	}
 
 	public void notifyChanged(Notification notification) {
 		updateUI();
+	}
+	
+	@Override
+	public void setModel(Object model) {
+		super.setModel(model);
+		if (prefixPage!=null)
+			prefixPage.setModel(getCastedModel().getMappings());
 	}
 
 	private final class TextFocusListener extends FocusAdapter {
