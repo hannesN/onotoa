@@ -31,6 +31,7 @@ import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.CommentEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.DiagramEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.EdgeEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.ItemIdentifierConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.NameTypeConstraintEditPart;
 import de.topicmapslab.tmcledit.diagram.editparts.OccurrenceTypeConstraintEditPart;
@@ -47,6 +48,7 @@ import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.MappingElement;
@@ -126,6 +128,8 @@ public class TMCLDiagramEditorUtil {
 					part = new PrefixMappingElementEditPart();
 				} else if (model instanceof SubjectIdentifierConstraint) {
 					part = new SubjectIdentifierConstraintEditPart();
+				} else if (model instanceof ItemIdentifierConstraint) {
+					part = new ItemIdentifierConstraintEditPart();
 				} else if (model instanceof SubjectLocatorConstraint) {
 					part = new SubjectLocatorConstraintEditPart();
 				} else if (model instanceof LabelPos) {
