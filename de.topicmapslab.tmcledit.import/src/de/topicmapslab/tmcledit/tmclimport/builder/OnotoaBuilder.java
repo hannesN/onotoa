@@ -33,6 +33,7 @@ import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -129,13 +130,22 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		return topicMap;
 	}
 
-	public void subjectIndicatorConstraintElement(Topic type, String arg1, String arg2, String arg3) {
+	public void subjectIdentifierConstraintElement(Topic type, String arg1, String arg2, String arg3) {
 		SubjectIdentifierConstraint sic = modelFactory.createSubjectIdentifierConstraint();
 		sic.setCardMin(arg1);
 		sic.setCardMax(arg2);
 		sic.setRegexp(arg3);
 
 		getTopicType(type).getSubjectIdentifierConstraints().add(sic);
+	}
+	
+	public void itemIdentififerConstraintElement(Topic type, String cardMin, String cardMax, String regExp) {
+		ItemIdentifierConstraint iic = modelFactory.createItemIdentifierConstraint();
+		iic.setCardMin(cardMin);
+		iic.setCardMax(cardMax);
+		iic.setRegexp(regExp);
+
+		getTopicType(type).getItemIdentifierConstraints().add(iic);
 	}
 
 	public void subjectLocatorConstraintElement(Topic arg0, String arg1, String arg2, String arg3) {
