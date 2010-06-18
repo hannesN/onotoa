@@ -249,7 +249,7 @@ public interface Namespaces {
 
 		public static String OCCURRENCE_DATATYPE_CONSTRAINT = PREFIX + "occurrence-datatype-constraint";
 
-		public static String ITEM_IDENTIFIER_CONSTRAINT = PREFIX + "item_identifier-constraint";
+		public static String ITEM_IDENTIFIER_CONSTRAINT = PREFIX + "item-identifier-constraint";
 
 		public static String REGULAR_EXPRESSION_CONSTRAINT = PREFIX + "regular-expression-constraint";
 
