@@ -35,7 +35,8 @@ public class ImportWizard extends Wizard implements IImportWizard {
 		
 		File file = builder.getFile();
 
-		Activator.getDefault().getPreferenceStore().putValue("last_imported_file", builder.getFile().getFilename());
+		if (file.getFilename()!=null)
+			Activator.getDefault().getPreferenceStore().putValue("last_imported_file", builder.getFile().getFilename());
 		
 		try {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
