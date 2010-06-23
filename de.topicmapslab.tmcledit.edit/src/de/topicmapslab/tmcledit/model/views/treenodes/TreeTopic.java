@@ -37,7 +37,7 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  * @author Hannes Niederhausen
  * 
  */
-public class TreeTopic extends TreeParent {
+public class TreeTopic extends TreeObject {
 
 	public TreeTopic(ModelView viewer, TopicType topic) {
 		super(viewer, null, topic.getKind());
@@ -55,8 +55,8 @@ public class TreeTopic extends TreeParent {
 				addChild(new TreeOccurrence(getModelView(), (OccurrenceTypeConstraint) notification.getNewValue()));
 				refresh();
 			} else if (notification.getEventType() == Notification.REMOVE) {
-				for (Iterator<TreeObject> it = getChildrenList().iterator(); it.hasNext();) {
-					TreeObject obj = it.next();
+				for (Iterator<AbstractModelViewNode> it = getChildrenList().iterator(); it.hasNext();) {
+					AbstractModelViewNode obj = it.next();
 					if (obj instanceof TreeOccurrence) {
 						if (((TreeOccurrence) obj).getModel().equals(notification.getOldValue())) {
 							it.remove();
@@ -71,8 +71,8 @@ public class TreeTopic extends TreeParent {
 				addChild(new TreeName(getModelView(), (NameTypeConstraint) notification.getNewValue()));
 				refresh();
 			} else if (notification.getEventType() == Notification.REMOVE) {
-				for (Iterator<TreeObject> it = getChildrenList().iterator(); it.hasNext();) {
-					TreeObject obj = it.next();
+				for (Iterator<AbstractModelViewNode> it = getChildrenList().iterator(); it.hasNext();) {
+					AbstractModelViewNode obj = it.next();
 					if (obj instanceof TreeName) {
 						if (((TreeName) obj).getModel().equals(notification.getOldValue())) {
 							it.remove();
@@ -87,8 +87,8 @@ public class TreeTopic extends TreeParent {
 				addChild(new TreeSubjectIdentifier(getModelView(), (SubjectIdentifierConstraint) notification.getNewValue()));
 				refresh();
 			} else if (notification.getEventType() == Notification.REMOVE) {
-				for (Iterator<TreeObject> it = getChildrenList().iterator(); it.hasNext();) {
-					TreeObject obj = it.next();
+				for (Iterator<AbstractModelViewNode> it = getChildrenList().iterator(); it.hasNext();) {
+					AbstractModelViewNode obj = it.next();
 					if (obj instanceof TreeSubjectIdentifier) {
 						if (obj.getModel().equals(notification.getOldValue())) {
 							it.remove();
@@ -103,8 +103,8 @@ public class TreeTopic extends TreeParent {
 				addChild(new TreeSubjectLocator(getModelView(),  (SubjectLocatorConstraint) notification.getNewValue()));
 				refresh();
 			} else if (notification.getEventType() == Notification.REMOVE) {
-				for (Iterator<TreeObject> it = getChildrenList().iterator(); it.hasNext();) {
-					TreeObject obj = it.next();
+				for (Iterator<AbstractModelViewNode> it = getChildrenList().iterator(); it.hasNext();) {
+					AbstractModelViewNode obj = it.next();
 					if (obj instanceof TreeSubjectLocator) {
 						if (obj.getModel().equals(notification.getOldValue())) {
 							it.remove();
@@ -119,8 +119,8 @@ public class TreeTopic extends TreeParent {
 				addChild(new TreeItemIdentifier(getModelView(),  (ItemIdentifierConstraint) notification.getNewValue()));
 				refresh();
 			} else if (notification.getEventType() == Notification.REMOVE) {
-				for (Iterator<TreeObject> it = getChildrenList().iterator(); it.hasNext();) {
-					TreeObject obj = it.next();
+				for (Iterator<AbstractModelViewNode> it = getChildrenList().iterator(); it.hasNext();) {
+					AbstractModelViewNode obj = it.next();
 					if (obj instanceof TreeItemIdentifier) {
 						if (obj.getModel().equals(notification.getOldValue())) {
 							it.remove();
@@ -141,14 +141,6 @@ public class TreeTopic extends TreeParent {
 	@Override
 	public String getName() {
 		return getTopicType().getName();
-	}
-
-	@Override
-	public Object getAdapter(Class key) {
-		if (getTopicType() == null)
-			return null;
-
-		return null;
 	}
 
 	@Override

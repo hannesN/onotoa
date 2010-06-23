@@ -8,9 +8,7 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-/**
- * 
- */
+
 package de.topicmapslab.tmcledit.model.views.pages;
 
 import org.eclipse.emf.common.notify.Notification;

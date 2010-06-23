@@ -11,7 +11,6 @@
 package de.topicmapslab.tmcledit.model.views.treenodes;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
@@ -38,7 +37,7 @@ public class TreeName extends TreeObject{
 	}
 	
 	@Override
-	public void setModel(EObject model) {
+	public void setModel(Object model) {
 		super.setModel(model);
 		if (getNameTypeConstraint().getType()!=null)
 			getNameTypeConstraint().getType().eAdapters().add(this);

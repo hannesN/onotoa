@@ -28,7 +28,7 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  * @author Hannes Niederhausen
  * 
  */
-public class TreeAssocConstraint extends TreeParent {
+public class TreeAssocConstraint extends TreeObject {
 
 	public TreeAssocConstraint(ModelView modelView, AssociationTypeConstraint constr) {
 		super(modelView, "", null);
@@ -58,7 +58,7 @@ public class TreeAssocConstraint extends TreeParent {
 	}
 
 	@Override
-	public void setModel(EObject model) {
+	public void setModel(Object model) {
 		super.setModel(model);
 		if (getAssocType() != null)
 			getAssocType().eAdapters().add(this);
@@ -80,7 +80,7 @@ public class TreeAssocConstraint extends TreeParent {
 
 
 	private void removeTopicRoleNode(RolePlayerConstraint rpc) {
-		TreeObject child = findChildPerModel(rpc);
+		AbstractModelViewNode child = findChildPerModel(rpc);
 		removeChild(child);
 		refresh();
 	}

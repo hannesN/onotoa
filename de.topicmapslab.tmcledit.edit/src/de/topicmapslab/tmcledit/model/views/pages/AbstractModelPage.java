@@ -37,10 +37,11 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.util.IModelProvider;
+import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.widgets.AnnotationWidget;
 
 public abstract class AbstractModelPage extends Page implements Adapter,
-		IModelProvider {
+		IModelProvider, IModelPage {
 
 	private EObject model;
 
@@ -67,6 +68,9 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		ID = id;
 	}
 
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#setSite(org.eclipse.ui.part.IPageSite)
+     */
 	public void setSite(IPageSite pageSite) {
 		init(pageSite);
 	}
@@ -172,6 +176,9 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 	    return folder;
     }
 	
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#setModel(java.lang.Object)
+     */
 	public void setModel(Object model) {
 		setEnabled(model!=null);
 		if (this.model == model) {
@@ -214,6 +221,9 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		return target;
 	}
 
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#getControl()
+     */
 	@Override
 	public Control getControl() {
 		return folder;
@@ -227,21 +237,33 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		this.target = newTarget;
 	}
 
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#getCommandStack()
+     */
 	public CommandStack getCommandStack() {
 		return commandStack;
 	}
 
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#setCommandStack(org.eclipse.emf.common.command.CommandStack)
+     */
 	public void setCommandStack(CommandStack commandStack) {
 		this.commandStack = commandStack;
 		if (this.annotationWidget!=null)
 			this.annotationWidget.setCommandStack(commandStack);
 	}
 
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#aboutToHide()
+     */
 	public void aboutToHide() {
 		if (this.getModel() != null)
 			this.getModel().eAdapters().remove(this);
 	}
 
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#updateUI()
+     */
 	public void updateUI() {
 		TMCLConstruct model = getCastedModel();
 		if (model == null)
@@ -269,6 +291,9 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 			commentText.setText(tmp);
 	}
 
+	/* (non-Javadoc)
+     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#getModel()
+     */
 	public EObject getModel() {
 		return model;
 	}
