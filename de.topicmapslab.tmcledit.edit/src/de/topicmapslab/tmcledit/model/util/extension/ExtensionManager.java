@@ -24,6 +24,7 @@ import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationProposalProvider;
 import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
 import de.topicmapslab.tmcledit.model.psiprovider.IPSIProvider;
+import de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider;
 
 
 
@@ -36,6 +37,7 @@ import de.topicmapslab.tmcledit.model.psiprovider.IPSIProvider;
 public class ExtensionManager {
 	private static final String EXT_PSIPROVIDER = "psiprovider";
 	private static final String EXT_ANNOTATIONPROVIDER = "annotationprovider";
+	private static final String EXT_MODELVIEWEXTENSION = "modelviewextension";
 	
 	private static final String ATT_ID = "id";
 	private static final String ATT_ClASS = "class";
@@ -47,7 +49,7 @@ public class ExtensionManager {
 	
 	private List<PSIProviderInfo> psiProviderInfos = null;
 	private List<AnnotationProviderInfo> annotationProviderInfos = null;
-	
+	private List<ModelViewExtensionInfo> modelViewExtensionInfos = null;
 	
 	public List<PSIProviderInfo> getPsiProviderInfos() {
 		if (psiProviderInfos==null)
@@ -59,6 +61,12 @@ public class ExtensionManager {
 		if (annotationProviderInfos==null)
 			initAnnotationProvider();
 		return annotationProviderInfos;
+    }
+	
+	public List<ModelViewExtensionInfo> getModelViewExtensionInfos() {
+		if (modelViewExtensionInfos==null)
+			initModelExtensions();
+		return modelViewExtensionInfos;
     }
 	
 	private void initAnnotationProvider() {
@@ -115,7 +123,7 @@ public class ExtensionManager {
 	    return null;
     }
 	
-	private void initPsiProvider() {
+	private void initPsiProvider() { 
 		List<PSIProviderInfo> tmp = new ArrayList<PSIProviderInfo>();
 		
 		IExtensionPoint ep = Platform.getExtensionRegistry().getExtensionPoint(
@@ -151,5 +159,41 @@ public class ExtensionManager {
 		}
 			
 			
+	}
+
+	private void initModelExtensions() {
+		List<ModelViewExtensionInfo> tmp = new ArrayList<ModelViewExtensionInfo>();
+		
+		IExtensionPoint ep = Platform.getExtensionRegistry().getExtensionPoint(
+				TmcleditEditPlugin.PLUGIN_ID, EXT_MODELVIEWEXTENSION);
+		
+		IExtension exts[] = ep.getExtensions();
+		
+		for (IExtension ext : exts) {
+			IConfigurationElement[] confElemements = ext.getConfigurationElements();
+			
+			for (IConfigurationElement ce : confElemements) {
+				String id = ce.getAttribute(ATT_ID);
+				String name = ce.getAttribute(ATT_NAME);
+				String clazz = ce.getAttribute(ATT_ClASS);
+				
+				Bundle bundle = Platform.getBundle(ext.getNamespaceIdentifier());
+				
+				try {
+					Object o = bundle.loadClass(clazz);
+					IModelViewProvider prov = (IModelViewProvider) ((Class<?>)o).getConstructor().newInstance();
+					tmp.add(new ModelViewExtensionInfo(name, id, prov));
+					
+				} catch (Exception e) {
+					TmcleditEditPlugin.getPlugin().log(e);
+				}
+			}
+		}
+		if (tmp.size()==0) {
+			tmp = null;
+			modelViewExtensionInfos = Collections.emptyList();
+		} else {
+			modelViewExtensionInfos = Collections.unmodifiableList(tmp);
+		}
 	}
 }

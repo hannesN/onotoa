@@ -32,7 +32,7 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
 public class TreeDiagram extends TreeObject {
 
 	public TreeDiagram(ModelView modelView, Diagram diagram) {
-		super(modelView, null);
+		super(modelView, (String) null);
 		setModel(diagram);
 		setHandleRename(true);
 	}

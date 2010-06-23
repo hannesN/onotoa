@@ -65,7 +65,7 @@ public class TreeRolePlayer extends TreeObject {
 	}
 	
 	@Override
-	public void setModel(EObject model) {
+	public void setModel(Object model) {
 	    super.setModel(model);
 	    RoleConstraint role = getCastedModel().getRole();
 		if (role!=null) {

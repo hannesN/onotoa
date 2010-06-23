@@ -32,6 +32,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledPageBook;
 import org.eclipse.ui.part.ViewPart;
 
+import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.pages.AbstractModelPage;
 import de.topicmapslab.tmcledit.model.views.pages.PropertyDetailPageFactory;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
@@ -50,7 +51,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.PropertyDetailView";
 
 	private ScrolledPageBook pageBook;
-	private AbstractModelPage currentPage;
+	private IModelPage currentPage;
 	private PropertyDetailPageFactory pageFactory;
 	private Object lastSelection = null;
 
@@ -91,7 +92,6 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		
 	}
 
-	@SuppressWarnings("unchecked")
     private void setSelection(ISelection selection) {
 		if (!(selection instanceof IStructuredSelection))
 			return;
@@ -121,7 +121,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		}
 	}
 
-	private void registerModelView(AbstractModelPage page) {
+	private void registerModelView(IModelPage page) {
 		IWorkbenchPart part = getSite().getWorkbenchWindow().getActivePage().findView(ModelView.ID);
 
 		if (part != null) {

@@ -33,7 +33,6 @@ import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.RedoAction;
@@ -55,15 +54,12 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -97,15 +93,9 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.File;
-import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.NameTypeConstraint;
-import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.OnoObject;
-import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
-import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -132,13 +122,9 @@ import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.util.io.FileUtil;
 import de.topicmapslab.tmcledit.model.validation.ModelValidator;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult;
-import de.topicmapslab.tmcledit.model.views.treenodes.TreeAssocConstraint;
-import de.topicmapslab.tmcledit.model.views.treenodes.TreeDiagram;
-import de.topicmapslab.tmcledit.model.views.treenodes.TreeItemIdentifier;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeName;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeOccurrence;
-import de.topicmapslab.tmcledit.model.views.treenodes.TreeParent;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeSubjectIdentifier;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeSubjectLocator;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
@@ -154,14 +140,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	public static final int MODEL_LOADED = 12345;
 
-	private TreeViewer viewer;
+	TreeViewer viewer;
 	private ViewContentProvider contentProvider;
 	private Action validationAction;
 	private Action doubleClickAction;
 
 	private EditingDomain editingDomain;
 	private ValidateJob validateJob = new ValidateJob();
-	private File currFile;
+	File currFile;
 
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
@@ -214,7 +200,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public void createPartControl(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 
-		contentProvider = new ViewContentProvider();
+		contentProvider = new ViewContentProvider(this);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setSorter(new NameSorter());
@@ -920,247 +906,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		if ((delta.getFlags() & IResourceDelta.MOVED_TO) != 0) {
 			String newPath = workspace.getRoot().getLocation().toOSString() + delta.getMovedToPath().toOSString();
 			currFile.setFilename(newPath);
-		}
-	}
-
-	class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
-		private TreeParent invisibleRoot;
-		private TreeParent diagramNode;
-		private TreeParent schemaNode;
-
-		private AdapterImpl tmsListener = new AdapterImpl() {
-			@Override
-			public void notifyChanged(Notification msg) {
-				if (msg.getNotifier() instanceof TopicMapSchema) {
-					if (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__TOPIC_TYPES) {
-						switch (msg.getEventType()) {
-						case Notification.ADD:
-							addType((TopicType) msg.getNewValue(), true);
-							break;
-						case Notification.REMOVE:
-							removeType((TopicType) msg.getOldValue(), true);
-							break;
-						}
-					} else if (msg.getFeatureID(EList.class) == ModelPackage.TOPIC_MAP_SCHEMA__ASSOCIATION_TYPE_CONSTRAINTS) {
-						switch (msg.getEventType()) {
-						case Notification.ADD:
-							addAssocContraint((AssociationTypeConstraint) msg.getNewValue());
-							break;
-						case Notification.REMOVE:
-							removeAssocContraint((AssociationTypeConstraint) msg.getOldValue());
-							break;
-						}
-					}
-				} else if ((msg.getNotifier() instanceof File)
-				        && (msg.getFeatureID(EList.class) == ModelPackage.FILE__DIAGRAMS)) {
-					switch (msg.getEventType()) {
-					case Notification.ADD:
-						addDiagram((Diagram) msg.getNewValue());
-						break;
-					case Notification.REMOVE:
-						removeDiagram((Diagram) msg.getOldValue());
-						break;
-					}
-				}
-			}
-		};
-
-		private TreeParent ttNode;
-		private TreeParent rtNode;
-		private TreeParent ntNode;
-		private TreeParent otNode;
-		private TreeParent atNode;
-		private TreeParent acNode;
-
-		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-		}
-
-		public void dispose() {
-			setFilename(null, false);
-		}
-
-		public Object[] getElements(Object parent) {
-			if (parent.equals(getViewSite())) {
-				if (invisibleRoot == null)
-					initialize();
-				return getChildren(invisibleRoot);
-			}
-			return getChildren(parent);
-		}
-
-		public Object getParent(Object child) {
-			if (child instanceof TreeObject) {
-				return ((TreeObject) child).getParent();
-			}
-			return null;
-		}
-
-		public Object[] getChildren(Object parent) {
-			if (parent instanceof TreeParent) {
-				return ((TreeParent) parent).getChildren();
-			}
-			return new Object[0];
-		}
-
-		public boolean hasChildren(Object parent) {
-			if (parent instanceof TreeParent)
-				return ((TreeParent) parent).hasChildren();
-			return false;
-		}
-
-		public void uninitialize() {
-			if (currFile != null) {
-				getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
-				currFile.eAdapters().remove(tmsListener);
-			}
-			invisibleRoot.dispose();
-		}
-
-		public void initialize() {
-			if (currFile != null) {
-				getCurrentTopicMapSchema().eAdapters().add(tmsListener);
-				currFile.eAdapters().add(tmsListener);
-			}
-			update();
-		}
-
-		public void update() {
-
-			invisibleRoot = new TreeParent(ModelView.this, "");
-			if (currFile != null) {
-				schemaNode = new TreeParent(ModelView.this, "Topic Map Schema", TreeObject.TOPIC_MAP_SCHEMA);
-
-				schemaNode.setModel(getCurrentTopicMapSchema());
-				diagramNode = new TreeParent(ModelView.this, "Diagrams", TreeObject.DIAGRAMS);
-
-				invisibleRoot.addChild(diagramNode);
-				invisibleRoot.addChild(schemaNode);
-
-				ttNode = new TreeParent(ModelView.this, "TopicTypes", KindOfTopicType.TOPIC_TYPE);
-				rtNode = new TreeParent(ModelView.this, "RoleTypes", KindOfTopicType.ROLE_TYPE);
-				ntNode = new TreeParent(ModelView.this, "NameTypes", KindOfTopicType.NAME_TYPE);
-				otNode = new TreeParent(ModelView.this, "OccurrenceTypes", KindOfTopicType.OCCURRENCE_TYPE);
-				atNode = new TreeParent(ModelView.this, "AssociationTypes", KindOfTopicType.ASSOCIATION_TYPE);
-
-				acNode = new TreeParent(ModelView.this, "Association Constraints");
-
-				schemaNode.addChild(ttNode);
-				schemaNode.addChild(rtNode);
-				schemaNode.addChild(ntNode);
-				schemaNode.addChild(otNode);
-				schemaNode.addChild(atNode);
-				schemaNode.addChild(acNode);
-
-				for (TopicType tt : getCurrentTopicMapSchema().getTopicTypes()) {
-					addType(tt, false);
-				}
-
-				for (Diagram d : currFile.getDiagrams()) {
-					diagramNode.addChild(new TreeDiagram(ModelView.this, d));
-				}
-
-				for (AssociationTypeConstraint ac : getCurrentTopicMapSchema().getAssociationTypeConstraints()) {
-					addAssocContraint(ac);
-				}
-
-				if (!viewer.isBusy())
-					viewer.refresh();
-				invisibleRoot.setSyncView(true);
-			} else {
-				TreeParent root = new TreeParent(ModelView.this, "No Diagramm Editor Open", KindOfTopicType.TOPIC_TYPE);
-				invisibleRoot.addChild(root);
-			}
-		}
-
-		private void addAssocContraint(AssociationTypeConstraint constraint) {
-			TreeAssocConstraint node = new TreeAssocConstraint(ModelView.this, constraint);
-			acNode.addChild(node);
-			acNode.refresh();
-		}
-
-		private void removeAssocContraint(AssociationTypeConstraint constraint) {
-			TreeObject child = acNode.findChildPerModel(constraint);
-			acNode.removeChild(child);
-			child.dispose();
-			acNode.refresh();
-		}
-
-		private void addDiagram(Diagram diagram) {
-			diagramNode.addChild(new TreeDiagram(ModelView.this, diagram));
-			diagramNode.refresh();
-		}
-
-		private void removeDiagram(Diagram diagram) {
-			TreeObject child = diagramNode.findChildPerModel(diagram);
-			diagramNode.removeChild(child);
-			child.dispose();
-			diagramNode.refresh();
-
-		}
-
-		private void addType(TopicType tt, boolean refresh) {
-			TreeTopic to = new TreeTopic(ModelView.this, tt);
-			TreeParent parent = null;
-
-			parent = getParentNode(tt);
-
-			if (parent != null) {
-				parent.setSyncView(refresh);
-				parent.addChild(to);
-				for (NameTypeConstraint ntc : tt.getNameConstraints()) {
-					to.addChild(new TreeName(ModelView.this, ntc));
-				}
-				for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
-					to.addChild(new TreeOccurrence(ModelView.this, otc));
-				}
-				for (ItemIdentifierConstraint iic : tt.getItemIdentifierConstraints()) {
-					to.addChild(new TreeItemIdentifier(ModelView.this, iic));
-				}
-				for (SubjectIdentifierConstraint sic : tt.getSubjectIdentifierConstraints()) {
-					to.addChild(new TreeSubjectIdentifier(ModelView.this, sic));
-				}
-				for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraints()) {
-					to.addChild(new TreeSubjectLocator(ModelView.this, slc));
-				}
-				parent.refresh();
-				parent.setSyncView(true);
-			}
-		}
-
-		private void removeType(TopicType tt, boolean refresh) {
-			TreeParent parent = ttNode;
-
-			parent = getParentNode(tt);
-
-			TreeObject to = parent.findChildPerModel(tt);
-			parent.removeChild(to);
-			to.dispose();
-
-			parent.setSyncView(refresh);
-			parent.refresh();
-			parent.setSyncView(true);
-		}
-
-		private TreeParent getParentNode(TopicType topicType) {
-			TreeParent parent;
-			switch (topicType.getKind()) {
-			case ROLE_TYPE:
-				parent = rtNode;
-				break;
-			case NAME_TYPE:
-				parent = ntNode;
-				break;
-			case OCCURRENCE_TYPE:
-				parent = otNode;
-				break;
-			case ASSOCIATION_TYPE:
-				parent = atNode;
-				break;
-			default:
-				parent = ttNode;
-				break;
-			}
-			return parent;
 		}
 	}
 

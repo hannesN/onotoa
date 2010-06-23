@@ -13,6 +13,7 @@
 <plugin>
    <extension-point id="psiprovider" name="PSI Provider" schema="schema/de.topicmapslab.tmcledit.edit.psiprovider.exsd"/>
    <extension-point id="annotationprovider" name="Annotation Provider" schema="schema/annotationprovider.exsd"/>
+   <extension-point id="modelviewextension" name="ModelView Extension" schema="schema/modelviewextension.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category

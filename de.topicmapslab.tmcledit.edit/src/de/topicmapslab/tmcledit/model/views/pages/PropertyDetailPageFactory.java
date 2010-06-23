@@ -33,8 +33,12 @@ import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.extension.ExtensionManager;
+import de.topicmapslab.tmcledit.model.util.extension.ModelViewExtensionInfo;
+import de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider;
 
 public class PropertyDetailPageFactory {
 	private static final String TOPIC_MAP_SCHEMA = "TopicMapSchema";
@@ -211,6 +215,13 @@ public class PropertyDetailPageFactory {
 				pageMap.put(REIFIER_CONSTRAINT, page);
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
+		} else {
+			ExtensionManager extensionManager = TmcleditEditPlugin.getExtensionManager();
+			for (ModelViewExtensionInfo infos : extensionManager.getModelViewExtensionInfos()) {
+				IModelViewProvider mvp = infos.getProvider();
+				
+			}
+			
 		}
 		if (page.getSite()==null)
 			page.init(new PageSite(viewSite));
