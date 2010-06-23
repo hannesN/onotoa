@@ -64,15 +64,20 @@ public class ImportWizardPage extends WizardPage {
 		
 		sourceEditor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				IPath path = new Path(ImportWizardPage.this.sourceEditor.getStringValue());
-				file = path.toOSString();
+				String filename = ImportWizardPage.this.sourceEditor.getStringValue();
+				if (filename.startsWith("http://")) {
+					file = filename;
+				} else {
+					IPath path = new Path(filename);
+					file = path.toOSString();
+				}
 			}
 		});
 		String[] extensions = new String[] { "*.ctm;*.xtm" }; // NON-NLS-1
 		sourceEditor.setFileExtensions(extensions);
 		
 		String file = Activator.getDefault().getPreferenceStore().getString("last_imported_file");
-		if (file!=null)
+		if ((file!=null) && (!file.startsWith("http://")))
 			sourceEditor.setStringValue(file);
 		
 		fileSelectionArea.moveAbove(null);
