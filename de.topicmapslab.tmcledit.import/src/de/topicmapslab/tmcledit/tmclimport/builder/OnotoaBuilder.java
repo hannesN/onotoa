@@ -4,7 +4,7 @@
 package de.topicmapslab.tmcledit.tmclimport.builder;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import org.tmapi.core.Locator;
@@ -67,7 +67,7 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 	private ModelFactory modelFactory;
 
 	// map used to get topic type for a specific topic
-	private Map<Topic, TopicType> topicTypeMap = new HashMap<Topic, TopicType>();
+	private Map<Topic, TopicType> topicTypeMap = new Hashtable<Topic, TopicType>();
 
 	public OnotoaBuilder(String filename) {
 		this.filename = filename;
@@ -102,9 +102,6 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 
 		ConstraintReader reader = new ConstraintReader(topicMap, system);
 		reader.addEventListener((ITypesListener) this);
-		reader.parse();
-		reader.removeListener((ITypesListener) this);
-
 		reader.addEventListener((ITypeConstraintsListener) this);
 		reader.parse();
 	}
@@ -169,7 +166,7 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 	}
 
 	public void isAbstractElement(Topic arg0) {
-		TopicType tt = topicTypeMap.get(arg0);
+		TopicType tt = getTopicType(arg0);
 		tt.setAbstract(true);
 	}
 
@@ -309,20 +306,30 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		NameTypeConstraint ntc = modelFactory.createNameTypeConstraint();
 		ntc.setCardMin(arg2);
 		ntc.setCardMax(arg3);
-		ntc.setType(topicTypeMap.get(arg1));
 
-		TopicType tt = topicTypeMap.get(arg0);
+		TopicType tt = getTopicType(arg0);
 		tt.getNameConstraints().add(ntc);
+		
+		try {
+			ntc.setType(getTopicType(arg1));
+		} catch (Exception e) {
+			// noop and use default
+		}
 	}
 
 	public void topicOccurrenceConstraintElement(Topic arg0, Topic arg1, String arg2, String arg3) {
 		OccurrenceTypeConstraint otc = modelFactory.createOccurrenceTypeConstraint();
 		otc.setCardMin(arg2);
 		otc.setCardMax(arg3);
-		otc.setType(topicTypeMap.get(arg1));
 
-		TopicType tt = topicTypeMap.get(arg0);
+		TopicType tt = getTopicType(arg0);
 		tt.getOccurrenceConstraints().add(otc);
+		
+		try {
+			otc.setType(getTopicType(arg1));
+		} catch (Exception e) {
+			// noop and use default
+		}
 
 	}
 
@@ -360,9 +367,9 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 			rpc.setCardMax(cardMax);
 
 			atc.getPlayerConstraints().add(rpc);
-		} catch (Exception e) {
+		} catch (TypeNotFoundException e) {
 			System.out.println(e);
-		}
+		} 
 		
 
 	}
@@ -429,10 +436,11 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
         return roleConstraint;
     }
 
-	private void fillData(TopicType tt, Topic arg0) {
+	private synchronized void fillData(TopicType tt, Topic arg0) {
 		if (arg0.getNames().size() == 0)
 			throw new RuntimeException("Invalid topic - no name given");
 
+		
 		String name = arg0.getNames().iterator().next().getValue();
 		tt.setName(name);
 
@@ -453,7 +461,14 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 			throw new NullPointerException("Argument is null");
 		TopicType tt = topicTypeMap.get(arg0);
 		if (tt == null) {
-			throw new RuntimeException("Unknown type!");
+			String appendix = "";
+			if (arg0.getNames().size()>0) {
+				appendix = arg0.getNames().iterator().next().getValue();
+			}
+			if (arg0.getSubjectIdentifiers().size()>0) {
+				appendix = arg0.getSubjectIdentifiers().iterator().next().toExternalForm();
+			}
+			throw new TypeNotFoundException("Unknown type for Topic: "+appendix );
 		}
 		return tt;
 	}
