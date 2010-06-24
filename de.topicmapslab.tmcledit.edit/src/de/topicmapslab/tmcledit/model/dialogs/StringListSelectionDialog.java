@@ -177,7 +177,6 @@ public class StringListSelectionDialog extends Dialog {
 	    return stringListViewer;
     }
 	
-	@SuppressWarnings("unchecked")
 	private void removeSelection() {
 		IStructuredSelection sel = (IStructuredSelection) stringListViewer.getSelection();
 		for (Iterator it = sel.iterator(); it.hasNext();) {

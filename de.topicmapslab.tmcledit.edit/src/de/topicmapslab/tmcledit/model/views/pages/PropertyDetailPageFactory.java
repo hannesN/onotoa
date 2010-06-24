@@ -38,6 +38,8 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.extension.ExtensionManager;
 import de.topicmapslab.tmcledit.model.util.extension.ModelViewExtensionInfo;
+import de.topicmapslab.tmcledit.model.views.extension.IModelExtension;
+import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider;
 
 public class PropertyDetailPageFactory {
@@ -59,7 +61,7 @@ public class PropertyDetailPageFactory {
 	private static final String REIFIER_CONSTRAINT = "reifierconstraint";
 	
 	private EmptyPage emptyPage;
-	private HashMap<String, AbstractModelPage> pageMap = new HashMap<String, AbstractModelPage>();
+	private HashMap<String, IModelPage> pageMap = new HashMap<String, IModelPage>();
 	
 	private final ScrolledPageBook pageBook;
 	private final IViewSite viewSite;
@@ -74,15 +76,15 @@ public class PropertyDetailPageFactory {
 	}
 	
 	public void dispose() {
-		for (AbstractModelPage page : pageMap.values()) {
+		for (IModelPage page : pageMap.values()) {
 			page.dispose();
 		}
 		pageMap.clear();
 	}
 	
 	
-	public AbstractModelPage getPageFor(Object model) {
-		AbstractModelPage page = emptyPage;
+	public IModelPage getPageFor(Object model) {
+		IModelPage page = emptyPage;
 		
 		if (model instanceof OccurrenceType) {
 			page = pageMap.get(OCCURRENCE_TYPE);
@@ -216,12 +218,20 @@ public class PropertyDetailPageFactory {
 				pageBook.registerPage(page.getID(), page.getControl());
 			}
 		} else {
-			ExtensionManager extensionManager = TmcleditEditPlugin.getExtensionManager();
-			for (ModelViewExtensionInfo infos : extensionManager.getModelViewExtensionInfos()) {
-				IModelViewProvider mvp = infos.getProvider();
-				
+			if (model instanceof IModelExtension) {
+				ExtensionManager extensionManager = TmcleditEditPlugin.getExtensionManager();
+				for (ModelViewExtensionInfo infos : extensionManager.getModelViewExtensionInfos()) {
+					IModelViewProvider mvp = infos.getProvider();
+					if (mvp.hasPageFor((IModelExtension) model)) {
+						page = (AbstractModelPage) mvp.getPageFor((IModelExtension) model);
+						if (page.getControl()==null) {
+							page.createControl(pageBook.getContainer());
+							pageBook.registerPage(page.getID(), page.getControl());
+						}
+						break;
+					}
+				}
 			}
-			
 		}
 		if (page.getSite()==null)
 			page.init(new PageSite(viewSite));

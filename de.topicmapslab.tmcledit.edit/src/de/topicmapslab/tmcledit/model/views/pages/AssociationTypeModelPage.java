@@ -220,7 +220,6 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		});
 
 		removeButton.addSelectionListener(new SelectionAdapter() {
-			@SuppressWarnings("unchecked")
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				IStructuredSelection sel = (IStructuredSelection) roleCombinationViewer.getSelection();

@@ -19,13 +19,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
-import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.views.ModelView;
-import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
 public class TreeObject extends AbstractModelViewNode implements IAdaptable, Adapter {
 	public static final int NOT_SET = -1;
@@ -104,14 +100,6 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 		target = newTarget;
 	}
 
-	public void handleDoubleClick() {
-		try {
-	        getModelView().getViewSite().getWorkbenchWindow().getActivePage().showView(PropertyDetailView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
-        } catch (PartInitException e) {
-        	TmcleditEditPlugin.getPlugin().log(e);
-        }
-	}
-	
 	protected Adapter getAdapter() {
 		return this;
 	}

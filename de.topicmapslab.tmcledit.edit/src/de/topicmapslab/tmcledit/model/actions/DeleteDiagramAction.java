@@ -48,8 +48,7 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 		setDiagram(null);
 	}
 
-	@SuppressWarnings("unchecked")
-    public void setDiagram(IStructuredSelection sel) {
+	public void setDiagram(IStructuredSelection sel) {
 		diagrams.clear();
 		if (sel!=null) {
 			Iterator it = sel.iterator();

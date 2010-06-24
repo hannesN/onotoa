@@ -14,8 +14,6 @@
 package de.topicmapslab.tmcledit.model.views;
 
 import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -33,7 +31,6 @@ import org.eclipse.ui.forms.widgets.ScrolledPageBook;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
-import de.topicmapslab.tmcledit.model.views.pages.AbstractModelPage;
 import de.topicmapslab.tmcledit.model.views.pages.PropertyDetailPageFactory;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
@@ -74,7 +71,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	public void setFocus() {
 	}
 
-	private void setCurrentPage(AbstractModelPage currentPage) {
+	private void setCurrentPage(IModelPage currentPage) {
 		if (this.currentPage != null)
 			this.currentPage.aboutToHide();
 
@@ -106,11 +103,13 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 				return;
 
 			lastSelection = obj;
-			AbstractModelPage page = pageFactory.getPageFor(obj);
-			if ( (!(obj instanceof EObject)) 
-			   &&(!(obj instanceof EObjectContainmentEList)) ){
-				return;
-			}
+			IModelPage page = pageFactory.getPageFor(obj);
+			
+//			if ( (!(obj instanceof EObject)) 
+//			   &&(!(obj instanceof EObjectContainmentEList)) ){
+//				return;
+//			}
+			
 			try {
 				setCurrentPage(page);
 				page.setModel(obj);

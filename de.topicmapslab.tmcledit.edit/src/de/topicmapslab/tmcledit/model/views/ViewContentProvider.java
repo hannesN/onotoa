@@ -290,9 +290,11 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 		return parent;
 	}
 
-	private void getExtensionChildren(AbstractModelViewNode nodes) {
+	private void getExtensionChildren(AbstractModelViewNode parent) {
 		for (ModelViewExtensionInfo mvei : TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos()) {
-			mvei.getProvider().getChildrenNodes(nodes);
+			for (AbstractModelViewNode n : mvei.getProvider().getChildNodes(modelView, parent)) {
+				parent.addChild(n);
+			}
 		}
 	}
 }
