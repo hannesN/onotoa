@@ -105,7 +105,6 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		return ((TopicType)item).getName();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected Comparator getItemsComparator() {
 		if (topicTypeComparator==null)

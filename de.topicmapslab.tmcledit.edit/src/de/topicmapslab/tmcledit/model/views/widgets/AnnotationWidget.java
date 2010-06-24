@@ -215,7 +215,6 @@ public class AnnotationWidget extends Composite {
 		viewer.refresh();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void removeAnnotation() {
 		IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
 		if (sel.isEmpty())
@@ -270,7 +269,7 @@ public class AnnotationWidget extends Composite {
 		}
 
 		this.model = (TMCLConstruct) model;
-		if (model == null)
+		if (this.model == null)
 			return;
 
 		this.model.eAdapters().add(adapter);

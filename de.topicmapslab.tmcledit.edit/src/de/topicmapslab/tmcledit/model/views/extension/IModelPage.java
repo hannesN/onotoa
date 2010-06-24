@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.model.views.extension;
 
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.ui.part.IPage;
+import org.eclipse.ui.part.IPageSite;
 
 /**
  * Interface for a property details page.
@@ -33,5 +34,11 @@ public interface IModelPage extends IPage {
 	public abstract void updateUI();
 
 	public abstract Object getModel();
+
+	public abstract IPageSite getSite();
+
+	public abstract void init(IPageSite pageSite);
+
+	public abstract String getID();
 
 }

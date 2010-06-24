@@ -10,7 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.actions;
 
-public interface UpdateAction {
+import org.eclipse.jface.action.IAction;
+
+public interface UpdateAction extends IAction{
 
 	public void update();
 	

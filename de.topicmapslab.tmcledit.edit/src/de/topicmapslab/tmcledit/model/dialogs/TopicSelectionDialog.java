@@ -212,7 +212,6 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		fac.applyTo(createButton);
 	}
 
-	@SuppressWarnings("unchecked")
 	private void addSelection() {
 		IStructuredSelection sel = (IStructuredSelection) availableTopicList.getSelection();
 		for (Iterator it = sel.iterator(); it.hasNext();) {
@@ -230,7 +229,6 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		selectedTopicList.refresh();
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void removeSelection() {
 		IStructuredSelection sel = (IStructuredSelection) selectedTopicList.getSelection();
 		for (Iterator it = sel.iterator(); it.hasNext();) {

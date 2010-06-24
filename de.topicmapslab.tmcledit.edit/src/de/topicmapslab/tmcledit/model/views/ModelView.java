@@ -80,7 +80,6 @@ import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -119,9 +118,11 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.preferences.PreferenceConstants;
 import de.topicmapslab.tmcledit.model.preferences.RecentUsedManager;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
+import de.topicmapslab.tmcledit.model.util.extension.ModelViewExtensionInfo;
 import de.topicmapslab.tmcledit.model.util.io.FileUtil;
 import de.topicmapslab.tmcledit.model.validation.ModelValidator;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult;
+import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeName;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeOccurrence;
@@ -187,6 +188,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private CreateSubjectLocatorConstraintAction createSubjectLocatorConstraintAction;
 
 	/**
+	 * Helper method to retrtieve the view from the PlatformUI
+	 * @return the instance of the {@link ModelView} or <code>null</code>
+	 */
+	public static final ModelView getInstance() {
+		return (ModelView) TmcleditEditPlugin.getPlugin().getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(ID);
+	}
+	
+	/**
 	 * The constructor.
 	 */
 	public ModelView() {
@@ -233,7 +242,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					createTopicAction.setEnabled(false);
 				} else {
 
-					TreeObject to = (TreeObject) sel.getFirstElement();
+					AbstractModelViewNode to = (AbstractModelViewNode) sel.getFirstElement();
 					createTopicAction.setEnabled(false);
 					createDiagramAction.setEnabled(false);
 					createDomainDiagramAction.setEnabled(false);
@@ -244,14 +253,15 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 						break;
 					}
 
-					createTopicAction.setKindOfTopicType(to.getKindOfTopicType());
-					if (to.getModel() == null)
-						currentSelection = new StructuredSelection(currFile);
-
+					if (to instanceof TreeObject) {
+					createTopicAction.setKindOfTopicType(((TreeObject) to).getKindOfTopicType());
+						if (to.getModel() == null)
+							currentSelection = new StructuredSelection(currFile);
+					}
 					Iterator<Object> it = sel.iterator();
 					List<OnoObject> list = new ArrayList<OnoObject>();
 					while (it.hasNext()) {
-						to = (TreeObject) it.next();
+						to = (AbstractModelViewNode) it.next();
 						if (to.getModel() != null)
 							list.add((OnoObject) to.getModel());
 					}
@@ -263,69 +273,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		});
 		initDragAndDrop();
-	}
-
-	private void initDragAndDrop() {
-		DragSource dragSource = new DragSource(viewer.getTree(), DND.DROP_COPY);
-		dragSource.setTransfer(new Transfer[] { TextTransfer.getInstance() });
-		dragSource.addDragListener(new DragSourceAdapter() {
-
-			@Override
-			public void dragStart(DragSourceEvent event) {
-
-				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-				StringBuffer tmp = prepareTopicTypes(sel);
-
-				if (tmp.length() > 0) {
-					event.doit = true;
-					event.data = tmp.toString();
-				} else {
-					event.doit = false;
-				}
-
-			}
-
-			@Override
-			public void dragSetData(DragSourceEvent event) {
-				if (viewer == null)
-					return;
-
-				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-
-				StringBuffer tmp = prepareTopicTypes(sel);
-				if (tmp.length() > 0) {
-					event.data = tmp.toString();
-				} else {
-					event.data = null;
-				}
-			}
-
-			@SuppressWarnings("unchecked")
-			private StringBuffer prepareTopicTypes(IStructuredSelection sel) {
-				// concat every model string and ignore other nodes..
-				StringBuffer tmp = new StringBuffer();
-
-				if (sel.size() == 1) {
-					TreeObject selObj = (TreeObject) sel.getFirstElement();
-
-					if ((selObj.getModel() instanceof AssociationTypeConstraint)
-					        || (selObj.getModel() instanceof TopicType)) {
-						tmp.append(selObj.getModel().toString());
-					}
-				} else {
-					Iterator<Object> it = sel.iterator();
-					while (it.hasNext()) {
-						Object obj = it.next();
-						if (obj instanceof TreeTopic) {
-							tmp.append(((TreeTopic) obj).getModel().toString());
-							tmp.append("--_--");
-						}
-					}
-				}
-				return tmp;
-			}
-
-		});
 	}
 
 	@Override
@@ -403,138 +350,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		actionBars.updateActionBars();
 	}
 
-	private void hookContextMenu() {
-		MenuManager menuMgr = new MenuManager("#PopupMenu");
-		menuMgr.setRemoveAllWhenShown(true);
-		menuMgr.addMenuListener(new IMenuListener() {
-			public void menuAboutToShow(IMenuManager manager) {
-				ModelView.this.fillContextMenu(manager);
-			}
-		});
-		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-		viewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(menuMgr, viewer);
-	}
-
-	private void contributeToActionBars() {
-		IActionBars bars = getViewSite().getActionBars();
-		fillLocalPullDown(bars.getMenuManager());
-		fillLocalToolBar(bars.getToolBarManager());
-	}
-
-	private void fillLocalPullDown(IMenuManager manager) {
-		manager.add(createDiagramAction);
-		manager.add(createDomainDiagramAction);
-		manager.add(validationAction);
-	
-		manager.add(new Separator());
-	}
-
-	private void fillContextMenu(IMenuManager manager) {
-		if (currFile == null) {
-			return;
-		}
-
-		if (createDiagramAction.isEnabled())
-			manager.add(createDiagramAction);
-
-		if (createDomainDiagramAction.isEnabled())
-			manager.add(createDomainDiagramAction);
-
-		if (createTopicAction.isEnabled())
-			manager.add(createTopicAction);
-
-		if (renameAction.isEnabled()) {
-			manager.add(renameAction);
-		}
-
-		if (deleteDiagramAction.isEnabled())
-			manager.add(deleteDiagramAction);
-
-		if (deleteTopicTypeAction.isEnabled())
-			manager.add(deleteTopicTypeAction);
-
-		manager.add(new Separator());
-
-		if (createNameConstraintAction.isEnabled())
-			manager.add(createNameConstraintAction);
-		if (createOccurrenceConstraintAction.isEnabled())
-			manager.add(createOccurrenceConstraintAction);
-		if (createItemIdenifierConstraintAction.isEnabled())
-			manager.add(createItemIdenifierConstraintAction);
-		if (createSubjectIdenifierConstraintAction.isEnabled())
-			manager.add(createSubjectIdenifierConstraintAction);
-		if (createSubjectLocatorConstraintAction.isEnabled())
-			manager.add(createSubjectLocatorConstraintAction);
-
-		// Other plug-ins can contribute there actions here
-		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-	}
-
-	private void fillLocalToolBar(IToolBarManager manager) {
-		validationAction.setEnabled(currFile!=null);
-		manager.add(validationAction);
-		manager.add(new Separator());
-
-	}
-
-	private void makeActions() {
-		validationAction = new ValidateAction(getSite());
-
-		doubleClickAction = new Action() {
-			@Override
-			public void run() {
-				ISelection selection = viewer.getSelection();
-				Object obj = ((IStructuredSelection) selection).getFirstElement();
-				((TreeObject) obj).handleDoubleClick();
-			}
-		};
-		deleteDiagramAction = new DeleteDiagramAction(this);
-		deleteTopicTypeAction = new DeleteTMCLConstruct(this);
-		createDiagramAction = new CreateDiagramAction(this);
-		createDomainDiagramAction = new CreateDomainDiagramAction(this);
-		createTopicAction = new CreateTopicAction(this);
-		renameAction = new RenameAction(this);
-
-		createNameConstraintAction = new CreateNameConstraintAction(this);
-		createOccurrenceConstraintAction = new CreateOccurrenceConstraintAction(this);
-		createItemIdenifierConstraintAction = new CreateItemIdenifierConstraintAction(this);
-		createSubjectIdenifierConstraintAction = new CreateSubjectIdenifierConstraintAction(this);
-		createSubjectLocatorConstraintAction = new CreateSubjectLocatorConstraintAction(this);
-
-		boolean enabled = (currFile!=null);
-		createDiagramAction.setEnabled(enabled);
-		createDomainDiagramAction.setEnabled(enabled);
-		validationAction.setEnabled(enabled);
-	}
-
-	private void hookDoubleClickAction() {
-		viewer.addDoubleClickListener(new IDoubleClickListener() {
-			public void doubleClick(DoubleClickEvent event) {
-				doubleClickAction.run();
-			}
-		});
-	}
-
-	private void hookKeyListener() {
-		viewer.getTree().addKeyListener(new org.eclipse.swt.events.KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.keyCode != SWT.F2)
-					return;
-
-				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-				if (sel.isEmpty())
-					return;
-
-				TreeObject obj = (TreeObject) sel.getFirstElement();
-				obj.handleRename();
-				e.doit = false;
-				return;
-			}
-		});
-	}
-
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
@@ -594,13 +409,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			viewer.setSelection(selection);
 		currentSelection = selection;
 		fireSelectionChanged();
-	}
-
-	private void fireSelectionChanged() {
-		SelectionChangedEvent e = new SelectionChangedEvent(this, currentSelection);
-		for (ISelectionChangedListener l : listeners) {
-			l.selectionChanged(e);
-		}
 	}
 
 	public void setFilename(String filename, boolean newFile) {
@@ -697,41 +505,6 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 	}
 
-	private void updateModelViewActions() {
-		// the actions aren't initalized therefor we return
-		if (createDiagramAction==null)
-			return;
-		
-		boolean enabled = (currFile!=null);
-		
-		createDiagramAction.setEnabled(enabled);
-		createDomainDiagramAction.setEnabled(enabled);
-		validationAction.setEnabled(enabled);
-	}
-	
-	private void updateTitle(String filename) {
-		if (filename != null) {
-			if (filename.length() == 0)
-				filename = "New File...";
-			getSite().getShell().setText("Onotoa - " + filename);
-		} else {
-			getSite().getShell().setText("Onotoa");
-		}
-	}
-
-	private void checkSavedState() {
-		if (currFile != null) {
-			currFile.eAdapters().remove(dirtyListener);
-			WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
-			if (cmdStack.isSaveNeeded()) {
-				if (MessageDialog.openQuestion(getViewSite().getShell(), "Unsaved model",
-				        "Your model is not saved. Do you want to save now?")) {
-					doSave(null);
-				}
-			}
-		}
-	}
-
 	@SuppressWarnings("unchecked")
 	public void updateActions() {
 		Iterator<IAction> it = actionRegistry.getActions();
@@ -741,6 +514,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				((UpdateAction) a).update();
 		}
 		// updating export selection
+		
+		List<ModelViewExtensionInfo> mveInfos = TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos();
+		for (ModelViewExtensionInfo mve : mveInfos) {
+			for (UpdateAction a : mve.getProvider().getActions()) {
+				a.update();
+			}
+		}
+		
 		getViewSite().getActionBars().getGlobalActionHandler(ActionFactory.EXPORT.getId());
 	}
 
@@ -909,6 +690,256 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 	}
 
+	private void initDragAndDrop() {
+    	DragSource dragSource = new DragSource(viewer.getTree(), DND.DROP_COPY);
+    	dragSource.setTransfer(new Transfer[] { TextTransfer.getInstance() });
+    	dragSource.addDragListener(new DragSourceAdapter() {
+    
+    		@Override
+    		public void dragStart(DragSourceEvent event) {
+    
+    			IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+    			StringBuffer tmp = prepareTopicTypes(sel);
+    
+    			if (tmp.length() > 0) {
+    				event.doit = true;
+    				event.data = tmp.toString();
+    			} else {
+    				event.doit = false;
+    			}
+    
+    		}
+    
+    		@Override
+    		public void dragSetData(DragSourceEvent event) {
+    			if (viewer == null)
+    				return;
+    
+    			IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+    
+    			StringBuffer tmp = prepareTopicTypes(sel);
+    			if (tmp.length() > 0) {
+    				event.data = tmp.toString();
+    			} else {
+    				event.data = null;
+    			}
+    		}
+    
+    		@SuppressWarnings("unchecked")
+    		private StringBuffer prepareTopicTypes(IStructuredSelection sel) {
+    			// concat every model string and ignore other nodes..
+    			StringBuffer tmp = new StringBuffer();
+    
+    			if (sel.size() == 1) {
+    				TreeObject selObj = (TreeObject) sel.getFirstElement();
+    
+    				if ((selObj.getModel() instanceof AssociationTypeConstraint)
+    				        || (selObj.getModel() instanceof TopicType)) {
+    					tmp.append(selObj.getModel().toString());
+    				}
+    			} else {
+    				Iterator<Object> it = sel.iterator();
+    				while (it.hasNext()) {
+    					Object obj = it.next();
+    					if (obj instanceof TreeTopic) {
+    						tmp.append(((TreeTopic) obj).getModel().toString());
+    						tmp.append("--_--");
+    					}
+    				}
+    			}
+    			return tmp;
+    		}
+    
+    	});
+    }
+
+	private void fireSelectionChanged() {
+    	SelectionChangedEvent e = new SelectionChangedEvent(this, currentSelection);
+    	for (ISelectionChangedListener l : listeners) {
+    		l.selectionChanged(e);
+    	}
+    }
+
+	private void updateModelViewActions() {
+    	// the actions aren't initalized therefor we return
+    	if (createDiagramAction==null)
+    		return;
+    	
+    	boolean enabled = (currFile!=null);
+    	
+    	createDiagramAction.setEnabled(enabled);
+    	createDomainDiagramAction.setEnabled(enabled);
+    	validationAction.setEnabled(enabled);
+    }
+
+	private void updateTitle(String filename) {
+    	if (filename != null) {
+    		if (filename.length() == 0)
+    			filename = "New File...";
+    		getSite().getShell().setText("Onotoa - " + filename);
+    	} else {
+    		getSite().getShell().setText("Onotoa");
+    	}
+    }
+
+	private void checkSavedState() {
+    	if (currFile != null) {
+    		currFile.eAdapters().remove(dirtyListener);
+    		WorkspaceCommandStackImpl cmdStack = (WorkspaceCommandStackImpl) getEditingDomain().getCommandStack();
+    		if (cmdStack.isSaveNeeded()) {
+    			if (MessageDialog.openQuestion(getViewSite().getShell(), "Unsaved model",
+    			        "Your model is not saved. Do you want to save now?")) {
+    				doSave(null);
+    			}
+    		}
+    	}
+    }
+
+	private void hookContextMenu() {
+    	MenuManager menuMgr = new MenuManager("#PopupMenu");
+    	menuMgr.setRemoveAllWhenShown(true);
+    	menuMgr.addMenuListener(new IMenuListener() {
+    		public void menuAboutToShow(IMenuManager manager) {
+    			ModelView.this.fillContextMenu(manager);
+    		}
+    	});
+    	Menu menu = menuMgr.createContextMenu(viewer.getControl());
+    	viewer.getControl().setMenu(menu);
+    	getSite().registerContextMenu(menuMgr, viewer);
+    }
+
+	private void contributeToActionBars() {
+    	IActionBars bars = getViewSite().getActionBars();
+    	fillLocalPullDown(bars.getMenuManager());
+    	fillLocalToolBar(bars.getToolBarManager());
+    }
+
+	private void fillLocalPullDown(IMenuManager manager) {
+    	manager.add(createDiagramAction);
+    	manager.add(createDomainDiagramAction);
+    	manager.add(validationAction);
+    
+    	manager.add(new Separator());
+    }
+
+	private void fillContextMenu(IMenuManager manager) {
+    	if (currFile == null) {
+    		return;
+    	}
+    
+    	if (createDiagramAction.isEnabled())
+    		manager.add(createDiagramAction);
+    
+    	if (createDomainDiagramAction.isEnabled())
+    		manager.add(createDomainDiagramAction);
+    
+    	if (createTopicAction.isEnabled())
+    		manager.add(createTopicAction);
+    
+    	if (renameAction.isEnabled()) {
+    		manager.add(renameAction);
+    	}
+    
+    	if (deleteDiagramAction.isEnabled())
+    		manager.add(deleteDiagramAction);
+    
+    	if (deleteTopicTypeAction.isEnabled())
+    		manager.add(deleteTopicTypeAction);
+    
+    	manager.add(new Separator());
+    
+    	if (createNameConstraintAction.isEnabled())
+    		manager.add(createNameConstraintAction);
+    	if (createOccurrenceConstraintAction.isEnabled())
+    		manager.add(createOccurrenceConstraintAction);
+    	if (createItemIdenifierConstraintAction.isEnabled())
+    		manager.add(createItemIdenifierConstraintAction);
+    	if (createSubjectIdenifierConstraintAction.isEnabled())
+    		manager.add(createSubjectIdenifierConstraintAction);
+    	if (createSubjectLocatorConstraintAction.isEnabled())
+    		manager.add(createSubjectLocatorConstraintAction);
+    
+    	// add enabled actions from extensions
+    	List<ModelViewExtensionInfo> mveInfos = TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos();
+    	for (ModelViewExtensionInfo mve : mveInfos) {
+    		for (UpdateAction a : mve.getProvider().getActions()) {
+    			if (a.isEnabled())
+    				manager.add(a);
+    		}
+    	}
+    	
+    }
+
+	private void fillLocalToolBar(IToolBarManager manager) {
+    	validationAction.setEnabled(currFile!=null);
+    	manager.add(validationAction);
+    	manager.add(new Separator());
+    
+    }
+
+	private void makeActions() {
+    	validationAction = new ValidateAction(getSite());
+    
+    	doubleClickAction = new Action() {
+    		@Override
+    		public void run() {
+    			ISelection selection = viewer.getSelection();
+    			Object obj = ((IStructuredSelection) selection).getFirstElement();
+    			((AbstractModelViewNode) obj).handleDoubleClick();
+    		}
+    	};
+    	deleteDiagramAction = new DeleteDiagramAction(this);
+    	deleteTopicTypeAction = new DeleteTMCLConstruct(this);
+    	createDiagramAction = new CreateDiagramAction(this);
+    	createDomainDiagramAction = new CreateDomainDiagramAction(this);
+    	createTopicAction = new CreateTopicAction(this);
+    	renameAction = new RenameAction(this);
+    
+    	createNameConstraintAction = new CreateNameConstraintAction(this);
+    	createOccurrenceConstraintAction = new CreateOccurrenceConstraintAction(this);
+    	createItemIdenifierConstraintAction = new CreateItemIdenifierConstraintAction(this);
+    	createSubjectIdenifierConstraintAction = new CreateSubjectIdenifierConstraintAction(this);
+    	createSubjectLocatorConstraintAction = new CreateSubjectLocatorConstraintAction(this);
+    
+    	boolean enabled = (currFile!=null);
+    	createDiagramAction.setEnabled(enabled);
+    	createDomainDiagramAction.setEnabled(enabled);
+    	validationAction.setEnabled(enabled);
+    	
+    	// add enabled actions from extensions
+    	List<ModelViewExtensionInfo> mveInfos = TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos();
+    	for (ModelViewExtensionInfo mve : mveInfos) {
+    			mve.getProvider().createActions(this);
+    	}
+    }
+
+	private void hookDoubleClickAction() {
+    	viewer.addDoubleClickListener(new IDoubleClickListener() {
+    		public void doubleClick(DoubleClickEvent event) {
+    			doubleClickAction.run();
+    		}
+    	});
+    }
+
+	private void hookKeyListener() {
+    	viewer.getTree().addKeyListener(new org.eclipse.swt.events.KeyAdapter() {
+    		@Override
+    		public void keyReleased(KeyEvent e) {
+    			if (e.keyCode != SWT.F2)
+    				return;
+    
+    			IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+    			if (sel.isEmpty())
+    				return;
+    
+    			AbstractModelViewNode obj = (AbstractModelViewNode) sel.getFirstElement();
+    			obj.handleRename();
+    			e.doit = false;
+    			return;
+    		}
+    	});
+    }
+
 	class ViewLabelProvider extends LabelProvider {
 
 		@Override
@@ -918,7 +949,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		@Override
 		public Image getImage(Object obj) {
-			return ((TreeObject) obj).getImage();
+			return ((AbstractModelViewNode) obj).getImage();
 		}
 	}
 

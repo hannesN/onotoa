@@ -8,8 +8,12 @@ import java.util.List;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
 public class AbstractModelViewNode implements IAdaptable {
 
@@ -41,6 +45,10 @@ public class AbstractModelViewNode implements IAdaptable {
     	if (parent != null)
     		this.syncView = parent.isSyncView();
     }
+	
+	final protected void setName(String newName) {
+		this.name = newName;
+	}
 
 	public int getId() {
         return id;
@@ -68,6 +76,14 @@ public class AbstractModelViewNode implements IAdaptable {
     		to.dispose();
     	}
     }
+	
+	public void handleDoubleClick() {
+		try {
+	        getModelView().getViewSite().getWorkbenchWindow().getActivePage().showView(PropertyDetailView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
+        } catch (PartInitException e) {
+        	TmcleditEditPlugin.getPlugin().log(e);
+        }
+	}
 
 	public Image getImage() {
     	return null;
@@ -105,8 +121,8 @@ public class AbstractModelViewNode implements IAdaptable {
     	child.setParent(null);
     }
 
-	public TreeObject[] getChildren() {
-    	return (TreeObject[]) children.toArray(new TreeObject[children
+	public AbstractModelViewNode[] getChildren() {
+    	return (AbstractModelViewNode[]) children.toArray(new AbstractModelViewNode[children
     			.size()]);
     }
 

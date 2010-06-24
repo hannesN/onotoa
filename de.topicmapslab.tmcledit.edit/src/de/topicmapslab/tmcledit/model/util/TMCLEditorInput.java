@@ -69,7 +69,6 @@ public class TMCLEditorInput implements IEditorInput {
 		return diagram.getName();
 	}
 
-	@SuppressWarnings("unchecked")
 	public Object getAdapter(Class adapter) {
 		if (adapter==ISaveablePart.class)
 			return modelView;

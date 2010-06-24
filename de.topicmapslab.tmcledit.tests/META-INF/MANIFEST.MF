@@ -7,7 +7,8 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: de.topicmapslab.tmcledit.model.tests
+Export-Package: de.topicmapslab.tmcledit.model.compare,
+ de.topicmapslab.tmcledit.model.tests
 Require-Bundle: org.eclipse.core.runtime,
  de.topicmapslab.tmcledit;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,

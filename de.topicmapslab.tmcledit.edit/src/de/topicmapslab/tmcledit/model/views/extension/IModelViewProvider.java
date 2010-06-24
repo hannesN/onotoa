@@ -12,8 +12,8 @@ package de.topicmapslab.tmcledit.model.views.extension;
 
 import java.util.List;
 
-import org.eclipse.jface.action.IAction;
-
+import de.topicmapslab.tmcledit.model.actions.UpdateAction;
+import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
 
 /**
@@ -37,11 +37,31 @@ public interface IModelViewProvider {
 		
 	public String getAnnotationKey(IModelExtension modelExtension);
 	
-	public List<AbstractModelViewNode> getChildrenNodes(AbstractModelViewNode parentModel);
+	/**
+	 * Returns the nodes for the given parent node which are added by the implementing extension.
+	 * @param modelView the modelview to extend
+	 * @param parentNode the parent node
+	 * @return a list of nodes added to the parent node
+	 */
+	public List<AbstractModelViewNode> getChildNodes(ModelView modelView, AbstractModelViewNode parentNode);
 
 	public boolean hasPageFor(IModelExtension extension);
 	
 	public IModelPage getPageFor(IModelExtension extension);
 	
-	public List<IAction> getActionsFor(AbstractModelViewNode node);
+	/**
+	 * Returns the list of actions provided for the context menu of the ModelView
+	 * @return a list of actions. May be emtpy but must not be <code>null</code>
+	 */
+	public List<UpdateAction> getActions();
+	
+	/**
+	 * This method should create the actions. It is called during the initialization of the modelview.
+	 * 
+	 * Actions which listen to selection changed event in the model view should be created in this method 
+	 * and register to the given {@link ModelView}.
+	 * @param modelView the model view instance which calles this method. 
+	 */
+	public void createActions(ModelView modelView);
+	
 }

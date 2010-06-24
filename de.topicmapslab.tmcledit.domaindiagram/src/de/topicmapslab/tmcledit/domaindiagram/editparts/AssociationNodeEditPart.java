@@ -272,11 +272,8 @@ public class AssociationNodeEditPart extends NodeEditPart implements IDirectEdit
 				if (at == null)
 					return null;
 
-				if (cmd == null)
-					return null;
 
-				DomainEditDomain ed = (DomainEditDomain) getHost().getViewer()
-						.getEditDomain();
+				DomainEditDomain ed = (DomainEditDomain) getHost().getViewer().getEditDomain();
 				CommandStack cmdStack = ed.getEditingDomain().getCommandStack();
 				return new CommandAdapter(cmdStack, cmd);
 			}
