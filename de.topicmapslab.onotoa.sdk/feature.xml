@@ -30,16 +30,30 @@
          unpack="false"/>
 
    <plugin
-         id="org.tmapix_0.3"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
          id="de.topicmapslab.ctmwriter"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="commons-beanutils"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="commons_logging"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.tmapix_0.4_snapshot"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>
