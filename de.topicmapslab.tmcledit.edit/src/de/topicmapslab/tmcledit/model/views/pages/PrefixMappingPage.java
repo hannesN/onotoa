@@ -57,7 +57,7 @@ import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
  * @author Hannes Niederhausen
  *
  */
-public class PrefixMappingPage extends AbstractModelPage {
+public class PrefixMappingPage extends AbstractEMFModelPage {
 
 	private final String[] columnNames = {"key", "value"};
 

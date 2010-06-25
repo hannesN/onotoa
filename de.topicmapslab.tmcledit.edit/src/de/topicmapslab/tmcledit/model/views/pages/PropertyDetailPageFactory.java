@@ -223,7 +223,7 @@ public class PropertyDetailPageFactory {
 				for (ModelViewExtensionInfo infos : extensionManager.getModelViewExtensionInfos()) {
 					IModelViewProvider mvp = infos.getProvider();
 					if (mvp.hasPageFor((IModelExtension) model)) {
-						page = (AbstractModelPage) mvp.getPageFor((IModelExtension) model);
+						page = (AbstractEMFModelPage) mvp.getPageFor((IModelExtension) model);
 						if (page.getControl()==null) {
 							page.createControl(pageBook.getContainer());
 							pageBook.registerPage(page.getID(), page.getControl());
@@ -241,7 +241,7 @@ public class PropertyDetailPageFactory {
 
 
 
-	public AbstractModelPage getEmptyPage() {
+	public AbstractEMFModelPage getEmptyPage() {
 		return emptyPage;
 	}
 	

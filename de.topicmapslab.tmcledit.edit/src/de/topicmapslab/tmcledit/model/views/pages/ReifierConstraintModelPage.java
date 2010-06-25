@@ -48,7 +48,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  * @author Hannes Niederhausen
  * 
  */
-public class ReifierConstraintModelPage extends AbstractModelPage {
+public class ReifierConstraintModelPage extends AbstractEMFModelPage {
 
 	private Text typeText;
 	private CCombo cardCombo;

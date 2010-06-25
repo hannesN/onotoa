@@ -82,7 +82,7 @@ import de.topicmapslab.tmcledit.model.views.widgets.TypedCardinalityConstraintWi
  * @author Hannes Niederhausen
  * 
  */
-public class TopicTypePage extends AbstractModelPage implements Adapter {
+public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 	private Text nameText;
 	private Text identifierText;

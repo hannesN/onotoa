@@ -63,5 +63,11 @@ public interface IModelViewProvider {
 	 * @param modelView the model view instance which calles this method. 
 	 */
 	public void createActions(ModelView modelView);
+
+	/**
+	 * This method is called when the model is closed. 
+	 * It should be sued to clean up some cached data.
+	 */
+	void close();
 	
 }
