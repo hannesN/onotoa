@@ -951,7 +951,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 		@Override
 		public String getText(Object obj) {
-			return obj.toString();
+			return ((AbstractModelViewNode) obj).getName();
 		}
 
 		@Override

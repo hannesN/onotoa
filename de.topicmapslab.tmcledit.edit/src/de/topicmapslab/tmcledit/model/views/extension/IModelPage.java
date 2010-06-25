@@ -39,6 +39,6 @@ public interface IModelPage extends IPage {
 
 	public abstract void init(IPageSite pageSite);
 
-	public abstract String getID();
+	public abstract String getId();
 
 }

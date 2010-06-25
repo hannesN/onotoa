@@ -19,7 +19,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class EmptyPage extends AbstractEMFModelPage {
+import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
+
+public class EmptyPage extends AbstractModelPage {
 
 	public EmptyPage() {
 		super("empty");
@@ -38,28 +40,28 @@ public class EmptyPage extends AbstractEMFModelPage {
 		item.setControl(comp);
 	}
 	
-	@Override
-	public boolean canAnnotate() {
-	    return false;
-	}
-	
-	@Override
-	protected boolean hasDocumentation() {
-		return false;
-	}
 	
 	@Override
 	public void setFocus() {
 	}
 
-	@Override
-	public void updateUI() {
-	}
-
 	public void notifyChanged(Notification notification) {
 	}
 	
+
+	public void aboutToHide() {
+    }
+
+	public void updateUI() {
+    }
+	
 	@Override
-	protected void setEnabled(boolean enabled) {
+	public void setModel(Object model) {
 	}
+	
+	@Override
+	public Object getModel() {
+	    return super.getModel();
+	}
+	
 }

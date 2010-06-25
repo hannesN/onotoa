@@ -15,7 +15,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -25,81 +24,48 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledPageBook;
-import org.eclipse.ui.part.IPageSite;
-import org.eclipse.ui.part.Page;
 
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.util.IModelProvider;
+import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
 import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.widgets.AnnotationWidget;
 
-public abstract class AbstractModelPage extends Page implements Adapter,
+public abstract class AbstractEMFModelPage extends AbstractModelPage implements Adapter,
 		IModelProvider, IModelPage {
-
-	private EObject model;
 
 	private Notifier target;
 
-	private CommandStack commandStack;
-
-	private String ID;
-
-	private CTabFolder folder;
 	private CTabItem descrItem;
 	private CTabItem annotationItem;
 
-	private Text descriptionText;
+	Text descriptionText;
 
-	private Text commentText;
+	Text commentText;
 
-	private Text seeAlsoText;
+	Text seeAlsoText;
 
-	private AnnotationWidget annotationWidget;
+	AnnotationWidget annotationWidget;
 
-	public AbstractModelPage(String id) {
-		super();
-		ID = id;
+	public AbstractEMFModelPage(String id) {
+		super(id);
 	}
 
-	/* (non-Javadoc)
-     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#setSite(org.eclipse.ui.part.IPageSite)
-     */
-	public void setSite(IPageSite pageSite) {
-		init(pageSite);
-	}
-	
 	public boolean canAnnotate() {
 		return true;
 	}
 	
-	@Override
-	public final void createControl(Composite parent) {
-		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		folder = new CTabFolder(parent, SWT.None);
-
-		createItems(folder);
-
-		if (canAnnotate())
-			createAnnotationWidgets(toolkit);
-		if (hasDocumentation()) {
-			createDescriptionTab(toolkit);
-			hookModifyListeners();
-		}
-		folder.setSelection(0);
-	}
-
 	protected boolean hasDocumentation() {
 		return true;
 	}
 
-	private void hookModifyListeners() {
+	void hookModifyListeners() {
 		descriptionText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -135,7 +101,7 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		seeAlsoText.addKeyListener(l);
 	}
 
-	private void createDescriptionTab(FormToolkit toolkit) {
+	void createDescriptionTab(FormToolkit toolkit) {
 		descrItem = new CTabItem(folder, SWT.None);
 		Composite comp = toolkit.createComposite(folder);
 		comp.setLayout(new GridLayout(2, false));
@@ -161,9 +127,18 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		descrItem.setControl(comp);
 	}
 
-	protected void createItems(CTabFolder folder) {
-		if (this.folder == null)
-			this.folder = folder;
+	
+	@Override
+	public void createControl(Composite parent) {
+	    super.createControl(parent);
+
+	    FormToolkit toolkit = new FormToolkit(folder.getDisplay());
+	    if (canAnnotate())
+    		createAnnotationWidgets(toolkit);
+    	if (hasDocumentation()) {
+    		createDescriptionTab(toolkit);
+    		hookModifyListeners();
+    	}
 	}
 
 	private TMCLConstruct getCastedModel() {
@@ -172,18 +147,21 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		return null;
 	}
 	
-	protected CTabFolder getFolder() {
-	    return folder;
-    }
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+	    super.setCommandStack(commandStack);
+	    if (this.annotationWidget!=null)
+    		this.annotationWidget.setCommandStack(commandStack);
+	}
 	
 	/* (non-Javadoc)
      * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#setModel(java.lang.Object)
      */
 	public void setModel(Object model) {
 		setEnabled(model!=null);
-		if (this.model == model) {
-			if ((this.model!=null) && (!this.model.eAdapters().contains(this)) )
-				this.model.eAdapters().add(this);
+		if (getModel() == model) {
+			if ((getModel()!=null) && (!getModel().eAdapters().contains(this)) )
+				getModel().eAdapters().add(this);
 			return;
 		}
 
@@ -191,42 +169,36 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 		ScrolledPageBook pb = (ScrolledPageBook) folder.getParent().getParent();
 		pb.setOrigin(0, 0);
 
-		if (this.model != null)
-			this.model.eAdapters().remove(this);
+		if (getModel() != null)
+			getModel().eAdapters().remove(this);
 
+		super.setModel(model);
+		
 		if (descrItem != null)
 			descrItem.getControl().setEnabled((model instanceof TMCLConstruct));
 
 		if (annotationItem!=null)
 			((AnnotationWidget) annotationItem.getControl()).setModel(model);
 		
-		this.model = (EObject) model;
-		if (model != null)
-			this.model.eAdapters().add(this);
-		
+		if (getModel() != null)
+			getModel().eAdapters().add(this);
+
 		updateUI();
 	}
 
+	@Override
+	public EObject getModel() {
+	    return (EObject) super.getModel();
+	}
+	
 	protected void setEnabled(boolean enabled) {
 		seeAlsoText.setEnabled(enabled);
 		commentText.setEnabled(enabled);
 		descriptionText.setEnabled(enabled);
 	}
 
-	@Override
-	public void setFocus() {
-	}
-
 	public Notifier getTarget() {
 		return target;
-	}
-
-	/* (non-Javadoc)
-     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#getControl()
-     */
-	@Override
-	public Control getControl() {
-		return folder;
 	}
 
 	public boolean isAdapterForType(Object type) {
@@ -235,22 +207,6 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 
 	public void setTarget(Notifier newTarget) {
 		this.target = newTarget;
-	}
-
-	/* (non-Javadoc)
-     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#getCommandStack()
-     */
-	public CommandStack getCommandStack() {
-		return commandStack;
-	}
-
-	/* (non-Javadoc)
-     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#setCommandStack(org.eclipse.emf.common.command.CommandStack)
-     */
-	public void setCommandStack(CommandStack commandStack) {
-		this.commandStack = commandStack;
-		if (this.annotationWidget!=null)
-			this.annotationWidget.setCommandStack(commandStack);
 	}
 
 	/* (non-Javadoc)
@@ -291,18 +247,7 @@ public abstract class AbstractModelPage extends Page implements Adapter,
 			commentText.setText(tmp);
 	}
 
-	/* (non-Javadoc)
-     * @see de.topicmapslab.tmcledit.model.views.pages.IModelPage#getModel()
-     */
-	public EObject getModel() {
-		return model;
-	}
-
-	public String getID() {
-		return ID;
-	}
-
-	private void createAnnotationWidgets(FormToolkit toolkit) {
+	void createAnnotationWidgets(FormToolkit toolkit) {
 		annotationItem = new CTabItem(folder, SWT.NONE);
 		annotationItem.setText("Annotations");
 		annotationWidget = new AnnotationWidget(folder, SWT.NONE, toolkit);
