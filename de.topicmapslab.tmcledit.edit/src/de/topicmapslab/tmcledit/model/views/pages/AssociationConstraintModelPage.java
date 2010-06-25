@@ -46,7 +46,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  * @author Hannes Niederhausen
  * 
  */
-public class AssociationConstraintModelPage extends AbstractModelPage {
+public class AssociationConstraintModelPage extends AbstractEMFModelPage {
 
 	private Text typeText;
 	private CTabItem item;

@@ -26,7 +26,7 @@ import de.topicmapslab.tmcledit.model.util.CardTextObserver;
  * @author Hannes Niederhausen
  *
  */
-public abstract class AbstractCardinalityConstraintModelPage extends AbstractModelPage {
+public abstract class AbstractCardinalityConstraintModelPage extends AbstractEMFModelPage {
 
 	protected Text cardMinText;
 	protected Text cardMaxText;

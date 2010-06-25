@@ -27,7 +27,7 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
-public class TopicMapSchemaPropertyPage extends AbstractModelPage {
+public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 
 	private Text nameText;
 	private Text baseLocatorText;

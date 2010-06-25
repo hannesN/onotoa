@@ -254,16 +254,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					}
 
 					if (to instanceof TreeObject) {
-					createTopicAction.setKindOfTopicType(((TreeObject) to).getKindOfTopicType());
+						createTopicAction.setKindOfTopicType(((TreeObject) to).getKindOfTopicType());
 						if (to.getModel() == null)
 							currentSelection = new StructuredSelection(currFile);
 					}
 					Iterator<Object> it = sel.iterator();
-					List<OnoObject> list = new ArrayList<OnoObject>();
+					List<Object> list = new ArrayList<Object>();
 					while (it.hasNext()) {
 						to = (AbstractModelViewNode) it.next();
 						if (to.getModel() != null)
-							list.add((OnoObject) to.getModel());
+							list.add((Object) to.getModel());
 					}
 					currentSelection = new StructuredSelection(list);
 				}
@@ -564,6 +564,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				activePage.closeEditor(ref.getEditor(false), false);
 			}
 		}
+		
+		// add enabled actions from extensions
+    	List<ModelViewExtensionInfo> mveInfos = TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos();
+    	for (ModelViewExtensionInfo mve : mveInfos) {
+    			mve.getProvider().close();
+    	}
+		
 		firePropertyChange(PROP_DIRTY);
 		updateActions();
 		viewer.refresh();

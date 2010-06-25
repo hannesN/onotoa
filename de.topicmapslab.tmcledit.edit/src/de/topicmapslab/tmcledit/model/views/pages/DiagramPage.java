@@ -30,7 +30,7 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
 
-public class DiagramPage extends AbstractModelPage {
+public class DiagramPage extends AbstractEMFModelPage {
 
 	private Text nameText;
 	private ControlDecoration nameDecorator;

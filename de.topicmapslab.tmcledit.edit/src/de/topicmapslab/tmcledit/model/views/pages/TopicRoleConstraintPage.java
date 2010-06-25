@@ -33,7 +33,7 @@ import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
-public class TopicRoleConstraintPage extends AbstractModelPage{
+public class TopicRoleConstraintPage extends AbstractEMFModelPage{
 	private Label playerLabel;
 	private Text cardMinText;
 	private Text cardMaxText;

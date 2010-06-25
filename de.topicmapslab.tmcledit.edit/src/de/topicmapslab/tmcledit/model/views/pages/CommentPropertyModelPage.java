@@ -34,7 +34,7 @@ import de.topicmapslab.tmcledit.model.commands.SetCommentContentCommand;
  * @author Hannes Niederhausen
  *
  */
-public class CommentPropertyModelPage extends AbstractModelPage {
+public class CommentPropertyModelPage extends AbstractEMFModelPage {
 
 	private Text contentText;
 	
