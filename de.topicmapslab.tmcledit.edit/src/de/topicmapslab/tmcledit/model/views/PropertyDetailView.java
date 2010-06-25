@@ -77,7 +77,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 
 		this.currentPage = currentPage;
 		// this.currentPage.setSite(getSite());
-		pageBook.showPage(currentPage.getID());
+		pageBook.showPage(currentPage.getId());
 		pageBook.reflow(true);
 	}
 

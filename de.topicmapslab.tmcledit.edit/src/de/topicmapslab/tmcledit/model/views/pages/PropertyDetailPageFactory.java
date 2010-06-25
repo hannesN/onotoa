@@ -38,6 +38,7 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.extension.ExtensionManager;
 import de.topicmapslab.tmcledit.model.util.extension.ModelViewExtensionInfo;
+import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
 import de.topicmapslab.tmcledit.model.views.extension.IModelExtension;
 import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider;
@@ -71,7 +72,7 @@ public class PropertyDetailPageFactory {
 		this.pageBook = pageBook;
 		emptyPage = new EmptyPage();
 		emptyPage.createControl(pageBook.getContainer());
-		this.pageBook.registerPage(emptyPage.getID(), emptyPage.getControl());
+		this.pageBook.registerPage(emptyPage.getId(), emptyPage.getControl());
 		this.viewSite = viewSite;
 	}
 	
@@ -92,7 +93,7 @@ public class PropertyDetailPageFactory {
 				page = new OccurrenceTypeModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(OCCURRENCE_TYPE, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof NameType) {
 			page = pageMap.get(NAME_TYPE);
@@ -100,7 +101,7 @@ public class PropertyDetailPageFactory {
 				page = new NameTypeModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(NAME_TYPE, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 			return page;
 		} else if (model instanceof AssociationType) {
@@ -109,7 +110,7 @@ public class PropertyDetailPageFactory {
 				page = new AssociationTypeModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(ASSOCIATION_TYPE, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof RoleType) {
 			page = pageMap.get(ROLE_TYPE);
@@ -117,7 +118,7 @@ public class PropertyDetailPageFactory {
 				page = new RoleTypePage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(ROLE_TYPE, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof TopicType) {
 			page = pageMap.get(TOPIC_TYPE);
@@ -125,7 +126,7 @@ public class PropertyDetailPageFactory {
 				page = new TopicTypePage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(TOPIC_TYPE, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if  ( (model instanceof MappingElement) || (model instanceof EObjectContainmentEList) ) {
 			page = pageMap.get(PREFIX_MAPPING);
@@ -133,7 +134,7 @@ public class PropertyDetailPageFactory {
 				page = new PrefixMappingPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(PREFIX_MAPPING, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof Diagram) {
 			page = pageMap.get(DIAGRAM);
@@ -141,7 +142,7 @@ public class PropertyDetailPageFactory {
 				page = new DiagramPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(DIAGRAM, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof RolePlayerConstraint) {
 			page = pageMap.get(ROLE);
@@ -149,7 +150,7 @@ public class PropertyDetailPageFactory {
 				page = new TopicRoleConstraintPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(ROLE, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof AssociationTypeConstraint) {
 			page = pageMap.get(ASSOCIATION);
@@ -157,7 +158,7 @@ public class PropertyDetailPageFactory {
 				page = new AssociationConstraintModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(ASSOCIATION, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		}  else if (model instanceof OccurrenceTypeConstraint) {
 			page = pageMap.get(OCCURRENCE_CONSTRAINT);
@@ -165,7 +166,7 @@ public class PropertyDetailPageFactory {
 				page = new OccurrenceConstraintDetailPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(OCCURRENCE_CONSTRAINT, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		}  else if (model instanceof NameTypeConstraint) {
 			page = pageMap.get(NAME_CONSTRAINT);
@@ -173,7 +174,7 @@ public class PropertyDetailPageFactory {
 				page = new NameConstraintDetailPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(NAME_CONSTRAINT, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if  ((model instanceof SubjectLocatorConstraint) 
 					|| (model instanceof SubjectIdentifierConstraint)
@@ -183,7 +184,7 @@ public class PropertyDetailPageFactory {
 				page = new IdentifierConstraintModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(IDENTIFIER_CONSTRAINT, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof TopicMapSchema) {
 			page = pageMap.get(TOPIC_MAP_SCHEMA);
@@ -191,7 +192,7 @@ public class PropertyDetailPageFactory {
 				page = new TopicMapSchemaPropertyPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(TOPIC_MAP_SCHEMA, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof Comment) {
 			page = pageMap.get(COMMENT);
@@ -199,7 +200,7 @@ public class PropertyDetailPageFactory {
 				page = new CommentPropertyModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(COMMENT, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof ScopeConstraint) {
 			page = pageMap.get(SCOPE_CONSTRAINT);
@@ -207,7 +208,7 @@ public class PropertyDetailPageFactory {
 				page = new ScopeConstraintModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(SCOPE_CONSTRAINT, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else if (model instanceof ReifierConstraint) {
 			page = pageMap.get(REIFIER_CONSTRAINT);
@@ -215,7 +216,7 @@ public class PropertyDetailPageFactory {
 				page = new ReifierConstraintModelPage();
 				page.createControl(pageBook.getContainer());
 				pageMap.put(REIFIER_CONSTRAINT, page);
-				pageBook.registerPage(page.getID(), page.getControl());
+				pageBook.registerPage(page.getId(), page.getControl());
 			}
 		} else {
 			if (model instanceof IModelExtension) {
@@ -223,10 +224,10 @@ public class PropertyDetailPageFactory {
 				for (ModelViewExtensionInfo infos : extensionManager.getModelViewExtensionInfos()) {
 					IModelViewProvider mvp = infos.getProvider();
 					if (mvp.hasPageFor((IModelExtension) model)) {
-						page = (AbstractEMFModelPage) mvp.getPageFor((IModelExtension) model);
+						page = (IModelPage) mvp.getPageFor((IModelExtension) model);
 						if (page.getControl()==null) {
 							page.createControl(pageBook.getContainer());
-							pageBook.registerPage(page.getID(), page.getControl());
+							pageBook.registerPage(page.getId(), page.getControl());
 						}
 						break;
 					}
@@ -241,7 +242,7 @@ public class PropertyDetailPageFactory {
 
 
 
-	public AbstractEMFModelPage getEmptyPage() {
+	public AbstractModelPage getEmptyPage() {
 		return emptyPage;
 	}
 	
