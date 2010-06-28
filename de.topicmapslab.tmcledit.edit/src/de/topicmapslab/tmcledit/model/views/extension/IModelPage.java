@@ -31,6 +31,12 @@ public interface IModelPage extends IPage {
 
 	public abstract void aboutToHide();
 
+	/**
+	 * Calling this method triggers an update of
+	 * every widget in the page. This may be needed when 
+	 * model changes outside the page occur.  
+	 * 
+	 */
 	public abstract void updateUI();
 
 	public abstract Object getModel();
