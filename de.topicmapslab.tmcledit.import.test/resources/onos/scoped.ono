@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file id="1" version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <notes>FOR $c IN // tmcl:scope-constraint 
+WHERE tmcl:constrained-statement(tmcl:constraint : $c, tmcl:constrained : typeid) AND
+		  tmcl:constrained-scope(tmcl:constraint : $c, tmcl:constrained : $tt)
+RETURN ( $tt , $c / tmcl:card-min || 0 , $c / tmcl:card-max || "*" )</notes>
+    <schema baseLocator="tm:" id="2">
+        <mappingElement id="4" key="tm" value="http://testmap.de/"/>
+        <topicType id="3" kind="NameType" regExp=".*">
+            <name>scopedName</name>
+            <subjectIdentifier>tm:scopedname</subjectIdentifier>
+            <scopeConstraint cardMax="1" cardMin="1" id="6">
+                <topictypeRef ref="topictypes.1"/>
+            </scopeConstraint>
+        </topicType>
+        <topicType id="5" kind="TopicType">
+            <name>language</name>
+            <subjectIdentifier>tm:language</subjectIdentifier>
+        </topicType>
+        <topicType datatype="xsd:anyType" id="7" kind="OccurrenceType" regExp=".*">
+            <name>description</name>
+            <subjectIdentifier>tm:description</subjectIdentifier>
+            <scopeConstraint cardMax="1" cardMin="1" id="8">
+                <topictypeRef ref="topictypes.1"/>
+            </scopeConstraint>
+            <scopeConstraint cardMax="1" cardMin="0" id="10">
+                <topictypeRef ref="topictypes.3"/>
+            </scopeConstraint>
+        </topicType>
+        <topicType id="9" kind="TopicType">
+            <name>context</name>
+            <subjectIdentifier>tm:context</subjectIdentifier>
+        </topicType>
+    </schema>
+    <diagram id="11" name="d"/>
+</file>

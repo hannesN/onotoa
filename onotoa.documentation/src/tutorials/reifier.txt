@@ -1,0 +1,59 @@
+== How to use the reifier constraint ==
+
+=== Theoretical background ===  
+
+We use reifiers to provide additional informations for a topic and distinguish between reifyable topics and topics, that reifies another 
+topic (only topic types can do this). Reifyable topics are:
+
+* *Occurrence Types*
+* *Name Types*
+* *Associations Types*
+
+Once the constraint is used to make a topic reifyable, there are three possible settings for the reifyable topic:
+
+* topic *can not* have a reifier -> cardinality [0..0]
+* topic *may* have a reifier -> cardinality [0..1]
+* topic *must* have a reifier -> cardinality [1..1]
+
+To demonstrate the constraint, we will create the following short example:
+
+A company has got a homepage and we want to specify the information who created this homepage. To simplify matters we define that a person created it.
+So we need a topic "company" her reifyable occurrence "homepage" and a second topic "person" which is the refier. Let us get into _Onotoa_.
+
+=== Into Onotoa ===
+
+First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name 
+for the model, e.g. "example_reifier.ono". To create a new diagram, right click on *Diagram* in the *Model View* and choose
+ *Create New Diagram...* in the context menu.
+After your decision for a diagram name, the _Onotoa_ window should looks like this:  
+
+.Onotoa 
+[[ref_create_model_diagram]]
+image::images/documentation/reifier/create_model_diagram.png[scaledwidth="50%"]
+
+Let us start with the reifier topic. Open the context of the node *TopicTypes* in the *Model View* at the right hand side of the _Onotoa_ window and choose 
+*Create TopicType...* . Type "person" in the following dialogue to finish our first topic. Create the "company" topic in the same way. 
+
+.Create Topic Type
+[[ref_create_topic_type]]
+image::images/documentation/reifier/create_topic_type.png[scaledwidth="100%"]
+
+As we can see the topics do not appears in the editor window. Click on the triangle on the left hand side of the *TopicType* node to list all 
+topics and add the existing ones to the editor by drag and drop. Your editor window should looks like this one:
+
+.Editor View
+[[ref_editor_view_1]]
+image::images/documentation/reifier/editor_view_1.png[scaledwidth="70%"]
+
+As next step we will create the occurrence "homepage". Therefore right click on the "company" topic and select the entry *Add Occurrence Constraint* 
+in the context menu. Now we must create and set the specific Occurrence Type. Create a new one by the use of the *Model View* and name it "homepage". 
+Switch to the property page of the Occurrence Constraint and click on the *...* button at the left hand side to set the type. A list of all available 
+types appears and we choose our only existing one: "homepage". 
+
+Now we take hand on the reifier constraint. All necessary settings can be done in the *Property Details View*. We start with the topic "person" and wanted to set 
+the topic this one will reifies. Click on the graphical representation to get access to its property page and scroll down to the section *reifies*. Click on 
+the add button and _Onotoa_ provides all possible topics in a list. Select "homepage" and confirm your choice.
+
+/// a picture should be right here but bug #32 is not fixed at this moment.
+
+The final step will be to define that 

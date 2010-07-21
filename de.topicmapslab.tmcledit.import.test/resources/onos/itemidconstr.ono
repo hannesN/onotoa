@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file id="1" version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema baseLocator="tm:" id="2">
+        <mappingElement id="13" key="tm" value="http://testmap.de/"/>
+        <topicType id="5" kind="TopicType">
+            <name>Test1</name>
+            <subjectIdentifier>tm:test1</subjectIdentifier>
+            <itemIdentifierConstraints>
+                <itemIdentifierConstraint cardMax="*" cardMin="0" id="12" regExp=".*"/>
+            </itemIdentifierConstraints>
+        </topicType>
+        <topicType id="15" kind="TopicType">
+            <name>Test2</name>
+            <subjectIdentifier>tm:test2</subjectIdentifier>
+            <itemIdentifierConstraints>
+                <itemIdentifierConstraint cardMax="4" cardMin="1" id="17" regExp="urn:.*"/>
+            </itemIdentifierConstraints>
+        </topicType>
+    </schema>
+    <diagram id="3" name="test1">
+        <node id="4" posX="172" posY="22" type="typeNode">
+            <topictypeRef ref="topictypes.0"/>
+        </node>
+        <node id="14" posX="326" posY="22" type="typeNode">
+            <topictypeRef ref="topictypes.1"/>
+        </node>
+    </diagram>
+</file>

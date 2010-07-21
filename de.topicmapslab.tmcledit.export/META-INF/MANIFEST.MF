@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Export Plug-in
+Bundle-SymbolicName: de.topicmapslab.tmcledit.export;singleton:=true
+Bundle-Version: 1.1.2.qualifier
+Bundle-Activator: de.topicmapslab.tmcledit.export.Activator
+Bundle-Vendor: H.Niederhausen, Topic Maps Lab
+Eclipse-RegisterBuddy: org.tm4j
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.topicmapslab.tmcledit,
+ org.eclipse.emf.edit,
+ org.eclipse.core.resources,
+ org.tmapi;bundle-version="[2.0.2,3.0.0)",
+ de.topicmapslab.ctmwriter,
+ de.topicmapslab.majortom
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Import-Package: de.topicmapslab.tmcledit.model.util,
+ org.tmapix.io,
+ com.semagia.mio.ltm,
+ com.semagia.mio.xtm
+Export-Package: de.topicmapslab.tmcledit.export.builder

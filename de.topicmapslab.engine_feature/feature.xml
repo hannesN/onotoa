@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.topicmapslab.engine_feature"
+      label="Topic Maps Engine"
+      version="1.0.0.qualifier">
+
+   <description>
+      This feature contains the third party plugins needed to export and import topic maps
+Onotoa.
+In detail these are:
+CTMWriter
+MaJorToM
+TMAPI
+TAMPIx including semagia-mio
+TMQL4j
+gnu.trove
+   </description>
+
+   <copyright>
+      CTMWriter (C) Topic Maps Lab
+MaJorToM (C) Topic Maps Lab
+TMQL4j  (C) Topic Maps Lab
+The libraries TMAPI and TAMPIx are maintained by Lars Heuer the
+Topic Maps community
+Semagia-mio (C) Lars Heuer
+trove is
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      The license of TMAPI is unknown.
+
+Trove is licensed under  Lesser GNU Public License see http://www.gnu.org/copyleft/lesser.html for more information.
+
+All other libraries are released under the Apache 2 license.
+See http://www.apache.org/licenses/LICENSE-2.0 for more onformation.
+   </license>
+
+   <url>
+      <discovery label="Semagia Mio site" url="http://code.google.com/p/mio/"/>
+      <discovery label="TMAPIX site" url="http://code.google.com/p/tmapix/"/>
+      <discovery label="TMQL4J site" url="http://code.google.com/p/tmql/"/>
+      <discovery label="MaJorToM site" url="http://code.google.com/p/majortom/"/>
+      <discovery label="ctm-writer site" url="http://code.google.com/p/ctm-writer/"/>
+      <discovery label="Trove website" url="http://trove4j.sourceforge.net/"/>
+   </url>
+
+   <plugin
+         id="de.topicmapslab.ctmwriter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.majortom"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.tmapi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.tmql4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="gnu.trove"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.tmapix_0.4_snapshot"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+</feature>

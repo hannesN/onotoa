@@ -1,0 +1,26 @@
+=== Name Constraint ===
+
+A name constraint connects a topic type to a name type. For instance you have the topic type "person" and the name type "first name". 
+If a name constraint is added to the topic "person" it will be possible to specify that it has to have exactly one name of type "first name".
+
+A name constraint is an element of an topic type. 
+It has the following properties:
+
+* *type:* A name type used for the constraint. If the type is not set, the default name type specified in
+TMDM will be used. 
+* *cardMin:* The minimum number of names with the given type. The default value is 0.
+* *cardMax:* The maximum number of names with the given type. The default value is * which means infinity.
+
+.Property Page for name constraint
+image::images/nameconstr_pp.png[scaledwidth="100%"]
+
+After creating a new name constraint the type is set to the default name type "tmdm:default-name". This can be changed
+by pressing the button on the right hand side. A dialogue will appear, proposing all name types in the schema. To create a new
+name type press the label *Type:* on the left of the text field. This will open the new type wizard. After the creation 
+it will be selected as type for this constraint.
+
+If a special type is set it is possible to edit its properties in the second tab, called *Name Type*. It lists
+all type properties, see <<_name_type>> for details.
+
+ 
+ 
