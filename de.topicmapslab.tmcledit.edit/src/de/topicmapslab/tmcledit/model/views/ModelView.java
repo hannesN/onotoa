@@ -768,7 +768,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     }
 
 	private void updateModelViewActions() {
-    	// the actions aren't initalized therefor we return
+    	// the actions aren't initialized therefore we return
     	if (createDiagramAction==null)
     		return;
     	
