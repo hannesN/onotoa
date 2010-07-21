@@ -35,13 +35,13 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 	
 	public TreeObject(ModelView modelView, int id) {
 		super(modelView);
-		this.id = NOT_SET;
-		this.kindOfTopicType = KindOfTopicType.NO_TYPE; 
+		this.id = id;
+		this.kindOfTopicType = null; 
 	}
 	
 	public TreeObject(ModelView modelView) {
 		super(modelView);
-		this.kindOfTopicType = KindOfTopicType.NO_TYPE;
+		this.kindOfTopicType = null;
 	}
 	
 	public TreeObject(ModelView modelView, String name, int id) {
@@ -52,7 +52,7 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 	public TreeObject(ModelView modelView, String name) {
 		super(modelView);
 		this.name = name;
-		this.kindOfTopicType = KindOfTopicType.NO_TYPE;
+		this.kindOfTopicType = null;
 	}
 
 	public TreeObject(ModelView modelView, KindOfTopicType kindOfTopicType) {

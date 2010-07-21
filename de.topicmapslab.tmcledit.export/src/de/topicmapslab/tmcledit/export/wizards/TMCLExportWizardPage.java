@@ -207,7 +207,9 @@ public class TMCLExportWizardPage extends WizardPage {
 				String file = Activator.getDefault().getPreferenceStore().getString("exported_file");
 				if (file!=null) {
 //					dlg.setFileName(file);
-					dlg.setFilterPath(file.substring(0, file.lastIndexOf("/")));
+					int idx = file.lastIndexOf("/");
+					if (idx!=-1)
+						dlg.setFilterPath(file.substring(0, idx));
 					
 				}
 					
