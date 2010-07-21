@@ -11,26 +11,28 @@
 package de.topicmapslab.onotoa.search.views;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.topicmapslab.kuria.annotation.tree.Children;
+import de.topicmapslab.kuria.annotation.tree.TreeNode;
 
 /**
  * @author sip
  * 
  */
+@TreeNode
 public class Container {
 
 	@Children
-	private List<DiagramWrapper> list = new ArrayList<DiagramWrapper>();
+	private List<Object> list = new ArrayList<Object>();
 
 	/**
 	 * @return the list
 	 */
-	public List<DiagramWrapper> getList() {
-		
-		for (DiagramWrapper dw : list)
-		System.out.println(dw.getName().toString());
+	public List<Object> getList() {
+		if (this.list == null)
+			return Collections.emptyList();
 		return list;
 	}
 
@@ -38,7 +40,7 @@ public class Container {
 	 * @param list
 	 *            the list to set
 	 */
-	public void setList(List<DiagramWrapper> list) {
+	public void setList(List<Object> list) {
 		this.list = list;
 	}
 

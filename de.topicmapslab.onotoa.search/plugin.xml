@@ -9,12 +9,12 @@
             name="Find Usage">
       </command>
       <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
+            defaultHandler="de.topicmapslab.onotoa.search.commands.KuriaListSubjectIdentifierHandler"
             id="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
             name="List All Subject Identifiers">
       </command>
       <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
+            defaultHandler="de.topicmapslab.onotoa.search.commands.KuriaListNonSubjectIdentifierTopicsHandler"
             id="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
             name="No Identifier Topics">
       </command>
@@ -78,7 +78,7 @@
       <perspectiveExtension
             targetID="de.topicmapslab.tmcledit.extensions.OnotoaPerspective">
          <view
-               id="de.topicmapslab.onotoa.search.views.SearchResults"
+               id="de.topicmapslab.onotoa.search.views.SearchView"
                ratio="0.5"
                relationship="top"
                relative="de.topicmapslab.tmcledit.model.views.NotesView">
@@ -99,9 +99,9 @@
       </category>
       <view
             category="de.topicmapslab.tmcledit.extensions"
-            class="de.topicmapslab.onotoa.search.views.Searchr"
-            icon="icons/sample.gif"
-            id="de.topicmapslab.onotoa.search.views.SearchResults"
+            class="de.topicmapslab.onotoa.search.views.SearchView"
+            icon="icons/loupe.gif"
+            id="de.topicmapslab.onotoa.search.views.SearchView"
             name="Search">
       </view>
    </extension>
