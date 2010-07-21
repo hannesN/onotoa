@@ -84,7 +84,6 @@ public class NotesView extends ViewPart {
 		
 		notesText.setText(content);
 		notesText.setEnabled(file!=null);
-		System.out.println("UPdate text");
     }
 
 	
