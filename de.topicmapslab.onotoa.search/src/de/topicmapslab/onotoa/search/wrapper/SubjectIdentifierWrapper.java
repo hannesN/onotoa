@@ -10,19 +10,33 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.wrapper;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+
 import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
+import de.topicmapslab.onotoa.search.searchImpl.NonSubjectIdentifierTopicSearcher;
+import de.topicmapslab.onotoa.search.views.SearchView;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
 /**
- * Wrapper class for the SubjectIdentifier of an TopicType 
+ * Wrapper class for the SubjectIdentifier of an TopicType
  * 
  * @author Sebastian Lippert
  */
 
 @TreeNode
 public class SubjectIdentifierWrapper implements
-		Comparable<SubjectIdentifierWrapper> {
+		Comparable<SubjectIdentifierWrapper>, IDoubleClickHandler {
 
 	private TopicType topic;
 	private String identifier;
@@ -30,22 +44,25 @@ public class SubjectIdentifierWrapper implements
 	/**
 	 * Constructor
 	 * 
-	 * @param type TopicType
-	 * @param one SubjectIdentifier of the TopicType
+	 * @param type
+	 *            TopicType
+	 * @param one
+	 *            SubjectIdentifier of the TopicType
 	 */
-	
+
 	public SubjectIdentifierWrapper(TopicType type, String identifier) {
 
-		this.topic = topic;
+		this.topic = type;
 		this.identifier = identifier;
 
 	}
 
 	/**
 	 * Getter for one SubjectIdentifier of a TopicType
-	 * @return SubjectIdentifier 
+	 * 
+	 * @return SubjectIdentifier
 	 */
-	
+
 	@Text
 	public String getSubjectIdentifier() {
 		return this.identifier;
@@ -56,7 +73,7 @@ public class SubjectIdentifierWrapper implements
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	
+
 	public int compareTo(SubjectIdentifierWrapper o) {
 
 		if (this.identifier.compareTo(o.identifier) == 0)
@@ -66,6 +83,35 @@ public class SubjectIdentifierWrapper implements
 
 		return 1;
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.topicmapslab.onotoa.search.wrapper.DoubleClickAction#doubleClickHappend
+	 * ()
+	 */
+	public void doubleClickHappend() {
+
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+		ModelView view = ModelView.getInstance();
+		if (view==null)
+			return;
+		
+		view.setSelection(new StructuredSelection(topic));
+		try {
+			activePage.showView(PropertyDetailView.ID,null,IWorkbenchPage.VIEW_VISIBLE);
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+
+		
 	}
 
 }

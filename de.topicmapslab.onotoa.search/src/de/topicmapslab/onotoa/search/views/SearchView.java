@@ -1,8 +1,15 @@
 package de.topicmapslab.onotoa.search.views;
 
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -21,8 +28,11 @@ import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.runtime.IBindingContainer;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
+import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
 import de.topicmapslab.onotoa.search.wrapper.SubjectIdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
+import de.topicmapslab.tmcledit.model.validation.ValidationResult;
+import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
 /**
  * This sample class demonstrates how to plug-in a new workbench view. The view
@@ -120,9 +130,39 @@ public class SearchView extends ViewPart {
 		WidgetGenerator.addImageCallback(new ImageCallBack());
 		viewer = gen.generateTree(comp, false);
 		viewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		viewer.setInput(container);
 		viewer.expandAll();
+
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent event) {
+
+				System.out.println("double click happend");
+				IStructuredSelection sel = (IStructuredSelection) event
+						.getSelection();
+
+				Object o = sel.getFirstElement();
+				if (o instanceof IDoubleClickHandler){
+					
+					((IDoubleClickHandler) o).doubleClickHappend();
+					
+				}
+				
+				// if (sel.isEmpty())
+				// setSelection(sel);
+				// else {
+				// ValidationResult r = (ValidationResult)
+				// sel.getFirstElement();
+				// setSelection(new StructuredSelection(r.getObject()));
+				// try {
+				// getSite().getWorkbenchWindow().getActivePage().showView(PropertyDetailView.ID);
+				// } catch (PartInitException e) {
+				// throw new RuntimeException(e);
+				// }
+				// }
+			}
+
+		});
 
 		// viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL |
 		// SWT.V_SCROLL);
@@ -140,17 +180,17 @@ public class SearchView extends ViewPart {
 		// contributeToActionBars();
 	}
 
-	public void setContent(Container container){
+	public void setContent(Container container) {
 		this.container = container;
 		viewer.setInput(container);
 	}
-	
+
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 
-		 Container con = new Container();
-		 this.container = con;
+		Container con = new Container();
+		this.container = con;
 
 	}
 
@@ -251,4 +291,12 @@ public class SearchView extends ViewPart {
 	// public void setFocus() {
 	// viewer.getControl().setFocus();
 	// }
+	// public void setSelection(ISelection selection) {
+	// currentSelection = selection;
+	// SelectionChangedEvent e = new SelectionChangedEvent(this, selection);
+	// for (ISelectionChangedListener l : listeners) {
+	// l.selectionChanged(e);
+	// }
+	// }
+
 }
