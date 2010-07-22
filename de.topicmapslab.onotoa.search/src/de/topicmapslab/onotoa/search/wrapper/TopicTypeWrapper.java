@@ -10,37 +10,39 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.wrapper;
 
-
 import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
- * Wrapper class for the name of an TopicType 
+ * Wrapper class for the name of an TopicType
  * 
  * @author Sebastian Lippert
  */
 
 @TreeNode(image = "./topictype.gif")
-public class TopicTypeWrapper implements Comparable<TopicTypeWrapper> {
+public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>,
+		IDoubleClickHandler {
 
 	private final TopicType type;
 
 	/**
 	 * Constructor
 	 * 
-	 * @param type TopicType
+	 * @param type
+	 *            TopicType
 	 */
-	
+
 	public TopicTypeWrapper(TopicType type) {
 		this.type = type;
 	}
 
 	/**
 	 * Getter for name of a TopicType
-	 * @return name 
+	 * 
+	 * @return name
 	 */
-	
+
 	@Text
 	public String getName() {
 		return this.type.getName();
@@ -51,7 +53,7 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper> {
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	
+
 	public int compareTo(TopicTypeWrapper o) {
 
 		if (this.getName().compareTo(o.getName()) == 0)
@@ -60,6 +62,17 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper> {
 			return -1;
 
 		return 1;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.topicmapslab.onotoa.search.wrapper.DoubleClickAction#doubleClickHappend
+	 * ()
+	 */
+	public void doubleClickHappend() {
+		System.out.println("Non thing clicked");
 	}
 
 }
