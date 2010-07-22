@@ -21,7 +21,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author Sebastian Lippert
  */
 
-@TreeNode(image = "/icons/topictype.gif")
+@TreeNode(image = "./topictype.gif")
 public class TopicTypeWrapper implements Comparable<TopicTypeWrapper> {
 
 	private final TopicType type;

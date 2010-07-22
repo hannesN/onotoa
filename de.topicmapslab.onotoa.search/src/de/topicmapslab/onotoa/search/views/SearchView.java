@@ -17,9 +17,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-import de.topicmapslab.jgui.swtgenerator.WidgetGenerator;
 import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.runtime.IBindingContainer;
+import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
+import de.topicmapslab.onotoa.search.util.ImageCallBack;
 import de.topicmapslab.onotoa.search.wrapper.SubjectIdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 
@@ -116,6 +117,7 @@ public class SearchView extends ViewPart {
 		IBindingContainer bc = fac.getBindingContainer();
 
 		WidgetGenerator gen = new WidgetGenerator(bc);
+		WidgetGenerator.addImageCallback(new ImageCallBack());
 		viewer = gen.generateTree(comp, false);
 		viewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
 		
