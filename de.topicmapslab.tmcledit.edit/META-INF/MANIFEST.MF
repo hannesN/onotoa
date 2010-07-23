@@ -28,5 +28,6 @@ Require-Bundle: de.topicmapslab.tmcledit;bundle-version="1.1.1",
  org.eclipse.ui.forms;bundle-version="3.4.0",
  org.eclipse.ui.ide;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.gef;bundle-version="3.5.0",
- org.apache.commons.httpclient;bundle-version="3.1.0"
+ org.apache.commons.httpclient;bundle-version="3.1.0",
+ de.topicmapslab.onotoa.selection;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

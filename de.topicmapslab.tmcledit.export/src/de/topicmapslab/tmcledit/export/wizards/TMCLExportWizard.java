@@ -22,7 +22,7 @@ import org.tmapi.core.TopicMap;
 import org.tmapix.io.LTMTopicMapWriter;
 import org.tmapix.io.TopicMapWriter;
 import org.tmapix.io.XTM2TopicMapWriter;
-import org.tmapix.io.XTM2TopicMapWriter.Version;
+import org.tmapix.io.XTMVersion;
 
 import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
 import de.topicmapslab.tmcledit.export.Activator;
@@ -85,7 +85,7 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		
 	    try {
 	        if ("xtm".equals(suffix)) {
-		        return new XTM2TopicMapWriter(stream, baseLocator, Version.XTM_20);
+		        return new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_0);
 	        }
 	        if ("ltm".equals(suffix)) {
 		        return new LTMTopicMapWriter(stream, baseLocator);

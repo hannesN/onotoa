@@ -15,7 +15,10 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.tmcledit.model.util.extension.AnnotationProviderInfo;
 import de.topicmapslab.tmcledit.model.util.extension.ExtensionManager;
 import de.topicmapslab.tmcledit.model.util.extension.PSIProviderInfo;
@@ -147,7 +150,11 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 			return null;
 		}
 		
-		
+		public IOnotoaSelectionService getOnotoaSelectionService() {
+			BundleContext context = getBundle().getBundleContext();
+			ServiceReference servRef = context.getServiceReference(IOnotoaSelectionService.class.getName());
+			return (IOnotoaSelectionService) context.getService(servRef);
+		}
 	}
 
 }
