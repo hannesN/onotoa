@@ -49,6 +49,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -986,6 +987,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	    @Override
 	    public void run() {
 	        syncView = this.isChecked();
+	    }
+	    
+	    @Override
+	    public ImageDescriptor getImageDescriptor() {
+	    	return PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ELCL_SYNCED);
 	    }
     }
 
