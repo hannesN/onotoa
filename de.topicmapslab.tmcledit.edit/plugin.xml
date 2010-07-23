@@ -47,6 +47,7 @@
       </view>
       <view
             class="de.topicmapslab.tmcledit.model.views.NotesView"
+            icon="icons/note.gif"
             id="de.topicmapslab.tmcledit.model.views.NotesView"
             name="Notes"
             restorable="true">
