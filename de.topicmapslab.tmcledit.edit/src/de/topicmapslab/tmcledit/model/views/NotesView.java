@@ -11,27 +11,29 @@
 package de.topicmapslab.tmcledit.model.views;
 
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IViewSite;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  *
  */
-public class NotesView extends ViewPart {
+public class NotesView extends ViewPart implements ISelectionChangedListener {
 
 	public static final String ID = "de.topicmapslab.tmcledit.model.views.NotesView";
 	
@@ -42,6 +44,18 @@ public class NotesView extends ViewPart {
 	public NotesView() {
 	}
 
+	@Override
+	public void init(IViewSite site) throws PartInitException {
+	    super.init(site);
+	    TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
+	}
+	
+	@Override
+	public void dispose() {
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().removeSelectionChangedListener(this);
+		super.dispose();
+	}
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
@@ -59,7 +73,12 @@ public class NotesView extends ViewPart {
 	    notesText.addFocusListener(new FocusAdapter() {
 	    	@Override
 	    	public void focusLost(FocusEvent e) {
-	    		IViewPart view = getViewSite().getWorkbenchWindow().getActivePage().findView(ModelView.ID);
+	    		ModelView view  = ModelView.getInstance();
+	    		
+	    		if ( (view == null) || (file == null) ){
+	    			return;
+	    		}
+	    		
 	    		CommandStack cmdStack = (CommandStack) view.getAdapter(CommandStack.class);
 	    		
 	    		GenericSetCommand cmd = new GenericSetCommand(file, ModelPackage.FILE__NOTES, notesText.getText());
@@ -72,13 +91,7 @@ public class NotesView extends ViewPart {
 	public void update() {
 		String content = "";
 		
-		IWorkbenchWindow workbenchWindow = getViewSite().getWorkbenchWindow();
-		IWorkbenchPage activePage = workbenchWindow.getActivePage();
-		if (activePage!=null) {
-			IViewPart view = activePage.findView(ModelView.ID);
-			if (view!=null)
-				file = (File) view.getAdapter(File.class);
-		}
+		file = TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().getOnotoaFile();
 		if ( (file!=null) && (file.getNotes()!=null) )
 			content = file.getNotes();
 		
@@ -91,4 +104,8 @@ public class NotesView extends ViewPart {
 	public void setFocus() {
 		notesText.setFocus();
 	}
+
+	public void selectionChanged(SelectionChangedEvent event) {
+	    update();
+    }
 }

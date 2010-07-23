@@ -11,6 +11,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
+
+import de.topicmapslab.tmcledit.model.File;
 
 /**
  * Implementation of  {@link IOnotoaSelectionService} 
@@ -20,7 +23,10 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
  */
 public class OnotoaSelectionService implements IOnotoaSelectionService {
 
-	List<ISelectionChangedListener> listeners; 
+	List<ISelectionChangedListener> listeners;
+	private ISelection selection; 
+	
+	private File file;
 	
 	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
@@ -40,11 +46,12 @@ public class OnotoaSelectionService implements IOnotoaSelectionService {
 
 	@Override
 	public void setSelection(ISelection selection, ISelectionProvider source) {
+		this.selection = selection;
 		notifyListeners(selection, source);
 	}
 
 	private void notifyListeners(ISelection selection, ISelectionProvider source) {
-		if (listeners.isEmpty())
+		if (getListeners().isEmpty())
 			return;
 		
 		ISelectionChangedListener listeners[] = getListeners().toArray(new ISelectionChangedListener[this.listeners.size()]);
@@ -60,5 +67,23 @@ public class OnotoaSelectionService implements IOnotoaSelectionService {
 	    	return Collections.emptyList();
 	    
 		return listeners;
+    }
+	
+	@Override
+	public ISelection getSelection() {
+	    if (this.selection==null)
+	    	return new StructuredSelection();
+	    return selection;
+	}
+	
+	@Override
+	public File getOnotoaFile() {
+	    return file;
+	}
+
+	@Override
+    public void setOnotoaFile(File file) {
+		 this.file = file;
+	    
     }
 }

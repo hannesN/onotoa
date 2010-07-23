@@ -14,7 +14,6 @@
 package de.topicmapslab.tmcledit.diagram.editor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,6 +67,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.action.AbstractSelectionAction;
 import de.topicmapslab.tmcledit.diagram.action.AddNameConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
@@ -101,8 +101,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private ScalableFreeformRootEditPart rootEditPart;
 
 	private ISelection currentSelection;
-	private List<ISelectionChangedListener> selectionChangedListeners = Collections
-			.emptyList();
 
 	private DirtyAdapter dirtyAdapter;
 
@@ -406,10 +404,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	}
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		if (selectionChangedListeners == Collections.EMPTY_LIST)
-			selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
-
-		selectionChangedListeners.add(listener);
+		// noop register to the IOnotoaSelectionService
 	}
 
 	public ISelection getSelection() {
@@ -423,8 +418,7 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-		if (selectionChangedListeners != Collections.EMPTY_LIST)
-			selectionChangedListeners.remove(listener);
+		// noop register to the IOnotoaSelectionService
 	}
 
 	public void setSelection(ISelection selection) {
@@ -436,24 +430,13 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			TMCLEditorInput ei = (TMCLEditorInput) getEditorInput();
 			currentSelection = new StructuredSelection(ei.getDiagram());
 		}
-		SelectionChangedEvent event = new SelectionChangedEvent(this,
-				currentSelection);
-
-		for (ISelectionChangedListener l : selectionChangedListeners) {
-			l.selectionChanged(event);
-		}
+		DiagramActivator.getDefault().getOnotoaSelectionService().setSelection(currentSelection, this);
 	}
 
 	public TMCLEditorInput getCastedEditorInput() {
 		return (TMCLEditorInput) getEditorInput();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seede.topicmapslab.tmcledit.diagram.editor.IPrintableDiagramEditor#
-	 * getPrintableFigure()
-	 */
 	public IFigure getPrintableFigure() {
 		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
 	}

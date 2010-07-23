@@ -13,8 +13,6 @@
  */
 package de.topicmapslab.tmcledit.model.views;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.action.IAction;
@@ -32,7 +30,6 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -48,6 +45,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
 
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult.Priority;
 
@@ -61,7 +59,6 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 	
 	private TableViewer viewer;
 	
-	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
 
 	@Override
@@ -109,7 +106,6 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 		});
 		hookContextMenu();
 		setSelection(new StructuredSelection());
-		getSite().setSelectionProvider(this);
 	}
 	private void hookContextMenu() {
 		MenuManager menuMgr = new MenuManager("#PopupMenu");
@@ -146,25 +142,16 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 	}
 	
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		if (listeners==Collections.EMPTY_LIST)
-			listeners = new ArrayList<ISelectionChangedListener>();
-		listeners.add(listener);
 	}
 	public ISelection getSelection() {
 		return currentSelection;
 	}
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-		if (listeners==Collections.EMPTY_LIST)
-			return;
-		listeners.remove(listener);
 	}
 	public void setSelection(ISelection selection) {
 		currentSelection = selection;
-		SelectionChangedEvent e = new SelectionChangedEvent(this, selection);
-		for (ISelectionChangedListener l : listeners) {
-			l.selectionChanged(e);
-		}
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(currentSelection, this);
 	}
 
 	private class ValidationLabelProvider implements ITableLabelProvider {

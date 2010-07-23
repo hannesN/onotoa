@@ -18,7 +18,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme;
 import de.topicmapslab.tmcledit.diagram.preferences.PreferenceConstants;
 import de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLHandler;
@@ -36,6 +38,8 @@ public class DiagramActivator extends AbstractUIPlugin {
 	
 	private List<ColorScheme> schemeList;
 	private int currScheme;
+
+	private IOnotoaSelectionService onotoaSelectionService;
 	
 	/**
 	 * The constructor
@@ -52,6 +56,13 @@ public class DiagramActivator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		resetCache();
+		ServiceReference servRef = context.getServiceReference(IOnotoaSelectionService.class.getName());
+		onotoaSelectionService = (IOnotoaSelectionService) context.getService(servRef);
+		
+	}
+	
+	public IOnotoaSelectionService getOnotoaSelectionService() {
+		return onotoaSelectionService;
 	}
 	
 	public List<ColorScheme> getSchemeList() {

@@ -79,7 +79,6 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -89,7 +88,6 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.UIJob;
 
-import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
@@ -149,7 +147,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private EditingDomain editingDomain;
 	private ValidateJob validateJob = new ValidateJob();
-	File currFile;
+	private File currFile;
+	
+	/* flag witch indicates if the view should have the global selection, or not */
+	private boolean syncView = false;
 
 	private List<ISelectionChangedListener> listeners = Collections.emptyList();
 	private ISelection currentSelection;
@@ -409,6 +410,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public void setSelection(ISelection selection) {
+		if (!syncView)
+			return;
+		
 		if (viewer != null) {
 			if (selection.isEmpty())
 				viewer.setSelection(selection);
@@ -424,8 +428,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				viewer.setSelection(new StructuredSelection(nodes));				
 			}
 		}
-//		currentSelection = selection;
-//		fireSelectionChanged();
+		currentSelection = selection;
+		fireSelectionChanged();
 	}
 
 	public void setFilename(String filename, boolean newFile) {
@@ -493,13 +497,19 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		} else {
 			currFile = null;
 		}
+		
+		// tell the selection service about the new file
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setOnotoaFile(currFile);
+		
+		
 		if (contentProvider != null)
 			contentProvider.initialize();
 
 		if (currFile != null)
 			setSelection(new StructuredSelection(currFile));
-
-		setSelection(new StructuredSelection());
+		else 
+			setSelection(new StructuredSelection());
+		
 		firePropertyChange(PROP_DIRTY);
 
 		if (viewer != null) {
@@ -510,16 +520,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		// update actions of modelview
 		updateModelViewActions();
 
-		// inform NotesView
-		if (viewSite != null) {
-			IWorkbenchWindow workbenchWindow = viewSite.getWorkbenchWindow();
-			IWorkbenchPage activePage = workbenchWindow.getActivePage();
-			if (activePage != null) {
-				IViewPart notesView = activePage.findView(NotesView.ID);
-				if (notesView != null)
-					((NotesView) notesView).update();
-			}
-		}
+//		// inform NotesView
+//		if (viewSite != null) {
+//			IWorkbenchWindow workbenchWindow = viewSite.getWorkbenchWindow();
+//			IWorkbenchPage activePage = workbenchWindow.getActivePage();
+//			if (activePage != null) {
+//				IViewPart notesView = activePage.findView(NotesView.ID);
+//				if (notesView != null)
+//					((NotesView) notesView).update();
+//			}
+//		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -899,6 +909,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private void fillLocalToolBar(IToolBarManager manager) {
     	validationAction.setEnabled(currFile!=null);
     	manager.add(validationAction);
+    	manager.add(new SyncAction("Syncronize", IAction.AS_CHECK_BOX, syncView));
     	manager.add(new Separator());
     
     }
@@ -964,6 +975,18 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     			return;
     		}
     	});
+    }
+
+	private final class SyncAction extends Action {
+	    private SyncAction(String text, int style, boolean checked) {
+		    super(text, style);
+		    setChecked(checked);
+	    }
+
+	    @Override
+	    public void run() {
+	        syncView = this.isChecked();
+	    }
     }
 
 	class ViewLabelProvider extends LabelProvider {
@@ -1072,7 +1095,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
-		System.out.println("Selection changed");
+		if (event.getSelectionProvider()!=this)
+			setSelection(event.getSelection());
     }
 
 }
