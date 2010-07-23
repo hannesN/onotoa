@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Onotoa" uid="onotoa" id="de.topicmapslab.tmcledit.application.product" application="de.topicmapslab.tmcledit.application.onotoa" version="%version" useFeatures="true" includeLaunchers="true">
+<product name="Onotoa" uid="onotoa" id="de.topicmapslab.tmcledit.application.product" application="de.topicmapslab.tmcledit.application.onotoa" version="1.1.2" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/de.topicmapslab.tmcledit.application/about.png"/>
