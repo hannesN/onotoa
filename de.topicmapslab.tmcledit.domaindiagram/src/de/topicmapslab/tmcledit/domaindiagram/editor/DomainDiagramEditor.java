@@ -14,7 +14,6 @@
 package de.topicmapslab.tmcledit.domaindiagram.editor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -74,6 +73,7 @@ import de.topicmapslab.tmcledit.diagram.action.AddOccurrenceConstraintAction;
 import de.topicmapslab.tmcledit.diagram.action.RemoveFromDiagramAction;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditorContextMenuProvider;
 import de.topicmapslab.tmcledit.diagram.util.IPrintableDiagramEditor;
+import de.topicmapslab.tmcledit.domaindiagram.Activator;
 import de.topicmapslab.tmcledit.domaindiagram.action.DeleteFromModelAction;
 import de.topicmapslab.tmcledit.domaindiagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
@@ -102,8 +102,6 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	private ScalableFreeformRootEditPart rootEditPart;
 
 	private ISelection currentSelection;
-	private List<ISelectionChangedListener> selectionChangedListeners = Collections
-			.emptyList();
 
 	private DirtyAdapter dirtyAdapter;
 
@@ -399,10 +397,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	}
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		if (selectionChangedListeners == Collections.EMPTY_LIST)
-			selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
-
-		selectionChangedListeners.add(listener);
+		// noop register to the IOnotoaSelectionService
 	}
 
 	public ISelection getSelection() {
@@ -414,10 +409,8 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		getGraphicalViewer().getControl().redraw();
 	}
 	
-	public void removeSelectionChangedListener(
-			ISelectionChangedListener listener) {
-		if (selectionChangedListeners != Collections.EMPTY_LIST)
-			selectionChangedListeners.remove(listener);
+	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+		// noop register to the IOnotoaSelectionService
 	}
 
 	public void setSelection(ISelection selection) {
@@ -429,12 +422,7 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			TMCLEditorInput ei = (TMCLEditorInput) getEditorInput();
 			currentSelection = new StructuredSelection(ei.getDiagram());
 		}
-		SelectionChangedEvent event = new SelectionChangedEvent(this,
-				currentSelection);
-
-		for (ISelectionChangedListener l : selectionChangedListeners) {
-			l.selectionChanged(event);
-		}
+		Activator.getDefault().getOnotoaSelectionService().setSelection(currentSelection, this);
 	}
 
 	public TMCLEditorInput getCastedEditorInput() {

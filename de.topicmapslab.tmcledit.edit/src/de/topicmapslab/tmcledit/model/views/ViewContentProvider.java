@@ -38,6 +38,8 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
      */
     private final ModelView modelView;
 
+    private File currentFile;
+    
 	/**
      * @param modelView
      */
@@ -129,17 +131,23 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 	}
 
 	public void uninitialize() {
-		if (this.modelView.currFile != null) {
-			this.modelView.getCurrentTopicMapSchema().eAdapters().remove(tmsListener);
-			this.modelView.currFile.eAdapters().remove(tmsListener);
+		if (currentFile != null) {
+			currentFile.getTopicMapSchema().eAdapters().remove(tmsListener);
+			currentFile.eAdapters().remove(tmsListener);
 		}
 		invisibleRoot.dispose();
 	}
 
 	public void initialize() {
-		if (this.modelView.currFile != null) {
-			this.modelView.getCurrentTopicMapSchema().eAdapters().add(tmsListener);
-			this.modelView.currFile.eAdapters().add(tmsListener);
+		TopicMapSchema schema = this.modelView.getCurrentTopicMapSchema();
+        if (schema!=null)
+        	currentFile = (File) schema.eContainer();
+        else
+        	currentFile = null;
+        
+        if (currentFile != null) {
+			currentFile.getTopicMapSchema().eAdapters().add(tmsListener);
+			currentFile.eAdapters().add(tmsListener);
 		}
 		update();
 	}
@@ -147,10 +155,10 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 	public void update() {
 
 		invisibleRoot = new TreeObject(this.modelView, "");
-		if (this.modelView.currFile != null) {
+		if (currentFile != null) {
 			schemaNode = new TreeObject(this.modelView, "Topic Map Schema", TreeObject.TOPIC_MAP_SCHEMA);
 
-			schemaNode.setModel(this.modelView.getCurrentTopicMapSchema());
+			schemaNode.setModel(currentFile.getTopicMapSchema());
 			diagramNode = new TreeObject(this.modelView, "Diagrams", TreeObject.DIAGRAMS);
 
 			invisibleRoot.addChild(diagramNode);
@@ -171,15 +179,15 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 			schemaNode.addChild(atNode);
 			schemaNode.addChild(acNode);
 
-			for (TopicType tt : this.modelView.getCurrentTopicMapSchema().getTopicTypes()) {
+			for (TopicType tt : currentFile.getTopicMapSchema().getTopicTypes()) {
 				addType(tt, false);
 			}
 
-			for (Diagram d : this.modelView.currFile.getDiagrams()) {
+			for (Diagram d : currentFile.getDiagrams()) {
 				diagramNode.addChild(new TreeDiagram(this.modelView, d));
 			}
 
-			for (AssociationTypeConstraint ac : this.modelView.getCurrentTopicMapSchema().getAssociationTypeConstraints()) {
+			for (AssociationTypeConstraint ac : currentFile.getTopicMapSchema().getAssociationTypeConstraints()) {
 				addAssocContraint(ac);
 			}
 
