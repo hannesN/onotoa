@@ -349,37 +349,41 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		if (sel.isEmpty())
 			return;
 		else {
-			if (sel.getFirstElement() instanceof EditPart) {
-				EditPart part = (EditPart) sel.getFirstElement();
-				if (part instanceof MoveableLabelEditPart) {
-					part = part.getParent();
-				}
-
-				cmProvider.setSelectedEditPart(part);
-				
-				Object model = part.getModel();
-				if (model instanceof TypeNode) {
-					TypeNode node = (TypeNode) model;
-					currentSelection = new StructuredSelection(node
-							.getTopicType());
-				} else if (model instanceof AssociationNode) {
-					AssociationNode node = (AssociationNode) model;
-					currentSelection = new StructuredSelection(node
-							.getAssociationConstraint());
-				} else if (model instanceof Edge) {
-					Edge edge = (Edge) model;
-					EObject tmp = edge.getRoleConstraint();
-					if (tmp != null)
-						currentSelection = new StructuredSelection(tmp);
-					else {
-						tmp = ((TypeNode)edge.getSource()).getTopicType();
-						currentSelection = new StructuredSelection(tmp);
+			Iterator<?> it = sel.iterator();
+			List<Object> selected = new ArrayList<Object>();
+			while (it.hasNext()) {
+				Object o = it.next();
+				if (o instanceof EditPart) {
+					EditPart part = (EditPart) o;
+					if (part instanceof MoveableLabelEditPart) {
+						part = part.getParent();
 					}
-				} else {
-					currentSelection = new StructuredSelection(model);
+	
+					cmProvider.setSelectedEditPart(part);
+					
+					Object model = part.getModel();
+					if (model instanceof TypeNode) {
+						TypeNode node = (TypeNode) model;
+						selected.add(node.getTopicType());
+					} else if (model instanceof AssociationNode) {
+						AssociationNode node = (AssociationNode) model;
+						selected.add(node.getAssociationConstraint());
+					} else if (model instanceof Edge) {
+						Edge edge = (Edge) model;
+						EObject tmp = edge.getRoleConstraint();
+						if (tmp != null)
+							selected.add(tmp);
+						else {
+							tmp = ((TypeNode) edge.getSource()).getTopicType();
+							selected.add(tmp);
+						}
+					} else {
+						selected.add(model);
+					}
 				}
-				fireSelectionChanged();
 			}
+			currentSelection = new StructuredSelection(selected);
+			fireSelectionChanged();
 		}
 	}
 
