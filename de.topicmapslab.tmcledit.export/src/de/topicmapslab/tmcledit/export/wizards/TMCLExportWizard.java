@@ -27,6 +27,7 @@ import org.tmapix.io.XTMVersion;
 import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
 import de.topicmapslab.tmcledit.export.Activator;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
+import de.topicmapslab.tmcledit.export.wizards.TMCLExportWizardPage.FileType;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.MappingElement;
@@ -81,17 +82,12 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 	}
 
 	private TopicMapWriter getTopicMapWriter(FileOutputStream stream, String baseLocator, TopicMap topicMap) {
-	    String suffix = page.getFileSuffix();
-		
+	    FileType.Type type = page.getSelectedFileType().type;
+	    
 	    try {
-	        if ("xtm".equals(suffix)) {
-		        return new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_0);
-	        }
-	        if ("ltm".equals(suffix)) {
-		        return new LTMTopicMapWriter(stream, baseLocator);
-	        }
-	        if ("ctm".equals(suffix)) {
-		        CTMTopicMapWriter writer = new CTMTopicMapWriter(stream, baseLocator);
+	    	switch (type) {
+			case CTM:
+				CTMTopicMapWriter writer = new CTMTopicMapWriter(stream, baseLocator);
 		        
 		        for (MappingElement me : schema.getMappings()) {
 		        	writer.setPrefix(me.getKey(), me.getValue());
@@ -107,9 +103,14 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 //		        	tmpl.setSerialize(false);
 //		        	writer.addTemplate(tmpl);
 //		        }
-		        
 		        return writer;
-	        }
+			case LTM:
+				return new LTMTopicMapWriter(stream, baseLocator);
+			case XTM_2_0:
+				return new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_0);
+			case XTM_2_1:
+				return new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_1);
+	    	}
         } catch (Exception e) {
 	        throw new RuntimeException(e);
         }
@@ -146,7 +147,5 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 			File file = (File) obj.eContainer();
 			schema = file.getTopicMapSchema();
 		}
-
 	}
-
 }

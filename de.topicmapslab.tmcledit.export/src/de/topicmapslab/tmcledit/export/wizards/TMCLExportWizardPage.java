@@ -10,10 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.wizards;
 
-import java.util.ArrayList; 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -45,10 +43,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import de.topicmapslab.tmcledit.export.Activator;
+import de.topicmapslab.tmcledit.export.wizards.TMCLExportWizardPage.FileType.Type;
 
 
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  *
  */
 public class TMCLExportWizardPage extends WizardPage {
@@ -56,7 +55,7 @@ public class TMCLExportWizardPage extends WizardPage {
 	
 	private TableViewer typeViewer;
 	
-	private static Map<String, String> extensionMap;
+	private static List<FileType> extensions;
 
 	private Button browseButton;
 	
@@ -64,17 +63,22 @@ public class TMCLExportWizardPage extends WizardPage {
 	
 	private Button onlyExportTopicTypes;
 	
+	private FileType selectedFileType;
+	
 	{
-		extensionMap = new HashMap<String, String>(2);
+		extensions = new ArrayList<TMCLExportWizardPage.FileType>();
 		
 		String descr = "Export schema topic map as CTM file using the TMCL templates";
-		extensionMap.put("ctm", descr);
+		extensions.add(new FileType(Type.CTM, "ctm", descr));
+		
+		descr = "Export schema topic map as XTM2.1.";
+		extensions.add(new FileType(Type.XTM_2_1, "xtm", descr));
 		
 		descr = "Export schema topic map as XTM2.0.";
-		extensionMap.put("xtm", descr);
+		extensions.add(new FileType(Type.XTM_2_0, "xtm", descr));
 		
 		descr = "Export schema topic map as LTM.";
-		extensionMap.put("ltm", descr);
+		extensions.add(new FileType(Type.LTM, "ltm", descr));
 		
 	}
 	
@@ -141,15 +145,12 @@ public class TMCLExportWizardPage extends WizardPage {
 	  
 	    typeViewer.setContentProvider(new ArrayContentProvider());
 	    typeViewer.setLabelProvider(new EntryLabelProvider());
-	    typeViewer.setInput(extensionMap.entrySet());
+	    typeViewer.setInput(extensions);
 	    
 	    hookListeners();
 	    setControl(comp);
     }
 
-	
-	
-	
 	public boolean isExportSchemaInfos() {
         return exportSchemaButton.getSelection();
     }
@@ -161,6 +162,10 @@ public class TMCLExportWizardPage extends WizardPage {
 	public boolean isExportDiagramInfos() {
 		return false;
 	}
+	
+	public FileType getSelectedFileType() {
+	    return selectedFileType;
+    }
 
 	/**
      * @param file
@@ -168,21 +173,24 @@ public class TMCLExportWizardPage extends WizardPage {
      */
     private String updateType(String file) {
         StructuredSelection sel = null;
+        FileType ft = findEntry("xtm");
         int idx = file.lastIndexOf('.');
         if (idx==-1) {
         	file += ".xtm";
-        	sel = new StructuredSelection(findEntry("xtm"));
+        	sel = new StructuredSelection(ft);
         
         } else {
         	String suffix = file.substring(idx+1);
-        	Entry<String, String> entry = findEntry(suffix);
-        	if (entry!=null) {
-        		sel = new StructuredSelection(entry);
+        	FileType ft2 = findEntry(suffix);
+        	if (ft2!=null) {
+        		sel = new StructuredSelection(ft2);
+        		ft=ft2;
         	} else {
         		file += ".xtm";
-        		sel = new StructuredSelection(findEntry("xtm"));
+        		sel = new StructuredSelection(ft);
         	}
         }
+        selectedFileType = ft;
         typeViewer.setSelection(sel);
         return file;
     }
@@ -195,9 +203,9 @@ public class TMCLExportWizardPage extends WizardPage {
 	    		
 	    		ArrayList<String> suffixes = new ArrayList<String>();
 	    		String all = "";
-	    		for (String s : extensionMap.keySet()) {
-	    			suffixes.add("*."+s);
-	    			all=all+"*."+s+";";
+	    		for (FileType ft : extensions) {
+	    			suffixes.add("*."+ft.fileSuffix);
+	    			all=all+"*."+ft.fileSuffix+";";
 	    		}
 	    		suffixes.add(0, all.substring(0, all.length()-1)); 
 	    			
@@ -234,7 +242,6 @@ public class TMCLExportWizardPage extends WizardPage {
 	    });
 	    typeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			
-			@SuppressWarnings("unchecked")
             public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection sel = (IStructuredSelection) typeViewer.getSelection();
 				if (sel.isEmpty())
@@ -245,24 +252,27 @@ public class TMCLExportWizardPage extends WizardPage {
 				if (filename.length()==0)
 					return;
 				
-				Entry<String, String> entry = (Entry<String, String>) sel.getFirstElement();
-				
-				if (filename.endsWith(entry.getKey()))
+				FileType ft = (FileType) sel.getFirstElement();
+				selectedFileType = ft;
+				if (filename.endsWith(ft.fileSuffix))
 					return;
 				
+				// changing current filesuffix to selected one
 				int idx = filename.lastIndexOf('.');
 				if (idx!=-1) {
 					String fSuffix = filename.substring(idx+1);
-					if (extensionMap.keySet().contains(fSuffix)) {
-						filename = filename.substring(0, idx+1)+entry.getKey();
+					if (findEntry(fSuffix)!=null) {
+						filename = filename.substring(0, idx+1)+ft.fileSuffix;
 						fileName.setText(filename);
 						return;
 					}
 				}
 				
-				filename = filename+"."+entry.getKey();
+				filename = filename+"."+ft.fileSuffix;
 				fileName.setText(filename);
 			}
+
+			
 		});
 	    
 	    fileName.addFocusListener(new FocusAdapter() {
@@ -274,10 +284,10 @@ public class TMCLExportWizardPage extends WizardPage {
 		});
     }
 
-	private Entry<String, String> findEntry(String key) {
-		for (Entry<String, String> e : extensionMap.entrySet()) {
-			if(e.getKey().equals(key))
-				return e;
+	private FileType findEntry(String key) {
+		for (FileType ft : extensions) {
+			if(ft.fileSuffix.equals(key))
+				return ft;
 		}
 		return null;
 	}
@@ -302,23 +312,39 @@ public class TMCLExportWizardPage extends WizardPage {
 	        return null;
         }
 
-		@SuppressWarnings("unchecked")
         public String getColumnText(Object element, int columnIndex) {
-			Map.Entry<String, String> e = (Entry<String, String>) element;
-	        if (columnIndex==1)
-	        	return e.getKey();
+			FileType e =  (FileType) element;
+	        if (columnIndex==0)
+	        	return e.description;
 	        else
-	        	return e.getValue();
+	        	return e.fileSuffix;
         }
 		
 	}
 
-	@SuppressWarnings("unchecked")
     public String getFileSuffix() {
 		IStructuredSelection sel = (IStructuredSelection) typeViewer.getSelection();
-		Entry<String, String> e = (Entry<String, String>) sel.getFirstElement();
-	    return e.getKey();
+		FileType e =  (FileType) sel.getFirstElement();
+	    return e.fileSuffix;
     }
 	
+	static class FileType {
+		enum Type {
+			XTM_2_0,
+			XTM_2_1,
+			LTM,
+			CTM
+		};
+		
+		Type type;
+		String fileSuffix;
+		String description;
+		public FileType(Type type, String fileSuffix, String description) {
+	        super();
+	        this.type = type;
+	        this.fileSuffix = fileSuffix;
+	        this.description = description;
+        }
+	}
 	
 }
