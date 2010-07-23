@@ -50,6 +50,7 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -88,13 +89,13 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.UIJob;
 
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
-import de.topicmapslab.tmcledit.model.OnoObject;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -135,7 +136,7 @@ import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
  */
 
 public class ModelView extends ViewPart implements IEditingDomainProvider, ISelectionProvider, CommandStackListener,
-        ISaveablePart, IResourceChangeListener {
+        ISaveablePart, IResourceChangeListener, ISelectionChangedListener {
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 
@@ -322,6 +323,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		actionRegistry = new ActionRegistry();
 		createActions();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
+		
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
+		
 	}
 
 	public void createActions() {
@@ -405,10 +409,23 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public void setSelection(ISelection selection) {
-		if (viewer != null)
-			viewer.setSelection(selection);
-		currentSelection = selection;
-		fireSelectionChanged();
+		if (viewer != null) {
+			if (selection.isEmpty())
+				viewer.setSelection(selection);
+			else {
+				List<AbstractModelViewNode> nodes = new ArrayList<AbstractModelViewNode>();
+				Iterator<?> it = ((IStructuredSelection)selection).iterator();
+				while (it.hasNext()) {
+					IContentProvider cp = viewer.getContentProvider();
+					AbstractModelViewNode n = ((ViewContentProvider) cp).findNodeFor(it.next());
+					if (n!=null)
+						nodes.add(n);
+				}
+				viewer.setSelection(new StructuredSelection(nodes));				
+			}
+		}
+//		currentSelection = selection;
+//		fireSelectionChanged();
 	}
 
 	public void setFilename(String filename, boolean newFile) {
@@ -610,6 +627,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	@Override
 	public void dispose() {
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().removeSelectionChangedListener(this);
 		super.dispose();
 	}
 
@@ -765,6 +783,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     	for (ISelectionChangedListener l : listeners) {
     		l.selectionChanged(e);
     	}
+    	TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(currentSelection, this);
     }
 
 	private void updateModelViewActions() {
@@ -1051,5 +1070,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		}
 
 	}
+
+	public void selectionChanged(SelectionChangedEvent event) {
+		System.out.println("Selection changed");
+    }
 
 }

@@ -17,7 +17,9 @@ import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
@@ -30,6 +32,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledPageBook;
 import org.eclipse.ui.part.ViewPart;
 
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.pages.PropertyDetailPageFactory;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
@@ -43,7 +46,7 @@ import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
  * 
  * 
  */
-public class PropertyDetailView extends ViewPart implements ISelectionListener {
+public class PropertyDetailView extends ViewPart implements ISelectionListener, ISelectionChangedListener {
 
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.PropertyDetailView";
 
@@ -56,12 +59,13 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 		site.getPage().addSelectionListener(this);
-
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
 	}
 
 	@Override
 	public void dispose() {
 		getSite().getPage().removeSelectionListener(this);
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
 		pageFactory.dispose();
 		pageFactory = null;
 		super.dispose();
@@ -82,10 +86,10 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if ( (((part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView))) && !selection.isEmpty())
-			setSelection(selection);
-		else
-			setCurrentPage(pageFactory.getEmptyPage());
+//		if ( (((part instanceof ModelView) || (part.getAdapter(CommandStack.class) != null) || (part instanceof ValidationErrorView))) && !selection.isEmpty())
+//			setSelection(selection);
+//		else
+//			setCurrentPage(pageFactory.getEmptyPage());
 		
 	}
 
@@ -158,5 +162,14 @@ public class PropertyDetailView extends ViewPart implements ISelectionListener {
 		setCurrentPage(pageFactory.getEmptyPage());
 		setSelection(getSite().getPage().getSelection());
 	}
+
+	public void selectionChanged(SelectionChangedEvent event) {
+		IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+		if (!selection.isEmpty())
+			setSelection(selection);
+		else
+			setCurrentPage(pageFactory.getEmptyPage());
+	    
+    }
 
 }

@@ -192,6 +192,26 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 		}
 	}
 
+	public AbstractModelViewNode findNodeFor(Object model) {
+		return findNodeFor(invisibleRoot, model);
+	}
+	
+	private AbstractModelViewNode findNodeFor(AbstractModelViewNode node, Object model) {
+		
+		if (model.equals(node.getModel())) {
+			return node;
+		}
+		
+		AbstractModelViewNode result = null;
+		for (AbstractModelViewNode n : node.getChildrenList()) {
+			result = findNodeFor(n, model);
+			if (result!=null)
+				break;
+		}
+		
+		return result;
+	}
+	
 	private void addAssocContraint(AssociationTypeConstraint constraint) {
 		TreeAssocConstraint node = new TreeAssocConstraint(this.modelView, constraint);
 		acNode.addChild(node);
@@ -289,7 +309,7 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 		}
 		return parent;
 	}
-
+	
 	private void getExtensionChildren(AbstractModelViewNode parent) {
 		for (ModelViewExtensionInfo mvei : TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos()) {
 			for (AbstractModelViewNode n : mvei.getProvider().getChildNodes(modelView, parent)) {
