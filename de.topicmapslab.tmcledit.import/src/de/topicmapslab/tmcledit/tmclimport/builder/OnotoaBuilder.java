@@ -20,7 +20,7 @@ import org.tmapix.io.CTMTopicMapReader;
 import org.tmapix.io.XTMTopicMapReader;
 
 import de.topicmapslab.majortom.core.TopicMapSystemFactoryImpl;
-import de.topicmapslab.majortom.inMemory.store.InMemoryTopicMapStore;
+import de.topicmapslab.majortom.inmemory.store.InMemoryTopicMapStore;
 import de.topicmapslab.majortom.store.TopicMapStoreProperty;
 import de.topicmapslab.tmcl.loader.listener.IAssociationTypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.INameTypeConstraintsListener;

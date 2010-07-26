@@ -27,6 +27,7 @@ import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_TO
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINT;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.DATATYPE;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.DESCRIPTION;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.ITEM_IDENTIFIER_CONSTRAINT;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.NAME_TYPE;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.OCCURRENCE_DATATYPE_CONSTRAINT;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.OCCURRENCE_TYPE;
@@ -64,6 +65,21 @@ import de.topicmapslab.ctm.writer.templates.entry.OccurrenceEntry;
 import de.topicmapslab.ctm.writer.templates.entry.RoleEntry;
 import de.topicmapslab.ctm.writer.templates.entry.TopicEntry;
 import de.topicmapslab.ctm.writer.templates.entry.param.IEntryParam;
+import de.topicmapslab.tmcledit.export.builder.scanner.CannotReifyScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.HasItemIdentifierScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.HasNameScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.HasOccurrenceScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.HasSubjectIdentifierScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.HasSubjectLocatorScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.IsAbstractScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.IsUniqueScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.MayHaveReifierScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.MayReifyScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.MustHaveReifierScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.MustReifyScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.OccurrenceDatatypeScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.OverlapScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.RegExpConstraintScanner;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.TMDM;
 
@@ -113,6 +129,7 @@ public class TMCLTemplateDefinitions {
     // private Topic constraint; // -- not needed is super type
     private Topic abstractConstraint;
     private Topic subjectIdentifierConstraint;
+    private Topic itemIdentifierConstraint;
     private Topic subjectLocatorConstraint;
     private Topic topicNameConstraint;
     private Topic topicOccurrenceConstraint;
@@ -166,6 +183,7 @@ public class TMCLTemplateDefinitions {
 
                 addOverlaps();
                 addHasSubjectIdentifier();
+                addHasItemIdentifier();
                 addHasSubjectLocator();
                 addHasName();
                 addHasOccurrence();
@@ -181,6 +199,7 @@ public class TMCLTemplateDefinitions {
                 addRoleCombination();
                 addHasDatatype();
                 addIsUnique();
+                addIsAbstract();
                 addMatchesRegExp();
                 addBelongsTo();
         }
@@ -244,6 +263,7 @@ public class TMCLTemplateDefinitions {
 
             // constraint = createTopic(CONSTRAINT);
             abstractConstraint = createTopic(ABSTRACT_CONSTRAINT);
+            itemIdentifierConstraint = createTopic(ITEM_IDENTIFIER_CONSTRAINT);
             subjectIdentifierConstraint = createTopic(SUBJECT_IDENTIFIER_CONSTRAINT);
             subjectLocatorConstraint = createTopic(SUBJECT_LOCATOR_CONSTRAINT);
             topicNameConstraint = createTopic(TOPIC_NAME_CONSTRAINT);
@@ -293,6 +313,7 @@ public class TMCLTemplateDefinitions {
                 AssociationEntry a2 = entryFactory.newAssociationEntry(overlaps, r1, r2);
                 t.add(a2);
 
+                t.setScanner(new OverlapScanner());
                 templates.add(t);
                
         }
@@ -333,7 +354,47 @@ public class TMCLTemplateDefinitions {
             RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("tt"));
             AssociationEntry a1 = entryFactory.newAssociationEntry(constrainedTopicType, r1, r2);
             t.add(a1);
+            t.setScanner(new HasSubjectIdentifierScanner());
+            templates.add(t);
+        }
+        
+        /*
+         * def has-item-identifier($tt, $min, $max, $regexp)
+			  ?c isa tmcl:item-identifier-constraint;
+			    tmcl:card-min: $min;
+			    tmcl:card-max: $max;
+			    tmcl:regexp: $regexp.
+			  tmcl:constrained-topic-type(tmcl:constraint : ?c, tmcl:constrained : $tt)
+			end
+
+         */
+        private void addHasItemIdentifier() {
+        	Template t = templateFactory.newTemplate("has-item-identifier");
+        	
+        	IEntryParam constrParam = entryFactory.newWildcardParam("c");
+        	TopicEntry t1 = entryFactory.newTopicEntry(constrParam);
+        	
+        	t1.add(entryFactory.newIsInstanceOfEntry(entryFactory.newTopicTypeParam(itemIdentifierConstraint)));
             
+            OccurrenceEntry o1 = entryFactory.newOccurrenceEntry(entryFactory.newVariableParam("min"),
+            		entryFactory.newTopicTypeParam(cardMin));
+            t1.add(o1);
+            
+            OccurrenceEntry o2 = entryFactory.newOccurrenceEntry(entryFactory.newVariableParam("max"),
+            		entryFactory.newTopicTypeParam(cardMax));
+            t1.add(o2);
+            
+            OccurrenceEntry o3 = entryFactory.newOccurrenceEntry(entryFactory.newVariableParam("regexp"),
+            		entryFactory.newTopicTypeParam(regExp));
+            t1.add(o3);
+            
+            t.add(t1);
+            
+            RoleEntry r1 = entryFactory.newRoleEntry(constraint, constrParam);
+            RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("tt"));
+            AssociationEntry a1 = entryFactory.newAssociationEntry(constrainedTopicType, r1, r2);
+            t.add(a1);
+            t.setScanner(new HasItemIdentifierScanner());
             templates.add(t);
         }
 
@@ -373,6 +434,7 @@ public class TMCLTemplateDefinitions {
             RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("tt"));
             AssociationEntry a1 = entryFactory.newAssociationEntry(constrainedTopicType, r1, r2);
             t.add(a1);
+            t.setScanner(new HasSubjectLocatorScanner());
             
             templates.add(t);
 
@@ -414,8 +476,9 @@ public class TMCLTemplateDefinitions {
             r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("nt"));
             AssociationEntry a2 = entryFactory.newAssociationEntry(constraintStatement, r1, r2);
             t.add(a2);
-            
+            t.setScanner(new HasNameScanner());
             templates.add(t);
+            
 
         }
 
@@ -457,6 +520,7 @@ public class TMCLTemplateDefinitions {
             AssociationEntry a2 = entryFactory.newAssociationEntry(constraintStatement, r1, r2);
             t.add(a2);
             
+            t.setScanner(new HasOccurrenceScanner());
             templates.add(t);
 
         }
@@ -585,7 +649,7 @@ public class TMCLTemplateDefinitions {
             r2 = entryFactory.newRoleEntry(allowed, entryFactory.newVariableParam("tt"));
             AssociationEntry a2 = entryFactory.newAssociationEntry(allowedReifier, r1, r2);
             t.add(a2);
-            
+            t.setScanner(new MustHaveReifierScanner());
             templates.add(t);
 
         }
@@ -664,6 +728,7 @@ public class TMCLTemplateDefinitions {
             AssociationEntry a2 = entryFactory.newAssociationEntry(allowedReifier, r1, r2);
             t.add(a2);
             
+            t.setScanner(new MayHaveReifierScanner());
             templates.add(t);
 
         }
@@ -703,7 +768,7 @@ public class TMCLTemplateDefinitions {
             r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("st"));
             AssociationEntry a2 = entryFactory.newAssociationEntry(constraintStatement, r1, r2);
             t.add(a2);
-            
+            t.setScanner(new MustReifyScanner());
             templates.add(t);
 
         }
@@ -736,7 +801,7 @@ public class TMCLTemplateDefinitions {
             RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("tt"));
             AssociationEntry a1 = entryFactory.newAssociationEntry(constrainedTopicType, r1, r2);
             t.add(a1);
-            
+            t.setScanner(new CannotReifyScanner());
             templates.add(t);
 
         }
@@ -751,7 +816,7 @@ public class TMCLTemplateDefinitions {
 			end
          */
         private void addMayReify() {
-        	Template t = templateFactory.newTemplate("must-reify");
+        	Template t = templateFactory.newTemplate("may-reify");
         	
         	IEntryParam constrParam = entryFactory.newWildcardParam("c");
         	TopicEntry t1 = entryFactory.newTopicEntry(constrParam);
@@ -776,6 +841,7 @@ public class TMCLTemplateDefinitions {
             AssociationEntry a2 = entryFactory.newAssociationEntry(constraintStatement, r1, r2);
             t.add(a2);
             
+            t.setScanner(new MayReifyScanner());
             templates.add(t);
 
         }
@@ -896,6 +962,7 @@ public class TMCLTemplateDefinitions {
             AssociationEntry a1 = entryFactory.newAssociationEntry(constraintStatement, r1, r2);
             t.add(a1);
             
+            t.setScanner(new OccurrenceDatatypeScanner());
             templates.add(t);
 
         }
@@ -920,7 +987,33 @@ public class TMCLTemplateDefinitions {
             RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("st"));
             AssociationEntry a1 = entryFactory.newAssociationEntry(constraintStatement, r1, r2);
             t.add(a1);
+            t.setScanner(new IsUniqueScanner());
             
+            templates.add(t);
+
+        }
+        
+        /*
+         * # Abstract Constraint
+			def is-abstract($tt)
+  				?c isa tmcl:abstract-constraint.
+  				tmcl:constrained-topic-type(tmcl:constraint : ?c, tmcl:constrained : $tt)
+			end
+         */
+        private void addIsAbstract() {
+        	Template t = templateFactory.newTemplate("is-abstract");
+        	
+        	IEntryParam constrParam = entryFactory.newWildcardParam("c");
+        	TopicEntry t1 = entryFactory.newTopicEntry(constrParam);
+        	
+        	t1.add(entryFactory.newIsInstanceOfEntry(entryFactory.newTopicTypeParam(abstractConstraint)));
+            t.add(t1);
+            
+            RoleEntry r1 = entryFactory.newRoleEntry(constraint, constrParam);
+            RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("tt"));
+            AssociationEntry a1 = entryFactory.newAssociationEntry(constrainedTopicType, r1, r2);
+            t.add(a1);
+            t.setScanner(new IsAbstractScanner());
             templates.add(t);
 
         }
@@ -951,6 +1044,7 @@ public class TMCLTemplateDefinitions {
             RoleEntry r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("st"));
             AssociationEntry a1 = entryFactory.newAssociationEntry(constraintStatement, r1, r2);
             t.add(a1);
+            t.setScanner(new RegExpConstraintScanner());
             
             templates.add(t);
 

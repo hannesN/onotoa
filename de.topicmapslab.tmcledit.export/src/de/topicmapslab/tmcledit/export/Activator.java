@@ -10,8 +10,13 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -23,6 +28,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
+	
+	private IOnotoaSelectionService selectionService;
 	
 	/**
 	 * The constructor
@@ -39,6 +46,15 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 	}
+	
+	public  IOnotoaSelectionService getSelectionService() {
+		if (selectionService==null) {
+			BundleContext bc = getBundle().getBundleContext();
+			ServiceReference servRef = bc.getServiceReference(IOnotoaSelectionService.class.getName());
+			selectionService = (IOnotoaSelectionService) bc.getService(servRef);
+		}
+	    return selectionService;
+    }
 
 	/*
 	 * (non-Javadoc)
@@ -59,4 +75,7 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	public void logException(Throwable e) {
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "An Error occurred!", e));
+	}
 }

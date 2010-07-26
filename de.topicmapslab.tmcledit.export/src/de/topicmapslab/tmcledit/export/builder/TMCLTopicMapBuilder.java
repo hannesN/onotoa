@@ -87,7 +87,7 @@ import org.tmapi.index.ScopedIndex;
 import org.tmapi.index.TypeInstanceIndex;
 
 import de.topicmapslab.majortom.core.TopicMapSystemFactoryImpl;
-import de.topicmapslab.majortom.inMemory.store.InMemoryTopicMapStore;
+import de.topicmapslab.majortom.inmemory.store.InMemoryTopicMapStore;
 import de.topicmapslab.majortom.store.TopicMapStoreProperty;
 import de.topicmapslab.tmcledit.export.voc.Namespaces;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.Onotoa;

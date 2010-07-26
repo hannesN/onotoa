@@ -256,7 +256,7 @@ public interface Namespaces {
 		public static String SCOPE_REQUIRED_CONSTRAINT = PREFIX + "scope-required-constraint";
 
 		public static String SUBJECT_IDENTIFIER_CONSTRAINT = PREFIX + "subject-identifier-constraint";
-
+		
 		public static String SUBJECT_LOCATOR_CONSTRAINT = PREFIX + "subject-locator-constraint";
 
 		public static String TOPIC_NAME_CONSTRAINT = PREFIX + "topic-name-constraint";
@@ -309,6 +309,9 @@ public interface Namespaces {
 		public static String VALIDATION_EXPRESSION = PREFIX + "validation-expression";
 		public static String VARIANT_NAME_CONSTRAINT = PREFIX + "variant-name-constraint";
 		public static String VERSION = PREFIX + "version";
+		
+		
+		public static String INTEGER = PREFIX + "integer";
 	}
 	
 	public static interface Onotoa {
