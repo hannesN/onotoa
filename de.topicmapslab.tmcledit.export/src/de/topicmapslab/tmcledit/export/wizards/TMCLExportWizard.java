@@ -18,6 +18,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.tmapi.core.Locator;
+import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
 import org.tmapix.io.LTMTopicMapWriter;
 import org.tmapix.io.TopicMapWriter;
@@ -25,8 +27,12 @@ import org.tmapix.io.XTM2TopicMapWriter;
 import org.tmapix.io.XTMVersion;
 
 import de.topicmapslab.ctm.writer.core.CTMTopicMapWriter;
+import de.topicmapslab.ctm.writer.templates.Template;
 import de.topicmapslab.tmcledit.export.Activator;
+import de.topicmapslab.tmcledit.export.builder.TMCLTemplateDefinitions;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
+import de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL;
+import de.topicmapslab.tmcledit.export.voc.Namespaces.TMDM;
 import de.topicmapslab.tmcledit.export.wizards.TMCLExportWizardPage.FileType;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
@@ -34,7 +40,6 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 public class TMCLExportWizard extends Wizard implements IExportWizard {
 
@@ -47,9 +52,15 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 
 	@Override
 	public boolean performFinish() {
-		if (schema == null)
-			schema = ModelIndexer.getInstance().getTopicMapSchema();
-
+		if (schema == null) {
+			File onotoaFile = Activator.getDefault().getSelectionService().getOnotoaFile();
+			if (onotoaFile!=null)
+				schema = onotoaFile.getTopicMapSchema();
+			else {
+				MessageDialog.openError(getShell(), "Error!", "No onotoa file opened!");
+				return true;
+			}
+		}
 		java.io.File file = new java.io.File(page.getFileName());
 
 		if (file.exists()) {
@@ -92,17 +103,32 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 		        for (MappingElement me : schema.getMappings()) {
 		        	writer.setPrefix(me.getKey(), me.getValue());
 		        }
+		        
+		        writer.setPrefix("tmdm", "http://psi.topicmaps.org/iso13250/model/");
 		        writer.setPrefix("tmcl", "http://psi.topicmaps.org/tmcl/");
 		        writer.setPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
 		        writer.setPrefix("iso", "http://psi.topicmaps.org/iso13250/");
 		        
+		        
 		        writer.addInclude("http://www.isotopicmaps.org/tmcl/templates.ctm");
 		        // template detection doesn't work :(
-//		        TMCLTemplateDefinitions def = new TMCLTemplateDefinitions(writer, topicMap);
-//		        for (Template tmpl : def.getTemplates()) {
-//		        	tmpl.setSerialize(false);
-//		        	writer.addTemplate(tmpl);
-//		        }
+		        TMCLTemplateDefinitions def = new TMCLTemplateDefinitions(writer, topicMap);
+		        for (Template tmpl : def.getTemplates()) {
+		        	tmpl.setSerialize(false);
+		        	writer.addTemplate(tmpl);
+		        }
+		        
+		        for (Topic t : topicMap.getTopics()) {
+		        	if (t.getSubjectIdentifiers().size()==1) {
+		        		Locator si = t.getSubjectIdentifiers().iterator().next();
+						if ( (si.toExternalForm().startsWith(TMCL.PREFIX))
+							||(si.toExternalForm().startsWith(TMDM.PREFIX)) ){
+							writer.addIgnoredConstruct(t);
+						}
+		        	}
+		        }
+		        
+		        
 		        return writer;
 			case LTM:
 				return new LTMTopicMapWriter(stream, baseLocator);
