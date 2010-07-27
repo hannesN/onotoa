@@ -69,6 +69,8 @@ import de.topicmapslab.tmcledit.export.builder.scanner.CannotReifyScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.HasItemIdentifierScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.HasNameScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.HasOccurrenceScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.HasRoleScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.HasScopeScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.HasSubjectIdentifierScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.HasSubjectLocatorScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.IsAbstractScanner;
@@ -79,7 +81,9 @@ import de.topicmapslab.tmcledit.export.builder.scanner.MustHaveReifierScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.MustReifyScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.OccurrenceDatatypeScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.OverlapScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.PlaysRoleScanner;
 import de.topicmapslab.tmcledit.export.builder.scanner.RegExpConstraintScanner;
+import de.topicmapslab.tmcledit.export.builder.scanner.RoleCombinationScanner;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL;
 import de.topicmapslab.tmcledit.export.voc.Namespaces.TMDM;
 
@@ -568,7 +572,7 @@ public class TMCLTemplateDefinitions {
             r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("rt"));
             AssociationEntry a3 = entryFactory.newAssociationEntry(constrainedRole, r1, r2);
             t.add(a3);
-            
+            t.setScanner(new PlaysRoleScanner());
             templates.add(t);
 
         }
@@ -609,6 +613,7 @@ public class TMCLTemplateDefinitions {
             r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("at"));
             AssociationEntry a2 = entryFactory.newAssociationEntry(constrainedScope, r1, r2);
             t.add(a2);
+            t.setScanner(new HasScopeScanner());
             
             templates.add(t);
 
@@ -882,6 +887,7 @@ public class TMCLTemplateDefinitions {
             r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("rt"));
             AssociationEntry a2 = entryFactory.newAssociationEntry(constrainedRole, r1, r2);
             t.add(a2);
+            t.setScanner(new HasRoleScanner());
             
             templates.add(t);
 
@@ -931,6 +937,7 @@ public class TMCLTemplateDefinitions {
             r2 = entryFactory.newRoleEntry(constrained, entryFactory.newVariableParam("ott"));
             AssociationEntry a5 = entryFactory.newAssociationEntry(otherConstrainedTopicType, r1, r2);
             t.add(a5);
+            t.setScanner(new RoleCombinationScanner());
             
             templates.add(t);
 
