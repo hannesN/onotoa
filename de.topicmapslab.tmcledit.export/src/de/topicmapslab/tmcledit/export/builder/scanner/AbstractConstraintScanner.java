@@ -42,9 +42,7 @@ public abstract class AbstractConstraintScanner implements ITemplateScanner {
 			        new TopicMapSystemFactoryImpl().newTopicMapSystem(), topicMap);
 
 			String query = getQuery();
-			System.out.println(query);
 			IQuery q = runtime.run(query);
-			System.out.println(q.getResults());
 			parseResults(q);
 			return matchings;
 
