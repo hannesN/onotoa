@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.ui,
  de.topicmapslab.tmcledit.edit;bundle-version="1.1.2",
  de.topicmapslab.kuria;bundle-version="1.0.0",
  org.eclipse.core.resources;bundle-version="3.6.0",
- org.eclipse.emf.edit.ui;bundle-version="2.6.0"
+ org.eclipse.emf.edit.ui;bundle-version="2.6.0",
+ de.topicmapslab.onotoa.selection;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .

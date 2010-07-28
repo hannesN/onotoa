@@ -18,6 +18,11 @@
             id="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
             name="No Identifier Topics">
       </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.TopicTypeSearchHandler"
+            id="de.topicmapslab.onotoa.search.searchTopicType"
+            name="Search Topic Type">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -40,6 +45,11 @@
             <command
                   commandId="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
                   label="List Topics &amp;without Identifier"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.searchTopicType"
+                  label="Search &amp;Topic Type"
                   style="push">
             </command>
          </menu>
