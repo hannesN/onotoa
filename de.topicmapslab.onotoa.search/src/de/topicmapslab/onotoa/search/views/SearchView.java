@@ -8,8 +8,6 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -28,11 +26,13 @@ import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.runtime.IBindingContainer;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
+import de.topicmapslab.onotoa.search.wrapper.AssociationTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
+import de.topicmapslab.onotoa.search.wrapper.NameTypeWrapper;
+import de.topicmapslab.onotoa.search.wrapper.OccurrenceTypeWrapper;
+import de.topicmapslab.onotoa.search.wrapper.RoleTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.SubjectIdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
-import de.topicmapslab.tmcledit.model.validation.ValidationResult;
-import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
 /**
  * This sample class demonstrates how to plug-in a new workbench view. The view
@@ -84,8 +84,7 @@ public class SearchView extends ViewPart {
 		}
 	}
 
-	class ViewLabelProvider extends LabelProvider implements
-			ITableLabelProvider {
+	class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
 		public String getColumnText(Object obj, int index) {
 			return getText(obj);
 		}
@@ -95,8 +94,7 @@ public class SearchView extends ViewPart {
 		}
 
 		public Image getImage(Object obj) {
-			return PlatformUI.getWorkbench().getSharedImages()
-					.getImage(ISharedImages.IMG_OBJ_ELEMENT);
+			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_ELEMENT);
 		}
 	}
 
@@ -123,6 +121,10 @@ public class SearchView extends ViewPart {
 		AnnotationBindingFactory fac = new AnnotationBindingFactory();
 		fac.addClass(SubjectIdentifierWrapper.class);
 		fac.addClass(TopicTypeWrapper.class);
+		fac.addClass(OccurrenceTypeWrapper.class);
+		fac.addClass(AssociationTypeWrapper.class);
+		fac.addClass(RoleTypeWrapper.class);
+		fac.addClass(NameTypeWrapper.class);
 		fac.addClass(Container.class);
 		IBindingContainer bc = fac.getBindingContainer();
 
@@ -137,17 +139,15 @@ public class SearchView extends ViewPart {
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
 
-				System.out.println("double click happend");
-				IStructuredSelection sel = (IStructuredSelection) event
-						.getSelection();
+				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
 
 				Object o = sel.getFirstElement();
-				if (o instanceof IDoubleClickHandler){
-					
+				if (o instanceof IDoubleClickHandler) {
+
 					((IDoubleClickHandler) o).doubleClickHappend();
-					
+
 				}
-				
+
 				// if (sel.isEmpty())
 				// setSelection(sel);
 				// else {
