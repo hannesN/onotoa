@@ -18,8 +18,9 @@ import de.topicmapslab.kuria.annotation.tree.Children;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
 
 /**
- * @author sip
+ * Container class that holds a list of Objects that will be displayed by a view
  * 
+ * @author Sebastian Lippert
  */
 @TreeNode
 public class Container {
@@ -28,8 +29,11 @@ public class Container {
 	private List<Object> list = new ArrayList<Object>();
 
 	/**
+	 * Get all Objects in the container
+	 * 
 	 * @return the list
 	 */
+	
 	public List<Object> getList() {
 		if (this.list == null)
 			return Collections.emptyList();
@@ -37,9 +41,12 @@ public class Container {
 	}
 
 	/**
+	 * Set list of Objects for the container
+	 * 
 	 * @param list
 	 *            the list to set
 	 */
+	
 	public void setList(List<Object> list) {
 		this.list = list;
 	}
