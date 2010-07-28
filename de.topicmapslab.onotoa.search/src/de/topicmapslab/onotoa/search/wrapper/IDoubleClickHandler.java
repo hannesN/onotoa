@@ -10,11 +10,13 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.wrapper;
 
+import org.eclipse.jface.viewers.ISelectionProvider;
+
 /**
  * @author sip
  *
  */
-public interface IDoubleClickHandler {
+public interface IDoubleClickHandler extends ISelectionProvider {
 	
 	public void doubleClickHappend();
 	
