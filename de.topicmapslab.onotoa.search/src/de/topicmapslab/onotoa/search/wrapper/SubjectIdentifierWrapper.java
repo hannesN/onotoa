@@ -35,8 +35,7 @@ import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
  */
 
 @TreeNode
-public class SubjectIdentifierWrapper implements
-		Comparable<SubjectIdentifierWrapper>, IDoubleClickHandler {
+public class SubjectIdentifierWrapper extends AbstractTypeWrapper {
 
 	private TopicType topic;
 	private String identifier;
@@ -51,6 +50,8 @@ public class SubjectIdentifierWrapper implements
 	 */
 
 	public SubjectIdentifierWrapper(TopicType type, String identifier) {
+
+		super(type.getName(), type.getKind().getValue());
 
 		this.topic = type;
 		this.identifier = identifier;
@@ -94,24 +95,20 @@ public class SubjectIdentifierWrapper implements
 	 */
 	public void doubleClickHappend() {
 
-		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow();
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 		ModelView view = ModelView.getInstance();
-		if (view==null)
+		if (view == null)
 			return;
-		
+
 		view.setSelection(new StructuredSelection(topic));
 		try {
-			activePage.showView(PropertyDetailView.ID,null,IWorkbenchPage.VIEW_VISIBLE);
+			activePage.showView(PropertyDetailView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 
-		
 	}
 
 }
