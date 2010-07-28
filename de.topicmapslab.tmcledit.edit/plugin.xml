@@ -40,7 +40,7 @@
       </view>
       <view
             class="de.topicmapslab.tmcledit.model.views.ValidationErrorView"
-            icon="icons/icon.png"
+            icon="icons/errorview.gif"
             id="de.topicmapslab.tmcledit.extensions.views.ValidationErrorView"
             name="Error View"
             restorable="true">
