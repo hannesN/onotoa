@@ -10,12 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
+import org.eclipse.osgi.service.environment.EnvironmentInfo;
 import org.eclipse.ui.IWorkbenchPreferenceConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.IWorkbenchConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 
 
 /**
@@ -53,12 +56,39 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
 		DiagramEditorWorkbenchWindowAdvisor advisor = new DiagramEditorWorkbenchWindowAdvisor(configurer);
-		advisor.setArguments(args);
+		
+		String filename = findFilename();
+		if (filename!=null) {
+			advisor.setArguments(new String[]{filename});
+		} else {
+			advisor.setArguments(args);
+		}
 		return advisor;
 	}
 
 	public void setArguments(String[] args) {
 		this.args = args;
+	}
+
+	private String findFilename() {
+		BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
+		ServiceReference sevRef = bundleContext.getServiceReference(EnvironmentInfo.class.getName());
+		EnvironmentInfo info = (EnvironmentInfo) bundleContext.getService(sevRef);
+		String[] args = info.getCommandLineArgs();
+		String filename = null;
+		for (String s: args) {
+			if (filename==null) {
+				if (s.equals("--launcher.openFile")) {
+					filename="";// state found param tag next one is the filename
+				}
+			} else {			
+				if (filename.length()==0) {
+					filename=s;
+					break;
+				}
+			}
+		}
+		return filename;
 	}
 
 }
