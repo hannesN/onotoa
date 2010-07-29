@@ -32,7 +32,8 @@ public class TmcleditApplication implements IApplication {
 		
 		Location workspaceLoc = Platform.getInstanceLocation();
 		workspaceLoc.release();
-		workspaceLoc.set(new URL("file:"+newLoc), false);
+		if (!workspaceLoc.isSet())
+			workspaceLoc.set(new URL("file:"+newLoc), false);
 		
 		
 		Display display = PlatformUI.createDisplay();
