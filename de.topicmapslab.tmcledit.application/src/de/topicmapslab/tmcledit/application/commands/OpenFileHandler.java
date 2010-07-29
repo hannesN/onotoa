@@ -41,7 +41,10 @@ public class OpenFileHandler extends AbstractHandler {
 		List<String> filesList = RecentUsedManager.getFilesList();
 		if (!filesList.isEmpty()) {
 			String file = filesList.get(0);
-			dlg.setFilterPath(file.substring(0, file.lastIndexOf("/")));
+			int idx = file.lastIndexOf("/");
+			if (idx==-1)
+				return null;
+			dlg.setFilterPath(file.substring(0, idx));
 		}
 		
 		String path = dlg.open();
