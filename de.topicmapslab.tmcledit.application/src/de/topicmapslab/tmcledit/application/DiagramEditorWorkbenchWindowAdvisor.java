@@ -10,6 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application;
 
+import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
@@ -55,15 +58,33 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(true);
 		
-		if (args.length==0)
+		int length = args.length;
+		if (length==0)
 			return;
 		// temporary storing the filename in the preference store of the edit plugin
-		TmcleditEditPlugin.getPlugin().getPreferenceStore().setValue("cmdLineFilename", args[0]);
+		TmcleditEditPlugin.getPlugin().getPreferenceStore().setValue("cmdLineFilename", args[length-1]);
 	}
 
 	public void setArguments(String[] args) {
 		this.args = args;		
 	}
 	
-	
+	@Override
+	public void postWindowOpen() {
+		super.postWindowOpen();
+		IContributionItem[] mItems, mSubItems;
+		IMenuManager mm = getWindowConfigurer().getActionBarConfigurer()
+				.getMenuManager();
+		mItems = mm.getItems();
+		for (int i = 0; i < mItems.length; i++) {
+			if (mItems[i] instanceof MenuManager) {
+				mSubItems = ((MenuManager) mItems[i]).getItems();
+				for (int j = 0; j < mSubItems.length; j++) {
+					if (mItems[i].getId().equals("file"))
+						((MenuManager) mItems[i]).remove("org.eclipse.ui.openLocalFile");
+				}
+			}
+		}
+	}
+
 }

@@ -285,9 +285,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		IPreferenceStore pref = TmcleditEditPlugin.getPlugin().getPreferenceStore();
 		String filename = pref.getString(PreferenceConstants.P_LOADFILE);
 		if ((filename != null) && (filename.length() > 0)) {
-			setFilename(filename, false);
-			pref.setValue(PreferenceConstants.P_LOADFILE, "");
-			return;
+			// check fi the parameter is really a file
+			java.io.File f = new java.io.File(filename);
+			if (filename.endsWith(".ono")&&(f.exists())) {
+				setFilename(filename, false);
+				pref.setValue(PreferenceConstants.P_LOADFILE, "");
+				return;
+			}
 		}
 
 		if (memento == null)
