@@ -16,19 +16,12 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Text;
 
 import de.topicmapslab.onotoa.search.util.SearchDataObject;
 
@@ -160,7 +153,7 @@ public class TopicTypeSearchDialog extends Dialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setSize(400, 500);
+		newShell.setSize(450, 700);
 	}
 
 	/**
