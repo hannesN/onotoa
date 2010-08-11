@@ -63,7 +63,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			TopicMap topicMap = builder.createTopicMap();
 
 			CodeGenerator gen = new CodeGenerator();
-			gen.generateCode(topicMap, new File(path), packageName);
+			gen.generateCode(builder.getTopicMapSystem(), topicMap, new File(path), packageName);
 		} catch (Exception e) {
 			MessageDialog.openError(getShell(), "Error while generating code",
 					"An error occurred:" + e.getMessage() + "["

@@ -16,8 +16,26 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import feature="de.topicmapslab.engine_feature" version="1.0.0.qualifier"/>
+   </requires>
+
    <plugin
-         id="de.topicmapslab.onotoa.aranuke.codegen"
+         id="aranuka.codegen"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="aranuka.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.onotoa.aranuka.codegen"
          download-size="0"
          install-size="0"
          version="0.0.0"
