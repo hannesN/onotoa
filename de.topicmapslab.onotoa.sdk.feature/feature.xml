@@ -41,17 +41,8 @@ All other libraries are released under the Apache 2 license. See http://www.apac
       <discovery label="Kuria site" url="http://code.google.com/p/kuria/"/>
    </url>
 
-   <plugin
-         id="org.tmapi"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.topicmapslab.majortom"
-         download-size="0"
-         install-size="0"
+   <includes
+         id="de.topicmapslab.engine_feature"
          version="0.0.0"/>
 
    <plugin
@@ -60,12 +51,6 @@ All other libraries are released under the Apache 2 license. See http://www.apac
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="de.topicmapslab.tmql4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
    <plugin
          id="de.topicmapslab.kuria.annotation"
@@ -89,28 +74,14 @@ All other libraries are released under the Apache 2 license. See http://www.apac
          unpack="false"/>
 
    <plugin
-         id="org.tmapix"
+         id="de.topicmapslab.tmql4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.tmapix.io"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.semagia.mio.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.semagia.mio.syntaxpack"
+         id="de.topicmapslab.tmql4j.tmml.extension"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -82,6 +82,7 @@ import org.tmapi.core.Association;
 import org.tmapi.core.Locator;
 import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
+import org.tmapi.core.TopicMapSystem;
 import org.tmapi.index.LiteralIndex;
 import org.tmapi.index.ScopedIndex;
 import org.tmapi.index.TypeInstanceIndex;
@@ -202,6 +203,8 @@ public class TMCLTopicMapBuilder {
 
 	private Topic containsTopic;
 
+	private TopicMapSystem topicMapSystem;
+
 	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema) {
 		this(topicMapSchema, exportSchema, false);
 	}
@@ -239,7 +242,8 @@ public class TMCLTopicMapBuilder {
 			TopicMapSystemFactoryImpl tmSystemFac = new TopicMapSystemFactoryImpl();
 			tmSystemFac.setProperty(TopicMapStoreProperty.TOPICMAPSTORE_CLASS, InMemoryTopicMapStore.class.getName());
 
-			topicMap = tmSystemFac.newTopicMapSystem().createTopicMap(baseLoc);
+			topicMapSystem = tmSystemFac.newTopicMapSystem();
+			topicMap = topicMapSystem.createTopicMap(baseLoc);
 			baseLocator = topicMap.createLocator(baseLoc);
 
 			topicTypeMap = new HashMap<TopicType, Topic>(topicMapSchema.getTopicTypes().size());
@@ -288,6 +292,10 @@ public class TMCLTopicMapBuilder {
 
 		return topicMap;
 	}
+	
+	public TopicMapSystem getTopicMapSystem() {
+	    return topicMapSystem;
+    }
 
 	private void createDiagramNodes() {
 		// init types

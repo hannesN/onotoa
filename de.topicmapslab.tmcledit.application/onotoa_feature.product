@@ -231,6 +231,7 @@ litigation.
    </features>
 
    <configurations>
+      <plugin id="com.semagia.mio.core" autoStart="true" startLevel="4" />
       <plugin id="com.semagia.mio.syntaxpack" autoStart="true" startLevel="4" />
       <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="3" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="3" />
