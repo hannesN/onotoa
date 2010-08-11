@@ -127,30 +127,45 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          unpack="false"/>
 
    <plugin
-         id="de.topicmapslab.kuria"
-         download-size="0"
-         install-size="0"
-         version="1.0.0.SNAPSHOT"/>
-
-   <plugin
-         id="commons-beanutils"
-         download-size="0"
-         install-size="0"
-         version="1.8.2"
-         unpack="false"/>
-
-   <plugin
-         id="commons_logging"
-         download-size="0"
-         install-size="0"
-         version="1.1.1"
-         unpack="false"/>
-
-   <plugin
          id="de.topicmapslab.onotoa.selection"
          download-size="0"
          install-size="0"
          version="1.0.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.kuria.annotation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.kuria.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.kuria.swtgenerator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.beanutils"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.collections"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

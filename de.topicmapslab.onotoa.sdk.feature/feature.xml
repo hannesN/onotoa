@@ -62,21 +62,58 @@ All other libraries are released under the Apache 2 license. See http://www.apac
          unpack="false"/>
 
    <plugin
-         id="org.tmapix_0.4_snapshot"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
          id="de.topicmapslab.tmql4j"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="de.topicmapslab.kuria"
+         id="de.topicmapslab.kuria.annotation"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.kuria.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.kuria.swtgenerator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.tmapix"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.tmapix.io"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.semagia.mio.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.semagia.mio.syntaxpack"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
