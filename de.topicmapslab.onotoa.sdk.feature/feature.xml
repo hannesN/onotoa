@@ -11,9 +11,11 @@ In detail these are:
 CTMWriter
 MaJorToM
 TMAPI
-TAMPIx including semagia-mio
+TAMPIx 
+Semagia-mio
 TMQL4j
 Kuria
+SLF4J
    </description>
 
    <copyright>
@@ -40,10 +42,6 @@ All other libraries are released under the Apache 2 license. See http://www.apac
       <discovery label="ctm-writer site" url="http://code.google.com/p/ctm-writer/"/>
       <discovery label="Kuria site" url="http://code.google.com/p/kuria/"/>
    </url>
-
-   <includes
-         id="de.topicmapslab.engine_feature"
-         version="0.0.0"/>
 
    <plugin
          id="de.topicmapslab.ctmwriter"
@@ -85,6 +83,77 @@ All other libraries are released under the Apache 2 license. See http://www.apac
          download-size="0"
          install-size="0"
          version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.tmapi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.tmapix"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.tmapix.io"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.semagia.mio.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.semagia.mio.syntaxpack"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.majortom.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.majortom.inmemory"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.topicmapslab.majortom.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="slf4j.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="slf4j.nop"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
          unpack="false"/>
 
 </feature>
