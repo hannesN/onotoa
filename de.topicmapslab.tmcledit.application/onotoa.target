@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="Running Platform">
+<locations>
+<location path="${eclipse_home}/dropins/deltaPack" type="Directory"/>
+<location path="${eclipse_home}" type="Profile"/>
+<location includeAllPlatforms="false" includeMode="slicer" type="InstallableUnit">
+<unit id="de.topicmapslab.onotoa.sdk.feature.feature.group" version="1.1.2.201008121222"/>
+<repository location="http://onotoa.topicmapslab.de/update-test"/>
+</location>
+</locations>
+<environment>
+<os>linux</os>
+<ws>gtk</ws>
+<arch>x86_64</arch>
+<nl>en_US</nl>
+</environment>
+<launcherArgs>
+<vmArgs>-Dosgi.requiredJavaVersion=1.5 -XX:MaxPermSize=256m -Xms40m -Xmx512m</vmArgs>
+</launcherArgs>
+</target>

@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Search Plugin for Onotoa
+Bundle-SymbolicName: de.topicmapslab.onotoa.search;singleton:=true
+Bundle-Version: 1.1.2.qualifier
+Bundle-Activator: de.topicmapslab.onotoa.search.Activator
+Bundle-Vendor: Hannes Niederhausen, Topic Maps Lab
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.topicmapslab.tmcledit;bundle-version="1.1.2",
+ de.topicmapslab.tmcledit.edit;bundle-version="1.1.2",
+ org.eclipse.core.resources;bundle-version="3.6.0",
+ org.eclipse.emf.edit.ui;bundle-version="2.6.0",
+ de.topicmapslab.onotoa.selection;bundle-version="1.0.0",
+ de.topicmapslab.kuria.annotation;bundle-version="1.0.0",
+ de.topicmapslab.kuria.runtime;bundle-version="1.0.0",
+ de.topicmapslab.kuria.swtgenerator;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
