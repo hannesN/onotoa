@@ -51,8 +51,8 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	private Container con;
 	private int validateType;
 
-	private List<String> typeList = Arrays.asList(new String[] { "Any", "TopicType", "OccurrenceType", "NameType",
-	        "RoleType", "AssociationType" });
+	private List<String> typeList = Arrays.asList(new String[] { "Any", "Topic Type", "Occurrence Type", "Name Type",
+	        "Role Type", "Association Type" });
 
 	/**
 	 * Constructor

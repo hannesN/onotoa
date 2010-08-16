@@ -38,7 +38,7 @@ import de.topicmapslab.onotoa.search.util.SearchDataObject;
 public class TopicTypeSearchDialog extends Dialog {
 
 	private BasicTopicTypeSearchTab basicTab;
-	private AdvancedTopicTypeSearchTab advancedTab;
+	// private AdvancedTopicTypeSearchTab advancedTab;
 
 	private boolean isAdvancedSearch = false;
 
@@ -86,7 +86,7 @@ public class TopicTypeSearchDialog extends Dialog {
 		TabItem advancedTab = new TabItem(tabFolder, SWT.NONE);
 		advancedTab.setText("Advanced");
 		advancedTab.setToolTipText("Advanced search");
-		advancedTab.setControl(createAdvancedTab(tabFolder));
+		// advancedTab.setControl(createAdvancedTab(tabFolder));
 
 		return comp;
 	}
@@ -106,12 +106,12 @@ public class TopicTypeSearchDialog extends Dialog {
 
 	}
 
-	private Control createAdvancedTab(Composite parent) {
-
-		advancedTab = new AdvancedTopicTypeSearchTab(parent);
-		return advancedTab.getComposite();
-
-	}
+	// private Control createAdvancedTab(Composite parent) {
+	//
+	// advancedTab = new AdvancedTopicTypeSearchTab(parent);
+	// return advancedTab.getComposite();
+	//
+	// }
 
 	/**
 	 * Listener for the chosen tab
