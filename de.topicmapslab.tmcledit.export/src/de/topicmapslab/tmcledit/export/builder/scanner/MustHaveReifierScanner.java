@@ -43,7 +43,7 @@ public class MustHaveReifierScanner extends AbstractConstraintScanner {
 	    + "WHERE ( $c / tmcl:card-min == \"1\"^^xsd:int AND $c / tmcl:card-max == \"1\"^^xsd:int ) "
 		+ "RETURN ( "
 		+ "$c >> traverse tmcl:constrained-statement, "
-		+ "$c >> traverse tmcl:allowed-reifier || tmdm:subject, " 
+		+ "$c >> traverse tmcl:allowed-reifier || \"tmdm:subject\", " 
 		+ "$c , $c << players)";
     }
 

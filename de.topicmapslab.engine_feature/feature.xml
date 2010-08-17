@@ -134,4 +134,10 @@ See http://www.apache.org/licenses/LICENSE-2.0 for more onformation.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="de.topicmapslab.geotype"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
 </feature>

@@ -61,6 +61,8 @@ public class TMCLExportWizardPage extends WizardPage {
 	
 	private Button exportSchemaButton;
 	
+	private Button exportAnnotationButton;
+	
 	private Button onlyExportTopicTypes;
 	
 	private FileType selectedFileType;
@@ -108,6 +110,11 @@ public class TMCLExportWizardPage extends WizardPage {
 	    browseButton = new Button(comp, SWT.PUSH);
 	    browseButton.setText("...");
 	    
+	    exportAnnotationButton = new Button(comp, SWT.CHECK);
+	    exportAnnotationButton.setEnabled(true);
+	    exportAnnotationButton.setText("Export Annotations");
+	    fac.applyTo(exportAnnotationButton);
+	    
 	    exportSchemaButton = new Button(comp, SWT.CHECK);
 	    exportSchemaButton.setText("Export Schema Information");
 	    fac.applyTo(exportSchemaButton);
@@ -151,6 +158,10 @@ public class TMCLExportWizardPage extends WizardPage {
 	    setControl(comp);
     }
 
+	public boolean isExportAnnotations() {
+        return exportAnnotationButton.getSelection();
+    }
+	
 	public boolean isExportSchemaInfos() {
         return exportSchemaButton.getSelection();
     }

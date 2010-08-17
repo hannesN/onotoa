@@ -73,6 +73,7 @@ import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.UNIQUE_VALUE_C
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -99,6 +100,7 @@ import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
+import de.topicmapslab.tmcledit.model.Annotation;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Bendpoint;
@@ -134,6 +136,8 @@ import de.topicmapslab.tmcledit.model.TypeNode;
  * 
  */
 public class TMCLTopicMapBuilder {
+	private static final String ANNOTATION_PREFIX = "http://onotoa.topicmapslab.de/annotation";
+
 	private final TopicMapSchema topicMapSchema;
 
 	// set to store the created roleconstraints and roleplayerconstraint
@@ -145,11 +149,14 @@ public class TMCLTopicMapBuilder {
 	private Map<TopicType, Topic> topicTypeMap;
 	private Map<Node, Topic> nodeMap;
 	private Map<String, String> prefixMap;
+	
+	private Map<String, Topic> annotationMap;
 
 	private TopicMap topicMap;
 	private Locator baseLocator;
 
 	private boolean exportSchema = true;
+	private boolean exportAnnotations = true;
 	private boolean exportTopicTypesOnly = false;
 	private Topic schema;
 
@@ -159,8 +166,11 @@ public class TMCLTopicMapBuilder {
 
 	private boolean createDiagramNodes;
 
+	// topic for the annotation type
+	private Topic annotationType;
+	
 	// topics for the diagram informations
-
+	
 	// topics for the classes
 	private Topic diagramTopic;
 	private Topic nodeTopic;
@@ -255,6 +265,11 @@ public class TMCLTopicMapBuilder {
 				addDocumentationOccurrences(schema, topicMapSchema);
 				schema.addType(createTopic(SCHEMA));
 			}
+			
+			if (exportAnnotations) {
+				annotationType = topicMap.createTopicBySubjectIdentifier(topicMap.createLocator(ANNOTATION_PREFIX));
+				annotationType.createName("Onotoa Annotation");
+			}
 
 			createTopicTypes();
 			if (!exportTopicTypesOnly) {
@@ -295,6 +310,14 @@ public class TMCLTopicMapBuilder {
 	
 	public TopicMapSystem getTopicMapSystem() {
 	    return topicMapSystem;
+    }
+	
+	public void setExportAnnotations(boolean exportAnnotations) {
+	    this.exportAnnotations = exportAnnotations;
+    }
+	
+	public void setExportSchema(boolean exportSchema) {
+	    this.exportSchema = exportSchema;
     }
 
 	private void createDiagramNodes() {
@@ -721,7 +744,24 @@ public class TMCLTopicMapBuilder {
 		if ((tmp != null) && (tmp.length() > 0))
 			topic.createOccurrence(createTopic(DESCRIPTION), tmp);
 
+		addAnnotationOccurrences(topic, construct);
 	}
+
+	private void addAnnotationOccurrences(Topic topic, TMCLConstruct construct) {
+		if (!exportAnnotations)
+			return;
+		
+		for (Annotation a : construct.getAnnotations()) {
+			addAnnotation(a, topic);
+		}
+	    
+    }
+
+	private void addAnnotation(Annotation a, Topic topic) {
+	    Topic type = getAnnotationType(a);
+	    
+	    topic.createOccurrence(type, a.getValue());
+    }
 
 	private void addCardinalityOccurrences(Topic constr, String cardMin, String cardMax) {
 		// needed for templates
@@ -977,6 +1017,32 @@ public class TMCLTopicMapBuilder {
 		return createTopic(loc);
 	}
 
+	private Map<String, Topic> getAnnotationMap() {
+        if (annotationMap==null)
+        	return Collections.emptyMap();
+    	return annotationMap;
+    }
+
+	private Topic getAnnotationType(Annotation annotation) {
+    	Topic type = getAnnotationMap().get(annotation.getKey());
+    	if (type==null) {
+    		String id = ANNOTATION_PREFIX+"/"+annotation.getKey().replaceAll("\\.", "/"); 
+    		Locator loc = topicMap.createLocator(id);
+    		type = topicMap.createTopicBySubjectIdentifier(loc);
+    		type.addType(annotationType);
+    		addAnnotationType(annotation.getKey(), type);
+    	}
+    	
+    	return type;
+    }
+
+	private void addAnnotationType(String key, Topic type) {
+        if (annotationMap==null) {
+        	annotationMap = new HashMap<String, Topic>();
+        }
+        annotationMap.put(key, type);
+    }
+
 	private class ConstraintWrapper {
 		private final AbstractConstraint constraint;
 		private final AssociationType at;
@@ -1065,5 +1131,4 @@ public class TMCLTopicMapBuilder {
 			return super.equals(obj);
 		}
 	}
-
 }
