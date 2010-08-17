@@ -12,43 +12,32 @@ package de.topicmapslab.onotoa.search.dialogs;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
 
 import de.topicmapslab.onotoa.search.util.SearchDataObject;
 
 /**
  * Creates search dialog for TopicTypes.
  * 
- * This includes a basic and an advanced search. After all inputs are done the
- * class creates an returnable SearchDataObject which includes all values from
- * the user.
+ * This includes a basic and an optional advanced part. After all inputs are
+ * done the class creates an returnable SearchDataObject which includes all
+ * values from the user.
  * 
  * @author Sebastian Lippert
  */
 
 public class TopicTypeSearchDialog extends Dialog {
 
-	private BasicTopicTypeSearchTab basicTab;
-	// private AdvancedTopicTypeSearchTab advancedTab;
-
-	private boolean isAdvancedSearch = false;
+	private TopicTypeSearchBasicPart basicPart;
 
 	private String searchString = "";
 	private String type = "Any";
 	private boolean isCaseSensitive = false;
 	private boolean isExactMatch = false;
 	private boolean isRegExp = false;
-
-	private TabFolder tabFolder;
+	private boolean isAdvancedSearch = false;
 
 	/**
 	 * Constructor
@@ -60,78 +49,17 @@ public class TopicTypeSearchDialog extends Dialog {
 	}
 
 	/**
-	 * Creates the main dialog with its two tabs for basic and advanced search.
+	 * Creates the basic part of the search dialog.
+	 * 
+	 * @return the basic part
 	 */
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
 
-		// main composite
-		Composite comp = new Composite(parent, SWT.NONE);
-		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
-		comp.setLayout(new FillLayout());
-		comp.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_BLUE));
+		basicPart = new TopicTypeSearchBasicPart(parent);
+		return basicPart.getComposite();
 
-		// tab folder
-		tabFolder = new TabFolder(comp, SWT.NONE);
-		hookSearchModusListener();
-
-		// basic search tab
-		TabItem basicTab = new TabItem(tabFolder, SWT.NONE);
-		basicTab.setText("Basic");
-		basicTab.setToolTipText("Basic search");
-		basicTab.setControl(createBasicTab(tabFolder));
-
-		// advanced search tab
-		TabItem advancedTab = new TabItem(tabFolder, SWT.NONE);
-		advancedTab.setText("Advanced");
-		advancedTab.setToolTipText("Advanced search");
-		// advancedTab.setControl(createAdvancedTab(tabFolder));
-
-		return comp;
-	}
-
-	/**
-	 * Creates whole basic search mask.
-	 * 
-	 * @param parent
-	 *            parent composite
-	 * @return the basic search mask composite
-	 */
-
-	private Control createBasicTab(Composite parent) {
-
-		basicTab = new BasicTopicTypeSearchTab(parent);
-		return basicTab.getComposite();
-
-	}
-
-	// private Control createAdvancedTab(Composite parent) {
-	//
-	// advancedTab = new AdvancedTopicTypeSearchTab(parent);
-	// return advancedTab.getComposite();
-	//
-	// }
-
-	/**
-	 * Listener for the chosen tab
-	 */
-
-	private void hookSearchModusListener() {
-
-		tabFolder.addSelectionListener(new SelectionAdapter() {
-
-			public void widgetSelected(SelectionEvent e) {
-
-				if (tabFolder.getSelectionIndex() == 0)
-					isAdvancedSearch = false;
-
-				if (tabFolder.getSelectionIndex() == 1)
-					isAdvancedSearch = true;
-
-			}
-
-		});
 	}
 
 	/**
@@ -165,11 +93,11 @@ public class TopicTypeSearchDialog extends Dialog {
 
 		if (!isAdvancedSearch) {
 
-			searchString = basicTab.getNameFieldValue();
-			type = basicTab.getTypeBoxValue();
-			isCaseSensitive = basicTab.getCaseButtonValue();
-			isExactMatch = basicTab.getMatchButtonValue();
-			isRegExp = basicTab.getRegularButtonValue();
+			searchString = basicPart.getNameFieldValue();
+			type = basicPart.getTypeBoxValue();
+			isCaseSensitive = basicPart.getCaseButtonValue();
+			isExactMatch = basicPart.getMatchButtonValue();
+			isRegExp = basicPart.getRegularButtonValue();
 
 			setReturnCode(OK);
 			close();
@@ -181,6 +109,12 @@ public class TopicTypeSearchDialog extends Dialog {
 		}
 
 	}
+
+	/**
+	 * Getter for SearchDataObject that holds all user input
+	 * 
+	 * @return SearchDataObject
+	 */
 
 	public SearchDataObject getSearchDataObject() {
 
