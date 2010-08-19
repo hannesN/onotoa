@@ -35,9 +35,9 @@ public class TopicTypeWrapper extends AbstractTypeWrapper {
 	 *            TopicType
 	 */
 
-	public TopicTypeWrapper(TopicType type) {
-		super(type.getName(), type.getKind().getValue());
-		this.type = type;
+	public TopicTypeWrapper(TopicType topicType) {
+		super(topicType);
+		this.type = topicType;
 	}
 
 	/**

@@ -36,7 +36,7 @@ public class AssociationTypeWrapper extends AbstractTypeWrapper {
 	 */
 
 	public AssociationTypeWrapper(TopicType topicType) {
-		super(topicType.getName(), topicType.getKind().getValue());
+		super(topicType);
 		this.type = topicType;
 	}
 

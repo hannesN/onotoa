@@ -36,7 +36,7 @@ public class OccurrenceTypeWrapper extends AbstractTypeWrapper implements IDoubl
 	 */
 
 	public OccurrenceTypeWrapper(TopicType topicType) {
-		super(topicType.getName(), topicType.getKind().getValue());
+		super(topicType);
 		this.type = topicType;
 	}
 
@@ -51,7 +51,6 @@ public class OccurrenceTypeWrapper extends AbstractTypeWrapper implements IDoubl
 		return this.type.getName();
 	}
 
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -59,7 +58,7 @@ public class OccurrenceTypeWrapper extends AbstractTypeWrapper implements IDoubl
 	 * de.topicmapslab.onotoa.search.wrapper.DoubleClickAction#doubleClickHappend
 	 * ()
 	 */
-	
+
 	public void doubleClickHappend() {
 		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(type), this);
 	}

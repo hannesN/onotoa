@@ -49,11 +49,11 @@ public class SubjectIdentifierWrapper extends AbstractTypeWrapper {
 	 *            SubjectIdentifier of the TopicType
 	 */
 
-	public SubjectIdentifierWrapper(TopicType type, String identifier) {
+	public SubjectIdentifierWrapper(TopicType topicType, String identifier) {
 
-		super(type.getName(), type.getKind().getValue());
+		super(topicType);
 
-		this.topic = type;
+		this.topic = topicType;
 		this.identifier = identifier;
 
 	}

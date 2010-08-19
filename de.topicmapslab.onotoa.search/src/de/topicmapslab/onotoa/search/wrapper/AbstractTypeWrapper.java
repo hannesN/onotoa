@@ -13,6 +13,8 @@ package de.topicmapslab.onotoa.search.wrapper;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 
+import de.topicmapslab.tmcledit.model.TopicType;
+
 /**
  * 
  * Abstract superclass for all TopicTye wrappers.
@@ -25,27 +27,27 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
  */
 public abstract class AbstractTypeWrapper implements Comparable<AbstractTypeWrapper>, IDoubleClickHandler {
 
+	private final TopicType topicType;
 	private final String name;
 	private final int type;
 
 	/**
 	 * Constructor
 	 * 
-	 * @param name of the TopicType
-	 * @param type int value of the type
+	 * @param name
+	 *            of the TopicType
+	 * @param type
+	 *            int value of the type
 	 * 
-	 * 0 = no type
-	 * 1 = TopicType
-	 * 2 = OccurrenceType
-	 * 3 = NameType
-	 * 4 = Role Type
-	 * 5 = AssociationType
+	 *            0 = no type 1 = TopicType 2 = OccurrenceType 3 = NameType 4 =
+	 *            Role Type 5 = AssociationType
 	 */
-	
-	public AbstractTypeWrapper(String name, int type) {
 
-		this.name = name;
-		this.type = type;
+	public AbstractTypeWrapper(TopicType topicType) {
+
+		this.topicType = topicType;
+		this.name = this.topicType.getName();
+		this.type = this.topicType.getKind().getValue();
 
 	}
 
