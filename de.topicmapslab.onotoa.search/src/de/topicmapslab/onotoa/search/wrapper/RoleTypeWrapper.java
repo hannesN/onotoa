@@ -36,7 +36,7 @@ public class RoleTypeWrapper extends AbstractTypeWrapper {
 	 */
 
 	public RoleTypeWrapper(TopicType topicType) {
-		super(topicType.getName(), topicType.getKind().getValue());
+		super(topicType);
 		this.type = topicType;
 	}
 

@@ -36,7 +36,7 @@ public class NameTypeWrapper extends AbstractTypeWrapper {
 	 */
 
 	public NameTypeWrapper(TopicType topicType) {
-		super(topicType.getName(), topicType.getKind().getValue());
+		super(topicType);
 		this.type = topicType;
 	}
 
@@ -58,7 +58,7 @@ public class NameTypeWrapper extends AbstractTypeWrapper {
 	 * de.topicmapslab.onotoa.search.wrapper.DoubleClickAction#doubleClickHappend
 	 * ()
 	 */
-	
+
 	public void doubleClickHappend() {
 		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(type), this);
 	}
