@@ -42,14 +42,11 @@ public class MainSearchHandler {
 		con = new Container();
 
 		// detect the modus of the search by the according Boolean
-		if (!searchObj.getIsAdvancedSearch()) {
 
-			BasicTopicTypeSearcher searcher = new BasicTopicTypeSearcher(
-					searchObj, schema, progressMonitor);
-			searcher.fetchResult();
-			con = searcher.getResult();
+		BasicTopicTypeSearcher searcher = new BasicTopicTypeSearcher(searchObj, schema, progressMonitor);
+		searcher.fetchResult();
+		con = searcher.getResult();
 
-		}
 	}
 
 	/**
