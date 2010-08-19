@@ -11,6 +11,7 @@
 package de.topicmapslab.onotoa.search.dialogs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,6 +41,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import de.topicmapslab.onotoa.search.util.TopicTypeComparator;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -150,6 +152,15 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 		availableTopicList.getTable().setLayoutData(gridData);
 		availableTopicList.setLabelProvider(new TopicLableProvider());
 		availableTopicList.setContentProvider(new ArrayContentProvider());
+
+		// throws java.lang.IllegalArgumentException: The 'no duplicates'
+		// constraint is violated
+
+		// TopicTypeComparator comparator = new TopicTypeComparator();
+		// List<TopicType> listAvailable =
+		// ModelIndexer.getTopicIndexer().getTopicTypes();
+		// Collections.sort(listAvailable, comparator);
+
 		availableTopicList.setInput(ModelIndexer.getTopicIndexer().getTopicTypes());
 		availableTopicList.addSelectionChangedListener(this);
 		availableTopicList.addDoubleClickListener(new IDoubleClickListener() {

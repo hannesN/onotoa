@@ -10,6 +10,10 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.util;
 
+import java.util.List;
+
+import de.topicmapslab.tmcledit.model.TopicType;
+
 /**
  * Object that includes all inputs from the search mask. For details look at the
  * constructor.
@@ -20,18 +24,19 @@ package de.topicmapslab.onotoa.search.util;
 
 public class SearchDataObject {
 
-	private boolean isAdvancedSearch;
+	// private boolean isAdvancedSearch;
 	private String searchString;
 	private String type;
 	private boolean isCaseSensitive;
 	private boolean isExactMatch;
 	private boolean isRegExp;
+	private boolean checkSubjectidentifier;
+	private boolean checkSubjectLocator;
+	private List<TopicType> topicList;
 
 	/**
 	 * Standart constructor
 	 * 
-	 * @param isAdvancedSearch
-	 *            Boolean if the search is basic or advanced
 	 * @param searchString
 	 *            String that will be compared with objects name
 	 * @param type
@@ -43,35 +48,44 @@ public class SearchDataObject {
 	 *            Boolean that can specify the searchString
 	 * @param isRegExp
 	 *            Boolean that can specify the searchString
+	 * @param checkSubjectIdentifier
+	 *            Boolean that can specify the searchString
+	 * @param checkSubjectLocator
+	 *            Boolean that can specify the searchString
+	 * @param topicList
+	 *            List of Topic Types that specifies the searched object
 	 */
 
-	public SearchDataObject(boolean isAdvancedSearch, String searchString, String type, boolean isCaseSensitive,
-	        boolean isExactMatch, boolean isRegExp) {
+	public SearchDataObject(String searchString, String type, boolean isCaseSensitive, boolean isExactMatch,
+	        boolean isRegExp, boolean checkSubjectidentifier, boolean checkSubjectLocator, List<TopicType> topicList) {
 
-		this.isAdvancedSearch = isAdvancedSearch;
+		// this.isAdvancedSearch = isAdvancedSearch;
 		this.searchString = searchString;
 		this.type = type;
 		this.isCaseSensitive = isCaseSensitive;
 		this.isExactMatch = isExactMatch;
 		this.isRegExp = isRegExp;
+		this.checkSubjectidentifier = checkSubjectidentifier;
+		this.checkSubjectLocator = checkSubjectLocator;
+		this.topicList = topicList;
 
 	}
 
-	/**
-	 * @return the isAdvancedSearch
-	 */
-
-	public Boolean getIsAdvancedSearch() {
-		return isAdvancedSearch;
-	}
-
-	/**
-	 * @param isAdvancedSearch
-	 *            the isAdvancedSearch to set
-	 */
-	public void setIsAdvancedSearch(Boolean isAdvancedSearch) {
-		this.isAdvancedSearch = isAdvancedSearch;
-	}
+	// /**
+	// * @return the isAdvancedSearch
+	// */
+	//
+	// public Boolean getIsAdvancedSearch() {
+	// return isAdvancedSearch;
+	// }
+	//
+	// /**
+	// * @param isAdvancedSearch
+	// * the isAdvancedSearch to set
+	// */
+	// public void setIsAdvancedSearch(Boolean isAdvancedSearch) {
+	// this.isAdvancedSearch = isAdvancedSearch;
+	// }
 
 	/**
 	 * @return the searchString
@@ -151,6 +165,71 @@ public class SearchDataObject {
 
 	public void setIsRegExp(Boolean isRegExp) {
 		this.isRegExp = isRegExp;
+	}
+
+	/**
+	 * @return the checkSubjectidentifier
+	 */
+	public boolean getIsCheckSubjectidentifier() {
+		return checkSubjectidentifier;
+	}
+
+	/**
+	 * @param checkSubjectidentifier
+	 *            the checkSubjectidentifier to set
+	 */
+	public void setIsCheckSubjectidentifier(boolean checkSubjectidentifier) {
+		this.checkSubjectidentifier = checkSubjectidentifier;
+	}
+
+	/**
+	 * @return the checkSubjectLocator
+	 */
+	public boolean getIsCheckSubjectLocator() {
+		return checkSubjectLocator;
+	}
+
+	/**
+	 * @param checkSubjectLocator
+	 *            the checkSubjectLocator to set
+	 */
+	public void setIsCheckSubjectLocator(boolean checkSubjectLocator) {
+		this.checkSubjectLocator = checkSubjectLocator;
+	}
+
+	/**
+	 * @return the topicList
+	 */
+	public List<TopicType> getTopicList() {
+		return topicList;
+	}
+
+	/**
+	 * @param topicList
+	 *            the topicList to set
+	 */
+	public void setTopicList(List<TopicType> topicList) {
+		this.topicList = topicList;
+	}
+
+	@Override
+	public String toString() {
+
+		 String s = "Input: " + searchString + "\n" 
+		+ "Type: " + type + "\n"
+		+ "Exact Match: " +isExactMatch + "\n"
+		+ "Case sensitive: " +isCaseSensitive + "\n"
+		+ "Reg Exp: " +isRegExp + "\n"
+		+ "Check SubjectIdentifier: " +checkSubjectidentifier + "\n"
+		+ "Check SubjectLocator: " +checkSubjectLocator + "\n";
+		
+		if(topicList == null)
+			s +="Topic List: null";
+		else
+			for (TopicType topic : topicList)
+				s +="Topic List: " +topic.getName() +" - " +topic.getKind().toString() +"\n";
+ 
+		return s;
 	}
 
 }
