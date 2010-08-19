@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.dialogs;
 
+import java.util.List;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.widgets.Composite;
@@ -17,6 +19,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import de.topicmapslab.onotoa.search.util.SearchDataObject;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
  * Creates search dialog for TopicTypes.
@@ -37,7 +40,9 @@ public class TopicTypeSearchDialog extends Dialog {
 	private boolean isCaseSensitive = false;
 	private boolean isExactMatch = false;
 	private boolean isRegExp = false;
-	private boolean isAdvancedSearch = false;
+	private boolean checkSubjectIdentifier = false;
+	private boolean checkSubkjectLocator = false;
+	private List<TopicType> topicList;
 
 	/**
 	 * Constructor
@@ -91,22 +96,21 @@ public class TopicTypeSearchDialog extends Dialog {
 	@Override
 	protected void okPressed() {
 
-		if (!isAdvancedSearch) {
+		searchString = basicPart.getNameFieldValue();
+		type = basicPart.getTypeBoxValue();
+		isCaseSensitive = basicPart.getCaseButtonValue();
+		isExactMatch = basicPart.getMatchButtonValue();
+		isRegExp = basicPart.getRegularButtonValue();
+		checkSubjectIdentifier = basicPart.getCheckSubjectIdentifierValue();
+		checkSubkjectLocator = basicPart.getCheckSubjectLocatorValue();
 
-			searchString = basicPart.getNameFieldValue();
-			type = basicPart.getTypeBoxValue();
-			isCaseSensitive = basicPart.getCaseButtonValue();
-			isExactMatch = basicPart.getMatchButtonValue();
-			isRegExp = basicPart.getRegularButtonValue();
+		if (basicPart.getIsAdvanced()) {
 
-			setReturnCode(OK);
-			close();
-
+			topicList = basicPart.getSelectedTypes();
+			System.out.println("Size: " + topicList.size());
 		}
-
-		if (isAdvancedSearch) {
-
-		}
+		setReturnCode(OK);
+		close();
 
 	}
 
@@ -118,7 +122,8 @@ public class TopicTypeSearchDialog extends Dialog {
 
 	public SearchDataObject getSearchDataObject() {
 
-		return new SearchDataObject(isAdvancedSearch, searchString, type, isCaseSensitive, isExactMatch, isRegExp);
+		return new SearchDataObject(searchString, type, isCaseSensitive, isExactMatch, isRegExp,
+		        checkSubjectIdentifier, checkSubkjectLocator, topicList);
 
 	}
 

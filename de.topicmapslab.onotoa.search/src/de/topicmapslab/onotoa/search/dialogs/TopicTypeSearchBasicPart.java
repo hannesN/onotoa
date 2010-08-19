@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.dialogs;
 
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -24,6 +26,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
  * @author sip
@@ -186,7 +189,7 @@ public class TopicTypeSearchBasicPart {
 
 				}
 
-				if (regularButton.getSelection()) {
+				if (!regularButton.getSelection()) {
 
 					caseButton.setEnabled(true);
 					matchButton.setEnabled(true);
@@ -241,8 +244,19 @@ public class TopicTypeSearchBasicPart {
 
 	}
 
+	/**
+	 * 
+	 * @return the created composite
+	 */
 	public Composite getComposite() {
 		return this.comp;
+	}
+
+	/**
+	 * @return isAdvanced
+	 */
+	public boolean getIsAdvanced() {
+		return isAdvanced;
 	}
 
 	/**
@@ -283,14 +297,31 @@ public class TopicTypeSearchBasicPart {
 	/**
 	 * @return the checkSI
 	 */
-	public boolean getCheckSIValue() {
+	public boolean getCheckSubjectIdentifierValue() {
 		return checkSI.getSelection();
 	}
 
 	/**
 	 * @return the checkSL
 	 */
-	public boolean getCheckSLValue() {
+	public boolean getCheckSubjectLocatorValue() {
 		return checkSL.getSelection();
+	}
+
+	/**
+	 * Getter for selected Topic Types of the advanced part of the search
+	 * 
+	 * @return List of selected Topic Types
+	 */
+
+	public List<TopicType> getSelectedTypes() {
+
+		if (compAssociation.getParent() == dockingShell && compTopic.getParent() != dockingShell)
+			return advancedTopic.getSelectedList();
+
+		if (compTopic.getParent() == dockingShell && compAssociation.getParent() != dockingShell)
+			return advancedAssosiation.getSelectedList();
+
+		return null;
 	}
 }
