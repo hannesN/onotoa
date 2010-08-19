@@ -10,12 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.searchImpl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.management.relation.RoleStatus;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -27,6 +30,8 @@ import de.topicmapslab.onotoa.search.wrapper.NameTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.OccurrenceTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.RoleTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
+import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -50,9 +55,10 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	private final boolean isRegExp;
 	private final boolean checkSubjectIdentifier;
 	private final boolean checkSubjectLocator;
+	private final boolean checkName;
 	private final TopicMapSchema schema;
 	private HashSet<AbstractTypeWrapper> set;
-
+	private final List<TopicType> topicList;
 	private final IProgressMonitor progressMonitor;
 
 	private Container con;
@@ -74,18 +80,20 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	public BasicTopicTypeSearcher(SearchDataObject searchObj, TopicMapSchema schema, IProgressMonitor progressMonitor) {
 
 		this.searchString = searchObj.getSearchString();
-		this.isCaseSensitive = searchObj.getIsCaseSensitive();
-		this.isExactMatch = searchObj.getIsExactMatch();
-		this.isRegExp = searchObj.getIsRegExp();
-		this.checkSubjectIdentifier = searchObj.getIsCheckSubjectidentifier();
-		this.checkSubjectLocator = searchObj.getIsCheckSubjectLocator();
+		this.isCaseSensitive = searchObj.isCaseSensitive();
+		this.isExactMatch = searchObj.isExactMatch();
+		this.isRegExp = searchObj.isRegExp();
+		this.checkSubjectIdentifier = searchObj.isCheckSubjectidentifier();
+		this.checkSubjectLocator = searchObj.isCheckSubjectLocator();
+		this.checkName = searchObj.isCheckName();
+		this.topicList = searchObj.getTopicList();
 		this.schema = schema;
 		this.progressMonitor = progressMonitor;
-		this.lowerCaseSearchString = searchString.toLowerCase();
-		set = new HashSet<AbstractTypeWrapper>();
 
-		con = new Container();
+		set = new HashSet<AbstractTypeWrapper>();
 		validateType = typeList.indexOf(searchObj.getType());
+		lowerCaseSearchString = searchString.toLowerCase();
+		con = new Container();
 
 	}
 
@@ -95,42 +103,40 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 
 	public void fetchResult() {
 
-		findTopicsByName();
-		// if (checkSubjectIdentifier)
-		// findTopicsBySubjectIdentifier();
+		findTopics();
+//		if (topicList != null && validateType == 5)
+//			cleanAssociationTypeSearch();
+
 	}
 
 	/**
      * 
      */
-	private void findTopicsByName() {
+	private void findTopics() {
+
 		// init progressmonitor
-		progressMonitor.setTaskName("Searching Topic Types by Name");
+		progressMonitor.setTaskName("Searching Topic Types");
 		progressMonitor.beginTask("Searching", schema.getTopicTypes().size());
 
 		// worked tts
 		int worked = 0;
 
 		/*
-		 * This search consists of three nested steps.
+		 * This search consists of two nested steps.
 		 * 
 		 * The first, outer one respects only the three Boolean parameters
 		 * isCaseSensitive, isExactMatch and isRegExp. They all specify the way
-		 * of interpreting the searchString that possibly match the name of a
-		 * TopicType. The comment over each great part represents the binary
-		 * code of those.
+		 * of interpreting the searchString.The comment over each great part
+		 * represents the binary code of those.
 		 * 
 		 * For example 000 means: CaseSensitive = false ExactMatch = false
 		 * RegExp = false
 		 * 
-		 * The second, middle step respects the Booleans checkSubjectIdentifier
-		 * and checkSubjectLocator. They indicates that the search should check
-		 * the Identifiers and Locators of each TopicType or not. The
-		 * searchSting will be interpreted in the same way as specified at the
-		 * first step.
-		 * 
-		 * Now all five possible Booleans are checked and the exact search can
-		 * executed. This is the third and last step.
+		 * The second, middle step respects the Booleans checkSubjectIdentifier,
+		 * checkSubjectLocator and checkName. They indicates that the search
+		 * should check the Identifiers and/or Locators and/or names of each
+		 * TopicType or not. The searchSting will be interpreted in the same way
+		 * as specified at the first step.
 		 * 
 		 * All positive matches will be added to a HashSet.
 		 */
@@ -138,89 +144,36 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		/*
 		 * 000
 		 */
-		if (!isCaseSensitive && !isExactMatch) {
+		if (!isCaseSensitive && !isExactMatch && !isRegExp) {
+			for (TopicType tt : schema.getTopicTypes()) {
 
-			if (!checkSubjectIdentifier && !checkSubjectLocator) {
-				for (TopicType tt : schema.getTopicTypes()) {
-					if (notCaseNotExactTest(tt.getName()) && validateType(tt, validateType))
-						set.add(getTypeWrapper(tt, validateType));
-
-					worked++;
-					progressMonitor.worked(worked);
-				}
-
-			} else if (checkSubjectIdentifier && !checkSubjectLocator) {
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (notCaseNotExactTest(tt.getName()) && isValidated) {
+				boolean done = false;
+				isValidated = validateType(tt, validateType);
+				if (checkName) {
+					if (isValidated && notCaseNotExactTest(tt.getName())) {
 						set.add(getTypeWrapper(tt, validateType));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
 					}
+				}
+				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
-						if (notCaseNotExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectLocator && !checkSubjectIdentifier) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (notCaseNotExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-					for (String s : tt.getLocators()) {
-						if (notCaseNotExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else {
-				boolean done;
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					done = false;
-					isValidated = validateType(tt, validateType);
-					if (notCaseNotExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-
-					for (String s : tt.getIdentifiers()) {
-						if (notCaseNotExactTest(s) && isValidated) {
+						if (isValidated && notCaseNotExactTest(s)) {
 							set.add(getTypeWrapper(tt, validateType));
 							done = true;
 							break;
 						}
 					}
-
-					if (!done) {
-						for (String s : tt.getLocators()) {
-							if (notCaseNotExactTest(s) && isValidated) {
-								set.add(getTypeWrapper(tt, validateType));
-								break;
-							}
+				}
+				if (checkSubjectLocator && !done) {
+					for (String s : tt.getLocators()) {
+						if (isValidated && notCaseNotExactTest(s)) {
+							set.add(getTypeWrapper(tt, validateType));
+							break;
 						}
 					}
-					worked++;
-					progressMonitor.worked(worked);
 				}
-
 			}
 		}
 
@@ -228,89 +181,35 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		 * 100
 		 */
 		else if (isCaseSensitive && !isExactMatch) {
-			if (!checkSubjectIdentifier && !checkSubjectLocator) {
+			for (TopicType tt : schema.getTopicTypes()) {
 
-				for (TopicType tt : schema.getTopicTypes()) {
-					if (isCaseNotExactTest(tt.getName()) && validateType(tt, validateType))
-						set.add(getTypeWrapper(tt, validateType));
-
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectIdentifier && !checkSubjectLocator) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (isCaseNotExactTest(tt.getName()) && isValidated) {
+				boolean done = false;
+				isValidated = validateType(tt, validateType);
+				if (checkName) {
+					if (isValidated && isCaseNotExactTest(tt.getName())) {
 						set.add(getTypeWrapper(tt, validateType));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
 					}
+				}
+				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
-						if (isCaseNotExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectLocator && !checkSubjectIdentifier) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (isCaseNotExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-					for (String s : tt.getLocators()) {
-						if (isCaseNotExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else {
-
-				boolean done;
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					done = false;
-					isValidated = validateType(tt, validateType);
-					if (isCaseNotExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-
-					for (String s : tt.getIdentifiers()) {
-						if (isCaseNotExactTest(s) && isValidated) {
+						if (isValidated && isCaseNotExactTest(s)) {
 							set.add(getTypeWrapper(tt, validateType));
 							done = true;
 							break;
 						}
 					}
-
-					if (!done) {
-						for (String s : tt.getLocators()) {
-							if (isCaseNotExactTest(s) && isValidated) {
-								set.add(getTypeWrapper(tt, validateType));
-								break;
-							}
+				}
+				if (checkSubjectLocator && !done) {
+					for (String s : tt.getLocators()) {
+						if (isValidated && isCaseNotExactTest(s)) {
+							set.add(getTypeWrapper(tt, validateType));
+							break;
 						}
 					}
-					worked++;
-					progressMonitor.worked(worked);
 				}
-
 			}
 		}
 
@@ -318,88 +217,35 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		 * 010
 		 */
 		else if (!isCaseSensitive && isExactMatch) {
-			if (!checkSubjectIdentifier && !checkSubjectLocator) {
+			for (TopicType tt : schema.getTopicTypes()) {
 
-				for (TopicType tt : schema.getTopicTypes()) {
-					if (notCaseIsExactTest(tt.getName()) && validateType(tt, validateType))
-						set.add(getTypeWrapper(tt, validateType));
-
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectIdentifier && !checkSubjectLocator) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (notCaseIsExactTest(tt.getName()) && isValidated) {
+				boolean done = false;
+				isValidated = validateType(tt, validateType);
+				if (checkName) {
+					if (isValidated && notCaseIsExactTest(tt.getName())) {
 						set.add(getTypeWrapper(tt, validateType));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
 					}
+				}
+				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
-						if (notCaseIsExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectLocator && !checkSubjectIdentifier) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (notCaseIsExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-					for (String s : tt.getLocators()) {
-						if (notCaseIsExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else {
-				boolean done;
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					done = false;
-					isValidated = validateType(tt, validateType);
-					if (notCaseIsExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-
-					for (String s : tt.getIdentifiers()) {
-						if (notCaseIsExactTest(s) && isValidated) {
+						if (isValidated && notCaseIsExactTest(s)) {
 							set.add(getTypeWrapper(tt, validateType));
 							done = true;
 							break;
 						}
 					}
-
-					if (!done) {
-						for (String s : tt.getLocators()) {
-							if (notCaseIsExactTest(s) && isValidated) {
-								set.add(getTypeWrapper(tt, validateType));
-								break;
-							}
+				}
+				if (checkSubjectLocator && !done) {
+					for (String s : tt.getLocators()) {
+						if (isValidated && notCaseIsExactTest(s)) {
+							set.add(getTypeWrapper(tt, validateType));
+							break;
 						}
 					}
-					worked++;
-					progressMonitor.worked(worked);
 				}
-
 			}
 		}
 
@@ -407,88 +253,35 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		 * 110
 		 */
 		else if (isCaseSensitive && isExactMatch) {
-			if (!checkSubjectIdentifier && !checkSubjectLocator) {
+			for (TopicType tt : schema.getTopicTypes()) {
 
-				for (TopicType tt : schema.getTopicTypes()) {
-					if (isCaseIsExactTest(tt.getName()) && validateType(tt, validateType))
-						set.add(getTypeWrapper(tt, validateType));
-
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectIdentifier && !checkSubjectLocator) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (isCaseIsExactTest(tt.getName()) && isValidated) {
+				boolean done = false;
+				isValidated = validateType(tt, validateType);
+				if (checkName) {
+					if (isValidated && isCaseIsExactTest(tt.getName())) {
 						set.add(getTypeWrapper(tt, validateType));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
 					}
+				}
+				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
-						if (isCaseIsExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectLocator && !checkSubjectIdentifier) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					if (isCaseIsExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-					for (String s : tt.getLocators()) {
-						if (isCaseIsExactTest(s) && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else {
-				boolean done;
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					done = false;
-					isValidated = validateType(tt, validateType);
-					if (isCaseIsExactTest(tt.getName()) && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-
-					for (String s : tt.getIdentifiers()) {
-						if (isCaseIsExactTest(s) && isValidated) {
+						if (isValidated && isCaseIsExactTest(s)) {
 							set.add(getTypeWrapper(tt, validateType));
 							done = true;
 							break;
 						}
 					}
-
-					if (!done) {
-						for (String s : tt.getLocators()) {
-							if (isCaseIsExactTest(s) && isValidated) {
-								set.add(getTypeWrapper(tt, validateType));
-								break;
-							}
+				}
+				if (checkSubjectLocator && !done) {
+					for (String s : tt.getLocators()) {
+						if (isValidated && isCaseIsExactTest(s)) {
+							set.add(getTypeWrapper(tt, validateType));
+							break;
 						}
 					}
-					worked++;
-					progressMonitor.worked(worked);
 				}
-
 			}
 		}
 
@@ -498,75 +291,21 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		else {
 			Matcher matcher;
 			Pattern pattern = Pattern.compile(searchString);
+			boolean done;
+			for (TopicType tt : schema.getTopicTypes()) {
 
-			if (!checkSubjectIdentifier && !checkSubjectLocator) {
-
-				for (TopicType tt : schema.getTopicTypes()) {
-				 Matcher	matcher1 = pattern.matcher(tt.getName());
-					if (matcher1.matches() && validateType(tt, validateType))
-						set.add(getTypeWrapper(tt, validateType));
-
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else if (checkSubjectIdentifier && !checkSubjectLocator) {
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
+				done = false;
+				isValidated = validateType(tt, validateType);
+				if (checkName) {
 					matcher = pattern.matcher(tt.getName());
-					if (matcher.matches() && isValidated) {
+					if (isValidated && matcher.matches()) {
 						set.add(getTypeWrapper(tt, validateType));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
 					}
-					for (String s : tt.getIdentifiers()) {
-						matcher = pattern.matcher(s);
-						if (matcher.matches() && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
 				}
-			} else if (!checkSubjectIdentifier && checkSubjectLocator) {
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					isValidated = validateType(tt, validateType);
-					matcher = pattern.matcher(tt.getName());
-					if (matcher.matches() && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-
-					for (String s : tt.getLocators()) {
-						matcher = pattern.matcher(s);
-						if (matcher.matches() && isValidated) {
-							set.add(getTypeWrapper(tt, validateType));
-							break;
-						}
-					}
-					worked++;
-					progressMonitor.worked(worked);
-				}
-			} else {
-
-				boolean done;
-				for (TopicType tt : schema.getTopicTypes()) {
-
-					done = false;
-					isValidated = validateType(tt, validateType);
-					matcher = pattern.matcher(tt.getName());
-					if (matcher.matches() && isValidated) {
-						set.add(getTypeWrapper(tt, validateType));
-						worked++;
-						progressMonitor.worked(worked);
-						continue;
-					}
-
+				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
 						matcher = pattern.matcher(s);
 						if (matcher.matches() && isValidated) {
@@ -575,22 +314,42 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 							break;
 						}
 					}
-
-					if (!done) {
-						for (String s : tt.getLocators()) {
-							matcher = pattern.matcher(s);
-							if (matcher.matches() && isValidated) {
-								set.add(getTypeWrapper(tt, validateType));
-								break;
-							}
+				}
+				if (checkSubjectLocator && !done) {
+					for (String s : tt.getLocators()) {
+						matcher = pattern.matcher(s);
+						if (matcher.matches() && isValidated) {
+							set.add(getTypeWrapper(tt, validateType));
+							break;
 						}
 					}
-					worked++;
-					progressMonitor.worked(worked);
 				}
 			}
 		}
 		progressMonitor.done();
+	}
+
+	private void cleanTopicTypeSearch() {
+
+	}
+
+	private void cleanAssociationTypeSearch() {
+
+		Iterator it = set.iterator();
+		List<RoleConstraint> rolesList;
+		List<TopicType> rolesTypeList;
+
+		while (it.hasNext()) {
+			rolesTypeList = new ArrayList<TopicType>();
+			rolesList = new ArrayList<RoleConstraint>(
+			        ((AssociationType) ((AbstractTypeWrapper) it.next()).getTopicType()).getRoles());
+			for (RoleConstraint rc : rolesList) {
+				rolesTypeList.add(rc.getType());
+			}
+			if (!rolesTypeList.contains(topicList))
+				set.remove(it.next());
+
+		}
 	}
 
 	private boolean notCaseNotExactTest(String s) {
@@ -606,7 +365,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	}
 
 	private boolean isCaseIsExactTest(String s) {
-		return s.contains(searchString);
+		return s.equals(searchString);
 	}
 
 	/**

@@ -42,6 +42,7 @@ public class TopicTypeSearchDialog extends Dialog {
 	private boolean isRegExp = false;
 	private boolean checkSubjectIdentifier = false;
 	private boolean checkSubkjectLocator = false;
+	private boolean checkName = false;
 	private List<TopicType> topicList;
 
 	/**
@@ -103,6 +104,7 @@ public class TopicTypeSearchDialog extends Dialog {
 		isRegExp = basicPart.getRegularButtonValue();
 		checkSubjectIdentifier = basicPart.getCheckSubjectIdentifierValue();
 		checkSubkjectLocator = basicPart.getCheckSubjectLocatorValue();
+		checkName = basicPart.getCheckNameValue();
 
 		if (basicPart.getIsAdvanced()) {
 
@@ -123,7 +125,7 @@ public class TopicTypeSearchDialog extends Dialog {
 	public SearchDataObject getSearchDataObject() {
 
 		return new SearchDataObject(searchString, type, isCaseSensitive, isExactMatch, isRegExp,
-		        checkSubjectIdentifier, checkSubkjectLocator, topicList);
+		        checkSubjectIdentifier, checkSubkjectLocator, checkName, topicList);
 
 	}
 
