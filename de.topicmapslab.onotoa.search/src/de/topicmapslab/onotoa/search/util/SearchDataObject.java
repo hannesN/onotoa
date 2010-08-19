@@ -32,6 +32,7 @@ public class SearchDataObject {
 	private boolean isRegExp;
 	private boolean checkSubjectidentifier;
 	private boolean checkSubjectLocator;
+	private boolean checkName;
 	private List<TopicType> topicList;
 
 	/**
@@ -57,7 +58,8 @@ public class SearchDataObject {
 	 */
 
 	public SearchDataObject(String searchString, String type, boolean isCaseSensitive, boolean isExactMatch,
-	        boolean isRegExp, boolean checkSubjectidentifier, boolean checkSubjectLocator, List<TopicType> topicList) {
+	        boolean isRegExp, boolean checkSubjectidentifier, boolean checkSubjectLocator, boolean checkName,
+	        List<TopicType> topicList) {
 
 		// this.isAdvancedSearch = isAdvancedSearch;
 		this.searchString = searchString;
@@ -67,25 +69,10 @@ public class SearchDataObject {
 		this.isRegExp = isRegExp;
 		this.checkSubjectidentifier = checkSubjectidentifier;
 		this.checkSubjectLocator = checkSubjectLocator;
+		this.checkName = checkName;
 		this.topicList = topicList;
 
 	}
-
-	// /**
-	// * @return the isAdvancedSearch
-	// */
-	//
-	// public Boolean getIsAdvancedSearch() {
-	// return isAdvancedSearch;
-	// }
-	//
-	// /**
-	// * @param isAdvancedSearch
-	// * the isAdvancedSearch to set
-	// */
-	// public void setIsAdvancedSearch(Boolean isAdvancedSearch) {
-	// this.isAdvancedSearch = isAdvancedSearch;
-	// }
 
 	/**
 	 * @return the searchString
@@ -122,7 +109,7 @@ public class SearchDataObject {
 	/**
 	 * @return the isCaseSensitive
 	 */
-	public boolean getIsCaseSensitive() {
+	public boolean isCaseSensitive() {
 		return isCaseSensitive;
 	}
 
@@ -131,14 +118,14 @@ public class SearchDataObject {
 	 *            the isCaseSensitive to set
 	 */
 
-	public void setIsCaseSensitive(Boolean isCaseSensitive) {
+	public void setCaseSensitive(Boolean isCaseSensitive) {
 		this.isCaseSensitive = isCaseSensitive;
 	}
 
 	/**
 	 * @return the isExactMatch
 	 */
-	public boolean getIsExactMatch() {
+	public boolean isExactMatch() {
 		return isExactMatch;
 	}
 
@@ -146,7 +133,7 @@ public class SearchDataObject {
 	 * @param isExactMatch
 	 *            the isExactMatch to set
 	 */
-	public void setIsExactMatch(Boolean isExactMatch) {
+	public void setExactMatch(Boolean isExactMatch) {
 		this.isExactMatch = isExactMatch;
 	}
 
@@ -154,7 +141,7 @@ public class SearchDataObject {
 	 * @return the isRegExp
 	 */
 
-	public boolean getIsRegExp() {
+	public boolean isRegExp() {
 		return isRegExp;
 	}
 
@@ -163,14 +150,14 @@ public class SearchDataObject {
 	 *            the isRegExp to set
 	 */
 
-	public void setIsRegExp(Boolean isRegExp) {
+	public void setRegExp(Boolean isRegExp) {
 		this.isRegExp = isRegExp;
 	}
 
 	/**
 	 * @return the checkSubjectidentifier
 	 */
-	public boolean getIsCheckSubjectidentifier() {
+	public boolean isCheckSubjectidentifier() {
 		return checkSubjectidentifier;
 	}
 
@@ -178,14 +165,14 @@ public class SearchDataObject {
 	 * @param checkSubjectidentifier
 	 *            the checkSubjectidentifier to set
 	 */
-	public void setIsCheckSubjectidentifier(boolean checkSubjectidentifier) {
+	public void setCheckSubjectidentifier(boolean checkSubjectidentifier) {
 		this.checkSubjectidentifier = checkSubjectidentifier;
 	}
 
 	/**
 	 * @return the checkSubjectLocator
 	 */
-	public boolean getIsCheckSubjectLocator() {
+	public boolean isCheckSubjectLocator() {
 		return checkSubjectLocator;
 	}
 
@@ -193,8 +180,23 @@ public class SearchDataObject {
 	 * @param checkSubjectLocator
 	 *            the checkSubjectLocator to set
 	 */
-	public void setIsCheckSubjectLocator(boolean checkSubjectLocator) {
+	public void setCheckSubjectLocator(boolean checkSubjectLocator) {
 		this.checkSubjectLocator = checkSubjectLocator;
+	}
+
+	/**
+	 * @return the checkName
+	 */
+	public boolean isCheckName() {
+		return checkName;
+	}
+
+	/**
+	 * @param checkName
+	 *            the checkName to set
+	 */
+	public void setCheckName(boolean checkName) {
+		this.checkName = checkName;
 	}
 
 	/**
@@ -215,20 +217,17 @@ public class SearchDataObject {
 	@Override
 	public String toString() {
 
-		 String s = "Input: " + searchString + "\n" 
-		+ "Type: " + type + "\n"
-		+ "Exact Match: " +isExactMatch + "\n"
-		+ "Case sensitive: " +isCaseSensitive + "\n"
-		+ "Reg Exp: " +isRegExp + "\n"
-		+ "Check SubjectIdentifier: " +checkSubjectidentifier + "\n"
-		+ "Check SubjectLocator: " +checkSubjectLocator + "\n";
-		
-		if(topicList == null)
-			s +="Topic List: null";
+		String s = "Input: " + searchString + "\n" + "Type: " + type + "\n" + "Exact Match: " + isExactMatch + "\n"
+		        + "Case sensitive: " + isCaseSensitive + "\n" + "Reg Exp: " + isRegExp + "\n"
+		        + "Check SubjectIdentifier: " + checkSubjectidentifier + "\n" + "Check SubjectLocator: "
+		        + checkSubjectLocator + "\n";
+
+		if (topicList == null)
+			s += "Topic List: null";
 		else
 			for (TopicType topic : topicList)
-				s +="Topic List: " +topic.getName() +" - " +topic.getKind().toString() +"\n";
- 
+				s += "Topic List: " + topic.getName() + " - " + topic.getKind().toString() + "\n";
+
 		return s;
 	}
 

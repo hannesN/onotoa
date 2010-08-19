@@ -40,7 +40,7 @@ public class TopicTypeSearchBasicPart {
 	private Combo typeBox;
 	private Text nameField;
 	private Button caseButton, matchButton, regularButton;
-	private Button checkSI, checkSL, advancedButton;
+	private Button checkSI, checkSL, checkName, advancedButton;
 	private Composite comp;
 	private Composite compTopic, compAssociation;
 
@@ -106,6 +106,9 @@ public class TopicTypeSearchBasicPart {
 
 		regularButton = new Button(buttonBar, SWT.CHECK);
 		regularButton.setText("Regular Expression");
+
+		checkName = new Button(buttonBar, SWT.CHECK);
+		checkName.setText("Check Name");
 
 		hookRegExpListener();
 
@@ -306,6 +309,10 @@ public class TopicTypeSearchBasicPart {
 	 */
 	public boolean getCheckSubjectLocatorValue() {
 		return checkSL.getSelection();
+	}
+
+	public boolean getCheckNameValue() {
+		return checkName.getSelection();
 	}
 
 	/**

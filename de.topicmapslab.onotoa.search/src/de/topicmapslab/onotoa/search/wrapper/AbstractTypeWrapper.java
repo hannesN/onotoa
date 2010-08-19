@@ -72,6 +72,10 @@ public abstract class AbstractTypeWrapper implements Comparable<AbstractTypeWrap
 		return 1;
 	}
 
+	public TopicType getTopicType() {
+		return this.topicType;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
