@@ -106,11 +106,9 @@ public class TopicTypeSearchDialog extends Dialog {
 		checkSubkjectLocator = basicPart.getCheckSubjectLocatorValue();
 		checkName = basicPart.getCheckNameValue();
 
-		if (basicPart.getIsAdvanced()) {
-
+		if (basicPart.getIsAdvanced())
 			topicList = basicPart.getSelectedTypes();
-			System.out.println("Size: " + topicList.size());
-		}
+
 		setReturnCode(OK);
 		close();
 
