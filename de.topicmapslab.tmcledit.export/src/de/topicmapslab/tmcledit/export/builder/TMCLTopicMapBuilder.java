@@ -764,11 +764,8 @@ public class TMCLTopicMapBuilder {
     }
 
 	private void addCardinalityOccurrences(Topic constr, String cardMin, String cardMax) {
-		// needed for templates
-		if (!cardMin.equals("0"))
-			constr.createOccurrence(createTopic(CARD_MIN), cardMin, topicMap.createLocator(XSD.INTEGER));
-		if (!cardMax.equals("*"))
-			constr.createOccurrence(createTopic(CARD_MAX), cardMax, topicMap.createLocator(XSD.INTEGER));
+		constr.createOccurrence(createTopic(CARD_MIN), cardMin, topicMap.createLocator(XSD.INTEGER));
+		constr.createOccurrence(createTopic(CARD_MAX), cardMax, topicMap.createLocator(XSD.INTEGER));
 	}
 
 	private void setOverlapConstraint(TopicType type, TopicType othertype) {
@@ -939,8 +936,10 @@ public class TMCLTopicMapBuilder {
 		addDocumentationOccurrences(constr, constraint);
 		addCardinalityOccurrences(constr, constraint.getCardMin(), constraint.getCardMax());
 
-		if ((constraint.getRegexp() != null) && (!".*".equals(constraint.getRegexp())))
+		if (constraint.getRegexp() != null) 
 			constr.createOccurrence(createTopic(REGEXP), constraint.getRegexp());
+		else
+			constr.createOccurrence(createTopic(REGEXP), ".*");
 
 		createConstrainedTopicType(t, constr);
 
@@ -953,8 +952,10 @@ public class TMCLTopicMapBuilder {
 		addDocumentationOccurrences(constr, constraint);
 		addCardinalityOccurrences(constr, constraint.getCardMin(), constraint.getCardMax());
 
-		if ((constraint.getRegexp() != null) && (!".*".equals(constraint.getRegexp())))
+		if (constraint.getRegexp() != null) 
 			constr.createOccurrence(createTopic(REGEXP), constraint.getRegexp());
+		else
+			constr.createOccurrence(createTopic(REGEXP), ".*");
 
 		createConstrainedTopicType(t, constr);
 
@@ -966,8 +967,10 @@ public class TMCLTopicMapBuilder {
 		addDocumentationOccurrences(constr, constraint);
 		addCardinalityOccurrences(constr, constraint.getCardMin(), constraint.getCardMax());
 
-		if ((constraint.getRegexp() != null) && (!".*".equals(constraint.getRegexp())))
+		if (constraint.getRegexp() != null) 
 			constr.createOccurrence(createTopic(REGEXP), constraint.getRegexp());
+		else
+			constr.createOccurrence(createTopic(REGEXP), ".*");
 
 		createConstrainedTopicType(t, constr);
 

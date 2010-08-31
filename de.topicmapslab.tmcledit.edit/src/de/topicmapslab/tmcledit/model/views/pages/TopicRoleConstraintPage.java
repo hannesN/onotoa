@@ -169,10 +169,18 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage{
 	}
 
 	protected AssociationType getAssociationType() {
-		return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
+		try {
+	        return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
+        } catch (Throwable e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+        }
+        return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
 	}
 	
 	public void notifyChanged(Notification notification) {
+		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
+			return;
 		updateUI();
 	}
 
