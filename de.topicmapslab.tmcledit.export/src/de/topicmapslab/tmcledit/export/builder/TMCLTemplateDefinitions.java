@@ -499,7 +499,7 @@ public class TMCLTemplateDefinitions {
 
          */
         private void addHasOccurrence() {
-        	Template t = templateFactory.newTemplate("has-occurence");
+        	Template t = templateFactory.newTemplate("has-occurrence");
         	
         	IEntryParam constrParam = entryFactory.newWildcardParam("c");
         	TopicEntry t1 = entryFactory.newTopicEntry(constrParam);

@@ -351,6 +351,12 @@ public class ModelSerializeOno1 implements ModelSerializer {
 	private void addRoleConstraintReference(Element rcNode, RoleConstraint rc) {
 		if (rc==null)
 			return;
+		
+		if (rc.eContainer()==null) {
+			TmcleditEditPlugin.logError(new IllegalStateException("the roleconstraint with id  "+rc.getId()+" has no parent!"));
+			return;
+		}
+		
 		Element e = document.createElement(E_ROLE_CONSTRAINT_REFERENCE);
 
 		AssociationType at = (AssociationType) rc.eContainer();
