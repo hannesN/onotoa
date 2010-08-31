@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="Onotoa Target Platform">
+<locations>
+<location path="${eclipse_home}/dropins/deltaPack" type="Directory"/>
+<location path="${eclipse_home}" type="Profile"/>
+<location path="/home/niederhausen/java/com.sun.codemodel" type="Directory"/>
+<location path="/home/mai00ckx/java/gennydeps" type="Directory"/>
+</locations>
+<environment>
+<os>linux</os>
+<ws>gtk</ws>
+<arch>x86_64</arch>
+<nl>en_US</nl>
+</environment>
+<launcherArgs>
+<vmArgs>-Dosgi.requiredJavaVersion=1.5 -XX:MaxPermSize=256m -Xms40m -Xmx512m</vmArgs>
+</launcherArgs>
+</target>

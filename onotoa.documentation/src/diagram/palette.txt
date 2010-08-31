@@ -1,0 +1,127 @@
+=== Palette ===
+
+The palette provides the functionality of the editor. It contains a set of 
+tools to create new elements. 
+
+_Onotoa_ distinguishes between diagram and schema elements. Schema elements are 
+used to define the
+Topic Maps schema. These are the constraints, topic types and their properties. 
+A diagram element is a visual representation
+of a schema element. For example the rectangle, which represents a topic type 
+or the line within this rectangle which represents constraint 
+of the topic. 
+
+The palette will create a diagram element and a new schema element which it 
+represents. If you select a diagram element the properties of the 
+represented schema element will be shown in the *Property Details View*.
+
+The palette can be seen in <<palette_elements>>.
+ 
+
+.Palette of a diagram editor
+[[palette_elements]]
+image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", 
+align="center"]
+
+The elements of the palette are:
+
+* *Select:* Tool for selecting a diagram element. The selected element can be 
+moved, if it supports this operation.
+
+* *Marquee:* Selection tool for multiple diagram elements. You can select a 
+group of elements. This can be useful if you want remove or delete more than 
+one element.
+
+* *Comment:* Creates a comment in the diagram. This comment is represented like 
+a post-it note. This comment does not exist as schema element. If you want to 
+export
+your a comment to TMCL use the documentation properties.  
+
+* *Topic:* Creates a topic representation and adds it to the diagram. The 
+represented topic is also created and added to the schema. 
+It will be placed where the it was dropped.
+
+* *Topic Type:* Creates a topic type representation and adds it to the diagram. 
+The represented topic is also created and added to the schema. 
+It will be placed where it was dropped.
+
+* *Occurrence Type:* Creates an occurrence type representation and adds it to 
+the diagram. The represented topic is also created and added to the schema. 
+It will be placed where it was dropped.
+
+* *Role Type:* Creates a role type representation and adds it to the diagram. 
+The represented topic is also created and added to the schema. 
+It will be placed where it was dropped.
+
+* *Association Type:* Creates an association type representation and adds it to 
+the diagram. The represented topic is also created and added to the schema. 
+It will be placed where it was dropped.
+
+* *Name Type:* Creates a name type representation and adds it to the diagram. 
+The represented topic is also created and added to the schema. The 
+representation is positioned where it was dropped.
+
+* *Occurrence Constraint:* Creates an occurrence constraint representation. You 
+need to drop the new constraint on a topic type representation. 
+A new schema element will be created too.  
+
+* *Name Constraint:* Creates a name constraint representation. You need to drop 
+the new constraint on a topic type representation. 
+A new schema element will be created too.
+
+* *Scope Constraint:* Creates a scope constraint representation to an name, 
+occurrence or association constraint representation. This will  
+only be possible if the parent constraint does not use a default type. 
+
+* *Reifier Constraint:* Creates a reifier constraint representation for a name, 
+occurrence or association constraint representation. Again this 
+will only be possible if the parent constraint does not use a default type. 
+
+* *Subject Identifier Constraint:* Creates a subject identifier constraint 
+representation. You need to drop the new constraint on a topic type 
+representation. A new schema element will be created too.
+
+* *Subject Locator Constraint:* Creates a subject locator constraint 
+representation. You need to drop the new constraint on a topic type 
+representation. A new schema element will be created too.
+
+* *Is A...:* Creates a connection between two topic types, which represents a 
+type instance relationship.
+
+* *Kind Of...:* Creates a connection between two topic types, which represents 
+a kind of relationship.
+
+* *Association Constraint:* Creates an element representing an association 
+constraint in the diagram. This is used as connection point between topic types 
+which are in an relationship.
+
+* *Topic Role Constraint:* The connection between a topic type (the player) an 
+an association constraint (the association). 
+
+To create a new 'Topic Type' just drag the *Topic Type* palette entry into the 
+diagram. A new 'Topic Type' with a default name will be created. 
+To add  another 'Topic Type' simply repeat this process. 
+
+To add a 'Name Constraint' to the 'Topic Type', just drag *Name Constraint* 
+onto the 'Topic Type' and a new 'Name Constraint' with 
+default properties will be added to the 'Topic Type'. The other constraints 
+work 
+similarly. But 'Scope Constraint' and 'Reifier Constraint'
+need to have a scopeable or reifyable constraint, i.e. 'Association', 
+'Name' and 'Occurrence Constraints' as parent.
+
+To create an 'Is a' or 'Kind of' relationship, click on the tool entry in the 
+palette. Then click on a topic type representation and 
+after that on another one. In an 'Is a' relationship, the first 'Topic Type' 
+will be 
+the instance and the second one the type. In a 'Kind of'
+relationship the first 'Topic Type' will be the subtype and the second one is 
+the 
+supertype.
+The editing state will remain in the relationship creation mode, so you don't 
+have to go through 
+the palette menu again for creating another relationship. To go back to 
+selection mode press the right mouse button or 
+'Select' in the palette.
+
+

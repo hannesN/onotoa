@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="de.topicmapslab.tmcledit.export.tmcledit"
+            name="Onotoa">
+      </category>
+      <wizard
+            category="de.topicmapslab.tmcledit.export.tmcledit"
+            class="de.topicmapslab.onotoa.aranuka.codegen.wizards.AranukaExportWizard"
+            id="de.topicmapslab.onotoa.aranuka.codegen.wizard"
+            name="Aranuka Code Generator">
+      </wizard>
+   </extension>
+   <extension
+         point="de.topicmapslab.tmcledit.edit.annotationprovider">
+      <annotationprovider
+            id="de.topicmapslab.onotoa.aranuka.codegen.generateattribute"
+            internal="false"
+            name="de.topicmapslab.aranuka.generateattribute"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.Validator">
+      </annotationprovider>
+   </extension>
+
+</plugin>
