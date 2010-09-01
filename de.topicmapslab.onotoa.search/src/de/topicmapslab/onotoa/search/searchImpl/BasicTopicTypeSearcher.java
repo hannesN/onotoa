@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import de.topicmapslab.onotoa.search.util.SearchDataObject;
+import de.topicmapslab.onotoa.search.util.SearchData;
 import de.topicmapslab.onotoa.search.views.Container;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -70,27 +70,27 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	/**
 	 * Constructor
 	 * 
-	 * @param searchObj
+	 * @param searchData
 	 *            Object that includes all inputs from the search mask
 	 * @param schema
 	 *            the search based on
 	 */
 
-	public BasicTopicTypeSearcher(SearchDataObject searchObj, TopicMapSchema schema, IProgressMonitor progressMonitor) {
+	public BasicTopicTypeSearcher(SearchData searchData, TopicMapSchema schema, IProgressMonitor progressMonitor) {
 
-		this.searchString = searchObj.getSearchString();
-		this.isCaseSensitive = searchObj.isCaseSensitive();
-		this.isExactMatch = searchObj.isExactMatch();
-		this.isRegExp = searchObj.isRegExp();
-		this.checkSubjectIdentifier = searchObj.isCheckSubjectidentifier();
-		this.checkSubjectLocator = searchObj.isCheckSubjectLocator();
-		this.checkName = searchObj.isCheckName();
-		this.topicList = searchObj.getTopicList();
+		this.searchString = searchData.getSearchString();
+		this.isCaseSensitive = searchData.isCaseSensitive();
+		this.isExactMatch = searchData.isExactMatch();
+		this.isRegExp = searchData.isRegExp();
+		this.checkSubjectIdentifier = searchData.isCheckSubjectidentifier();
+		this.checkSubjectLocator = searchData.isCheckSubjectLocator();
+		this.checkName = searchData.isCheckName();
+		this.topicList = searchData.getTopicList();
 		this.schema = schema;
 		this.progressMonitor = progressMonitor;
 
 		resultList = new ArrayList<TopicTypeWrapper>();
-		validateType = typeList.indexOf(searchObj.getType());
+		validateType = typeList.indexOf(searchData.getType());
 		lowerCaseSearchString = searchString.toLowerCase();
 		con = new Container();
 

@@ -12,7 +12,7 @@ package de.topicmapslab.onotoa.search.searchImpl;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import de.topicmapslab.onotoa.search.util.SearchDataObject;
+import de.topicmapslab.onotoa.search.util.SearchData;
 import de.topicmapslab.onotoa.search.views.Container;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
@@ -31,19 +31,19 @@ public class MainSearchHandler {
 	/**
 	 * Constructor
 	 * 
-	 * @param searchObj
+	 * @param searchData
 	 *            Object that includes all inputs from the search mask
 	 * @param schema
 	 *            the search based on
 	 */
 
-	public MainSearchHandler(SearchDataObject searchObj, TopicMapSchema schema, IProgressMonitor progressMonitor) {
+	public MainSearchHandler(SearchData searchData, TopicMapSchema schema, IProgressMonitor progressMonitor) {
 
 		con = new Container();
 
 		// detect the modus of the search by the according Boolean
 
-		BasicTopicTypeSearcher searcher = new BasicTopicTypeSearcher(searchObj, schema, progressMonitor);
+		BasicTopicTypeSearcher searcher = new BasicTopicTypeSearcher(searchData, schema, progressMonitor);
 		searcher.fetchResult();
 		con = searcher.getResult();
 
