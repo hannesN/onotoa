@@ -12,14 +12,10 @@ package de.topicmapslab.onotoa.search.searchImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.management.relation.RoleStatus;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -32,7 +28,13 @@ import de.topicmapslab.onotoa.search.wrapper.OccurrenceTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.RoleTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.AssociationType;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.NameType;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.RoleType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -100,7 +102,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	}
 
 	/**
-	 * Search TopicTypes with the given name
+	 * Search TopicTypes
 	 */
 
 	public void fetchResult() {
@@ -108,7 +110,10 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		// find topics by name, identifier and locator
 		findTopics();
 
-		// check topicList argument
+		/*
+		 * check topicList argument and remove Topics that don't match the
+		 * expected constraints
+		 */
 		if (topicList != null && topicList.size() != 0)
 			if (validateType == 5)
 				// check constraints of searched AssociationTypes
@@ -338,8 +343,90 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		progressMonitor.done();
 	}
 
+	/**
+	 * Compares all constraints from all previously found TopicTypes with the
+	 * constraints the user specified in the advanced dialog part. If an
+	 * TopicType doesn't contains all specified constraints he will be removed
+	 * from the ResultList.
+	 */
+
 	private void cleanTopicTypeSearch() {
 
+		List<OccurrenceType> occurrenceList;
+		List<NameType> nameList;
+		List<RoleType> roleList;
+		List<AssociationType> associationList;
+		List<AbstractTypeWrapper> removeList = new ArrayList<AbstractTypeWrapper>();
+		TopicType resultType;
+
+		// iterate over all wrapper from previous search
+		for (int i = 0; i < resultList.size(); i++) {
+
+			// TopicType to take a look at
+			resultType = resultList.get(i).getTopicType();
+
+			// lists for types of the TopicTypes constraints
+			occurrenceList = new ArrayList<OccurrenceType>();
+			nameList = new ArrayList<NameType>();
+			roleList = new ArrayList<RoleType>();
+			associationList = new ArrayList<AssociationType>();
+
+			// detect all OccurrrenceTypes the TopicType uses as constraint
+			if (resultType.getOccurrenceConstraints().size() > 0)
+				for (OccurrenceTypeConstraint occConstraint : resultType.getOccurrenceConstraints()) {
+					occurrenceList.add((OccurrenceType) occConstraint.getType());
+				}
+
+			// detect all NameTypes the TopicType uses as constraint
+			if (resultType.getNameConstraints().size() > 0)
+				for (NameTypeConstraint nameConstraint : resultType.getNameConstraints()) {
+					nameList.add((NameType) nameConstraint.getType());
+				}
+
+			/*
+			 * detect all AssociationTypes where the TopicType plays a role and
+			 * detect all roles the TopicType plays
+			 */
+			if (schema.getAssociationTypeConstraints().size() > 0)
+				for (AssociationTypeConstraint assoConstraint : schema.getAssociationTypeConstraints()) {
+					for (RolePlayerConstraint rpc : assoConstraint.getPlayerConstraints()) {
+						if (rpc.getPlayer().equals(resultType)) {
+							roleList.add((RoleType) rpc.getRole().getType());
+							associationList.add((AssociationType) assoConstraint.getType());
+						}
+					}
+				}
+
+			/*
+			 * iterate over all types (the searched TopicType should use) and
+			 * check if they are used by the TopicType of the iteration
+			 */
+			for (TopicType type : topicList) {
+
+				switch (type.getKind().getValue()) {
+				case 1:
+					if (!occurrenceList.contains(type))
+						removeList.add(resultList.get(i));
+					break;
+				case 2:
+					if (!nameList.contains(type))
+						removeList.add(resultList.get(i));
+					break;
+				case 3:
+					if (!roleList.contains(type))
+						removeList.add(resultList.get(i));
+					break;
+				case 4:
+					if (!associationList.contains(type))
+						removeList.add(resultList.get(i));
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		// remove non matching wrapper from the resultList
+		resultList.removeAll(removeList);
 	}
 
 	/**
@@ -371,7 +458,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				removeList.add(wrapper);
 		}
 
-		// remove not matching wrapper from the resultList
+		// remove non matching wrapper from the resultList
 		resultList.removeAll(removeList);
 	}
 
