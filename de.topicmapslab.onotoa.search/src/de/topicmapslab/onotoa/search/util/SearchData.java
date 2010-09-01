@@ -22,7 +22,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * 
  */
 
-public class SearchDataObject {
+public class SearchData {
 
 	// private boolean isAdvancedSearch;
 	private String searchString;
@@ -57,7 +57,7 @@ public class SearchDataObject {
 	 *            List of Topic Types that specifies the searched object
 	 */
 
-	public SearchDataObject(String searchString, String type, boolean isCaseSensitive, boolean isExactMatch,
+	public SearchData(String searchString, String type, boolean isCaseSensitive, boolean isExactMatch,
 	        boolean isRegExp, boolean checkSubjectidentifier, boolean checkSubjectLocator, boolean checkName,
 	        List<TopicType> topicList) {
 

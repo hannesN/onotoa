@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-import de.topicmapslab.onotoa.search.util.SearchDataObject;
+import de.topicmapslab.onotoa.search.util.SearchData;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
@@ -120,9 +120,9 @@ public class TopicTypeSearchDialog extends Dialog {
 	 * @return SearchDataObject
 	 */
 
-	public SearchDataObject getSearchDataObject() {
+	public SearchData getSearchData() {
 
-		return new SearchDataObject(searchString, type, isCaseSensitive, isExactMatch, isRegExp,
+		return new SearchData(searchString, type, isCaseSensitive, isExactMatch, isRegExp,
 		        checkSubjectIdentifier, checkSubkjectLocator, checkName, topicList);
 
 	}

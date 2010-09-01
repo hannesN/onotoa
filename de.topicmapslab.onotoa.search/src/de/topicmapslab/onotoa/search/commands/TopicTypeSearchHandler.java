@@ -70,7 +70,7 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 
 			// TODO Hannes: Real monitor
 		//	System.out.println(dialog.getSearchDataObject().toString());
-			MainSearchHandler handler = new MainSearchHandler(dialog.getSearchDataObject(), schema,
+			MainSearchHandler handler = new MainSearchHandler(dialog.getSearchData(), schema,
 			        new NullProgressMonitor());
 
 			// sort results
