@@ -35,7 +35,7 @@ import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
  */
 
 @TreeNode
-public class SubjectIdentifierWrapper extends AbstractTypeWrapper {
+public class SubjectIdentifierWrapper extends TopicTypeWrapper {
 
 	private TopicType topic;
 	private String identifier;

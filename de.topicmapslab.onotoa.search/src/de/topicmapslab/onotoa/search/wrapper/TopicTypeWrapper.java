@@ -10,49 +10,157 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.wrapper;
 
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.StructuredSelection;
 
 import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
 import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
 
 /**
- * Wrapper class for the name of an TopicType
+ * 
+ * Abstract superclass for all TopicTye wrappers.
+ * 
+ * Includes the interfaces Comparable and IDoubleClickHandler to sort all
+ * wrappers when they are used for a view and handles the double click event.
  * 
  * @author Sebastian Lippert
+ * 
  */
 
-@TreeNode(image = "./topictype.gif")
-public class TopicTypeWrapper extends AbstractTypeWrapper {
+@TreeNode(imageMethod = "getImagePath")
+public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleClickHandler {
 
-	private final TopicType type;
+	private final TopicType topicType;
+	private final String name;
+	private final int type;
 
 	/**
 	 * Constructor
 	 * 
+	 * @param name
+	 *            of the TopicType
 	 * @param type
-	 *            TopicType
+	 *            int value of the type
+	 * 
+	 *            0 = no type 1 = TopicType 2 = OccurrenceType 3 = NameType 4 =
+	 *            Role Type 5 = AssociationType
 	 */
 
 	public TopicTypeWrapper(TopicType topicType) {
-		super(topicType);
-		this.type = topicType;
+
+		this.topicType = topicType;
+		this.name = this.topicType.getName();
+		this.type = this.topicType.getKind().getValue();
+
 	}
 
-	/**
-	 * Getter for name of a TopicType
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return name
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	public int compareTo(TopicTypeWrapper o) {
+
+		if (type == o.type) {
+
+			if (name.compareTo(o.name) == 0)
+				return 0;
+			else if (name.compareTo(o.name) <= -1)
+				return -1;
+			return 1;
+
+		} else if (type <= o.type)
+			return -1;
+
+		return 1;
+	}
+
+	public TopicType getTopicType() {
+		return this.topicType;
+	}
 
 	@Text
 	public String getName() {
-		return this.type.getName();
+		return this.topicType.getName();
 	}
 
+	/**
+	 * Detect type of a topic and returns image path
+	 * 
+	 * @return Path to specific image
+	 */
+
+	public String getImagePath() {
+
+		switch (topicType.getKind()) {
+		case NO_TYPE:
+			return ImageConstants.TOPIC;
+		case ASSOCIATION_TYPE:
+			return ImageConstants.ASSOCIATIONTYPE;
+		case NAME_TYPE:
+			return ImageConstants.NAMETYPE;
+		case OCCURRENCE_TYPE:
+			return ImageConstants.OCCURRENCETYPE;
+		case ROLE_TYPE:
+			return ImageConstants.ROLETYPE;
+		default:
+			return ImageConstants.TOPICTYPE;
+
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener
+	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	 */
+	public ISelection getSelection() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.viewers.ISelectionProvider#removeSelectionChangedListener
+	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse
+	 * .jface.viewers.ISelection)
+	 */
+	public void setSelection(ISelection selection) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler#doubleClickHappend
+	 * ()
+	 */
 	public void doubleClickHappend() {
-		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(type), this);
+		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(topicType), this);
 	}
-
 }
