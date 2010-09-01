@@ -2,8 +2,6 @@ package de.topicmapslab.onotoa.search.views;
 
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -26,11 +24,7 @@ import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.runtime.IBindingContainer;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
-import de.topicmapslab.onotoa.search.wrapper.AssociationTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
-import de.topicmapslab.onotoa.search.wrapper.NameTypeWrapper;
-import de.topicmapslab.onotoa.search.wrapper.OccurrenceTypeWrapper;
-import de.topicmapslab.onotoa.search.wrapper.RoleTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.SubjectIdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 
@@ -121,10 +115,6 @@ public class SearchView extends ViewPart {
 		AnnotationBindingFactory fac = new AnnotationBindingFactory();
 		fac.addClass(SubjectIdentifierWrapper.class);
 		fac.addClass(TopicTypeWrapper.class);
-		fac.addClass(OccurrenceTypeWrapper.class);
-		fac.addClass(AssociationTypeWrapper.class);
-		fac.addClass(RoleTypeWrapper.class);
-		fac.addClass(NameTypeWrapper.class);
 		fac.addClass(Container.class);
 		IBindingContainer bc = fac.getBindingContainer();
 

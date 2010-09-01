@@ -21,11 +21,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.topicmapslab.onotoa.search.util.SearchDataObject;
 import de.topicmapslab.onotoa.search.views.Container;
-import de.topicmapslab.onotoa.search.wrapper.AbstractTypeWrapper;
-import de.topicmapslab.onotoa.search.wrapper.AssociationTypeWrapper;
-import de.topicmapslab.onotoa.search.wrapper.NameTypeWrapper;
-import de.topicmapslab.onotoa.search.wrapper.OccurrenceTypeWrapper;
-import de.topicmapslab.onotoa.search.wrapper.RoleTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -61,7 +56,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	private final boolean checkSubjectLocator;
 	private final boolean checkName;
 	private final TopicMapSchema schema;
-	private List<AbstractTypeWrapper> resultList;
+	private List<TopicTypeWrapper> resultList;
 	private final List<TopicType> topicList;
 	private final IProgressMonitor progressMonitor;
 
@@ -94,7 +89,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		this.schema = schema;
 		this.progressMonitor = progressMonitor;
 
-		resultList = new ArrayList<AbstractTypeWrapper>();
+		resultList = new ArrayList<TopicTypeWrapper>();
 		validateType = typeList.indexOf(searchObj.getType());
 		lowerCaseSearchString = searchString.toLowerCase();
 		con = new Container();
@@ -165,7 +160,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				isValidated = validateType(tt, validateType);
 				if (checkName) {
 					if (isValidated && notCaseNotExactTest(tt.getName())) {
-						resultList.add(getTypeWrapper(tt, validateType));
+						resultList.add(new TopicTypeWrapper(tt));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
@@ -174,7 +169,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
 						if (isValidated && notCaseNotExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							done = true;
 							break;
 						}
@@ -183,7 +178,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectLocator && !done) {
 					for (String s : tt.getLocators()) {
 						if (isValidated && notCaseNotExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							break;
 						}
 					}
@@ -201,7 +196,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				isValidated = validateType(tt, validateType);
 				if (checkName) {
 					if (isValidated && isCaseNotExactTest(tt.getName())) {
-						resultList.add(getTypeWrapper(tt, validateType));
+						resultList.add(new TopicTypeWrapper(tt));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
@@ -210,7 +205,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
 						if (isValidated && isCaseNotExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							done = true;
 							break;
 						}
@@ -219,7 +214,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectLocator && !done) {
 					for (String s : tt.getLocators()) {
 						if (isValidated && isCaseNotExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							break;
 						}
 					}
@@ -237,7 +232,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				isValidated = validateType(tt, validateType);
 				if (checkName) {
 					if (isValidated && notCaseIsExactTest(tt.getName())) {
-						resultList.add(getTypeWrapper(tt, validateType));
+						resultList.add(new TopicTypeWrapper(tt));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
@@ -246,7 +241,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
 						if (isValidated && notCaseIsExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							done = true;
 							break;
 						}
@@ -255,7 +250,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectLocator && !done) {
 					for (String s : tt.getLocators()) {
 						if (isValidated && notCaseIsExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							break;
 						}
 					}
@@ -273,7 +268,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				isValidated = validateType(tt, validateType);
 				if (checkName) {
 					if (isValidated && isCaseIsExactTest(tt.getName())) {
-						resultList.add(getTypeWrapper(tt, validateType));
+						resultList.add(new TopicTypeWrapper(tt));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
@@ -282,7 +277,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectIdentifier) {
 					for (String s : tt.getIdentifiers()) {
 						if (isValidated && isCaseIsExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							done = true;
 							break;
 						}
@@ -291,7 +286,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkSubjectLocator && !done) {
 					for (String s : tt.getLocators()) {
 						if (isValidated && isCaseIsExactTest(s)) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							break;
 						}
 					}
@@ -313,7 +308,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 				if (checkName) {
 					matcher = pattern.matcher(tt.getName());
 					if (isValidated && matcher.matches()) {
-						resultList.add(getTypeWrapper(tt, validateType));
+						resultList.add(new TopicTypeWrapper(tt));
 						worked++;
 						progressMonitor.worked(worked);
 						continue;
@@ -323,7 +318,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 					for (String s : tt.getIdentifiers()) {
 						matcher = pattern.matcher(s);
 						if (matcher.matches() && isValidated) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							done = true;
 							break;
 						}
@@ -333,7 +328,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 					for (String s : tt.getLocators()) {
 						matcher = pattern.matcher(s);
 						if (matcher.matches() && isValidated) {
-							resultList.add(getTypeWrapper(tt, validateType));
+							resultList.add(new TopicTypeWrapper(tt));
 							break;
 						}
 					}
@@ -356,7 +351,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		List<NameType> nameList;
 		List<RoleType> roleList;
 		List<AssociationType> associationList;
-		List<AbstractTypeWrapper> removeList = new ArrayList<AbstractTypeWrapper>();
+		List<TopicTypeWrapper> removeList = new ArrayList<TopicTypeWrapper>();
 		TopicType resultType;
 
 		// iterate over all wrapper from previous search
@@ -440,10 +435,10 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 
 		List<RoleConstraint> rolesList;
 		List<TopicType> rolesTypeList;
-		List<AbstractTypeWrapper> removeList = new ArrayList<AbstractTypeWrapper>();
+		List<TopicTypeWrapper> removeList = new ArrayList<TopicTypeWrapper>();
 
 		// iterate over all wrapper from the previous search
-		for (AbstractTypeWrapper wrapper : resultList) {
+		for (TopicTypeWrapper wrapper : resultList) {
 
 			// get all roles of the wrapper
 			rolesList = new ArrayList<RoleConstraint>(((AssociationType) wrapper.getTopicType()).getRoles());
@@ -488,40 +483,6 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 
 	private boolean validateType(TopicType topicType, int validateType) {
 		return (validateType == 0) || (topicType.getKind().getValue() == (validateType - 1));
-	}
-
-	/**
-	 * Getter for the wrapper.
-	 * 
-	 * Returns the TopicType class own wrapper
-	 * 
-	 * @param topicType
-	 *            that should be wrapped
-	 * @return special wrapper
-	 */
-
-	private AbstractTypeWrapper getTypeWrapper(TopicType topicType, int validateType) {
-
-		switch (validateType) {
-
-		case 0:
-			return getTypeWrapper(topicType, topicType.getKind().getValue() + 1);
-		case 1:
-			return new TopicTypeWrapper(topicType);
-		case 2:
-			return new OccurrenceTypeWrapper(topicType);
-		case 3:
-			return new NameTypeWrapper(topicType);
-		case 4:
-			return new RoleTypeWrapper(topicType);
-		case 5:
-			return new AssociationTypeWrapper(topicType);
-
-		default:
-			return null;
-
-		}
-
 	}
 
 	/**
