@@ -542,7 +542,10 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 				akoText.setText("");
 				abstractButton.setSelection(false);
 				overlapText.setText("");
-				cannotReifyButton.setSelection(false);
+				// button can be null if we have a non topic type page (subclasses) 
+				// because they don't call this.createAdditionalControls
+				if (cannotReifyButton!=null)
+					cannotReifyButton.setSelection(false);
 			}
 
 		}

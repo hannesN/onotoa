@@ -26,6 +26,7 @@ import org.eclipse.ui.IWorkbench;
 import org.tmapi.core.TopicMap;
 
 import de.topicmapslab.aranuka.codegen.core.CodeGenerator;
+import de.topicmapslab.onotoa.aranuka.codegen.Activator;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -65,6 +66,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			CodeGenerator gen = new CodeGenerator();
 			gen.generateCode(builder.getTopicMapSystem(), topicMap, new File(path), packageName);
 		} catch (Exception e) {
+			Activator.logException(e);
 			MessageDialog.openError(getShell(), "Error while generating code",
 					"An error occurred:" + e.getMessage() + "["
 							+ e.getClass().getName() + "]");

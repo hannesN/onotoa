@@ -480,10 +480,6 @@ public class TMCLTopicMapBuilder {
 				constraintSet.add(w);
 			}
 
-			for (RoleCombinationConstraint rcc : at.getRoleCombinations()) {
-				setRoleCombinationConstraint(at, rcc);
-			}
-
 			// setScopeConstraints(at);
 		}
 	}
@@ -677,6 +673,12 @@ public class TMCLTopicMapBuilder {
 
 		if (type instanceof OccurrenceType) {
 			setOccurrenceDatatype((OccurrenceType) type);
+		}
+		
+		if (type instanceof AssociationType) {
+			for (RoleCombinationConstraint rcc : ((AssociationType) type).getRoleCombinations()) {
+				setRoleCombinationConstraint((AssociationType) type, rcc);
+			}
 		}
 
 		setTopicReifiesConstraint(type);
