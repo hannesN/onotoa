@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import org.tmapi.core.TMAPIException;
 
+import de.topicmapslab.tmcl.loader.util.NullWorkMonitor;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.tmclimport.builder.OnotoaBuilder;
@@ -38,7 +39,7 @@ public abstract class AbstractImportTest {
 		// reader.read();
 		//
 		OnotoaBuilder builder = new OnotoaBuilder(filename);
-		file = builder.getFile();
+		file = builder.getFile(new NullWorkMonitor());
 		ModelIndexer.createInstance(file);
 	}
 
