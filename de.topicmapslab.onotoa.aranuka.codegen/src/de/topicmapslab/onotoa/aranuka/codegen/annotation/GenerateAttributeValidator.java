@@ -12,12 +12,12 @@ import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
  * @author Hannes Niederhausen
  *
  */
-public class Validator implements IAnnotationValidator {
+public class GenerateAttributeValidator implements IAnnotationValidator {
 
 	/**
 	 * 
 	 */
-	public Validator() {
+	public GenerateAttributeValidator() {
 	}
 
 	@Override

@@ -4,6 +4,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.topicmapslab.tmcledit.tmclimport.builder.TypeNotFoundException;
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -52,5 +54,10 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
+
+	public void logError(TypeNotFoundException e) {
+		Status s = new Status(Status.ERROR, PLUGIN_ID, "An error occurred!", e);
+		getLog().log(s);
+    }
 
 }

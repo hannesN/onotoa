@@ -7,9 +7,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.tmapi.core.Locator;
 import org.tmapi.core.TMAPIException;
 import org.tmapi.core.Topic;
@@ -29,6 +32,7 @@ import de.topicmapslab.tmcl.loader.listener.IRoleTypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.ITopicTypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.ITypeConstraintsListener;
 import de.topicmapslab.tmcl.loader.listener.ITypesListener;
+import de.topicmapslab.tmcl.loader.listener.IWorkMonitor;
 import de.topicmapslab.tmcl.loader.reader.ConstraintReader;
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
@@ -54,6 +58,7 @@ import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.tmclimport.Activator;
 
 /**
  * @author Hannes Niederhausen
@@ -71,66 +76,21 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 	// map used to get topic type for a specific topic
 	private Map<Topic, TopicType> topicTypeMap = new Hashtable<Topic, TopicType>();
 
+	private IWorkMonitor monitor;
+
 	public OnotoaBuilder(String filename) {
 		this.filename = filename;
 	}
 
-	public File getFile() {
+	public File getFile(IWorkMonitor monitor) {
 		if (file == null)
 			try {
+				this.monitor = monitor;
 				createFile();
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 		return file;
-	}
-
-	private void createFile() throws Exception {
-		modelFactory = ModelFactory.eINSTANCE;
-		file = modelFactory.createFile();
-		file.setTopicMapSchema(modelFactory.createTopicMapSchema());
-
-		ModelIndexer.createInstance(file);
-		
-		
-		TopicMapSystemFactoryImpl topicMapSystemFactory = new TopicMapSystemFactoryImpl();
-		// TODO remove with new default store impl
-		if (topicMapSystemFactory instanceof TopicMapSystemFactoryImpl) {
-			topicMapSystemFactory.setProperty(TopicMapStoreProperty.TOPICMAPSTORE_CLASS,
-			        InMemoryTopicMapStore.class.getName());
-		}
-		TopicMapSystem system = topicMapSystemFactory.newTopicMapSystem();
-		TopicMap topicMap = loadTopicMap(system);
-
-		ConstraintReader reader = new ConstraintReader(topicMap, system);
-		reader.addEventListener((ITypesListener) this);
-		reader.addEventListener((ITypeConstraintsListener) this);
-		reader.parse();
-	}
-
-	private TopicMap loadTopicMap(TopicMapSystem system) throws TMAPIException, TopicMapExistsException, IOException {
-
-		String docIri = "http://onotoa.topicmapslab.de/schema/";
-		TopicMap topicMap = system.createTopicMap(docIri);
-
-		InputStream is;
-		if (filename.startsWith("http://")) {
-			is = new URL(filename).openStream();
-		} else {
-			java.io.File file = new java.io.File(filename);
-			is = new FileInputStream(file);
-		}
-		/*
-		 * load topic map from file
-		 */
-		if (filename.endsWith(".ctm")) {
-			CTMTopicMapReader reader = new CTMTopicMapReader(topicMap, is, docIri);
-			reader.read();
-		} else if (filename.endsWith(".xtm") || filename.endsWith(".xtm20")) {
-			XTMTopicMapReader reader = new XTMTopicMapReader(topicMap, is, docIri);
-			reader.read();
-		}
-		return topicMap;
 	}
 
 	public void subjectIdentifierConstraintElement(Topic type, String arg1, String arg2, String arg3) {
@@ -249,7 +209,6 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		try {
 			AssociationType at = (AssociationType) getTopicType(type);
 			TopicType rt = getTopicType(roleType);
-			
 			RoleConstraint rc = modelFactory.createRoleConstraint();
 			rc.setCardMin(cardMin);
 			rc.setCardMax(cardMax);
@@ -365,7 +324,6 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 			
 			AssociationTypeConstraint atc = findAssociationConstraint(at);
 			
-			
 			RolePlayerConstraint rpc = modelFactory.createRolePlayerConstraint();
 			rpc.setPlayer(player);
 			rpc.setRole(findRoleConstraint(at, rt));
@@ -374,7 +332,7 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 
 			atc.getPlayerConstraints().add(rpc);
 		} catch (TypeNotFoundException e) {
-			System.out.println(e);
+			Activator.getDefault().logError(e);
 		} 
 		
 
@@ -418,6 +376,105 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		TopicType tt = modelFactory.createTopicType();
 		fillData(tt, arg0);
 	}
+
+	private void createFile() throws Exception {
+    	modelFactory = ModelFactory.eINSTANCE;
+    	file = modelFactory.createFile();
+    	file.setTopicMapSchema(modelFactory.createTopicMapSchema());
+    
+    	ModelIndexer.createInstance(file);
+    	
+    	
+    	TopicMapSystemFactoryImpl topicMapSystemFactory = new TopicMapSystemFactoryImpl();
+    	// TODO remove with new default store impl
+    	if (topicMapSystemFactory instanceof TopicMapSystemFactoryImpl) {
+    		topicMapSystemFactory.setProperty(TopicMapStoreProperty.TOPICMAPSTORE_CLASS,
+    		        InMemoryTopicMapStore.class.getName());
+    	}
+    	TopicMapSystem system = topicMapSystemFactory.newTopicMapSystem();
+    	TopicMap topicMap = loadTopicMap(system);
+    
+    	ConstraintReader reader = new ConstraintReader(topicMap, system);
+    	reader.addEventListener((ITypesListener) this);
+    	reader.addEventListener((ITypeConstraintsListener) this);
+    	reader.parse(monitor);
+    	
+    	refactorAssociationConstraints();
+    }
+
+	private void refactorAssociationConstraints() {
+        EList<AssociationTypeConstraint> atcList = file.getTopicMapSchema().getAssociationTypeConstraints();
+    	List<AssociationTypeConstraint> associationTypeConstraints = new ArrayList<AssociationTypeConstraint>(atcList);
+        for (AssociationTypeConstraint currAtc : associationTypeConstraints) {
+        	AssociationType at = (AssociationType)currAtc.getType();
+    		EList<RoleCombinationConstraint> roleCombinations = at.getRoleCombinations();
+    		if (roleCombinations.size()==0) {
+        		continue;
+        	}
+    		for (RoleCombinationConstraint rcc : roleCombinations) {
+    			AssociationTypeConstraint atc = modelFactory.createAssociationTypeConstraint();
+    			atc.setType(currAtc.getType());
+    			
+    			RolePlayerConstraint rpc1 = createRolePlayerConstraintFor(currAtc, rcc.getRole(), rcc.getPlayer());
+    			if (rpc1==null) {
+    				Activator.getDefault().logInfo("Invalid role combination constraint in :"+at.getName());
+    			}
+    			
+    			RolePlayerConstraint rpc2 = createRolePlayerConstraintFor(currAtc, rcc.getOtherRole(), rcc.getOtherPlayer());
+    			if (rpc2==null) {
+    				Activator.getDefault().logInfo("Invalid role combination constraint in :"+at.getName());
+    			}
+    				
+    			atc.getPlayerConstraints().add(rpc1);
+    			atc.getPlayerConstraints().add(rpc2);
+    			atcList.add(atc);
+    		}
+        }
+        
+    }
+
+	private RolePlayerConstraint createRolePlayerConstraintFor(AssociationTypeConstraint atc, TopicType role,
+            TopicType player) {
+        for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+        	if ((rpc.getRole().getType().equals(role)) && (rpc.getPlayer().equals(player))) {
+        		RolePlayerConstraint result = modelFactory.createRolePlayerConstraint();
+        		result.setCardMin(rpc.getCardMin());
+        		result.setCardMax(rpc.getCardMax());
+        		result.setComment(rpc.getComment());
+        		result.setDescription(rpc.getDescription());
+        		result.setPlayer(player);
+        		result.setRole(rpc.getRole());
+        		
+        	   return result;
+        	}
+        }
+        return null;
+    }
+
+	private TopicMap loadTopicMap(TopicMapSystem system) throws TMAPIException, TopicMapExistsException, IOException {
+    
+    	String docIri = "http://onotoa.topicmapslab.de/schema/";
+    	TopicMap topicMap = system.createTopicMap(docIri);
+    
+    	InputStream is;
+    	if (filename.startsWith("http://")) {
+    		is = new URL(filename).openStream();
+    	} else {
+    		java.io.File file = new java.io.File(filename);
+    		is = new FileInputStream(file);
+    	}
+    	/*
+    	 * load topic map from file
+    	 */
+    	if (filename.endsWith(".ctm")) {
+    		CTMTopicMapReader reader = new CTMTopicMapReader(topicMap, is, docIri);
+    		reader.read();
+    	} else if (filename.endsWith(".xtm") || filename.endsWith(".xtm20")) {
+    		XTMTopicMapReader reader = new XTMTopicMapReader(topicMap, is, docIri);
+    		reader.read();
+    	}
+    	return topicMap;
+    }
 
 	private AssociationTypeConstraint findAssociationConstraint(AssociationType at) {
 		for (AssociationTypeConstraint atc : file.getTopicMapSchema().getAssociationTypeConstraints()) {
