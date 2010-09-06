@@ -41,4 +41,18 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="de.topicmapslab.tmql4j.tmml.extension"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.sun.codemodel"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
