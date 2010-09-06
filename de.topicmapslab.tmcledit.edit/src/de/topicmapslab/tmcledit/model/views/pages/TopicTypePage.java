@@ -54,6 +54,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -634,6 +635,11 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 	    		nameDecorator.hide();
 	    	} else {
 				String errormsg = "Name: "+nameText.getText()+" already used!";
+				// if getSite is null we ignore the error
+				if (getSite()==null) {
+					TmcleditEditPlugin.getPlugin().log("getSite() is null... ignoring name error.");
+					return;
+				}
 				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
 				
 				nameText.setText(getCastedModel().getName());
