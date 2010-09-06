@@ -20,7 +20,13 @@
             id="de.topicmapslab.onotoa.aranuka.codegen.generateattribute"
             internal="false"
             name="de.topicmapslab.aranuka.generateattribute"
-            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.Validator">
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.GenerateAttributeValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.aranuka.name"
+            internal="false"
+            name="de.topicmapslab.aranuka.name"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.NameValidator">
       </annotationprovider>
    </extension>
 

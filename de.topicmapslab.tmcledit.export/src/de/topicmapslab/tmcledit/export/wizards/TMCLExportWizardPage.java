@@ -111,7 +111,7 @@ public class TMCLExportWizardPage extends WizardPage {
 	    browseButton.setText("...");
 	    
 	    exportAnnotationButton = new Button(comp, SWT.CHECK);
-	    exportAnnotationButton.setEnabled(true);
+	    exportAnnotationButton.setSelection(true);
 	    exportAnnotationButton.setText("Export Annotations");
 	    fac.applyTo(exportAnnotationButton);
 	    
