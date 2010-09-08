@@ -21,7 +21,6 @@ import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
-import de.topicmapslab.onotoa.search.searchImpl.NonSubjectIdentifierTopicSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
