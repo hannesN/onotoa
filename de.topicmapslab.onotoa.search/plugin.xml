@@ -4,9 +4,19 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.GeneralSearchUseCommandHandler"
-            id="de.topicmapslab.onotoa.search.use"
-            name="Find Usage">
+            defaultHandler="de.topicmapslab.onotoa.search.commands.TopicTypeSearchHandler"
+            id="de.topicmapslab.onotoa.search.commands.SearchTopicType"
+            name="Search Topic Type">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.NeverUsedTopicsSearchHandler"
+            id="de.topicmapslab.onotoa.search.commands.NeverUsedTopics"
+            name="List never used Topics">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifierSearchHandler"
+            id="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifier"
+            name="List Topics without Identifier">
       </command>
       <command
             defaultHandler="de.topicmapslab.onotoa.search.commands.KuriaListSubjectIdentifierHandler"
@@ -14,14 +24,9 @@
             name="List All Subject Identifiers">
       </command>
       <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.KuriaListNonSubjectIdentifierTopicsHandler"
-            id="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
-            name="No Identifier Topics">
-      </command>
-      <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.TopicTypeSearchHandler"
-            id="de.topicmapslab.onotoa.search.searchTopicType"
-            name="Search Topic Type">
+            defaultHandler="de.topicmapslab.onotoa.search.commands.GeneralSearchUseCommandHandler"
+            id="de.topicmapslab.onotoa.search.use"
+            name="Find Usage">
       </command>
    </extension>
    <extension
@@ -32,9 +37,18 @@
                id="search"
                label="&amp;Search">
             <command
-                  commandId="de.topicmapslab.onotoa.search.use"
-                  id="use"
-                  label="Find &amp;Use"
+                  commandId="de.topicmapslab.onotoa.search.commands.SearchTopicType"
+                  label="Search &amp;Topic Type"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.NeverUsedTopics"
+                  label="List &amp;never used Topics"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifier"
+                  label="List Topics &amp;without Identifier"
                   style="push">
             </command>
             <command
@@ -43,13 +57,9 @@
                   style="push">
             </command>
             <command
-                  commandId="de.topicmapslab.onotoa.search.commands.ListNonSubjectIdentifierTopicsHandler"
-                  label="List Topics &amp;without Identifier"
-                  style="push">
-            </command>
-            <command
-                  commandId="de.topicmapslab.onotoa.search.searchTopicType"
-                  label="Search &amp;Topic Type"
+                  commandId="de.topicmapslab.onotoa.search.use"
+                  id="use"
+                  label="Find &amp;Use"
                   style="push">
             </command>
          </menu>
