@@ -10,7 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.searchImpl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import de.topicmapslab.onotoa.search.views.Container;
@@ -75,11 +77,16 @@ public class NeverUsedTopicsSearcher implements ISearchImpl {
 
 			// add used TopicTypes to exclude them from the later comparison
 			if (tt.getKind().getValue() == 0)
-				if (tt.getNameConstraints().size() != 0 || tt.getOccurrenceConstraints().size() != 0
-				        || tt.getIdentifiers().size() != 0 || tt.getLocators().size() != 0
-				        || tt.getItemIdentifierConstraints().size() != 0 || tt.getAko().size() != 0
-				        || tt.getIsa().size() != 0 || ModelIndexer.getTopicIndexer().getUsedAsIsa(tt).size() != 0
-				        || ModelIndexer.getTopicIndexer().getUsedAsAko(tt).size() != 0 || playerSet.contains(tt))
+				if (tt.getNameConstraints().size() != 0 
+						|| tt.getOccurrenceConstraints().size() != 0
+				        || tt.getIdentifiers().size() != 0 
+				        || tt.getLocators().size() != 0
+				        || tt.getItemIdentifierConstraints().size() != 0 
+				        || tt.getAko().size() != 0
+				        || tt.getIsa().size() != 0 
+				        || ModelIndexer.getTopicIndexer().getUsedAsIsa(tt).size() != 0
+				        || ModelIndexer.getTopicIndexer().getUsedAsAko(tt).size() != 0 
+				        || playerSet.contains(tt))
 					usedTypesSet.add(tt);
 		}
 
@@ -99,6 +106,20 @@ public class NeverUsedTopicsSearcher implements ISearchImpl {
 	 */
 	public Container getResult() {
 		return con;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	 */
+	public List<TopicType> getReslutList() {
+
+		List<TopicType> resultList = new ArrayList<TopicType>();
+		for (Object wrapper : con.getList())
+			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
+
+		return resultList;
 	}
 
 }
