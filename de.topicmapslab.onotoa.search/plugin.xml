@@ -9,11 +9,6 @@
             name="Search Topic Type">
       </command>
       <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.NeverUsedTopicsSearchHandler"
-            id="de.topicmapslab.onotoa.search.commands.NeverUsedTopics"
-            name="List never used Topics">
-      </command>
-      <command
             defaultHandler="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifierSearchHandler"
             id="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifier"
             name="List Topics without Identifier">
@@ -28,6 +23,11 @@
             id="de.topicmapslab.onotoa.search.use"
             name="Find Usage">
       </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.CleanSchemaHandler"
+            id="de.topicmapslab.onotoa.search.commands.CleanSchema"
+            name="Clean Schema">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -39,11 +39,6 @@
             <command
                   commandId="de.topicmapslab.onotoa.search.commands.SearchTopicType"
                   label="Search &amp;Topic Type"
-                  style="push">
-            </command>
-            <command
-                  commandId="de.topicmapslab.onotoa.search.commands.NeverUsedTopics"
-                  label="List &amp;never used Topics"
                   style="push">
             </command>
             <command
@@ -60,6 +55,11 @@
                   commandId="de.topicmapslab.onotoa.search.use"
                   id="use"
                   label="Find &amp;Use"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.CleanSchema"
+                  label="&amp;Clean Schema"
                   style="push">
             </command>
          </menu>
