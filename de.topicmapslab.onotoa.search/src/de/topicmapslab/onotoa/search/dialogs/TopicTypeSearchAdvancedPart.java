@@ -341,7 +341,7 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 
 		// occurrenceType filter
 		filterOccurrence = new Button(buttonBar, SWT.PUSH);
-		filterOccurrence.setToolTipText("Show only Occurrence TYpes");
+		filterOccurrence.setToolTipText("Show only Occurrence Types");
 		filterOccurrence.setImage(ImageProvider.getImage(ImageConstants.OCCURRENCETYPE));
 		filterOccurrence.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		filterOccurrence.setVisible(false);

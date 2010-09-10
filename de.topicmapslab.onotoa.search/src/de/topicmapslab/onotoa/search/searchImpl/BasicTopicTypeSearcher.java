@@ -500,4 +500,18 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		return con;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	 */
+	public List<TopicType> getReslutList() {
+
+		List<TopicType> resultList = new ArrayList<TopicType>();
+		for (Object wrapper : con.getList())
+			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
+
+		return resultList;
+	}
+
 }

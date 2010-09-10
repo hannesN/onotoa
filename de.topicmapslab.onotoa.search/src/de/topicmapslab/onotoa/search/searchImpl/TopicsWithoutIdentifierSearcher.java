@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.searchImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.topicmapslab.onotoa.search.views.Container;
@@ -61,6 +62,20 @@ public class TopicsWithoutIdentifierSearcher implements ISearchImpl {
 	 */
 	public Container getResult() {
 		return con;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	 */
+	public List<TopicType> getReslutList() {
+
+		List<TopicType> resultList = new ArrayList<TopicType>();
+		for (Object wrapper : con.getList())
+			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
+
+		return resultList;
 	}
 
 }

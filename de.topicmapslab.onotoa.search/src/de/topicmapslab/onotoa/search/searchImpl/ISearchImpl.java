@@ -10,7 +10,10 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.searchImpl;
 
+import java.util.List;
+
 import de.topicmapslab.onotoa.search.views.Container;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
  * Interface for all searcher classes. It provides a method that get the results
@@ -36,5 +39,13 @@ public interface ISearchImpl {
 	 */
 
 	public Container getResult();
+	
+	/**
+	 * get results as list
+	 * 
+	 * @return List with results
+ 	 */
+	
+	public List<TopicType> getReslutList();
 
 }
