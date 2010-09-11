@@ -1,5 +1,6 @@
 package de.topicmapslab.onotoa.search.views;
 
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -18,11 +19,15 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.contexts.NestableContextService;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
+import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.runtime.IBindingContainer;
+import de.topicmapslab.kuria.swtgenerator.IContextMenuListener;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
+import de.topicmapslab.kuria.swtgenerator.widgets.MasterDetailWidget;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
 import de.topicmapslab.onotoa.search.wrapper.SubjectIdentifierWrapper;
@@ -120,7 +125,8 @@ public class SearchView extends ViewPart {
 
 		WidgetGenerator gen = new WidgetGenerator(bc);
 		WidgetGenerator.addImageCallback(new ImageCallBack());
-		viewer = gen.generateTree(comp, false);
+		// viewer = gen.generateTree(comp, true);
+		viewer = gen.generateTree(comp, true, new ContextMenuListener());
 		viewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		viewer.setInput(container);
@@ -178,9 +184,8 @@ public class SearchView extends ViewPart {
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
-
-		Container con = new Container();
-		this.container = con;
+		// Container con = new Container("");
+		// this.container = con;
 
 	}
 
@@ -192,6 +197,23 @@ public class SearchView extends ViewPart {
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
+
+	}
+
+	private class ContextMenuListener implements IContextMenuListener {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * de.topicmapslab.kuria.swtgenerator.IContextMenuListener#createMenu
+		 * (org.eclipse.jface.action.IMenuManager)
+		 */
+		public void createMenu(IMenuManager arg0) {
+
+			//TODO: Create Menu
+
+		}
 
 	}
 

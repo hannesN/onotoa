@@ -47,7 +47,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 
 public class BasicTopicTypeSearcher implements ISearchImpl {
 
-	private String lowerCaseSearchString;
+	private String lowerCaseSearchString, containerLabel;
 	private final String searchString;
 	private final boolean isCaseSensitive;
 	private final boolean isExactMatch;
@@ -92,7 +92,11 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 		resultList = new ArrayList<TopicTypeWrapper>();
 		validateType = typeList.indexOf(searchData.getType());
 		lowerCaseSearchString = searchString.toLowerCase();
-		con = new Container();
+
+		containerLabel = "Search for \"" + searchData.getSearchString() + "\" " + " (Type: " + searchData.getType()
+		        + ")";
+		
+		con = new Container(containerLabel);
 
 	}
 

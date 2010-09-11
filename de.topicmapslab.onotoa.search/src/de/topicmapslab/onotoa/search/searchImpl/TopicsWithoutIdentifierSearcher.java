@@ -30,7 +30,7 @@ public class TopicsWithoutIdentifierSearcher implements ISearchImpl {
 	public TopicsWithoutIdentifierSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
-		con = new Container();
+		con = new Container("Topics without Identifier");
 
 	}
 
