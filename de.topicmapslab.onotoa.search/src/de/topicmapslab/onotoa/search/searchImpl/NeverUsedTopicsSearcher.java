@@ -38,7 +38,7 @@ public class NeverUsedTopicsSearcher implements ISearchImpl {
 	public NeverUsedTopicsSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
-		con = new Container();
+		con = new Container("Never used Types");
 
 	}
 

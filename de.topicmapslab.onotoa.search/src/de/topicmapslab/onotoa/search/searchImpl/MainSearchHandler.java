@@ -39,7 +39,7 @@ public class MainSearchHandler {
 
 	public MainSearchHandler(SearchData searchData, TopicMapSchema schema, IProgressMonitor progressMonitor) {
 
-		con = new Container();
+		//con = new Container("lala");
 
 		// detect the modus of the search by the according Boolean
 

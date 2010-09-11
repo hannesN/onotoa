@@ -27,7 +27,7 @@ public class SubjectIdentifierSearcher {
 	public SubjectIdentifierSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
-		con = new Container();
+		con = new Container("All Subject Identifiers");
 		createContainer();
 
 	}

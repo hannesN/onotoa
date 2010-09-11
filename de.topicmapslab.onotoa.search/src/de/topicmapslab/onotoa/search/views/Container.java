@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.annotation.tree.Children;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
 
@@ -25,6 +26,12 @@ import de.topicmapslab.kuria.annotation.tree.TreeNode;
 @TreeNode
 public class Container {
 
+	private final String label;
+
+	public Container(String label) {
+		this.label = label;
+	}
+
 	@Children
 	private List<Object> list = new ArrayList<Object>();
 
@@ -33,7 +40,7 @@ public class Container {
 	 * 
 	 * @return the list
 	 */
-	
+
 	public List<Object> getList() {
 		if (this.list == null)
 			return Collections.emptyList();
@@ -46,9 +53,14 @@ public class Container {
 	 * @param list
 	 *            the list to set
 	 */
-	
+
 	public void setList(List<Object> list) {
 		this.list = list;
+	}
+
+	@Text
+	public String getLabel() {
+		return this.label;
 	}
 
 }
