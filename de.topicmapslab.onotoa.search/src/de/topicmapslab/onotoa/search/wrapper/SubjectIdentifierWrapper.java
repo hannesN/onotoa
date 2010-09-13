@@ -10,22 +10,15 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.wrapper;
 
-import java.util.Collections;
-import java.util.List;
-
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
-import de.topicmapslab.onotoa.search.views.SearchView;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.views.ModelView;
-import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
 
 /**
  * Wrapper class for the SubjectIdentifier of an TopicType
@@ -33,10 +26,10 @@ import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
  * @author Sebastian Lippert
  */
 
-@TreeNode
-public class SubjectIdentifierWrapper extends TopicTypeWrapper {
+@TreeNode(imageMethod = "getImagePath")
+public class SubjectIdentifierWrapper implements Comparable<SubjectIdentifierWrapper>, IDoubleClickHandler {
 
-	private TopicType topic;
+	private TopicType topicType;
 	private String identifier;
 
 	/**
@@ -50,9 +43,7 @@ public class SubjectIdentifierWrapper extends TopicTypeWrapper {
 
 	public SubjectIdentifierWrapper(TopicType topicType, String identifier) {
 
-		super(topicType);
-
-		this.topic = topicType;
+		this.topicType = topicType;
 		this.identifier = identifier;
 
 	}
@@ -85,29 +76,65 @@ public class SubjectIdentifierWrapper extends TopicTypeWrapper {
 
 	}
 
+	public String getImagePath() {
+		return ImageConstants.SUBJECTIDENTIFIERCONSTRAINT;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * de.topicmapslab.onotoa.search.wrapper.DoubleClickAction#doubleClickHappend
+	 * org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener
+	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	 */
+	public ISelection getSelection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.viewers.ISelectionProvider#removeSelectionChangedListener
+	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse
+	 * .jface.viewers.ISelection)
+	 */
+	public void setSelection(ISelection selection) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler#doubleClickHappend
 	 * ()
 	 */
 	public void doubleClickHappend() {
-
-		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		ModelView view = ModelView.getInstance();
-		if (view == null)
-			return;
-
-		view.setSelection(new StructuredSelection(topic));
-		try {
-			activePage.showView(PropertyDetailView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
-		} catch (PartInitException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(topicType), this);
 	}
 
 }
