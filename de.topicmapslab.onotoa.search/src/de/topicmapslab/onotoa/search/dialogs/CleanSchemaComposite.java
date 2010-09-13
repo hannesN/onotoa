@@ -81,8 +81,8 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		comp.setLayout(new GridLayout());
 
-//		gridData = new GridData(GridData.FILL_BOTH);
-//		gridData.horizontalSpan = 2;
+		// gridData = new GridData(GridData.FILL_BOTH);
+		// gridData.horizontalSpan = 2;
 
 		// Group that contains all elements
 		group = new Group(comp, SWT.SHADOW_OUT);
@@ -126,8 +126,8 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 			}
 		});
 
-//		gridData = new GridData(GridData.FILL_HORIZONTAL);
-//		gridData.horizontalAlignment = SWT.CENTER;
+		// gridData = new GridData(GridData.FILL_HORIZONTAL);
+		// gridData.horizontalAlignment = SWT.CENTER;
 
 		// dummy button for layout purposes
 		dummyButton = new Button(group, SWT.PUSH);
@@ -136,7 +136,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 		dummyButton.setVisible(false);
 
 		gridData = new GridData(GridData.FILL_BOTH);
-//		gridData.widthHint = 200;
+		// gridData.widthHint = 200;
 
 		// left table with unused TopicTypes from the schema
 		unusedTopicsTable = new TableViewer(group, SWT.BORDER | SWT.V_SCROLL);
@@ -161,11 +161,6 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 			@Override
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
-
-				// "real" TopicTypes aren't used as constraints, so they aren't
-				// displayed
-				if (((TopicType) element).getKind().getValue() == KindOfTopicType.TOPIC_TYPE_VALUE)
-					return false;
 
 				// filter by type
 				if (isTypeFiltered)
@@ -236,7 +231,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 				clearSelection();
 			}
 		});
-		
+
 		// button activates filtering available topics by their types
 		typeFilterButton = new Button(buttonBar, SWT.Activate);
 		typeFilterButton.setText("Filter >>");
@@ -336,7 +331,27 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 			// get image according to TopicType kind
 			if (element instanceof TopicType)
-				return ImageProvider.getTopicTypeImage((TopicType) element);
+
+				// black/white icons for deleted icons
+				if (selectedList.contains(element)) {
+					switch (((TopicType) element).getKind().getValue()) {
+
+					case 0:
+						return ImageProvider.getImage(ImageConstants.TOPICTYPE_BW);
+					case 1:
+						return ImageProvider.getImage(ImageConstants.OCCURRENCETYPE_BW);
+					case 2:
+						return ImageProvider.getImage(ImageConstants.NAMETYPE_BW);
+					case 3:
+						return ImageProvider.getImage(ImageConstants.ROLETYPE_BW);
+					case 4:
+						return ImageProvider.getImage(ImageConstants.ASSOCIATIONTYPE_BW);
+					default:
+						return ImageProvider.getImage(ImageConstants.TOPIC_BW);
+
+					}
+				} else
+					return ImageProvider.getTopicTypeImage((TopicType) element);
 
 			return null;
 
