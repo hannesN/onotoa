@@ -10,17 +10,21 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.commands;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import de.topicmapslab.onotoa.action.NewSubjectIdentifierAction;
+import de.topicmapslab.onotoa.action.NewSubjectLocatorAction;
 import de.topicmapslab.onotoa.search.searchImpl.TopicsWithoutIdentifierSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -59,6 +63,10 @@ public class TopicsWithoutIdentifierSearchHandler extends AbstractHandler {
 			else
 				activePage.activate(searchView);
 
+			List<Action> actionList = new ArrayList<Action>();
+			actionList.add(new NewSubjectIdentifierAction("Add Subject Identifier..", searchView.getTreeViewer()));
+			actionList.add(new NewSubjectLocatorAction("Add Subject Locator..", searchView.getTreeViewer()));
+			searchView.addContextMenu(actionList);
 			searchView.setContent(searcher.getResult());
 
 		} catch (PartInitException e) {
