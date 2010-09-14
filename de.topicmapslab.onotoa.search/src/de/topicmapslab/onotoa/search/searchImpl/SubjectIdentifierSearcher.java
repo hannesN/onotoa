@@ -10,8 +10,11 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.searchImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.topicmapslab.onotoa.search.views.Container;
-import de.topicmapslab.onotoa.search.wrapper.SubjectIdentifierWrapper;
+import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -23,24 +26,31 @@ public class SubjectIdentifierSearcher {
 
 	private TopicMapSchema schema;
 	private Container con;
+	private List<String> identifierList;
 
 	public SubjectIdentifierSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
 		con = new Container("All Subject Identifiers");
+		identifierList = new ArrayList<String>();
 		createContainer();
 
 	}
 
 	private void createContainer() {
 
-		for (TopicType type : schema.getTopicTypes())
-			for (String identifier : type.getIdentifiers())
-				con.getList().add(
-						new SubjectIdentifierWrapper(type, identifier));
-
+		for (TopicType type : schema.getTopicTypes()) {
+			for (String identifier : type.getIdentifiers()) {
+				identifierList.add(identifier);
+				con.getList().add(new IdentifierWrapper(type, identifier, IdentifierWrapper.SUBJECTIDENTIFIER));
+			}
+		}
 	}
 
+	public List<String> getIdentifierList(){
+		return identifierList;
+	}
+	
 	public Container getContainer() {
 		return this.con;
 	}
