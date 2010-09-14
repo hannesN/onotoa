@@ -14,9 +14,14 @@
             name="List Topics without Identifier">
       </command>
       <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.KuriaListSubjectIdentifierHandler"
+            defaultHandler="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
             id="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
             name="List All Subject Identifiers">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.ListSubjectLocatorHandler"
+            id="de.topicmapslab.onotoa.search.commands.ListSubjectLocatorHandler"
+            name="List All Subject Locators">
       </command>
       <command
             defaultHandler="de.topicmapslab.onotoa.search.commands.GeneralSearchUseCommandHandler"
@@ -49,6 +54,11 @@
             <command
                   commandId="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
                   label="List All Subject &amp;Identifiers"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.ListSubjectLocatorHandler"
+                  label="List All Subject &amp;Locators"
                   style="push">
             </command>
             <command
