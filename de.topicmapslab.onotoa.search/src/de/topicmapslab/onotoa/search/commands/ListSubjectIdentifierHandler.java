@@ -10,41 +10,61 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.commands;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
-import de.topicmapslab.onotoa.search.dialogs.SubjectIdentifierDialog;
-import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.onotoa.search.searchImpl.SubjectIdentifierSearcher;
+import de.topicmapslab.onotoa.search.views.*;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
- * @author niederhausen
- *
+ * @author sip
+ * 
  */
 public class ListSubjectIdentifierHandler extends AbstractHandler {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
-	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
-		List<String> result = new ArrayList<String>();
-		for (TopicType tt : ModelIndexer.getTopicIndexer().getTopicTypes()) {
-			result.addAll(tt.getIdentifiers());
+
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+		ModelView view = (ModelView) activePage.findView(ModelView.ID);
+
+		if (view == null)
+			return null;
+
+		if (view.getCurrentTopicMapSchema() == null)
+			return null;
+
+		TopicMapSchema schema = view.getCurrentTopicMapSchema();
+		SubjectIdentifierSearcher siSearcher = new SubjectIdentifierSearcher(
+				schema);
+		Collections.sort((List<? extends Comparable>) siSearcher.getContainer()
+				.getList());
+
+		try {
+
+			SearchView search = (SearchView) activePage.findView(SearchView.ID);
+			if (search == null)
+				search = (SearchView) activePage.showView(SearchView.ID);
+			else
+				activePage.activate(search);
+
+			search.setContent(siSearcher.getContainer());
+
+		} catch (PartInitException e) {
+			throw new RuntimeException(e);
 		}
-		
-		Shell shell = HandlerUtil.getActiveShell(event);
-		SubjectIdentifierDialog dlg = new SubjectIdentifierDialog(shell, result);
-		
-		dlg.open();
-		
+
 		return null;
 	}
-
 }
