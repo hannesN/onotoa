@@ -12,12 +12,12 @@ import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
  * @author Hannes Niederhausen
  *
  */
-public class GenerateAttributeValidator implements IAnnotationValidator {
+public class BooleanValidator implements IAnnotationValidator {
 
 	/**
 	 * 
 	 */
-	public GenerateAttributeValidator() {
+	public BooleanValidator() {
 	}
 
 	@Override
@@ -27,9 +27,7 @@ public class GenerateAttributeValidator implements IAnnotationValidator {
 
 	@Override
 	public boolean isValid(Object obj) {
-		if (obj instanceof Boolean)
-			return true;
-		return false;
+		return (obj instanceof Boolean);
 	}
 
 }

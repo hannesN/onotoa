@@ -15,18 +15,64 @@
       </wizard>
    </extension>
    <extension
+         name="Aranuka Annotation Extensions"
          point="de.topicmapslab.tmcledit.edit.annotationprovider">
       <annotationprovider
             id="de.topicmapslab.onotoa.aranuka.codegen.generateattribute"
             internal="false"
             name="de.topicmapslab.aranuka.generateattribute"
-            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.GenerateAttributeValidator">
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
       </annotationprovider>
       <annotationprovider
             id="de.topicmapslab.aranuka.name"
             internal="false"
             name="de.topicmapslab.aranuka.name"
-            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.NameValidator">
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.StringValidator">
+      </annotationprovider>
+   </extension>
+   <extension
+         name="Genny Annotation Extensions"
+         point="de.topicmapslab.tmcledit.edit.annotationprovider">
+      <annotationprovider
+            id="de.topicmapslab.onotoa.genny.codegen.autogenerate"
+            internal="false"
+            name="de.topicmapslab.genny.autogenerate"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.genny.codegen.category"
+            internal="false"
+            name="de.topicmapslab.genny.category"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.StringValidator">
+      </annotationprovider>
+   </extension>
+   <extension
+         name="Kuria Annotation Extensions"
+         point="de.topicmapslab.tmcledit.edit.annotationprovider">
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.hidden"
+            internal="false"
+            name="de.topicmapslab.kuria.hidden"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.text"
+            internal="false"
+            name="de.topicmapslab.kuria.text"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.liststyle"
+            internal="false"
+            name="de.topicmapslab.kuria.liststyle"
+            proposalprovider="de.topicmapslab.onotoa.aranuka.codegen.annotation.ListStyleProvider"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.StringValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.rows"
+            internal="false"
+            name="de.topicmapslab.kuria.rows"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.RowsValidator">
       </annotationprovider>
    </extension>
 
