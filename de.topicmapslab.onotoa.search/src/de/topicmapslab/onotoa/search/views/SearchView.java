@@ -1,5 +1,11 @@
 package de.topicmapslab.onotoa.search.views;
 
+import java.util.List;
+
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -8,6 +14,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
@@ -17,7 +24,7 @@ import de.topicmapslab.kuria.runtime.IBindingContainer;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
-import de.topicmapslab.onotoa.search.wrapper.SubjectIdentifierWrapper;
+import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 
 /**
@@ -44,11 +51,12 @@ public class SearchView extends ViewPart {
 	private Container container;
 	private TreeViewer viewer;
 
+	// private IContextMenuListener contextMenu;
+
 	/**
 	 * The constructor.
 	 */
 	public SearchView() {
-
 	}
 
 	/**
@@ -62,7 +70,7 @@ public class SearchView extends ViewPart {
 		comp.setLayout(new GridLayout());
 
 		AnnotationBindingFactory fac = new AnnotationBindingFactory();
-		fac.addClass(SubjectIdentifierWrapper.class);
+		fac.addClass(IdentifierWrapper.class);
 		fac.addClass(TopicTypeWrapper.class);
 		fac.addClass(Container.class);
 		IBindingContainer bc = fac.getBindingContainer();
@@ -90,6 +98,24 @@ public class SearchView extends ViewPart {
 
 	}
 
+	public void addContextMenu(final List<Action> actionList) {
+
+		MenuManager menuMgr = new MenuManager("#PopupMenu");
+		menuMgr.setRemoveAllWhenShown(true);
+		menuMgr.addMenuListener(new IMenuListener() {
+			public void menuAboutToShow(IMenuManager manager) {
+				for (Action a : actionList) {
+					manager.add(a);
+				}
+			}
+		});
+
+		Menu menu = menuMgr.createContextMenu(viewer.getControl());
+		viewer.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuMgr, viewer);
+
+	}
+
 	public void setContent(Container container) {
 		this.container = container;
 		viewer.setInput(container);
@@ -108,6 +134,10 @@ public class SearchView extends ViewPart {
 	@Override
 	public void setFocus() {
 		// Not in use
+	}
+
+	public TreeViewer getTreeViewer() {
+		return viewer;
 	}
 
 }
