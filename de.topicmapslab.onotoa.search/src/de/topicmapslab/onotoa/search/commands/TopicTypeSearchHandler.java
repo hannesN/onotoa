@@ -69,7 +69,6 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 				return null;
 
 			// TODO Hannes: Real monitor
-		//	System.out.println(dialog.getSearchDataObject().toString());
 			MainSearchHandler handler = new MainSearchHandler(dialog.getSearchData(), schema,
 			        new NullProgressMonitor());
 
@@ -87,6 +86,7 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 
 				// set results as content for the view
 				searchView.setContent(handler.getResultContainer());
+				searchView.removeContextMenu();
 
 			} catch (PartInitException e) {
 				throw new RuntimeException(e);

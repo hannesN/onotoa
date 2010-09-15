@@ -50,6 +50,7 @@ public class SearchView extends ViewPart {
 	public static final String ID = "de.topicmapslab.onotoa.search.views.SearchView";
 	private Container container;
 	private TreeViewer viewer;
+	private MenuManager menuMgr;
 
 	// private IContextMenuListener contextMenu;
 
@@ -98,7 +99,7 @@ public class SearchView extends ViewPart {
 
 	public void addContextMenu(final List<Action> actionList) {
 
-		MenuManager menuMgr = new MenuManager("#PopupMenu");
+		menuMgr = new MenuManager("PopupMenu");
 		menuMgr.setRemoveAllWhenShown(true);
 		menuMgr.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
@@ -112,6 +113,10 @@ public class SearchView extends ViewPart {
 		viewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(menuMgr, viewer);
 
+	}
+
+	public void removeContextMenu() {
+		viewer.getControl().setMenu(null);
 	}
 
 	public void setContent(Container container) {
