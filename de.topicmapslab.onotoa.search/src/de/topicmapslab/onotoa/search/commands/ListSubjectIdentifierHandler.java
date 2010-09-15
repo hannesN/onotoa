@@ -53,13 +53,14 @@ public class ListSubjectIdentifierHandler extends AbstractHandler {
 
 		try {
 
-			SearchView search = (SearchView) activePage.findView(SearchView.ID);
-			if (search == null)
-				search = (SearchView) activePage.showView(SearchView.ID);
+			SearchView searchView = (SearchView) activePage.findView(SearchView.ID);
+			if (searchView == null)
+				searchView = (SearchView) activePage.showView(SearchView.ID);
 			else
-				activePage.activate(search);
+				activePage.activate(searchView);
 
-			search.setContent(siSearcher.getContainer());
+			searchView.setContent(siSearcher.getContainer());
+			searchView.removeContextMenu();
 
 		} catch (PartInitException e) {
 			throw new RuntimeException(e);
