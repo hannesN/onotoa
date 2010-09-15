@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -48,6 +49,9 @@ public class TopicsWithoutIdentifierSearchHandler extends AbstractHandler {
 		if (view.getCurrentTopicMapSchema() == null)
 			return null;
 
+		CommandStack commandStack = view.getEditingDomain().getCommandStack();
+		
+		
 		TopicMapSchema schema = view.getCurrentTopicMapSchema();
 		TopicsWithoutIdentifierSearcher searcher = new TopicsWithoutIdentifierSearcher(schema);
 
@@ -64,8 +68,8 @@ public class TopicsWithoutIdentifierSearchHandler extends AbstractHandler {
 				activePage.activate(searchView);
 
 			List<Action> actionList = new ArrayList<Action>();
-			actionList.add(new NewSubjectIdentifierAction("Add Subject Identifier..", searchView.getTreeViewer()));
-			actionList.add(new NewSubjectLocatorAction("Add Subject Locator..", searchView.getTreeViewer()));
+			actionList.add(new NewSubjectIdentifierAction(commandStack, "Add Subject Identifier..", searchView.getTreeViewer()));
+			actionList.add(new NewSubjectLocatorAction(commandStack, "Add Subject Locator..", searchView.getTreeViewer()));
 			searchView.addContextMenu(actionList);
 			searchView.setContent(searcher.getResult());
 
