@@ -79,9 +79,7 @@ public class SearchView extends ViewPart {
 		WidgetGenerator.addImageCallback(new ImageCallBack());
 		viewer = gen.generateTree(comp, true);
 		viewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
-
 		viewer.setInput(container);
-		viewer.expandAll();
 
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
@@ -119,6 +117,7 @@ public class SearchView extends ViewPart {
 	public void setContent(Container container) {
 		this.container = container;
 		viewer.setInput(container);
+		viewer.expandAll();
 	}
 
 	@Override
