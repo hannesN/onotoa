@@ -18,8 +18,9 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
 
 import de.topicmapslab.onotoa.search.searchImpl.SubjectIdentifierSearcher;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
@@ -28,20 +29,29 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 
 /**
- * @author sip
+ * 
+ * Action that adds SubjectIdentifier to selected TopicType of Viewer
+ * 
+ * @author Sebastian Lippert
  * 
  */
+
 public class NewSubjectIdentifierAction extends Action {
 
-	private TreeViewer viewer;
+	private Viewer viewer;
 	private TopicType topicType;
 	private CommandStack commandStack;
 
 	/**
-	 * @param string
+	 * @param comandStack
+	 *            CommandStack
+	 * @param label
+	 *            Text for the action
 	 * @param viewer
+	 *            Viewer of the ContextMenu with this action
 	 */
-	public NewSubjectIdentifierAction(CommandStack commandStack ,String label, TreeViewer viewer) {
+	
+	public NewSubjectIdentifierAction(CommandStack commandStack, String label, Viewer viewer) {
 
 		super(label, Action.AS_PUSH_BUTTON);
 		this.viewer = viewer;
@@ -52,18 +62,28 @@ public class NewSubjectIdentifierAction extends Action {
 	@Override
 	public void run() {
 
+		// get selection (Topic Type)
 		IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
 		topicType = ((TopicTypeWrapper) sel.getFirstElement()).getTopicType();
 
+		// call InputDialog
 		InputDialog dlg = new InputDialog(viewer.getControl().getShell(), "New..",
 		        "Please enter the new subject identifier.", "", new IInputValidator() {
 
 			        public String isValid(String newText) {
 
+				        // check if input is valid
 				        SubjectIdentifierSearcher searcher = new SubjectIdentifierSearcher(
 				                (TopicMapSchema) topicType.eContainer());
+
+				        // unique test
 				        if (searcher.getIdentifierList().contains(newText))
 					        return "This Subject Identifier is already in use!";
+
+				        // empty test
+				        if (newText.equals(""))
+					        return "";
+
 				        return null;
 			        }
 
@@ -75,7 +95,13 @@ public class NewSubjectIdentifierAction extends Action {
 			List<String> list = new ArrayList<String>();
 			list.add(result);
 			SetTopicTypeIdentifiersCommand command = new SetTopicTypeIdentifiersCommand(list, topicType);
+			
+			// CommandStack execution to enable undo/redo operation
 			commandStack.execute(command);
+
+			// fire event for listeners for eventually reactions
+			if (getListeners().length != 0)
+				firePropertyChange(new PropertyChangeEvent(this, IContextMenuAction.ADD_SUBJECTIDENTIFIER, "", result));
 
 		}
 
