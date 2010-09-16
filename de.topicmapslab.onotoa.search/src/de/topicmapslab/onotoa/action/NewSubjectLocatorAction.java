@@ -18,8 +18,9 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
 
 import de.topicmapslab.onotoa.search.searchImpl.SubjectLocatorSearcher;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
@@ -28,20 +29,29 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
 
 /**
- * @author sip
+ * 
+ * Action that adds SubjectLocator to selected TopicType of Viewer
+ * 
+ * @author Sebastian Lippert
  * 
  */
+
 public class NewSubjectLocatorAction extends Action {
 
-	private TreeViewer viewer;
+	private Viewer viewer;
 	private TopicType topicType;
 	private CommandStack commandStack;
 
 	/**
-	 * @param string
+	 * @param comandStack
+	 *            CommandStack
+	 * @param label
+	 *            Text for the action
 	 * @param viewer
+	 *            Viewer of the ContextMenu with this action
 	 */
-	public NewSubjectLocatorAction(CommandStack commandStack,String label, TreeViewer viewer) {
+	
+	public NewSubjectLocatorAction(CommandStack commandStack, String label, Viewer viewer) {
 
 		super(label, Action.AS_PUSH_BUTTON);
 		this.viewer = viewer;
@@ -52,18 +62,29 @@ public class NewSubjectLocatorAction extends Action {
 	@Override
 	public void run() {
 
+		// get selection (Topic Type)
 		IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
 		topicType = ((TopicTypeWrapper) sel.getFirstElement()).getTopicType();
 
+		// call InputDialog
 		InputDialog dlg = new InputDialog(viewer.getControl().getShell(), "New..",
 		        "Please enter the new subject locator.", "", new IInputValidator() {
 
 			        public String isValid(String newText) {
 
+			        	 // check if input is valid
 				        SubjectLocatorSearcher searcher = new SubjectLocatorSearcher(
 				                (TopicMapSchema) topicType.eContainer());
+				      
+				        // unique test
 				        if (searcher.getLocatorList().contains(newText))
 					        return "This Subject Locator is already in use!";
+
+				        // empty test
+
+				        if (newText.equals(""))
+					        return "";
+
 				        return null;
 			        }
 
@@ -75,7 +96,13 @@ public class NewSubjectLocatorAction extends Action {
 			List<String> list = new ArrayList<String>();
 			list.add(result);
 			SetTopicTypeLocatorsCommand command = new SetTopicTypeLocatorsCommand(list, topicType);
+		
+			// CommandStack execution to enable undo/redo operation
 			commandStack.execute(command);
+
+			// fire event for listeners for eventually reactions
+			if (getListeners().length != 0)
+				firePropertyChange(new PropertyChangeEvent(this, IContextMenuAction.ADD_SUBJECTLOCATOR, "", result));
 
 		}
 
