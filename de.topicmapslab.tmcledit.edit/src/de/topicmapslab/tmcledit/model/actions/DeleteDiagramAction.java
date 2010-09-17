@@ -28,6 +28,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import de.topicmapslab.tmcledit.model.Diagram;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.DeleteDiagramCommand;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
@@ -44,7 +45,7 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 		setText("Delete");
 		this.modelView = modelView;
 		diagrams = new ArrayList<Diagram>();
-		modelView.addSelectionChangedListener(this);
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
 		setDiagram(null);
 	}
 

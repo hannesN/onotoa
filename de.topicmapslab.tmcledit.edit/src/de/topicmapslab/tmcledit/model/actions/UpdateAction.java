@@ -12,8 +12,18 @@ package de.topicmapslab.tmcledit.model.actions;
 
 import org.eclipse.jface.action.IAction;
 
-public interface UpdateAction extends IAction{
+/**
+ * Action which state update can be triggered.
+ * 
+ * @author Hannes Niederhausen
+ * 
+ */
+public interface UpdateAction extends IAction {
 
+	/**
+	 * Triggers an update. Mostly the update checks if the action should be
+	 * enabled or disabled and sets the state.
+	 */
 	public void update();
-	
+
 }
