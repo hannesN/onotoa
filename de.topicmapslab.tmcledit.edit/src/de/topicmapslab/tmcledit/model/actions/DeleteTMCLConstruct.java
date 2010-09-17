@@ -35,6 +35,7 @@ import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.DeleteAssociationConstraintCommand;
@@ -55,7 +56,7 @@ public class DeleteTMCLConstruct extends Action implements ISelectionChangedList
 
 	public DeleteTMCLConstruct(ModelView modelView) {
 		this.modelView = modelView;
-		this.modelView.addSelectionChangedListener(this);
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
 		setText("Delete...");
 	}
 

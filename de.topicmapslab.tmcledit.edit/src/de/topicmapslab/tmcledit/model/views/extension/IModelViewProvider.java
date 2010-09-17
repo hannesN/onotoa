@@ -35,7 +35,7 @@ public interface IModelViewProvider {
 	
 	public IModelExtension deserialize(String model);
 		
-	public String getAnnotationKey(IModelExtension modelExtension);
+//	public String getAnnotationKey(IModelExtension modelExtension);
 	
 	/**
 	 * Returns the nodes for the given parent node which are added by the implementing extension.

@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
@@ -32,7 +33,7 @@ public abstract class AbstractCreateConstraintAction extends Action implements I
 
 	public AbstractCreateConstraintAction(ModelView view) {
 		this.view = view;
-		view.addSelectionChangedListener(this);
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
 	}
 
 	public void setTopicType(TopicType topicType) {

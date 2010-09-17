@@ -153,7 +153,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	/* flag witch indicates if the view should have the global selection, or not */
 	private boolean syncView = false;
 
-	private List<ISelectionChangedListener> listeners = Collections.emptyList();
+	private List<ISelectionChangedListener> selectionListeners;
 	private ISelection currentSelection;
 
 	// private Map<String, IAction> actionRegistry;
@@ -240,6 +240,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				}
 
 				IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+				
+				// notify all selectionListeners in this 
+				fireSelectionChanged(sel);
+				// getting element for selection service
+				
 				if (sel.isEmpty()) {
 					currentSelection = new StructuredSelection(currFile);
 					createTopicAction.setEnabled(false);
@@ -270,8 +275,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					}
 					currentSelection = new StructuredSelection(list);
 				}
-				fireSelectionChanged();
-
+				TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(currentSelection, ModelView.this);
 			}
 
 		});
@@ -392,10 +396,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return getEditingDomain().getCommandStack();
 	}
 
+	private List<ISelectionChangedListener> getSelectionListeners() {
+		if (selectionListeners == null)
+			return Collections.emptyList();
+		return selectionListeners;
+    }
+	
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		if (listeners == Collections.EMPTY_LIST)
-			listeners = new ArrayList<ISelectionChangedListener>();
-		listeners.add(listener);
+		if (selectionListeners == null)
+			selectionListeners = new ArrayList<ISelectionChangedListener>();
+		selectionListeners.add(listener);
 	}
 
 	public ISelection getSelection() {
@@ -414,9 +424,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	}
 
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
-		if (listeners == Collections.EMPTY_LIST)
-			listeners = new ArrayList<ISelectionChangedListener>();
-		listeners.remove(listener);
+		if (selectionListeners != null)
+			selectionListeners.remove(listener);
 	}
 
 	public void setSelection(ISelection selection) {
@@ -435,11 +444,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 					if (n!=null)
 						nodes.add(n);
 				}
-				viewer.setSelection(new StructuredSelection(nodes));				
+				StructuredSelection nodeSel = new StructuredSelection(nodes);
+				viewer.setSelection(nodeSel);
+				fireSelectionChanged(nodeSel);
 			}
 		}
 		currentSelection = selection;
-		fireSelectionChanged();
+		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(currentSelection, ModelView.this);
 	}
 
 	public void setFilename(String filename, boolean newFile) {
@@ -798,13 +809,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     	});
     }
 
-	private void fireSelectionChanged() {
-    	SelectionChangedEvent e = new SelectionChangedEvent(this, currentSelection);
-    	for (ISelectionChangedListener l : listeners) {
+	/**
+	 * Notifies the selection service that a viewer has a new selection
+	 */
+	private void fireSelectionChanged(ISelection selection) {
+    	SelectionChangedEvent e = new SelectionChangedEvent(this, selection);
+    	for (ISelectionChangedListener l : getSelectionListeners()) {
     		l.selectionChanged(e);
     	}
-    	TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(currentSelection, this);
     }
+	
 
 	private void updateModelViewActions() {
     	// the actions aren't initialized therefore we return
