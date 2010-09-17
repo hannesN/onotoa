@@ -11,28 +11,28 @@
 package de.topicmapslab.tmcledit.model.annotationprovider;
 
 /**
- * A validator which uses String as type and every String is valid, but <code>null</code>.
+ * A validator which uses String as type and every String is valid, but
+ * <code>null</code>.
  * 
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class StringAnnotationValidator implements IAnnotationValidator {
 
-	
 	public Class<?> getType() {
 		return String.class;
 	}
 
 	/**
-	 * Only checks if obj is null and if not is instance of String.
-	 * @param obj the obj to check
-	 * @return <code>true</code> if obj is not <code>null</code> 
+	 * Only checks if obj is null and has a length greater than 0.
+	 * 
+	 * @param obj
+	 *            the obj to check
+	 * @return <code>true</code> if obj is not <code>null</code>
 	 */
-	public boolean isValid(Object obj) {
-		if (obj==null)
-			return false;
-		
-		return obj instanceof String;
+	public boolean isValid(String obj) {
+
+		return (obj != null) && obj.length() > 0;
 	}
 
 }

@@ -159,6 +159,8 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 			schemaNode = new TreeObject(this.modelView, "Topic Map Schema", TreeObject.TOPIC_MAP_SCHEMA);
 
 			schemaNode.setModel(currentFile.getTopicMapSchema());
+			getExtensionChildren(schemaNode);
+			
 			diagramNode = new TreeObject(this.modelView, "Diagrams", TreeObject.DIAGRAMS);
 
 			invisibleRoot.addChild(diagramNode);
@@ -184,7 +186,9 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 			}
 
 			for (Diagram d : currentFile.getDiagrams()) {
-				diagramNode.addChild(new TreeDiagram(this.modelView, d));
+				TreeDiagram dn = new TreeDiagram(this.modelView, d);
+				diagramNode.addChild(dn);
+				getExtensionChildren(dn);
 			}
 
 			for (AssociationTypeConstraint ac : currentFile.getTopicMapSchema().getAssociationTypeConstraints()) {
@@ -266,13 +270,19 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 				getExtensionChildren(tocc);
 			}
 			for (ItemIdentifierConstraint iic : tt.getItemIdentifierConstraints()) {
-				to.addChild(new TreeItemIdentifier(this.modelView, iic));
+				TreeItemIdentifier iin = new TreeItemIdentifier(this.modelView, iic);
+				to.addChild(iin);
+				getExtensionChildren(iin);
 			}
 			for (SubjectIdentifierConstraint sic : tt.getSubjectIdentifierConstraints()) {
-				to.addChild(new TreeSubjectIdentifier(this.modelView, sic));
+				TreeSubjectIdentifier sin = new TreeSubjectIdentifier(this.modelView, sic);
+				to.addChild(sin);
+				getExtensionChildren(sin);
 			}
 			for (SubjectLocatorConstraint slc : tt.getSubjectLocatorConstraints()) {
-				to.addChild(new TreeSubjectLocator(this.modelView, slc));
+				TreeSubjectLocator sln = new TreeSubjectLocator(this.modelView, slc);
+				to.addChild(sln);
+				getExtensionChildren(sln);
 			}
 			
 			getExtensionChildren(to);

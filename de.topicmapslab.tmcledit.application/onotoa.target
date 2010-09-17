@@ -6,7 +6,7 @@
 <location path="${eclipse_home}/dropins/deltaPack" type="Directory"/>
 <location path="${eclipse_home}" type="Profile"/>
 <location path="/home/niederhausen/java/com.sun.codemodel" type="Directory"/>
-<location path="/home/mai00ckx/java/gennydeps" type="Directory"/>
+<location path="/home/niederhausen/Dropbox/gennydeps" type="Directory"/>
 </locations>
 <environment>
 <os>linux</os>
