@@ -24,21 +24,21 @@
             validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
       </annotationprovider>
       <annotationprovider
-            id="de.topicmapslab.aranuka.name"
+            id="de.topicmapslab.onotoa.aranuka.codegen.name"
             internal="false"
             name="de.topicmapslab.aranuka.name"
             validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.StringValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.aranuka.codegen.autogenerate"
+            internal="false"
+            name="de.topicmapslab.aranuka.autogenerate"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
       </annotationprovider>
    </extension>
    <extension
          name="Genny Annotation Extensions"
          point="de.topicmapslab.tmcledit.edit.annotationprovider">
-      <annotationprovider
-            id="de.topicmapslab.onotoa.genny.codegen.autogenerate"
-            internal="false"
-            name="de.topicmapslab.genny.autogenerate"
-            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
-      </annotationprovider>
       <annotationprovider
             id="de.topicmapslab.onotoa.genny.codegen.category"
             internal="false"
@@ -86,11 +86,17 @@
             name="de.topicmapslab.kuria.typelabel"
             validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
       </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.createnew"
+            internal="false"
+            name="de.topicmapslab.kuria.createnew"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+      </annotationprovider>
    </extension>
    <extension
          point="de.topicmapslab.tmcledit.edit.modelviewextension">
       <modeviewextension
-            class="de.topicmapslab.onotoa.aranuka.codegen.modelview.GeneratorProvider"
+            class="de.topicmapslab.onotoa.aranuka.codegen.modelview.GeneratorModelViewProvider"
             name="Code Generator">
       </modeviewextension>
    </extension>
