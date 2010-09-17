@@ -6,7 +6,7 @@ package de.topicmapslab.onotoa.aranuka.codegen.annotation;
 import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
 
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  *
  */
 public class IntegerValidator implements IAnnotationValidator {
@@ -18,20 +18,21 @@ public class IntegerValidator implements IAnnotationValidator {
 		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator#getType()
-	 */
 	@Override
 	public Class<?> getType() {
 		return Integer.class;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator#isValid(java.lang.Object)
-	 */
 	@Override
-	public boolean isValid(Object obj) {
-		return (obj instanceof Integer);
+	public boolean isValid(String obj) {
+		if (obj != null) {
+			try {
+				Integer.parseInt(obj);
+			} catch (NumberFormatException e) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

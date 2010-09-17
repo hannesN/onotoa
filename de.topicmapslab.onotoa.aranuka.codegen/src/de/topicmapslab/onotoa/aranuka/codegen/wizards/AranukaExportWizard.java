@@ -6,6 +6,7 @@ package de.topicmapslab.onotoa.aranuka.codegen.wizards;
 import java.io.File;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
@@ -25,8 +26,10 @@ import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.tmapi.core.TopicMap;
 
-import de.topicmapslab.aranuka.codegen.core.CodeGenerator;
+import de.topicmapslab.codegenerator.CodeGenerator;
+import de.topicmapslab.codegenerator.factories.AranukaDescriptorFactory;
 import de.topicmapslab.onotoa.aranuka.codegen.Activator;
+import de.topicmapslab.onotoa.aranuka.codegen.preferences.IPreferenceConstants;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -56,20 +59,24 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 	@Override
 	public boolean performFinish() {
 		try {
-			TopicMapSchema schema = ModelIndexer.getInstance()
-					.getTopicMapSchema();
+			TopicMapSchema schema = ModelIndexer.getInstance().getTopicMapSchema();
 
 			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema, false);
 
 			TopicMap topicMap = builder.createTopicMap();
 
-			CodeGenerator gen = new CodeGenerator();
-			gen.generateCode(builder.getTopicMapSystem(), topicMap, new File(path), packageName);
+			AranukaDescriptorFactory fac = new AranukaDescriptorFactory(builder.getTopicMapSystem(), topicMap,
+			        packageName);
+			CodeGenerator gen = fac.getCodeGenerator();
+			gen.generateCode(new File(path));
+			
+			IPreferenceStore ps = Activator.getDefault().getPreferenceStore();
+			ps.setValue(IPreferenceConstants.P_LASTSOURCEPATH, path);
+	        ps.setValue(IPreferenceConstants.P_LASTPACKAGENAME, packageName);
 		} catch (Exception e) {
 			Activator.logException(e);
-			MessageDialog.openError(getShell(), "Error while generating code",
-					"An error occurred:" + e.getMessage() + "["
-							+ e.getClass().getName() + "]");
+			MessageDialog.openError(getShell(), "Error while generating code", "An error occurred:" + e.getMessage()
+			        + "[" + e.getClass().getName() + "]");
 
 			return true;
 		}
@@ -105,8 +112,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			l.setText("Target Directory:");
 
 			sourcePathText = new Text(comp, SWT.BORDER);
-			sourcePathText
-					.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+			sourcePathText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 			browseButton = new Button(comp, SWT.PUSH);
 			browseButton.setText("...");
@@ -114,17 +120,25 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			l = new Label(comp, SWT.NONE);
 			l.setText("package name:");
 			packageNameText = new Text(comp, SWT.BORDER);
-			packageNameText
-					.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+			packageNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 			hookListeners();
 
 			setControl(comp);
 
-			sourcePathText.setText("/tmp/aranuka");
-			packageNameText.setText("de.test");
+			init();
+			
 			path = sourcePathText.getText();
 			packageName = packageNameText.getText();
 		}
+
+		protected void init() {
+			IPreferenceStore ps = Activator.getDefault().getPreferenceStore();
+			String tmp = ps.getString(IPreferenceConstants.P_LASTSOURCEPATH);
+	        sourcePathText.setText(tmp);
+	        
+	        tmp = ps.getString(IPreferenceConstants.P_LASTPACKAGENAME);
+			packageNameText.setText(tmp);
+        }
 
 		private void hookListeners() {
 			browseButton.addSelectionListener(new SelectionAdapter() {

@@ -26,8 +26,16 @@ public class BooleanValidator implements IAnnotationValidator {
 	}
 
 	@Override
-	public boolean isValid(Object obj) {
-		return (obj instanceof Boolean);
+	public boolean isValid(String obj) {
+		if (obj != null) {
+			try {
+				Boolean.parseBoolean(obj);
+			} catch (NumberFormatException e) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 }

@@ -11,9 +11,6 @@ import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationValidator;
  */
 public class StringValidator implements IAnnotationValidator {
 
-	/**
-	 * 
-	 */
 	public StringValidator() {
 	}
 
@@ -29,11 +26,8 @@ public class StringValidator implements IAnnotationValidator {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(Object obj) {
-		if (obj instanceof String)
-			return ((String) obj).length() > 0;
-		else
-			return false;
+	public boolean isValid(String obj) {
+		return ((String) obj).length() > 0;
 	}
 
 }
