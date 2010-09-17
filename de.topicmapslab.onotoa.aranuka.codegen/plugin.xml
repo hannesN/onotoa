@@ -56,10 +56,10 @@
             validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
       </annotationprovider>
       <annotationprovider
-            id="de.topicmapslab.onotoa.kuria.codegen.text"
+            id="de.topicmapslab.onotoa.kuria.codegen.label"
             internal="false"
-            name="de.topicmapslab.kuria.text"
-            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+            name="de.topicmapslab.kuria.label"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.StringValidator">
       </annotationprovider>
       <annotationprovider
             id="de.topicmapslab.onotoa.kuria.codegen.liststyle"
@@ -74,6 +74,25 @@
             name="de.topicmapslab.kuria.rows"
             validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.RowsValidator">
       </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.optional"
+            internal="false"
+            name="de.topicmapslab.kuria.optional"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+      </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.typelabel"
+            internal="false"
+            name="de.topicmapslab.kuria.typelabel"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+      </annotationprovider>
+   </extension>
+   <extension
+         point="de.topicmapslab.tmcledit.edit.modelviewextension">
+      <modeviewextension
+            class="de.topicmapslab.onotoa.aranuka.codegen.modelview.GeneratorProvider"
+            name="Code Generator">
+      </modeviewextension>
    </extension>
 
 </plugin>

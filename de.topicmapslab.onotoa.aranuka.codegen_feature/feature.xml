@@ -21,13 +21,6 @@
    </requires>
 
    <plugin
-         id="aranuka.codegen"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="aranuka.runtime"
          download-size="0"
          install-size="0"
@@ -50,6 +43,13 @@
 
    <plugin
          id="com.sun.codemodel"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="Genny Code Generator"
          download-size="0"
          install-size="0"
          version="0.0.0"
