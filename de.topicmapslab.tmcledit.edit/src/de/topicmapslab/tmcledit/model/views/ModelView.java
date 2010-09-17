@@ -602,7 +602,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			}
 		}
 		
-		// add enabled actions from extensions
+		// notify extensions
     	List<ModelViewExtensionInfo> mveInfos = TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos();
     	for (ModelViewExtensionInfo mve : mveInfos) {
     			mve.getProvider().close();

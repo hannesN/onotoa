@@ -27,9 +27,9 @@ public interface IAnnotationValidator {
 	
 	/**
 	 * Validates the given Object, which is a new value of an annotation.
-	 * @param object The value of the annotation. 
+	 * @param object The string representation of the value 
 	 * @return <code>true</code> if the object has a valid value, <code>false</code> else 
 	 */
-	public boolean isValid(Object obj);
+	public boolean isValid(String obj);
 
 }

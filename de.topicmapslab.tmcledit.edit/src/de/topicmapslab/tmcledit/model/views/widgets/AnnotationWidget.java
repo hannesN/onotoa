@@ -254,7 +254,7 @@ public class AnnotationWidget extends Composite {
 		}
 		return null;
 	}
-	
+
 	public void setModel(Object model) {
 		if (this.model != null) {
 			this.model.eAdapters().remove(adapter);
@@ -325,18 +325,15 @@ public class AnnotationWidget extends Composite {
 		}
 
 		@Override
-        protected CellEditor getCellEditor(Object element) {
-	        if (ed==null) {
-	        	ed = new TextCellEditor((Composite) getViewer().getControl());
-	        	
-				new ContentAssistCommandAdapter(ed.getControl(), 
-						new TextContentAdapter(), 
-						new AnnotationKeyProvider(), 
-						null,
-						AnnotationKeyProvider.KEYS); 
-	        }
-	        return ed;
-        }
+		protected CellEditor getCellEditor(Object element) {
+			if (ed == null) {
+				ed = new TextCellEditor((Composite) getViewer().getControl());
+
+				new ContentAssistCommandAdapter(ed.getControl(), new TextContentAdapter(), new AnnotationKeyProvider(),
+				        null, AnnotationKeyProvider.KEYS);
+			}
+			return ed;
+		}
 
 		@Override
 		protected Object getValue(Object element) {
@@ -373,9 +370,9 @@ public class AnnotationWidget extends Composite {
 
 		private IAnnotationValidator currValidator;
 		private AnnotationValueProvider proposalProvider;
-		
+
 		private boolean comboUsed = false;
-		
+
 		public ValueEditingSupport(ColumnViewer viewer) {
 			super(viewer);
 		}
@@ -388,16 +385,16 @@ public class AnnotationWidget extends Composite {
 		@Override
 		protected CellEditor getCellEditor(Object element) {
 			comboUsed = false;
-			Class<?> type = getType(element);
-			if (type==Boolean.class) {
-				return getBooleanEditor();
-			}
-			
 			AnnotationProviderInfo info = getInfo(element);
-			if (info !=null) {
-				
+			if (info != null) {
+				Class<?> type = getType(element);
+				if (type == Boolean.class) {
+					currValidator = info.getValidator();
+					return getBooleanEditor();
+				}
+
 				IAnnotationProposalProvider proposalProvider = info.getPorposalProvider();
-				if (proposalProvider!=null) {
+				if (proposalProvider != null) {
 					if (!proposalProvider.newValuesAllowed()) {
 						getComboBoxCellEditor().setItems(proposalsToArray(proposalProvider));
 						comboUsed = true;
@@ -405,77 +402,71 @@ public class AnnotationWidget extends Composite {
 					}
 				} else {
 					getTextEditor();
-					if (info!=null) {
+					if (info != null) {
 						currValidator = info.getValidator();
 						this.proposalProvider.setProvider(proposalProvider);
-					} 
+					}
 				}
 			} else {
 				currValidator = null;
-				if (proposalProvider!=null)
+				if (proposalProvider != null)
 					proposalProvider.setProvider(null);
 			}
 			return getTextEditor();
 		}
 
 		private String[] proposalsToArray(IAnnotationProposalProvider proposalProvider) {
-	        List<String> list = new ArrayList<String>();
-	        
-	        for (String s : proposalProvider.getProposals()) {
-	        	list.add(s);
-	        }
-	        
-	        return list.toArray(new String[list.size()]);
-        }
+			List<String> list = new ArrayList<String>();
+
+			for (String s : proposalProvider.getProposals()) {
+				list.add(s);
+			}
+
+			return list.toArray(new String[list.size()]);
+		}
 
 		private Class<?> getType(Object element) {
-	        AnnotationProviderInfo info = getInfo(element);
-			if (info==null)
+			AnnotationProviderInfo info = getInfo(element);
+			if (info == null)
 				return String.class;
-	        return info.getValidator().getType();
-        }
+			return info.getValidator().getType();
+		}
 
 		private AnnotationProviderInfo getInfo(Object element) {
-	        String key = cast(element).getKey();
+			String key = cast(element).getKey();
 
 			AnnotationProviderInfo info = TmcleditEditPlugin.getPlugin().getAnnotionProviderInfo(key);
-	        return info;
-        }
-		
-		
-		
-		public CheckboxCellEditor getBooleanEditor() {
-			if (booleanEditor==null)
-				booleanEditor = new CheckboxCellEditor((Composite) getViewer().getControl());
-        	return booleanEditor;
-        }
+			return info;
+		}
 
+		public CheckboxCellEditor getBooleanEditor() {
+			if (booleanEditor == null)
+				booleanEditor = new CheckboxCellEditor((Composite) getViewer().getControl());
+			return booleanEditor;
+		}
 
 		public ComboBoxCellEditor getComboBoxCellEditor() {
-			if (comboBoxCellEditor==null)
-				comboBoxCellEditor = new ComboBoxCellEditor((Composite) getViewer().getControl(), new String[]{});
-        	return comboBoxCellEditor;
-        }
+			if (comboBoxCellEditor == null)
+				comboBoxCellEditor = new ComboBoxCellEditor((Composite) getViewer().getControl(), new String[] {});
+			return comboBoxCellEditor;
+		}
 
 		private TextCellEditor getTextEditor() {
-	        if (textEditor==null) {
-	        	textEditor = new TextCellEditor((Composite) getViewer().getControl());
-	        	proposalProvider = new AnnotationValueProvider();
-				new ContentAssistCommandAdapter(textEditor.getControl(), 
-						new TextContentAdapter(), 
-						proposalProvider, 
-						null,
-						AnnotationValueProvider.KEYS); 	
-	        }
+			if (textEditor == null) {
+				textEditor = new TextCellEditor((Composite) getViewer().getControl());
+				proposalProvider = new AnnotationValueProvider();
+				new ContentAssistCommandAdapter(textEditor.getControl(), new TextContentAdapter(), proposalProvider,
+				        null, AnnotationValueProvider.KEYS);
+			}
 			return textEditor;
-        }
+		}
 
 		@Override
 		protected Object getValue(Object element) {
 			String value = cast(element).getValue();
-			if (getType(element)==Boolean.class)
+			if (getType(element) == Boolean.class)
 				return Boolean.parseBoolean(value);
-			
+
 			if (comboUsed) {
 				int i = 0;
 				for (String s : getComboBoxCellEditor().getItems()) {
@@ -484,36 +475,35 @@ public class AnnotationWidget extends Composite {
 					i++;
 				}
 				return new Integer(0);
-				
+
 			}
-			
-			
+
 			return value;
 		}
 
 		@Override
 		protected void setValue(Object element, Object value) {
 			Annotation a = cast(element);
-			
+
 			if (value instanceof Boolean)
-				value = ((Boolean)value).toString();
-			
+				value = ((Boolean) value).toString();
+
 			if (comboUsed) {
-				int index = ((Integer)value).intValue();
-				value = getComboBoxCellEditor().getItems()[index];				
+				int index = ((Integer) value).intValue();
+				value = getComboBoxCellEditor().getItems()[index];
 			}
-			
-			if ((currValidator!=null) && (!currValidator.isValid(value)) ) {
+
+			if ((currValidator != null) && (!currValidator.isValid((String) value))) {
 				return;
 			}
-			
+
 			cmdStack.execute(new ModifyAnnotationValueCommand(a, (String) value));
 		}
 
 		private Annotation cast(Object e) {
 			return (Annotation) e;
 		}
-		
+
 	}
 
 	private class ValueLabelProvider extends CellLabelProvider {
