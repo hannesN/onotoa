@@ -30,9 +30,10 @@ public interface IModelViewProvider {
 	 * @param modelEx the model to serialize
 	 * @return the serialized model
 	 */
+	@Deprecated
 	public String serialize(IModelExtension modelEx );
 	
-	
+	@Deprecated
 	public IModelExtension deserialize(String model);
 		
 //	public String getAnnotationKey(IModelExtension modelExtension);

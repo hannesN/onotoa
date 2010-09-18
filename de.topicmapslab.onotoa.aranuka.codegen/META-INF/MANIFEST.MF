@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.ui,
  de.topicmapslab.aranuka_kuria.codegenerator;bundle-version="1.0.0",
  de.topicmapslab.kuria.annotation;bundle-version="1.0.1",
  de.topicmapslab.kuria.runtime;bundle-version="1.0.1",
- de.topicmapslab.kuria.swtgenerator;bundle-version="1.0.1"
+ de.topicmapslab.kuria.swtgenerator;bundle-version="1.0.1",
+ org.eclipse.ui.forms;bundle-version="3.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .

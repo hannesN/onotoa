@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 
+import de.topicmapslab.onotoa.aranuka.codegen.commands.CreateGeneratorDataCommand;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
@@ -55,6 +56,20 @@ public class CreateAnnotationHub extends Action implements UpdateAction, ISelect
     	update();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void run() {
+    	AbstractModelViewNode parent = (AbstractModelViewNode) sel.getFirstElement();
+    	
+    	CreateGeneratorDataCommand cmd = new CreateGeneratorDataCommand(parent);
+    	
+    	modelView.getCommandStack().execute(cmd);
+    	
+    	
+    }
+    
 	/**
      * {@inheritDoc}
      */

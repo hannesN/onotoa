@@ -18,9 +18,9 @@ public interface IAnnotationKeys {
 	// aranuka
 	public static final String GENERATE_ATTRIBUTE = "de.topicmapslab.aranuka.generateattribute";
 	public static final String NAME = "de.topicmapslab.aranuka.name";
+	public static final String AUTO_GENERATE = "de.topicmapslab.aranuka.autogenerate";
 
 	// genny
-	public static final String AUTO_GENERATE = "de.topicmapslab.genny.autogenerate";
 	public static final String CATEGORY = "de.topicmapslab.genny.category";
 	
 	// kuria
