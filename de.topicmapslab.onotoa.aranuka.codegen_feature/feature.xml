@@ -49,7 +49,7 @@
          unpack="false"/>
 
    <plugin
-         id="Genny Code Generator"
+         id="de.topicmapslab.aranuka_kuria.codegenerator"
          download-size="0"
          install-size="0"
          version="0.0.0"

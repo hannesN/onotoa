@@ -107,11 +107,21 @@ public class AbstractModelViewNode implements IAdaptable {
     }
 
 	public void addChild(AbstractModelViewNode child) {
+		addChild(-1, child);
+    }
+	
+	public void addChild(int index, AbstractModelViewNode child) {
     	if (children==null)
     		children = new ArrayList<AbstractModelViewNode>();
     	
-    	children.add(child);
+    	if (index>0)
+    		children.add(index, child);
+    	else
+    		children.add(child);
+    	
     	child.setParent(this);
+    	if (isSyncView())
+    		refresh();
     }
 
 	public void removeChild(AbstractModelViewNode child) {

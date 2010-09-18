@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.topicmapslab.onotoa.aranuka.codegen.actions.CreateAnnotationHub;
+import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.extension.IModelExtension;
@@ -21,17 +22,17 @@ import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
  */
 /**
  * @author niederhausen
- *
+ * 
  */
 public class GeneratorModelViewProvider implements IModelViewProvider {
 
 	private CreateAnnotationHub createAnnotationHubAction;
+	private CodeGeneratorModelPage codeGeneratorModelPage;
 
 	/**
 	 * 
 	 */
 	public GeneratorModelViewProvider() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -51,7 +52,6 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 		return null;
 	}
 
-	
 	/**
 	 * {@inheritDocs}
 	 */
@@ -60,39 +60,36 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 		return Collections.emptyList();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider#hasPageFor(de.topicmapslab.tmcledit.model.views.extension.IModelExtension)
-	 */
 	/**
 	 * {@inheritDocs}
 	 */
 	@Override
 	public boolean hasPageFor(IModelExtension extension) {
-		// TODO Auto-generated method stub
+		if (extension instanceof GeneratorData) {
+			return true;
+		}
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider#getPageFor(de.topicmapslab.tmcledit.model.views.extension.IModelExtension)
-	 */
 	/**
 	 * {@inheritDocs}
 	 */
 	@Override
 	public IModelPage getPageFor(IModelExtension extension) {
-		// TODO Auto-generated method stub
+		if (extension instanceof GeneratorData) {
+			if (codeGeneratorModelPage == null)
+				codeGeneratorModelPage = new CodeGeneratorModelPage();
+			return codeGeneratorModelPage;
+		}
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider#getActions()
-	 */
 	/**
 	 * {@inheritDocs}
 	 */
 	@Override
 	public List<UpdateAction> getActions() {
-		if (createAnnotationHubAction==null)
+		if (createAnnotationHubAction == null)
 			return Collections.emptyList();
 		return Arrays.asList((UpdateAction) createAnnotationHubAction);
 	}
