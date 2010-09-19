@@ -12,9 +12,22 @@ package de.topicmapslab.onotoa.aranuka.codegen.commands;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 
+import de.topicmapslab.onotoa.aranuka.codegen.model.CharacteristicData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.IdentifierData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.TopicMapSchemaData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.TopicRoleConstraintData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.TopicTypeData;
 import de.topicmapslab.onotoa.aranuka.codegen.modelview.GeneratorDataNode;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
 
@@ -71,10 +84,40 @@ public class CreateGeneratorDataCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		node = new GeneratorDataNode((ModelView) parent.getAdapter(ModelView.class));
-		node.setModel(new GeneratorData((TMCLConstruct) parent.getModel()));
+		node.setModel(getModel());
 		idx = -1;
 		return true;
 	}
+
+	/**
+     * @return
+     */
+    private GeneratorData getModel() {
+    	Object model = parent.getModel();
+		TMCLConstruct construct = (TMCLConstruct) model;
+		if (model instanceof TopicMapSchema)
+    		return new TopicMapSchemaData(construct);
+    	
+    	if (model instanceof TopicType)
+    		return new TopicTypeData(construct);
+    	
+    	if ( (model instanceof SubjectIdentifierConstraint)
+    	   ||(model instanceof SubjectLocatorConstraint)
+    	   ||(model instanceof ItemIdentifierConstraint)) {
+    		return new IdentifierData(construct);
+    	}
+    	
+    	if ( (model instanceof NameTypeConstraint)
+    	    	   ||(model instanceof OccurrenceTypeConstraint)) {
+    		return new CharacteristicData(construct);
+    	}
+    	
+    	if (model instanceof RolePlayerConstraint) {
+    		return new TopicRoleConstraintData();
+    	}
+    	
+    	return null;
+    }
 
 	/**
      * {@inheritDoc}

@@ -26,7 +26,7 @@ public interface IAnnotationKeys {
 	// kuria
 	public static final String HIDDEN = "de.topicmapslab.kuria.hidden";
 	public static final String LABEL = "de.topicmapslab.kuria.label";
-	public static final String MLIST_STYLE = "de.topicmapslab.kuria.liststyle";
+	public static final String LIST_STYLE = "de.topicmapslab.kuria.liststyle";
 	public static final String ROWS = "de.topicmapslab.kuria.rows";
 	public static final String OPTIONAL = "de.topicmapslab.kuria.optional";
 	public static final String TYPELABEL = "de.topicmapslab.kuria.typelabel";

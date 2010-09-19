@@ -33,134 +33,134 @@ public class AbstractModelViewNode implements IAdaptable {
 	}
 
 	public String getName() {
-    	return name;
-    }
+		return name;
+	}
 
 	protected ModelView getModelView() {
-    	return modelView;
-    }
+		return modelView;
+	}
 
 	public void setParent(AbstractModelViewNode parent) {
-    	this.parent = parent;
-    	if (parent != null)
-    		this.syncView = parent.isSyncView();
-    }
-	
+		this.parent = parent;
+		if (parent != null)
+			this.syncView = parent.isSyncView();
+	}
+
 	final protected void setName(String newName) {
 		this.name = newName;
 	}
 
 	public int getId() {
-        return id;
-    }
+		return id;
+	}
 
 	public AbstractModelViewNode getParent() {
-    	return parent;
-    }
+		return parent;
+	}
 
 	public Object getAdapter(Class key) {
-    	return null;
-    }
+		return null;
+	}
 
 	public Object getModel() {
-    	return model;
-    }
+		return model;
+	}
 
 	public void setModel(Object model) {
-    	dispose();
-    	this.model = model;
-    }
+		dispose();
+		this.model = model;
+	}
 
 	public void dispose() {
-    	for (AbstractModelViewNode to : getChildrenList()) {
-    		to.dispose();
-    	}
-    }
-	
+		for (AbstractModelViewNode to : getChildrenList()) {
+			to.dispose();
+		}
+	}
+
 	public void handleDoubleClick() {
 		try {
-	        getModelView().getViewSite().getWorkbenchWindow().getActivePage().showView(PropertyDetailView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
-        } catch (PartInitException e) {
-        	TmcleditEditPlugin.getPlugin().log(e);
-        }
+			getModelView().getViewSite().getWorkbenchWindow().getActivePage()
+			        .showView(PropertyDetailView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
+		} catch (PartInitException e) {
+			TmcleditEditPlugin.getPlugin().log(e);
+		}
 	}
 
 	public Image getImage() {
-    	return null;
-    }
+		return null;
+	}
 
 	public void refresh() {
-    	if (syncView)
-    		getModelView().getViewer().refresh(this);
-    }
+		if (syncView)
+			getModelView().getViewer().refresh(this);
+	}
 
 	protected boolean isSyncView() {
-    	return syncView;
-    }
+		return syncView;
+	}
 
 	public void handleRename() {
-    
-    }
+
+	}
 
 	public boolean canHandleRename() {
-    	return handleRename;
-    }
+		return handleRename;
+	}
 
 	public void addChild(AbstractModelViewNode child) {
 		addChild(-1, child);
-    }
-	
+	}
+
 	public void addChild(int index, AbstractModelViewNode child) {
-    	if (children==null)
-    		children = new ArrayList<AbstractModelViewNode>();
-    	
-    	if (index>0)
-    		children.add(index, child);
-    	else
-    		children.add(child);
-    	
-    	child.setParent(this);
-    	if (isSyncView())
-    		refresh();
-    }
+		if (children == null)
+			children = new ArrayList<AbstractModelViewNode>();
+
+		if (index > 0)
+			children.add(index, child);
+		else
+			children.add(child);
+
+		child.setParent(this);
+		if (isSyncView())
+			refresh();
+	}
 
 	public void removeChild(AbstractModelViewNode child) {
-    	if (children==null)
-    		return;
-    	children.remove(child);
-    	child.setParent(null);
-    }
+		if (children == null)
+			return;
+		children.remove(child);
+		child.setParent(null);
+	}
 
 	public AbstractModelViewNode[] getChildren() {
-    	return (AbstractModelViewNode[]) children.toArray(new AbstractModelViewNode[children
-    			.size()]);
-    }
+		return (AbstractModelViewNode[]) getChildrenList().toArray(new AbstractModelViewNode[getChildrenList().size()]);
+	}
 
 	public List<AbstractModelViewNode> getChildrenList() {
-    	if (children==null)
-    		return Collections.emptyList();
-    	return children;
-    }
+		if (children == null)
+			return Collections.emptyList();
+		return children;
+	}
 
 	public boolean hasChildren() {
-    	return getChildrenList().size() > 0;
-    }
+		return getChildrenList().size() > 0;
+	}
 
 	public void setSyncView(boolean syncView) {
-        this.syncView = syncView;
-        for (AbstractModelViewNode child : getChildrenList()) {
-        	child.setSyncView(syncView);
-        }
-    }
+		this.syncView = syncView;
+		for (AbstractModelViewNode child : getChildrenList()) {
+			child.setSyncView(syncView);
+		}
+	}
 
 	protected void clearChildren() {
-        for (Iterator<AbstractModelViewNode> it=getChildrenList().iterator(); it.hasNext();) {
-        	AbstractModelViewNode child = it.next();
-    		it.remove();
-    		child.dispose();
-    	}
-    }
-	
+		for (Iterator<AbstractModelViewNode> it = getChildrenList().iterator(); it.hasNext();) {
+			AbstractModelViewNode child = it.next();
+			it.remove();
+			child.dispose();
+		}
+	}
+
 	public AbstractModelViewNode findChildPerModel(Object childModel) {
 		for (AbstractModelViewNode o : getChildrenList()) {
 			if (childModel.equals(o.getModel()))
@@ -170,6 +170,6 @@ public class AbstractModelViewNode implements IAdaptable {
 	}
 
 	public EditingDomain getEditingDomain() {
-	    return editingDomain;
-    }
+		return editingDomain;
+	}
 }

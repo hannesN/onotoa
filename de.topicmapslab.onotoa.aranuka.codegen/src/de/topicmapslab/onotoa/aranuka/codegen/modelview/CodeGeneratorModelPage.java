@@ -10,8 +10,12 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.aranuka.codegen.modelview;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -32,7 +36,19 @@ public class CodeGeneratorModelPage extends AbstractModelPage {
 	private Composite control;
 	private InputMask inputMask;
 
+	private final Class<? extends GeneratorData> modelType;
 	
+	
+	
+	/**
+     * @param modelType
+     */
+    public CodeGeneratorModelPage(Class<? extends GeneratorData> modelType) {
+	    super();
+	    this.modelType = modelType;
+    }
+
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -43,11 +59,33 @@ public class CodeGeneratorModelPage extends AbstractModelPage {
 		control.setLayout(new GridLayout());
 		AnnotationBindingFactory fac = new AnnotationBindingFactory();
 		fac.addClass(GeneratorData.class);
+		fac.addClass(modelType);
 	
 		WidgetGenerator widgetGenerator = new WidgetGenerator(fac.getBindingContainer());
-		inputMask = widgetGenerator.generateEditable(GeneratorData.class, control);
+		inputMask = widgetGenerator.generateEditable(modelType, control);
 		inputMask.getComposite().setLayoutData(new GridData(GridData.FILL_BOTH));
+		adapt(toolkit, inputMask.getComposite());
 		
+		Button applyButton = toolkit.createButton(control, "Apply", SWT.PUSH);
+		applyButton.addSelectionListener(new SelectionAdapter() {
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				inputMask.persist();
+			}
+		});
+	}
+	
+
+	private void adapt(FormToolkit toolkit, Control control) {
+		toolkit.adapt(control, true, true);
+		if (control instanceof Composite) {
+			for (Control c : ((Composite) control).getChildren()) {
+				adapt(toolkit, c);
+			}
+		}
 	}
 	
 	/**
@@ -73,6 +111,15 @@ public class CodeGeneratorModelPage extends AbstractModelPage {
     public void updateUI() {
 	    inputMask.setModel(getModel());
 	    inputMask.setEnabled(getModel()!=null);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setModel(Object model) {
+        super.setModel(model);
+        updateUI();
     }
 
     /**

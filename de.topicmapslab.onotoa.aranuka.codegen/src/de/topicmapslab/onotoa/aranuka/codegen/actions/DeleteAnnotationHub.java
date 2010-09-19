@@ -10,36 +10,38 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.aranuka.codegen.actions;
 
-import de.topicmapslab.onotoa.aranuka.codegen.commands.CreateGeneratorDataCommand;
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.onotoa.aranuka.codegen.commands.RemoveGeneratorDataCommand;
+import de.topicmapslab.onotoa.aranuka.codegen.modelview.GeneratorDataNode;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
-public class CreateAnnotationHub extends AbstractSelectionAction {
+public class DeleteAnnotationHub extends AbstractSelectionAction {
 
-	public CreateAnnotationHub(ModelView modelView) {
-	    super(modelView);
-	    setText("Create Code Generator Meta Data");
-    }
+	/**
+	 * @param modelView
+	 */
+	public DeleteAnnotationHub(ModelView modelView) {
+		super(modelView);
+		setText("Delete Code Generator Meta Data");
+	}
 
-    
-    /**
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void run() {
 		AbstractModelViewNode parent = (AbstractModelViewNode) sel.getFirstElement();
 
-		CreateGeneratorDataCommand cmd = new CreateGeneratorDataCommand(parent);
+		RemoveGeneratorDataCommand cmd = new RemoveGeneratorDataCommand(parent);
 
 		modelView.getCommandStack().execute(cmd);
+
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -47,16 +49,12 @@ public class CreateAnnotationHub extends AbstractSelectionAction {
 	public void update() {
 		if (sel.size() == 1) {
 			Object obj = sel.getFirstElement();
-			if ((obj instanceof AbstractModelViewNode) && (!hasGeneratorNode((AbstractModelViewNode) obj))) {
-
-				Object model = ((AbstractModelViewNode) obj).getModel();
-				if ((model instanceof TMCLConstruct) && (!(model instanceof AssociationTypeConstraint))) {
-
-					setEnabled(true);
-					return;
-				}
+			if (obj instanceof GeneratorDataNode) {
+				setEnabled(true);
+				return;
 			}
 		}
 		setEnabled(false);
 	}
+
 }
