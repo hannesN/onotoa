@@ -74,6 +74,7 @@ public class PropertyDetailView extends ViewPart implements ISelectionChangedLis
 		if (this.currentPage != null)
 			this.currentPage.aboutToHide();
 
+		this.lastSelection = null;
 		this.currentPage = currentPage;
 		pageBook.showPage(currentPage.getId());
 		pageBook.reflow(true);
