@@ -3,11 +3,15 @@
  */
 package de.topicmapslab.onotoa.aranuka.codegen.modelview;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import de.topicmapslab.onotoa.aranuka.codegen.actions.AbstractSelectionAction;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.CreateAnnotationHub;
+import de.topicmapslab.onotoa.aranuka.codegen.actions.DeleteAnnotationHub;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -21,18 +25,20 @@ import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
  *
  */
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  * 
  */
 public class GeneratorModelViewProvider implements IModelViewProvider {
 
-	private CreateAnnotationHub createAnnotationHubAction;
-	private CodeGeneratorModelPage codeGeneratorModelPage;
+	private List<UpdateAction> actions;
+
+	private Map<Class<? extends GeneratorData>, CodeGeneratorModelPage> pageMap;
 
 	/**
 	 * 
 	 */
 	public GeneratorModelViewProvider() {
+
 	}
 
 	/**
@@ -40,7 +46,6 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public String serialize(IModelExtension modelEx) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -76,12 +81,16 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public IModelPage getPageFor(IModelExtension extension) {
-		if (extension instanceof GeneratorData) {
-			if (codeGeneratorModelPage == null)
-				codeGeneratorModelPage = new CodeGeneratorModelPage();
-			return codeGeneratorModelPage;
+		@SuppressWarnings("unchecked")
+        Class<? extends GeneratorData> extClass = (Class<? extends GeneratorData>) extension.getClass();
+		
+		CodeGeneratorModelPage page = getPageMap().get(extClass);
+		if (page == null) {
+			page = new CodeGeneratorModelPage(extClass);
+			putPage(extClass, page);
 		}
-		return null;
+		
+		return page;
 	}
 
 	/**
@@ -89,9 +98,9 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public List<UpdateAction> getActions() {
-		if (createAnnotationHubAction == null)
+		if (actions == null)
 			return Collections.emptyList();
-		return Arrays.asList((UpdateAction) createAnnotationHubAction);
+		return actions;
 	}
 
 	/**
@@ -99,7 +108,11 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public void createActions(ModelView modelView) {
-		createAnnotationHubAction = new CreateAnnotationHub(modelView);
+		actions = new ArrayList<UpdateAction>();
+
+		actions.add(new CreateAnnotationHub(modelView));
+		actions.add(new DeleteAnnotationHub(modelView));
+
 	}
 
 	/**
@@ -107,7 +120,30 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public void close() {
-
+		for (UpdateAction a : getActions()) {
+			((AbstractSelectionAction) a).dispose();
+		}
+		actions = null;
+		
+		for (CodeGeneratorModelPage page : getPageMap().values()) {
+			page.dispose();
+		}
+		pageMap = null;
 	}
 
+	/**
+	 * @return the pageMap
+	 */
+	private Map<Class<? extends GeneratorData>, CodeGeneratorModelPage> getPageMap() {
+		if (pageMap == null)
+			return Collections.emptyMap();
+		return pageMap;
+	}
+
+	private void putPage(Class<? extends GeneratorData> key, CodeGeneratorModelPage val) {
+		if (pageMap == null)
+			pageMap = new HashMap<Class<? extends GeneratorData>, CodeGeneratorModelPage>();
+		pageMap.put(key, val);
+	}
+	
 }
