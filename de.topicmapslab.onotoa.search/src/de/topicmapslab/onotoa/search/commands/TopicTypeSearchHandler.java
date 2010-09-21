@@ -55,6 +55,7 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 		// OK button in search dialog was presses
 		if (dialog.open() == Window.OK) {
 
+			// get active page and active view
 			IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 			ModelView view = (ModelView) activePage.findView(ModelView.ID);
