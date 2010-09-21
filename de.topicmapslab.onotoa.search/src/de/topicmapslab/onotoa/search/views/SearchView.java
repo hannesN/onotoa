@@ -2,7 +2,9 @@ package de.topicmapslab.onotoa.search.views;
 
 import java.util.List;
 
+import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -15,8 +17,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
@@ -26,6 +30,7 @@ import de.topicmapslab.onotoa.search.util.ImageCallBack;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
 import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
+import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
  * This sample class demonstrates how to plug-in a new workbench view. The view
@@ -115,6 +120,29 @@ public class SearchView extends ViewPart {
 
 	}
 
+	private void registerModelView() {
+		// register actions
+
+		ModelView modelView = ModelView.getInstance();
+		ActionRegistry ar = (ActionRegistry) modelView.getAdapter(ActionRegistry.class);
+		if (ar != null) {
+			IActionBars actionBars = getViewSite().getActionBars();
+
+			String tmp = ActionFactory.UNDO.getId();
+			actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
+
+			tmp = ActionFactory.REDO.getId();
+			actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
+
+			tmp = ActionFactory.SAVE.getId();
+			actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
+
+			tmp = ActionFactory.CLOSE.getId();
+			actionBars.setGlobalActionHandler(tmp, (IAction) ar.getAction(tmp));
+		}
+
+	}
+
 	public void removeContextMenu() {
 		viewer.getControl().setMenu(null);
 	}
@@ -123,6 +151,7 @@ public class SearchView extends ViewPart {
 		this.container = container;
 		viewer.setInput(container);
 		viewer.expandAll();
+		registerModelView();
 	}
 
 	@Override

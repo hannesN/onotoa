@@ -16,6 +16,8 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
@@ -50,6 +52,7 @@ public class CleanSchemaHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
+		// get active page and active view
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 		ModelView view = (ModelView) activePage.findView(ModelView.ID);
@@ -59,6 +62,9 @@ public class CleanSchemaHandler extends AbstractHandler {
 
 		if (view.getCurrentTopicMapSchema() == null)
 			return null;
+
+		// get CommandStack
+		CommandStack commandStack = view.getEditingDomain().getCommandStack();
 
 		// get schema
 		TopicMapSchema schema = view.getCurrentTopicMapSchema();
@@ -75,18 +81,23 @@ public class CleanSchemaHandler extends AbstractHandler {
 
 		// initiate command for deletion
 		DeleteTopicTypeCommand deleteCommand;
+		CompoundCommand compoundCommand = new CompoundCommand();
 
 		if (dialog.open() == Window.OK)
 
 			// iterate over selected TopicTypes and delete them from schema
 			for (TopicType tt : dialog.getCleanList()) {
 
+				// create CompoundCommand which makes it possible to undo them
+				// all at once
 				deleteCommand = new DeleteTopicTypeCommand(tt);
-				deleteCommand.canExecute();
-				deleteCommand.execute();
+				compoundCommand.append(deleteCommand);
 
 			}
 
+		// excute all
+		commandStack.execute(compoundCommand);
 		return null;
+
 	}
 }
