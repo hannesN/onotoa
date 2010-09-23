@@ -11,9 +11,10 @@
 package de.topicmapslab.onotoa.search.searchImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import de.topicmapslab.onotoa.search.views.Container;
+import de.topicmapslab.onotoa.search.container.SubjectIdentifierContainer;
 import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -22,37 +23,56 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author sip
  * 
  */
-public class SubjectIdentifierSearcher {
+public class SubjectIdentifierSearcher implements ISearcher {
 
 	private TopicMapSchema schema;
-	private Container con;
+	private SubjectIdentifierContainer con;
 	private List<String> identifierList;
 
 	public SubjectIdentifierSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
-		con = new Container("All Subject Identifiers");
+		con = new SubjectIdentifierContainer("All Subject Identifiers", this);
 		identifierList = new ArrayList<String>();
-		createContainer();
 
 	}
 
-	private void createContainer() {
+	/**
+	 * {@inheritDoc}
+	 */
+
+	public void fetchResult() {
 
 		for (TopicType type : schema.getTopicTypes()) {
 			for (String identifier : type.getIdentifiers()) {
 				identifierList.add(identifier);
-				con.getList().add(new IdentifierWrapper(type, identifier, IdentifierWrapper.SUBJECTIDENTIFIER));
+				con.addListElement(new IdentifierWrapper(type, identifier, IdentifierWrapper.SUBJECTIDENTIFIER));
 			}
 		}
+
 	}
 
-	public List<String> getIdentifierList(){
+	/**
+	 * {@inheritDoc}
+	 */
+
+	public SubjectIdentifierContainer getResult() {
+		Collections.sort((List<? extends Comparable>) con.getContentList());
+		return con;
+	}
+
+	public List<String> getIdentifierList() {
 		return identifierList;
 	}
-	
-	public Container getContainer() {
-		return this.con;
-	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+
+	public void refresh() {
+
+		con.removeAllElements();
+		fetchResult();
+
+	}
 }

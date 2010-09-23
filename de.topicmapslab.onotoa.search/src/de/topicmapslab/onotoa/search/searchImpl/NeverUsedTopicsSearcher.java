@@ -11,11 +11,12 @@
 package de.topicmapslab.onotoa.search.searchImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import de.topicmapslab.onotoa.search.views.Container;
+import de.topicmapslab.onotoa.search.container.NeverUsedTopicsContainer;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -30,22 +31,21 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  * @author Sebastian Lippert
  * 
  */
-public class NeverUsedTopicsSearcher implements ISearchImpl {
+public class NeverUsedTopicsSearcher implements ISearcher {
 
 	private final TopicMapSchema schema;
-	private Container con;
+	private NeverUsedTopicsContainer con;
 
 	public NeverUsedTopicsSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
-		con = new Container("Never used Types");
+		con = new NeverUsedTopicsContainer("Never used Types", this);
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#fetchResult()
+
+	/**
+	 * {@inheritDoc}
 	 */
 	public void fetchResult() {
 
@@ -69,7 +69,6 @@ public class NeverUsedTopicsSearcher implements ISearchImpl {
 			}
 
 			// add RoleTypes
-			// ModelIndexer should do this, but he doesn't ... ?!?
 			if (tt instanceof AssociationType)
 				for (RoleConstraint roleConstraint : ((AssociationType) tt).getRoles()) {
 					usedTypesSet.add(roleConstraint.getType());
@@ -93,33 +92,44 @@ public class NeverUsedTopicsSearcher implements ISearchImpl {
 		// compare usedTypeSet with all types and detect unused types
 		for (TopicType tt : schema.getTopicTypes()) {
 			if (!usedTypesSet.contains(tt))
-				con.getList().add(new TopicTypeWrapper(tt));
+				con.addListElement(new TopicTypeWrapper(tt));
 
 		}
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getResult()
+	/**
+	 * {@inheritDoc}
 	 */
-	public Container getResult() {
+
+	public NeverUsedTopicsContainer getResult() {
+		Collections.sort((List<? extends Comparable>) con.getContentList());
 		return con;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	/**
+	 * Get list of unused topics
+
+	 * @return list of unused topics 
 	 */
-	public List<TopicType> getReslutList() {
+	public List<TopicType> getResultList() {
 
 		List<TopicType> resultList = new ArrayList<TopicType>();
-		for (Object wrapper : con.getList())
+		for (Object wrapper : con.getContentList())
 			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
-
+		
 		return resultList;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+
+	public void refresh() {
+	    
+		con.removeAllElements();
+		fetchResult();
+	    
+    }
 
 }

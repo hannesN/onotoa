@@ -109,6 +109,7 @@ public class TopicTypeSearchBasicPart {
 
 		checkName = new Button(buttonBar, SWT.CHECK);
 		checkName.setText("Check Name");
+		checkName.setSelection(true);
 
 		hookRegExpListener();
 

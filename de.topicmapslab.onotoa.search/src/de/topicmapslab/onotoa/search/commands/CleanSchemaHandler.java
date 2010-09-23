@@ -73,11 +73,11 @@ public class CleanSchemaHandler extends AbstractHandler {
 		NeverUsedTopicsSearcher searcher = new NeverUsedTopicsSearcher(schema);
 		searcher.fetchResult();
 
-		Collections.sort((List<? extends Comparable>) searcher.getResult().getList());
+		Collections.sort((List<? extends Comparable>) searcher.getResult().getContentList());
 
 		// get shell and open search dialog for unused TopicTypes
 		Shell shell = HandlerUtil.getActiveShell(event);
-		CleanSchemaDialog dialog = new CleanSchemaDialog(shell, searcher.getReslutList());
+		CleanSchemaDialog dialog = new CleanSchemaDialog(shell, searcher.getResultList());
 
 		// initiate command for deletion
 		DeleteTopicTypeCommand deleteCommand;

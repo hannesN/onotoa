@@ -10,10 +10,10 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.searchImpl;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import de.topicmapslab.onotoa.search.views.Container;
+import de.topicmapslab.onotoa.search.container.TopicsWithoutIdentifierContainer;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -22,23 +22,22 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author sip
  * 
  */
-public class TopicsWithoutIdentifierSearcher implements ISearchImpl {
+public class TopicsWithoutIdentifierSearcher implements ISearcher {
 
 	private final TopicMapSchema schema;
-	private Container con;
+	private TopicsWithoutIdentifierContainer con;
 
 	public TopicsWithoutIdentifierSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
-		con = new Container("Topics without Identifier");
+		con = new TopicsWithoutIdentifierContainer("Topics without Identifier", this);
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#fetchResult()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void fetchResult() {
 
 		List<TopicType> topicList = schema.getTopicTypes();
@@ -51,31 +50,28 @@ public class TopicsWithoutIdentifierSearcher implements ISearchImpl {
 			 */
 			if (tt.getIdentifiers().size() == 0 && tt.getLocators().size() == 0
 			        && tt.getItemIdentifierConstraints().size() == 0)
-				con.getList().add(new TopicTypeWrapper(tt));
+				con.addListElement(new TopicTypeWrapper(tt));
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getResult()
+	/**
+	 * {@inheritDoc}
 	 */
-	public Container getResult() {
+
+	public TopicsWithoutIdentifierContainer getResult() {
+		Collections.sort((List<? extends Comparable>) con.getContentList());
 		return con;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	/**
+	 * {@inheritDoc}
 	 */
-	public List<TopicType> getReslutList() {
 
-		List<TopicType> resultList = new ArrayList<TopicType>();
-		for (Object wrapper : con.getList())
-			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
+	public void refresh() {
 
-		return resultList;
+		con.removeAllElements();
+		fetchResult();
+
 	}
 
 }

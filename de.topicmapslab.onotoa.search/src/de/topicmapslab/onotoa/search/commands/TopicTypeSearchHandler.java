@@ -10,9 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.commands;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -26,7 +23,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.topicmapslab.onotoa.search.dialogs.TopicTypeSearchDialog;
-import de.topicmapslab.onotoa.search.searchImpl.MainSearchHandler;
+import de.topicmapslab.onotoa.search.searchImpl.BasicTopicTypeSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -70,11 +67,10 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 				return null;
 
 			// TODO Hannes: Real monitor
-			MainSearchHandler handler = new MainSearchHandler(dialog.getSearchData(), schema,
-			        new NullProgressMonitor());
 
-			// sort results
-			Collections.sort((List<? extends Comparable>) handler.getResultContainer().getList());
+			BasicTopicTypeSearcher searcher = new BasicTopicTypeSearcher(dialog.getSearchData(), schema,
+			        new NullProgressMonitor());
+			searcher.fetchResult();
 
 			try {
 
@@ -86,7 +82,7 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 					activePage.activate(searchView);
 
 				// set results as content for the view
-				searchView.setContent(handler.getResultContainer());
+				searchView.setContent(searcher.getResult());
 				searchView.removeContextMenu();
 
 			} catch (PartInitException e) {

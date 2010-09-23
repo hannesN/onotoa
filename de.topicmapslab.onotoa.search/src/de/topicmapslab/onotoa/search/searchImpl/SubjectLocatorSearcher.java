@@ -11,10 +11,12 @@
 package de.topicmapslab.onotoa.search.searchImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import de.topicmapslab.onotoa.search.views.Container;
+import de.topicmapslab.onotoa.search.container.SubjectLocatorContainer;
 import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
+import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -22,37 +24,74 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author sip
  * 
  */
-public class SubjectLocatorSearcher {
+public class SubjectLocatorSearcher implements ISearcher {
 
 	private TopicMapSchema schema;
-	private Container con;
+	private SubjectLocatorContainer con;
 	private List<String> locatorList;
 
 	public SubjectLocatorSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;
-		con = new Container("All Subject Locators");
+		con = new SubjectLocatorContainer("All Subject Locators", this);
 		locatorList = new ArrayList<String>();
-		createContainer();
 
 	}
 
-	private void createContainer() {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#fetchResult()
+	 */
+	public void fetchResult() {
 
 		for (TopicType type : schema.getTopicTypes()) {
 			for (String locator : type.getLocators()) {
 				locatorList.add(locator);
-				con.getList().add(new IdentifierWrapper(type, locator, IdentifierWrapper.SUBJECTLOCATOR));
+				con.addListElement(new IdentifierWrapper(type, locator, IdentifierWrapper.SUBJECTLOCATOR));
 			}
 		}
+
 	}
 
-	public List<String> getLocatorList(){
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getResult()
+	 */
+	public SubjectLocatorContainer getResult() {
+		Collections.sort((List<? extends Comparable>) con.getContentList());
+		return this.con;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	 */
+	public List<TopicType> getResultList() {
+
+		List<TopicType> resultList = new ArrayList<TopicType>();
+		for (Object wrapper : con.getContentList())
+			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
+
+		return resultList;
+	}
+
+	public List<String> getLocatorList() {
 		return locatorList;
 	}
-	
-	public Container getContainer() {
-		return this.con;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearcher#refresh()
+	 */
+	public void refresh() {
+
+		con.removeAllElements();
+		fetchResult();
+
 	}
 
 }
