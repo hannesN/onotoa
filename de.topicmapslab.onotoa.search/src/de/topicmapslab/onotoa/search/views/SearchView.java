@@ -13,19 +13,30 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
 
 import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.runtime.IBindingContainer;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
+import de.topicmapslab.onotoa.search.container.AbstractContainer;
+import de.topicmapslab.onotoa.search.container.BasicTopicTypeContainer;
+import de.topicmapslab.onotoa.search.container.NeverUsedTopicsContainer;
+import de.topicmapslab.onotoa.search.container.SubjectIdentifierContainer;
+import de.topicmapslab.onotoa.search.container.SubjectLocatorContainer;
+import de.topicmapslab.onotoa.search.container.TopicsWithoutIdentifierContainer;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
 import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
@@ -33,37 +44,20 @@ import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
- * This sample class demonstrates how to plug-in a new workbench view. The view
- * shows data obtained from the model. The sample creates a dummy model on the
- * fly, but a real implementation would connect to the model available either in
- * this or another plug-in (e.g. the workspace). The view is connected to the
- * model using a content provider.
- * <p>
- * The view uses a label provider to define how model objects should be
- * presented in the view. Each view can present the same model objects using
- * different labels and icons, if needed. Alternatively, a single label provider
- * can be shared between views in order to ensure that objects of the same type
- * are presented in the same way everywhere.
- * <p>
+ * View to present content.
+ * 
+ * @author Sebastian Lippert
  */
 
 public class SearchView extends ViewPart {
 
 	/**
-	 * The ID of the view as specified by the extension.
+	 * The ID of the input view as specified by the extension.
 	 */
 	public static final String ID = "de.topicmapslab.onotoa.search.views.SearchView";
-	private Container container;
+	private AbstractContainer container;
 	private TreeViewer viewer;
 	private MenuManager menuMgr;
-
-	// private IContextMenuListener contextMenu;
-
-	/**
-	 * The constructor.
-	 */
-	public SearchView() {
-	}
 
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
@@ -75,10 +69,25 @@ public class SearchView extends ViewPart {
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		comp.setLayout(new GridLayout());
 
+		Button refreshButton = new Button(comp, SWT.PUSH);
+		refreshButton.setText("Refresh");
+		refreshButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_TOOL_REDO));
+		refreshButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				updateContent();
+			}
+		});
+
 		AnnotationBindingFactory fac = new AnnotationBindingFactory();
 		fac.addClass(IdentifierWrapper.class);
 		fac.addClass(TopicTypeWrapper.class);
-		fac.addClass(Container.class);
+		fac.addClass(AbstractContainer.class);
+		fac.addClass(BasicTopicTypeContainer.class);
+		fac.addClass(NeverUsedTopicsContainer.class);
+		fac.addClass(SubjectIdentifierContainer.class);
+		fac.addClass(SubjectLocatorContainer.class);
+		fac.addClass(TopicsWithoutIdentifierContainer.class);
 		IBindingContainer bc = fac.getBindingContainer();
 
 		WidgetGenerator gen = new WidgetGenerator(bc);
@@ -102,6 +111,13 @@ public class SearchView extends ViewPart {
 
 	}
 
+	/**
+	 * Add context menu.
+	 * 
+	 * @param actionList
+	 *            the represents the menu
+	 */
+
 	public void addContextMenu(final List<Action> actionList) {
 
 		menuMgr = new MenuManager("PopupMenu");
@@ -120,9 +136,14 @@ public class SearchView extends ViewPart {
 
 	}
 
-	private void registerModelView() {
-		// register actions
+	/**
+	 * Global registration of SeachView to enable undo and redo from everywhere
+	 * at the Onotoa window.
+	 */
 
+	private void registerModelView() {
+
+		// register actions
 		ModelView modelView = ModelView.getInstance();
 		ActionRegistry ar = (ActionRegistry) modelView.getAdapter(ActionRegistry.class);
 		if (ar != null) {
@@ -143,34 +164,88 @@ public class SearchView extends ViewPart {
 
 	}
 
+	/**
+	 * Remove context menu.
+	 */
+
 	public void removeContextMenu() {
 		viewer.getControl().setMenu(null);
 	}
 
-	public void setContent(Container container) {
-		this.container = container;
-		viewer.setInput(container);
+	/**
+	 * Set content of the TreeViewer and add possible adapters at container.
+	 * 
+	 * @param con
+	 *            that holds the content
+	 */
+
+	public void setContent(AbstractContainer con) {
+
+		// dispose() remove all adapters from former content
+		if (container != null)
+			container.dispose();
+
+		container = con;
+
+		// marriage of view and container
+		container.setView(this);
+
+		// nothing happens if container is a read-only
+		container.addAdapter();
+		viewer.setInput(con);
 		viewer.expandAll();
 		registerModelView();
+
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setFocus() {
 		// Not in use
 	}
 
+	/**
+	 * Get TreeViewer of the SearchView.
+	 * 
+	 * @return TreeViewer
+	 */
+
 	public TreeViewer getTreeViewer() {
 		return viewer;
+	}
+
+	/**
+	 * Update content.
+	 */
+
+	public void updateContent() {
+
+		if (container != null) {
+			container.dispose();
+			container.refresh();
+			container.addAdapter();
+		}
+		updateUI();
+
+	}
+
+	/**
+	 * Refresh TreeViewer while content has changed.
+	 */
+
+	public void updateUI() {
+		viewer.refresh();
 	}
 
 }
