@@ -18,7 +18,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 
@@ -98,10 +97,6 @@ public class NewSubjectIdentifierAction extends Action {
 			
 			// CommandStack execution to enable undo/redo operation
 			commandStack.execute(command);
-
-			// fire event for listeners for eventually reactions
-			if (getListeners().length != 0)
-				firePropertyChange(new PropertyChangeEvent(this, IContextMenuAction.ADD_SUBJECTIDENTIFIER, "", result));
 
 		}
 
