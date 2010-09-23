@@ -12,6 +12,7 @@ package de.topicmapslab.onotoa.search.searchImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,8 +20,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import de.topicmapslab.onotoa.search.container.BasicTopicTypeContainer;
 import de.topicmapslab.onotoa.search.util.SearchData;
-import de.topicmapslab.onotoa.search.views.Container;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -45,7 +46,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
  * @author Sebastian Lippert
  */
 
-public class BasicTopicTypeSearcher implements ISearchImpl {
+public class BasicTopicTypeSearcher implements ISearcher {
 
 	private String lowerCaseSearchString, containerLabel;
 	private final String searchString;
@@ -60,7 +61,7 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	private final List<TopicType> topicList;
 	private final IProgressMonitor progressMonitor;
 
-	private Container con;
+	private BasicTopicTypeContainer con;
 	private int validateType;
 	private boolean isValidated;
 
@@ -95,13 +96,13 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 
 		containerLabel = "Search for \"" + searchData.getSearchString() + "\" " + " (Type: " + searchData.getType()
 		        + ")";
-		
-		con = new Container(containerLabel);
+
+		con = new BasicTopicTypeContainer(containerLabel, this);
 
 	}
 
 	/**
-	 * Search TopicTypes
+	 * {@inheritDoc}
 	 */
 
 	public void fetchResult() {
@@ -120,6 +121,8 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 			else
 				// check constraints of searched TopicTypes
 				cleanTopicTypeSearch();
+
+		createContainer();
 	}
 
 	/**
@@ -495,27 +498,31 @@ public class BasicTopicTypeSearcher implements ISearchImpl {
 	 * @return Result container
 	 */
 
-	public Container getResult() {
-
-		Iterator it = resultList.iterator();
-		while (it.hasNext()) {
-			con.getList().add(it.next());
-		}
+	public BasicTopicTypeContainer getResult() {
+		Collections.sort((List<? extends Comparable>) con.getContentList());
 		return con;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	/**
+     * 
+     */
+	private void createContainer() {
+		Iterator it = resultList.iterator();
+		while (it.hasNext()) {
+			con.addListElement(it.next());
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
-	public List<TopicType> getReslutList() {
 
-		List<TopicType> resultList = new ArrayList<TopicType>();
-		for (Object wrapper : con.getList())
-			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
+	public void refresh() {
 
-		return resultList;
+		resultList.clear();
+		con.removeAllElements();
+		fetchResult();
+
 	}
 
 }

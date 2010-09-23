@@ -10,8 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.commands;
 
-import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -48,8 +46,7 @@ public class ListSubjectIdentifierHandler extends AbstractHandler {
 		TopicMapSchema schema = view.getCurrentTopicMapSchema();
 		SubjectIdentifierSearcher siSearcher = new SubjectIdentifierSearcher(
 				schema);
-		Collections.sort((List<? extends Comparable>) siSearcher.getContainer()
-				.getList());
+		siSearcher.fetchResult();
 
 		try {
 
@@ -59,7 +56,7 @@ public class ListSubjectIdentifierHandler extends AbstractHandler {
 			else
 				activePage.activate(searchView);
 
-			searchView.setContent(siSearcher.getContainer());
+			searchView.setContent(siSearcher.getResult());
 			searchView.removeContextMenu();
 
 		} catch (PartInitException e) {
