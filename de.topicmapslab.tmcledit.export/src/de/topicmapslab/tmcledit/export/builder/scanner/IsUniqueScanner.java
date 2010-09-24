@@ -33,7 +33,7 @@ public class IsUniqueScanner extends AbstractConstraintScanner {
 			matching.setContext((Construct) r.getResults().get(0));
 						
 			matching.addAffectedConstruct((Construct) r.getResults().get(1));
-			addAffectedConstructs((Collection<?>) r.getResults().get(2), matching);
+			matching.addAffectedConstruct((Construct) r.getResults().get(2));
 			addMatching(matching);
 		}
 

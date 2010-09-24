@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.export.builder.scanner;
 
 import java.util.Collection;
 
+import org.tmapi.core.Construct;
 import org.tmapi.core.Topic;
 
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
@@ -31,7 +32,11 @@ public class OccurrenceDatatypeScanner extends AbstractConstraintScanner {
 	    	matching.setContext((Topic) result.getResults().get(0));
 	    	matching.addArgument(result.getResults().get(1));
 	    	matching.addAffectedConstruct((Topic) result.getResults().get(2));
-	    	addAffectedConstructs((Collection<?>) result.getResults().get(3), matching);
+	    	Object tmp = result.getResults().get(3);
+	    	if (tmp instanceof Collection<?>)
+	    		addAffectedConstructs((Collection<?>) tmp, matching);
+	    	else
+	    		matching.addAffectedConstruct((Construct) tmp);
 	    	addMatching(matching);
 	    }
     }

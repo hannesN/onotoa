@@ -39,7 +39,12 @@ public class HasScopeScanner extends AbstractConstraintScanner {
 			matching.addArgument(res.get(3));
 			
 			matching.addAffectedConstruct((Construct) res.get(4));
-			addAffectedConstructs((Collection<?>) res.get(5), matching);
+			Object tmp = res.get(5);
+			if (tmp instanceof Collection<?>) {
+				addAffectedConstructs((Collection<?>) tmp, matching);
+			} else {
+				matching.addAffectedConstruct((Construct) tmp);
+			}
 			addMatching(matching);
 		}
 
