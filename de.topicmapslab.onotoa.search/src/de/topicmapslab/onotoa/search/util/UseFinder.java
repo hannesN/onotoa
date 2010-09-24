@@ -82,13 +82,13 @@ public class UseFinder {
 		}
 		
 		for (NameTypeConstraint ntc : tt.getNameConstraints()) {
-			if (ntc.getType().equals(type)) {
+			if (type.equals(ntc.getType())) {
 				tn.addChild(new TreeNode(ntc, TreeNodeType.Nametype));
 			}
 		}
 		
 		for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
-			if (otc.getType().equals(type)) {
+			if (type.equals(otc.getType())) {
 				tn.addChild(new TreeNode(otc, TreeNodeType.OccurrenceType));
 			}
 		}
