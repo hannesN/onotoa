@@ -75,20 +75,34 @@ This Agreement is governed by the laws of the State of New York andthe intellect
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gef" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common.ui" version="2.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit.ui" version="2.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit" version="2.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.transaction" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.workspace" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.forms" version="3.3.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.apache.batik.ext.awt"/>
       <import plugin="org.apache.batik.svggen"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.workspace" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.gef" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.httpclient" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.core.resources" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.kuria.annotation" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.kuria.runtime" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.kuria.swtgenerator" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.swt" version="3.5.0" match="compatible"/>
+      <import plugin="org.eclipse.jface" version="3.5.0" match="compatible"/>
+      <import plugin="org.apache.commons.logging"/>
    </requires>
 
    <plugin
