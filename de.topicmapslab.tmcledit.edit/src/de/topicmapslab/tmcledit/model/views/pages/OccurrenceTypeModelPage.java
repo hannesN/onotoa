@@ -87,7 +87,7 @@ public class OccurrenceTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 			"xsd:unsignedInt",
 			"xsd:unsignedLong",
 			"xsd:unsignedShort",
-			"xsd:WGS84"
+			"http://en.wikipedia.org/wiki/World_Geodetic_System_1984"
 	};
 	
 	private Text datatypeText;
