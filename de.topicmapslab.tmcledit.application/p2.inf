@@ -26,6 +26,3 @@ requires.2.namespace = org.eclipse.equinox.p2.iu
 requires.2.name = de.topicmapslab.tmcledit.core_feature.feature.group
 requires.2.range = [1.1.0, 2.0.0)
 
-requires.3.namespace = org.eclipse.equinox.p2.iu
-requires.3.name = de.topicmapslab.engine_feature.feature.group
-requires.3.range = [1.0.0, 2.0.0)

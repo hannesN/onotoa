@@ -418,11 +418,13 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
     			RolePlayerConstraint rpc1 = createRolePlayerConstraintFor(currAtc, rcc.getRole(), rcc.getPlayer());
     			if (rpc1==null) {
     				Activator.getDefault().logInfo("Invalid role combination constraint in :"+at.getName());
+    				continue;
     			}
     			
     			RolePlayerConstraint rpc2 = createRolePlayerConstraintFor(currAtc, rcc.getOtherRole(), rcc.getOtherPlayer());
     			if (rpc2==null) {
     				Activator.getDefault().logInfo("Invalid role combination constraint in :"+at.getName());
+    				continue;
     			}
     				
     			atc.getPlayerConstraints().add(rpc1);
