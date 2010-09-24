@@ -23,6 +23,7 @@
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
 <repository location="http://update.topicmapslab.de"/>
 </location>
+<location path="${eclipse_home}/dropins/deltaPack" type="Directory"/>
 </locations>
 <environment>
 <os>linux</os>
