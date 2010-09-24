@@ -75,8 +75,24 @@ This Agreement is governed by the laws of the State of New York andthe intellect
    </url>
 
    <requires>
-      <import feature="de.topicmapslab.tmcledit.core_feature" version="1.1.1" match="greaterOrEqual"/>
-      <import feature="de.topicmapslab.engine_feature" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="de.topicmapslab.tmcledit"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.tmapi" version="2.0.2" match="compatible"/>
+      <import plugin="de.topicmapslab.onotoa.selection" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.tmql4j" version="2.6.4" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.ctmwriter" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.majortom.core" version="1.1.1" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.majortom.inmemory" version="1.1.1" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.majortom.model" version="1.1.1" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.geotype" version="0.0.2" match="greaterOrEqual"/>
+      <import plugin="com.semagia.mio.syntaxpacknodeps"/>
+      <import plugin="de.topicmapslab.tmcledit.edit"/>
+      <import plugin="org.tmapix.io"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="slf4j.api"/>
    </requires>
 
    <plugin
