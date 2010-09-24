@@ -86,7 +86,8 @@ public class OccurrenceTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 			"xsd:unsignedByte",
 			"xsd:unsignedInt",
 			"xsd:unsignedLong",
-			"xsd:unsignedShort"
+			"xsd:unsignedShort",
+			"xsd:WGS84"
 	};
 	
 	private Text datatypeText;
