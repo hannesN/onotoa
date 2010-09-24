@@ -32,7 +32,7 @@ public class RegExpConstraintScanner extends AbstractConstraintScanner {
 			matching.setContext((Topic) result.getResults().get(0));
 			matching.addArgument(result.getResults().get(1));
 			matching.addAffectedConstruct((Construct) result.getResults().get(2));
-			addAffectedConstructs((Collection<?>) result.getResults().get(3), matching);
+			matching.addAffectedConstruct((Construct) result.getResults().get(3));
 			addMatching(matching);
 		}
     }

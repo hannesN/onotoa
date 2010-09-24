@@ -41,7 +41,12 @@ public class HasRoleScanner extends AbstractConstraintScanner {
 			matching.addArgument(r.get(3));
 			
 			matching.addAffectedConstruct((Construct) r.get(4));
-			addAffectedConstructs((Collection<?>) r.get(5), matching);
+			Object tmp = r.get(5);
+			if (tmp instanceof Collection<?>) {
+				addAffectedConstructs((Collection<?>) tmp, matching);
+			} else {
+				matching.addAffectedConstruct((Construct) tmp);
+			}
 			
 			addMatching(matching);
 		}

@@ -33,7 +33,7 @@ public class HasSubjectLocatorScanner extends AbstractConstraintScanner {
 	    	matching.addArgument(result.getResults().get(2));
 	    	matching.addArgument(result.getResults().get(3));
 	    	matching.addAffectedConstruct((Topic) result.getResults().get(4));
-	    	addAffectedConstructs((Collection<?>) result.getResults().get(5), matching);
+	    	matching.addAffectedConstruct((Topic) result.getResults().get(5));
 	    	addMatching(matching);
 	    }
     }

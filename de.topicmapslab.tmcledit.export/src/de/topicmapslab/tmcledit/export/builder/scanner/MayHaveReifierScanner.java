@@ -32,7 +32,11 @@ public class MayHaveReifierScanner extends AbstractConstraintScanner {
 			matching.setContext((Topic) result.getResults().get(0));
 			matching.addArgument(result.getResults().get(1));
 			matching.addAffectedConstruct((Construct) result.getResults().get(2));
-			addAffectedConstructs((Collection<?>) result.getResults().get(3), matching);
+			Object tmp = result.getResults().get(3);
+			if (tmp instanceof Collection<?>)
+				addAffectedConstructs((Collection<?>) tmp, matching);
+			else
+				matching.addAffectedConstruct((Construct) tmp);
 			addMatching(matching);
 		}
 	}

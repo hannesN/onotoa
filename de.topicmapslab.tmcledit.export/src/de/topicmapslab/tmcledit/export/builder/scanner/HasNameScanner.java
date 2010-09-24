@@ -12,6 +12,7 @@ package de.topicmapslab.tmcledit.export.builder.scanner;
 
 import java.util.Collection;
 
+import org.tmapi.core.Construct;
 import org.tmapi.core.Topic;
 
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
@@ -26,18 +27,23 @@ import de.topicmapslab.tmql4j.resultprocessing.model.IResult;
 public class HasNameScanner extends AbstractConstraintScanner {
 
 	protected void parseResults(IQuery q) {
-	    for (IResult result : q.getResults()) {
-	    	TemplateMatching matching = new TemplateMatching();
-	    	matching.setContext((Topic) result.getResults().get(0));
-	    	matching.addArgument(result.getResults().get(1));
-	    	matching.addArgument(result.getResults().get(2));
-	    	matching.addArgument(result.getResults().get(3));
-	    	matching.addAffectedConstruct((Topic) result.getResults().get(4));
-	    	addAffectedConstructs((Collection<?>) result.getResults().get(5), matching);
-	    	addMatching(matching);
-	    }
-    }
-	
+		for (IResult result : q.getResults()) {
+			TemplateMatching matching = new TemplateMatching();
+			matching.setContext((Topic) result.getResults().get(0));
+			matching.addArgument(result.getResults().get(1));
+			matching.addArgument(result.getResults().get(2));
+			matching.addArgument(result.getResults().get(3));
+			matching.addAffectedConstruct((Topic) result.getResults().get(4));
+			Object tmp = result.getResults().get(5);
+			if (tmp instanceof Collection<?>) {
+				addAffectedConstructs((Collection<?>) tmp, matching);
+			} else {
+				matching.addAffectedConstruct((Construct) tmp);
+			}
+			addMatching(matching);
+		}
+	}
+
 	protected String getQuery() {
 		String query = "FOR $c IN // tmcl:topic-name-constraint "
 		        + "RETURN  ( $c >> traverse tmcl:constrained-topic-type, "
