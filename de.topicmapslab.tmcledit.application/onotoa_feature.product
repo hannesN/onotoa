@@ -239,6 +239,7 @@ litigation.
       <feature id="thaiopensource.jing_feature" version="2009.11.11"/>
       <feature id="org.slf4j.nop_feature" version="1.6.1"/>
       <feature id="org.postgresql.jdbc.driver_feature" version="1.0.0"/>
+      <feature id="com.sun.codemodel_feature" version="2.4.0"/>
    </features>
 
    <configurations>

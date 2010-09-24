@@ -4,6 +4,7 @@
 <target name="Onotoa Target Platform">
 <locations>
 <location path="${eclipse_home}" type="Profile"/>
+<location path="${eclipse_home}/dropins/deltaPack" type="Directory"/>
 <location includeAllPlatforms="false" includeMode="slicer" type="InstallableUnit">
 <unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
 <unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
@@ -23,7 +24,6 @@
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
 <repository location="http://update.topicmapslab.de"/>
 </location>
-<location path="${eclipse_home}/dropins/deltaPack" type="Directory"/>
 </locations>
 <environment>
 <os>linux</os>
