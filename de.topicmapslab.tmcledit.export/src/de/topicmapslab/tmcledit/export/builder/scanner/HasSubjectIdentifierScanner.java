@@ -10,9 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder.scanner;
 
-import java.util.Collection;
-
-import org.tmapi.core.Construct;
+import org.tmapi.core.Association;
 import org.tmapi.core.Topic;
 
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
@@ -34,7 +32,7 @@ public class HasSubjectIdentifierScanner extends AbstractConstraintScanner {
 	    	matching.addArgument(result.getResults().get(2));
 	    	matching.addArgument(result.getResults().get(3));
 	    	matching.addAffectedConstruct((Topic) result.getResults().get(4));
-	    	matching.addAffectedConstruct((Topic) result.getResults().get(5));
+	    	matching.addAffectedConstruct((Association) result.getResults().get(5));
 	    	addMatching(matching);
 	    }
     }

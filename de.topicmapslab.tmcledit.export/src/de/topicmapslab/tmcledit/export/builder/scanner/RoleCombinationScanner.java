@@ -39,7 +39,12 @@ public class RoleCombinationScanner extends AbstractConstraintScanner {
 			tm.addArgument(rl.get(4));
 			
 			tm.addAffectedConstruct((Construct) rl.get(5));
-			addAffectedConstructs((Collection<?>) rl.get(6), tm);
+			Object tmp = r.get(6);
+			if (tmp instanceof Collection<?>) {
+				addAffectedConstructs((Collection<?>) tmp, tm);
+			} else {
+				tm.addAffectedConstruct((Construct) tmp);
+			}
 			
 			
 			addMatching(tm);

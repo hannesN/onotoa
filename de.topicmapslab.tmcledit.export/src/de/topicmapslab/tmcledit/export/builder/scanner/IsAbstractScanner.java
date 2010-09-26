@@ -10,8 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder.scanner;
 
-import java.util.Collection;
-
 import org.tmapi.core.Construct;
 import org.tmapi.core.Topic;
 
