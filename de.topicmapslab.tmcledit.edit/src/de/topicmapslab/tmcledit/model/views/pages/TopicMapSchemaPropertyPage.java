@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.views.pages;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
@@ -64,6 +65,13 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 
 	public TopicMapSchema getCastedModel() {
 		return (TopicMapSchema) getModel();
+	}
+	
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+	    super.setCommandStack(commandStack);
+	    if (prefixPage!=null)
+	    	prefixPage.setCommandStack(commandStack);
 	}
 
 	protected Composite createPage(CTabFolder folder) {
