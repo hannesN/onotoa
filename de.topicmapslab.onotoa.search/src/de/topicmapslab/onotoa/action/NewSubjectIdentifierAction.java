@@ -21,11 +21,10 @@ import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 
-import de.topicmapslab.onotoa.search.searchImpl.SubjectIdentifierSearcher;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * 
@@ -71,13 +70,9 @@ public class NewSubjectIdentifierAction extends Action {
 
 			        public String isValid(String newText) {
 
-				        // check if input is valid
-				        SubjectIdentifierSearcher searcher = new SubjectIdentifierSearcher(
-				                (TopicMapSchema) topicType.eContainer());
-
-				        // unique test
-				        if (searcher.getIdentifierList().contains(newText))
-					        return "This Subject Identifier is already in use!";
+			        	// unique test
+						if (ModelIndexer.getTopicIndexer().getTopicTypeBySubjectIdentifier(newText) != null)
+							return "This Subject Identifier is already in use!";
 
 				        // empty test
 				        if (newText.equals(""))
