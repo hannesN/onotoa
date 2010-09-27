@@ -32,7 +32,6 @@ import de.topicmapslab.onotoa.aranuka.codegen.commands.SetAnnotationsCommand;
 import de.topicmapslab.onotoa.aranuka.codegen.model.FieldData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorDataContentProvider;
-import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
 
 /**
