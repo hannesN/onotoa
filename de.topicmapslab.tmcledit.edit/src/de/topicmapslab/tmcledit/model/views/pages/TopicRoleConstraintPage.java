@@ -30,6 +30,7 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
@@ -165,9 +166,8 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 	protected AssociationType getAssociationType() {
 		try {
 			return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			TmcleditEditPlugin.logError(e);
 		}
 		return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
 	}
