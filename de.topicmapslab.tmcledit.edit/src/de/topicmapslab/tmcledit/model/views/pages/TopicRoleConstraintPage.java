@@ -33,33 +33,31 @@ import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
-public class TopicRoleConstraintPage extends AbstractEMFModelPage{
+public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 	private Label playerLabel;
 	private Text cardMinText;
 	private Text cardMaxText;
 	private Combo roleCombo;
 	private CTabItem item;
-	
+
 	private AssociationTypeModelPage assPage;
 
-	
 	public TopicRoleConstraintPage() {
 		super("role");
 	}
-	
+
 	@Override
 	public void updateUI() {
 		RolePlayerConstraint rpc = getCastedModel();
-		
+
 		updateCombo();
-		
+
 		cardMinText.setText(rpc.getCardMin());
 		cardMaxText.setText(rpc.getCardMax());
 		playerLabel.setText(rpc.getPlayer().getName());
 		super.updateUI();
 	}
-	
-	
+
 	@Override
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
@@ -68,13 +66,12 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage{
 		item = new CTabItem(folder, SWT.NONE);
 		item.setText("Topic Role Constraint");
 		Composite comp = createRoleConstraintProps(folder, toolkit);
-		
+
 		item.setControl(comp);
-		
+
 		assPage = new AssociationTypeModelPage();
 		assPage.createItems(folder);
 	}
-	
 
 	@Override
 	protected void setEnabled(boolean enabled) {
@@ -84,18 +81,17 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage{
 	@Override
 	public void dispose() {
 		assPage.dispose();
-	    super.dispose();
+		super.dispose();
 	}
-	
+
 	@Override
 	public void setCommandStack(CommandStack commandStack) {
 		super.setCommandStack(commandStack);
 		assPage.setCommandStack(commandStack);
 	}
-	
-	private Composite createRoleConstraintProps(Composite parent,
-			FormToolkit toolkit) {
-		
+
+	private Composite createRoleConstraintProps(Composite parent, FormToolkit toolkit) {
+
 		Composite comp = toolkit.createComposite(parent);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginWidth = 5;
@@ -103,56 +99,54 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage{
 		gridLayout.verticalSpacing = 0;
 		gridLayout.horizontalSpacing = 2;
 		comp.setLayout(gridLayout);
-		
+
 		toolkit.createLabel(comp, "Player:");
-		playerLabel = toolkit.createLabel(comp, "", SWT.READ_ONLY|SWT.BORDER|SWT.NO_FOCUS);
+		playerLabel = toolkit.createLabel(comp, "", SWT.READ_ONLY | SWT.BORDER | SWT.NO_FOCUS);
 		playerLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		playerLabel.setCapture(false);
 		playerLabel.setBackground(comp.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		
-		
+
 		toolkit.createLabel(comp, "Role:");
 		roleCombo = new Combo(comp, SWT.BORDER);
 		roleCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		toolkit.adapt(roleCombo);
-		
+
 		roleCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				int index = roleCombo.getSelectionIndex();
-				if (index>-1) {
+				if (index > -1) {
 					RoleConstraint rc = getAssociationType().getRoles().get(index);
 					CompoundCommand ccmd = new CompoundCommand();
-					
+
 					SetRoleConstraintCommand cmd = new SetRoleConstraintCommand(getCastedModel(), rc);
 					ccmd.append(cmd);
-									
+
 					getCommandStack().execute(ccmd);
 				}
 			}
 		});
-		
-				
+
 		toolkit.createLabel(comp, "cardMin:");
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		cardMinText = toolkit.createText(comp, "", SWT.BORDER);
 		cardMinText.setLayoutData(gd);
 		CardTextObserver.observe(cardMinText, this, true);
-				
+
 		toolkit.createLabel(comp, "cardMax:");
 		cardMaxText = toolkit.createText(comp, "", SWT.BORDER);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		cardMaxText.setLayoutData(gd);
 		CardTextObserver.observe(cardMaxText, this, false);
-		
+
 		return comp;
 	}
-	
+
 	private void updateCombo() {
 		int index = -1;
-		int i=0;
+		int i = 0;
 		roleCombo.removeAll();
-		if (getAssociationType()==null)
+		if (getAssociationType() == null)
 			return;
 		for (RoleConstraint rc : getAssociationType().getRoles()) {
 			roleCombo.add(rc.getType().getName());
@@ -160,49 +154,79 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage{
 				index = i;
 			i++;
 		}
-		if (index>-1)
+		if (index > -1)
 			roleCombo.select(index);
 	}
-	
+
 	protected RolePlayerConstraint getCastedModel() {
 		return (RolePlayerConstraint) getModel();
 	}
 
 	protected AssociationType getAssociationType() {
 		try {
-	        return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
-        } catch (Throwable e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-        }
-        return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
+			return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
 	}
-	
+
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
+		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
 			return;
+		
+		if (notification.getEventType() == Notification.SET) {
+			if (notification.getNotifier().equals(getCastedModel().eContainer())) {
+				System.out.println("New type, remove old adapter");
+				AssociationType at = (AssociationType) notification.getOldValue();
+				if (at != null)
+					at.eAdapters().remove(this);
+				
+				at = (AssociationType) notification.getNewValue();
+				if (at != null)
+					at.eAdapters().add(this);
+					
+			}
+			
+		}
+		
 		updateUI();
 	}
 
 	@Override
 	public void setModel(Object model) {
 		RolePlayerConstraint rpc = (RolePlayerConstraint) getCastedModel();
-		
-		if ( (rpc!=null) && (rpc.getRole()!=null) )
-			rpc.getRole().eAdapters().remove(this);
-		
-		if ( (rpc!=null) && (rpc.getPlayer()!=null) )
-			rpc.getPlayer().eAdapters().remove(this);
-		
+
+		if (rpc != null) {
+			if (rpc.getRole() != null)
+				rpc.getRole().eAdapters().remove(this);
+
+			if (rpc.getPlayer() != null)
+				rpc.getPlayer().eAdapters().remove(this);
+			
+			AssociationTypeConstraint atc = (AssociationTypeConstraint) rpc.eContainer();
+			atc.eAdapters().remove(this);
+			if (atc.getType()!=null) {
+				atc.getType().eAdapters().remove(this);
+			}
+		}
+
 		super.setModel(model);
-		
+
 		rpc = (RolePlayerConstraint) model;
-		
-		if (rpc.getRole()!=null)
+
+		if (rpc.getRole() != null)
 			rpc.getRole().eAdapters().add(this);
-		
+
 		rpc.getPlayer().eAdapters().add(this);
 		
+		AssociationTypeConstraint atc = (AssociationTypeConstraint) rpc.eContainer();
+		atc.eAdapters().add(this);
+		if (atc.getType()!=null) {
+			atc.getType().eAdapters().add(this);
+		}
+
 		if (assPage != null)
 			assPage.setModel(getAssociationType());
 	}
