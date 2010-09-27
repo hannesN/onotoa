@@ -31,4 +31,5 @@ public interface IAnnotationKeys {
 	public static final String OPTIONAL = "de.topicmapslab.kuria.optional";
 	public static final String TYPELABEL = "de.topicmapslab.kuria.typelabel";
 	public static final String CREATE_NEW = "de.topicmapslab.kuria.createnew";
+	public static final String WEIGHT = "de.topicmapslab.kuria.weight";
 }

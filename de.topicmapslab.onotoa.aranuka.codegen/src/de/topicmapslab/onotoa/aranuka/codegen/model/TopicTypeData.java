@@ -10,7 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.aranuka.codegen.model;
 
-import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.*;
+import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.CATEGORY;
+import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.NAME;
 import de.topicmapslab.kuria.annotation.widgets.Editable;
 import de.topicmapslab.kuria.annotation.widgets.TextField;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;

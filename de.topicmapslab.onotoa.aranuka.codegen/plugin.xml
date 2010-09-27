@@ -75,6 +75,13 @@
             validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.RowsValidator">
       </annotationprovider>
       <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.weight"
+            internal="false"
+            name="de.topicmapslab.kuria.weight"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.WeightValidator"
+            proposalprovider="de.topicmapslab.onotoa.aranuka.codegen.annotation.WeightProvider">
+      </annotationprovider>
+      <annotationprovider
             id="de.topicmapslab.onotoa.kuria.codegen.optional"
             internal="false"
             name="de.topicmapslab.kuria.optional"
