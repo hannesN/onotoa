@@ -21,11 +21,10 @@ import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 
-import de.topicmapslab.onotoa.search.searchImpl.SubjectLocatorSearcher;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * 
@@ -71,13 +70,9 @@ public class NewSubjectLocatorAction extends Action {
 
 			        public String isValid(String newText) {
 
-			        	 // check if input is valid
-				        SubjectLocatorSearcher searcher = new SubjectLocatorSearcher(
-				                (TopicMapSchema) topicType.eContainer());
-				      
 				        // unique test
-				        if (searcher.getLocatorList().contains(newText))
-					        return "This Subject Locator is already in use!";
+				        if (ModelIndexer.getTopicIndexer().getTopicTypeBySubjectLocator(newText) != null)
+							return "This Subject Locator is already in use!";
 
 				        // empty test
 
