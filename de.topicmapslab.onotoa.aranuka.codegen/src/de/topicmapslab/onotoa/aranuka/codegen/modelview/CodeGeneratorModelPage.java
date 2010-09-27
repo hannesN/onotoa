@@ -10,6 +10,11 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.aranuka.codegen.modelview;
 
+import java.util.EventObject;
+
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -23,16 +28,18 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
 import de.topicmapslab.kuria.swtgenerator.edit.InputMask;
+import de.topicmapslab.onotoa.aranuka.codegen.commands.SetAnnotationsCommand;
 import de.topicmapslab.onotoa.aranuka.codegen.model.FieldData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorDataContentProvider;
+import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
 
 /**
  * @author Hannes Niederhausen
  *
  */
-public class CodeGeneratorModelPage extends AbstractModelPage {
+public class CodeGeneratorModelPage extends AbstractModelPage implements CommandStackListener {
 
 	
 	private Composite control;
@@ -77,11 +84,28 @@ public class CodeGeneratorModelPage extends AbstractModelPage {
 			 */
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				SetAnnotationsCommand cmd = new SetAnnotationsCommand((GeneratorData) inputMask.getModel());
+				// prepare data which means copy old values
+				cmd.prepare();
+				// persisting the data which means the annotations are created and set
 				inputMask.persist();
+				// now execute the command which stores the new values
+				getCommandStack().execute(cmd);
 			}
 		});
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setCommandStack(CommandStack commandStack) {
+		if (getCommandStack()!=null)
+			getCommandStack().removeCommandStackListener(this);
+	    super.setCommandStack(commandStack);
+	    if (getCommandStack()!=null)
+	    	getCommandStack().addCommandStackListener(this);
+	}
 
 	private void adapt(FormToolkit toolkit, Control control) {
 		toolkit.adapt(control, true, true);
@@ -132,5 +156,31 @@ public class CodeGeneratorModelPage extends AbstractModelPage {
     @Override
     public String getId() {
         return "de.topcimapslab.codegenerator.annotaionpage";
+    }
+
+
+	/**
+     * {@inheritDoc}
+     */
+    @Override
+    public void commandStackChanged(EventObject arg0) {
+	    Object source = arg0.getSource();
+	    if (source instanceof CommandStack) {
+	    	Command cmd = ((CommandStack) source).getMostRecentCommand();
+			if (cmd instanceof SetAnnotationsCommand) {
+	    		if (((SetAnnotationsCommand) cmd).getData().equals(inputMask.getModel()))
+	    			inputMask.refresh();
+	    	}
+	    }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dispose() {
+    	if (getCommandStack()!=null)
+    		getCommandStack().removeCommandStackListener(this);
+        super.dispose();
     }
 }
