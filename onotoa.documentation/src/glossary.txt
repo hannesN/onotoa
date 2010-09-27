@@ -1,0 +1,123 @@
+Glossary
+========
+[glossary]
+
+Association Constraint::
+	An association constraint is used to connect an association type with its roles to topic types, namely players.
+
+Association Type::
+	An association type is a specialized topic type. Only instances of an association type should be used to type an association.
+
+Bundle::
+	A bundle or plug-in is a component of an eclipse application.
+
+Cardinality::
+	The cardinality specifies the amount of usage of an element. _CardMin_ defines how often the
+	element must occur at least. _CardMax_ defines the maximum occurrence of the element.
+
+Constraint::
+	A constraint is a topic which represents a definition of a specific topic type. The topic name constraint for instance is used to
+	define, that a topic has names of a specific type. The topic constraint may have some occurrences, which specify additional 
+	restrictions, for instance the cardinality.
+
+Content Assist::
+	For some text fields _Onotoa_ will provide proposals based on the characters already entered. The proposals are shown in a list
+	under the text field. You can select one by using the up and down arrow keys. If some information of the proposal exists, it
+	will be shown in another window on the right of the list. To select a proposal press enter. The whole process is called content assist.
+
+Diagram::
+	A diagram is a view of the Topic Maps schema. It consists of graphical representation of schema elements
+	and connects them if they have a relationship, e.g. the supertype-subtype relationship.
+
+Diagram Element::
+	A diagram element is any element which is part of the diagram. Basically a diagram element is the visualization of a schema element. 
+	
+Domain Diagram::
+	A Domain Diagram is an abstract view of the Topic Maps schema. It consists of graphical representations of schema elements
+	and connects them if they have a relationship, e.g. the "Kind of" relationship, but in a more abstract way than the normal diagram. 
+	Some informations, e.g. cardinalities, aren´t displayed in this diagram type. 
+
+Feature::
+	A feature bundles a set of plug-ins. Additionally it contains meta information, such as  the licence model or copyright information.
+	
+Model::
+	The set of schema and diagram elements is called the model.
+
+Model View::
+	The Model View shows all elements of the Topic Maps schema in a tree viewer. It also
+	lists the diagrams. 
+	
+Name Constraint::
+	A topic may have a number of names of different types. By using name constraints the number of names and their type
+	may be specified for a topic type. All instances of that topic type need to fulfill this constraint.
+
+Name Type::
+	A name type is a specialized topic type. Only instances of a name type should be used to type a name.
+	
+Node::
+	A node is an element in the tree of the *Model View*. It has a label, mostly the name of the
+	schema element it represents and may have child elements.
+
+Occurrence Constraint::
+	A topic may have a number of occurrences of different types. By using occurrence constraints the number of occurrences and their type
+	may be specified for a topic type. All instances of that topic type need to fulfill this constraint.
+
+Occurrence Type::
+	An occurrence type is a specialized topic type. Only instances of an occurrence type should be used to type an occurrence.
+	
+Palette::
+	The palette provides the functionality of the editor. It contains a set of tools to create new elements.
+	
+Perspective::
+	A perspective defines what views are shown in eclipse and where they are located.
+
+Property Details View::
+	The Property Details View contains property pages for every element of an schema and provides input masks to change their 
+	properties.
+
+Schema Element::
+	A schema element is an element in the schema like a topic or role type, or any constraint added to the schema element.
+
+Role Constraint::
+	A role constraint specifies, which role type and cardinality belongs to an association type. This means any association of that type must
+	have a number of roles within the range specified in the constraints cardinality. 	
+
+Role Type::
+	A role type is a specialized topic type. Only instances of a role type should be used as roles of association.
+	
+Subject Identifier Constraint::
+	The subject identifier constraints specifies the number of identifiers a topic type may have. It also has a property which defines the 
+	syntax of the identifier with a regular expression.
+	
+Subject Locator Constraint::
+	The subject locator constraints specifies the number of locators a topic type may have. It also has a property which defines the 
+	syntax of the locator with a regular expression.
+
+TMCL::
+	The Topic Maps Constraint Language is the specification of the schema language for Topic Maps. See http://www.isotopicmaps.org/tmcl for
+	more information.
+		
+TMDM::
+	The Topic Maps Data Model is the specification of the standard Topic Maps. See http://www.isotopicmaps.org/sam/sam-model/ for
+	more information.
+	
+		
+Topic Maps Schema::
+	A Topic Maps Schema is a description of the form of a topic map. It consists of topic type and 
+	constraints.
+	
+Topic Maps Schema Element::
+	Topic Maps schema element is simply a part of the schema. This may be any constraint or topic type (and its specializations).
+
+Topic Role Constraint::
+	A topic role constraint specifies which topic type is the player of an association of a specific association type. It also specifies
+	which role it plays. This constraint also specifies the number of players playing the role.  
+	
+Topic Type::
+	A topic type is a topic which is used in a type-instance relationship. Types are defined in a Topic Maps schema
+	and the instances are created in the topic map.
+	
+Update Site::
+	An update site is a web page containing eclipse features.  Features can be installed via the install dialogue of _Onotoa_. 
+	If a new version of an installed feature is available on an 
+	update site, _Onotoa_ will realizes and offer an update.

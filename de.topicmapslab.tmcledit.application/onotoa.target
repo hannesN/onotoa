@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="Onotoa Target Platform">
+<locations>
+<location path="${eclipse_home}" type="Profile"/>
+<location path="${eclipse_home}/dropins/deltaPack" type="Directory"/>
+<location includeAllPlatforms="false" includeMode="slicer" type="InstallableUnit">
+<unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
+<unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
+<unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
+<unit id="net.sf.json_feature.feature.group" version="2.3.0"/>
+<unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
+<unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
+<unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
+<unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
+<unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
+<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.1.2"/>
+<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
+<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1"/>
+<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.1.2"/>
+<unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
+<unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
+<repository location="http://update.topicmapslab.de"/>
+</location>
+<location includeAllPlatforms="false" includeMode="slicer" type="InstallableUnit">
+<unit id="de.topicmapslab.maiana.io_feature.feature.group" version="1.0.0.201009271037"/>
+<repository location="http://genny.topicmapslab.de/update"/>
+</location>
+</locations>
+<launcherArgs>
+<vmArgs>-Dosgi.requiredJavaVersion=1.5 -XX:MaxPermSize=256m -Xms40m -Xmx512m</vmArgs>
+</launcherArgs>
+</target>

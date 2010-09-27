@@ -1,0 +1,20 @@
+== Export an schema ==
+
+After creating the schema with _Onotoa_ you might use it to validate a topic map. For that you need a schema 
+according to the TMCL standard. _Onotoa_ provides an export mechanism to create such schema topic map.
+
+To export a schema use the menu *File->Export...*. A dialog will appear and a list of export wizards are 
+proposed. If you use _Onotoa_ in an eclipse installation you will see a lot of wizards. In the standalone
+version you should see a dialog like in <<export_dialog>>.
+
+.Create an occurrence
+[[export_dialog]]
+image::images/export_dialog.png[scaledwidth="50%"] 
+
+A TMCL schema is a topic map and therefor different notations for the serialisation are possible. You can choose between CTM or XTM.
+The following dialog will ask for the filename and if the schema information should be exported too. The schema information are 
+associations which connect every schema element with a topic representing the schema.
+
+After pressing finish the topic map is created from the schema and serielised in the given file.
+
+NOTE: If you choose CTM the TMCL templates will be used to create the topic map.

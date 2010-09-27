@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.TopicTypeSearchHandler"
+            id="de.topicmapslab.onotoa.search.commands.SearchTopicType"
+            name="Search Topic Type">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifierSearchHandler"
+            id="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifier"
+            name="List Topics without Identifier">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
+            id="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
+            name="List All Subject Identifiers">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.ListSubjectLocatorHandler"
+            id="de.topicmapslab.onotoa.search.commands.ListSubjectLocatorHandler"
+            name="List All Subject Locators">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.GeneralSearchUseCommandHandler"
+            id="de.topicmapslab.onotoa.search.use"
+            name="Find Usage">
+      </command>
+      <command
+            defaultHandler="de.topicmapslab.onotoa.search.commands.CleanSchemaHandler"
+            id="de.topicmapslab.onotoa.search.commands.CleanSchema"
+            name="Clean Schema">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="search"
+               label="&amp;Search">
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.SearchTopicType"
+                  label="Search &amp;Topic Type"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.TopicsWithoutIdentifier"
+                  label="List Topics &amp;without Identifier"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.ListSubjectIdentifierHandler"
+                  label="List All Subject &amp;Identifiers"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.ListSubjectLocatorHandler"
+                  label="List All Subject &amp;Locators"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.use"
+                  id="use"
+                  label="Find &amp;Use"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.topicmapslab.onotoa.search.commands.CleanSchema"
+                  label="&amp;Clean Schema"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="de.topicmapslab.onotoa.search.commands.SearchUseCommandHandler"
+            commandId="de.topicmapslab.onotoa.search.use">
+         <activeWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="or">
+                  <instanceof
+                        value="de.topicmapslab.tmcledit.model.TopicType">
+                  </instanceof>
+               </iterate>
+            </with>
+         </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="de.topicmapslab.onotoa.search.use"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="de.topicmapslab.tmcledit.application.bindingScheme"
+            sequence="CTRL+F">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="de.topicmapslab.tmcledit.extensions.OnotoaPerspective">
+         <view
+               id="de.topicmapslab.onotoa.search.views.SearchView"
+               ratio="0.5"
+               relationship="top"
+               relative="de.topicmapslab.tmcledit.model.views.NotesView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="de.topicmapslab.onotoa.search"
+            name="Sample Category">
+      </category>
+      <view
+            category="de.topicmapslab.tmcledit.extensions"
+            class="de.topicmapslab.onotoa.search.views.SearchView"
+            icon="icons/loupe.gif"
+            id="de.topicmapslab.onotoa.search.views.SearchView"
+            name="Search">
+      </view>
+   </extension>
+
+</plugin>
