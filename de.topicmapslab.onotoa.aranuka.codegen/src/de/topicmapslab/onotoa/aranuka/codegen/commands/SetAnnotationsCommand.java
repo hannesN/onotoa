@@ -41,6 +41,7 @@ public class SetAnnotationsCommand extends AbstractCommand {
      */
 	public SetAnnotationsCommand(GeneratorData data) {
 		this.data = data;
+		setLabel("Set Annoation...");
 	}
 
 	/**
