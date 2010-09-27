@@ -23,7 +23,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
 import de.topicmapslab.kuria.swtgenerator.edit.InputMask;
+import de.topicmapslab.onotoa.aranuka.codegen.model.FieldData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorDataContentProvider;
 import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
 
 /**
@@ -59,11 +61,13 @@ public class CodeGeneratorModelPage extends AbstractModelPage {
 		control.setLayout(new GridLayout());
 		AnnotationBindingFactory fac = new AnnotationBindingFactory();
 		fac.addClass(GeneratorData.class);
+		fac.addClass(FieldData.class);
 		fac.addClass(modelType);
 	
 		WidgetGenerator widgetGenerator = new WidgetGenerator(fac.getBindingContainer());
 		inputMask = widgetGenerator.generateEditable(modelType, control);
 		inputMask.getComposite().setLayoutData(new GridData(GridData.FILL_BOTH));
+		inputMask.setContentProvider(new GeneratorDataContentProvider());
 		adapt(toolkit, inputMask.getComposite());
 		
 		Button applyButton = toolkit.createButton(control, "Apply", SWT.PUSH);

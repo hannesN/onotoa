@@ -4,6 +4,7 @@
 package de.topicmapslab.onotoa.aranuka.codegen.modelview;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,19 @@ import java.util.Map;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.AbstractSelectionAction;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.CreateAnnotationHub;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.DeleteAnnotationHub;
+import de.topicmapslab.onotoa.aranuka.codegen.model.CharacteristicData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.IdentifierData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.TopicMapSchemaData;
+import de.topicmapslab.onotoa.aranuka.codegen.model.TopicTypeData;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.NameTypeConstraint;
+import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
+import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.extension.IModelExtension;
@@ -62,7 +75,41 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public List<AbstractModelViewNode> getChildNodes(ModelView modelView, AbstractModelViewNode parentNode) {
+
+		if (parentNode.getModel() instanceof TMCLConstruct) {
+
+			AbstractModelViewNode n = getNodeForConstruct(modelView, (TMCLConstruct) parentNode.getModel());
+
+			if (n != null)
+				return Arrays.asList(n);
+		}
+
 		return Collections.emptyList();
+	}
+
+	/**
+	 * @param model
+	 * @return
+	 */
+	private AbstractModelViewNode getNodeForConstruct(ModelView modelView, TMCLConstruct model) {
+		GeneratorData data = null;
+		if (model instanceof TopicMapSchema) {
+			data = new TopicMapSchemaData(model);
+		} else if (model instanceof TopicType) {
+			data = new TopicTypeData(model);
+		} else if ((model instanceof NameTypeConstraint) || (model instanceof OccurrenceTypeConstraint)) {
+			data = new CharacteristicData(model);
+		} else if ((model instanceof SubjectIdentifierConstraint) 
+				|| (model instanceof SubjectLocatorConstraint)
+				|| (model instanceof ItemIdentifierConstraint)) {
+			data = new IdentifierData(model);
+		} else {
+			return null;
+		}
+		
+		GeneratorDataNode n = new GeneratorDataNode(modelView);
+		n.setModel(data);
+		return n;
 	}
 
 	/**
@@ -82,14 +129,14 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	@Override
 	public IModelPage getPageFor(IModelExtension extension) {
 		@SuppressWarnings("unchecked")
-        Class<? extends GeneratorData> extClass = (Class<? extends GeneratorData>) extension.getClass();
-		
+		Class<? extends GeneratorData> extClass = (Class<? extends GeneratorData>) extension.getClass();
+
 		CodeGeneratorModelPage page = getPageMap().get(extClass);
 		if (page == null) {
 			page = new CodeGeneratorModelPage(extClass);
 			putPage(extClass, page);
 		}
-		
+
 		return page;
 	}
 
@@ -124,7 +171,7 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 			((AbstractSelectionAction) a).dispose();
 		}
 		actions = null;
-		
+
 		for (CodeGeneratorModelPage page : getPageMap().values()) {
 			page.dispose();
 		}
@@ -145,5 +192,5 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 			pageMap = new HashMap<Class<? extends GeneratorData>, CodeGeneratorModelPage>();
 		pageMap.put(key, val);
 	}
-	
+
 }

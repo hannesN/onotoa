@@ -52,9 +52,14 @@ public abstract class GeneratorData implements IModelExtension {
 
 	protected boolean getBooleanValueOf(String annotationKey) {
 
+		return getBooleanValueOf(annotationKey, false);
+	}
+	
+	protected boolean getBooleanValueOf(String annotationKey, boolean defaultVal) {
+
 		String val = getValueOf(annotationKey);
 		if (val == null)
-			return false;
+			return defaultVal;
 
 		return Boolean.parseBoolean(val);
 	}
@@ -91,6 +96,10 @@ public abstract class GeneratorData implements IModelExtension {
 		return null;
 	}
 
+	protected void setValue(String annoKey, int value) {
+		setValue(annoKey, Integer.toString(value));
+	}
+	
 	protected void setValue(String annoKey, String value) {
 		Annotation a = getAnnotationOf(annoKey);
 		if (a == null) {
