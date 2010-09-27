@@ -67,12 +67,8 @@ This Agreement is governed by the laws of the State of New York andthe intellect
    </license>
 
    <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.core.resources"/>
       <import plugin="de.topicmapslab.tmcledit" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="de.topicmapslab.tmcledit.edit" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit" version="2.5.0" match="greaterOrEqual"/>
       <import plugin="org.tmapi"/>
       <import plugin="org.tmapix.io"/>
       <import plugin="org.tmapix.core"/>
