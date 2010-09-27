@@ -83,6 +83,8 @@ public class SetRoleAction extends AbstractCommandStackAction {
 		}
 		RoleConstraint rc = ModelFactory.eINSTANCE.createRoleConstraint();
 		rc.setType(data.role);
+		rc.setCardMin("1");
+		rc.setCardMax("1");
 		data.rc = rc;
 		AddRoleConstraintCommand c = new AddRoleConstraintCommand(at, rc);
 
