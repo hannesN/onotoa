@@ -24,13 +24,11 @@
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
 <repository location="http://update.topicmapslab.de"/>
 </location>
+<location includeAllPlatforms="false" includeMode="slicer" type="InstallableUnit">
+<unit id="de.topicmapslab.maiana.io_feature.feature.group" version="1.0.0.201009271037"/>
+<repository location="http://genny.topicmapslab.de/update"/>
+</location>
 </locations>
-<environment>
-<os>linux</os>
-<ws>gtk</ws>
-<arch>x86_64</arch>
-<nl>en_US</nl>
-</environment>
 <launcherArgs>
 <vmArgs>-Dosgi.requiredJavaVersion=1.5 -XX:MaxPermSize=256m -Xms40m -Xmx512m</vmArgs>
 </launcherArgs>
