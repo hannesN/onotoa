@@ -191,7 +191,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private CreateSubjectLocatorConstraintAction createSubjectLocatorConstraintAction;
 
 	/**
-	 * Helper method to retrtieve the view from the PlatformUI
+	 * Helper method to retrieve the view from the PlatformUI
 	 * @return the instance of the {@link ModelView} or <code>null</code>
 	 */
 	public static final ModelView getInstance() {
@@ -1047,7 +1047,17 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				return 2;
 			}
 
-			return super.category(element);
+			// extensions to the topic map schema should be the first nodes,
+			// else the extension nodes are at the and of the list
+			AbstractModelViewNode n = (AbstractModelViewNode) element;
+			if (!(n instanceof TreeObject)) {
+				if (n.getParent().getModel() instanceof TopicMapSchema)
+					return 0;
+				else
+					return 6;
+			}
+			
+			return 1;
 		}
 	}
 
