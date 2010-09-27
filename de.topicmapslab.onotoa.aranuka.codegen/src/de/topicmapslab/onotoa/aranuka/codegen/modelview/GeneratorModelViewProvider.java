@@ -77,7 +77,14 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	public List<AbstractModelViewNode> getChildNodes(ModelView modelView, AbstractModelViewNode parentNode) {
 
 		if (parentNode.getModel() instanceof TMCLConstruct) {
-
+			
+			// check if the node already has a generator node
+			for (AbstractModelViewNode n : parentNode.getChildrenList()) {
+				if (n instanceof GeneratorDataNode)
+					return Collections.emptyList();
+			}
+			
+			
 			AbstractModelViewNode n = getNodeForConstruct(modelView, (TMCLConstruct) parentNode.getModel());
 
 			if (n != null)
