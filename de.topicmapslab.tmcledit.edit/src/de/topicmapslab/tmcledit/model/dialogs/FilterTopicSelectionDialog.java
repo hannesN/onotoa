@@ -38,28 +38,34 @@ import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 	private static final String SETTINGS = FilterTopicSelectionDialog.class.getCanonicalName();
-	
+
 	private List<KindOfTopicType> kindOfTopicType = null;
 
 	private TopicTypeComparator topicTypeComparator;
-	
+
 	private List<TopicType> excludeList;
-	
+	private List<TopicType> contentList;
+
+	public FilterTopicSelectionDialog(Shell shell, List<TopicType> contentList) {
+		this(shell, false);
+		this.contentList = contentList;
+	}
+
 	public FilterTopicSelectionDialog(Shell shell, KindOfTopicType... kind) {
 		this(shell, false);
 		this.kindOfTopicType = Arrays.asList(kind);
 		setInitialPattern("?");
 	}
-	
+
 	public FilterTopicSelectionDialog(Shell shell, boolean multi) {
 		super(shell, multi);
-		
+
 		setListLabelProvider(new ListLabelProvider());
 		setDetailsLabelProvider(new DetailLabelProvider());
 		this.kindOfTopicType = Collections.emptyList();
 		setInitialPattern("?");
 	}
-	
+
 	@Override
 	protected Control createExtendedContentArea(Composite parent) {
 		return new Composite(parent, SWT.NONE);
@@ -69,60 +75,68 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	protected ItemsFilter createFilter() {
 		return new TopicFilter();
 	}
-	
-	@Override
-	protected void fillContentProvider(AbstractContentProvider contentProvider,
-			ItemsFilter itemsFilter, IProgressMonitor progressMonitor)
-			throws CoreException {
-		List<TopicType> types = ModelIndexer.getTopicIndexer().getTopicTypes();
-		progressMonitor.beginTask("Filling Topic List", types.size());
 
-		for (TopicType type : types) {
-			if (kindOfTopicType.size()>0) {
-				if (kindOfTopicType.contains(type.getKind())) {
+	@Override
+	protected void fillContentProvider(AbstractContentProvider contentProvider, ItemsFilter itemsFilter,
+	        IProgressMonitor progressMonitor) throws CoreException {
+
+		if (contentList != null) {
+			progressMonitor.beginTask("Filling Topic List", contentList.size());
+			for (TopicType type : contentList) {
+				contentProvider.add(type, itemsFilter);
+				progressMonitor.worked(1);
+			}
+		} else {
+
+			List<TopicType> types = ModelIndexer.getTopicIndexer().getTopicTypes();
+			progressMonitor.beginTask("Filling Topic List", types.size());
+
+			for (TopicType type : types) {
+				if (kindOfTopicType.size() > 0) {
+					if (kindOfTopicType.contains(type.getKind())) {
+						contentProvider.add(type, itemsFilter);
+					}
+				} else {
 					contentProvider.add(type, itemsFilter);
 				}
-			} else {
-				contentProvider.add(type, itemsFilter);
+				progressMonitor.worked(1);
 			}
-			progressMonitor.worked(1);
 		}
-		
-		
+
 	}
 
 	@Override
 	protected IDialogSettings getDialogSettings() {
 		IDialogSettings settings = TmcleditEditPlugin.getPlugin().getDialogSettings().getSection(SETTINGS);
-		if (settings==null)
+		if (settings == null)
 			settings = TmcleditEditPlugin.getPlugin().getDialogSettings().addNewSection(SETTINGS);
-		
+
 		return settings;
 	}
 
 	@Override
 	public String getElementName(Object item) {
-		return ((TopicType)item).getName();
+		return ((TopicType) item).getName();
 	}
 
 	@Override
 	protected Comparator getItemsComparator() {
-		if (topicTypeComparator==null)
+		if (topicTypeComparator == null)
 			topicTypeComparator = new TopicTypeComparator();
-		
+
 		return topicTypeComparator;
 	}
 
 	public void setExcludeList(List<TopicType> excludeList) {
-	    this.excludeList = excludeList;
-    }
-	
+		this.excludeList = excludeList;
+	}
+
 	public List<TopicType> getExcludeList() {
-		if (excludeList==null)
+		if (excludeList == null)
 			return Collections.emptyList();
 		return excludeList;
-    }
-	
+	}
+
 	@Override
 	protected IStatus validateItem(Object item) {
 		return Status.OK_STATUS;
@@ -132,10 +146,10 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		public int compare(TopicType o1, TopicType o2) {
 			if (o1.equals(o2))
 				return 0;
-			
+
 			TopicType tt1 = (TopicType) o1;
 			TopicType tt2 = (TopicType) o2;
-			
+
 			return tt1.getName().compareTo(tt2.getName());
 		}
 	}
@@ -151,15 +165,15 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		public boolean matchItem(Object item) {
 
 			TopicType tt = (TopicType) item;
-			
+
 			if (getExcludeList().contains(tt))
 				return false;
-			
+
 			return matches(tt.getName());
 		}
-		
+
 	}
-	
+
 	private class ListLabelProvider implements ILabelProvider {
 
 		public Image getImage(Object element) {
@@ -167,9 +181,9 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		}
 
 		public String getText(Object element) {
-			if (element==null)
+			if (element == null)
 				return "";
-				
+
 			TopicType tt = (TopicType) element;
 			return tt.getName();
 		}
@@ -186,9 +200,9 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 		public void removeListener(ILabelProviderListener listener) {
 		}
-		
+
 	}
-	
+
 	private class DetailLabelProvider implements ILabelProvider {
 
 		public Image getImage(Object element) {
@@ -196,7 +210,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		}
 
 		public String getText(Object element) {
-			if (element==null)
+			if (element == null)
 				return "";
 			TopicType tt = (TopicType) element;
 			return tt.getName();
@@ -214,7 +228,7 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 		public void removeListener(ILabelProviderListener listener) {
 		}
-		
+
 	}
-	
+
 }

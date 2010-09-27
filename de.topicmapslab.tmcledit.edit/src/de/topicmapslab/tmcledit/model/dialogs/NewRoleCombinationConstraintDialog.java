@@ -14,6 +14,7 @@
 package de.topicmapslab.tmcledit.model.dialogs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
@@ -34,19 +35,21 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
-import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
-import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddRoleCombinationConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class NewRoleCombinationConstraintDialog extends Dialog implements DisposeListener {
 
@@ -54,34 +57,71 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 	private Text playerText;
 	private Text otherRoleText;
 	private Text otherPlayerText;
-	
+
 	private RoleCombinationConstraint roleCombination;
-	
+
 	private List<TopicType> possibleRoles;
-	
+	private List<TopicType> possiblePlayers;
+	private HashMap<TopicType, List<TopicType>> rolePlayerMap;
+	private HashMap<TopicType, List<TopicType>> playerRoleMap;
+
 	private Button roleButton;
 	private Button playerButton;
 	private Button otherRoleButton;
 	private Button otherPlayerButton;
-	
+
 	private TopicType role;
 	private TopicType player;
 	private TopicType otherRole;
 	private TopicType otherPlayer;
-	
+
 	private AssociationType at;
-	
-	
+
 	public NewRoleCombinationConstraintDialog(Shell parentShell, AssociationType at) {
 		super(parentShell);
 		possibleRoles = new ArrayList<TopicType>(at.getRoles().size());
+		possiblePlayers = new ArrayList<TopicType>();
 		this.at = at;
-		for (RoleConstraint rc : at.getRoles()) {
-			if (rc.getType()!=null)
-				possibleRoles.add((TopicType) rc.getType());
+
+		TopicType role;
+		TopicType player;
+
+		rolePlayerMap = new HashMap<TopicType, List<TopicType>>();
+		playerRoleMap = new HashMap<TopicType, List<TopicType>>();
+
+		for (AbstractTypedConstraint abstractConstraint : ModelIndexer.getConstraintIndexer().getConstraintsByType(at)) {
+			if (abstractConstraint instanceof AssociationTypeConstraint)
+				for (RolePlayerConstraint rpc : ((AssociationTypeConstraint) abstractConstraint).getPlayerConstraints()) {
+
+					role = rpc.getRole().getType();
+					player = rpc.getPlayer();
+
+					if (role != null && player != null) {
+
+						possiblePlayers.add(player);
+						if (!possibleRoles.contains(role))
+							possibleRoles.add(role);
+
+						if (!rolePlayerMap.containsKey(role)) {
+							List<TopicType> playerList = new ArrayList<TopicType>();
+							playerList.add(player);
+							rolePlayerMap.put(role, playerList);
+						} else
+							rolePlayerMap.get(role).add(player);
+
+						if (!playerRoleMap.containsKey(player)) {
+							List<TopicType> roleList = new ArrayList<TopicType>();
+							roleList.add(role);
+							playerRoleMap.put(player, roleList);
+						} else
+							playerRoleMap.get(player).add(role);
+
+					}
+				}
+
 		}
 	}
-	
+
 	public NewRoleCombinationConstraintDialog(Shell parentShell, AssociationType at, RoleCombinationConstraint rcc) {
 		this(parentShell, at);
 		this.roleCombination = rcc;
@@ -99,76 +139,80 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 	}
 
 	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		// create OK and Cancel buttons by default
+		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+		validate();
+	}
+
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		comp.setLayout(new GridLayout(3, false));
-		
+
 		Label l = new Label(comp, SWT.NONE);
 		l.setText("&Role:");
-		roleText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
+		roleText = new Text(comp, SWT.BORDER | SWT.READ_ONLY);
 		roleText.addDisposeListener(this);
 		roleText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		roleButton = new Button(comp, SWT.PUSH);
 		roleButton.setText("...");
-		
+
 		l = new Label(comp, SWT.NONE);
 		l.setText("&Player:");
-		playerText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
+		playerText = new Text(comp, SWT.BORDER | SWT.READ_ONLY);
 		playerText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		playerButton = new Button(comp, SWT.PUSH);
 		playerButton.setText("...");
-		
+
 		l = new Label(comp, SWT.NONE);
 		l.setText("&Other Role:");
-		otherRoleText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
+		otherRoleText = new Text(comp, SWT.BORDER | SWT.READ_ONLY);
 		otherRoleText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		otherRoleButton = new Button(comp, SWT.PUSH);
 		otherRoleButton.setText("...");
-		
+
 		l = new Label(comp, SWT.NONE);
 		l.setText("O&ther Player:");
-		otherPlayerText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
+		otherPlayerText = new Text(comp, SWT.BORDER | SWT.READ_ONLY);
 		otherPlayerText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		otherPlayerButton = new Button(comp, SWT.PUSH);
 		otherPlayerButton.setText("...");
-		
+
 		hookButtonListeners();
-		
+
 		// filling textfields
-		if (roleCombination!=null) {
+		if (roleCombination != null) {
 			roleText.setText(roleCombination.getRole().getName());
 			otherRoleText.setText(roleCombination.getOtherRole().getName());
 			playerText.setText(roleCombination.getPlayer().getName());
 			otherPlayerText.setText(roleCombination.getOtherPlayer().getName());
-			
+
 			role = roleCombination.getRole();
 			otherRole = roleCombination.getOtherRole();
 			player = roleCombination.getPlayer();
 			otherPlayer = roleCombination.getOtherPlayer();
-			
-			
-		} 
-		
+
+		}
+
 		validate();
 		return super.createDialogArea(parent);
 	}
 
-
 	private void validate() {
 		boolean finished = true;
-		if (roleCombination==null)
+		if (role == null)
 			finished = false;
-		else if (role==null)
+		else if (player == null)
 			finished = false;
-		else if (player==null)
+		else if (otherRole == null)
 			finished = false;
-		else if (otherRole==null)
+		else if (otherPlayer == null)
 			finished = false;
-		else if (otherPlayer==null)
-			finished = false;
-		
-		if (getButton(IDialogConstants.OK_ID)!=null)
+
+		if (getButton(IDialogConstants.OK_ID) != null)
 			getButton(IDialogConstants.OK_ID).setEnabled(finished);
 	}
 
@@ -178,32 +222,35 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 		roleCombination.setRole(role);
 		roleCombination.setOtherPlayer(otherPlayer);
 		roleCombination.setOtherRole(otherRole);
-		
+
 		return new AddRoleCombinationConstraintCommand(at, roleCombination);
 	}
-	
+
 	public Command getModifyCommand() {
 		CompoundCommand cmd = new CompoundCommand();
-		
-		if (roleCombination==null)
+
+		if (roleCombination == null)
 			cmd.append(getCreateCommand());
 		else {
 			if (!roleCombination.getPlayer().equals(player)) {
-				cmd.append(new GenericSetCommand(roleCombination, ModelPackage.ROLE_COMBINATION_CONSTRAINT__PLAYER, player));
+				cmd.append(new GenericSetCommand(roleCombination, ModelPackage.ROLE_COMBINATION_CONSTRAINT__PLAYER,
+				        player));
 			}
 			if (!roleCombination.getOtherPlayer().equals(otherPlayer)) {
-				cmd.append(new GenericSetCommand(roleCombination, ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_PLAYER, otherPlayer));
+				cmd.append(new GenericSetCommand(roleCombination,
+				        ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_PLAYER, otherPlayer));
 			}
 			if (!roleCombination.getRole().equals(role)) {
 				cmd.append(new GenericSetCommand(roleCombination, ModelPackage.ROLE_COMBINATION_CONSTRAINT__ROLE, role));
 			}
 			if (!roleCombination.getOtherRole().equals(otherRole)) {
-				cmd.append(new GenericSetCommand(roleCombination, ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE, otherRole));
+				cmd.append(new GenericSetCommand(roleCombination, ModelPackage.ROLE_COMBINATION_CONSTRAINT__OTHER_ROLE,
+				        otherRole));
 			}
 		}
-		return cmd;		
+		return cmd;
 	}
-	
+
 	public void widgetDisposed(DisposeEvent e) {
 	}
 
@@ -211,55 +258,72 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 		roleButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE, KindOfTopicType.ROLE_TYPE);
-				if (dlg.open()==Dialog.OK) {
-					TopicType rt =  (TopicType) dlg.getFirstResult();
+
+				if (player != null)
+					possibleRoles = playerRoleMap.get(player);
+
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(roleButton.getShell(), possibleRoles);
+				if (dlg.open() == Dialog.OK) {
+					TopicType rt = (TopicType) dlg.getFirstResult();
 
 					role = rt;
 					roleText.setText(role.getName());
 				}
+
+				validate();
 			}
 		});
 		playerButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE);
-				if (dlg.open()==Dialog.OK) {
+
+				if (role != null)
+					possiblePlayers = rolePlayerMap.get(role);
+
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(roleButton.getShell(), possiblePlayers);
+				if (dlg.open() == Dialog.OK) {
 					TopicType p = (TopicType) dlg.getFirstResult();
 					player = p;
 					playerText.setText(player.getName());
 				}
+				validate();
 			}
 		});
-		
+
 		otherPlayerButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE);
-				if (dlg.open()==Dialog.OK) {
+
+				if (otherRole != null)
+					possiblePlayers = rolePlayerMap.get(otherRole);
+
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(roleButton.getShell(), possiblePlayers);
+				if (dlg.open() == Dialog.OK) {
 					TopicType op = (TopicType) dlg.getFirstResult();
-					
+
 					otherPlayer = op;
 					otherPlayerText.setText(op.getName());
 				}
+				validate();
 			}
 		});
 		otherRoleButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(
-						roleButton.getShell(), KindOfTopicType.TOPIC_TYPE, KindOfTopicType.ROLE_TYPE);
-				if (dlg.open()==Dialog.OK) {
+
+				if (otherPlayer != null)
+					possibleRoles = playerRoleMap.get(otherPlayer);
+
+				FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(roleButton.getShell(), possibleRoles);
+				if (dlg.open() == Dialog.OK) {
 					TopicType rt = (TopicType) dlg.getFirstResult();
-					
+
 					otherRole = rt;
 					otherRoleText.setText(otherRole.getName());
 				}
+				validate();
 			}
 		});
 	}
-	
+
 }
