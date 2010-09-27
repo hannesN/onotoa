@@ -130,8 +130,11 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 
 				TopicIndexer instance = ModelIndexer.getTopicIndexer();
 				List<TopicType> list = new ArrayList<TopicType>();
-				list.addAll(instance.getRoleTypes());
-				list.addAll(instance.getTopicTypes());
+			
+				for (TopicType tt : instance.getTopicTypes()){
+					if(tt.getKind().getValue() == 0 || tt.getKind().getValue() == 3)
+						list.add(tt);
+				}
 				
 				for (RoleConstraint rc : getCastedModel().getRoles()) {
 					if (rc.getType()!=null)
