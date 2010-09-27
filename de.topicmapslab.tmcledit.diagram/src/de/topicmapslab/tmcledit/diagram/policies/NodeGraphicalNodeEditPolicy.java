@@ -22,6 +22,7 @@ import org.eclipse.gef.requests.ReconnectRequest;
 import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.TMCLEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.AssociationNodeEditPart;
+import de.topicmapslab.tmcledit.diagram.editparts.TypeNodeEditPart;
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
@@ -51,6 +52,10 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
 		if ((request.getSourceEditPart() instanceof AssociationNodeEditPart)
 				&& (request.getTargetEditPart() instanceof AssociationNodeEditPart))
+			return null;
+		
+		if ((request.getSourceEditPart() instanceof TypeNodeEditPart)
+				&& (request.getTargetEditPart() instanceof TypeNodeEditPart))
 			return null;
 
 		Node node = (Node) request.getTargetEditPart().getModel();
