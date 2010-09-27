@@ -178,7 +178,6 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 		
 		if (notification.getEventType() == Notification.SET) {
 			if (notification.getNotifier().equals(getCastedModel().eContainer())) {
-				System.out.println("New type, remove old adapter");
 				AssociationType at = (AssociationType) notification.getOldValue();
 				if (at != null)
 					at.eAdapters().remove(this);
