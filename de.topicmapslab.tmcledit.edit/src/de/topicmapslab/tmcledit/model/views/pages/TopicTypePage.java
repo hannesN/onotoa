@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
@@ -96,7 +97,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 	protected CTabItem item;
 	private Text overlapText;
 	private ControlDecoration nameDecorator;
-	
+
 	private TypedCardinalityConstraintWidget reifiesControl;
 
 	public TopicTypePage() {
@@ -114,9 +115,9 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		comp.setLayout(new GridLayout(3, false));
 
 		toolkit.createLabel(comp, "Name:");
-		
+
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
-		nameDecorator = new ControlDecoration(nameText, SWT.LEFT|SWT.TOP);
+		nameDecorator = new ControlDecoration(nameText, SWT.LEFT | SWT.TOP);
 		nameDecorator.setMarginWidth(2);
 		nameDecorator.setShowOnlyOnFocus(true);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -128,20 +129,21 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 				finishName();
 			}
 		});
-		
+
 		nameText.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
-				if (e.character==SWT.CR)
+				if (e.character == SWT.CR)
 					finishName();
 			}
 		});
-		
+
 		nameText.addModifyListener(new ModifyListener() {
-			
+
 			public void modifyText(ModifyEvent e) {
 				TopicType topic = ModelIndexer.getTopicIndexer().getTopicTypeByName(nameText.getText());
-				if ( (topic!=null) && (!topic.equals(getModel())) ){
-					nameDecorator.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_ERROR).getImage());
+				if ((topic != null) && (!topic.equals(getModel()))) {
+					nameDecorator.setImage(FieldDecorationRegistry.getDefault()
+					        .getFieldDecoration(FieldDecorationRegistry.DEC_ERROR).getImage());
 					nameDecorator.setDescriptionText("Name already in use!");
 					nameDecorator.show();
 				} else {
@@ -151,8 +153,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		});
 
 		toolkit.createLabel(comp, "Subject Identifiers:");
-		identifierText = toolkit.createText(comp, "", SWT.BORDER
-				| SWT.READ_ONLY);
+		identifierText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		identifierText.setLayoutData(gd);
 
@@ -161,17 +162,31 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicType type = (TopicType) getModel();
-				SubjectIdentifierListDialog dlg = new SubjectIdentifierListDialog(
-						identifierText.getShell());
+				SubjectIdentifierListDialog dlg = new SubjectIdentifierListDialog(identifierText.getShell());
 				dlg.setText("Subject Identifier...");
 				dlg.setTopicName(getCastedModel().getName());
 				dlg.setSelectedTopics(type.getIdentifiers());
 				dlg.setInputDescription("Please enter the new subject identifier.");
+				dlg.setValidator(new IInputValidator() {
+
+					public String isValid(String newText) {
+
+						// unique test
+						if (ModelIndexer.getTopicIndexer().getTopicTypeBySubjectIdentifier(newText) != null)
+							return "This Subject Identifier is already in use!";
+
+						// empty test
+						if (newText.equals(""))
+							return "";
+
+						return null;
+					}
+
+				});
 
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
-							new SetTopicTypeIdentifiersCommand(dlg
-									.getStringList(), (TopicType) getModel()));
+					        new SetTopicTypeIdentifiersCommand(dlg.getStringList(), (TopicType) getModel()));
 				}
 			}
 		});
@@ -186,17 +201,29 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TopicType type = (TopicType) getModel();
-				StringListSelectionDialog dlg = new StringListSelectionDialog(
-						identifierText.getShell());
+				StringListSelectionDialog dlg = new StringListSelectionDialog(identifierText.getShell());
 				dlg.setSelectedTopics(type.getLocators());
 				dlg.setInputDescription("Please enter the new subject locator.");
+				dlg.setValidator(new IInputValidator() {
 
+					public String isValid(String newText) {
+
+						// unique test
+						if (ModelIndexer.getTopicIndexer().getTopicTypeBySubjectLocator(newText) != null)
+							return "This Subject Locator is already in use!";
+
+						// empty test
+						if (newText.equals(""))
+							return "";
+
+						return null;
+					}
+
+				});
+				
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack()
-							.execute(
-									new SetTopicTypeLocatorsCommand(dlg
-											.getStringList(),
-											(TopicType) getModel()));
+					getCommandStack().execute(
+					        new SetTopicTypeLocatorsCommand(dlg.getStringList(), (TopicType) getModel()));
 				}
 			}
 		});
@@ -210,15 +237,12 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TopicSelectionDialog dlg = new TopicSelectionDialog(isAText
-						.getShell(), (TopicType) getModel());
+				TopicSelectionDialog dlg = new TopicSelectionDialog(isAText.getShell(), (TopicType) getModel());
 				dlg.setTitle("Is a Selection...");
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(
-							new SetIsACommand(dlg.getSelectedTopics(),
-									(TopicType) getModel()));
+					getCommandStack().execute(new SetIsACommand(dlg.getSelectedTopics(), (TopicType) getModel()));
 				}
 			}
 		});
@@ -232,23 +256,19 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText
-						.getShell(), (TopicType) getModel());
+				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText.getShell(), (TopicType) getModel());
 				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
 				dlg.setTitle("Kind of Selection...");
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(
-							new SetAkoCommand(dlg.getSelectedTopics(),
-									(TopicType) getModel()));
+					getCommandStack().execute(new SetAkoCommand(dlg.getSelectedTopics(), (TopicType) getModel()));
 				}
 			}
 
 		});
 
 		toolkit.createLabel(comp, "overlap:");
-		overlapText = toolkit
-				.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
+		overlapText = toolkit.createText(comp, "", SWT.BORDER | SWT.READ_ONLY);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 1;
 		overlapText.setLayoutData(gd);
@@ -256,15 +276,12 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TopicSelectionDialog dlg = new TopicSelectionDialog(
-						overlapText.getShell(), (TopicType) getModel());
+				TopicSelectionDialog dlg = new TopicSelectionDialog(overlapText.getShell(), (TopicType) getModel());
 				dlg.setSelectedTopics(((TopicType) getModel()).getOverlap());
 				dlg.setTitle("Overlap Selection...");
 
 				if (dlg.open() == Dialog.OK) {
-					getCommandStack().execute(
-							new SetOverlapCommand(dlg.getSelectedTopics(),
-									(TopicType) getModel()));
+					getCommandStack().execute(new SetOverlapCommand(dlg.getSelectedTopics(), (TopicType) getModel()));
 				}
 			}
 
@@ -279,8 +296,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				getCommandStack().execute(
-						new SetAbstractTopicTypeCommand((TopicType) getModel(),
-								abstractButton.getSelection()));
+				        new SetAbstractTopicTypeCommand((TopicType) getModel(), abstractButton.getSelection()));
 			}
 		});
 
@@ -288,7 +304,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 		return comp;
 	}
-	
+
 	@Override
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
@@ -296,42 +312,42 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		item.setText("Topic Type");
 		item.setControl(createPage(folder));
 	}
-	
+
 	public CTabItem getItem() {
-	    return item;
-    }
+		return item;
+	}
 
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
-			return; 
-		
-		if (notification.getNotifier()==getModel()) {
-			if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__NAME) {
+		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
+			return;
+
+		if (notification.getNotifier() == getModel()) {
+			if (notification.getFeatureID(Class.class) == ModelPackage.TOPIC_TYPE__NAME) {
 				updateName();
 				return;
 			}
-			if (notification.getFeatureID(Class.class)==ModelPackage.TOPIC_TYPE__IDENTIFIERS) {
+			if (notification.getFeatureID(Class.class) == ModelPackage.TOPIC_TYPE__IDENTIFIERS) {
 				updateIdentifierts();
 				return;
 			}
-			
-			if (notification.getFeatureID(EList.class)== ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS) {
+
+			if (notification.getFeatureID(EList.class) == ModelPackage.TOPIC_TYPE__TOPIC_REIFIES_CONSTRAINTS) {
 				refreshRefies();
-				
+
 			}
 
 		}
-			
+
 		updateUI();
 	}
 
 	private void refreshRefies() {
 		// widgets aren't initialized
-		if (cannotReifyButton==null)
+		if (cannotReifyButton == null)
 			return;
 		TopicType t = getCastedModel();
-		if (t.getTopicReifiesConstraints().size()==1) {
-			boolean cannotReify = t.getTopicReifiesConstraints().get(0).getType()==null;
+		if (t.getTopicReifiesConstraints().size() == 1) {
+			boolean cannotReify = t.getTopicReifiesConstraints().get(0).getType() == null;
 			cannotReifyButton.setSelection(cannotReify);
 			reifiesControl.setEnabled(!cannotReify);
 		} else {
@@ -339,7 +355,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 			reifiesControl.setEnabled(true);
 		}
 		reifiesControl.getTableViewer().refresh();
-    }
+	}
 
 	private void createReifiesControl(Composite parent, FormToolkit toolkit) {
 		toolkit.createLabel(parent, "Refies:");
@@ -351,138 +367,138 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		cannotReifyButton.setLayoutData(gd);
 		// placeholder
 		toolkit.createComposite(parent);
-		
+
 		reifiesControl = new TypedCardinalityConstraintWidget(parent, toolkit, getCommandStack(), false);
 		reifiesControl.setMaxCardinality(1);
 		hookReifierListener();
 	}
-	
+
 	@Override
 	public void setCommandStack(CommandStack commandStack) {
-	    super.setCommandStack(commandStack);
-	    if (reifiesControl!=null)
-	    	reifiesControl.setCommandStack(commandStack);
+		super.setCommandStack(commandStack);
+		if (reifiesControl != null)
+			reifiesControl.setCommandStack(commandStack);
 	}
-	
+
 	private void hookReifierListener() {
-			reifiesControl.getAddButton().addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
+		reifiesControl.getAddButton().addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
 
-					TopicIndexer instance = ModelIndexer.getTopicIndexer();
-					List<TopicType> list = new ArrayList<TopicType>();
-					list.addAll(instance.getTopicTypes());
-					list.removeAll(instance.getTypesByKind(KindOfTopicType.TOPIC_TYPE));
-					
-					
-					for (TopicReifiesConstraint rc : getCastedModel().getTopicReifiesConstraints()) {
-						if (rc.getType()!=null)
-							list.remove(rc.getType());
-					}
+				TopicIndexer instance = ModelIndexer.getTopicIndexer();
+				List<TopicType> list = new ArrayList<TopicType>();
+				list.addAll(instance.getTopicTypes());
+				list.removeAll(instance.getTypesByKind(KindOfTopicType.TOPIC_TYPE));
 
-					ListSelectionDialog dlg = new ListSelectionDialog(reifiesControl.getShell(), list, new ArrayContentProvider(),
-					        reifiesControl.new TopicLabelProvider(), "Choose the reifyable type");
-
-					if (dlg.open() == Dialog.OK) {
-						if (dlg.getResult().length == 0)
-							return;
-
-						List<TopicReifiesConstraint> trcl = new ArrayList<TopicReifiesConstraint>();
-						for (Object tt : dlg.getResult()) {
-							TopicReifiesConstraint trc = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
-							trc.setType((TopicType) tt);
-							trc.setCardMin("0");
-							trc.setCardMax("1");
-							trcl.add(trc);
-						}
-						AddTopicReifiesConstraintsCommand cmd = new AddTopicReifiesConstraintsCommand(getCastedModel(), trcl);
-						getCommandStack().execute(cmd);
-
-					}
-
+				for (TopicReifiesConstraint rc : getCastedModel().getTopicReifiesConstraints()) {
+					if (rc.getType() != null)
+						list.remove(rc.getType());
 				}
-			});
 
-			reifiesControl.getNewButton().addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.TOPIC_TYPE);
-					WizardDialog dlg = new WizardDialog(reifiesControl.getShell(), wizard);
+				ListSelectionDialog dlg = new ListSelectionDialog(reifiesControl.getShell(), list,
+				        new ArrayContentProvider(), reifiesControl.new TopicLabelProvider(),
+				        "Choose the reifyable type");
 
-					if (dlg.open() == Dialog.OK) {
-						CompoundCommand cmd = new CompoundCommand();
-						TopicType tt = wizard.getNewTopicType();
-						cmd.append(new CreateTopicTypeCommand((TopicMapSchema) getCastedModel().eContainer(), tt));
-						TopicReifiesConstraint trc = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
-						trc.setType(tt);
-						trc.setCardMin("0");
-						trc.setCardMax("1");
-						cmd.append(new AddTopicReifiesConstraintsCommand(getCastedModel(), trc));
-						if (cmd.canExecute())
-							getCommandStack().execute(cmd);
-
-					}
-				}
-			});
-
-			reifiesControl.getRemoveButton().addSelectionListener(new SelectionAdapter() {
-				@SuppressWarnings("unchecked")
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					IStructuredSelection sel = (IStructuredSelection) reifiesControl.getTableViewer().getSelection();
-
-					if (sel.isEmpty())
+				if (dlg.open() == Dialog.OK) {
+					if (dlg.getResult().length == 0)
 						return;
 
-					List<TopicReifiesConstraint> removeList = new ArrayList<TopicReifiesConstraint>();
-					Iterator<TopicReifiesConstraint> it = sel.iterator();
-					while (it.hasNext()) {
-						removeList.add(it.next());
+					List<TopicReifiesConstraint> trcl = new ArrayList<TopicReifiesConstraint>();
+					for (Object tt : dlg.getResult()) {
+						TopicReifiesConstraint trc = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
+						trc.setType((TopicType) tt);
+						trc.setCardMin("0");
+						trc.setCardMax("1");
+						trcl.add(trc);
 					}
-
-					RemoveTopicReifiesConstraintsCommand cmd = new RemoveTopicReifiesConstraintsCommand(getCastedModel(), removeList);
+					AddTopicReifiesConstraintsCommand cmd = new AddTopicReifiesConstraintsCommand(getCastedModel(),
+					        trcl);
 					getCommandStack().execute(cmd);
+
 				}
-			});
-			
-			reifiesControl.getTableViewer().addFilter(new ViewerFilter() {
-				@Override
-				public boolean select(Viewer viewer, Object parentElement, Object element) {
-					TopicReifiesConstraint trc = (TopicReifiesConstraint) element;
-					
-				    return trc.getType()!=null;
+
+			}
+		});
+
+		reifiesControl.getNewButton().addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.TOPIC_TYPE);
+				WizardDialog dlg = new WizardDialog(reifiesControl.getShell(), wizard);
+
+				if (dlg.open() == Dialog.OK) {
+					CompoundCommand cmd = new CompoundCommand();
+					TopicType tt = wizard.getNewTopicType();
+					cmd.append(new CreateTopicTypeCommand((TopicMapSchema) getCastedModel().eContainer(), tt));
+					TopicReifiesConstraint trc = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
+					trc.setType(tt);
+					trc.setCardMin("0");
+					trc.setCardMax("1");
+					cmd.append(new AddTopicReifiesConstraintsCommand(getCastedModel(), trc));
+					if (cmd.canExecute())
+						getCommandStack().execute(cmd);
+
 				}
-			});
-			
-			cannotReifyButton.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					if (cannotReifyButton.getSelection()) {
-						getCommandStack().execute(new SetCannotReifyConstraint(getCastedModel()));
-					} else {
-						getCommandStack().execute(
-								new RemoveTopicReifiesConstraintsCommand(getCastedModel(), 
-										getCastedModel().getTopicReifiesConstraints()));
-					}
-					reifiesControl.setEnabled(!cannotReifyButton.getSelection());
+			}
+		});
+
+		reifiesControl.getRemoveButton().addSelectionListener(new SelectionAdapter() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				IStructuredSelection sel = (IStructuredSelection) reifiesControl.getTableViewer().getSelection();
+
+				if (sel.isEmpty())
+					return;
+
+				List<TopicReifiesConstraint> removeList = new ArrayList<TopicReifiesConstraint>();
+				Iterator<TopicReifiesConstraint> it = sel.iterator();
+				while (it.hasNext()) {
+					removeList.add(it.next());
 				}
-			});
+
+				RemoveTopicReifiesConstraintsCommand cmd = new RemoveTopicReifiesConstraintsCommand(getCastedModel(),
+				        removeList);
+				getCommandStack().execute(cmd);
+			}
+		});
+
+		reifiesControl.getTableViewer().addFilter(new ViewerFilter() {
+			@Override
+			public boolean select(Viewer viewer, Object parentElement, Object element) {
+				TopicReifiesConstraint trc = (TopicReifiesConstraint) element;
+
+				return trc.getType() != null;
+			}
+		});
+
+		cannotReifyButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (cannotReifyButton.getSelection()) {
+					getCommandStack().execute(new SetCannotReifyConstraint(getCastedModel()));
+				} else {
+					getCommandStack().execute(
+					        new RemoveTopicReifiesConstraintsCommand(getCastedModel(), getCastedModel()
+					                .getTopicReifiesConstraints()));
+				}
+				reifiesControl.setEnabled(!cannotReifyButton.getSelection());
+			}
+		});
 	}
 
-	
 	@Override
 	protected void setEnabled(boolean enabled) {
 		item.getControl().setEnabled(enabled);
 		abstractButton.setEnabled(enabled);
 	}
-	
-	
+
 	@Override
 	public void updateUI() {
 		if (nameText != null) {
 			TopicType t = (TopicType) getModel();
 			if (t != null) {
-				
+
 				item.setText(getTopicType(t));
 
 				updateName();
@@ -531,9 +547,9 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 					overlapText.setText("");
 
 				abstractButton.setSelection(t.isAbstract());
-				
+
 				refreshRefies();
-				
+
 			} else {
 				item.setText("Topic Type");
 				nameText.setText("");
@@ -543,9 +559,10 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 				akoText.setText("");
 				abstractButton.setSelection(false);
 				overlapText.setText("");
-				// button can be null if we have a non topic type page (subclasses) 
+				// button can be null if we have a non topic type page
+				// (subclasses)
 				// because they don't call this.createAdditionalControls
-				if (cannotReifyButton!=null)
+				if (cannotReifyButton != null)
 					cannotReifyButton.setSelection(false);
 			}
 
@@ -555,46 +572,45 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 	@Override
 	public void setModel(Object model) {
-		if (getModel()!=null) {
+		if (getModel() != null) {
 			for (TopicReifiesConstraint trc : getCastedModel().getTopicReifiesConstraints()) {
 				trc.eAdapters().remove(this);
-				if (trc.getType()!=null)
+				if (trc.getType() != null)
 					trc.getType().eAdapters().remove(this);
 			}
 		}
-	    super.setModel(model);
-	    
-	    if (model==null)
-	    	return;
-	    if (reifiesControl!=null) {
-	    	reifiesControl.setInput(getCastedModel().getTopicReifiesConstraints());
-	    	if (((TopicType) model).getTopicReifiesConstraints().size()==1) {
-				boolean cannotReify = ((TopicType) model).getTopicReifiesConstraints().get(0).getType()==null;
+		super.setModel(model);
+
+		if (model == null)
+			return;
+		if (reifiesControl != null) {
+			reifiesControl.setInput(getCastedModel().getTopicReifiesConstraints());
+			if (((TopicType) model).getTopicReifiesConstraints().size() == 1) {
+				boolean cannotReify = ((TopicType) model).getTopicReifiesConstraints().get(0).getType() == null;
 				cannotReifyButton.setSelection(cannotReify);
 				reifiesControl.setEnabled(!cannotReify);
 			}
-	    }
+		}
 	}
-	
+
 	private StringBuffer updateIdentifierts() {
-	    StringBuffer b = new StringBuffer();
-	    for (String s : getCastedModel().getIdentifiers()) {
-	    	b.append(s);
-	    	b.append(", ");
-	    }
-	    if (b.length() > 0)
-	    	identifierText.setText(b.substring(0, b.length() - 2));
-	    else
-	    	identifierText.setText("");
-	    return b;
-    }
+		StringBuffer b = new StringBuffer();
+		for (String s : getCastedModel().getIdentifiers()) {
+			b.append(s);
+			b.append(", ");
+		}
+		if (b.length() > 0)
+			identifierText.setText(b.substring(0, b.length() - 2));
+		else
+			identifierText.setText("");
+		return b;
+	}
 
 	private void updateName() {
-	    nameText.setText(getCastedModel().getName());
-    }
+		nameText.setText(getCastedModel().getName());
+	}
 
-	protected void createAdditionalControls(Composite parent,
-			FormToolkit toolkit) {
+	protected void createAdditionalControls(Composite parent, FormToolkit toolkit) {
 		createReifiesControl(parent, toolkit);
 	}
 
@@ -616,35 +632,35 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 			return "Topic";
 		}
 	}
-	
+
 	private TopicType getCastedModel() {
-        return (TopicType) super.getModel();
-    }
+		return (TopicType) super.getModel();
+	}
 
 	private void finishName() {
-	    if (nameText.getText().length() > 0) {
-	    	Command cmd;
-	    	TopicType tt = getCastedModel();
-	    	if (tt.getName().equals(nameText.getText()))
-	    		return;
-	    	
-	    	cmd=new RenameTopicTypeCommand(tt, nameText.getText());
-	    	
-	    	if (cmd.canExecute()) {
-	    		getCommandStack().execute(cmd);
-	    		nameDecorator.hide();
-	    	} else {
-				String errormsg = "Name: "+nameText.getText()+" already used!";
+		if (nameText.getText().length() > 0) {
+			Command cmd;
+			TopicType tt = getCastedModel();
+			if (tt.getName().equals(nameText.getText()))
+				return;
+
+			cmd = new RenameTopicTypeCommand(tt, nameText.getText());
+
+			if (cmd.canExecute()) {
+				getCommandStack().execute(cmd);
+				nameDecorator.hide();
+			} else {
+				String errormsg = "Name: " + nameText.getText() + " already used!";
 				// if getSite is null we ignore the error
-				if (getSite()==null) {
+				if (getSite() == null) {
 					TmcleditEditPlugin.getPlugin().log("getSite() is null... ignoring name error.");
 					return;
 				}
 				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
-				
+
 				nameText.setText(getCastedModel().getName());
-	    	}
-	    	
-	    }
-    }
+			}
+
+		}
+	}
 }
