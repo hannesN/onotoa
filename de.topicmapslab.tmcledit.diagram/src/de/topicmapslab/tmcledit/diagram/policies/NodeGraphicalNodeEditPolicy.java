@@ -54,13 +54,16 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 				&& (request.getTargetEditPart() instanceof AssociationNodeEditPart))
 			return null;
 		
-		if ((request.getSourceEditPart() instanceof TypeNodeEditPart)
-				&& (request.getTargetEditPart() instanceof TypeNodeEditPart))
-			return null;
+		
 
 		Node node = (Node) request.getTargetEditPart().getModel();
 
 		if (cmd.getEdge().getType() == EdgeType.ROLE_CONSTRAINT_TYPE) {
+			// no roleconstraints between TopicTypes
+			if ((request.getSourceEditPart() instanceof TypeNodeEditPart)
+					&& (request.getTargetEditPart() instanceof TypeNodeEditPart))
+				return null;
+			
 			if (node instanceof AssociationNode) {
 				cmd.setSource(node);
 			} else {
