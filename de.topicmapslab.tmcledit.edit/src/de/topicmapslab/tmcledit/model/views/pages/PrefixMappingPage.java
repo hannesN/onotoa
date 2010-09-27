@@ -189,7 +189,7 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 				if (dlg.open() == Dialog.OK) {
 					for (MappingElement me : schema.getMappings()) {
 						if (me.getKey().equals(dlg.getKey())) {
-							MessageDialog.openError(shell, "Invlaid Key", "A prefix with that key already exists.");
+							MessageDialog.openError(shell, "Invalid Key", "A prefix with that key already exists.");
 							return;
 						}
 					}

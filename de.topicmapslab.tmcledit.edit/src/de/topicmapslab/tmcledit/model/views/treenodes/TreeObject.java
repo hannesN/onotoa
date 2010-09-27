@@ -21,6 +21,8 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
+import de.topicmapslab.tmcledit.model.util.extension.ModelViewExtensionInfo;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 public class TreeObject extends AbstractModelViewNode implements IAdaptable, Adapter {
@@ -69,10 +71,6 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 		return kindOfTopicType;
 	}
 
-	protected void setId(int id) {
-		this.id = id;
-	}
-	
 	@Override
 	public String toString() {
 		return getName();
@@ -80,6 +78,12 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 
 	public Notifier getTarget() {
 		return target;
+	}
+	
+	@Override
+	public void addChild(AbstractModelViewNode child) {
+	    super.addChild(child);
+	    getExtensionChildren(child);
 	}
 
 	public boolean isAdapterForType(Object type) {
@@ -100,10 +104,6 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 		target = newTarget;
 	}
 
-	protected Adapter getAdapter() {
-		return this;
-	}
-
 	@Override
 	public void dispose() {
 		if ( (getModel() != null) && (getModel() instanceof EObject) ){
@@ -112,7 +112,23 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 	    super.dispose();
 	}
 	
+	protected Adapter getAdapter() {
+    	return this;
+    }
+
+	protected void setId(int id) {
+    	this.id = id;
+    }
+
 	protected void setHandleRename(boolean handleRename) {
 	    this.handleRename = handleRename;
     }
+	
+	private void getExtensionChildren(AbstractModelViewNode parent) {
+		for (ModelViewExtensionInfo mvei : TmcleditEditPlugin.getExtensionManager().getModelViewExtensionInfos()) {
+			for (AbstractModelViewNode n : mvei.getProvider().getChildNodes(getModelView(), parent)) {
+				parent.addChild(n);
+			}
+		}
+	}
 }
