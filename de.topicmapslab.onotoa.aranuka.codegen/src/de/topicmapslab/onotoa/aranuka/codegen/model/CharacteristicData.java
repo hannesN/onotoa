@@ -43,7 +43,7 @@ public class CharacteristicData extends FieldData {
     	setValue(CREATE_NEW, Boolean.toString(hidden));
     }
 	
-	@Combo (label="Number of Rows", weight=8)
+	@Combo (label="Number of Rows", optional=true, weight=8)
     public int getRows() {
     	return getIntValueOf(ROWS);
     }
