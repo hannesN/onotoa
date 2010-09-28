@@ -18,13 +18,19 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.fieldassist.ContentAssistCommandAdapter;
 
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.model.psiprovider.PSIContentProposalProvider;
 
 /**
  * 
@@ -48,7 +54,7 @@ public class NewSubjectIdentifierAction extends Action {
 	 * @param viewer
 	 *            Viewer of the ContextMenu with this action
 	 */
-	
+
 	public NewSubjectIdentifierAction(CommandStack commandStack, String label, Viewer viewer) {
 
 		super(label, Action.AS_PUSH_BUTTON);
@@ -65,14 +71,15 @@ public class NewSubjectIdentifierAction extends Action {
 		topicType = ((TopicTypeWrapper) sel.getFirstElement()).getTopicType();
 
 		// call InputDialog
-		InputDialog dlg = new InputDialog(viewer.getControl().getShell(), "New..",
+
+		AssistDialog dia = new AssistDialog(viewer.getControl().getShell(), "New..",
 		        "Please enter the new subject identifier.", "", new IInputValidator() {
 
 			        public String isValid(String newText) {
 
-			        	// unique test
-						if (ModelIndexer.getTopicIndexer().getTopicTypeBySubjectIdentifier(newText) != null)
-							return "This Subject Identifier is already in use!";
+				        // unique test
+				        if (ModelIndexer.getTopicIndexer().getTopicTypeBySubjectIdentifier(newText) != null)
+					        return "This Subject Identifier is already in use!";
 
 				        // empty test
 				        if (newText.equals(""))
@@ -83,18 +90,37 @@ public class NewSubjectIdentifierAction extends Action {
 
 		        });
 
-		if (Dialog.OK == dlg.open()) {
+		if (Dialog.OK == dia.open()) {
 
-			String result = dlg.getValue();
+			String result = dia.getValue();
 			List<String> list = new ArrayList<String>();
 			list.add(result);
 			SetTopicTypeIdentifiersCommand command = new SetTopicTypeIdentifiersCommand(list, topicType);
-			
+
 			// CommandStack execution to enable undo/redo operation
 			commandStack.execute(command);
 
 		}
 
+	}
+
+	private class AssistDialog extends InputDialog {
+		public AssistDialog(Shell parentShell, String dialogTitle, String dialogMessage, String initialValue,
+		        IInputValidator validator) {
+			super(parentShell, dialogTitle, dialogMessage, initialValue, validator);
+		}
+
+		@Override
+		protected Control createDialogArea(Composite parent) {
+			Control control = super.createDialogArea(parent);
+
+			PSIContentProposalProvider proposalProvider = new PSIContentProposalProvider();
+			proposalProvider.setName(topicType.getName());
+			new ContentAssistCommandAdapter(getText(), new TextContentAdapter(), proposalProvider, null,
+			        PSIContentProposalProvider.KEYS);
+
+			return control;
+		}
 	}
 
 }
