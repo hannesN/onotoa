@@ -10,6 +10,10 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.aranuka.codegen.modelview;
 
+import org.eclipse.swt.graphics.Image;
+
+import de.topicmapslab.onotoa.aranuka.codegen.util.ImageConstants;
+import de.topicmapslab.onotoa.aranuka.codegen.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
 
@@ -27,5 +31,13 @@ public class GeneratorDataNode extends AbstractModelViewNode {
     public GeneratorDataNode(ModelView modelView) {
 	    super(modelView);
 	    setName("Code Generation Data");
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Image getImage() {
+    	return ImageProvider.getImage(ImageConstants.IMG_GENERATE_CODE);
     }
 }
