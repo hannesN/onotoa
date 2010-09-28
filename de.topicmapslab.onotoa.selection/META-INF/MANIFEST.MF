@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Selection Service Provider
 Bundle-SymbolicName: de.topicmapslab.onotoa.selection;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: de.topicmapslab.onotoa.selection.Activator
 Bundle-Vendor: Hannes Niederhausen
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
