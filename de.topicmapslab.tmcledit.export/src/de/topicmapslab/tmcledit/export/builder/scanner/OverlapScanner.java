@@ -34,12 +34,7 @@ public class OverlapScanner extends AbstractConstraintScanner {
 			matching.addArgument(r.getResults().get(1));
 			
 			matching.addAffectedConstruct((Construct) r.getResults().get(2));
-			Object tmp = r.getResults().get(3);
-			if (tmp instanceof Collection<?>) {
-				addAffectedConstructs((Collection<?>) tmp, matching);
-			} else {
-				matching.addAffectedConstruct((Construct) tmp);
-			}
+			addAffectedConstructs((Collection<?>) r.get(3), matching);
 			addMatching(matching);
 		}
 

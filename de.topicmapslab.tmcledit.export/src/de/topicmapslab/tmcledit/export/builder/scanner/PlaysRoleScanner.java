@@ -42,12 +42,7 @@ public class PlaysRoleScanner extends AbstractConstraintScanner {
 			matching.addArgument(r.get(4));
 			
 			matching.addAffectedConstruct((Construct) r.get(5));
-			Object tmp = r.get(6);
-			if (tmp instanceof Collection<?>) {
-				addAffectedConstructs((Collection<?>) tmp, matching);
-			} else {
-				matching.addAffectedConstruct((Construct) tmp);
-			}
+			addAffectedConstructs((Collection<?>) r.get(6), matching);
 			
 			addMatching(matching);
 		}

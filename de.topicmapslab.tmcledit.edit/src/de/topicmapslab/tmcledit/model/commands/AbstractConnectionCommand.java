@@ -59,7 +59,7 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		topic.eSetDeliver(true);
 		getTypeList().addAll(newList);
 			
-		for (Entry<Diagram, List<Edge>> e : newEdgesMaps.entrySet()) {
+		for (Entry<Diagram, List<Edge>> e : getNewEdgesMaps().entrySet()) {
 			Diagram d = e.getKey();
 			List<Edge> edges = e.getValue();
 			
@@ -82,7 +82,7 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		topic.eSetDeliver(true);
 		getTypeList().addAll(oldList);
 		
-		for (Entry<Diagram, List<Edge>> e : oldEdgesMaps.entrySet()) {
+		for (Entry<Diagram, List<Edge>> e : getOldEdgesMaps().entrySet()) {
 			Diagram d = e.getKey();
 			List<Edge> edges = e.getValue();
 			
@@ -105,6 +105,18 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		
 		return true;
 	}
+	
+	public Map<Diagram, List<Edge>> getNewEdgesMaps() {
+		if (newEdgesMaps==null)
+			return Collections.emptyMap();
+		return newEdgesMaps;
+    }
+	
+	public Map<Diagram, List<Edge>> getOldEdgesMaps() {
+		if (oldEdgesMaps==null)
+			return Collections.emptyMap();
+	    return oldEdgesMaps;
+    }
 
 	private void createEdgeLists() {
 		// now the more costly part.. finding edges which represent the current state

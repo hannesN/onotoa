@@ -10,8 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder.scanner;
 
+import java.util.Collection;
+
 import org.tmapi.core.Construct;
-import org.tmapi.core.Topic;
 
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
 import de.topicmapslab.tmql4j.common.model.query.IQuery;
@@ -32,7 +33,7 @@ public class IsAbstractScanner extends AbstractConstraintScanner {
 			matching.setContext((Construct) r.getResults().get(0));
 						
 			matching.addAffectedConstruct((Construct) r.getResults().get(1));
-			matching.addAffectedConstruct((Topic) r.getResults().get(2));
+			addAffectedConstructs((Collection<?>) r.get(2), matching);
 			addMatching(matching);
 		}
 

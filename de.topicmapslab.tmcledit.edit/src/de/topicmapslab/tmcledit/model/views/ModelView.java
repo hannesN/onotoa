@@ -682,7 +682,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		List<String> filesList = RecentUsedManager.getFilesList();
 		if (!filesList.isEmpty()) {
 			String file = filesList.get(0);
-			dlg.setFilterPath(file.substring(0, file.lastIndexOf("/")));
+			int idx = file.lastIndexOf("/");
+			if (idx!=-1)
+				dlg.setFilterPath(file.substring(0, idx));
 		}
 		String result = dlg.open();
 		if (result != null) {
