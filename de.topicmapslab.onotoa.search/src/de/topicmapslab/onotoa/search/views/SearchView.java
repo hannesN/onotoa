@@ -71,6 +71,7 @@ public class SearchView extends ViewPart {
 
 		Button refreshButton = new Button(comp, SWT.PUSH);
 		refreshButton.setImage(ImageProvider.getImage(ImageConstants.ICON_RELOAD));
+		refreshButton.setToolTipText("Refresh the search results");
 		refreshButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
