@@ -83,7 +83,7 @@ public class CleanSchemaHandler extends AbstractHandler {
 		DeleteTopicTypeCommand deleteCommand;
 		CompoundCommand compoundCommand = new CompoundCommand();
 
-		if (dialog.open() == Window.OK)
+		if (dialog.open() == Window.OK) {
 
 			// iterate over selected TopicTypes and delete them from schema
 			for (TopicType tt : dialog.getCleanList()) {
@@ -95,8 +95,9 @@ public class CleanSchemaHandler extends AbstractHandler {
 
 			}
 
-		// excute all
-		commandStack.execute(compoundCommand);
+			// excute all
+			commandStack.execute(compoundCommand);
+		}
 		return null;
 
 	}
