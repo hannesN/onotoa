@@ -29,6 +29,8 @@ public class GeneratorDataContentProvider implements IContentProvider {
 	public Object[] getElements(String name, Object model) {
 		if ("weight".equals(name))
 			return vals;
+		if ("rows".equals(name))
+			return vals;
 		return null;
 	}
 
@@ -39,7 +41,8 @@ public class GeneratorDataContentProvider implements IContentProvider {
 	public boolean hasContent(String arg0, Object arg1) {
 		if ("weight".equals(arg0))
 			return true;
-		
+		if ("rows".equals(arg0))
+			return true;
 		return false;
 	}
 
