@@ -23,7 +23,7 @@ import de.topicmapslab.tmql4j.resultprocessing.model.IResult;
  * Scanner for the role-combination template
  * 
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class RoleCombinationScanner extends AbstractConstraintScanner {
 
@@ -37,31 +37,20 @@ public class RoleCombinationScanner extends AbstractConstraintScanner {
 			tm.addArgument(rl.get(2));
 			tm.addArgument(rl.get(3));
 			tm.addArgument(rl.get(4));
-			
+
 			tm.addAffectedConstruct((Construct) rl.get(5));
-			Object tmp = r.get(6);
-			if (tmp instanceof Collection<?>) {
-				addAffectedConstructs((Collection<?>) tmp, tm);
-			} else {
-				tm.addAffectedConstruct((Construct) tmp);
-			}
-			
-			
+			addAffectedConstructs((Collection<?>) r.get(6), tm);
+
 			addMatching(tm);
 		}
 	}
 
 	@Override
 	protected String getQuery() {
-		return  "FOR $c IN // tmcl:role-combination-constraint " +
-				"RETURN ( " +
-				"$c >> traverse tmcl:constrained-statement, " +
-				"$c >> traverse tmcl:constrained-role, " +
-				"$c >> traverse tmcl:constrained-topic-type, " +
-				"$c >> traverse tmcl:other-constrained-role, " +
-				"$c >> traverse tmcl:other-constrained-topic-type, " +
-				"$c, " +
-				"$c << players )";
+		return "FOR $c IN // tmcl:role-combination-constraint " + "RETURN ( "
+		        + "$c >> traverse tmcl:constrained-statement, " + "$c >> traverse tmcl:constrained-role, "
+		        + "$c >> traverse tmcl:constrained-topic-type, " + "$c >> traverse tmcl:other-constrained-role, "
+		        + "$c >> traverse tmcl:other-constrained-topic-type, " + "$c, " + "$c << players )";
 	}
 
 }

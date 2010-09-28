@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder.scanner;
 
+import java.util.Collection;
+
 import org.tmapi.core.Construct;
 import org.tmapi.core.Topic;
 
@@ -30,7 +32,7 @@ public class RegExpConstraintScanner extends AbstractConstraintScanner {
 			matching.setContext((Topic) result.getResults().get(0));
 			matching.addArgument(result.getResults().get(1));
 			matching.addAffectedConstruct((Construct) result.getResults().get(2));
-			matching.addAffectedConstruct((Construct) result.getResults().get(3));
+			addAffectedConstructs((Collection<?>) result.getResults().get(3), matching);
 			addMatching(matching);
 		}
     }

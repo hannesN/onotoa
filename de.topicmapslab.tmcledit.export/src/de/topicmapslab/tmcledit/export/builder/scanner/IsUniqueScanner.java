@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.export.builder.scanner;
 
+import java.util.Collection;
+
 import org.tmapi.core.Construct;
 
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
@@ -31,7 +33,7 @@ public class IsUniqueScanner extends AbstractConstraintScanner {
 			matching.setContext((Construct) r.getResults().get(0));
 						
 			matching.addAffectedConstruct((Construct) r.getResults().get(1));
-			matching.addAffectedConstruct((Construct) r.getResults().get(2));
+			addAffectedConstructs((Collection<?>) r.get(2), matching);
 			addMatching(matching);
 		}
 
