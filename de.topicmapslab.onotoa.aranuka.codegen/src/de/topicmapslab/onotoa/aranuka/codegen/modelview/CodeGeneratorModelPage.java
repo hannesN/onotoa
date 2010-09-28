@@ -154,7 +154,7 @@ public class CodeGeneratorModelPage extends AbstractModelPage implements Command
      */
     @Override
     public String getId() {
-        return "de.topcimapslab.codegenerator.annotaionpage";
+        return "de.topcimapslab.codegenerator.annotaionpage-"+modelType.getName();
     }
 
 

@@ -11,7 +11,9 @@
 package de.topicmapslab.onotoa.aranuka.codegen.model;
 
 import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.CREATE_NEW;
+import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.ROWS;
 import de.topicmapslab.kuria.annotation.widgets.Check;
+import de.topicmapslab.kuria.annotation.widgets.Combo;
 import de.topicmapslab.kuria.annotation.widgets.Editable;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
@@ -39,5 +41,14 @@ public class CharacteristicData extends FieldData {
 
 	public void setCreateNew(boolean hidden) {
     	setValue(CREATE_NEW, Boolean.toString(hidden));
+    }
+	
+	@Combo (label="Number of Rows", weight=8)
+    public int getRows() {
+    	return getIntValueOf(ROWS);
+    }
+
+	public void setRows(int hidden) {
+    	setValue(ROWS, Integer.toString(hidden));
     }
 }
