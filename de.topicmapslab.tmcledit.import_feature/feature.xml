@@ -2,7 +2,7 @@
 <feature
       id="de.topicmapslab.tmcledit.import_feature"
       label="Onotoa TMCL Import"
-      version="1.1.2.qualifier"
+      version="1.2.0.qualifier"
       provider-name="Hannes Niederhausen, Topic map Labs">
 
    <description url="http://www.example.com/description">
@@ -83,7 +83,7 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          id="de.topicmapslab.tmcledit.tmclimport"
          download-size="0"
          install-size="0"
-         version="1.1.2.qualifier"
+         version="1.2.0.qualifier"
          unpack="false"/>
 
 </feature>
