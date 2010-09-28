@@ -43,7 +43,6 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -67,6 +66,8 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 					        .getPlayerConstraints())
 						playerSet.add(playerConstraint.getPlayer());
 			}
+			
+			usedTypesSet.addAll(playerSet);
 
 			// add RoleTypes
 			if (tt instanceof AssociationType)
@@ -76,24 +77,20 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 
 			// add used TopicTypes to exclude them from the later comparison
 			if (tt.getKind().getValue() == 0)
-				if (tt.getNameConstraints().size() != 0 
-						|| tt.getOccurrenceConstraints().size() != 0
-				        || tt.getIdentifiers().size() != 0 
-				        || tt.getLocators().size() != 0
-				        || tt.getItemIdentifierConstraints().size() != 0 
-				        || tt.getAko().size() != 0
-				        || tt.getIsa().size() != 0 
-				        || ModelIndexer.getTopicIndexer().getUsedAsIsa(tt).size() != 0
-				        || ModelIndexer.getTopicIndexer().getUsedAsAko(tt).size() != 0 
-				        || playerSet.contains(tt))
+				if (tt.getNameConstraints().size() != 0 || tt.getOccurrenceConstraints().size() != 0
+				        || tt.getIdentifiers().size() != 0 || tt.getLocators().size() != 0
+				        || tt.getItemIdentifierConstraints().size() != 0 || tt.getAko().size() != 0
+				        || tt.getIsa().size() != 0 || ModelIndexer.getTopicIndexer().getUsedAsIsa(tt).size() != 0
+				        || ModelIndexer.getTopicIndexer().getUsedAsAko(tt).size() != 0 )
 					usedTypesSet.add(tt);
 		}
 
 		// compare usedTypeSet with all types and detect unused types
 		for (TopicType tt : schema.getTopicTypes()) {
-			if (!usedTypesSet.contains(tt))
+			if (!usedTypesSet.contains(tt)) {
+				System.out.println(tt.getName());
 				con.addListElement(new TopicTypeWrapper(tt));
-
+			}
 		}
 
 	}
@@ -109,27 +106,27 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 
 	/**
 	 * Get list of unused topics
-
-	 * @return list of unused topics 
+	 * 
+	 * @return list of unused topics
 	 */
 	public List<TopicType> getResultList() {
 
 		List<TopicType> resultList = new ArrayList<TopicType>();
 		for (Object wrapper : con.getContentList())
 			resultList.add(((TopicTypeWrapper) wrapper).getTopicType());
-		
+
 		return resultList;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 
 	public void refresh() {
-	    
+
 		con.removeAllElements();
 		fetchResult();
-	    
-    }
+
+	}
 
 }
