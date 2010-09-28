@@ -8,7 +8,8 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.search.util;
+package de.topicmapslab.onotoa.aranuka.codegen.util;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -16,13 +17,14 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
-import de.topicmapslab.onotoa.search.Activator;
+import de.topicmapslab.onotoa.aranuka.codegen.Activator;
+
 /**
  * @author Hannes Niederhausen
  *
  */
 public class ImageProvider {
-	
+
 	public static Image getImage(String path) {
 		ImageRegistry imageRegistry = Activator.getDefault().getImageRegistry();
 		

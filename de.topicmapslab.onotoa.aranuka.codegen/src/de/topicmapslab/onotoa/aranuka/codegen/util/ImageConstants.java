@@ -8,14 +8,14 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.search.util;
+package de.topicmapslab.onotoa.aranuka.codegen.util;
 
 /**
- * @author Sebastian Lippert
- *
+ * @author Hannes Niederhausen
+ * 
  */
-public interface ImageConstants {
+public class ImageConstants {
 
-	public static String ICON_RELOAD = "./icons/reload.gif";
-	
+	public static String IMG_GENERATE_CODE = "./icons/anvil.gif";
+
 }
