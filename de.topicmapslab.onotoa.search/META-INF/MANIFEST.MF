@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Search Plugin for Onotoa
 Bundle-SymbolicName: de.topicmapslab.onotoa.search;singleton:=true
-Bundle-Version: 1.1.2.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: de.topicmapslab.onotoa.search.Activator
 Bundle-Vendor: Hannes Niederhausen, Topic Maps Lab
 Require-Bundle: org.eclipse.ui,
