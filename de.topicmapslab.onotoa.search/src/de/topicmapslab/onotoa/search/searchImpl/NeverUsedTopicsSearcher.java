@@ -51,9 +51,6 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 		// set for used types
 		Set<TopicType> usedTypesSet = new HashSet<TopicType>();
 
-		// set for players
-		Set<TopicType> playerSet = new HashSet<TopicType>();
-
 		// iterate over TopicTypes
 		for (TopicType tt : schema.getTopicTypes()) {
 
@@ -64,10 +61,8 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 				if (constraint instanceof AssociationTypeConstraint)
 					for (RolePlayerConstraint playerConstraint : ((AssociationTypeConstraint) constraint)
 					        .getPlayerConstraints())
-						playerSet.add(playerConstraint.getPlayer());
+						usedTypesSet.add(playerConstraint.getPlayer());
 			}
-			
-			usedTypesSet.addAll(playerSet);
 
 			// add RoleTypes
 			if (tt instanceof AssociationType)
@@ -77,20 +72,22 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 
 			// add used TopicTypes to exclude them from the later comparison
 			if (tt.getKind().getValue() == 0)
-				if (tt.getNameConstraints().size() != 0 || tt.getOccurrenceConstraints().size() != 0
-				        || tt.getIdentifiers().size() != 0 || tt.getLocators().size() != 0
-				        || tt.getItemIdentifierConstraints().size() != 0 || tt.getAko().size() != 0
-				        || tt.getIsa().size() != 0 || ModelIndexer.getTopicIndexer().getUsedAsIsa(tt).size() != 0
-				        || ModelIndexer.getTopicIndexer().getUsedAsAko(tt).size() != 0 )
+				if (tt.getNameConstraints().size() != 0 
+						|| tt.getOccurrenceConstraints().size() != 0
+				        || tt.getIdentifiers().size() != 0 
+				        || tt.getLocators().size() != 0
+				        || tt.getItemIdentifierConstraints().size() != 0 
+				        || tt.getAko().size() != 0
+				        || tt.getIsa().size() != 0 
+				        || ModelIndexer.getTopicIndexer().getUsedAsIsa(tt).size() != 0
+				        || ModelIndexer.getTopicIndexer().getUsedAsAko(tt).size() != 0)
 					usedTypesSet.add(tt);
 		}
 
 		// compare usedTypeSet with all types and detect unused types
 		for (TopicType tt : schema.getTopicTypes()) {
-			if (!usedTypesSet.contains(tt)) {
-				System.out.println(tt.getName());
+			if (!usedTypesSet.contains(tt))
 				con.addListElement(new TopicTypeWrapper(tt));
-			}
 		}
 
 	}
