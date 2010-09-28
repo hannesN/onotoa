@@ -36,10 +36,11 @@ import de.topicmapslab.onotoa.search.container.SubjectIdentifierContainer;
 import de.topicmapslab.onotoa.search.container.SubjectLocatorContainer;
 import de.topicmapslab.onotoa.search.container.TopicsWithoutIdentifierContainer;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
+import de.topicmapslab.onotoa.search.util.ImageConstants;
+import de.topicmapslab.onotoa.search.util.ImageProvider;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
 import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
-import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -69,7 +70,7 @@ public class SearchView extends ViewPart {
 		comp.setLayout(new GridLayout());
 
 		Button refreshButton = new Button(comp, SWT.PUSH);
-		refreshButton.setImage(ImageProvider.getImage("./reload.gif"));
+		refreshButton.setImage(ImageProvider.getImage(ImageConstants.ICON_RELOAD));
 		refreshButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
