@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="$pluginId-feature"
+      label="$name"
+      version="1.0.0.qualifier"
+      plugin="$pluginId">
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="aranuka.runtime" version="1.0.2" match="greaterOrEqual"/>
+      <import plugin="aranuka_connector_majortom" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.kuria.annotation" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.kuria.runtime" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.kuria.swtgenerator" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.genericeditor.application" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi"/>
+   </requires>
+
+   <plugin
+         id="$pluginId"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.xml.resolver"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="net.sf.ezmorph"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="net.sf.json"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.security"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.forms"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
