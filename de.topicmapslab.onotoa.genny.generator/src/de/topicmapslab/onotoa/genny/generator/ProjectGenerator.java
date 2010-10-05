@@ -23,174 +23,212 @@ import org.tmapi.core.TopicMap;
 import de.topicmapslab.codegenerator.CodeGenerator;
 import de.topicmapslab.codegenerator.factories.AranukaDescriptorFactory;
 import de.topicmapslab.onotoa.genny.generator.model.GeneratorData;
+import de.topicmapslab.onotoa.genny.generator.ui.ITextListener;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class ProjectGenerator {
 
 	private GeneratorData data;
-	private StringBuilder messages;
 	private IProgressMonitor monitor;
+	private ITextListener textListener;
 
-	public void generateProjects(GeneratorData data, StringBuilder messages, IProgressMonitor monitor) {
+	private int work = 0;
+
+	public void generateProjects(GeneratorData data, ITextListener listener, IProgressMonitor monitor) {
 		this.data = data;
-		this.messages = messages;
 		this.monitor = monitor;
+		this.textListener = listener;
 		File f = new File(data.getTargetDir());
 		if (!f.exists()) {
 			f.mkdirs();
 		}
-		
+
+		monitor.beginTask("Generating Application..", 15);
+
 		createFeatureDirectory();
 		createRelengDirectory();
 		createApplicationDirectory();
 		createProjectDirectory();
-		
+
 		buildProject();
-		
+
 	}
 
-
 	private void buildProject() {
-		
-		File dir = new File(data.getTargetDir()+"/"+data.getApplicationId()+"-releng");
-		
-	    Runtime runtime = Runtime.getRuntime();
-	    
-	    String[] cmd = new String[]{"/home/niederhausen/java/apache-maven-3.0-beta-3/bin/mvn", "package"};
-	    
-	    try {
-	        final Process p = runtime.exec(cmd, new String[]{}, dir);
-	        
-	        Thread isReadThread = new Thread(new Runnable() {
 
-				@Override
-                public void run() {
-					InputStream is = p.getInputStream();
-			        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-			        
-			        while (true) {
-			        	try {
-	                        String line = null;
-	                        while ((line=reader.readLine())!=null) {
-	                        	messages.append(line);
-	                        	System.out.println(line);
-	                        }
-                        } catch (IOException e) {
-                        	Activator.logException(e);
-                        }
-                        try {
-	                        Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                        }
-			        }
-                }
-	        });
-	        
-	        // start reading thread
-	        isReadThread.start();
-	        // wait the build process to end
-	        p.waitFor();
-	        // stop read process
-	        isReadThread.interrupt();
-	        
-        } catch (Exception e) {
-        	Activator.logException(e);
-        	
-        	
-        }
-	    
-    }
+		final File dir = new File(data.getTargetDir() + "/" + data.getApplicationId() + "-releng");
+		monitor.subTask("Compiling application..");
+		work++;
+		monitor.worked(work);
+		addContent("Compiling application...");
 
+		try {
+			Thread processThread = new Thread() {
+				public void run() {
+					try {
+	                    final Process p = startProcess(dir);
+
+	                    Thread isReadThread = generateReadThread(p);
+
+	                    // start reading thread
+	                    isReadThread.start();
+	                    // wait the build process to end
+	                    p.waitFor();
+	                    // stop read process
+	                    isReadThread.interrupt();
+	                    
+	                    monitor.done();
+                    } catch (Exception e) {
+                    	Activator.logException(e);
+                    	throw new RuntimeException(e);
+                    }
+				}
+
+			};
+
+			processThread.start();
+			
+			
+		} catch (Exception e) {
+			Activator.logException(e);
+
+		}
+
+	}
+
+	protected Thread generateReadThread(final Process p) {
+		Thread isReadThread = new Thread() {
+
+			@Override
+			public void run() {
+				InputStream is = p.getInputStream();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+				String lineSep = System.getProperty("line.separator");
+				String line = null;
+				while (true) {
+					try {
+						while ((line = reader.readLine()) != null) {
+							addContent(line + lineSep);
+						}
+					} catch (IOException e) {
+						Activator.logException(e);
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						System.out.println("Thread interrupted");
+					}
+				}
+			}
+		};
+		return isReadThread;
+	}
+
+	protected Process startProcess(File dir) throws IOException {
+		Runtime runtime = Runtime.getRuntime();
+		String[] cmd = new String[] { "/home/niederhausen/java/apache-maven-3.0-beta-3/bin/mvn", "package" };
+		final Process p = runtime.exec(cmd, new String[] {}, dir);
+		return p;
+	}
 
 	private void createRelengDirectory() {
 		monitor.subTask("Creating Release Engineering Project");
-		messages.append("Creating Release Engineering project... ");
-	    File dir = new File(data.getTargetDir()+"/"+data.getApplicationId()+"-releng");
-	    dir.mkdir();
-	    
-	    copyResource(dir, "/resources/releng");
-	    
-	    messages.append("finished\n");
-	    
-    }
+		work++;
+		monitor.worked(work);
+		addContent("Creating Release Engineering project... ");
+		File dir = new File(data.getTargetDir() + "/" + data.getApplicationId() + "-releng");
+		dir.mkdir();
 
+		copyResource(dir, "/resources/releng");
+
+		addContent("finished\n");
+
+	}
 
 	private void createApplicationDirectory() {
 		monitor.subTask("Creating Application Project");
-		messages.append("Creating application project... ");
-	    File dir = new File(data.getTargetDir()+"/"+data.getApplicationId()+"-application");
-	    dir.mkdir();
-	    
-	    copyResource(dir, "/resources/application");
-	    
-	    messages.append("finished\n");
-	    
-    }
+		work++;
+		monitor.worked(work);
+		addContent("Creating application project... ");
+		File dir = new File(data.getTargetDir() + "/" + data.getApplicationId() + "-application");
+		dir.mkdir();
 
+		copyResource(dir, "/resources/application");
+
+		addContent("finished\n");
+
+	}
 
 	private void createProjectDirectory() {
 		monitor.subTask("Creating Model Project");
-		messages.append("Creating model project... ");
-	    File dir = new File(data.getTargetDir()+"/"+data.getApplicationId());
-	    dir.mkdir();
-	    
-	    copyResource(dir, "/resources/project");
-	    
-	    File srcFolder = new File(dir.getAbsolutePath()+"/src");
-	    srcFolder.mkdir();
-	    
-	    TopicMapSchema schema = ModelIndexer.getInstance().getTopicMapSchema();
+		work++;
+		monitor.worked(work);
+		addContent("Creating model project... ");
+		File dir = new File(data.getTargetDir() + "/" + data.getApplicationId());
+		dir.mkdir();
+
+		copyResource(dir, "/resources/project");
+
+		File srcFolder = new File(dir.getAbsolutePath() + "/src");
+		srcFolder.mkdir();
+
+		TopicMapSchema schema = ModelIndexer.getInstance().getTopicMapSchema();
 
 		TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(schema, false);
 
 		TopicMap topicMap = builder.createTopicMap();
 
 		try {
-	        AranukaDescriptorFactory fac = new AranukaDescriptorFactory(builder.getTopicMapSystem(), topicMap, data.getApplicationId()+".model");
-	        CodeGenerator gen = fac.getCodeGenerator();
-	        gen.generateCode(new File(srcFolder.getAbsolutePath()));
-        } catch (Exception e) {
-        	Activator.logException(e);
-        	throw new RuntimeException(e);
-        }
-		
-        // now we copy the activator to the src dir
-        
-        String packagePath = data.getApplicationId().replaceAll("\\.", "/");
-        File path = new File(srcFolder.getAbsolutePath()+"/"+packagePath);
-        
-        copyFile("resources/template/Activator.java", path);
-        
-	    
-	    messages.append("finished\n");
-	    
-    }
+			AranukaDescriptorFactory fac = new AranukaDescriptorFactory(builder.getTopicMapSystem(), topicMap,
+			        data.getApplicationId() + ".model");
+			CodeGenerator gen = fac.getCodeGenerator();
+			gen.generateCode(new File(srcFolder.getAbsolutePath()));
+		} catch (Exception e) {
+			Activator.logException(e);
+			throw new RuntimeException(e);
+		}
 
+		// now we copy the activator to the src dir
+
+		String packagePath = data.getApplicationId().replaceAll("\\.", "/");
+		File path = new File(srcFolder.getAbsolutePath() + "/" + packagePath);
+
+		copyFile("resources/template/Activator.java", path);
+
+		addContent("finished\n");
+
+	}
 
 	private void createFeatureDirectory() {
 		monitor.subTask("Creating Feature Project");
-		messages.append("Creating feature project... ");
-	    File dir = new File(data.getTargetDir()+"/"+data.getApplicationId()+"-feature");
-	    dir.mkdir();
-	    
-	    copyResource(dir, "/resources/feature");
-	    
-	    messages.append("finished\n");
-    }
+		work++;
+		monitor.worked(work);
+		addContent("Creating feature project... ");
+		File dir = new File(data.getTargetDir() + "/" + data.getApplicationId() + "-feature");
+		dir.mkdir();
+
+		copyResource(dir, "/resources/feature");
+
+		addContent("finished\n");
+	}
 
 	/**
 	 * Copies the resource found in srcPath to the target directory
-	 * @param dir target directory
-	 * @param srcPath srcpath in the the bundle
+	 * 
+	 * @param dir
+	 *            target directory
+	 * @param srcPath
+	 *            srcpath in the the bundle
 	 */
 	private void copyResource(File dir, String srcPath) {
-        Enumeration<?> entryPaths = Activator.getDefault().getBundle().getEntryPaths(srcPath);
+		Enumeration<?> entryPaths = Activator.getDefault().getBundle().getEntryPaths(srcPath);
 
 		if (entryPaths == null)
 			return;
@@ -224,7 +262,7 @@ public class ProjectGenerator {
 					String tmp = o.substring(0, o.length() - 1);
 					tmp = tmp.substring(tmp.lastIndexOf("/"));
 
-					File subDir = new File(dir.getAbsolutePath()+"/"+tmp);
+					File subDir = new File(dir.getAbsolutePath() + "/" + tmp);
 					if (subDir.exists())
 						subDir.delete();
 
@@ -240,11 +278,14 @@ public class ProjectGenerator {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * Copies a file to the given target folder
-	 * @param file the path and name of the file
-	 * @param folder the target folder
+	 * 
+	 * @param file
+	 *            the path and name of the file
+	 * @param folder
+	 *            the target folder
 	 */
 	private void copyFile(String file, File folder) {
 		try {
@@ -253,22 +294,20 @@ public class ProjectGenerator {
 			String filename = file.substring(file.lastIndexOf("/") + 1);
 
 			if ("name.product".equals(filename)) {
-				filename = getValidName(data.getApplicationName())+".product";
+				filename = getValidName(data.getApplicationName()) + ".product";
 			}
 
 			String content = builder.toString();
 
-			content = content.replaceAll(Matcher.quoteReplacement("$name"),
-					data.getApplicationName());
+			content = content.replaceAll(Matcher.quoteReplacement("$name"), data.getApplicationName());
 			content = content.replaceAll(Matcher.quoteReplacement("$validname"),
-					getValidName(data.getApplicationName()));
-			content = content.replaceAll(Matcher.quoteReplacement("$pluginId"),
-					data.getApplicationId());
+			        getValidName(data.getApplicationName()));
+			content = content.replaceAll(Matcher.quoteReplacement("$pluginId"), data.getApplicationId());
 
-			File newFile = new File(folder.getAbsolutePath()+"/"+filename);
+			File newFile = new File(folder.getAbsolutePath() + "/" + filename);
 			if (newFile.exists())
 				newFile.delete();
-			
+
 			FileOutputStream fos = new FileOutputStream(newFile);
 			fos.write(content.getBytes());
 			fos.close();
@@ -281,6 +320,7 @@ public class ProjectGenerator {
 
 	/**
 	 * Reads the content of a file in the bundles resources
+	 * 
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -300,8 +340,11 @@ public class ProjectGenerator {
 
 	private String getValidName(String name) {
 		String tmp = name.replaceAll(" ", "_");
-		
+
 		return tmp.toLowerCase();
-		
+	}
+
+	private void addContent(String text) {
+		textListener.newText(text);
 	}
 }
