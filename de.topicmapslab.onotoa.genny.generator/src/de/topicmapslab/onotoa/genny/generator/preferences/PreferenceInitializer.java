@@ -14,6 +14,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		store.setDefault(IPreferenceConstants.P_LAST_PROJECTID, "org.example.application");
 		store.setDefault(IPreferenceConstants.P_LAST_PROJECTNAME, "Example Application");
+		store.setDefault(IPreferenceConstants.P_MAVEN_OPTS, "-Xmx512m -XX:MaxPermSize=256m");
 	}
 
 }

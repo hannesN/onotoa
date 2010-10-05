@@ -3,12 +3,10 @@
  */
 package de.topicmapslab.onotoa.genny.generator;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +22,7 @@ import de.topicmapslab.codegenerator.CodeGenerator;
 import de.topicmapslab.codegenerator.factories.AranukaDescriptorFactory;
 import de.topicmapslab.onotoa.genny.generator.model.GeneratorData;
 import de.topicmapslab.onotoa.genny.generator.ui.ITextListener;
+import de.topicmapslab.onotoa.genny.generator.util.ProcessInputReader;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -75,7 +74,6 @@ public class ProjectGenerator {
 	                    final Process p = startProcess(dir);
 
 	                    Thread isReadThread = generateReadThread(p);
-
 	                    // start reading thread
 	                    isReadThread.start();
 	                    // wait the build process to end
@@ -101,40 +99,39 @@ public class ProjectGenerator {
 		}
 
 	}
+	
+	protected Thread generateErrorThread(final Process p) {
+		Thread isReadThread = new ProcessInputReader(p, new ITextListener() {
+			
+			@Override
+			public void newText(String text) {
+				System.out.println(text);
+			}
+		});
+		return isReadThread;
+	}
 
 	protected Thread generateReadThread(final Process p) {
-		Thread isReadThread = new Thread() {
-
+		Thread isReadThread = new ProcessInputReader(p, new ITextListener() {
+			
+			private final String lineSep = System.getProperty("line.separator"); 
+			
 			@Override
-			public void run() {
-				InputStream is = p.getInputStream();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-				String lineSep = System.getProperty("line.separator");
-				String line = null;
-				while (true) {
-					try {
-						while ((line = reader.readLine()) != null) {
-							addContent(line + lineSep);
-						}
-					} catch (IOException e) {
-						Activator.logException(e);
-					}
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						System.out.println("Thread interrupted");
-					}
-				}
+			public void newText(String text) {
+				addContent(text+lineSep);
 			}
-		};
+		});
 		return isReadThread;
 	}
 
 	protected Process startProcess(File dir) throws IOException {
-		Runtime runtime = Runtime.getRuntime();
-		String[] cmd = new String[] { "/home/niederhausen/java/apache-maven-3.0-beta-3/bin/mvn", "package" };
-		final Process p = runtime.exec(cmd, new String[] {}, dir);
+//		String[] cmd = new String[] { data.getMavenpath()+"/bin/mvn", "package" };
+		
+		ProcessBuilder pb = new ProcessBuilder(data.getMavenpath()+"/bin/mvn", "package");
+		pb.environment().put("MAVEN_OPTS", data.getMavenOpts());
+		pb.directory(dir);
+		
+		final Process p = pb.start();
 		return p;
 	}
 

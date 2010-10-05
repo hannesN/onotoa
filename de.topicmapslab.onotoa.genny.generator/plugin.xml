@@ -10,6 +10,10 @@
          <keywordReference
                id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny">
          </keywordReference>
+         <description>
+            Export which creates an editor application based ont the loaded schema. If no schema is loaded the export wizard is of no use.
+Attention: You need to have to have Maven 3 on your system and set the path in the properties.
+         </description>
       </wizard>
    </extension>
    <extension

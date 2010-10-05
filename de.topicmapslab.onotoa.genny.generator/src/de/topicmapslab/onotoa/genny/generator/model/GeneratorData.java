@@ -6,6 +6,7 @@ package de.topicmapslab.onotoa.genny.generator.model;
 import de.topicmapslab.kuria.annotation.widgets.Check;
 import de.topicmapslab.kuria.annotation.widgets.Directory;
 import de.topicmapslab.kuria.annotation.widgets.Editable;
+import de.topicmapslab.kuria.annotation.widgets.Hidden;
 import de.topicmapslab.kuria.annotation.widgets.TextField;
 
 /**
@@ -18,16 +19,22 @@ import de.topicmapslab.kuria.annotation.widgets.TextField;
 public class GeneratorData {
 
 	@Directory
-	public String targetDir;
+	private String targetDir;
 	
 	@TextField
-	public String applicationId;
+	private String applicationId;
 	
 	@TextField
-	public String applicationName;
+	private String applicationName;
 	
 	@Check
-	public boolean deleteTemporaryFiles;
+	private boolean deleteTemporaryFiles;
+	
+	@Hidden
+	private String mavenPath;
+	
+	@Hidden
+	private String mavenOpts;
 
 	/**
      * @return the targetDir
@@ -85,6 +92,19 @@ public class GeneratorData {
     	this.deleteTemporaryFiles = deleteTemporaryFiles;
     }
 	
+	public void setMavenpath(String mavenpath) {
+	    this.mavenPath = mavenpath;
+    }
 	
+	public String getMavenpath() {
+	    return mavenPath;
+    }
 	
+	public void setMavenOpts(String mavenOpts) {
+	    this.mavenOpts = mavenOpts;
+    }
+	
+	public String getMavenOpts() {
+	    return mavenOpts;
+    }
 }
