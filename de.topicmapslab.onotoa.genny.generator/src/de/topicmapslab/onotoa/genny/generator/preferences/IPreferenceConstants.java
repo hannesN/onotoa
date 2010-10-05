@@ -30,4 +30,9 @@ public interface IPreferenceConstants {
 	 * the maven home directory
 	 */
 	public final static String P_MAVEN_HOME = "maven_home";
+	
+	/**
+	 * Options for maven which will be set via env variable
+	 */
+	public final static String P_MAVEN_OPTS = "maven_opts";
 }
