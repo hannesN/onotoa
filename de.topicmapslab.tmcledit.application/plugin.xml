@@ -128,8 +128,13 @@
                activityId="de.topicmapslab.tmcledit.application"
                isEqualityPattern="false"
                pattern="org.eclipse.equinox.security.ui/.*"> 
-         </activityPatternBinding> 
-      </extension> 
+         </activityPatternBinding>
+         <activityPatternBinding
+		 		activityId="de.topicmapslab.tmcledit.application"
+		 		isEqualityPattern="false"
+	   			pattern="org\.eclipse\.ui\.ide/.*">
+	     </activityPatternBinding>
+      </extension>
       <extension 
             point="org.eclipse.ui.services"> 
          <sourceProvider 
