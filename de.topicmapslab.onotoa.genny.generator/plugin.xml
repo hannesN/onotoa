@@ -7,7 +7,41 @@
             class="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
             id="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
             name="Generate Genny Application">
+         <keywordReference
+               id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny">
+         </keywordReference>
       </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="de.topicmapslab.onotoa.genny.generator.preferences.GennyPreferencePage"
+            id="de.topicmapslab.onotoa.genny.generator.preferences.GennyPropertyPage"
+            name="Generic Editor Export">
+         <keywordReference
+               id="de.topicmapslab.onotoa.genny.generator.preference.keywords.maven">
+         </keywordReference>
+         <keywordReference
+               id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny">
+         </keywordReference>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="de.topicmapslab.onotoa.genny.generator.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.keywords">
+      <keyword
+            id="de.topicmapslab.onotoa.genny.generator.preference.keywords.maven"
+            label="Maven">
+      </keyword>
+      <keyword
+            id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny"
+            label="Genny">
+      </keyword>
    </extension>
 
 </plugin>

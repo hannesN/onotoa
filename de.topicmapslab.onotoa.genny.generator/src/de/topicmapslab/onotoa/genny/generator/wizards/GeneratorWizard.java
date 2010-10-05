@@ -5,7 +5,7 @@ package de.topicmapslab.onotoa.genny.generator.wizards;
 
 import java.util.Collection;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
@@ -20,7 +20,7 @@ import de.topicmapslab.kuria.annotation.AnnotationBindingFactory;
 import de.topicmapslab.kuria.swtgenerator.WidgetGenerator;
 import de.topicmapslab.kuria.swtgenerator.edit.IInputMaskListener;
 import de.topicmapslab.kuria.swtgenerator.edit.InputMask;
-import de.topicmapslab.onotoa.genny.generator.ProjectGenerator;
+import de.topicmapslab.onotoa.genny.generator.dialog.GenerationProgressDialog;
 import de.topicmapslab.onotoa.genny.generator.model.GeneratorData;
 
 /**
@@ -50,14 +50,10 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 	@Override
 	public boolean performFinish() {
 		page.persist();
-		ProjectGenerator gen = new ProjectGenerator();
-
-		StringBuilder builder = new StringBuilder();
-		NullProgressMonitor monitor = new NullProgressMonitor();
-
-		gen.generateProjects(data, builder, monitor);
 		
-		return true;
+		int result = new GenerationProgressDialog(getShell(), data).run();
+		
+		return result==Dialog.OK;
 	}
 
 	@Override
