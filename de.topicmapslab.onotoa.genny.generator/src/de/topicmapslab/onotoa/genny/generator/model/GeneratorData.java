@@ -3,6 +3,10 @@
  */
 package de.topicmapslab.onotoa.genny.generator.model;
 
+import static de.topicmapslab.onotoa.genny.generator.preferences.IPreferenceConstants.*;
+
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import de.topicmapslab.kuria.annotation.widgets.Check;
 import de.topicmapslab.kuria.annotation.widgets.Directory;
 import de.topicmapslab.kuria.annotation.widgets.Editable;
@@ -107,4 +111,16 @@ public class GeneratorData {
 	public String getMavenOpts() {
 	    return mavenOpts;
     }
+	
+	public void init(IPreferenceStore ps) {
+		applicationId = ps.getString(P_LAST_PROJECTID);
+		applicationName = ps.getString(P_LAST_PROJECTNAME);
+		targetDir = ps.getString(P_LAST_TARGET);
+	}
+	
+	public void save(IPreferenceStore ps) {
+		ps.setValue(P_LAST_PROJECTID, applicationId);
+		ps.setValue(P_LAST_PROJECTNAME, applicationName);
+		ps.setValue(P_LAST_TARGET, targetDir);
+	}
 }
