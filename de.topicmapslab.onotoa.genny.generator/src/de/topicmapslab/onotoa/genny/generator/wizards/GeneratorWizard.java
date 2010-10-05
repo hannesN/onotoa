@@ -71,7 +71,7 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 		path = ps.getString(IPreferenceConstants.P_MAVEN_HOME);
 		data.setMavenpath(path);
 		data.setMavenOpts(ps.getString(IPreferenceConstants.P_MAVEN_OPTS));
-		
+		data.save(ps);
 		int result = new GenerationProgressDialog(getShell(), data).run();
 		
 		return result==Dialog.OK;
@@ -156,6 +156,7 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 			im.getComposite().setLayoutData(new GridData(GridData.FILL_BOTH));
 			
 			data = new GeneratorData();
+			data.init(Activator.getDefault().getPreferenceStore());
 			im.setModel(data);
 			
 			im.addInputMaskListeners(this);
