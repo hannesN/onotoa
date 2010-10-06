@@ -30,7 +30,7 @@ public class GeneratorData {
 	
 	@TextField
 	private String applicationName;
-	
+
 	@Check
 	private boolean deleteTemporaryFiles;
 	

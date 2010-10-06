@@ -99,6 +99,12 @@
             name="de.topicmapslab.kuria.createnew"
             validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
       </annotationprovider>
+      <annotationprovider
+            id="de.topicmapslab.onotoa.kuria.codegen.read-only"
+            internal="false"
+            name="de.topicmapslab.kuria.read-only"
+            validator="de.topicmapslab.onotoa.aranuka.codegen.annotation.BooleanValidator">
+      </annotationprovider>
    </extension>
    <extension
          point="de.topicmapslab.tmcledit.edit.modelviewextension">

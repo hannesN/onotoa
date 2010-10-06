@@ -10,7 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.aranuka.codegen.model;
 
-import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.GENERATE_ATTRIBUTE;
+import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.*;
 import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.HIDDEN;
 import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.LABEL;
 import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.NAME;
@@ -22,7 +22,7 @@ import de.topicmapslab.kuria.annotation.widgets.TextField;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  *
  */
 public abstract class FieldData extends GeneratorData {
@@ -85,6 +85,15 @@ public abstract class FieldData extends GeneratorData {
 
 	public void setHidden(boolean hidden) {
     	setValue(HIDDEN, Boolean.toString(hidden));
+    }
+	
+	@Check(weight=6, label="Read Only")
+    public boolean isReadOnly() {
+    	return getBooleanValueOf(READONLY);
+    }
+
+	public void setReadOnly(boolean readOnly) {
+    	setValue(READONLY, Boolean.toString(readOnly));
     }
 
 	@Check(label = "Use value as String representation", weight=6)

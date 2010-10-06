@@ -184,7 +184,7 @@ public class ProjectGenerator {
 
 		try {
 			AranukaDescriptorFactory fac = new AranukaDescriptorFactory(builder.getTopicMapSystem(), topicMap,
-			        data.getApplicationId() + ".model");
+			        data.getApplicationId() + ".model", true, true);
 			CodeGenerator gen = fac.getCodeGenerator();
 			gen.generateCode(new File(srcFolder.getAbsolutePath()));
 		} catch (Exception e) {

@@ -3,9 +3,15 @@
  */
 package de.topicmapslab.onotoa.aranuka.codegen.wizards;
 
+import static de.topicmapslab.onotoa.aranuka.codegen.preferences.IPreferenceConstants.P_LASTGENNYAGENERATION;
+import static de.topicmapslab.onotoa.aranuka.codegen.preferences.IPreferenceConstants.P_LASTKURIAGENERATION;
+import static de.topicmapslab.onotoa.aranuka.codegen.preferences.IPreferenceConstants.P_LASTPACKAGENAME;
+import static de.topicmapslab.onotoa.aranuka.codegen.preferences.IPreferenceConstants.P_LASTSOURCEPATH;
+
 import java.io.File;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -29,7 +35,6 @@ import org.tmapi.core.TopicMap;
 import de.topicmapslab.codegenerator.CodeGenerator;
 import de.topicmapslab.codegenerator.factories.AranukaDescriptorFactory;
 import de.topicmapslab.onotoa.aranuka.codegen.Activator;
-import de.topicmapslab.onotoa.aranuka.codegen.preferences.IPreferenceConstants;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -44,6 +49,8 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 
 	private String path;
 	private String packageName;
+	private boolean generateKuriaAnnotations = false;
+	private boolean generateGennyClasses = false;
 
 	/**
 	 * 
@@ -66,13 +73,17 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			TopicMap topicMap = builder.createTopicMap();
 
 			AranukaDescriptorFactory fac = new AranukaDescriptorFactory(builder.getTopicMapSystem(), topicMap,
-			        packageName);
+			        packageName, generateGennyClasses, generateKuriaAnnotations);
 			CodeGenerator gen = fac.getCodeGenerator();
 			gen.generateCode(new File(path));
-			
+
+			// storing new values
 			IPreferenceStore ps = Activator.getDefault().getPreferenceStore();
-			ps.setValue(IPreferenceConstants.P_LASTSOURCEPATH, path);
-	        ps.setValue(IPreferenceConstants.P_LASTPACKAGENAME, packageName);
+			ps.setValue(P_LASTSOURCEPATH, path);
+			ps.setValue(P_LASTPACKAGENAME, packageName);
+			ps.setValue(P_LASTKURIAGENERATION, generateKuriaAnnotations);
+			ps.setValue(P_LASTGENNYAGENERATION, generateGennyClasses);
+			
 		} catch (Exception e) {
 			Activator.logException(e);
 			MessageDialog.openError(getShell(), "Error while generating code", "An error occurred:" + e.getMessage()
@@ -99,6 +110,9 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 		private Text packageNameText;
 		private Button browseButton;
 
+		private Button kuriaButton;
+		private Button gennyButton;
+
 		protected ExportPage() {
 			super("Export");
 		}
@@ -118,27 +132,43 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			browseButton.setText("...");
 
 			l = new Label(comp, SWT.NONE);
-			l.setText("package name:");
+			l.setText("Package Name:");
 			packageNameText = new Text(comp, SWT.BORDER);
 			packageNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-			hookListeners();
+			
+
+			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			gd.horizontalSpan = 3;
+			GridDataFactory fac = GridDataFactory.createFrom(gd);
+			
+			
+			kuriaButton = new Button(comp, SWT.CHECK);
+			kuriaButton.setText("Generate Kuria Annotations");
+			fac.applyTo(kuriaButton);
+			
+			gennyButton = new Button(comp, SWT.CHECK);
+			gennyButton.setText("Generate Genny ModelHandler Classes");
+			fac.applyTo(gennyButton);
 
 			setControl(comp);
-
+			hookListeners();
 			init();
-			
+
 			path = sourcePathText.getText();
 			packageName = packageNameText.getText();
 		}
 
 		protected void init() {
 			IPreferenceStore ps = Activator.getDefault().getPreferenceStore();
-			String tmp = ps.getString(IPreferenceConstants.P_LASTSOURCEPATH);
-	        sourcePathText.setText(tmp);
-	        
-	        tmp = ps.getString(IPreferenceConstants.P_LASTPACKAGENAME);
+			String tmp = ps.getString(P_LASTSOURCEPATH);
+			sourcePathText.setText(tmp);
+
+			tmp = ps.getString(P_LASTPACKAGENAME);
 			packageNameText.setText(tmp);
-        }
+			
+			gennyButton.setSelection(ps.getBoolean(P_LASTGENNYAGENERATION));
+			kuriaButton.setSelection(ps.getBoolean(P_LASTKURIAGENERATION));
+		}
 
 		private void hookListeners() {
 			browseButton.addSelectionListener(new SelectionAdapter() {
@@ -167,10 +197,27 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 					packageName = packageNameText.getText();
 				}
 			});
+
+			kuriaButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					generateKuriaAnnotations = kuriaButton.getSelection();
+				}
+			});
+
+			gennyButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+
+					generateGennyClasses = gennyButton.getSelection();
+				}
+			});
 		}
 
+		
+		
 		@Override
-		public boolean canFlipToNextPage() {
+		public boolean isPageComplete() {
 			File file = new File(sourcePathText.getText());
 			if (!file.isDirectory())
 				return false;
