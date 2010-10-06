@@ -168,6 +168,13 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			
 			gennyButton.setSelection(ps.getBoolean(P_LASTGENNYAGENERATION));
 			kuriaButton.setSelection(ps.getBoolean(P_LASTKURIAGENERATION));
+			
+			generateGennyClasses = gennyButton.getSelection();
+			kuriaButton.setEnabled(!generateGennyClasses);
+			if (generateGennyClasses) {
+				generateKuriaAnnotations = true;
+				kuriaButton.setSelection(true);
+			}
 		}
 
 		private void hookListeners() {
@@ -208,8 +215,12 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 			gennyButton.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-
 					generateGennyClasses = gennyButton.getSelection();
+					kuriaButton.setEnabled(!generateGennyClasses);
+					if (generateGennyClasses) {
+						generateKuriaAnnotations = true;
+						kuriaButton.setSelection(true);
+					}
 				}
 			});
 		}
