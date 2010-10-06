@@ -137,6 +137,8 @@ public class DiagramPage extends AbstractEMFModelPage {
 	}
 
 	public void notifyChanged(Notification notification) {
+		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
+			return;
 		updateUI();
 	}
 }
