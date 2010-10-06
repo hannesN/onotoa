@@ -17,7 +17,7 @@ import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
 import de.topicmapslab.tmcledit.diagram.util.SWTPattern;
 
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  * 
  */
 public class TypeFigure extends Figure {
@@ -36,7 +36,7 @@ public class TypeFigure extends Figure {
 		ColorDefinition tsc = scheme.getTopicSecondaryColor();
 		Rectangle rec = getBounds();
 		if (tsc != null) {
-
+			// use pattern if a secondary color exists
 			Rectangle r = rec.getCopy();
 			r.scale(graphics.getAbsoluteScale());
 			graphics.setBackgroundPattern(new SWTPattern(null, r.x + r.width

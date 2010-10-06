@@ -34,7 +34,9 @@ public class CircleFigure extends Figure {
 		graphics.setBackgroundColor(getBackgroundColor());
 		graphics.setForegroundColor(getForegroundColor());
 		
-		graphics.setBackgroundPattern(new Pattern(Display.getCurrent(), posX, rec.y, posX, rec.y+height, getForegroundColor(), getBackgroundColor()));
+		Rectangle r = rec.getCopy();
+		r.scale(graphics.getAbsoluteScale());
+		graphics.setBackgroundPattern(new Pattern(Display.getCurrent(), posX, r.y, posX, r.y+r.height, getForegroundColor(), getBackgroundColor()));
 		
 		graphics.fillOval(posX, rec.y, height, height);
 		graphics.popState();
