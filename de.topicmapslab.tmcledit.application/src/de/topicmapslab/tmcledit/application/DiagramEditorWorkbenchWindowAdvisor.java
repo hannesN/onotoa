@@ -80,8 +80,11 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 			if (mItems[i] instanceof MenuManager) {
 				mSubItems = ((MenuManager) mItems[i]).getItems();
 				for (int j = 0; j < mSubItems.length; j++) {
-					if (mItems[i].getId().equals("file"))
+					if (mItems[i].getId().equals("file")) {
+						// removine menu entries we don't want
 						((MenuManager) mItems[i]).remove("org.eclipse.ui.openLocalFile");
+						((MenuManager) mItems[i]).remove("converstLineDelimitersTo");
+					}
 				}
 			}
 		}
