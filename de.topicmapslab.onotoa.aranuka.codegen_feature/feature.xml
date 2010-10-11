@@ -96,4 +96,11 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="de.topicmapslab.aranuka_kuria.codegenerator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

@@ -227,12 +227,9 @@ litigation.
       <feature id="de.topicmapslab.aranuka.majortom_feature" version="1.1.2"/>
       <feature id="de.topicmapslab.aranuka_feature" version="1.0.2"/>
       <feature id="de.topicmapslab.ctmwriter_feature" version="1.0.8"/>
-      <feature id="de.topicmapslab.genericeditorsdk.codegenerator_feature" version="1.0.0"/>
-      <feature id="de.topicmapslab.kuria_feature" version="1.0.1"/>
       <feature id="de.topicmapslab.maiana.io_feature"/>
       <feature id="de.topicmapslab.majortom_feature" version="1.1.2"/>
       <feature id="de.topicmapslab.tmql4j_feature" version="2.6.5"/>
-      <feature id="org.tmapi_feature" version="2.0.3"/>
       <feature id="org.tmapix_feature" version="1.0.0"/>
       <feature id="com.mysql.jdbc_feature" version="5.1.13"/>
       <feature id="net.sf.json_feature" version="2.3.0"/>
@@ -245,6 +242,23 @@ litigation.
       <feature id="de.topicmapslab.tmcledit.doc_feature" version="1.2.0.qualifier"/>
       <feature id="de.topicmapslab.tmcledit.export_feature" version="1.2.0.qualifier"/>
       <feature id="de.topicmapslab.tmcledit.import_feature" version="1.2.0.qualifier"/>
+      <feature id="org.tmapi_feature" version="2.0.3"/>
+      <feature id="org.eclipse.nebula.widgets.cdatetime.feature" version="0.14.0"/>
+      <feature id="org.eclipse.rcp" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
+      <feature id="org.eclipse.emf.common" version="2.6.0.v20100914-1218"/>
+      <feature id="org.eclipse.emf.edit" version="2.6.0.v20100914-1218"/>
+      <feature id="org.eclipse.emf.edit.ui" version="2.6.0.v20100914-1218"/>
+      <feature id="org.eclipse.emf.transaction" version="1.4.0.v20100428-2315-377-8s734C3E7D15D6B"/>
+      <feature id="org.eclipse.emf.workspace" version="1.4.0.v20100428-2315-36-8s734C367E3CBC7"/>
+      <feature id="org.eclipse.gef" version="3.6.1.v20100908-1100-777B181A3Bz-6B663E7974242"/>
+      <feature id="org.eclipse.platform" version="3.6.1.r361_v20100909-9gF78GrkFqw7GrsZnvz0JWNTeb6fue6896L"/>
+      <feature id="org.eclipse.emf.common.ui" version="2.6.0.v20100914-1218"/>
+      <feature id="org.eclipse.emf.ecore" version="2.6.1.v20100914-1218"/>
+      <feature id="org.eclipse.emf.ecore.edit" version="2.6.0.v20100914-1218"/>
+      <feature id="org.eclipse.gmf.runtime.thirdparty" version="1.4.0.v20100521-1113-7P8W5FHV2CNOiy0niXURaw311A16"/>
+      <feature id="org.eclipse.emf.validation" version="1.4.0.v20100428-2315-479-9oB56N5BBR6LCA6"/>
+      <feature id="de.topicmapslab.genericeditorsdk.codegenerator_feature" version="1.0.0.201010111331"/>
+      <feature id="de.topicmapslab.kuria_feature" version="1.0.1.201010111331"/>
    </features>
 
    <configurations>
