@@ -22,6 +22,20 @@
 <repository location="http://genny.topicmapslab.de/update"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="org.eclipse.rcp.feature.group" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.6.1.v20100908-1100-7G7R2A5WNcBQPZgXAHiSXMXYaKPI"/>
+<unit id="org.eclipse.epp.mpc.feature.group" version="1.0.1.v20100826-2143"/>
+<repository location="http://mirror.topicmapslab.de/update/helios/"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.4.1.R36x_v20100823-7M7K7JF90dnJ-WLf3cf4yi"/>
+<unit id="org.eclipse.emf.validation.feature.group" version="1.4.0.v20100428-2315-479-9oB56N5BBR6LCA6"/>
+<unit id="org.eclipse.pde.junit.runtime.standalone.feature.group" version="1.0.0.v20100831"/>
+<unit id="org.eclipse.gmf.runtime.thirdparty.feature.group" version="1.4.0.v20100521-1113-7P8W5FHV2CNOiy0niXURaw311A16"/>
+<repository location="http://mirror.topicmapslab.de/update/helios/"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
 <unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
 <unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
 <unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
@@ -34,27 +48,12 @@
 <unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
 <unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.1.2"/>
 <unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
-<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201010111331"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201010111331"/>
+<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201010121055"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201010121055"/>
 <unit id="de.topicmapslab.majortom_feature.feature.group" version="1.1.2"/>
 <unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
 <repository location="http://update.topicmapslab.de"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.rcp.feature.group" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
-<unit id="org.eclipse.rcp.sdk.id" version="3.6.0.M20100909-0800"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
-<unit id="org.eclipse.gef.sdk.feature.group" version="3.6.1.v20100908-1100-7G7R2A5WNcBQPZgXAHiSXMXYaKPI"/>
-<unit id="org.eclipse.epp.mpc.feature.group" version="1.0.1.v20100826-2143"/>
-<repository location="http://mirror.topicmapslab.de/update/helios/"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.equinox.executable.feature.group" version="3.4.1.R36x_v20100823-7M7K7JF90dnJ-WLf3cf4yi"/>
-<unit id="org.eclipse.emf.validation.feature.group" version="1.4.0.v20100428-2315-479-9oB56N5BBR6LCA6"/>
-<unit id="org.eclipse.pde.junit.runtime.standalone.feature.group" version="1.0.0.v20100831"/>
-<unit id="org.eclipse.gmf.runtime.thirdparty.feature.group" version="1.4.0.v20100521-1113-7P8W5FHV2CNOiy0niXURaw311A16"/>
-<repository location="http://mirror.topicmapslab.de/update/helios/"/>
 </location>
 </locations>
 <launcherArgs>
