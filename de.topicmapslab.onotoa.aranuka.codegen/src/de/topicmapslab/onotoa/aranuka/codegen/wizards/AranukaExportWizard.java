@@ -186,6 +186,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 					if (s != null) {
 						sourcePathText.setText(s);
 					}
+					setPageComplete(isPageComplete());
 				}
 			});
 
@@ -194,6 +195,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 				@Override
 				public void modifyText(ModifyEvent e) {
 					path = sourcePathText.getText();
+					setPageComplete(isPageComplete());
 				}
 			});
 
@@ -202,6 +204,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 				@Override
 				public void modifyText(ModifyEvent e) {
 					packageName = packageNameText.getText();
+					setPageComplete(isPageComplete());
 				}
 			});
 
@@ -209,6 +212,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					generateKuriaAnnotations = kuriaButton.getSelection();
+					setPageComplete(isPageComplete());
 				}
 			});
 
@@ -221,6 +225,7 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 						generateKuriaAnnotations = true;
 						kuriaButton.setSelection(true);
 					}
+					setPageComplete(isPageComplete());
 				}
 			});
 		}
