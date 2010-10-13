@@ -44,7 +44,7 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 	public GenerationProgressDialog(Shell parent, GeneratorData data) {
 		super(parent);
 		this.data = data;
-		setShellStyle(getDefaultOrientation() | SWT.TITLE | SWT.APPLICATION_MODAL);
+		setShellStyle(getDefaultOrientation() | SWT.TITLE |SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	}
 
 	public int run() {
@@ -128,6 +128,7 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 					hideButton.setText("Details >>");
 					styledText.setVisible(false);
 					textCache = new StringBuilder(styledText.getText());
+					getShell().setSize(700, 150);
 				} else {
 					hideButton.setText("Details <<");
 

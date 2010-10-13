@@ -29,9 +29,9 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>genny.target</file>
+									<file>$name.target</file>
 									<type>target</type>
-									<classifier>genny_target_e36</classifier>
+									<classifier>$name_target_e36</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>
