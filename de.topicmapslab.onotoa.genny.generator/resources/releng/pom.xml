@@ -12,53 +12,38 @@
 		<module>../$pluginId-application</module>
 		<module>../$pluginId-feature</module>
 	</modules>
+
+	<properties>
+		<tycho-version>0.10.0</tycho-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<build>
 		<plugins>
-			<!--<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.3</version>
-				<executions>
-					<execution>
-						<id>attach-artifacts</id>
-						<phase>package</phase>
-						<goals>
-							<goal>attach-artifact</goal>
-						</goals>
-						<configuration>
-							<artifacts>
-								<artifact>
-									<file>de.test.lala2/lala.target</file>
-									<type>target</type>
-									<classifier>lala_target_e36</classifier>
-								</artifact>
-							</artifacts>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			--><plugin>
+			<plugin>
 				<groupId>org.sonatype.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
-				<version>0.9.0</version>
+				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
 			<plugin>
 				<groupId>org.sonatype.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
-				<version>0.9.0</version>
+				<version>${tycho-version}</version>
 				<configuration>
 					<resolver>p2</resolver>
+					<target>
+						<artifact>
+							<groupId>$pluginId</groupId>
+							<version>1.0.0-SNAPSHOT</version>
+							<classifier>$name_target_e36</classifier>
+						</artifact>
+					</target>
 					<environments>
 						<environment>
 							<os>linux</os>
 							<ws>gtk</ws>
 							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86</arch>
 						</environment>
 						<environment>
 							<os>win32</os>
@@ -89,7 +74,7 @@
 		<repository>
 			<id>helios update site</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/helios</url>
+			<url>http://mirror.topicmapslab.de/update/helios</url>
 		</repository>
 		<repository>
 			<id>TMLab update</id>

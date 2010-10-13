@@ -22,8 +22,93 @@
    <vm>
    </vm>
 
+   <plugins>
+      <plugin id="$pluginId" fragment=""/>
+      <plugin id="aranuka.runtime"/>
+      <plugin id="aranuka_connector_majortom"/>
+      <plugin id="com.ibm.icu"/>
+      <plugin id="com.semagia.mio.syntaxpacknodeps"/>
+      <plugin id="de.topicmapslab.ctmwriter"/>
+      <plugin id="de.topicmapslab.genericeditor.application"/>
+      <plugin id="de.topicmapslab.geotype"/>
+      <plugin id="de.topicmapslab.kuria.annotation"/>
+      <plugin id="de.topicmapslab.kuria.runtime"/>
+      <plugin id="de.topicmapslab.kuria.swtgenerator"/>
+      <plugin id="de.topicmapslab.maiana_io"/>
+      <plugin id="de.topicmapslab.majortom.core"/>
+      <plugin id="de.topicmapslab.majortom.inmemory"/>
+      <plugin id="de.topicmapslab.majortom.jdbc"/>
+      <plugin id="de.topicmapslab.majortom.model"/>
+      <plugin id="de.topicmapslab.tmql4j"/>
+      <plugin id="de.topicmapslab.tmql4j.tmml.extension"/>
+      <plugin id="net.sf.ezmorph"/>
+      <plugin id="net.sf.json"/>
+      <plugin id="org.apache.commons.beanutils"/>
+      <plugin id="org.apache.commons.collections"/>
+      <plugin id="org.apache.commons.lang"/>
+      <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.xml.resolver"/>
+      <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.databinding"/>
+      <plugin id="org.eclipse.core.databinding.observable"/>
+      <plugin id="org.eclipse.core.databinding.property"/>
+      <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.ds"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.equinox.security"/>
+      <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.util"/>
+      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.jface.databinding"/>
+      <plugin id="org.eclipse.jface.text"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.swt.photon.qnx.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.text"/>
+      <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
+      <plugin id="org.eclipse.ui.forms"/>
+      <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.hamcrest.core"/>
+      <plugin id="org.junit"/>
+      <plugin id="org.junit4"/>
+      <plugin id="org.postgresql.jdbc.driver"/>
+      <plugin id="org.tmapi"/>
+      <plugin id="org.tmapix" fragment=""/>
+      <plugin id="org.tmapix.core"/>
+      <plugin id="org.tmapix.io"/>
+      <plugin id="slf4j.api"/>
+      <plugin id="slf4j.nop" fragment="true"/>
+      <plugin id="thaiopensource.jing"/>
+   </plugins>
+
    <features>
-      <feature id="$pluginId-feature" version="1.0.0.qualifier"/>
+      <feature id="$pluginId_feature" version="1.0.0.qualifier"/>
       <feature id="de.topicmapslab.aranuka.majortom_feature" version="1.1.2"/>
       <feature id="de.topicmapslab.aranuka_feature" version="1.0.2"/>
       <feature id="de.topicmapslab.majortom_feature" version="1.1.2"/>
