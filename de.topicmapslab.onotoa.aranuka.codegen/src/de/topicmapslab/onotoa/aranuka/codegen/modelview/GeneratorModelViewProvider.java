@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.topicmapslab.onotoa.aranuka.codegen.Activator;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.AbstractSelectionAction;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.CreateAnnotationHub;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.DeleteAnnotationHub;
@@ -18,6 +19,7 @@ import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.IdentifierData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.TopicMapSchemaData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.TopicTypeData;
+import de.topicmapslab.onotoa.aranuka.codegen.preferences.IPreferenceConstants;
 import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
@@ -75,8 +77,8 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public List<AbstractModelViewNode> getChildNodes(ModelView modelView, AbstractModelViewNode parentNode) {
-
-		if (parentNode.getModel() instanceof TMCLConstruct) {
+		if ((!Activator.getDefault().getPreferenceStore().getBoolean(IPreferenceConstants.P_HIDE_NODES))
+		 && (parentNode.getModel() instanceof TMCLConstruct)) {
 			
 			// check if the node already has a generator node
 			for (AbstractModelViewNode n : parentNode.getChildrenList()) {
@@ -99,6 +101,9 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 * @return
 	 */
 	private AbstractModelViewNode getNodeForConstruct(ModelView modelView, TMCLConstruct model) {
+		if (Activator.getDefault().getPreferenceStore().getBoolean(IPreferenceConstants.P_HIDE_NODES))
+			return null;
+		
 		GeneratorData data = null;
 		if (model instanceof TopicMapSchema) {
 			data = new TopicMapSchemaData(model);
@@ -124,6 +129,9 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public boolean hasPageFor(IModelExtension extension) {
+		if (Activator.getDefault().getPreferenceStore().getBoolean(IPreferenceConstants.P_HIDE_NODES))
+			return false;
+		
 		if (extension instanceof GeneratorData) {
 			return true;
 		}

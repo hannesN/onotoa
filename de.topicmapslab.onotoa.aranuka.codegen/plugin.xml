@@ -113,5 +113,13 @@
             name="Code Generator">
       </modeviewextension>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="de.topicmapslab.onotoa.aranuka.codegen.preferences.CodegenPage"
+            id="de.topicmapslab.onotoa.aranuka.codegen.preferences.CodegenPage"
+            name="Code Generation">
+      </page>
+   </extension>
 
 </plugin>

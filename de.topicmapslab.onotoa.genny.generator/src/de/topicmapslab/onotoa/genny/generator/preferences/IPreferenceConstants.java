@@ -35,4 +35,9 @@ public interface IPreferenceConstants {
 	 * Options for maven which will be set via env variable
 	 */
 	public final static String P_MAVEN_OPTS = "maven_opts";
+	
+	/**
+	 * Options whether the annotaiton nodes should be shown
+	 */
+	public final static String P_SHOW_GENERATOR_NODES = "show_generator_nodes";
 }
