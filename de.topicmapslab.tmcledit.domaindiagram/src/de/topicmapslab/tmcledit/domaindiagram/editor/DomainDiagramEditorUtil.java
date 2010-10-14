@@ -176,7 +176,7 @@ public class DomainDiagramEditorUtil {
 					}
 
 				}, ImageProvider.getImageDescriptor(ImageConstants.KINDOF_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.KINDOF)));
+				ImageProvider.getImageDescriptor(ImageConstants.KINDOF_SM)));
 
 		group.add(new CombinedTemplateCreationEntry(
 						"Association",
@@ -185,7 +185,7 @@ public class DomainDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)));
+								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM)));
 
 		group.add(new ConnectionCreationToolEntry("Player",
 				"Create Topic Role Constraint connection",
@@ -205,7 +205,7 @@ public class DomainDiagramEditorUtil {
 
 				}, ImageProvider
 						.getImageDescriptor(ImageConstants.TOPICROLE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPICROLE)));
+				ImageProvider.getImageDescriptor(ImageConstants.TOPICROLE_SM)));
 
 		return group;
 	}
