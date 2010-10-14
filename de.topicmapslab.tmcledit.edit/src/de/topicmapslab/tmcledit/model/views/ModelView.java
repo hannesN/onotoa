@@ -552,6 +552,16 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 //			}
 //		}
 	}
+	
+	public void refreshView(boolean recreate) {
+		if (recreate) {
+			contentProvider.initialize();
+		} else {
+			getViewer().refresh();
+		}
+		viewer.refresh();
+		viewer.expandToLevel(2);
+	}
 
 	@SuppressWarnings("unchecked")
 	public void updateActions() {

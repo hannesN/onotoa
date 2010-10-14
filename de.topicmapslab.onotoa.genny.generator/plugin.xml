@@ -19,6 +19,7 @@ Attention: You need to have to have Maven 3 on your system and set the path in t
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
+            category="de.topicmapslab.onotoa.aranuka.codegen.preferences.CodegenPage"
             class="de.topicmapslab.onotoa.genny.generator.preferences.GennyPreferencePage"
             id="de.topicmapslab.onotoa.genny.generator.preferences.GennyPropertyPage"
             name="Generic Editor Export">
