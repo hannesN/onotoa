@@ -58,7 +58,7 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 		Figure constraint = new Figure();
 		figure.add(constraint);
 		lm = new ToolbarLayout(true);
-		lm.setSpacing(10);
+		lm.setSpacing(0);
 		constraint.setLayoutManager(lm);
 		
 		nameLabel = new EditableLabel("");
