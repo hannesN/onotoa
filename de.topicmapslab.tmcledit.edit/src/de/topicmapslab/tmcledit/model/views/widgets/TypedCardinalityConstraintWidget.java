@@ -161,7 +161,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		bgd.verticalAlignment = SWT.CENTER;
 		GridDataFactory fac = GridDataFactory.createFrom(bgd);
 
-		addButton = toolkit.createButton(comp, "Add...", SWT.PUSH);
+		addButton = toolkit.createButton(comp, "Select...", SWT.PUSH);
 		fac.applyTo(addButton);
 
 		newButton = toolkit.createButton(comp, "New...", SWT.PUSH);
