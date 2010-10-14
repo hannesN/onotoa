@@ -67,7 +67,7 @@ public class OnotoaSplashHandler extends BasicSplashHandler {
 		label.setFont(copyrightFont);
 		String tmp = "Developer in chief: Hannes Niederhausen\n"
 				+ "Onotoa is a graduate from Topic Maps Lab\n"
-				+ "(C) 2008, 2009 Hannes Niederhauen, Topic Maps Lab";
+				+ "(C) 2008-2010 Hannes Niederhauen, Topic Maps Lab";
 		label.setText(tmp);
 	}
 
