@@ -20,4 +20,6 @@ public interface IPreferenceConstants {
 	public final String P_LASTKURIAGENERATION = "last_kuria_flag";
 	
 	public final String P_LASTGENNYAGENERATION = "last_genny_flag";
+	
+	public final String P_HIDE_NODES = "hide_nodes";
 }
