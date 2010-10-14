@@ -156,12 +156,12 @@ public class TMCLDiagramEditorUtil {
 		group.add(new CombinedTemplateCreationEntry("Topic", "Topic",
 				new TypeNodeCreationFactory(KindOfTopicType.NO_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPIC_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPIC)));
+				ImageProvider.getImageDescriptor(ImageConstants.TOPIC_SM)));
 
 		group.add(new CombinedTemplateCreationEntry("Topic Type", "Topic Type",
 				new TypeNodeCreationFactory(KindOfTopicType.TOPIC_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE)));
+				ImageProvider.getImageDescriptor(ImageConstants.TOPICTYPE_SM)));
 
 		group
 				.add(new CombinedTemplateCreationEntry(
@@ -172,7 +172,7 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.OCCURRENCETYPE_SM),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURRENCETYPE)));
+								.getImageDescriptor(ImageConstants.OCCURRENCETYPE_SM)));
 
 		group.add(new CombinedTemplateCreationEntry("Role Type", "Role Type",
 				new TypeNodeCreationFactory(KindOfTopicType.ROLE_TYPE),
@@ -184,12 +184,12 @@ public class TMCLDiagramEditorUtil {
 				ImageProvider
 						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE_SM),
 				ImageProvider
-						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE)));
+						.getImageDescriptor(ImageConstants.ASSOCIATIONTYPE_SM)));
 
 		group.add(new CombinedTemplateCreationEntry("Name Type", "Name Type",
 				new TypeNodeCreationFactory(KindOfTopicType.NAME_TYPE),
 				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE)));
+				ImageProvider.getImageDescriptor(ImageConstants.NAMETYPE_SM)));
 		return group;
 	}
 
@@ -202,7 +202,7 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT_SM),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT)));
+								.getImageDescriptor(ImageConstants.OCCURRENCECONSTRAINT_SM)));
 
 		group.add(new CombinedTemplateCreationEntry(
 						"Name Constraint",
@@ -222,7 +222,7 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.NAMECONSTRAINT_SM),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.NAMECONSTRAINT)));
+								.getImageDescriptor(ImageConstants.NAMECONSTRAINT_SM)));
 		
 		group.add(new CombinedTemplateCreationEntry(
 				"Scope Constraint",
@@ -340,7 +340,7 @@ public class TMCLDiagramEditorUtil {
 					}
 
 				}, ImageProvider.getImageDescriptor(ImageConstants.ISA_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.ISA)));
+				ImageProvider.getImageDescriptor(ImageConstants.ISA_SM)));
 
 		group.add(new ConnectionCreationToolEntry("Kind Of ...",
 				"Create kind of connection", new CreationFactory() {
@@ -356,7 +356,7 @@ public class TMCLDiagramEditorUtil {
 					}
 
 				}, ImageProvider.getImageDescriptor(ImageConstants.KINDOF_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.KINDOF)));
+				ImageProvider.getImageDescriptor(ImageConstants.KINDOF_SM)));
 
 		group
 				.add(new CombinedTemplateCreationEntry(
@@ -381,7 +381,7 @@ public class TMCLDiagramEditorUtil {
 						ImageProvider
 								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM),
 						ImageProvider
-								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT)));
+								.getImageDescriptor(ImageConstants.ASSOCIATIONCONSTRAINT_SM)));
 
 		group.add(new ConnectionCreationToolEntry("Topic Role Constraint",
 				"Create Topic Role Constraint connection",
@@ -401,7 +401,7 @@ public class TMCLDiagramEditorUtil {
 
 				}, ImageProvider
 						.getImageDescriptor(ImageConstants.TOPICROLE_SM),
-				ImageProvider.getImageDescriptor(ImageConstants.TOPICROLE)));
+				ImageProvider.getImageDescriptor(ImageConstants.TOPICROLE_SM)));
 
 		return group;
 	}
