@@ -180,6 +180,8 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 		// TableColumnLayout layout = new TableColumnLayout();
 		GridLayout layout = new GridLayout();
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
 		comp.setLayout(layout);
 		Table table = toolkit.createTable(comp, SWT.BORDER | SWT.FULL_SELECTION|SWT.MULTI);
 		table.setHeaderVisible(true);
