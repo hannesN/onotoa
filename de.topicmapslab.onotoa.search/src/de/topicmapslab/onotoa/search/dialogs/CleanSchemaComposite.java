@@ -11,7 +11,10 @@
 package de.topicmapslab.onotoa.search.dialogs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -64,7 +67,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 	private boolean isTextFiltered = false;
 	private String textFilterValue;
 
-	private List<TopicType> selectedList = new ArrayList<TopicType>();
+	private Set<TopicType> selectedSet = new HashSet<TopicType>();
 
 	/**
 	 * Constructor
@@ -139,7 +142,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 		// gridData.widthHint = 200;
 
 		// left table with unused TopicTypes from the schema
-		unusedTopicsTable = new TableViewer(group, SWT.BORDER | SWT.V_SCROLL);
+		unusedTopicsTable = new TableViewer(group, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		unusedTopicsTable.getTable().setLayoutData(gridData);
 		unusedTopicsTable.setLabelProvider(new TopicLableProvider());
 		unusedTopicsTable.setContentProvider(new ArrayContentProvider());
@@ -333,7 +336,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 			if (element instanceof TopicType)
 
 				// black/white icons for deleted icons
-				if (selectedList.contains(element)) {
+				if (selectedSet.contains(element)) {
 					switch (((TopicType) element).getKind().getValue()) {
 
 					case 0:
@@ -377,7 +380,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 			// use grey as font to show delete-selection
 			if (element instanceof TopicType)
-				if (selectedList.contains(element))
+				if (selectedSet.contains(element))
 					return comp.getDisplay().getSystemColor(SWT.COLOR_GRAY);
 
 			return null;
@@ -404,7 +407,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 	private void clearSelection() {
 
 		textFilter.setText("");
-		selectedList.clear();
+		selectedSet.clear();
 		unusedTopicsTable.refresh();
 
 	}
@@ -418,7 +421,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 		IStructuredSelection sel = (IStructuredSelection) unusedTopicsTable.getSelection();
 
-		if (selectedList.contains((TopicType) sel.getFirstElement()))
+		if (selectedSet.contains((TopicType) sel.getFirstElement()))
 			restoreSelection();
 		else
 			deleteSelection();
@@ -432,8 +435,11 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 	private void deleteSelection() {
 
+		// iterate over all selected types (multi selection is allowed!)
 		IStructuredSelection sel = (IStructuredSelection) unusedTopicsTable.getSelection();
-		selectedList.add((TopicType) sel.getFirstElement());
+		for (Iterator it = sel.iterator(); it.hasNext();) {
+			selectedSet.add((TopicType) it.next());
+		}
 		unusedTopicsTable.refresh();
 
 		// change button immediately to re-enable restoring
@@ -449,8 +455,11 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 	private void restoreSelection() {
 
+		// iterate over all selected types (multi selection is allowed!)
 		IStructuredSelection sel = (IStructuredSelection) unusedTopicsTable.getSelection();
-		selectedList.remove((TopicType) sel.getFirstElement());
+		for (Iterator it = sel.iterator(); it.hasNext();) {
+			selectedSet.remove((TopicType) it.next());
+		}
 		unusedTopicsTable.refresh();
 
 		// change button immediately to re-enable deleting
@@ -525,10 +534,10 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 		if (event.getSelectionProvider().equals(unusedTopicsTable)) {
 
-			if (!event.getSelection().isEmpty() && !selectedList.contains((TopicType) sel.getFirstElement())) {
+			if (!event.getSelection().isEmpty() && !selectedSet.contains((TopicType) sel.getFirstElement())) {
 				deleteButton.setEnabled(true);
 				restoreButton.setEnabled(false);
-			} else if (!event.getSelection().isEmpty() && selectedList.contains((TopicType) sel.getFirstElement())) {
+			} else if (!event.getSelection().isEmpty() && selectedSet.contains((TopicType) sel.getFirstElement())) {
 				deleteButton.setEnabled(false);
 				restoreButton.setEnabled(true);
 			} else {
@@ -554,7 +563,15 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 	 * @return list with TopicTypes
 	 */
 	public List<TopicType> getCleanList() {
-		return selectedList;
+
+		List<TopicType> cleanList = new ArrayList<TopicType>();
+
+		Iterator it = selectedSet.iterator();
+		while (it.hasNext()) {
+			cleanList.add((TopicType) it.next());
+		}
+
+		return cleanList;
 	}
 
 }
