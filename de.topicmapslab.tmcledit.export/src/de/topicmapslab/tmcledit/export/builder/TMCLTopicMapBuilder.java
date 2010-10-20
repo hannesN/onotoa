@@ -768,7 +768,9 @@ public class TMCLTopicMapBuilder {
     }
 
 	private void addAnnotation(Annotation a, Topic topic) {
-	    Topic type = getAnnotationType(a);
+	    if (a.getValue().length()==0)
+	    	return;
+		Topic type = getAnnotationType(a);
 	    
 	    topic.createOccurrence(type, a.getValue());
     }
