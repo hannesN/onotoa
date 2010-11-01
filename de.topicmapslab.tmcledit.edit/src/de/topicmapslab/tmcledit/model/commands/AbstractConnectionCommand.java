@@ -54,7 +54,7 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 	protected abstract List<TopicType> getTypeList();
 	
 	public void execute() {
-		topic.eSetDeliver(newList.size()!=0);
+		topic.eSetDeliver(newList.size()==0);
 		getTypeList().clear();
 		topic.eSetDeliver(true);
 		getTypeList().addAll(newList);
