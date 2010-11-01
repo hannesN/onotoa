@@ -777,7 +777,7 @@ public class TMCLTopicMapBuilder {
 
 	private void addCardinalityOccurrences(Topic constr, String cardMin, String cardMax) {
 		constr.createOccurrence(createTopic(CARD_MIN), cardMin, topicMap.createLocator(XSD.INTEGER));
-		constr.createOccurrence(createTopic(CARD_MAX), cardMax, topicMap.createLocator(XSD.INTEGER));
+		constr.createOccurrence(createTopic(CARD_MAX), cardMax, topicMap.createLocator(TMCL.INTEGER));
 	}
 
 	private void setOverlapConstraint(TopicType type, TopicType othertype) {
