@@ -71,38 +71,37 @@ public class ProjectGenerator {
 			Thread processThread = new Thread() {
 				public void run() {
 					try {
-	                    final Process p = startProcess(dir);
+						final Process p = startProcess(dir);
 
-	                    Thread isReadThread = generateReadThread(p);
-	                    // start reading thread
-	                    isReadThread.start();
-	                    // wait the build process to end
-	                    p.waitFor();
-	                    // stop read process
-	                    isReadThread.interrupt();
-	                    
-	                    monitor.done();
-                    } catch (Exception e) {
-                    	Activator.logException(e);
-                    	throw new RuntimeException(e);
-                    }
+						Thread isReadThread = generateReadThread(p);
+						// start reading thread
+						isReadThread.start();
+						// wait the build process to end
+						p.waitFor();
+						// stop read process
+						isReadThread.interrupt();
+
+						monitor.done();
+					} catch (Exception e) {
+						Activator.logException(e);
+						throw new RuntimeException(e);
+					}
 				}
 
 			};
 
 			processThread.start();
-			
-			
+
 		} catch (Exception e) {
 			Activator.logException(e);
 
 		}
 
 	}
-	
+
 	protected Thread generateErrorThread(final Process p) {
 		Thread isReadThread = new ProcessInputReader(p, new ITextListener() {
-			
+
 			@Override
 			public void newText(String text) {
 				System.out.println(text);
@@ -113,24 +112,25 @@ public class ProjectGenerator {
 
 	protected Thread generateReadThread(final Process p) {
 		Thread isReadThread = new ProcessInputReader(p, new ITextListener() {
-			
-			private final String lineSep = System.getProperty("line.separator"); 
-			
+
+			private final String lineSep = System.getProperty("line.separator");
+
 			@Override
 			public void newText(String text) {
-				addContent(text+lineSep);
+				addContent(text + lineSep);
 			}
 		});
 		return isReadThread;
 	}
 
 	protected Process startProcess(File dir) throws IOException {
-//		String[] cmd = new String[] { data.getMavenpath()+"/bin/mvn", "package" };
-		
-		ProcessBuilder pb = new ProcessBuilder(data.getMavenpath()+"/bin/mvn", "package");
+		// String[] cmd = new String[] { data.getMavenpath()+"/bin/mvn",
+		// "package" };
+
+		ProcessBuilder pb = new ProcessBuilder(data.getMavenpath() + "/bin/mvn", "--update-snapshots", "package");
 		pb.environment().put("MAVEN_OPTS", data.getMavenOpts());
 		pb.directory(dir);
-		
+
 		final Process p = pb.start();
 		return p;
 	}
@@ -267,13 +267,42 @@ public class ProjectGenerator {
 
 					copyResource(subDir, o);
 				} else {
-					copyFile(o, dir);
+					if (isBin(o)) {
+						copyBinaryFile(o, dir);
+					} else {
+						copyFile(o, dir);
+					}
 				}
 			}
 		} catch (Exception e) {
 			Activator.logException(e);
 			throw new RuntimeException(e);
 		}
+	}
+
+	private void copyBinaryFile(String file, File folder) {
+		try {
+	        URL entry = Activator.getDefault().getBundle().getEntry(file);
+	        InputStream is = entry.openStream();
+	        String filename = file.substring(file.lastIndexOf("/") + 1);
+	        File newFile = new File(folder.getAbsolutePath() + "/" + filename);
+	        if (newFile.exists())
+	        	newFile.delete();
+
+	        FileOutputStream fos = new FileOutputStream(newFile);
+	        int c = 0;
+	        byte[] buffer = new byte[1024];
+	        do {
+	        	c = is.read(buffer);
+	        	if (c!=-1)
+	        		fos.write(buffer, 0, c);
+	        } while (c!=-1);
+	        
+	        fos.close();
+	        is.close();
+        } catch (Exception e) {
+        	Activator.logException(e);
+        }
 	}
 
 	/**
@@ -343,5 +372,16 @@ public class ProjectGenerator {
 
 	private void addContent(String text) {
 		textListener.newText(text);
+	}
+
+	private boolean isBin(String o) {
+		String[] binSuffixes = new String[] { ".bmp", "*.gif", "*.png" };
+
+		for (String s : binSuffixes) {
+			if (o.endsWith(s))
+				return true;
+		}
+
+		return false;
 	}
 }

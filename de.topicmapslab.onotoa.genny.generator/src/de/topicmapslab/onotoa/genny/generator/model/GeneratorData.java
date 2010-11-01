@@ -28,7 +28,7 @@ public class GeneratorData {
 	@TextField
 	private String applicationId;
 	
-	@TextField
+	@TextField(description="test")
 	private String applicationName;
 
 	@Check

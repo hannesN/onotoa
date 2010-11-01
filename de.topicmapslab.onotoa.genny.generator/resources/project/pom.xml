@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>$pluginId</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>$pluginId</artifactId>
+	<artifactId>$validname-core</artifactId>
 	<packaging>eclipse-plugin</packaging>
 	<build>
 		<plugins>
@@ -29,7 +29,7 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>$name.target</file>
+									<file>genny.target</file>
 									<type>target</type>
 									<classifier>$name_target_e36</classifier>
 								</artifact>
