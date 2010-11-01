@@ -13,6 +13,7 @@
  */
 package de.topicmapslab.tmcledit.model.views.widgets;
 
+import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	protected final static String[] TABLE_PROPS = { "Type", "cardMin", "cardMax" };
 
 	protected TableViewer tableViewer;
-	private Button addButton;
+	private Button selectButton;
 	private Button newButton;
 	private Button removeButton;
 	
@@ -161,13 +162,17 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		bgd.verticalAlignment = SWT.CENTER;
 		GridDataFactory fac = GridDataFactory.createFrom(bgd);
 
-		addButton = toolkit.createButton(comp, "Select...", SWT.PUSH);
-		fac.applyTo(addButton);
+		selectButton = toolkit.createButton(comp, "Select...", SWT.PUSH);
+		selectButton.setImage(ImageProvider.getImage(ImageConstants.SELECT));
+		fac.applyTo(selectButton);
 
 		newButton = toolkit.createButton(comp, "New...", SWT.PUSH);
+		newButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
 		fac.applyTo(newButton);
+		
 
 		removeButton = toolkit.createButton(comp, "Remove", SWT.PUSH);
+		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
 		fac.applyTo(removeButton);
 
 	}
@@ -267,7 +272,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	}
 	
 	public Button getAddButton() {
-		return addButton;
+		return selectButton;
 	}
 
 	public Button getNewButton() {
@@ -424,7 +429,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	}
 
 	public void setEnabled(boolean enabled) {
-	    addButton.setEnabled(enabled);
+	    selectButton.setEnabled(enabled);
 	    removeButton.setEnabled(enabled);
 	    newButton.setEnabled(enabled);
 	    tableViewer.getControl().setEnabled(enabled);
