@@ -81,6 +81,11 @@
                defaultHandler="de.topicmapslab.tmcledit.application.commands.OpenFileHandler"
                id="de.topicmapslab.tmcledit.application.openfile"
                name="Open file"> 
+         </command>
+         <command
+               defaultHandler="de.topicmapslab.tmcledit.application.commands.ReportBugHandler"
+               id="de.topicmapslab.tmcledit.application.reportbug"
+               name="Report a Bug">
          </command> 
          
       </extension> 
@@ -103,6 +108,15 @@
                allPopups="false"
                class="de.topicmapslab.tmcledit.application.actions.MenuDefinition"
                locationURI="menu:file?placement=recent">
+         </menuContribution>
+         <menuContribution
+               allPopups="false"
+               locationURI="menu:help">
+            <command
+                  commandId="de.topicmapslab.tmcledit.application.reportbug"
+                  label="Report a &amp;Bug"
+                  style="push">
+            </command>
          </menuContribution> 
       </extension> 
       <extension 
