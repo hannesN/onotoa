@@ -132,9 +132,17 @@ public class TMCLExportWizard extends Wizard implements IExportWizard {
 			case LTM:
 				return new LTMTopicMapWriter(stream, baseLocator);
 			case XTM_2_0:
-				return new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_0);
+				XTM2TopicMapWriter xtmWriter = new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_0);
+				if (page.isUseIndention()) {
+					xtmWriter.setPrettify(true);
+				}
+				return xtmWriter;
 			case XTM_2_1:
-				return new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_1);
+				xtmWriter = new XTM2TopicMapWriter(stream, baseLocator, XTMVersion.XTM_2_1);
+				if (page.isUseIndention()) {
+					xtmWriter.setPrettify(true);
+				}
+				return xtmWriter;
 	    	}
         } catch (Exception e) {
 	        throw new RuntimeException(e);
