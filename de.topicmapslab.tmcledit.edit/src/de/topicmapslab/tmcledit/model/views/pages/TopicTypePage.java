@@ -14,6 +14,7 @@
 package de.topicmapslab.tmcledit.model.views.pages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -516,8 +517,8 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 				b.setLength(0);
 
-				for (TopicType tt : t.getIsa()) {
-					b.append(tt.getName());
+				for (String n : getNameList(t.getIsa())) {
+					b.append(n);
 					b.append(", ");
 				}
 				if (b.length() > 0)
@@ -526,8 +527,8 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 					isAText.setText("");
 
 				b.setLength(0);
-				for (TopicType tt : t.getAko()) {
-					b.append(tt.getName());
+				for (String n : getNameList(t.getAko())) {
+					b.append(n);
 					b.append(", ");
 				}
 				if (b.length() > 0)
@@ -537,8 +538,8 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 				b.setLength(0);
 
-				for (TopicType tt : t.getOverlap()) {
-					b.append(tt.getName());
+				for (String n : getNameList(t.getOverlap())) {
+					b.append(n);
 					b.append(", ");
 				}
 				if (b.length() > 0)
@@ -568,6 +569,18 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 		}
 		super.updateUI();
+	}
+	
+	private List<String> getNameList(List<TopicType> list) {
+		if (list.isEmpty())
+			return Collections.emptyList();
+		
+		ArrayList<String> result = new ArrayList<String>();
+		for (TopicType tt : list) {
+			result.add(tt.getName());
+		}
+		Collections.sort(result);
+		return result;
 	}
 
 	@Override
