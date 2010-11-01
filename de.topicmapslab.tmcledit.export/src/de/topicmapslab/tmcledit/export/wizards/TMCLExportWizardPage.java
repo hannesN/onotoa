@@ -63,6 +63,8 @@ public class TMCLExportWizardPage extends WizardPage {
 	
 	private Button exportAnnotationButton;
 	
+	private Button useIndention;
+	
 	private Button onlyExportTopicTypes;
 	
 	private FileType selectedFileType;
@@ -124,6 +126,12 @@ public class TMCLExportWizardPage extends WizardPage {
 	    onlyExportTopicTypes.setToolTipText("You can use the exported topic map as stub for your instance topic map.");
 	    fac.applyTo(onlyExportTopicTypes);
 	    
+	    useIndention = new Button(comp, SWT.CHECK);
+	    useIndention.setSelection(true);
+	    useIndention.setText("Indent XML formats");
+	    useIndention.setToolTipText("Uses newline and indention chracters in XTM2 and XTM2.1");
+	    fac.applyTo(useIndention);
+	    
 	    label = new Label(comp, SWT.NONE);
 	    label.setText("Filetype:");
 	    fac.applyTo(label);
@@ -173,6 +181,12 @@ public class TMCLExportWizardPage extends WizardPage {
 	public boolean isExportDiagramInfos() {
 		return false;
 	}
+	
+	public boolean isUseIndention() {
+		return useIndention.getSelection();
+	}
+	
+	
 	
 	public FileType getSelectedFileType() {
 	    return selectedFileType;
