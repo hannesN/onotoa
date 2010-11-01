@@ -18,6 +18,9 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -32,6 +35,8 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 
 	private Text nameText;
 	private Text baseLocatorText;
+	private Text versionText;
+	private Text schemaResourceText;
 	private CTabItem item;
 	
 	private PrefixMappingPage prefixPage;
@@ -57,9 +62,24 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 				nameText.setText(tmp);
 			else
 				nameText.setText("");
+			
+			tmp = getCastedModel().getVersion();
+			if (tmp != null)
+				versionText.setText(tmp);
+			else
+				versionText.setText("");
+			
+			tmp = getCastedModel().getSchemaResource();
+			if (tmp != null)
+				schemaResourceText.setText(tmp);
+			else
+				schemaResourceText.setText("");
+			
 		} else {
 			nameText.setText("");
 			baseLocatorText.setText("");
+			versionText.setText("");
+			schemaResourceText.setText("");
 		}
 	}
 
@@ -87,6 +107,11 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 		nameText = toolkit.createText(comp, "", SWT.BORDER);
 		fac.applyTo(nameText);
 		nameText.setToolTipText("The nameText of the Topic Map.");
+		
+		toolkit.createLabel(comp, "Version:");
+		versionText = toolkit.createText(comp, "", SWT.BORDER);
+		fac.applyTo(versionText);
+		versionText.setToolTipText("The version of the Topic Map schema.");
 
 		toolkit.createLabel(comp, "Base Locator:");
 		baseLocatorText = toolkit.createText(comp, "", SWT.BORDER);
@@ -95,11 +120,18 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 				.setToolTipText("The base locator of the Topic Map. It is used to create subject identifiers"
 						+ " or subject locators using this url and the nameText of the topic.");
 
+		toolkit.createLabel(comp, "Schema Resource:");
+		schemaResourceText = toolkit.createText(comp, "", SWT.BORDER);
+		fac.applyTo(schemaResourceText);
+		schemaResourceText.setToolTipText("The schema resource of the Topic Map schema, which is a URL where to download the schema.");
+		
 		updateUI();
 
-		nameText.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__NAME));
-		baseLocatorText.addFocusListener(new TextFocusListener(ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR));
-
+		// instantiate listeners, they reigster themselves
+		new TextFocusListener(nameText, ModelPackage.TOPIC_MAP_SCHEMA__NAME);
+		new TextFocusListener(baseLocatorText, ModelPackage.TOPIC_MAP_SCHEMA__BASE_LOCATOR);
+		new TextFocusListener(versionText, ModelPackage.TOPIC_MAP_SCHEMA__VERSION);
+		new TextFocusListener(schemaResourceText, ModelPackage.TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE);
 		
 		return comp;
 	}
@@ -131,20 +163,37 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 			prefixPage.setModel(getCastedModel().getMappings());
 	}
 
-	private final class TextFocusListener extends FocusAdapter {
+	private final class TextFocusListener extends FocusAdapter implements KeyListener {
 		private final int feature;
 
 		
-		public TextFocusListener(int feature) {
+		public TextFocusListener(Text text, int feature) {
 			super();
+			text.addKeyListener(this);
+			text.addFocusListener(this);
 			this.feature = feature;
 		}
 
 		public void focusLost(FocusEvent e) {
-			Text text = (Text) e.widget;
-			getCommandStack().execute(
-					new GenericSetCommand(getModel(), feature, text.getText()));
+			commit(e);
 		}
+
+		public void keyPressed(KeyEvent e) {
+			if (e.character == SWT.CR) {
+				commit(e);
+			}
+		}
+
+		/**
+         * @param e
+         */
+        private void commit(TypedEvent e) {
+	        Text text = (Text) e.widget;
+	        getCommandStack().execute(new GenericSetCommand(getModel(), feature, text.getText()));
+        }
+
+		public void keyReleased(KeyEvent e) {
+        }
 	}
 
 }

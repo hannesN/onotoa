@@ -62,6 +62,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseLocator" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaResource" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SubjectLocatorConstraint" eSuperTypes="#//AbstractRegExpConstraint #//AbstractCardinalityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="SubjectIdentifierConstraint" eSuperTypes="#//AbstractRegExpConstraint #//AbstractCardinalityConstraint"/>

@@ -21,6 +21,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getIncludes <em>Includes</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getBaseLocator <em>Base Locator</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getName <em>Name</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getVersion <em>Version</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getSchemaResource <em>Schema Resource</em>}</li>
  * </ul>
  * </p>
  *
@@ -145,5 +147,58 @@ public interface TopicMapSchema extends TMCLConstruct {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(String)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_Version()
+	 * @model default=""
+	 * @generated
+	 */
+	String getVersion();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Schema Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Schema Resource</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Schema Resource</em>' attribute.
+	 * @see #setSchemaResource(String)
+	 * @see de.topicmapslab.tmcledit.model.ModelPackage#getTopicMapSchema_SchemaResource()
+	 * @model
+	 * @generated
+	 */
+	String getSchemaResource();
+
+	/**
+	 * Sets the value of the '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getSchemaResource <em>Schema Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Schema Resource</em>' attribute.
+	 * @see #getSchemaResource()
+	 * @generated
+	 */
+	void setSchemaResource(String value);
 
 } // TopicMapSchema
