@@ -10,7 +10,6 @@
 		<relativePath>../$pluginId-releng</relativePath>
 	</parent>
 	<groupId>$pluginId</groupId>
-	<name>$name</name>
 	<version>1.0.0</version>
 	<artifactId>$validname</artifactId>
 	<packaging>eclipse-application</packaging>

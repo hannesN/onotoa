@@ -59,6 +59,15 @@ public abstract class FieldData extends GeneratorData {
     	setValue(LABEL, name);
     }
 	
+	@TextField(label="Description", optional=true, weight=8, rows=8)
+	public String getDescription() {
+		return getValueOf(DESCRIPTION);
+	}
+	
+	public void setDescription(String dsc) {
+		setValue(DESCRIPTION, dsc);
+	}
+	
 	@Combo(label="Weight", weight=8)
 	public int getWeight() {
 		int tmp = getIntValueOf(WEIGHT);

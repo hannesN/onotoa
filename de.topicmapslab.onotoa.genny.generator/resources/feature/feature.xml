@@ -5,7 +5,6 @@
       version="1.0.0.qualifier"
       plugin="$pluginId">
 
-  
    <plugin
          id="$pluginId"
          download-size="0"
@@ -46,6 +45,30 @@
          download-size="0"
          install-size="0"
          version="3.5.2.r36_v20100702"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.jface.nl_de"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.swt.nl_de"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.workbench.nl_de"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
          unpack="false"/>
 
 </feature>
