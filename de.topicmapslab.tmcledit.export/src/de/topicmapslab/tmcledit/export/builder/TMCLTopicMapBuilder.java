@@ -260,11 +260,7 @@ public class TMCLTopicMapBuilder {
 
 			overlapMap = new HashMap<TopicType, TopicType>(10);
 
-			if (exportSchema) {
-				schema = topicMap.createTopic();
-				addDocumentationOccurrences(schema, topicMapSchema);
-				schema.addType(createTopic(SCHEMA));
-			}
+			
 			
 			if (exportAnnotations) {
 				annotationType = topicMap.createTopicBySubjectIdentifier(topicMap.createLocator(ANNOTATION_PREFIX));
@@ -279,6 +275,12 @@ public class TMCLTopicMapBuilder {
 				
 			}
 
+			if (exportSchema) {
+				schema = topicMap.createTopic();
+				addDocumentationOccurrences(schema, topicMapSchema);
+				schema.addType(createTopic(SCHEMA));
+			}
+			
 			createTopicTypes();
 			if (!exportTopicTypesOnly) {
 				createAssociationConstraints();
