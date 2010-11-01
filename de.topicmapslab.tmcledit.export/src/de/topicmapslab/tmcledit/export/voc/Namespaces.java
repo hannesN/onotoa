@@ -311,7 +311,7 @@ public interface Namespaces {
 		public static String VERSION = PREFIX + "version";
 		
 		
-		public static String INTEGER = PREFIX + "integer";
+		public static String INTEGER = "http://psi.topicmaps.org/iso13250/ctm-integer";
 	}
 	
 	public static interface Onotoa {
