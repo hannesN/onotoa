@@ -40,6 +40,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getIncludes <em>Includes</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getBaseLocator <em>Base Locator</em>}</li>
  *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link de.topicmapslab.tmcledit.model.impl.TopicMapSchemaImpl#getSchemaResource <em>Schema Resource</em>}</li>
  * </ul>
  * </p>
  *
@@ -125,6 +127,46 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VERSION_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected String version = VERSION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSchemaResource() <em>Schema Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchemaResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SCHEMA_RESOURCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSchemaResource() <em>Schema Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchemaResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected String schemaResource = SCHEMA_RESOURCE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -240,6 +282,48 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVersion(String newVersion) {
+		String oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__VERSION, oldVersion, version));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSchemaResource() {
+		return schemaResource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSchemaResource(String newSchemaResource) {
+		String oldSchemaResource = schemaResource;
+		schemaResource = newSchemaResource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE, oldSchemaResource, schemaResource));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -273,6 +357,10 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 				return getBaseLocator();
 			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
 				return getName();
+			case ModelPackage.TOPIC_MAP_SCHEMA__VERSION:
+				return getVersion();
+			case ModelPackage.TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE:
+				return getSchemaResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -308,6 +396,12 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
 				setName((String)newValue);
 				return;
+			case ModelPackage.TOPIC_MAP_SCHEMA__VERSION:
+				setVersion((String)newValue);
+				return;
+			case ModelPackage.TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE:
+				setSchemaResource((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -338,6 +432,12 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.TOPIC_MAP_SCHEMA__VERSION:
+				setVersion(VERSION_EDEFAULT);
+				return;
+			case ModelPackage.TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE:
+				setSchemaResource(SCHEMA_RESOURCE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -362,6 +462,10 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 				return BASE_LOCATOR_EDEFAULT == null ? baseLocator != null : !BASE_LOCATOR_EDEFAULT.equals(baseLocator);
 			case ModelPackage.TOPIC_MAP_SCHEMA__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.TOPIC_MAP_SCHEMA__VERSION:
+				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+			case ModelPackage.TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE:
+				return SCHEMA_RESOURCE_EDEFAULT == null ? schemaResource != null : !SCHEMA_RESOURCE_EDEFAULT.equals(schemaResource);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -382,6 +486,10 @@ public class TopicMapSchemaImpl extends TMCLConstructImpl implements TopicMapSch
 		result.append(baseLocator);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", version: ");
+		result.append(version);
+		result.append(", schemaResource: ");
+		result.append(schemaResource);
 		result.append(')');
 		return result.toString();
 	}

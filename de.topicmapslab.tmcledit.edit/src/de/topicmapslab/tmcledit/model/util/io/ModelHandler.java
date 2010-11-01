@@ -164,6 +164,14 @@ class ModelHandler extends DefaultHandler {
 			if (tmp!=null)
 				file.getTopicMapSchema().setBaseLocator(tmp);
 			
+			tmp = attributes.getValue(A_VERSION);
+			if (tmp!=null)
+				file.getTopicMapSchema().setVersion(tmp);
+			
+			tmp = attributes.getValue(A_SCHEMA_RESOURCE);
+			if (tmp!=null)
+				file.getTopicMapSchema().setSchemaResource(tmp);
+			
 		}
 		if (E_MAPPING_ELEMENT.equals(qName)) {
 			addMappingElement(attributes);

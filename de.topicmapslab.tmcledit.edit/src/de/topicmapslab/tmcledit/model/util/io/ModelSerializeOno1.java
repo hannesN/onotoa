@@ -187,12 +187,21 @@ public class ModelSerializeOno1 implements ModelSerializer {
 
 		Element schemaNode = document.createElement(E_SCHEMA);
 		setId(schema, schemaNode);
+		
+		// schema properties
 		String tmp = schema.getBaseLocator();
 		if ((tmp != null) && (tmp.length() > 0))
 			schemaNode.setAttribute(A_BASE_LOCATOR, tmp);
 		tmp = schema.getName();
 		if ((tmp != null) && (tmp.length() > 0))
 			schemaNode.setAttribute(A_NAME, tmp);
+		tmp = schema.getVersion();
+		if ((tmp != null) && (tmp.length() > 0))
+			schemaNode.setAttribute(A_VERSION, tmp);
+		tmp = schema.getSchemaResource();
+		if ((tmp != null) && (tmp.length() > 0))
+			schemaNode.setAttribute(A_SCHEMA_RESOURCE, tmp);
+		
 		addTMCLConstructElements(schema, schemaNode);
 		fileNode.appendChild(schemaNode);
 		

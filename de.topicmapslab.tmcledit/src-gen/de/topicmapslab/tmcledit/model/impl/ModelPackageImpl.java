@@ -725,6 +725,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTopicMapSchema_Version() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTopicMapSchema_SchemaResource() {
+		return (EAttribute)topicMapSchemaEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSubjectLocatorConstraint() {
 		return subjectLocatorConstraintEClass;
 	}
@@ -1593,6 +1611,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__INCLUDES);
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__BASE_LOCATOR);
 		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__NAME);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__VERSION);
+		createEAttribute(topicMapSchemaEClass, TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE);
 
 		subjectLocatorConstraintEClass = createEClass(SUBJECT_LOCATOR_CONSTRAINT);
 
@@ -1841,6 +1861,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTopicMapSchema_Includes(), ecorePackage.getEString(), "includes", null, 0, -1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicMapSchema_BaseLocator(), ecorePackage.getEString(), "baseLocator", "", 1, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTopicMapSchema_Name(), ecorePackage.getEString(), "name", null, 0, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_Version(), ecorePackage.getEString(), "version", "", 0, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTopicMapSchema_SchemaResource(), ecorePackage.getEString(), "schemaResource", null, 0, 1, TopicMapSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectLocatorConstraintEClass, SubjectLocatorConstraint.class, "SubjectLocatorConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

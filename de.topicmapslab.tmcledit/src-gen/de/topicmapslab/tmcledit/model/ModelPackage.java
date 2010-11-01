@@ -1052,13 +1052,31 @@ public interface ModelPackage extends EPackage {
 	int TOPIC_MAP_SCHEMA__NAME = TMCL_CONSTRUCT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__VERSION = TMCL_CONSTRUCT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Schema Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE = TMCL_CONSTRUCT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Topic Map Schema</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = TMCL_CONSTRUCT_FEATURE_COUNT + 6;
+	int TOPIC_MAP_SCHEMA_FEATURE_COUNT = TMCL_CONSTRUCT_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl <em>Subject Locator Constraint</em>}' class.
@@ -4975,6 +4993,28 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTopicMapSchema_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#getVersion()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_Version();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.topicmapslab.tmcledit.model.TopicMapSchema#getSchemaResource <em>Schema Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Resource</em>'.
+	 * @see de.topicmapslab.tmcledit.model.TopicMapSchema#getSchemaResource()
+	 * @see #getTopicMapSchema()
+	 * @generated
+	 */
+	EAttribute getTopicMapSchema_SchemaResource();
+
+	/**
 	 * Returns the meta object for class '{@link de.topicmapslab.tmcledit.model.SubjectLocatorConstraint <em>Subject Locator Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6198,6 +6238,22 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TOPIC_MAP_SCHEMA__NAME = eINSTANCE.getTopicMapSchema_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__VERSION = eINSTANCE.getTopicMapSchema_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Resource</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPIC_MAP_SCHEMA__SCHEMA_RESOURCE = eINSTANCE.getTopicMapSchema_SchemaResource();
 
 		/**
 		 * The meta object literal for the '{@link de.topicmapslab.tmcledit.model.impl.SubjectLocatorConstraintImpl <em>Subject Locator Constraint</em>}' class.

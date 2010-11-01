@@ -278,7 +278,18 @@ public class TMCLTopicMapBuilder {
 			if (exportSchema) {
 				schema = topicMap.createTopic();
 				addDocumentationOccurrences(schema, topicMapSchema);
+				
+				String tmp = topicMapSchema.getSchemaResource();
+				if ((tmp!=null) && (tmp.length()>0)) {
+					schema.createOccurrence(createTopic(TMCL.SCHEMA_RESOURCE), tmp);
+				}
+				
+				tmp = topicMapSchema.getVersion();
+				if ((tmp!=null) && (tmp.length()>0)) {
+					schema.createOccurrence(createTopic(TMCL.VERSION), tmp);
+				}
 				schema.addType(createTopic(SCHEMA));
+				
 			}
 			
 			createTopicTypes();

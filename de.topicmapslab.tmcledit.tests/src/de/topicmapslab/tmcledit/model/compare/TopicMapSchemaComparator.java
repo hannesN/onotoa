@@ -30,6 +30,12 @@ public class TopicMapSchemaComparator extends TMCLConstructComparator {
 
 		if (stringCompare(o1.getName(), o2.getName()) == false)
 			return false;
+		
+		if (stringCompare(o1.getVersion(), o2.getVersion()) == false)
+			return false;
+		
+		if (stringCompare(o1.getSchemaResource(), o2.getSchemaResource()) == false)
+			return false;
 
 		if (stringListCompare(o1.getIncludes(), o2.getIncludes()) == false)
 			return false;
