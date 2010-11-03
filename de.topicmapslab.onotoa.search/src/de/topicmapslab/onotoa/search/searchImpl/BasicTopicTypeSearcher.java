@@ -360,6 +360,7 @@ public class BasicTopicTypeSearcher implements ISearcher {
 		List<AssociationType> associationList;
 		List<TopicTypeWrapper> removeList = new ArrayList<TopicTypeWrapper>();
 		TopicType resultType;
+		Object roleObj;
 
 		// iterate over all wrapper from previous search
 		for (int i = 0; i < resultList.size(); i++) {
@@ -393,7 +394,14 @@ public class BasicTopicTypeSearcher implements ISearcher {
 				for (AssociationTypeConstraint assoConstraint : schema.getAssociationTypeConstraints()) {
 					for (RolePlayerConstraint rpc : assoConstraint.getPlayerConstraints()) {
 						if (rpc.getPlayer().equals(resultType)) {
-							roleList.add((RoleType) rpc.getRole().getType());
+
+							roleObj = rpc.getRole().getType();
+							if (roleObj instanceof RoleType)
+								roleList.add((RoleType) roleObj);
+
+							// TODO handle TopicTypes as role
+							// if (roleObj instanceof TopicType)
+
 							associationList.add((AssociationType) assoConstraint.getType());
 						}
 					}
