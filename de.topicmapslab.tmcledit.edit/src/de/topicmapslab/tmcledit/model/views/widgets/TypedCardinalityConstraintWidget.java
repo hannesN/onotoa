@@ -163,7 +163,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		GridDataFactory fac = GridDataFactory.createFrom(bgd);
 
 		selectButton = toolkit.createButton(comp, "Select...", SWT.PUSH);
-		selectButton.setImage(ImageProvider.getImage(ImageConstants.SELECT));
+		selectButton.setImage(ImageProvider.getImage(ImageConstants.SELECT_CHECK));
 		fac.applyTo(selectButton);
 
 		newButton = toolkit.createButton(comp, "New...", SWT.PUSH);
