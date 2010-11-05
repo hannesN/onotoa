@@ -357,6 +357,7 @@ public class BasicTopicTypeSearcher implements ISearcher {
 		List<OccurrenceType> occurrenceList;
 		List<NameType> nameList;
 		List<RoleType> roleList;
+		List<TopicType> topicRolesList;
 		List<AssociationType> associationList;
 		List<TopicTypeWrapper> removeList = new ArrayList<TopicTypeWrapper>();
 		TopicType resultType;
@@ -372,6 +373,7 @@ public class BasicTopicTypeSearcher implements ISearcher {
 			occurrenceList = new ArrayList<OccurrenceType>();
 			nameList = new ArrayList<NameType>();
 			roleList = new ArrayList<RoleType>();
+			topicRolesList = new ArrayList<TopicType>();
 			associationList = new ArrayList<AssociationType>();
 
 			// detect all OccurrrenceTypes the TopicType uses as constraint
@@ -395,12 +397,14 @@ public class BasicTopicTypeSearcher implements ISearcher {
 					for (RolePlayerConstraint rpc : assoConstraint.getPlayerConstraints()) {
 						if (rpc.getPlayer().equals(resultType)) {
 
+							// handle RoleTypes as roles
 							roleObj = rpc.getRole().getType();
 							if (roleObj instanceof RoleType)
 								roleList.add((RoleType) roleObj);
 
-							// TODO handle TopicTypes as role
-							// if (roleObj instanceof TopicType)
+							// handle TopicTypes as roles
+							if (roleObj instanceof TopicType)
+								topicRolesList.add((TopicType) roleObj);
 
 							associationList.add((AssociationType) assoConstraint.getType());
 						}
@@ -414,6 +418,10 @@ public class BasicTopicTypeSearcher implements ISearcher {
 			for (TopicType type : topicList) {
 
 				switch (type.getKind().getValue()) {
+				case 0:
+					if (!topicRolesList.contains(type))
+						removeList.add(resultList.get(i));
+					break;
 				case 1:
 					if (!occurrenceList.contains(type))
 						removeList.add(resultList.get(i));

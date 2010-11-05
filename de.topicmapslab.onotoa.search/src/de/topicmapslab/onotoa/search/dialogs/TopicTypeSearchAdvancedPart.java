@@ -42,7 +42,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.topicmapslab.onotoa.search.util.TopicTypeComparator;
+import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
@@ -188,8 +190,12 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 		availableTopicList.setLabelProvider(new TopicLableProvider());
 		availableTopicList.setContentProvider(new ArrayContentProvider());
 
-		// sort available TopicTypes
+		// get all Topics and add them sorted
 		listAvailable = new ArrayList<TopicType>(ModelIndexer.getTopicIndexer().getTopicTypes());
+
+		// special treatment for TopicTypes cause we only want the ones, which are
+		// used as roles
+		deleteNonRoleTopicTypes(listAvailable);
 		Collections.sort(listAvailable, comparator);
 
 		// set input and add listeners
@@ -209,11 +215,6 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 
 			@Override
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
-
-				// "real" TopicTypes aren't used as constraints, so they aren't
-				// displayed
-				if (((TopicType) element).getKind().getValue() == KindOfTopicType.TOPIC_TYPE_VALUE)
-					return false;
 
 				/*
 				 * check if TopicType is already selected. If true, don't
@@ -277,6 +278,38 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 			}
 
 		});
+
+	}
+
+	/**
+	 * Remove all TopicTypes from the list, that aren't used as RoleType
+	 * 
+	 * @param listAvailable
+	 */
+	private void deleteNonRoleTopicTypes(List<TopicType> listAvailable) {
+
+		// prepare stuff
+		List<TopicType> removeList = new ArrayList<TopicType>();
+		TopicType role;
+
+		// select all previous found TopicTypes from list
+		for (TopicType t : listAvailable) {
+			if (t.getKind().getValue() == KindOfTopicType.TOPIC_TYPE_VALUE)
+				removeList.add(t);
+		}
+
+		// remove all TopicTypes from list
+		listAvailable.removeAll(removeList);
+
+		// search all TopicTypes that are used as RoleType and add them
+		for (AssociationType at : ModelIndexer.getTopicIndexer().getAssociationTypes())
+			for (RoleConstraint rc : at.getRoles()) {
+				role = rc.getType();
+				// kindOf test, because RoleTypes are already in the list
+				if (role.getKind().getValue() == KindOfTopicType.TOPIC_TYPE_VALUE)
+					if (!listAvailable.contains(role))
+						listAvailable.add(role);
+			}
 
 	}
 
