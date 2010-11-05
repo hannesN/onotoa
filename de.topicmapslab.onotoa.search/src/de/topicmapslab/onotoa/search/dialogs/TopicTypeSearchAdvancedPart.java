@@ -65,7 +65,7 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 	private Shell dockingShell;
 	private Group group;
 	private Button addButton, removeButton, clearButton, typeFilterButton;
-	private Button filterOccurrence, filterName, filterRole, filterAssociation;
+	private Button filterTopicTypes, filterOccurrence, filterName, filterRole, filterAssociation;
 	private Text textFilterAvailable, textFilterSelected;;
 
 	private int filterValue = -1;
@@ -372,6 +372,22 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 		typeFilterButton.setSelection(false);
 		hookFilterListener();
 
+		// topicType filter
+		filterTopicTypes = new Button(buttonBar, SWT.PUSH);
+		filterTopicTypes.setToolTipText("Show only Topic Types");
+		filterTopicTypes.setImage(ImageProvider.getImage(ImageConstants.TOPICTYPE));
+		filterTopicTypes.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		filterTopicTypes.setVisible(false);
+		filterTopicTypes.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				// set global filterValue
+				filterValue = KindOfTopicType.TOPIC_TYPE_VALUE;
+				refreshLists();
+			}
+		});
+		
 		// occurrenceType filter
 		filterOccurrence = new Button(buttonBar, SWT.PUSH);
 		filterOccurrence.setToolTipText("Show only Occurrence Types");
@@ -534,6 +550,7 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 				if (typeFilterButton.getText().equals("Filter >>")) {
 
 					// make each specific type filter button visible
+					filterTopicTypes.setVisible(true);
 					filterOccurrence.setVisible(true);
 					filterName.setVisible(true);
 					filterRole.setVisible(true);
@@ -547,6 +564,7 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 				} else {
 
 					// make each specific type filter button invisible
+					filterTopicTypes.setVisible(false);
 					filterOccurrence.setVisible(false);
 					filterName.setVisible(false);
 					filterRole.setVisible(false);
