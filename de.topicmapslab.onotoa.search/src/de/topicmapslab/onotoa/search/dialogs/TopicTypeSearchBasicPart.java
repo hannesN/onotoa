@@ -25,6 +25,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import de.topicmapslab.onotoa.search.dialogs.TopicTypeSearchAdvancedParts.AdvancedAssociationPart;
+import de.topicmapslab.onotoa.search.dialogs.TopicTypeSearchAdvancedParts.AdvancedTopicTypePart;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 
@@ -34,7 +36,9 @@ import de.topicmapslab.tmcledit.model.TopicType;
  */
 public class TopicTypeSearchBasicPart {
 
-	private TopicTypeSearchAdvancedPart advancedTopic, advancedAssosiation;
+	private AdvancedTopicTypePart advancedTopic;
+	private AdvancedAssociationPart advancedAssosiation;
+	// private TopicTypeSearchAdvancedPart advancedTopic, advancedAssosiation;
 
 	private Shell dockingShell;
 	private Combo typeBox;
@@ -124,11 +128,11 @@ public class TopicTypeSearchBasicPart {
 		 * instantiate advanced parts and dock them to invisible shell to use
 		 * them later in a dynamic way
 		 */
-		advancedTopic = new TopicTypeSearchAdvancedPart();
-		advancedAssosiation = new TopicTypeSearchAdvancedPart();
+		advancedTopic = new AdvancedTopicTypePart();
+		advancedAssosiation = new AdvancedAssociationPart();
 
-		compTopic = advancedTopic.getAdvancedTopicComposite();
-		compAssociation = advancedAssosiation.getAdvancedAssociationComposite();
+		compTopic = advancedTopic.getAdvancedGroup();
+		compAssociation = advancedAssosiation.getAdvancedGroup();
 
 	}
 

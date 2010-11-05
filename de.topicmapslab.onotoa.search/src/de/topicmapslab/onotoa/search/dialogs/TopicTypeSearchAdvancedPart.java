@@ -193,7 +193,8 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 		// get all Topics and add them sorted
 		listAvailable = new ArrayList<TopicType>(ModelIndexer.getTopicIndexer().getTopicTypes());
 
-		// special treatment for TopicTypes cause we only want the ones, which are
+		// special treatment for TopicTypes cause we only want the ones, which
+		// are
 		// used as roles
 		deleteNonRoleTopicTypes(listAvailable);
 		Collections.sort(listAvailable, comparator);
@@ -302,7 +303,7 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 		listAvailable.removeAll(removeList);
 
 		// search all TopicTypes that are used as RoleType and add them
-		for (AssociationType at : ModelIndexer.getTopicIndexer().getAssociationTypes())
+		for (AssociationType at : ModelIndexer.getTopicIndexer().getAssociationTypes()) {
 			for (RoleConstraint rc : at.getRoles()) {
 				role = rc.getType();
 				// kindOf test, because RoleTypes are already in the list
@@ -310,7 +311,7 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 					if (!listAvailable.contains(role))
 						listAvailable.add(role);
 			}
-
+		}
 	}
 
 	/**
@@ -387,7 +388,7 @@ public class TopicTypeSearchAdvancedPart implements ISelectionChangedListener {
 				refreshLists();
 			}
 		});
-		
+
 		// occurrenceType filter
 		filterOccurrence = new Button(buttonBar, SWT.PUSH);
 		filterOccurrence.setToolTipText("Show only Occurrence Types");
