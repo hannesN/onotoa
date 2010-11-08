@@ -13,7 +13,6 @@
  */
 package de.topicmapslab.tmcledit.model.views.widgets;
 
-import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
 
