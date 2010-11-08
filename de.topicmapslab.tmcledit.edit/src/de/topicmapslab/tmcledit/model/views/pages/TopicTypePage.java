@@ -100,6 +100,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 	private ControlDecoration nameDecorator;
 
 	private TypedCardinalityConstraintWidget reifiesControl;
+	private boolean showError;
 
 	public TopicTypePage() {
 		super("topic type");
@@ -651,6 +652,9 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 	}
 
 	private void finishName() {
+		if (showError)
+			return;
+		
 		if (nameText.getText().length() > 0) {
 			Command cmd;
 			TopicType tt = getCastedModel();
@@ -669,9 +673,14 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 					TmcleditEditPlugin.getPlugin().log("getSite() is null... ignoring name error.");
 					return;
 				}
-				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
-
 				nameText.setText(getCastedModel().getName());
+				
+				// need to check to omit showing dialog twice
+				showError = true;
+				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
+				showError = false;
+				
+				
 			}
 
 		}
