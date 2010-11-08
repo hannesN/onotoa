@@ -3,7 +3,6 @@
  */
 package de.topicmapslab.onotoa.aranuka.codegen.modelview;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,8 +11,6 @@ import java.util.Map;
 
 import de.topicmapslab.onotoa.aranuka.codegen.Activator;
 import de.topicmapslab.onotoa.aranuka.codegen.actions.AbstractSelectionAction;
-import de.topicmapslab.onotoa.aranuka.codegen.actions.CreateAnnotationHub;
-import de.topicmapslab.onotoa.aranuka.codegen.actions.DeleteAnnotationHub;
 import de.topicmapslab.onotoa.aranuka.codegen.model.CharacteristicData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.IdentifierData;
@@ -170,11 +167,7 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public void createActions(ModelView modelView) {
-		actions = new ArrayList<UpdateAction>();
-
-		actions.add(new CreateAnnotationHub(modelView));
-		actions.add(new DeleteAnnotationHub(modelView));
-
+		// do nothing
 	}
 
 	/**
