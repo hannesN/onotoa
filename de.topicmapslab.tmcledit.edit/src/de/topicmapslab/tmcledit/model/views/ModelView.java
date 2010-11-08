@@ -50,6 +50,7 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -176,7 +177,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 
 	private CreateTopicAction createTopicAction;
 
-	private DeleteTMCLConstruct deleteTopicTypeAction;
+	private DeleteTMCLConstruct deleteConstructAction;
 
 	private DeleteDiagramAction deleteDiagramAction;
 
@@ -915,8 +916,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     	if (deleteDiagramAction.isEnabled())
     		manager.add(deleteDiagramAction);
     
-    	if (deleteTopicTypeAction.isEnabled())
-    		manager.add(deleteTopicTypeAction);
+    	if (deleteConstructAction.isEnabled())
+    		manager.add(deleteConstructAction);
     
     	manager.add(new Separator());
     
@@ -962,7 +963,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     		}
     	};
     	deleteDiagramAction = new DeleteDiagramAction(this);
-    	deleteTopicTypeAction = new DeleteTMCLConstruct(this);
+    	deleteConstructAction = new DeleteTMCLConstruct(this);
     	createDiagramAction = new CreateDiagramAction(this);
     	createDomainDiagramAction = new CreateDomainDiagramAction(this);
     	createTopicAction = new CreateTopicAction(this);
@@ -998,17 +999,26 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     	viewer.getTree().addKeyListener(new org.eclipse.swt.events.KeyAdapter() {
     		@Override
     		public void keyReleased(KeyEvent e) {
-    			if (e.keyCode != SWT.F2)
-    				return;
-    
     			IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
-    			if (sel.isEmpty())
-    				return;
-    
-    			AbstractModelViewNode obj = (AbstractModelViewNode) sel.getFirstElement();
-    			obj.handleRename();
-    			e.doit = false;
-    			return;
+				if (sel.isEmpty())
+					return;
+
+				AbstractModelViewNode obj = (AbstractModelViewNode) sel.getFirstElement();
+				
+    			if (e.keyCode == SWT.F2) {
+					obj.handleRename();
+				} else if (e.keyCode == SWT.ARROW_RIGHT) {
+					viewer.expandToLevel(obj, 1);
+				} else if (e.keyCode == SWT.ARROW_LEFT) {
+					viewer.collapseToLevel(obj, AbstractTreeViewer.ALL_LEVELS);
+				} else if (e.keyCode == SWT.DEL) {
+					if (deleteConstructAction.isEnabled()) {
+						deleteConstructAction.run();
+					}
+					
+					
+				}
+				e.doit = false;				
     		}
     	});
     }
