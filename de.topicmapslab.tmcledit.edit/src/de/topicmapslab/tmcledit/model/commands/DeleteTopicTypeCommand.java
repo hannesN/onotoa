@@ -94,18 +94,21 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			cmd.execute();
 		}
 
-		for (DeleteAssociationConstraintCommand cmd : associationCommands) {
-			cmd.execute();
-		}
 
 		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
 			cmd.execute();
 		}
 
-		for (DeleteTopicTypeConstraintItemCommand cmd : constraintCommands) {
+		for (DeleteAssociationConstraintCommand cmd : associationCommands) {
 			cmd.execute();
 		}
 
+		
+		for (DeleteTopicTypeConstraintItemCommand cmd : constraintCommands) {
+			cmd.execute();
+		}
+		
+		
 		ModelIndexer.getInstance().getTopicMapSchema().getTopicTypes().remove(topicType);
 
 	}
@@ -118,14 +121,14 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 			cmd.undo();
 		}
 
-		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
-			cmd.undo();
-		}
-
 		for (DeleteAssociationConstraintCommand cmd : associationCommands) {
 			cmd.undo();
 		}
 
+		for (RemoveScopeConstraintsCommand cmd : scopeCommands) {
+			cmd.undo();
+		}
+		
 		for (SetRoleConstraintCommand cmd : roleconstCommands) {
 			cmd.undo();
 		}
