@@ -29,6 +29,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.xml.sax.InputSource;
 
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.psiprovider.PSIProvider;
 import de.topicmapslab.tmcledit.model.psiprovider.PSIProviderResult;
 
@@ -55,7 +56,7 @@ public class Subj3ctPSIProvider extends PSIProvider {
     		params.add(new NameValuePair("query", getName()));
     		method.setQueryString(params.toArray(new NameValuePair[params.size()]));
 
-    		client.getParams().setSoTimeout(500);
+    		client.getParams().setSoTimeout(5000);
             client.executeMethod(method);
             
             String result = method.getResponseBodyAsString();
@@ -86,9 +87,11 @@ public class Subj3ctPSIProvider extends PSIProvider {
             return Collections.unmodifiableSet(resultSet);
         } catch (UnknownHostException e) {
         	// no http connection -> no results
+        	TmcleditEditPlugin.logInfo(e);
         	return Collections.emptySet();
         } catch (SocketTimeoutException e) {
         	// timeout -> no results
+        	TmcleditEditPlugin.logInfo(e);
         	return Collections.emptySet();
     	} catch (Exception e) {
             throw new RuntimeException(e);
