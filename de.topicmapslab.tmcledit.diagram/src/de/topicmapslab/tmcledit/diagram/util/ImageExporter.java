@@ -19,7 +19,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.w3c.dom.Document;
@@ -27,12 +26,6 @@ import org.w3c.dom.Document;
 public class ImageExporter {
 	
 	public static void exportSvg(IPrintableDiagramEditor editor, File file) {
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite().getShell();
-		FileDialog dlg = new FileDialog(shell, SWT.SAVE);
-		dlg.setFilterExtensions(new String[] { "*.svg" });
-		dlg.setText("Save as...");
-		
-		
 		Graphics g = null;
 		Image image = null;
 		try {
@@ -71,12 +64,6 @@ public class ImageExporter {
 	}
 
 	public static void exportPng(IPrintableDiagramEditor editor, File file) {
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite().getShell();
-		FileDialog dlg = new FileDialog(shell, SWT.SAVE);
-		dlg.setFilterExtensions(new String[] { "*.png" });
-		dlg.setText("Save as...");
-		
-		
 		Image image = null;
 		try {
 			FileOutputStream result = new FileOutputStream(file);

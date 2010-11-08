@@ -102,7 +102,7 @@ public class TMCLEditorActionBarContributor extends ActionBarContributor {
 				return;
 
 			FileDialog dlg = new FileDialog(editor.getSite().getShell(), SWT.SAVE);
-			dlg.setFilterExtensions(new String[] { "*.svg;*.png" });
+			dlg.setFilterExtensions(new String[] { "*.png", "*.svg", "*.svg;*.png" });
 			dlg.setText("Save as...");
 			String file = dlg.open();
 			if (file == null)
