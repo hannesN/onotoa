@@ -90,6 +90,10 @@ public final class TmcleditEditPlugin extends EMFPlugin {
 		getPlugin().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage()));
 	}
 	
+	public static void logInfo(Exception e) {
+		getPlugin().getLog().log(new Status(IStatus.INFO, PLUGIN_ID, e.getMessage()));
+	}
+	
 	/**
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 * <!-- begin-user-doc -->
