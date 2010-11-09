@@ -1,5 +1,7 @@
 package de.topicmapslab.onotoa.export.maiana;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -68,4 +70,8 @@ public class Activator extends AbstractUIPlugin {
 		}
 		return selectionService;
 	}
+
+	public static void logError(Exception e) {
+	    plugin.getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "An error occurred: "+e.getMessage(), e));
+    }
 }

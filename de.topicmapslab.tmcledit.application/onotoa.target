@@ -52,9 +52,9 @@
 <unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
 <unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.1.2"/>
-<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201011021026"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201011021026"/>
+<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201011021729"/>
 <unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201011021729"/>
 <unit id="de.topicmapslab.majortom_feature.feature.group" version="1.1.2"/>
 <repository location="http://update.topicmapslab.de"/>
 </location>

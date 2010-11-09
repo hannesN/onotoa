@@ -3,6 +3,7 @@
  */
 package de.topicmapslab.onotoa.export.maiana.wizard;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
@@ -40,8 +41,7 @@ public class MaianaExport extends Wizard implements IExportWizard {
 
 	@Override
 	public boolean performFinish() {
-		page.performFinish();
-		return true;
+		return page.performFinish();
 	}
 
 	@Override
@@ -65,13 +65,21 @@ public class MaianaExport extends Wizard implements IExportWizard {
 	        setControl(widget);
         }
 		
-		public void performFinish() {
-			IOnotoaSelectionService selServ = Activator.getDefault().getSelectionService();
-			File f = selServ.getOnotoaFile();
-			
-			TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(f.getTopicMapSchema(), false, false);
-			
-			widget.upload(builder.createTopicMap(), true);
+		public boolean performFinish() {
+			try {
+				IOnotoaSelectionService selServ = Activator.getDefault().getSelectionService();
+				File f = selServ.getOnotoaFile();
+				
+				TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(f.getTopicMapSchema(), false, false);
+				
+				widget.upload(builder.createTopicMap(), true);
+				
+				return true;
+			} catch (RuntimeException e) {
+				MessageDialog.openError(getShell(), "An error occured!", e.getMessage());
+				Activator.logError(e);
+				return false;
+			}
 		}
 	}
 }
