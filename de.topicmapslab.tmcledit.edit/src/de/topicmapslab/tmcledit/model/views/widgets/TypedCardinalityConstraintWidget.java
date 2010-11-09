@@ -34,6 +34,8 @@ import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.FontMetrics;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -156,22 +158,31 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		comp.setLayout(new GridLayout());
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 
+		
+		GC gc = new GC(comp);
+		gc.setFont(comp.getFont());
+		FontMetrics fm = gc.getFontMetrics();
+		
+		
 		GridData bgd = new GridData();
-		bgd.widthHint = 100;
+		bgd.widthHint = fm.getAverageCharWidth()*13;
 		bgd.verticalAlignment = SWT.CENTER;
 		GridDataFactory fac = GridDataFactory.createFrom(bgd);
 
 		selectButton = toolkit.createButton(comp, "Select...", SWT.PUSH);
 		selectButton.setImage(ImageProvider.getImage(ImageConstants.SELECT_CHECK));
+		selectButton.setAlignment(SWT.LEFT);
 		fac.applyTo(selectButton);
 
 		newButton = toolkit.createButton(comp, "New...", SWT.PUSH);
 		newButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
+		newButton.setAlignment(SWT.LEFT);
 		fac.applyTo(newButton);
 		
 
 		removeButton = toolkit.createButton(comp, "Remove", SWT.PUSH);
 		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
+		removeButton.setAlignment(SWT.LEFT);
 		fac.applyTo(removeButton);
 
 	}
