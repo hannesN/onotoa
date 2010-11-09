@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -34,7 +35,8 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	private final AssociationType associationType;
 	private final List<RoleConstraint> roles;
 	
-	private List<SetRoleConstraintCommand> roleConstraintList = Collections.emptyList();
+	private CompoundCommand cmd;
+	
 	private List<RoleConstraint> oldRoleConstraintList = Collections.emptyList();
 	
 	public RemoveRoleConstraintCommand(AssociationType associationType,
@@ -54,9 +56,10 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	 * @see org.eclipse.emf.common.command.Command#execute()
 	 */
 	public void execute() {
-		for (SetRoleConstraintCommand cmd : roleConstraintList) {
-			cmd.execute();
-		}
+		prepare();
+		
+		cmd.execute();
+		
 		associationType.getRoles().removeAll(roles);
 	}
 
@@ -64,30 +67,26 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	 * @see org.eclipse.emf.common.command.Command#redo()
 	 */
 	public void redo() {
-		execute();
+		cmd.redo();
+		
+		associationType.getRoles().removeAll(roles);
 	}
 
 	@Override
 	public void undo() {
 		associationType.getRoles().clear();
 		associationType.getRoles().addAll(oldRoleConstraintList);
-		for (SetRoleConstraintCommand cmd : roleConstraintList) {
-			cmd.undo();
-		}
+
+		cmd.undo();
 	}
-	
-	private void addRoleConstraintCommand(SetRoleConstraintCommand cmd) {
-		if (roleConstraintList==Collections.EMPTY_LIST)
-			roleConstraintList = new ArrayList<SetRoleConstraintCommand>();
 		
-		roleConstraintList.add(cmd);
-	}
-	
 	@Override
 	protected boolean prepare() {
-		
+		cmd = new CompoundCommand();
 		prepareRoleConstraintCommands();	
+		
 		oldRoleConstraintList = new ArrayList<RoleConstraint>(associationType.getRoles());
+		
 		return true;
 	}
 
@@ -97,8 +96,7 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 				for (RolePlayerConstraint rpc : asc.getPlayerConstraints()) {
 					if (roles.contains(rpc.getRole())) {
 						SetRoleConstraintCommand cmd = new SetRoleConstraintCommand(rpc, null);
-						if (cmd.canExecute())
-							addRoleConstraintCommand(cmd);
+						this.cmd.appendIfCanExecute(cmd);
 					}
 				}
 			}

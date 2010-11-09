@@ -13,11 +13,8 @@
  */
 package de.topicmapslab.tmcledit.model.commands;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.swt.graphics.Point;
 
 import de.topicmapslab.tmcledit.model.AssociationNode;
@@ -51,7 +48,9 @@ public class CreateNodeCommand extends AbstractCommand {
 
 	private final Diagram diagram;
 	
-	private List<CreateEdgeCommand> edgeCommands = Collections.emptyList();
+	private CompoundCommand edgeCommands;
+	
+//	private List<CreateEdgeCommand> edgeCommands = Collections.emptyList();
 
 	private boolean createdNewType = false;
 
@@ -98,8 +97,7 @@ public class CreateNodeCommand extends AbstractCommand {
 						addType = true;
 				}
 			}
-			
-			return true;
+			return (edgeCommands.isEmpty() || edgeCommands.canExecute());
 		}
 		return false;
 	}
@@ -125,10 +123,7 @@ public class CreateNodeCommand extends AbstractCommand {
 			}
 		}
 		diagram.getNodes().add(node);
-		for (CreateEdgeCommand cmd : edgeCommands) {
-			if (cmd.canExecute())
-				cmd.execute();
-		}
+		edgeCommands.execute();
 	}
 
 	@Override
@@ -136,6 +131,7 @@ public class CreateNodeCommand extends AbstractCommand {
 		if (isPrepared)
 			return true;
 		
+		edgeCommands = new CompoundCommand();
 		TopicTypeNodeIndexer nodeIndexer = ModelIndexer.getNodeIndexer();
 		
 		switch (type) {
@@ -190,7 +186,7 @@ public class CreateNodeCommand extends AbstractCommand {
 		Edge edge = createEdge(node1, node2, EdgeType.ROLE_CONSTRAINT_TYPE);
 		edge.setRoleConstraint(rpc);
 		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
-		addEdgeCommand(cmd);
+		edgeCommands.append(cmd);
 	}
 	
 	private void createAkOEdges(TopicType topicType, TopicTypeNodeIndexer nodeIndexer, TopicIndexer topicIndexer) {
@@ -199,7 +195,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node, node2, EdgeType.AKO_TYPE);
 	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
-	    		addEdgeCommand(cmd);
+	    		edgeCommands.append(cmd);
 	    	}
 	    }
 	    for(TopicType tt : topicIndexer.getUsedAsAko(topicType)) {
@@ -207,7 +203,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node2, node, EdgeType.AKO_TYPE);
 	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
-	    		addEdgeCommand(cmd);
+	    		edgeCommands.append(cmd);
 	    	}
 	    }
     }
@@ -218,7 +214,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node, node2, EdgeType.IS_ATYPE);
 	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
-	    		addEdgeCommand(cmd);
+	    		edgeCommands.append(cmd);
 	    	}
 	    }
 	    for(TopicType tt : topicIndexer.getUsedAsIsa(topicType) ) {
@@ -226,7 +222,7 @@ public class CreateNodeCommand extends AbstractCommand {
 	    	if (node2!=null) {
 	    		Edge edge = createEdge(node2, node, EdgeType.IS_ATYPE);
 	    		CreateEdgeCommand cmd = new CreateEdgeCommand(edge, diagram);
-	    		addEdgeCommand(cmd);
+	    		edgeCommands.append(cmd);
 	    	}
 	    }
     }
@@ -259,16 +255,12 @@ public class CreateNodeCommand extends AbstractCommand {
 			}
 		}
 		diagram.getNodes().add(node);
-		for (CreateEdgeCommand cmd : edgeCommands) {
-			cmd.redo();
-		}
+		edgeCommands.redo();
 	}
 
 	@Override
 	public void undo() {
-		for (CreateEdgeCommand cmd : edgeCommands) {
-			cmd.undo();
-		}
+		edgeCommands.undo();
 		diagram.getNodes().remove(node);
 		switch (type) {
 		case TYPE:
@@ -294,12 +286,5 @@ public class CreateNodeCommand extends AbstractCommand {
 	@Override
 	public String getLabel() {
 		return (type==Type.TYPE) ? "Create Type Node" : "Create Association Node";
-	}
-	
-	private void addEdgeCommand(CreateEdgeCommand cmd) {
-		if (edgeCommands==Collections.EMPTY_LIST)
-			edgeCommands = new ArrayList<CreateEdgeCommand>();
-		
-		edgeCommands.add(cmd);
 	}
 }
