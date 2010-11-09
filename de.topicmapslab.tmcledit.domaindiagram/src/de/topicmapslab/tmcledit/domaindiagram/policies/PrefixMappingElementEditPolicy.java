@@ -16,7 +16,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 
 import de.topicmapslab.tmcledit.diagram.policies.AbstractDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.MappingElement;
-import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
+import de.topicmapslab.tmcledit.model.commands.ModifyPrefixCommand;
 import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
 public class PrefixMappingElementEditPolicy extends AbstractDirectEditPolicy {
@@ -40,7 +40,7 @@ public class PrefixMappingElementEditPolicy extends AbstractDirectEditPolicy {
 				newValue = getNewString(request);
 			 
 			if (PrefixKeyMatcher.isValidKey(newValue))
-				return new UpdatePrefixCommand((MappingElement) model, newKey, newValue);
+				return new ModifyPrefixCommand((MappingElement) model, newKey, newValue);
 			else
 				MessageDialog
 				.openError(request.getCellEditor().getControl().getShell(), "invalid key",
