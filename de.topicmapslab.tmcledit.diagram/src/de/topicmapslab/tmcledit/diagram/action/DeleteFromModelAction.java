@@ -87,7 +87,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 
 			cmd.append(getCommand(model));
 		}
-		if (cmd != null) {
+		if (cmd.canExecute()) {
 			getCommandStack().execute(cmd);
 		}
 	}

@@ -10,13 +10,12 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.commands;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationNode;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
@@ -31,10 +30,10 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 	
 	private final AssociationTypeConstraint constraint;
 	private final TopicMapSchema tms;
-	private List<DeleteRolePlayerConstraintCommand> cmds = Collections.emptyList();
+	private CompoundCommand cmd;
 	
-	private Map<Diagram, Node> nodeMap = Collections.emptyMap();
-	private Map<Diagram, Integer> indexMap = Collections.emptyMap();
+	private Map<Diagram, Node> nodeMap = null;
+	private Map<Diagram, Integer> indexMap = null;
 	
 	private int atcIndex;
 
@@ -49,27 +48,25 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 	
 	
 	public void execute() {
+		// prepare again because model could have changed
+		prepare();
 		
-		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
-			cmd.execute();
-		}
+		cmd.execute();
 		
 
-		for (Diagram d : nodeMap.keySet()) {
-			d.getNodes().remove(nodeMap.get(d));
+		for (Diagram d : getNodeMap().keySet()) {
+			d.getNodes().remove(getNodeMap().get(d));
 		}
 		
 		tms.getAssociationTypeConstraints().remove(constraint);
 		
 	}
-
+	
 	public void redo() {
-		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
-			cmd.redo();
-		}
+		cmd.redo();
 		
-		for (Diagram d : nodeMap.keySet()) {
-			d.getNodes().remove(nodeMap.get(d));
+		for (Diagram d : getNodeMap().keySet()) {
+			d.getNodes().remove(getNodeMap().get(d));
 		}
 		
 		tms.getAssociationTypeConstraints().remove(constraint);
@@ -81,34 +78,32 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 		tms.getAssociationTypeConstraints().add(atcIndex, constraint);
 		
 		
-		for (Diagram d : nodeMap.keySet()) {
-			int idx = indexMap.get(d);
-			d.getNodes().add(idx, nodeMap.get(d));
+		for (Diagram d : getNodeMap().keySet()) {
+			int idx = getIndexMap().get(d);
+			d.getNodes().add(idx, getNodeMap().get(d));
 		}
-		
-		for (DeleteRolePlayerConstraintCommand cmd : cmds) {
-			cmd.undo();
-		}
+		cmd.undo();
 	}
 	
 	@Override
 	protected boolean prepare() {
-		if (constraint.getPlayerConstraints().size()>0) {
-			cmds = new ArrayList<DeleteRolePlayerConstraintCommand>(constraint.getPlayerConstraints().size());
-		}
-		
 		atcIndex = tms.getAssociationTypeConstraints().indexOf(constraint);
+		
+		// reset state
+		cmd = new CompoundCommand();
+		indexMap = null;
+		nodeMap = null;
+		
 		
 		for (RolePlayerConstraint rpc : constraint.getPlayerConstraints()) {
 			DeleteRolePlayerConstraintCommand cmd = new DeleteRolePlayerConstraintCommand(constraint, rpc);
-			if (cmd.canExecute())
-				cmds.add(cmd);
+			this.cmd.appendIfCanExecute(cmd);
 		}
 		
 		File file = (File) tms.eContainer();
+		
 		for (Diagram d : file.getDiagrams()) {
-			AssociationNode node = (AssociationNode) ModelIndexer.getNodeIndexer()
-					.getNodeFor(constraint, d);
+			AssociationNode node = (AssociationNode) ModelIndexer.getNodeIndexer().getNodeFor(constraint, d);
 			if (node!=null) {
 				addNode(d, node);
 			}
@@ -119,7 +114,7 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 
 
 	private void addNode(Diagram d, AssociationNode node) {
-		if (nodeMap==Collections.EMPTY_MAP) {
+		if (nodeMap==null) {
 			nodeMap = new HashMap<Diagram, Node>();
 		}
 		nodeMap.put(d, node);
@@ -127,10 +122,24 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 	}	
 
 	private void addIndex(Diagram d, int idx) {
-		if (indexMap==Collections.EMPTY_MAP) {
+		if (indexMap==null) {
 			indexMap = new HashMap<Diagram, Integer>();
 		}
 		indexMap.put(d, idx);
 	}	
 
+
+	private Map<Diagram, Node> getNodeMap() {
+		if (nodeMap==null)
+			return Collections.emptyMap();
+		
+	    return nodeMap;
+    }
+	
+	private Map<Diagram, Integer> getIndexMap() {
+		if (indexMap==null)
+			return Collections.emptyMap();
+		
+	    return indexMap;
+    }
 }

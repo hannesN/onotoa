@@ -13,6 +13,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 
+import de.topicmapslab.onotoa.selection.Activator;
 import de.topicmapslab.tmcledit.model.File;
 
 /**
@@ -48,6 +49,8 @@ public class OnotoaSelectionService implements IOnotoaSelectionService {
 	public void setSelection(ISelection selection, ISelectionProvider source) {
 		this.selection = selection;
 		notifyListeners(selection, source);
+		
+//		Activator.logInfo(new Exception(this.selection.toString()));
 	}
 
 	private void notifyListeners(ISelection selection, ISelectionProvider source) {
