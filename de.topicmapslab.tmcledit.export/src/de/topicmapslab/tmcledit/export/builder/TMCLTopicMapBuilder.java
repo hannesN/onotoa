@@ -276,7 +276,12 @@ public class TMCLTopicMapBuilder {
 			}
 
 			if (exportSchema) {
-				schema = topicMap.createTopic();
+				
+				String schemaII = "http://onotoa.topicmapslab.de/schema/";
+				if (topicMapSchema.getVersion()!=null)
+					schemaII+=topicMapSchema.getVersion();
+				
+				schema = topicMap.createTopicByItemIdentifier(topicMap.createLocator(schemaII));
 				addDocumentationOccurrences(schema, topicMapSchema);
 				
 				String tmp = topicMapSchema.getSchemaResource();
