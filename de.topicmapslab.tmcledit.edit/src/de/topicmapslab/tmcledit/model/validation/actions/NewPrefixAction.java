@@ -43,8 +43,7 @@ public class NewPrefixAction extends ValidationAction {
 
 	@Override
 	public void run() {
-		Shell shell = PlatformUI
-				.getWorkbench().getActiveWorkbenchWindow().getShell();
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(shell);
 		dlg.setKey(key);
 		if (Dialog.OK==dlg.open()) {

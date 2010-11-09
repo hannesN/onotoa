@@ -49,7 +49,7 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.commands.CreatePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.RemovePrefixMappingCommand;
-import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
+import de.topicmapslab.tmcledit.model.commands.ModifyPrefixCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewPrefixMappingDialog;
 import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
@@ -314,7 +314,7 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 				val = (String) value;
 			}
 			if (PrefixKeyMatcher.isValidKey(key)) {
-				getCommandStack().execute(new UpdatePrefixCommand(me, key, val));
+				getCommandStack().execute(new ModifyPrefixCommand(me, key, val));
 			} else {
 				MessageDialog
 				.openError(addButton.getShell(), "invalid key",

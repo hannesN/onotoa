@@ -10,6 +10,9 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.validation;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,6 +39,7 @@ import de.topicmapslab.tmcledit.model.actions.IgnorePrefixAction;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult.Priority;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationCreateTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.AssociationSelectTypeAction;
+import de.topicmapslab.tmcledit.model.validation.actions.ModifyPrefix;
 import de.topicmapslab.tmcledit.model.validation.actions.NameConstraintCreateTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NameConstraintSelectTypeAction;
 import de.topicmapslab.tmcledit.model.validation.actions.NewPrefixAction;
@@ -161,14 +165,14 @@ public class ModelValidator {
 			if (prefix.equals("mailto"))
 				return;
 
-			boolean found = false;
+			MappingElement foundME = null;
 			for (MappingElement me : schema.getMappings()) {
 				if (me.getKey().equals(prefix)) {
-					found = true;
+					foundME = me;
 					break;
 				}
 			}
-			if (!found) {
+			if (foundME==null) {
 				if (getIgnoredPrefixes().contains(prefix))
 					return;
 				if (!(foundNotFoundPrefixes.contains(prefix))) {					
@@ -176,9 +180,27 @@ public class ModelValidator {
 					vr.addValidationAction(new NewPrefixAction(commandStack, schema, prefix));
 					vr.addValidationAction(new IgnorePrefixAction(commandStack, schema, prefix));
 					addValidationResult(vr);
-					
+
 					foundNotFoundPrefixes.add(prefix);
 				}
+			} else {
+				// check if its a valid uri
+				String uri = foundME.getValue();
+				if (!( (uri.endsWith("#"))
+				  || (uri.endsWith("/")))) {
+					uri += "#";
+				}
+				String tmp = c;
+				tmp = tmp.replace(prefix + ":", uri);
+				try {
+					new URL(tmp); 
+				} catch (MalformedURLException e){
+					String msg = MessageFormat.format("Identifier: {0} resolves to the invalid URL: {1} of topic: {2}", c, tmp, tt.getName());
+					ValidationResult vr = new ValidationResult(msg, tt);
+					vr.addValidationAction(new ModifyPrefix(commandStack, foundME));
+					addValidationResult(vr);
+				}
+				
 			}
 		}
 	}

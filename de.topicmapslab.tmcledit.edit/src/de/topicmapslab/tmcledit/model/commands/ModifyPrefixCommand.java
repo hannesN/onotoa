@@ -22,7 +22,7 @@ import de.topicmapslab.tmcledit.model.MappingElement;
  * @author Hannes Niederhausen
  *
  */
-public class UpdatePrefixCommand extends AbstractCommand {
+public class ModifyPrefixCommand extends AbstractCommand {
 
 	private final MappingElement me;
 	private final String oldKey;
@@ -32,7 +32,7 @@ public class UpdatePrefixCommand extends AbstractCommand {
 
 	
 	
-	public UpdatePrefixCommand(MappingElement me, String newKey, String newValue) {
+	public ModifyPrefixCommand(MappingElement me, String newKey, String newValue) {
 		super();
 		this.me = me;
 		this.oldKey = me.getKey();

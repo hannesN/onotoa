@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
-import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
+import de.topicmapslab.tmcledit.model.commands.ModifyPrefixCommand;
 
 /**
  * @author Hannes Niederhausen
@@ -28,7 +28,7 @@ import de.topicmapslab.tmcledit.model.commands.UpdatePrefixCommand;
  */
 public class UpdatePrefixCommandTest {
 
-	private UpdatePrefixCommand command;
+	private ModifyPrefixCommand command;
 	private MappingElement me;
 	private String oldKey;
 	private String newKey;
@@ -59,7 +59,7 @@ public class UpdatePrefixCommandTest {
 		}
 
 		if (command == null)
-			command = new UpdatePrefixCommand(me, newKey, newValue);
+			command = new ModifyPrefixCommand(me, newKey, newValue);
 
 	}
 
@@ -80,41 +80,41 @@ public class UpdatePrefixCommandTest {
 
 		Assert.assertTrue(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, oldKey, null);
+		command = new ModifyPrefixCommand(me, oldKey, null);
 		Assert.assertTrue(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, newKey, null);
+		command = new ModifyPrefixCommand(me, newKey, null);
 		Assert.assertTrue(command.canExecute());
 		
 
-		command = new UpdatePrefixCommand(me, null, oldValue);
+		command = new ModifyPrefixCommand(me, null, oldValue);
 		Assert.assertTrue(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, null, newValue);
+		command = new ModifyPrefixCommand(me, null, newValue);
 		Assert.assertTrue(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, null, null);
+		command = new ModifyPrefixCommand(me, null, null);
 		Assert.assertTrue(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, oldKey, oldValue);
+		command = new ModifyPrefixCommand(me, oldKey, oldValue);
 		Assert.assertFalse(command.canExecute());
 		
 		me.setKey(null);
 		me.setValue(null);
-		command = new UpdatePrefixCommand(me, null, null);
+		command = new ModifyPrefixCommand(me, null, null);
 		Assert.assertFalse(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, oldKey, null);
+		command = new ModifyPrefixCommand(me, oldKey, null);
 		Assert.assertTrue(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, newKey, null);
+		command = new ModifyPrefixCommand(me, newKey, null);
 		Assert.assertTrue(command.canExecute());
 		
 
-		command = new UpdatePrefixCommand(me, null, oldValue);
+		command = new ModifyPrefixCommand(me, null, oldValue);
 		Assert.assertTrue(command.canExecute());
 		
-		command = new UpdatePrefixCommand(me, null, newValue);
+		command = new ModifyPrefixCommand(me, null, newValue);
 		
 		
 
