@@ -157,30 +157,26 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout());
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
-
-		
-		GC gc = new GC(comp);
-		gc.setFont(comp.getFont());
-		FontMetrics fm = gc.getFontMetrics();
-		
 		
 		GridData bgd = new GridData();
-		bgd.widthHint = fm.getAverageCharWidth()*13;
 		bgd.verticalAlignment = SWT.CENTER;
 		GridDataFactory fac = GridDataFactory.createFrom(bgd);
 
-		selectButton = toolkit.createButton(comp, "Select...", SWT.PUSH);
+		selectButton = toolkit.createButton(comp, "", SWT.PUSH);
+		selectButton.setToolTipText("Create a new contraint using an existing topic type.");
 		selectButton.setImage(ImageProvider.getImage(ImageConstants.SELECT_CHECK));
 		selectButton.setAlignment(SWT.LEFT);
 		fac.applyTo(selectButton);
 
-		newButton = toolkit.createButton(comp, "New...", SWT.PUSH);
+		newButton = toolkit.createButton(comp, "", SWT.PUSH);
+		newButton.setToolTipText("Create a new contraint with a new topic type.");
 		newButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
 		newButton.setAlignment(SWT.LEFT);
 		fac.applyTo(newButton);
 		
 
-		removeButton = toolkit.createButton(comp, "Remove", SWT.PUSH);
+		removeButton = toolkit.createButton(comp, "", SWT.PUSH);
+		removeButton.setToolTipText("Removing the contraints selected in the table.");
 		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
 		removeButton.setAlignment(SWT.LEFT);
 		fac.applyTo(removeButton);
