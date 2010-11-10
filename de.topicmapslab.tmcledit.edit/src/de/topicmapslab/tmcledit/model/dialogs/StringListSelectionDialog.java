@@ -37,6 +37,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
+
 /**
  * @author Hannes Niederhausen
  *
@@ -90,12 +93,13 @@ public class StringListSelectionDialog extends Dialog {
 		comp.setLayout(new GridLayout());
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 		GridData gd = new GridData();
-		gd.widthHint = 100;
+		//gd.widthHint = 100;
 		GridDataFactory fac = GridDataFactory.createFrom(gd);
 		
 		Button addButton = new Button(comp, SWT.PUSH);
-		addButton.setText("Add...");
-		addButton.setToolTipText("Add selected Topics");
+		addButton.setText("");
+		addButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
+		addButton.setToolTipText("Add selected Identifiers");
 		fac.applyTo(addButton);
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -105,8 +109,9 @@ public class StringListSelectionDialog extends Dialog {
 		});
 		
 		Button editButton = new Button(comp, SWT.PUSH);
-		editButton.setText("Edit...");
-		editButton.setToolTipText("Edit selected Element");
+		editButton.setText("");
+		editButton.setImage(ImageProvider.getImage(ImageConstants.EDIT));
+		editButton.setToolTipText("Edit selected Identifier");
 		fac.applyTo(editButton);
 		editButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -120,8 +125,9 @@ public class StringListSelectionDialog extends Dialog {
 		});
 		
 		Button removeButton = new Button(comp, SWT.PUSH);
-		removeButton.setText("Remove");
-		removeButton.setToolTipText("Remove selected Topics");
+		removeButton.setText("");
+		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
+		removeButton.setToolTipText("Remove selected Identifiers");
 		fac.applyTo(removeButton);
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -131,8 +137,9 @@ public class StringListSelectionDialog extends Dialog {
 		});
 		
 		Button removeAllButton = new Button(comp, SWT.PUSH);
-		removeAllButton.setText("Clear");
-		removeAllButton.setToolTipText("Remove all Topics");
+		removeAllButton.setText("");
+		removeAllButton.setImage(ImageProvider.getImage(ImageConstants.CLEAR));
+		removeAllButton.setToolTipText("Remove all Identifiers");
 		fac.applyTo(removeAllButton);
 		removeAllButton.addSelectionListener(new SelectionAdapter() {
 			@Override

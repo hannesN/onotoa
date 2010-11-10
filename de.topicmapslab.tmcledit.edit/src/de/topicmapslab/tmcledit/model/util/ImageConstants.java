@@ -24,9 +24,11 @@ public interface ImageConstants {
 	public static String ASSOCIATIONTYPE = "./associationtype.gif";
 	public static String ASSOCIATIONTYPE_BW = "./associationtype_bw.gif";
 	public static String ASSOCIATIONTYPE_SM = "./associationtype_sm.gif";
+	public static String CLEAR = "./clear_icon.gif";
 	public static String COMMENT = "./comment.png";
 	public static String DIAGRAM = "./diagram.gif";
 	public static String DOMAINDIAGRAM = "./domaindiagram.gif";
+	public static String EDIT = "./edit_icon.gif";
 	public static String ICON = "./icon.png";
 	public static String ISA = "./isa.gif";
 	public static String ISA_SM = "./isa_sm.gif";
