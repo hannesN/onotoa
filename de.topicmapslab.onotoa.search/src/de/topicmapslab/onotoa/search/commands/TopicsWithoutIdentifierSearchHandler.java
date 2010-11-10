@@ -28,6 +28,7 @@ import de.topicmapslab.onotoa.action.NewSubjectLocatorAction;
 import de.topicmapslab.onotoa.search.searchImpl.TopicsWithoutIdentifierSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -50,6 +51,10 @@ public class TopicsWithoutIdentifierSearchHandler extends AbstractHandler {
 		ModelView view = (ModelView) activePage.findView(ModelView.ID);
 
 		if (view == null)
+			return null;
+		
+		// check if ModelIndexer exists
+		if (ModelIndexer.getInstance() == null)
 			return null;
 
 		if (view.getCurrentTopicMapSchema() == null)

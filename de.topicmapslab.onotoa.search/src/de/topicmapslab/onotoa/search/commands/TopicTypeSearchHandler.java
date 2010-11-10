@@ -26,6 +26,7 @@ import de.topicmapslab.onotoa.search.dialogs.TopicTypeSearchDialog;
 import de.topicmapslab.onotoa.search.searchImpl.BasicTopicTypeSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -45,6 +46,10 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
+		// check if ModelIndexer exists
+		if (ModelIndexer.getInstance() == null)
+			return null;
+		
 		// get shell and open search dialog for TopicTypes
 		Shell shell = HandlerUtil.getActiveShell(event);
 		TopicTypeSearchDialog dialog = new TopicTypeSearchDialog(shell);
@@ -59,7 +64,7 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 
 			if (view == null)
 				return null;
-
+			
 			// get schema
 			TopicMapSchema schema = view.getCurrentTopicMapSchema();
 
