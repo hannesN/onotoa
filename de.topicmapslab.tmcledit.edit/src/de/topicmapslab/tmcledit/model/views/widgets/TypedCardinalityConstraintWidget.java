@@ -164,7 +164,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 		selectButton = toolkit.createButton(comp, "", SWT.PUSH);
 		selectButton.setToolTipText("Create a new contraint using an existing topic type.");
-		selectButton.setImage(ImageProvider.getImage(ImageConstants.SELECT_CHECK));
+		selectButton.setImage(ImageProvider.getImage(ImageConstants.SELECT));
 		selectButton.setAlignment(SWT.LEFT);
 		fac.applyTo(selectButton);
 

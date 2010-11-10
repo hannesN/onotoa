@@ -49,7 +49,6 @@ public interface ImageConstants {
 	public static String ROLETYPE_BW = "./roletype_bw.gif";
 	public static String ROLETYPE_SM = "./roletype_sm.gif";
 	public static String SELECT = "./select_icon.gif";
-	public static String SELECT_CHECK = "./select_icon_check.gif";
 	public static String SUBJECTIDENTIFIERCONSTRAINT = "./siconstraint.gif";
 	public static String SUBJECTLOCATORCONSTRAINT = "./slconstraint.gif";
 	public static String TOPIC = "./topic.gif";
