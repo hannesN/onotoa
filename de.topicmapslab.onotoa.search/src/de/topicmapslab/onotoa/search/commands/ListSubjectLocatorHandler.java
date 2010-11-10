@@ -21,6 +21,7 @@ import org.eclipse.ui.PlatformUI;
 import de.topicmapslab.onotoa.search.searchImpl.SubjectLocatorSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -39,6 +40,10 @@ public class ListSubjectLocatorHandler extends AbstractHandler {
 		if (view == null)
 			return null;
 
+		// check if ModelIndexer exists
+		if (ModelIndexer.getInstance() == null)
+			return null;
+		
 		if (view.getCurrentTopicMapSchema() == null)
 			return null;
 

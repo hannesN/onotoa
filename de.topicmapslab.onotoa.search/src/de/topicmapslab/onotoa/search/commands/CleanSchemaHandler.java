@@ -30,6 +30,7 @@ import de.topicmapslab.onotoa.search.searchImpl.NeverUsedTopicsSearcher;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -60,6 +61,10 @@ public class CleanSchemaHandler extends AbstractHandler {
 		if (view == null)
 			return null;
 
+		// check if ModelIndexer exists
+		if (ModelIndexer.getInstance() == null)
+			return null;
+		
 		if (view.getCurrentTopicMapSchema() == null)
 			return null;
 
