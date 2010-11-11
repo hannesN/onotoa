@@ -45,6 +45,8 @@ import org.eclipse.swt.widgets.Shell;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 /**
  * @author Hannes Niederhausen
@@ -141,11 +143,12 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		comp.setLayout(new GridLayout());
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 		GridData gd = new GridData();
-		gd.widthHint = 100;
+		//gd.widthHint = 100;
 		GridDataFactory fac = GridDataFactory.createFrom(gd);
 
 		addButton = new Button(comp, SWT.PUSH);
-		addButton.setText(">");
+		addButton.setText("");
+		addButton.setImage(ImageProvider.getImage(ImageConstants.ADD_ONE));
 		addButton.setToolTipText("Add selected Topics");
 		fac.applyTo(addButton);
 		addButton.setEnabled(false);
@@ -157,7 +160,8 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		});
 
 		Button addAllButton = new Button(comp, SWT.PUSH);
-		addAllButton.setText(">>");
+		addAllButton.setText("");
+		addAllButton.setImage(ImageProvider.getImage(ImageConstants.ADD_ALL));
 		addAllButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -169,7 +173,8 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		fac.applyTo(addAllButton);
 
 		removeButton = new Button(comp, SWT.PUSH);
-		removeButton.setText("<");
+		removeButton.setText("");
+		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE_ONE));
 		removeButton.setEnabled(false);
 		removeButton.setToolTipText("Remove selected Topics");
 		fac.applyTo(removeButton);
@@ -181,7 +186,8 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		});
 
 		Button removeAllButton = new Button(comp, SWT.PUSH);
-		removeAllButton.setText("<<");
+		removeAllButton.setText("");
+		removeAllButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE_ALL));
 		removeAllButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -193,7 +199,8 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 
 		Button createButton = new Button(comp, SWT.PUSH);
 		createButton.setToolTipText("Create new Topic");
-		createButton.setText("New...");
+		createButton.setText("");
+		createButton.setImage(ImageProvider.getImage(ImageConstants.NEW_TOPICTYPE));
 		createButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override
