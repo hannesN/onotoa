@@ -82,7 +82,6 @@ public class AnnotationWidget extends Composite {
 
 	private FormToolkit toolkit;
 	private Button addButton;
-	private Button editButton;
 	private Button removeButton;
 	private int newCounter;
 
@@ -113,11 +112,6 @@ public class AnnotationWidget extends Composite {
 		addButton = createButton(comp, "");
 		addButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
 		addButton.setToolTipText("Create new Annotation");
-
-		editButton = createButton(comp, "");
-		editButton.setImage(ImageProvider.getImage(ImageConstants.EDIT));
-		editButton.setToolTipText("Edit selected Annotation");
-		editButton.setEnabled(false);
 
 		removeButton = createButton(comp, "");
 		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
@@ -168,13 +162,11 @@ public class AnnotationWidget extends Composite {
 					return;
 				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
 
-				if (sel.isEmpty()) {
+				if (sel.isEmpty())
 					removeButton.setEnabled(false);
-					editButton.setEnabled(false);
-				} else {
+				else
 					removeButton.setEnabled(true);
-					editButton.setEnabled(true);
-				}
+
 			}
 		});
 
@@ -204,13 +196,6 @@ public class AnnotationWidget extends Composite {
 			}
 		});
 
-		editButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				editAnnotation();
-			}
-		});
-
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -220,7 +205,6 @@ public class AnnotationWidget extends Composite {
 	}
 
 	private void editAnnotation() {
-		System.out.println("Edit");
 		viewer.refresh();
 	}
 
