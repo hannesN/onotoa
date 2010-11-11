@@ -64,6 +64,8 @@ import de.topicmapslab.tmcledit.model.commands.CreateAnnotationCommand;
 import de.topicmapslab.tmcledit.model.commands.ModifyAnnotationKeyCommand;
 import de.topicmapslab.tmcledit.model.commands.ModifyAnnotationValueCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveAnnotationCommand;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.extension.AnnotationProviderInfo;
 
 /**
@@ -106,15 +108,22 @@ public class AnnotationWidget extends Composite {
 	private void createButtonBar() {
 		Composite comp = (toolkit == null) ? new Composite(this, SWT.NONE) : toolkit.createComposite(this);
 		comp.setLayout(new GridLayout());
-		GridData gd = new GridData(GridData.FILL_VERTICAL);
-		gd.widthHint = 120;
-		comp.setLayoutData(gd);
+		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 
-		addButton = createButton(comp, "Add...");
-		editButton = createButton(comp, "Edit...");
+		addButton = createButton(comp, "");
+		addButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
+		addButton.setToolTipText("Create new Annotation");
+
+		editButton = createButton(comp, "");
+		editButton.setImage(ImageProvider.getImage(ImageConstants.EDIT));
+		editButton.setToolTipText("Edit selected Annotation");
 		editButton.setEnabled(false);
-		removeButton = createButton(comp, "Remove");
+
+		removeButton = createButton(comp, "");
+		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
+		removeButton.setToolTipText("Remove selected Annotation");
 		removeButton.setEnabled(false);
+
 		hookButtonListeners();
 	}
 
