@@ -91,7 +91,7 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 	 * @param enableTypeFilter
 	 *            Boolean that enables or disables the type filter button
 	 */
-	
+
 	public AbstractTopicTypeSearchAdvancedPart(List<TopicType> inputList, boolean enableTypeFilter) {
 
 		this.inputList = inputList;
@@ -301,7 +301,8 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 
 		// clear button to reset both tables
 		clearButton = new Button(buttonBar, SWT.PUSH);
-		clearButton.setText("Clear");
+		clearButton.setText("");
+		clearButton.setImage(ImageProvider.getImage(ImageConstants.CLEAR));
 		clearButton.setToolTipText("Remove all selected Topics");
 		clearButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		clearButton.addSelectionListener(new SelectionAdapter() {
@@ -313,7 +314,8 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 
 		// button for adding one topic to the list of selected TopicTypes
 		addButton = new Button(buttonBar, SWT.PUSH);
-		addButton.setText(">");
+		addButton.setText("");
+		addButton.setImage(ImageProvider.getImage(ImageConstants.ADD_ONE));
 		addButton.setToolTipText("Add selected Topics");
 		addButton.setEnabled(false);
 		addButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -326,7 +328,8 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 
 		// button for removing one topic from the list of selected TopicTypes
 		removeButton = new Button(buttonBar, SWT.PUSH);
-		removeButton.setText("<");
+		removeButton.setText("");
+		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE_ONE));
 		removeButton.setEnabled(false);
 		removeButton.setToolTipText("Remove selected Topics");
 		removeButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -339,7 +342,9 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 
 		// button activates filtering available topics by their types
 		typeFilterButton = new Button(buttonBar, SWT.Activate);
-		typeFilterButton.setText("Filter >>");
+		typeFilterButton.setText("");
+		typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
+		        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF));
 		typeFilterButton.setToolTipText("Enable filter for list of available Topics");
 		typeFilterButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		typeFilterButton.setSelection(false);
@@ -439,7 +444,8 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 			public void widgetSelected(SelectionEvent e) {
 
 				// activation
-				if (typeFilterButton.getText().equals("Filter >>")) {
+				if (typeFilterButton.getImage() == de.topicmapslab.onotoa.search.util.ImageProvider
+				        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF)) {
 
 					// make each specific type filter button visible
 					for (Button b : filterButtonList)
@@ -447,7 +453,8 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 
 					// set flag and change label
 					isTypeFiltered = true;
-					typeFilterButton.setText("Filter <<");
+					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
+					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_ON));
 
 					// deactivation
 				} else {
@@ -468,7 +475,8 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 					refreshLists();
 
 					// change label
-					typeFilterButton.setText("Filter >>");
+					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
+					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF));
 
 				}
 			}

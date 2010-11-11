@@ -196,22 +196,10 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 		buttonBar.setLayout(new GridLayout());
 		buttonBar.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 
-		// delete button to delete selected TopicType(s)
-		deleteButton = new Button(buttonBar, SWT.PUSH);
-		deleteButton.setText("Delete");
-		deleteButton.setToolTipText("Mark selected Topic for deletion");
-		deleteButton.setEnabled(false);
-		deleteButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		deleteButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				deleteSelection();
-			}
-		});
-
 		// delete all unused TopicTypes
 		restoreButton = new Button(buttonBar, SWT.PUSH);
-		restoreButton.setText("Restore");
+		restoreButton.setText("");
+		restoreButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
 		restoreButton.setToolTipText("Restore selected Topic");
 		restoreButton.setEnabled(false);
 		restoreButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -222,9 +210,24 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 			}
 		});
 
+		// delete button to delete selected TopicType(s)
+		deleteButton = new Button(buttonBar, SWT.PUSH);
+		deleteButton.setText("");
+		deleteButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
+		deleteButton.setToolTipText("Mark selected Topic for deletion");
+		deleteButton.setEnabled(false);
+		deleteButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		deleteButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				deleteSelection();
+			}
+		});
+
 		// reset button to take all choices back
 		clearButton = new Button(buttonBar, SWT.PUSH);
-		clearButton.setText("Clear");
+		clearButton.setText("");
+		clearButton.setImage(ImageProvider.getImage(ImageConstants.CLEAR));
 		clearButton.setToolTipText("Clear all desicions");
 		clearButton.setEnabled(true);
 		clearButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -237,7 +240,9 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 		// button activates filtering available topics by their types
 		typeFilterButton = new Button(buttonBar, SWT.Activate);
-		typeFilterButton.setText("Filter >>");
+		typeFilterButton.setText("");
+		typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
+		        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF));
 		typeFilterButton.setToolTipText("Enable filter for list of available Topics");
 		typeFilterButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		typeFilterButton.setSelection(false);
@@ -479,7 +484,8 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 			public void widgetSelected(SelectionEvent e) {
 
 				// activation
-				if (typeFilterButton.getText().equals("Filter >>")) {
+				if (typeFilterButton.getImage() == de.topicmapslab.onotoa.search.util.ImageProvider
+				        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF)) {
 
 					// make each specific type filter button visible
 					filterTopicType.setVisible(true);
@@ -490,7 +496,8 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 					// set flag and change label
 					isTypeFiltered = true;
-					typeFilterButton.setText("Filter <<");
+					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
+					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_ON));
 
 					// deactivation
 				} else {
@@ -514,7 +521,8 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 					unusedTopicsTable.refresh();
 
 					// change label
-					typeFilterButton.setText("Filter >>");
+					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
+					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF));
 
 				}
 			}

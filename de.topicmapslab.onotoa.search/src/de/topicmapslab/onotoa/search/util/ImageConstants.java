@@ -17,5 +17,7 @@ package de.topicmapslab.onotoa.search.util;
 public interface ImageConstants {
 
 	public static String ICON_RELOAD = "icons/reload.gif";
+	public static String FILTER_ON = "icons/filter_on_icon.gif";
+	public static String FILTER_OFF = "icons/filter_off_icon.gif";
 	
 }
