@@ -444,14 +444,12 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 			public void widgetSelected(SelectionEvent e) {
 
 				// activation
-				if (typeFilterButton.getImage() == de.topicmapslab.onotoa.search.util.ImageProvider
-				        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF)) {
-
+				if (!isTypeFiltered) {
 					// make each specific type filter button visible
 					for (Button b : filterButtonList)
 						b.setVisible(true);
 
-					// set flag and change label
+					// change button image
 					isTypeFiltered = true;
 					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
 					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_ON));
@@ -474,7 +472,7 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 					filterValue = -1;
 					refreshLists();
 
-					// change label
+					// change button image
 					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
 					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF));
 

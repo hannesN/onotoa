@@ -484,9 +484,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 			public void widgetSelected(SelectionEvent e) {
 
 				// activation
-				if (typeFilterButton.getImage() == de.topicmapslab.onotoa.search.util.ImageProvider
-				        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF)) {
-
+				if (!isTypeFiltered) {
 					// make each specific type filter button visible
 					filterTopicType.setVisible(true);
 					filterOccurrence.setVisible(true);
@@ -494,14 +492,13 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 					filterRole.setVisible(true);
 					filterAssociation.setVisible(true);
 
-					// set flag and change label
+					// change button image
 					isTypeFiltered = true;
 					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
 					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_ON));
 
 					// deactivation
 				} else {
-
 					// make each specific type filter button invisible
 					filterTopicType.setVisible(false);
 					filterOccurrence.setVisible(false);
@@ -520,7 +517,7 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 					filterValue = -1;
 					unusedTopicsTable.refresh();
 
-					// change label
+					// change button image
 					typeFilterButton.setImage(de.topicmapslab.onotoa.search.util.ImageProvider
 					        .getImage(de.topicmapslab.onotoa.search.util.ImageConstants.FILTER_OFF));
 
