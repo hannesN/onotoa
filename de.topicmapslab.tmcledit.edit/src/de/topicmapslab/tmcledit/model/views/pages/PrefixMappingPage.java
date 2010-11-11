@@ -25,8 +25,10 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
@@ -51,15 +53,17 @@ import de.topicmapslab.tmcledit.model.commands.CreatePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.RemovePrefixMappingCommand;
 import de.topicmapslab.tmcledit.model.commands.ModifyPrefixCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewPrefixMappingDialog;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
 /**
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class PrefixMappingPage extends AbstractEMFModelPage {
 
-	private final String[] columnNames = {"key", "value"};
+	private final String[] columnNames = { "key", "value" };
 
 	private TableViewer tableViewer;
 
@@ -74,25 +78,25 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 	public PrefixMappingPage() {
 		super("prefix mapping");
 	}
-	
+
 	@Override
 	public void setModel(Object model) {
 		schema = null;
 		if (model instanceof MappingElement) {
 			MappingElement me = (MappingElement) model;
-			schema = (TopicMapSchema) me.eContainer(); 
+			schema = (TopicMapSchema) me.eContainer();
 		} else if (model instanceof EObjectContainmentEList) {
 			// this must be the list of mapping elements
-			schema = (TopicMapSchema) ((EObjectContainmentEList)model).getEObject();
+			schema = (TopicMapSchema) ((EObjectContainmentEList) model).getEObject();
 		}
 		super.setModel(schema);
-		
+
 		schema.eAdapters().add(this);
 		for (MappingElement me : schema.getMappings()) {
 			me.eAdapters().add(this);
 		}
 	}
-	
+
 	@Override
 	public void aboutToHide() {
 		TopicMapSchema schema = (TopicMapSchema) getModel();
@@ -101,82 +105,81 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 		}
 		super.aboutToHide();
 	}
-	
+
 	@Override
 	public void updateUI() {
-		if (tableViewer==null)
+		if (tableViewer == null)
 			return;
-		
+
 		TopicMapSchema schema = (TopicMapSchema) getModel();
 		tableViewer.setInput(schema.getMappings());
-		
+
 	}
 
 	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
-		
+
 		Composite comp = toolkit.createComposite(parent);
-		comp.setLayout(new GridLayout());
-		
-		createButtonComposite(toolkit, comp);
+		comp.setLayout(new GridLayout(2, false));
+
 		createTableViewer(toolkit, comp);
+		createButtonComposite(toolkit, comp);
 		return comp;
 	}
-	
+
 	@Override
 	protected boolean hasDocumentation() {
 		return false;
 	}
-	
+
 	@Override
 	protected void setEnabled(boolean enabled) {
 		item.getControl().setEnabled(enabled);
 	}
-	
+
 	@Override
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
 		item = new CTabItem(folder, SWT.None);
 		item.setText("Prefixes");
-		item.setControl(createPage(folder));	
+		item.setControl(createPage(folder));
 	}
 
 	private void createButtonComposite(FormToolkit toolkit, Composite parent) {
 		Composite comp = toolkit.createComposite(parent);
-		comp.setLayout(new GridLayout(2, false));
-		GridData gd = new GridData(GridData.END);
-		comp.setLayoutData(gd);
-		
-		gd=new GridData();
-		gd.widthHint = 120;
-		GridDataFactory fac = GridDataFactory.createFrom(gd);
-		
-		addButton = toolkit.createButton(comp, "Add...", SWT.PUSH);
+		comp.setLayout(new GridLayout());
+		comp.setLayoutData(new GridData(GridData.END));
+
+		GridDataFactory fac = GridDataFactory.createFrom(new GridData(SWT.VERTICAL));
+
+		addButton = toolkit.createButton(comp, "", SWT.PUSH);
+		addButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
+		addButton.setToolTipText("Create new Prefix");
 		fac.applyTo(addButton);
-		removeButton = toolkit.createButton(comp, "Remove", SWT.PUSH);
+		removeButton = toolkit.createButton(comp, "", SWT.PUSH);
+		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
+		removeButton.setToolTipText("Remove selected Prefix");
+		removeButton.setEnabled(false);
 		fac.applyTo(removeButton);
-		
+
 		hookAddButtonListener();
 		hookRemoveButtonListener();
-		
+
 	}
 
 	private void hookRemoveButtonListener() {
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				IStructuredSelection sel = (IStructuredSelection) tableViewer
-						.getSelection();
+				IStructuredSelection sel = (IStructuredSelection) tableViewer.getSelection();
 				if (sel.isEmpty())
 					return;
 				MappingElement me = (MappingElement) sel.getFirstElement();
-				getCommandStack().execute(
-						new RemovePrefixMappingCommand(
-								(TopicMapSchema) getModel(), me));
+				getCommandStack().execute(new RemovePrefixMappingCommand((TopicMapSchema) getModel(), me));
 
 			}
 		});
-		
+
 	}
 
 	private void hookAddButtonListener() {
@@ -184,8 +187,7 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Shell shell = addButton.getShell();
-				NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(
-						shell);
+				NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(shell);
 				if (dlg.open() == Dialog.OK) {
 					for (MappingElement me : schema.getMappings()) {
 						if (me.getKey().equals(dlg.getKey())) {
@@ -194,18 +196,16 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 						}
 					}
 					if (PrefixKeyMatcher.isValidKey(dlg.getKey()))
-						getCommandStack().execute(
-								new CreatePrefixMappingCommand(
-										(TopicMapSchema) getModel(), dlg.getKey(),
-										dlg.getUri()));
+						getCommandStack()
+						        .execute(
+						                new CreatePrefixMappingCommand((TopicMapSchema) getModel(), dlg.getKey(), dlg
+						                        .getUri()));
 					else
-						MessageDialog
-								.openError(shell, "invalid key",
-										"You've entered an invalid key!");
+						MessageDialog.openError(shell, "invalid key", "You've entered an invalid key!");
 				}
 			}
 		});
-		
+
 	}
 
 	private void createTableViewer(FormToolkit toolkit, Composite parent) {
@@ -213,44 +213,58 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 		tableComp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		TableColumnLayout layout = new TableColumnLayout();
 		tableComp.setLayout(layout);
-		
-		Table table = toolkit.createTable(tableComp, SWT.BORDER|SWT.FULL_SELECTION);
+
+		Table table = toolkit.createTable(tableComp, SWT.BORDER | SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);
-		
-		
+
 		TableColumn tc = new TableColumn(table, 0);
 		tc.setText("Prefix");
 		layout.setColumnData(tc, new ColumnWeightData(1));
-		
+
 		tc = new TableColumn(table, 0);
 		tc.setText("URI");
 		layout.setColumnData(tc, new ColumnWeightData(1));
-		
+
 		tableViewer = new TableViewer(table);
 		tableViewer.setColumnProperties(columnNames);
-		tableViewer.setCellEditors(new CellEditor[]{new TextCellEditor(table), new TextCellEditor(table)});
+		tableViewer.setCellEditors(new CellEditor[] { new TextCellEditor(table), new TextCellEditor(table) });
 		tableViewer.setContentProvider(new ArrayContentProvider());
 		tableViewer.setLabelProvider(new TableLabelProvider());
 		tableViewer.setCellModifier(new TableCellModifier());
-		
+
+		tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			public void selectionChanged(SelectionChangedEvent event) {
+				if (!(event.getSelection() instanceof IStructuredSelection))
+					return;
+				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
+
+				if (sel.isEmpty())
+					removeButton.setEnabled(false);
+				else
+					removeButton.setEnabled(true);
+
+			}
+		});
+
 	}
 
 	public void notifyChanged(Notification notification) {
-		if (notification.getEventType()==Notification.REMOVING_ADAPTER)
+		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
 			return;
-		
-		if (notification.getEventType()==Notification.ADD) {
+
+		if (notification.getEventType() == Notification.ADD) {
 			if (notification.getNewValue() instanceof MappingElement) {
 				EObject obj = (EObject) notification.getNewValue();
 				obj.eAdapters().add(this);
 			}
-		} else if (notification.getEventType()==Notification.REMOVE) {
+		} else if (notification.getEventType() == Notification.REMOVE) {
 			if (notification.getOldValue() instanceof MappingElement) {
 				EObject obj = (EObject) notification.getOldValue();
 				obj.eAdapters().remove(this);
 			}
 		}
-		
+
 		updateUI();
 	}
 
@@ -262,9 +276,11 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 
 		public String getColumnText(Object element, int columnIndex) {
 			MappingElement me = (MappingElement) element;
-			switch(columnIndex) {
-			case 0: return me.getKey();
-			case 1: return me.getValue();
+			switch (columnIndex) {
+			case 0:
+				return me.getKey();
+			case 1:
+				return me.getValue();
 			}
 			return null;
 		}
@@ -280,9 +296,9 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 		}
 
 		public void removeListener(ILabelProviderListener listener) {
-		}		
+		}
 	}
-	
+
 	private class TableCellModifier implements ICellModifier {
 
 		public boolean canModify(Object element, String property) {
@@ -299,7 +315,7 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 		}
 
 		public void modify(Object element, String property, Object value) {
-			if (value==null)
+			if (value == null)
 				return;
 			MappingElement me = (MappingElement) ((TableItem) element).getData();
 			String key = me.getKey();
@@ -316,13 +332,11 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 			if (PrefixKeyMatcher.isValidKey(key)) {
 				getCommandStack().execute(new ModifyPrefixCommand(me, key, val));
 			} else {
-				MessageDialog
-				.openError(addButton.getShell(), "invalid key",
-						"You've entered an invalid key!");
+				MessageDialog.openError(addButton.getShell(), "invalid key", "You've entered an invalid key!");
 			}
-			
+
 		}
-		
+
 	}
-	
+
 }
