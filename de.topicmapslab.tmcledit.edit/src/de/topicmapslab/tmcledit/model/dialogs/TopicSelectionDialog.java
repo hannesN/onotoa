@@ -142,9 +142,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayout(new GridLayout());
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
-		GridData gd = new GridData();
-		//gd.widthHint = 100;
-		GridDataFactory fac = GridDataFactory.createFrom(gd);
+		GridDataFactory fac = GridDataFactory.createFrom(new GridData());
 
 		addButton = new Button(comp, SWT.PUSH);
 		addButton.setText("");
