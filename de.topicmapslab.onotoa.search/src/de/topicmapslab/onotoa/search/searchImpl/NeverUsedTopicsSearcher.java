@@ -23,6 +23,8 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.ScopeConstraint;
+import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -50,8 +52,13 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 
 		// set for used types
 		Set<TopicType> usedTypesSet = new HashSet<TopicType>();
+		
+		/*
+		 * build a list of all used topics and remove this list from the list of
+		 * all topics of the schema. The remaining ones are the never used ones
+		 */
 
-		// iterate over TopicTypes
+		// iterate over TopicTypes to get uses ones
 		for (TopicType tt : schema.getTopicTypes()) {
 
 			// add constraints from TopicType
@@ -82,6 +89,14 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 				        || ModelIndexer.getTopicIndexer().getUsedAsIsa(tt).size() != 0
 				        || ModelIndexer.getTopicIndexer().getUsedAsAko(tt).size() != 0)
 					usedTypesSet.add(tt);
+
+		}
+
+		// add TopicTypes that are used as scope to used list
+		for (ScopedTopicType stt : ModelIndexer.getTopicIndexer().getScopedTopicTypes()) {
+			for (ScopeConstraint sc : stt.getScope()) {
+				usedTypesSet.add(sc.getType());
+			}
 		}
 
 		// compare usedTypeSet with all types and detect unused types
