@@ -17,6 +17,8 @@ package de.topicmapslab.tmcledit.model.util;
  */
 public interface ImageConstants {
 	
+	public static String ADD_ALL ="./add_all_icon.gif";
+	public static String ADD_ONE ="./add_one_icon.gif";
 	public static String ASSOCIATIONCONSTRAINT = "./associationconstraint.gif";
 	public static String ASSOCIATIONCONSTRAINT_SM = "./associationconstraint_sm.gif";
 	public static String ASSOCIATIONROLECONSTRAINT = "./associationroleconstraint.gif";
@@ -41,12 +43,15 @@ public interface ImageConstants {
 	public static String NAMETYPE_BW = "./nametype_bw.gif";
 	public static String NAMETYPE_SM = "./nametype_sm.gif";
 	public static String NEW = "./new_icon.gif";
+	public static String NEW_TOPICTYPE = "./new_topictype_icon.gif";
 	public static String OCCURRENCECONSTRAINT = "./occurrenceconstraint.gif";
 	public static String OCCURRENCECONSTRAINT_SM = "./occurrenceconstraint_sm.gif";
 	public static String OCCURRENCETYPE = "./occurrencetype.gif";
 	public static String OCCURRENCETYPE_BW = "./occurrencetype_bw.gif";
 	public static String OCCURRENCETYPE_SM = "./occurrencetype_sm.gif";
 	public static String REMOVE = "./remove_icon.gif";
+	public static String REMOVE_ALL = "./remove_all_icon.gif";
+	public static String REMOVE_ONE = "./remove_one_icon.gif";
 	public static String ROLETYPE = "./roletype.gif";
 	public static String ROLETYPE_BW = "./roletype_bw.gif";
 	public static String ROLETYPE_SM = "./roletype_sm.gif";
