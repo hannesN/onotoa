@@ -30,8 +30,10 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -68,6 +70,7 @@ import de.topicmapslab.tmcledit.model.dialogs.NewRoleCombinationConstraintDialog
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.index.TopicIndexer;
+import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.widgets.TypedCardinalityConstraintWidget;
 
@@ -98,20 +101,20 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 
 	@Override
 	protected void setEnabled(boolean enabled) {
-	     super.setEnabled(enabled);
-	     addButton.setEnabled(enabled);
-	     removeButton.setEnabled(enabled);
-	     editButton.setEnabled(enabled);
-	     roleCombinationViewer.getControl().setEnabled(enabled);
-	     control.setEnabled(enabled);
+		super.setEnabled(enabled);
+		addButton.setEnabled(enabled);
+//		removeButton.setEnabled(enabled);
+//		editButton.setEnabled(enabled);
+		roleCombinationViewer.getControl().setEnabled(enabled);
+		control.setEnabled(enabled);
 	}
-	
+
 	@Override
 	public void dispose() {
 		control.dispose();
-	    super.dispose();
+		super.dispose();
 	}
-	
+
 	@Override
 	public void setCommandStack(CommandStack commandStack) {
 		super.setCommandStack(commandStack);
@@ -130,14 +133,14 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 
 				TopicIndexer instance = ModelIndexer.getTopicIndexer();
 				List<TopicType> list = new ArrayList<TopicType>();
-			
-				for (TopicType tt : instance.getTopicTypes()){
-					if(tt.getKind().getValue() == 0 || tt.getKind().getValue() == 3)
+
+				for (TopicType tt : instance.getTopicTypes()) {
+					if (tt.getKind().getValue() == 0 || tt.getKind().getValue() == 3)
 						list.add(tt);
 				}
-				
+
 				for (RoleConstraint rc : getCastedModel().getRoles()) {
-					if (rc.getType()!=null)
+					if (rc.getType() != null)
 						list.remove(rc.getType());
 				}
 
@@ -171,7 +174,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				if (dlg.open() == Dialog.OK) {
 					CompoundCommand cmd = new CompoundCommand();
 					TopicType tt = wizard.getNewTopicType();
-					cmd.append(new CreateTopicTypeCommand((TopicMapSchema)getCastedModel().eContainer(), tt));
+					cmd.append(new CreateTopicTypeCommand((TopicMapSchema) getCastedModel().eContainer(), tt));
 					RoleConstraint rc = ModelFactory.eINSTANCE.createRoleConstraint();
 					rc.setType(tt);
 					rc.setCardMin("1");
@@ -206,19 +209,20 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				NewRoleCombinationConstraintDialog dlg = new NewRoleCombinationConstraintDialog(addButton.getShell(), getCastedModel());
+				NewRoleCombinationConstraintDialog dlg = new NewRoleCombinationConstraintDialog(addButton.getShell(),
+				        getCastedModel());
 				if (dlg.open() == Dialog.OK) {
 					Command cmd = dlg.getCreateCommand();
 					getCommandStack().execute(cmd);
 				}
 			}
 		});
-		
+
 		editButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				startRCCEditing();
-			
+
 			}
 		});
 
@@ -242,7 +246,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	}
 
 	@SuppressWarnings("unchecked")
-    @Override
+	@Override
 	public void notifyChanged(Notification notification) {
 		if (notification.getNotifier() instanceof ScopeConstraint) {
 			if (notification.getFeatureID(TopicType.class) == ModelPackage.ROLE_CONSTRAINT__TYPE) {
@@ -255,31 +259,30 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 			}
 			return;
 		}
-		
-		if (notification.getFeatureID(EList.class)==ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS) {
-			if (notification.getEventType()==Notification.ADD) {
+
+		if (notification.getFeatureID(EList.class) == ModelPackage.ASSOCIATION_TYPE__ROLE_COMBINATIONS) {
+			if (notification.getEventType() == Notification.ADD) {
 				Object n = notification.getNewValue();
 				((EObject) n).eAdapters().add(this);
 			}
-			if (notification.getEventType()==Notification.ADD_MANY) {
+			if (notification.getEventType() == Notification.ADD_MANY) {
 				List<Object> newList = (List<Object>) notification.getNewValue();
 				for (Object n : newList) {
 					((EObject) n).eAdapters().add(this);
 				}
 			}
-			if (notification.getEventType()==Notification.REMOVE) {
+			if (notification.getEventType() == Notification.REMOVE) {
 				Object n = notification.getOldValue();
 				((EObject) n).eAdapters().remove(this);
 			}
-			if (notification.getEventType()==Notification.REMOVE_MANY) {
+			if (notification.getEventType() == Notification.REMOVE_MANY) {
 				List<Object> oldList = (List<Object>) notification.getOldValue();
 				for (Object n : oldList) {
 					((EObject) n).eAdapters().remove(this);
 				}
 			}
 		}
-		
-		
+
 		if (notification.getNotifier() instanceof RoleCombinationConstraint) {
 			roleCombinationViewer.refresh(notification.getNotifier());
 			return;
@@ -287,9 +290,9 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 
 		if (roleCombinationViewer != null)
 			roleCombinationViewer.setInput(getCastedModel().getRoleCombinations());
-		
+
 		super.notifyChanged(notification);
-		
+
 	}
 
 	@Override
@@ -300,8 +303,8 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 					rc.getType().eAdapters().remove(this);
 				rc.eAdapters().remove(this);
 			}
-		
-			for (RoleCombinationConstraint rcc : getCastedModel().getRoleCombinations()) { 
+
+			for (RoleCombinationConstraint rcc : getCastedModel().getRoleCombinations()) {
 				rcc.eAdapters().remove(this);
 			}
 		}
@@ -314,11 +317,11 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				rc.getType().eAdapters().add(this);
 			rc.eAdapters().add(this);
 		}
-		
-		for (RoleCombinationConstraint rcc : getCastedModel().getRoleCombinations()) { 
+
+		for (RoleCombinationConstraint rcc : getCastedModel().getRoleCombinations()) {
 			rcc.eAdapters().add(this);
 		}
-		
+
 		if (roleCombinationViewer != null)
 			roleCombinationViewer.setInput(getCastedModel().getRoleCombinations());
 	}
@@ -357,6 +360,23 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 			}
 		});
 		
+		roleCombinationViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			public void selectionChanged(SelectionChangedEvent event) {
+				if (!(event.getSelection() instanceof IStructuredSelection))
+					return;
+				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
+
+				if (sel.isEmpty()) {
+					removeButton.setEnabled(false);
+					editButton.setEnabled(false);
+				} else {
+					removeButton.setEnabled(true);
+					editButton.setEnabled(true);
+				}
+			}
+		});
+
 		Composite buttonBar = getButtonBar(comp, toolkit);
 		buttonBar.setLayoutData(new GridData(GridData.FILL_VERTICAL));
 
@@ -365,32 +385,39 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 
 	@Override
 	protected void createItems(CTabFolder folder) {
-	    super.createItems(folder);
-	    FormToolkit toolkit = new FormToolkit(folder.getDisplay());
-	    
-	    CTabItem item2 = new CTabItem(folder, SWT.None);
+		super.createItems(folder);
+		FormToolkit toolkit = new FormToolkit(folder.getDisplay());
+
+		CTabItem item2 = new CTabItem(folder, SWT.None);
 		item2.setText("Role Combination Constraints");
 		item2.setControl(getRoleCombinationWidget(folder, toolkit));
-		
+
 		hookButtonListeners();
 	}
-	
+
 	private Composite getButtonBar(Composite parent, FormToolkit toolkit) {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout());
 
 		GridData gd = new GridData();
 		gd.verticalAlignment = SWT.CENTER;
-		gd.widthHint = 80;
 		GridDataFactory fac = GridDataFactory.createFrom(gd);
 
-		addButton = toolkit.createButton(comp, "Add..", SWT.PUSH);
+		addButton = toolkit.createButton(comp, "", SWT.PUSH);
+		addButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
+		addButton.setToolTipText("Create new Role Combination Constraint");
 		fac.applyTo(addButton);
-		
-		editButton = toolkit.createButton(comp, "Edit...", SWT.PUSH);
+
+		editButton = toolkit.createButton(comp, "", SWT.PUSH);
+		editButton.setImage(ImageProvider.getImage(ImageConstants.EDIT));
+		editButton.setToolTipText("Edit selected Role Combination Constraint");
+		editButton.setEnabled(false);
 		fac.applyTo(editButton);
 
-		removeButton = toolkit.createButton(comp, "Remove", SWT.PUSH);
+		removeButton = toolkit.createButton(comp, "", SWT.PUSH);
+		removeButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE));
+		removeButton.setToolTipText("Remove selected Role Combination Constraint");
+		removeButton.setEnabled(false);
 		fac.applyTo(removeButton);
 
 		return comp;
@@ -408,20 +435,20 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	}
 
 	private void startRCCEditing() {
-	    IStructuredSelection sel = (IStructuredSelection) roleCombinationViewer.getSelection();
+		IStructuredSelection sel = (IStructuredSelection) roleCombinationViewer.getSelection();
 
-	    if (sel.isEmpty())
-	    	return;
+		if (sel.isEmpty())
+			return;
 
-	    
-	    RoleCombinationConstraint el = (RoleCombinationConstraint) sel.getFirstElement();
-	    
-	    NewRoleCombinationConstraintDialog dlg = new NewRoleCombinationConstraintDialog(addButton.getShell(), getCastedModel(), el);
-	    if (dlg.open() == Dialog.OK) {
-	    	Command cmd = dlg.getModifyCommand();
-	    	getCommandStack().execute(cmd);
-	    }
-    }
+		RoleCombinationConstraint el = (RoleCombinationConstraint) sel.getFirstElement();
+
+		NewRoleCombinationConstraintDialog dlg = new NewRoleCombinationConstraintDialog(addButton.getShell(),
+		        getCastedModel(), el);
+		if (dlg.open() == Dialog.OK) {
+			Command cmd = dlg.getModifyCommand();
+			getCommandStack().execute(cmd);
+		}
+	}
 
 	private class OtherRoleLabelProvider implements ITableLabelProvider {
 
