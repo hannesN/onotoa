@@ -103,10 +103,18 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	protected void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		addButton.setEnabled(enabled);
-//		removeButton.setEnabled(enabled);
-//		editButton.setEnabled(enabled);
+		removeButton.setEnabled(enabled);
+		editButton.setEnabled(enabled);
 		roleCombinationViewer.getControl().setEnabled(enabled);
 		control.setEnabled(enabled);
+		validate();
+	}
+
+	private void validate() {
+		if (roleCombinationViewer.getSelection().isEmpty()) {
+			removeButton.setEnabled(false);
+			editButton.setEnabled(false);
+		}
 	}
 
 	@Override
@@ -359,7 +367,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 				startRCCEditing();
 			}
 		});
-		
+
 		roleCombinationViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			public void selectionChanged(SelectionChangedEvent event) {
