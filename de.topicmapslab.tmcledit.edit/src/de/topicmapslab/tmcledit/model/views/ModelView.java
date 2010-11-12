@@ -1014,6 +1014,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				} else if (e.keyCode == SWT.DEL) {
 					if (deleteConstructAction.isEnabled()) {
 						deleteConstructAction.run();
+					} else if (deleteDiagramAction.isEnabled()) {
+						deleteDiagramAction.run();
 					}
 					
 					
