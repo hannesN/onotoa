@@ -50,6 +50,8 @@ public class NewPrefixMappingDialog extends Dialog {
 	
 		if (key!=null)
 			keyText.setText(key);
+		if (uri!=null)
+			uriText.setText(uri);
 		
 		return comp;
 	}
@@ -80,4 +82,8 @@ public class NewPrefixMappingDialog extends Dialog {
 	public String getKey() {
 		return key;
 	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+    }
 }

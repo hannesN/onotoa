@@ -39,6 +39,7 @@ public class ModifyPrefix extends ValidationAction {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		NewPrefixMappingDialog dlg = new NewPrefixMappingDialog(shell);
 		dlg.setKey(mappingElement.getKey());
+		dlg.setUri(mappingElement.getValue());
 		if (Dialog.OK==dlg.open()) {
 			ModifyPrefixCommand cmd = new ModifyPrefixCommand(mappingElement, mappingElement.getKey(), dlg.getUri());
 			if (cmd.canExecute()) {
