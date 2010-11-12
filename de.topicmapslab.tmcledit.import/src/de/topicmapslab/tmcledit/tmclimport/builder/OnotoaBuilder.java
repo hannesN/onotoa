@@ -502,13 +502,13 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
     }
 
 	private synchronized void fillData(TopicType tt, Topic arg0) {
-		if (arg0.getNames().size() == 0)
-			throw new RuntimeException("Invalid topic - no name given");
+		String name = null;
+		if (arg0.getNames().size() != 0) {
+			name = arg0.getNames().iterator().next().getValue();
+		}
+
 
 		
-		String name = arg0.getNames().iterator().next().getValue();
-		tt.setName(name);
-
 		for (Locator loc : arg0.getSubjectIdentifiers()) {
 			tt.getIdentifiers().add(loc.toExternalForm());
 		}
@@ -517,6 +517,19 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 			tt.getLocators().add(loc.toExternalForm());
 		}
 
+		if (name == null) {
+			if (!tt.getIdentifiers().isEmpty()) {
+				name = tt.getIdentifiers().get(0);
+			} else {
+				if (!tt.getLocators().isEmpty()) {
+					name = tt.getIdentifiers().get(0);
+				} else {
+					throw new RuntimeException("Topic has neither name, subject identifier nor suvject locator");
+				}
+			}
+		}
+		tt.setName(name);
+		
 		topicTypeMap.put(arg0, tt);
 		file.getTopicMapSchema().getTopicTypes().add(tt);
 	}
