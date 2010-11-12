@@ -40,8 +40,9 @@ public class RemoveNodeCommand extends AbstractCommand {
 	}
 	
 	public void execute() {
-		
-		redo();
+		prepare();
+		diagram.getEdges().removeAll(edgeList);
+		diagram.getNodes().remove(node);
 	}
 	
 	public void redo() {
