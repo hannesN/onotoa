@@ -27,8 +27,10 @@ import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
@@ -65,12 +67,11 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	private Button selectButton;
 	private Button newButton;
 	private Button removeButton;
-	
+
 	private int minCardinality = 0;
 	private int maxCardinality = -1;
-	
+
 	private boolean createLabel;
-	
 
 	private CommandStack commandStack;
 	private List<? extends AbstractTypedCardinalityConstraint> input;
@@ -80,8 +81,9 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack) {
 		this(parent, toolkit, commandStack, true);
 	}
-	
-	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack, boolean createLabel) {
+
+	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack,
+	        boolean createLabel) {
 		this.createLabel = createLabel;
 		this.commandStack = commandStack;
 		createControls(parent, toolkit);
@@ -112,7 +114,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	public void setInput(List<? extends AbstractTypedCardinalityConstraint> input) {
 		for (AbstractTypedCardinalityConstraint tcc : getInput()) {
 			tcc.eAdapters().remove(this);
-			if (tcc.getType()!=null)
+			if (tcc.getType() != null)
 				tcc.getType().eAdapters().remove(this);
 		}
 
@@ -121,10 +123,9 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 		for (AbstractTypedCardinalityConstraint tcc : getInput()) {
 			tcc.eAdapters().add(this);
-			if (tcc.getType()!=null)
+			if (tcc.getType() != null)
 				tcc.getType().eAdapters().add(this);
 		}
-		
 
 	}
 
@@ -136,7 +137,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			gd.verticalAlignment = SWT.TOP;
 			label.setLayoutData(gd);
 		}
-		
+
 		Composite comp = toolkit.createComposite(parent);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
@@ -155,7 +156,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout());
 		comp.setLayoutData(new GridData(GridData.FILL_VERTICAL));
-		
+
 		GridData bgd = new GridData();
 		bgd.verticalAlignment = SWT.CENTER;
 		GridDataFactory fac = GridDataFactory.createFrom(bgd);
@@ -171,7 +172,6 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		newButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
 		newButton.setAlignment(SWT.LEFT);
 		fac.applyTo(newButton);
-		
 
 		removeButton = toolkit.createButton(comp, "", SWT.PUSH);
 		removeButton.setToolTipText("Removing the contraints selected in the table.");
@@ -192,7 +192,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		layout.marginWidth = 0;
 		layout.marginHeight = 0;
 		comp.setLayout(layout);
-		Table table = toolkit.createTable(comp, SWT.BORDER | SWT.FULL_SELECTION|SWT.MULTI);
+		Table table = toolkit.createTable(comp, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
@@ -212,9 +212,21 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		tableViewer.setContentProvider(new ArrayContentProvider());
 		tableViewer.setLabelProvider(new ScopeTableLabelProvider());
 		tableViewer.setCellModifier(new ConstraintCellModifier());
-		
+
 		tableViewer.setSorter(new TypeViewerSorter());
-		
+		tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			public void selectionChanged(SelectionChangedEvent event) {
+
+				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
+				if (sel.isEmpty())
+					removeButton.setEnabled(false);
+				else
+					removeButton.setEnabled(true);
+
+			}
+		});
+
 		return comp;
 	}
 
@@ -227,8 +239,8 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	private CellEditor getTextCellEditor(final boolean isMin) {
 		TextCellEditor editor = new TextCellEditor(tableViewer.getTable());
 		editor.setValidator(new ICellEditorValidator() {
-			boolean min = isMin; 
-			
+			boolean min = isMin;
+
 			public String isValid(Object value) {
 				String val = (String) value;
 				if (val.length() == 0)
@@ -245,36 +257,36 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 						return "use only digits";
 					}
 				}
-				
+
 				int v = Integer.parseInt(val);
 				if (min) {
-					if (v<minCardinality) {
-						return "cardMin must be at least:"+minCardinality;
+					if (v < minCardinality) {
+						return "cardMin must be at least:" + minCardinality;
 					}
 				} else {
-					if ((maxCardinality!=-1) && (v>maxCardinality)) {
-						return "cardMax must be at least:"+maxCardinality;
+					if ((maxCardinality != -1) && (v > maxCardinality)) {
+						return "cardMax must be at least:" + maxCardinality;
 					}
 				}
-				
+
 				return null;
 			}
 		});
-		
+
 		Text text = (Text) editor.getControl();
 		CardTextObserver.addVerifyListener(text, isMin);
-		
+
 		return editor;
 	}
 
 	public EObject getModel() {
-	    IStructuredSelection sel = (IStructuredSelection) tableViewer.getSelection();
-	    if (sel.isEmpty())
-	    	return null;
-	    	
-	    return (EObject) sel.getFirstElement();
+		IStructuredSelection sel = (IStructuredSelection) tableViewer.getSelection();
+		if (sel.isEmpty())
+			return null;
+
+		return (EObject) sel.getFirstElement();
 	}
-	
+
 	public Button getAddButton() {
 		return selectButton;
 	}
@@ -286,14 +298,14 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	public Button getRemoveButton() {
 		return removeButton;
 	}
-	
+
 	public void setMaxCardinality(int maxCardinality) {
-	    this.maxCardinality = maxCardinality;
-    }
-	
+		this.maxCardinality = maxCardinality;
+	}
+
 	public void setMinCardinality(int minCardinality) {
-	    this.minCardinality = minCardinality;
-    }
+		this.minCardinality = minCardinality;
+	}
 
 	private class ConstraintCellModifier implements ICellModifier {
 
@@ -317,11 +329,11 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			TableItem item = (TableItem) element;
 			AbstractTypedCardinalityConstraint constraint = (AbstractTypedCardinalityConstraint) item.getData();
 			boolean isMin = true;
-			
+
 			if (property.equals(TABLE_PROPS[2])) {
 				isMin = false;
 			}
-			
+
 			if (value instanceof String) {
 				try {
 					SetCardinalityCommand cmd = new SetCardinalityCommand(constraint, isMin, (String) value);
@@ -334,14 +346,14 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		}
 
 	}
-	
+
 	private class TypeViewerSorter extends ViewerSorter {
-	
+
 		@Override
 		public int compare(Viewer viewer, Object e1, Object e2) {
 			AbstractTypedCardinalityConstraint tc1 = (AbstractTypedCardinalityConstraint) e1;
 			AbstractTypedCardinalityConstraint tc2 = (AbstractTypedCardinalityConstraint) e2;
-			
+
 			String name1 = tc1.getType().getName();
 			String name2 = tc2.getType().getName();
 			return name1.compareTo(name2);
@@ -358,7 +370,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 			AbstractTypedCardinalityConstraint tc = (AbstractTypedCardinalityConstraint) element;
 			switch (columnIndex) {
 			case 0:
-				return tc.getType()==null ? "tmdm:subject" : tc.getType().getName();
+				return tc.getType() == null ? "tmdm:subject" : tc.getType().getName();
 			case 1:
 				return tc.getCardMin();
 			case 2:
@@ -433,10 +445,19 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	}
 
 	public void setEnabled(boolean enabled) {
-	    selectButton.setEnabled(enabled);
-	    removeButton.setEnabled(enabled);
-	    newButton.setEnabled(enabled);
-	    tableViewer.getControl().setEnabled(enabled);
-    }
+		selectButton.setEnabled(enabled);
+		removeButton.setEnabled(enabled);
+		newButton.setEnabled(enabled);
+		tableViewer.getControl().setEnabled(enabled);
+		validate();
+	}
+
+	private void validate() {
+
+		if (tableViewer.getSelection().isEmpty())
+			removeButton.setEnabled(false);
+		else
+			removeButton.setEnabled(true);
+	}
 
 }
