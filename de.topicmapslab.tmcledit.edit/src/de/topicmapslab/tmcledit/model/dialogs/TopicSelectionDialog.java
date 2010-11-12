@@ -63,12 +63,12 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 
 	private KindOfTopicType kind;
 
-	private Button addButton;
+	private Button addButton, addAllButton;
 
-	private Button removeButton;
+	private Button removeButton, removeAllButton;
 
 	private String title;
-	
+
 	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType) {
 		this(parentShell, workingTopicType, KindOfTopicType.TOPIC_TYPE);
 	}
@@ -93,7 +93,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		availableTopicList.setLabelProvider(new TopicLableProvider());
 		availableTopicList.setInput(ModelIndexer.getTopicIndexer().getTopicTypes());
 		availableTopicList.addDoubleClickListener(new IDoubleClickListener() {
-			
+
 			public void doubleClick(DoubleClickEvent event) {
 				addSelection();
 			}
@@ -129,12 +129,13 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		selectedTopicList.setInput(selectedTopics);
 		selectedTopicList.addSelectionChangedListener(this);
 		selectedTopicList.addDoubleClickListener(new IDoubleClickListener() {
-			
+
 			public void doubleClick(DoubleClickEvent event) {
 				removeSelection();
 			}
 		});
 
+		validate();
 		return comp;
 	}
 
@@ -157,7 +158,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 			}
 		});
 
-		Button addAllButton = new Button(comp, SWT.PUSH);
+		addAllButton = new Button(comp, SWT.PUSH);
 		addAllButton.setText("");
 		addAllButton.setImage(ImageProvider.getImage(ImageConstants.ADD_ALL));
 		addAllButton.addSelectionListener(new SelectionAdapter() {
@@ -167,7 +168,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 			}
 		});
 		addAllButton.setToolTipText("Add all Topics");
-		
+
 		fac.applyTo(addAllButton);
 
 		removeButton = new Button(comp, SWT.PUSH);
@@ -183,7 +184,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 			}
 		});
 
-		Button removeAllButton = new Button(comp, SWT.PUSH);
+		removeAllButton = new Button(comp, SWT.PUSH);
 		removeAllButton.setText("");
 		removeAllButton.setImage(ImageProvider.getImage(ImageConstants.REMOVE_ALL));
 		removeAllButton.addSelectionListener(new SelectionAdapter() {
@@ -222,30 +223,33 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		for (Iterator it = sel.iterator(); it.hasNext();) {
 			selectedTopics.add((TopicType) it.next());
 		}
+		validate();
 		availableTopicList.refresh();
 		selectedTopicList.refresh();
 	}
 
 	@SuppressWarnings("unchecked")
-    private void addAll() {
-		selectedTopics.addAll((Collection<? extends TopicType>) availableTopicList.getInput());		
-		
+	private void addAll() {
+		selectedTopics.addAll((Collection<? extends TopicType>) availableTopicList.getInput());
+		validate();
 		availableTopicList.refresh();
 		selectedTopicList.refresh();
 	}
-	
+
 	private void removeSelection() {
 		IStructuredSelection sel = (IStructuredSelection) selectedTopicList.getSelection();
 		for (Iterator it = sel.iterator(); it.hasNext();) {
 			selectedTopics.remove((TopicType) it.next());
 		}
+		validate();
 		availableTopicList.refresh();
 		selectedTopicList.refresh();
+
 	}
-	
+
 	private void removeAll() {
-		selectedTopics.clear();		
-		
+		selectedTopics.clear();
+		validate();
 		availableTopicList.refresh();
 		selectedTopicList.refresh();
 	}
@@ -277,27 +281,41 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 	}
 
 	public String getTitle() {
-	    return title==null ? "" : title;
-    }
-	
+		return title == null ? "" : title;
+	}
+
 	public void setTitle(String title) {
-	    this.title = title;
-    }
-	
+		this.title = title;
+	}
+
 	public void selectionChanged(SelectionChangedEvent event) {
-	    if (event.getSelectionProvider().equals(availableTopicList)) {
-	    	if (event.getSelection().isEmpty()) {
-	    		addButton.setEnabled(false);
-	    	} else {
-	    		addButton.setEnabled(true);
-	    	}
-	    } else if (event.getSelectionProvider().equals(selectedTopicList)) {
-	    	if (event.getSelection().isEmpty()) {
-	    		removeButton.setEnabled(false);
-	    	} else {
-	    		removeButton.setEnabled(true);
-	    	}
-	    }
-	    
-    }
+		if (event.getSelectionProvider().equals(availableTopicList)) {
+			if (event.getSelection().isEmpty()) {
+				addButton.setEnabled(false);
+			} else {
+				addButton.setEnabled(true);
+			}
+		} else if (event.getSelectionProvider().equals(selectedTopicList)) {
+			if (event.getSelection().isEmpty()) {
+				removeButton.setEnabled(false);
+			} else {
+				removeButton.setEnabled(true);
+			}
+		}
+
+	}
+
+	private void validate() {
+
+		if (selectedTopics.size() <= 0)
+			removeAllButton.setEnabled(false);
+		else
+			removeAllButton.setEnabled(true);
+
+		if (selectedTopics.size() == ((List) availableTopicList.getInput()).size())
+			addAllButton.setEnabled(false);
+		else
+			addAllButton.setEnabled(true);
+
+	}
 }
