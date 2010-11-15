@@ -32,6 +32,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
+import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
@@ -208,12 +209,12 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 	 * @return
 	 */
 	private boolean isValidEditPartModel(Object model) {
-		return  (model instanceof SubjectIdentifierConstraint)
-				|| (model instanceof SubjectLocatorConstraint)
-				|| (model instanceof Edge)
-				|| (model instanceof ScopeConstraint)
-				|| (model instanceof ReifierConstraint)
-				|| (model instanceof Comment);
+		return (model instanceof OccurrenceTypeConstraint)
+		|| (model instanceof NameTypeConstraint)
+		|| (model instanceof ItemIdentifierConstraint)
+		|| (model instanceof SubjectIdentifierConstraint)
+		|| (model instanceof SubjectLocatorConstraint)
+		|| (model instanceof Edge);
 	}
 
 }
