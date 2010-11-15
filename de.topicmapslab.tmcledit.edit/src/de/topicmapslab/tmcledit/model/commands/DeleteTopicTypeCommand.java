@@ -180,7 +180,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 				}
 				for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
 					if (topicType.equals(rpc.getPlayer())) {
-						DeleteRolePlayerConstraintCommand cmd2 = new DeleteRolePlayerConstraintCommand(atc, rpc);
+						DeleteRolePlayerConstraintCommand cmd2 = new DeleteRolePlayerConstraintCommand(rpc);
 						if (cmd2.canExecute())
 							cmds.append(cmd2);
 					}

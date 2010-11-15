@@ -110,6 +110,6 @@ public class DeleteRoleCommand extends AbstractCommand {
 		if (deletePlayerCmds==null)
 			deletePlayerCmds = new LinkedList<DeleteRolePlayerConstraintCommand>();
 		
-		deletePlayerCmds.add(new DeleteRolePlayerConstraintCommand(atc, rpc));
+		deletePlayerCmds.add(new DeleteRolePlayerConstraintCommand(rpc));
 	}
 }

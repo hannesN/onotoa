@@ -16,7 +16,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.NodeEditPart;
@@ -28,30 +27,21 @@ import de.topicmapslab.tmcledit.diagram.action.AbstractSelectionAction;
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.AssociationNode;
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
-import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.ReifiableTopicType;
-import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
-import de.topicmapslab.tmcledit.model.ScopeConstraint;
-import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.DeleteAssociationConstraintCommand;
-import de.topicmapslab.tmcledit.model.commands.DeleteCommentCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteRolePlayerConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemCommand;
-import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
-import de.topicmapslab.tmcledit.model.commands.RemoveScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
@@ -112,14 +102,9 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		} else if (model instanceof AssociationNode) {
 			cmd = new DeleteAssociationConstraintCommand(
 					((AssociationNode) model).getAssociationConstraint());
-		} else if (model instanceof Comment) {
-			cmd = new DeleteCommentCommand((Comment) model);
-		} else if (model instanceof ReifierConstraint) {
-			ReifiableTopicType rtt = (ReifiableTopicType) ((EObject) model).eContainer();
-			cmd = new GenericSetCommand(rtt, ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT, null);
-		} else if (model instanceof ScopeConstraint) {
-			ScopeConstraint sc = (ScopeConstraint) model;
-			cmd = new RemoveScopeConstraintsCommand((ScopedTopicType) sc.eContainer(), sc);
+		} else if (model instanceof RolePlayerConstraint) {
+			RolePlayerConstraint rpc = (RolePlayerConstraint) model;
+			cmd = new DeleteRolePlayerConstraintCommand(rpc);
 		} else if (model instanceof AbstractConstraint) {
 			cmd = getDeleteTopicTypeConstraintItemCommand(model);
 		}
@@ -131,9 +116,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		Edge edge = (Edge) model;
 		RolePlayerConstraint roleConstraint = edge.getRoleConstraint();
 		if (roleConstraint != null) {
-			return new DeleteRolePlayerConstraintCommand(
-					(AssociationTypeConstraint) roleConstraint.eContainer(),
-					roleConstraint);
+			return new DeleteRolePlayerConstraintCommand(roleConstraint);
 		} else {
 			if (edge.getType() != EdgeType.ROLE_CONSTRAINT_TYPE) {
 				TopicType source = ((TypeNode) edge.getSource()).getTopicType();
@@ -214,6 +197,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		|| (model instanceof ItemIdentifierConstraint)
 		|| (model instanceof SubjectIdentifierConstraint)
 		|| (model instanceof SubjectLocatorConstraint)
+		|| (model instanceof RolePlayerConstraint)
 		|| (model instanceof Edge);
 	}
 
