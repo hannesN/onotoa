@@ -248,6 +248,7 @@ litigation.
       <feature id="de.topicmapslab.genericeditorsdk.codegenerator_feature"/>
       <feature id="de.topicmapslab.kuria_feature"/>
       <feature id="org.eclipse.gmf.runtime.thirdparty" version="1.4.0.v20100521-1113-7P8W5FHV2CNOiy0niXURaw311A16"/>
+      <feature id="org.eclipse.help" version="1.2.0.v20100427-7e7jEQFEp4jsWcboLU9l93"/>
    </features>
 
    <configurations>

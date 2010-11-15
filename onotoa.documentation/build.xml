@@ -15,7 +15,7 @@
 	      - Configure basic properties that will be used in the file.
 	      -->
 	<!-- libs-->
-	<property name="docbook.xsl.dir" value="lib/docbook-xsl-1.75.2" />
+	<property name="docbook.xsl.dir" value="lib/docbook-xsl-1.76.1" />
 	<property name="html.stylesheet" value="${docbook.xsl.dir}/html/docbook.xsl" />
 	<property name="fo.stylesheet" value="lib/mydocbook/docbook.xsl" />
 	<property name="xalan.lib.dir" value="lib/" />

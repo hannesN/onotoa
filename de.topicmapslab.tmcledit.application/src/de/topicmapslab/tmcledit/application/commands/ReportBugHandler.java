@@ -10,9 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.application.commands;
 
-import java.awt.Desktop;
-import java.net.URI;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -28,6 +25,8 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import de.topicmapslab.tmcledit.model.util.BrowserUtil;
+
 /**
  * @author bosso
  *
@@ -38,10 +37,6 @@ public class ReportBugHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		
-//		MessageDialog.openInformation(HandlerUtil.getActiveShell(event), "Report a Bug...", 
-//			"Please report your bug at "+uriString);
-		
 		new Message(HandlerUtil.getActiveShell(event)).open();
 		
 		return null;
@@ -71,8 +66,9 @@ public class ReportBugHandler extends AbstractHandler {
 			l.setText("<a>"+URI+"</a>");
 			l.addListener(SWT.Selection, new Listener() {
 				public void handleEvent(Event event) {
+					
 					try {
-						Desktop.getDesktop().browse(new URI(URI));
+						BrowserUtil.openLink(getShell(), URI);
 					} catch (Exception e) {
 						MessageDialog.openError(getShell(),
 								"Can't open browser", 
