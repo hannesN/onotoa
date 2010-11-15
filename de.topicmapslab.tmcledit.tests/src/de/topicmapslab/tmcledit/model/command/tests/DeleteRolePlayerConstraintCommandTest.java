@@ -160,8 +160,7 @@ public class DeleteRolePlayerConstraintCommandTest {
 		ModelIndexer.createInstance(file);
 
 		if (command == null)
-			command = new DeleteRolePlayerConstraintCommand(
-					associationTypeConstraint, rolePlayerConstraint0);
+			command = new DeleteRolePlayerConstraintCommand(rolePlayerConstraint0);
 
 	}
 

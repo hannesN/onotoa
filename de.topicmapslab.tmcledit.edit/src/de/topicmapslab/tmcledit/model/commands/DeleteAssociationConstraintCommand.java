@@ -96,7 +96,7 @@ public class DeleteAssociationConstraintCommand extends AbstractCommand {
 		
 		
 		for (RolePlayerConstraint rpc : constraint.getPlayerConstraints()) {
-			DeleteRolePlayerConstraintCommand cmd = new DeleteRolePlayerConstraintCommand(constraint, rpc);
+			DeleteRolePlayerConstraintCommand cmd = new DeleteRolePlayerConstraintCommand(rpc);
 			this.cmd.appendIfCanExecute(cmd);
 		}
 		

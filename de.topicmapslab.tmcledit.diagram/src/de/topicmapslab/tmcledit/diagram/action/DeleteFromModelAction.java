@@ -26,7 +26,6 @@ import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.model.AbstractConstraint;
 import de.topicmapslab.tmcledit.model.AssociationNode;
-import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
@@ -130,9 +129,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		Edge edge = (Edge) model;
 		RolePlayerConstraint roleConstraint = edge.getRoleConstraint();
 		if (roleConstraint != null) {
-			return new DeleteRolePlayerConstraintCommand(
-					(AssociationTypeConstraint) roleConstraint.eContainer(),
-					roleConstraint);
+			return new DeleteRolePlayerConstraintCommand(roleConstraint);
 		} else {
 			if (edge.getType() != EdgeType.ROLE_CONSTRAINT_TYPE) {
 				TopicType source = ((TypeNode) edge.getSource()).getTopicType();

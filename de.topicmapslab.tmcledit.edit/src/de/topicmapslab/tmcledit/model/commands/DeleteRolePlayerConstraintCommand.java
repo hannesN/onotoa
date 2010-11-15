@@ -27,33 +27,37 @@ import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
- * Command to delete a role player constraint. The {@link #execute()} method will re-call {@link #prepare()} to make sure the model hasn't changed.
- * Changes can occure if this command is part of a {@link CompoundCommand}. If the constraint was already removed by another command 
- * this command does nothing.
+ * Command to delete a role player constraint. The {@link #execute()} method
+ * will re-call {@link #prepare()} to make sure the model hasn't changed.
+ * Changes can occure if this command is part of a {@link CompoundCommand}. If
+ * the constraint was already removed by another command this command does
+ * nothing.
  * 
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 
 	private final AssociationTypeConstraint associationTypeConstraint;
 	private final RolePlayerConstraint rolePlayerConstraint;
-	
-	private Map<Diagram, Edge>  edgeMap = null;
-	private Map<Diagram, Integer> indexMap  = null;
-	
+
+	private Map<Diagram, Edge> edgeMap = null;
+	private Map<Diagram, Integer> indexMap = null;
+
 	private int contraintIndex;
-	
-	public DeleteRolePlayerConstraintCommand(
-			AssociationTypeConstraint associationTypeConstraint,
-			RolePlayerConstraint RolePlayerConstraint) {
+
+	public DeleteRolePlayerConstraintCommand(RolePlayerConstraint rolePlayerConstraint) {
 		super();
-		this.associationTypeConstraint = associationTypeConstraint;
-		this.rolePlayerConstraint = RolePlayerConstraint;
+
+		assert (rolePlayerConstraint != null);
+		assert (rolePlayerConstraint.eContainer() != null);
+
+		this.associationTypeConstraint = (AssociationTypeConstraint) rolePlayerConstraint.eContainer();
+		this.rolePlayerConstraint = rolePlayerConstraint;
 	}
 
 	public void execute() {
-		
+
 		prepare();
 		if (!isPrepared)
 			return;
@@ -66,7 +70,7 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 	public void redo() {
 		if (!isPrepared)
 			return;
-		
+
 		for (Diagram d : getEdgeMap().keySet()) {
 			d.getEdges().remove(getEdgeMap().get(d));
 		}
@@ -77,7 +81,7 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 	public void undo() {
 		if (!isPrepared)
 			return;
-		
+
 		EList<RolePlayerConstraint> tmp = associationTypeConstraint.getPlayerConstraints();
 		tmp.add(contraintIndex, rolePlayerConstraint);
 		for (Diagram d : getEdgeMap().keySet()) {
@@ -85,21 +89,22 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 			d.getEdges().add(idx, getEdgeMap().get(d));
 		}
 	}
-	
+
 	@Override
 	protected boolean prepare() {
 		contraintIndex = associationTypeConstraint.getPlayerConstraints().indexOf(rolePlayerConstraint);
-		if (contraintIndex==-1) {
-			this.isPrepared=false;
+		if (contraintIndex == -1) {
+			this.isPrepared = false;
 			return false;
 		}
 		edgeMap = null;
 		indexMap = null;
-		
+
 		for (Diagram d : ModelIndexer.getInstance().getDiagrams()) {
-			AssociationNode node = (AssociationNode) ModelIndexer.getNodeIndexer().getNodeFor(associationTypeConstraint, d);
-			
-			if (node!=null) {
+			AssociationNode node = (AssociationNode) ModelIndexer.getNodeIndexer().getNodeFor(
+			        associationTypeConstraint, d);
+
+			if (node != null) {
 				for (Edge e : ModelIndexer.getNodeIndexer().getEdges(d, EdgeType.ROLE_CONSTRAINT_TYPE)) {
 					if (e.getRoleConstraint().equals(rolePlayerConstraint)) {
 						addEdge(d, e);
@@ -107,37 +112,36 @@ public class DeleteRolePlayerConstraintCommand extends AbstractCommand {
 				}
 			}
 		}
-		
-		
+
 		return true;
 	}
 
 	private void addEdge(Diagram d, Edge e) {
-		if (edgeMap==null) {
+		if (edgeMap == null) {
 			edgeMap = new HashMap<Diagram, Edge>();
 		}
 		edgeMap.put(d, e);
 		addIndex(d, d.getEdges().indexOf(e));
 	}
-	
+
 	private void addIndex(Diagram d, int idx) {
 		if (indexMap == null) {
 			indexMap = new HashMap<Diagram, Integer>();
 		}
 		indexMap.put(d, idx);
 	}
-	
+
 	private Map<Diagram, Integer> getIndexMap() {
-		if (indexMap==null)
-	    	return Collections.emptyMap();
-		
+		if (indexMap == null)
+			return Collections.emptyMap();
+
 		return indexMap;
-    }
-	
+	}
+
 	private Map<Diagram, Edge> getEdgeMap() {
-	    if (edgeMap==null)
-	    	return Collections.emptyMap();
-		
+		if (edgeMap == null)
+			return Collections.emptyMap();
+
 		return edgeMap;
-    }
+	}
 }
