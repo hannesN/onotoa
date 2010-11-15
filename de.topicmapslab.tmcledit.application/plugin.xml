@@ -21,6 +21,10 @@
                name="windowImages"
                value="icons/onotoa_16_16.png,icons/onotoa_32_32.png,icons/onotoa_48_48.png,icons/onotoa_64_64.png,icons/onotoa_128_128.png"> 
          </property>
+         <property
+               name="aboutText"
+               value="%aboutText">
+         </property>
       </product> 
    </extension> 
    <extension 
