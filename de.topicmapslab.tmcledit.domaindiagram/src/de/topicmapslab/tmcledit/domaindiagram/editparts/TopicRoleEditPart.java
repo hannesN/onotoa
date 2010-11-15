@@ -127,7 +127,7 @@ public class TopicRoleEditPart extends AbstractLabelEditPart implements
 		data.role = null;
 		data.schema = getTopicMapSchema();
 
-		subMenu.add(new SetRoleAction(data));
+		subMenu.add(new SetRoleAction(data, true));
 		
 		List <SetRoleData> dataList = new ArrayList<SetRoleData>();
 		for (TopicType tt : getTopicMapSchema().getTopicTypes()) {
