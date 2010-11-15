@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="de.topicmapslab.tmcledit.tmclimport.onotoa"
+            name="Onotoa">
+      </category>
+      <wizard
+            category="de.topicmapslab.tmcledit.tmclimport.onotoa"
+            class="de.topicmapslab.tmcledit.tmclimport.wizards.ImportWizard"
+            icon="icons/sample.gif"
+            id="de.topicmapslab.tmcledit.tmclimport.wizards.ImportWizard"
+            name="Import TMCL schema">
+         <description>
+            Import a TMCL Topic Map into Onotoa
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

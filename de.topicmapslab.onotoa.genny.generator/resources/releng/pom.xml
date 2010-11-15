@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>$pluginId</groupId>
+	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>parent-project</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>../$pluginId</module>
+		<module>../$pluginId-application</module>
+		<module>../$pluginId-feature</module>
+	</modules>
+
+	<properties>
+		<tycho-version>0.10.0</tycho-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+					<target>
+						<artifact>
+							<groupId>$pluginId</groupId>
+							<version>1.0.0-SNAPSHOT</version>
+							<classifier>$name_target_e36</classifier>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>helios update site</id>
+			<layout>p2</layout>
+			<url>http://mirror.topicmapslab.de/update/helios</url>
+		</repository>
+		<repository>
+            <id>babel update site for helios</id>
+            <layout>p2</layout>
+            <url>http://mirror.topicmapslab.de/update/babel_helios</url>
+        </repository>
+		<repository>
+			<id>TMLab update</id>
+			<layout>p2</layout>
+			<url>http://update.topicmapslab.de</url>
+		</repository>
+		<repository>
+			<id>Genny update</id>
+			<layout>p2</layout>
+			<url>http://genny.topicmapslab.de/update</url>
+		</repository>
+	</repositories>
+</project>
