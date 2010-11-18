@@ -630,6 +630,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     			mve.getProvider().close();
     	}
 		
+    	TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(new StructuredSelection(), this);
+    	
 		firePropertyChange(PROP_DIRTY);
 		updateActions();
 		viewer.refresh();
