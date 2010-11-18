@@ -4,6 +4,7 @@
 package de.topicmapslab.tmcledit.tmclimport.builder;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -11,7 +12,10 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
 import org.tmapi.core.Locator;
@@ -43,6 +47,7 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
+import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
@@ -497,6 +502,10 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
     	 * load topic map from file
     	 */
     	if (filename.endsWith(".ctm")) {
+    		// import prefixes
+    		
+    		importPrefix(filename);
+    		
     		CTMTopicMapReader reader = new CTMTopicMapReader(topicMap, is, docIri);
     		reader.read();
     	} else if (filename.endsWith(".xtm") || filename.endsWith(".xtm20")) {
@@ -504,6 +513,37 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
     		reader.read();
     	}
     	return topicMap;
+    }
+
+	private void importPrefix(String filename) {
+	    
+		try {
+	        Pattern p = Pattern.compile("%prefix\\s+(\\w+)\\s+<?([^<>\\r\\n]+)>?");
+	        
+	        Scanner scanner = new Scanner(new FileInputStream(filename));
+	        scanner.findInLine(p);
+	        scanner.useDelimiter(System.getProperty("line.separator"));
+	        while (scanner.hasNext()) {
+	        	String line = scanner.next();
+	        	Matcher matcher = p.matcher(line.trim());
+	        	if (matcher.matches()) {
+	        		MappingElement me = modelFactory.createMappingElement();
+	        		me.setKey(matcher.group(1));
+	        		me.setValue(matcher.group(2));
+	        		file.getTopicMapSchema().getMappings().add(me);
+	        		
+	        		System.out.println(me);
+	        	}
+	        	
+	        }
+        } catch (FileNotFoundException e) {
+	       return;
+        }
+		
+	    
+	    
+	    
+	    
     }
 
 	private AssociationTypeConstraint findAssociationConstraint(AssociationType at) {
