@@ -295,6 +295,9 @@ public class TMCLTopicMapBuilder {
 				}
 				schema.addType(createTopic(SCHEMA));
 				
+				if ((topicMapSchema.getName()!=null) && (topicMapSchema.getName().length()>0)) {
+					schema.createName(topicMapSchema.getName());
+				}
 			}
 			
 			createTopicTypes();
