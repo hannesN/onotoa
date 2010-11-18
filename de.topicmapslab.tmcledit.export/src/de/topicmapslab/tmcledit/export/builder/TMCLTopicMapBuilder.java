@@ -265,6 +265,7 @@ public class TMCLTopicMapBuilder {
 			if (exportAnnotations) {
 				annotationType = topicMap.createTopicBySubjectIdentifier(topicMap.createLocator(ANNOTATION_PREFIX));
 				annotationType.createName("Onotoa Annotation");
+				annotationType.addType(getTopicType(KindOfTopicType.TOPIC_TYPE));
 				
 				// create reifier for topic map for schema annotations
 				Topic reifier = topicMap.createTopicBySubjectIdentifier(topicMap.createLocator("http://onotoa.topicmapslab.de/schemareifier"));
