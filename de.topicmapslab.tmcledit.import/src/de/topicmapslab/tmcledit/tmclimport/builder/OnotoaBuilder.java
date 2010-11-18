@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.tmapi.core.Locator;
+import org.tmapi.core.Name;
+import org.tmapi.core.Occurrence;
 import org.tmapi.core.TMAPIException;
 import org.tmapi.core.Topic;
 import org.tmapi.core.TopicMap;
@@ -67,6 +70,8 @@ import de.topicmapslab.tmcledit.tmclimport.Activator;
 public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListener, INameTypeConstraintsListener,
         IOccurrenceTypeConstraintsListener, IAssociationTypeConstraintsListener, IRoleTypeConstraintsListener {
 
+	private static final String TMCL_PREFIX = "http://psi.topicmaps.org/tmcl/";
+	
 	private final String filename;
 
 	private File file;
@@ -91,6 +96,29 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 				throw new RuntimeException(e);
 			}
 		return file;
+	}
+	
+	public void schemaElement(Topic schemaTopic) {
+		Set<Name> nameSet = schemaTopic.getNames();
+		if (!nameSet.isEmpty())
+			file.getTopicMapSchema().setName(nameSet.iterator().next().getValue());
+		
+		// get schema resource if exists
+		TopicMap tm = schemaTopic.getParent();
+		Topic type = tm.getTopicBySubjectIdentifier(tm.createLocator(TMCL_PREFIX+"schema-resource"));
+		if (type!=null) {
+			for (Occurrence o : schemaTopic.getOccurrences(type)) {
+				file.getTopicMapSchema().setSchemaResource(o.getValue());
+			}
+		}
+
+		// get schema version if exists
+		type = tm.getTopicBySubjectIdentifier(tm.createLocator(TMCL_PREFIX+"version"));
+		if (type!=null) {
+			for (Occurrence o : schemaTopic.getOccurrences(type)) {
+				file.getTopicMapSchema().setVersion(o.getValue());
+			}
+		}
 	}
 
 	public void subjectIdentifierConstraintElement(Topic type, String arg1, String arg2, String arg3) {
