@@ -14,13 +14,13 @@ import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -38,7 +38,7 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 	private Label playerLabel;
 	private Text cardMinText;
 	private Text cardMaxText;
-	private Combo roleCombo;
+	private CCombo roleCombo;
 	private CTabItem item;
 
 	private AssociationTypeModelPage assPage;
@@ -108,7 +108,7 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 		playerLabel.setBackground(comp.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 
 		toolkit.createLabel(comp, "Role:");
-		roleCombo = new Combo(comp, SWT.BORDER);
+		roleCombo = new CCombo(comp, SWT.BORDER);
 		roleCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		toolkit.adapt(roleCombo);
 
