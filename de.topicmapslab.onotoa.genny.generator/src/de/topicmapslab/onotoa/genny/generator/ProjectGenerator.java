@@ -127,8 +127,16 @@ public class ProjectGenerator {
 		// String[] cmd = new String[] { data.getMavenpath()+"/bin/mvn",
 		// "package" };
 
+		String osName = System.getProperty("os.name");
+		String javaHome = System.getProperty("java.home");
+		
 		ProcessBuilder pb = new ProcessBuilder(data.getMavenpath() + "/bin/mvn", "--update-snapshots", "package");
+		if (osName.toLowerCase().startsWith("windows")) {
+			pb = new ProcessBuilder("cmd.exe", "/C", data.getMavenpath() + "/bin/mvn", "--update-snapshots", "package");
+		} 
+				
 		pb.environment().put("MAVEN_OPTS", data.getMavenOpts());
+		pb.environment().put("JAVA_HOME", javaHome);
 		pb.directory(dir);
 
 		final Process p = pb.start();

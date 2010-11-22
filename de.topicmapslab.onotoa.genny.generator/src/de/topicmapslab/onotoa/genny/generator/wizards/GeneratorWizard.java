@@ -4,7 +4,10 @@
 package de.topicmapslab.onotoa.genny.generator.wizards;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map.Entry;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -107,8 +110,21 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 		
 		ProcessInputReader pir = null;
 		try {
-	        String cmd[] = new String[] {f.getAbsolutePath(), "--version"};
-	        Process p = Runtime.getRuntime().exec(cmd, null);
+			String osName = System.getProperty("os.name");
+			String javaHome = System.getProperty("java.home");
+			
+			String cmd[] = new String[] {f.getAbsolutePath(), "--version"};
+			if (osName.toLowerCase().startsWith("windows")) {
+				cmd = new String[] {"cmd.exe", "/C", f.getAbsolutePath(), "--version"};
+			} 
+			
+			List<String> envs = new ArrayList<String>();
+			for (Entry<String, String> e : System.getenv().entrySet()) {
+				envs.add(e.getKey()+"="+e.getValue());
+			}
+			envs.add("JAVA_HOME="+javaHome);
+			
+	        Process p = Runtime.getRuntime().exec(cmd, envs.toArray(new String[envs.size()]));
 	        
 	        ProcessListener pl = new ProcessListener();
 			pir = new ProcessInputReader(p, pl);
@@ -120,6 +136,7 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 	        return pl.isCorrectVersion();
 	        
         } catch (Exception e) {
+        	Activator.logException(e);
         	return false;
         } finally {
         	// t be sure we don't produce zombies
@@ -194,6 +211,7 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 		
 		@Override
 		public void newText(String text) {
+			System.out.println("***"+text);
 			if (text.contains("Apache Maven 3"))
 				correctVersion = true;		    
 		}
