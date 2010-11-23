@@ -26,6 +26,13 @@ import de.topicmapslab.tmcledit.model.commands.CreateDomainDiagramCommand;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Action to create a new domain diagram, used in the context menu of the
+ * {@link ModelView}
+ * 
+ * @author Hannes Niederhausen
+ * 
+ */
 public class CreateDomainDiagramAction extends Action {
 	/**
 	 * 
@@ -39,11 +46,17 @@ public class CreateDomainDiagramAction extends Action {
 		this.modelView = modelView;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getText() {
 		return "Create New Domain Diagram...";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		final File file = (File) modelView.getCurrentTopicMapSchema().eContainer();

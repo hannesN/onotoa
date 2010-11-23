@@ -17,7 +17,9 @@ import de.topicmapslab.tmcledit.model.commands.CreateAnnotationCommand;
 import de.topicmapslab.tmcledit.model.validation.actions.ValidationAction;
 
 /**
- * @author Adds a string to the ignore prefix annotation
+ *  Adds a string to the ignore prefix annotation
+ * 
+ * @author Hannes Niederhausen
  *
  */
 public class IgnorePrefixAction extends ValidationAction {
@@ -26,7 +28,14 @@ public class IgnorePrefixAction extends ValidationAction {
 	private final String prefix;
 	
 	
-	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param cmdStack the {@link CommandStack} used to execute the operations
+	 * @param schema the {@link TopicMapSchema} which contains the prefix
+	 * @param prefix the prefix to ignore
+	 */
 	public IgnorePrefixAction(CommandStack cmdStack, TopicMapSchema schema, String prefix) {
 		super(cmdStack);
 		setText("Ignore..");
@@ -34,6 +43,9 @@ public class IgnorePrefixAction extends ValidationAction {
 		this.prefix = prefix;
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 	    getCommandStack().execute(new CreateAnnotationCommand(schema, "validator.ignoreprefix", prefix));

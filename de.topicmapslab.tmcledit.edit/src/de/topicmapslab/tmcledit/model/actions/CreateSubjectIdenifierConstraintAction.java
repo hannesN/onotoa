@@ -16,16 +16,26 @@ import de.topicmapslab.tmcledit.model.commands.CreateSubjectIdentifierConstraint
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * 
+ * Action to create a new subject identifier constraint in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class CreateSubjectIdenifierConstraintAction extends AbstractCreateConstraintAction {
 
+	/**
+	 * 
+	 * @param view the {@link ModelView}
+	 */
 	public CreateSubjectIdenifierConstraintAction(ModelView view) {
 	    super(view);
 	    setText("Create &Subject Identifier Constraint...");
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected Command getCommand() {
 		return new CreateSubjectIdentifierConstraintCommand(getTopicType());

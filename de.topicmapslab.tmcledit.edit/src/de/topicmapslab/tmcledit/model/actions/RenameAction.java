@@ -15,17 +15,26 @@ import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 
 
 /**
+ * Action to rename a construct shown in a node in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class RenameAction extends AbstractTreeListenerAction {
 
+	/**
+	 * 
+	 * @param view the {@link ModelView}
+	 */
 	public RenameAction(ModelView view) {
 	    super(view);
 	    setText("Rename...");
 	    setId("rename");
     }
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	protected void setTreeObject(TreeObject treeObject) {
 	    super.setTreeObject(treeObject);
 	    if ( (treeObject==null) || (!treeObject.canHandleRename()) )
@@ -35,6 +44,9 @@ public class RenameAction extends AbstractTreeListenerAction {
 	    
     }
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		getTreeObject().handleRename();

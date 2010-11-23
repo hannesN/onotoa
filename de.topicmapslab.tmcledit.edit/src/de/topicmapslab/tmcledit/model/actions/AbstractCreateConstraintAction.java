@@ -31,16 +31,28 @@ public abstract class AbstractCreateConstraintAction extends Action implements I
 	private TopicType topicType;
 	private ModelView view;
 
+	/**
+	 * 
+	 * @param view the {@link ModelView} 
+	 */
 	public AbstractCreateConstraintAction(ModelView view) {
 		this.view = view;
 		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
 	}
 
+	/**
+	 * Sets the topic type which will be the container of the constraint.
+	 * 
+	 * @param topicType the container of the constraint
+	 */
 	public void setTopicType(TopicType topicType) {
 		this.topicType = topicType;
 		setEnabled(topicType != null);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		view.getEditingDomain().getCommandStack().execute(getCommand());
@@ -50,6 +62,9 @@ public abstract class AbstractCreateConstraintAction extends Action implements I
 		return topicType;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void selectionChanged(SelectionChangedEvent event) {
 		TopicType tt = null;
 		if ((!event.getSelection().isEmpty()) || ((event.getSelection() instanceof IStructuredSelection))) {

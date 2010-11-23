@@ -16,16 +16,25 @@ import de.topicmapslab.tmcledit.model.commands.CreateNameTypeConstraintCommand;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Action to create a new name constraint in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class CreateNameConstraintAction extends AbstractCreateConstraintAction {
 
+	/**
+	 * 
+	 * @param view the {@link ModelView}
+	 */
 	public CreateNameConstraintAction(ModelView view) {
 	    super(view);
 	    setText("Create &Name Constraint...");
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected Command getCommand() {
 		return new CreateNameTypeConstraintCommand(getTopicType());

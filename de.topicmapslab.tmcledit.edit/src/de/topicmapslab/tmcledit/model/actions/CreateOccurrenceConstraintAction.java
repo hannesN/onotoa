@@ -16,16 +16,25 @@ import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Action to create a new occurrence constraint in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class CreateOccurrenceConstraintAction extends AbstractCreateConstraintAction {
 
+	/**
+	 * 
+	 * @param view the {@link ModelView}
+	 */
 	public CreateOccurrenceConstraintAction(ModelView view) {
 	    super(view);
 	    setText("Create &Occurrence Constraint...");
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected Command getCommand() {
 		return new CreateOccurrenceConstraintCommand(getTopicType());

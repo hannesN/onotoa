@@ -23,6 +23,11 @@ import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 
+/**
+ * 
+ * @author niederhausen
+ *
+ */
 public class CreateTopicAction extends AbstractTreeListenerAction {
 	private KindOfTopicType kindOfTopicType;
 
@@ -34,6 +39,11 @@ public class CreateTopicAction extends AbstractTreeListenerAction {
 		setText("Create Topic Type...");
 	}
 
+	/**
+	 * Sets the kind of topic to create
+	 * 
+	 * @param kindOfTopicType
+	 */
 	public void setKindOfTopicType(KindOfTopicType kindOfTopicType) {
 		this.kindOfTopicType = kindOfTopicType;
 		if (kindOfTopicType != null)
@@ -42,7 +52,7 @@ public class CreateTopicAction extends AbstractTreeListenerAction {
 	}
 
 	private void setEnabled() {
-		if ((getTreeObject() == null) || (getTreeObject().getModel() != null) || (kindOfTopicType == null))
+		if ((getTreeObject() == null) || (!(getTreeObject().getModel() instanceof String)) || (kindOfTopicType == null))
 			setEnabled(false);
 		else {
 			setEnabled(true);

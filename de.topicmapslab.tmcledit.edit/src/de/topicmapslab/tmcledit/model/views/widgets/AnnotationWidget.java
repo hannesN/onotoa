@@ -85,11 +85,21 @@ public class AnnotationWidget extends Composite {
 	private Button removeButton;
 	private int newCounter;
 
+	/**
+	 * 
+	 * @param parent the parent widget
+	 * @param style the widget style
+	 * @param toolkit the {@link FormToolkit} to create the widgets
+	 */
 	public AnnotationWidget(Composite parent, int style, FormToolkit toolkit) {
 		this(parent, style);
 		this.toolkit = toolkit;
 	}
 
+	/**
+	 * @param parent the parent widget
+	 * @param style the widget style
+	 */
 	public AnnotationWidget(Composite parent, int style) {
 		super(parent, style);
 		adapter = new Adapter();
@@ -248,6 +258,11 @@ public class AnnotationWidget extends Composite {
 		return null;
 	}
 
+	/**
+	 * Sets the model for the widget.
+	 * 
+	 * @param model the model which should be an instance of {@link TMCLConstruct}
+	 */
 	public void setModel(Object model) {
 		if (this.model != null) {
 			this.model.eAdapters().remove(adapter);
@@ -541,6 +556,10 @@ public class AnnotationWidget extends Composite {
 		}
 	}
 
+	/**
+	 * Sets the {@link CommandStack} for the operations created in this widget
+	 * @param commandStack the {@link CommandStack} 
+	 */
 	public void setCommandStack(CommandStack commandStack) {
 		cmdStack = commandStack;
 	}

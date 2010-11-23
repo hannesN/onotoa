@@ -21,6 +21,9 @@ import org.eclipse.ui.actions.ActionFactory;
  */
 public class UndoActionWrapper extends UndoAction implements UpdateAction {
 
+	/**
+	 * Constructor which sets the id to {@link ActionFactory.UNDO.getId()}
+	 */
 	public UndoActionWrapper() {
 		setId(ActionFactory.UNDO.getId());
 	}

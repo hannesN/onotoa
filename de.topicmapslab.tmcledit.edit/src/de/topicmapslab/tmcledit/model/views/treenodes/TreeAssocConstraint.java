@@ -30,6 +30,11 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  */
 public class TreeAssocConstraint extends TreeObject {
 
+	/**
+	 * Creates an association constraint node.
+	 * @param modelView the {@link ModelView}
+	 * @param constr the constraint
+	 */
 	public TreeAssocConstraint(ModelView modelView, AssociationTypeConstraint constr) {
 		super(modelView, "", null);
 		setModel(constr);

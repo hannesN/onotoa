@@ -16,11 +16,15 @@ import org.eclipse.ui.actions.ActionFactory;
 
 /**
  * This class is just here to have the UpdateAction implemented
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class RedoActionWrapper extends RedoAction implements UpdateAction {
 
+	/**
+	 * Constructor which sets the id to {@link ActionFactory.REDO.getId()}
+	 */
 	public RedoActionWrapper() {
 		setId(ActionFactory.REDO.getId());
 	}

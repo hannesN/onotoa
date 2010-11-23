@@ -33,6 +33,8 @@ import de.topicmapslab.tmcledit.model.commands.DeleteDiagramCommand;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Action to delete adiagram in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -41,6 +43,10 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 	private List<Diagram> diagrams;
 	private ModelView modelView;
 
+	/**
+	 * 
+	 * @param modelView the {@link ModelView}
+	 */
 	public DeleteDiagramAction(ModelView modelView) {
 		setText("Delete");
 		this.modelView = modelView;
@@ -49,6 +55,10 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 		setDiagram(null);
 	}
 
+	/**
+	 * Sets the diagram to delete
+	 * @param sel a selection containing one or more {@link Diagram}s
+	 */
 	public void setDiagram(IStructuredSelection sel) {
 		diagrams.clear();
 		if (sel!=null) {
@@ -64,6 +74,9 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 		setEnabled(!diagrams.isEmpty());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		Shell shell = modelView.getSite().getShell();
@@ -99,6 +112,9 @@ public class DeleteDiagramAction extends Action implements ISelectionChangedList
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void selectionChanged(SelectionChangedEvent event) {
 		setDiagram((IStructuredSelection) event.getSelection());
 	}

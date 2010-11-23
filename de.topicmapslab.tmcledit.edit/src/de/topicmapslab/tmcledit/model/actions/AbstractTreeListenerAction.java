@@ -28,6 +28,10 @@ public abstract class AbstractTreeListenerAction extends Action implements ISele
 
 	private TreeObject treeObject;
 	
+	/**
+	 * 
+	 * @param view the {@link ModelView} 
+	 */
 	public AbstractTreeListenerAction(ModelView view) {
 	    super();
 	    this.view = view;

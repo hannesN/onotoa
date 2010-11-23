@@ -25,9 +25,27 @@ import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.util.extension.ModelViewExtensionInfo;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Superclass for the core nodes of the {@link ModelView}. 
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeObject extends AbstractModelViewNode implements IAdaptable, Adapter {
+
+	/**
+	 * Default node id
+	 */
 	public static final int NOT_SET = -1;
+	
+	/**
+	 * Id for the Topic Map Schema node
+	 */
 	public static final int TOPIC_MAP_SCHEMA = 1;
+	
+	/**
+	 * Id for the Diagrams node
+	 */
 	public static final int DIAGRAMS = 2;
 	
 	
@@ -55,6 +73,8 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 		super(modelView);
 		this.name = name;
 		this.kindOfTopicType = null;
+		if ((name!=null) && (name.length()>0))
+			setModel(name);
 	}
 
 	public TreeObject(ModelView modelView, KindOfTopicType kindOfTopicType) {
@@ -65,6 +85,8 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 	public TreeObject(ModelView modelView, String name, KindOfTopicType kindOfTopicType) {
 		this(modelView, kindOfTopicType);
 		this.name = name;
+		if ((name!=null) && (name.length()>0))
+			setModel(name);
 	}
 
 	public KindOfTopicType getKindOfTopicType() {

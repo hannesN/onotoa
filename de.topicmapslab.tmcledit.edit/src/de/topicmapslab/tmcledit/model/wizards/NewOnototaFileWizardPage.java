@@ -195,10 +195,18 @@ public class NewOnototaFileWizardPage extends WizardPage {
 		setPageComplete(message == null);
 	}
 
+	/**
+	 * 
+	 * @return the container text
+	 */
 	public String getContainerName() {
 		return containerText.getText();
 	}
 
+	/**
+	 * 
+	 * @return the file name text
+	 */
 	public String getFileName() {
 		return fileText.getText();
 	}
