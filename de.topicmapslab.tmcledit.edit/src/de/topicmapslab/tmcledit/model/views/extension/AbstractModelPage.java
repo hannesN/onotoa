@@ -8,7 +8,13 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 
+import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 
+/**
+ * The {@link AbstractModelPage} is the superclass for new {@link PropertyDetailView} pages.
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractModelPage extends Page implements IModelPage {
 
 	protected Object model;
@@ -16,15 +22,27 @@ public abstract class AbstractModelPage extends Page implements IModelPage {
 	protected String id;
 	protected CTabFolder folder;
 
+	/**
+	 * Default constructor
+	 */
 	public AbstractModelPage() {
 		super();
 	}
 
+	/**
+	 * Constructor with id
+	 * 
+	 * @param id id of the view
+	 */
 	public AbstractModelPage(String id) {
 		super();
 		this.id = id;
 	}
 	
+	/**
+	 * 
+	 * @param pageSite the pageSite of the view containing this page
+	 */
 	public void setSite(IPageSite pageSite) {
     	init(pageSite);
     }

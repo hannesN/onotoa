@@ -14,6 +14,8 @@ import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.IPageSite;
 
+import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
+
 /**
  * Interface for a property details page.
  * 
@@ -22,13 +24,27 @@ import org.eclipse.ui.part.IPageSite;
  */
 public interface IModelPage extends IPage {
 
-	
-	public abstract void setModel(Object model);
-
+	/**
+	 * 
+	 * @return the {@link CommandStack} used to execute Undoable Operations in the page
+	 */
 	public abstract CommandStack getCommandStack();
 
+	/**
+	 * Sets the {@link CommandStack} used to execute Undoable Operations in the page
+	 * @param commandStack the new {@link CommandStack}
+	 */
 	public abstract void setCommandStack(CommandStack commandStack);
 
+	/**
+	 * Initializes the page using the {@link IPageSite} of the {@link PropertyDetailView} 
+	 * @param pageSite the {@link IPageSite} of the view
+	 */
+	public abstract void init(IPageSite pageSite);
+
+	/**
+	 * Indicates that the page will be hidden. Implementations should clean up some chaches or clear input masks
+	 */
 	public abstract void aboutToHide();
 
 	/**
@@ -39,12 +55,29 @@ public interface IModelPage extends IPage {
 	 */
 	public abstract void updateUI();
 
+	/**
+	 * 
+	 * @return the model which was modified by the page
+	 */
 	public abstract Object getModel();
 
+	/**
+	 * Sets the model instance which will be modified or shown
+	 * @param model the model to show/edit
+	 */
+	public abstract void setModel(Object model);
+
+	/**
+	 * 
+	 * @return the used pageSite
+	 */
 	public abstract IPageSite getSite();
 
-	public abstract void init(IPageSite pageSite);
-
+	/**
+	 * The id of the page. The id should be unique so it is advised to use a scheme like
+	 * the ones for views or editors.
+	 * @return the id of the page
+	 */
 	public abstract String getId();
 
 }

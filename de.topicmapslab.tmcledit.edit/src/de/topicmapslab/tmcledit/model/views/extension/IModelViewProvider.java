@@ -14,6 +14,7 @@ import java.util.List;
 
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 import de.topicmapslab.tmcledit.model.views.ModelView;
+import de.topicmapslab.tmcledit.model.views.PropertyDetailView;
 import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
 
 /**
@@ -33,6 +34,11 @@ public interface IModelViewProvider {
 	@Deprecated
 	public String serialize(IModelExtension modelEx );
 	
+	/**
+	 * Deserializes the model
+	 * @param model
+	 * @return
+	 */
 	@Deprecated
 	public IModelExtension deserialize(String model);
 		
@@ -46,8 +52,23 @@ public interface IModelViewProvider {
 	 */
 	public List<AbstractModelViewNode> getChildNodes(ModelView modelView, AbstractModelViewNode parentNode);
 
+	/**
+	 * Checks if the extension has a page for the {@link PropertyDetailView} for the given model.
+	 * @param extension the model which needs a property details page
+	 * @return <code>true</code> if a page is provided; <code>false</code> else
+	 */
 	public boolean hasPageFor(IModelExtension extension);
-	
+
+	/**
+	 * Returns the page for the {@link PropertyDetailView} for the given model.
+	 * 
+	 * The method {@link #hasPageFor(IModelExtension)} should be called before
+	 * calling this method to be sure a page exists.
+	 * 
+	 * @param extension
+	 *            the model which needs a property details page
+	 * @return the instance of the {@link IModelPage}
+	 */
 	public IModelPage getPageFor(IModelExtension extension);
 	
 	/**
