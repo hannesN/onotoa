@@ -1,0 +1,3 @@
+== Generating an Instance Editor ==
+
+With the Generic Editor SDK and Maven3 it is possible to create an editor ...
