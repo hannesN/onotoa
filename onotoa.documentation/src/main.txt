@@ -16,9 +16,13 @@ include::modelview.txt[]
 
 include::diagram.txt[]
 
+include::search.txt[]
+
 include::preferences.txt[]
 
 include::export.txt[]
+
+include::genny.txt[]
 
 /////////////////////////////
 Some Short Tutorials
