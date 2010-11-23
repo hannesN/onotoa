@@ -35,15 +35,16 @@ import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
  */
 public class NotesView extends ViewPart implements ISelectionChangedListener {
 
+	/**
+	 * 
+	 */
 	public static final String ID = "de.topicmapslab.tmcledit.model.views.NotesView";
 	
 	private File file;
 	
 	private Text notesText;
 	
-	public NotesView() {
-	}
-
+	
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 	    super.init(site);
@@ -88,6 +89,9 @@ public class NotesView extends ViewPart implements ISelectionChangedListener {
 		});
     }
 
+	/**
+	 * Updates the content of the view.
+	 */
 	public void update() {
 		String content = "";
 		

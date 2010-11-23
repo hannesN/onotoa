@@ -26,6 +26,13 @@ import de.topicmapslab.tmcledit.model.commands.CreateDiagramCommand;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Action to create a new diagram, used in the context menu of the
+ * {@link ModelView}
+ * 
+ * @author Hannes Niederhausen
+ * 
+ */
 public class CreateDiagramAction extends Action {
 	/**
 	 * 
@@ -39,56 +46,60 @@ public class CreateDiagramAction extends Action {
 		this.modelView = modelView;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getText() {
 		return "Create New Diagram...";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		final File file = (File) modelView.getCurrentTopicMapSchema().eContainer();
-		InputDialog dlg = new InputDialog(this.modelView.getSite().getShell(),
-				"New Diagram..",
-				"Please Enter the name of the new diagram", "", 
-				new IInputValidator() {
+		InputDialog dlg = new InputDialog(this.modelView.getSite().getShell(), "New Diagram..",
+		        "Please Enter the name of the new diagram", "", new IInputValidator() {
 
-					public String isValid(String newText) {
-						if (newText.length()==0)
-							return "Please enter a name.";
-						
-						
-						
-						for (Diagram d : file.getDiagrams()) {
-							if (d.getName().equals(newText)) {
-								return "A diagram with that name already exists!";
-							}
-						}
-						return null;										
-					}
-			
-		});
+			        public String isValid(String newText) {
+				        if (newText.length() == 0)
+					        return "Please enter a name.";
+
+				        for (Diagram d : file.getDiagrams()) {
+					        if (d.getName().equals(newText)) {
+						        return "A diagram with that name already exists!";
+					        }
+				        }
+				        return null;
+			        }
+
+		        });
 
 		if (dlg.open() == Dialog.OK) {
 			String name = dlg.getValue();
 			CreateDiagramCommand command = new CreateDiagramCommand(name, file);
-			this.modelView.getEditingDomain().getCommandStack().execute(
-					command);
+			this.modelView.getEditingDomain().getCommandStack().execute(command);
 			this.modelView.getViewer().expandToLevel(2);
-			
-			if (command.getDiagram()==null)
+
+			if (command.getDiagram() == null)
 				return;
 			try {
-				TmcleditEditPlugin.getPlugin().getWorkbench().getActiveWorkbenchWindow()
-						.getActivePage().openEditor(new TMCLEditorInput(command.getDiagram(), 
-								this.modelView.getEditingDomain(),
-								this.modelView.getActionRegistry(),
-								modelView,
-								true), TmcleditEditPlugin.DIAGRAMEDITOR_ID);
+				TmcleditEditPlugin
+				        .getPlugin()
+				        .getWorkbench()
+				        .getActiveWorkbenchWindow()
+				        .getActivePage()
+				        .openEditor(
+				                new TMCLEditorInput(command.getDiagram(), this.modelView.getEditingDomain(),
+				                        this.modelView.getActionRegistry(), modelView, true),
+				                TmcleditEditPlugin.DIAGRAMEDITOR_ID);
 			} catch (PartInitException e) {
 				throw new RuntimeException(e);
 			}
 		}
 
 	}
-	
+
 }

@@ -45,6 +45,9 @@ import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
  */
 public class PropertyDetailView extends ViewPart implements ISelectionChangedListener {
 
+	/**
+	 * ID ov the view
+	 */
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.PropertyDetailView";
 
 	private ScrolledPageBook pageBook;

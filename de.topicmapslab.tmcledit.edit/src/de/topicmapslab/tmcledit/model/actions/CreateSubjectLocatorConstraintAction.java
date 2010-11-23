@@ -16,16 +16,25 @@ import de.topicmapslab.tmcledit.model.commands.CreateSubjectLocatorConstraintCom
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Action to create a new subject locator constraint in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class CreateSubjectLocatorConstraintAction extends AbstractCreateConstraintAction {
 
+	/**
+	 * 
+	 * @param view the {@link ModelView}
+	 */
 	public CreateSubjectLocatorConstraintAction(ModelView view) {
 	    super(view);
 	    setText("Create &Subject Locator Constraint...");
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected Command getCommand() {
 		return new CreateSubjectLocatorConstraintCommand(getTopicType());

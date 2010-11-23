@@ -17,9 +17,18 @@ import org.eclipse.ui.handlers.IHandlerService;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
+/**
+ * This actions triggers an validation event.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class ValidateAction extends Action {
 	IWorkbenchPartSite site = null;
 	
+	/**
+	 * Constructor
+	 */
 	public ValidateAction() {
 		setText("Validate");
 		setToolTipText("Validate the TMCL schema");
@@ -27,18 +36,27 @@ public class ValidateAction extends Action {
 	}
 	
 	
-	
+	/**
+	 * Constructor
+	 * @param site the {@link IWorkbenchPartSite} of the actions container
+	 */
 	public ValidateAction(IWorkbenchPartSite site) {
 	    this();
 	    this.site = site;
     }
 
 
-
+	/**
+	 * Sets the {@link IWorkbenchPartSite} of the container
+	 * @param site the {@link IWorkbenchPartSite} of the container
+	 */
 	public void setSite(IWorkbenchPartSite site) {
 		this.site = site;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		try {

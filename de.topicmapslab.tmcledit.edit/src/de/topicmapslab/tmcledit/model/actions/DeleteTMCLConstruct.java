@@ -44,6 +44,8 @@ import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemComm
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Action to delete a TMCL construct in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -53,13 +55,19 @@ public class DeleteTMCLConstruct extends Action implements ISelectionChangedList
 	private ModelView modelView;
 	
 	
-
+	/**
+	 * 
+	 * @param modelView the {@link ModelView}
+	 */
 	public DeleteTMCLConstruct(ModelView modelView) {
 		this.modelView = modelView;
 		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().addSelectionChangedListener(this);
 		setText("Delete...");
 	}
 
+	/**
+	 * @return the list of constructs to remove
+	 */
 	public List<TMCLConstruct> getConstructList() {
 		if (constructList==null)
 			constructList = new ArrayList<TMCLConstruct>();
@@ -67,6 +75,9 @@ public class DeleteTMCLConstruct extends Action implements ISelectionChangedList
 		return constructList;
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		Shell shell = modelView.getSite().getShell();
@@ -109,7 +120,9 @@ public class DeleteTMCLConstruct extends Action implements ISelectionChangedList
 
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * {@inheritDoc}
+	 */
     public void selectionChanged(SelectionChangedEvent event) {
 		getConstructList().clear();
 		if ((!event.getSelection().isEmpty()) && (((event.getSelection() instanceof IStructuredSelection))) ) {
@@ -117,7 +130,7 @@ public class DeleteTMCLConstruct extends Action implements ISelectionChangedList
 
 		
 			Object obj = sel.getFirstElement();
-			Iterator<Object> it = sel.iterator();
+			Iterator<?> it = sel.iterator();
 			while (it.hasNext()) {
 				obj = it.next();
 				if ( (obj instanceof TMCLConstruct) 

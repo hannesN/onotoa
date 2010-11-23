@@ -32,7 +32,7 @@ import de.topicmapslab.tmcledit.model.views.treenodes.TreeSubjectIdentifier;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeSubjectLocator;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
 
-class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
+class ModelViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
 	/**
      * 
      */
@@ -43,7 +43,7 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 	/**
      * @param modelView
      */
-    ViewContentProvider(ModelView modelView) {
+    ModelViewContentProvider(ModelView modelView) {
         this.modelView = modelView;
     }
 
@@ -139,12 +139,7 @@ class ViewContentProvider implements IStructuredContentProvider, ITreeContentPro
 	}
 
 	public void initialize() {
-		TopicMapSchema schema = this.modelView.getCurrentTopicMapSchema();
-        if (schema!=null)
-        	currentFile = (File) schema.eContainer();
-        else
-        	currentFile = null;
-        
+		currentFile = TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().getOnotoaFile();
         if (currentFile != null) {
 			currentFile.getTopicMapSchema().eAdapters().add(tmsListener);
 			currentFile.eAdapters().add(tmsListener);

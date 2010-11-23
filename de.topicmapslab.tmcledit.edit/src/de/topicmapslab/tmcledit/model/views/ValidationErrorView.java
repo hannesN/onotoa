@@ -55,6 +55,9 @@ import de.topicmapslab.tmcledit.model.validation.ValidationResult.Priority;
  */
 public class ValidationErrorView extends ViewPart implements ISelectionProvider {
 
+	/**
+	 * ID of the view
+	 */
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ValidationErrorView";
 	
 	private TableViewer viewer;
@@ -137,6 +140,10 @@ public class ValidationErrorView extends ViewPart implements ISelectionProvider 
 	public void setFocus() {
 	}
 
+	/**
+	 * Sets the validation results shown in the view
+	 * @param results the list of results
+	 */
 	public void setValidationResults(List<ValidationResult> results) {
 		viewer.setInput(results);
 	}

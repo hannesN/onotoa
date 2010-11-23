@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
@@ -78,10 +77,23 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 	private Label label;
 
+	/**
+	 * 
+	 * @param parent parent widget
+	 * @param toolkit {@link FormToolkit} 
+	 * @param commandStack the {@link CommandStack} used to execute modification operations
+	 */
 	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack) {
 		this(parent, toolkit, commandStack, true);
 	}
 
+	/**
+	 * 
+	 * @param parent parent widget
+	 * @param toolkit {@link FormToolkit} 
+	 * @param commandStack the {@link CommandStack} used to execute modification operations
+	 * @param createLabel flag if a label for the widget should be created
+	 */
 	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack,
 	        boolean createLabel) {
 		this.createLabel = createLabel;
@@ -89,18 +101,29 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		createControls(parent, toolkit);
 	}
 
+	/**
+	 * Sets the {@link CommandStack}
+	 * @param commandStack the {@link CommandStack}
+	 */
 	public void setCommandStack(CommandStack commandStack) {
 		this.commandStack = commandStack;
 	}
 
-	public CommandStack getCommandStack() {
+	private CommandStack getCommandStack() {
 		return commandStack;
 	}
 
+	/**
+	 * Sets the text for the label
+	 * @param text the content of the label
+	 */
 	public void setText(String text) {
 		label.setText(text);
 	}
 
+	/**
+	 * Frees all resources and removes registered listeners
+	 */
 	public void dispose() {
 		for (AbstractTypedCardinalityConstraint tcc : getInput()) {
 			tcc.eAdapters().remove(this);
@@ -111,6 +134,10 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		return ((input == null) ? Collections.<AbstractTypedCardinalityConstraint> emptyList() : input);
 	}
 
+	/**
+	 * Sets the input for the table
+	 * @param input the input for the table
+	 */
 	public void setInput(List<? extends AbstractTypedCardinalityConstraint> input) {
 		for (AbstractTypedCardinalityConstraint tcc : getInput()) {
 			tcc.eAdapters().remove(this);
@@ -279,30 +306,43 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		return editor;
 	}
 
-	public EObject getModel() {
-		IStructuredSelection sel = (IStructuredSelection) tableViewer.getSelection();
-		if (sel.isEmpty())
-			return null;
-
-		return (EObject) sel.getFirstElement();
-	}
-
+	/**
+	 * 
+	 * @return the button which is used to open a selection dialog
+	 */
 	public Button getAddButton() {
 		return selectButton;
 	}
 
+	/**
+	 * 
+	 * @return the button which opens a new type dialog
+	 */
 	public Button getNewButton() {
 		return newButton;
 	}
 
+	/**
+	 * 
+	 * @return the button which removes the selected elements in the table
+	 */
 	public Button getRemoveButton() {
 		return removeButton;
 	}
 
+
+	/**
+	 * Sets a the maximum value for a valid card-max
+	 * @param maxCardinality the possible card-max
+	 */
 	public void setMaxCardinality(int maxCardinality) {
 		this.maxCardinality = maxCardinality;
 	}
 
+	/**
+	 * Sets the minimum value for a valid card-min
+	 * @param minCardinality the possiblie card-min
+	 */
 	public void setMinCardinality(int minCardinality) {
 		this.minCardinality = minCardinality;
 	}
@@ -394,6 +434,12 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 	}
 
+	/**
+	 * LabelProvider for a {@link TopicType}. It renders the name next to the type icon.
+	 * 
+	 * @author Hannes Niederhausen
+	 *
+	 */
 	public class TopicLabelProvider implements ILabelProvider {
 
 		public Image getImage(Object element) {
@@ -436,14 +482,27 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 
 	}
 
+
+	/**
+	 * 
+	 * @return the used tableViewer
+	 */
 	public TableViewer getTableViewer() {
 		return tableViewer;
 	}
 
+	/**
+	 * 
+	 * @return the shell of the table viewer
+	 */
 	public Shell getShell() {
 		return tableViewer.getTable().getShell();
 	}
 
+	/**
+	 * Disables/Enables the widget which means all children will be enabled or disabled 
+	 * @param enabled
+	 */
 	public void setEnabled(boolean enabled) {
 		selectButton.setEnabled(enabled);
 		removeButton.setEnabled(enabled);

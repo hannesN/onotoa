@@ -24,6 +24,9 @@ import de.topicmapslab.tmcledit.model.annotationprovider.IAnnotationProposalProv
  *
  */
 public class AnnotationValueProvider implements IContentProposalProvider {
+	/**
+	 * An array for keys which trigger the auto completion proposals
+	 */
 	public final static char KEYS[] = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
         'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2',
@@ -31,6 +34,9 @@ public class AnnotationValueProvider implements IContentProposalProvider {
 
 	private IAnnotationProposalProvider provider;
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public IContentProposal[] getProposals(String contents, int position) {
 		List<AnnotationKeyProposal> results = null;
 		
@@ -49,6 +55,10 @@ public class AnnotationValueProvider implements IContentProposalProvider {
 		return results.toArray(new IContentProposal[results.size()]);
 	}
 
+	/**
+	 * Sets the proposal provider
+	 * @param provider the {@link IAnnotationProposalProvider} instance
+	 */
 	public void setProvider(IAnnotationProposalProvider provider) {
 	    this.provider = provider;
     }

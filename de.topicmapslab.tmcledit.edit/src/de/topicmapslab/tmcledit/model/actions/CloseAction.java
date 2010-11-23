@@ -21,6 +21,8 @@ import org.eclipse.ui.actions.ActionFactory;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Closes the model in the {@link ModelView}.
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -28,6 +30,11 @@ public class CloseAction extends Action implements IPropertyListener {
 
 	private ModelView modelView;
 	
+	/**
+	 * The constructor 
+	 * 
+	 * @param modelView the {@link ModelView}
+	 */
 	public CloseAction(ModelView modelView) {
 		this.modelView = modelView;
 		setEnabled(modelView.getCurrentTopicMapSchema()!=null);

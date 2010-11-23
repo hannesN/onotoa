@@ -90,6 +90,7 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.UIJob;
 
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.DomainDiagram;
@@ -138,12 +139,13 @@ import de.topicmapslab.tmcledit.model.views.treenodes.TreeTopic;
 public class ModelView extends ViewPart implements IEditingDomainProvider, ISelectionProvider, CommandStackListener,
         ISaveablePart, IResourceChangeListener, ISelectionChangedListener {
 
+	/**
+	 * The ID of the view
+	 */
 	public static final String ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 
-	public static final int MODEL_LOADED = 12345;
-
 	TreeViewer viewer;
-	private ViewContentProvider contentProvider;
+	private ModelViewContentProvider contentProvider;
 	private Action validationAction;
 	private Action doubleClickAction;
 
@@ -213,7 +215,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	public void createPartControl(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 
-		contentProvider = new ViewContentProvider(this);
+		contentProvider = new ModelViewContentProvider(this);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setSorter(new NameSorter());
@@ -344,7 +346,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		
 	}
 
-	public void createActions() {
+	private void createActions() {
 		IActionBars actionBars = getViewSite().getActionBars();
 		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 
@@ -393,6 +395,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return editingDomain;
 	}
 
+	/**
+	 * 
+	 * @return the {@link CommandStack} used to execute the modification operations
+	 */
 	public CommandStack getCommandStack() {
 		return getEditingDomain().getCommandStack();
 	}
@@ -418,7 +424,13 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return currentSelection;
 	}
 
+	/**
+	 * 
+	 * @return the current {@link TopicMapSchema} or <code>null</code> if not loaded
+	 * @deprecated Use the {@link IOnotoaSelectionService} instead
+	 */
 	public TopicMapSchema getCurrentTopicMapSchema() {
+		File currFile = TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().getOnotoaFile();
 		if (currFile != null)
 			return currFile.getTopicMapSchema();
 		return null;
@@ -441,7 +453,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				Iterator<?> it = ((IStructuredSelection)selection).iterator();
 				while (it.hasNext()) {
 					IContentProvider cp = viewer.getContentProvider();
-					AbstractModelViewNode n = ((ViewContentProvider) cp).findNodeFor(it.next());
+					AbstractModelViewNode n = ((ModelViewContentProvider) cp).findNodeFor(it.next());
 					if (n!=null)
 						nodes.add(n);
 				}
@@ -454,12 +466,23 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(currentSelection, ModelView.this);
 	}
 
+	/**
+	 * Sets the filename and loads the file 
+	 * @param filename the name of a new file
+	 * @param newFile flag if the file is new or should be loaded
+	 */
 	public void setFilename(String filename, boolean newFile) {
 		setFilename(filename, newFile, null);
 		if (filename!=null&&filename.length()>0)
 			RecentUsedManager.addFile(filename);
 	}
 	
+	/**
+	 * Sets the filename and loads the file 
+	 * @param filename the name of a new file
+	 * @param newFile flag if the file is new or should be loaded
+	 * @param newOnotoaFile a file which is already opened and set to this {@link ModelView}
+	 */
 	// TODO refactor me PLEEEEAAASSE!!!
 	public void setFilename(String filename, boolean newFile, File newOnotoaFile) {
 		IViewSite viewSite = getViewSite();
@@ -554,6 +577,11 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 //		}
 	}
 	
+	/**
+	 * Refreshes the {@link TreeViewer}. If recreate is <code>true</code> the content provider is reinitialized, else
+	 * the view will just refresh.
+	 * @param recreate flag whether the contentProvider should be reinitialzed
+	 */
 	public void refreshView(boolean recreate) {
 		if (recreate) {
 			contentProvider.initialize();
@@ -564,9 +592,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		viewer.expandToLevel(2);
 	}
 
-	@SuppressWarnings("unchecked")
-	public void updateActions() {
-		Iterator<IAction> it = actionRegistry.getActions();
+	
+	private void updateActions() {
+		@SuppressWarnings("unchecked")
+        Iterator<IAction> it = actionRegistry.getActions();
 		while (it.hasNext()) {
 			IAction a = it.next();
 			if (a instanceof UpdateAction)
@@ -584,6 +613,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		getViewSite().getActionBars().getGlobalActionHandler(ActionFactory.EXPORT.getId());
 	}
 
+	/**
+	 * 
+	 * @return the {@link ActionRegistry} of this view containing all actions of the context menu
+	 */
 	public ActionRegistry getActionRegistry() {
 		return actionRegistry;
 	}
@@ -602,6 +635,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		return super.getAdapter(adapter);
 	}
 
+	/**
+	 * 
+	 * @return the {@link TreeViewer} representing the model
+	 */
 	public TreeViewer getViewer() {
 		return viewer;
 	}
@@ -615,6 +652,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 			validateJob.schedule();
 	}
 
+	/**
+	 * Closes the model
+	 */
 	public void close() {
 		setFilename(null, false);
 		IWorkbenchPage activePage = getViewSite().getWorkbenchWindow().getActivePage();

@@ -16,16 +16,26 @@ import de.topicmapslab.tmcledit.model.commands.CreateItemIdentifierConstraintCom
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Action to create a new item identifier constraint in the {@link ModelView}
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class CreateItemIdenifierConstraintAction extends AbstractCreateConstraintAction {
 
+	/**
+	 * 
+	 * @param view the {@link ModelView}
+	 */
 	public CreateItemIdenifierConstraintAction(ModelView view) {
 	    super(view);
 	    setText("Create &Item Identifier Constraint...");
     }
 
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected Command getCommand() {
 		return new CreateItemIdentifierConstraintCommand(getTopicType());
