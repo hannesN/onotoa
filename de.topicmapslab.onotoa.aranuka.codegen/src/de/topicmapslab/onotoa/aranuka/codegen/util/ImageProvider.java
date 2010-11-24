@@ -25,6 +25,11 @@ import de.topicmapslab.onotoa.aranuka.codegen.Activator;
  */
 public class ImageProvider {
 
+	/**
+	 * Returns the image for the given path
+	 * @param path path for the image. Should be a constant from {@link ImageConstants}
+	 * @return the image instance
+	 */
 	public static Image getImage(String path) {
 		ImageRegistry imageRegistry = Activator.getDefault().getImageRegistry();
 		

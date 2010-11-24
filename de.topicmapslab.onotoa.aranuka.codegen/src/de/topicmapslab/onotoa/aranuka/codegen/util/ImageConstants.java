@@ -16,6 +16,9 @@ package de.topicmapslab.onotoa.aranuka.codegen.util;
  */
 public class ImageConstants {
 
+	/**
+	 * Anvil Image Contrant
+	 */
 	public static String IMG_GENERATE_CODE = "icons/anvil.gif";
 
 }

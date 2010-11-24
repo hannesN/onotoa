@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.topicmapslab.onotoa.aranuka.codegen.Activator;
-import de.topicmapslab.onotoa.aranuka.codegen.actions.AbstractSelectionAction;
 import de.topicmapslab.onotoa.aranuka.codegen.model.CharacteristicData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.GeneratorData;
 import de.topicmapslab.onotoa.aranuka.codegen.model.IdentifierData;
@@ -42,16 +41,7 @@ import de.topicmapslab.tmcledit.model.views.treenodes.AbstractModelViewNode;
  */
 public class GeneratorModelViewProvider implements IModelViewProvider {
 
-	private List<UpdateAction> actions;
-
 	private Map<Class<? extends GeneratorData>, CodeGeneratorModelPage> pageMap;
-
-	/**
-	 * 
-	 */
-	public GeneratorModelViewProvider() {
-
-	}
 
 	/**
 	 * {@inheritDocs}
@@ -157,9 +147,7 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public List<UpdateAction> getActions() {
-		if (actions == null)
-			return Collections.emptyList();
-		return actions;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -175,11 +163,6 @@ public class GeneratorModelViewProvider implements IModelViewProvider {
 	 */
 	@Override
 	public void close() {
-		for (UpdateAction a : getActions()) {
-			((AbstractSelectionAction) a).dispose();
-		}
-		actions = null;
-
 		for (CodeGeneratorModelPage page : getPageMap().values()) {
 			page.dispose();
 		}

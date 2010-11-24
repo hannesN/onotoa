@@ -13,7 +13,9 @@ import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/**
+	 *  The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.onotoa.export.maiana"; //$NON-NLS-1$
 
 	// The shared instance
@@ -60,6 +62,10 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	/**
+	 * Returns the Selection Service of Onotoa
+	 * @return
+	 */
 	public IOnotoaSelectionService getSelectionService() {
 		if (selectionService == null) {
 			BundleContext bc = getBundle().getBundleContext();
@@ -71,6 +77,10 @@ public class Activator extends AbstractUIPlugin {
 		return selectionService;
 	}
 
+	/**
+	 * Logs the exception as error
+	 * @param e the ecxception to log
+	 */
 	public static void logError(Exception e) {
 	    plugin.getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "An error occurred: "+e.getMessage(), e));
     }
