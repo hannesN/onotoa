@@ -10,10 +10,6 @@ the schema:
  * Only one "kind of.." association per topic type allowed
  * Every type must have at least one subject identifier
 
-
-
-
- 
 In addition to the TMCL constructs the code generator needs some annotation which are explained in the following sections.
 For most of the constructs a new node will be shown in the *ModelView* which can be disabled in the preferences.
 Selecting one of the node labeled "Code Generation Data" a page is shown in the *PropertyDetailsPage*.
@@ -102,4 +98,34 @@ contraint with type x in a super type there must be no subtype with a constraint
 
 === Associations ===
 
+Associations have no special property pages for annotations yet. So the annotations need to be added directly into the annotation table.
+Associations also are represented by fields in the class. The type will be the class for the other players.
 
+Mostly it is not wanted that every player has a field with the counter player. For instance an person should have the attribute where she 
+lives which is of type address. On the contrary the address instance should not have a set of persons. To hide the field the annotation
+"de.topicmapslab.aranuka.generateattribute" is set to false. The construct annotated with this annotation will be the which will not be a
+field. In the example it is necessary to select the topic role constraint connecting the association constraint with the topic type person.
+
+The code generator sets the name of the field in binary associations to the name of the type. If the card-max is more than 1 the field is
+named "typeNameSet". To prevent that this name is used as label the "de.topicmapslab.kuria.label" annotation  is used.
+
+Other annotations createnew and so on are listed below and are used like in other fields.
+
+.Used annotations for topic role constraints
+[options="header"]
+|=========================================
+|Key|Description
+|de.topicmapslab.aranuka.generateattribute|generate a field
+|de.topicmapslab.kuria.hidden|indicates that there should be no widget for the generated field; its hidden in the input mask
+|de.topicmapslab.kuria.read-only|generates a widget but it is only read-only
+|de.topicmapslab.kuria.label|Every widget has a label which shows the name of the field in the class. This can be overridden.
+|de.topicmapslab.kuria.createnew|used to create a new instance before adding it to the list - only used for lists or sets 
+|de.topicmapslab.kuria.weight|A weight used to sort the widgets of the input mask
+|=========================================
+
+=== General Information ===
+
+Every constraint has a cardinality which will be used for the code generation. If the card-min is zero, the field will be marked as 
+optional, which means the input mask does not demand this values.
+
+If card-max is greater then 1 a set of the type is created. Especially for primitive data types it is necessary to set the create new flag to true.
