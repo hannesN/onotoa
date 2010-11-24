@@ -10,7 +10,9 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/**
+	 * plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.onotoa.genny.generator"; //$NON-NLS-1$
 
 	// The shared instance

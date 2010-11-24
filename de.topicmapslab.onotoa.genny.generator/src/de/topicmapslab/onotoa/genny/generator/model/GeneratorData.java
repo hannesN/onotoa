@@ -96,28 +96,53 @@ public class GeneratorData {
     	this.deleteTemporaryFiles = deleteTemporaryFiles;
     }
 	
+    /**
+     * 
+     * @param mavenpath the new mavenpath
+     */
 	public void setMavenpath(String mavenpath) {
 	    this.mavenPath = mavenpath;
     }
 	
+	/**
+	 * 
+	 * @return the maven path
+	 */
 	public String getMavenpath() {
 	    return mavenPath;
     }
 	
+	/**
+	 * Sets the maven oprions set in an environment variable.
+	 * 
+	 * @param mavenOpts the new maven options 
+	 */
 	public void setMavenOpts(String mavenOpts) {
 	    this.mavenOpts = mavenOpts;
     }
 	
+	/**
+	 * 
+	 * @return the maven options
+	 */
 	public String getMavenOpts() {
 	    return mavenOpts;
     }
 	
+	/**
+	 * Initializes the fields with data from the preference store
+	 * @param ps the preference store to use
+	 */
 	public void init(IPreferenceStore ps) {
 		applicationId = ps.getString(P_LAST_PROJECTID);
 		applicationName = ps.getString(P_LAST_PROJECTNAME);
 		targetDir = ps.getString(P_LAST_TARGET);
 	}
 	
+	/**
+	 * Saves the field values into the given preference store.
+	 * @param ps the preference store to use to save
+	 */
 	public void save(IPreferenceStore ps) {
 		ps.setValue(P_LAST_PROJECTID, applicationId);
 		ps.setValue(P_LAST_PROJECTNAME, applicationName);
