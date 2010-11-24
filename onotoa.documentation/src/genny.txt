@@ -57,6 +57,9 @@ The annotation keys used are:
 
 Every identifier constraint of a topic type will be represented as field in the generated class. 
 
+The nodes in the _ModelView_ have a generator child node which provides an input mask.
+The widgets shown represent the following annotations:
+
 .Used annotations for identifier constraints
 [options="header"]
 |=========================================
@@ -71,4 +74,32 @@ Every identifier constraint of a topic type will be represented as field in the 
 |de.topicmapslab.kuria.weight|A weight used to sort the widgets of the input mask
 |=========================================
 
-WARNING: Aranuka allows only one field for each identifier type. This includes contraints inherited from super types.
+WARNING: _Aranuka_ allows only one field for each identifier type. This includes contraints inherited from super types.
+
+=== Name and Occurrence Constraints ===
+
+Every name and occurrence constraint of a topic type will be represented as field in the generated class. 
+
+The nodes in the _ModelView_ have a generator child node which provides an input mask.
+The widgets shown represent the following annotations:
+
+.Used annotations for identifier constraints
+[options="header"]
+|=========================================
+|Key|Description
+|de.topicmapslab.aranuka.name|name of the field of the generated class 
+|de.topicmapslab.aranuka.generateattribute|generate a field
+|de.topicmapslab.kuria.hidden|indicates that there should be no widget for the generated field; its hidden in the input mask
+|de.topicmapslab.kuria.read-only|generates a widget but it is only read-only
+|de.topicmapslab.kuria.label|Every widget has a label which shows the name of the field in the class. This can be overridden.
+|de.topicmapslab.kuria.typelabel|Instead of using toString the field will be used as string representation of the instance
+|de.topicmapslab.kuria.createnew|used to create a new instance before adding it to the list - only used for lists or sets 
+|de.topicmapslab.kuria.weight|A weight used to sort the widgets of the input mask
+|=========================================
+
+WARNING: It is not allowed to have names or occurrences with the same type. This also valid for super types. This means if you specify a name
+contraint with type x in a super type there must be no subtype with a constraint using x. 
+
+=== Associations ===
+
+
