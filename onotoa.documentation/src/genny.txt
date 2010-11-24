@@ -1,3 +1,74 @@
 == Generating an Instance Editor ==
 
-With the Generic Editor SDK and Maven3 it is possible to create an editor ...
+With the Generic Editor SDK and Maven3 it is possible to create an editor based on a topic map schema.
+
+The generated editor uses _Aranuka_ for mapping the java instances to topics therefore there are some restrictions for
+the schema:
+
+ * Scope contraints aren't supported
+ * Reifier constraints aren't supported
+ * Only one "kind of.." association per topic type allowed
+ * Every type must have at least one subject identifier
+
+
+
+
+ 
+In addition to the TMCL constructs the code generator needs some annotation which are explained in the following sections.
+For most of the constructs a new node will be shown in the *ModelView* which can be disabled in the preferences.
+Selecting one of the node labeled "Code Generation Data" a page is shown in the *PropertyDetailsPage*.
+In contrast to the  constructs property details page, the annotation pages need to apply the values by pressing the apply button in every page. 
+Without pressing "apply" the changes are lost! 
+
+NOTE: It is possible to add the annotations in the constructs annotation table instead of using the input mask.
+
+The sections are titled with the annotated constructs.
+
+=== Topic Map Schema ===
+
+The code generator page for the topic map schema has only one text field: "Default Category".
+Its value is used to label the editors *ModelView* tab for every topic type. If no value is given the tab
+is labeled "Model".
+
+.Used annotations for topic maps schema
+[options="header"]
+|=========================================
+|Key|Description
+|de.topicmapslab.genny.category|Default category name
+|======================= 
+
+=== Topic Type ===
+
+For every topic type another category can be set. For each category a new tab is added to the *ModelView* of the editor.
+In addition the name of the generated can be set. This might be useful if the name of the topic type is not useable as
+class name or its in another language than the wanted code.
+
+The annotation keys used are:
+
+.Used annotations for topic types
+[options="header"]
+|=========================================
+|Key|Description
+|de.topicmapslab.aranuka.name|Class name
+|de.topicmapslab.genny.category|Category name
+|=========================================
+
+=== Identifier Constraints ===
+
+Every identifier constraint of a topic type will be represented as field in the generated class. 
+
+.Used annotations for identifier constraints
+[options="header"]
+|=========================================
+|Key|Description
+|de.topicmapslab.aranuka.name|name of the field of the generated class 
+|de.topicmapslab.aranuka.generateattribute|generate a field
+|de.topicmapslab.kuria.hidden|indicates that there should be no widget for the generated field; its hidden in the input mask
+|de.topicmapslab.kuria.read-only|generates a widget but it is only read-only
+|de.topicmapslab.kuria.label|Every widget has a label which shows the name of the field in the class. This can be overridden.
+|de.topicmapslab.kuria.typelabel|Instead of using toString the field will be used as string representation of the instance
+|de.topicmapslab.aranuka.autogenerate|identifier will be auto generated when the instance will be persisted into the topic map.
+|de.topicmapslab.kuria.weight|A weight used to sort the widgets of the input mask
+|=========================================
+
+WARNING: Aranuka allows only one field for each identifier type. This includes contraints inherited from super types.

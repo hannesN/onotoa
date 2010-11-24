@@ -1,8 +1,10 @@
 
-	<!--
-		article-docinfo.xml Example DocBook document information file for
-		article.txt.
-	-->
+<mediaobject role="cover">
+  <imageobject>
+    <imagedata fileref="images/cover/onotoa_cover.jpg" format="JPG" align="center"  scalefit="1"/>
+  </imageobject>
+  <textobject><phrase>Onotoa Handbook</phrase></textobject>
+</mediaobject>
 
 <authorgroup>
 	<author>
@@ -22,16 +24,26 @@
 		<surname>Lippert</surname>
 		<affiliation>
 			<orgname>Topic Maps Lab</orgname>
+			<shortaffil>Developer of Onotoa</shortaffil>
 		</affiliation>
 	</author>
 </authorgroup>
 
 <copyright>
-	<year>2009</year>
+	<year>2009-2010</year>
 	<holder>Hannes Niederhausen, Topic Maps Lab</holder>
 </copyright>
 
 <revhistory>
+	<revision>
+		<revnumber>1.2</revnumber>
+		<date>November 2010</date>
+		<authorinitials>HN</authorinitials>
+		<revremark>
+			Updates including generator explanations.
+			Removed extension point tutorials (until installation of features are available again
+    	</revremark>
+	</revision>
 	<revision>
 		<revnumber>1.1</revnumber>
 		<date>Dezember 2009</date>

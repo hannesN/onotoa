@@ -95,7 +95,11 @@ visualisation of the schema elements.
 
 The last chapter of the first part is <<_preferences>>. It will explain how _Onotoa_ can be configured.
 
+//////////////////
 The second part of this handbook is for developers, who want to extend _Onotoa_.
 <<_what_you_need_to_extend_onotoa>> covers the requirements for writing _Onotoa_ plug-ins. 
 In <<_create_a_psiprovider>> an example plug-in will be created which will be
 deployed in <<_deploy_the_new_plug_ins>>. 
+////////////////
+
+The second part of this handbook contains some tutorials which will guide you through your first topic map schemas.
