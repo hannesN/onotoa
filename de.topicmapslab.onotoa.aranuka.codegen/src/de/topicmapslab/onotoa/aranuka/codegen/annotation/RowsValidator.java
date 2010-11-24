@@ -4,6 +4,8 @@
 package de.topicmapslab.onotoa.aranuka.codegen.annotation;
 
 /**
+ * The {@link RowsValidator} checks if the given value is greater than or equal  1
+ * 
  * @author Hannes Niederhausen
  * 
  */

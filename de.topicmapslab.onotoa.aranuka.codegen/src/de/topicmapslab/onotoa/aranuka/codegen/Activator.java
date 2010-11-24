@@ -10,7 +10,9 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/**
+	 *  The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.onotoa.aranuke.codegen";
 
 	// The shared instance
@@ -49,6 +51,10 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 	
+	/**
+	 * logs the given exception as error
+	 * @param e the exception to log
+	 */
 	public static void logException(Throwable e) {
 		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "An error occurred:", e));
 	}
