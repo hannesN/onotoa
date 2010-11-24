@@ -24,12 +24,7 @@ include::export.txt[]
 
 include::genny.txt[]
 
-/////////////////////////
-Extending Onotoa
-================
 
-include::extension.txt[]
-/////////////////////////
 
 
 
