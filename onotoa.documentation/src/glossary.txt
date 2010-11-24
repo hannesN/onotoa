@@ -121,3 +121,6 @@ Update Site::
 	An update site is a web page containing eclipse features.  Features can be installed via the install dialogue of _Onotoa_. 
 	If a new version of an installed feature is available on an 
 	update site, _Onotoa_ will realizes and offer an update.
+	
+Widget::
+	A widget is a visual element of an application, e.g. windows, buttons, text fields, tables and combos.

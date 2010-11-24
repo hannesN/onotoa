@@ -24,20 +24,12 @@ include::export.txt[]
 
 include::genny.txt[]
 
-/////////////////////////////
-Some Short Tutorials
-====================
-
-== TODO ==
-
-* find little tasks
-/////////////////////////////
-
+/////////////////////////
 Extending Onotoa
 ================
 
 include::extension.txt[]
-
+/////////////////////////
 
 
 
