@@ -8,10 +8,21 @@ import java.io.InputStreamReader;
 import de.topicmapslab.onotoa.genny.generator.Activator;
 import de.topicmapslab.onotoa.genny.generator.ui.ITextListener;
 
+/**
+ * The {@link ProcessErrorReader} reads the stderr output of a Process in a {@link Thread}
+ * @author Hannes Niederhausen
+ *
+ */
 public final class ProcessErrorReader extends Thread {
     private final Process p;
     private final ITextListener listener;
 
+    /**
+     * Constructor
+     * 
+     * @param p process to listen to
+     * @param listener the {@link ITextListener} implementation to notify the read text
+     */
     public ProcessErrorReader(Process p, ITextListener listener) {
 	    this.p = p;
 	    this.listener = listener;

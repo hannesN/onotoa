@@ -39,6 +39,12 @@ public class ProjectGenerator {
 
 	private int work = 0;
 
+	/**
+	 * Generates the projects including code
+	 * @param data the data for the generator
+	 * @param listener a {@link ITextListener} to get text from the non UI thread 
+	 * @param monitor a progress monitor
+	 */
 	public void generateProjects(GeneratorData data, ITextListener listener, IProgressMonitor monitor) {
 		this.data = data;
 		this.monitor = monitor;

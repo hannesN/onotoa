@@ -41,12 +41,23 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 
 	private StringBuilder textCache;
 
+	/**
+	 * 
+	 * Construcotr
+	 * 
+	 * @param parent the parent shell
+	 * @param data the data for the generator
+	 */
 	public GenerationProgressDialog(Shell parent, GeneratorData data) {
 		super(parent);
 		this.data = data;
 		setShellStyle(getDefaultOrientation() | SWT.TITLE |SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	}
 
+	/**
+	 * Starts the generation process
+	 * @return value from the dialog, see {@link Dialog.open()}
+	 */
 	public int run() {
 
 		if (getShell() == null || getShell().isDisposed()) {
@@ -248,6 +259,10 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 		}
 	}
 
+	/**
+	 * Sets the text for the label below the progress bar	
+	 * @param text
+	 */
 	public void setProgressLabel(String text) {
 		final String newText = text;
 		getShell().getDisplay().syncExec(new Runnable() {
@@ -258,6 +273,13 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 		});
 	}
 
+	/**
+	 * Sets the values of the {@link ProgressBar} values
+	 * 
+	 * @param sel the current selection, which must be between 0 and totalWork
+	 * @param state the state, see {@link ProgressBar.state()} or -1 if it shouldn't be set
+	 * @param totalWork the value for the maximum selection or -1 if it shouldn't be set
+	 */
 	public void setProgressBar(final int sel, final int state, final int totalWork) {
 		getShell().getDisplay().syncExec(new Runnable() {
 			@Override

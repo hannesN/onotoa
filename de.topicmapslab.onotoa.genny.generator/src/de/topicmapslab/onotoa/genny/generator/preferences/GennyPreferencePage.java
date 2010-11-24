@@ -19,8 +19,14 @@ import de.topicmapslab.onotoa.genny.generator.Activator;
  */
 public class GennyPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
+	/**
+	 * The ID of the page
+	 */
 	public final static String ID = "de.topicmapslab.onotoa.genny.generator.preferences.GennyPropertyPage";
 
+	/**
+	 * Construcotr setting the preference store and the description
+	 */
 	public GennyPreferencePage() {
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 		setDescription("Preference page for the Generic Editor Generation.");

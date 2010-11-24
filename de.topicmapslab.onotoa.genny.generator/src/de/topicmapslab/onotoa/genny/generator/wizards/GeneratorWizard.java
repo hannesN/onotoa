@@ -47,9 +47,6 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 	private GeneratorData data;
 	private GeneratorWizardPage page;
 	
-	public GeneratorWizard() {
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -63,8 +60,9 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 	@Override
 	public boolean performFinish() {
 		page.persist();
+
 		
-		
+		getContainer().updateButtons();
 		
 		String path = getNewPath();
 		if (path==null)
@@ -183,8 +181,9 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 
 		private void persist() {
 			im.persist();
+			setPageComplete(false);
 		}
-
+		
 		@Override
         public void dirtyChanged() {
 			Collection<String> msgs = im.getErrorMessages();
@@ -211,7 +210,6 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 		
 		@Override
 		public void newText(String text) {
-			System.out.println("***"+text);
 			if (text.contains("Apache Maven 3"))
 				correctVersion = true;		    
 		}

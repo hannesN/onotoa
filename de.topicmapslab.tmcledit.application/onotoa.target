@@ -16,13 +16,6 @@
 <repository location="http://genny.topicmapslab.de/update"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.rcp.feature.group" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
-<unit id="org.eclipse.gef.sdk.feature.group" version="3.6.1.v20100908-1100-7G7R2A5WNcBQPZgXAHiSXMXYaKPI"/>
-<unit id="org.eclipse.epp.mpc.feature.group" version="1.0.1.v20100826-2143"/>
-<repository location="http://mirror.topicmapslab.de/update/helios/"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
 <unit id="org.eclipse.equinox.executable.feature.group" version="3.4.1.R36x_v20100823-7M7K7JF90dnJ-WLf3cf4yi"/>
 <unit id="org.eclipse.emf.validation.feature.group" version="1.4.0.v20100428-2315-479-9oB56N5BBR6LCA6"/>
 <unit id="org.eclipse.pde.junit.runtime.standalone.feature.group" version="1.0.0.v20100831"/>
@@ -57,6 +50,18 @@
 <unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
 <unit id="de.topicmapslab.majortom_feature.feature.group" version="1.1.2"/>
 <repository location="http://update.topicmapslab.de"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="org.eclipse.rcp.feature.group" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
+<unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.6.0.v20100603-7sF99FsHFTw8HQBta4g33J3F"/>
+<unit id="org.eclipse.equinox.p2.discovery.feature.feature.group" version="1.0.0.v20100510-4--9oB5855K7P"/>
+<unit id="org.eclipse.equinox.p2.user.ui.feature.group" version="2.0.1.r361_v20100903-897HFZFFZRuSD2LMtVxyz0Vr"/>
+<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.6.0.v20100503-9I7VGAeG8tz-BY6jz0w2HLRYr"/>
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.6.1.v20100908-1100-7G7R2A5WNcBQPZgXAHiSXMXYaKPI"/>
+<unit id="org.eclipse.epp.mpc.feature.group" version="1.0.1.v20100826-2143"/>
+<unit id="org.eclipse.equinox.server.p2.feature.group" version="1.0.0.v20100503-7x7IFGOFQ74dz0POCNUBjA6L"/>
+<repository location="http://mirror.topicmapslab.de/update/helios/"/>
 </location>
 </locations>
 <launcherArgs>

@@ -32,26 +32,26 @@ public class CheckUpdateCommand extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-//		ProgressMonitorDialog dlg = new ProgressMonitorDialog(HandlerUtil.getActiveShell(event));
-//		try {
-//			dlg.run(false, false, new IRunnableWithProgress() {
-//
-//				@Override
-//				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-//					IProvisioningAgent agent = Activator.getAgent();
-//					IStatus s = P2Util.checkForUpdates(agent, monitor);
-//					if (s.getCode()==UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-//						System.out.println("Nothing to update");
-//					}
-//				}
-//			});
-//		} catch (Exception e) {
-//
-//			Activator.logException(e);
-//			throw new RuntimeException(e);
-//		}
-		ProvisioningSession session = new ProvisioningSession(Activator.getAgent());
-		ProvisioningUI.getDefaultUI().openUpdateWizard(false, new UpdateOperation(session), new LoadMetadataRepositoryJob(ProvisioningUI.getDefaultUI()));
+		ProgressMonitorDialog dlg = new ProgressMonitorDialog(HandlerUtil.getActiveShell(event));
+		try {
+			dlg.run(false, false, new IRunnableWithProgress() {
+
+				@Override
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					IProvisioningAgent agent = Activator.getAgent();
+					IStatus s = P2Util.checkForUpdates(agent, monitor);
+					if (s.getCode()==UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
+						System.out.println("Nothing to update");
+					}
+				}
+			});
+		} catch (Exception e) {
+
+			Activator.logException(e);
+			throw new RuntimeException(e);
+		}
+//		ProvisioningSession session = new ProvisioningSession(Activator.getAgent());
+//		ProvisioningUI.getDefaultUI().openUpdateWizard(false, new UpdateOperation(session), new LoadMetadataRepositoryJob(ProvisioningUI.getDefaultUI()));
 		
 
 		return null;
