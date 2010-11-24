@@ -7,7 +7,7 @@
                 exclude-result-prefixes="db ng exsl"
                 version='1.0'>
 
-<xsl:include href="../docbook-xsl-1.75.2/fo/docbook.xsl"/>
+<xsl:include href="../docbook-xsl-1.76.1/fo/docbook.xsl"/>
 <!-- 
 <xsl:attribute-set name="body.font.master">11</xsl:attribute-set>
  -->
