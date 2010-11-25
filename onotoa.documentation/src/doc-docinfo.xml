@@ -1,0 +1,63 @@
+
+<mediaobject role="cover">
+  <imageobject>
+    <imagedata fileref="images/cover/onotoa_cover.jpg" format="JPG" align="center"  scalefit="1"/>
+  </imageobject>
+  <textobject><phrase>Onotoa Handbook</phrase></textobject>
+</mediaobject>
+
+<authorgroup>
+	<author>
+		<honorific>Dipl. Inf</honorific>
+		<firstname>Hannes</firstname>
+		<surname>Niederhausen</surname>
+		<email>niederhausen@informatik.uni-leipzig.de</email>
+		<affiliation>
+			<shortaffil>Main Developer of Onotoa</shortaffil>
+			<orgname>Topic Maps Lab</orgname>
+		</affiliation>
+	</author>
+
+	<author>
+		<honorific>Mr</honorific>
+		<firstname>Sebastian</firstname>
+		<surname>Lippert</surname>
+		<affiliation>
+			<orgname>Topic Maps Lab</orgname>
+			<shortaffil>Developer of Onotoa</shortaffil>
+		</affiliation>
+	</author>
+</authorgroup>
+
+<copyright>
+	<year>2009-2010</year>
+	<holder>Hannes Niederhausen, Topic Maps Lab</holder>
+</copyright>
+
+<revhistory>
+	<revision>
+		<revnumber>1.2</revnumber>
+		<date>November 2010</date>
+		<authorinitials>HN</authorinitials>
+		<revremark>
+			Updates including generator explanations.
+			Removed extension point tutorials (until installation of features are available again
+    	</revremark>
+	</revision>
+	<revision>
+		<revnumber>1.1</revnumber>
+		<date>Dezember 2009</date>
+		<authorinitials>HN</authorinitials>
+		<revremark>
+			Updates.
+    </revremark>
+	</revision>
+	<revision>
+		<revnumber>1.0</revnumber>
+		<date>Oktober 2009</date>
+		<authorinitials>HN</authorinitials>
+		<revremark>
+			First release.
+    </revremark>
+	</revision>
+</revhistory>

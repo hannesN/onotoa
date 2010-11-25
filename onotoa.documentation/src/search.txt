@@ -1,0 +1,114 @@
+== Search ==
+
+Basically you can search Topic Types and identifiers. The results are displayed as tree structure in a new view. 
+The root shows informations about the specific search (type, search string e.g.) and the children represent the results.
+The button above the tree refreshes the last search. All searches are reachable by the menu entry *Search*.
+
+.Result View
+[[search_result_view]]
+image::images/documentation/search/result_view.png[scaledwidth="50%"]
+
+TIP: Double click on any entry to open its Property page.  
+
+_Onotoa_ provides several different searches for different purposes. These are:
+
+* Search Topic Type
+* List Topics without Identifier
+* List All Subject Identifier 
+* List All Subject Locator 
+* Find Usage
+* Clean Schema
+
+=== Search Topic Type ===
+
+This is a search for any topic of the schema. You can refine the search by the use of some constraints. These are:   
+
+* *Search String:* A string the topic name or one identifier should match. If this field is empty,
+all topics are a possible result.  
+* *Type:* Set the target type of the searched topic. Possible types are: *Topic Type*, *Occurrence Type*, 
+*Name Type*, *Role Type* and *Association Type*. The default value *Any* which means that the type constraint is disabled. 
+* *Case sensitive:* If this option is enabled lower and upper cases of your search string are respected by the 
+string matching.
+* *Exact Match:* This means only strings that are exactly the same (case insensitive) are recognized as match.
+* *Regular Expression:* By the use of the option, the search string will be interpreted as a regular expression. 
+If you enable this one, the options *Case sensitive* and *Exact Match* will be automatically disabled.
+* *Check Name:* Compares the topics name with the search string.
+* *Check Subject Identifier:* Compares the topics _Subject Identifiers_ with the search string.
+* *Check Subject Locator:* Compares the topics _Subject Locators_ with the search string.     
+
+NOTE: _Check Name_, _Check Subject Identifier_ and _Check Subject Locator_ are connected as logical disjunction.          
+
+.Search Dialog
+[[search_search_dialog]]
+image::images/documentation/search/search_dialog.png[scaledwidth="50%"]
+
+==== Advanced Mode ====
+
+The search for an Association or a Topic Type allows you to enable the advanced mode. Click on the *Advanced >>* button 
+to show more search options. 
+
+At this mode you can define constraints the searched type should use. The left list shows all available Topic Types. 
+Select one or more entry and click the *>* button to add them or double click on one entry. Your selection should appear in 
+the right list. Remove them by double clicking or the use of the *<* button. Above every list is a small text box 
+that you can use to filter (case sensitive) the shown entries by their names.  
+
+[width="75%", cols="^10%,<90%"]
+|======================================================================
+ifdef::basebackend-docbook[]
+|Icon| Description
+|image:images/documentation/search/search_b_bar/clear.png[width="0.3cm"]|Clear all selections and reset the name filter
+|image:images/documentation/search/search_b_bar/add_one.png[width="0.3cm"]|Add selected types to use list
+|image:images/documentation/search/search_b_bar/remove_one.png[width="0.3cm"]|Remove selected types from use list
+|image:images/documentation/search/search_b_bar/filter.png[width="0.3cm"]|Enable or disable type filtering
+endif::basebackend-docbook[]
+ifndef::basebackend-docbook[]
+|image:images/documentation/search/search_b_bar/clear.png[width="1cm"]|Clear all selections and reset the name filter
+|image:images/documentation/search/search_b_bar/add_one.png[width="1cm"]|Add selected types to use list
+|image:images/documentation/search/search_b_bar/remove_one.png[width="1cm"]|Remove selected types from use list
+|image:images/documentation/search/search_b_bar/filter.png[width="1cm"]|Enable or disable type filtering
+endif::basebackend-docbook[]
+|======================================================================
+
+If you search an *Association Type*, you can: 
+
+* Add roles the association should have.
+
+If you search a *Topic Type* you can:
+
+* Add roles the topic should play (Topic and Role Types)
+* Add name or occurrence constraints the the topic should have
+* Add associations where the topic should play a role    
+
+NOTE: All types the searched topic should use are connected as logical conjunction.
+ 
+.Advanced Mode
+[[search_advanced_dialog]]
+image::images/documentation/search/advanced_dialog.png[scaledwidth="50%"]
+
+=== List Topics without Identifier ===
+
+This search lists all Topic Types without any identifier. That means: Every result don't have at least one Subject Identifier or
+Subject Locator or Item Identifier. By the use of the context menu at the result view you can change this 
+immediately. If you do this, the result view will be refreshed automatically.
+
+.Add Identifier
+[[search_non_id_context]]
+image::images/documentation/search/non_id_context.png[scaledwidth="50%"]
+
+=== List All Subject Identifier ===
+
+List all Subject Identifiers of the schema. Double click on a result to open the corresponding 
+*Property Details Page* of the Topic Type that uses this Subject Identifier. 
+
+.Result List
+[[search_si_list]]
+image::images/documentation/search/si_list.png[scaledwidth="50%"]
+
+=== List All Subject Locator ===
+
+List all Subject Identifiers of the schema. Double click on a result to open the corresponding 
+*Property Details Page* of the Topic Type that uses this Subject Locator.
+
+.Result List
+[[search_sl_list]]
+image::images/documentation/search/sl_list.png[scaledwidth="50%"]

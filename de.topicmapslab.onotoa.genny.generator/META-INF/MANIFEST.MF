@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Genny Application Generator
+Bundle-SymbolicName: de.topicmapslab.onotoa.genny.generator;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.topicmapslab.onotoa.genny.generator.Activator
+Bundle-Vendor: Hannes Niederhausen, Topic Maps Lab
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.topicmapslab.aranuka_kuria.codegenerator;bundle-version="1.0.0",
+ de.topicmapslab.kuria.annotation;bundle-version="1.0.1",
+ de.topicmapslab.kuria.runtime;bundle-version="1.0.1",
+ de.topicmapslab.kuria.swtgenerator;bundle-version="1.0.1",
+ org.tmapi;bundle-version="2.0.3",
+ de.topicmapslab.tmcledit;bundle-version="1.2.0",
+ de.topicmapslab.tmcledit.export;bundle-version="1.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

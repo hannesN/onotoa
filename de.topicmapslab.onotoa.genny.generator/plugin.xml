@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            class="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
+            id="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
+            name="Generate Genny Application">
+         <keywordReference
+               id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny">
+         </keywordReference>
+         <description>
+            Export which creates an editor application based ont the loaded schema. If no schema is loaded the export wizard is of no use.
+Attention: You need to have to have Maven 3 on your system and set the path in the preferences.
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="de.topicmapslab.onotoa.aranuka.codegen.preferences.CodegenPage"
+            class="de.topicmapslab.onotoa.genny.generator.preferences.GennyPreferencePage"
+            id="de.topicmapslab.onotoa.genny.generator.preferences.GennyPropertyPage"
+            name="Generic Editor Export">
+         <keywordReference
+               id="de.topicmapslab.onotoa.genny.generator.preference.keywords.maven">
+         </keywordReference>
+         <keywordReference
+               id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny">
+         </keywordReference>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="de.topicmapslab.onotoa.genny.generator.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.keywords">
+      <keyword
+            id="de.topicmapslab.onotoa.genny.generator.preference.keywords.maven"
+            label="Maven">
+      </keyword>
+      <keyword
+            id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny"
+            label="Genny">
+      </keyword>
+   </extension>
+
+</plugin>
