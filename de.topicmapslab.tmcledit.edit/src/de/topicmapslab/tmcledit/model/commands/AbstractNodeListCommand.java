@@ -14,17 +14,31 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Abstract command for the move and copy nodes commands.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractNodeListCommand extends AbstractCommand {
 
 	protected final Diagram newDiagram;
 	protected final List<Node> nodeList;
 
+	/**
+	 * 
+	 * @param nodeList list of nodes to work with
+	 * @param newDiagram target 
+	 */
 	public AbstractNodeListCommand(List<Node> nodeList, Diagram newDiagram) {
 		super();
 		this.newDiagram=newDiagram;
 		this.nodeList = nodeList;
 	}
 
+	/**
+	 * Removing nodes which are already in the target diagram
+	 */
 	protected void removeNodes() {
     	Iterator<Node> it = nodeList.iterator();
     	while (it.hasNext()) {
@@ -43,8 +57,6 @@ public abstract class AbstractNodeListCommand extends AbstractCommand {
         			if (c.getContent().equals(content))
         				it.remove();
         		}
-        		
-        		
     		}
     	}
     	

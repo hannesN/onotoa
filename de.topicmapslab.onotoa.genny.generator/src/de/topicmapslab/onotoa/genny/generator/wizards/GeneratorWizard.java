@@ -52,6 +52,7 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 	 */
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		setWindowTitle("Generate Application...");
 	}
 
 	/**
