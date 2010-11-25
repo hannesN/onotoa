@@ -15,18 +15,31 @@ import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * 
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class RegExpTest extends AbstractImportTest {
-	
+	/**
+	 * loads topic map
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/regexp.xtm");
 	}
-	
+	/**
+	 * checks number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(4, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * checks unique
+	 */
 	@Test
 	public void testUnique() {
 		for (TopicType tt : getFile().getTopicMapSchema().getTopicTypes()) {

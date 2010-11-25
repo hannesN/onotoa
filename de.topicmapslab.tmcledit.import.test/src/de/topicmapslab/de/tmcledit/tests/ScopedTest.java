@@ -27,17 +27,26 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  */
 public class ScopedTest extends AbstractImportTest{
 
+	/**
+	 * loading topic map
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/scoped.xtm");
 		
 	}
 	
+	/**
+	 * checks number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(4, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * checks name types 
+	 */
 	@Test
 	public void nametypeTest() {
 		ModelIndexer.createInstance(getFile());
@@ -63,6 +72,9 @@ public class ScopedTest extends AbstractImportTest{
 		assertEquals("http://testmap.de/language", sc.getType().getIdentifiers().get(0));
 	}
 	
+	/**
+	 * checks occurrence types
+	 */
 	public void occtypeTest() {
 		ModelIndexer.createInstance(getFile());
 		List<TopicType> occTypes = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.OCCURRENCE_TYPE);

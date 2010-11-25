@@ -167,7 +167,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 				SubjectIdentifierListDialog dlg = new SubjectIdentifierListDialog(identifierText.getShell());
 				dlg.setText("Subject Identifier...");
 				dlg.setTopicName(getCastedModel().getName());
-				dlg.setSelectedTopics(type.getIdentifiers());
+				dlg.setSelectedStrings(type.getIdentifiers());
 				dlg.setInputDescription("Please enter the new subject identifier.");
 				dlg.setValidator(new IInputValidator() {
 
@@ -204,7 +204,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 			public void widgetSelected(SelectionEvent e) {
 				TopicType type = (TopicType) getModel();
 				StringListSelectionDialog dlg = new StringListSelectionDialog(identifierText.getShell());
-				dlg.setSelectedTopics(type.getLocators());
+				dlg.setSelectedStrings(type.getLocators());
 				dlg.setInputDescription("Please enter the new subject locator.");
 				dlg.setValidator(new IInputValidator() {
 

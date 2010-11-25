@@ -7,9 +7,21 @@ package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 
+/**
+ * Comparator to compare two {@link AbstractCardinalityConstraint}
+ * @author 
+ *
+ */
 public abstract class AbstractCardinalityConstraintComparator extends
 		TMCLConstructComparator {
 
+	
+	/**
+	 * Compares to constraints.
+	 * @param o1
+	 * @param o2
+	 * @return <code>true</code> if the two constraints are equal 
+	 */
 	public boolean equals(AbstractCardinalityConstraint o1,
 			AbstractCardinalityConstraint o2) {
 

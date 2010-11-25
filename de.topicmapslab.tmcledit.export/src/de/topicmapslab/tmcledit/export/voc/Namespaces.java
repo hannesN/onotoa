@@ -8,6 +8,9 @@ package de.topicmapslab.tmcledit.export.voc;
  */
 public interface Namespaces {
 	
+	/**
+	 * interface containing the TMDM vocabulary
+	 */
 	public static interface TMDM {
 		/**
 		 * General prefix for the types.
@@ -49,6 +52,9 @@ public interface Namespaces {
 		
 	}
 	
+	/**
+	 * interface containing the XSD vocabulary
+	 */
 	public static interface XSD {
 		/**
 		 * Base identifier of all XML Scheme Definition data-types <br />
@@ -219,7 +225,9 @@ public interface Namespaces {
 		public static final String QANY = QNAME + ":" + "any";
 	}
 	
-	
+	/**
+	 * interface containing the TMCL vocabulary
+	 */
 	public static interface TMCL {
 		/**
 		 * General prefix for the types.
@@ -314,6 +322,9 @@ public interface Namespaces {
 		public static String INTEGER = "http://psi.topicmaps.org/iso13250/ctm-integer";
 	}
 	
+	/**
+	 * interface containing the Onotoa vocabulary
+	 */
 	public static interface Onotoa {
 		/**
 		 * General prefix for the types.

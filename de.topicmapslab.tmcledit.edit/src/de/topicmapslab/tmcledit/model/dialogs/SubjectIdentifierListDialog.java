@@ -21,6 +21,8 @@ import org.eclipse.ui.fieldassist.ContentAssistCommandAdapter;
 import de.topicmapslab.tmcledit.model.psiprovider.PSIContentProposalProvider;
 
 /**
+ * A dialog for subject identifier modification
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -28,6 +30,10 @@ public class SubjectIdentifierListDialog extends StringListSelectionDialog {
 
 	private String topicName;
 	
+	/**
+	 * 
+	 * @param parentShell the parent shell
+	 */
 	public SubjectIdentifierListDialog(Shell parentShell) {
 	    super(parentShell);
     }
@@ -38,6 +44,10 @@ public class SubjectIdentifierListDialog extends StringListSelectionDialog {
 		return new AssistInputDialog(getShell(), text, inputDescription, init, validator);
 	}
 	
+	/**
+	 * Sets the topic name used for content proposals
+	 * @param topicName
+	 */
 	public void setTopicName(String topicName) {
 	    this.topicName = topicName;
     }

@@ -47,6 +47,8 @@ import de.topicmapslab.tmcledit.export.wizards.TMCLExportWizardPage.FileType.Typ
 
 
 /**
+ * Page for the export providing widgets to configure the export.
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -86,10 +88,18 @@ public class TMCLExportWizardPage extends WizardPage {
 		
 	}
 	
+	/**
+	 * Constructor
+	 * @param pageName name of the page
+	 */
 	public TMCLExportWizardPage(String pageName) {
 	    super("TMCL Export");
     }
 
+	/**
+	 * 
+	 * @return the filename
+	 */
 	public String getFileName() {
 	    return fileName.getText();
     }
@@ -166,28 +176,50 @@ public class TMCLExportWizardPage extends WizardPage {
 	    setControl(comp);
     }
 
+	/**
+	 * 
+	 * @return the flag whether to export the annotations
+	 */
 	public boolean isExportAnnotations() {
         return exportAnnotationButton.getSelection();
     }
 	
+	/**
+	 * 
+	 * @return the flag whether to export the schema infos
+	 */
 	public boolean isExportSchemaInfos() {
         return exportSchemaButton.getSelection();
     }
 	
+	/**
+	 * 
+	 * @return the flag whether to export the topic types only
+	 */
 	public boolean isExportTopicTypes() {
 		return onlyExportTopicTypes.getSelection();
 	}
 	
+	/**
+	 * 
+	 * @return the flag whether to export the diagram infos
+	 */
 	public boolean isExportDiagramInfos() {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return the flag whether to indenx the xml serialization
+	 */
 	public boolean isUseIndention() {
 		return useIndention.getSelection();
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @return the selected file type (xml, ctm, ltm)
+	 */
 	public FileType getSelectedFileType() {
 	    return selectedFileType;
     }
@@ -347,6 +379,10 @@ public class TMCLExportWizardPage extends WizardPage {
 		
 	}
 
+	/**
+	 * 
+	 * @return the file suffix according to the selection
+	 */
     public String getFileSuffix() {
 		IStructuredSelection sel = (IStructuredSelection) typeViewer.getSelection();
 		FileType e =  (FileType) sel.getFirstElement();

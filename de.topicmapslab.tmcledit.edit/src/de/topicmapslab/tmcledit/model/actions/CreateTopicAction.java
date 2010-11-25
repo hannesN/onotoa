@@ -18,14 +18,16 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.model.views.treenodes.TreeObject;
 
 /**
+ * Action to create a new topic type
  * 
- * @author niederhausen
+ * @author Hannes Niederhausen
  *
  */
 public class CreateTopicAction extends AbstractTreeListenerAction {
@@ -73,7 +75,7 @@ public class CreateTopicAction extends AbstractTreeListenerAction {
 		
 		if (dlg.open() == Dialog.OK) {
 			getView().getEditingDomain().getCommandStack().execute(
-			        new CreateTopicTypeCommand(getView().getCurrentTopicMapSchema(), wizard.getNewTopicType()));
+			        new CreateTopicTypeCommand(TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().getOnotoaFile().getTopicMapSchema(), wizard.getNewTopicType()));
 		}
 
 	}

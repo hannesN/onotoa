@@ -16,10 +16,9 @@ import de.topicmapslab.kuria.annotation.widgets.Check;
 import de.topicmapslab.kuria.annotation.widgets.Combo;
 import de.topicmapslab.kuria.annotation.widgets.Editable;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
 /**
- * Model for {@link TopicMapSchema}s
+ * Model for occurrence and name constraints
  * 
  * @author Hannes Niederhausen
  * 
@@ -34,21 +33,37 @@ public class CharacteristicData extends FieldData {
     	super(parent);
     }
 
+    /**
+     * 
+     * @return flag whether to provide a button to create a new instance 
+     */
 	@Check (label="Enable New instance Creation", weight=6)
     public boolean isCreateNew() {
     	return getBooleanValueOf(CREATE_NEW);
     }
 
-	public void setCreateNew(boolean hidden) {
-    	setValue(CREATE_NEW, Boolean.toString(hidden));
+	/**
+	 * Flag whether to provide a button to create a new instance
+	 * @param createnew 
+	 */
+	public void setCreateNew(boolean createnew) {
+    	setValue(CREATE_NEW, Boolean.toString(createnew));
     }
 	
+	/**
+	 * 
+	 * @return the number of rows for a text field for the attribute
+	 */
 	@Combo (label="Number of Rows", optional=true, weight=8)
     public int getRows() {
     	return getIntValueOf(ROWS);
     }
 
-	public void setRows(int hidden) {
-    	setValue(ROWS, Integer.toString(hidden));
+	/**
+	 * Sets the number of rows for a text field for the attribute
+	 * @param numRows the number of rows: 1..10
+	 */
+	public void setRows(int numRows) {
+    	setValue(ROWS, Integer.toString(numRows));
     }
 }

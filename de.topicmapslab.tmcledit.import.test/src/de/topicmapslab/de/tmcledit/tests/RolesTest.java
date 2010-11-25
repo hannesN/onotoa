@@ -28,16 +28,26 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  */
 public class RolesTest extends AbstractImportTest {
 
+	/**
+	 * loading topic map
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/roles.xtm");
 		
 	}
+	
+	/**
+	 * checks number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(5, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * checks roles
+	 */
 	@Test
 	public void checkRoles() {
 		ModelIndexer.createInstance(getFile());
@@ -70,6 +80,9 @@ public class RolesTest extends AbstractImportTest {
 		}
 	}
 
+	/**
+	 * checks players
+	 */
 	@Test
 	public void testPlayer() {
 		ModelIndexer.createInstance(getFile());
@@ -101,6 +114,9 @@ public class RolesTest extends AbstractImportTest {
 			}
 		}
 	}
+	/**
+	 * checks role combonation 
+	 */
 	@Test
 	public void testRoleCombination() {
 		ModelIndexer.createInstance(getFile());
