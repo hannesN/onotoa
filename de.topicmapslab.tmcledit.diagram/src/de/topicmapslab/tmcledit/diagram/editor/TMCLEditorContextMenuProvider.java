@@ -36,6 +36,13 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.Node;
 
+/**
+ * Class which provides the content of a context menu. It creates the actions based on the selected {@link EditPart}
+ * in the diagram.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 
 	private final ActionRegistry actionRegistry;
@@ -44,7 +51,12 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 	
 	private EditPart selectedEditPart;
 	
-	
+	/**
+	 * 
+	 * @param viewer the viewer containing the editpart - e.g. the diagram
+	 * @param actionRegistry an action registry
+	 * @param diagram the {@link Diagram}
+	 */
 	public TMCLEditorContextMenuProvider(EditPartViewer viewer, ActionRegistry actionRegistry, Diagram diagram) {
 		super(viewer);
 		this.actionRegistry = actionRegistry;
@@ -52,10 +64,18 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 		this.diagram = diagram;
 	}
 	
+	/**
+	 * Flag if the provider should generate a context menu
+	 * @param active 
+	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 	
+	/**
+	 * Sets the selected {@link EditPart}
+	 * @param selectedEditPart the selected {@link EditPart}
+	 */
 	public void setSelectedEditPart(EditPart selectedEditPart) {
 		this.selectedEditPart = selectedEditPart;
 	}
@@ -162,6 +182,10 @@ public class TMCLEditorContextMenuProvider extends ContextMenuProvider {
 		
 	}
 	
+	/**
+	 * 
+	 * @return the used action registry
+	 */
 	public ActionRegistry getActionRegistry() {
 		return actionRegistry;
 	}

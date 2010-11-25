@@ -236,6 +236,10 @@ public class TypeNodeEditPart extends
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return the model casted as {@link TypeNode}
+	 */
 	public TypeNode getCastedModel() {
 		return (TypeNode) getModel();
 	}

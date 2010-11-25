@@ -52,11 +52,24 @@ import de.topicmapslab.tmcledit.model.commands.RemoveScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
+/**
+ * Actions which deletes the selected model entry from the model
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class DeleteFromModelAction extends AbstractSelectionAction {
+	/**
+	 * Action ID
+	 */
 	public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 
 
-
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the {@link CommandStack} which is used to execute the deletion command(s)
+	 */
 	public DeleteFromModelAction(CommandStack commandStack) {
 		super(commandStack);
 		update();

@@ -11,6 +11,7 @@
 package de.topicmapslab.tmcledit.domaindiagram.editparts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
@@ -85,12 +86,13 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 
 	@Override
 	public List<IAction> getActions() {
-		ArrayList<IAction> result = new ArrayList<IAction>();
+//		ArrayList<IAction> result = new ArrayList<IAction>();
 
-		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(),
-				getCastedModel()));
+		// to ealry need to refactor contextmenuprovider
+//		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(),
+//				getCastedModel()));
 
-		return result;
+		return Collections.emptyList();
 	}
 
 	public void notifyChanged(Notification notification) {
