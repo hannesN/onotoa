@@ -56,7 +56,7 @@ import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
  * Actions which deletes the selected model entry from the model
  * 
  * @author Hannes Niederhausen
- *
+ * 
  */
 public class DeleteFromModelAction extends AbstractSelectionAction {
 	/**
@@ -64,11 +64,12 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 	 */
 	public final static String ID = "de.topicmapslab.tmcleditor.removefrommodel";
 
-
 	/**
 	 * Constructor
 	 * 
-	 * @param commandStack the {@link CommandStack} which is used to execute the deletion command(s)
+	 * @param commandStack
+	 *            the {@link CommandStack} which is used to execute the deletion
+	 *            command(s)
 	 */
 	public DeleteFromModelAction(CommandStack commandStack) {
 		super(commandStack);
@@ -92,8 +93,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		while (it.hasNext()) {
 			EditPart selectedEditPart = (EditPart) it.next();
 			if (ed == null)
-				ed = (EditDomain) selectedEditPart.getViewer()
-						.getEditDomain();
+				ed = (EditDomain) selectedEditPart.getViewer().getEditDomain();
 
 			Object model = selectedEditPart.getModel();
 
@@ -121,8 +121,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		} else if (model instanceof Comment) {
 			cmd = new DeleteCommentCommand((Comment) model);
 		} else if (model instanceof ReifierConstraint) {
-			ReifiableTopicType rtt = (ReifiableTopicType) ((EObject) model)
-					.eContainer();
+			ReifiableTopicType rtt = (ReifiableTopicType) ((EObject) model).eContainer();
 			cmd = new GenericSetCommand(
 					rtt,
 					ModelPackage.SCOPED_REIFIABLE_TOPIC_TYPE__REIFIER_CONSTRAINT,
@@ -134,7 +133,7 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 		} else if (model instanceof AbstractConstraint) {
 			cmd = getDeleteTopicTypeConstraintItemCommand(model);
 		}
-		
+
 		return cmd;
 	}
 
@@ -147,19 +146,21 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 			if (edge.getType() != EdgeType.ROLE_CONSTRAINT_TYPE) {
 				TopicType source = ((TypeNode) edge.getSource()).getTopicType();
 				TopicType target = ((TypeNode) edge.getTarget()).getTopicType();
-				
+
 				if (edge.getType() == EdgeType.IS_ATYPE) {
-					ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
+					ArrayList<TopicType> newList = new ArrayList<TopicType>(
+							source.getIsa());
 					newList.remove(target);
-					
+
 					return new SetIsACommand(newList, source);
 				} else {
-					ArrayList<TopicType> newList = new ArrayList<TopicType>(source.getAko());
+					ArrayList<TopicType> newList = new ArrayList<TopicType>(
+							source.getAko());
 					newList.remove(target);
-					
+
 					return new SetAkoCommand(newList, source);
 				}
-				
+
 			}
 		}
 		return null;
@@ -180,8 +181,8 @@ public class DeleteFromModelAction extends AbstractSelectionAction {
 			type = ModelPackage.TOPIC_TYPE__ITEM_IDENTIFIER_CONSTRAINTS;
 		}
 		AbstractConstraint ac = (AbstractConstraint) model;
-		cmd = new DeleteTopicTypeConstraintItemCommand((TopicType) ac
-				.eContainer(), ac, type);
+		cmd = new DeleteTopicTypeConstraintItemCommand(
+				(TopicType) ac.eContainer(), ac, type);
 		return cmd;
 	}
 

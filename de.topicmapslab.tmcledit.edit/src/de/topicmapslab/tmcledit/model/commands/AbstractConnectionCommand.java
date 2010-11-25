@@ -31,6 +31,13 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Abstract Command for removing elements which have a connection representation, which are 
+ * isa, ako and topic role constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractConnectionCommand extends AbstractCommand {
 
 	private List<TopicType> oldList = Collections.emptyList();
@@ -42,6 +49,13 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 	protected final TopicType topic;
 
 
+	/**
+	 * Constructor
+	 * 
+	 * @param label label for the command
+	 * @param newList the new list to set
+	 * @param topic 
+	 */
 	public AbstractConnectionCommand(String label, List<TopicType> newList,
 			TopicType topic) {
 		super(label);
@@ -63,7 +77,7 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 			Diagram d = e.getKey();
 			List<Edge> edges = e.getValue();
 			
-			d.eSetDeliver(edges.size()>0);
+			d.eSetDeliver(edges.size()==0);
 			d.getEdges().clear();
 			d.eSetDeliver(true);
 			d.getEdges().addAll(edges);
@@ -86,7 +100,7 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 			Diagram d = e.getKey();
 			List<Edge> edges = e.getValue();
 			
-			d.eSetDeliver(edges.size()>0);
+			d.eSetDeliver(edges.size()==0);
 			d.getEdges().clear();
 			d.eSetDeliver(true);
 			d.getEdges().addAll(edges);
@@ -106,13 +120,21 @@ public abstract class AbstractConnectionCommand extends AbstractCommand {
 		return true;
 	}
 	
-	public Map<Diagram, List<Edge>> getNewEdgesMaps() {
+	/**
+	 * 
+	 * @return the map with the new edges for a diagram
+	 */
+	protected Map<Diagram, List<Edge>> getNewEdgesMaps() {
 		if (newEdgesMaps==null)
 			return Collections.emptyMap();
 		return newEdgesMaps;
     }
 	
-	public Map<Diagram, List<Edge>> getOldEdgesMaps() {
+	/**
+	 * 
+	 * @return the map with the old edges for a diagram
+	 */
+	protected Map<Diagram, List<Edge>> getOldEdgesMaps() {
 		if (oldEdgesMaps==null)
 			return Collections.emptyMap();
 	    return oldEdgesMaps;
