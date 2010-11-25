@@ -20,6 +20,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * The {@link NewPrefixMappingDialog} is a dialog used to add new prefixes. It contains two textfields and
+ * validates if a prefix is already used.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class NewPrefixMappingDialog extends Dialog {
 
 	private Text keyText;
@@ -28,6 +35,10 @@ public class NewPrefixMappingDialog extends Dialog {
 	private String key;
 	private String uri;
 	
+	/**
+	 * Constructor
+	 * @param parentShell the parent shell
+	 */
 	public NewPrefixMappingDialog(Shell parentShell) {
 		super(parentShell);
 	}
@@ -56,6 +67,10 @@ public class NewPrefixMappingDialog extends Dialog {
 		return comp;
 	}
 	
+	/**
+	 * Sets the key which may be edited
+	 * @param key
+	 */
 	public void setKey(String key) {
 		this.key = key;
 	}
@@ -75,14 +90,26 @@ public class NewPrefixMappingDialog extends Dialog {
 		newShell.setSize(350, 200);
 	}
 	
+	/**
+	 * 
+	 * @return the uri
+	 */
 	public String getUri() {
 		return uri;
 	}
 	
+	/**
+	 * 
+	 * @return the entered prefix key
+	 */
 	public String getKey() {
 		return key;
 	}
 
+	/**
+	 * Sets the uri
+	 * @param uri the old uri which may be edited
+	 */
 	public void setUri(String uri) {
 		this.uri = uri;
     }

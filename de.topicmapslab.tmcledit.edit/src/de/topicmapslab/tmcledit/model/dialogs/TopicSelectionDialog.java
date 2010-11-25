@@ -49,6 +49,8 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 /**
+ * Dialog to select topics from a list of porposals.
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -69,10 +71,23 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 
 	private String title;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param parentShell parent shell
+	 * @param workingTopicType type which will be modified with the selected types, e.g. isa associtioan
+	 */
 	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType) {
 		this(parentShell, workingTopicType, KindOfTopicType.TOPIC_TYPE);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param parentShell parent shell
+	 * @param workingTopicType type which will be modified with the selected types, e.g. isa associtioan
+	 * @param kind kind of topic of the porposals
+	 */
 	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType, KindOfTopicType kind) {
 		super(parentShell);
 		this.workingTopicType = workingTopicType;
@@ -261,10 +276,18 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		newShell.setText(getTitle());
 	}
 
+	/**
+	 * The list of selected topics
+	 * @return
+	 */
 	public List<TopicType> getSelectedTopics() {
 		return selectedTopics;
 	}
 
+	/**
+	 * Sets the  initial selected topics 
+	 * @param selectedTopics the list of topics which are selected
+	 */
 	public void setSelectedTopics(List<TopicType> selectedTopics) {
 		this.selectedTopics = new ArrayList<TopicType>();
 		this.selectedTopics.addAll(selectedTopics);
@@ -280,10 +303,18 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		}
 	}
 
+	/**
+	 * 
+	 * @return returns the title
+	 */
 	public String getTitle() {
 		return title == null ? "" : title;
 	}
 
+	/**
+	 * Sets the title
+	 * @param title the new title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}

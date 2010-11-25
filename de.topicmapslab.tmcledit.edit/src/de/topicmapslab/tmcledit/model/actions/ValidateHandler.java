@@ -25,6 +25,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.tmcledit.model.File;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.validation.ModelValidator;
 import de.topicmapslab.tmcledit.model.validation.ValidationResult;
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -38,43 +39,41 @@ public class ValidateHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow();
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 		ModelView view = (ModelView) activePage.findView(ModelView.ID);
 		if (view == null)
 			return null;
 
-		if (view.getCurrentTopicMapSchema() != null) {
-			File file = (File) view.getCurrentTopicMapSchema().eContainer();
+		File file = TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().getOnotoaFile();
+		if (file == null)
+			return null;
 
-			ModelValidator validator = new ModelValidator(file);
-			
-			List<ValidationResult> list = validator.validate(view.getEditingDomain().getCommandStack());
-			
-			try {
-				ValidationErrorView vew = (ValidationErrorView) activePage.findView(ValidationErrorView.ID);
-				
-				if (list.size()==0) {
-					MessageBox box = new MessageBox(activeWorkbenchWindow.getShell());
-					box.setMessage("Everything is fine.");
-					box.setText("Validation message");
-					box.open();
-				} else {
-					if (vew == null)
-						vew = (ValidationErrorView) activePage.showView(ValidationErrorView.ID);
-					else
-						activePage.activate(vew);
-				}
-				if (vew!=null)
-					vew.setValidationResults(list);
+		ModelValidator validator = new ModelValidator(file);
 
-			} catch (PartInitException e) {
-				throw new RuntimeException(e);
+		List<ValidationResult> list = validator.validate(view.getEditingDomain().getCommandStack());
+
+		try {
+			ValidationErrorView vew = (ValidationErrorView) activePage.findView(ValidationErrorView.ID);
+
+			if (list.size() == 0) {
+				MessageBox box = new MessageBox(activeWorkbenchWindow.getShell());
+				box.setMessage("Everything is fine.");
+				box.setText("Validation message");
+				box.open();
+			} else {
+				if (vew == null)
+					vew = (ValidationErrorView) activePage.showView(ValidationErrorView.ID);
+				else
+					activePage.activate(vew);
 			}
-			
-			
+			if (vew != null)
+				vew.setValidationResults(list);
+
+		} catch (PartInitException e) {
+			throw new RuntimeException(e);
 		}
+
 		return null;
 	}
 

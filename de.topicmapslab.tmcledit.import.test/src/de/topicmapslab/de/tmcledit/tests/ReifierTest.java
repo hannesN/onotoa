@@ -18,19 +18,33 @@ import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * tests reifier
+ * @author Hannes Niederhausen
+ *
+ */
 public class ReifierTest extends AbstractImportTest {
 
+	/**
+	 * loading topic map
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/reifier.xtm");
 
 	}
 
+	/**
+	 * checks number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(4, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 
+	/**
+	 * checks topic types
+	 */
 	@Test
 	public void checkTopicType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(
@@ -45,6 +59,9 @@ public class ReifierTest extends AbstractImportTest {
 		assertEquals(3, tt.getTopicReifiesConstraints().size());
 	}
 
+	/**
+	 * checks association reifier
+	 */
 	@Test
 	public void checkAssocReifierConstraint() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(
@@ -62,6 +79,9 @@ public class ReifierTest extends AbstractImportTest {
 
 	}
 
+	/**
+	 * checks name reifier
+	 */
 	@Test
 	public void checkNameReifierConstraint() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(
@@ -79,6 +99,9 @@ public class ReifierTest extends AbstractImportTest {
 
 	}
 
+	/**
+	 * checks occurrence reifier
+	 */
 	@Test
 	public void checkOccurrenceReifierConstraint() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(

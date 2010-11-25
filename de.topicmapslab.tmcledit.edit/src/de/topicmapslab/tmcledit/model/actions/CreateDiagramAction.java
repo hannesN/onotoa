@@ -59,7 +59,7 @@ public class CreateDiagramAction extends Action {
 	 */
 	@Override
 	public void run() {
-		final File file = (File) modelView.getCurrentTopicMapSchema().eContainer();
+		final File file = TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().getOnotoaFile();
 		InputDialog dlg = new InputDialog(this.modelView.getSite().getShell(), "New Diagram..",
 		        "Please Enter the name of the new diagram", "", new IInputValidator() {
 

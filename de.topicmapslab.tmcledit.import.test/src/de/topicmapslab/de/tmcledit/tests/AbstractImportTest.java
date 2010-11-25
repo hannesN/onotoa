@@ -13,7 +13,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.tmclimport.builder.OnotoaBuilder;
 
 /**
- * 
+ *  abstract test for import tests
  * 
  * @author Hannes Niederhausen
  * 
@@ -43,6 +43,10 @@ public abstract class AbstractImportTest {
 		ModelIndexer.createInstance(file);
 	}
 
+	/**
+	 * 
+	 * @return the {@link File} with the loaded model 
+	 */
 	public File getFile() {
 		return file;
 	}

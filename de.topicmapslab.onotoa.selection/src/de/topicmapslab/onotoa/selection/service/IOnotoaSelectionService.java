@@ -17,12 +17,32 @@ import de.topicmapslab.tmcledit.model.File;
  */
 public interface IOnotoaSelectionService {
 
+	/**
+	 * Adds a {@link ISelectionChangedListener} to the list.
+	 * 
+	 * @param listener the new listener
+	 */
 	public void addSelectionChangedListener(ISelectionChangedListener listener);
 	
+	/**
+	 * Removes a {@link ISelectionChangedListener} to the list.
+	 * 
+	 * @param listener the listener to remove
+	 */
 	public void removeSelectionChangedListener(ISelectionChangedListener listener);
 	
+	/**
+	 * Sets the selection
+	 * 
+	 * @param selection the new selection
+	 * @param source the source of the selection
+	 */
 	public void setSelection(ISelection selection, ISelectionProvider source);
 	
+	/**
+	 * 
+	 * @return the selection
+	 */
 	public ISelection getSelection();
 	
 	/**

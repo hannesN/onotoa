@@ -11,19 +11,33 @@ import org.tmapi.core.TMAPIException;
 import de.topicmapslab.tmcledit.model.AbstractUniqueValueTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class UniqueTest extends AbstractImportTest {
 
+	/**
+	 * loading topic map
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/unique.xtm");
 		
 	}
 	
+	/**
+	 * Check number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(4, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * Check unique constraint
+	 */
 	@Test
 	public void testUnique() {
 		for (TopicType tt : getFile().getTopicMapSchema().getTopicTypes()) {

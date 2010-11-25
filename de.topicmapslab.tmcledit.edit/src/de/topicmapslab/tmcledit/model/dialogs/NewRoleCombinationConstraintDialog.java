@@ -48,6 +48,8 @@ import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
+ * A dialog to create new role combination constraints.
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -77,6 +79,11 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 
 	private AssociationType at;
 
+	/**
+	 * Cohnstructor
+	 * @param parentShell the parent shell
+	 * @param at the {@link AssociationType} which will get the constraints
+	 */
 	public NewRoleCombinationConstraintDialog(Shell parentShell, AssociationType at) {
 		super(parentShell);
 		possibleRoles = new ArrayList<TopicType>(at.getRoles().size());
@@ -122,6 +129,12 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 		}
 	}
 
+	/**
+	 * 
+	 * @param parentShell the parent shell
+	 * @param at the {@link AssociationType} havint the contraint
+	 * @param rcc the cnotraint to edit
+	 */
 	public NewRoleCombinationConstraintDialog(Shell parentShell, AssociationType at, RoleCombinationConstraint rcc) {
 		this(parentShell, at);
 		this.roleCombination = rcc;
@@ -216,6 +229,11 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 			getButton(IDialogConstants.OK_ID).setEnabled(finished);
 	}
 
+	
+	/**
+	 * 
+	 * @return a configured {@link AddRoleCombinationConstraintCommand}
+	 */
 	public Command getCreateCommand() {
 		roleCombination = ModelFactory.eINSTANCE.createRoleCombinationConstraint();
 		roleCombination.setPlayer(player);
@@ -226,6 +244,10 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 		return new AddRoleCombinationConstraintCommand(at, roleCombination);
 	}
 
+	/**
+	 * 
+	 * @return a {@link CompoundCommand} containg command to set the properties of the modified constraint
+	 */
 	public Command getModifyCommand() {
 		CompoundCommand cmd = new CompoundCommand();
 

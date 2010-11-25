@@ -21,22 +21,35 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 
 /**
+ * tests kind of import
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class AkoIsaTest extends AbstractImportTest{
 
+	/**
+	 * Loads the topic map
+	 * @throws IOException
+	 * @throws TMAPIException
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/isa_ako.xtm");
 		
 	}
 	
+	/**
+	 * Checks number of imported types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(3, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * Checks imported topic types
+	 */
 	@Test
 	public void checkTopicType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.TOPIC_TYPE);

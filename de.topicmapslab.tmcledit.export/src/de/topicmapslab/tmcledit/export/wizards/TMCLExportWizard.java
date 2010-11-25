@@ -37,14 +37,16 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 
+/**
+ * Wizard to export to a topic map serialization
+ * @author Hannes Niederhausen
+ *
+ */
 public class TMCLExportWizard extends Wizard implements IExportWizard {
 
 	private TopicMapSchema schema;
 
 	private TMCLExportWizardPage page;
-
-	public TMCLExportWizard() {
-	}
 
 	@Override
 	public boolean performFinish() {
