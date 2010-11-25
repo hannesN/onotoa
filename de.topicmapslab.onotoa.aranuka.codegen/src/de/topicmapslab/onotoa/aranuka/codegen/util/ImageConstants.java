@@ -17,8 +17,8 @@ package de.topicmapslab.onotoa.aranuka.codegen.util;
 public class ImageConstants {
 
 	/**
-	 * Anvil Image Contrant
+	 * Gear Image Contrant
 	 */
-	public static String IMG_GENERATE_CODE = "icons/anvil.gif";
-
+	public static String IMG_GENERATE_CODE = "icons/gear.png";
+	
 }
