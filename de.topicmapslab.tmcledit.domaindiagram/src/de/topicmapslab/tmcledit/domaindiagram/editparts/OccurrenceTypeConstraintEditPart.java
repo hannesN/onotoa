@@ -21,7 +21,6 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 
-import de.topicmapslab.tmcledit.domaindiagram.action.DeleteTypedConstraintAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.ModelPackage;
@@ -32,6 +31,12 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
+/**
+ * {@link EditPart} for the occurrence constraint
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 
 	OccurrenceTypeConstraint getCastedModel() {
@@ -146,6 +151,12 @@ public class OccurrenceTypeConstraintEditPart extends AbstractLabelEditPart {
 		return result;
 	}
 
+	/**
+	 * Checks if the given topic type already has a occurrence type constraint with the given name type
+	 * @param tt the topic type containing the constraints
+	 * @param ot the occurrence type to check
+	 * @return
+	 */
 	public boolean alreadyUsed(TopicType tt, OccurrenceType ot) {
 		for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
 			if (otc.equals(getModel()))
