@@ -15,10 +15,10 @@ import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.NAME;
 import de.topicmapslab.kuria.annotation.widgets.Editable;
 import de.topicmapslab.kuria.annotation.widgets.TextField;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
+import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
- * Model for {@link TopicMapSchema}s
+ * Model for {@link TopicType}s
  * 
  * @author Hannes Niederhausen
  * 
@@ -33,20 +33,36 @@ public class TopicTypeData extends GeneratorData {
     	super(parent);
     }
 
+    /**
+     * 
+     * @return the category name
+     */
 	@TextField(label = "Category", optional=true)
 	public String getCategory() {
 		return getValueOf(CATEGORY);
 	}
 	
+	/**
+	 * Sets the name of the category
+	 * @param category the new name
+	 */
 	public void setCategory(String category) {
 		setValue(CATEGORY, category);
 	}
 	
+	/**
+	 * The name of the generated class
+	 * @return class name, must be Java compatible
+	 */
 	@TextField(label="Class name", optional=true)
 	public String getName() {
 		return getValueOf(NAME);
 	}
 	
+	/**
+	 * 
+	 * @param name the name of the class
+	 */
 	public void setName(String name) {
 		setValue(NAME, name);
 	}

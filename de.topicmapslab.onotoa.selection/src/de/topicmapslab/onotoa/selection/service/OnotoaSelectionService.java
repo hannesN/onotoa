@@ -13,7 +13,6 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 
-import de.topicmapslab.onotoa.selection.Activator;
 import de.topicmapslab.tmcledit.model.File;
 
 /**

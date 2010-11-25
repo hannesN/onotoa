@@ -32,11 +32,19 @@ public class TopicMapSchemaData extends GeneratorData {
     	super(parent);
     }
 
+    /**
+     * 
+     * @return the label for the default category
+     */
 	@TextField(label = "Default Category", optional=true)
 	public String getCategory() {
 		return getValueOf(CATEGORY);
 	}
 	
+	/**
+	 * Sets the label for the default category
+	 * @param category
+	 */
 	public void setCategory(String category) {
 		setValue(CATEGORY, category);
 	}

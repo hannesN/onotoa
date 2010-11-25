@@ -29,6 +29,9 @@ public abstract class GeneratorData implements IModelExtension {
 	@Hidden
 	private TMCLConstruct parent;
 
+	/**
+	 * Default constructor
+	 */
 	public GeneratorData() {
 	}
 

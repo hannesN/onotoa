@@ -17,7 +17,7 @@ package de.topicmapslab.onotoa.aranuka.codegen.util;
 public class ImageConstants {
 
 	/**
-	 * Gear Image Contrant
+	 * Gear Image Constant
 	 */
 	public static String IMG_GENERATE_CODE = "icons/gear.png";
 	

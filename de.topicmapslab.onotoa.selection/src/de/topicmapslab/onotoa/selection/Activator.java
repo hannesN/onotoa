@@ -8,6 +8,12 @@ import org.osgi.framework.BundleContext;
 import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.onotoa.selection.service.OnotoaSelectionService;
 
+/**
+ * Activator for the Selection bundle
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class Activator extends Plugin {
 	private static final String PLUGIN_ID = "de.topicmapslab.onotoa.selection";
 	
@@ -20,6 +26,10 @@ public class Activator extends Plugin {
 		return context;
 	}
 
+	/**
+	 * Returns the bundles singleton
+	 * @return
+	 */
 	public static Activator getPlugin() {
 	    return plugin;
     }
@@ -44,6 +54,10 @@ public class Activator extends Plugin {
 		Activator.plugin = null;
 	}
 	
+	/**
+	 * Logs a {@link Throwable} as info
+	 * @param t the {@link Throwable} to log
+	 */
 	public static void logInfo(Throwable t) {
 		getPlugin().getLog().log(new Status(IStatus.INFO, PLUGIN_ID, "Exception thrown:", t));
 	}

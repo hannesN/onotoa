@@ -23,21 +23,32 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 
 /**
+ * Test type import
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class TypesTest extends AbstractImportTest{
 
+	/**
+	 * loading topic map
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/typestest.xtm");
 	}
 	
+	/**
+	 * checks number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(5, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * checks topic types
+	 */
 	@Test
 	public void checkTopicType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.TOPIC_TYPE);
@@ -51,6 +62,9 @@ public class TypesTest extends AbstractImportTest{
 		
 	}
 	
+	/**
+	 * checks name types
+	 */
 	@Test
 	public void checkNameType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.NAME_TYPE);
@@ -65,6 +79,9 @@ public class TypesTest extends AbstractImportTest{
 		
 	}
 	
+	/**
+	 * checks role types
+	 */
 	@Test
 	public void checkRoleType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.ROLE_TYPE);
@@ -79,6 +96,9 @@ public class TypesTest extends AbstractImportTest{
 		
 	}
 	
+	/**
+	 * checks association types
+	 */
 	@Test
 	public void checkAssociationType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.ASSOCIATION_TYPE);
@@ -93,6 +113,9 @@ public class TypesTest extends AbstractImportTest{
 		
 	}
 	
+	/**
+	 * checks occurrence types
+	 */
 	@Test
 	public void checkOccurrenceType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.OCCURRENCE_TYPE);
