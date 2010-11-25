@@ -11,16 +11,17 @@
 package de.topicmapslab.tmcledit.domaindiagram.editparts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 
-import de.topicmapslab.tmcledit.domaindiagram.action.DeleteTypedConstraintAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeAction;
 import de.topicmapslab.tmcledit.domaindiagram.action.SetTypeData;
 import de.topicmapslab.tmcledit.domaindiagram.policies.AbstractTypedConstraintDirectEditPolicy;
@@ -33,6 +34,12 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
+/**
+ * {@link EditPart} for the name constraint
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 
 	private NameTypeConstraint getCastedModel() {
@@ -109,12 +116,13 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 
 	@Override
 	public List<IAction> getActions() {
-		ArrayList<IAction> result = new ArrayList<IAction>();
+//		ArrayList<IAction> result = new ArrayList<IAction>();
 
-		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(),
-				getCastedModel()));
+		// to ealry need to refactor contextmenuprovider
+//		result.add(new DeleteTypedConstraintAction(getEMFCommendStack(),
+//				getCastedModel()));
 
-		return result;
+		return Collections.emptyList();
 	}
 
 	@Override
@@ -149,7 +157,13 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 		return result;
 	}
 
-	public boolean alreadyUsed(TopicType tt, NameType nt) {
+	/**
+	 * Checks if the given topic type already has a name type constraint with the fiven name type
+	 * @param tt the topic type containing the constraints
+	 * @param nt the name type to check
+	 * @return
+	 */
+	private boolean alreadyUsed(TopicType tt, NameType nt) {
 		for (NameTypeConstraint ntc : tt.getNameConstraints()) {
 			if (ntc.equals(getModel()))
 				continue;

@@ -24,11 +24,25 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.commands.RemoveNodeCommand;
 
+/**
+ * Action which removes a node element from the diagram
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class RemoveFromDiagramAction extends AbstractSelectionAction {
 
+	/**
+	 * Action ID
+	 */
 	public final static String ID = "de.topicmapslab.tmcleditor.removefromdiagram";
 
 
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the {@link CommandStack} used to execute the remoce caommand(s)
+	 */
 	public RemoveFromDiagramAction(CommandStack commandStack) {
 		super(commandStack);
 	}
