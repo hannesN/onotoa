@@ -158,7 +158,7 @@ public class NameTypeConstraintEditPart extends AbstractLabelEditPart {
 	}
 
 	/**
-	 * Checks if the given topic type already has a name type constraint with the fiven name type
+	 * Checks if the given topic type already has a name type constraint with the given name type
 	 * @param tt the topic type containing the constraints
 	 * @param nt the name type to check
 	 * @return
