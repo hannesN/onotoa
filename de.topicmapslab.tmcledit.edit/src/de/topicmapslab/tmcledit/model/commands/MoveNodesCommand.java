@@ -21,7 +21,12 @@ import de.topicmapslab.tmcledit.model.index.AssociationIndexer;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.index.TopicTypeNodeIndexer;
 
-
+/**
+ * A command which moves a list of nodes to another diagram
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class MoveNodesCommand extends AbstractNodeListCommand {
 
 	private final Diagram oldDiagram;
@@ -31,9 +36,12 @@ public class MoveNodesCommand extends AbstractNodeListCommand {
 	private List<Edge> oldEdgeList;
 	private List<Edge> newEdgeList;
 	
-	
-	
-	
+	/**
+	 * Constructor
+	 * 
+	 * @param nodeList list of nodes to move
+	 * @param newDiagram the target diagram
+	 */
 	public MoveNodesCommand(List<Node> nodeList, Diagram newDiagram) {
 	    super(nodeList, newDiagram);
 	    this.oldDiagram = (Diagram) nodeList.get(0).eContainer();

@@ -12,7 +12,7 @@
          </keywordReference>
          <description>
             Export which creates an editor application based ont the loaded schema. If no schema is loaded the export wizard is of no use.
-Attention: You need to have to have Maven 3 on your system and set the path in the properties.
+Attention: You need to have to have Maven 3 on your system and set the path in the preferences.
          </description>
       </wizard>
    </extension>

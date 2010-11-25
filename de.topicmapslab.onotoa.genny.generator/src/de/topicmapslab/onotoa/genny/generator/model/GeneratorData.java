@@ -3,11 +3,12 @@
  */
 package de.topicmapslab.onotoa.genny.generator.model;
 
-import static de.topicmapslab.onotoa.genny.generator.preferences.IPreferenceConstants.*;
+import static de.topicmapslab.onotoa.genny.generator.preferences.IPreferenceConstants.P_LAST_PROJECTID;
+import static de.topicmapslab.onotoa.genny.generator.preferences.IPreferenceConstants.P_LAST_PROJECTNAME;
+import static de.topicmapslab.onotoa.genny.generator.preferences.IPreferenceConstants.P_LAST_TARGET;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import de.topicmapslab.kuria.annotation.widgets.Check;
 import de.topicmapslab.kuria.annotation.widgets.Directory;
 import de.topicmapslab.kuria.annotation.widgets.Editable;
 import de.topicmapslab.kuria.annotation.widgets.Hidden;
@@ -22,16 +23,16 @@ import de.topicmapslab.kuria.annotation.widgets.TextField;
 @Editable
 public class GeneratorData {
 
-	@Directory
+	@Directory(label="Target Directory")
 	private String targetDir;
 	
-	@TextField
+	@TextField(label="Application ID", description="Similiar to a package name. Will be used to create the packages and the bundle ids for the application.")
 	private String applicationId;
 	
-	@TextField(description="test")
+	@TextField(label="Name", description="The name of the application, which will be the name of the executable.")
 	private String applicationName;
 
-	@Check
+	@Hidden
 	private boolean deleteTemporaryFiles;
 	
 	@Hidden

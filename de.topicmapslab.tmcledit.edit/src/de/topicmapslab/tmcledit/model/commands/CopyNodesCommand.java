@@ -23,7 +23,12 @@ import de.topicmapslab.tmcledit.model.index.AssociationIndexer;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.index.TopicTypeNodeIndexer;
 
-
+/**
+ * Command which copies a list of nodes to another diagram
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class CopyNodesCommand extends AbstractNodeListCommand {
 
 	private List<Edge> newEdgeList;
@@ -32,7 +37,12 @@ public class CopyNodesCommand extends AbstractNodeListCommand {
 	private Map<Comment, Comment> newCommentMap;
 	
 	
-	
+	/**
+	 * Constructor 
+	 * 
+	 * @param nodeList list of nodes to copy
+	 * @param newDiagram target diagram
+	 */
 	public CopyNodesCommand(List<Node> nodeList, Diagram newDiagram) {
 	    super(nodeList, newDiagram);
 	    newNodesMap = new HashMap<Node, Node>(nodeList.size());

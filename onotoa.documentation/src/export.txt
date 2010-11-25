@@ -7,7 +7,7 @@ To export a schema use the menu *File->Export...*. A dialog will appear and a li
 proposed. If you use _Onotoa_ in an eclipse installation you will see a lot of wizards. In the standalone
 version you should see a dialog like in <<export_dialog>>.
 
-.Create an occurrence
+.Export Dialog
 [[export_dialog]]
 image::images/export_dialog.png[scaledwidth="50%"] 
 

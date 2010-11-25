@@ -129,3 +129,24 @@ Every constraint has a cardinality which will be used for the code generation. I
 optional, which means the input mask does not demand this values.
 
 If card-max is greater then 1 a set of the type is created. Especially for primitive data types it is necessary to set the create new flag to true.
+
+=== Generate the Editor ===
+
+After annotating the schema the editor can be generated using the "Generate Genny Application" entry in the export wizard.
+
+The following dialog is shown in <<genny_export_dialog>>
+
+.Create an application dialog
+[[genny_export_dialog]]
+image::images/genny_export.png[scaledwidth="50%"] 
+
+The *Target Directory* leads to a directory where the generated code will be stored. 
+The *Application ID* is a string similar to a package name. You should use a qualified domain to be sure your application plug-ins will have a unique id.
+The *Name* of the application will be used as executable name.
+
+After pressing *Finish* another dialog will open which shows a progress bar for the generation. If the bar is at 100% the close button will be enabled 
+and the dialog can be closed. The binaries of the application can be found at {targetDir}/{applicationId}-application/target . Onotoa generated binaries for
+win32, macosx and linux for 32 and 64 systems. 
+
+NOTE: The application is build with Maven3. If you start the generator for the first time the building process will take some time because maven needs to
+download all dependencies. After that there are stored in a local repository.  
