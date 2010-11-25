@@ -23,7 +23,9 @@ import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/**
+	 *  The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.tmcledit.export";
 
 	// The shared instance
@@ -47,6 +49,10 @@ public class Activator extends AbstractUIPlugin {
 		plugin = this;
 	}
 	
+	/**
+	 * 
+	 * @return the registered {@link IOnotoaSelectionService}
+	 */
 	public  IOnotoaSelectionService getSelectionService() {
 		if (selectionService==null) {
 			BundleContext bc = getBundle().getBundleContext();
@@ -75,6 +81,10 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	/**
+	 * Logs an exception as error
+	 * @param e the {@link Throwable} to log
+	 */
 	public void logException(Throwable e) {
 		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "An Error occurred!", e));
 	}

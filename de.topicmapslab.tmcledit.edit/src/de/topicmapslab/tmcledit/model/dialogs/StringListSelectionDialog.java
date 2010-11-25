@@ -43,6 +43,8 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 /**
+ * Generic dialog to select a set of strings.
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -56,10 +58,18 @@ public class StringListSelectionDialog extends Dialog {
 
 	private Button addButton, removeButton, removeAllButton, editButton;
 
+	/**
+	 * 
+	 * @param parentShell 
+	 */
 	public StringListSelectionDialog(Shell parentShell) {
 		super(parentShell);
 	}
 
+	/**
+	 * Sets a validator 
+	 * @param validator the validator to use
+	 */
 	public void setValidator(IInputValidator validator) {
 		this.validator = validator;
 	}
@@ -219,18 +229,35 @@ public class StringListSelectionDialog extends Dialog {
 
 	}
 
+	/**
+	 * 
+	 * @return the {@link InputDialog} description or an empty string
+	 */
 	public String getInputDescription() {
 		return (inputDescription == null) ? "" : inputDescription;
 	}
 
+	/**
+	 * Sets the text used as title in the title bar
+	 * @param text
+	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
+	/**
+	 * 
+	 * @return the text in the title bar
+	 */
 	public String getText() {
 		return text == null ? "" : text;
 	}
 
+	/**
+	 * Sets the input description which is used for an input dialog if a new value is created
+	 * 
+	 * @param inputDescription
+	 */
 	public void setInputDescription(String inputDescription) {
 		this.inputDescription = inputDescription;
 	}
@@ -242,11 +269,20 @@ public class StringListSelectionDialog extends Dialog {
 		newShell.setText(getText());
 	}
 
+	/**
+	 * 
+	 * @return the selected string list
+	 */
 	public ArrayList<String> getStringList() {
 		return stringList;
 	}
 
-	public void setSelectedTopics(List<String> stringList) {
+	/**
+	 * Sets the initial selection
+	 * 
+	 * @param stringList the new string list
+	 */
+	public void setSelectedStrings(List<String> stringList) {
 		this.stringList = new ArrayList<String>();
 		this.stringList.addAll(stringList);
 	}

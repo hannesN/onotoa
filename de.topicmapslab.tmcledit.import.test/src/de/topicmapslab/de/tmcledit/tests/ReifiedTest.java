@@ -28,22 +28,31 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 
 /**
+ * tests reified
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class ReifiedTest extends AbstractImportTest{
 
+	/**
+	 * load topic map 
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/reified.xtm");
 		
 	}
-	
+	/**
+	 * checks number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(7, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
-	
+	/**
+	 * checks topic types
+	 */
 	@Test
 	public void checkTopicType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.TOPIC_TYPE);

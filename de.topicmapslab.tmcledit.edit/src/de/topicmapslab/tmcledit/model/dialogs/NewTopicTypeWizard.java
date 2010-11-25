@@ -35,6 +35,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.psiprovider.PSIContentProposalProvider;
 
 /**
+ * Wizard to create a new topic type
  * @author Hannes Niederhausen
  *
  */
@@ -45,6 +46,10 @@ public class NewTopicTypeWizard extends Wizard {
 	private TopicType newTopicType;
 	private KindOfTopicType kind = KindOfTopicType.TOPIC_TYPE;
 	
+	/**
+	 * Constructor
+	 * @param kind the kind of topic type to create
+	 */
 	public NewTopicTypeWizard(KindOfTopicType kind) {
 		this.kind = kind;
 		setWindowTitle("New "+kind.getLiteral()+"...");
@@ -62,6 +67,10 @@ public class NewTopicTypeWizard extends Wizard {
 		return true;
 	}
 	
+	/**
+	 * Returns new created topic type
+	 * @return
+	 */
 	public TopicType getNewTopicType() {
 		return newTopicType;
 	}

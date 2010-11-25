@@ -18,6 +18,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.actions.ActionFactory;
 
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -37,7 +38,8 @@ public class CloseAction extends Action implements IPropertyListener {
 	 */
 	public CloseAction(ModelView modelView) {
 		this.modelView = modelView;
-		setEnabled(modelView.getCurrentTopicMapSchema()!=null);
+		// set enabled state
+		propertyChanged(null, 0);
 	}
 	
 	@Override
@@ -62,7 +64,7 @@ public class CloseAction extends Action implements IPropertyListener {
 
 	
 	public void propertyChanged(Object source, int propId) {
-		setEnabled(modelView.getCurrentTopicMapSchema()!=null);
+		setEnabled(TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().getOnotoaFile()!=null);
     }
 	
 }

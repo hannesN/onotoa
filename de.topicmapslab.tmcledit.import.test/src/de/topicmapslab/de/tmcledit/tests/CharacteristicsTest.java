@@ -23,22 +23,35 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 
 /**
+ * tests import of characteristics
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class CharacteristicsTest extends AbstractImportTest{
 
+	/**
+	 * Loads topic map
+	 * @throws IOException
+	 * @throws TMAPIException
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/characteristicstest.xtm");
 		
 	}
 	
+	/**
+	 * Counts types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(4, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * Checks topic types
+	 */
 	@Test
 	public void checkTopicType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.TOPIC_TYPE);
@@ -75,6 +88,9 @@ public class CharacteristicsTest extends AbstractImportTest{
 		
 	}
 	
+	/**
+	 * chacks names
+	 */
 	@Test
 	public void checkNameType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.NAME_TYPE);
@@ -89,6 +105,9 @@ public class CharacteristicsTest extends AbstractImportTest{
 		
 	}
 	
+	/**
+	 * checks occurrences
+	 */
 	@Test
 	public void checkOccurrenceType() {
 		List<TopicType> ttList = ModelIndexer.getTopicIndexer().getTypesByKind(KindOfTopicType.OCCURRENCE_TYPE);

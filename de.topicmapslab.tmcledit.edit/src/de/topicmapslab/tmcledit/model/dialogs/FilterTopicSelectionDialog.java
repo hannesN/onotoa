@@ -35,6 +35,14 @@ import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 
+/**
+ * A {@link FilterTopicSelectionDialog} is used to provide a table view from which to select topic types.
+ * 
+ * The proposals can be added directly or set by kind of {@link TopicType} using an exclude list.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 
 	private static final String SETTINGS = FilterTopicSelectionDialog.class.getCanonicalName();
@@ -46,17 +54,33 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 	private List<TopicType> excludeList;
 	private List<TopicType> contentList;
 
+	/**
+	 * Constructor
+	 * @param shell parent shell
+	 * @param contentList list of porposals from which to choose
+	 */
 	public FilterTopicSelectionDialog(Shell shell, List<TopicType> contentList) {
 		this(shell, false);
 		this.contentList = contentList;
 	}
 
+	/**
+	 * Constructor 
+	 * @param shell parent shell
+	 * @param kind array which kind of types are allowed
+	 */
 	public FilterTopicSelectionDialog(Shell shell, KindOfTopicType... kind) {
 		this(shell, false);
 		this.kindOfTopicType = Arrays.asList(kind);
 		setInitialPattern("?");
 	}
 
+	/**
+	 * Constructor 
+	 * @param shell parent shell
+	 * @param multi indicates whether dialog allows to select more than one
+	 *            position in its list of items
+	 */
 	public FilterTopicSelectionDialog(Shell shell, boolean multi) {
 		super(shell, multi);
 
@@ -127,10 +151,19 @@ public class FilterTopicSelectionDialog extends FilteredItemsSelectionDialog {
 		return topicTypeComparator;
 	}
 
+	/**
+	 * Sets the list of excluded {@link TopicType}s
+	 * 
+	 * @param excludeList the exclude list
+	 */
 	public void setExcludeList(List<TopicType> excludeList) {
 		this.excludeList = excludeList;
 	}
 
+	/**
+	 * 
+	 * @return the list of excluded {@link TopicType}s
+	 */
 	public List<TopicType> getExcludeList() {
 		if (excludeList == null)
 			return Collections.emptyList();

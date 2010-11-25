@@ -132,6 +132,8 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
+ * The class create a TMCL topic map based on a Onotoa {@link TopicMapSchema}
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -215,10 +217,21 @@ public class TMCLTopicMapBuilder {
 
 	private TopicMapSystem topicMapSystem;
 
+	/**
+	 * Constructor
+	 * @param topicMapSchema the topic map schema
+	 * @param exportSchema export schema information flag
+	 */
 	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema) {
 		this(topicMapSchema, exportSchema, false);
 	}
 
+	/**
+	 * Constructor
+	 * @param topicMapSchema the topic map schema
+	 * @param exportSchema export schema information flag
+	 * @param createDiagramNodes create diagram nodes flag
+	 */
 	public TMCLTopicMapBuilder(TopicMapSchema topicMapSchema, boolean exportSchema, boolean createDiagramNodes) {
 		super();
 		this.topicMapSchema = topicMapSchema;
@@ -226,10 +239,19 @@ public class TMCLTopicMapBuilder {
 		this.createDiagramNodes = createDiagramNodes;
 	}
 
+	/**
+	 * Sets the flag whether export the types only 
+	 * 
+	 * @param exportTopicTypesOnly 
+	 */
 	public void setExportTopicTypesOnly(boolean exportTopicTypesOnly) {
 		this.exportTopicTypesOnly = exportTopicTypesOnly;
 	}
 
+	/**
+	 * Creates the topic map based on the {@link TopicMapSchema}
+	 * @return the cretaed {@link TopicMap}
+	 */
 	public TopicMap createTopicMap() {
 		try {
 			// init prefixMap
@@ -338,14 +360,26 @@ public class TMCLTopicMapBuilder {
 		return topicMap;
 	}
 	
+	/**
+	 * 
+	 * @return the used {@link TopicMapSystem}
+	 */
 	public TopicMapSystem getTopicMapSystem() {
 	    return topicMapSystem;
     }
 	
+	/**
+	 * Sets the flag whether to export the annotations
+	 * @param exportAnnotations
+	 */
 	public void setExportAnnotations(boolean exportAnnotations) {
 	    this.exportAnnotations = exportAnnotations;
     }
-	
+	/**
+	 * Sets the flag whether to export the schema and create association for every element
+	 * 
+	 * @param exportSchema
+	 */
 	public void setExportSchema(boolean exportSchema) {
 	    this.exportSchema = exportSchema;
     }

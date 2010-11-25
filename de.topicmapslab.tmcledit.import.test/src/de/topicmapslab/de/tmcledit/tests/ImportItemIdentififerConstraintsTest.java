@@ -12,18 +12,35 @@ import org.tmapi.core.TMAPIException;
 import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * test for item identifier constraint import
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class ImportItemIdentififerConstraintsTest extends AbstractImportTest {
 	
+	/**
+	 * loads topic map
+	 * @throws IOException
+	 * @throws TMAPIException
+	 */
 	@BeforeClass
 	public static void init() throws IOException, TMAPIException {
 		loadTopicMap("resources/itemidcontstr.xtm");
 	}
 	
+	/**
+	 * checks number of types
+	 */
 	@Test
 	public void countType() {
 		assertEquals(2, getFile().getTopicMapSchema().getTopicTypes().size());
 	}
 	
+	/**
+	 * checks defaults
+	 */
 	@Test
 	public void testDefaultCardConstraint() {
 		for (TopicType tt : getFile().getTopicMapSchema().getTopicTypes()) {
@@ -38,7 +55,7 @@ public class ImportItemIdentififerConstraintsTest extends AbstractImportTest {
 		}
 	}
 
-	/*
+	/**
 	 * Tests the iic of test2 with regexp and card [1,4]
 	 */
 	@Test
