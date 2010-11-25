@@ -19,12 +19,20 @@ import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
+ * Sets the ako list of a topic type to a new list
+ * 
  * @author Hannes Niederhausen
  * 
  */
 public class SetAkoCommand extends AbstractConnectionCommand {
 
-
+	/**
+	 * 
+	 * Constructor
+	 * 
+	 * @param newList the new list containg all super types
+	 * @param topic the sub type
+	 */
 	public SetAkoCommand(List<TopicType> newList, TopicType topic) {
 		super("Set a kind of relationship", newList, topic);
 	}
