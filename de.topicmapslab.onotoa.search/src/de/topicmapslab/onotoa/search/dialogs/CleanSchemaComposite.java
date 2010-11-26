@@ -129,9 +129,6 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 			}
 		});
 
-		// gridData = new GridData(GridData.FILL_HORIZONTAL);
-		// gridData.horizontalAlignment = SWT.CENTER;
-
 		// dummy button for layout purposes
 		dummyButton = new Button(group, SWT.PUSH);
 		dummyButton.setLayoutData(new GridData());
@@ -139,7 +136,6 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 		dummyButton.setVisible(false);
 
 		gridData = new GridData(GridData.FILL_BOTH);
-		// gridData.widthHint = 200;
 
 		// left table with unused TopicTypes from the schema
 		unusedTopicsTable = new TableViewer(group, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
@@ -365,6 +361,10 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
+
 		public String getText(Object element) {
 
 			// return the name of the TopicType as label
@@ -374,13 +374,10 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.jface.viewers.ITableColorProvider#getForeground(java.
-		 * lang.Object, int)
+		/**
+		 * {@inheritDoc}
 		 */
+
 		public Color getForeground(Object element, int columnIndex) {
 
 			// use grey as font to show delete-selection
@@ -391,13 +388,10 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 			return null;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.jface.viewers.ITableColorProvider#getBackground(java.
-		 * lang.Object, int)
+		/**
+		 * {@inheritDoc}
 		 */
+
 		public Color getBackground(Object element, int columnIndex) {
 			// not in use
 			return null;
