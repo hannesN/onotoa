@@ -44,14 +44,7 @@ public class CreateDiagramAction extends Action {
 	 */
 	public CreateDiagramAction(ModelView modelView) {
 		this.modelView = modelView;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getText() {
-		return "Create New Diagram...";
+		setText("Create New Detailed Diagram");
 	}
 
 	/**
