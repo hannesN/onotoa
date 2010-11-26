@@ -48,24 +48,24 @@ The search for an Association or a Topic Type allows you to enable the advanced 
 to show more search options. 
 
 At this mode you can define constraints the searched type should use. The left list shows all available Topic Types. 
-Select one or more entry and click the *>* button to add them or double click on one entry. Your selection should appear in 
-the right list. Remove them by double clicking or the use of the *<* button. Above every list is a small text box 
+Select one or more entry and click the image:images/documentation/search/buttons/add_one.png[] button to add them or double click on one entry. Your selection should appear in 
+the right list. Remove them by double clicking or the use of the image:images/documentation/search/buttons/remove:one.png[] button. Above every list is a small text box 
 that you can use to filter (case sensitive) the shown entries by their names.  
 
 [width="75%", cols="^10%,<90%"]
 |======================================================================
 ifdef::basebackend-docbook[]
 |Icon| Description
-|image:images/documentation/search/search_b_bar/clear.png[width="0.3cm"]|Clear all selections and reset the name filter
-|image:images/documentation/search/search_b_bar/add_one.png[width="0.3cm"]|Add selected types to use list
-|image:images/documentation/search/search_b_bar/remove_one.png[width="0.3cm"]|Remove selected types from use list
-|image:images/documentation/search/search_b_bar/filter.png[width="0.3cm"]|Enable or disable type filtering
+|image:images/documentation/search/buttons/clear.png[width="0.3cm"]|Clear all selections and reset the name filter
+|image:images/documentation/search/buttons/add_one.png[width="0.3cm"]|Add selected types to use list
+|image:images/documentation/search/buttons/remove_one.png[width="0.3cm"]|Remove selected types from use list
+|image:images/documentation/search/buttons/filter.png[width="0.3cm"]|Enable or disable type filtering
 endif::basebackend-docbook[]
 ifndef::basebackend-docbook[]
-|image:images/documentation/search/search_b_bar/clear.png[width="1cm"]|Clear all selections and reset the name filter
-|image:images/documentation/search/search_b_bar/add_one.png[width="1cm"]|Add selected types to use list
-|image:images/documentation/search/search_b_bar/remove_one.png[width="1cm"]|Remove selected types from use list
-|image:images/documentation/search/search_b_bar/filter.png[width="1cm"]|Enable or disable type filtering
+|image:images/documentation/search/buttons/clear.png[width="1cm"]|Clear all selections and reset the name filter
+|image:images/documentation/search/buttons/add_one.png[width="1cm"]|Add selected types to use list
+|image:images/documentation/search/buttons/remove_one.png[width="1cm"]|Remove selected types from use list
+|image:images/documentation/search/buttons/filter.png[width="1cm"]|Enable or disable type filtering
 endif::basebackend-docbook[]
 |======================================================================
 
@@ -112,3 +112,48 @@ List all Subject Identifiers of the schema. Double click on a result to open the
 .Result List
 [[search_sl_list]]
 image::images/documentation/search/sl_list.png[scaledwidth="50%"]
+
+=== Clean Schema ===
+
+This little feature should help you to keep your schema clean. It searches unused Topic Types and provides the opportunity 
+to delete them. If the list is empty, everything seems to be fine. Above the list is a text field, 
+that you can use to filter (case sensitive) the results.
+
+Depending on its type, a topic is recognized as unused when:
+
+* *Topic Type* is never used as role and plays no role. It also haven't at least one identifier or constraint, isn't
+part of any *isa* or *ako* relation and is never used as scope.
+
+* *Occurrence Type* is never used as occurrence constraint.
+* *Name Type* is never used as name constraint.
+* *Role Type* is never set as role for any Association Type.
+* *Association Type* is never type of at least one association constraint. 
+
+[width="75%", cols="^10%,<90%"]
+|======================================================================
+ifdef::basebackend-docbook[]
+|Icon| Description
+|image:images/documentation/search/buttons/clear.png[width="0.3cm"]|Clear all selections and reset the name filter
+|image:images/documentation/search/buttons/new.png[width="0.3cm"]|Mark Topic Type for deletion
+|image:images/documentation/search/buttons/remove_one.png[width="0.3cm"]|Restore Topic Type
+|image:images/documentation/search/buttons/filter.png[width="0.3cm"]|Enable or disable type filtering
+endif::basebackend-docbook[]
+ifndef::basebackend-docbook[]
+|image:images/documentation/search/buttons/clear.png[width="1cm"]|Clear all selections and reset the name filter
+|image:images/documentation/search/buttons/new.png[width="1cm"]|Mark Topic Type for deletion
+|image:images/documentation/search/buttons/remove.png[width="1cm"]|Restore Topic Type
+|image:images/documentation/search/buttons/filter.png[width="1cm"]|Enable or disable type filtering
+endif::basebackend-docbook[]
+|====================================================================== 
+
+Once the cleaner found unused topics you can delete them. Select the unused type and press the 
+image:images/documentation/search/buttons/remove.png[] button. The font color of the entry will change to 
+grey. If you want to restore him, press the image:images/documentation/search/buttons/new.png[] button. 
+All decisions you made have no effect until you press the *Clean* button. After this all selected types 
+will be really deleted.
+
+.Clean Schema
+[[search_clean]]
+image::images/documentation/search/cleaner.png[scaledwidth="50%"]
+
+TIP: Are there too many Topic Types? Use the type filter.
