@@ -28,41 +28,55 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
+ * 
+ * Class that implements the search for use cases of an specific Topic
+ * 
  * @author Hannes Niederhausen
- *
+ * 
  */
+
 public class UseFinder {
 
-	
 	private static TopicMapSchema schema;
 
+	/**
+	 * Find usage for a Topic Type
+	 * 
+	 * @param type
+	 *            the Topic that should analyzed
+	 * @param monitor
+	 *            Progress Monitor
+	 * @return Result list
+	 */
+	
 	public static final List<TreeNode> findUse(TopicType type, IProgressMonitor monitor) {
 		List<TreeNode> result = new ArrayList<TreeNode>();
-		
+
 		schema = (TopicMapSchema) type.eContainer();
-		
-		monitor.beginTask("Search topic type using "+type.getName(), schema.getTopicTypes().size()-1+schema.getAssociationTypeConstraints().size());
-		
+
+		monitor.beginTask("Search topic type using " + type.getName(), schema.getTopicTypes().size() - 1
+		        + schema.getAssociationTypeConstraints().size());
+
 		for (TopicType tt : schema.getTopicTypes()) {
 			if (tt.equals(type))
 				continue;
-			
-			monitor.subTask("Check: "+tt.getName());
+
+			monitor.subTask("Check: " + tt.getName());
 			TreeNode child = getUse(type, tt);
-			if (child!=null)
+			if (child != null)
 				result.add(child);
-			
+
 			monitor.worked(1);
 		}
-		
+
 		for (AssociationTypeConstraint atc : schema.getAssociationTypeConstraints()) {
 			if (atc.getType().equals(type))
 				result.add(new TreeNode(atc, TreeNodeType.Association));
 		}
-		
+
 		monitor.done();
-		
-		return result;		
+
+		return result;
 	}
 
 	/**
@@ -75,42 +89,40 @@ public class UseFinder {
 			if (isa.equals(type))
 				tn.addChild(new TreeNode(isa, TreeNodeType.Type));
 		}
-		
+
 		for (TopicType ako : tt.getAko()) {
 			if (ako.equals(type))
 				tn.addChild(new TreeNode(ako, TreeNodeType.Supertype));
 		}
-		
+
 		for (NameTypeConstraint ntc : tt.getNameConstraints()) {
 			if (type.equals(ntc.getType())) {
 				tn.addChild(new TreeNode(ntc, TreeNodeType.Nametype));
 			}
 		}
-		
+
 		for (OccurrenceTypeConstraint otc : tt.getOccurrenceConstraints()) {
 			if (type.equals(otc.getType())) {
 				tn.addChild(new TreeNode(otc, TreeNodeType.OccurrenceType));
 			}
 		}
-		
+
 		if (tt instanceof AssociationType) {
 			for (RolePlayerConstraint rpc : ModelIndexer.getAssociationIndexer().getRolePlayerConstraintsFor(tt)) {
 				if (rpc.getPlayer().equals(type))
 					tn.addChild(new TreeNode(rpc, TreeNodeType.Player));
 			}
-			
-			for (RoleConstraint rc : ((AssociationType)tt).getRoles()) {
+
+			for (RoleConstraint rc : ((AssociationType) tt).getRoles()) {
 				if (rc.getType().equals(type)) {
 					tn.addChild(new TreeNode(rc, TreeNodeType.Role));
 				}
 			}
 		}
-		
-		
-		if (tn.getChildren().size()>0)
+
+		if (tn.getChildren().size() > 0)
 			return tn;
 		return null;
 	}
 
-	
 }

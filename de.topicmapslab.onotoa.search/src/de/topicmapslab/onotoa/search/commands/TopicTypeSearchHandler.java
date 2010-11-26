@@ -13,6 +13,7 @@ package de.topicmapslab.onotoa.search.commands;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -22,9 +23,11 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.onotoa.search.dialogs.TopicTypeSearchDialog;
 import de.topicmapslab.onotoa.search.searchImpl.BasicTopicTypeSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -34,14 +37,11 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  * 
  * @author Sebastian Lippert
  */
+
 public class TopicTypeSearchHandler extends AbstractHandler {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.
-	 * ExecutionEvent)
+	/**
+	 * {@inheritDoc}
 	 */
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -49,7 +49,7 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 		// check if ModelIndexer exists
 		if (ModelIndexer.getInstance() == null)
 			return null;
-		
+
 		// get shell and open search dialog for TopicTypes
 		Shell shell = HandlerUtil.getActiveShell(event);
 		TopicTypeSearchDialog dialog = new TopicTypeSearchDialog(shell);
@@ -64,12 +64,15 @@ public class TopicTypeSearchHandler extends AbstractHandler {
 
 			if (view == null)
 				return null;
-			
-			// get schema
-			TopicMapSchema schema = view.getCurrentTopicMapSchema();
 
-			if (view.getCurrentTopicMapSchema() == null)
+			// get file for schema
+			File file = Activator.getDefault().getSelectionService().getOnotoaFile();
+			if (file == null)
 				return null;
+
+			// get schema
+			Assert.isNotNull(file.getTopicMapSchema());
+			TopicMapSchema schema = file.getTopicMapSchema();
 
 			// TODO Hannes: Real monitor
 

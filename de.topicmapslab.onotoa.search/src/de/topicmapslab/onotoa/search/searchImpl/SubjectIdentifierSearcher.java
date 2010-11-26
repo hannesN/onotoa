@@ -20,14 +20,25 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
- * @author sip
+ * 
+ * Class that implements the Subject Identifier search
+ * 
+ * @author Sebastian Lippert
  * 
  */
+
 public class SubjectIdentifierSearcher implements ISearcher {
 
 	private TopicMapSchema schema;
 	private SubjectIdentifierContainer con;
 	private List<String> identifierList;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param schema
+	 *            Schema that should used
+	 */
 
 	public SubjectIdentifierSearcher(TopicMapSchema schema) {
 
@@ -61,6 +72,11 @@ public class SubjectIdentifierSearcher implements ISearcher {
 		return con;
 	}
 
+	/**
+	 * Getter for all found Subject Identifier
+	 * 
+	 * @return Subject Identifier list
+	 */
 	public List<String> getIdentifierList() {
 		return identifierList;
 	}

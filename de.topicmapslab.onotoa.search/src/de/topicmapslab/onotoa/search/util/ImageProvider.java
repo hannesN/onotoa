@@ -9,6 +9,7 @@
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.util;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -17,30 +18,41 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 import de.topicmapslab.onotoa.search.Activator;
+
 /**
- * @author Hannes Niederhausen
- *
+ * 
+ * Class provides the meachnism to get specific Images
+ * 
+ * @author Sebastian Lippert
+ * 
  */
 public class ImageProvider {
+
+	/**
+	 * Getter for specific image
+	 * 
+	 * @param path
+	 *            to the image
+	 * @return Image
+	 */
 	
 	public static Image getImage(String path) {
 		ImageRegistry imageRegistry = Activator.getDefault().getImageRegistry();
-		
-		
+
 		Image img = imageRegistry.get(path);
-		
-		if (img==null) {
+
+		if (img == null) {
 			try {
-	            URL url = Activator.getDefault().getBundle().getEntry(path);
-	            img = new Image(Display.getCurrent(), url.openStream());
-	            imageRegistry.put(path, img);
-            } catch (IOException e) {
-            	Activator.logException(e);
-            }
+				URL url = Activator.getDefault().getBundle().getEntry(path);
+				img = new Image(Display.getCurrent(), url.openStream());
+				imageRegistry.put(path, img);
+			} catch (IOException e) {
+				Activator.logException(e);
+			}
 		}
-		
+
 		return img;
-		
+
 	}
 
 }

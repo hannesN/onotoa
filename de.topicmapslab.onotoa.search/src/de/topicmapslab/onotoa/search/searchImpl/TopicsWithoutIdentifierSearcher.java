@@ -19,13 +19,22 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
- * @author sip
+ * Class that implements the search for unused Topic Types
  * 
+ * @author Sebastian Lippert
  */
+
 public class TopicsWithoutIdentifierSearcher implements ISearcher {
 
 	private final TopicMapSchema schema;
 	private TopicsWithoutIdentifierContainer con;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param schema
+	 *            Schema that should used
+	 */
 
 	public TopicsWithoutIdentifierSearcher(TopicMapSchema schema) {
 

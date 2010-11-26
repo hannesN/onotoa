@@ -38,6 +38,12 @@ public class NeverUsedTopicsSearcher implements ISearcher {
 	private final TopicMapSchema schema;
 	private NeverUsedTopicsContainer con;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param schema Schema that should used
+	 */
+	
 	public NeverUsedTopicsSearcher(TopicMapSchema schema) {
 
 		this.schema = schema;

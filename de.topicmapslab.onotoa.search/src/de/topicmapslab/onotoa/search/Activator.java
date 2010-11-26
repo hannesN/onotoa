@@ -16,6 +16,9 @@ import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
+	/**
+	 * Final plugin ID String
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.onotoa.search";
 
 	// The shared instance

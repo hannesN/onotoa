@@ -21,14 +21,25 @@ import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
- * @author sip
+ * 
+ * Class that implements the Subject Identifier search
+ * 
+ * @author Sebastian Lippert
  * 
  */
+
 public class SubjectLocatorSearcher implements ISearcher {
 
 	private TopicMapSchema schema;
 	private SubjectLocatorContainer con;
 	private List<String> locatorList;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param schema
+	 *            Schema that should used
+	 */
 
 	public SubjectLocatorSearcher(TopicMapSchema schema) {
 
@@ -38,11 +49,10 @@ public class SubjectLocatorSearcher implements ISearcher {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#fetchResult()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void fetchResult() {
 
 		for (TopicType type : schema.getTopicTypes()) {
@@ -54,21 +64,22 @@ public class SubjectLocatorSearcher implements ISearcher {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getResult()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public SubjectLocatorContainer getResult() {
 		Collections.sort((List<? extends Comparable>) con.getContentList());
 		return this.con;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearchImpl#getReslutList()
+	 * Returns the result list 
+	 * 
+	 * @return
 	 */
+
 	public List<TopicType> getResultList() {
 
 		List<TopicType> resultList = new ArrayList<TopicType>();
@@ -78,15 +89,20 @@ public class SubjectLocatorSearcher implements ISearcher {
 		return resultList;
 	}
 
+	/**
+	 * Getter for all found Subject Locator
+	 * 
+	 * @return Subject Locator list
+	 */
+
 	public List<String> getLocatorList() {
 		return locatorList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.topicmapslab.onotoa.search.searchImpl.ISearcher#refresh()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void refresh() {
 
 		con.removeAllElements();

@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.jface.window.Window;
@@ -25,8 +26,10 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.onotoa.search.dialogs.CleanSchemaDialog;
 import de.topicmapslab.onotoa.search.searchImpl.NeverUsedTopicsSearcher;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
@@ -41,14 +44,11 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  * @author Sebastian Lippert
  * 
  */
+
 public class CleanSchemaHandler extends AbstractHandler {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.
-	 * ExecutionEvent)
+	/**
+	 * {@inheritDoc}
 	 */
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -64,15 +64,18 @@ public class CleanSchemaHandler extends AbstractHandler {
 		// check if ModelIndexer exists
 		if (ModelIndexer.getInstance() == null)
 			return null;
-		
-		if (view.getCurrentTopicMapSchema() == null)
+	
+		// get file for schema
+		File file = Activator.getDefault().getSelectionService().getOnotoaFile();
+		if (file == null)
 			return null;
 
 		// get CommandStack
 		CommandStack commandStack = view.getEditingDomain().getCommandStack();
 
 		// get schema
-		TopicMapSchema schema = view.getCurrentTopicMapSchema();
+		Assert.isNotNull(file.getTopicMapSchema());
+		TopicMapSchema schema = file.getTopicMapSchema();
 
 		// get unused topics
 		NeverUsedTopicsSearcher searcher = new NeverUsedTopicsSearcher(schema);

@@ -13,11 +13,17 @@ package de.topicmapslab.onotoa.search.wrapper;
 import org.eclipse.jface.viewers.ISelectionProvider;
 
 /**
- * @author sip
- *
+ * Interface for classes that should hanlde a double click
+ * 
+ * @author Sebastian Lippert
+ * 
  */
+
 public interface IDoubleClickHandler extends ISelectionProvider {
-	
+
+	/**
+	 * handling for double click
+	 */
 	public void doubleClickHappend();
-	
+
 }
