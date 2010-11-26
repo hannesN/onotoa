@@ -79,10 +79,21 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 		return 1;
 	}
 
+	/**
+	 * Getter for Topic Type inside the wrapper
+	 * 
+	 * @return TopicType
+	 */
+
 	public TopicType getTopicType() {
 		return this.topicType;
 	}
 
+	/**
+	 * Getter for name of the Topic Type that is wrapped
+	 * 
+	 * @return name
+	 */
 	@Text
 	public String getName() {
 		return this.topicType.getName();

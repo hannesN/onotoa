@@ -21,7 +21,7 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.util.ImageConstants;
 
 /**
- * Wrapper class for the SubjectIdentifier of an TopicType
+ * Wrapper class for the Identifier of an TopicType
  * 
  * @author Sebastian Lippert
  */
@@ -29,7 +29,16 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 @TreeNode(imageMethod = "getImagePath")
 public class IdentifierWrapper implements Comparable<IdentifierWrapper>, IDoubleClickHandler {
 
+	/**
+	 * Flag that indicates: Identifier is an Subject Identifier
+	 */
+
 	public static String SUBJECTIDENTIFIER = "si";
+
+	/**
+	 * Flag that indicates: Identifier is an Subject Locator
+	 */
+
 	public static String SUBJECTLOCATOR = "sl";
 
 	private TopicType topicType;
@@ -83,6 +92,10 @@ public class IdentifierWrapper implements Comparable<IdentifierWrapper>, IDouble
 
 	}
 
+	/**
+	 * @return String to specific Image
+	 */
+
 	public String getImagePath() {
 
 		if (identifierType.equals(SUBJECTIDENTIFIER))
@@ -95,59 +108,46 @@ public class IdentifierWrapper implements Comparable<IdentifierWrapper>, IDouble
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener
-	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public ISelection getSelection() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.viewers.ISelectionProvider#removeSelectionChangedListener
-	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse
-	 * .jface.viewers.ISelection)
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void setSelection(ISelection selection) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler#doubleClickHappend
-	 * ()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void doubleClickHappend() {
 		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(topicType), this);
 	}

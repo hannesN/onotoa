@@ -18,35 +18,57 @@ import de.topicmapslab.kuria.annotation.tree.TreeNode;
 import de.topicmapslab.onotoa.search.searchImpl.ISearcher;
 
 /**
- * @author sip
- *
+ * 
+ * Container for Subject Locator search.
+ * 
+ * @author Sebastian Lippert
+ * 
  */
 @TreeNode
-public class SubjectLocatorContainer extends AbstractContainer{
+public class SubjectLocatorContainer extends AbstractContainer {
 
 	/**
-     * @param label
-     * @param searcher
-     */
-    public SubjectLocatorContainer(String label, ISearcher searcher) {
-	    super(label, searcher);
-	    // TODO Auto-generated constructor stub
-    }
-    @Text
-    public String getlabel(){
-    	return super.getLabel();
-    }
+	 * Constructor
+	 * 
+	 * @param label
+	 *            Label of the container
+	 * @param searcher
+	 *            Specific searcher for desired target
+	 */
 
-    @Children
-    public List<Object> getChildren(){
-    	return super.getContentList();
-    }
+	public SubjectLocatorContainer(String label, ISearcher searcher) {
+		super(label, searcher);
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
-     * {@inheritDoc}
-     */
-    public void addAdapter() {
-	    // TODO Auto-generated method stub
-	    
-    }
+	 * Getter for container label
+	 * 
+	 * @return String label
+	 */
+
+	@Text
+	public String getlabel() {
+		return super.getLabel();
+	}
+
+	/**
+	 * Getter for children list
+	 * 
+	 * @return List<Object> list of all children
+	 */
+
+	@Children
+	public List<Object> getChildren() {
+		return super.getContentList();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addAdapter() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

@@ -52,6 +52,14 @@ public class TopicTypeSearchBasicPart {
 	        "Association Type" };
 	private boolean isAdvanced = false;
 
+	/**
+	 * 
+	 * Constructor
+	 * 
+	 * @param parent
+	 *            Composite that should be the parent
+	 */
+
 	public TopicTypeSearchBasicPart(Composite parent) {
 
 		Label label;
@@ -253,68 +261,106 @@ public class TopicTypeSearchBasicPart {
 	}
 
 	/**
+	 * Getter for composite
 	 * 
 	 * @return the created composite
 	 */
+
 	public Composite getComposite() {
 		return this.comp;
 	}
 
 	/**
+	 * Getter for isAdvanced
+	 * 
 	 * @return isAdvanced
 	 */
+
 	public boolean getIsAdvanced() {
 		return isAdvanced;
 	}
 
 	/**
-	 * @return the nameField
+	 * Getter for the search String
+	 * 
+	 * @return String search String
 	 */
+
 	public String getNameFieldValue() {
 		return nameField.getText();
 	}
 
 	/**
-	 * @return the typeBox
+	 * Getter for the type of the searched Topic (as String)
+	 * 
+	 * @return type of the Topic Type
 	 */
+
 	public String getTypeBoxValue() {
 		return itemsBasic[typeBox.getSelectionIndex()];
 	}
 
 	/**
-	 * @return the caseButton
+	 * Getter for the decision if the search String should handled case
+	 * sensitive
+	 * 
+	 * @return boolean isCaseSensitive
 	 */
+
 	public boolean getCaseButtonValue() {
 		return caseButton.getSelection();
 	}
 
 	/**
-	 * @return the matchButton
+	 * Getter for the decision if the search String should handled as exact
+	 * match
+	 * 
+	 * @return boolean isExactMatch
 	 */
+
 	public boolean getMatchButtonValue() {
 		return matchButton.getSelection();
 	}
 
 	/**
-	 * @return the regularButton
+	 * Getter for the decision if the search String should handled as regular
+	 * expression
+	 * 
+	 * @return boolean isRegExp
 	 */
+
 	public boolean getRegularButtonValue() {
 		return regularButton.getSelection();
 	}
 
 	/**
-	 * @return the checkSI
+	 * Getter for the decision if the search String should compared with Subject
+	 * Identifier of the Topic Type
+	 * 
+	 * @return boolean isCheckSI
 	 */
+
 	public boolean getCheckSubjectIdentifierValue() {
 		return checkSI.getSelection();
 	}
 
 	/**
-	 * @return the checkSL
+	 * Getter for the decision if the search String should compared with Subject
+	 * Locator of the Topic Type
+	 * 
+	 * @return boolean isCheckSL
 	 */
+
 	public boolean getCheckSubjectLocatorValue() {
 		return checkSL.getSelection();
 	}
+
+	/**
+	 * Getter for the decision if the search String should compared with name of
+	 * the Topic Type
+	 * 
+	 * @return boolean isCheckName
+	 */
 
 	public boolean getCheckNameValue() {
 		return checkName.getSelection();

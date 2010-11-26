@@ -13,22 +13,34 @@ package de.topicmapslab.onotoa.search.commands;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.onotoa.search.searchImpl.SubjectLocatorSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
- * @author sip
- *
+ * 
+ * Handles Subject Locator search. That means it provides the dialog and add results
+ * to result view.
+ * 
+ * @author Sebastian Lippert
+ * 
  */
+
 public class ListSubjectLocatorHandler extends AbstractHandler {
+
+	/**
+	 * {@inheritDoc}
+	 */
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
@@ -44,10 +56,15 @@ public class ListSubjectLocatorHandler extends AbstractHandler {
 		if (ModelIndexer.getInstance() == null)
 			return null;
 		
-		if (view.getCurrentTopicMapSchema() == null)
+		// get file for schema
+		File file = Activator.getDefault().getSelectionService().getOnotoaFile();
+		if (file == null)
 			return null;
 
-		TopicMapSchema schema = view.getCurrentTopicMapSchema();
+		// get schema
+		Assert.isNotNull(file.getTopicMapSchema());
+		TopicMapSchema schema = file.getTopicMapSchema();
+		
 		SubjectLocatorSearcher slSearcher = new SubjectLocatorSearcher(
 				schema);
 		slSearcher.fetchResult();

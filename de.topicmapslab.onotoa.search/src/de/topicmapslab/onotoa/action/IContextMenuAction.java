@@ -15,11 +15,17 @@ package de.topicmapslab.onotoa.action;
  * Property list for fired PropertyChangeEvent by context menu actions
  * 
  * @author Sebastian Lippert
- *
+ * 
  */
 public interface IContextMenuAction {
 
+	/**
+	 * Constant for adding an Subject Identifier
+	 */
 	public static String ADD_SUBJECTIDENTIFIER = "Add_SubjectIdentifier";
+	/**
+	 * Constant for adding an Subject Locator
+	 */
 	public static String ADD_SUBJECTLOCATOR = "Add_SubjectLocator";
-	
+
 }

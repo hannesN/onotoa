@@ -33,6 +33,13 @@ public abstract class AbstractContainer implements IContainer {
 	protected final ISearcher searcher;
 	protected SearchView view;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param label Label of the container
+	 * @param searcher Specific searcher for desired target  
+	 */
+	
 	public AbstractContainer(String label, ISearcher searcher) {
 		this.label = label;
 		this.searcher = searcher;

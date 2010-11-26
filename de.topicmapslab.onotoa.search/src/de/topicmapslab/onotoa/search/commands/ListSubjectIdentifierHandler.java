@@ -10,31 +10,41 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.commands;
 
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.onotoa.search.searchImpl.SubjectIdentifierSearcher;
 import de.topicmapslab.onotoa.search.views.*;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
- * @author sip
+ * 
+ * Handles Subject Identifier search. That means it provides the dialog and add results
+ * to result view.
+ * 
+ * @author Sebastian Lippert
  * 
  */
+
 public class ListSubjectIdentifierHandler extends AbstractHandler {
+
+	/**
+	 * {@inheritDoc}
+	 */
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow();
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 		ModelView view = (ModelView) activePage.findView(ModelView.ID);
 
@@ -44,13 +54,17 @@ public class ListSubjectIdentifierHandler extends AbstractHandler {
 		// check if ModelIndexer exists
 		if (ModelIndexer.getInstance() == null)
 			return null;
-		
-		if (view.getCurrentTopicMapSchema() == null)
+
+		// get file for schema
+		File file = Activator.getDefault().getSelectionService().getOnotoaFile();
+		if (file == null)
 			return null;
 
-		TopicMapSchema schema = view.getCurrentTopicMapSchema();
-		SubjectIdentifierSearcher siSearcher = new SubjectIdentifierSearcher(
-				schema);
+		// get schema
+		Assert.isNotNull(file.getTopicMapSchema());
+		TopicMapSchema schema = file.getTopicMapSchema();
+
+		SubjectIdentifierSearcher siSearcher = new SubjectIdentifierSearcher(schema);
 		siSearcher.fetchResult();
 
 		try {

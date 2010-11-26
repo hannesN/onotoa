@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IWorkbenchPage;
@@ -25,8 +26,10 @@ import org.eclipse.ui.PlatformUI;
 
 import de.topicmapslab.onotoa.action.NewSubjectIdentifierAction;
 import de.topicmapslab.onotoa.action.NewSubjectLocatorAction;
+import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.onotoa.search.searchImpl.TopicsWithoutIdentifierSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
+import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
@@ -43,6 +46,10 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
  */
 public class TopicsWithoutIdentifierSearchHandler extends AbstractHandler {
 
+	/**
+	 * {@inheritDoc}
+	 */
+
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		// get view
@@ -52,19 +59,22 @@ public class TopicsWithoutIdentifierSearchHandler extends AbstractHandler {
 
 		if (view == null)
 			return null;
-		
+
 		// check if ModelIndexer exists
 		if (ModelIndexer.getInstance() == null)
 			return null;
 
-		if (view.getCurrentTopicMapSchema() == null)
+		// get file for schema
+		File file = Activator.getDefault().getSelectionService().getOnotoaFile();
+		if (file == null)
 			return null;
 
 		// get CommandStack
 		CommandStack commandStack = view.getEditingDomain().getCommandStack();
 
-		// get schema of the seach
-		TopicMapSchema schema = view.getCurrentTopicMapSchema();
+		// get schema
+		Assert.isNotNull(file.getTopicMapSchema());
+		TopicMapSchema schema = file.getTopicMapSchema();
 
 		// search and sort results
 		TopicsWithoutIdentifierSearcher searcher = new TopicsWithoutIdentifierSearcher(schema);

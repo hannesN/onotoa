@@ -11,17 +11,46 @@
 package de.topicmapslab.onotoa.search.model.tree;
 
 /**
- * @author niederhausen
- *
+ * Enum class for TreeNode types
+ * 
+ * @author Hannes Niederhausen
+ * 
  */
 public enum TreeNodeType {
+	/**
+	 * No type
+	 */
 	None,
+	/**
+	 * User
+	 */
 	User,
+	/**
+	 * Type
+	 */
 	Type,
+	/**
+	 * SuperType
+	 */
 	Supertype,
+	/**
+	 * NameType
+	 */
 	Nametype,
+	/**
+	 * OccurrenceT
+	 */
 	OccurrenceType,
+	/**
+	 * Association
+	 */
 	Association,
+	/**
+	 * Role
+	 */
 	Role,
+	/**
+	 * Player
+	 */
 	Player
 }
