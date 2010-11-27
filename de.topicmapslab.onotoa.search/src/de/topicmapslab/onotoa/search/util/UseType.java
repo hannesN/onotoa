@@ -8,7 +8,7 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.search.model.tree;
+package de.topicmapslab.onotoa.search.util;
 
 /**
  * Enum class for TreeNode types
@@ -16,7 +16,7 @@ package de.topicmapslab.onotoa.search.model.tree;
  * @author Hannes Niederhausen
  * 
  */
-public enum TreeNodeType {
+public enum UseType {
 	/**
 	 * No type
 	 */
@@ -52,5 +52,11 @@ public enum TreeNodeType {
 	/**
 	 * Player
 	 */
-	Player
+	Player,
+	/**
+	 * TypeOf
+	 */
+	AssociationType
+	
+	
 }
