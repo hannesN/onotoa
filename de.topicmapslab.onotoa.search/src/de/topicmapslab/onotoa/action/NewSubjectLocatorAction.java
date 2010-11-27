@@ -48,7 +48,7 @@ public class NewSubjectLocatorAction extends Action {
 	 * @param viewer
 	 *            Viewer of the ContextMenu with this action
 	 */
-	
+
 	public NewSubjectLocatorAction(CommandStack commandStack, String label, Viewer viewer) {
 
 		super(label, Action.AS_PUSH_BUTTON);
@@ -62,6 +62,11 @@ public class NewSubjectLocatorAction extends Action {
 
 		// get selection (Topic Type)
 		IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+
+		// check if selected element is a TopicType
+		if (!(sel.getFirstElement() instanceof TopicTypeWrapper))
+			return;
+
 		topicType = ((TopicTypeWrapper) sel.getFirstElement()).getTopicType();
 
 		// call InputDialog
@@ -72,7 +77,7 @@ public class NewSubjectLocatorAction extends Action {
 
 				        // unique test
 				        if (ModelIndexer.getTopicIndexer().getTopicTypeBySubjectLocator(newText) != null)
-							return "This Subject Locator is already in use!";
+					        return "This Subject Locator is already in use!";
 
 				        // empty test
 
@@ -90,7 +95,7 @@ public class NewSubjectLocatorAction extends Action {
 			List<String> list = new ArrayList<String>();
 			list.add(result);
 			SetTopicTypeLocatorsCommand command = new SetTopicTypeLocatorsCommand(list, topicType);
-		
+
 			// CommandStack execution to enable undo/redo operation
 			commandStack.execute(command);
 

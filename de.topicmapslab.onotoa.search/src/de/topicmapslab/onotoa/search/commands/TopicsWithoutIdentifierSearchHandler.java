@@ -89,6 +89,9 @@ public class TopicsWithoutIdentifierSearchHandler extends AbstractHandler {
 			else
 				activePage.activate(searchView);
 
+			// clear old content menu
+			searchView.addContextMenu(null);
+			
 			// initiate actions for context menu
 			List<Action> actionList = new ArrayList<Action>();
 			actionList.add(new NewSubjectIdentifierAction(commandStack, "Add Subject Identifier..", searchView
