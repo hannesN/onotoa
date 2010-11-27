@@ -22,7 +22,7 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 
 /**
  * 
- * Abstract superclass for all TopicTye wrappers.
+ * TopicTye wrappers.
  * 
  * Includes the interfaces Comparable and IDoubleClickHandler to sort all
  * wrappers when they are used for a view and handles the double click event.
@@ -37,7 +37,7 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 	private final TopicType topicType;
 	private final String name;
 	private final int type;
-
+	
 	/**
 	 * Constructor
 	 * 
@@ -50,9 +50,9 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 		this.topicType = topicType;
 		this.name = this.topicType.getName();
 		this.type = this.topicType.getKind().getValue();
-
+		
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
