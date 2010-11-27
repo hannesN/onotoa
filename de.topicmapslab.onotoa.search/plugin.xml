@@ -24,7 +24,7 @@
             name="List All Subject Locators">
       </command>
       <command
-            defaultHandler="de.topicmapslab.onotoa.search.commands.GeneralSearchUseCommandHandler"
+            defaultHandler="de.topicmapslab.onotoa.search.commands.UseSearchHandler"
             id="de.topicmapslab.onotoa.search.use"
             name="Find Usage">
       </command>
