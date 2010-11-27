@@ -38,9 +38,12 @@ import de.topicmapslab.onotoa.search.container.TopicsWithoutIdentifierContainer;
 import de.topicmapslab.onotoa.search.util.ImageCallBack;
 import de.topicmapslab.onotoa.search.util.ImageConstants;
 import de.topicmapslab.onotoa.search.util.ImageProvider;
+import de.topicmapslab.onotoa.search.wrapper.AssociationTypeConstraintWrapper;
 import de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler;
 import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
+import de.topicmapslab.onotoa.search.wrapper.KindOfUseWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
+import de.topicmapslab.onotoa.search.wrapper.UseWrapper;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -82,12 +85,16 @@ public class SearchView extends ViewPart {
 		AnnotationBindingFactory fac = new AnnotationBindingFactory();
 		fac.addClass(IdentifierWrapper.class);
 		fac.addClass(TopicTypeWrapper.class);
+		fac.addClass(KindOfUseWrapper.class);
+		fac.addClass(AssociationTypeConstraintWrapper.class);
+		fac.addClass(UseWrapper.class);
 		fac.addClass(AbstractContainer.class);
 		fac.addClass(BasicTopicTypeContainer.class);
 		fac.addClass(NeverUsedTopicsContainer.class);
 		fac.addClass(SubjectIdentifierContainer.class);
 		fac.addClass(SubjectLocatorContainer.class);
 		fac.addClass(TopicsWithoutIdentifierContainer.class);
+
 		IBindingContainer bc = fac.getBindingContainer();
 
 		WidgetGenerator gen = new WidgetGenerator(bc);
@@ -115,7 +122,7 @@ public class SearchView extends ViewPart {
 	 * Add context menu.
 	 * 
 	 * @param actionList
-	 *            the represents the menu
+	 *            List of actions that build the menu
 	 */
 
 	public void addContextMenu(final List<Action> actionList) {
@@ -193,7 +200,9 @@ public class SearchView extends ViewPart {
 		// nothing happens if container is a read-only
 		container.addAdapter();
 		viewer.setInput(con);
-		viewer.expandAll();
+
+		// expand only level 1 and 2 to keep the tree clearly arranged
+		viewer.expandToLevel(2);
 		registerModelView();
 
 	}
