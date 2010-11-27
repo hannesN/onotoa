@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 
+import de.topicmapslab.onotoa.search.util.UseType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -35,7 +36,7 @@ public class TreeNode {
 	private List<TreeNode> children;
 
 	private final Object object;
-	private final TreeNodeType type;
+	private final UseType type;
 
 	/**
 	 * Constructor
@@ -45,7 +46,7 @@ public class TreeNode {
 	 */
 
 	public TreeNode(Object object) {
-		this(object, TreeNodeType.None);
+		this(object, UseType.None);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class TreeNode {
 	 *            Type of the TreeNode
 	 */
 
-	public TreeNode(Object object, TreeNodeType type) {
+	public TreeNode(Object object, UseType type) {
 		this.object = object;
 		this.type = type;
 		if (object instanceof AssociationTypeConstraint)
