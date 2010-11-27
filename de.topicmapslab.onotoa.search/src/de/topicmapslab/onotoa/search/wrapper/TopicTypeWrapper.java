@@ -41,13 +41,8 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 	/**
 	 * Constructor
 	 * 
-	 * @param name
-	 *            of the TopicType
-	 * @param type
-	 *            int value of the type
-	 * 
-	 *            0 = no type 1 = TopicType 2 = OccurrenceType 3 = NameType 4 =
-	 *            Role Type 5 = AssociationType
+	 * @param topicType
+	 *            The TopicType that should be wrapped
 	 */
 
 	public TopicTypeWrapper(TopicType topicType) {
@@ -58,11 +53,10 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public int compareTo(TopicTypeWrapper o) {
 
 		if (type == o.type) {
@@ -125,52 +119,39 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener
-	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public ISelection getSelection() {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.viewers.ISelectionProvider#removeSelectionChangedListener
-	 * (org.eclipse.jface.viewers.ISelectionChangedListener)
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse
-	 * .jface.viewers.ISelection)
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void setSelection(ISelection selection) {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.topicmapslab.onotoa.search.wrapper.IDoubleClickHandler#doubleClickHappend
-	 * ()
+	/**
+	 * {@inheritDoc}
 	 */
+
 	public void doubleClickHappend() {
 		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(topicType), this);
 	}
