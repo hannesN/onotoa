@@ -68,6 +68,11 @@ public class NewSubjectIdentifierAction extends Action {
 
 		// get selection (Topic Type)
 		IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+
+		// check if selected element is a TopicType
+		if (!(sel.getFirstElement() instanceof TopicTypeWrapper))
+			return;
+
 		topicType = ((TopicTypeWrapper) sel.getFirstElement()).getTopicType();
 
 		// call InputDialog
