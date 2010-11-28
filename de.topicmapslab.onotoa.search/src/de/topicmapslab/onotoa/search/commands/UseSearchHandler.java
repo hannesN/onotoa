@@ -10,11 +10,16 @@
  *******************************************************************************/
 package de.topicmapslab.onotoa.search.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -25,6 +30,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import de.topicmapslab.onotoa.search.Activator;
 import de.topicmapslab.onotoa.search.searchImpl.UseSearcher;
 import de.topicmapslab.onotoa.search.views.SearchView;
+import de.topicmapslab.onotoa.search.wrapper.UseWrapper;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -94,21 +100,20 @@ public class UseSearchHandler extends AbstractHandler {
 			// clear old menu
 			searchView.removeContextMenu();
 
-			// List<Action> actionList = new ArrayList<Action>();
-			// actionList.add(new Action("Find use") {
-			// @Override
-			// public void run() {
-			// IStructuredSelection sel = (IStructuredSelection)
-			// view.getSelection();
-			// Object o = sel.getFirstElement();
-			//
-			// if (o instanceof UseWrapper){
-			// searcher.setTopicType(((UseWrapper) o).getTopicType());
-			// searchView.updateContent();
-			// }
-			// }
-			// });
-			// searchView.addContextMenu(actionList);
+//			List<Action> actionList = new ArrayList<Action>();
+//			actionList.add(new Action("Find use") {
+//				@Override
+//				public void run() {
+//					IStructuredSelection sel = (IStructuredSelection) view.getSelection();
+//					Object o = sel.getFirstElement();
+//
+//					if (o instanceof UseWrapper) {
+//						searcher.setTopicType(((UseWrapper) o).getTopicType());
+//
+//					}
+//				}
+//			});
+//			searchView.addContextMenu(actionList);
 
 		} catch (PartInitException e) {
 			throw new RuntimeException(e);

@@ -13,6 +13,8 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -116,6 +118,53 @@ public class SearchView extends ViewPart {
 
 		});
 
+		/*
+		 * this listener is used to abort the context menu while clicking on non
+		 * TopicType based entries (like the root or kind of use informations in
+		 * the use finder view
+		 * 
+		 * Maybe some day a public method for more customization is needed.
+		 */
+		viewer.getControl().addMouseListener(new MouseListener() {
+
+			public void mouseUp(MouseEvent e) {
+			}
+
+			/*
+			 * check the mouseDown of the right button event. (the mouseUp event
+			 * is catched by the manager for the context menu and isn't useable
+			 * at this point
+			 */
+			public void mouseDown(MouseEvent e) {
+
+				// check if right mouse button was pressed
+				// should be tested for all os, I think this is to lazy.
+				if (e.button == 3) {
+					IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
+					Object o = sel.getFirstElement();
+
+					// check if menu for this selection exists, to avoid
+					// nullPointerException
+					if (viewer.getControl().getMenu() != null) {
+						/*
+						 * only wrappers with a TopicType inside implements
+						 * IDoubleClickHandler to open the Property Page by
+						 * double clicking. We use this to ensure that only for
+						 * this nodes the context menu is visible
+						 */
+						if (!(o instanceof IDoubleClickHandler))
+							menuMgr.getMenu().setVisible(false);
+						else
+							menuMgr.getMenu().setVisible(true);
+					}
+				}
+			}
+
+			public void mouseDoubleClick(MouseEvent e) {
+				// implemented otherwise to avoid reaction one other double
+				// clicks than with the left mouse button
+			}
+		});
 	}
 
 	/**
