@@ -46,6 +46,7 @@ import de.topicmapslab.onotoa.search.wrapper.IdentifierWrapper;
 import de.topicmapslab.onotoa.search.wrapper.KindOfUseWrapper;
 import de.topicmapslab.onotoa.search.wrapper.TopicTypeWrapper;
 import de.topicmapslab.onotoa.search.wrapper.UseWrapper;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -121,7 +122,7 @@ public class SearchView extends ViewPart {
 		/*
 		 * this listener is used to abort the context menu while clicking on non
 		 * TopicType based entries (like the root or kind of use informations in
-		 * the use finder view
+		 * the use finder view)
 		 * 
 		 * Maybe some day a public method for more customization is needed.
 		 */
@@ -131,8 +132,8 @@ public class SearchView extends ViewPart {
 			}
 
 			/*
-			 * check the mouseDown of the right button event. (the mouseUp event
-			 * is catched by the manager for the context menu and isn't useable
+			 * check the mouseDown even of the right button. (the mouseUp event
+			 * is catched by the manager for the context menu and isn't usable
 			 * at this point
 			 */
 			public void mouseDown(MouseEvent e) {
@@ -154,8 +155,15 @@ public class SearchView extends ViewPart {
 						 */
 						if (!(o instanceof IDoubleClickHandler))
 							menuMgr.getMenu().setVisible(false);
-						else
-							menuMgr.getMenu().setVisible(true);
+
+						/*
+						 * This handles the only exception: The
+						 * AssociationConstraintWrapper implements the
+						 * interface, but doesn't wrap a Topic Type
+						 */
+						if (o instanceof IDoubleClickHandler)
+							if (!(((IDoubleClickHandler) o).getWrappedType() instanceof TopicType))
+								menuMgr.getMenu().setVisible(false);
 					}
 				}
 			}
