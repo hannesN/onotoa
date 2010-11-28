@@ -16,12 +16,12 @@ _Onotoa_ provides several different searches for different purposes. These are:
 * List Topics without Identifier
 * List All Subject Identifier 
 * List All Subject Locator 
-* Find Usage
+* Find Use
 * Clean Schema
 
 === Search Topic Type ===
 
-This is a search for any topic of the schema. You can refine the search by the use of some constraints. These are:   
+This is a search for any Topic Type of the schema. Access this search via *Search->Search Topic Type* at the menu. You can refine the search by the use of some constraints. These are:   
 
 * *Search String:* A string the topic name or one identifier should match. If this field is empty,
 all topics are a possible result.  
@@ -48,9 +48,10 @@ The search for an Association or a Topic Type allows you to enable the advanced 
 to show more search options. 
 
 At this mode you can define constraints the searched type should use. The left list shows all available Topic Types. 
-Select one or more entry and click the image:images/documentation/search/buttons/add_one.png[] button to add them or double click on one entry. Your selection should appear in 
-the right list. Remove them by double clicking or the use of the image:images/documentation/search/buttons/remove:one.png[] button. Above every list is a small text box 
-that you can use to filter (case sensitive) the shown entries by their names.  
+Select one or more entry and click the image:images/documentation/search/buttons/add_one.png[] button to add them or double 
+click on one entry. Your selection should appear in the right list. Remove them by double clicking or the use of the 
+image:images/documentation/search/buttons/remove:one.png[] button. Above every list is a small text box that you can use to 
+filter (case sensitive) the shown entries by their names.  
 
 [width="75%", cols="^10%,<90%"]
 |======================================================================
@@ -87,9 +88,9 @@ image::images/documentation/search/advanced_dialog.png[scaledwidth="50%"]
 
 === List Topics without Identifier ===
 
-This search lists all Topic Types without any identifier. That means: Every result don't have at least one Subject Identifier or
-Subject Locator or Item Identifier. By the use of the context menu at the result view you can change this 
-immediately. If you do this, the result view will be refreshed automatically.
+To find all Topic Types without any identifier call this search via *Search->List Topics without Identifier*. That means: 
+Every result don't have at least one Subject Identifier or Subject Locator or Item Identifier. By the use of the context 
+menu at the _Result View_ you can change this immediately. If you do this, the _Result View_ will be refreshed automatically.
 
 .Add Identifier
 [[search_non_id_context]]
@@ -97,8 +98,8 @@ image::images/documentation/search/non_id_context.png[scaledwidth="50%"]
 
 === List All Subject Identifier ===
 
-List all Subject Identifiers of the schema. Double click on a result to open the corresponding 
-*Property Details Page* of the Topic Type that uses this Subject Identifier. 
+List all Subject Identifiers of the schema. Open the search by *Search->List All Subject Identifier*. Double click on a 
+result to open the corresponding *Property Details Page* of the Topic Type that uses this Subject Identifier. 
 
 .Result List
 [[search_si_list]]
@@ -106,18 +107,37 @@ image::images/documentation/search/si_list.png[scaledwidth="50%"]
 
 === List All Subject Locator ===
 
-List all Subject Identifiers of the schema. Double click on a result to open the corresponding 
-*Property Details Page* of the Topic Type that uses this Subject Locator.
+List all Subject Identifiers of the schema. Open the search by *Search->List All Subject Locator*. Double click on a 
+result to open the corresponding *Property Details Page* of the Topic Type that uses this Subject Locator.
 
 .Result List
 [[search_sl_list]]
 image::images/documentation/search/sl_list.png[scaledwidth="50%"]
 
+=== Find Use ===
+
+With this search you can find all uses of a specific Topic Type. To define this one open 
+the _Topic Selection Dialog_ via *Search->Find Use* at the menu. The following dialog consists of a 
+list that shows all available Topic Types and a text field to filter the list. Select one entry and confirm your 
+choice.      
+
+.Topic Selection Dialog
+[[search_topic_selection_dialog]]
+image::images/documentation/search/topic_selection_dialog.png[scaledwidth="50%"]
+
+All Topic Types that uses the defined Type are now displayed at the _Result View_. To see the kind of the use click on 
+the triangle in front of an entry to expand the node. Now you can also use the context menu by right click on a Topic Type 
+to search the use for this Type.
+
+.Result View
+[[search_find_use_context]]
+image::images/documentation/search/find_use_context.png[scaledwidth="50%"]         
+
 === Clean Schema ===
 
-This little feature should help you to keep your schema clean. It searches unused Topic Types and provides the opportunity 
-to delete them. If the list is empty, everything seems to be fine. Above the list is a text field, 
-that you can use to filter (case sensitive) the results.
+_Onotoa_  offers this little feature to keep your schema clean. Open the cleaner via *Search->Clean Schema* t the menu. It 
+searches unused Topic Types and provides the opportunity to delete them. If the list is empty, everything seems to be fine. 
+Above the list is a text field, that you can use to filter (case sensitive) the results.
 
 Depending on its type, a topic is recognized as unused when:
 
