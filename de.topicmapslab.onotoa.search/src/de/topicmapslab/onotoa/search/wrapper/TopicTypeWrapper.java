@@ -37,7 +37,7 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 	private final TopicType topicType;
 	private final String name;
 	private final int type;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -50,9 +50,9 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 		this.topicType = topicType;
 		this.name = this.topicType.getName();
 		this.type = this.topicType.getKind().getValue();
-		
+
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -74,13 +74,19 @@ public class TopicTypeWrapper implements Comparable<TopicTypeWrapper>, IDoubleCl
 	}
 
 	/**
-	 * Getter for Topic Type inside the wrapper
-	 * 
-	 * @return TopicType
+	 * {@inheritDoc}
 	 */
 
-	public TopicType getTopicType() {
+	public TopicType getWrappedType() {
 		return this.topicType;
+	}
+	
+	/**
+	 * Get wrapped TopicType
+	 */
+	
+	public TopicType getTopicType(){
+		return topicType;
 	}
 
 	/**

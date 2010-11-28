@@ -49,7 +49,7 @@ public class NewUseSearchAction extends Action {
 		Object o = sel.getFirstElement();
 
 		if (o instanceof UseWrapper) {
-			searcher.setTopicType(((UseWrapper) o).getWrappedType());
+			searcher.setTopicType(((UseWrapper) o).getTopicType());
 			searchview.updateContent();
 		}
 
