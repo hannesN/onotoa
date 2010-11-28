@@ -26,4 +26,10 @@ public interface IDoubleClickHandler extends ISelectionProvider {
 	 */
 	public void doubleClickHappend();
 
+	/**
+	 * get wrapped type
+	 */
+	
+	public Object getWrappedType();
+
 }

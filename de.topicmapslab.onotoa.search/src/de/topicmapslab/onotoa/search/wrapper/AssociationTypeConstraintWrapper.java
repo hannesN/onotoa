@@ -130,4 +130,11 @@ public class AssociationTypeConstraintWrapper implements Comparable<TopicTypeWra
 		return 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public Object getWrappedType() {
+		return atc;
+	}
+
 }

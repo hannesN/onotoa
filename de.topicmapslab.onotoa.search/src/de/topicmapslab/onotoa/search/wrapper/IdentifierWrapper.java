@@ -152,4 +152,22 @@ public class IdentifierWrapper implements Comparable<IdentifierWrapper>, IDouble
 		Activator.getDefault().getSelectionService().setSelection(new StructuredSelection(topicType), this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	
+	public Object getWrappedType() {
+		return topicType;
+	}
+
+	/**
+	 * Getter for wrapped TopicType
+	 * 
+	 * @return wrapped TopicType
+	 */
+	
+	public TopicType getTopicType(){
+		return topicType;
+	}
+	
 }
