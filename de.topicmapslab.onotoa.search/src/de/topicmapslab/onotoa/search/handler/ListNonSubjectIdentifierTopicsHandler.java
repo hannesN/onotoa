@@ -8,36 +8,42 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
+package de.topicmapslab.onotoa.search.handler;
 
-package de.topicmapslab.onotoa.search.commands;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import de.topicmapslab.onotoa.search.dialogs.NonSubjectIdentifierDialog;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
+import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
- * @author Hannes Niederhausen
+ * @author niederhausen
  *
  */
-public class GeneralSearchUseCommandHandler extends AbstractUseFinderHandler {
+public class ListNonSubjectIdentifierTopicsHandler extends AbstractHandler {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell shell = HandlerUtil.getActiveShell(event); 
-
 		
-		FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(shell, false);
-		if ( (dlg.open()!=Dialog.OK) || (dlg.getResult().length==0)) {
-			return null;
+		List<TopicType> result = new ArrayList<TopicType>();
+		for (TopicType tt : ModelIndexer.getTopicIndexer().getTopicTypes()) {
+			if ((tt.getIdentifiers().size()==0) && (tt.getLocators().size()==0))
+				result.add(tt);
 		}
 		
-		TopicType tt = (TopicType) dlg.getResult()[0];
-
-		startSearch(shell, tt);
+		Shell shell = HandlerUtil.getActiveShell(event);
+		NonSubjectIdentifierDialog dlg = new NonSubjectIdentifierDialog(shell, result);
+		
+		dlg.open();
 		
 		return null;
 	}

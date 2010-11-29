@@ -8,7 +8,7 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.search.commands;
+package de.topicmapslab.onotoa.search.handler;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;

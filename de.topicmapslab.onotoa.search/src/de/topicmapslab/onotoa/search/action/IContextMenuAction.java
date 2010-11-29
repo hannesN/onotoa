@@ -8,7 +8,7 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.action;
+package de.topicmapslab.onotoa.search.action;
 
 /**
  * 
