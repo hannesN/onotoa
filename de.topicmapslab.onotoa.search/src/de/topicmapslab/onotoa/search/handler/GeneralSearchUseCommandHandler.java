@@ -8,42 +8,38 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.search.commands;
+
+package de.topicmapslab.onotoa.search.handler;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.topicmapslab.tmcledit.model.TopicType;
+import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 
 /**
- * @author niederhausen
+ * @author Hannes Niederhausen
  *
  */
-public class SearchUseCommandHandler extends AbstractUseFinderHandler {
+public class GeneralSearchUseCommandHandler extends AbstractUseFinderHandler {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
-	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell shell = HandlerUtil.getActiveShell(event); 
-		ISelection selection = HandlerUtil.getCurrentSelection(event);
-		if (!(selection instanceof IStructuredSelection))
+
+		
+		FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(shell, false);
+		if ( (dlg.open()!=Dialog.OK) || (dlg.getResult().length==0)) {
 			return null;
+		}
 		
-		IStructuredSelection sel = (IStructuredSelection) selection;
-		
-		TopicType tt = (TopicType) sel.getFirstElement();
-		
-		
+		TopicType tt = (TopicType) dlg.getResult()[0];
+
 		startSearch(shell, tt);
 		
 		return null;
 	}
-
-	
 
 }

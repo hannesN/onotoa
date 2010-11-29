@@ -8,105 +8,104 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.search.commands;
+package de.topicmapslab.onotoa.search.handler;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.command.CompoundCommand;
-import org.eclipse.jface.window.Window;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.topicmapslab.onotoa.search.Activator;
-import de.topicmapslab.onotoa.search.dialogs.CleanSchemaDialog;
-import de.topicmapslab.onotoa.search.searchImpl.NeverUsedTopicsSearcher;
+import de.topicmapslab.onotoa.search.action.NewUseSearchAction;
+import de.topicmapslab.onotoa.search.searchImpl.UseSearcher;
+import de.topicmapslab.onotoa.search.views.SearchView;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
  * 
- * Handles clean feature for schemas. That means it provides the dialog and
- * executes the deletion for selected types.
+ * Class handles search for use of a TopicType. It calls TopicSelectionDialog to
+ * select a specific Topic Type, the search implementation to search use cases
+ * and finally a view to show the results.
  * 
  * @author Sebastian Lippert
  * 
  */
-
-public class CleanSchemaHandler extends AbstractHandler {
+public class UseSearchHandler extends AbstractHandler {
 
 	/**
 	 * {@inheritDoc}
 	 */
-
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		// check if ModelIndexer exists
+		if (ModelIndexer.getInstance() == null)
+			return null;
+
+		// get shell and open search dialog for TopicTypes
+		Shell shell = HandlerUtil.getActiveShell(event);
+
+		FilterTopicSelectionDialog dlg = new FilterTopicSelectionDialog(shell, false);
+		if ((dlg.open() != Dialog.OK) || (dlg.getResult().length == 0)) {
+			return null;
+		}
 
 		// get active page and active view
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		ModelView view = (ModelView) activePage.findView(ModelView.ID);
+		final ModelView view = (ModelView) activePage.findView(ModelView.ID);
 
 		if (view == null)
 			return null;
 
-		// check if ModelIndexer exists
-		if (ModelIndexer.getInstance() == null)
-			return null;
-	
 		// get file for schema
 		File file = Activator.getDefault().getSelectionService().getOnotoaFile();
 		if (file == null)
 			return null;
 
-		// get CommandStack
-		CommandStack commandStack = view.getEditingDomain().getCommandStack();
-
 		// get schema
 		Assert.isNotNull(file.getTopicMapSchema());
 		TopicMapSchema schema = file.getTopicMapSchema();
 
-		// get unused topics
-		NeverUsedTopicsSearcher searcher = new NeverUsedTopicsSearcher(schema);
+		final UseSearcher searcher = new UseSearcher((TopicType) dlg.getResult()[0], schema);
 		searcher.fetchResult();
 
-		Collections.sort((List<? extends Comparable>) searcher.getResult().getContentList());
+		try {
 
-		// get shell and open search dialog for unused TopicTypes
-		Shell shell = HandlerUtil.getActiveShell(event);
-		CleanSchemaDialog dialog = new CleanSchemaDialog(shell, searcher.getResultList());
+			// open view that displays that results
+			SearchView searchView = (SearchView) activePage.findView(SearchView.ID);
+			if (searchView == null)
+				searchView = (SearchView) activePage.showView(SearchView.ID);
+			else
+				activePage.activate(searchView);
 
-		// initiate command for deletion
-		DeleteTopicTypeCommand deleteCommand;
-		CompoundCommand compoundCommand = new CompoundCommand();
+			// set results as content for the view
+			searchView.setContent(searcher.getResult());
 
-		if (dialog.open() == Window.OK) {
+			// clear old menu
+			searchView.removeContextMenu();
 
-			// iterate over selected TopicTypes and delete them from schema
-			for (TopicType tt : dialog.getCleanList()) {
+			List<Action> actionList = new ArrayList<Action>();
+			actionList.add(new NewUseSearchAction("Find use..", searcher, searchView.getTreeViewer(), searchView));
+			searchView.addContextMenu(actionList);
 
-				// create CompoundCommand which makes it possible to undo them
-				// all at once
-				deleteCommand = new DeleteTopicTypeCommand(tt);
-				compoundCommand.append(deleteCommand);
-
-			}
-
-			// excute all
-			commandStack.execute(compoundCommand);
+		} catch (PartInitException e) {
+			throw new RuntimeException(e);
 		}
 		return null;
-
 	}
 }

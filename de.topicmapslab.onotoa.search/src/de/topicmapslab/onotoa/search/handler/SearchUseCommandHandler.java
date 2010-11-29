@@ -8,44 +8,42 @@
  * Contributors:
  *     Hannes Niederhausen - initial API and implementation
  *******************************************************************************/
-package de.topicmapslab.onotoa.search.commands;
+package de.topicmapslab.onotoa.search.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import de.topicmapslab.onotoa.search.dialogs.NonSubjectIdentifierDialog;
 import de.topicmapslab.tmcledit.model.TopicType;
-import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
  * @author niederhausen
  *
  */
-public class ListNonSubjectIdentifierTopicsHandler extends AbstractHandler {
+public class SearchUseCommandHandler extends AbstractUseFinderHandler {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		Shell shell = HandlerUtil.getActiveShell(event); 
+		ISelection selection = HandlerUtil.getCurrentSelection(event);
+		if (!(selection instanceof IStructuredSelection))
+			return null;
 		
-		List<TopicType> result = new ArrayList<TopicType>();
-		for (TopicType tt : ModelIndexer.getTopicIndexer().getTopicTypes()) {
-			if ((tt.getIdentifiers().size()==0) && (tt.getLocators().size()==0))
-				result.add(tt);
-		}
+		IStructuredSelection sel = (IStructuredSelection) selection;
 		
-		Shell shell = HandlerUtil.getActiveShell(event);
-		NonSubjectIdentifierDialog dlg = new NonSubjectIdentifierDialog(shell, result);
+		TopicType tt = (TopicType) sel.getFirstElement();
 		
-		dlg.open();
+		
+		startSearch(shell, tt);
 		
 		return null;
 	}
+
+	
 
 }
