@@ -12,6 +12,7 @@ package de.topicmapslab.onotoa.search.wrapper;
 
 import java.util.List;
 
+import de.topicmapslab.kuria.annotation.Text;
 import de.topicmapslab.kuria.annotation.tree.Children;
 import de.topicmapslab.kuria.annotation.tree.TreeNode;
 import de.topicmapslab.tmcledit.model.TopicType;
@@ -57,6 +58,15 @@ public class UseWrapper extends TopicTypeWrapper {
 	public List<Object> getKindOfUseList() {
 
 		return kindOfUseList;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	
+	@Text
+	public String getName(){
+		return super.getName();
 	}
 
 	/**
