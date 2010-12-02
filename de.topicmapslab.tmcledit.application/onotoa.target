@@ -32,26 +32,6 @@
 <repository location="http://mirror.topicmapslab.de/update/helios/"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="net.sf.json_feature.feature.group" version="2.3.0"/>
-<unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
-<unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
-<unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
-<unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="0.14.0"/>
-<unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
-<unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
-<unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
-<unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
-<unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
-<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201011181709"/>
-<unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
-<unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201011181709"/>
-<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.1.2"/>
-<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
-<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.1.2"/>
-<repository location="http://update.topicmapslab.de"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
 <unit id="org.eclipse.rcp.feature.group" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
 <unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.6.0.v20100603-7sF99FsHFTw8HQBta4g33J3F"/>
@@ -62,6 +42,26 @@
 <unit id="org.eclipse.epp.mpc.feature.group" version="1.0.1.v20100826-2143"/>
 <unit id="org.eclipse.equinox.server.p2.feature.group" version="1.0.0.v20100503-7x7IFGOFQ74dz0POCNUBjA6L"/>
 <repository location="http://mirror.topicmapslab.de/update/helios/"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="net.sf.json_feature.feature.group" version="2.3.0"/>
+<unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
+<unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
+<unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
+<unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="0.14.0"/>
+<unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
+<unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
+<unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
+<unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
+<unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
+<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201012011502"/>
+<unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201012011502"/>
+<unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
+<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.1.2"/>
+<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
+<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.1.2"/>
+<repository location="http://update.topicmapslab.de"/>
 </location>
 </locations>
 <launcherArgs>
