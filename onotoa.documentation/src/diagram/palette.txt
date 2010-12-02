@@ -20,8 +20,7 @@ The palette can be seen in <<palette_elements>>.
 
 .Palette of a diagram editor
 [[palette_elements]]
-image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", 
-align="center"]
+image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", align="center"]
 
 The elements of the palette are:
 

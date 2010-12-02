@@ -17,9 +17,10 @@
 	<!-- libs-->
 	<property name="docbook.xsl.dir" value="lib/docbook-xsl-1.76.1" />
 	<property name="html.stylesheet" value="${docbook.xsl.dir}/html/docbook.xsl" />
-	<property name="fo.stylesheet" value="${docbook.xsl.dir}/fo/docbook.xsl" />
 	<property name="epub.stylesheet" value="${docbook.xsl.dir}/epub/docbook.xsl" />
+	<property name="fo.stylesheet" value="${docbook.xsl.dir}/fo/docbook.xsl" />
 	<property name="xalan.lib.dir" value="lib/" />
+	
 
 	<property name="src.dir" value="src" />
 	<property name="src.dir.images" value="${src.dir}/images" />
@@ -35,7 +36,7 @@
 	<property name="build" value="${doc.docbook}/build" />
 	<property name="build.fo" value="${build}/fo" />
 
-	<property name="paper.type" value="A4" />
+	<property name="paper.type" value="C5" />
 
 	<!--
 	      - Sets up the classpath for the Xalan and Xerces implementations

@@ -1,20 +1,78 @@
 == Export an schema ==
 
-After creating the schema with _Onotoa_ you might use it to validate a topic map. For that you need a schema 
-according to the TMCL standard. _Onotoa_ provides an export mechanism to create such schema topic map.
+_Onotoa_ provides a set of export functions to generate a schema topic map, java source code or even a complete editor. The latter is explaines in
+<<_generating_an_instance_editor>>
 
-To export a schema use the menu *File->Export...*. A dialog will appear and a list of export wizards are 
-proposed. If you use _Onotoa_ in an eclipse installation you will see a lot of wizards. In the standalone
-version you should see a dialog like in <<export_dialog>>.
+To use the export functions use the menu *File->Export...*.
 
 .Export Dialog
 [[export_dialog]]
 image::images/export_dialog.png[scaledwidth="50%"] 
 
-A TMCL schema is a topic map and therefor different notations for the serialisation are possible. You can choose between CTM or XTM.
-The following dialog will ask for the filename and if the schema information should be exported too. The schema information are 
-associations which connect every schema element with a topic representing the schema.
 
-After pressing finish the topic map is created from the schema and serielised in the given file.
+
+=== Exporting the Schema ===
+
+After creating the schema with _Onotoa_ you might use it to validate a topic map. For that you need a schema 
+according to the TMCL standard. Use the *Export TMCL* entry and press *Next*.
+
+The dialog shows the following input mask:
+
+.Export TMCL Dialog
+[[export_tmcl_dialog]]
+image::images/export_tmcl_dialog.png[scaledwidth="50%"] 
+
+The file is the absolute path to the file.
+
+The check boxes below have the following meaning:
+
+* *Export Annotations* A flag if the additional annotation of _Onotoa_ should be exported. For each element in the schema the annotations will be added as 
+occurrences. The type of the occurrence is a type of the annotation type ("http://onotoa.topicmapslab.de/annotation").
+* *Export Schema information* TMCL specifies a topic type for a schema topic with an occurrence for version and where to get the schema. Every construct 
+will get another association with this schema topic. With this any constraint and type can be traced back to the source schema in case of 
+merging two schemas. 
+* *Export Topic Types only* Before starting an instance topic map, the typed need to be created, mostly only with an subject identifier. 
+This options exports only the topic types and their names which can be used as a start for an instance topic map. 
+* *Indent XML formats* if XTM2 or XTM2.1 the XML will be indented if if is checked. If not the whole XML will be in one line  
+
+A TMCL schema is a topic map and therefore different notations for the serialization are possible. In the list below the check boxes you can choose from the given types. The
+suffix of the file name will be changed based on the selection.
+
+After pressing finish the topic map is created from the schema and serialized in the given file.
 
 NOTE: If you choose CTM the TMCL templates will be used to create the topic map.
+
+=== Exporting to _Maiana_ ===
+
+Another option is to upload the schema topic map to _Maiana_, the generic Topic maps Browser of the Topic Maps Lab.
+Use *Maiana Export* and enter your API-Key and press apply. The table below lists all topic map end points which may be overwritten.
+Select an end point and press finish to overwrite the topic map.
+
+To create a new end point in _Maiana_ select *Create new Maiana Endpoint*. Tje following values are necessary:
+
+* *Short Name*: This is the identifier of the topic map and must be unique for each user. It must be lower case and must not have whitspaces!
+* *Name*: The name of the topic map.
+* *Is Downloadable* This flag indicates whether users who may see this topic map may download it.
+* *Is Schema* flag whether the topic map is a schema. This is always true for _Onotoa_ schemas and if the box is unchecked, the flag will be set to true.
+* *Is Public* flag whether everyone may see the topic map or only invited users. 
+
+NOTE: You need a _Maiana_ account at http://maiana.topicmapslab.de. Your API-Key is on the left side of the user page.
+
+
+=== Exporting Aranuka annotated Java Sources ===
+
+Another Use-Case for a schema is the generation of Java classes. With _Aranuka_ the Topic Maps lab provides a library which maps java objects
+with topic maps using some schema annotations in the code. _Onotoa_ provides a generator for this kind of classes.
+
+NOTE: See http://code.google.com/p/aranuka for more information on _Aranuka_. 
+
+Choose *Aranuka Code Generator* in the exporter list provides a simple input mask with the following entries:
+
+*Target Directory* the target directory of the generated code.
+*Package Name* Specifies the package name of the generated classes.
+*Generate Kuria Annotations* Flag whether the generated classes should also be annotated for the usage with _Kuria_ input masks
+*Generate Genny ModelHandler Classes* Generates additional classes necessary for the generated editor. THis might be useful if 
+an existing editor should get an updated model.
+
+
+
