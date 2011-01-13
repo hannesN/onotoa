@@ -39,6 +39,7 @@ import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.BELONGS_TO;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CARD_MAX;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CARD_MIN;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED;
+import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_CONSTRUCT;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_ROLE;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_SCOPE;
 import static de.topicmapslab.tmcledit.export.voc.Namespaces.TMCL.CONSTRAINED_STATEMENT;
@@ -791,6 +792,13 @@ public class TMCLTopicMapBuilder {
 		ass.createRole(createTopic(CONSTRAINED), t);
 	}
 
+	private void createConstrainedConstruct(Topic t, Topic constr) {
+		Association ass = topicMap.createAssociation(createTopic(CONSTRAINED_CONSTRUCT));
+		ass.createRole(createTopic(CONSTRAINT), constr);
+		ass.createRole(createTopic(CONSTRAINED), t);
+        
+    }
+
 	private void createOverlaps(TopicType type, Topic constraint) {
 		Association ass = topicMap.createAssociation(createTopic(OVERLAPS));
 		ass.createRole(createTopic(ALLOWS), constraint);
@@ -1009,7 +1017,7 @@ public class TMCLTopicMapBuilder {
 		else
 			constr.createOccurrence(createTopic(REGEXP), ".*");
 
-		createConstrainedTopicType(t, constr);
+		createConstrainedConstruct(t, constr);
 
 		setSchema(constr);
 	}
