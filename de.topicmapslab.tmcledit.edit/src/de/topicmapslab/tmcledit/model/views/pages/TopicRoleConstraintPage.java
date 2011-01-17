@@ -53,12 +53,24 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 
 		updateCombo();
 
-		cardMinText.setText(rpc.getCardMin());
-		cardMaxText.setText(rpc.getCardMax());
-		playerLabel.setText(rpc.getPlayer().getName());
+		if (rpc==null) {
+			cardMinText.setText("");
+			cardMaxText.setText("");
+			playerLabel.setText("");	
+		} else {
+			cardMinText.setText(rpc.getCardMin());
+			cardMaxText.setText(rpc.getCardMax());
+			playerLabel.setText(rpc.getPlayer().getName());	
+		}
+		
 		super.updateUI();
 	}
 
+	@Override
+	public void aboutToHide() {
+		setModel(null);
+	}
+	
 	@Override
 	protected void createItems(CTabFolder folder) {
 		super.createItems(folder);
@@ -165,6 +177,8 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 
 	protected AssociationType getAssociationType() {
 		try {
+			if (getModel()==null)
+				return null;
 			return (AssociationType) ((AssociationTypeConstraint) getCastedModel().eContainer()).getType();
 		} catch (Exception e) {
 			TmcleditEditPlugin.logError(e);
@@ -213,6 +227,11 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 
 		super.setModel(model);
 
+		if (model==null) {
+			assPage.setModel(null);
+			return;
+		}
+		
 		rpc = (RolePlayerConstraint) model;
 
 		if (rpc.getRole() != null)

@@ -22,17 +22,27 @@ public class CreateTopicTypeCommand extends AbstractCommand {
 	private TopicMapSchema schema;
 	private String name;
 	private TopicType topicType;
+	private KindOfTopicType kind;
 
 	public CreateTopicTypeCommand(TopicMapSchema schema, String name) {
 		this.schema = schema;
 		this.name = name;
 		this.topicType = null;
+		this.kind = KindOfTopicType.TOPIC_TYPE;
+	}
+	
+	public CreateTopicTypeCommand(TopicMapSchema schema, String name, KindOfTopicType kind) {
+		this.schema = schema;
+		this.name = name;
+		this.topicType = null;
+		this.kind = kind;
 	}
 
 	public CreateTopicTypeCommand(TopicMapSchema schema, TopicType type) {
 		this.schema = schema;
 		this.name = type.getName();
 		this.topicType = type;
+		this.kind = type.getKind();
 	}
 
 	@Override
@@ -45,7 +55,7 @@ public class CreateTopicTypeCommand extends AbstractCommand {
 	@Override
 	protected boolean prepare() {
 		if (topicType == null) {
-			topicType = ModelIndexer.getTopicIndexer().createTopicType(KindOfTopicType.TOPIC_TYPE);
+			topicType = ModelIndexer.getTopicIndexer().createTopicType(kind);
 			topicType.setName(name);
 		}
 		return true;
