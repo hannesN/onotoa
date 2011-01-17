@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.topicmapslab.onotoa.wordlisteditor.commands.OpenEditorCommand"
+            id="openwordlisteditor"
+            name="Open Wordlist Editor">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:de.topicmapslab.tmcledit.extensions.views.ModelView">
+         <command
+               commandId="openwordlisteditor"
+               icon="icons/wordlist.png"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="de.topicmapslab.onotoa.wordlisteditor.editor.WordListEditor"
+            default="false"
+            id="de.topicmapslab.onotoa.wordlisteditor.editor.WordListEditor"
+            name="Word List Editor">
+      </editor>
+   </extension>
+   <extension
+         point="de.topicmapslab.tmcledit.edit.annotationprovider">
+      <annotationprovider
+            id="de.topicmapslab.onotoa.wordlisteditor.wordannotationprovider"
+            internal="true"
+            name="de.topicmapslab.onotoa.wordlist">
+      </annotationprovider>
+   </extension>
+
+</plugin>
