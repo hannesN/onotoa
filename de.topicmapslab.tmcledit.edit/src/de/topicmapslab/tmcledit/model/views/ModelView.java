@@ -41,6 +41,7 @@ import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.emf.workspace.impl.WorkspaceCommandStackImpl;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -82,6 +83,7 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewSite;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -192,6 +194,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	private CreateItemIdenifierConstraintAction createItemIdenifierConstraintAction;
 
 	private CreateSubjectLocatorConstraintAction createSubjectLocatorConstraintAction;
+
+	private IAction saveAction;
+
+	private CloseAction closeAction;
+
+	private RedoActionWrapper redoAction;
+
+	private UndoActionWrapper undoAction;
 
 	/**
 	 * Helper method to retrieve the view from the PlatformUI
@@ -350,26 +360,34 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		IActionBars actionBars = getViewSite().getActionBars();
 		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 
-		UndoActionWrapper undoAction = new UndoActionWrapper();
+		undoAction = new UndoActionWrapper();
 		undoAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_UNDO));
-		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), undoAction);
+		
 
-		RedoActionWrapper redoAction = new RedoActionWrapper();
+		redoAction = new RedoActionWrapper();
 		redoAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_REDO));
-		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(), redoAction);
-
-		CloseAction closeAction = new CloseAction(this);
+		
+		closeAction = new CloseAction(this);
 		addPropertyListener(closeAction);
-		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), closeAction);
-
-		IAction a = ActionFactory.SAVE.create(getViewSite().getWorkbenchWindow());
-		actionRegistry.registerAction(a);
-
+		
+		saveAction = ActionFactory.SAVE.create(getViewSite().getWorkbenchWindow());
+		
+		
+		
+		
+		actionRegistry.registerAction(saveAction);
 		actionRegistry.registerAction(closeAction);
 		actionRegistry.registerAction(undoAction);
 		actionRegistry.registerAction(redoAction);
 
 		actionBars.updateActionBars();
+		
+		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), undoAction);
+		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(), redoAction);
+		actionBars.setGlobalActionHandler(ActionFactory.CLOSE.getId(), closeAction);
+		
+		undoAction.setEnabled(false);
+		redoAction.setEnabled(false);
 	}
 
 	/**
@@ -676,6 +694,10 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		updateActions();
 		viewer.refresh();
 		setSelection(new StructuredSelection());
+		
+		actionRegistry.getAction(ActionFactory.UNDO.getId()).setEnabled(false);
+		actionRegistry.getAction(ActionFactory.REDO.getId()).setEnabled(false);
+		
 	}
 
 	@Override
@@ -990,6 +1012,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
     	manager.add(validationAction);
     	manager.add(new SyncAction("Syncronize", IAction.AS_CHECK_BOX, syncView));
     	manager.add(new Separator());
+    	manager.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
     
     }
 
