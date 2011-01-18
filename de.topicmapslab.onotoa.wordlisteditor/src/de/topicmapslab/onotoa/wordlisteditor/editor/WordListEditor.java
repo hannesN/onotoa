@@ -361,13 +361,14 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 					Clipboard clipboard = new Clipboard(e.widget.getDisplay());
 					
 					StringBuilder builder = new StringBuilder();
-					WordListContainer wlc = (WordListContainer) viewer.getInput();
+					
 					
 					String lineSeparator = System.getProperty("line.separator");
+					IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
 					
-					Iterator<Word> it = wlc.iterator();
+					Iterator<?> it = sel.iterator();
 					while (it.hasNext()) {
-						Word w = it.next();
+						Word w = (Word) it.next();
 						builder.append("\"");
 						builder.append(w.getWord());
 						builder.append("\"");
