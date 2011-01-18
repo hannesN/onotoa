@@ -47,6 +47,11 @@ import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.Clipboard;
+import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -310,6 +315,39 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
+		table.addKeyListener(new KeyAdapter() {
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if ((e.keyCode==(int)'c') && ((e.stateMask&SWT.CTRL)!=0)) {
+					Clipboard clipboard = new Clipboard(e.widget.getDisplay());
+					
+					StringBuilder builder = new StringBuilder();
+					WordListContainer wlc = (WordListContainer) viewer.getInput();
+					
+					String lineSeparator = System.getProperty("line.separator");
+					
+					Iterator<Word> it = wlc.iterator();
+					while (it.hasNext()) {
+						Word w = it.next();
+						builder.append("\"");
+						builder.append(w.getWord());
+						builder.append("\"");
+						builder.append(";");
+						builder.append(w.getType().getName());
+						if (it.hasNext()) {
+							builder.append(lineSeparator);
+						}
+					}
+					clipboard.setContents(new Object[] {builder.toString()}, new Transfer[]{TextTransfer.getInstance()});
+					
+					clipboard.dispose();
+				}
+			}
+		});
+		
 		viewer = new TableViewer(table);
 		viewer.setContentProvider(new WordListProvider());
 		
