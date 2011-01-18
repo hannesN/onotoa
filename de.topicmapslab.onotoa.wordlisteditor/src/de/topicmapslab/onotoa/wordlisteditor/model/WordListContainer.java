@@ -104,6 +104,19 @@ public class WordListContainer implements Collection<Word>{
 	    return wordList.toArray(a);
     }
 
+    /**
+     * Checks if a word instance foir the given string exists
+     * @param word the word to check
+     * @return <code>true</code> if a word exists, <code>false</code> else
+     */
+    public boolean containsWord(String word) {
+    	for (Word w : this) {
+    		if (w.getWord().equals(word))
+    			return true;
+    	}
+    	return false;
+    }
+    
 	/**
      * @param e
      * @return

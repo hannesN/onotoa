@@ -26,6 +26,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.CellEditor;
@@ -46,12 +47,15 @@ import org.eclipse.jface.viewers.TableViewerEditor;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Clipboard;
-import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -59,6 +63,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -114,6 +119,8 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 	private CommandStack commandStack;
 
 	private DirtyAdapter dirtyAdapter;
+
+	private Text filterText;
 
 	/**
 	 * {@inheritDoc}
@@ -181,6 +188,12 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 		Composite comp = toolkit.createComposite(parent);
 		comp.setLayout(new GridLayout(2, false));
 
+		filterText = toolkit.createText(comp, "", SWT.BORDER|SWT.SEARCH|SWT.CANCEL);
+		filterText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
+		// empty comp
+		toolkit.createComposite(comp);
+		
 		// table composite with table layout
 		Composite tableComp = toolkit.createComposite(comp);
 		tableComp.setLayout(new TableColumnLayout());
@@ -218,10 +231,33 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 	 */
 	private void hookListeners() {
 
+		filterText.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				viewer.refresh();
+			}
+		});
+		
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				updateButtons();
+			}
+		});
+		
+		viewer.addFilter(new ViewerFilter() {
+			
+			@Override
+			public boolean select(Viewer viewer, Object parentElement, Object element) {
+				String tmp = filterText.getText();
+				if (tmp.length()==0)
+					return true;
+				
+				if (!((WordListContainer) viewer.getInput()).contains(element))
+					return true;
+				
+				return ((Word) element).getWord().startsWith(tmp);
 			}
 		});
 
@@ -379,12 +415,23 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 				cell.setText(((Word) cell.getElement()).getWord());
 			}
 		});
+		
 		tvc.setEditingSupport(new EditingSupport(viewer) {
 
 			@Override
 			protected void setValue(Object element, Object value) {
 				WordListContainer wlc = (WordListContainer) viewer.getInput();
+
 				Word w = (Word) element;
+				if (w.getWord().equals(value))
+					return;
+				
+				if (wlc.containsWord((String) value)) {
+					MessageDialog.openInformation(table.getShell(), "Word already entered", "The word <"+value+"> was already entered");
+					return;
+				}
+				
+
 				
 				AbstractCommand cmd = null;
 				if (wlc.contains(w)) {
@@ -416,6 +463,20 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 			}
 		});
 
+		// create column sorter
+		new AbstractColumnViewerSorter(viewer, tvc) {
+			
+			@Override
+			public String getText(Object element) {
+				if (((WordListContainer) viewer.getInput()).contains(element))
+					return ((Word)element).getWord();
+				// hack so hopefully the new element is always the last
+				else 
+					return "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+				
+			}
+		};
+		
 		// type column
 		tvc = new TableViewerColumn(viewer, SWT.NONE);
 		tvc.getColumn().setText("Type");
@@ -475,6 +536,19 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 				return true;
 			}
 		});
+	
+		// create column sorter
+		new AbstractColumnViewerSorter(viewer, tvc) {
+			
+			@Override
+			public String getText(Object element) {
+				if (((WordListContainer) viewer.getInput()).contains(element))
+					return ((Word)element).getType().getName();
+				// hack so hopefully the new element is always the last
+				else 
+					return "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZ";
+			}
+		};
 	}
 
 	private Annotation getWordListAnnotation() {
@@ -629,5 +703,5 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 	        return words;
         }
 		
-	}
+	}	
 }
