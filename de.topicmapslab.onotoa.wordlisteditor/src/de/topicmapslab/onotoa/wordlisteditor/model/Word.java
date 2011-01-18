@@ -28,7 +28,7 @@ public class Word {
      * 
      */
     public Word() {
-	    word = "word";
+	    word = "new word";
 	    type=KindOfTopicType.NO_TYPE;
     }
 	

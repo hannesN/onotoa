@@ -155,4 +155,11 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          version="3.2.1"
          unpack="false"/>
 
+   <plugin
+         id="de.topicmapslab.onotoa.wordlisteditor"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.qualifier"
+         unpack="false"/>
+
 </feature>

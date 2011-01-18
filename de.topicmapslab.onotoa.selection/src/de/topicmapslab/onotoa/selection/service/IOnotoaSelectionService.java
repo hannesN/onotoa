@@ -54,7 +54,7 @@ public interface IOnotoaSelectionService {
 	/**
 	 * Sets the current file model. 
 	 * 
-	 * INTERNAL: This should never be called ans is only for the model view to set.
+	 * INTERNAL: This should never be called and is only for the model view to set.
 	 * 
 	 * @param file the file model
 	 */
