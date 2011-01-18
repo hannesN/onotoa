@@ -4,26 +4,6 @@
 <target name="Generic Editor SDK Target">
 <locations>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="net.sf.json_feature.feature.group" version="2.3.0"/>
-<unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
-<unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
-<unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
-<unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="0.14.0"/>
-<unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
-<unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
-<unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
-<unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
-<unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
-<unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201010191135"/>
-<unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
-<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.1.2"/>
-<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
-<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201010191135"/>
-<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.1.2"/>
-<repository location="http://update.topicmapslab.de"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
 <unit id="epp.package.reporting" version="1.3.1.20100916-1202"/>
 <unit id="org.eclipse.platform.ide" version="3.6.1.M20100909-0800"/>
 <unit id="org.eclipse.equinox.executable.feature.group" version="3.4.1.R36x_v20100823-7M7K7JF90dnJ-WLf3cf4yi"/>
@@ -42,6 +22,26 @@
 <unit id="de.topicmapslab.genericeditor.application_feature.feature.group" version="1.0.0"/>
 <unit id="de.topicmapslab.maiana.io_feature.feature.group" version="1.0.0"/>
 <repository location="http://genny.topicmapslab.de/update"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="net.sf.json_feature.feature.group" version="2.3.0"/>
+<unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
+<unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
+<unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
+<unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="0.14.0"/>
+<unit id="cern.jet.random_feature.feature.group" version="0.9.0"/>
+<unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
+<unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
+<unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
+<unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
+<unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
+<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.1.2"/>
+<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2"/>
+<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201101171309"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201101171309"/>
+<unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
+<unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.8"/>
+<repository location="http://update.topicmapslab.de"/>
 </location>
 </locations>
 </target>
