@@ -26,7 +26,11 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
@@ -61,6 +65,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IActionBars;
@@ -73,6 +78,7 @@ import org.eclipse.ui.part.EditorPart;
 
 import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.onotoa.wordlisteditor.Activator;
+import de.topicmapslab.onotoa.wordlisteditor.editor.actions.SelectAllAction;
 import de.topicmapslab.onotoa.wordlisteditor.editor.input.WordListEditorInput;
 import de.topicmapslab.onotoa.wordlisteditor.emfcommands.AddWordCommand;
 import de.topicmapslab.onotoa.wordlisteditor.emfcommands.ModifyWordCommand;
@@ -127,6 +133,10 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 	private Text inputText;
 
 	private Button addButton;
+
+	private SelectAllAction selectAllAction;
+
+	private SelectAllAction deselectAllAction;
 
 	/**
 	 * {@inheritDoc}
@@ -194,17 +204,23 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 
 		createTableButtonBar(comp, toolkit);
 
+		gd = new GridData();
+		gd.widthHint = 150;
+		GridDataFactory fac = GridDataFactory.createFrom(gd);
+		
 		createSelectedTypesButton = toolkit.createButton(comp, "Create selected types", SWT.PUSH);
 		createSelectedTypesButton.setToolTipText("Creates Types for the selected words.");
+		fac.applyTo(createSelectedTypesButton);
 		
 		createAllTypesButton = toolkit.createButton(comp, "Create types", SWT.PUSH);
 		createAllTypesButton.setToolTipText("Creates Types for every word.");
-
+		fac.applyTo(createAllTypesButton);
+		
 		updateInput();
 
 		updateButtons();
 		hookListeners();
-
+		createContextMenu();
 	}
 
 	/**
@@ -273,10 +289,8 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 		});
 	}
 
-	/**
-     * 
-     */
-	protected void updateInput() {
+	
+	private void updateInput() {
 		Annotation a = getWordListAnnotation();
 		if ((a.getValue() == null) || (a.getValue().length() == 0)) {
 			WordListContainer tmp = new WordListContainer();
@@ -312,7 +326,7 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 				return ((Word) element).getWord().startsWith(tmp);
 			}
 		});
-
+		
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			/**
 			 * {@inheritDoc}
@@ -375,10 +389,14 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 		}
 
 	}
-
-	private void updateButtons() {
+	
+	/**
+	 * Updates the button states according to the selection in the viewer.
+	 */
+	public void updateButtons() {
 		removeButton.setEnabled(viewer.getCheckedElements().length != 0);
 		createAllTypesButton.setEnabled(!((WordListContainer) viewer.getInput()).isEmpty());
+		createSelectedTypesButton.setEnabled(viewer.getCheckedElements().length != 0);
 	}
 
 	/**
@@ -408,6 +426,8 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
+		table.setMenu(new Menu(table));
+		
 		table.addKeyListener(new KeyAdapter() {
 			/**
 			 * {@inheritDoc}
@@ -672,6 +692,41 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 			viewer.reveal(cmd.getNewWord());
 		}
 	}
+	
+	private void createContextMenu() {
+		MenuManager menuMgr = new MenuManager("#PopupMenu");
+    	menuMgr.setRemoveAllWhenShown(true);
+    	menuMgr.addMenuListener(new IMenuListener() {
+    		public void menuAboutToShow(IMenuManager manager) {
+    			WordListEditor.this.fillContextMenu(manager);
+    		}
+    	});
+    	
+    	Menu menu = menuMgr.createContextMenu(viewer.getControl());
+    	viewer.getControl().setMenu(menu);
+		
+	}
+
+	/**
+	 * Fills the context menu for the table viewer.
+	 * 
+     * @param manager
+     */
+    private void fillContextMenu(IMenuManager manager) {
+    	// lazy instantiation of actions
+    	if (selectAllAction==null)
+    		selectAllAction = new SelectAllAction(this, viewer, true);
+    	if (deselectAllAction==null)
+    		deselectAllAction = new SelectAllAction(this, viewer, false);
+    	
+    	// if there's no input we have no menu
+    	if (((WordListContainer) viewer.getInput()).isEmpty())
+    		return;
+    	
+    	manager.add(selectAllAction);
+    	manager.add(deselectAllAction);
+    	
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -817,5 +872,4 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 			}
 		}
 	}
-
 }
