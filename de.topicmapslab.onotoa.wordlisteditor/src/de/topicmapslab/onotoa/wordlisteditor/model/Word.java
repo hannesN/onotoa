@@ -24,6 +24,8 @@ public class Word {
 	
 	private KindOfTopicType type;
 	
+	private String comment;
+	
 	/**
      * 
      */
@@ -60,4 +62,18 @@ public class Word {
 	    this.word = word;
     }
 	
+    
+    /**
+     * @return the comment
+     */
+    public String getComment() {
+	    return comment;
+    }
+    
+    /**
+     * @param comment the comment to set
+     */
+    public void setComment(String comment) {
+	    this.comment = comment;
+    }
 }

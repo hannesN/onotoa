@@ -284,6 +284,9 @@ public class WordListContainer implements Collection<Word>{
 	        	Element e = doc.createElement("word");
 	        	e.setAttribute("word", w.getWord());
 	        	e.setAttribute("type", w.getType().getName());
+	        	if (w.getComment()!=null) {
+	        		e.setAttribute("comment", w.getComment());
+	        	}
 	        	doc.getDocumentElement().appendChild(e);
 	        }
 	        
@@ -315,7 +318,7 @@ public class WordListContainer implements Collection<Word>{
     }
 	
 	/**
-	 * Parses the given XML and creates a new word list contianer
+	 * Parses the given XML and creates a new word list container
 	 * 
 	 * @param xml
 	 * @return
@@ -338,6 +341,10 @@ public class WordListContainer implements Collection<Word>{
 	        			w.setWord(tmp);
 	        			tmp = attributes.getValue("type");
 	        			w.setType(KindOfTopicType.getByName(tmp));
+	        			
+	        			tmp = attributes.getValue("comment");
+	        			if (tmp!=null)
+	        				w.setComment(tmp);
 	        			
 	        			wordListContainer.add(w);
 	        		}
