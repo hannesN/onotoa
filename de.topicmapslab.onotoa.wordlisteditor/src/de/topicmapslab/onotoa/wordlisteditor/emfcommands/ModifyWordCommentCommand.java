@@ -13,31 +13,32 @@ package de.topicmapslab.onotoa.wordlisteditor.emfcommands;
 import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.onotoa.wordlisteditor.model.Word;
-import de.topicmapslab.onotoa.wordlisteditor.model.WordListContainer;
 
 /**
- * Command to remove a word from the word container
+ * Command to set a comment to a model.
  * 
  * @author Hannes Niederhausen
  *
  */
-public class RemoveWordCommand extends AbstractCommand {
+public class ModifyWordCommentCommand extends AbstractCommand {
 
-	private WordListContainer container;
 	private Word word;
-	private int idx;
+	
+	private String newComment;
+	
+	private String oldComment;
 	
 	
 	/**
 	 * Constructor
-	 * @param container the container for the word to remove
-	 * @param word the word of the new {@link Word} instance
-	 * @param type the type of the new {@link Word} instance
+	 * 
+	 * @param word the {@link Word} to modify
+	 * @param newComment the new word value
 	 */
-	public RemoveWordCommand(WordListContainer container, Word word) {
+	public ModifyWordCommentCommand(Word word, String newComment) {
 	    super();
-	    this.container = container;
 	    this.word = word;
+	    this.newComment = newComment;
     }
 
 	/**
@@ -45,8 +46,8 @@ public class RemoveWordCommand extends AbstractCommand {
 	 */
 	@Override
 	public void execute() {
-		idx = container.indexOf(word);
-		container.remove(word);
+		this.word.setComment(newComment);
+
 	}
 
 	/**
@@ -54,23 +55,39 @@ public class RemoveWordCommand extends AbstractCommand {
 	 */
 	@Override
 	public void redo() {
-		container.remove(word);
+		this.word.setComment(newComment);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void undo() {
+		this.word.setComment(oldComment);
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void undo() {
-		container.add(idx, word);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	protected boolean prepare() {
-	    return true;
-	}
+		
+		// don't need to save empty strings so we set it to null
+		if ( (newComment!=null) && (newComment.length()==0)) {
+			newComment = null;
+		}
 
+		oldComment = this.word.getComment();
+		
+		// check if both comment values are null
+		if (oldComment==null) {
+			if (newComment==null) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		return !oldComment.equals(oldComment);
+	}
 }
