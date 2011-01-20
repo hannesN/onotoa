@@ -17,6 +17,8 @@ import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.Command;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -89,6 +91,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.commands.ICommandService;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.UIJob;
 
@@ -593,6 +597,14 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 //					((NotesView) notesView).update();
 //			}
 //		}
+	
+		// enabling wordlist command
+//		ICommandService commandService = (ICommandService)PlatformUI.getWorkbench().getService(ICommandService.class);
+//		IHandlerService handlerservice = (IHandlerService)PlatformUI.getWorkbench().getService(IHandlerService.class);
+
+//		Command command = commandService.getCommand("de.topicmapslab.onotoa.openwordlisteditor");
+//		((AbstractHandler) command.getHandler()).setEnabled(currFile!=null);
+	
 	}
 	
 	/**

@@ -30,6 +30,21 @@ public class AddWordCommand extends AbstractCommand {
 	
 	/**
 	 * Constructor
+	 * 
+	 * Creates a word with the type {@link KindOfTopicType#NO_TYPE}
+	 * 
+	 * @param container the container for the new word
+	 * @param word the word of the new {@link Word} instance
+	 */
+	public AddWordCommand(WordListContainer container, String word) {
+	    super();
+	    this.container = container;
+	    this.word = word;
+	    this.type = KindOfTopicType.NO_TYPE;
+    }
+	
+	/**
+	 * Constructor
 	 * @param container the container for the new word
 	 * @param word the word of the new {@link Word} instance
 	 * @param type the type of the new {@link Word} instance
@@ -65,6 +80,15 @@ public class AddWordCommand extends AbstractCommand {
 		container.remove(newWord);
 	}
 
+	/**
+	 * Returns the newly created word
+	 * 
+     * @return the newWord of <code>null</code>
+     */
+    public Word getNewWord() {
+	    return newWord;
+    }
+	
 	/**
 	 * {@inheritDoc}
 	 */
