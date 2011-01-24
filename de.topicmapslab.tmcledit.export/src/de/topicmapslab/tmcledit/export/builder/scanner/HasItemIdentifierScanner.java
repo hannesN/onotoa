@@ -40,7 +40,7 @@ public class HasItemIdentifierScanner extends AbstractConstraintScanner {
 	
 	protected String getQuery() {
 		String query = "FOR $c IN // tmcl:item-identifier-constraint "
-		        + "RETURN  ( $c >> traverse tmcl:constrained-topic-type, "
+		        + "RETURN  ( $c >> traverse tmcl:constrained-construct, "
 		        + "$c  / tmcl:card-min || \"0\" , " 
 		        + "$c / tmcl:card-max || \"*\" , " 
 		        + "$c / tmcl:regexp || \".*\" , "

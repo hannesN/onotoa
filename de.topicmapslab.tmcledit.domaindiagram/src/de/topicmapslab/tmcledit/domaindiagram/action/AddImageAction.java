@@ -21,13 +21,25 @@ import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.SetImageCommand;
 import de.topicmapslab.tmcledit.model.util.Base64;
 
+/**
+ * Action to add an image to a topic type.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class AddImageAction extends AbstractCommandStackAction {
 	/**
-	 * 
+	 * type node to change
 	 */
 	private TypeNode typeNode;
 	
 
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the {@link CommandStack} which executes the 
+	 * @param typeNode the 
+	 */
 	public AddImageAction(CommandStack commandStack, TypeNode typeNode) {
 		super(commandStack);
 		this.typeNode = typeNode;
@@ -37,6 +49,11 @@ public class AddImageAction extends AbstractCommandStackAction {
 			setText("Change Image...");
 	}
 
+	/**
+	 * Sets the node to change
+	 * 
+	 * @param typeNode the node which receives the model
+	 */
 	public void setTypeNode(TypeNode typeNode) {
 		this.typeNode = typeNode;
 	}

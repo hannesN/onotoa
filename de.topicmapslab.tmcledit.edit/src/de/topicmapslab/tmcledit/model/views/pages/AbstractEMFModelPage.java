@@ -37,6 +37,12 @@ import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
 import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.widgets.AnnotationWidget;
 
+/**
+ * AbstractPage for EMF generated model elements
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractEMFModelPage extends AbstractModelPage implements Adapter,
 		IModelProvider, IModelPage {
 
@@ -53,10 +59,19 @@ public abstract class AbstractEMFModelPage extends AbstractModelPage implements 
 
 	AnnotationWidget annotationWidget;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param id page id
+	 */
 	public AbstractEMFModelPage(String id) {
 		super(id);
 	}
 
+	/**
+	 * Flag if the represented model element may be annotated
+	 * @return <code>true</code> if the model element can be annotated, <code>false</code> else
+	 */
 	public boolean canAnnotate() {
 		return true;
 	}

@@ -309,7 +309,14 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 		tt.getNameConstraints().add(ntc);
 		
 		try {
-			ntc.setType(getTopicType(arg1));
+			// check if arg1 is default name
+			TopicMap tm = arg1.getTopicMap();
+			Topic defaultName = tm.getTopicBySubjectIdentifier(tm.createLocator("http://psi.topicmaps.org/iso13250/model/topic-name"));
+			if (arg1.equals(defaultName)) {
+				ntc.setType(null);
+			} else {
+				ntc.setType(getTopicType(arg1));
+			}
 		} catch (Exception e) {
 			// noop and use default
 		}

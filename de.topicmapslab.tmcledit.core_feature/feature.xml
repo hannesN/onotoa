@@ -74,10 +74,6 @@ This Agreement is governed by the laws of the State of New York andthe intellect
       <discovery label="For more information on Topic maps" url="http://onotoa.topicmapslab.de"/>
    </url>
 
-   <requires>
-      <import feature="de.topicmapslab.kuria_feature" version="1.0.1"/>
-   </requires>
-
    <plugin
          id="de.topicmapslab.tmcledit"
          download-size="0"

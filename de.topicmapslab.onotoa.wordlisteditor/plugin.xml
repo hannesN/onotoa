@@ -18,6 +18,15 @@
                commandId="de.topicmapslab.onotoa.openwordlisteditor"
                icon="icons/wordlist.png"
                style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <with
+                     variable="de.topicmapslab.onotoa.file.loaded">
+                     <equals
+                           value="true">
+                     </equals>
+               </with>
+            </visibleWhen>
          </command>
       </menuContribution>
    </extension>

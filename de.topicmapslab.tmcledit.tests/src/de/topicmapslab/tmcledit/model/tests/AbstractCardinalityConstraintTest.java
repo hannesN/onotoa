@@ -5,6 +5,12 @@
  */
 package de.topicmapslab.tmcledit.model.tests;
 
+import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
+
+/**
+ * Test for the {@link AbstractCardinalityConstraint}
+ *
+ */
 public abstract class AbstractCardinalityConstraintTest extends
 		TMCLConstructTest {
 

@@ -3,9 +3,14 @@
  */
 package de.topicmapslab.onotoa.selection.service;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.eclipse.ui.AbstractSourceProvider;
+import org.eclipse.ui.ISources;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -13,6 +18,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 
+import de.topicmapslab.onotoa.selection.Activator;
 import de.topicmapslab.tmcledit.model.File;
 
 /**
@@ -21,8 +27,10 @@ import de.topicmapslab.tmcledit.model.File;
  * @author Hannes Niederhausen
  *
  */
-public class OnotoaSelectionService implements IOnotoaSelectionService {
+public class OnotoaSelectionService implements IOnotoaSelectionService  {
 
+	
+	
 	List<ISelectionChangedListener> listeners;
 	private ISelection selection; 
 	
@@ -86,6 +94,10 @@ public class OnotoaSelectionService implements IOnotoaSelectionService {
 	@Override
     public void setOnotoaFile(File file) {
 		 this.file = file;
-	    
+		 
+		 Activator.getSourceProvider().setFileLoaded(this.file!=null);
+		 
     }
+
+	
 }
