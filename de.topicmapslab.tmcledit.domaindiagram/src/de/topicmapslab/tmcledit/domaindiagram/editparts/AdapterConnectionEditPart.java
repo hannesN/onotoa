@@ -13,10 +13,18 @@ package de.topicmapslab.tmcledit.domaindiagram.editparts;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 
 import de.topicmapslab.tmcledit.model.Edge;
 
+/**
+ * Abstract class for connection {@link EditPart}s with a {@link Adapter} to listen
+ * to model changes.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPart {
 
 	protected Adapter adapter = new Adapter() {
@@ -40,10 +48,20 @@ public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPa
 		
 	};
 
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 */
 	public boolean isAdapterForType(Object type) {
 		return true;
 	}
 
+	/**
+	 * {inheritDoc}
+	 * 
+	 * @param notification the event notification
+	 */
 	public abstract void notifyChanged(Notification notification);
 
 	

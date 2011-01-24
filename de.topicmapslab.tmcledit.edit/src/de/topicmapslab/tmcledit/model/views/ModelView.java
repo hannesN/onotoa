@@ -17,8 +17,6 @@ import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.Command;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -91,8 +89,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.commands.ICommandService;
-import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.UIJob;
 
@@ -306,7 +302,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 		IPreferenceStore pref = TmcleditEditPlugin.getPlugin().getPreferenceStore();
 		String filename = pref.getString(PreferenceConstants.P_LOADFILE);
 		if ((filename != null) && (filename.length() > 0) && (filename.endsWith(".ono")) ){
-			// check fi the parameter is really a file
+			// check if the parameter is really a file
 			java.io.File f = new java.io.File(filename);
 			if (!f.exists()) {
 				// try to add working directory because filename is a relative path
@@ -345,7 +341,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), this, true), id);
 			}
 		}
-
+		
 	}
 
 	@Override
@@ -598,15 +594,9 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 //			}
 //		}
 	
-		// enabling wordlist command
-//		ICommandService commandService = (ICommandService)PlatformUI.getWorkbench().getService(ICommandService.class);
-//		IHandlerService handlerservice = (IHandlerService)PlatformUI.getWorkbench().getService(IHandlerService.class);
-
-//		Command command = commandService.getCommand("de.topicmapslab.onotoa.openwordlisteditor");
-//		((AbstractHandler) command.getHandler()).setEnabled(currFile!=null);
-	
 	}
-	
+
+		
 	/**
 	 * Refreshes the {@link TreeViewer}. If recreate is <code>true</code> the content provider is reinitialized, else
 	 * the view will just refresh.

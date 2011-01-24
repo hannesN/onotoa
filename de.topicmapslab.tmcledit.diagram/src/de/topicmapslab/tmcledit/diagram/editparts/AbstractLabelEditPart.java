@@ -34,6 +34,11 @@ import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.EditableLabel;
 import de.topicmapslab.tmcledit.diagram.figures.SelectionFigure;
 
+/**
+ * Abstract editpart for labeled elements like occurrences, names and identifier 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart implements IDirectEditable {
 
 	private DirectEditManager manager;
@@ -44,9 +49,6 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 	private boolean editable = true;
 	private Figure compartement;
 
-	public AbstractLabelEditPart() {
-		super();
-	}
 
 	@Override
 	protected IFigure createFigure() {
@@ -104,6 +106,10 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 		return compartement;
 	}
 	
+	/**
+	 * 
+	 * @return the label for the cardinality
+	 */
 	public Label getCardLabel() {
 		return cardLabel;
 	}
@@ -178,18 +184,33 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 		return manager;
 	}
 
+	/**
+	 * 
+	 * @return the label for the name
+	 */
 	public EditableLabel getNameLabel() {
 		return nameLabel;
 	}
 
+	/**
+	 * 
+	 * @return the label for a type
+	 */
 	public Label getTypeLabel() {
 		return typeLabel;
 	}
 	
+	/**
+	 * 
+	 * @return the label for a regular expression
+	 */
 	public Label getRegExpLabel() {
 		return regExpLabel;
 	}
 	
+	/**
+	 * Removes all children labels for scope
+	 */
 	@SuppressWarnings("unchecked")
 	public void clearScopeLables() {
 		int counter = 0;
@@ -204,6 +225,10 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 		}
 	}
 	
+	/**
+	 * Adds a scope creating a label for the given text
+	 * @param text the scope text
+	 */
 	public void addScopeLabel(String text) {
 		Label scopeLabel = new Label();
 		scopeLabel.setLabelAlignment(PositionConstants.LEFT);

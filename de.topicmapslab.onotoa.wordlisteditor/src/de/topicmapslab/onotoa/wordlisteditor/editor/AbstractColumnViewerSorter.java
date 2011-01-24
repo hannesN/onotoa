@@ -19,15 +19,17 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 /**
+ * Abstract Sorter for TableViewerColumns
+ * 
  * @author Hannes Niederhausen
  * 
  */
 public abstract class AbstractColumnViewerSorter extends ViewerSorter {
-	public static final int ASC = 1;
+	private static final int ASC = 1;
 
-	public static final int NONE = 0;
+	private static final int NONE = 0;
 
-	public static final int DESC = -1;
+	private static final int DESC = -1;
 
 	private int direction = 0;
 
@@ -68,7 +70,13 @@ public abstract class AbstractColumnViewerSorter extends ViewerSorter {
 		});
 	}
 
-	public void setSorter(AbstractColumnViewerSorter sorter, int direction) {
+	/**
+	 * Sets the sorter and the direction
+	 * 
+	 * @param sorter the sorter for the viewer
+	 * @param direction the sort direction
+	 */
+	private void setSorter(AbstractColumnViewerSorter sorter, int direction) {
 		if (direction == NONE) {
 			column.getColumn().getParent().setSortColumn(null);
 			column.getColumn().getParent().setSortDirection(SWT.NONE);

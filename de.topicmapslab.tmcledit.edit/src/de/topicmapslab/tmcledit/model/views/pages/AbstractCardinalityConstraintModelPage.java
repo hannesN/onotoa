@@ -22,6 +22,7 @@ import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
 /**
+ * Abstract page for cardinality constraints.
  * 
  * @author Hannes Niederhausen
  *
@@ -31,7 +32,11 @@ public abstract class AbstractCardinalityConstraintModelPage extends AbstractEMF
 	protected Text cardMinText;
 	protected Text cardMaxText;
 
-	
+	/**
+	 * Constructor
+	 * 
+	 * @param id pageId
+	 */
 	public AbstractCardinalityConstraintModelPage(String id) {
 		super(id);
 	}

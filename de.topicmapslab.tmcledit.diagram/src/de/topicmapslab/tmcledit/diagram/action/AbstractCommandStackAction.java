@@ -13,10 +13,21 @@ package de.topicmapslab.tmcledit.diagram.action;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.jface.action.Action;
 
+/**
+ * Abstract Action with a {@link CommandStack} attribute
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractCommandStackAction extends Action {
 
 	protected final CommandStack commandStack;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the {@link CommandStack} to use
+	 */
 	public AbstractCommandStackAction(CommandStack commandStack) {
 		super();
 		this.commandStack = commandStack;

@@ -241,6 +241,10 @@ public class AbstractModelViewNode implements IAdaptable {
 			refresh();
 	}
 
+	/**
+	 * Removes a child
+	 * @param child
+	 */
 	public void removeChild(AbstractModelViewNode child) {
 		if (children == null)
 			return;
@@ -248,20 +252,39 @@ public class AbstractModelViewNode implements IAdaptable {
 		child.setParent(null);
 	}
 
+	/**
+	 * 
+	 * @return an array containing the children of this node
+	 */
 	public AbstractModelViewNode[] getChildren() {
 		return (AbstractModelViewNode[]) getChildrenList().toArray(new AbstractModelViewNode[getChildrenList().size()]);
 	}
 
+	/**
+	 * 
+	 * @return a list with the children of this node
+	 */
 	public List<AbstractModelViewNode> getChildrenList() {
 		if (children == null)
 			return Collections.emptyList();
 		return children;
 	}
 
+	/**
+	 * 
+	 * @return <code>true</code> if the node has children, <code>false</code> else
+	 */
 	public boolean hasChildren() {
 		return getChildrenList().size() > 0;
 	}
 
+	/**
+	 * Sets a flag if the node should update when the model changes or not.
+	 * 
+	 * This is a helper function top omit refreshing the view when initializing the model.
+	 *
+	 * @param syncView
+	 */
 	public void setSyncView(boolean syncView) {
 		this.syncView = syncView;
 		for (AbstractModelViewNode child : getChildrenList()) {

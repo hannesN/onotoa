@@ -4,14 +4,14 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.topicmapslab.tmcledit.tmclimport.builder.TypeNotFoundException;
-
 /**
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/**
+	 *  The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.tmcledit.tmclimport";
 
 	// The shared instance
@@ -32,15 +32,18 @@ public class Activator extends AbstractUIPlugin {
 		plugin = this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	/**
+	 * {inheritDoc}
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
 
+	/**
+	 * Logs the message as info
+	 * @param message the message to log
+	 */
 	public void logInfo(String message) {
 		Status s = new Status(Status.INFO, PLUGIN_ID, message);
 		getLog().log(s);
@@ -55,7 +58,12 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	public void logError(TypeNotFoundException e) {
+	/**
+	 * Logs the given exception as error.
+	 * 
+	 * @param e the exception to log
+	 */
+	public void logError(Exception e) {
 		Status s = new Status(Status.ERROR, PLUGIN_ID, "An error occurred!", e);
 		getLog().log(s);
     }

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.domaindiagram.editparts;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.draw2d.Figure;
@@ -36,16 +35,17 @@ import de.topicmapslab.tmcledit.domaindiagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.domaindiagram.figures.EditableLabel;
 import de.topicmapslab.tmcledit.domaindiagram.figures.SelectionFigure;
 
+/**
+ * Abstract {@link EditPart} for labels
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart implements IDirectEditable {
 
 	private DirectEditManager manager;
 	private EditableLabel nameLabel;
 	private Label secondaryLabel;
 	private Figure compartement;
-
-	public AbstractLabelEditPart() {
-		super();
-	}
 
 	@Override
 	protected IFigure createFigure() {
@@ -95,6 +95,10 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 		return compartement;
 	}
 	
+	/**
+	 * 
+	 * @return the secondary label 
+	 */
 	public Label getSecondaryLabel() {
 		return secondaryLabel;
 	}
@@ -162,37 +166,21 @@ public abstract class AbstractLabelEditPart extends AdapterGraphicalEditPart imp
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.topicmapslab.tmcledit.domaindiagram.editparts.IDirectEditable#getManager()
+	/**
+	 * {inheritDoc}
 	 */
 	public DirectEditManager getManager() {
 		return manager;
 	}
 
+	/**
+	 * 
+	 * @return the name label
+	 */
 	public EditableLabel getNameLabel() {
 		return nameLabel;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void clearScopeLables() {
-		int counter = 0;
-		Iterator it = getFigure().getChildren().iterator();
-		// 1. name label, 2nd: type/card label, 3rd: 
-		while (it.hasNext()) {
-			it.next();
-			if (counter>2) {
-				it.remove();
-			}
-			counter++;
-		}
-	}
-	
-	public void addScopeLabel(String text) {
-		Label scopeLabel = new Label();
-		scopeLabel.setLabelAlignment(PositionConstants.LEFT);
-		getFigure().add(scopeLabel);
-		scopeLabel.setText(text);
-	}
 	
 	public void revertNameChange() {
 		figure.setVisible(true);

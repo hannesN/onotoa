@@ -14,6 +14,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.expressions.EvaluationContext;
 
 import de.topicmapslab.onotoa.wordlisteditor.Activator;
 import de.topicmapslab.onotoa.wordlisteditor.editor.WordListEditor;
@@ -37,4 +38,13 @@ public class OpenEditorCommand extends AbstractHandler implements IHandler {
 		return null;
 	}
 
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnabled(Object evaluationContext) {
+	    EvaluationContext ctx = (EvaluationContext) evaluationContext;
+	    setBaseEnabled(ctx.getDefaultVariable()!=null);
+	}
 }

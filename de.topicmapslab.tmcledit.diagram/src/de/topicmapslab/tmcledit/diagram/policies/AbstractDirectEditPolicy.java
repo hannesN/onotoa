@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.diagram.policies;
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
@@ -19,11 +20,13 @@ import de.topicmapslab.tmcledit.diagram.command.CommandAdapter;
 import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
 import de.topicmapslab.tmcledit.diagram.editparts.IDirectEditable;
 
+/**
+ * Abstract Edit Policy for direct editing elements.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
-
-	public AbstractDirectEditPolicy() {
-		super();
-	}
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
@@ -42,6 +45,12 @@ public abstract class AbstractDirectEditPolicy extends DirectEditPolicy {
 		return (String) cellEditor.getValue();
 	}
 	
+	/**
+	 * Returns the command for changes of the model.
+	 * @param model the model element
+	 * @param request the {@link DirectEditRequest} of the {@link EditPart}
+	 * @return
+	 */
 	public abstract org.eclipse.emf.common.command.Command getCommand(Object model, DirectEditRequest request);
 		
 	@Override

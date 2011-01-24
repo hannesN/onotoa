@@ -8,13 +8,16 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
+import de.topicmapslab.onotoa.selection.service.OnotoaSelectionService;
 
 /**
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/**
+	 *  The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.tmcledit.domaindiagram";
 
 	// The shared instance
@@ -39,6 +42,10 @@ public class Activator extends AbstractUIPlugin {
 		onotoaSelectionService = (IOnotoaSelectionService) context.getService(servRef);
 	}
 
+	/**
+	 * 
+	 * @return the {@link OnotoaSelectionService}
+	 */
 	public IOnotoaSelectionService getOnotoaSelectionService() {
 		return onotoaSelectionService;
 	}
@@ -61,10 +68,18 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	/**
+	 * 
+	 * @return the active shell of the workbench window
+	 */
 	public static Shell getCurrentShell() {
 		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	}
 
+	/**
+	 * Logs an exception as error
+	 * @param e exception to log
+	 */
 	public void log(Exception e) {
 		getLog().log(new Status(Status.ERROR, PLUGIN_ID, "An error occured", e));
 	}
