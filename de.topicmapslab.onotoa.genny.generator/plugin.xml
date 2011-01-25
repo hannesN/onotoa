@@ -4,6 +4,7 @@
    <extension
          point="org.eclipse.ui.exportWizards">
       <wizard
+            category="de.topicmapslab.tmcledit.export.tmcledit"
             class="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
             id="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
             name="Generate Genny Application">
