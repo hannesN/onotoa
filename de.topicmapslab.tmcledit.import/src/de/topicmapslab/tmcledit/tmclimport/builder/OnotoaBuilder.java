@@ -69,6 +69,8 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 import de.topicmapslab.tmcledit.tmclimport.Activator;
 
 /**
+ * Builder which creates the Onotoa model based on a TMCL Topic Map
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -88,10 +90,20 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
 
 	private IWorkMonitor monitor;
 
+	/**
+	 * Constructor 
+	 * 
+	 * @param filename file which contains the serialiazed topic map.
+	 */
 	public OnotoaBuilder(String filename) {
 		this.filename = filename;
 	}
 
+	/**
+	 * The {@link File} instance containing the model
+	 * @param monitor a progress monitor
+	 * @return the file containing the onotoa model
+	 */
 	public File getFile(IWorkMonitor monitor) {
 		if (file == null)
 			try {

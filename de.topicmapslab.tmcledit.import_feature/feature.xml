@@ -73,9 +73,9 @@ This Agreement is governed by the laws of the State of New York andthe intellect
       <import plugin="org.tmapix.io"/>
       <import plugin="org.tmapix.core"/>
       <import plugin="com.semagia.mio.syntaxpacknodeps"/>
-      <import plugin="de.topicmapslab.majortom.core" version="1.1.2" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.majortom.inmemory" version="1.1.2" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.majortom.model" version="1.1.2" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.majortom.core" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.majortom.inmemory" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.majortom.model" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="de.topicmapslab.tmql4j" version="2.6.5" match="greaterOrEqual"/>
    </requires>
 
