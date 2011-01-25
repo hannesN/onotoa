@@ -1,3 +1,4 @@
+include::tutorials/wordlist.txt[]
 include::tutorials/descriptionToSchema.txt[]
 include::tutorials/unaryAssociation.txt[]
 include::tutorials/domainDiagram.txt[]
