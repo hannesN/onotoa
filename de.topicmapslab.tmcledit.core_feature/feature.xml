@@ -78,84 +78,84 @@ This Agreement is governed by the laws of the State of New York andthe intellect
          id="de.topicmapslab.tmcledit"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.diagram"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.edit"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.tmcledit.domaindiagram"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.onotoa.search"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.onotoa.selection"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.kuria.annotation"
          download-size="0"
          install-size="0"
-         version="1.0.1.SNAPSHOT"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.kuria.runtime"
          download-size="0"
          install-size="0"
-         version="1.0.1.SNAPSHOT"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.kuria.swtgenerator"
          download-size="0"
          install-size="0"
-         version="1.0.1.SNAPSHOT"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.apache.commons.beanutils"
          download-size="0"
          install-size="0"
-         version="1.8.2"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.apache.commons.collections"
          download-size="0"
          install-size="0"
-         version="3.2.1"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.topicmapslab.onotoa.wordlisteditor"
          download-size="0"
          install-size="0"
-         version="1.0.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

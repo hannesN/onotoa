@@ -69,7 +69,6 @@ This Agreement is governed by the laws of the State of New York andthe intellect
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="de.topicmapslab.tmcledit" version="1.1.2" match="greaterOrEqual"/>
-      <import plugin="aranuka.runtime" version="1.0.2" match="greaterOrEqual"/>
       <import plugin="de.topicmapslab.tmcledit.export" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.tmapi" version="2.0.2" match="greaterOrEqual"/>
       <import plugin="de.topicmapslab.majortom.core" version="1.1.1" match="greaterOrEqual"/>
@@ -80,6 +79,7 @@ This Agreement is governed by the laws of the State of New York andthe intellect
       <import plugin="de.topicmapslab.kuria.runtime" version="1.0.1" match="greaterOrEqual"/>
       <import plugin="de.topicmapslab.kuria.swtgenerator" version="1.0.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.forms" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.aranuka.runtime"/>
    </requires>
 
    <plugin

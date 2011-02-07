@@ -7,7 +7,6 @@ Bundle-Activator: de.topicmapslab.onotoa.aranuka.codegen.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  de.topicmapslab.tmcledit;bundle-version="1.1.2",
- aranuka.runtime;bundle-version="1.0.2",
  de.topicmapslab.tmcledit.export;bundle-version="1.1.1",
  org.tmapi;bundle-version="2.0.2",
  de.topicmapslab.majortom.core;bundle-version="1.1.1",
@@ -17,7 +16,8 @@ Require-Bundle: org.eclipse.ui,
  de.topicmapslab.kuria.annotation;bundle-version="1.0.1",
  de.topicmapslab.kuria.runtime;bundle-version="1.0.1",
  de.topicmapslab.kuria.swtgenerator;bundle-version="1.0.1",
- org.eclipse.ui.forms;bundle-version="3.5.0"
+ org.eclipse.ui.forms;bundle-version="3.5.0",
+ de.topicmapslab.aranuka.runtime;bundle-version="1.0.2"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .

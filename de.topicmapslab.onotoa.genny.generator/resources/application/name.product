@@ -26,12 +26,12 @@
 
    <plugins>
       <plugin id="$pluginId" fragment=""/>
-      <plugin id="aranuka.runtime"/>
-      <plugin id="aranuka_connector_majortom"/>
+      <plugin id="aranuka.runtime" fragment=""/>
+      <plugin id="aranuka_connector_majortom" fragment=""/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.semagia.mio.syntaxpacknodeps"/>
       <plugin id="de.topicmapslab.ctmwriter"/>
-      <plugin id="de.topicmapslab.genericeditor.application" fragment=""/>
+      <plugin id="de.topicmapslab.genericeditor.application"/>
       <plugin id="de.topicmapslab.geotype"/>
       <plugin id="de.topicmapslab.kuria.annotation"/>
       <plugin id="de.topicmapslab.kuria.runtime"/>
@@ -122,7 +122,7 @@
       <feature id="org.tmapi_feature" version="2.0.3"/>
       <feature id="org.tmapix_feature" version="1.0.0"/>
       <feature id="thaiopensource.jing_feature" version="2009.11.11"/>
-      <feature id="org.apache.commons_feature" version="1.0.0"/>
+      <feature id="org.apache.commons_feature"/>
       <feature id="org.eclipse.rcp"/>
       <feature id="de.topicmapslab.genericeditor.application_feature"/>
       <feature id="de.topicmapslab.maiana.io_feature" version="1.0.0"/>

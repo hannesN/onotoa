@@ -19,29 +19,30 @@
 <repository location="http://mirror.topicmapslab.de/update/babel_helios"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="de.topicmapslab.genericeditor.application_feature.feature.group" version="1.0.0"/>
+<unit id="de.topicmapslab.genericeditor.application_feature.feature.group" version="1.0.0.201101261718"/>
 <unit id="de.topicmapslab.maiana.io_feature.feature.group" version="1.0.0"/>
 <repository location="http://genny.topicmapslab.de/update"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
 <unit id="net.sf.json_feature.feature.group" version="2.3.0"/>
-<unit id="org.apache.commons_feature.feature.group" version="1.0.0"/>
 <unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
 <unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
 <unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="0.14.0"/>
 <unit id="cern.jet.random_feature.feature.group" version="0.9.0"/>
+<unit id="org.apache.velocity.feature.group" version="1.7.0"/>
 <unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
 <unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
 <unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
+<unit id="org.apache.commons_feature.feature.group" version="1.0.0.201102071640"/>
 <unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
 <unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
-<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.0.2.201101241337"/>
-<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2.201101241337"/>
-<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201101241337"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201101241337"/>
-<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.2.0.201101241337"/>
+<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.0.2.201101261312"/>
+<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2.201101261312"/>
+<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201101261349"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201101260951"/>
+<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.2.0.201102071528"/>
 <unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
-<unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.9.201101241337"/>
+<unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.9.201102071552"/>
 <repository location="http://update.topicmapslab.de"/>
 </location>
 </locations>

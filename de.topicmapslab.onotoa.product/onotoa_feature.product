@@ -231,7 +231,7 @@ litigation.
       <feature id="org.tmapix_feature" version="1.0.0"/>
       <feature id="com.mysql.jdbc_feature" version="5.1.13"/>
       <feature id="net.sf.json_feature" version="2.3.0"/>
-      <feature id="org.apache.commons_feature" version="1.0.0"/>
+      <feature id="org.apache.commons_feature" version="1.0.0.201102071640"/>
       <feature id="org.postgresql.jdbc.driver_feature" version="1.0.0"/>
       <feature id="org.slf4j.nop_feature" version="1.6.1"/>
       <feature id="thaiopensource.jing_feature" version="2009.11.11"/>
