@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file id="63" version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema baseLocator="tm:" id="64">
+        <mappingElement id="68" key="tm" value="http://testmap.de/"/>
+        <topicType id="70" kind="TopicType">
+            <name>Test1</name>
+            <subjectIdentifier>tm:test1</subjectIdentifier>
+        </topicType>
+        <topicType id="72" kind="TopicType">
+            <name>Test2</name>
+            <subjectIdentifier>tm:test2</subjectIdentifier>
+        </topicType>
+        <topicType id="75" kind="AssociationType">
+            <name>testAssoc</name>
+            <subjectIdentifier>tm:testassoc</subjectIdentifier>
+            <roleConstraints>
+                <roleConstraint cardMax="1" cardMin="1" id="123">
+                    <topictypeRef ref="topictypes.3"/>
+                </roleConstraint>
+                <roleConstraint cardMax="*" cardMin="0" id="125">
+                    <topictypeRef ref="topictypes.4"/>
+                </roleConstraint>
+            </roleConstraints>
+            <roleCombinationConstraints>
+                <roleCombinationConstraint id="126">
+                    <player>
+                        <topictypeRef ref="topictypes.0"/>
+                    </player>
+                    <role>
+                        <topictypeRef ref="topictypes.3"/>
+                    </role>
+                    <otherPlayer>
+                        <topictypeRef ref="topictypes.1"/>
+                    </otherPlayer>
+                    <otherRole>
+                        <topictypeRef ref="topictypes.4"/>
+                    </otherRole>
+                </roleCombinationConstraint>
+            </roleCombinationConstraints>
+        </topicType>
+        <topicType id="122" kind="RoleType">
+            <name>testRole1</name>
+            <subjectIdentifier>tm:testrole1</subjectIdentifier>
+        </topicType>
+        <topicType id="124" kind="RoleType">
+            <name>testRole2</name>
+            <subjectIdentifier>tm:testrole2</subjectIdentifier>
+        </topicType>
+        <associationConstraint id="74">
+            <topictypeRef ref="topictypes.2"/>
+            <topicRoleConstraint cardMax="1" cardMin="1" id="77">
+                <player>
+                    <topictypeRef ref="topictypes.1"/>
+                </player>
+                <roleConstraint>
+                    <roleConstraintReference ref="topictypes.2_roleConstraints.1"/>
+                </roleConstraint>
+            </topicRoleConstraint>
+            <topicRoleConstraint cardMax="*" cardMin="0" id="92">
+                <player>
+                    <topictypeRef ref="topictypes.0"/>
+                </player>
+                <roleConstraint>
+                    <roleConstraintReference ref="topictypes.2_roleConstraints.0"/>
+                </roleConstraint>
+            </topicRoleConstraint>
+        </associationConstraint>
+    </schema>
+    <diagram id="65" name="lol">
+        <node id="69" posX="119" posY="160" type="typeNode">
+            <topictypeRef ref="topictypes.0"/>
+        </node>
+        <node id="71" posX="477" posY="161" type="typeNode">
+            <topictypeRef ref="topictypes.1"/>
+        </node>
+        <node id="73" posX="287" posY="246" type="associationNode">
+            <assocConstraintRef ref="assocConstraints.0"/>
+        </node>
+        <edge id="88" source="node.2" target="node.1" topicRoleRef="associationConstraint.0_topicRoleConstraint.0" type="ROLE_CONSTRAINT_TYPE">
+            <labelPosition id="89" posX="15" posY="9"/>
+            <labelPosition id="90" posX="-35" posY="-24"/>
+        </edge>
+        <edge id="117" source="node.2" target="node.0" topicRoleRef="associationConstraint.0_topicRoleConstraint.1" type="ROLE_CONSTRAINT_TYPE">
+            <labelPosition id="118" posX="-63" posY="23"/>
+            <labelPosition id="119" posX="11" posY="-21"/>
+        </edge>
+    </diagram>
+</file>

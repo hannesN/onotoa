@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file id="53" version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema id="54">
+        <topicType datatype="xsd:anyType" id="57" kind="OccurrenceType" regExp=".*" unique="true">
+            <name>UniqueOcc</name>
+        </topicType>
+        <topicType id="59" kind="NameType" regExp=".*" unique="true">
+            <name>UniqueName</name>
+        </topicType>
+        <topicType id="61" kind="NameType" regExp=".*">
+            <name>NonUniqueName</name>
+        </topicType>
+        <topicType datatype="xsd:anyType" id="63" kind="OccurrenceType" regExp=".*">
+            <name>NonUniqueOcc</name>
+        </topicType>
+    </schema>
+    <diagram id="55" name="test">
+        <node id="56" posX="148" posY="132" type="typeNode">
+            <topictypeRef ref="topictypes.0"/>
+        </node>
+        <node id="58" posX="358" posY="148" type="typeNode">
+            <topictypeRef ref="topictypes.1"/>
+        </node>
+        <node id="60" posX="89" posY="267" type="typeNode">
+            <topictypeRef ref="topictypes.2"/>
+        </node>
+        <node id="62" posX="335" posY="276" type="typeNode">
+            <topictypeRef ref="topictypes.3"/>
+        </node>
+    </diagram>
+</file>

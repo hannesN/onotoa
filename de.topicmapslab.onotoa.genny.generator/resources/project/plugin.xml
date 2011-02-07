@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!-- Test -->
+<plugin>
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run class="de.topicmapslab.genericeditor.application.application.Application"/>
+      </application>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="$pluginId.application"
+            name="$name">
+         <property
+               name="appName"
+               value="$name">
+         </property>
+         <property 
+               name="aboutImage"
+               value="about.bmp"> 
+         </property>
+          <property 
+               name="aboutText"
+               value="%aboutText"> 
+         </property>  
+      </product>
+   </extension>
+   <extension point="de.topicmapslab.genericeditor.application.modelprovider">
+      <model ModelHandler="$pluginId.model.ModelHandler"/>
+   </extension>
+</plugin>

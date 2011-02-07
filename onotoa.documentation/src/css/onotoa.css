@@ -1,0 +1,15 @@
+body {
+	width: 800px;
+}
+
+p {
+	margin-left: 40px;
+}
+
+.caption {
+	text-align: center;
+}
+
+img {
+	text-align: center;
+}
