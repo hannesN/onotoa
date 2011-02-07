@@ -106,9 +106,15 @@ The _Onotoa_ plug-ins can be installed into an existing eclipse
 installation. You will need eclipse 3.5 (Galileo) for _Onotoa_. 
 
 An up and running version of eclipse is required and has to be installed. 
-Choose *Help->Install New Software...* and enter  'http://onotoa.topicmapslab.de/update' into the text 
-field
-next to *Work with:*. Press enter and the content of the update site will be shown 
+
+Open *Window->Preferences->Install/Update->Available Software Sites* and enter the following 
+update sites:
+
+* http://onotoa.topicmapslab.de/update
+* http://update.topicmapslab.de
+* http://genny.topicmapslab.de/update
+
+Choose *Help->Install New Software...* and choose  'http://onotoa.topicmapslab.de/update' and the content of the update site will be shown 
 (see <<updatemanager>>).
 
 .Update Manager of Eclipse 3.5
