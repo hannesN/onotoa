@@ -221,7 +221,7 @@ litigation.
    </plugins>
 
    <features>
-      <feature id="de.topicmapslab.onotoa.aranuka.codegen_feature" version="1.0.0.qualifier"/>
+      <feature id="de.topicmapslab.onotoa.aranuka.codegen_feature"/>
       <feature id="com.sun.codemodel_feature" version="2.4.0"/>
       <feature id="de.topicmapslab.aranuka.majortom_feature"/>
       <feature id="de.topicmapslab.aranuka_feature"/>

@@ -33,6 +33,7 @@ import de.topicmapslab.tmcledit.model.index.ModelIndexer;
  */
 public class ProjectGenerator {
 
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 	private GeneratorData data;
 	private IProgressMonitor monitor;
 	private ITextListener textListener;
@@ -90,6 +91,8 @@ public class ProjectGenerator {
 						monitor.done();
 					} catch (Exception e) {
 						Activator.logException(e);
+						monitor.done();
+						addError(e);
 						throw new RuntimeException(e);
 					}
 				}
@@ -100,17 +103,21 @@ public class ProjectGenerator {
 
 		} catch (Exception e) {
 			Activator.logException(e);
-
+			addError(e);
 		}
 
 	}
 
 	protected Thread generateErrorThread(final Process p) {
 		Thread isReadThread = new ProcessInputReader(p, new ITextListener() {
-
 			@Override
 			public void newText(String text) {
-				System.out.println(text);
+				newText(text, false);
+			}
+			
+			@Override
+			public void newText(String text, boolean forceShow) {
+				addContent(text+LINE_SEPARATOR);			    
 			}
 		});
 		return isReadThread;
@@ -118,12 +125,14 @@ public class ProjectGenerator {
 
 	protected Thread generateReadThread(final Process p) {
 		Thread isReadThread = new ProcessInputReader(p, new ITextListener() {
-
-			private final String lineSep = System.getProperty("line.separator");
-
 			@Override
 			public void newText(String text) {
-				addContent(text + lineSep);
+				newText(text, false);
+			}
+			
+			@Override
+			public void newText(String text, boolean forceShow) {
+				addContent(text+LINE_SEPARATOR);			    
 			}
 		});
 		return isReadThread;
@@ -202,7 +211,9 @@ public class ProjectGenerator {
 			CodeGenerator gen = fac.getCodeGenerator();
 			gen.generateCode(new File(srcFolder.getAbsolutePath()));
 		} catch (Exception e) {
+			addError(e);
 			Activator.logException(e);
+			monitor.done();
 			throw new RuntimeException(e);
 		}
 
@@ -290,6 +301,8 @@ public class ProjectGenerator {
 			}
 		} catch (Exception e) {
 			Activator.logException(e);
+			monitor.done();
+			addError(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -316,6 +329,8 @@ public class ProjectGenerator {
 	        is.close();
         } catch (Exception e) {
         	Activator.logException(e);
+        	addError(e);
+        	monitor.done();
         }
 	}
 
@@ -354,6 +369,8 @@ public class ProjectGenerator {
 
 		} catch (Exception e) {
 			Activator.logException(e);
+			addError(e);
+			monitor.done();
 		}
 
 	}
@@ -388,6 +405,10 @@ public class ProjectGenerator {
 		textListener.newText(text);
 	}
 
+	private void addError(Throwable e) {
+		textListener.newText(LINE_SEPARATOR+LINE_SEPARATOR+"An error ccurred:"+e.getMessage()+LINE_SEPARATOR, true);
+	}
+	
 	private boolean isBin(String o) {
 		String[] binSuffixes = new String[] { ".bmp", "*.gif", "*.png" };
 

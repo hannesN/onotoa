@@ -7,7 +7,7 @@
             category="de.topicmapslab.tmcledit.export.tmcledit"
             class="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
             id="de.topicmapslab.onotoa.genny.generator.wizards.GeneratorWizard"
-            name="Generate Genny Application">
+            name="Generate Genny Application (experimental)">
          <keywordReference
                id="de.topicmapslab.onotoa.genny.generator.preference.keywords.genny">
          </keywordReference>

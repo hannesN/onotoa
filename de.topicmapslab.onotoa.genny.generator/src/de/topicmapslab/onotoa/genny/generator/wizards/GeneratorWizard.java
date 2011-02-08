@@ -143,7 +143,7 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
         		pir.interrupt();
         }
     }
-
+	
 	@Override
 	public void addPages() {
 		page = new GeneratorWizardPage();
@@ -179,6 +179,15 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 			
 			setControl(comp);
 		}
+		
+		@Override
+		public boolean isPageComplete() {
+			if (Activator.getDefault().getOnotoaSelectionService().getOnotoaFile()==null) {
+				setErrorMessage("No Model Loaded!");
+				return false;
+			}
+			return super.isPageComplete();
+		}
 
 		private void persist() {
 			im.persist();
@@ -211,8 +220,12 @@ public class GeneratorWizard extends Wizard implements IExportWizard {
 		
 		@Override
 		public void newText(String text) {
+			newText(text, false);	    
+		}
+		@Override
+		public void newText(String text, boolean forceShow) {
 			if (text.contains("Apache Maven 3"))
-				correctVersion = true;		    
+				correctVersion = true;	
 		}
 	}
 }

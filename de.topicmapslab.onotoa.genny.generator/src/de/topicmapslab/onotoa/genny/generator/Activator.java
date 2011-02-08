@@ -4,6 +4,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -63,6 +66,16 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static void logException(Throwable e) {
 		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "An error occurred:", e));
+	}
+	
+	/**
+	 * Returns the selection service found via OSGi services
+	 * @return the {@link IOnotoaSelectionService} of the running instance
+	 */
+	public IOnotoaSelectionService getOnotoaSelectionService() {
+		BundleContext context = getBundle().getBundleContext();
+		ServiceReference servRef = context.getServiceReference(IOnotoaSelectionService.class.getName());
+		return (IOnotoaSelectionService) context.getService(servRef);
 	}
 
 }
