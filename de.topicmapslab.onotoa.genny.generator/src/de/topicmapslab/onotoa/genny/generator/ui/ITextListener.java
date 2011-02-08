@@ -20,4 +20,11 @@ public interface ITextListener {
 	 * @param text
 	 */
 	public void newText(String text);
+	
+	/**
+	 * Sets the new text which should be visualized.
+	 * @param text
+	 * @param forceShow falg whether the textfield should be made visible if necessary
+	 */
+	public void newText(String text, boolean forceShow);
 }

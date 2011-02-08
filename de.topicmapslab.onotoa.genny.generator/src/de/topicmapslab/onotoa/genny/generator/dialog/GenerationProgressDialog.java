@@ -43,7 +43,7 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 
 	/**
 	 * 
-	 * Construcotr
+	 * Constructor
 	 * 
 	 * @param parent the parent shell
 	 * @param data the data for the generator
@@ -51,7 +51,7 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 	public GenerationProgressDialog(Shell parent, GeneratorData data) {
 		super(parent);
 		this.data = data;
-		setShellStyle(getDefaultOrientation() | SWT.TITLE |SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+		setShellStyle(getDefaultOrientation() | SWT.TITLE |SWT.BORDER | SWT.APPLICATION_MODAL);
 	}
 
 	/**
@@ -135,35 +135,44 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 		hideButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (textCache == null) {
-					hideButton.setText("Details >>");
-					styledText.setVisible(false);
-					textCache = new StringBuilder(styledText.getText());
-					getShell().setSize(700, 150);
-				} else {
-					hideButton.setText("Details <<");
-
-					if (styledText == null) {
-						createText((Composite) getDialogArea());
-					}
-					styledText.setText(textCache.toString());
-					styledText.setVisible(true);
-					// and set selection to scroll down. setting the caret to
-					// the beginning of the last line
-					int lineOffset = styledText.getLineAtOffset(styledText.getCharCount() - 3);
-					lineOffset = styledText.getOffsetAtLine(lineOffset);
-
-					styledText.setCaretOffset(lineOffset);
-					styledText.setSelection(lineOffset, lineOffset);
-					
-					textCache = null;
-				}
-				GenerationProgressDialog.this.getShell().pack(true);
+				toggleTextFieldVisible();
 
 			}
+
+			
 		});
 	}
 
+	/**
+     * 
+     */
+    public void toggleTextFieldVisible() {
+        if (textCache == null) {
+			hideButton.setText("Details >>");
+			styledText.setVisible(false);
+			textCache = new StringBuilder(styledText.getText());
+			getShell().setSize(700, 150);
+		} else {
+			hideButton.setText("Details <<");
+
+			if (styledText == null) {
+				createText((Composite) getDialogArea());
+			}
+			styledText.setText(textCache.toString());
+			styledText.setVisible(true);
+			// and set selection to scroll down. setting the caret to
+			// the beginning of the last line
+			int lineOffset = styledText.getLineAtOffset(styledText.getCharCount() - 3);
+			lineOffset = styledText.getOffsetAtLine(lineOffset);
+
+			styledText.setCaretOffset(lineOffset);
+			styledText.setSelection(lineOffset, lineOffset);
+			
+			textCache = null;
+		}
+		GenerationProgressDialog.this.getShell().pack(true);
+    }
+	
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		closeButton = createButton(parent, IDialogConstants.CLOSE_ID, IDialogConstants.CLOSE_LABEL, true);
@@ -236,10 +245,17 @@ public class GenerationProgressDialog extends Dialog implements IProgressMonitor
 
 	@Override
 	public void newText(String text) {
+		newText(text, false);
+	}
+	
+	@Override
+	public void newText(String text, boolean forceShow) {
 		final String newText = text;
-
+		
 		if (textCache != null) {
 			textCache.append(text);
+			if (forceShow)
+				toggleTextFieldVisible();
 		} else {
 			getShell().getDisplay().syncExec(new Runnable() {
 				@Override
