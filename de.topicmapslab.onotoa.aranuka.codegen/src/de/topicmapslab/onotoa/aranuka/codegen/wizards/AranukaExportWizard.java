@@ -35,6 +35,7 @@ import org.tmapi.core.TopicMap;
 import de.topicmapslab.codegenerator.CodeGenerator;
 import de.topicmapslab.codegenerator.factories.AranukaDescriptorFactory;
 import de.topicmapslab.onotoa.aranuka.codegen.Activator;
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.tmcledit.export.builder.TMCLTopicMapBuilder;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
@@ -234,6 +235,12 @@ public class AranukaExportWizard extends Wizard implements IExportWizard {
 		
 		@Override
 		public boolean isPageComplete() {
+			IOnotoaSelectionService selServ = Activator.getDefault().getSelectionService();
+			if (selServ.getOnotoaFile()==null) {
+				setErrorMessage("No Model Loaded!");
+				return false;
+			}
+			
 			File file = new File(sourcePathText.getText());
 			if (!file.isDirectory())
 				return false;
