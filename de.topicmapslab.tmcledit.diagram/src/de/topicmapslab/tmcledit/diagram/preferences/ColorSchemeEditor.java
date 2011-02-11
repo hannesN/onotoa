@@ -294,6 +294,10 @@ public class ColorSchemeEditor extends Dialog {
 		super.okPressed();
 	}
 
+	/**
+	 * 
+	 * @return the created {@link ColorScheme}
+	 */
 	public ColorScheme getScheme() {
 		return scheme;
 	}

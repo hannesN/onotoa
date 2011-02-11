@@ -24,6 +24,8 @@ import de.topicmapslab.tmcledit.model.Node;
 import de.topicmapslab.tmcledit.model.commands.MoveNodesCommand;
 
 /**
+ *  Action to trigger a move process. 
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -33,6 +35,13 @@ public class MoveToDiagramAction extends Action {
 	private final EditPartViewer viewer;
 	private final CommandStack commandStack;
 
+	/**
+	 * Constructor 
+	 * 
+	 * @param commandStack the command stack to execute the command
+	 * @param diagram the target diagram
+	 * @param viewer the viewer of the source diagram
+	 */
 	public MoveToDiagramAction(CommandStack commandStack, Diagram diagram, EditPartViewer viewer) {
 		this.diagram = diagram;
 		this.viewer = viewer;
@@ -40,6 +49,10 @@ public class MoveToDiagramAction extends Action {
 	}
 
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		List<Node> nodeList = collectMoveableNodes();
@@ -63,14 +76,13 @@ public class MoveToDiagramAction extends Action {
 		
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getText() {
 		return diagram.getName();
-	}
-	
-	
-	public void update() {
-		
 	}
 
 }

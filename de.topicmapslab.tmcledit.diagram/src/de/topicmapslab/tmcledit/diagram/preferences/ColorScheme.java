@@ -39,64 +39,122 @@ public class ColorScheme implements Cloneable {
 
 	private static ColorScheme defaultSchema;
 	
+	
+	
+	
+	
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return the commentColor
+	 */
 	public ColorDefinition getCommentColor() {
 		return commentColor;
 	}
 
-	public void setCommentColor(ColorDefinition noteColor) {
-		this.commentColor = noteColor;
+	/**
+	 * @param commentColor the commentColor to set
+	 */
+	public void setCommentColor(ColorDefinition commentColor) {
+		this.commentColor = commentColor;
 	}
 
+	/**
+	 * @return the commentSecondaryColor
+	 */
 	public ColorDefinition getCommentSecondaryColor() {
 		return commentSecondaryColor;
 	}
 
-	public void setCommentSecondaryColor(ColorDefinition noteSecondaryColor) {
-		this.commentSecondaryColor = noteSecondaryColor;
+	/**
+	 * @param commentSecondaryColor the commentSecondaryColor to set
+	 */
+	public void setCommentSecondaryColor(ColorDefinition commentSecondaryColor) {
+		this.commentSecondaryColor = commentSecondaryColor;
 	}
 
+	/**
+	 * @return the topicColor
+	 */
 	public ColorDefinition getTopicColor() {
 		return topicColor;
 	}
 
+	/**
+	 * @param topicColor the topicColor to set
+	 */
 	public void setTopicColor(ColorDefinition topicColor) {
 		this.topicColor = topicColor;
 	}
 
+	/**
+	 * @return the topicSecondaryColor
+	 */
 	public ColorDefinition getTopicSecondaryColor() {
 		return topicSecondaryColor;
 	}
 
+	/**
+	 * @param topicSecondaryColor the topicSecondaryColor to set
+	 */
 	public void setTopicSecondaryColor(ColorDefinition topicSecondaryColor) {
 		this.topicSecondaryColor = topicSecondaryColor;
 	}
-	
+
+	/**
+	 * @return the topicFontColor
+	 */
 	public ColorDefinition getTopicFontColor() {
 		return topicFontColor;
 	}
-	
+
+	/**
+	 * @param topicFontColor the topicFontColor to set
+	 */
 	public void setTopicFontColor(ColorDefinition topicFontColor) {
 		this.topicFontColor = topicFontColor;
 	}
-	
+
+	/**
+	 * @return the commentFontColor
+	 */
 	public ColorDefinition getCommentFontColor() {
 		return commentFontColor;
 	}
-	
+
+	/**
+	 * @param commentFontColor the commentFontColor to set
+	 */
 	public void setCommentFontColor(ColorDefinition commentFontColor) {
 		this.commentFontColor = commentFontColor;
 	}
-	
-	
-	
+
+	/**
+	 * @return the defaultSchema
+	 */
+	public static ColorScheme getDefaultSchema() {
+		return defaultSchema;
+	}
+
+	/**
+	 * @param defaultSchema the defaultSchema to set
+	 */
+	public static void setDefaultSchema(ColorScheme defaultSchema) {
+		ColorScheme.defaultSchema = defaultSchema;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -141,6 +199,10 @@ public class ColorScheme implements Cloneable {
 		return scheme;
 	}
 
+	/**
+	 * 
+	 * @return a default schema
+	 */
 	public static final ColorScheme getDefault() {
 		if (defaultSchema==null) {
 			defaultSchema = new ColorScheme();
@@ -160,19 +222,41 @@ public class ColorScheme implements Cloneable {
 		return defaultSchema;
 	}
 	
+	/**
+	 * Helper class for storing colors
+	 * 
+	 * @author Hannes Niederhausen
+	 *
+	 */
 	public static class ColorDefinition implements Cloneable {
+		/**  the red value */
 		public int r;
+		/**  the green value */
 		public int g;
+		/**  the blue value */
 		public int b;
 		private Color color = null;
 		
+		/**
+		 * Constructor
+		 */
 		public ColorDefinition() {
 		}
 		
+		/**
+		 * Constructor
+		 * @param rgb the RGB values for the color definition
+		 */
 		public ColorDefinition(RGB rgb) {
 			setRGB(rgb);
 		}
 		
+		/**
+		 * Constructor
+		 * @param r the red value for the color definition
+		 * @param g the green value for the color definition
+		 * @param b the blue value for the color definition
+		 */
 		public ColorDefinition(int r, int g, int b) {
 			super();
 			this.r = r;
@@ -180,10 +264,18 @@ public class ColorScheme implements Cloneable {
 			this.b = b;
 		}
 		
+		/**
+		 * 
+		 * @return the RGB of the colors values
+		 */
 		public RGB getRGB() {
 			return new RGB(r,g,b);
 		}
 		
+		/**
+		 * Sets the rgb values for the color definition
+		 * @param rgb
+		 */
 		public void setRGB(RGB rgb) {
 			if (rgb==null)
 				return;
@@ -192,17 +284,30 @@ public class ColorScheme implements Cloneable {
 			b = rgb.blue;
 		}
 		
+		/**
+		 * Returns the color object for the given rgb values.
+		 * If it is not created yet it will be using the given device 
+		 * @param device the device used to create the color
+		 * @return a {@link Color} using the deifnitions RGB values
+		 */
 		public Color createColor(Device device) {
 			if (color==null)
 				color = new Color(device, r, g, b);
 			return color;
 		}
 		
+		/**
+		 * 
+		 * {@inheritDoc}
+		 */
 		@Override
 		protected ColorDefinition clone() {
 			return new ColorDefinition(r, g, b);
 		}
 		
+		/**
+		 * Disposes the created color.
+		 */
 		public void dispose() {
 			if ( (color!=null) && (!color.isDisposed()) ){
 				color.dispose();

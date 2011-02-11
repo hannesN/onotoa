@@ -93,6 +93,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		implements ISelectionChangedListener, ISelectionProvider,
 		IPrintableDiagramEditor {
 
+	/**
+	 * ID of the editor in the plugin.xml
+	 */
 	public static final String ID = "de.topicmapslab.tmcledit.diagram.editor.TMCLDiagramEditor";
 
 	private Diagram diagram;
@@ -110,6 +113,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	
 	private ModelView modelView;
 
+	/**
+	 * Constructor
+	 */
 	public TMCLDiagramEditor() {
 		setEditDomain(new TMCLEditDomain(this));
 	}
@@ -188,21 +194,26 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 
 	}
 
-	public ZoomManager getZoomManager() {
-		return getRootEditPart().getZoomManager();
-	}
-
-	public ScalableFreeformRootEditPart getRootEditPart() {
+	private ScalableFreeformRootEditPart getRootEditPart() {
 		if (rootEditPart == null) {
 			rootEditPart = new ScalableFreeformRootEditPart();
 		}
 		return rootEditPart;
 	}
 
+	/**
+	 * 
+	 * @return the emf editing domain in the editor input
+	 */
 	public EditingDomain getEditingDomain() {
 		return ((TMCLEditorInput) getEditorInput()).getEditingDomain();
 	}
 
+	
+	/**
+	 * 
+	 * @return the instance of {@link Diagram} to edit 
+	 */
 	public Diagram getDiagram() {
 		return diagram;
 	}
@@ -333,6 +344,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return super.getAdapter(adapter);
 	}
 
+	/**
+	 * @return the outine page of the editor
+	 */
 	public IContentOutlinePage getContentOutlinePage() {
 		if ((outlinePage == null) && (null != getGraphicalViewer())) {
 
@@ -416,6 +430,9 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 				: currentSelection;
 	}
 
+	/**
+	 * Redraws the diagram.
+	 */
 	public void refresh() {
 		getGraphicalViewer().getControl().redraw();
 	}
@@ -444,10 +461,6 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 			currentSelection = new StructuredSelection(ei.getDiagram());
 		}
 		DiagramActivator.getDefault().getOnotoaSelectionService().setSelection(currentSelection, this);
-	}
-
-	public TMCLEditorInput getCastedEditorInput() {
-		return (TMCLEditorInput) getEditorInput();
 	}
 
 	public IFigure getPrintableFigure() {

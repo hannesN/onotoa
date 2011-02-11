@@ -21,8 +21,20 @@ import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.Display;
 import org.w3c.dom.Document;
 
+/**
+ * Class to export a diagram image.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class ImageExporter {
 	
+	/**
+	 * Exports a diagram editor to svg. 
+	 * 
+	 * @param editor the editor with the diagram to export
+	 * @param file the target file
+	 */
 	public static void exportSvg(IPrintableDiagramEditor editor, File file) {
 		Graphics g = null;
 		Image image = null;
@@ -61,6 +73,12 @@ public class ImageExporter {
 		}
 	}
 
+	/**
+	 * Exports a diagram editor to png. 
+	 * 
+	 * @param editor the editor with the diagram to export
+	 * @param file the target file
+	 */
 	public static void exportPng(IPrintableDiagramEditor editor, File file) {
 		Image image = null;
 		try {

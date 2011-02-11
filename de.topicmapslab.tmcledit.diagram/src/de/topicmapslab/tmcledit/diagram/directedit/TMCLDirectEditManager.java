@@ -23,6 +23,9 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Text;
 
 /**
+ * 
+ * DirectEditManager for all editable elements like names of types, occurrence and name types and so on.
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -32,15 +35,21 @@ public class TMCLDirectEditManager extends DirectEditManager {
 	private Label label;
 	private Font figureFont;
 
+	/**
+	 * Constructor
+	 * @param source the edit part of the figure
+	 * @param editorType the editor type
+	 * @param label the label to edit
+	 */
 	@SuppressWarnings("unchecked")
-	public TMCLDirectEditManager(GraphicalEditPart source, Class editorType,
-			Label label) {
+	public TMCLDirectEditManager(GraphicalEditPart source, Class editorType, Label label) {
 		super(source, editorType, new LabelCellEditorLocator(label));
 		this.label = label;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.tools.DirectEditManager#initCellEditor()
+	/**
+	 * 
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void initCellEditor() {

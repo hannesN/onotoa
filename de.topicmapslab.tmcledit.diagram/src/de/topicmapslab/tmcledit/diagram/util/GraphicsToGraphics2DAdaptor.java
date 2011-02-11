@@ -1372,16 +1372,16 @@ public class GraphicsToGraphics2DAdaptor extends Graphics  {
 		return img;
 	}
 */
-	/* 
-	 * (non-Javadoc)
-	 * @see org.eclipse.gmf.runtime.draw2d.ui.render.awt.internal.DrawableRenderedImage#allowDelayRender()
+	/**
+	 * Flag whether to allow delayed rendering.
 	 */
 	public boolean shouldAllowDelayRender() {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gmf.runtime.draw2d.ui.render.awt.internal.DrawableRenderedImage#getMaximumRenderSize()
+	/**
+	 * 
+	 * @return always <code>null</code>
 	 */
 	public Dimension getMaximumRenderSize() {
 		return null;

@@ -20,29 +20,45 @@ import de.topicmapslab.tmcledit.model.commands.CreateNameTypeConstraintCommand;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
+ * Action to create a new name contraint
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class AddNameConstraintAction extends AddConstraintAction {
+	/**
+	 * ID of the action
+	 */
 	public static final String ID = "de.topicmapslab.tmcleditor.addnameconstraint";
 	
 	private boolean createType = false;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the commandstack used to execute model changes
+	 */
 	public AddNameConstraintAction(CommandStack commandStack) {
 		super(commandStack);
 		setText("Add Name Constraint");
 		setId(ID);
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the commandstack used to execute model changes
+	 * @param createType flag whether a name type should be created
+	 */
 	public AddNameConstraintAction(CommandStack commandStack, boolean createType) {
 		this(commandStack);
 		this.createType = createType;
 	}
-	
-	public void setCreateType(boolean createType) {
-		this.createType = createType;
-	}
-	
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected Command getEmfCommand() {
 		NameTypeConstraint nameTypeConstraint = ModelFactory.eINSTANCE

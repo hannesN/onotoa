@@ -32,7 +32,11 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.part.ViewPart;
 
-
+/**
+ * Action Bar Advisor for the Onotoa window
+ * @author Hannes Niederhausen
+ *
+ */
 public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 	private ActionFactory.IWorkbenchAction lockToolBarAction;
@@ -43,6 +47,10 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 
 	private IWorkbenchAction prefAction;
 
+	/**
+	 * Constructor
+	 * @param configurer the {@link IActionBarConfigurer} for the window
+	 */
 	public DiagramEditorActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -275,6 +283,13 @@ public class DiagramEditorActionBarAdvisor extends ActionBarAdvisor {
 		}
 	}
 
+	/**
+	 * Opens the model view
+	 * @param workbench the workbench 
+	 * @param filename the filename to open
+	 * @param newFile flag whether its a new file
+	 * @return <code>true</code>
+	 */
 	public static boolean openModelView(IWorkbench workbench, String filename, boolean newFile) {
 		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
 		IWorkbenchPage page = workbenchWindow.getActivePage();

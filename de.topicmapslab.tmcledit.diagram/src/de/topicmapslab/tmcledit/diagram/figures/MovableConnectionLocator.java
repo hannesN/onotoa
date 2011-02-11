@@ -23,6 +23,12 @@ import org.eclipse.draw2d.geometry.Transposer;
 
 import de.topicmapslab.tmcledit.model.LabelPos;
 
+/**
+ * Locator for a label which is used as connection label.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class MovableConnectionLocator implements Locator {
 	private boolean end;
 	private Connection conn;
@@ -292,18 +298,36 @@ public class MovableConnectionLocator implements Locator {
 		vDistance = distance;
 	}
 
+	/**
+	 * 
+	 * @return the x coordinate of the position
+	 */
 	public int getPosX() {
 		return labelPos.getPosX();
 	}
 
+	/**
+	 * 
+	 * @return the y coordinate of the position
+	 */
 	public int getPosY() {
 		return labelPos.getPosY();
 	}
 
+	/**
+	 * Sets the label position
+	 * 
+	 * @param labelPos position of the label
+	 */
 	public void setLabelPos(LabelPos labelPos) {
 		this.labelPos = labelPos;
 	}
 
+	/**
+	 * Translates a point
+	 * @param p the point to translate
+	 * @return the translated point
+	 */
 	public Point translate(Point p) {
 		Point p1 = Point.SINGLETON;
 		Point p2 = new Point();

@@ -69,6 +69,11 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
  */
 public class TMCLDiagramEditorUtil {
 
+	/**
+	 * Creates the Palette Entries for the diagram.
+	 * 
+	 * @return the palette root for the diagram
+	 */
 	public static final PaletteRoot getPaletteRoot() {
 		PaletteRoot pr = new PaletteRoot();
 		PaletteGroup group = new PaletteGroup("Tools");
@@ -104,6 +109,11 @@ public class TMCLDiagramEditorUtil {
 		return pr;
 	}
 
+	/**
+	 * Returns the edit part factory for the diagram editor
+	 * 
+	 * @return a new created  {@link EditPartFactory}
+	 */
 	public static EditPartFactory getEditPartFactory() {
 		return new EditPartFactory() {
 

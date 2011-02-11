@@ -16,11 +16,20 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+/**
+ * Label which  can be edited. The background of the label is dependent of the selection state of the label
+ * @author Hannes Niederhausen
+ *
+ */
 public class EditableLabel extends Label
 {
 
 	private boolean selected;
 	
+	/**
+	 * Constructor
+	 * @param text the text of the label
+	 */
 	public EditableLabel(String text)
 	{
 		super(text);

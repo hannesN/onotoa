@@ -16,17 +16,25 @@ import java.util.Map;
 import org.eclipse.ui.AbstractSourceProvider;
 
 /**
+ * Source Provider to set Contexts for COmmands
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class OnotoaSourceProvider extends AbstractSourceProvider {
 
+	/**
+	 * The key for the map
+	 */
 	public final String RCP = "rcp";
 	
 	private final String[] PROVIDED_SOURCE = new String[]{RCP};
 	
 	private final Map<String, String> map = new HashMap<String, String>();
 	
+	/**
+	 * Constructor
+	 */
 	public OnotoaSourceProvider() {
 		map.put(RCP, "true");
 	}

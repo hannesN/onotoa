@@ -16,25 +16,43 @@ package de.topicmapslab.tmcledit.diagram.creationfactories;
 import org.eclipse.gef.requests.CreationFactory;
 
 import de.topicmapslab.tmcledit.model.ModelFactory;
+import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
-import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * The factory to create a new {@link OccurrenceTypeConstraint}.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class OccurrenceConstraintCreationFactory implements CreationFactory {
 
-	private TopicType occurrenceType;
+	private OccurrenceType occurrenceType;
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public Object getNewObject() {
 		OccurrenceTypeConstraint otc = ModelFactory.eINSTANCE.createOccurrenceTypeConstraint();
 		otc.setType(occurrenceType);
 		
-		
 		return otc;
 	}
 
-	public void setTopicType(TopicType topicType) {
-		this.occurrenceType = topicType;
+	/**
+	 * Sets the occurrence type 
+	 * 
+	 * @param occurrenceType
+	 */
+	public void setTopicType(OccurrenceType occurrenceType) {
+		this.occurrenceType = occurrenceType;
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public Object getObjectType() {
 		return OccurrenceTypeConstraint.class;
 	}

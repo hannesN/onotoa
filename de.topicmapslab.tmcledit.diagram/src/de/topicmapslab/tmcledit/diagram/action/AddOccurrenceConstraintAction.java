@@ -20,18 +20,34 @@ import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
+ * Action to create a new occurrence contraint
+ * 
  * @author Hannes Niederhausen
  * 
  */
 public class AddOccurrenceConstraintAction extends AddConstraintAction {
+	/**
+	 * ID
+	 */
 	public static final String ID = "de.topicmapslab.tmcleditor.addoccurrenceconstraint";
 	private boolean createType = false;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the {@link CommandStack} used to execute model changes
+	 * @param createType flag whether a occurrence type should be created
+	 */
 	public AddOccurrenceConstraintAction(CommandStack commandStack, boolean createType) {
 		this(commandStack);
 		this.createType = createType;
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the {@link CommandStack} used to execute model changes
+	 */
 	public AddOccurrenceConstraintAction(CommandStack commandStack) {
 		super(commandStack);
 		setText("Add Occurrence Constraint");

@@ -17,6 +17,8 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import de.topicmapslab.tmcledit.model.actions.UpdateAction;
 
 /**
+ * Abstract action which handles selection events and updates the actions state
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -24,17 +26,32 @@ public abstract class AbstractSelectionAction extends AbstractCommandStackAction
 		UpdateAction {
 
 	private IStructuredSelection selections;
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the commandstack for changes
+	 */
 	public AbstractSelectionAction(CommandStack commandStack) {
 		super(commandStack);
 		selections = new StructuredSelection();
 		update();
 	}
 
+	/**
+	 * Sets the selection and updates the actions state
+	 * 
+	 * @param selections
+	 */
 	public void setSelections(IStructuredSelection selections) {
 		this.selections = selections;
 		update();
 	}
 	
+	/**
+	 * Returns the selection
+	 * @return
+	 */
 	protected IStructuredSelection getSelections() {
 		return selections;
 	}

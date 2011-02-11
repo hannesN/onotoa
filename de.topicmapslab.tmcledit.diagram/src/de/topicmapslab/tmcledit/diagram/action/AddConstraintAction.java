@@ -21,20 +21,34 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 
 /**
+ * Action to add a constraint
+ * 
  * @author Hannes Niederhausen
  * 
  */
 public abstract class AddConstraintAction extends AbstractSelectionAction {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param commandStack the {@link CommandStack} used to execute commands
+	 */
 	public AddConstraintAction(CommandStack commandStack) {
 		super(commandStack);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		getCommandStack().execute(getEmfCommand());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public void update() {
 		if ((getSelections().size() == 1)
 				&& (getSelections().getFirstElement() instanceof EditPart)
@@ -46,6 +60,10 @@ public abstract class AddConstraintAction extends AbstractSelectionAction {
 		}
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ImageDescriptor getImageDescriptor() {
 		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
