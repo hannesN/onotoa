@@ -13,50 +13,90 @@ package de.topicmapslab.tmcledit.diagram.command;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 
-
+/**
+ * GEF COmmand adapter encapsulating EMF Commands.
+ * 
+ * @author Hannes Niederhausen
+ * 
+ */
 public class CommandAdapter extends org.eclipse.gef.commands.Command {
 
 	private Command emfCommand;
-	
+
 	private CommandStack cmdStack;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param cmdStack
+	 *            the emf command stack
+	 * @param emfCommand
+	 *            the encapsulated emf command
+	 */
 	public CommandAdapter(CommandStack cmdStack, Command emfCommand) {
 		super();
 		this.cmdStack = cmdStack;
 		this.emfCommand = emfCommand;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean canExecute() {
 		return emfCommand.canExecute();
 	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean canUndo() {
 		return emfCommand.canUndo();
 	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute() {
 		cmdStack.execute(emfCommand);
 	}
 
-	public String getDescription() {
-		return emfCommand.getDescription();
-	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getLabel() {
 		return emfCommand.getLabel();
 	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void redo() {
 		cmdStack.redo();
 	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void undo() {
 		cmdStack.undo();
 	}
-	
+
+	/**
+	 * @return the encapsulated EMF COmmand
+	 */
 	public Command getEmfCommand() {
 		return emfCommand;
 	}
-	
+
 }

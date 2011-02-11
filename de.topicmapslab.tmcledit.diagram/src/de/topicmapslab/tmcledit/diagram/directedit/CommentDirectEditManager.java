@@ -28,6 +28,8 @@ import org.eclipse.swt.widgets.Text;
 import de.topicmapslab.tmcledit.diagram.figures.CommentFigure;
 
 /**
+ * Direct Edit Manager for Comments.
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -37,12 +39,20 @@ public class CommentDirectEditManager extends DirectEditManager {
 	private CommentFigure figure;
 	private Font figureFont;
 
-	public CommentDirectEditManager(GraphicalEditPart source, 
-			CommentFigure figure) {
+	/**
+	 * Constructor 
+	 * @param source the source edit part (comment node)
+	 * @param figure the comment figure
+	 */
+	public CommentDirectEditManager(GraphicalEditPart source, CommentFigure figure) {
 		super(source, TextCellEditor.class, new CommentFigureCellEditorLocator(figure));
 		this.figure = figure;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void initCellEditor() {
 		Text text = (Text) getCellEditor().getControl();
@@ -67,6 +77,10 @@ public class CommentDirectEditManager extends DirectEditManager {
 		text.selectAll();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	protected CellEditor createCellEditorOn(Composite composite) {
 		try {
 			return new TextCellEditor(composite, SWT.MULTI);

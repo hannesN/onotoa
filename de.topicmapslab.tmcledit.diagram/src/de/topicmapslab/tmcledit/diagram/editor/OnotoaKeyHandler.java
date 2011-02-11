@@ -35,6 +35,13 @@ import de.topicmapslab.tmcledit.diagram.editparts.NodeEditPart;
  */
 public class OnotoaKeyHandler extends GraphicalViewerKeyHandler {
 	final ActionRegistry actionRegistry; 
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param viewer the graphical viewer of the diagram editor
+	 * @param actionRegistry the action registry
+	 */
 	public OnotoaKeyHandler(GraphicalViewer viewer, ActionRegistry actionRegistry) {
 		super(viewer);
 		this.actionRegistry = actionRegistry;

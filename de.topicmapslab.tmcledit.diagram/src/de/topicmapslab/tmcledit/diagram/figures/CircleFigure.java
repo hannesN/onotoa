@@ -21,11 +21,20 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+/**
+ * Figure which renders a circle.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class CircleFigure extends Figure {
 	
 	
 	private Insets insets;
 
+	/**
+	 * Constructor
+	 */
 	public CircleFigure() {
 		setBorder(new EllipseBorder());
 		setOpaque(false);

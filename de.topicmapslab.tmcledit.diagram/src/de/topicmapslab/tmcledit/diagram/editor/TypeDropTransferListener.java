@@ -33,6 +33,12 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * Class to handle drop events in the diagram
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TypeDropTransferListener extends
 		AbstractTransferDropTargetListener {
 
@@ -47,6 +53,11 @@ public class TypeDropTransferListener extends
 
 	private final TopicMapSchema schema;
 
+	/**
+	 * 
+	 * @param viewer the viewer containing the diagram
+	 * @param diagram the target {@link Diagram} 
+	 */
 	public TypeDropTransferListener(EditPartViewer viewer, Diagram diagram) {
 		super(viewer);
 		this.schema = ((File) diagram.eContainer()).getTopicMapSchema();

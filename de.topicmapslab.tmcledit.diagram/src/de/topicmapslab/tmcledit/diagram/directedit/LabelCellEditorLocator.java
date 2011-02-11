@@ -31,10 +31,19 @@ public class LabelCellEditorLocator implements CellEditorLocator {
 
 	private final Label label;
 	
+	/**
+	 * Constructor
+
+	 * @param label the label to edit
+	 */
 	public LabelCellEditorLocator(Label label) {
 		this.label = label;
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public void relocate(CellEditor celleditor) {
 		Text text = (Text) celleditor.getControl();
 

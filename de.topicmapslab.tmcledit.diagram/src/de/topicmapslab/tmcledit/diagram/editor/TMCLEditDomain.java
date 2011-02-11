@@ -17,10 +17,21 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.ui.IEditorPart;
 
+/**
+ * Implementation of the {@link IOnotoaEditDomain} interface
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TMCLEditDomain extends DefaultEditDomain implements IOnotoaEditDomain {
 
 	private EditingDomain editingDomain;
 	
+	/**
+	 * Constructor 
+	 * 
+	 * @param editorPart the editor part containing the diagram
+	 */
 	public TMCLEditDomain(IEditorPart editorPart) {
 		super(editorPart);
 	}

@@ -17,6 +17,8 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 
 /**
+ * The factory to create a new node for an {@link AssociationTypeConstraint}
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -24,16 +26,28 @@ public class AssociationNodeCreationFactory implements CreationFactory {
 
 	private AssociationTypeConstraint atc = null;
 	
+	/**
+	 * Sets the {@link AssociationTypeConstraint} to use
+	 * @param atc
+	 */
 	public void setAssociationTypeConstraint(AssociationTypeConstraint atc) {
 		this.atc = atc;
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public Object getNewObject() {
 		AssociationNode node = ModelFactory.eINSTANCE.createAssociationNode();
 		node.setAssociationConstraint(atc);
 		return node;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public Object getObjectType() {
 		return AssociationNode.class;
 	}

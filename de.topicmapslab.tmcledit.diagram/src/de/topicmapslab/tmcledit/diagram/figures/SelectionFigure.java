@@ -22,13 +22,15 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Color;
 
+/**
+ * Figure which has a selection state and renders the background according to this state.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class SelectionFigure extends Figure {
 
 	private boolean selected;
-
-	public SelectionFigure() {
-		super();
-	}
 
 	private Rectangle getSelectionRectangle() {
 		Rectangle bounds = getBounds().getCopy();

@@ -22,6 +22,9 @@ import org.osgi.framework.ServiceReference;
 
 
 /**
+ *  The  {@link WorkbenchAdvisor} of the Onotoa Window
+ * @author Hannes Niederhausen
+ *
  */
 public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 	
@@ -66,6 +69,10 @@ public class DiagramEditorWorkbenchAdvisor extends WorkbenchAdvisor {
 		return advisor;
 	}
 
+	/**
+	 * Sets the start up arguments 
+	 * @param args args from the commandline
+	 */
 	public void setArguments(String[] args) {
 		this.args = args;
 	}

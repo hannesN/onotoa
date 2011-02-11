@@ -30,10 +30,18 @@ public class CommentFigureCellEditorLocator implements CellEditorLocator {
 
 	private final CommentFigure figure;
 	
+	/**
+	 * Constructor
+	 * @param figure the figure for the comment
+	 */
 	public CommentFigureCellEditorLocator(CommentFigure figure) {
 		this.figure = figure;
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public void relocate(CellEditor celleditor) {
 		Text text = (Text) celleditor.getControl();
 

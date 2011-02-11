@@ -31,18 +31,25 @@ import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
 import de.topicmapslab.tmcledit.diagram.util.SWTPattern;
 
 /**
+ * Figure to render the comment node
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class CommentFigure extends Figure {
 
+	/**  Minimum width */
 	public static final int MIN_WIDTH = 50;
+	/**  Minimum height */
 	public static final int MIN_HEIGHT = 40;
 
 	private TextFlow textFlow;
 	private FlowPage page;
 	private BlockFlow blockFlow;
 	
+	/**
+	 * Constructor
+	 */
 	public CommentFigure() {
 		setBackgroundColor(ColorConstants.orange);
 		setOpaque(false);
@@ -59,27 +66,47 @@ public class CommentFigure extends Figure {
 		setSize(MIN_WIDTH, MIN_HEIGHT);
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Dimension getPreferredSize(int hint, int hint2) {
 		return getSize();
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setBounds(Rectangle rect) {
 		super.setBounds(rect);
 		setChildrenSize(rect.width, rect.height);
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setSize(int w, int h) {
 		super.setSize(w, h);
 		setChildrenSize(w, h);
 	}
 
+	/**
+	 * Sets the comment text
+	 * @param text the text
+	 */
 	public void setText(String text) {
 		textFlow.setText(text);
 	}
 
+	/**
+	 * 
+	 * @return the text in the comment node
+	 */
 	public String getText() {
 		return textFlow.getText();
 	}
@@ -92,6 +119,10 @@ public class CommentFigure extends Figure {
 		textFlow.setSize(dim.width, dim.height);
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void paint(Graphics graphics) {
 		Rectangle rec = getBounds();

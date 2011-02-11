@@ -21,6 +21,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
+import de.topicmapslab.onotoa.selection.service.OnotoaSelectionService;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme;
 import de.topicmapslab.tmcledit.diagram.preferences.PreferenceConstants;
 import de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLHandler;
@@ -30,7 +31,9 @@ import de.topicmapslab.tmcledit.diagram.preferences.SchemesXMLHandler;
  */
 public class DiagramActivator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/**
+	 *  The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.topicmapslab.tmcledit.diagram"; //$NON-NLS-1$
 
 	// The shared instance
@@ -61,10 +64,18 @@ public class DiagramActivator extends AbstractUIPlugin {
 		
 	}
 	
+	/**
+	 * @return the {@link OnotoaSelectionService}
+	 */
 	public IOnotoaSelectionService getOnotoaSelectionService() {
 		return onotoaSelectionService;
 	}
 	
+	/**
+	 * Loads a scheme list from the preference store and returns it
+	 * 
+	 * @return the loaded scheme list
+	 */
 	public List<ColorScheme> getSchemeList() {
 		if (schemeList==null) {
 			String xml = getPreferenceStore().getString(PreferenceConstants.P_COLOR_SCHEMES);
@@ -89,14 +100,17 @@ public class DiagramActivator extends AbstractUIPlugin {
 		return schemeList;
 	}
 	
+	/**
+	 * Resets the cached scheme list
+	 */
 	public void resetCache() {
 		schemeList = null;
 		currScheme = -1;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	/**
+	 * 
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
@@ -104,6 +118,10 @@ public class DiagramActivator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
+	/**
+	 * 
+	 * @return the current chosen color scheme or if none chosen the default scheme
+	 */
 	public static ColorScheme getCurrentColorScheme() {
 		if ( (getDefault().getSchemeList().size()==0) || (getDefault().currScheme==-1) )
 			return ColorScheme.getDefault();

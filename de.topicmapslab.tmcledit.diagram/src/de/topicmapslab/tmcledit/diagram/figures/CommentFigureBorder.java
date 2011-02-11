@@ -17,15 +17,28 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+/**
+ * Border for the comment figure
+ * @author Hannes Niederhausen
+ *
+ */
 public class CommentFigureBorder extends AbstractBorder {
 
 	static final Insets zeroInsets = new Insets(0, 0, 0, 0); 
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public Insets getInsets(IFigure figure) {
 		return new Insets(5,5,5,5);
 		
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public void paint(IFigure figure, Graphics graphics, Insets insets) {
 		Rectangle rec = getPaintRectangle(figure, getInsets(figure));
 		//rec.y -= 10;

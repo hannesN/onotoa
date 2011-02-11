@@ -25,6 +25,8 @@ import de.topicmapslab.tmcledit.model.commands.AbstractNodeListCommand;
 import de.topicmapslab.tmcledit.model.commands.CopyNodesCommand;
 
 /**
+ * Action to trigger a copy process. 
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -34,6 +36,13 @@ public class CopyToDiagramAction extends Action {
 	private final EditPartViewer viewer;
 	private final CommandStack commandStack;
 
+	/**
+	 * Constructor 
+	 * 
+	 * @param commandStack the command stack to execute the commans
+	 * @param diagram the target diagram
+	 * @param viewer the viewer of the source diagram
+	 */
 	public CopyToDiagramAction(CommandStack commandStack, Diagram diagram, EditPartViewer viewer) {
 		this.diagram = diagram;
 		this.viewer = viewer;
@@ -41,6 +50,10 @@ public class CopyToDiagramAction extends Action {
 	}
 
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		List<Node> nodeList = collectMoveableNodes();
@@ -64,14 +77,13 @@ public class CopyToDiagramAction extends Action {
 		
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getText() {
 		return diagram.getName();
 	}
 	
-	
-	public void update() {
-		
-	}
-
 }

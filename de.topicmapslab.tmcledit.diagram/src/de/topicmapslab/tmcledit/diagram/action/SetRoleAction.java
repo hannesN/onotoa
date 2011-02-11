@@ -20,15 +20,30 @@ import de.topicmapslab.tmcledit.model.commands.DeleteRoleCommand;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 
+/**
+ * Action to set a role  type to an association. 
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class SetRoleAction extends AbstractCommandStackAction {
 
 	private SetRoleData data = new SetRoleData();
 	private boolean removeOldRCP;
 	
+	/**
+	 * Constructor 
+	 * @param data the data for the action
+	 */
 	public SetRoleAction(SetRoleData data) {
 		this(data, false);
 	}
 	
+	/**
+	 * Constructor 
+	 * @param data the data for the action
+	 * @param flag whether to remove an old role-player-constraint (topic-role-constraint)
+	 */
 	public SetRoleAction(SetRoleData data, boolean removeOldRCP) {
 		super(data.editDomain.getEditingDomain().getCommandStack());
 		this.data = data;
@@ -41,6 +56,10 @@ public class SetRoleAction extends AbstractCommandStackAction {
 		setText(text);
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void run() {
 		CompoundCommand cmd = new CompoundCommand();

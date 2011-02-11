@@ -63,11 +63,19 @@ public class SchemesXMLHandler extends DefaultHandler2 {
 	private State state;
 	private boolean docStart;
 	
-	
+	/**
+	 * 
+	 * @return the read schema list
+	 */
 	public List<ColorScheme> getSchemaList() {
 		return schemaList;
 	}
 
+	/**
+	 * Gets an input stream which should be a serialized color scheme list
+	 * @param is the input stream to parse
+	 * @return a list of color schemes
+	 */
 	public static List<ColorScheme> parseSchemeList(InputStream is) {
 		try {
 			SchemesXMLHandler handler = new SchemesXMLHandler();
@@ -84,11 +92,19 @@ public class SchemesXMLHandler extends DefaultHandler2 {
 		}
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void startDocument() throws SAXException {
 		docStart = true;
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
@@ -157,6 +173,10 @@ public class SchemesXMLHandler extends DefaultHandler2 {
 		}
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {

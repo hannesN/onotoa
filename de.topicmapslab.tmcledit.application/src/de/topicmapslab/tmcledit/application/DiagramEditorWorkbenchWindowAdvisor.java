@@ -23,10 +23,14 @@ import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 
 
 /**
- * @generated
+ * {@link WorkbenchWindowAdvisor} of Onotoa
+ * @author Hannes Niederhausen
  */
 public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
+	/**
+	 * Constant for the ModelView
+	 */
 	public static final String MODEL_VIEW_ID = "de.topicmapslab.tmcledit.extensions.views.ModelView";
 	private String[] args;
 
@@ -65,6 +69,10 @@ public class DiagramEditorWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor 
 		TmcleditEditPlugin.getPlugin().getPreferenceStore().setValue("cmdLineFilename", args[length-1]);
 	}
 
+	/**
+	 * Sets the start up arguments 
+	 * @param args args from the commandline
+	 */
 	public void setArguments(String[] args) {
 		this.args = args;		
 	}

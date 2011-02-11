@@ -42,6 +42,8 @@ import org.w3c.dom.Element;
 import de.topicmapslab.tmcledit.diagram.preferences.ColorScheme.ColorDefinition;
 
 /**
+ * Creates a xml serialization of color schemes
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -49,10 +51,22 @@ public class SchemeXMLBuilder {
 
 	private Document doc;
 
+	/**
+	 * Create the XML Serialization of the given schem list
+	 * @param list the list of schemes to serialize
+	 * @return the xml String
+	 */
 	public String buildSchemeXML(List<ColorScheme> list) {
 		return buildSchemeXML(list, false);
 	}
 	
+	/**
+	 * Create the XML Serialization of the given schem list
+	 * @param list the list of schemes to serialize
+	 * @param indent flag whether to indent the xml
+	 * @return the xml String
+	 * 
+	 */
 	public String buildSchemeXML(List<ColorScheme> list, boolean indent) {
 		try {
 
