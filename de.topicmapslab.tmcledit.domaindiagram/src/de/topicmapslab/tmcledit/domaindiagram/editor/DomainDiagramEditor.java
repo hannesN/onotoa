@@ -437,6 +437,15 @@ public class DomainDiagramEditor extends GraphicalEditorWithFlyoutPalette
 		return getRootEditPart().getLayer(LayerConstants.PRINTABLE_LAYERS);
 	}
 
+	/** 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFocus() {
+		super.setFocus();
+		fireSelectionChanged();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void updateActions(List actionIds) {
