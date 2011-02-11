@@ -428,6 +428,15 @@ public class TMCLDiagramEditor extends GraphicalEditorWithFlyoutPalette
 	public void setSelection(ISelection selection) {
 		// currentSelection = selection;
 	}
+	
+	/** 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFocus() {
+		super.setFocus();
+		fireSelectionChanged();
+	}
 
 	private void fireSelectionChanged() {
 		if (currentSelection == null) {
