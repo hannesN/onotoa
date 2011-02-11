@@ -103,32 +103,22 @@ image::images/emptyfilewin.png["_Onotoa_ window after creating a file", scaledwi
 === Using the plug-in version of _Onotoa_ ===
 
 The _Onotoa_ plug-ins can be installed into an existing eclipse 
-installation. You will need eclipse 3.5 (Galileo) for _Onotoa_. 
+installation. You will need eclipse 3.6 (Helios) for _Onotoa_. 
 
 An up and running version of eclipse is required and has to be installed. 
 
-Open *Window->Preferences->Install/Update->Available Software Sites* and enter the following 
-update sites:
+Choose *Help->Install New Software...* and enter  'http://onotoa.topicmapslab.de/update' and the content of the update site will be shown 
+(see <<updatemanager>>). 
 
-* http://onotoa.topicmapslab.de/update
-* http://update.topicmapslab.de
-* http://genny.topicmapslab.de/update
-
-Choose *Help->Install New Software...* and choose  'http://onotoa.topicmapslab.de/update' and the content of the update site will be shown 
-(see <<updatemanager>>).
-
-.Update Manager of Eclipse 3.5
+.Update Manager of Eclipse 3.6
 [caption="Figure:"]
 [[updatemanager]]
 image::images/update_manager.png["Update Manager", scaledwidth="100%"]
 
-To create Topic Maps schemas it is only necessary to install *Onotoa 
-Plugins*. If you want to export to CTM or import existing CTM files you will have 
-to install the *Import_feature* or *Onotoa Export Plugins*. The tinyTiM feature is needed in both cases, so you will
-have to install this too.
-Choose the features you want to install (we advise to install all) and click on 
-*Finish*. You should agree to the licence agreements  after the dependencies have 
-been checked and then restart eclipse after the installation.
+Select *Onotoa* and all plugins will be selected. The dependencies will be 
+downloaded automatically, so just press *Finish*. You should agree to the 
+licence agreements  after the dependencies have been checked and then restart 
+eclipse after the installation.
 
 You will have to create a project before you can create a Topic Maps. You 
 can use any project type you want. In this example we will create a

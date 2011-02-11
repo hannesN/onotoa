@@ -42,6 +42,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import de.topicmapslab.onotoa.selection.service.IOnotoaSelectionService;
 import de.topicmapslab.tmcledit.export.Activator;
 import de.topicmapslab.tmcledit.export.wizards.TMCLExportWizardPage.FileType.Type;
 
@@ -104,6 +105,22 @@ public class TMCLExportWizardPage extends WizardPage {
 	    return fileName.getText();
     }
 		
+	@Override
+	public boolean isPageComplete() {
+		IOnotoaSelectionService selServ = Activator.getDefault().getSelectionService();
+		if (selServ.getOnotoaFile()==null) {
+			setErrorMessage("No Model Loaded!");
+			return false;
+		}
+		
+		if (fileName.getText().length()==0) {
+			setErrorMessage("No filename set");
+			return false;
+		}
+		setErrorMessage(null);
+		return super.isPageComplete();
+	}
+	
 	public void createControl(Composite parent) {
 	    Composite comp = new Composite(parent, SWT.NONE);
 	    comp.setLayout(new GridLayout(3, false));
@@ -174,6 +191,8 @@ public class TMCLExportWizardPage extends WizardPage {
 	    
 	    hookListeners();
 	    setControl(comp);
+	    
+	    validate();
     }
 
 	/**
@@ -283,6 +302,7 @@ public class TMCLExportWizardPage extends WizardPage {
 				if (file!=null) {
 					file = updateType(file);
 					fileName.setText(file);
+					validate();
 					return;
 				}
 	    	}
@@ -327,6 +347,7 @@ public class TMCLExportWizardPage extends WizardPage {
 				
 				filename = filename+"."+ft.fileSuffix;
 				fileName.setText(filename);
+				validate();
 			}
 
 			
@@ -337,9 +358,25 @@ public class TMCLExportWizardPage extends WizardPage {
 	    	public void focusLost(FocusEvent e) {
 	    		String tmp = getFileName();
 	    		updateType(tmp);
+	    		validate();
 	    	}
 		});
     }
+	
+	private void validate() {
+		IOnotoaSelectionService selServ = Activator.getDefault().getSelectionService();
+		if (selServ.getOnotoaFile()==null) {
+			setErrorMessage("No Model Loaded!");
+			setPageComplete(false);
+		}
+		
+		if (fileName.getText().length()==0) {
+			setErrorMessage("No filename set");
+			setPageComplete(false);
+		}
+		setErrorMessage(null);
+		setPageComplete(true);
+	}
 
 	private FileType findEntry(String key) {
 		for (FileType ft : extensions) {

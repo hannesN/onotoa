@@ -53,9 +53,11 @@ public class MaianaExport extends Wizard implements IExportWizard {
 	private class Page extends WizardPage {
 
 		private UploadWidget widget;
+		private IOnotoaSelectionService selServ;
 		
 		protected Page() {
 	        super("Maiana Data");
+	        selServ = Activator.getDefault().getSelectionService();
         }
 
 		@Override
@@ -65,9 +67,20 @@ public class MaianaExport extends Wizard implements IExportWizard {
 	        setControl(widget);
         }
 		
+		@Override
+		public boolean isPageComplete() {
+			
+			if (selServ.getOnotoaFile()==null) {
+				
+				setErrorMessage("No Model Loaded!");
+				return false;
+			}
+		    return super.isPageComplete();
+		}
+		
 		public boolean performFinish() {
 			try {
-				IOnotoaSelectionService selServ = Activator.getDefault().getSelectionService();
+				selServ = Activator.getDefault().getSelectionService();
 				File f = selServ.getOnotoaFile();
 				
 				TMCLTopicMapBuilder builder = new TMCLTopicMapBuilder(f.getTopicMapSchema(), false, false);

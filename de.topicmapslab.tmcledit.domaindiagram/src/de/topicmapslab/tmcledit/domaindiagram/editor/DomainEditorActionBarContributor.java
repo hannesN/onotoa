@@ -105,7 +105,7 @@ public class DomainEditorActionBarContributor extends ActionBarContributor {
 				return;
 
 			FileDialog dlg = new FileDialog(getShell(), SWT.SAVE);
-			dlg.setFilterExtensions(new String[] { "*.png", "*.svg", "*.svg;*.png" });
+			dlg.setFilterExtensions(new String[] { "*.svg;*.png", "*.png", "*.svg"});
 			dlg.setText("Save as...");
 			String file = dlg.open();
 			if (file == null)
