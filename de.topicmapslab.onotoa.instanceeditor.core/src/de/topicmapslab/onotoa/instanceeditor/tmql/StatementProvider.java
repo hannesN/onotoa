@@ -174,7 +174,19 @@ public class StatementProvider {
 		return getStatement("UPDATE scope ADD ? << id WHERE ? << id");
 	}
 	
+	/**
+	 * @return prepared statement to get the reifier
+	 */
+	public IPreparedStatement getGetReifierStatement(){
+		return getStatement("? << id << reifier >> id");
+	}
 	
+	/**
+	 * @return prepared statement to set an reifier
+	 */
+	public IPreparedStatement getSetReifierStatement(){
+		return getStatement("UPDATE reifier SET ? << id WHERE ? << id");
+	}
 	
 	
 	
