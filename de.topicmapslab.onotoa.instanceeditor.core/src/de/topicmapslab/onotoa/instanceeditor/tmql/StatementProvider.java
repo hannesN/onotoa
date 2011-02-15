@@ -188,6 +188,12 @@ public class StatementProvider {
 		return getStatement("UPDATE reifier SET ? << id WHERE ? << id");
 	}
 	
+	/**
+	 * @return prepared statement to get association roles
+	 */
+	public IPreparedStatement getGetAssociationRolesStatement(){
+		return getStatement("? << id >> roles >> id");
+	}
 	
 	
 	/**
