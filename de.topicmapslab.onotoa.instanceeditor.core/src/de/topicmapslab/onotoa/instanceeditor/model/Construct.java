@@ -20,7 +20,7 @@ public abstract class Construct {
 	 * @param id - the construct id
 	 * @param statementProvider - the statement provider
 	 */
-	public Construct(String id, StatementProvider statementProvider) {
+	protected Construct(String id, StatementProvider statementProvider) {
 		this.id = id;
 		this.statementProvider = statementProvider;
 	}

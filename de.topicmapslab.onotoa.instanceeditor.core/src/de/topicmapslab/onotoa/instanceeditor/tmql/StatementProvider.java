@@ -125,6 +125,41 @@ public class StatementProvider {
 		return getStatement("? << id >> subtypes >> id ");
 	}
 	
+	/**
+	 * @return prepared statement to get a characteristics value
+	 */
+	public IPreparedStatement getGetCharacteristicValueStatement(){
+		return getStatement("? << id >> atomify");
+	}
+	
+	/**
+	 * @return prepared statement to set a name value
+	 */
+	public IPreparedStatement getSetNameValueStatement(){
+		return getStatement("UPDATE names SET ? WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to set a occurrence value
+	 */
+	public IPreparedStatement getSetOccurrenceValueStatement(){
+		return getStatement("UPDATE occurrences SET ? WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to get the datatype
+	 */
+	public IPreparedStatement getGetDatatypeStatement(){
+		return getStatement("fn:has-datatype( ? << id )");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * returns a prepared statement. creates a new one if not available
