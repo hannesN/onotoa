@@ -167,7 +167,12 @@ public class StatementProvider {
 		return getStatement("? << id << typed >> id");
 	}
 	
-	
+	/**
+	 * @return prepared statement to add a theme
+	 */
+	public IPreparedStatement getAddThemeStatement(){
+		return getStatement("UPDATE scope ADD ? << id WHERE ? << id");
+	}
 	
 	
 	
