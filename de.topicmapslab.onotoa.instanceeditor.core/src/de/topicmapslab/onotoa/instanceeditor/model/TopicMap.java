@@ -36,7 +36,7 @@ public class TopicMap extends Construct {
 	 */
 	public Topic createTopic(){
 		
-		IPreparedStatement stmt = getStatementProvider().getCreateTopicByItemIdentifier();
+		IPreparedStatement stmt = getStatementProvider().getCreateTopicByItemIdentifierStatement();
 		stmt.set(0, createItemIdentifier()); // XXX check for uniqueness
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
@@ -54,7 +54,7 @@ public class TopicMap extends Construct {
 		
 		Set<Topic> result = new HashSet<Topic>();
 		
-		IPreparedStatement stmt = getStatementProvider().getGetTopics();
+		IPreparedStatement stmt = getStatementProvider().getGetTopicsStatement();
 		
 		for(IResult r:executePreparedStatement(stmt)){
 			Topic topic = new Topic(r.get(0).toString(), getStatementProvider());
@@ -70,7 +70,7 @@ public class TopicMap extends Construct {
 	 */
 	public void removeTopic(Topic topic){
 		
-		IPreparedStatement stmt = getStatementProvider().getRemoveConstructById();
+		IPreparedStatement stmt = getStatementProvider().getRemoveConstructByIdStatement();
 		stmt.set(0, topic.getId());
 		
 		executePreparedStatement(stmt); // TODO check return value! (TODO: find out what will be returned)
