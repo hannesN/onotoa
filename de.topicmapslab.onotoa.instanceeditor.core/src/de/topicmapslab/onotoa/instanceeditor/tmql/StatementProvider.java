@@ -153,7 +153,19 @@ public class StatementProvider {
 		return getStatement("fn:has-datatype( ? << id )");
 	}
 	
+	/**
+	 * @return prepared statement to set the type of a typed construct
+	 */
+	public IPreparedStatement getSetTypeStatement(){
+		return getStatement("UPDATE types SET ? WHERE ? << id ");
+	}
 	
+	/**
+	 * @return prepared statement to get the type of a typed construct
+	 */
+	public IPreparedStatement getGetTypeStatement(){
+		return getStatement("? << id << typed >> id");
+	}
 	
 	
 	
