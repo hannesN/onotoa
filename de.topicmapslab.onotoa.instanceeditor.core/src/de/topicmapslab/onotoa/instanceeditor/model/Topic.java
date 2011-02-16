@@ -60,7 +60,7 @@ public class Topic extends Construct {
 	 */
 	public void addType(Topic type){
 		
-		IPreparedStatement stmt = getStatementProvider().getGetTopicTypesStatement();
+		IPreparedStatement stmt = getStatementProvider().getAddTopicTypeStatement();
 		stmt.set(0, type.getId());
 		stmt.set(1, this.getId());
 		
@@ -95,11 +95,7 @@ public class Topic extends Construct {
 		stmt.set(0, this.getId());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
-		
-		System.out.println(resultSet);
-		
 		String id = resultSet.get(0).get("names");
-		
 		Name name = new Name(id, getStatementProvider());
 		
 		return name;
@@ -131,7 +127,7 @@ public class Topic extends Construct {
 	 */
 	public Occurrence createOccurrence(){
 		
-		IPreparedStatement stmt = getStatementProvider().getCreateNameStatement();
+		IPreparedStatement stmt = getStatementProvider().getCreateOccurrenceStatement();
 		stmt.set(0, this.getId());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
@@ -322,5 +318,32 @@ public class Topic extends Construct {
 		
 		executePreparedStatement(stmt);
 	}
+	
+	/**
+	 * removes an subject identifier from the topic
+	 * @param iri - the subject identifier as string
+	 */
+	public void removeSubjectIdentifier(String iri){
+	
+		IPreparedStatement stmt = getStatementProvider().getRemoveSubjectIdentifierStatement();
+		stmt.setString(0, iri);
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
+	
+	/**
+	 * removes an subject locator from the topic
+	 * @param iri - the subject locator as string
+	 */
+	public void removeSubjectLocator(String iri){
+		
+		IPreparedStatement stmt = getStatementProvider().getRemoveSubjectLocatorStatement();
+		stmt.setString(0, iri);
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
+	
 	
 }

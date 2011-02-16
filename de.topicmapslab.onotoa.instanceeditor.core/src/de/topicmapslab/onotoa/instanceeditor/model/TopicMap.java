@@ -40,8 +40,6 @@ public class TopicMap extends Construct {
 		stmt.set(0, createItemIdentifier());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
-		System.out.println(resultSet);
-		
 		String id = resultSet.get(0).get("topics").toString();
 		Topic topic = new Topic(id, getStatementProvider());
 		
@@ -144,13 +142,17 @@ public class TopicMap extends Construct {
 		
 		return topic;
 	}
-	
-	
+		
 	/**
 	 * @return a randomly created item identifier as string
 	 */
 	private String createItemIdentifier(){
 		return this.topicMapProvider.getTopicMapBaseLocator() + Long.toString(this.random.nextLong());
 	}
+	
+	
+	
+	
+	
 	
 }

@@ -1,4 +1,4 @@
-package de.topicmapslab.onotoa.instanceeditor.test;
+package de.topicmapslab.onotoa.instanceeditor.model.test;
 
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystem;
@@ -11,12 +11,24 @@ import de.topicmapslab.majortom.util.FeatureStrings;
 import de.topicmapslab.onotoa.instanceeditor.service.ITopicMapProvider;
 import de.topicmapslab.onotoa.instanceeditor.test.provider.MyTopicMapProvider;
 
-public abstract class AbstractTest {
+/**
+ * abstract model test class
+ * @author Christian Haß
+ *
+ */
+public abstract class AbstractModelTest {
 
+	/**
+	 * the topic map
+	 */
 	protected de.topicmapslab.onotoa.instanceeditor.model.TopicMap map;
 	
 	private ITopicMapProvider provider;
 	
+	/**
+	 * creates an empty topic map
+	 * @throws Exception
+	 */
 	void getEmptyTopicMap() throws Exception{
 
 		TopicMapSystemFactory tm_factory = new TopicMapSystemFactoryImpl();

@@ -34,6 +34,9 @@ public abstract class Construct {
 	 * @return the result set
 	 */
 	public IResultSet<IResult> executePreparedStatement(IPreparedStatement statement){
+		
+		System.out.println("execute: " + statement.getNonParametrizedQueryString());
+		
 		return this.statementProvider.getTopicMapProvider().executePrepatedStement(statement);
 	}
 	
@@ -80,8 +83,19 @@ public abstract class Construct {
 		
 		executePreparedStatement(stmt);
 	}
-	
-	
+
+	/**
+	 * removes an item identifier from the topic
+	 * @param iri - the item identifier as string
+	 */
+	public void removeItemIdentifier(String iri){
+		
+		IPreparedStatement stmt = getStatementProvider().getRemoveItemIdentifierStatement();
+		stmt.setString(0, iri);
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
 	
 	/**
 	 * {@inheritDoc}
