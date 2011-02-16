@@ -30,18 +30,12 @@ public abstract class Characteristic extends Scoped {
 		if(value == null)
 			return;
 		
-		IPreparedStatement stmt = null;
-		
-		if(this instanceof Name)
-			stmt = getStatementProvider().getSetNameValueStatement();
-		else
-			stmt = getStatementProvider().getSetOccurrenceValueStatement();
+		IPreparedStatement stmt = getStatementProvider().getSetCharacteristicValueStatement();
 		
 		stmt.setString(0, value);
 		stmt.set(1, this.getId());
 		
 		executePreparedStatement(stmt);
-		
 	}
 	
 	/**

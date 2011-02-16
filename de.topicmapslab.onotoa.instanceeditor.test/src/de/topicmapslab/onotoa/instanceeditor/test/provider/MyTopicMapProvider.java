@@ -8,7 +8,6 @@ import de.topicmapslab.tmql4j.components.processor.results.IResult;
 import de.topicmapslab.tmql4j.components.processor.results.IResultSet;
 import de.topicmapslab.tmql4j.components.processor.runtime.ITMQLRuntime;
 import de.topicmapslab.tmql4j.components.processor.runtime.TMQLRuntimeFactory;
-import de.topicmapslab.tmql4j.path.components.processor.runtime.TmqlRuntime2007;
 
 public class MyTopicMapProvider implements ITopicMapProvider {
 
@@ -19,7 +18,7 @@ public class MyTopicMapProvider implements ITopicMapProvider {
 	public MyTopicMapProvider(TopicMap map, String baseLocator) {
 		this.baseLocator = baseLocator;
 		this.topicMap = map;
-		this.runtime = TMQLRuntimeFactory.newFactory().newRuntime(TmqlRuntime2007.TMQL_2007);
+		this.runtime = TMQLRuntimeFactory.newFactory().newRuntime("tmql-2007");
 	}
 	
 	

@@ -40,7 +40,9 @@ public class TopicMap extends Construct {
 		stmt.set(0, createItemIdentifier());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
-		String id = resultSet.get(0).get(0);
+		System.out.println(resultSet);
+		
+		String id = resultSet.get(0).get("topics").toString();
 		Topic topic = new Topic(id, getStatementProvider());
 		
 		return topic;
@@ -76,6 +78,73 @@ public class TopicMap extends Construct {
 		executePreparedStatement(stmt);
 		
 	}
+	
+	/**
+	 * selects a topic by its subject identifier
+	 * @param iri - the subject identifier iri
+	 * @return the topic or <code>null</code> if not found
+	 */
+	public Topic getTopicBySubjectIdentifier(String iri){
+		
+		IPreparedStatement stmt = getStatementProvider().getGetTopicBySiStatement();
+		stmt.setString(0, iri);
+		
+		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
+		
+		if(resultSet.isEmpty())
+			return null;
+		
+		String id = resultSet.get(0).get(0).toString();
+		
+		Topic topic = new Topic(id, getStatementProvider());
+		
+		return topic;
+	}
+	
+	/**
+	 * selects a topic by its subject locator
+	 * @param iri - the subject locator iri
+	 * @return the topic or <code>null</code> if not found
+	 */
+	public Topic getTopicBySubjectLocator(String iri){
+		
+		IPreparedStatement stmt = getStatementProvider().getGetTopicBySlStatement();
+		stmt.setString(0, iri);
+		
+		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
+		
+		if(resultSet.isEmpty())
+			return null;
+		
+		String id = resultSet.get(0).get(0).toString();
+		
+		Topic topic = new Topic(id, getStatementProvider());
+		
+		return topic;
+	}
+
+	/**
+	 * selects a topic by its item identifier
+	 * @param iri - the item identifier iri
+	 * @return the topic or <code>null</code> if not found
+	 */
+	public Topic getTopicByItemIdentifier(String iri){
+		
+		IPreparedStatement stmt = getStatementProvider().getGetTopicByIiStatement();
+		stmt.setString(0, iri);
+		
+		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
+		
+		if(resultSet.isEmpty())
+			return null;
+		
+		String id = resultSet.get(0).get(0).toString();
+		
+		Topic topic = new Topic(id, getStatementProvider());
+		
+		return topic;
+	}
+	
 	
 	/**
 	 * @return a randomly created item identifier as string
