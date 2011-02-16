@@ -52,14 +52,14 @@ public class StatementProvider {
 	 * @return prepared statement to remove a topic
 	 */
 	public IPreparedStatement getRemoveConstructByIdStatement(){
-		return getStatement("delete ? << id");
+		return getStatement("DELETE ? << id");
 	}
 	
 	/**
 	 * @return prepared statement to get best label
 	 */
 	public IPreparedStatement getGetBestLableStatement(){
-		return getStatement("fn:best-lebel( ? << id )");
+		return getStatement("fn:best-label( ? << id )");
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class StatementProvider {
 	 * @return prepared statement to get the supertypes of a topic
 	 */
 	public IPreparedStatement getGetSupertypesStatement(){
-		return getStatement("? << id >> supertypes >> id");
+		return getStatement("%pragma taxonometry tm:transitive ? << id >> supertypes >> id");
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class StatementProvider {
 	 * @return prepared statement to set the type of a typed construct
 	 */
 	public IPreparedStatement getSetTypeStatement(){
-		return getStatement("UPDATE types SET ? WHERE ? << id ");
+		return getStatement("UPDATE types SET ? << id WHERE ? << id ");
 	}
 	
 	/**
@@ -312,6 +312,27 @@ public class StatementProvider {
 	 */
 	public IPreparedStatement getAddItemIdentifierStatement(){
 		return getStatement("UPDATE item ADD ? WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to remove an subject identifier
+	 */
+	public IPreparedStatement getRemoveSubjectIdentifierStatement(){
+		return getStatement("UPDATE indicators REMOVE ? WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to remove an subject locator
+	 */
+	public IPreparedStatement getRemoveSubjectLocatorStatement(){
+		return getStatement("UPDATE locators REMOVE ? WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to remove an item identifier
+	 */
+	public IPreparedStatement getRemoveItemIdentifierStatement(){
+		return getStatement("UPDATE item REMOVE ? WHERE ? << id");
 	}
 	
 	
