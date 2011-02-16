@@ -37,7 +37,7 @@ public class TopicMap extends Construct {
 	public Topic createTopic(){
 		
 		IPreparedStatement stmt = getStatementProvider().getCreateTopicByItemIdentifierStatement();
-		stmt.set(0, createItemIdentifier()); // XXX check for uniqueness
+		stmt.set(0, createItemIdentifier());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
 		String id = resultSet.get(0).get(0);
@@ -73,10 +73,13 @@ public class TopicMap extends Construct {
 		IPreparedStatement stmt = getStatementProvider().getRemoveConstructByIdStatement();
 		stmt.set(0, topic.getId());
 		
-		executePreparedStatement(stmt); // TODO check return value! (TODO: find out what will be returned)
+		executePreparedStatement(stmt);
 		
 	}
 	
+	/**
+	 * @return a randomly created item identifier as string
+	 */
 	private String createItemIdentifier(){
 		return this.topicMapProvider.getTopicMapBaseLocator() + Long.toString(this.random.nextLong());
 	}
