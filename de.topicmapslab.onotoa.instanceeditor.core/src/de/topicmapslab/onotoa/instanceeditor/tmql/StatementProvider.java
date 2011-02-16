@@ -195,6 +195,34 @@ public class StatementProvider {
 		return getStatement("? << id >> roles >> id");
 	}
 	
+	/**
+	 * @return prepared statement to get association roles yb type
+	 */
+	public IPreparedStatement getGetAssociationRolesByTypeStatement(){
+		return getStatement("? << id >> roles [ . >> types == ? << id ] >> id ");
+	}
+	
+	/**
+	 * @return prepared statement to get association roles execluding one specific role (i.e. the counter roles)
+	 */
+	public IPreparedStatement getGetAssociationCounterRolesStatement(){
+		return getStatement("? << id >> roles >> id MINUS ?");
+	}
+	
+	/**
+	 * @return prepared statement to get the association of a specific role
+	 */
+	public IPreparedStatement getGetRoleAssociationStatement(){
+		return getStatement("? << id << roles >> id");
+	}
+	
+	/**
+	 * @return prepared statement to get role player
+	 */
+	public IPreparedStatement getGetRolePlayerStatement(){
+		return getStatement("? << id >> playes >> id");
+	}
+	
 	
 	/**
 	 * returns a prepared statement. creates a new one if not available
