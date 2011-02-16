@@ -96,6 +96,8 @@ public class Topic extends Construct {
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
 		
+		System.out.println(resultSet);
+		
 		String id = resultSet.get(0).get("names");
 		
 		Name name = new Name(id, getStatementProvider());
@@ -256,6 +258,66 @@ public class Topic extends Construct {
 		
 		IPreparedStatement stmt = getStatementProvider().getRemoveSupertypeStatement();
 		stmt.set(0, supertype.getId());
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
+	
+	/**
+	 * @return the subject identifier of the topic or an empty set
+	 */
+	public Set<String> getSubjectIdentifier(){
+		
+		Set<String> result = new HashSet<String>();
+		
+		IPreparedStatement stmt = getStatementProvider().getGetSubjectIdentifierStatement();
+		stmt.set(0, this.getId());
+		
+		for(IResult r:executePreparedStatement(stmt)){
+			result.add(r.get(0).toString());
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * @return the subject locator of the topic or an empty set
+	 */
+	public Set<String> getSubjectLocator(){
+		
+		Set<String> result = new HashSet<String>();
+		
+		IPreparedStatement stmt = getStatementProvider().getGetSubjectLocatorStatement();
+		stmt.set(0, this.getId());
+		
+		for(IResult r:executePreparedStatement(stmt)){
+			result.add(r.get(0).toString());
+		}
+		
+		return result;
+	}
+
+	/**
+	 * adds an subject identifier to the topic
+	 * @param iri - the subject identifier as string
+	 */
+	public void addSubjectIdentifier(String iri){
+		
+		IPreparedStatement stmt = getStatementProvider().getAddSubjectIdentifierStatement();
+		stmt.setString(0, iri);
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
+	
+	/**
+	 * adds an subject locator to the topic
+	 * @param iri - the subject locator as string
+	 */
+	public void addSubjectLocator(String iri){
+		
+		IPreparedStatement stmt = getStatementProvider().getAddSubjectLocatorStatement();
+		stmt.setString(0, iri);
 		stmt.set(1, this.getId());
 		
 		executePreparedStatement(stmt);

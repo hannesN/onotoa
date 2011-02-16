@@ -135,15 +135,8 @@ public class StatementProvider {
 	/**
 	 * @return prepared statement to set a name value
 	 */
-	public IPreparedStatement getSetNameValueStatement(){
-		return getStatement("UPDATE names SET ? WHERE ? << id");
-	}
-	
-	/**
-	 * @return prepared statement to set a occurrence value
-	 */
-	public IPreparedStatement getSetOccurrenceValueStatement(){
-		return getStatement("UPDATE occurrences SET ? WHERE ? << id");
+	public IPreparedStatement getSetCharacteristicValueStatement(){
+		return getStatement("UPDATE characteristics SET ? WHERE ? << id");
 	}
 	
 	/**
@@ -256,6 +249,69 @@ public class StatementProvider {
 	 */
 	public IPreparedStatement getRemoveSupertypeStatement(){
 		return getStatement("UPDATE supertypes REMOVE ? << id WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to get a topic by an subject identifier
+	 */
+	public IPreparedStatement getGetTopicBySiStatement(){
+		return getStatement("? << indicators >> id");
+	}
+	
+	/**
+	 * @return prepared statement to get a topic by an subject locator
+	 */
+	public IPreparedStatement getGetTopicBySlStatement(){
+		return getStatement("? << locators >> id");
+	}
+	
+	/**
+	 * @return prepared statement to get a topic by an item identifier
+	 */
+	public IPreparedStatement getGetTopicByIiStatement(){
+		return getStatement("? << item >> id");
+	}
+	
+	/**
+	 * @return prepared statement to get the subject identifier of a topic
+	 */
+	public IPreparedStatement getGetSubjectIdentifierStatement(){
+		return getStatement("? << id >> indicators >> atomify");
+	}
+	
+	/**
+	 * @return prepared statement to get the subject locator of a topic
+	 */
+	public IPreparedStatement getGetSubjectLocatorStatement(){
+		return getStatement("? << id >> locators >> atomify");
+	}
+	
+	/**
+	 * @return prepared statement to get the item identifier of a topic
+	 */
+	public IPreparedStatement getGetItemIdentifierStatement(){
+		return getStatement("? << id >> item >> atomify");
+	}
+	
+	/**
+	 * @return prepared statement to add a subject identifier
+	 */
+	public IPreparedStatement getAddSubjectIdentifierStatement(){
+		return getStatement("UPDATE indicators ADD ? WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to add a subject locator
+	 */
+	public IPreparedStatement getAddSubjectLocatorStatement(){
+		return getStatement("UPDATE locators ADD ? WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to add a item identifier
+	 */
+	public IPreparedStatement getAddItemIdentifierStatement(){
+		return getStatement("UPDATE item ADD ? WHERE ? << id");
 	}
 	
 	
