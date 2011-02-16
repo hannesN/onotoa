@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>onotoa</artifactId>
+    <groupId>de.topicmapslab.onotoa</groupId>
+    <version>1.2.0-SNAPSHOT</version>
+  </parent>
+  <groupId>de.topicmapslab.onotoa</groupId>
+  <artifactId>onotoa-update-site.aggregator</artifactId>
+  <version>1.2.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>../de.topicmapslab.onotoa.aranuka.codegen</module>
+    <module>../de.topicmapslab.onotoa.aranuka.codegen_feature</module>
+    <module>../de.topicmapslab.onotoa.export.maiana</module>
+    <module>../de.topicmapslab.onotoa.genny.generator</module>
+    <module>../de.topicmapslab.onotoa.search</module>
+    <module>../de.topicmapslab.onotoa.selection</module>
+    <module>../de.topicmapslab.tmcledit</module>
+    <module>../de.topicmapslab.tmcledit.core_feature</module>
+    <module>../de.topicmapslab.tmcledit.diagram</module>
+    <module>../de.topicmapslab.tmcledit.doc</module>
+    <module>../de.topicmapslab.tmcledit.doc_feature</module>
+    <module>../de.topicmapslab.tmcledit.domaindiagram</module>
+    <module>../de.topicmapslab.tmcledit.edit</module>
+    <module>../de.topicmapslab.tmcledit.export</module>
+    <module>../de.topicmapslab.tmcledit.export_feature</module>
+    <module>../de.topicmapslab.tmcledit.import_feature</module>
+    <module>../de.topicmapslab.tmcledit.tests</module>
+    <module>.</module>
+  </modules>
+</project>
