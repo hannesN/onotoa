@@ -31,7 +31,18 @@ public abstract class Scoped extends Reifiable {
 		executePreparedStatement(stmt);
 	}
 		
-//	removeTheme() TODO
+	/**
+	 * removes a theme from the constructs scope
+	 * @param theme - the theme
+	 */
+	public void removeTheme(Topic theme){
+		
+		IPreparedStatement stmt = getStatementProvider().getRemoveThemeStatement();
+		stmt.set(0, theme.getId());
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
 	
 	
 }

@@ -223,6 +223,41 @@ public class StatementProvider {
 		return getStatement("? << id >> playes >> id");
 	}
 	
+	/**
+	 * @return prepared statement to remove a theme
+	 */
+	public IPreparedStatement getRemoveThemeStatement(){
+		return getStatement("UPDATE scope REMOVE ? << id WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to remove a type
+	 */
+	public IPreparedStatement getRemoveTypeStatement(){
+		return getStatement("UPDATE types REMOVE ? << id WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to delete a contruct
+	 */
+	public IPreparedStatement getDeleteConstructStatement(){
+		return getStatement("DELETE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to get roles played
+	 */
+	public IPreparedStatement getRolesPlayedStatement(){
+		return getStatement("? << id >> roles >> id");
+	}
+	
+	/**
+	 * @return prepared statement to remove a supertype
+	 */
+	public IPreparedStatement getRemoveSupertypeStatement(){
+		return getStatement("UPDATE supertypes REMOVE ? << id WHERE ? << id");
+	}
+	
 	
 	/**
 	 * returns a prepared statement. creates a new one if not available

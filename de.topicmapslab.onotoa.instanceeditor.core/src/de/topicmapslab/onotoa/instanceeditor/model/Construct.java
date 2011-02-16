@@ -31,7 +31,6 @@ public abstract class Construct {
 	 * @return the result set
 	 */
 	public IResultSet<IResult> executePreparedStatement(IPreparedStatement statement){
-		// XXX not really nice but better then a second parameter which is reached through every constructor
 		return this.statementProvider.getTopicMapProvider().executePrepatedStement(statement);
 	}
 	

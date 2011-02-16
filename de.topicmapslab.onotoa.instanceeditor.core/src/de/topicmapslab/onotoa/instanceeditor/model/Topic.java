@@ -193,12 +193,72 @@ public class Topic extends Construct {
 		return result;
 	}
 	
+	/**
+	 * removes the type form the topic
+	 * @param type - the type
+	 */
+	public void removeType(Topic type){
+		
+		IPreparedStatement stmt = getStatementProvider().getRemoveTypeStatement();
+		stmt.set(0, type.getId());
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
+
+	/**
+	 * removes the name from the topic
+	 * @param name - the name
+	 */
+	public void removeName(Name name){
+		
+		IPreparedStatement stmt = getStatementProvider().getDeleteConstructStatement();
+		stmt.set(0, name.getId());
+		
+		executePreparedStatement(stmt);
+	}
 	
-// TODO:
-//	removeType()
-//	removeName()
-//	removeOccurrence()
-//	getRoles()
-//	removeSuperType()
+	/**
+	 * removes the occurrence from the topic
+	 * @param occurrence - the occurrence
+	 */
+	public void removeOccurrence(Occurrence occurrence){
+		
+		IPreparedStatement stmt = getStatementProvider().getDeleteConstructStatement();
+		stmt.set(0, occurrence.getId());
+		
+		executePreparedStatement(stmt);
+	}
+	
+	/**
+	 * @return roles played by this topic
+	 */
+	public Set<Role> getRoles(){
+
+		Set<Role> result = new HashSet<Role>();
+		
+		IPreparedStatement stmt = getStatementProvider().getRolesPlayedStatement();
+		stmt.set(0, this.getId());
+		
+		for(IResult r:executePreparedStatement(stmt)){
+			Role role = new Role(r.get(0).toString(), getStatementProvider());
+			result.add(role);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * removes the supertype from the topic
+	 * @param supertype - the supertype
+	 */
+	public void removeSuperType(Topic supertype){
+		
+		IPreparedStatement stmt = getStatementProvider().getRemoveSupertypeStatement();
+		stmt.set(0, supertype.getId());
+		stmt.set(1, this.getId());
+		
+		executePreparedStatement(stmt);
+	}
 	
 }
