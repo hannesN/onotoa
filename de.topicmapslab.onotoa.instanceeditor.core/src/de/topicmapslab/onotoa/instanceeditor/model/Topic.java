@@ -5,8 +5,8 @@ import java.util.Set;
 
 import de.topicmapslab.onotoa.instanceeditor.tmql.StatementProvider;
 import de.topicmapslab.tmql4j.components.processor.prepared.IPreparedStatement;
-import de.topicmapslab.tmql4j.components.processor.results.IResult;
-import de.topicmapslab.tmql4j.components.processor.results.IResultSet;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResult;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResultSet;
 
 /**
  * topic class 

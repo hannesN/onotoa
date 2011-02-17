@@ -9,6 +9,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.topicmapslab.onotoa.instanceeditor.model.Association;
 import de.topicmapslab.onotoa.instanceeditor.model.Topic;
 import de.topicmapslab.onotoa.instanceeditor.model.TopicMap;
 
@@ -148,6 +149,16 @@ public class TestTopicMap extends AbstractModelTest {
 		
 	}
 	
+	/**
+	 * test for createAssociation()
+	 */
+	@Test
+	public void testCreateAssociation(){
+		
+		Association ass = this.map.createAssociation();
+		assertNotNull(ass);
+		
+	}
 	
 	
 	

@@ -4,8 +4,8 @@ import org.tmapi.core.TopicMap;
 
 import de.topicmapslab.onotoa.instanceeditor.service.ITopicMapProvider;
 import de.topicmapslab.tmql4j.components.processor.prepared.IPreparedStatement;
-import de.topicmapslab.tmql4j.components.processor.results.IResult;
-import de.topicmapslab.tmql4j.components.processor.results.IResultSet;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResult;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResultSet;
 import de.topicmapslab.tmql4j.components.processor.runtime.ITMQLRuntime;
 import de.topicmapslab.tmql4j.components.processor.runtime.TMQLRuntimeFactory;
 import de.topicmapslab.tmql4j.path.components.processor.runtime.TmqlRuntime2007;
