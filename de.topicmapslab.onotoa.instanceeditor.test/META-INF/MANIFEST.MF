@@ -23,4 +23,5 @@ Require-Bundle: de.topicmapslab.onotoa.instanceeditor.core;bundle-version="1.0.0
  de.topicmapslab.majortom.model;bundle-version="1.2.0",
  cern.jet.random;bundle-version="0.9.0",
  slf4j.api;bundle-version="1.6.1",
- de.topicmapslab.tmql4j.majortom;bundle-version="3.1.0"
+ de.topicmapslab.tmql4j.majortom;bundle-version="3.1.0",
+ org.apache.commons.collections;bundle-version="3.2.1"
