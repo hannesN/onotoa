@@ -1,7 +1,11 @@
 package de.topicmapslab.onotoa.instanceeditor.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import de.topicmapslab.onotoa.instanceeditor.tmql.StatementProvider;
 import de.topicmapslab.tmql4j.components.processor.prepared.IPreparedStatement;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResult;
 
 /**
  * abstract scoped class
@@ -44,5 +48,24 @@ public abstract class Scoped extends Reifiable {
 		executePreparedStatement(stmt);
 	}
 	
+	/**
+	 * @return the themes or empty set
+	 */
+	public Set<Topic> getThemes(){
+		
+		IPreparedStatement stmt = getStatementProvider().getGetThemesStatement();
+		stmt.set(0, this.getId());
+		
+		Set<Topic> result = new HashSet<Topic>();
+		
+		for(IResult r:executePreparedStatement(stmt)){
+			
+			String id = r.get(0).toString();
+			Topic theme = new Topic(id, getStatementProvider());
+			result.add(theme);
+		}
+		
+		return result;
+	}
 	
 }

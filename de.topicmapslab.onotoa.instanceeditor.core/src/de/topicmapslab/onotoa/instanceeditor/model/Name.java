@@ -17,4 +17,7 @@ public class Name extends Characteristic {
 	protected Name(String id, StatementProvider statementProvider) {
 		super(id, statementProvider);
 	}
+	
+	
+	
 }

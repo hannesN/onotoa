@@ -5,7 +5,8 @@ import java.util.Set;
 
 import de.topicmapslab.onotoa.instanceeditor.tmql.StatementProvider;
 import de.topicmapslab.tmql4j.components.processor.prepared.IPreparedStatement;
-import de.topicmapslab.tmql4j.components.processor.results.IResult;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResult;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResultSet;
 
 /**
  * association class
@@ -82,6 +83,28 @@ public class Association extends Scoped {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * creates a new role
+	 * @param player - the player of the role
+	 * @return the role
+	 */
+	public Role createRole(Topic player){
+		
+		IPreparedStatement stmt = getStatementProvider().getCreateRoleStatement();
+		stmt.set(0, player.getId());
+		stmt.set(1, this.getId());
+		
+		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
+		
+		System.out.println(resultSet);
+		
+		String id = resultSet.get(0).get("roles").toString();
+		System.out.println(id);
+		Role role = new Role(id, getStatementProvider());
+		
+		return role;
 	}
 	
 }

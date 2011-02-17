@@ -14,6 +14,8 @@ import de.topicmapslab.tmql4j.components.processor.prepared.IPreparedStatement;
 public class StatementProvider {
 
 	private final static String DEFAULT_OCCURRENCE_TYPE = "http://onotoa.topicmapslab.de/default-occurrence";
+	private final static String DEFAULT_ASSOCIATION_TYPE = "http://onotoa.topicmapslab.de/default-association";
+	private final static String DEFAULT_ROLE_TYPE = "http://onotoa.topicmapslab.de/default-role";
 	
 	private final ITopicMapProvider topicMapProvider;
 	private Map<String, IPreparedStatement> statements;
@@ -241,7 +243,7 @@ public class StatementProvider {
 	 * @return prepared statement to get roles played
 	 */
 	public IPreparedStatement getRolesPlayedStatement(){
-		return getStatement("? << id >> roles >> id");
+		return getStatement("? << id << players >> id");
 	}
 	
 	/**
@@ -334,6 +336,30 @@ public class StatementProvider {
 	public IPreparedStatement getRemoveItemIdentifierStatement(){
 		return getStatement("UPDATE item REMOVE ? WHERE ? << id");
 	}
+	
+	/**
+	 * @return prepared statement to create an association
+	 */
+	public IPreparedStatement getCreateAssociationStatement(){
+		return getStatement("UPDATE associations ADD " + DEFAULT_ASSOCIATION_TYPE + " ()");
+	}
+		
+	/**
+	 * @return prepared statement to create an role
+	 */
+	public IPreparedStatement getCreateRoleStatement(){
+		return getStatement("UPDATE roles " + DEFAULT_ROLE_TYPE + " ADD ? << id WHERE ? << id");
+	}
+	
+	/**
+	 * @return prepared statement to get the themes
+	 */
+	public IPreparedStatement getGetThemesStatement(){
+		return getStatement("? << id >> scope >> id");
+	}
+	
+	
+	
 	
 	
 	/**
