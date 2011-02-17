@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import de.topicmapslab.onotoa.instanceeditor.model.Association;
@@ -20,14 +19,6 @@ import de.topicmapslab.onotoa.instanceeditor.model.TopicMap;
  */
 public class TestTopicMap extends AbstractModelTest {
 
-	/**
-	 * executed before each test
-	 * @throws Exception
-	 */
-	@Before
-	public void before() throws Exception{
-		getEmptyTopicMap();
-	}
 	
 	/**
 	 * test for createTopic()

@@ -97,11 +97,7 @@ public class Association extends Scoped {
 		stmt.set(1, this.getId());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
-		
-		System.out.println(resultSet);
-		
 		String id = resultSet.get(0).get("roles").toString();
-		System.out.println(id);
 		Role role = new Role(id, getStatementProvider());
 		
 		return role;

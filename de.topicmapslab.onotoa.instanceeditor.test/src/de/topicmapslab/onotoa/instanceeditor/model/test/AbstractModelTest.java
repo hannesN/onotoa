@@ -1,5 +1,6 @@
 package de.topicmapslab.onotoa.instanceeditor.model.test;
 
+import org.junit.Before;
 import org.tmapi.core.TopicMap;
 import org.tmapi.core.TopicMapSystem;
 import org.tmapi.core.TopicMapSystemFactory;
@@ -41,6 +42,16 @@ public abstract class AbstractModelTest {
 		this.provider = new MyTopicMapProvider(topicMap, "http://test/");
 		this.map = new de.topicmapslab.onotoa.instanceeditor.model.TopicMap(this.provider);
 		
+	}
+	
+	
+	/**
+	 * executed before each test
+	 * @throws Exception
+	 */
+	@Before
+	public void before() throws Exception{
+		getEmptyTopicMap();
 	}
 	
 
