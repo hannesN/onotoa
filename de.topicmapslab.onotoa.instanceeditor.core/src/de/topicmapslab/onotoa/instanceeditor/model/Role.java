@@ -30,6 +30,7 @@ public class Role extends Reifiable {
 		stmt.set(0, this.getId());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
+		System.out.println(resultSet);
 		String id = resultSet.get(0).get(0).toString();
 		Association association = new Association(id, getStatementProvider());
 		
@@ -45,6 +46,7 @@ public class Role extends Reifiable {
 		stmt.set(0, this.getId());
 		
 		IResultSet<IResult> resultSet = executePreparedStatement(stmt);
+		System.out.println(resultSet);
 		String id = resultSet.get(0).get(0).toString();
 		Topic player = new Topic(id, getStatementProvider());
 		

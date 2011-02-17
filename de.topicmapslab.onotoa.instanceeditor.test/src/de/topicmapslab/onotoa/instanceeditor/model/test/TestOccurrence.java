@@ -10,16 +10,61 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import de.topicmapslab.onotoa.instanceeditor.model.Name;
+import de.topicmapslab.onotoa.instanceeditor.model.Occurrence;
 import de.topicmapslab.onotoa.instanceeditor.model.Topic;
 
 /**
- * test class for {@link Name}
+ * test class for {@link Occurrence}
  * @author Christian Haß
  *
  */
-public class TestName extends AbstractModelTest {
+public class TestOccurrence extends AbstractModelTest {
 
+	
+	/**
+	 * test for setDatatype()
+	 */
+	@Test
+	public void testSetDatatype(){
+		
+		Topic topic = this.map.createTopic();
+		assertNotNull(topic);
+		
+		Occurrence occurrence = topic.createOccurrence();
+		assertNotNull(occurrence);
+		
+		occurrence.setValue("lala");
+		
+		String datatype = "http://test/datatype";
+		
+		assertNotSame(datatype, occurrence.getDatatype());
+		
+		occurrence.setDatatype(datatype);
+		
+		assertEquals(datatype, occurrence.getDatatype());
+		
+		
+	}
+	
+	/**
+	 * test for getDatatype()
+	 */
+	@Test
+	public void testGetDatatype(){
+		
+		Topic topic = this.map.createTopic();
+		assertNotNull(topic);
+		
+		Occurrence occurrence = topic.createOccurrence();
+		assertNotNull(occurrence);
+		
+		String input = "http://test/datatype";
+		occurrence.setValue("lala" + "^^" + input);
+				
+		String datatype = occurrence.getDatatype();
+		assertNotNull(datatype);
+		assertEquals(datatype, input);
+	}
 	
 	/**
 	 * test for getType()
@@ -30,7 +75,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		Topic type = this.map.createTopic();
@@ -51,7 +96,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		Topic type = this.map.createTopic();
@@ -74,7 +119,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		String iri = "http://test/iri";
@@ -97,7 +142,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		String iri = "http://test/iri";
@@ -124,7 +169,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		Set<Topic> themes = name.getThemes();
@@ -152,7 +197,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		Set<Topic> themes = name.getThemes();
@@ -180,7 +225,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		Topic theme1 = this.map.createTopic();
@@ -222,7 +267,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		String value = "lala";
@@ -244,7 +289,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 
 		String input = "lala";
@@ -266,7 +311,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		assertNull(name.getReifier());
@@ -289,7 +334,7 @@ public class TestName extends AbstractModelTest {
 		Topic topic = this.map.createTopic();
 		assertNotNull(topic);
 		
-		Name name = topic.createName();
+		Occurrence name = topic.createOccurrence();
 		assertNotNull(name);
 		
 		Topic reifier = this.map.createTopic();
@@ -303,3 +348,4 @@ public class TestName extends AbstractModelTest {
 	
 	
 }
+

@@ -143,7 +143,9 @@ public class TopicMap extends Construct {
 		return topic;
 	}
 		
-	
+	/**
+	 * @return a newly created association
+	 */
 	public Association createAssociation(){
 		
 		IPreparedStatement stmt = getStatementProvider().getCreateAssociationStatement();
@@ -156,20 +158,12 @@ public class TopicMap extends Construct {
 		
 		return a;
 	}
-	
-	
-	
-	
+
 	/**
 	 * @return a randomly created item identifier as string
 	 */
 	private String createItemIdentifier(){
 		return this.topicMapProvider.getTopicMapBaseLocator() + Long.toString(this.random.nextLong());
 	}
-	
-	
-	
-	
-	
 	
 }

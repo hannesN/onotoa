@@ -1,11 +1,11 @@
 package de.topicmapslab.onotoa.instanceeditor.model.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import de.topicmapslab.onotoa.instanceeditor.model.Association;
@@ -21,14 +21,6 @@ import de.topicmapslab.onotoa.instanceeditor.model.Topic;
  */
 public class TestTopic extends AbstractModelTest {
 
-	/**
-	 * executed before each test
-	 * @throws Exception
-	 */
-	@Before
-	public void before() throws Exception{
-		getEmptyTopicMap();
-	}
 	
 	/**
 	 * test for getBestLabel()
