@@ -7,9 +7,23 @@ package de.topicmapslab.tmcledit.model.compare;
 
 import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 
+/**
+ * A comparator for {@link AbstractRegExpTopicType}
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractRegExpTopicTypeComparator extends
 		TopicTypeComparator {
 
+	
+	/**
+	 * The comparing method
+	 * 
+	 * @param o1 
+	 * @param o2
+	 * @return true if the two objects are equal, which means their regexps are equal 
+	 */
 	public boolean equals(AbstractRegExpTopicType o1, AbstractRegExpTopicType o2) {
 
 		if ((o1 == null) ^ (o2 == null))

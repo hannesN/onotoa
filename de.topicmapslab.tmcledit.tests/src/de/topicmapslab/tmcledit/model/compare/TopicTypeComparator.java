@@ -15,8 +15,21 @@ import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * Comparator for {@link TopicType}.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TopicTypeComparator extends TMCLConstructComparator {
 
+	/**
+	 * The comparing method
+	 * 
+	 * @param o1 
+	 * @param o2
+	 * @return true if the two objects are equal 
+	 */
 	public boolean equals(TopicType o1, TopicType o2) {
 
 		if ((o1 == null) ^ (o2 == null))

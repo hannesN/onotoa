@@ -13,6 +13,6 @@ Require-Bundle: org.eclipse.ui,
  de.topicmapslab.kuria.annotation;bundle-version="1.0.1",
  de.topicmapslab.kuria.runtime;bundle-version="1.0.1",
  de.topicmapslab.kuria.swtgenerator;bundle-version="1.0.1",
- de.topicmapslab.genericeditor.application;bundle-version="1.0.0",
  de.topicmapslab.aranuka.connector-majortom;bundle-version="1.0.2",
- de.topicmapslab.aranuka.runtime;bundle-version="1.0.2"
+ de.topicmapslab.aranuka.runtime;bundle-version="1.0.2",
+ de.topicmapslab.genericeditor.application;bundle-version="1.0.0"

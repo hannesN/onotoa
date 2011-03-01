@@ -92,8 +92,7 @@ image::images/emptywin.png["Blank _Onotoa_ window", scaledwidth="100%"]
 
 
 To create a new model, use *File->New..*.
-Choose the path of the file and name it "example.ono". After that your window 
-should look like <<emptyfile_win>>
+After that your window should look like <<emptyfile_win>>
 
 .Onotoa window after creating a file
 [caption="Figure:"]
