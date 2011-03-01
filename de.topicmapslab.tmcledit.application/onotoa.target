@@ -56,13 +56,12 @@
 <unit id="org.apache.velocity.feature.group" version="1.7.0"/>
 <unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
 <unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
-<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.0.2.201101261312"/>
-<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2.201101261312"/>
+<unit id="de.topicmapslab.aranuka.majortom_feature.feature.group" version="1.0.2.201102241633"/>
+<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2.201102241633"/>
 <unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201102071729"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201101260951"/>
-<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.2.0.201102081100"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201103011055"/>
+<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.2.0.201102211426"/>
 <unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
-<unit id="de.topicmapslab.tmql4j3_1_feature.feature.group" version="3.1.0.201102161222"/>
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.9.201102071552"/>
 <repository location="http://update.topicmapslab.de"/>
 </location>

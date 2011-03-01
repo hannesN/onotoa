@@ -11,6 +11,7 @@
 package de.topicmapslab.tmcledit.domaindiagram.policies;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.jface.dialogs.MessageDialog;
 
@@ -19,6 +20,11 @@ import de.topicmapslab.tmcledit.domaindiagram.Activator;
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 
+/**
+ * An {@link DirectEditPolicy} to change names of occurrence types and name types.
+ * @author Hannes Niederhausen
+ *
+ */
 public class AbstractTypedConstraintDirectEditPolicy extends AbstractDirectEditPolicy {
 
 	@Override

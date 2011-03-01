@@ -18,11 +18,18 @@ import java.util.List;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
+ * The command so set the subject locator for a topic type.
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class SetTopicTypeLocatorsCommand extends AbstractTopicTypeIdentificationCommand {
 
+	/**
+	 * 
+	 * @param newList the new list of subject locators
+	 * @param type the type to modify
+	 */
 	public SetTopicTypeLocatorsCommand(List<String> newList, TopicType type) {
 		super("Set Type Subject Locators", newList, type);
 	}

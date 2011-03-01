@@ -34,12 +34,14 @@ import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.commands.AddScopeConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
+/**
+ * Edit part which renders a label containing scope,
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractScopedLabeledEditPart extends
 		AbstractLabelEditPart {
-
-	public AbstractScopedLabeledEditPart() {
-		super();
-	}
 
 	@Override
 	public Command getCommand(Request request) {
