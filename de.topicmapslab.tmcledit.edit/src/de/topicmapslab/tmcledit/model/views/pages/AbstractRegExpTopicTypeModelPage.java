@@ -20,6 +20,8 @@ import de.topicmapslab.tmcledit.model.AbstractRegExpTopicType;
 import de.topicmapslab.tmcledit.model.util.TextObserver;
 
 /**
+ * The property page for {@link AbstractRegExpTopicType}s
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -27,6 +29,10 @@ public abstract class AbstractRegExpTopicTypeModelPage extends ScopedTopicTypePa
 
 	private Text regExpText; 
 	
+	/**
+	 * Constructor
+	 * @param id page id
+	 */
 	public AbstractRegExpTopicTypeModelPage(String id) {
 	    super(id);
     }

@@ -17,6 +17,12 @@ import org.eclipse.emf.common.command.AbstractCommand;
 
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * Abstract command to set a list of identifiers. 
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AbstractTopicTypeIdentificationCommand extends
 		AbstractCommand {
 
@@ -24,13 +30,22 @@ public abstract class AbstractTopicTypeIdentificationCommand extends
 	protected List<String> oldList;
 	protected TopicType type;
 
-
+	/**
+	 * Constructor
+	 * @param label the label of the command
+	 * @param newList the list of new elements
+	 * @param type the topic type 
+	 */
 	public AbstractTopicTypeIdentificationCommand(String label, List<String> newList, TopicType type) {
 		super(label);
 		this.newList = newList;
 		this.type = type;
 	}
 
+	/**
+	 * 
+	 * @return the list which will contain the new values
+	 */
 	protected abstract List<String> getStringList();
 
 	protected final void setList(List<String> list) {

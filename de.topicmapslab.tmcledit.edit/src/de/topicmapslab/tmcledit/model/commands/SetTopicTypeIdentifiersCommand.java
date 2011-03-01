@@ -19,11 +19,18 @@ import java.util.List;
 import de.topicmapslab.tmcledit.model.TopicType;
 
 /**
+ * The command so set the subject identifier for a topic type.
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class SetTopicTypeIdentifiersCommand extends AbstractTopicTypeIdentificationCommand {
 
+	/**
+	 * Constructor
+	 * @param newList the new list of identifiers
+	 * @param type the topic type 
+	 */
 	public SetTopicTypeIdentifiersCommand(List<String> newList, TopicType type) {
 		super("Set Type Subject Identifiers", newList, type);
 	}
