@@ -758,6 +758,7 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 	@Override
 	public void dispose() {
 		this.file.eAdapters().remove(dirtyAdapter);
+		this.commandStack.removeCommandStackListener(this);
 		super.dispose();
 	}
 

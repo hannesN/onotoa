@@ -11,7 +11,6 @@
 package de.topicmapslab.onotoa.wordlisteditor.editor.celleditor;
 
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.CellEditor.LayoutData;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;

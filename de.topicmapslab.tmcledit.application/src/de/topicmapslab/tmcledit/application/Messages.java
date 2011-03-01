@@ -30,17 +30,49 @@ public class Messages extends NLS {
 	private Messages() {
 	}
 
+	/**
+	 * 
+	 */
 	public static String ApplicationMenuName_File;
+	/**
+	 * 
+	 */
 	public static String ApplicationMenuName_Edit;
+	/**
+	 * 
+	 */
 	public static String ApplicationMenuName_Window;
+	/**
+	 * 
+	 */
 	public static String ApplicationMenuName_Help;
+	/**
+	 * 
+	 */
 	public static String ApplicationMenuName_New;
-
+	/**
+	 * 
+	 */
 	public static String DiagramEditorActionBarAdvisor_DefaultFileEditorTitle;
+	/**
+	 * 
+	 */
 	public static String DiagramEditorActionBarAdvisor_DefaultFileEditorMessage;
+	/**
+	 * 
+	 */
 	public static String DiagramEditorActionBarAdvisor_DefaultEditorOpenErrorTitle;
+	/**
+	 * 
+	 */
 	public static String DiagramEditorActionBarAdvisor_AboutDialogTitle;
+	/**
+	 * 
+	 */
 	public static String DiagramEditorActionBarAdvisor_AboutDialogMessage;
+	/**
+	 * 
+	 */
 	public static String DiagramEditorWorkbenchWindowAdvisor_Title;
 
 }

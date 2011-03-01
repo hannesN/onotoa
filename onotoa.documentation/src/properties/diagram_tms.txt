@@ -33,7 +33,9 @@ representations.
 The properties of a topic map schema are:
 
 * *Name:* The name of the schema.
-* *Base Locator:* The base locator used to generate automatic subject identifier. 
+* *Version:* A version for the schema
+* *Base Locator:* The base locator used to generate automatic subject identifier.
+* *Schema Resource:* A URL where to find a serialised version of this schema. 
 
 
 .Property Page of TopicMapSchema
