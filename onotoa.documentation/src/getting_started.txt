@@ -91,8 +91,7 @@ like in <<empty_win>> after a brief for loading.
 image::images/emptywin.png["Blank _Onotoa_ window", scaledwidth="100%"]
 
 
-To create a new model, use *File->New..*.
-After that your window should look like <<emptyfile_win>>
+To create a new model, use *File->New..*. After that your window should look like <<emptyfile_win>>
 
 .Onotoa window after creating a file
 [caption="Figure:"]
@@ -195,16 +194,23 @@ an input interface for the properties shown in the
 *Property Details View*. A detailed description of the property page of every 
 element is given in <<_the_property_details_view>>
 
+==== Notes View ====
+
+The *Notes View* can be used to enter some notes. These note will be saved in the ono-file. 
+The kind of notes is up to you. They can be comments, some TODOs or just some way to communicate
+with another editor. 
+
 === Creating the first diagram ===
 
 With _Onotoa_ it is possible to create multiple diagrams for a Topic Maps 
 schemas. Although the schema can be created with wizards provided
 by the *Model View*, it is preferable to do so with the *Diagram Editor*.
 
+_Onotoa_ provides two kinds of diagrams. In this introduction the *Detailed Diagram* will be used.
 Via the context menu of the *Diagrams* node in the *Model View* a new diagram 
-can be created. After selecting *Create New Diagram...* a dialogue box will asks for the 
+can be created. After selecting *Create New Detailed Diagram...* a dialogue box will asks for the 
 name of the
-diagram. Alternatively you can select *Create New Diagram...* in the drop down 
+diagram. Alternatively you can select *Create New Detailed Diagram...* in the drop down 
 menu, marked with 
 ifdef::basebackend-docbook[]
 image:images/viewmenu_button.png[width="0.3cm"].
@@ -222,8 +228,7 @@ and contains the tools to create new diagram elements (see <<palette>>).
 .Palette of a diagram editor
 [caption="Figure:"]
 [[palette]]
-image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", 
-align="center"]
+image::images/palette.png["Palette of a diagram editor", scaledwidth="35%", align="center"]
 
 To add a new element to the diagram just drag an palette entry onto the 
 position of the diagram. Let us create a new topic type for persons. Drag 
