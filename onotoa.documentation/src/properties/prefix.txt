@@ -13,8 +13,8 @@ Every diagram includes a box containing the prefixes. If you click on the prefix
 .Example of Prefix Property Page
 image::images/prefix_pp.png[scaledwidth="100%"]
 
-To remove a prefix, just select and press *Remove* in the table.
-Press *Add...* to add a new prefix and a dialogue will be shown, which provides an input mask for the prefix.
+To remove a prefix, just select and press image:images/documentation/search/buttons/remove.png[] in the table.
+Press image:images/documentation/search/buttons/new.png[] to add a new prefix and a dialogue will be shown, which provides an input mask for the prefix.
 After pressing *OK* the new prefix will be added to the schema and will exported if the CTM export is applied. 
 
 
