@@ -208,7 +208,7 @@ by the *Model View*, it is preferable to do so with the *Diagram Editor*.
 
 _Onotoa_ provides two kinds of diagrams. In this introduction the *Detailed Diagram* will be used.
 Via the context menu of the *Diagrams* node in the *Model View* a new diagram 
-can be created. After selecting *Create New Detailed Diagram...* a dialogue box will asks for the 
+can be created. After selecting *Create New Detailed Diagram...* a dialogue box will ask for the 
 name of the
 diagram. Alternatively you can select *Create New Detailed Diagram...* in the drop down 
 menu, marked with 
