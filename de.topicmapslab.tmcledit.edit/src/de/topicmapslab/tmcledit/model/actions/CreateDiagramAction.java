@@ -44,7 +44,7 @@ public class CreateDiagramAction extends Action {
 	 */
 	public CreateDiagramAction(ModelView modelView) {
 		this.modelView = modelView;
-		setText("Create New Detailed Diagram");
+		setText("Create New Detailed Diagram...");
 	}
 
 	/**
