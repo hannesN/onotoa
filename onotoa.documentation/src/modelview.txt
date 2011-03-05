@@ -10,15 +10,23 @@ to realize different views of the same schema.
 [caption="Figure:"]
 image::images/modelview.png[scaledwidth="60%"]
 
-In the title bar of the *Model View* you will see a button. This button can be used to start a validation of the current schema. 
-Additionally the *Model View* has a menu, which can be opened by clicking on 
+In the title bar of the *Model View* you will see a row of buttons with different functions.
+
+[width="53%", cols="^10%,<90%"]
+|======================================================================
 ifdef::basebackend-docbook[]
-image:images/viewmenu_button.png[width="0.3cm"].
+|image:images/onotoa_icon.png[width="0.3cm"]|Validate the current schema
+|image:images/synchronize.png[width="0.3cm"]|Enable / disable Synchronize feature. This will keep the navigation tree synchronized to the selected topic in the diagram 
+|image:images/wordlist/button.png[width="0.3cm"]|Open Wordlist editor (see Chapter 4)
+|image:images/viewmenu_button.png[width="0.3cm"]|Open Model View Menu that provides the actions *Create New Detailed Diagram...*, *Create New Domain Diagram...* and *Validate*
 endif::basebackend-docbook[]
 ifndef::basebackend-docbook[]
-image:images/viewmenu_button.png[].
+|image:images/onotoa_icon.png[width="1cm"]||Validate the current schema
+|image:images/synchronize.png[width="1cm"]|Enable / disable Synchronize feature. This will keep the navigation tree synchronized to the selected topic in the diagram 
+|image:images/wordlist/button.png[width="0.3cm"]|Open Wordlist editor (see Chapter 4)
+|image:images/viewmenu_button.png[width="1cm"]|Open Model View Menu that provides the actions *Create New Detailed Diagram...*, *Create New Domain Diagram...* and *Validate*
 endif::basebackend-docbook[]
-Right now the menu contains *Create New Diagram...* and *Validate*.
+|======================================================================
 
 Every element in the tree is called a node. A node has a parent and may have children. For example the node *Diagrams* is
 used as parent for node representing diagrams. These nodes are named after the diagram. A description of the different 
@@ -31,9 +39,11 @@ To select a node, just click on the node with the left mouse button.
 
 The node 'Diagrams' is the parent of all nodes representing diagrams. 
 
-To create a new diagram, use the context menu of the 'Diagrams' node. It contains two entries,  *Create New Diagram...* and *Create New Domain Diagram...*. Choose the entries, 
+To create a new diagram, use the context menu of the 'Diagrams' node. It contains two entries,  *Create New Detailed Diagram...* and *Create New Domain Diagram...*. Choose the entries, 
 by clicking with the left mouse button on it and a dialogue appears and asks for the name of the new diagram.
 If you want to abort, just press the *Cancel* button. 
+
+NOTE: If a diagram is selected at the editor part, the context menu of the 'Diagrams' node also offers an entry to delete this one.
 
 Every diagram must have a different name, so if you enter a name, which is already used, it is 
 not possible to press *OK*. After pressing *OK* a new diagram is created and an editor is automatically opened. You can also recognize, that the 
