@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -33,7 +32,6 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -57,11 +55,9 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
-import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.AddTopicReifiesConstraintsCommand;
-import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveTopicReifiesConstraintsCommand;
 import de.topicmapslab.tmcledit.model.commands.RenameTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAbstractTopicTypeCommand;
@@ -71,7 +67,6 @@ import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 import de.topicmapslab.tmcledit.model.commands.SetOverlapCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeIdentifiersCommand;
 import de.topicmapslab.tmcledit.model.commands.SetTopicTypeLocatorsCommand;
-import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.dialogs.StringListSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.SubjectIdentifierListDialog;
 import de.topicmapslab.tmcledit.model.dialogs.TopicSelectionDialog;
@@ -102,14 +97,27 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 	private TypedCardinalityConstraintWidget reifiesControl;
 	private boolean showError;
 
+	/**
+	 * Constructor
+	 */
 	public TopicTypePage() {
 		super("topic type");
 	}
 
+	/**
+	 * Construcor
+	 * @param id the id of the page
+	 */
 	public TopicTypePage(String id) {
 		super(id);
 	}
 
+	/**
+	 * Creates the page with all the controls
+	 * 
+	 * @param parent the parent widget
+	 * @return the container of all widgets
+	 */
 	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 
@@ -315,10 +323,17 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		item.setControl(createPage(folder));
 	}
 
+	/**
+	 * @return the {@link CTabItem} for the widget
+	 */
 	public CTabItem getItem() {
 		return item;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	public void notifyChanged(Notification notification) {
 		if (notification.getEventType() == Notification.REMOVING_ADAPTER)
 			return;
@@ -370,7 +385,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		// placeholder
 		toolkit.createComposite(parent);
 
-		reifiesControl = new TypedCardinalityConstraintWidget(parent, toolkit, getCommandStack(), false);
+		reifiesControl = new TypedCardinalityConstraintWidget(parent, toolkit, getCommandStack(), false, false);
 		reifiesControl.setMaxCardinality(1);
 		hookReifierListener();
 	}
@@ -419,28 +434,6 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 				}
 
-			}
-		});
-
-		reifiesControl.getNewButton().addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				NewTopicTypeWizard wizard = new NewTopicTypeWizard(KindOfTopicType.TOPIC_TYPE);
-				WizardDialog dlg = new WizardDialog(reifiesControl.getShell(), wizard);
-
-				if (dlg.open() == Dialog.OK) {
-					CompoundCommand cmd = new CompoundCommand();
-					TopicType tt = wizard.getNewTopicType();
-					cmd.append(new CreateTopicTypeCommand((TopicMapSchema) getCastedModel().eContainer(), tt));
-					TopicReifiesConstraint trc = ModelFactory.eINSTANCE.createTopicReifiesConstraint();
-					trc.setType(tt);
-					trc.setCardMin("0");
-					trc.setCardMax("1");
-					cmd.append(new AddTopicReifiesConstraintsCommand(getCastedModel(), trc));
-					if (cmd.canExecute())
-						getCommandStack().execute(cmd);
-
-				}
 			}
 		});
 
