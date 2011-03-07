@@ -18,3 +18,4 @@ de.topicmapslab.tmcledit.doc/html/*
 glob:onotoa.documentation/build.properties
 de.topicmapslab.tmcledit.doc/toc.xml
 */target
+.recommenders

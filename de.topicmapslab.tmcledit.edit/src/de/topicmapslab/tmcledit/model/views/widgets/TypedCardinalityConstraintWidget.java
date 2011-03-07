@@ -71,6 +71,7 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	private int maxCardinality = -1;
 
 	private boolean createLabel;
+	private boolean createNewButton;
 
 	private CommandStack commandStack;
 	private List<? extends AbstractTypedCardinalityConstraint> input;
@@ -95,10 +96,23 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	 * @param createLabel flag if a label for the widget should be created
 	 */
 	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack,
-	        boolean createLabel) {
+	        boolean createLabel, boolean createNewButton) {
 		this.createLabel = createLabel;
 		this.commandStack = commandStack;
+		this.createNewButton = createNewButton;
 		createControls(parent, toolkit);
+	}
+	
+	/**
+	 * 
+	 * @param parent parent widget
+	 * @param toolkit {@link FormToolkit} 
+	 * @param commandStack the {@link CommandStack} used to execute modification operations
+	 * @param createLabel flag if a label for the widget should be created
+	 */
+	public TypedCardinalityConstraintWidget(Composite parent, FormToolkit toolkit, CommandStack commandStack,
+	        boolean createLabel) {
+		this(parent, toolkit, commandStack, true, true);
 	}
 
 	/**
@@ -194,11 +208,13 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 		selectButton.setAlignment(SWT.LEFT);
 		fac.applyTo(selectButton);
 
-		newButton = toolkit.createButton(comp, "", SWT.PUSH);
-		newButton.setToolTipText("Create a new contraint with a new topic type.");
-		newButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
-		newButton.setAlignment(SWT.LEFT);
-		fac.applyTo(newButton);
+		if (createNewButton) {
+			newButton = toolkit.createButton(comp, "", SWT.PUSH);
+			newButton.setToolTipText("Create a new contraint with a new topic type.");
+			newButton.setImage(ImageProvider.getImage(ImageConstants.NEW));
+			newButton.setAlignment(SWT.LEFT);
+			fac.applyTo(newButton);
+		}
 
 		removeButton = toolkit.createButton(comp, "", SWT.PUSH);
 		removeButton.setToolTipText("Removing the contraints selected in the table.");
@@ -506,7 +522,10 @@ public class TypedCardinalityConstraintWidget extends AdapterImpl {
 	public void setEnabled(boolean enabled) {
 		selectButton.setEnabled(enabled);
 		removeButton.setEnabled(enabled);
-		newButton.setEnabled(enabled);
+		
+		if (createNewButton)
+			newButton.setEnabled(enabled);
+		
 		tableViewer.getControl().setEnabled(enabled);
 		validate();
 	}
