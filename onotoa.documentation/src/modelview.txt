@@ -21,7 +21,7 @@ ifdef::basebackend-docbook[]
 |image:images/viewmenu_button.png[width="0.3cm"]|Open Model View Menu that provides the actions *Create New Detailed Diagram...*, *Create New Domain Diagram...* and *Validate*
 endif::basebackend-docbook[]
 ifndef::basebackend-docbook[]
-|image:images/onotoa_icon.png[width="1cm"]||Validate the current schema
+|image:images/onotoa_icon.png[width="1cm"]|Validate the current schema
 |image:images/synchronize.png[width="1cm"]|Enable / disable Synchronize feature. This will keep the navigation tree synchronized to the selected topic in the diagram 
 |image:images/wordlist/button.png[width="0.3cm"]|Open Wordlist editor (see Chapter 4)
 |image:images/viewmenu_button.png[width="1cm"]|Open Model View Menu that provides the actions *Create New Detailed Diagram...*, *Create New Domain Diagram...* and *Validate*
