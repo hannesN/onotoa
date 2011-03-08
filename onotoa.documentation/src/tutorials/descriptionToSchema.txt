@@ -21,7 +21,7 @@ When we analyse this short statement, we can figure out our two main topics "per
 We recognise that more than one person could work for a company, but one person could not work for more than one company. That point 
 effects the cardinality. In equal measure we handle the other cardinalities: 
 
-[width="50%", cols="^30%,^30%,^40%"]
+[width="50%", cols="^30%,^30%,^40%",options="header"]
 |===========================================
 |Association| Role One| Role Two 
 |work for| employee [1..*]| employer [1..1] 
@@ -43,7 +43,7 @@ Now we are able to associate them to the topics "person" and "company" without t
 === Into Onotoa ===
 
 First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name for the model, e. g.
-"example_domain.ono". To create a new diagram, right click on *Diagram* in the *Model View* and choose *Create New Diagram...* in 
+"example_domain.ono". To create a new diagram, right click on *Diagram* in the *Model View* and choose *Create New Detailed Diagram...* in 
 the context menu.
 After your decision for a diagram name, the _Onotoa_ window should looks like this:  
 
