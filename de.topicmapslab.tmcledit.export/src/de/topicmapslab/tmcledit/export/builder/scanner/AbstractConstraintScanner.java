@@ -21,12 +21,10 @@ import de.topicmapslab.ctm.writer.templates.ITemplateScanner;
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
 import de.topicmapslab.majortom.core.TopicMapSystemFactoryImpl;
 import de.topicmapslab.tmcledit.export.Activator;
-import de.topicmapslab.tmql4j.common.context.TMQLRuntimeProperties;
-import de.topicmapslab.tmql4j.common.core.runtime.TMQLRuntimeFactory;
-import de.topicmapslab.tmql4j.common.model.query.IQuery;
-import de.topicmapslab.tmql4j.common.model.runtime.ITMQLRuntime;
-import de.topicmapslab.tmql4j.resultprocessing.core.simple.SimpleResultSet;
-import de.topicmapslab.tmql4j.resultprocessing.core.simple.SimpleTupleResult;
+import de.topicmapslab.tmql4j.components.processor.runtime.ITMQLRuntime;
+import de.topicmapslab.tmql4j.components.processor.runtime.TMQLRuntimeFactory;
+import de.topicmapslab.tmql4j.path.components.processor.runtime.TmqlRuntime2007;
+import de.topicmapslab.tmql4j.query.IQuery;
 
 /**
  * @author Sven Krosse
@@ -42,12 +40,10 @@ public abstract class AbstractConstraintScanner implements ITemplateScanner {
 			matchings = new HashSet<TemplateMatching>();
 
 			ITMQLRuntime runtime = TMQLRuntimeFactory.newFactory().newRuntime(
-			        new TopicMapSystemFactoryImpl().newTopicMapSystem(), topicMap);
+			        new TopicMapSystemFactoryImpl().newTopicMapSystem(), TmqlRuntime2007.TMQL_2007 );
 
-			runtime.getProperties().setProperty(TMQLRuntimeProperties.RESULT_SET_IMPLEMENTATION_CLASS, SimpleResultSet.class.getName());
-			runtime.getProperties().setProperty(TMQLRuntimeProperties.RESULT_TUPLE_IMPLEMENTATION_CLASS, SimpleTupleResult.class.getName());
 			String query = getQuery();
-			IQuery q = runtime.run(query);
+			IQuery q = runtime.run(topicMap, query);
 			parseResults(q);
 			return matchings;
 

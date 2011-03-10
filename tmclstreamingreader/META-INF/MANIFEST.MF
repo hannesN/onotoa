@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Export-Package: de.topicmapslab.tmcl.loader.util;uses:="de.topicmapsla
+ b.tmcl.loader.listener,de.topicmapslab.tmql4j.components.processor.re
+ sults.model,de.topicmapslab.tmql4j.query,de.topicmapslab.tmql4j.compo
+ nents.processor.runtime.module,de.topicmapslab.tmql4j.components.proc
+ essor.results.tmdm,de.topicmapslab.tmql4j.components.processor.runtim
+ e,org.tmapi.core,de.topicmapslab.tmql4j.exception",de.topicmapslab.tm
+ cl.loader.listener;uses:="org.tmapi.core",de.topicmapslab.tmcl.loader
+ .reader;uses:="org.tmapi.index,org.tmapix.io,de.topicmapslab.tmql4j.c
+ omponents.processor.runtime,org.tmapi.core,de.topicmapslab.tmql4j.exc
+ eption,de.topicmapslab.tmcl.loader.util,de.topicmapslab.tmcl.loader.l
+ istener,de.topicmapslab.tmql4j.components.processor.results.model,de.
+ topicmapslab.tmql4j.query,de.topicmapslab.tmql4j.components.processor
+ .results.tmdm"
+Bundle-ActivationPolicy: lazy
+Bundle-Version: 1.0.0.201103101207
+Tool: Bnd-1.15.0
+Bundle-Name: TMCL Streaming Reader
+Bnd-LastModified: 1299755234348
+Created-By: 1.6.0_24 (Sun Microsystems Inc.)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: de.topicmapslab.tmcl.streamingreader
+Import-Package: de.topicmapslab.tmql4j.components.processor.results.mo
+ del,de.topicmapslab.tmql4j.components.processor.results.tmdm,de.topic
+ mapslab.tmql4j.components.processor.runtime,de.topicmapslab.tmql4j.co
+ mponents.processor.runtime.module,de.topicmapslab.tmql4j.exception,de
+ .topicmapslab.tmql4j.path.components.processor.runtime,de.topicmapsla
+ b.tmql4j.query,org.tmapi.core;version="2.0.3",org.tmapi.index;version
+ ="2.0.3",org.tmapix.io
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+

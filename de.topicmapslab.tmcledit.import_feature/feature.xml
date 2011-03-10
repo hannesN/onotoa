@@ -204,6 +204,7 @@ litigation.
       <import plugin="de.topicmapslab.majortom.inmemory" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="de.topicmapslab.majortom.model" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="de.topicmapslab.tmql4j" version="2.6.5" match="greaterOrEqual"/>
+      <import plugin="de.topicmapslab.tmcl.streamingreader"/>
    </requires>
 
    <plugin

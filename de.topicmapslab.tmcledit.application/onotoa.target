@@ -48,6 +48,7 @@
 <unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2.201103091629"/>
 <unit id="cern.jet.random_feature.feature.group" version="0.9.0"/>
 <unit id="org.apache.commons_feature.feature.group" version="1.0.0.201102071640"/>
+<unit id="org.codehaus.jackson.mapper.asl_feature.feature.group" version="1.6.1"/>
 <unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
 <unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
 <unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201103011055"/>
@@ -59,7 +60,7 @@
 <unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
 <unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
 <unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
-<unit id="de.topicmapslab.tmql4j_feature.feature.group" version="2.6.5"/>
+<unit id="de.topicmapslab.tmql4j3_1_feature.feature.group" version="3.1.0.201103091333"/>
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.9.201102071552"/>
 <unit id="org.apache.velocity.feature.group" version="1.7.0"/>
 <repository location="http://update.topicmapslab.de"/>

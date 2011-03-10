@@ -88,7 +88,7 @@ public class RolesTest extends AbstractImportTest {
 		ModelIndexer.createInstance(getFile());
 		
 		EList<AssociationTypeConstraint> atcList = getFile().getTopicMapSchema().getAssociationTypeConstraints();
-		assertEquals(1, atcList.size());
+		assertEquals(2, atcList.size());
 		
 		List<AssociationType> associationTypes = ModelIndexer.getTopicIndexer().getAssociationTypes();
 		
