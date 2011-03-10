@@ -16,8 +16,8 @@ import org.tmapi.core.Construct;
 import org.tmapi.core.Topic;
 
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
-import de.topicmapslab.tmql4j.common.model.query.IQuery;
-import de.topicmapslab.tmql4j.resultprocessing.model.IResult;
+import de.topicmapslab.tmql4j.components.processor.results.model.IResult;
+import de.topicmapslab.tmql4j.query.IQuery;
 
 /**
  * @author Hannes Niederhausen
