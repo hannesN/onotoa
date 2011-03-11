@@ -11,7 +11,9 @@
 package de.topicmapslab.tmcledit.export.builder.scanner;
 
 import java.util.Collection;
+import java.util.List;
 
+import org.tmapi.core.Construct;
 import org.tmapi.core.Topic;
 
 import de.topicmapslab.ctm.writer.templates.TemplateMatching;
@@ -28,22 +30,27 @@ public class HasOccurrenceScanner extends AbstractConstraintScanner {
 	protected void parseResults(IQuery q) {
 	    for (IResult result : q.getResults()) {
 	    	TemplateMatching matching = new TemplateMatching();
-	    	matching.setContext((Topic) result.getResults().get(0));
-	    	matching.addArgument(result.getResults().get(1));
-	    	matching.addArgument(result.getResults().get(2));
-	    	matching.addArgument(result.getResults().get(3));
+	    	matching.setContext((Topic) ((List<?>) result.getResults().get(0)).get(0));
+	    	matching.addArgument(((List<?>) result.getResults().get(1)).get(0));
+	    	matching.addArgument(((List<?>) result.getResults().get(2)).get(0));
+	    	matching.addArgument(((List<?>) result.getResults().get(2)).get(0));
 	    	matching.addAffectedConstruct((Topic) result.getResults().get(4));
-	    	addAffectedConstructs((Collection<?>) result.get(5), matching);
+	    	Object res5 = result.get(5);
+	    	if (res5 instanceof Collection<?>)
+	    		addAffectedConstructs((Collection<?>) res5, matching);
+	    	else
+	    		matching.addAffectedConstruct((Construct) res5);
 			
 	    	addMatching(matching);
 	    }
     }
 	
 	protected String getQuery() {
-		String query = "FOR $c IN // tmcl:topic-occurrence-constraint "
+		String query = TMCLPREFIX+"FOR $c IN // tmcl:topic-occurrence-constraint "
+				+ "group by $4 "
 		        + "RETURN  ( $c >> traverse tmcl:constrained-topic-type, "
 		        + "$c >> traverse tmcl:constrained-statement, "
-		        + "$c  / tmcl:card-min || \"0\" , $c / tmcl:card-max || \"*\" , $c, $c << players)";
+		        + "$c  / tmcl:card-min || \"0\" , $c / tmcl:card-max || \"*\" , $c, $c << players << roles)";
 		return query;
 	}
 

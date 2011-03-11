@@ -53,7 +53,7 @@ public class HasRoleScanner extends AbstractConstraintScanner {
 	 */
 	@Override
 	protected String getQuery() {
-		return "FOR $c IN // tmcl:association-role-constraint " +
+		return TMCLPREFIX+"FOR $c IN // tmcl:association-role-constraint " +
 				"RETURN (" +
 				"$c >> traverse tmcl:constrained-statement, " +
 				"$c >> traverse tmcl:constrained-role, " +

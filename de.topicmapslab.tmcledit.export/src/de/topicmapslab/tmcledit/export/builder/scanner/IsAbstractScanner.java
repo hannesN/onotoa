@@ -44,7 +44,7 @@ public class IsAbstractScanner extends AbstractConstraintScanner {
 	 */
 	@Override
 	protected String getQuery() {
-		return "FOR $c IN // tmcl:abstract-constraint " +
+		return TMCLPREFIX+"FOR $c IN // tmcl:abstract-constraint " +
 			   "RETURN $c >> traverse tmcl:constrained-topic-type, " +
 			   "$c, " +
 			   "$c << players";

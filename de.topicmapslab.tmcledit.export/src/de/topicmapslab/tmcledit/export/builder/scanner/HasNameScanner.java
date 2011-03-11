@@ -39,7 +39,7 @@ public class HasNameScanner extends AbstractConstraintScanner {
 	}
 
 	protected String getQuery() {
-		String query = "FOR $c IN // tmcl:topic-name-constraint "
+		String query = TMCLPREFIX+"FOR $c IN // tmcl:topic-name-constraint "
 		        + "RETURN  ( $c >> traverse tmcl:constrained-topic-type, "
 		        + "$c >> traverse tmcl:constrained-statement, "
 		        + "$c  / tmcl:card-min || \"0\" , $c / tmcl:card-max || \"*\" , $c, $c << players)";

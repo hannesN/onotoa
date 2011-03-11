@@ -37,7 +37,7 @@ public class OccurrenceDatatypeScanner extends AbstractConstraintScanner {
     }
 	
 	protected String getQuery() {
-		String query = "FOR $c IN // tmcl:occurrence-datatype-constraint "
+		String query = TMCLPREFIX+"FOR $c IN // tmcl:occurrence-datatype-constraint "
 		        + "RETURN  ( $c >> traverse tmcl:constrained-statement, "
 		        + "$c / tmcl:datatype || \"http://www.w3.org/2001/XMLSchema#anyType\" , "
 		        + "$c, " 
