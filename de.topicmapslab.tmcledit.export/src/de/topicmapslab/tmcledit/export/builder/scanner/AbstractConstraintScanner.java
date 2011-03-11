@@ -33,6 +33,8 @@ import de.topicmapslab.tmql4j.query.IQuery;
  */
 public abstract class AbstractConstraintScanner implements ITemplateScanner {
 
+	protected static String TMCLPREFIX = "%prefix tmcl http://psi.topicmaps.org/tmcl/ ";
+	
 	private Set<TemplateMatching> matchings;
 
 	public Set<TemplateMatching> getAdaptiveConstructs(TopicMap topicMap) {

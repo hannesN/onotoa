@@ -221,13 +221,12 @@ litigation.
    </plugins>
 
    <features>
-      <feature id="de.topicmapslab.onotoa.aranuka.codegen_feature"/>
+      <feature id="de.topicmapslab.tmql4j3_1_feature" version="3.1.0.201103091333"/>
       <feature id="com.sun.codemodel_feature" version="2.4.0"/>
       <feature id="de.topicmapslab.aranuka.majortom_feature"/>
       <feature id="de.topicmapslab.aranuka_feature"/>
       <feature id="de.topicmapslab.ctmwriter_feature"/>
       <feature id="de.topicmapslab.maiana.io_feature"/>
-      <feature id="de.topicmapslab.tmql4j_feature" version="2.6.5"/>
       <feature id="org.tmapix_feature" version="1.0.0"/>
       <feature id="com.mysql.jdbc_feature" version="5.1.13"/>
       <feature id="net.sf.json_feature" version="2.3.0"/>
@@ -244,12 +243,14 @@ litigation.
       <feature id="org.eclipse.nebula.widgets.cdatetime.feature" version="0.14.0"/>
       <feature id="org.eclipse.rcp" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
       <feature id="org.eclipse.gef" version="3.6.1.v20100908-1100-777B181A3Bz-6B663E7974242"/>
-      <feature id="de.topicmapslab.genericeditorsdk.codegenerator_feature"/>
       <feature id="de.topicmapslab.kuria_feature"/>
       <feature id="org.eclipse.gmf.runtime.thirdparty" version="1.4.0.v20100521-1113-7P8W5FHV2CNOiy0niXURaw311A16"/>
       <feature id="org.eclipse.help" version="1.2.0.v20100427-7e7jEQFEp4jsWcboLU9l93"/>
       <feature id="cern.jet.random_feature" version="0.9.0"/>
       <feature id="de.topicmapslab.majortom_feature"/>
+      <feature id="org.codehaus.jackson.mapper.asl_feature" version="1.6.1"/>
+      <feature id="de.topicmapslab.onotoa.aranuka.codegen_feature"/>
+      <feature id="de.topicmapslab.genericeditorsdk.codegenerator_feature"/>
    </features>
 
    <configurations>

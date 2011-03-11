@@ -47,7 +47,7 @@ public class RoleCombinationScanner extends AbstractConstraintScanner {
 
 	@Override
 	protected String getQuery() {
-		return "FOR $c IN // tmcl:role-combination-constraint " + "RETURN ( "
+		return TMCLPREFIX+"FOR $c IN // tmcl:role-combination-constraint " + "RETURN ( "
 		        + "$c >> traverse tmcl:constrained-statement, " + "$c >> traverse tmcl:constrained-role, "
 		        + "$c >> traverse tmcl:constrained-topic-type, " + "$c >> traverse tmcl:other-constrained-role, "
 		        + "$c >> traverse tmcl:other-constrained-topic-type, " + "$c, " + "$c << players )";

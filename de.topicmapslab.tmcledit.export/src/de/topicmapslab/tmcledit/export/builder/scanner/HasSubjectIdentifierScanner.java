@@ -39,7 +39,7 @@ public class HasSubjectIdentifierScanner extends AbstractConstraintScanner {
     }
 	
 	protected String getQuery() {
-		String query = "FOR $c IN // tmcl:subject-identifier-constraint "
+		String query = TMCLPREFIX+"FOR $c IN // tmcl:subject-identifier-constraint "
 		        + "RETURN  ( $c >> traverse tmcl:constrained-topic-type, "
 		        + "$c  / tmcl:card-min || \"0\" , " 
 		        + "$c / tmcl:card-max || \"*\" , " 

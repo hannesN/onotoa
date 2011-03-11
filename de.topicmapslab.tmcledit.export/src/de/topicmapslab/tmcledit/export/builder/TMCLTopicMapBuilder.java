@@ -674,11 +674,7 @@ public class TMCLTopicMapBuilder {
 			}
 		}
 
-		// add types
-		Topic typeTopic = getTopicType(type.getKind());
-		if (typeTopic != null)
-			t.addType(typeTopic);
-
+		
 		for (TopicType tt : type.getIsa()) {
 			t.addType(createTopic(tt));
 		}
@@ -690,6 +686,11 @@ public class TMCLTopicMapBuilder {
 		if (exportTopicTypesOnly)
 			return t;
 
+		// add tmcl type 
+		Topic typeTopic = getTopicType(type.getKind());
+		if (typeTopic != null)
+			t.addType(typeTopic);
+		
 		// creating doc occs
 		addDocumentationOccurrences(t, type);
 

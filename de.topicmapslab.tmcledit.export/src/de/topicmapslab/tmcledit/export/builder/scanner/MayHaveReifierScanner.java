@@ -39,7 +39,7 @@ public class MayHaveReifierScanner extends AbstractConstraintScanner {
 
 	@Override
     protected String getQuery() {
-	    return "FOR $c IN // tmcl:reifier-constraint "
+	    return TMCLPREFIX+"FOR $c IN // tmcl:reifier-constraint "
 	    + "WHERE ( $c / tmcl:card-min == \"0\"^^xsd:int AND $c / tmcl:card-max == \"1\"^^xsd:int ) "
 		+ "RETURN ( "
 		+ "$c >> traverse tmcl:constrained-statement, "

@@ -192,23 +192,6 @@ Each party waives itsrights to a jury trial in any resulting
 litigation.
    </license>
 
-   <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="de.topicmapslab.tmcledit" version="1.1.2" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.tmcledit.export" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="org.tmapi" version="2.0.2" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.majortom.core" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.majortom.model" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.tmcledit.edit" version="1.1.2" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.aranuka_kuria.codegenerator" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.kuria.annotation" version="1.0.1" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.kuria.runtime" version="1.0.1" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.kuria.swtgenerator" version="1.0.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.forms" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="de.topicmapslab.aranuka.runtime"/>
-   </requires>
-
    <plugin
          id="de.topicmapslab.onotoa.aranuka.codegen"
          download-size="0"

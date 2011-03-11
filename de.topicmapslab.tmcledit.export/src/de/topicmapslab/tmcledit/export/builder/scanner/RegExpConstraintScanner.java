@@ -39,7 +39,7 @@ public class RegExpConstraintScanner extends AbstractConstraintScanner {
 
 	@Override
     protected String getQuery() {
-	    return "FOR $c IN //tmcl:regular-expression-constraint "
+	    return TMCLPREFIX+"FOR $c IN //tmcl:regular-expression-constraint "
 		 	 + "RETURN ($c >> traverse tmcl:constrained-statement, " 
 			 + "$c / tmcl:regexp || \".*\", $c, $c << players)";
     }

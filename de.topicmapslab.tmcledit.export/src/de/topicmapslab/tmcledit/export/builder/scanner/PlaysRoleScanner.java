@@ -54,7 +54,7 @@ public class PlaysRoleScanner extends AbstractConstraintScanner {
 	 */
 	@Override
 	protected String getQuery() {
-		return "FOR $c IN // tmcl:topic-role-constraint " +
+		return TMCLPREFIX+"FOR $c IN // tmcl:topic-role-constraint " +
 				"RETURN (" +
 				"$c >> traverse tmcl:constrained-topic-type, " +
 				"$c >> traverse tmcl:constrained-role, " +

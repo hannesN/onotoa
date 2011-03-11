@@ -47,7 +47,7 @@ public class HasScopeScanner extends AbstractConstraintScanner {
 
 	@Override
 	protected String getQuery() {
-		return  "FOR $c IN // tmcl:scope-constraint " +
+		return  TMCLPREFIX+"FOR $c IN // tmcl:scope-constraint " +
 				"RETURN ( " +
 				"$c >> traverse tmcl:constrained-statement, " +
 				"$c >> traverse tmcl:constrained-scope, " +

@@ -41,7 +41,7 @@ public class IsUniqueScanner extends AbstractConstraintScanner {
 
 	@Override
 	protected String getQuery() {
-		return "FOR $c IN // tmcl:unique-value-constraint " +
+		return TMCLPREFIX+"FOR $c IN // tmcl:unique-value-constraint " +
 			   "RETURN $c >> traverse tmcl:constrained-statement, " +
 			   "$c, " +
 			   "$c << players";

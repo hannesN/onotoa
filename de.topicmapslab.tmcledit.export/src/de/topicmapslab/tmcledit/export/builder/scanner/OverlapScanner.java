@@ -45,10 +45,10 @@ public class OverlapScanner extends AbstractConstraintScanner {
 	 */
 	@Override
 	protected String getQuery() {
-		return "FOR $c IN // tmcl:overlap-declaration " +
+		return TMCLPREFIX+"FOR $c IN // tmcl:overlap-declaration " +
 			   "RETURN $c >> traverse tmcl:overlaps[0], " +
 			   "$c >> traverse tmcl:overlaps[1], " +
-			   "$c, $c << players";
+			   "$c, $c << players << roles";
 	}
 
 }

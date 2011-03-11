@@ -195,26 +195,26 @@ public class TMCLTemplateDefinitions {
 		templates = new ArrayList<Template>();
 
 		addOverlaps();
-		addHasSubjectIdentifier();
-		addHasItemIdentifier();
-		addHasSubjectLocator();
-		addHasName();
+//		addHasSubjectIdentifier();
+//		addHasItemIdentifier();
+//		addHasSubjectLocator();
+//		addHasName();
 		addHasOccurrence();
-		addPlaysRole();
-		addHasScope();
-		addMustHaveReifier();
-		addCannotHaveReifier();
-		addMayHaveReifier();
-		addMustReify();
-		addCannotReify();
-		addMayReify();
-		addHasRole();
-		addRoleCombination();
-		addHasDatatype();
-		addIsUnique();
-		addIsAbstract();
-		addMatchesRegExp();
-		addBelongsTo();
+//		addPlaysRole();
+//		addHasScope();
+//		addMustHaveReifier();
+//		addCannotHaveReifier();
+//		addMayHaveReifier();
+//		addMustReify();
+//		addCannotReify();
+//		addMayReify();
+//		addHasRole();
+//		addRoleCombination();
+//		addHasDatatype();
+//		addIsUnique();
+//		addIsAbstract();
+//		addMatchesRegExp();
+//		addBelongsTo();
 	}
 
 	private void initTypes() {
