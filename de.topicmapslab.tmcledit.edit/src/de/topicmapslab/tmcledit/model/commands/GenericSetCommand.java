@@ -14,6 +14,12 @@ import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+/**
+ * This command is used to set a value using the EMF feature IDs
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class GenericSetCommand extends AbstractCommand {
 
 	private final int featureID;
@@ -24,7 +30,13 @@ public class GenericSetCommand extends AbstractCommand {
 	private EStructuralFeature feature;
 	
 	
-	
+	/**
+	 * Constructor
+	 * 
+	 * @param model the parent model
+	 * @param featureID the feature id of the attribute
+	 * @param newValue the new value
+	 */
 	public GenericSetCommand(EObject model, int featureID, Object newValue) {
 		super();
 		this.model = model;

@@ -22,6 +22,8 @@ import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 
 /**
+ * Command to remove a list of role combination constraints
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -31,6 +33,11 @@ public class RemoveRoleCombinationConstraintCommand extends AbstractCommand {
 
 	private List<RoleCombinationConstraint> oldConstraintList;
 	
+	/**
+	 * Constructor
+	 * @param assType the type containing the role combination constraint
+	 * @param constraintList a list of new role combination constraints
+	 */
 	public RemoveRoleCombinationConstraintCommand(AssociationType assType,
 			List<RoleCombinationConstraint> constraintList) {
 		super();
