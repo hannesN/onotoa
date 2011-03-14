@@ -27,6 +27,7 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.ScopeConstraint;
@@ -36,6 +37,12 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Command which deletes a topic type and all constraints which use it.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class DeleteTopicTypeCommand extends AbstractCommand {
 
 	private final TopicType topicType;
@@ -49,15 +56,30 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 	private CompoundCommand cmds = new CompoundCommand();
 		
+	/**
+	 * Constructor
+	 * 
+	 * @param topicType the topic type to delete
+	 */
 	public DeleteTopicTypeCommand(TopicType topicType) {
 		this(topicType, false);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param topicType the topic type to delete
+	 * @param ignoreConstraints flag whether to delete all constraints
+	 */
 	public DeleteTopicTypeCommand(TopicType topicType, boolean ignoreConstraints) {
 		this.topicType = topicType;
 		this.ignoreConstraints = ignoreConstraints;
 	}
 
+	/**
+	 * 
+	 * {inheritDoc}
+	 */
 	public void execute() {
 		
 		prepare();
@@ -140,10 +162,28 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		prepareAssociationCommandsList();
 
 		prepareScopeConstraintCommandList();
+		
+		prepareRoleCombinationConstraintList();
 
 		isPrepared = true;
 
-		return true;
+		return cmds.canExecute();
+	}
+
+	private void prepareRoleCombinationConstraintList() {
+		for (AssociationType at : ModelIndexer.getTopicIndexer().getAssociationTypes()) {
+			List<RoleCombinationConstraint> rccList = new ArrayList<RoleCombinationConstraint>();
+
+			for (RoleCombinationConstraint rcc : at.getRoleCombinations()) {
+				if ((topicType.equals(rcc.getPlayer())) || (topicType.equals(rcc.getOtherPlayer()))
+				        || (topicType.equals(rcc.getRole())) || (topicType.equals(rcc.getOtherRole()))) {
+
+					rccList.add(rcc);
+				}
+			}
+			this.cmds.append(new RemoveRoleCombinationConstraintCommand(at, rccList));
+		}
+
 	}
 
 	private void prepareAssociationCommandsList() {
@@ -188,7 +228,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 			}
 		}
-
+		
 	}
 
 	/**
@@ -292,7 +332,7 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 		return typeNodeList;
     }
 	
-	public Map<Diagram, List<Edge>> getEdgeMap() {
+	private Map<Diagram, List<Edge>> getEdgeMap() {
 		if (edgeMap == null)
 			return Collections.emptyMap();
 		return edgeMap;
