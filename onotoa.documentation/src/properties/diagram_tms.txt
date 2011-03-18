@@ -1,4 +1,4 @@
-=== Diagram ===
+=== Detailed Diagram ===
 
 The diagram has only one property:
 
@@ -14,7 +14,7 @@ image::images/diagram_pp.png[scaledwidth="100%"]
 
 === Domain Diagram ===
 
-Similiar to the diagram the domain diagram has only one property:
+Similiar to the detailed diagram the domain diagram has only one property:
 
 * *Name*: The name is an unique identifier in a schema, which means you can not create two diagrams with the same name.
 

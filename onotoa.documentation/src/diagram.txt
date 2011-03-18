@@ -14,7 +14,7 @@ include::diagram/export.txt[]
 
 == The Domain Diagram Editor ==
 
-The *Diagram Editor* should be the editors first choice to create and modify a Topic Maps schema. It displays detailed informations 
+The *Detailed Diagram Editor* should be the editors first choice to create and modify a Topic Maps schema. It displays detailed informations 
 about the schema and represents an exact graphical representation. 
 
 The *Domain Diagram Editor* presents the informations in an abstract way without the loss of important information. Because of this it is predestined 
@@ -28,7 +28,7 @@ fast and easy way. The following information does not appear in the diagram:
 
 Look at the images below to see the differences.
 
-.Diagram of a schema
+.Detailed Diagram
 [[ex_diagram_view]]
 image::images/example_diagram_view.png[scaledwidth="100%"]
 
@@ -36,7 +36,7 @@ image::images/example_diagram_view.png[scaledwidth="100%"]
 [[ex_domain_diagram_view]]
 image::images/example_domain_diagram_view.png[scaledwidth="100%"]
 
-The *Palette* of the *Domain Diagram Editor* also differs from the one of the *Diagram Editor*. Some constraints, types and the *Is A...* relation
+The *Palette* of the *Domain Diagram Editor* also differs from the one of the *Detailed Diagram Editor*. Some constraints, types and the *Is A...* relation
 are absent to simplify the menu. There is no loss of complexity. All missing properties are still available and modifiable 
 in the *Property Detail View* below the diagram but this is not the recommended way to use the *Domain Diagram Editor*. 
 
@@ -44,7 +44,7 @@ in the *Property Detail View* below the diagram but this is not the recommended 
 [[domain_diagram_palette]]
 image::images/domain_diagram_palette.png[scaledwidth="35%"]
 
-In contrast to the *Diagram Editor*, two additional operations are directly available by the use of the context menu:
+In contrast to the *Detailed Diagram Editor*, two additional operations are directly available by the use of the context menu:
 
 * Add and remove picture (see below)
 * Set and create new roles for an association
@@ -143,11 +143,11 @@ Another change is, that the creation of a constraint automatically creates a typ
 If a typing topic should be used which already exists, it is possible to select it in the context menu. After choosing an existing type, the new created type will be deleted.
 
 
-=== Interaction between Diagram and Domain Diagram ===
+=== Interaction between Detailed Diagram and Domain Diagram ===
 
 Every newly created diagram is reachable by its respective named tab at the top of the main editor window. 
 
-_Onotoa_ provides the exchange of elements between a *Domain Diagram Editor* and the *Diagram Editor*. There are two different methods to perform this exchange 
+_Onotoa_ provides the exchange of elements between a *Domain Diagram Editor* and the *Detailed Diagram Editor*. There are two different methods to perform this exchange 
 as you can see in the context menu of every Topic type:
 
 .Move and Copy

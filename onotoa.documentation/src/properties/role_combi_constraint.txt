@@ -29,7 +29,7 @@ The properties of the {rcc} are:
 .Property Page for {rcc}
 image::images/role_comb_constr_pp.png[scaledwidth="100%"]
 
-To add a new {rcc} press the *Add...* button and fill out the prompted dialogue.
+To add a new {rcc} press the image:images/documentation/search/buttons/new.png[] button and fill out the prompted dialogue.
 
 .Dialogue to create a new {rcc}
 image::images/role_comb_constr_dialog.png[scaledwidth="60%", align="center"]

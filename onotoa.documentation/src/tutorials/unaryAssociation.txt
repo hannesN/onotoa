@@ -46,7 +46,7 @@ image::images/documentation/unary_association/new_asso_type.png[scaledwidth="50%
 
 An association needs roles and we have to define them. In this case it is only one. Click on the graphical representation 
 of the association to reach their property page. Click on the tab "Association Type" scroll down to the *roles* entry.
-At the right hand side is the *New...* button the create roles. Click on it and type "single" as name in the following 
+At the right hand side is the image:images/documentation/search/buttons/new.png[] button the create roles. Click on it and type "single" as name in the following 
 dialogue. The new role will appear in the property page. 
 
 
