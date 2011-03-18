@@ -130,4 +130,3 @@ them before in the Domain Diagram.
 [[dd_normal_diagram]]
 image::images/documentation/domain_diagram/normal_diagram.png[scaledwidth="100%"]
 
-NOTE: The position of the diagram elements could varies after the move / copy operation. 
