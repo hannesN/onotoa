@@ -184,7 +184,7 @@ public class AnnotationWidget extends Composite {
 		tvc.setLabelProvider(new KeyLabelProvider());
 		tvc.setEditingSupport(new KeyEditingSupport(viewer));
 		TableColumn tc = tvc.getColumn();
-		tc.setText("Annotation");
+		tc.setText("Key");
 		layout.setColumnData(tc, new ColumnWeightData(1));
 
 		tvc = new TableViewerColumn(viewer, SWT.NONE);

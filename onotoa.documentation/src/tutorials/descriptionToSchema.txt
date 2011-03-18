@@ -107,7 +107,7 @@ generated.
 image::images/documentation/description_to_schema/create_association_type.png[scaledwidth="100%"] 
 
 An association demands for roles and these are "employer" and "employee". We search for the *roles* entry in the tap *Association Type* in the 
-"Property Details View". There we create a new one by clicking on the *New...* button. Choose "employer" as name an repeat the whole
+"Property Details View". There we create a new one by clicking on the image:images/select_icon.png[] button. Choose "employer" as name an repeat the whole
 procedure for "employee". More than one person could work for a company, so we change the employees *cardMax* value from 1 to *.
 
 .Create Roles

@@ -65,7 +65,7 @@ _Onotoa_ update site (http://onotoa.topicmapslab.de/update).
 
 The Java Runtime Environment Version 5.0 must be installed to 
 run _Onotoa_. The latest Java Version can be downloaded for free from
-http://java.sun.com.
+http://www.oracle.com/technetwork/java/index.html.
 
 TIP: You can check the your java version by opening a shell and enter 'java 
 -version'. Windows(TM) user open the shell by executing the command 'cmd'.
@@ -73,8 +73,8 @@ TIP: You can check the your java version by opening a shell and enter 'java
 === Using the stand-alone version of _Onotoa_ ===
 
 _Onotoa_ does not come with an installer. You just need to download the file for 
-your system. For Windows(TM) you'll need "onotoa-1.1.0-win32.win32.x86.zip" will be required. 
-If you have a 64bit Windows(TM) you will have to download "onotoa-1.1.0-win32.win32.x86_64.zip".
+your system. For Windows(TM) you'll need "onotoa-1.1.1-win32.win32.x86.zip" will be required. 
+If you have a 64bit Windows(TM) you will have to download "onotoa-1.1.1-win32.win32.x86_64.zip".
 
 After downloading the file for your system you will have to unzip it. The zip 
 file contains a folder named "onotoa", so it is not necessary to

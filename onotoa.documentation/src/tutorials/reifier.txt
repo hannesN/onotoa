@@ -47,7 +47,7 @@ image::images/documentation/reifier/editor_view_1.png[scaledwidth="70%"]
 
 As next step we will create the occurrence "homepage". Therefore right click on the "company" topic and select the entry *Add Occurrence Constraint* 
 in the context menu. Now we must create and set the specific Occurrence Type. Create a new one by the use of the *Model View* and name it "homepage". 
-Switch to the property page of the Occurrence Constraint and click on the *...* button at the left hand side to set the type. A list of all available 
+Switch to the property page of the Occurrence Constraint and click on the image:images/select_icon.png[] button at the left hand side to set the type. A list of all available 
 types appears and we choose our only existing one: "homepage". 
 
 Now we take hand on the reifier constraint. All necessary settings can be done in the *Property Details View*. We start with the topic "person" and wanted to set 
