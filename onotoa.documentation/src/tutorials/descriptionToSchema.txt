@@ -51,7 +51,7 @@ After your decision for a diagram name, the _Onotoa_ window should looks like th
 [[dom_create_model_diagram]]
 image::images/documentation/description_to_schema/create_model_diagram.png[scaledwidth="100%"]
 
-We start with the creation of the topics "company" and "person". On the left side of the _Onotoa_ window you can see a box, 
+We start with the creation of the topics "company" and "person". On the right side of the _Onotoa_ window you can see a box, 
 the so called *Palette*. You can add anything in this box by drag and drop into the diagram. Press and hold left mouse button 
 on *Topic Types*, move the cursor into the diagram and release the button and a yellow box will appear. At the bottom of the window 
 is the "Property Details View". There you can modify the properties of a topic. We need to change the name, 
@@ -94,7 +94,7 @@ image::images/documentation/description_to_schema/select_datatype.png[scaledwidt
 
 NOTE: You can specify valid names by the use of regular expressions.
 
-After this is done we repeat this procedure to create the "given name" occurrence for "person" and the "name" occurrence" for "company". 
+After this is done we repeat this procedure to create the "given name" occurrence for "person" and the "name" occurrence for "company". 
 But set the cardinality in this two cases to "1..1", because this is exactly we want it to be.
 
 A person works for a company. To figure this out, we create the association "works for". Drag an drop an new *Association Constraint* from the 
@@ -174,7 +174,7 @@ their cardinality:
 |lives in|inhabitant [1..*]|place [1..1]
 |located in|locatee [1..1]|location [1..1]
 |===========================================
-After this, your _Onotoa_ window should looks like these and we completed the tutorial:  
+After this, your _Onotoa_ window should looks like this and we completed the tutorial:  
 
 .Final Onotoa screen
 [[dom_final_screen]]

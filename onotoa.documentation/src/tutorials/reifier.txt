@@ -29,7 +29,7 @@ After your decision for a diagram name, the _Onotoa_ window should looks like th
 
 .Onotoa 
 [[ref_create_model_diagram]]
-image::images/documentation/reifier/create_model_diagram.png[scaledwidth="50%"]
+image::images/documentation/reifier/create_model_diagram.png[scaledwidth="100%"]
 
 Let us start with the reifier topic. Open the context of the node *TopicTypes* in the *Model View* at the right hand side of the _Onotoa_ window and choose 
 *Create TopicType...* . Type "person" in the following dialogue to finish our first topic. Create the "company" topic in the same way. 
@@ -54,6 +54,8 @@ Now we take hand on the reifier constraint. All necessary settings can be done i
 the topic this one will reifies. Click on the graphical representation to get access to its property page and scroll down to the section *reifies*. Click on 
 the add button and _Onotoa_ provides all possible topics in a list. Select "homepage" and confirm your choice.
 
-/// a picture should be right here but bug #32 is not fixed at this moment.
+.Reified Type
+[[ref_select_reified_type]]
+image::images/documentation/reifier/reifies.png[scaledwidth="70%"]
 
 The final step will be to define that 
