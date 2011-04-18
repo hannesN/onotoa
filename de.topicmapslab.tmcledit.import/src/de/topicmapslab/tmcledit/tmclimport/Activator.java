@@ -1,5 +1,6 @@
 package de.topicmapslab.tmcledit.tmclimport;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -56,6 +57,16 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+	
+	/**
+	 * logs the given exception as error
+	 * 
+	 * @param e
+	 *            the exception to log
+	 */
+	public static void logException(Throwable e) {
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "An error occurred:", e));
 	}
 
 	/**
