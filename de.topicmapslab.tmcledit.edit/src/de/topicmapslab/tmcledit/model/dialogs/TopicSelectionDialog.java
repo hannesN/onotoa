@@ -62,6 +62,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 	private ListViewer selectedTopicList;
 
 	private TopicType workingTopicType;
+	private boolean showWorkingTopicType;
 
 	private KindOfTopicType kind;
 
@@ -74,23 +75,32 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 	/**
 	 * Constructor
 	 * 
-	 * @param parentShell parent shell
-	 * @param workingTopicType type which will be modified with the selected types, e.g. isa associtioan
+	 * @param parentShell
+	 *            parent shell
+	 * @param workingTopicType
+	 *            type which will be modified with the selected types, e.g. isa
+	 *            associtioan
 	 */
-	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType) {
-		this(parentShell, workingTopicType, KindOfTopicType.TOPIC_TYPE);
+	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType, boolean showWorkingTopicType) {
+		this(parentShell, workingTopicType, showWorkingTopicType, KindOfTopicType.TOPIC_TYPE);
 	}
 
 	/**
 	 * Constructor
 	 * 
-	 * @param parentShell parent shell
-	 * @param workingTopicType type which will be modified with the selected types, e.g. isa associtioan
-	 * @param kind kind of topic of the porposals
+	 * @param parentShell
+	 *            parent shell
+	 * @param workingTopicType
+	 *            type which will be modified with the selected types, e.g. isa
+	 *            associtioan
+	 * @param kind
+	 *            kind of topic of the porposals
 	 */
-	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType, KindOfTopicType kind) {
+	public TopicSelectionDialog(Shell parentShell, TopicType workingTopicType, boolean showWorkingTopicType,
+	        KindOfTopicType kind) {
 		super(parentShell);
 		this.workingTopicType = workingTopicType;
+		this.showWorkingTopicType = showWorkingTopicType;
 		this.kind = kind;
 	}
 
@@ -106,7 +116,15 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 		availableTopicList.getList().setLayoutData(gd);
 		availableTopicList.setContentProvider(new ArrayContentProvider());
 		availableTopicList.setLabelProvider(new TopicLableProvider());
-		availableTopicList.setInput(ModelIndexer.getTopicIndexer().getTopicTypes());
+
+		if (showWorkingTopicType)
+			availableTopicList.setInput(ModelIndexer.getTopicIndexer().getTopicTypes());
+		else {
+			List<TopicType> inputList = new ArrayList<TopicType>(ModelIndexer.getTopicIndexer().getTopicTypes());
+			inputList.remove(workingTopicType);
+			availableTopicList.setInput(inputList);
+		}
+
 		availableTopicList.addDoubleClickListener(new IDoubleClickListener() {
 
 			public void doubleClick(DoubleClickEvent event) {
@@ -125,8 +143,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 
 				if (selectedTopics.contains(element))
 					return false;
-				if (element.equals(workingTopicType))
-					return false;
+
 				return true;
 			}
 
@@ -278,6 +295,7 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 
 	/**
 	 * The list of selected topics
+	 * 
 	 * @return
 	 */
 	public List<TopicType> getSelectedTopics() {
@@ -285,8 +303,10 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 	}
 
 	/**
-	 * Sets the  initial selected topics 
-	 * @param selectedTopics the list of topics which are selected
+	 * Sets the initial selected topics
+	 * 
+	 * @param selectedTopics
+	 *            the list of topics which are selected
 	 */
 	public void setSelectedTopics(List<TopicType> selectedTopics) {
 		this.selectedTopics = new ArrayList<TopicType>();
@@ -313,7 +333,9 @@ public class TopicSelectionDialog extends Dialog implements ISelectionChangedLis
 
 	/**
 	 * Sets the title
-	 * @param title the new title
+	 * 
+	 * @param title
+	 *            the new title
 	 */
 	public void setTitle(String title) {
 		this.title = title;

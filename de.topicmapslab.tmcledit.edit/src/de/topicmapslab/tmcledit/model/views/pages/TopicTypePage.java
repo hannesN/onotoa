@@ -106,7 +106,9 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 
 	/**
 	 * Construcor
-	 * @param id the id of the page
+	 * 
+	 * @param id
+	 *            the id of the page
 	 */
 	public TopicTypePage(String id) {
 		super(id);
@@ -115,7 +117,8 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 	/**
 	 * Creates the page with all the controls
 	 * 
-	 * @param parent the parent widget
+	 * @param parent
+	 *            the parent widget
 	 * @return the container of all widgets
 	 */
 	public Composite createPage(Composite parent) {
@@ -230,7 +233,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 					}
 
 				});
-				
+
 				if (dlg.open() == Dialog.OK) {
 					getCommandStack().execute(
 					        new SetTopicTypeLocatorsCommand(dlg.getStringList(), (TopicType) getModel()));
@@ -247,7 +250,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TopicSelectionDialog dlg = new TopicSelectionDialog(isAText.getShell(), (TopicType) getModel());
+				TopicSelectionDialog dlg = new TopicSelectionDialog(isAText.getShell(), (TopicType) getModel(), true);
 				dlg.setTitle("Is a Selection...");
 				dlg.setSelectedTopics(((TopicType) getModel()).getIsa());
 
@@ -266,7 +269,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText.getShell(), (TopicType) getModel());
+				TopicSelectionDialog dlg = new TopicSelectionDialog(akoText.getShell(), (TopicType) getModel(), false);
 				dlg.setSelectedTopics(((TopicType) getModel()).getAko());
 				dlg.setTitle("Kind of Selection...");
 
@@ -286,7 +289,8 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TopicSelectionDialog dlg = new TopicSelectionDialog(overlapText.getShell(), (TopicType) getModel());
+				TopicSelectionDialog dlg = new TopicSelectionDialog(overlapText.getShell(), (TopicType) getModel(),
+				        true);
 				dlg.setSelectedTopics(((TopicType) getModel()).getOverlap());
 				dlg.setTitle("Overlap Selection...");
 
@@ -564,11 +568,11 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 		}
 		super.updateUI();
 	}
-	
+
 	private List<String> getNameList(List<TopicType> list) {
 		if (list.isEmpty())
 			return Collections.emptyList();
-		
+
 		ArrayList<String> result = new ArrayList<String>();
 		for (TopicType tt : list) {
 			result.add(tt.getName());
@@ -647,7 +651,7 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 	private void finishName() {
 		if (showError)
 			return;
-		
+
 		if (nameText.getText().length() > 0) {
 			Command cmd;
 			TopicType tt = getCastedModel();
@@ -667,13 +671,12 @@ public class TopicTypePage extends AbstractEMFModelPage implements Adapter {
 					return;
 				}
 				nameText.setText(getCastedModel().getName());
-				
+
 				// need to check to omit showing dialog twice
 				showError = true;
 				MessageDialog.openError(getSite().getShell(), "Invalid name", errormsg);
 				showError = false;
-				
-				
+
 			}
 
 		}
