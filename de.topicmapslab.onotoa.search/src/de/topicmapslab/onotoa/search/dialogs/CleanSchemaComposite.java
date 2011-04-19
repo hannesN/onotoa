@@ -30,8 +30,8 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
@@ -113,18 +113,14 @@ public class CleanSchemaComposite implements ISelectionChangedListener {
 				// important: remove focusListener. Otherwise every focus clear
 				// the filter
 				textFilter.removeFocusListener(this);
-				textFilter.addKeyListener(new KeyListener() {
+				textFilter.addModifyListener(new ModifyListener() {
 
-					// listens to done key strokes an refreshes list
-					public void keyReleased(KeyEvent e) {
+					public void modifyText(ModifyEvent e) {
 						isTextFiltered = true;
 						textFilterValue = textFilter.getText();
 						unusedTopicsTable.refresh();
 					}
 
-					public void keyPressed(KeyEvent e) {
-						// not in use
-					}
 				});
 			}
 		});
