@@ -28,8 +28,8 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -133,19 +133,15 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 				// important: remove focusListener. Otherwise every focus clear
 				// the filter
 				textFilterAvailable.removeFocusListener(this);
-				textFilterAvailable.addKeyListener(new KeyListener() {
+				textFilterAvailable.addModifyListener(new ModifyListener() {
 
-					// listens to done key strokes an refreshes list
-					public void keyReleased(KeyEvent e) {
+					public void modifyText(ModifyEvent e) {
 						isTextFilteredAvailable = true;
 						textFilterAvailableValue = textFilterAvailable.getText();
 						refreshLists();
 					}
-
-					public void keyPressed(KeyEvent e) {
-						// not in use
-					}
 				});
+
 			}
 		});
 
@@ -176,16 +172,12 @@ public abstract class AbstractTopicTypeSearchAdvancedPart implements ISelectionC
 				// important: remove focusListener. Otherwise every focus clear
 				// the filter
 				textFilterSelected.removeFocusListener(this);
-				textFilterSelected.addKeyListener(new KeyListener() {
+				textFilterSelected.addModifyListener(new ModifyListener() {
 
-					public void keyReleased(KeyEvent e) {
+					public void modifyText(ModifyEvent e) {
 						isTextFilteredSelected = true;
 						textFilterSelectedValue = textFilterSelected.getText();
 						refreshLists();
-					}
-
-					public void keyPressed(KeyEvent e) {
-						// not in use
 					}
 				});
 			}
