@@ -34,6 +34,12 @@ import de.topicmapslab.tmcledit.model.commands.CreateOccurrenceConstraintCommand
 import de.topicmapslab.tmcledit.model.commands.CreateSubjectIdentifierConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateSubjectLocatorConstraintCommand;
 
+/**
+ * Layout policy for type nodes which creates commands for new occurrences and names. 
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TypeNodeLayoutEditPolicy extends LayoutEditPolicy {
 
 
