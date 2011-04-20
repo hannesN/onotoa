@@ -51,23 +51,57 @@ public class ExtensionManager {
 	private List<AnnotationProviderInfo> annotationProviderInfos = null;
 	private List<ModelViewExtensionInfo> modelViewExtensionInfos = null;
 	
+	/**
+	 * Creates and returns a list of {@link PSIProviderInfo}s which
+	 * contain informations about registered extensions.
+	 * 
+	 * @return
+	 */
 	public List<PSIProviderInfo> getPsiProviderInfos() {
 		if (psiProviderInfos==null)
 			initPsiProvider();
 		return psiProviderInfos;
     }
 	
+	/**
+	 * Creates and returns a list of {@link AnnotationProviderInfo}s which
+	 * contain informations about registered extensions.
+	 * 
+	 * @return
+	 */
 	public List<AnnotationProviderInfo> getAnnotationProviderInfos() {
 		if (annotationProviderInfos==null)
 			initAnnotationProvider();
 		return annotationProviderInfos;
     }
 	
+	/**
+	 * Creates and returns a list of {@link ModelViewExtensionInfo}s which
+	 * contain informations about registered extensions.
+	 * 
+	 * @return
+	 */
 	public List<ModelViewExtensionInfo> getModelViewExtensionInfos() {
 		if (modelViewExtensionInfos==null)
 			initModelExtensions();
 		return modelViewExtensionInfos;
     }
+	
+	/**
+	 * Helper method to check if an annotation key is registered as internal annotation.
+	 * 
+	 * @param key the key of the annotation
+	 * @return <code>true</code> if the annotation is internal, <code>false</code> if the annotation is public or not registered
+	 */
+	public boolean isInternalAnnotation(String key) {
+		for (AnnotationProviderInfo api : getAnnotationProviderInfos()) {
+			if (api.getName().equals(key)) {
+				return api.isInternal();
+			}
+		}
+		
+		return false;
+	}
 	
 	private void initAnnotationProvider() {
 		List<AnnotationProviderInfo> tmp = new ArrayList<AnnotationProviderInfo>();
@@ -93,7 +127,8 @@ public class ExtensionManager {
 				
 				
 				String clazz = ce.getAttribute(ATT_VALIDATOR);
-				validator = (IAnnotationValidator) getInstance(ext, clazz);
+				if (clazz!=null)
+					validator = (IAnnotationValidator) getInstance(ext, clazz);
 				
 				clazz = ce.getAttribute(ATT_PROPOSALPROVIDER);
 				if (clazz!=null)
@@ -118,7 +153,7 @@ public class ExtensionManager {
 	    	return ((Class<?>)o).newInstance();
 	    	
 	    } catch (Exception e) {
-	    	TmcleditEditPlugin.getPlugin().log(e);
+	    	TmcleditEditPlugin.getPlugin().log("Could not load: "+clazz);
 	    }
 	    return null;
     }
