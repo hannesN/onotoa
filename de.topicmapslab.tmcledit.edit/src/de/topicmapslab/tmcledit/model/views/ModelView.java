@@ -396,6 +396,8 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 	@Override
 	public void setFocus() {
 		viewer.getControl().setFocus();
+		if (currentSelection!=null)
+			TmcleditEditPlugin.getPlugin().getOnotoaSelectionService().setSelection(currentSelection, ModelView.this);
 	}
 
 	public EditingDomain getEditingDomain() {
