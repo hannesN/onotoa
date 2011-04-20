@@ -77,6 +77,7 @@ import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -127,10 +128,12 @@ import de.topicmapslab.tmcledit.model.ScopedTopicType;
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
+import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.TopicReifiesConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
+import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 
 /**
  * The class create a TMCL topic map based on a Onotoa {@link TopicMapSchema}
@@ -833,6 +836,10 @@ public class TMCLTopicMapBuilder {
     }
 
 	private void addAnnotation(Annotation a, Topic topic) {
+		// check if its an internal annotation
+		if (TmcleditEditPlugin.getExtensionManager().isInternalAnnotation(a.getKey()))
+			return;
+		
 	    if (a.getValue().length()==0)
 	    	return;
 		Topic type = getAnnotationType(a);
