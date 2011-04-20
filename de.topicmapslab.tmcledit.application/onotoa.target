@@ -44,25 +44,25 @@
 <repository location="http://mirror.topicmapslab.de/update/helios/"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2.201104181443"/>
 <unit id="cern.jet.random_feature.feature.group" version="0.9.0"/>
 <unit id="org.apache.commons_feature.feature.group" version="1.0.0.201102071640"/>
+<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201103291401"/>
+<unit id="org.codehaus.jackson.mapper.asl_feature.feature.group" version="1.6.1"/>
 <unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
 <unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201104121911"/>
+<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.2.0.201102211426"/>
 <unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="0.14.0"/>
 <unit id="net.sf.json_feature.feature.group" version="2.3.0"/>
+<unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
+<unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
 <unit id="org.postgresql.jdbc.driver_feature.feature.group" version="1.0.0"/>
 <unit id="org.slf4j.nop_feature.feature.group" version="1.6.1"/>
 <unit id="thaiopensource.jing_feature.feature.group" version="2009.11.11"/>
-<unit id="org.apache.velocity.feature.group" version="1.7.0"/>
-<unit id="org.tmapi_feature.feature.group" version="2.0.3"/>
-<unit id="org.tmapix_feature.feature.group" version="1.0.0"/>
-<unit id="de.topicmapslab.aranuka_feature.feature.group" version="1.0.2.201104181253"/>
-<unit id="de.topicmapslab.genericeditorsdk.codegenerator_feature.feature.group" version="1.0.0.201103291401"/>
-<unit id="org.codehaus.jackson.mapper.asl_feature.feature.group" version="1.6.1"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201104121911"/>
-<unit id="de.topicmapslab.majortom_feature.feature.group" version="1.2.0.201102211426"/>
 <unit id="de.topicmapslab.tmql4j3_1_feature.feature.group" version="3.1.0.201104130900"/>
 <unit id="de.topicmapslab.ctmwriter_feature.feature.group" version="1.0.9.201103071652"/>
+<unit id="org.apache.velocity.feature.group" version="1.7.0"/>
 <repository location="http://update.topicmapslab.de"/>
 </location>
 </locations>
