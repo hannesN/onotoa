@@ -25,6 +25,11 @@ public class RemoveAnnotationCommand extends AbstractCommand {
 	private final int index;
 	private final Annotation annotation;
 
+	/**
+	 * Contructor
+	 * @param construct the annotated contruct
+	 * @param annotation the annotation to remove
+	 */
 	public RemoveAnnotationCommand(TMCLConstruct construct, Annotation annotation) {
 		super();
 		this.construct = construct;

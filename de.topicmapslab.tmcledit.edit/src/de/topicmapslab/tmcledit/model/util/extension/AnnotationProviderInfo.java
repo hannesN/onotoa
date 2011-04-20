@@ -33,22 +33,37 @@ public class AnnotationProviderInfo {
 	    this.porposalProvider = porposalProvider;
     }
 
+	/**
+	 * @return
+	 */
 	public String getId() {
     	return id;
     }
 
+	/**
+	 * @return
+	 */
 	public boolean isInternal() {
 	    return internal;
     }
 	
+	/**
+	 * @return
+	 */
 	public String getName() {
     	return name;
     }
 
+	/**
+	 * @return
+	 */
 	public IAnnotationValidator getValidator() {
     	return validator;
     }
 
+	/**
+	 * @return
+	 */
 	public IAnnotationProposalProvider getPorposalProvider() {
     	return porposalProvider;
     }	

@@ -28,6 +28,12 @@ public class CreateAnnotationCommand extends AbstractCommand {
 	private final String key;
 	private final String value;
 
+	/**
+	 * Constructor
+	 * @param construct the annotated construct
+	 * @param key the key of the annotation
+	 * @param value the value of the annotation
+	 */
 	public CreateAnnotationCommand(TMCLConstruct construct, String key, String value) {
 		super();
 		this.construct = construct;
@@ -51,6 +57,9 @@ public class CreateAnnotationCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
+		if ((key==null) || (key.length()==0))
+			return false;
+		
 		annotation.setKey(key);
 		annotation.setValue(value);
 		

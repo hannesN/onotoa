@@ -25,6 +25,11 @@ public class ModifyAnnotationKeyCommand extends AbstractCommand {
 	private final String newKey;
 	private final String oldKey;
 
+	/**
+	 * Constructor
+	 * @param annotation the annotation to modify
+	 * @param newKey the new key
+	 */
 	public ModifyAnnotationKeyCommand(Annotation annotation, String newKey) {
 		super();
 		setLabel("Modify Annotation");
@@ -48,7 +53,7 @@ public class ModifyAnnotationKeyCommand extends AbstractCommand {
 
 	@Override
 	protected boolean prepare() {
-		if (newKey.equals(oldKey))
+		if ((newKey.length()==0) || (newKey.equals(oldKey)))
 			return false;
 		
 		return true;
