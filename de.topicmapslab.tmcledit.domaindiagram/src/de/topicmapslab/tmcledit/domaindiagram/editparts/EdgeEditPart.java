@@ -41,6 +41,11 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.EdgeType;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 
+/**
+ * Editpart for edges
+ * @author Hannes Niederhausen
+ *
+ */
 public class EdgeEditPart extends AdapterConnectionEditPart {
 	private BendpointConnectionRouter router;
 
@@ -79,7 +84,7 @@ public class EdgeEditPart extends AdapterConnectionEditPart {
 		super.addChildVisual(childEditPart, index);
 	}
 
-	public Edge getCastedModel() {
+	private Edge getCastedModel() {
 		return (Edge) getModel();
 	}
 
