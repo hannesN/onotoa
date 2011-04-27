@@ -302,6 +302,7 @@ public class SearchView extends ViewPart {
 			container.refresh();
 			container.addAdapter();
 		}
+		viewer.expandToLevel(2);
 		updateUI();
 
 	}
