@@ -1,0 +1,70 @@
+== How to create unary associations ==
+
+=== Theoretical background ===  
+
+An unary association is an association that needs only one role to be complete. Some examples are:
+
+* person is a single
+* document is secret
+* something is usefull
+
+We pick up the first example an create the according schema. We need a Topic Type "person", a Association 
+Type "is single" and its only role "single". That is all we need and now we are ready for _Onotoa_.
+
+=== Into Onotoa ===
+  
+First of all, we have to create an new model and a new diagram. Click on *File->New* and choose your preferred name 
+for the model, e.g. "example_unaryAsso.ono". To create a new diagram, right click on *Diagram* in the *Model View* and choose
+ *Create New Diagram...* in the context menu.
+After your decision for a diagram name, the _Onotoa_ window should looks like this:  
+
+.Onotoa 
+[[una_create_model_diagram]]
+image::images/documentation/unary_association/create_model_diagram.png[scaledwidth="100%"]
+
+A the right side next do the editor window is the so called *Palette*. With its help we can add topics the the 
+schema. Left click on *Topic Type* and left click twice anywhere in the editor to add our new topic. A 
+yellow box with the label "default" should appear. The label represents the name of the topic and we have 
+to change it. This and all other properties of every topic is editable in the *Property Details View* at 
+the bottom of the _Onotoa_ window. The first entry should be the name. Click in the field and change the name 
+from "default" to "person".
+
+.Set topic name 
+[[una_set_name]]
+image::images/documentation/unary_association/set_name.png[scaledwidth="50%"]  
+
+NOTE:  Click on a topic to get its focus and its unique property page will be available in the *Property Details 
+View*.
+
+Now we will create the association. Use the *Palette* to add an Association Constraint and look at its property 
+page. We have to select or create the type of the constraint. Click on the blue label *Type* and a dialogue to create 
+an Association Type will appear. Type "is single" as name and press the *Finish* button to create the type. 
+
+.Create Association Type
+[[una_new_asso_type]]
+image::images/documentation/unary_association/new_asso_type.png[scaledwidth="50%"]  
+
+An association needs roles and we have to define them. In this case it is only one. Click on the graphical representation 
+of the association to reach their property page. Click on the tab "Association Type" scroll down to the *roles* entry.
+At the right hand side is the image:images/documentation/search/buttons/new.png[] button the create roles. Click on it and type "single" as name in the following 
+dialogue. The new role will appear in the property page. 
+
+
+.Create Role Type
+[[una_new_role_type]]
+image::images/documentation/unary_association/new_role_type.png[scaledwidth="100%"]  
+
+At the next step we will connect the "person" and "is single. We do this by the use of the *Topic Role Constraint.* 
+Select it from the *Palette* and click first on the topic and second on the association (order does not matter).
+From now on a thin black line connect the two topics.
+
+The label "no role type set" means what its look like. Let us set it. Therefore click on the label to get to the property page.
+At the right hand side is a small arrow. If you click on it, you will see a list of all available roles and have to 
+choose one. In this case the choice should be easy. The cardinality of the "Topic Role Constraint* should be 0..1 . This means an
+instance of person may be in exactly one association instance or in none.
+
+.Unary Association
+[[una_editor_view]]
+image::images/documentation/unary_association/editor_view.png[scaledwidth="100%"]  
+ 
+    

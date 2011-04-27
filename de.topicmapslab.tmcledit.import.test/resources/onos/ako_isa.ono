@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file id="12" version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema baseLocator="tm:" id="13">
+        <mappingElement id="15" key="tm" value="http://testmap.de/"/>
+        <topicType abstract="true" id="17" kind="TopicType">
+            <name>AbstractTest1</name>
+            <subjectIdentifier>tm:abstracttest1</subjectIdentifier>
+        </topicType>
+        <topicType id="19" kind="TopicType">
+            <name>Test1</name>
+            <subjectIdentifier>tm:test1</subjectIdentifier>
+            <ako>
+                <topictypeRef ref="topictypes.0"/>
+            </ako>
+        </topicType>
+        <topicType id="41" kind="TopicType">
+            <name>Instance</name>
+            <subjectIdentifier>tm:instance</subjectIdentifier>
+            <isa>
+                <topictypeRef ref="topictypes.1"/>
+            </isa>
+        </topicType>
+    </schema>
+    <diagram id="14" name="test">
+        <node id="16" posX="422" posY="50" type="typeNode">
+            <topictypeRef ref="topictypes.0"/>
+        </node>
+        <node id="18" posX="322" posY="249" type="typeNode">
+            <topictypeRef ref="topictypes.1"/>
+        </node>
+        <node id="40" posX="671" posY="296" type="typeNode">
+            <topictypeRef ref="topictypes.2"/>
+        </node>
+        <edge id="38" source="node.1" target="node.0" type="AKO_TYPE"/>
+        <edge id="62" source="node.2" target="node.1" type="IS_ATYPE"/>
+    </diagram>
+</file>

@@ -1,0 +1,41 @@
+== How to use the word list editor ==
+
+=== Theoretical background ===  
+
+Sometimes the initial step to specify a domain is to collect a set of words which are part of the domain. _Onotoa_ provides an editor to 
+collect the words. The goal of the editor is to create types which use the words as name. Therefore every words needs an assigned topic type.
+After that the creation of the types is just a click on a button.
+ 
+
+=== Into Onotoa ===
+
+Create a new file and open the Word List Editor by clicking the image:images/wordlist/button.png[] Button in the toolbar of the *Model View*. 
+An empty editor opens like in the image below. 
+
+.Empty Word List Editor
+image::images/wordlist/step1.png[scaledwidth="100%"]
+
+Enter new words you want to add to the word list in the *New Word* text field and click on
+*add* or just press the enter key.
+
+Enter the words you see in the image below.
+
+.Word List Editor with a few Words
+image::images/wordlist/step2.png[scaledwidth="100%"]
+
+In the second column you can assign types to your words. The topics maps that will be
+created from your words will have this type. Just click into the table cell and a combo box will be activated to 
+choose the type. To comment the word just click into the third column of the row. Words can be modified by clicking in the 
+first column. 
+
+NOTE: You may not enter a word twice even if it should have different types.
+
+
+Use the check boxes to select words you want to create a type of or remove. 
+
+After setting the types for the words you can create the types by pressing the *Create Type* button.
+You will find the new types in the *ModelView* like in the image below.
+
+.Word List Editor with a Words and Types in the *Model View*
+image::images/wordlist/step3.png[scaledwidth="100%"]
+

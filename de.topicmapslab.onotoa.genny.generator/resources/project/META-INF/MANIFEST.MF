@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: $name
+Bundle-SymbolicName: $pluginId;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: $pluginId.Activator
+Bundle-Vendor: Genny User
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.forms,
+ de.topicmapslab.kuria.annotation;bundle-version="1.0.1",
+ de.topicmapslab.kuria.runtime;bundle-version="1.0.1",
+ de.topicmapslab.kuria.swtgenerator;bundle-version="1.0.1",
+ de.topicmapslab.aranuka.connector-majortom;bundle-version="1.0.2",
+ de.topicmapslab.aranuka.runtime;bundle-version="1.0.2",
+ de.topicmapslab.genericeditor.application;bundle-version="1.0.0"

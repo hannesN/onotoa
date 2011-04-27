@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+>
+   <extension
+         point="org.eclipse.ui.services">
+      <sourceProvider
+            provider="de.topicmapslab.onotoa.selection.service.OnotoaFileSourceProvider">
+         <variable
+               name="de.topicmapslab.onotoa.file.loaded"
+               priorityLevel="workbench">
+         </variable>
+      </sourceProvider>
+   </extension>
+</plugin>

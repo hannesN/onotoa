@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Onotoa Wordlist Editor
+Bundle-SymbolicName: de.topicmapslab.onotoa.wordlisteditor;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.topicmapslab.onotoa.wordlisteditor.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.topicmapslab.tmcledit;bundle-version="1.2.0",
+ de.topicmapslab.tmcledit.edit;bundle-version="1.2.0",
+ de.topicmapslab.onotoa.selection;bundle-version="1.2.0",
+ org.eclipse.core.resources;bundle-version="3.6.0",
+ org.eclipse.emf.edit;bundle-version="2.6.0",
+ org.eclipse.ui.forms;bundle-version="3.5.0",
+ org.eclipse.gef,
+ org.eclipse.core.expressions
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

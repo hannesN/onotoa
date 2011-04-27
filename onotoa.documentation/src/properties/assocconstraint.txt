@@ -1,0 +1,41 @@
+=== Association Constraint ===
+:ac: association constraint
+
+An association constraint is used as connection between an association type and it's role player constraints.
+
+
+The '{ac}' has only one property:
+
+* *Type:* The association type which is constrained in use. 
+
+You can select an existing 'Association Type' by
+pressing the right button and selecting the desired type. To create a new type, click on the `Type` label on the left. 
+The wizard to create a new type will appear and after the creation the new type will be the type of the constraint. 
+
+.Property Page for '{ac}'
+image::images/assoc_constr_pp.png[scaledwidth="100%"]
+
+NOTE: There is no such thing as an association constraint in the TMCL draft. It was introduced to encapsulate the association type
+and the constraints using this type. See the following section for more information.
+
+==== Differences between TMCL and Onotoa
+
+In TMCL, there are three different kinds of constraints to describe the _signature_ of an association, each of which can be declared using a speficic TMCL template:
+
+tmcl:topic-role-constraint::
+  declared using _plays-role_ within a _TopicType_ +
+  is used to constrain the cardinality of a specific role type an instance of the topic type plays within an association.
+tmcl:association-role-constraint::
+  declared using _has_role_ within an _AssociationType_ +
+  is used to constrain the cardinality of a specific role type with the association type.
+tmcl:role-combination-constraint::
+  declared using _role-combination_ within an _AssociationType_ +
+  is used to constrain instances of which _topic type_ can play which _role type_ within an association together with
+  instances of which _other topic type_ with which role type_.
+  In other words: it defines a path navigating from one topic of a given type to another topic of a given type over an association of a given type by constraining which role type the source topic plays and the role type the destination topic plays. It does not constrain how many times an instance of a topic type can be involved in such a path (this is where the topic-role-constraint comes in) and it does not constrain how many roles of a specific type can be involved within a particular association (this is where the association-role-constraint comes in).
+
+It is obvious that for a binary association, one role-combination constraint is enough, but for an association with three roles, three role-combination constraints are needed. For associations with four roles, six role-combination constraints are needed and so on. Instead of this, Onotoa creates one _association constraint_ (which does not exist in TMCL) that has an association type and a list of role player constraints which manage the needed data in an application-specific way.
+
+As a user, you don't have to worry about the internal representation of the constraints. Onotoa takes care of importing and exporting valid TMCL schemas.
+
+
