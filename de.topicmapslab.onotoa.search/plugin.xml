@@ -72,6 +72,15 @@
                   label="&amp;Clean Schema"
                   style="push">
             </command>
+            <visibleWhen
+                  checkEnabled="true">
+               <with
+                     variable="de.topicmapslab.onotoa.file.loaded">
+                  <equals
+                        value="true">
+                  </equals>
+               </with>
+            </visibleWhen>
          </menu>
       </menuContribution>
    </extension>
