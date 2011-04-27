@@ -199,5 +199,6 @@ public class UseSearcher implements ISearcher {
 
 	public void setTopicType(TopicType tt) {
 		topicType = tt;
+		con.setLabel("Search use for: " + this.topicType.getName());
 	}
 }

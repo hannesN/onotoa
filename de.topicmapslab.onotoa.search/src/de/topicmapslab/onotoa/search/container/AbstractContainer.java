@@ -29,7 +29,7 @@ import de.topicmapslab.onotoa.search.views.SearchView;
 @TreeNode
 public abstract class AbstractContainer implements IContainer {
 
-	private final String label;
+	private String label;
 	protected final ISearcher searcher;
 	protected SearchView view;
 
@@ -117,6 +117,16 @@ public abstract class AbstractContainer implements IContainer {
 	@Text
 	public String getLabel() {
 		return this.label;
+	}
+	
+	/**
+	 * Set label of the result view
+	 * 
+	 * @param label
+	 */
+	
+	public void setLabel(String label){
+		this.label = label;
 	}
 
 	/**
