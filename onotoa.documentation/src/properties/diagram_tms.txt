@@ -1,0 +1,44 @@
+=== Detailed Diagram ===
+
+The diagram has only one property:
+
+* *Name:* The name of the diagram. It is a unique identifier in a schema, which means you can not create two diagrams with the same name.
+
+You can edit the name by modifying the value in the text field of the property page. If you enter a name which is already used, a red icon will appear on the left hand side,
+and the name will not be changed, when the focus is lost.  
+
+
+.Property Page of 'Diagram'
+image::images/diagram_pp.png[scaledwidth="100%"]
+
+
+=== Domain Diagram ===
+
+Similiar to the detailed diagram the domain diagram has only one property:
+
+* *Name*: The name is an unique identifier in a schema, which means you can not create two diagrams with the same name.
+
+You can edit the name by modifying the value in the text field of the property page. If you enter a name which is already 
+used, a red icon will appear on the left hand side, and the name will not be changed, when the focus is lost.
+
+.Property Page of Domain Diagram
+[[domain_diagram_name]]
+image::images/domain_diagram_name.png[scaledwidth="100%"]
+
+=== Topic Map Schema ===
+
+Another top level element is the topic map schema. This element contains all the elements of the schema, despite the graphical 
+representations. 
+
+The properties of a topic map schema are:
+
+* *Name:* The name of the schema.
+* *Version:* A version for the schema
+* *Base Locator:* The base locator used to generate automatic subject identifier.
+* *Schema Resource:* A URL where to find a serialised version of this schema. 
+
+
+.Property Page of TopicMapSchema
+image::images/tmschema_pp.png[scaledwidth="100%"]
+
+Both properties are optional.

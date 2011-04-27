@@ -1,0 +1,61 @@
+=== Topic Type ===
+
+Topic type is a topic, which specifies that a topic, which is instance of topic type is used as type
+in a type-instance relationship. A schema defines topic types, their names and occurrences and their relationship. Every type
+in a schema is instance of the topic "topic-type", except for types which are used as name, role or occurrence type.
+
+Every type in TMCL is instance of "topic-type", which means they all share a minimum of properties. The property page of
+a topic type can be seen in <<tt_pp>>:
+
+.Property Page of topic type
+[caption=Figure:]
+[[tt_pp]]
+image::images/topictype_pp.png[align="center", scaledwidth="100%"]
+
+A topic type has the following properties:
+
+* *name:* The name of the topic type. Although the TMDM permits having different Topics with the same name, _Onotoa_ forbids that. 
+The name of the type is also not scoped  and of type "tmdm:default-name".
+
+* *subject identifier:* The subject identifiers are a set of IRI. The list of the identifiers can be modified by pressing the button labelled *...* 
+and in the subject identifier dialogue. This list may be empty.
+
+.Subject Identifier Dialog
+image::images/si_dialog.png[scaledwidth="40%"]
+
+* *subject locator:* The subject locators are a set of IRIs representing the subject locators of the topic, which is similar to the subject identifiers. 
+This list can be edited by using the dialogue opened by the button *...*. It looks like the subject identifier dialogue. 
+The list may be empty too.
+
+* *is a:* This property is a list of topic types, which are the type of the current topic. In the diagram view this is represented by a connection 
+between the topics. The property  page includes a  list of names of the typing topics, separated by commas. To add or remove a topic, press the button labelled 
+*...* and a dialogue will open. On the left hand side is a list of topic types which are not used as type, on the right hand side is a list of the types in use. 
+The centrally located buttons can be used to move a type from one side to the other.
+
+* *kind of:* This is a list of topics which are supertypes of the current topic type. Editing this list is similar to the *is a* property.
+
+* *overlap:* Topics in TMCL are defined as types, which are used as types for instances in a topic map. By default, a topic may not be 
+of two types at the same time, for instance a topic should no be of type "Person" and "Car". To  overcome this restriction the overlap
+property is used. It contains a list of topic types like *is a* or *kind of*. The list is edited with the same dialogue as *is a*. The list 
+contains all topic types which may be used in a type-instance relationship. For instance to allow a topic to be typed by "Car" and "Person"
+just add "Car" to the overlap property of "Person". _Onotoa_ automatically adds "Person" to the overlap property of "Car".
+
+* *is abstract:* A topic type may be used as type or supertype. To prevent that the topic type is used as type, check the *is abstract* button,
+which sets this property to true. This means the topic type may be used as supertype in a supertype-subtype relationship, but not as type in
+a type-instance relationship.
+
+* *reifies:* The refies property is a constraint and defines if the topic type may or must be used as reifier for a topic type. The table consists of
+three columns. The first one specifies the type, i.e. which instances may be reified by instances of the current topic type. The *cardMin* value is either
+'0' or '1', so is the value of *cardMax* in the third column. If both cardinality values are '0', the current topic type must not be used as reifier for the
+topic type. If both values are '1' the current topic type has to be a reifier for the type. If *cardMin* is '0' and *cardMax* is '1' the use of the current topic
+type as reifier for the type is optional. Use the image:images/select_icon.png[] button to open a selection dialogue where you can choose the types to be reified. The added type will a appear at the list.
+To remove a reified type, select the entry at the list and click on the image:images/documentation/search/buttons/remove.png[] button.
+
+//You can create a new topic reifies constraint using the buttons *Add...* and *New...*. The first one opens
+//a selection dialogue where you can choose the types to be reified. The latter is used to create a constraint using a new topic type. After pressing
+//this button, the new topic type dialogue is opened and after filling out the text fields a new constraint is created using this type. By default the cardinality
+//is set to optional use. You can edit them directly in the table. Click on the value that you want to change and edit the value.
+
+.Topic Selection Dialog
+[caption=Figure:]
+image::images/reifies_dialog.png[scaledwidth="60%"]

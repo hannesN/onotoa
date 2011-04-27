@@ -1,0 +1,16 @@
+=== Annotation ===
+
+It To every schema element can 
+
+Every element of the schema  can be supplemented by annotations, which can be used for meta informations.
+An annotation consists of:
+
+* *key:* Is used to identify a specific annotation
+* *value:* Is the value of the annotation.
+
+.Property Page of documentation
+image::images/annotation_pp.png[scaledwidth="100%"]
+
+Create a new annotation by clicking on the image:images/documentation/search/buttons/new.png[] button and a new 
+table entry will appear. Just click on a table cell to edit its value. By selecting an entry and clicking on the 
+image:images/documentation/search/buttons/remove.png[] button the annotation will be deleted.

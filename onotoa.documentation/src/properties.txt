@@ -1,0 +1,39 @@
+== The Property Details View ==
+
+Every element of an schema has a property page where the properties of an element may be changed. 
+Examples for properties are the name of a topic type or the cardinality of a constraint. The following
+sections will explain the property pages of the elements. These pages are shown in the *Property Details View*.
+The view a property page of an element, you will have to select it either in the *Model View* or in a *Diagram Editor*.
+
+NOTE: The property pages support undo and redo functions for model changes. To manage a lot of changes during entering the text, 
+_Onotoa_ processes the changes after the text field loses its focus or the enter key was pressed.
+
+include::properties/annotation.txt[]
+
+include::properties/documentation.txt[]
+
+include::properties/diagram_tms.txt[]
+
+include::properties/prefix.txt[]
+
+include::properties/topictype.txt[]
+
+include::properties/nametype.txt[]
+
+include::properties/occurrencetype.txt[]
+
+include::properties/assoctype.txt[]
+
+include::properties/roletype.txt[]
+
+include::properties/nameconstraint.txt[]
+
+include::properties/occconstraint.txt[]
+
+include::properties/subjectidentifierconstraint.txt[]
+
+include::properties/subjectlocatorconstraint.txt[]
+
+include::properties/assocconstraint.txt[]
+
+include::properties/role_combi_constraint.txt[]

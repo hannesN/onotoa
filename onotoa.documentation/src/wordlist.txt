@@ -1,0 +1,31 @@
+== The Word List Editor ==
+
+When you click the image:images/wordlist/button.png[] Button the *Word List Editor* opens.
+
+There are two text fields, a index and a few buttons. The first text field is the “New Word” text field. There 
+you enter the words you want to add to your list. Behind the _New Word_ text field there is the *Add* button. Use it to add a word, or push the
+Enter-key instead.
+
+The second text field is the *Filter Words* text field. There you can enter one word or a part
+of a word that for the list should be filtered. Your list will be filtered automatically, you don’t
+have to push any key or button.
+
+.Empty Word List Editor
+image::images/wordlist/step1.png[scaledwidth="100%"]
+
+In the table below the text fields, you can edit your word list, assign types to your words, leave
+comments and mark single words.
+
+When you have selected one ore more words, two buttons will be enabled:
+The *Remove* button will remove the selected words from your list.
+The *Create selected types* button will create types only from the selected words.
+
+By clicking *Create types* for every word in the list a type will be created.
+
+The Types you have created of your word list will appear in the *Model View* and can be
+used as topic types.
+
+NOTE: Words and the created topic types are not connected. So if you rename a created topic type or modify a word after 
+the creation of the topic type it won'r reflect on the counter part.
+
+  

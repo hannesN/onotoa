@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<file id="67" version="1.0.0" xmlns="onotoa.topicmapslab.de">
+    <schema baseLocator="tm:" id="68">
+        <mappingElement id="71" key="tm" value="http://testmap.de/"/>
+        <topicType id="69" kind="TopicType">
+            <name>Overlap1</name>
+            <subjectIdentifier>tm:overlap1</subjectIdentifier>
+            <overlap>
+                <topictypeRef ref="topictypes.1"/>
+            </overlap>
+        </topicType>
+        <topicType id="70" kind="TopicType">
+            <name>Overlap2</name>
+            <subjectIdentifier>tm:overlap2</subjectIdentifier>
+            <overlap>
+                <topictypeRef ref="topictypes.0"/>
+            </overlap>
+        </topicType>
+    </schema>
+</file>

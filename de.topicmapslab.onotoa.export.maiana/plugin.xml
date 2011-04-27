@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            category="de.topicmapslab.tmcledit.export.tmcledit"
+            class="de.topicmapslab.onotoa.export.maiana.wizard.MaianaExport"
+            id="de.topicmapslab.onotoa.export.maiana.wizard.MaianaExport"
+            name="Maiana Export">
+      </wizard>
+   </extension>
+
+</plugin>
