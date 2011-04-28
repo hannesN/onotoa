@@ -171,6 +171,9 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 		isPrepared = true;
 
+		if (cmds.getCommandList().isEmpty())
+			return true;
+		
 		return cmds.canExecute();
 	}
 
