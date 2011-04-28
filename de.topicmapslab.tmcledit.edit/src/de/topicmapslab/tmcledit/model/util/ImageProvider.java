@@ -14,6 +14,7 @@ import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
+import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 
@@ -35,7 +36,11 @@ public class ImageProvider {
 		if (topicType==null)
 			return null;
 		
-		switch(topicType.getKind())
+		return getImageOfKindOfTopic(topicType.getKind());
+	}
+
+	public static Image getImageOfKindOfTopic(KindOfTopicType kind) {
+	    switch(kind)
 		{
 			case NO_TYPE:
 				return ImageProvider.getImage(ImageConstants.TOPIC);
@@ -51,7 +56,7 @@ public class ImageProvider {
 				return ImageProvider.getImage(ImageConstants.TOPICTYPE);
 		
 		}
-	}
+    }
 	
 	private static ExtendedImageRegistry getExtendedImageRegistry() {
 		if (imageRegistry == null) {

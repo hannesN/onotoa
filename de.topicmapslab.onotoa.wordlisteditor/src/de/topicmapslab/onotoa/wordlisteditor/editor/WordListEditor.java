@@ -95,6 +95,7 @@ import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
+import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
@@ -555,7 +556,11 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 
 			@Override
 			public void update(ViewerCell cell) {
-				cell.setText(((Word) cell.getElement()).getType().getName());
+				String name = ((Word) cell.getElement()).getType().getName();
+				cell.setText(name);
+				cell.setImage(ImageProvider.getImageOfKindOfTopic(KindOfTopicType.getByName(name)));
+				
+				
 			}
 		});
 		tvc.setEditingSupport(new EditingSupport(viewer) {
