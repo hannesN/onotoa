@@ -37,11 +37,13 @@
 <revhistory>
 	<revision>
 		<revnumber>1.2</revnumber>
-		<date>November 2010</date>
+		<date>April 2011</date>
 		<authorinitials>HN</authorinitials>
 		<revremark>
 			Updates including generator explanations.
-			Removed extension point tutorials (until installation of features are available again
+			Removed extension point tutorials (until installation of features are available again)
+			Added Word List description.
+			Many updates according
     	</revremark>
 	</revision>
 	<revision>
