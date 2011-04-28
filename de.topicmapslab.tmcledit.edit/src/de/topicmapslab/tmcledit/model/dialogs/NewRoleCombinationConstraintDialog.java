@@ -80,7 +80,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 	private AssociationType at;
 
 	/**
-	 * Cohnstructor
+	 * Constructor
 	 * @param parentShell the parent shell
 	 * @param at the {@link AssociationType} which will get the constraints
 	 */
@@ -100,7 +100,7 @@ public class NewRoleCombinationConstraintDialog extends Dialog implements Dispos
 			if (abstractConstraint instanceof AssociationTypeConstraint)
 				for (RolePlayerConstraint rpc : ((AssociationTypeConstraint) abstractConstraint).getPlayerConstraints()) {
 
-					role = rpc.getRole().getType();
+					role = (rpc.getRole()!=null) ? rpc.getRole().getType() : null;
 					player = rpc.getPlayer();
 
 					if (role != null && player != null) {
