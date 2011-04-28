@@ -86,6 +86,9 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 	private Button removeButton;
 	private Button editButton;
 
+	/**
+	 * Constructor
+	 */
 	public AssociationTypeModelPage() {
 		super("asssociation type");
 	}

@@ -53,6 +53,9 @@ public class AssociationConstraintModelPage extends AbstractEMFModelPage {
 
 	private AssociationTypeModelPage typeModelPage;
 
+	/**
+	 * Constructor
+	 */
 	public AssociationConstraintModelPage() {
 		super("association_constraint");
 	}
