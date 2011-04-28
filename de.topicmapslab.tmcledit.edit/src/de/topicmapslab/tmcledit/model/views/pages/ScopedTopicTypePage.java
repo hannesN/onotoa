@@ -68,6 +68,9 @@ public abstract class ScopedTopicTypePage extends TopicTypePage {
 	private CCombo cardCombo;
 	private Button hasReifierConstraintButton;
 
+	/**
+	 * 
+	 */
 	public ScopedTopicTypePage(String id) {
 		super(id);
 	}

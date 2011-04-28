@@ -56,6 +56,9 @@ public class ReifierConstraintModelPage extends AbstractEMFModelPage {
 	private Button browseButton;
 	private Hyperlink link;
 	
+	/**
+	 * Constructor
+	 */
 	public ReifierConstraintModelPage() {
 		super("reifier constraint");
 	}
@@ -187,7 +190,9 @@ public class ReifierConstraintModelPage extends AbstractEMFModelPage {
 	@Override
 	public void updateUI() {
 	    super.updateUI();
-	    if (getCastedModel().getType()==null)
+	    if (getCastedModel()==null)
+	    	typeText.setText("");
+	    else if (getCastedModel().getType()==null)
 	    	typeText.setText("tmdm:subject");
 	    else
 	    	typeText.setText(getCastedModel().getType().getName());

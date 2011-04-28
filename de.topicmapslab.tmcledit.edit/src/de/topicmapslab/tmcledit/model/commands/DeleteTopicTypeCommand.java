@@ -27,6 +27,8 @@ import de.topicmapslab.tmcledit.model.Edge;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
+import de.topicmapslab.tmcledit.model.ReifiableTopicType;
+import de.topicmapslab.tmcledit.model.ReifierConstraint;
 import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
@@ -163,12 +165,29 @@ public class DeleteTopicTypeCommand extends AbstractCommand {
 
 		prepareScopeConstraintCommandList();
 		
+		prepareReifierConstraintCommandList();
+		
 		prepareRoleCombinationConstraintList();
 
 		isPrepared = true;
 
 		return cmds.canExecute();
 	}
+
+	private void prepareReifierConstraintCommandList() {
+	    for (TopicType tt : ModelIndexer.getTopicIndexer().getTopicTypes()) {
+	    	if (tt instanceof ReifiableTopicType) {
+	    		
+	    		ReifierConstraint rc = ((ReifiableTopicType) tt).getReifierConstraint();
+	    		if (rc!=null) {
+	    			if (topicType.equals(rc.getType())) {
+	    				cmds.append(new GenericSetCommand(rc, ModelPackage.REIFIER_CONSTRAINT__TYPE, null));
+	    			}
+	    		}
+	    	}
+	    }
+	    
+    }
 
 	private void prepareRoleCombinationConstraintList() {
 		for (AssociationType at : ModelIndexer.getTopicIndexer().getAssociationTypes()) {
