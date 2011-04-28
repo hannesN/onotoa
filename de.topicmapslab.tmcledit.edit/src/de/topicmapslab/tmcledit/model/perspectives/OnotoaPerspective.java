@@ -41,7 +41,7 @@ public class OnotoaPerspective implements IPerspectiveFactory {
 				"bottom", IPageLayout.BOTTOM, 0.75f, layout.getEditorArea()); //$NON-NLS-1$
 		bottom.addView(PropertyDetailView.ID);
 		
-		layout.addView(NotesView.ID, IPageLayout.RIGHT, 0.4f, "botton");
+		layout.addView(NotesView.ID, IPageLayout.RIGHT, 0.4f, "bottom");
 		
 		
 		
