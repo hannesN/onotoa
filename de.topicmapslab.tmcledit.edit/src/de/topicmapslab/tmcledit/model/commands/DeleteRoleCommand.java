@@ -10,29 +10,41 @@
  *******************************************************************************/
 package de.topicmapslab.tmcledit.model.commands;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.AbstractCommand;
+import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Command to delete a role.
+ *  
+ * @author Hannes Niederhausen
+ *
+ */
 public class DeleteRoleCommand extends AbstractCommand {
 
 	private final AssociationType associationType;
 	private final RoleConstraint roleConstraint;
 	private final boolean cascade;
 	
-	private LinkedList<DeleteRolePlayerConstraintCommand> deletePlayerCmds = null;
+	private CompoundCommand otherCmds;
 	private int idx;
 	
+	/**
+	 * Constructor
+	 * @param associationType
+	 * @param roleConstraint
+	 * @param cascade
+	 */
 	public DeleteRoleCommand(
 			AssociationType associationType,
 			RoleConstraint roleConstraint,
@@ -41,8 +53,14 @@ public class DeleteRoleCommand extends AbstractCommand {
 		this.associationType = associationType;
 		this.roleConstraint = roleConstraint;
 		this.cascade = cascade;
+		otherCmds = new CompoundCommand();
 	}
 	
+	/**
+	 * Constructor
+	 * @param associationType
+	 * @param roleConstraint
+	 */
 	public DeleteRoleCommand(
 			AssociationType associationType,
 			RoleConstraint roleConstraint) {
@@ -50,37 +68,24 @@ public class DeleteRoleCommand extends AbstractCommand {
 	}
 
 	public void execute() {
-		for (DeleteRolePlayerConstraintCommand cmd : getDeletePlayerCmds())
-			if (cmd.canExecute())
-				cmd.execute();
+		otherCmds.execute();
 		associationType.getRoles().remove(roleConstraint);
 	}
 
 	public void redo() {
-		for (DeleteRolePlayerConstraintCommand cmd : getDeletePlayerCmds())
-			cmd.redo();
+		otherCmds.redo();
 		associationType.getRoles().remove(roleConstraint);
 	}
 
 	@Override
 	public void undo() {
-		if (getDeletePlayerCmds().size() > 0) {
-			LinkedList<DeleteRolePlayerConstraintCommand> l = (LinkedList<DeleteRolePlayerConstraintCommand>) getDeletePlayerCmds();
-			Iterator<DeleteRolePlayerConstraintCommand> it = l.descendingIterator();
-			while (it.hasNext()) {
-				DeleteRolePlayerConstraintCommand cmd = it.next();
-				if (cmd.canUndo())
-					cmd.undo();
-			}
-		}
 		associationType.getRoles().add(idx, roleConstraint);
+		otherCmds.undo();
 	}
 	
 	@Override
 	protected boolean prepare() {
-		
 		idx = associationType.getRoles().indexOf(roleConstraint);
-		
 		
 		if (!cascade)
 			return true;
@@ -92,24 +97,24 @@ public class DeleteRoleCommand extends AbstractCommand {
 			if (atc.getType().equals(associationType)) {
 				for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
 					if (rpc.getRole().equals(roleConstraint)) {
-						addCommand(atc, rpc);
+						otherCmds.appendIfCanExecute(new DeleteRolePlayerConstraintCommand(rpc));
 					}
 				}
 			}
 		}
-		return true;
-	}
-	
-	private List<DeleteRolePlayerConstraintCommand> getDeletePlayerCmds() {
-		if (deletePlayerCmds==null)
-			return Collections.emptyList();
-	    return deletePlayerCmds;
-    }
-
-	private void addCommand(AssociationTypeConstraint atc, RolePlayerConstraint rpc) {
-		if (deletePlayerCmds==null)
-			deletePlayerCmds = new LinkedList<DeleteRolePlayerConstraintCommand>();
 		
-		deletePlayerCmds.add(new DeleteRolePlayerConstraintCommand(rpc));
+		// get list of role combination constraints which use this code and remove them
+		List<RoleCombinationConstraint> rccList = new ArrayList<RoleCombinationConstraint>();
+		for (RoleCombinationConstraint rcc : associationType.getRoleCombinations()) {
+			if ((rcc.getRole().equals(roleConstraint.getType()))
+			        || ((rcc.getOtherRole().equals(roleConstraint.getType())))) {
+				rccList.add(rcc);
+			}
+		}
+		
+		if (!rccList.isEmpty())
+			otherCmds.appendIfCanExecute(new RemoveRoleCombinationConstraintCommand(associationType, rccList));
+		
+		return true;
 	}
 }
