@@ -12,9 +12,8 @@ package de.topicmapslab.tmcledit.model.index;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
-import org.eclipse.emf.common.util.EList;
 
 import de.topicmapslab.tmcledit.model.AbstractTypedConstraint;
 import de.topicmapslab.tmcledit.model.AssociationType;
@@ -64,7 +63,7 @@ public class ConstraintIndexer {
 		return Collections.unmodifiableSet(result);
 	}
 
-	private void checkConstraints(TopicType tt, HashSet<AbstractTypedConstraint> result, EList<? extends AbstractTypedConstraint> list) {
+	private void checkConstraints(TopicType tt, HashSet<AbstractTypedConstraint> result, List<? extends AbstractTypedConstraint> list) {
 	    for (AbstractTypedConstraint atc : list) {
 	    	if (tt.equals(atc.getType()))
 	    		result.add(atc);

@@ -249,7 +249,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 				if (sc.getType() != null)
 					sc.getType().eAdapters().add(this);
 			} else if (eventType == Notification.ADD_MANY) {
-				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
+				for (ScopeConstraint sc : (List<ScopeConstraint>) notification
 						.getNewValue()) {
 					sc.eAdapters().remove(this);
 					if (sc.getType() != null)
@@ -262,7 +262,7 @@ public class AssociationNodeEditPart extends NodeEditPart {
 				if (sc.getType() != null)
 					sc.getType().eAdapters().remove(this);
 			} else if (eventType == Notification.REMOVE_MANY) {
-				for (ScopeConstraint sc : (EList<ScopeConstraint>) notification
+				for (ScopeConstraint sc : (List<ScopeConstraint>) notification
 						.getOldValue()) {
 					sc.eAdapters().remove(this);
 					if (sc.getType() != null)

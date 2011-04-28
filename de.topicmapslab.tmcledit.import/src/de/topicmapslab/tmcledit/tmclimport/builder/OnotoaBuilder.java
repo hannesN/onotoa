@@ -17,7 +17,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.emf.common.util.EList;
 import org.tmapi.core.Locator;
 import org.tmapi.core.Name;
 import org.tmapi.core.Occurrence;
@@ -455,11 +454,11 @@ public class OnotoaBuilder implements ITypesListener, ITopicTypeConstraintsListe
     }
 
 	private void refactorAssociationConstraints() {
-        EList<AssociationTypeConstraint> atcList = file.getTopicMapSchema().getAssociationTypeConstraints();
+        List<AssociationTypeConstraint> atcList = file.getTopicMapSchema().getAssociationTypeConstraints();
     	List<AssociationTypeConstraint> associationTypeConstraints = new ArrayList<AssociationTypeConstraint>(atcList);
         for (AssociationTypeConstraint currAtc : associationTypeConstraints) {
         	AssociationType at = (AssociationType)currAtc.getType();
-    		EList<RoleCombinationConstraint> roleCombinations = at.getRoleCombinations();
+    		List<RoleCombinationConstraint> roleCombinations = at.getRoleCombinations();
     		if (roleCombinations.size()==0) {
         		continue;
         	}
