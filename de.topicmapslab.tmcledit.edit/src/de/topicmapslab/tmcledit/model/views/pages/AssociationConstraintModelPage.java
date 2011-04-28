@@ -124,7 +124,7 @@ public class AssociationConstraintModelPage extends AbstractEMFModelPage {
 			}
 		});
 
-		typeText = toolkit.createText(comp, "", SWT.BORDER);
+		typeText = toolkit.createText(comp, "", SWT.BORDER|SWT.READ_ONLY);
 		typeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Button button = toolkit.createButton(comp, "...", SWT.PUSH);

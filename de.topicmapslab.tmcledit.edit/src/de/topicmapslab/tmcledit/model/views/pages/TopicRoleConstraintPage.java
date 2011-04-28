@@ -120,7 +120,7 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 		playerLabel.setBackground(comp.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 
 		toolkit.createLabel(comp, "Role:");
-		roleCombo = new CCombo(comp, SWT.BORDER);
+		roleCombo = new CCombo(comp, SWT.BORDER|SWT.READ_ONLY);
 		roleCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		toolkit.adapt(roleCombo);
 

@@ -111,7 +111,7 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 		GridLayout layout = new GridLayout(2, false);
 		layout.marginWidth = 0;
 		typeComp.setLayout(layout);
-		typeText = toolkit.createText(typeComp, "", SWT.BORDER);
+		typeText = toolkit.createText(typeComp, "", SWT.BORDER|SWT.READ_ONLY);
 		typeText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		typeButton = toolkit.createButton(typeComp, "...", SWT.PUSH);

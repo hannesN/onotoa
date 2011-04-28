@@ -299,7 +299,7 @@ public class AssociationTypeModelPage extends ScopedTopicTypePage {
 			return;
 		}
 
-		if (roleCombinationViewer != null)
+		if ((roleCombinationViewer != null) && (getCastedModel() != null))
 			roleCombinationViewer.setInput(getCastedModel().getRoleCombinations());
 
 		super.notifyChanged(notification);
