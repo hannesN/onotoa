@@ -14,6 +14,7 @@ import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
 import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.ModelFactory;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
+import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
 import de.topicmapslab.tmcledit.model.commands.AddRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateTopicTypeCommand;
 import de.topicmapslab.tmcledit.model.commands.DeleteRoleCommand;
@@ -80,8 +81,18 @@ public class SetRoleAction extends AbstractCommandStackAction {
 			// check if a roleplayer has a role and if so, remove it
 			RoleConstraint role = data.rpc.getRole();
 			if (role != null) {
-				AssociationType at = (AssociationType) role.eContainer();
-				cmd.append(new DeleteRoleCommand(at, role, false));
+				boolean removeRoleContraint = true;
+				AssociationTypeConstraint atc = (AssociationTypeConstraint) data.rpc.eContainer();
+				for (RolePlayerConstraint rpc : atc.getPlayerConstraints()) {
+					if ((rpc!=data.rpc) && (rpc.getRole().equals(role))) {
+						removeRoleContraint = false;
+					}
+				}
+
+				if (removeRoleContraint) {
+					AssociationType at = (AssociationType) role.eContainer();
+					cmd.append(new DeleteRoleCommand(at, role, false));
+				}
 			}
 		}
 		
