@@ -3,14 +3,9 @@
  */
 package de.topicmapslab.onotoa.selection.service;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.eclipse.ui.AbstractSourceProvider;
-import org.eclipse.ui.ISources;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
