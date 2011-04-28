@@ -69,6 +69,9 @@ public class ModifyWordCommand extends AbstractCommand {
 	 */
 	@Override
 	protected boolean prepare() {
+		if (newWord.length()==0)
+			return false;
+		
 		oldWord = this.word.getWord();
 		
 		return !newWord.equals(oldWord);
