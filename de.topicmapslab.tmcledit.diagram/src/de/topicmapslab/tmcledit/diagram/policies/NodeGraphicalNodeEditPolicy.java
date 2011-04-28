@@ -38,6 +38,11 @@ import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
 import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
+/**
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
 	@Override
@@ -86,6 +91,11 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 	}
 
 	private Command getISACommand(CreateEdgeCommand cmd) {
+		if (!(cmd.getEdge().getTarget() instanceof TypeNode))
+			return null;
+		
+		if (!(cmd.getEdge().getSource() instanceof TypeNode))
+			return null;
 		TopicType target = ((TypeNode) cmd.getEdge().getTarget())
 				.getTopicType();
 		TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
@@ -101,7 +111,14 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 	}
 
 	private Command getAKOCommand(CreateEdgeCommand cmd) {
-		TopicType target = ((TypeNode) cmd.getEdge().getTarget()).getTopicType();
+		if (!(cmd.getEdge().getTarget() instanceof TypeNode))
+			return null;
+		
+		if (!(cmd.getEdge().getSource() instanceof TypeNode))
+			return null;
+		
+		TypeNode typeNode = (TypeNode) cmd.getEdge().getTarget();
+		TopicType target = typeNode.getTopicType();
 		TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
 
 		if (target.getKind() == KindOfTopicType.NO_TYPE) {
@@ -128,6 +145,10 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			else
 				cmd.setTarget(node);
 		} else {
+			
+			if (node instanceof AssociationNode)
+				return null;
+			
 			cmd.setSource(node);
 		}
 
