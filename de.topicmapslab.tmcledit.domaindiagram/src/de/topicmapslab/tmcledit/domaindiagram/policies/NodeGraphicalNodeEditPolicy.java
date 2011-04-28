@@ -35,8 +35,12 @@ import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.commands.AddTopicRoleCommand;
 import de.topicmapslab.tmcledit.model.commands.CreateEdgeCommand;
 import de.topicmapslab.tmcledit.model.commands.SetAkoCommand;
-import de.topicmapslab.tmcledit.model.commands.SetIsACommand;
 
+/**
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
 	@Override
@@ -69,30 +73,19 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 		} 
 		
 		cmd.setTarget(node);
-		if (cmd.getEdge().getType() == EdgeType.IS_ATYPE) {
-			return getISACommand(cmd);
-		} else if (cmd.getEdge().getType() == EdgeType.AKO_TYPE) {
+		if (cmd.getEdge().getType() == EdgeType.AKO_TYPE) {
 			return getAKOCommand(cmd);
 		}
 		return request.getStartCommand();
 	}
 
-	private Command getISACommand(CreateEdgeCommand cmd) {
-		TopicType target = ((TypeNode) cmd.getEdge().getTarget())
-				.getTopicType();
-		TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
-
-		if (target.getKind() == KindOfTopicType.NO_TYPE) {
-			return null;
-		}
-		
-		List<TopicType> newList = new ArrayList<TopicType>(source.getIsa());
-		newList.add(target);
-		SetIsACommand isACmd = new SetIsACommand(newList, source);
-		return new CommandAdapter(getCommandStack(), isACmd);
-	}
-
 	private Command getAKOCommand(CreateEdgeCommand cmd) {
+		if (!(cmd.getEdge().getTarget() instanceof TypeNode))
+			return null;
+		
+		if (!(cmd.getEdge().getSource() instanceof TypeNode))
+			return null;
+		
 		TopicType target = ((TypeNode) cmd.getEdge().getTarget()).getTopicType();
 		TopicType source = ((TypeNode) cmd.getEdge().getSource()).getTopicType();
 
@@ -120,6 +113,9 @@ public class NodeGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			else
 				cmd.setTarget(node);
 		} else {
+			if (node instanceof AssociationNode)
+				return null;
+			
 			cmd.setSource(node);
 		}
 
