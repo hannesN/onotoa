@@ -22,8 +22,10 @@ import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.topicmapslab.tmcledit.model.AssociationType;
 import de.topicmapslab.tmcledit.model.AssociationTypeConstraint;
+import de.topicmapslab.tmcledit.model.RoleCombinationConstraint;
 import de.topicmapslab.tmcledit.model.RoleConstraint;
 import de.topicmapslab.tmcledit.model.RolePlayerConstraint;
+import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
@@ -39,12 +41,22 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	
 	private List<RoleConstraint> oldRoleConstraintList = Collections.emptyList();
 	
+	/**
+	 * 
+	 * @param associationType
+	 * @param role
+	 */
 	public RemoveRoleConstraintCommand(AssociationType associationType,
 			RoleConstraint role) {
 		this(associationType, new ArrayList<RoleConstraint>());
 		this.roles.add(role);
 	}
 	
+	/**
+	 * 
+	 * @param associationType
+	 * @param roles
+	 */
 	public RemoveRoleConstraintCommand(AssociationType associationType,
 			List<RoleConstraint> roles) {
 		super("Add Scope Constraints");
@@ -84,6 +96,7 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 	protected boolean prepare() {
 		cmd = new CompoundCommand();
 		prepareRoleConstraintCommands();	
+		prepareRoleCombinationCommands();
 		
 		oldRoleConstraintList = new ArrayList<RoleConstraint>(associationType.getRoles());
 		
@@ -102,5 +115,29 @@ public class RemoveRoleConstraintCommand extends AbstractCommand {
 			}
 		}
 		
+		
 	}
+	
+	private void prepareRoleCombinationCommands() {
+		// get list of role combination constraints which use this code and remove them
+		List<RoleCombinationConstraint> rccList = new ArrayList<RoleCombinationConstraint>();
+		for (RoleCombinationConstraint rcc : associationType.getRoleCombinations()) {
+			if ((isUsedRoleType(rcc.getRole())) || (isUsedRoleType(rcc.getOtherRole()))) {
+				rccList.add(rcc);
+			}
+		}
+		
+		if (!rccList.isEmpty())
+			cmd.appendIfCanExecute(new RemoveRoleCombinationConstraintCommand(associationType, rccList));
+	}
+	
+	
+	private boolean isUsedRoleType(TopicType tt) {
+		for (RoleConstraint rc : oldRoleConstraintList) {
+			if (tt.equals(rc.getType()))
+				return true;
+		}
+		return false;
+	}
+	
 }
