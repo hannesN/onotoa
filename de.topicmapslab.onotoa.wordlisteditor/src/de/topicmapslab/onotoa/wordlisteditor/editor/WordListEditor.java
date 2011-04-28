@@ -64,6 +64,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
@@ -597,7 +598,8 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 
 			@Override
 			protected CellEditor getCellEditor(Object element) {
-				return new ComboBoxCellEditor(table, ITEMS);
+				ComboBoxCellEditor comboBoxCellEditor = new ComboBoxCellEditor(table, ITEMS, SWT.READ_ONLY);
+				return comboBoxCellEditor;
 			}
 
 			@Override
