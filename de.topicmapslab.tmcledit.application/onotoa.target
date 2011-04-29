@@ -52,7 +52,7 @@
 <unit id="org.codehaus.jackson.mapper.asl_feature.feature.group" version="1.6.1"/>
 <unit id="com.sun.codemodel_feature.feature.group" version="2.4.0"/>
 <unit id="com.mysql.jdbc_feature.feature.group" version="5.1.13"/>
-<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.1.201104191541"/>
+<unit id="de.topicmapslab.kuria_feature.feature.group" version="1.0.2.201104291450"/>
 <unit id="de.topicmapslab.majortom_feature.feature.group" version="1.2.0.201104151049"/>
 <unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="0.14.0"/>
 <unit id="net.sf.json_feature.feature.group" version="2.3.0"/>

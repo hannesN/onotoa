@@ -111,11 +111,11 @@
 
    <features>
       <feature id="$pluginId_feature" version="1.0.0.qualifier"/>
-      <feature id="de.topicmapslab.aranuka.majortom_feature"/>
-      <feature id="de.topicmapslab.aranuka_feature"/>
+      <feature id="de.topicmapslab.aranuka.majortom_feature" version="1.0.2.201103111434"/>
+      <feature id="de.topicmapslab.aranuka_feature" version="1.0.2.201103111434"/>
       <feature id="de.topicmapslab.majortom_feature"/>
       <feature id="de.topicmapslab.ctmwriter_feature"/>
-      <feature id="de.topicmapslab.kuria_feature"/>
+      <feature id="de.topicmapslab.kuria_feature" version="1.0.2.201104291450"/>
       <feature id="org.postgresql.jdbc.driver_feature" version="1.0.0"/>
       <feature id="org.slf4j.nop_feature" version="1.6.1"/>
       <feature id="org.tmapi_feature" version="2.0.3"/>
