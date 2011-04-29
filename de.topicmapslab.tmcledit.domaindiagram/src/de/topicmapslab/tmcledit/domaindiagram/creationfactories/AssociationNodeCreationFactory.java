@@ -19,6 +19,8 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
+ * Factory to create an associationnode via palette
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -26,6 +28,10 @@ public class AssociationNodeCreationFactory implements CreationFactory {
 
 	private AssociationTypeConstraint atc = null;
 	
+	/**
+	 * Sets an already created constraint which needs a node
+	 * @param atc the constraint which is the model for the node
+	 */
 	public void setAssociationTypeConstraint(AssociationTypeConstraint atc) {
 		this.atc = atc;
 	}

@@ -40,6 +40,11 @@ import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Property page for name constraints
+ * @author Hannes Niederhausen
+ *
+ */
 public class NameConstraintDetailPage extends AbstractCardinalityConstraintModelPage {
 
 	private Text typeText;
@@ -48,6 +53,9 @@ public class NameConstraintDetailPage extends AbstractCardinalityConstraintModel
 	private NameTypeModelPage typeModelPage;
 	private CTabItem item;
 
+	/**
+	 * Constructor
+	 */
 	public NameConstraintDetailPage() {
 		super("name constraint");
 	}

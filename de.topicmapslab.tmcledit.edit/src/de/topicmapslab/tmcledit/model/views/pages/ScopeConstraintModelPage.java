@@ -57,6 +57,9 @@ public class ScopeConstraintModelPage extends AbstractCardinalityConstraintModel
 	private Text typeText;
 	private CTabItem item;
 
+	/**
+	 * Constructor
+	 */
 	public ScopeConstraintModelPage() {
 		super("scope constraint");
 	}

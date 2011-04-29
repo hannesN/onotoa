@@ -30,11 +30,20 @@ import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.commands.RenameDiagramCommand;
 
+/**
+ * Property page for diagrams
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class DiagramPage extends AbstractEMFModelPage {
 
 	private Text nameText;
 	private ControlDecoration nameDecorator;
 	
+	/**
+	 * Constructor
+	 */
 	public DiagramPage() {
 		super("diagram");
 	}
@@ -50,6 +59,12 @@ public class DiagramPage extends AbstractEMFModelPage {
 		return false;
 	}
 
+	/**
+	 * Creates the widget of the page 
+	 *  
+	 * @param parent the parent widget
+	 * @return the widget of the page
+	 */
 	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Composite comp = toolkit.createComposite(parent);

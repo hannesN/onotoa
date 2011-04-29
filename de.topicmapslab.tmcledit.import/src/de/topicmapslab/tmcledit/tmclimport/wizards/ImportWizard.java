@@ -29,13 +29,14 @@ import de.topicmapslab.tmcledit.model.views.ModelView;
 import de.topicmapslab.tmcledit.tmclimport.Activator;
 import de.topicmapslab.tmcledit.tmclimport.builder.OnotoaBuilder;
 
+/**
+ * Wiztard for importing a topic map.
+ * @author Hannes Niederhausen
+ *
+ */
 public class ImportWizard extends Wizard implements IImportWizard {
 
 	ImportWizardPage mainPage;
-
-	public ImportWizard() {
-		super();
-	}
 
 	public boolean performFinish() {
 
@@ -50,37 +51,13 @@ public class ImportWizard extends Wizard implements IImportWizard {
 			        + "[" + e.getClass().getName() + "]");
 		}
 
-		// File file = builder.getFile();
-		//
-		// if (file.getFilename()!=null)
-		// Activator.getDefault().getPreferenceStore().putValue("last_imported_file",
-		// builder.getFile().getFilename());
-		//
-		// try {
-		// IWorkbenchPage activePage =
-		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		// ModelView mv = (ModelView) activePage.findView(ModelView.ID);
-		// if (mv==null) {
-		// // TODO look at msg
-		// System.out.println("Error, please show a dialog");
-		// }
-		//
-		// mv.setFilename("", true, file);
-		//
-		//
-		// activePage.activate(mv);
-		//
-		// } catch (Exception e) {
-		// throw new RuntimeException(e);
-		// }
-
 		return true;
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("TMCL Schema Import Wizard"); // NON-NLS-1
 		setNeedsProgressMonitor(true);
-		mainPage = new ImportWizardPage("Import TMCL schema", selection); // NON-NLS-1
+		mainPage = new ImportWizardPage("Import TMCL schema"); // NON-NLS-1
 	}
 
 	/*
@@ -112,8 +89,9 @@ public class ImportWizard extends Wizard implements IImportWizard {
 				IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				ModelView mv = (ModelView) activePage.findView(ModelView.ID);
 				if (mv == null) {
-					// TODO look at msg
-					System.out.println("Error, please show a dialog");
+					RuntimeException e = new RuntimeException("Could not find Model View");
+					Activator.logException(e);
+					throw e;
 				}
 
 				mv.setFilename("", true, file);

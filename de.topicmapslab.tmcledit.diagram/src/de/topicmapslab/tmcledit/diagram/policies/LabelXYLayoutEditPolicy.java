@@ -31,6 +31,11 @@ import de.topicmapslab.tmcledit.diagram.editparts.MoveableLabelEditPart;
 import de.topicmapslab.tmcledit.model.LabelPos;
 import de.topicmapslab.tmcledit.model.commands.SetLabelPosCommand;
 
+/**
+ * Layout policy for the moveable labels (like cardinalities of roleplayerconstraints)
+ * 
+ * @author Hannes Niederhausen
+ */
 public class LabelXYLayoutEditPolicy extends XYLayoutEditPolicy {
 	@Override
 	protected EditPolicy createChildEditPolicy(EditPart child) {

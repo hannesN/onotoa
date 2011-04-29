@@ -18,6 +18,11 @@ import org.eclipse.gef.GraphicalEditPart;
 
 import de.topicmapslab.tmcledit.model.MappingElement;
 
+/**
+ * Editpart for one entry of the prefix map
+ * @author Hannes Niederhausen
+ *
+ */
 public class PrefixMappingElementEditPart extends AdapterGraphicalEditPart {
 
 	private Label keyLabel;
@@ -28,6 +33,10 @@ public class PrefixMappingElementEditPart extends AdapterGraphicalEditPart {
 		return new Figure();
 	}
 	
+	/**
+	 * 
+	 * @return the label for the key value
+	 */
 	public Label getKeyLabel() {
 		if (keyLabel == null) {
 			keyLabel = new Label();
@@ -36,6 +45,10 @@ public class PrefixMappingElementEditPart extends AdapterGraphicalEditPart {
 		return keyLabel;
 	}
 	
+	/**
+	 * 
+	 * @return the label for the uri label
+	 */
 	public Label getUriLabel() {
 		if (uriLabel == null) {
 			uriLabel = new Label();
@@ -47,6 +60,7 @@ public class PrefixMappingElementEditPart extends AdapterGraphicalEditPart {
 	@Override
 	protected void createEditPolicies() {
 	}
+	
 	@Override
 	protected void refreshVisuals() {
 		keyLabel.setText(getCastedModel().getKey());

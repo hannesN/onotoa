@@ -34,11 +34,18 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Node for the topic types
+ * 
  * @author Hannes Niederhausen
  * 
  */
 public class TreeTopic extends TreeObject {
 
+	/**
+	 * Constructor
+	 * @param viewer the modelview containing the node
+	 * @param topic the topic represented by the node
+	 */
 	public TreeTopic(ModelView viewer, TopicType topic) {
 		super(viewer, null, topic.getKind());
 		setModel(topic);

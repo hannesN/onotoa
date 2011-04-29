@@ -22,6 +22,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 /**
+ * Dialog showing a website via browser widget
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -40,6 +42,11 @@ public class BrowserDialog extends Dialog {
 		
 	}
 	
+	/**
+	 * Constructor
+	 * @param parentShell the parent shell
+	 * @param isModal flag whether the dialog is model
+	 */
 	public BrowserDialog(Shell parentShell, boolean isModal) {
 		super(parentShell);
 		if (!isModal)
@@ -65,6 +72,10 @@ public class BrowserDialog extends Dialog {
 		return comp;
 	}
 	
+	/**
+	 * Sets the url for to show
+	 * @param url the new url
+	 */
 	public void setUrl(String url) {
 		this.url = url;
 		if (browser!=null)

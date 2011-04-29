@@ -20,6 +20,11 @@ import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Creation factory for occurrence constraints
+ * @author Hannes Niederhausen
+ *
+ */
 public class OccurrenceConstraintCreationFactory implements CreationFactory {
 
 	private TopicType occurrenceType;
@@ -45,10 +50,6 @@ public class OccurrenceConstraintCreationFactory implements CreationFactory {
 		}
 
 		return otc;
-	}
-
-	public void setTopicType(TopicType topicType) {
-		this.occurrenceType = topicType;
 	}
 
 	public Object getObjectType() {

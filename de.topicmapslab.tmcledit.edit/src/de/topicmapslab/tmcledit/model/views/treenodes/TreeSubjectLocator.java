@@ -19,12 +19,29 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Node for subject locator constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeSubjectLocator extends TreeObject{
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing this node
+	 * @param slc the subject locator constraint
+	 */
 	public TreeSubjectLocator(ModelView modelView, SubjectLocatorConstraint slc) {
 		this(modelView, slc, null);
 	}
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing this node
+	 * @param slc the subject locator constraint
+	 * @param name the label of the node
+	 */
 	public TreeSubjectLocator(ModelView modelView, SubjectLocatorConstraint slc, String name) {
 		super(modelView, name, KindOfTopicType.TOPIC_TYPE);
 		setModel(slc);
@@ -43,13 +60,6 @@ public class TreeSubjectLocator extends TreeObject{
 	
 	@Override
 	public void notifyChanged(Notification notification) {
-//		if (notification.getNotifier().equals(getOccurrenceTypeConstraint())) {
-//			if (notification.getNewValue() instanceof TopicType) {
-//				if (notification.getOldValue()!=null)
-//					((TopicType)notification.getOldValue()).eAdapters().remove(this);
-//				((TopicType)notification.getNewValue()).eAdapters().add(this);
-//			}
-//		}
-//		getModelView().getViewer().refresh(this);
+		// nothing to do
 	}
 }

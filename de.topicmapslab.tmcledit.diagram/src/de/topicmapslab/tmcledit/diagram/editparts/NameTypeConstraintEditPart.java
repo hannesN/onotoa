@@ -11,14 +11,18 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.gef.EditPolicy;
 
-import de.topicmapslab.tmcledit.diagram.policies.NameConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.NameTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * Editpart for name constraints.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 
 	private static UnderlineLabelBorder border = new UnderlineLabelBorder();
@@ -30,14 +34,6 @@ public class NameTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 	@Override
 	protected boolean isEditable() {
 		return false;
-	}
-	
-	@Override
-	protected void createEditPolicies() {
-		super.createEditPolicies();
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new NameConstraintDirectEditPolicy());
-
 	}
 
 	@Override

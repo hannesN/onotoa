@@ -338,7 +338,7 @@ public class ModelView extends ViewPart implements IEditingDomainProvider, ISele
 				        : TmcleditEditPlugin.DIAGRAMEDITOR_ID;
 
 				getViewSite().getPage().openEditor(
-				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), this, true), id);
+				        new TMCLEditorInput(currDiagram, getEditingDomain(), getActionRegistry(), this), id);
 			}
 		}
 		

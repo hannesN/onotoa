@@ -58,6 +58,8 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
 /**
+ * Property page for the prefix mappings
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -75,6 +77,9 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 
 	private TopicMapSchema schema;
 
+	/**
+	 * Constructor
+	 */
 	public PrefixMappingPage() {
 		super("prefix mapping");
 	}
@@ -116,6 +121,11 @@ public class PrefixMappingPage extends AbstractEMFModelPage {
 
 	}
 
+	/**
+	 * Creates the page using the given parent
+	 * @param parent the parent for the page widget
+	 * @return the widget of the page
+	 */
 	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 

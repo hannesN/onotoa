@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.FileFieldEditor;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -31,15 +30,22 @@ import org.eclipse.swt.widgets.Composite;
 
 import de.topicmapslab.tmcledit.tmclimport.Activator;
 
+/**
+ * Wizard page for the import wizard
+ * @author Hannes Niederhausen
+ *
+ */
 public class ImportWizardPage extends WizardPage {
 
 	protected FileFieldEditor sourceEditor;
 
 	private String file;
 
-	private String newFile;
-
-	public ImportWizardPage(String pageName, IStructuredSelection selection) {
+	/**
+	 * Constructor
+	 * @param pageName name of the page
+	 */
+	public ImportWizardPage(String pageName) {
 		super(pageName);
 		setTitle(pageName); // NON-NLS-1
 		setDescription("Import a TMCL schema"); // NON-NLS-1
@@ -94,12 +100,12 @@ public class ImportWizardPage extends WizardPage {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return the file to import
+	 */
 	public String getFile() {
 		return file;
-	}
-
-	public String getNewFile() {
-		return newFile;
 	}
 
 	protected String getNewFileLabel() {

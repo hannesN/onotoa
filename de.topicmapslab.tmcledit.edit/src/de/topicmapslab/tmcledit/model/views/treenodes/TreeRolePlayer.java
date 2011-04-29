@@ -12,8 +12,19 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Node for role player constraints (aka topic role constraints)
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeRolePlayer extends TreeObject {
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing the node
+	 * @param rc the {@link RolePlayerConstraint}
+	 */
 	public TreeRolePlayer(ModelView modelView, RolePlayerConstraint rc) {
 	    super(modelView);
 	    assert rc!=null;

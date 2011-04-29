@@ -20,12 +20,29 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Node for Occurrence Constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeOccurrence extends TreeObject{
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing the node
+	 * @param otc the occurrence constraint represented by this node
+	 */
 	public TreeOccurrence(ModelView modelView, OccurrenceTypeConstraint otc) {
 		this(modelView, otc, null);
 	}
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing the node
+	 * @param otc the occurrence constraint represented by this node
+	 * @param name the label of the node
+	 */
 	public TreeOccurrence(ModelView modelView, OccurrenceTypeConstraint otc, String name) {
 		super(modelView, name, KindOfTopicType.OCCURRENCE_TYPE);
 		setModel(otc);

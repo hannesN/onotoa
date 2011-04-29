@@ -11,7 +11,6 @@
 
 package de.topicmapslab.tmcledit.model.views.pages;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -21,8 +20,17 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import de.topicmapslab.tmcledit.model.views.extension.AbstractModelPage;
 
+/**
+ * The empty property page
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class EmptyPage extends AbstractModelPage {
 
+	/**
+	 * Constructor
+	 */
 	public EmptyPage() {
 		super("empty");
 	}
@@ -45,8 +53,7 @@ public class EmptyPage extends AbstractModelPage {
 	public void setFocus() {
 	}
 
-	public void notifyChanged(Notification notification) {
-	}
+	
 	
 
 	public void aboutToHide() {

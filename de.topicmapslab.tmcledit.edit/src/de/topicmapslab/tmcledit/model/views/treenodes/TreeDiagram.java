@@ -29,8 +29,20 @@ import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.util.TMCLEditorInput;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Node for the diagram
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeDiagram extends TreeObject {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param modelView the model view containing the node
+	 * @param diagram the diagram which is represented by this node 
+	 */
 	public TreeDiagram(ModelView modelView, Diagram diagram) {
 		super(modelView, (String) null);
 		setModel(diagram);
@@ -42,7 +54,7 @@ public class TreeDiagram extends TreeObject {
 		return getDiagram().getName();
 	}
 
-	public Diagram getDiagram() {
+	private Diagram getDiagram() {
 		return (Diagram) getModel();
 	}
 
@@ -53,7 +65,7 @@ public class TreeDiagram extends TreeObject {
 			        .getActivePage();
 
 			TMCLEditorInput input = new TMCLEditorInput(getDiagram(), getModelView().getEditingDomain(), getModelView()
-			        .getActionRegistry(), getModelView(), true);
+			        .getActionRegistry(), getModelView());
 			IEditorPart part = activePage.findEditor(input);
 			
 			

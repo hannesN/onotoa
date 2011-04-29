@@ -11,7 +11,7 @@
 package de.topicmapslab.tmcledit.model.util;
 
 /**
- * All the constants containg the path to the images used by TMCLEdit
+ * All the constants containing the path to the images used by Onotoa
  * @author Hannes Niederhausen
  *
  */

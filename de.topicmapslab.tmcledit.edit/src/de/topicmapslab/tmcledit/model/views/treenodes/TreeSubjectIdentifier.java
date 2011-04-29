@@ -19,12 +19,29 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Node for subject identifier constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeSubjectIdentifier extends TreeObject{
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing this node
+	 * @param sic the subject identifier constraint
+	 */
 	public TreeSubjectIdentifier(ModelView modelView, SubjectIdentifierConstraint sic) {
 		this(modelView, sic, null);
 	}
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing this node
+	 * @param sic the subject identifier constraint
+	 * @param name label for the node
+	 */
 	public TreeSubjectIdentifier(ModelView modelView, SubjectIdentifierConstraint sic, String name) {
 		super(modelView, name, KindOfTopicType.TOPIC_TYPE);
 		setModel(sic);
@@ -43,13 +60,6 @@ public class TreeSubjectIdentifier extends TreeObject{
 	
 	@Override
 	public void notifyChanged(Notification notification) {
-//		if (notification.getNotifier().equals(getOccurrenceTypeConstraint())) {
-//			if (notification.getNewValue() instanceof TopicType) {
-//				if (notification.getOldValue()!=null)
-//					((TopicType)notification.getOldValue()).eAdapters().remove(this);
-//				((TopicType)notification.getNewValue()).eAdapters().add(this);
-//			}
-//		}
-//		getModelView().getViewer().refresh(this);
+		// nothing to do
 	}
 }

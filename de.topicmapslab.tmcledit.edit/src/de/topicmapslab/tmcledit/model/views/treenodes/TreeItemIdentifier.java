@@ -19,12 +19,29 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Tree node for item identifiers
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeItemIdentifier extends TreeObject{
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing the node
+	 * @param iic the item identifier constraint to represent
+	 */
 	public TreeItemIdentifier(ModelView modelView, ItemIdentifierConstraint iic) {
 		this(modelView, iic, null);
 	}
 
+	/**
+	 * Constructor
+	 * @param modelView the modelview containing the node
+	 * @param iic the item identifier constraint to represent
+	 * @param name the label of the node
+	 */
 	public TreeItemIdentifier(ModelView modelView, ItemIdentifierConstraint iic, String name) {
 		super(modelView, name, KindOfTopicType.TOPIC_TYPE);
 		setModel(iic);

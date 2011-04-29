@@ -24,6 +24,12 @@ import org.eclipse.jface.action.IContributionItem;
 import de.topicmapslab.tmcledit.diagram.editor.IOnotoaEditDomain;
 import de.topicmapslab.tmcledit.model.Edge;
 
+/**
+ * Abstract class which extends the {@link AbstractConnectionEditPart} with an EMF adapter to listen to the model.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPart implements IContextMenuProvider {
 
 	protected Adapter adapter = new Adapter() {
@@ -34,7 +40,7 @@ public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPa
 		}
 
 		public boolean isAdapterForType(Object type) {
-			return AdapterConnectionEditPart.this.isAdapterForType(type);
+			return true;
 		}
 
 		public void notifyChanged(Notification notification) {
@@ -47,10 +53,11 @@ public abstract class AdapterConnectionEditPart extends AbstractConnectionEditPa
 		
 	};
 
-	public boolean isAdapterForType(Object type) {
-		return true;
-	}
-
+	/**
+	 * Notifies any model changes
+	 * 
+	 * @param notification the notification conatining infos about the changes
+	 */
 	public abstract void notifyChanged(Notification notification);
 
 	

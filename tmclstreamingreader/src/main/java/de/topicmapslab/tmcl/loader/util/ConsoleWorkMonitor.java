@@ -20,7 +20,6 @@ public class ConsoleWorkMonitor implements IWorkMonitor {
 	@Override
 	public void finished() {
 		started = false;
-		System.out.println("Finished after "+currStep+" of "+numberOfSteps+" steps.");
 	}
 
 	@Override
@@ -28,7 +27,6 @@ public class ConsoleWorkMonitor implements IWorkMonitor {
 		this.started = true;
 		this.numberOfSteps = numberOfSteps;
 		this.currStep = 0;
-		System.out.println("Starting with steps: "+numberOfSteps);
 	}
 
 	@Override
@@ -39,7 +37,12 @@ public class ConsoleWorkMonitor implements IWorkMonitor {
 	@Override
 	public void stepDone() {
 		currStep++;
-		System.out.println("Step done: "+currStep);
 	}
 
+	/**
+	 * @return the numberOfSteps
+	 */
+	public int getNumberOfSteps() {
+		return numberOfSteps;
+	}
 }

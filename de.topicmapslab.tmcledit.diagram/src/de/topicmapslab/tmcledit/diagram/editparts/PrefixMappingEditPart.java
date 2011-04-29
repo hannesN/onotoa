@@ -30,6 +30,11 @@ import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.MappingElement;
 
+/**
+ * Compartment edit part for the prefix mappings, which will be located at the left upper corner of the diagram.
+ * @author Hannes Niederhausen
+ *
+ */
 public class PrefixMappingEditPart extends AbstractGraphicalEditPart {
 
 	private Figure compartment;

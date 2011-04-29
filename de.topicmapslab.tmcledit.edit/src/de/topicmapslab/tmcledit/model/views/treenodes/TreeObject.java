@@ -52,23 +52,41 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 	private Notifier target;
 	private final KindOfTopicType kindOfTopicType;
 	
-	
+	/**
+	 * Constructor
+	 * @param modelView modelview containing the node
+	 * @param id id of the node
+	 */
 	public TreeObject(ModelView modelView, int id) {
 		super(modelView);
 		this.id = id;
 		this.kindOfTopicType = null; 
 	}
-	
+	/**
+	 * Constructor
+	 * @param modelView modelview containing the node
+	 */
 	public TreeObject(ModelView modelView) {
 		super(modelView);
 		this.kindOfTopicType = null;
 	}
 	
+	/**
+	 * Constructor
+	 * @param odelView modelview containing the node
+	 * @param name label of the node
+	 * @param id id of the node
+	 */
 	public TreeObject(ModelView modelView, String name, int id) {
 		this(modelView, name);
 		this.id = id;
 	}
 	
+	/**
+	 * Constructor
+	 * @param modelView modelview containing the node
+	 * @param name label of the node
+	 */
 	public TreeObject(ModelView modelView, String name) {
 		super(modelView);
 		this.name = name;
@@ -77,11 +95,22 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 			setModel(name);
 	}
 
+	/**
+	 * Constructor
+	 * @param modelView modelview containing the node
+	 * @param kindOfTopicType kind of topic type represented by the node
+	 */
 	public TreeObject(ModelView modelView, KindOfTopicType kindOfTopicType) {
 		super(modelView);
 		this.kindOfTopicType = kindOfTopicType;
 	}
 
+	/**
+	 * Constructor
+	 * @param modelView modelview containing the node
+	 * @param name label for the node
+	 * @param kindOfTopicType kind of topic type represented by the node
+	 */
 	public TreeObject(ModelView modelView, String name, KindOfTopicType kindOfTopicType) {
 		this(modelView, kindOfTopicType);
 		this.name = name;
@@ -89,6 +118,11 @@ public class TreeObject extends AbstractModelViewNode implements IAdaptable, Ada
 			setModel(name);
 	}
 
+	/**
+	 * Returns the kind of topic which should be created when the node is selected
+	 * 
+	 * @return the {@link KindOfTopicType} of the node
+	 */
 	public KindOfTopicType getKindOfTopicType() {
 		return kindOfTopicType;
 	}

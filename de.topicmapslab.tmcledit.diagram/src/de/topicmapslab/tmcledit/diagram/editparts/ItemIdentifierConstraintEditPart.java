@@ -14,9 +14,17 @@ import org.eclipse.emf.common.notify.Notification;
 
 import de.topicmapslab.tmcledit.model.ItemIdentifierConstraint;
 
-
+/**
+ * Edit part for item identifier constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class ItemIdentifierConstraintEditPart extends AbstractLabelEditPart {
 	
+	/**
+	 * Constructor
+	 */
 	public ItemIdentifierConstraintEditPart() {
 		setEditable(false);
 	}
