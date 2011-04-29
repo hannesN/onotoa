@@ -38,6 +38,12 @@ import de.topicmapslab.tmcledit.model.dialogs.FilterTopicSelectionDialog;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Propertey page for Occurrence Constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstraintModelPage {
 	
 	private Text typeText;
@@ -46,6 +52,9 @@ public class OccurrenceConstraintDetailPage extends AbstractCardinalityConstrain
 	private OccurrenceTypeModelPage typeModelPage;
 	private CTabItem item;
 	
+	/**
+	 * Constructor
+	 */
 	public OccurrenceConstraintDetailPage() {
 		super("occurrence constraint");
 	}

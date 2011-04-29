@@ -25,6 +25,7 @@ import de.topicmapslab.tmcledit.model.AbstractCardinalityConstraint;
 import de.topicmapslab.tmcledit.model.commands.SetCardinalityCommand;
 
 /**
+ * Helper class to observe text fields for cardinalities
  * 
  * @author Hannes Niederhausen
  * 
@@ -66,12 +67,7 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 	}
 
 	private void finish() {
-	    /*
-		 * EStructuralFeature feature =
-		 * modelProvider.getModel().eClass().getEStructuralFeature(featureID);
-		 * modelProvider.getModel().eSet(feature, text.getText());
-		 */
-		
+
 		AbstractCardinalityConstraint model = (AbstractCardinalityConstraint) modelProvider.getModel();
 		
 		if (text.getText().length()==0) {
@@ -99,6 +95,12 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 		text.removeDisposeListener(this);
 	}
 
+	/**
+	 * Factory method which adds the listeners used to observ the given text field
+	 * @param text the text used to edit the cardinality
+	 * @param modelProvider the model provider containing the model which will be modified by the text field
+	 * @param isMin flag whether its a cardmin field or a card max field (which may contain an '*'
+	 */
 	public static void observe(Text text, IModelProvider modelProvider,
 			boolean isMin) {
 		new CardTextObserver(text, modelProvider, isMin);
@@ -107,7 +109,7 @@ public class CardTextObserver implements FocusListener, DisposeListener,
 	/**
 	 * Creates an instance of the verify listener.
 	 * 
-	 * The methos is used, when the content of a text field should be verified, but the 
+	 * The method is used, when the content of a text field should be verified, but the 
 	 * model will be modified elsewhere. For instance in TextCellEditors.
 	 * 
 	 */

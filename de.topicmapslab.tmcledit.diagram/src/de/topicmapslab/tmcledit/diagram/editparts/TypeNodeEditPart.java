@@ -47,7 +47,6 @@ import org.eclipse.swt.widgets.Display;
 import de.topicmapslab.tmcledit.diagram.DiagramActivator;
 import de.topicmapslab.tmcledit.diagram.directedit.TMCLDirectEditManager;
 import de.topicmapslab.tmcledit.diagram.figures.LineFigure;
-import de.topicmapslab.tmcledit.diagram.figures.SelectionFigure;
 import de.topicmapslab.tmcledit.diagram.policies.TopicTypeDirectEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeContainerEditPolicy;
 import de.topicmapslab.tmcledit.diagram.policies.TypeNodeLayoutEditPolicy;
@@ -61,6 +60,8 @@ import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 
 /**
+ * Edit part for topic types
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -262,6 +263,10 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return the model casted to {@link TypeNode}
+	 */
 	public TypeNode getCastedModel() {
 		return (TypeNode) getModel();
 	}
@@ -280,12 +285,20 @@ public class TypeNodeEditPart extends de.topicmapslab.tmcledit.diagram.editparts
 		return list;
 	}
 	
+	/**
+	 * Sets the new value to the title label
+	 * 
+	 * @param value
+	 */
 	public void handleNameChange(String value) {
 		titleLabel.setText(value);
 		titleLabel.setVisible(false);
 		refreshVisuals();
 	}
 	
+	/**
+	 * reverts the name of the title label using the value from the model.
+	 */
 	public void revertNameChange() {
 		titleLabel.setVisible(true);
 		refreshVisuals();

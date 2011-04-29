@@ -35,21 +35,13 @@ public class PrefixKeyMatcher {
 	@SuppressWarnings("unused")
     private static Pattern pattern = Pattern.compile(regExp);
 	
+	/**
+	 * Will checks if the key is valid some time, for now always returns true
+	 * @param key the key to check
+	 * @return well... <code>true</code>
+	 */
 	public static boolean isValidKey(String key) {
 		return true;
 		//pattern.matcher(key).matches();
 	}
-	
-	public static void main(String[] args) {
-	    String tests[] = {
-	    		"urn:hannes/dort",
-	    		"http://www.hannesniederhausen.de",
-	    		"urn:onotoa-x",
-	    		"lala:¼½³¼.de"    		    		
-	    };
-	    
-	    for (String s : tests) {
-	    	System.out.println(s+" - "+isValidKey(s));
-	    }
-    }
 }

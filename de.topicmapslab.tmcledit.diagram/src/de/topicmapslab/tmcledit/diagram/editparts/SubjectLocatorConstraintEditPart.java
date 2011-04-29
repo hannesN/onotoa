@@ -14,8 +14,16 @@ import org.eclipse.emf.common.notify.Notification;
 
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 
+/**
+ * Editpart for the subject locator constraint
+ * @author Hannes Niederhausen
+ *
+ */
 public class SubjectLocatorConstraintEditPart extends AbstractLabelEditPart {
 
+	/**
+	 * Constructor
+	 */
 	public SubjectLocatorConstraintEditPart() {
 		setEditable(false);
 	}

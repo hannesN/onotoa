@@ -20,19 +20,37 @@ import de.topicmapslab.tmcledit.model.util.ImageConstants;
 import de.topicmapslab.tmcledit.model.util.ImageProvider;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
+/**
+ * Property page for name constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class TreeName extends TreeObject{
 
-	
+	/**
+	 * Constructor
+	 * 
+	 * @param modelView the modelview containing the node
+	 * @param ntc the represented name constraint
+	 */
 	public TreeName(ModelView modelView, NameTypeConstraint ntc) {
 		this(modelView, ntc, null);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param modelView the modelview containing the node
+	 * @param ntc the represented name constraint
+	 * @param name the label of the node
+	 */
 	public TreeName(ModelView modelView, NameTypeConstraint ntc, String name) {
 		super(modelView, name, KindOfTopicType.NAME_TYPE);
 		setModel(ntc);
 	}
 
-	public NameTypeConstraint getNameTypeConstraint() {
+	private NameTypeConstraint getNameTypeConstraint() {
 		return (NameTypeConstraint) getModel();
 	}
 	

@@ -36,6 +36,8 @@ import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.commands.SetDatatypeCommand;
 
 /**
+ * Property Page for occurrences
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -94,6 +96,9 @@ public class OccurrenceTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 	private Button datatypeButton;
 	private Button uniqueButton;
 	
+	/**
+	 * Constructor
+	 */
 	public OccurrenceTypeModelPage() {
 		super("occurrence type");
 	}

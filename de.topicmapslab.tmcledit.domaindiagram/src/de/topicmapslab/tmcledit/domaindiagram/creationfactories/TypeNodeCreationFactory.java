@@ -25,6 +25,11 @@ import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TypeNode;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Creation factory to create a type node
+ * @author Hannes Niederhausen
+ *
+ */
 public final class TypeNodeCreationFactory implements CreationFactory {
 	private KindOfTopicType kind;
 
@@ -32,6 +37,11 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 	private boolean cache; // cache the topic type or not (last for palette
 							// necessary)
 
+	/**
+	 * Constructor
+	 * @param kind kind of topic type to create
+	 * @param cache the created topic type
+	 */
 	public TypeNodeCreationFactory(KindOfTopicType kind, boolean cache) {
 		this.kind = kind;
 		this.cache = cache;
@@ -45,6 +55,10 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 		this(kind, false);
 	}
 
+	/**
+	 * Constructor
+	 * @param cache flag whether to cache the topic type
+	 */
 	public TypeNodeCreationFactory(boolean cache) {
 		this(KindOfTopicType.TOPIC_TYPE, cache);
 	}
@@ -78,6 +92,10 @@ public final class TypeNodeCreationFactory implements CreationFactory {
 		}
 	}
 
+	/**
+	 * Sets a list of topic types which need a node in a diagram
+	 * @param topicTypes
+	 */
 	public void setTopicTypes(List<TopicType> topicTypes) {
 		this.topicTypes = new ArrayList<TopicType>(topicTypes);
 	}

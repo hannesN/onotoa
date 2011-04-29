@@ -22,6 +22,8 @@ import de.topicmapslab.tmcledit.model.commands.DeleteTopicTypeConstraintItemComm
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
 /**
+ * Action to delete a typed constraint
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -29,6 +31,11 @@ public class DeleteTypedConstraintAction extends AbstractCommandStackAction {
 
 	private AbstractTypedConstraint atc;
 
+	/**
+	 * Constructor
+	 * @param commandStack the commandstack 
+	 * @param atc an abstract typed constraint
+	 */
 	public DeleteTypedConstraintAction(CommandStack commandStack, AbstractTypedConstraint atc) {
 		super(commandStack);
 		this.atc = atc;

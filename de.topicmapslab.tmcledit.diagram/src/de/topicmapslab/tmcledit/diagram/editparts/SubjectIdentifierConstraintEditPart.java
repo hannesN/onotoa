@@ -14,9 +14,16 @@ import org.eclipse.emf.common.notify.Notification;
 
 import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 
-
+/**
+ * Editpart for the subject identifier constraint
+ * @author Hannes Niederhausen
+ *
+ */
 public class SubjectIdentifierConstraintEditPart extends AbstractLabelEditPart {
 	
+	/**
+	 * Constructor
+	 */
 	public SubjectIdentifierConstraintEditPart() {
 		setEditable(false);
 	}

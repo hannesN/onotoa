@@ -34,6 +34,11 @@ import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 import de.topicmapslab.tmcledit.model.commands.SetRoleConstraintCommand;
 import de.topicmapslab.tmcledit.model.util.CardTextObserver;
 
+/**
+ * Propertypage for the Topic Role Contraint
+ * @author Hannes Niederhausen
+ *
+ */
 public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 	private Label playerLabel;
 	private Text cardMinText;
@@ -43,6 +48,9 @@ public class TopicRoleConstraintPage extends AbstractEMFModelPage {
 
 	private AssociationTypeModelPage assPage;
 
+	/**
+	 * Constructor
+	 */
 	public TopicRoleConstraintPage() {
 		super("role");
 	}

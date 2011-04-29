@@ -64,7 +64,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
@@ -857,7 +856,6 @@ public class WordListEditor extends EditorPart implements CommandStackListener {
 
 		if (!errorWords.isEmpty()) {
 			// TODO show errors
-			System.out.println("Errors exist");
 		}
 	}
 

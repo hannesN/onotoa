@@ -11,13 +11,16 @@
 package de.topicmapslab.tmcledit.diagram.editparts;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.gef.EditPolicy;
 
-import de.topicmapslab.tmcledit.diagram.policies.OccurrenceConstraintDirectEditPolicy;
 import de.topicmapslab.tmcledit.model.OccurrenceType;
 import de.topicmapslab.tmcledit.model.OccurrenceTypeConstraint;
 import de.topicmapslab.tmcledit.model.TopicType;
 
+/**
+ * Editpart for occurrence constraints
+ * @author Hannes Niederhausen
+ *
+ */
 public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditPart {
 
 	private static UnderlineLabelBorder border = new UnderlineLabelBorder();
@@ -26,12 +29,6 @@ public class OccurrenceTypeConstraintEditPart extends AbstractScopedLabeledEditP
 		return (OccurrenceTypeConstraint) getModel();
 	}
 	
-	@Override
-	protected void createEditPolicies() {
-		super.createEditPolicies();
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new OccurrenceConstraintDirectEditPolicy());
-	}
-
 	@Override
 	protected boolean isEditable() {
 		return false;

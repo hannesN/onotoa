@@ -19,12 +19,15 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class RoleTypePage extends TopicTypePage {
 
+	/**
+	 * Constructor
+	 */
 	public RoleTypePage() {
 		super("role type");
     }
 	
 	@Override
 	protected void createAdditionalControls(Composite parent, FormToolkit toolkit) {
-	// we don't need a refies part
+		// we don't need a refies part
 	}
 }

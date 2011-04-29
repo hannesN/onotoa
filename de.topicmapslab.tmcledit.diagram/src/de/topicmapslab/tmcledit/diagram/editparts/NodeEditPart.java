@@ -23,11 +23,12 @@ import de.topicmapslab.tmcledit.diagram.policies.NodeGraphicalNodeEditPolicy;
 import de.topicmapslab.tmcledit.model.Diagram;
 import de.topicmapslab.tmcledit.model.Edge;
 
+/**
+ * Abstract edit part for nodes (topic types and association constraints)
+ * @author Hannes Niederhausen
+ *
+ */
 public abstract class NodeEditPart extends AdapterGraphicalEditPart implements org.eclipse.gef.NodeEditPart{
-
-	public NodeEditPart() {
-		super();
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

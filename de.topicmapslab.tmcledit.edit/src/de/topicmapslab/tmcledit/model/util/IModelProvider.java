@@ -14,12 +14,22 @@ import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.EObject;
 
 /**
+ * Interface to get a commandstack and a model to modify it.
  * 
  * @author Hannes Niederhausen
  *
  */
 public interface IModelProvider {
+	
+	/**
+	 * 
+	 * @return the model element
+	 */
 	public EObject getModel();
 	
+	/**
+	 * 
+	 * @return a command stack which may be used to execute modification commands
+	 */
 	public CommandStack getCommandStack();
 }

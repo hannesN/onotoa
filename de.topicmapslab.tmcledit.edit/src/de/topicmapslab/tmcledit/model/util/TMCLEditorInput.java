@@ -25,30 +25,37 @@ import de.topicmapslab.tmcledit.model.DomainDiagram;
 import de.topicmapslab.tmcledit.model.views.ModelView;
 
 /**
+ * Editor Input for the two diagram editors
+ * 
  * @author Hannes Niederhausen
  *
  */
 public class TMCLEditorInput implements IEditorInput {
 
 	private final Diagram diagram;
-	private final boolean exists;
 	private final EditingDomain editingDomain;
 	
 	private final ActionRegistry actionRegistry;
 	private ModelView modelView;
 	
+	/**
+	 * Constructor
+	 * @param diagram the diagram to edit
+	 * @param editingDomain the editingDomain containing the command stack and other stuff
+	 * @param actionRegistry the action registry for shared actions, like undo, redo and save
+	 * @param modelView the model view which opens the editor
+	 */
 	public TMCLEditorInput(Diagram diagram, EditingDomain editingDomain,
-			ActionRegistry actionRegistry, ModelView modelView, boolean exists) {
+			ActionRegistry actionRegistry, ModelView modelView) {
 		super();
 		this.diagram = diagram;
 		this.editingDomain = editingDomain;
-		this.exists = exists;
 		this.actionRegistry = actionRegistry;
 		this.modelView = modelView;
 	}
 
 	public boolean exists() {
-		return exists;
+		return true;
 	}
 
 	public ImageDescriptor getImageDescriptor() {
@@ -72,21 +79,43 @@ public class TMCLEditorInput implements IEditorInput {
 	public Object getAdapter(Class adapter) {
 		if (adapter==ISaveablePart.class)
 			return modelView;
+		if (adapter == EditingDomain.class)
+			return getEditingDomain();
+		if (adapter == ActionRegistry.class)
+			return getActionRegistry();
+		if (adapter == ModelView.class)
+			return getModelView();
 		return null;
 	}
 	
+	/**
+	 * Returns the editing domain
+	 * @return
+	 */
 	public EditingDomain getEditingDomain() {
 		return editingDomain;
 	}
 
+	/**
+	 * 
+	 * @return the diagram
+	 */
 	public Diagram getDiagram() {
 		return diagram;
 	}
 
+	/**
+	 * 
+	 * @return the action registry
+	 */
 	public ActionRegistry getActionRegistry() {
 	    return actionRegistry;
     }
 
+	/**
+	 * 
+	 * @return the model view
+	 */
 	public ModelView getModelView() {
 	    return modelView;
     }
@@ -98,7 +127,7 @@ public class TMCLEditorInput implements IEditorInput {
 	    result = prime * result + ((actionRegistry == null) ? 0 : actionRegistry.hashCode());
 	    result = prime * result + ((diagram == null) ? 0 : diagram.hashCode());
 	    result = prime * result + ((editingDomain == null) ? 0 : editingDomain.hashCode());
-	    result = prime * result + (exists ? 1231 : 1237);
+	    result = prime * result + 1231;
 	    return result;
     }
 
@@ -125,8 +154,6 @@ public class TMCLEditorInput implements IEditorInput {
 		    if (other.editingDomain != null)
 			    return false;
 	    } else if (!editingDomain.equals(other.editingDomain))
-		    return false;
-	    if (exists != other.exists)
 		    return false;
 	    return true;
     }

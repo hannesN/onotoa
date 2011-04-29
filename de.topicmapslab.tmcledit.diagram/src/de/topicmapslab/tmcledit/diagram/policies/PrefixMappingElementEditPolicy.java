@@ -18,12 +18,15 @@ import de.topicmapslab.tmcledit.model.MappingElement;
 import de.topicmapslab.tmcledit.model.commands.ModifyPrefixCommand;
 import de.topicmapslab.tmcledit.model.util.PrefixKeyMatcher;
 
+/**
+ * Edit policy for direct editing the prefixes
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class PrefixMappingElementEditPolicy extends AbstractDirectEditPolicy {
-
-	public static final String EXT_EDITED = "edited";
-	
-	public static final String EXT_EDITED_KEY = "key";
-	public static final String EXT_EDITED_VALUE = "value";
+	private static final String EXT_EDITED_KEY = "key";
+	private static final String EXT_EDITED_VALUE = "value";
 	
 	@Override
 	public Command getCommand(Object model, DirectEditRequest request) {

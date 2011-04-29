@@ -26,6 +26,8 @@ import de.topicmapslab.tmcledit.diagram.figures.MovableConnectionLocator;
 import de.topicmapslab.tmcledit.model.LabelPos;
 
 /**
+ * Editpart for moveable labels, like the cardinalities of athe roleplayerconstraint
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -48,6 +50,10 @@ public class MoveableLabelEditPart extends AdapterGraphicalEditPart {
 		return label;
 	}
 
+	/**
+	 * Sets the text of the label
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		this.text = text;
 	}
@@ -90,7 +96,7 @@ public class MoveableLabelEditPart extends AdapterGraphicalEditPart {
 		return dragTracker;
 	}
 	
-	public MovableConnectionLocator getLocator() {
+	private MovableConnectionLocator getLocator() {
 		if (locator == null) {
 			boolean isEnd = (getParent().getChildren().indexOf(this)!=0);
 				

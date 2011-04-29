@@ -26,12 +26,17 @@ import de.topicmapslab.tmcledit.model.NameType;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
 /**
+ * Property page for the name type
+ * 
  * @author Hannes Niederhausen
  * 
  */
 public class NameTypeModelPage extends AbstractRegExpTopicTypeModelPage {
 	private Button uniqueButton;
 
+	/**
+	 * Constructor
+	 */
 	public NameTypeModelPage() {
 		super("name type");
 	}

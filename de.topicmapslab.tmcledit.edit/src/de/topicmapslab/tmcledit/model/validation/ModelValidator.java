@@ -48,6 +48,9 @@ import de.topicmapslab.tmcledit.model.validation.actions.OccurrenceConstraintSel
 import de.topicmapslab.tmcledit.model.validation.actions.RemoveIsAAction;
 
 /**
+ * Validator for the model creating a list of validation results containing some actions
+ * for fixing the errors.
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -60,6 +63,10 @@ public class ModelValidator {
 	private CommandStack commandStack;
 	private List<String> foundNotFoundPrefixes;
 
+	/**
+	 * Constructor
+	 * @param file the model file element to validate
+	 */
 	public ModelValidator(File file) {
 		this.schema = file.getTopicMapSchema();
 	}
@@ -71,6 +78,11 @@ public class ModelValidator {
 		resultList.add(result);
 	}
 
+	/**
+	 * Starts validating
+	 * @param cmdStack the comdStack which should be used by the validation actions.s
+	 * @return a list of {@link ValidationResult}s which are errors in the model
+	 */
 	public List<ValidationResult> validate(CommandStack cmdStack) {
 		this.commandStack = cmdStack;
 		

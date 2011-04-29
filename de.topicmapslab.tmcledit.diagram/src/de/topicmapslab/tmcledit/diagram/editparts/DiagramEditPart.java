@@ -40,6 +40,8 @@ import de.topicmapslab.tmcledit.model.File;
 import de.topicmapslab.tmcledit.model.ModelPackage;
 
 /**
+ * Editparts for the diagram
+ * 
  * @author Hannes Niederhausen
  * 
  */
@@ -131,7 +133,7 @@ public class DiagramEditPart extends AdapterGraphicalEditPart {
 		}
 	}
 
-	public PrefixMappingEditPart getPrefixMappingEditPart() {
+	private PrefixMappingEditPart getPrefixMappingEditPart() {
 		return prefixMappingEditPart;
 	}
 

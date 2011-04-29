@@ -31,6 +31,8 @@ import de.topicmapslab.tmcledit.model.Comment;
 import de.topicmapslab.tmcledit.model.commands.SetCommentContentCommand;
 
 /**
+ * Property Page for comments
+ * 
  * @author Hannes Niederhausen
  *
  */
@@ -38,6 +40,9 @@ public class CommentPropertyModelPage extends AbstractEMFModelPage {
 
 	private Text contentText;
 	
+	/**
+	 * Constructor
+	 */
 	public CommentPropertyModelPage() {
 		super("comment page");
 	}
@@ -68,6 +73,12 @@ public class CommentPropertyModelPage extends AbstractEMFModelPage {
 		item.setControl(createPage(folder));
 	}
 	
+	/**
+	 * Creates the widget of the page
+	 * 
+	 * @param parent the parent widget
+	 * @return the widget of the page
+	 */
 	public Control createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		Composite comp = toolkit.createComposite(parent);

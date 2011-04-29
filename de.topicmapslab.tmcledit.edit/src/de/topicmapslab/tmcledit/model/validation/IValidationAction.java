@@ -14,11 +14,18 @@ import org.eclipse.jface.action.IAction;
 
 /**
  * 
+ * Interface for actions used in the validation view. These action represent quick fixes for a specific model element.
+ * 
  * @author Hannes Niederhausen
  *
  */
 public interface IValidationAction extends IAction{
 
+	/**
+	 * Sets the model which is invalid and should be modified
+	 * 
+	 * @param modelObject
+	 */
 	public abstract void setModelObject(Object modelObject);
 
 }

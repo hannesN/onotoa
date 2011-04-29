@@ -18,20 +18,40 @@ import de.topicmapslab.tmcledit.model.KindOfTopicType;
 import de.topicmapslab.tmcledit.model.TopicType;
 import de.topicmapslab.tmcledit.model.TmcleditEditPlugin;
 
+/**
+ * Util class to get image objects from an image registry.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class ImageProvider {
-
-	
-	
 	private static ExtendedImageRegistry imageRegistry;
 	
+	/**
+	 * Returns an image for the given key or <code>null</code>
+	 * 
+	 * @param key the key should be a constant from {@link ImageConstants}
+	 * @return an image for the given key or <code>null</code>
+	 */
 	public static Image getImage(String key) {
 		return getExtendedImageRegistry().getImage(TmcleditEditPlugin.INSTANCE.getImage(key));
 	}
 	
+	/**
+	 * Returns an image descriptor for the given key or <code>null</code>
+	 * 
+	 * @param key the key should be a constant from {@link ImageConstants}
+	 * @return an image descriptor for the given key or <code>null</code>
+	 */
 	public static ImageDescriptor getImageDescriptor(String key) {
 		return getExtendedImageRegistry().getImageDescriptor(TmcleditEditPlugin.INSTANCE.getImage(key));
 	}
 	
+	/**
+	 * Returns an image for the given type. For each kind of topic type animage exists  
+	 * @param topicType the topic type which image should be returned
+	 * @return the image for the kind of topic type of the given type
+	 */
 	public static Image getTopicTypeImage(TopicType topicType) {
 		if (topicType==null)
 			return null;
@@ -39,6 +59,12 @@ public class ImageProvider {
 		return getImageOfKindOfTopic(topicType.getKind());
 	}
 
+	/**
+	 * Returns an image based on the given kind of topic
+	 * 
+	 * @param kind the kind of topic
+	 * @return the image for the kind of topic
+	 */
 	public static Image getImageOfKindOfTopic(KindOfTopicType kind) {
 	    switch(kind)
 		{

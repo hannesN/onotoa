@@ -21,10 +21,20 @@ import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 import de.topicmapslab.tmcledit.model.dialogs.NewTopicTypeWizard;
 import de.topicmapslab.tmcledit.model.index.ModelIndexer;
 
+/**
+ * Action to set a type to an typed constraint.
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class SetTypeAction extends AbstractCommandStackAction {
 
 	protected SetTypeData data = new SetTypeData();
 
+	/**
+	 * Constructor
+	 * @param data the data for the action
+	 */
 	public SetTypeAction(SetTypeData data) {
 		super(data.editDomain.getEditingDomain().getCommandStack());
 		this.data = data;

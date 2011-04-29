@@ -43,6 +43,12 @@ import de.topicmapslab.tmcledit.model.views.extension.IModelExtension;
 import de.topicmapslab.tmcledit.model.views.extension.IModelPage;
 import de.topicmapslab.tmcledit.model.views.extension.IModelViewProvider;
 
+/**
+ * Factory which returns a property page for the a specific model
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class PropertyDetailPageFactory {
 	private static final String TOPIC_MAP_SCHEMA = "TopicMapSchema";
 	private static final String TOPIC_TYPE = "TopicType";
@@ -67,6 +73,12 @@ public class PropertyDetailPageFactory {
 	private final ScrolledPageBook pageBook;
 	private final IViewSite viewSite;
 
+	/**
+	 * 
+	 * 
+	 * @param pageBook
+	 * @param viewSite
+	 */
 	public PropertyDetailPageFactory(ScrolledPageBook pageBook, IViewSite viewSite) {
 		super();
 		this.pageBook = pageBook;
@@ -76,6 +88,9 @@ public class PropertyDetailPageFactory {
 		this.viewSite = viewSite;
 	}
 	
+	/**
+	 * Disposes all the pages
+	 */
 	public void dispose() {
 		for (IModelPage page : pageMap.values()) {
 			page.dispose();
@@ -83,7 +98,12 @@ public class PropertyDetailPageFactory {
 		pageMap.clear();
 	}
 	
-	
+	/**
+	 * Create a property page for the model
+	 * 
+	 * @param model the model which needs the page
+	 * @return a page for the model
+	 */
 	public IModelPage getPageFor(Object model) {
 		IModelPage page = emptyPage;
 		
@@ -240,8 +260,10 @@ public class PropertyDetailPageFactory {
 		return page;
 	}
 
-
-
+	/**
+	 * 
+	 * @return an empty age used as default page
+	 */
 	public AbstractModelPage getEmptyPage() {
 		return emptyPage;
 	}

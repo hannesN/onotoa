@@ -25,16 +25,31 @@ import de.topicmapslab.tmcledit.model.SubjectIdentifierConstraint;
 import de.topicmapslab.tmcledit.model.SubjectLocatorConstraint;
 import de.topicmapslab.tmcledit.model.util.TextObserver;
 
+/**
+ * Property page for identifier constraints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class IdentifierConstraintModelPage extends AbstractCardinalityConstraintModelPage {
 
 	private Text regExpText;
 	
+	/**
+	 * Constructor
+	 */
 	public IdentifierConstraintModelPage() {
 		super("identifier constraint");
 	}
 
 	private CTabItem item;
 	
+	/**
+	 * Creates the widget for the page
+	 * 
+	 * @param parent the parent for the widget
+	 * @return the widget continaing the page
+	 */
 	public Composite createPage(Composite parent) {
 		FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		

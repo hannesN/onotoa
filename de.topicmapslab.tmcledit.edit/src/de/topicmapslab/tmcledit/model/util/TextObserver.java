@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
 /**
+ * Utility class to observ text fields which let the user modify the model
  * 
  * @author Hannes Niederhausen
  *
@@ -62,7 +63,13 @@ public class TextObserver implements FocusListener, DisposeListener, KeyListener
 		text.removeFocusListener(this);
 	}
 
-	
+	/**
+	 * Creates a text observer for the given text setting the values into the modelproviders model
+	 * using the given featureID
+	 * @param text the text which edits the models attribute
+	 * @param modelProvider the provider of the model to modify
+	 * @param featureID the featureID of the attribute in the model
+	 */
 	public static void observe(Text text, IModelProvider modelProvider,
 			int featureID) {
 		new TextObserver(text, modelProvider, featureID);

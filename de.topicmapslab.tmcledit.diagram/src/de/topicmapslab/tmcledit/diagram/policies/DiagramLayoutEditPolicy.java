@@ -41,6 +41,11 @@ import de.topicmapslab.tmcledit.model.commands.CreateNodeCommand;
 import de.topicmapslab.tmcledit.model.commands.MoveNodeCommand;
 import de.topicmapslab.tmcledit.model.commands.ResizeCommentCommand;
 
+/**
+ * XYLayoutPolica for diagramms creating the command to create new nodes.
+ * @author Hannes Niederhausen
+ *
+ */
 public class DiagramLayoutEditPolicy extends XYLayoutEditPolicy {
 
 	@Override

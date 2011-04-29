@@ -31,6 +31,11 @@ import de.topicmapslab.tmcledit.model.ModelPackage;
 import de.topicmapslab.tmcledit.model.TopicMapSchema;
 import de.topicmapslab.tmcledit.model.commands.GenericSetCommand;
 
+/**
+ * Property page for the Topic Map Schema
+ * @author Hannes Niederhausen
+ *
+ */
 public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 
 	private Text nameText;
@@ -41,6 +46,9 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 	
 	private PrefixMappingPage prefixPage;
 
+	/**
+	 * Constructor
+	 */
 	public TopicMapSchemaPropertyPage() {
 		super("topicmapschema");
 	}
@@ -83,7 +91,8 @@ public class TopicMapSchemaPropertyPage extends AbstractEMFModelPage {
 		}
 	}
 
-	public TopicMapSchema getCastedModel() {
+	
+	private TopicMapSchema getCastedModel() {
 		return (TopicMapSchema) getModel();
 	}
 	

@@ -17,6 +17,11 @@ import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
  */
 public class BrowserUtil {
 
+	/**
+	 * Opens the given link
+	 * @param shell the parent shell
+	 * @param href the link to opehn
+	 */
 	public static final void openLink(Shell shell, String href) {
 		// format the href for an html file (file:///<filename.html>
 		// required for Mac only.

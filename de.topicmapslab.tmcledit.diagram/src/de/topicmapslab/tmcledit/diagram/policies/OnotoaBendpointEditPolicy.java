@@ -23,6 +23,12 @@ import de.topicmapslab.tmcledit.model.commands.AddBendpointCommand;
 import de.topicmapslab.tmcledit.model.commands.MoveBendpointCommand;
 import de.topicmapslab.tmcledit.model.commands.RemoveBendpointCommand;
 
+/**
+ * Policy to create and remove bendpoints
+ * 
+ * @author Hannes Niederhausen
+ *
+ */
 public class OnotoaBendpointEditPolicy extends BendpointEditPolicy {
 	@Override
 	protected Command getMoveBendpointCommand(BendpointRequest request) {

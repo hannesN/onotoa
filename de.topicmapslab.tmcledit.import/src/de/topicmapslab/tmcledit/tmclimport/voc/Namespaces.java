@@ -8,6 +8,9 @@ package de.topicmapslab.tmcledit.tmclimport.voc;
  */
 public interface Namespaces {
 	
+	/**
+	 * Interface for the TMDM identifier 
+	 */
 	public static interface TMDM {
 		/**
 		 * General prefix for the types.
@@ -49,6 +52,9 @@ public interface Namespaces {
 		
 	}
 	
+	/**
+	 * Interface for the XSD identifier
+	 */
 	public static interface XSD {
 		/**
 		 * Base identifier of all XML Scheme Definition data-types <br />
@@ -219,7 +225,11 @@ public interface Namespaces {
 		public static final String QANY = QNAME + ":" + "any";
 	}
 	
-	
+	/**
+	 * Interface for the TMCL identifier
+	 * @author Hannes Niederhausen
+	 *
+	 */
 	public static interface TMCL {
 		/**
 		 * General prefix for the types.
