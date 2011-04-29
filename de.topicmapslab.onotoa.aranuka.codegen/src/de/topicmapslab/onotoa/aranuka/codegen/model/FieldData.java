@@ -18,6 +18,7 @@ import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.TYPEL
 import static de.topicmapslab.onotoa.aranuka.codegen.model.IAnnotationKeys.WEIGHT;
 import de.topicmapslab.kuria.annotation.widgets.Check;
 import de.topicmapslab.kuria.annotation.widgets.Combo;
+import de.topicmapslab.kuria.annotation.widgets.Editable;
 import de.topicmapslab.kuria.annotation.widgets.TextField;
 import de.topicmapslab.tmcledit.model.TMCLConstruct;
 
@@ -27,6 +28,7 @@ import de.topicmapslab.tmcledit.model.TMCLConstruct;
  * @author Hannes Niederhausen
  *
  */
+@Editable
 public abstract class FieldData extends GeneratorData {
 
 	/**
